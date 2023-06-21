@@ -1,8 +1,8 @@
 "use client" // This is a client component
 
 import { useState } from "react"
-import { DarkModeSwitch } from "./DarkModeSwitch"
-import { useDarkSide } from "../hooks/useDarkSide"
+import { useDarkSide } from "../../hooks/useDarkSide"
+import Switch from '@mui/material/Switch';
 
 export default function ThemeSwitcher() {
   const [colorTheme, setTheme] = useDarkSide()
@@ -10,17 +10,17 @@ export default function ThemeSwitcher() {
     colorTheme === "light" ? true : false
   )
 
-  const toggleDarkMode = (checked: boolean) => {
+  const toggleDarkMode = (event: React.ChangeEvent<HTMLInputElement>) => {
     setTheme(colorTheme)
-    setDarkSide(checked)
+    setDarkSide(event.target.checked)
   }
 
   return (
-    <DarkModeSwitch
-      style={{ marginBottom: "2rem" }}
+
+    <Switch
       checked={darkSide}
       onChange={toggleDarkMode}
-      size={30}
+      inputProps={{ 'aria-label': 'Dark Mode' }}
     />
   )
 }

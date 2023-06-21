@@ -1,6 +1,4 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+/* Global styles */
 
 body {
   margin: 0;
@@ -9,43 +7,4 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-}
-
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
-}
-
-/* :root {
-  --clr-bg-dark-fade: #3C4146;
-  --clr-bg-dark: #000000;
-  --clr-bg-light-fade: #b09d9d;
-  --clr-bg-light: #ffffff;
-
-  --clr-text-dark: #dad3d3;
-  --clr-text-light: #3C4146;
-}
-
-.light {
-  color: var(--clr-text-light);
-  background: linear-gradient(to bottom,
-    transparent,
-    var(--clr-bg-light-fade)) var(--clr-bg-light);
-}
-
-.dark {
-  color: var(--clr-text-dark);
-  background: linear-gradient(to bottom,
-    transparent,
-    var(--clr-bg-dark-fade)) var(--clr-bg-dark);
-} */
-
-@layer base {
-  .light {
-    @apply text-black bg-gradient-to-b from-white to-stone-400
-  }
-
-  .dark {
-    @apply text-white bg-gradient-to-b from-stone-800 to-black
-  }
 }
