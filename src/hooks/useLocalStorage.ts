@@ -18,7 +18,7 @@ const useLocalStorage = <T>(key: string, initialValue: T) => {
   return [state, setValue] as [T, Dispatch<SetStateAction<T>>]
 }
 
-export const getLocalStorage = <T>(key: string, initialValue: T) => {
+export const getLocalStorage = <T>(key: string, initialValue: T): T => {
   try
   {
     const value = window.localStorage.getItem(key)
@@ -28,6 +28,8 @@ export const getLocalStorage = <T>(key: string, initialValue: T) => {
   } catch (error)
   {
     console.log(error)
+    window.localStorage.setItem(key, JSON.stringify(initialValue))
+    return initialValue
   }
 }
 

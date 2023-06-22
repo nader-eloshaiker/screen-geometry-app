@@ -1,43 +1,36 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './App.css';
-import { ThemeProvider, createTheme } from '@mui/material/styles'
-import { ThemeModeSwitch } from './Styled/ThemeModeSwitch'
-import CssBaseline from '@mui/material/CssBaseline';
-// import ThemeSwitcher from './components/ThemeSwitcher';
+import ThemeModeProvider from './components/ThemeMode/ThemeModeProvider';
+import { Typography, Link, Container, Box } from '@mui/material';
+import ProTip from './components/ProTip';
+
+function Copyright() {
+  return (
+    <Typography variant="body2" color="text.secondary" align="center">
+      {'Copyright © '}
+      <Link color="inherit" href="https://mui.com/">
+        Your Website
+      </Link>{' '}
+      {new Date().getFullYear()}.
+    </Typography>
+  );
+}
 
 function App() {
-  const [theme, settheme] = useState(false);
-  const darkTheme = createTheme({
-    components: {
-      MuiCssBaseline: {
-        styleOverrides: {
-          body: {
-            background: theme ? 'linear-gradient(#2D333B, #000000)' : 'linear-gradient(#ffffff, #E7E5E4)',
-            backgroundRepeat: "no-repeat",
-            backgroundAttachment: "fixed",
-          },
-        },
-      },
-    },
-    palette: {
-      mode: theme ? 'dark' : 'light',
-    },
-  });
-
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    settheme(event.target.checked);
-  }
   return (
     <div className="App">
-      <ThemeProvider theme={darkTheme}>
-        <CssBaseline />
-
-        <label>Dark Mode</label>
-        <ThemeModeSwitch
-          checked={theme}
-          onChange={handleChange}
-        />
-      </ThemeProvider>
+      <ThemeModeProvider>
+        <Container maxWidth="sm">
+          <Box sx={{ my: 4 }}>
+            <Typography variant="h4" component="h1" gutterBottom>
+              Material UI Create React App example in TypeScript
+            </Typography>
+            <ProTip />
+            <Copyright />
+          </Box>
+        </Container>
+      );
+      </ThemeModeProvider>
     </div>
   );
 }
