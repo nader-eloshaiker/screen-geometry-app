@@ -1,8 +1,8 @@
 import React from 'react';
 import './App.css';
-import ThemeModeProvider from './components/ThemeMode/ThemeModeProvider';
 import { Typography, Link, Container, Box } from '@mui/material';
 import ProTip from './components/ProTip';
+import ThemeModeToggle from './components/ThemeMode/ThemeModeToggle';
 
 function Copyright() {
   return (
@@ -19,18 +19,17 @@ function Copyright() {
 function App() {
   return (
     <div className="App">
-      <ThemeModeProvider>
-        <Container maxWidth="sm">
-          <Box sx={{ my: 4 }}>
-            <Typography variant="h4" component="h1" gutterBottom>
-              Material UI Create React App example in TypeScript
-            </Typography>
-            <ProTip />
-            <Copyright />
-          </Box>
-        </Container>
-      );
-      </ThemeModeProvider>
+      <ThemeModeToggle title="Dark Mode"/>
+      <Container maxWidth="sm">
+        <Box sx={{ my: 4 }}>
+          <Typography variant="h4" component="h1" gutterBottom>
+            Material UI Create React App example in TypeScript
+          </Typography>
+          <ProTip />
+          <Copyright />
+        </Box>
+      </Container>
+    );
     </div>
   );
 }

@@ -1,6 +1,6 @@
 import { styled } from '@mui/material/styles'
 import Switch from '@mui/material/Switch'
-import { DarkTheme, LightTheme, DarkMode } from './ThemeConstants'
+import { DarkTheme, LightTheme, DarkMode } from '../components/ThemeMode/ThemeConstants'
 
 export const ThemeModeSwitch = styled(Switch)(({ theme }) => ({
   width: 62,
