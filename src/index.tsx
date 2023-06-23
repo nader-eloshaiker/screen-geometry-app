@@ -4,7 +4,6 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { ThemeModeProvider } from './components/ThemeMode/ThemeModeProvider';
-import MaterialThemeMode from './components/ThemeMode/MaterialThemeMode';
 
 import '@fontsource/roboto/300.css';
 import '@fontsource/roboto/400.css';
@@ -17,9 +16,7 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <ThemeModeProvider>
-      <MaterialThemeMode>
-        <App />
-      </MaterialThemeMode>
+      <App />
     </ThemeModeProvider>
   </React.StrictMode>
 );
