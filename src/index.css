@@ -1,10 +1,67 @@
-/* Global styles */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-body {
+/* :root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0;
+  }
+} */
+
+/* body {
+  color: krgb(var(--foreground-rgb));
+  background: linear-gradient(
+      to bottom,
+      transparent,
+      rgb(var(--background-end-rgb))
+    )
+    rgb(var(--background-start-rgb));
+
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans',
+    'Droid Sans', 'Helvetica Neue', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+} */
+
+/* :root {
+  --clr-bg-dark-fade: #3C4146;
+  --clr-bg-dark: #000000;
+  --clr-bg-light-fade: #b09d9d;
+  --clr-bg-light: #ffffff;
+
+  --clr-text-dark: #dad3d3;
+  --clr-text-light: #3C4146;
+}
+
+.light {
+  color: var(--clr-text-light);
+  background: linear-gradient(to bottom,
+    transparent,
+    var(--clr-bg-light-fade)) var(--clr-bg-light);
+}
+
+.dark {
+  color: var(--clr-text-dark);
+  background: linear-gradient(to bottom,
+    transparent,
+    var(--clr-bg-dark-fade)) var(--clr-bg-dark);
+} */
+
+@layer base {
+  .light {
+    @apply text-black bg-gradient-to-b from-white to-stone-300
+  }
+
+  .dark {
+    @apply text-white bg-gradient-to-b from-stone-800 to-black
+  }
 }
