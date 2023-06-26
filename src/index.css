@@ -58,10 +58,10 @@
 
 @layer base {
   .light {
-    @apply text-black bg-gradient-to-b from-white to-stone-300
+    @apply bg-gradient-to-b from-white to-stone-300 text-black;
   }
 
   .dark {
-    @apply text-white bg-gradient-to-b from-stone-800 to-black
+    @apply bg-gradient-to-b from-stone-800 to-black text-white;
   }
 }

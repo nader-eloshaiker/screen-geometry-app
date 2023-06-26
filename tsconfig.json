@@ -21,9 +21,6 @@
     "noEmit": true,
     "jsx": "react-jsx"
   },
-  "paths": {
-    "@/*": ["./src/*"]
-  },
   "include": [
     "src",
     "src/types/index.d.ts",
