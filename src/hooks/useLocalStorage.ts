@@ -1,7 +1,20 @@
 import { Dispatch, SetStateAction, useState } from 'react'
 
+const getLocalStorage = <T>(key: string, initialValue: T): T => {
+  try {
+    const value = window.localStorage.getItem(key)
+    // Check if the local storage already has any values,
+    // otherwise initialize it with the passed initialValue
+    return value ? (JSON.parse(value) as T) : initialValue
+  } catch (error) {
+    console.log(error)
+    window.localStorage.setItem(key, JSON.stringify(initialValue))
+    return initialValue
+  }
+}
+
 const useLocalStorage = <T>(key: string, initialValue: T) => {
-  const [state, setState] = useState(() => getLocalStorage(key, initialValue))
+  const [state, setState] = useState(() => getLocalStorage<T>(key, initialValue))
 
   const setValue = (value: T) => {
     try {
@@ -16,19 +29,6 @@ const useLocalStorage = <T>(key: string, initialValue: T) => {
   }
 
   return [state, setValue] as [T, Dispatch<SetStateAction<T>>]
-}
-
-export const getLocalStorage = <T>(key: string, initialValue: T): T => {
-  try {
-    const value = window.localStorage.getItem(key)
-    // Check if the local storage already has any values,
-    // otherwise initialize it with the passed initialValue
-    return value ? (JSON.parse(value) as T) : initialValue
-  } catch (error) {
-    console.log(error)
-    window.localStorage.setItem(key, JSON.stringify(initialValue))
-    return initialValue
-  }
 }
 
 export default useLocalStorage

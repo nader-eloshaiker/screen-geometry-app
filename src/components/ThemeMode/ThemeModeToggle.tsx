@@ -1,6 +1,5 @@
-// import { ThemeModeSwitch } from '../../Styled/ThemeModeSwitch';
 import { DarkMode, LightMode } from './ThemeConstants'
-import { useThemeMode } from './ThemeModeProvider'
+import { useThemeMode } from './useThemeMode'
 
 type TProps = {
   title: string
