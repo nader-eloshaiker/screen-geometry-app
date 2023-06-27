@@ -14,14 +14,16 @@ export default function ThemeModeToggle({ title = 'Dark Mode' }: TProps) {
   }
 
   return (
-    <div>
-      <label>{title}</label>
-      <input type='checkbox' onChange={handleChange} checked={themeState === DarkMode} />
-      {/* <ThemeModeSwitch
-          checked={themeState === DarkMode}
+    <div className='form-control'>
+      <label className='cursor-pointer label'>
+        <span className='label-text'>{title}</span>
+        <input
+          type='checkbox'
+          className='toggle-accent toggle'
           onChange={handleChange}
-          inputProps={{ 'aria-label': title }}
-        /> */}
+          checked={themeState === DarkMode}
+        />
+      </label>
     </div>
   )
 }
