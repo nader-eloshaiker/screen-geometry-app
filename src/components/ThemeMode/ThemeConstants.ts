@@ -16,7 +16,12 @@ export const Context = createContext<[TThemeMode, React.Dispatch<React.SetStateA
 const attachThemeClass = (newTheme: TThemeMode) => {
   const root = window.document.documentElement
 
-  newTheme === DarkMode ? root.classList.add(DarkMode) : root.classList.remove(DarkMode)
+  if (newTheme === DarkMode) {
+    !root.classList.contains(DarkMode) && root.classList.add(DarkMode)
+  } else {
+    root.classList.contains(DarkMode) && root.classList.remove(DarkMode)
+  }
+  root.setAttribute('data-theme', newTheme)
 }
 
 export { attachThemeClass }

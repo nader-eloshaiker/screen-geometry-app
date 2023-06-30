@@ -1,29 +1,32 @@
+import MoonIcon from '../svg/Moon'
+import SunIcon from '../svg/Sun'
 import { DarkMode, LightMode } from './ThemeConstants'
 import { useThemeMode } from './useThemeMode'
 
-type TProps = {
-  title: string
-}
+type TProps = TReactChildren & TRestProps & { title?: string }
 
-export default function ThemeModeToggle({ title = 'Dark Mode' }: TProps) {
+export default function ThemeModeToggle({ children: _children, title: _title, ...rest }: TProps) {
   const [themeState, setThemeState] = useThemeMode()
+  const isDarkMode = themeState === DarkMode
 
-  // const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setThemeState(event.target.checked ? DarkMode : LightMode)
+  const handleChange = () => {
+    setThemeState(isDarkMode ? LightMode : DarkMode)
   }
 
   return (
-    <div className='form-control'>
-      <label className='cursor-pointer label'>
-        <span className='label-text'>{title}</span>
-        <input
-          type='checkbox'
-          className='toggle-accent toggle'
-          onChange={handleChange}
-          checked={themeState === DarkMode}
+    <div {...rest}>
+      <button id='theme-toggle' onClick={handleChange} type='button' className='btn-link btn'>
+        <SunIcon
+          id='theme-dark-icon'
+          className={`${isDarkMode ? 'hidden' : ''} h-8 w-8 text-indigo-200`}
+          fill='currentColor'
         />
-      </label>
+        <MoonIcon
+          id='theme-light-icon'
+          className={`${isDarkMode ? '' : 'hidden'} h-8 w-8 text-indigo-900`}
+          fill='currentColor'
+        />
+      </button>
     </div>
   )
 }

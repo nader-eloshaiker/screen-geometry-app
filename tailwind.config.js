@@ -1,13 +1,14 @@
 /** @type {import('tailwindcss').Config} */
 
-import colors from 'tailwindcss/colors'
 import daisyui from 'daisyui'
+import colors from 'tailwindcss/colors'
 
 module.exports = {
-  content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
+  content: ['./index.html', './src/**/*.{js,ts,jsx,tsx,html}'],
   theme: {
     extend: {
       colors: {
+        current: 'currentColor',
         lightGray: colors.slate[400],
         darkGray: colors.slate[800],
         lightGreen: colors.emerald[400],
@@ -24,5 +25,8 @@ module.exports = {
     },
   },
   plugins: [daisyui],
-  darkMode: 'class',
+  darkMode: ['class', '[data-theme="dark"]'],
+  daisyui: {
+    themes: ['light', 'dark'],
+  },
 }
