@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import ThemeModeProvider from './components/ThemeMode/ThemeModeProvider.tsx'
+import ThemeModeProvider from './components/theme/ThemeModeProvider.tsx'
 import './index.css'
 import AppRouterProvider from './Providers/AppRouterProvider.tsx'
 import reportWebVitals from './reportWebVitals.ts'

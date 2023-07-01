@@ -1,8 +1,10 @@
 import { useEffect } from 'react'
-import { Form, Link, Outlet, useLoaderData, useNavigation, useSubmit } from 'react-router-dom'
+import { Outlet, useLoaderData, useNavigation, useSubmit } from 'react-router-dom'
 import { IContact } from '../components/api/contactAPI'
 import Footer from '../components/Footer'
 import Header from '../components/Header'
+import DrawerLayout from '../components/sidebar/DrawerLayout'
+import SidebarProvider from '../components/sidebar/SidebarProvider'
 
 export default function Root() {
   const { contacts, q } = (useLoaderData() as { contacts: Array<IContact>; q: string }) || { contacts: [], q: '' }
@@ -19,9 +21,10 @@ export default function Root() {
   }, [q])
 
   return (
-    <div className='container mx-auto flex min-h-screen flex-col'>
-      <Header />
-      <div id='sidebar'>
+    <SidebarProvider>
+      <div className='container mx-auto flex min-h-screen flex-col justify-center'>
+        <Header />
+        {/* <div id='sidebar' className='drawer lg:drawer-open'>
         <h1>React Router Contacts</h1>
         <div>
           <Form id='search-form' role='search'>
@@ -46,9 +49,9 @@ export default function Root() {
             <button type='submit'>New</button>
           </Form>
         </div>
-        <nav>
+        <nav className='drawer-side'>
           {contacts.length ? (
-            <ul>
+            <ul className='h-full p-4 menu w-80 bg-base-200 text-base-content'>
               {contacts.map((contact) => (
                 <li key={contact.id}>
                   <Link to={`contacts/${contact.id}`}>
@@ -70,20 +73,15 @@ export default function Root() {
             </p>
           )}
         </nav>
-        <div className='card m-4 w-80 shadow-2xl'>
-          <figure>
-            <img src='https://picsum.photos/id/1005/500/250' />
-          </figure>
-          <div className='card-body'>
-            <h2 className='card-title'>DaisyUI Card</h2>
-            <p>Rerum reiciendis beatae tenetur excepturi aut pariatur est eos. Sit sit necessitatibus.</p>
+      </div> */}
+        <DrawerLayout>
+          <div id='detail' className='grow'>
+            {navigation.state === 'loading' ? <span className='loading loading-bars loading-lg'></span> : <Outlet />}
           </div>
-        </div>
+        </DrawerLayout>
+
+        <Footer />
       </div>
-      <div id='detail' className='grow'>
-        {navigation.state === 'loading' ? <span className='loading loading-bars loading-lg'></span> : <Outlet />}
-      </div>
-      <Footer />
-    </div>
+    </SidebarProvider>
   )
 }
