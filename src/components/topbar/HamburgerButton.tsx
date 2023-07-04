@@ -18,8 +18,8 @@ export default function HamburgerButton({ className, ...rest }: TProps) {
       {/* this hidden checkbox controls the state */}
       <input type='checkbox' className='hidden' onClick={toggleDrawer} />
 
-      <CloseIcon id='theme-dark-icon' className='w-12 h-12 px-2 py-0 swap-on' fill='currentColor' />
-      <HamburgerIcon id='theme-light-icon' className='w-12 h-12 px-2 py-0 swap-off' fill='currentColor' />
+      <CloseIcon id='theme-dark-icon' className='px-2 py-0 w-11 h-11 swap-on' fill='currentColor' />
+      <HamburgerIcon id='theme-light-icon' className='px-2 py-0 w-11 h-11 swap-off' fill='currentColor' />
     </label>
   )
 }

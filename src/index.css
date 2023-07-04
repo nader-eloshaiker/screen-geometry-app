@@ -30,12 +30,6 @@
   }
 }
 
-@layer components {
-  .drawer-toggle:checked ~ .drawer-side > .drawer-overlay {
-    @apply bg-transparent;
-  }
-}
-
 .header {
   @apply bg-indigo-600 dark:bg-indigo-700 text-gray-50;
 }

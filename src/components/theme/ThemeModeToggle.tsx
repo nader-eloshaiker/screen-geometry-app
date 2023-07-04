@@ -19,8 +19,8 @@ export default function ThemeModeToggle({ className, ...rest }: TProps) {
       {/* this hidden checkbox controls the state */}
       <input type='checkbox' className='hidden' onClick={handleChange} />
 
-      <SunIcon id='theme-dark-icon' className='w-12 h-12 px-2 py-0 swap-on' fill='currentColor' />
-      <MoonIcon id='theme-light-icon' className='w-12 h-12 px-2 py-0 swap-off' fill='currentColor' />
+      <SunIcon id='theme-dark-icon' className='w-10 h-10 px-2 py-0 swap-on' fill='currentColor' />
+      <MoonIcon id='theme-light-icon' className='w-10 h-10 px-2 py-0 swap-off' fill='currentColor' />
     </label>
   )
 }
