@@ -12,13 +12,13 @@ export default function Root() {
       <div className='container flex flex-col justify-center min-h-screen mx-auto'>
         <Header />
         <DrawerLayout>
-          <div id='detail' className='grow'>
+          <main id='detail' className='grow'>
             {navigation.state === 'loading' ? (
               <span className='text-indigo-600 loading loading-bars loading-lg'></span>
             ) : (
               <Outlet />
             )}
-          </div>
+          </main>
         </DrawerLayout>
         <Footer />
       </div>

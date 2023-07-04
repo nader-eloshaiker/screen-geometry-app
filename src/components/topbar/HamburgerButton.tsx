@@ -1,10 +1,12 @@
 import { useContext } from 'react'
+import { twMerge } from 'tailwind-merge'
+import CloseIcon from '../icons/Close'
 import HamburgerIcon from '../icons/Hamburger'
 import { Context } from '../sidebar/SidebarProvider'
 
-type TProps = TReactChildren & TRestProps
+type TProps = TRestProps & { className?: string }
 
-export default function HamburgerButton({ children: _children, ...rest }: TProps) {
+export default function HamburgerButton({ className, ...rest }: TProps) {
   const drawerRef = useContext(Context)
 
   const toggleDrawer = () => {
@@ -12,10 +14,12 @@ export default function HamburgerButton({ children: _children, ...rest }: TProps
   }
 
   return (
-    <div {...rest}>
-      <button className='p-2 py-0 btn-ghost btn' onClick={toggleDrawer}>
-        <HamburgerIcon id='Hamburger-icon' className='w-8 h-8' fill='currentColor' />
-      </button>
-    </div>
+    <label className={twMerge(className, 'btn-ghost btn px-2 swap swap-rotate')} {...rest}>
+      {/* this hidden checkbox controls the state */}
+      <input type='checkbox' className='hidden' onClick={toggleDrawer} />
+
+      <CloseIcon id='theme-dark-icon' className='w-12 h-12 px-2 py-0 swap-on' fill='currentColor' />
+      <HamburgerIcon id='theme-light-icon' className='w-12 h-12 px-2 py-0 swap-off' fill='currentColor' />
+    </label>
   )
 }

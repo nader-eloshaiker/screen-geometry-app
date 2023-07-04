@@ -19,7 +19,7 @@ export default function SideNav() {
   }, [q])
 
   return (
-    <div id='sidebar' className='h-full p-4 w-80 rounded-r-xl lg:rounded-xl sidebar'>
+    <div id='sidebar' className='p-4 lg:h-full w-80 rounded-xl sidebar'>
       <h1>React Router Contacts</h1>
       <div className='flex flex-row gap-2'>
         <Form id='search-form' role='search'>
