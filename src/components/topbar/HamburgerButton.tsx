@@ -2,7 +2,9 @@ import { useContext } from 'react'
 import HamburgerIcon from '../icons/Hamburger'
 import { Context } from '../sidebar/SidebarProvider'
 
-export default function HamburgerButton() {
+type TProps = TReactChildren & TRestProps
+
+export default function HamburgerButton({ children: _children, ...rest }: TProps) {
   const drawerRef = useContext(Context)
 
   const toggleDrawer = () => {
@@ -10,7 +12,7 @@ export default function HamburgerButton() {
   }
 
   return (
-    <div className='lightModeText lg:hidden'>
+    <div {...rest}>
       <button className='p-2 py-0 btn-ghost btn' onClick={toggleDrawer}>
         <HamburgerIcon id='Hamburger-icon' className='w-8 h-8' fill='currentColor' />
       </button>
