@@ -15,12 +15,7 @@ export default function ThemeModeToggle({ children: _children, title: _title, ..
 
   return (
     <div {...rest}>
-      <button
-        id='theme-toggle'
-        onClick={handleChange}
-        type='button'
-        className='btn-ghost btn p-2 py-0 text-indigo-200 dark:text-indigo-900'
-      >
+      <button id='theme-toggle' onClick={handleChange} type='button' className='p-2 py-0 btn-ghost btn'>
         <SunIcon id='theme-dark-icon' className={`${isDarkMode ? 'hidden' : ''} h-6 w-6`} fill='currentColor' />
         <MoonIcon id='theme-light-icon' className={`${isDarkMode ? '' : 'hidden'} h-6 w-6`} fill='currentColor' />
       </button>
