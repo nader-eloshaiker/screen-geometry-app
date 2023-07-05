@@ -9,8 +9,8 @@ export default function Header() {
       </div>
       <div className='sticky top-0 z-auto sidebar rounded-b-xl'>
         <header>
-          <div className='flex items-center justify-between'>
-            <div className='flex flex-row items-center'>
+          <div className='flex items-center justify-between px-2 py-2 lg:px-4'>
+            <div className='flex flex-row items-center gap-3'>
               <HamburgerButton className='lightModeText lg:hidden' />
               <ul className='flex justify-center gap-4 list-none'>
                 <li>Home</li>

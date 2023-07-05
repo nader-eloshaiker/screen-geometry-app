@@ -2,10 +2,11 @@
 
 import { useEffect } from 'react'
 import { Form, NavLink, useLoaderData, useNavigation, useSubmit } from 'react-router-dom'
-import { IContact } from '../api/contactAPI'
+import { routes } from '../../routes/RouteSchema'
+import { IScreenEntry } from '../api/screenStore'
 
 export default function SideNav() {
-  const { contacts, q } = (useLoaderData() as { contacts: Array<IContact>; q: string }) || { contacts: [], q: '' }
+  const { list, q } = (useLoaderData() as { list: Array<IScreenEntry>; q: string }) || { list: [], q: '' }
   const submit = useSubmit()
 
   const navigation = useNavigation()
@@ -52,20 +53,14 @@ export default function SideNav() {
       </div>
       <div className='divider' />
       <nav>
-        {contacts.length ? (
+        {list.length ? (
           <ul className='menu'>
             <li className='menu-title'>Selected Screens</li>
-            {contacts.map((contact) => (
-              <li key={contact.id}>
-                <NavLink to={`contacts/${contact.id}`}>
-                  {contact.first || contact.last ? (
-                    <>
-                      {contact.first} {contact.last}
-                    </>
-                  ) : (
-                    <i>No Name</i>
-                  )}{' '}
-                  {contact.favorite && <span>★</span>}
+            {list.map((item) => (
+              <li key={item.id}>
+                <NavLink to={`${routes.screens.path}${item.id}`}>
+                  {item.diagonalSize} - {item.aspectRatio}
+                  {item.favorite && <span>★</span>}
                 </NavLink>
               </li>
             ))}

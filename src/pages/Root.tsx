@@ -1,7 +1,7 @@
 import { Outlet, useNavigation } from 'react-router-dom'
 import Footer from '../components/Footer'
 import DrawerLayout from '../components/sidebar/DrawerLayout'
-import SidebarProvider from '../components/sidebar/SidebarProvider'
+import SidebarProvider from '../components/sidebar/DrawerProvider'
 import Header from '../components/topbar/Header'
 
 export default function Root() {
