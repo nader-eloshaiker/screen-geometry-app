@@ -2,11 +2,11 @@
 
 import { useEffect } from 'react'
 import { Form, NavLink, useLoaderData, useNavigation, useSubmit } from 'react-router-dom'
+import { IScreenSpec } from '../../models/Screen'
 import { routes } from '../../routes/RouteSchema'
-import { IScreenEntry } from '../api/screenStore'
 
 export default function SideNav() {
-  const { list, q } = (useLoaderData() as { list: Array<IScreenEntry>; q: string }) || { list: [], q: '' }
+  const { list, q } = (useLoaderData() as { list: Array<IScreenSpec>; q: string }) || { list: [], q: '' }
   const submit = useSubmit()
 
   const navigation = useNavigation()

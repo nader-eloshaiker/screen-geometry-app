@@ -1,45 +1,26 @@
 import localforage from 'localforage'
 import { matchSorter } from 'match-sorter'
 import sortBy from 'sort-by'
+import { IScreenSpec, TScreenData } from '../../models/Screen'
 
 const storageKey = 'screens'
 
-export interface IScreenEntry {
-  id: string
-  diagonalSize: number
-  aspectRatio: string
-  aspectRatioFloat: number
-  hSize: number
-  vSize: number
-  hRes?: number
-  vRes?: number
-  ppi?: number
-  favorite?: boolean
-  refreshRate?: number
-  notes?: string
-}
-
-export type TScreenData = {
-  diagonalSize: number
-  aspectRatio: string
-}
-
-export async function getItemList(query?: string): Promise<Array<IScreenEntry>> {
+export async function getItemList(query?: string): Promise<Array<IScreenSpec>> {
   await fakeNetwork(`getScreens:${query}`)
-  let list: Array<IScreenEntry> = (await localforage.getItem(storageKey)) || []
+  let list: Array<IScreenSpec> = (await localforage.getItem(storageKey)) || []
   if (query) {
     list = matchSorter(list, query, { keys: ['diagonalSize', 'aspectRatio'] })
   }
   return list.sort(sortBy('diagonalSize', 'aspectRatio'))
 }
 
-export function createScreenEntry(data: TScreenData): IScreenEntry {
+export function createScreenEntry(data: TScreenData): IScreenSpec {
   const id = Math.random().toString(36).substring(2, 9)
   const aspectRatio = data.aspectRatio.split(':') // [width, height]
   const aspectRatioFloat = parseFloat(aspectRatio[0]) / parseFloat(aspectRatio[1])
   const hSize = Math.sqrt(Math.pow(data.diagonalSize, 2) / (1 + Math.pow(aspectRatioFloat, 2)))
   const vSize = hSize * aspectRatioFloat
-  const item: IScreenEntry = {
+  const item: IScreenSpec = {
     id,
     diagonalSize: data.diagonalSize,
     aspectRatio: data.aspectRatio,
@@ -50,25 +31,25 @@ export function createScreenEntry(data: TScreenData): IScreenEntry {
   return item
 }
 
-export async function createItem(data: TScreenData): Promise<IScreenEntry> {
+export async function createItem(data: TScreenData): Promise<IScreenSpec> {
   await fakeNetwork()
   const item = createScreenEntry(data)
-  const list: Array<IScreenEntry> = await getItemList()
+  const list: Array<IScreenSpec> = await getItemList()
   list.unshift(item)
   await set(list)
   return item
 }
 
-export async function getItem(id?: string): Promise<IScreenEntry | undefined> {
+export async function getItem(id?: string): Promise<IScreenSpec | undefined> {
   await fakeNetwork(`contact:${id}`)
-  const list: Array<IScreenEntry> = (await localforage.getItem(storageKey)) || []
+  const list: Array<IScreenSpec> = (await localforage.getItem(storageKey)) || []
   const item = list.find((entry) => entry.id === id)
   return item
 }
 
-export async function updateItem(id: string, updates: IScreenEntry): Promise<IScreenEntry> {
+export async function updateItem(id: string, updates: IScreenSpec): Promise<IScreenSpec> {
   await fakeNetwork()
-  const list: Array<IScreenEntry> = (await localforage.getItem(storageKey)) || []
+  const list: Array<IScreenSpec> = (await localforage.getItem(storageKey)) || []
   const item = list.find((entry) => entry.id === id)
   if (!item) throw new Error(`No contact found for ${id}`)
   Object.assign(item, updates)
@@ -77,7 +58,7 @@ export async function updateItem(id: string, updates: IScreenEntry): Promise<ISc
 }
 
 export async function deleteItem(id: string): Promise<boolean> {
-  const list: Array<IScreenEntry> = (await localforage.getItem(storageKey)) || []
+  const list: Array<IScreenSpec> = (await localforage.getItem(storageKey)) || []
   const index = list.findIndex((entry) => entry.id === id)
   if (index > -1) {
     list.splice(index, 1)
@@ -87,7 +68,7 @@ export async function deleteItem(id: string): Promise<boolean> {
   return false
 }
 
-function set(itemList: Array<IScreenEntry>): Promise<Array<IScreenEntry>> {
+function set(itemList: Array<IScreenSpec>): Promise<Array<IScreenSpec>> {
   return localforage.setItem(storageKey, itemList)
 }
 

@@ -1,8 +1,9 @@
 import { Params, redirect } from 'react-router-dom'
+import { IScreenSpec, TScreenData } from '../../models/Screen'
 import { routes } from '../../routes/RouteSchema'
-import { createItem, deleteItem, getItem, getItemList, IScreenEntry, TScreenData, updateItem } from './screenStore'
+import { createItem, deleteItem, getItem, getItemList, updateItem } from './screenStore'
 
-export async function itemListLoader({ request }: { request: Request }): Promise<{ list: IScreenEntry[]; q: string }> {
+export async function itemListLoader({ request }: { request: Request }): Promise<{ list: IScreenSpec[]; q: string }> {
   const url = new URL(request.url)
   const q = url.searchParams.get('q') || ''
   const list = await getItemList(q)
@@ -10,7 +11,7 @@ export async function itemListLoader({ request }: { request: Request }): Promise
   return { list, q }
 }
 
-export async function itemLoader({ params }: { params: Params }): Promise<{ item: IScreenEntry | undefined }> {
+export async function itemLoader({ params }: { params: Params }): Promise<{ item: IScreenSpec | undefined }> {
   const item = await getItem(params[routes.screens.key])
   if (!item) {
     throw new Response('', {
@@ -24,7 +25,7 @@ export async function itemLoader({ params }: { params: Params }): Promise<{ item
 
 export async function editItemAction({ request, params }: { request: Request; params: Params }) {
   const formData = await request.formData()
-  const updates = Object.fromEntries(formData) as unknown as IScreenEntry
+  const updates = Object.fromEntries(formData) as unknown as IScreenSpec
   await updateItem(params.screenId || '', updates)
 
   return redirect(`/${routes.screens}${params[routes.screens.key]}`)
@@ -57,7 +58,7 @@ export async function favouriteAction({ request, params }: { request: Request; p
   }
 
   const formData = await request.formData()
-  const item = Object.fromEntries(formData) as unknown as IScreenEntry
+  const item = Object.fromEntries(formData) as unknown as IScreenSpec
 
   // null check is handled by the if statement above
   // eslint-disable-next-line @typescript-eslint/no-non-null-assertion

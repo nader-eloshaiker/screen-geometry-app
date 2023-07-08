@@ -1,8 +1,8 @@
 import { Form, useFetcher, useLoaderData } from 'react-router-dom'
-import { IScreenEntry } from '../components/api/screenAPI'
+import { IScreenSpec } from '../models/Screen'
 
 export default function Contact() {
-  const contactDefault: IScreenEntry = {
+  const contactDefault: IScreenSpec = {
     id: Math.random().toString(36).substring(2, 9),
     createdAt: Date.now(),
     first: 'Your',
@@ -13,7 +13,7 @@ export default function Contact() {
     favorite: true,
   }
 
-  const { contact } = (useLoaderData() as { contact: IScreenEntry }) || contactDefault
+  const { contact } = (useLoaderData() as { contact: IScreenSpec }) || contactDefault
 
   return (
     <div id='contact'>
@@ -64,7 +64,7 @@ export default function Contact() {
   )
 }
 
-function Favorite({ contact }: { contact: IScreenEntry }) {
+function Favorite({ contact }: { contact: IScreenSpec }) {
   const fetcher = useFetcher()
   let favorite = !!contact.favorite
 
