@@ -13,7 +13,15 @@ export interface IScreenSpec {
   notes?: string
 }
 
-export type TScreenData = {
+export enum ScreenDataEnum {
+  diagonalSize = 'diagonalSize',
+  aspectRatio = 'aspectRatio',
+}
+
+type ScreenDataEnumKeys = keyof typeof ScreenDataEnum
+type ScreenDataEnumFields = { [key in ScreenDataEnumKeys]: number | string }
+
+export interface IScreenData extends ScreenDataEnumFields {
   diagonalSize: number
   aspectRatio: string
 }

@@ -1,16 +1,17 @@
 // components/Navbar.tsx
 
 import { useEffect } from 'react'
-import { Form, NavLink, useLoaderData, useNavigation, useSubmit } from 'react-router-dom'
+import { Form, NavLink, useLoaderData } from 'react-router-dom'
 import { IScreenSpec } from '../../models/Screen'
 import { routes } from '../../routes/RouteSchema'
+import CreateScreen from '../forms/screen/create'
 
 export default function SideNav() {
   const { list, q } = (useLoaderData() as { list: Array<IScreenSpec>; q: string }) || { list: [], q: '' }
-  const submit = useSubmit()
 
-  const navigation = useNavigation()
-  const searching = navigation.location && new URLSearchParams(navigation.location.search).has('q')
+  // const submit = useSubmit()
+  // const navigation = useNavigation()
+  // const searching = navigation.location && new URLSearchParams(navigation.location.search).has('q')
 
   useEffect(() => {
     const element = document.getElementById('q') as HTMLInputElement
@@ -23,9 +24,10 @@ export default function SideNav() {
     <div id='sidebar' className='p-4 lg:h-full w-80 rounded-xl sidebar'>
       <h1>React Router Contacts</h1>
       <div className='flex flex-row gap-2'>
-        <Form id='search-form' role='search'>
+        <CreateScreen />
+        {/* <Form id='search-form' role='search'>
           <input
-            id='q'
+            id='q'`
             className='w-full max-w-xs input'
             aria-label='Search contacts'
             placeholder='Search'
@@ -44,7 +46,7 @@ export default function SideNav() {
             aria-hidden
             className={`loading loading-dots loading-lg ${!searching && 'hidden'}`}
           />
-        </Form>
+        </Form> */}
         <Form method='post'>
           <button type='submit' className='btn-neutral btn'>
             New

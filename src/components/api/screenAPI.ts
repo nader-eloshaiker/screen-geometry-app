@@ -1,5 +1,5 @@
 import { Params, redirect } from 'react-router-dom'
-import { IScreenSpec, TScreenData } from '../../models/Screen'
+import { IScreenData, IScreenSpec } from '../../models/Screen'
 import { routes } from '../../routes/RouteSchema'
 import { createItem, deleteItem, getItem, getItemList, updateItem } from './screenStore'
 
@@ -33,7 +33,7 @@ export async function editItemAction({ request, params }: { request: Request; pa
 
 export async function createItemAction({ request }: { request: Request }) {
   const formData = await request.formData()
-  const data = Object.fromEntries(formData) as unknown as TScreenData
+  const data = Object.fromEntries(formData) as unknown as IScreenData
 
   const item = await createItem(data)
 
