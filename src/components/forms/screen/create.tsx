@@ -30,7 +30,6 @@ const DiagonalInput = (props: UseControllerProps<IScreenData>) => {
       thousandSeparator=','
       onBlur={field.onBlur}
       onChange={(e) => {
-        console.log('e.target.value', e.target.value)
         field.onChange(parseFormNumber(e.target.value) as string | number | React.ChangeEvent<Element>) // send data to hook form
       }}
       className='w-full max-w-xs input input-bordered'
@@ -56,7 +55,7 @@ export default function CreateScreen() {
   const {
     register,
     handleSubmit,
-    watch,
+    // watch,
     formState: { errors },
     control,
   } = useForm<IScreenData>({
@@ -64,7 +63,7 @@ export default function CreateScreen() {
   })
   const onSubmit: SubmitHandler<IScreenData> = (data) => console.log(data)
 
-  console.log(watch(ScreenDataEnum.diagonalSize)) // watch input value by passing the name of it
+  // console.log(watch(ScreenDataEnum.diagonalSize)) // watch input value by passing the name of it
 
   return (
     /* "handleSubmit" will validate your inputs before invoking "onSubmit" */
