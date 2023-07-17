@@ -1,10 +1,10 @@
 // components/Navbar.tsx
 
 import { useEffect } from 'react'
-import { Form, NavLink, useLoaderData } from 'react-router-dom'
+import { NavLink, useLoaderData } from 'react-router-dom'
 import { IScreenSpec } from '../../models/Screen'
 import { routes } from '../../routes/RouteSchema'
-import CreateScreen from '../forms/screen/create'
+import CreateScreenForm from '../forms/screen/create'
 
 export default function SideNav() {
   const { list, q } = (useLoaderData() as { list: Array<IScreenSpec>; q: string }) || { list: [], q: '' }
@@ -21,10 +21,10 @@ export default function SideNav() {
   }, [q])
 
   return (
-    <div id='sidebar' className='p-4 lg:h-full w-80 rounded-xl sidebar'>
+    <div className='p-4 lg:h-full rounded-xl sidebar'>
       <h1>React Router Contacts</h1>
       <div className='flex flex-row gap-2'>
-        <CreateScreen />
+        <CreateScreenForm />
         {/* <Form id='search-form' role='search'>
           <input
             id='q'`
@@ -47,22 +47,24 @@ export default function SideNav() {
             className={`loading loading-dots loading-lg ${!searching && 'hidden'}`}
           />
         </Form> */}
-        <Form method='post'>
-          <button type='submit' className='btn-neutral btn'>
-            New
-          </button>
-        </Form>
       </div>
       <div className='divider' />
-      <nav>
+      <nav id='sidebar'>
         {list.length ? (
           <ul className='menu'>
             <li className='menu-title'>Selected Screens</li>
             {list.map((item) => (
               <li key={item.id}>
                 <NavLink to={`${routes.screens.path}${item.id}`}>
-                  {item.diagonalSize} - {item.aspectRatio}
-                  {item.favorite && <span>★</span>}
+                  <div className='flex flex-row justify-between'>
+                    <div>
+                      {item.diagonalSize} - {item.aspectRatio}
+                      {item.favorite && <span>★</span>}
+                    </div>
+                    <div>
+                      <button onClick={(event) => {}}>Delete</button>
+                    </div>
+                  </div>
                 </NavLink>
               </li>
             ))}

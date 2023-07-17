@@ -3,7 +3,7 @@ import { IScreenData, IScreenSpec } from '../../models/Screen'
 import { routes } from '../../routes/RouteSchema'
 import { createItem, deleteItem, getItem, getItemList, updateItem } from './screenStore'
 
-export async function itemListLoader({ request }: { request: Request }): Promise<{ list: IScreenSpec[]; q: string }> {
+export async function listLoader({ request }: { request: Request }): Promise<{ list: IScreenSpec[]; q: string }> {
   const url = new URL(request.url)
   const q = url.searchParams.get('q') || ''
   const list = await getItemList(q)

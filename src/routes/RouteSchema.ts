@@ -3,12 +3,12 @@ export const routes = {
     path: '/',
   },
   screens: {
-    path: 'screens/',
+    path: 'screens',
     key: ':screenId',
     actions: {
-      create: '/create',
-      delete: '/delete',
-      edit: '/edit',
+      create: 'create',
+      delete: 'delete',
+      edit: 'edit',
     },
   },
 }
