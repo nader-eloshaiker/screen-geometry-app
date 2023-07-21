@@ -1,9 +1,10 @@
 import { yupResolver } from '@hookform/resolvers/yup'
 import { SubmitHandler, useController, UseControllerProps, useForm } from 'react-hook-form'
 import { NumericFormat } from 'react-number-format'
-import { useFetcher } from 'react-router-dom'
 import * as yup from 'yup'
 import { IScreenData, ScreenDataEnum } from '../../../models/Screen'
+import { routes } from '../../api/ApiRouteSchema'
+import useAxios from '../../api/fetch/useAxios'
 
 const parseFormNumber = (value: string | number | undefined, strict = true) => {
   if (!value || value == null) {
@@ -62,14 +63,14 @@ export default function CreateScreenForm() {
   } = useForm<IScreenData>({
     resolver: yupResolver(screenDataSchema),
   })
-  const fetcher = useFetcher()
-  const onSubmit: SubmitHandler<IScreenData> = (data) => {
-    // async request which may result error
-    try {
-      fetcher.submit({ ...data }, { method: 'post', action: '' })
-    } catch (e) {
-      // handle your error
-    }
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [{ response: _response, loading: _putLoading, error: _putError }, { execute }] = useAxios(
+    { url: `${routes.baseUrl}${routes.root}/${routes.screens.path}`, method: 'PUT' },
+    { manual: true },
+  )
+
+  const onSubmit: SubmitHandler<IScreenData> = (form) => {
+    execute({ data: form })
   }
 
   return (

@@ -4,15 +4,14 @@ import {
   deleteItemAction,
   editItemAction,
   favouriteAction,
-  itemLoader,
-  listLoader,
-} from '../components/api/screenAPI'
+  getScreen,
+} from '../components/api/db/indexApi'
 import Contact from '../pages/Contacts'
 import EditContact from '../pages/EditContact'
 import ErrorManager from '../pages/ErrorManger'
 import Home from '../pages/Home'
 import Root from '../pages/Root'
-import { routes } from './RouteSchema'
+import { routes } from './AppRouteSchema'
 
 export default function AppRouterProvider() {
   const router = createBrowserRouter([
@@ -20,7 +19,7 @@ export default function AppRouterProvider() {
       path: routes.root.path,
       element: <Root />,
       errorElement: <ErrorManager />,
-      loader: listLoader,
+      // loader: getScreenList,
       action: createItemAction,
       children: [
         {
@@ -30,19 +29,19 @@ export default function AppRouterProvider() {
             {
               path: routes.screens.path + '/' + routes.screens.actions.create,
               element: <Home />,
-              loader: listLoader,
+              // loader: getScreenList,
               action: createItemAction,
             },
             {
               path: routes.screens.path + '/' + routes.screens.key,
               element: <Contact />,
-              loader: itemLoader,
+              loader: getScreen,
               action: favouriteAction,
             },
             {
               path: routes.screens.path + '/' + routes.screens.key + '/' + routes.screens.actions.edit,
               element: <EditContact />,
-              loader: itemLoader,
+              loader: getScreen,
               action: editItemAction,
             },
             {

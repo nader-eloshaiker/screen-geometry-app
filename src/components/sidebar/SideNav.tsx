@@ -1,13 +1,14 @@
 // components/Navbar.tsx
 
-import { useEffect } from 'react'
-import { NavLink, useLoaderData } from 'react-router-dom'
-import { IScreenSpec } from '../../models/Screen'
-import { routes } from '../../routes/RouteSchema'
+import { useContext, useEffect } from 'react'
+import { NavLink } from 'react-router-dom'
+import { routes } from '../../routes/AppRouteSchema'
+import { DataContext } from '../api/DataProvider'
 import CreateScreenForm from '../forms/screen/create'
 
 export default function SideNav() {
-  const { list, q } = (useLoaderData() as { list: Array<IScreenSpec>; q: string }) || { list: [], q: '' }
+  const [data] = useContext(DataContext)
+  const { screens, query } = data
 
   // const submit = useSubmit()
   // const navigation = useNavigation()
@@ -16,9 +17,9 @@ export default function SideNav() {
   useEffect(() => {
     const element = document.getElementById('q') as HTMLInputElement
     if (element && element != null) {
-      element.value = q
+      element.value = query
     }
-  }, [q])
+  }, [query])
 
   return (
     <div className='p-4 lg:h-full rounded-xl sidebar'>
@@ -50,10 +51,10 @@ export default function SideNav() {
       </div>
       <div className='divider' />
       <nav id='sidebar'>
-        {list.length ? (
+        {screens.length ? (
           <ul className='menu'>
             <li className='menu-title'>Selected Screens</li>
-            {list.map((item) => (
+            {screens.map((item) => (
               <li key={item.id}>
                 <NavLink to={`${routes.screens.path}${item.id}`}>
                   <div className='flex flex-row justify-between'>
@@ -62,7 +63,7 @@ export default function SideNav() {
                       {item.favorite && <span>★</span>}
                     </div>
                     <div>
-                      <button onClick={(event) => {}}>Delete</button>
+                      <button onClick={() => {}}>Delete</button>
                     </div>
                   </div>
                 </NavLink>

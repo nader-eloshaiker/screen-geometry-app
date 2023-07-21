@@ -1,7 +1,9 @@
-export interface IScreenSpec {
-  id: string
+export interface IScreenData extends ScreenDataEnumFields {
   diagonalSize: number
   aspectRatio: string
+}
+export interface IScreenSpec extends IScreenData {
+  id: string
   aspectRatioFloat: number
   hSize: number
   vSize: number
@@ -20,8 +22,3 @@ export enum ScreenDataEnum {
 
 type ScreenDataEnumKeys = keyof typeof ScreenDataEnum
 type ScreenDataEnumFields = { [key in ScreenDataEnumKeys]: number | string }
-
-export interface IScreenData extends ScreenDataEnumFields {
-  diagonalSize: number
-  aspectRatio: string
-}
