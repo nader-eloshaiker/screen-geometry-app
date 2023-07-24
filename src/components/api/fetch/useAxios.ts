@@ -4,7 +4,6 @@ import { axiosInstance } from './axios'
 
 const UseAxiosOptionsDefaults = {
   manual: false,
-  cancelable: false,
 }
 
 type UseAxiosOptions = Partial<typeof UseAxiosOptionsDefaults>
@@ -41,6 +40,9 @@ const useAxios = <T>(axiosParams: AxiosRequestConfig, hooksOptions: UseAxiosOpti
   useEffect(() => {
     if (!options.manual) {
       fetchData(axiosParams)
+
+      // cleanup for unmount
+      return cancel
     }
   }, [])
 
