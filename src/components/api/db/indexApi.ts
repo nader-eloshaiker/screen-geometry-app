@@ -12,6 +12,10 @@ export type TScreenResponse = {
   item: IScreen
 }
 
+export type TIdResponse = {
+  id: string
+}
+
 export async function getScreenList(apiUrl: string): Promise<TScreenListResponse> {
   const url = new URL(apiUrl)
   const q = url.searchParams.get('q') || ''
@@ -41,16 +45,21 @@ export async function createItemAction(data: IScreenDataInput) {
   return { item }
 }
 
-export async function deleteItemAction(params: Params) {
-  if (!params[routes.screens.key] || params[routes.screens.key] === null) {
-    throw new Error('oh dang!')
+export async function deleteItemAction(url: string | undefined) {
+  if (!url) {
+    throw new Error('No url provided!')
   }
 
-  // null check is handled by the if statement above
-  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-  await deleteItem(params[routes.screens.key]!)
+  const urlObj = new URL(url)
+  const id = urlObj.pathname.split('/').pop() || ''
 
-  return { item: null }
+  if (!id) {
+    throw new Error('No id provided!')
+  }
+
+  await deleteItem(id)
+
+  return { id }
 }
 
 export async function favouriteAction(apiUrl: string) {

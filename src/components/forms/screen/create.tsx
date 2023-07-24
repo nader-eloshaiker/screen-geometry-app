@@ -76,6 +76,8 @@ export default function CreateScreenForm() {
     if (response && !loading && !error) {
       dispatch({ type: ActionTypes.CREATE, payload: response.data.payload.item })
     }
+
+    dispatch({ type: ActionTypes.LOADING, payload: loading })
   }, [loading, error, response])
 
   const onSubmit: SubmitHandler<IScreenDataInput> = (form) => {

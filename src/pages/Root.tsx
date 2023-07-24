@@ -11,15 +11,17 @@ import Header from '../components/topbar/Header'
 
 export default function Root() {
   const navigation = useNavigation()
-  const [_, dispatch] = useContext(DataContext)
+  const [dataState, dispatch] = useContext(DataContext)
   const [{ response, loading, error }] = useAxios<{ payload: TScreenListResponse }>({
     url: `${routes.baseUrl}${routes.root}/${routes.screens.path}`,
     method: 'GET',
   })
   useEffect(() => {
     if (response && !loading && !error) {
-      dispatch({ type: ActionTypes.LOAD, payload: response.data.payload })
+      dispatch({ type: ActionTypes.LIST, payload: response.data.payload })
     }
+
+    dispatch({ type: ActionTypes.LOADING, payload: loading })
   }, [loading, error, response])
 
   return (
@@ -28,7 +30,7 @@ export default function Root() {
         <Header />
         <DrawerLayout>
           <main id='detail' className='grow'>
-            {navigation.state === 'loading' || loading ? (
+            {navigation.state === 'loading' || dataState.loading ? (
               <span className='text-indigo-600 loading loading-bars loading-lg'></span>
             ) : (
               <Outlet />

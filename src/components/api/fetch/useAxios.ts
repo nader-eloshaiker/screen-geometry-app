@@ -24,6 +24,7 @@ const useAxios = <T>(axiosParams: AxiosRequestConfig, hooksOptions: UseAxiosOpti
 
   const fetchData = async (params: AxiosRequestConfig, controller: AbortController) => {
     try {
+      setLoading(true)
       const result = await axiosInstance.request({ ...params, signal: controller.signal })
       setResponse(result)
     } catch (error) {

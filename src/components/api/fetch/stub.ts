@@ -1,7 +1,7 @@
 import { AxiosInstance, AxiosRequestConfig } from 'axios'
 import MockAdapter from 'axios-mock-adapter'
 import { routes } from '../ApiRouteSchema'
-import { createItemAction, getScreen, getScreenList } from '../db/indexApi'
+import { createItemAction, deleteItemAction, getScreen, getScreenList } from '../db/indexApi'
 
 // Stub out the API calls using axios-mock-adapter for indexAPI to store data in the browser's IndexedDB
 // The stubbed API calls can later be replaced with real API calls to a backend store
@@ -55,6 +55,22 @@ export const generateStub = (axiosInstance: AxiosInstance) => {
         ]
       }),
     )
+
+  // eslint-disable-next-line prettier/prettier, no-useless-escape
+  const screenUrl = new RegExp(routes.baseUrl + routes.root + '/' + routes.screens.path + '/\\S+')
+
+  mock.onDelete(screenUrl).reply((config) =>
+    deleteItemAction(config.url).then((payload) => {
+      debug(config, payload)
+      return [
+        200,
+        {
+          payload,
+        },
+        { Accept: 'application/json', 'Content-Type': 'application/json' },
+      ]
+    }),
+  )
 
   return mock
 }

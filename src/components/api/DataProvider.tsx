@@ -4,28 +4,31 @@ import { IScreen } from '../../models/Screen'
 import { TScreenListResponse } from './db/indexApi'
 
 export enum ActionTypes {
-  LOAD = 'load',
+  LIST = 'list',
   UPDATE = 'update',
   CREATE = 'create',
   DELETE = 'delete',
+  LOADING = 'loading',
 }
 
 type TScreenAction =
-  | { type: ActionTypes.LOAD; payload: TScreenListResponse }
+  | { type: ActionTypes.LIST; payload: TScreenListResponse }
   | { type: ActionTypes.UPDATE; payload: IScreen }
   | { type: ActionTypes.CREATE; payload: IScreen }
   | { type: ActionTypes.DELETE; payload: string }
+  | { type: ActionTypes.LOADING; payload: boolean }
 
 const initialScreenState = {
   screens: [] as IScreen[],
   query: '',
+  loading: false,
 }
 
 type IScreenState = typeof initialScreenState
 
 const screenReducer = (state: IScreenState, { type, payload }: TScreenAction): IScreenState => {
   switch (type) {
-    case ActionTypes.LOAD:
+    case ActionTypes.LIST:
       return { ...state, screens: payload.list, query: payload.q }
     case ActionTypes.DELETE:
       return { ...state, screens: state.screens.filter((screen) => screen.id !== payload) }
@@ -36,6 +39,8 @@ const screenReducer = (state: IScreenState, { type, payload }: TScreenAction): I
       }
     case ActionTypes.CREATE:
       return { ...state, screens: [...state.screens, payload] }
+    case ActionTypes.LOADING:
+      return { ...state, loading: payload }
     default:
       return state
   }
