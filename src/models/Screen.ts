@@ -1,17 +1,26 @@
-export interface IScreenData extends ScreenDataEnumFields {
+export interface IScreenDataInput extends ScreenDataEnumFields {
   diagonalSize: number
   aspectRatio: string
 }
-export interface IScreenSpec extends IScreenData {
-  id: string
+
+export interface IScreenData {
   aspectRatioFloat: number
   hSize: number
   vSize: number
-  hRes?: number
-  vRes?: number
-  ppi?: number
-  favorite?: boolean
+}
+
+export interface IScreenSpec {
+  hRes: number
+  vRes: number
+  ppi: number
   refreshRate?: number
+}
+export interface IScreen {
+  id: string
+  tag: IScreenDataInput
+  data: IScreenData
+  spec?: IScreenSpec
+  favorite: boolean
   notes?: string
 }
 

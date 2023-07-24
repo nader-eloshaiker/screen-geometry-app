@@ -22,9 +22,9 @@ export default function SideNav() {
   }, [query])
 
   return (
-    <div className='p-4 lg:h-full rounded-xl sidebar'>
-      <h1>React Router Contacts</h1>
-      <div className='flex flex-row gap-2'>
+    <div className='p-4 w-xs lg:h-full rounded-xl sidebar'>
+      <div className='flex flex-col gap-1'>
+        <h1>React Router Contacts</h1>
         <CreateScreenForm />
         {/* <Form id='search-form' role='search'>
           <input
@@ -48,34 +48,34 @@ export default function SideNav() {
             className={`loading loading-dots loading-lg ${!searching && 'hidden'}`}
           />
         </Form> */}
+        <div className='divider' />
+        <nav id='sidebar'>
+          {screens.length ? (
+            <ul className='menu'>
+              <li className='menu-title'>Selected Screens</li>
+              {screens.map((item) => (
+                <li key={item.id}>
+                  <NavLink to={`${routes.screens.path}${item.id}`}>
+                    <div className='flex flex-row justify-between'>
+                      <div>
+                        {item.tag.diagonalSize}&quot; - {item.tag.aspectRatio}
+                        {item.favorite && <span>★</span>}
+                      </div>
+                      <div>
+                        <button onClick={() => {}}>Delete</button>
+                      </div>
+                    </div>
+                  </NavLink>
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <p>
+              <i>No contacts</i>
+            </p>
+          )}
+        </nav>
       </div>
-      <div className='divider' />
-      <nav id='sidebar'>
-        {screens.length ? (
-          <ul className='menu'>
-            <li className='menu-title'>Selected Screens</li>
-            {screens.map((item) => (
-              <li key={item.id}>
-                <NavLink to={`${routes.screens.path}${item.id}`}>
-                  <div className='flex flex-row justify-between'>
-                    <div>
-                      {item.diagonalSize} - {item.aspectRatio}
-                      {item.favorite && <span>★</span>}
-                    </div>
-                    <div>
-                      <button onClick={() => {}}>Delete</button>
-                    </div>
-                  </div>
-                </NavLink>
-              </li>
-            ))}
-          </ul>
-        ) : (
-          <p>
-            <i>No contacts</i>
-          </p>
-        )}
-      </nav>
     </div>
   )
 }

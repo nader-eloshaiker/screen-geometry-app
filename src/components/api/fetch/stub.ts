@@ -9,7 +9,7 @@ export const generateStub = (axiosInstance: AxiosInstance) => {
   const mock = new MockAdapter(axiosInstance, { onNoMatch: 'passthrough', delayResponse: 1000 })
 
   const debug = (config: AxiosRequestConfig, response: unknown) => {
-    console.debug(`${config.method}: ${config.url}`, '\nRequest:', config, '\nResponse Data:', response)
+    console.debug(`axios adapter: [${config.method}] ${config.url}`, '\n', config, '\n', response)
   }
 
   mock.onGet(`${routes.baseUrl}${routes.root}/${routes.screens.path}`).reply((config) =>
@@ -43,7 +43,7 @@ export const generateStub = (axiosInstance: AxiosInstance) => {
   mock
     .onPost(`${routes.baseUrl}${routes.root}/${routes.screens.path}/${routes.screens.actions.create}`)
     .reply((config) =>
-      createItemAction(config.data || {}).then((payload) => {
+      createItemAction(config.data ? JSON.parse(config.data) : {}).then((payload) => {
         debug(config, payload)
 
         return [

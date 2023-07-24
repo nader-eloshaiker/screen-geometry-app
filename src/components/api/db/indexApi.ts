@@ -1,14 +1,18 @@
 import { Params } from 'react-router-dom'
-import { IScreenData, IScreenSpec } from '../../../models/Screen'
+import { IScreen, IScreenDataInput } from '../../../models/Screen'
 import { routes } from '../../../routes/AppRouteSchema'
 import { createItem, deleteItem, getItem, getItemList, updateItem } from './indexDB'
 
-export type TGetScreenListResponse = {
-  list: IScreenSpec[]
+export type TScreenListResponse = {
+  list: IScreen[]
   q: string
 }
 
-export async function getScreenList(apiUrl: string): Promise<TGetScreenListResponse> {
+export type TScreenResponse = {
+  item: IScreen
+}
+
+export async function getScreenList(apiUrl: string): Promise<TScreenListResponse> {
   const url = new URL(apiUrl)
   const q = url.searchParams.get('q') || ''
   const list = await getItemList(q)
@@ -16,7 +20,7 @@ export async function getScreenList(apiUrl: string): Promise<TGetScreenListRespo
   return { list, q }
 }
 
-export async function getScreen(params: Params): Promise<{ item: IScreenSpec | undefined }> {
+export async function getScreen(params: Params): Promise<{ item: IScreen | undefined }> {
   const item = await getItem(params[routes.screens.key])
   if (!item) {
     throw new Error('Not Found')
@@ -25,13 +29,13 @@ export async function getScreen(params: Params): Promise<{ item: IScreenSpec | u
   return { item }
 }
 
-export async function editItemAction(data: IScreenSpec) {
+export async function editItemAction(data: IScreen) {
   const item = await updateItem(data.id || '', data)
 
   return { item }
 }
 
-export async function createItemAction(data: IScreenData) {
+export async function createItemAction(data: IScreenDataInput) {
   const item = await createItem(data)
 
   return { item }

@@ -1,7 +1,7 @@
 import { createContext, useReducer } from 'react'
 
-import { IScreenSpec } from '../../models/Screen'
-import { TGetScreenListResponse } from './db/indexApi'
+import { IScreen } from '../../models/Screen'
+import { TScreenListResponse } from './db/indexApi'
 
 export enum ActionTypes {
   LOAD = 'load',
@@ -11,13 +11,13 @@ export enum ActionTypes {
 }
 
 type TScreenAction =
-  | { type: ActionTypes.LOAD; payload: TGetScreenListResponse }
-  | { type: ActionTypes.UPDATE; payload: IScreenSpec }
-  | { type: ActionTypes.CREATE; payload: IScreenSpec }
+  | { type: ActionTypes.LOAD; payload: TScreenListResponse }
+  | { type: ActionTypes.UPDATE; payload: IScreen }
+  | { type: ActionTypes.CREATE; payload: IScreen }
   | { type: ActionTypes.DELETE; payload: string }
 
 const initialScreenState = {
-  screens: [] as IScreenSpec[],
+  screens: [] as IScreen[],
   query: '',
 }
 
@@ -32,9 +32,7 @@ const screenReducer = (state: IScreenState, { type, payload }: TScreenAction): I
     case ActionTypes.UPDATE:
       return {
         ...state,
-        screens: state.screens.map((screen) =>
-          payload && screen.id !== payload.id ? screen : payload,
-        ) as IScreenSpec[],
+        screens: state.screens.map((screen) => (payload && screen.id !== payload.id ? screen : payload)) as IScreen[],
       }
     case ActionTypes.CREATE:
       return { ...state, screens: [...state.screens, payload] }

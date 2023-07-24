@@ -1,9 +1,9 @@
 import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios'
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { axiosInstance } from './axios'
 
 const UseAxiosOptionsDefaults = {
-  manual: false,
+  manualExecution: false,
 }
 
 type UseAxiosOptions = Partial<typeof UseAxiosOptionsDefaults>
@@ -12,19 +12,24 @@ const useAxios = <T>(axiosParams: AxiosRequestConfig, hooksOptions: UseAxiosOpti
   const options = { ...UseAxiosOptionsDefaults, ...hooksOptions }
   const [response, setResponse] = useState<AxiosResponse<T>>()
   const [error, setError] = useState<AxiosError>()
-  const [loading, setLoading] = useState(!options.manual)
-  const controllerRef = useRef(new AbortController())
-  const cancel = () => {
-    controllerRef.current.abort()
+  const [loading, setLoading] = useState(!options.manualExecution)
+
+  const cancel = (controller: AbortController, reason?: string) => {
+    controller.abort(reason)
+    controller.signal.reason &&
+      console.debug(
+        `axios abort: [${axiosParams.method}] ${axiosParams.url} status: [${controller.signal.aborted}] ${controller.signal.reason}`,
+      )
   }
 
-  const fetchData = async (params: AxiosRequestConfig) => {
+  const fetchData = async (params: AxiosRequestConfig, controller: AbortController) => {
     try {
-      const result = await axiosInstance.request({ ...params, signal: controllerRef.current.signal })
+      const result = await axiosInstance.request({ ...params, signal: controller.signal })
       setResponse(result)
     } catch (error) {
       if (axios.isAxiosError(error)) {
-        setError(error)
+        // only set error if not aborted
+        !axios.isCancel(error) && setError(error)
       } else {
         throw new Error('different error than axios')
       }
@@ -34,22 +39,22 @@ const useAxios = <T>(axiosParams: AxiosRequestConfig, hooksOptions: UseAxiosOpti
   }
 
   const execute = (data?: unknown) => {
-    fetchData({ ...axiosParams, data: data || axiosParams.data })
+    const controller = new AbortController()
+
+    fetchData({ ...axiosParams, data: data || axiosParams.data }, controller)
   }
 
   useEffect(() => {
-    if (!options.manual) {
-      fetchData(axiosParams)
+    if (!options.manualExecution) {
+      const controller = new AbortController()
+      fetchData(axiosParams, controller)
 
       // cleanup for unmount
-      return cancel
+      return () => cancel(controller, 'React effect unmount')
     }
   }, [])
 
-  return [
-    { response, error, loading },
-    { execute, cancel },
-  ] as const
+  return [{ response, error, loading }, { execute }] as const
 }
 
 export default useAxios

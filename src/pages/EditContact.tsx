@@ -1,8 +1,8 @@
 import { Form, useLoaderData, useNavigate } from 'react-router-dom'
-import { IScreenData } from '../models/Screen'
+import { IScreenDataInput } from '../models/Screen'
 
 export default function EditContact() {
-  const { contact } = useLoaderData() as { contact: IScreenData }
+  const { contact } = useLoaderData() as { contact: IScreenDataInput }
   const navigate = useNavigate()
 
   return (

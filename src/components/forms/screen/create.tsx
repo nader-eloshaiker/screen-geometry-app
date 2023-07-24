@@ -1,9 +1,12 @@
 import { yupResolver } from '@hookform/resolvers/yup'
+import { useContext, useEffect } from 'react'
 import { SubmitHandler, useController, UseControllerProps, useForm } from 'react-hook-form'
 import { NumericFormat } from 'react-number-format'
 import * as yup from 'yup'
-import { IScreenData, ScreenDataEnum } from '../../../models/Screen'
+import { IScreenDataInput, ScreenDataEnum } from '../../../models/Screen'
 import { routes } from '../../api/ApiRouteSchema'
+import { ActionTypes, DataContext } from '../../api/DataProvider'
+import { TScreenResponse } from '../../api/db/indexApi'
 import useAxios from '../../api/fetch/useAxios'
 
 const parseFormNumber = (value: string | number | undefined, strict = true) => {
@@ -20,7 +23,7 @@ const parseFormNumber = (value: string | number | undefined, strict = true) => {
   return isNaN(parsed) ? undefined : parsed
 }
 
-const DiagonalInput = (props: UseControllerProps<IScreenData>) => {
+const DiagonalInput = (props: UseControllerProps<IScreenDataInput>) => {
   const { field } = useController(props)
 
   return (
@@ -35,7 +38,7 @@ const DiagonalInput = (props: UseControllerProps<IScreenData>) => {
       onChange={(e) => {
         field.onChange(parseFormNumber(e.target.value) as string | number | React.ChangeEvent<Element>) // send data to hook form
       }}
-      className='w-full max-w-xs input input-bordered'
+      className='w-full input input-bordered'
       placeholder='27"'
     />
   )
@@ -60,48 +63,54 @@ export default function CreateScreenForm() {
     formState: { errors },
     control,
     handleSubmit,
-  } = useForm<IScreenData>({
+  } = useForm<IScreenDataInput>({
     resolver: yupResolver(screenDataSchema),
   })
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [{ response: _response, loading: _putLoading, error: _putError }, { execute }] = useAxios(
-    { url: `${routes.baseUrl}${routes.root}/${routes.screens.path}`, method: 'PUT' },
-    { manual: true },
+  const [_, dispatch] = useContext(DataContext)
+  const [{ response, loading, error }, { execute }] = useAxios<{ payload: TScreenResponse }>(
+    { url: `${routes.baseUrl}${routes.root}/${routes.screens.path}/${routes.screens.actions.create}`, method: 'POST' },
+    { manualExecution: true },
   )
 
-  const onSubmit: SubmitHandler<IScreenData> = (form) => {
-    execute({ data: form })
+  useEffect(() => {
+    if (response && !loading && !error) {
+      dispatch({ type: ActionTypes.CREATE, payload: response.data.payload.item })
+    }
+  }, [loading, error, response])
+
+  const onSubmit: SubmitHandler<IScreenDataInput> = (form) => {
+    execute(form)
   }
 
   return (
     /* "handleSubmit" will validate your inputs before invoking "onSubmit" */
     <form method='post' onSubmit={handleSubmit(onSubmit)}>
       <div className='flex flex-col gap-2'>
-        <div className='w-full max-w-xs form-control'>
+        <div className='w-full form-control'>
           <label className='label'>
             <span className='label-text'>Screen Size (diagnol)</span>
           </label>
           <div id='diagonalSize'>
             <DiagonalInput control={control} name={ScreenDataEnum.diagonalSize} />
             {errors[ScreenDataEnum.diagonalSize] && (
-              <div className='max-w-xs text-error'>{errors[ScreenDataEnum.diagonalSize].message}</div>
+              <div className='text-error'>{errors[ScreenDataEnum.diagonalSize].message}</div>
             )}
           </div>
         </div>
         {/* include validation with required or other standard HTML validation rules */}
-        <div className='w-full max-w-xs form-control'>
+        <div className='w-full form-control'>
           <label className='label'>
             <span className='label-text'>Aspect Ratio</span>
           </label>
           <input
             type='text'
-            className='w-full max-w-xs input input-bordered'
+            className='w-full input input-bordered'
             placeholder='16:9'
             {...register(ScreenDataEnum.aspectRatio)}
           />
           {/* errors will return when field validation fails  */}
           {errors[ScreenDataEnum.aspectRatio] && (
-            <div className='max-w-xs text-error'>{errors[ScreenDataEnum.aspectRatio].message}</div>
+            <div className='text-error'>{errors[ScreenDataEnum.aspectRatio].message}</div>
           )}
         </div>
         <div className='flex flex-row-reverse pt-2'>

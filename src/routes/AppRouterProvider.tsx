@@ -1,11 +1,4 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
-import {
-  createItemAction,
-  deleteItemAction,
-  editItemAction,
-  favouriteAction,
-  getScreen,
-} from '../components/api/db/indexApi'
 import Contact from '../pages/Contacts'
 import EditContact from '../pages/EditContact'
 import ErrorManager from '../pages/ErrorManger'
@@ -19,8 +12,6 @@ export default function AppRouterProvider() {
       path: routes.root.path,
       element: <Root />,
       errorElement: <ErrorManager />,
-      // loader: getScreenList,
-      action: createItemAction,
       children: [
         {
           errorElement: <ErrorManager />,
@@ -29,24 +20,17 @@ export default function AppRouterProvider() {
             {
               path: routes.screens.path + '/' + routes.screens.actions.create,
               element: <Home />,
-              // loader: getScreenList,
-              action: createItemAction,
             },
             {
               path: routes.screens.path + '/' + routes.screens.key,
               element: <Contact />,
-              loader: getScreen,
-              action: favouriteAction,
             },
             {
               path: routes.screens.path + '/' + routes.screens.key + '/' + routes.screens.actions.edit,
               element: <EditContact />,
-              loader: getScreen,
-              action: editItemAction,
             },
             {
               path: routes.screens.path + routes.screens.key + '/' + routes.screens.actions.delete,
-              action: deleteItemAction,
               errorElement: <div>Oops! There was an error.</div>,
             },
           ],
