@@ -1,24 +1,33 @@
 // components/Navbar.tsx
 
-import { useContext, useEffect, useState } from 'react'
+import { useContext, useEffect } from 'react'
 import { NavLink } from 'react-router-dom'
-import DeleteIcon from '../../assets/icons/Delete'
+import CloseIcon from '../../assets/icons/Close'
 import StarOutlineIcon from '../../assets/icons/StarOutline'
+import StarSolidIcon from '../../assets/icons/StarSolid'
+import { IScreen } from '../../models/Screen'
+import { useDeleteScreenAction } from '../api/actions/useDeleteScreenAction'
+import { useUpdateScreenAction } from '../api/actions/useUpdateScreenAction'
 import { routes } from '../api/ApiRouteSchema'
-import { ActionTypes, DataContext } from '../api/DataProvider'
-import { TIdResponse } from '../api/db/indexApi'
-import useAxios from '../api/fetch/useAxios'
-import CreateScreenForm from '../forms/screen/create'
+import { DataContext } from '../api/DataProvider'
+import CreateScreenForm from './CreateScreenForm'
 
 export default function SideNav() {
-  const [data] = useContext(DataContext)
-  const { screens, query } = data
-
-  const [deleteId, setDeleteId] = useState<string>()
-
+  const [{ screens, query }] = useContext(DataContext)
+  const [{ deleteId, setDeleteId, executeDelete }] = useDeleteScreenAction()
+  const [{ updateData, setUpdateData, executeUpdate }] = useUpdateScreenAction()
   // const submit = useSubmit()
   // const navigation = useNavigation()
   // const searching = navigation.location && new URLSearchParams(navigation.location.search).has('q')
+
+  const handleDelete = (id: string) => {
+    setDeleteId(id)
+  }
+
+  const handleFavourite = (screen: IScreen) => {
+    const data = { ...screen, favorite: !screen.favorite } as IScreen
+    setUpdateData(data)
+  }
 
   useEffect(() => {
     const element = document.getElementById('q') as HTMLInputElement
@@ -27,27 +36,6 @@ export default function SideNav() {
     }
   }, [query])
 
-  const [_, dispatch] = useContext(DataContext)
-  const [{ response, loading, error }, { execute: executeDelete }] = useAxios<{ payload: TIdResponse }>(
-    {
-      url: `${routes.baseUrl}${routes.root}/${routes.screens.path}/${deleteId}`,
-      method: 'DELETE',
-    },
-    { manualExecution: true },
-  )
-
-  useEffect(() => {
-    if (response && !loading && !error) {
-      dispatch({ type: ActionTypes.DELETE, payload: response.data.payload.id })
-    }
-
-    dispatch({ type: ActionTypes.LOADING, payload: loading })
-  }, [loading, error, response])
-
-  const handleDelete = (id: string) => {
-    setDeleteId(id)
-  }
-
   useEffect(() => {
     if (deleteId) {
       executeDelete()
@@ -55,10 +43,17 @@ export default function SideNav() {
     }
   }, [deleteId])
 
+  useEffect(() => {
+    if (updateData) {
+      executeUpdate()
+      setUpdateData(undefined)
+    }
+  }, [updateData])
+
   return (
-    <div className='flex flex-col gap-1 p-2 w-60 lg:h-full rounded-xl sidebar'>
+    <div className='flex flex-col gap-1 p-2 w-70 lg:h-full rounded-xl sidebar'>
       <div className='px-2 pt-2'>
-        <h1>React Router Contacts</h1>
+        <label className='text-lg'>Add Screen</label>
         <CreateScreenForm />
         {/* <Form id='search-form' role='search'>
           <input
@@ -86,29 +81,32 @@ export default function SideNav() {
       <div className='divider' />
       <nav id='sidebar'>
         {screens.length ? (
-          <ul className='menu'>
-            <li className='menu-title'>Selected Screens</li>
+          <ul className='menu menu-lg'>
+            <li className='text-lg'>Selected Screens</li>
             {screens.map((item) => (
               <li key={item.id}>
                 <div className='flex flex-row items-center justify-between'>
-                  <NavLink to={`${routes.screens.path}${item.id}`}>
-                    <div>
-                      {item.tag.diagonalSize}&quot; - {item.tag.aspectRatio}
-                      {item.favorite && <span>★</span>}
-                    </div>
-                  </NavLink>
-                  <div className='flex flex-row items-center gap-2'>
-                    <button onClick={() => handleDelete(item.id)}>
-                      <DeleteIcon id='delete-icon' className='w-5 h-5' fill='currentColor' />
-                    </button>
+                  <div className='flex flex-row items-center gap-3'>
                     <button
                       onClick={() => {
-                        console.log('favourite')
+                        handleFavourite(item)
                       }}
                     >
-                      <StarOutlineIcon id='star-icon' className='w-4 h-4' fill='currentColor' />
+                      {item.favorite ? (
+                        <StarSolidIcon id='star-icon' className='w-4 h-4' fill='currentColor' />
+                      ) : (
+                        <StarOutlineIcon id='star-icon' className='w-4 h-4' fill='currentColor' />
+                      )}
                     </button>
+                    <NavLink to={`${routes.screens.path}${item.id}`}>
+                      <div>
+                        {item.tag.diagonalSize}&quot; - {item.tag.aspectRatio}
+                      </div>
+                    </NavLink>
                   </div>
+                  <button className='align-middle' onClick={() => handleDelete(item.id)}>
+                    <CloseIcon id='delete-icon' className='w-4 h-4' fill='currentColor' />
+                  </button>
                 </div>
               </li>
             ))}

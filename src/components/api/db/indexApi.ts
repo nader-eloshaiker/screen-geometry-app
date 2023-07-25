@@ -33,7 +33,7 @@ export async function getScreen(params: Params): Promise<{ item: IScreen | undef
   return { item }
 }
 
-export async function editItemAction(data: IScreen) {
+export async function updateItemAction(data: IScreen) {
   const item = await updateItem(data.id || '', data)
 
   return { item }

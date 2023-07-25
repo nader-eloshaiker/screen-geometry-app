@@ -11,7 +11,7 @@ export enum ActionTypes {
   LOADING = 'loading',
 }
 
-type TScreenAction =
+export type TScreenAction =
   | { type: ActionTypes.LIST; payload: TScreenListResponse }
   | { type: ActionTypes.UPDATE; payload: IScreen }
   | { type: ActionTypes.CREATE; payload: IScreen }

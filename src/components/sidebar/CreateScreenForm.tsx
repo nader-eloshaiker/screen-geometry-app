@@ -1,13 +1,9 @@
 import { yupResolver } from '@hookform/resolvers/yup'
-import { useContext, useEffect } from 'react'
 import { SubmitHandler, useController, UseControllerProps, useForm } from 'react-hook-form'
 import { NumericFormat } from 'react-number-format'
 import * as yup from 'yup'
-import { IScreenDataInput, ScreenDataEnum } from '../../../models/Screen'
-import { routes } from '../../api/ApiRouteSchema'
-import { ActionTypes, DataContext } from '../../api/DataProvider'
-import { TScreenResponse } from '../../api/db/indexApi'
-import useAxios from '../../api/fetch/useAxios'
+import { IScreenDataInput, ScreenDataEnum } from '../../models/Screen'
+import { useCreateScreenAction } from '../api/actions/useCreateScreenAction'
 
 const parseFormNumber = (value: string | number | undefined, strict = true) => {
   if (!value || value == null) {
@@ -66,22 +62,10 @@ export default function CreateScreenForm() {
   } = useForm<IScreenDataInput>({
     resolver: yupResolver(screenDataSchema),
   })
-  const [_, dispatch] = useContext(DataContext)
-  const [{ response, loading, error }, { execute }] = useAxios<{ payload: TScreenResponse }>(
-    { url: `${routes.baseUrl}${routes.root}/${routes.screens.path}/${routes.screens.actions.create}`, method: 'POST' },
-    { manualExecution: true },
-  )
-
-  useEffect(() => {
-    if (response && !loading && !error) {
-      dispatch({ type: ActionTypes.CREATE, payload: response.data.payload.item })
-    }
-
-    dispatch({ type: ActionTypes.LOADING, payload: loading })
-  }, [loading, error, response])
+  const [{ executeCreate }] = useCreateScreenAction()
 
   const onSubmit: SubmitHandler<IScreenDataInput> = (form) => {
-    execute(form)
+    executeCreate(form)
   }
 
   return (
