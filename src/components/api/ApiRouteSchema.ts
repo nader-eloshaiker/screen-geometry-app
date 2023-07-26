@@ -5,9 +5,8 @@ export const routes = {
     path: 'screens',
     key: ':screenId',
     actions: {
+      favorite: 'favorite',
       create: 'create',
-      delete: 'delete',
-      edit: 'edit',
     },
   },
 }

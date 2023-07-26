@@ -51,7 +51,7 @@ export async function deleteItemAction(url: string | undefined) {
   }
 
   const urlObj = new URL(url)
-  const id = urlObj.pathname.split('/').pop() || ''
+  const id = urlObj.pathname.split('/').at(-1) || ''
 
   if (!id) {
     throw new Error('No id provided!')
@@ -62,13 +62,22 @@ export async function deleteItemAction(url: string | undefined) {
   return { id }
 }
 
-export async function favouriteAction(apiUrl: string) {
-  const url = new URL(apiUrl)
-  const q = url.searchParams.get('q') || ''
-  const data = await getItem(q)
+export async function favouriteItemAction(url: string | undefined) {
+  if (!url) {
+    throw new Error('No url provided!')
+  }
+
+  const urlObj = new URL(url)
+  const id = urlObj.pathname.split('/').at(-2) || ''
+
+  if (!id) {
+    throw new Error('No id provided!')
+  }
+
+  const data = await getItem(id)
 
   const item = data
-    ? await updateItem(q, {
+    ? await updateItem(id, {
         ...data,
         favorite: !data.favorite, // === 'true',
       })

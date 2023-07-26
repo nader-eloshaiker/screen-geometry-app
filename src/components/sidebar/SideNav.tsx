@@ -5,9 +5,8 @@ import { NavLink } from 'react-router-dom'
 import CloseIcon from '../../assets/icons/Close'
 import StarOutlineIcon from '../../assets/icons/StarOutline'
 import StarSolidIcon from '../../assets/icons/StarSolid'
-import { IScreen } from '../../models/Screen'
 import { useDeleteScreenAction } from '../api/actions/useDeleteScreenAction'
-import { useUpdateScreenAction } from '../api/actions/useUpdateScreenAction'
+import { useFavoriteScreenAction } from '../api/actions/useFavoriteScreenAction'
 import { routes } from '../api/ApiRouteSchema'
 import { DataContext } from '../api/DataProvider'
 import CreateScreenForm from './CreateScreenForm'
@@ -15,7 +14,7 @@ import CreateScreenForm from './CreateScreenForm'
 export default function SideNav() {
   const [{ screens, query }] = useContext(DataContext)
   const [{ deleteId, setDeleteId, executeDelete }] = useDeleteScreenAction()
-  const [{ updateData, setUpdateData, executeUpdate }] = useUpdateScreenAction()
+  const [{ favoriteId, setFavoriteId, executeFavorite }] = useFavoriteScreenAction()
   // const submit = useSubmit()
   // const navigation = useNavigation()
   // const searching = navigation.location && new URLSearchParams(navigation.location.search).has('q')
@@ -24,9 +23,8 @@ export default function SideNav() {
     setDeleteId(id)
   }
 
-  const handleFavourite = (screen: IScreen) => {
-    const data = { ...screen, favorite: !screen.favorite } as IScreen
-    setUpdateData(data)
+  const handleFavourite = (id: string) => {
+    setFavoriteId(id)
   }
 
   useEffect(() => {
@@ -44,11 +42,11 @@ export default function SideNav() {
   }, [deleteId])
 
   useEffect(() => {
-    if (updateData) {
-      executeUpdate()
-      setUpdateData(undefined)
+    if (favoriteId) {
+      executeFavorite()
+      setFavoriteId(undefined)
     }
-  }, [updateData])
+  }, [favoriteId])
 
   return (
     <div className='flex flex-col gap-1 p-2 w-70 lg:h-full rounded-xl sidebar'>
@@ -89,7 +87,7 @@ export default function SideNav() {
                   <div className='flex flex-row items-center gap-3'>
                     <button
                       onClick={() => {
-                        handleFavourite(item)
+                        handleFavourite(item.id)
                       }}
                     >
                       {item.favorite ? (

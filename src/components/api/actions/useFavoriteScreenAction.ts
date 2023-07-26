@@ -1,24 +1,19 @@
 import { useContext, useEffect, useState } from 'react'
-import { IScreen } from '../../../models/Screen'
 import { routes } from '../ApiRouteSchema'
 import { ActionTypes, DataContext } from '../DataProvider'
 import { TScreenResponse } from '../db/indexApi'
 import useAxios from '../fetch/useAxios'
 
-export const useUpdateScreenAction = () => {
-  const [updateData, setUpdateData] = useState<IScreen>()
+export const useFavoriteScreenAction = () => {
+  const [favoriteId, setFavoriteId] = useState<string>()
   const [_, dispatch] = useContext(DataContext)
-  const [{ response, loading, error }, { execute }] = useAxios<{ payload: TScreenResponse }>(
+  const [{ response, loading, error }, { execute: executeFavorite }] = useAxios<{ payload: TScreenResponse }>(
     {
-      url: `${routes.baseUrl}${routes.root}/${routes.screens.path}/${updateData?.id}`,
-      method: 'PUT',
+      url: `${routes.baseUrl}${routes.root}/${routes.screens.path}/${favoriteId}/${routes.screens.actions.favorite}`,
+      method: 'PATCH',
     },
     { manualExecution: true },
   )
-
-  const executeUpdate = () => {
-    execute(updateData)
-  }
 
   useEffect(() => {
     if (response && !loading && !error) {
@@ -28,5 +23,5 @@ export const useUpdateScreenAction = () => {
     dispatch({ type: ActionTypes.LOADING, payload: loading })
   }, [loading, error, response])
 
-  return [{ updateData, setUpdateData, executeUpdate }] as const
+  return [{ favoriteId, setFavoriteId, executeFavorite }] as const
 }
