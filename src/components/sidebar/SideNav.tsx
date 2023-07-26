@@ -5,14 +5,14 @@ import { NavLink } from 'react-router-dom'
 import CloseIcon from '../../assets/icons/Close'
 import StarOutlineIcon from '../../assets/icons/StarOutline'
 import StarSolidIcon from '../../assets/icons/StarSolid'
+import { AppContext } from '../../contexts/AppContext'
 import { useDeleteScreenAction } from '../api/actions/useDeleteScreenAction'
 import { useFavoriteScreenAction } from '../api/actions/useFavoriteScreenAction'
 import { routes } from '../api/ApiRouteSchema'
-import { DataContext } from '../api/DataProvider'
 import CreateScreenForm from './CreateScreenForm'
 
 export default function SideNav() {
-  const [{ screens, query }] = useContext(DataContext)
+  const [{ screens, query }] = useContext(AppContext)
   const [{ deleteId, setDeleteId, executeDelete }] = useDeleteScreenAction()
   const [{ favoriteId, setFavoriteId, executeFavorite }] = useFavoriteScreenAction()
   // const submit = useSubmit()

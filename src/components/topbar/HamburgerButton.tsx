@@ -2,7 +2,7 @@ import { useContext } from 'react'
 import { twMerge } from 'tailwind-merge'
 import CloseIcon from '../../assets/icons/Close'
 import HamburgerIcon from '../../assets/icons/Hamburger'
-import { Context } from '../sidebar/DrawerProvider'
+import { Context } from '../sidebar/DrawerContext'
 
 type TProps = TRestProps & { className?: string }
 

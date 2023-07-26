@@ -1,28 +1,17 @@
-import { useContext, useEffect } from 'react'
+import { useContext } from 'react'
 import { Outlet, useNavigation } from 'react-router-dom'
-import { routes } from '../components/api/ApiRouteSchema'
-import { ActionTypes, DataContext } from '../components/api/DataProvider'
-import { TScreenListResponse } from '../components/api/db/indexApi'
-import useAxios from '../components/api/fetch/useAxios'
+import { useListScreensAction } from '../components/api/actions/useListScreensAction'
 import Footer from '../components/Footer'
+import { DrawerProvider } from '../components/sidebar/DrawerContext'
 import DrawerLayout from '../components/sidebar/DrawerLayout'
-import DrawerProvider from '../components/sidebar/DrawerProvider'
 import Header from '../components/topbar/Header'
+import { AppContext } from '../contexts/AppContext'
 
 export default function Root() {
   const navigation = useNavigation()
-  const [dataState, dispatch] = useContext(DataContext)
-  const [{ response, loading, error }] = useAxios<{ payload: TScreenListResponse }>({
-    url: `${routes.baseUrl}${routes.root}/${routes.screens.path}`,
-    method: 'GET',
-  })
-  useEffect(() => {
-    if (response && !loading && !error) {
-      dispatch({ type: ActionTypes.LIST, payload: response.data.payload })
-    }
+  const [dataState] = useContext(AppContext)
 
-    dispatch({ type: ActionTypes.LOADING, payload: loading })
-  }, [loading, error, response])
+  useListScreensAction()
 
   return (
     <DrawerProvider>

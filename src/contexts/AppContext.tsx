@@ -1,7 +1,7 @@
 import { createContext, useReducer } from 'react'
 
-import { IScreen } from '../../models/Screen'
-import { TScreenListResponse } from './db/indexApi'
+import { TScreenListResponse } from '../components/api/db/indexApi'
+import { IScreen } from '../models/Screen'
 
 export enum ActionTypes {
   LIST = 'list',
@@ -26,7 +26,7 @@ const initialScreenState = {
 
 type IScreenState = typeof initialScreenState
 
-const screenReducer = (state: IScreenState, { type, payload }: TScreenAction): IScreenState => {
+const appReducer = (state: IScreenState, { type, payload }: TScreenAction): IScreenState => {
   switch (type) {
     case ActionTypes.LIST:
       return { ...state, screens: payload.list, query: payload.q }
@@ -46,10 +46,10 @@ const screenReducer = (state: IScreenState, { type, payload }: TScreenAction): I
   }
 }
 
-export const DataContext = createContext<[IScreenState, React.Dispatch<TScreenAction>]>([initialScreenState, () => {}])
+export const AppContext = createContext<[IScreenState, React.Dispatch<TScreenAction>]>([initialScreenState, () => {}])
 
-export default function DataProvider({ children }: TReactChildren) {
-  const [screens, dispatch] = useReducer(screenReducer, initialScreenState)
+export const AppProvider = ({ children }: TReactChildren) => {
+  const [screens, dispatch] = useReducer(appReducer, initialScreenState)
 
-  return screens ? <DataContext.Provider value={[screens, dispatch]}>{children}</DataContext.Provider> : null
+  return screens ? <AppContext.Provider value={[screens, dispatch]}>{children}</AppContext.Provider> : null
 }

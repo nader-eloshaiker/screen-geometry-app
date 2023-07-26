@@ -1,0 +1,396 @@
+{
+  "mobile": [
+    {
+      "name": "iPhone 3",
+      "size": 3.5,
+      "width": 320,
+      "height": 480,
+      "aspectRatio": "4:3"
+    },
+    {
+      "name": "iPhone 4",
+      "size": 3.5,
+      "width": 320,
+      "height": 480,
+      "aspectRatio": "4:3"
+    },
+    {
+      "name": "iPhone 5",
+      "size": 4,
+      "width": 320,
+      "height": 568,
+      "aspectRatio": "16:9"
+    },
+    {
+      "name": "iPhone 6",
+      "size": 4.7,
+      "width": 375,
+      "height": 667,
+      "aspectRatio": "16:9"
+    },
+    {
+      "name": "iPhone 6 Plus",
+      "size": 5.5,
+      "width": 414,
+      "height": 736,
+      "aspectRatio": "16:9"
+    },
+    {
+      "name": "iPhone 7",
+      "size": 4.7,
+      "width": 375,
+      "height": 667,
+      "aspectRatio": "16:9"
+    },
+    {
+      "name": "iPhone 7 Plus",
+      "size": 5.5,
+      "width": 414,
+      "height": 736,
+      "aspectRatio": "16:9"
+    },
+    {
+      "name": "iPhone 8",
+      "size": 4.7,
+      "width": 375,
+      "height": 667,
+      "aspectRatio": "16:9"
+    },
+    {
+      "name": "iPhone 8 Plus",
+      "size": 5.5,
+      "width": 414,
+      "height": 736,
+      "aspectRatio": "16:9"
+    },
+    {
+      "name": "iPhone X",
+      "size": 5.8,
+      "width": 375,
+      "height": 812,
+      "aspectRatio": "19.5:9"
+    },
+    {
+      "name": "iPhone XS",
+      "size": 5.8,
+      "width": 375,
+      "height": 812,
+      "aspectRatio": "19.5:9"
+    },
+    {
+      "name": "iPhone XS Max",
+      "size": 6.5,
+      "width": 414,
+      "height": 896,
+      "aspectRatio": "19.5:9"
+    },
+    {
+      "name": "iPhone XR",
+      "size": 6.1,
+      "width": 414,
+      "height": 896,
+      "aspectRatio": "19.5:9"
+    },
+    {
+      "name": "iPhone 11",
+      "size": 6.1,
+      "width": 414,
+      "height": 896,
+      "aspectRatio": "19.5:9"
+    },
+    {
+      "name": "iPhone 11 Pro",
+      "size": 5.8,
+      "width": 375,
+      "height": 812,
+      "aspectRatio": "19.5:9"
+    },
+    {
+      "name": "iPhone 11 Pro Max",
+      "size": 6.5,
+      "width": 414,
+      "height": 896,
+      "aspectRatio": "19.5:9"
+    },
+    {
+      "name": "iPhone SE",
+      "size": 4,
+      "width": 320,
+      "height": 568,
+      "aspectRatio": "16:9"
+    },
+    {
+      "name": "iPhone SE 2",
+      "size": 4.7,
+      "width": 375,
+      "height": 667,
+      "aspectRatio": "16:9"
+    },
+    {
+      "name": "iPhone 12 Mini",
+      "size": 5.4,
+      "width": 375,
+      "height": 812,
+      "aspectRatio": "19.5:9"
+    },
+    {
+      "name": "iPhone 12",
+      "size": 6.1,
+      "width": 390,
+      "height": 844,
+      "aspectRatio": "19.5:9"
+    },
+    {
+      "name": "iPhone 12 Pro",
+      "size": 6.1,
+      "width": 390,
+      "height": 844,
+      "aspectRatio": "19.5:9"
+    },
+    {
+      "name": "iPhone 12 Pro Max",
+      "size": 6.7,
+      "width": 428,
+      "height": 926,
+      "aspectRatio": "19.5:9"
+    },
+    {
+      "name": "iPhone 13 Mini",
+      "size": 5.4,
+      "width": 375,
+      "height": 812,
+      "aspectRatio": "19.5:9"
+    },
+    {
+      "name": "iPhone 13",
+      "size": 6.1,
+      "width": 390,
+      "height": 844,
+      "aspectRatio": "19.5:9"
+    },
+    {
+      "name": "iPhone 13 Pro",
+      "size": 6.1,
+      "width": 390,
+      "height": 844,
+      "aspectRatio": "19.5:9"
+    },
+    {
+      "name": "iPhone 13 Pro Max",
+      "size": 6.7,
+      "width": 428,
+      "height": 926,
+      "aspectRatio": "19.5:9"
+    },
+    {
+      "name": "iPhone 14",
+      "size": 6.1,
+      "width": 390,
+      "height": 844,
+      "aspectRatio": "19.5:9"
+    },
+    {
+      "name": "iPhone 14 Plus",
+      "size": 6.7,
+      "width": 428,
+      "height": 926,
+      "aspectRatio": "19.5:9"
+    },
+    {
+      "name": "iPhone 14 Pro",
+      "size": 6.1,
+      "width": 390,
+      "height": 844,
+      "aspectRatio": "19.5:9"
+    },
+    {
+      "name": "iPhone 14 Pro Max",
+      "size": 6.7,
+      "width": 428,
+      "height": 926,
+      "aspectRatio": "19.5:9"
+    },
+    {
+      "name": "Nexus 4",
+      "size": 4.7,
+      "width": 384,
+      "height": 640,
+      "aspectRatio": "16:9"
+    },
+    {
+      "name": "Nexus 5",
+      "size": 4.95,
+      "width": 360,
+      "height": 640,
+      "aspectRatio": "16:9"
+    },
+    {
+      "name": "Nexus 5X",
+      "size": 5.2,
+      "width": 412,
+      "height": 732,
+      "aspectRatio": "16:9"
+    },
+    {
+      "name": "Nexus 6P",
+      "size": 5.7,
+      "width": 412,
+      "height": 732,
+      "aspectRatio": "16:9"
+    },
+    {
+      "name": "Galaxy S5",
+      "size": 5.1,
+      "width": 360,
+      "height": 640,
+      "aspectRatio": "16:9"
+    },
+    {
+      "name": "Galaxy S6",
+      "size": 5.1,
+      "width": 360,
+      "height": 640,
+      "aspectRatio": "16:9"
+    },
+    {
+      "name": "Galaxy S7",
+      "size": 5.1,
+      "width": 360,
+      "height": 640,
+      "aspectRatio": "16:9"
+    },
+    {
+      "name": "Galaxy Note 4",
+      "size": 5.7,
+      "width": 360,
+      "height": 640,
+      "aspectRatio": "16:9"
+    },
+    {
+      "name": "Galaxy Fold",
+      "size": 7.3,
+      "width": 280,
+      "height": 653,
+      "aspectRatio": "21:9"
+    },
+    {
+      "name": "Galaxy Z Flip",
+      "size": 6.7,
+      "width": 300,
+      "height": 654,
+      "aspectRatio": "22:9"
+    },
+    {
+      "name": "Galaxy Z Fold 2",
+      "size": 7.6,
+      "width": 280,
+      "height": 653,
+      "aspectRatio": "21:9"
+    },
+    {
+      "name": "Pixel 2",
+      "size": 5,
+      "width": 411,
+      "height": 731,
+      "aspectRatio": "16:9"
+    },
+    {
+      "name": "Pixel 2 XL",
+      "size": 6,
+      "width": 411,
+      "height": 823,
+      "aspectRatio": "18:9"
+    },
+    {
+      "name": "Pixel 3",
+      "size": 5.5,
+      "width": 411,
+      "height": 731,
+      "aspectRatio": "18:9"
+    },
+    {
+      "name": "Pixel 3 XL",
+      "size": 6.3,
+      "width": 411,
+      "height": 823,
+      "aspectRatio": "18.5:9"
+    },
+    {
+      "name": "Pixel 3a",
+      "size": 5.6,
+      "width": 411,
+      "height": 731,
+      "aspectRatio": "18:9"
+    },
+    {
+      "name": "Pixel 3a XL",
+      "size": 6,
+      "width": 411,
+      "height": 823,
+      "aspectRatio": "18.5:9"
+    },
+    {
+      "name": "Pixel 4",
+      "size": 5.7,
+      "width": 411,
+      "height": 731,
+      "aspectRatio": "19:9"
+    },
+    {
+      "name": "Pixel 4 XL",
+      "size": 6.3,
+      "width": 411,
+      "height": 823,
+      "aspectRatio": "19:9"
+    },
+    {
+      "name": "Pixel 4a",
+      "size": 5.8,
+      "width": 411,
+      "height": 731,
+      "aspectRatio": "19.5:9"
+    },
+    {
+      "name": "Pixel 4a 5G",
+      "size": 6.2,
+      "width": 412,
+      "height": 869,
+      "aspectRatio": "19.5:9"
+    },
+    {
+      "name": "Pixel 5",
+      "size": 6,
+      "width": 412,
+      "height": 869,
+      "aspectRatio": "19.5:9"
+    },
+    {
+      "name": "Pixel 6",
+      "size": 6.4,
+      "width": 412,
+      "height": 869,
+      "aspectRatio": "19.5:9"
+    },
+    {
+      "name": "Pixel 6 Pro",
+      "size": 6.7,
+      "width": 412,
+      "height": 869,
+      "aspectRatio": "19.5:9"
+    },
+    {
+      "name": "Pixel 6a",
+      "size": 6.2,
+      "width": 412,
+      "height": 869,
+      "aspectRatio": "19.5:9"
+    },
+    {
+      "name": "Pixel 6a Pro",
+      "size": 6.7,
+      "width": 412,
+      "height": 869,
+      "aspectRatio": "19.5:9"
+    }
+  ],
+}

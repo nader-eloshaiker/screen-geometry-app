@@ -1,13 +1,13 @@
 import { useContext, useEffect, useState } from 'react'
+import { ActionTypes, AppContext } from '../../../contexts/AppContext'
 import { IScreen } from '../../../models/Screen'
 import { routes } from '../ApiRouteSchema'
-import { ActionTypes, DataContext } from '../DataProvider'
 import { TScreenResponse } from '../db/indexApi'
 import useAxios from '../fetch/useAxios'
 
 export const useUpdateScreenAction = () => {
   const [updateData, setUpdateData] = useState<IScreen>()
-  const [_, dispatch] = useContext(DataContext)
+  const [_, dispatch] = useContext(AppContext)
   const [{ response, loading, error }, { execute }] = useAxios<{ payload: TScreenResponse }>(
     {
       url: `${routes.baseUrl}${routes.root}/${routes.screens.path}/${updateData?.id}`,

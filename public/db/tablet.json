@@ -1,0 +1,319 @@
+{
+  "tablet": [
+    {
+      "name": "iPad",
+      "size": 9.7,
+      "width": 768,
+      "height": 1024,
+      "aspectRatio": "4:3"
+    },
+    {
+      "name": "iPad Pro",
+      "size": 12.9,
+      "width": 1024,
+      "height": 1366,
+      "aspectRatio": "4:3"
+    },
+    {
+      "name": "iPad Mini",
+      "size": 7.9,
+      "width": 768,
+      "height": 1024,
+      "aspectRatio": "4:3"
+    },
+    {
+      "name": "Surface Duo",
+      "size": 8.1,
+      "width": 540,
+      "height": 720,
+      "aspectRatio": "4:3"
+    },
+    {
+      "name": "Surface Duo 2",
+      "size": 8.1,
+      "width": 540,
+      "height": 720,
+      "aspectRatio": "4:3"
+    },
+    {
+      "name": "Surface Neo",
+      "size": 8.1,
+      "width": 540,
+      "height": 720,
+      "aspectRatio": "4:3"
+    },
+    {
+      "name": "Surface Neo 2",
+      "size": 8.1,
+      "width": 540,
+      "height": 720,
+      "aspectRatio": "4:3"
+    },
+    {
+      "name": "Pixel C",
+      "size": 10.2,
+      "width": 900,
+      "height": 1440,
+      "aspectRatio": "16:10"
+    },
+    {
+      "name": "Galaxy Tab S",
+      "size": 10.5,
+      "width": 800,
+      "height": 1280,
+      "aspectRatio": "16:10"
+    },
+    {
+      "name": "Galaxy Tab S2",
+      "size": 9.7,
+      "width": 800,
+      "height": 1280,
+      "aspectRatio": "16:10"
+    },
+    {
+      "name": "Galaxy Tab S3",
+      "size": 9.7,
+      "width": 800,
+      "height": 1280,
+      "aspectRatio": "16:10"
+    },
+    {
+      "name": "Galaxy Tab S4",
+      "size": 10.5,
+      "width": 800,
+      "height": 1280,
+      "aspectRatio": "16:10"
+    },
+    {
+      "name": "Galaxy Tab S5e",
+      "size": 10.5,
+      "width": 800,
+      "height": 1280,
+      "aspectRatio": "16:10"
+    },
+    {
+      "name": "Galaxy Tab S6",
+      "size": 10.5,
+      "width": 800,
+      "height": 1280,
+      "aspectRatio": "16:10"
+    },
+    {
+      "name": "Galaxy Tab S7",
+      "size": 11,
+      "width": 800,
+      "height": 1280,
+      "aspectRatio": "16:10"
+    },
+    {
+      "name": "Galaxy Tab S7+",
+      "size": 12.4,
+      "width": 800,
+      "height": 1280,
+      "aspectRatio": "16:10"
+    },
+    {
+      "name": "Galaxy Tab A",
+      "size": 8,
+      "width": 800,
+      "height": 1280,
+      "aspectRatio": "16:10"
+    },
+    {
+      "name": "Galaxy Tab A7",
+      "size": 10.4,
+      "width": 800,
+      "height": 1280,
+      "aspectRatio": "16:10"
+    },
+    {
+      "name": "Galaxy Tab A8",
+      "size": 8.4,
+      "width": 800,
+      "height": 1280,
+      "aspectRatio": "16:10"
+    },
+    {
+      "name": "Galaxy Tab A8+",
+      "size": 10.1,
+      "width": 800,
+      "height": 1280,
+      "aspectRatio": "16:10"
+    },
+    {
+      "name": "Galaxy Tab A8.4",
+      "size": 8.4,
+      "width": 800,
+      "height": 1280,
+      "aspectRatio": "16:10"
+    },
+    {
+      "name": "Galaxy Tab A8.4 2021",
+      "size": 8.4,
+      "width": 800,
+      "height": 1280,
+      "aspectRatio": "16:10"
+    },
+    {
+      "name": "Galaxy Tab A8.4 2022",
+      "size": 8.4,
+      "width": 800,
+      "height": 1280,
+      "aspectRatio": "16:10"
+    },
+    {
+      "name": "Galaxy Tab A8.4 2023",
+      "size": 8.4,
+      "width": 800,
+      "height": 1280,
+      "aspectRatio": "16:10"
+    },
+    {
+      "name": "Galaxy Tab 10",
+      "size": 10.1,
+      "width": 800,
+      "height": 1280,
+      "aspectRatio": "16:10"
+    },
+    {
+      "name": "Galaxy Note 10.1",
+      "size": 10.1,
+      "width": 800,
+      "height": 1280,
+      "aspectRatio": "16:10"
+    },
+    {
+      "name": "Nexus 7",
+      "size": 7,
+      "width": 600,
+      "height": 960,
+      "aspectRatio": "16:10"
+    },
+    {
+      "name": "Nexus 9",
+      "size": 8.9,
+      "width": 768,
+      "height": 1024,
+      "aspectRatio": "4:3"
+    },
+    {
+      "name": "Nexus 10",
+      "size": 10.1,
+      "width": 800,
+      "height": 1280,
+      "aspectRatio": "16:10"
+    },
+    {
+      "name": "Pixel C",
+      "size": 10.2,
+      "width": 900,
+      "height": 1440,
+      "aspectRatio": "16:10"
+    },
+    {
+      "name": "Galaxy Tab S3",
+      "size": 9.7,
+      "width": 800,
+      "height": 1280,
+      "aspectRatio": "16:10"
+    },
+    {
+      "name": "Galaxy Tab S4",
+      "size": 10.5,
+      "width": 800,
+      "height": 1280,
+      "aspectRatio": "16:10"
+    },
+    {
+      "name": "Galaxy Tab 4",
+      "size": 10.1,
+      "width": 800,
+      "height": 1280,
+      "aspectRatio": "16:10"
+    },
+    {
+      "name": "Galaxy Tab S5e",
+      "size": 10.5,
+      "width": 800,
+      "height": 1280,
+      "aspectRatio": "16:10"
+    },
+    {
+      "name": "Galaxy Tab S6",
+      "size": 10.5,
+      "width": 800,
+      "height": 1280,
+      "aspectRatio": "16:10"
+    },
+    {
+      "name": "Galaxy Tab 7",
+      "size": 7,
+      "width": 600,
+      "height": 960,
+      "aspectRatio": "16:10"
+    },
+    {
+      "name": "Galaxy Tab S7",
+      "size": 11,
+      "width": 800,
+      "height": 1280,
+      "aspectRatio": "16:10"
+    },
+    {
+      "name": "Galaxy Tab S7+",
+      "size": 12.4,
+      "width": 800,
+      "height": 1280,
+      "aspectRatio": "16:10"
+    },
+    {
+      "name": "Kindle Fire HDX 7",
+      "size": 7,
+      "width": 800,
+      "height": 1280,
+      "aspectRatio": "16:10"
+    },
+    {
+      "name": "Kindle Fire HDX 8.9",
+      "size": 8.9,
+      "width": 800,
+      "height": 1280,
+      "aspectRatio": "16:10"
+    },
+    {
+      "name": "Kindle Fire",
+      "size": 7,
+      "width": 600,
+      "height": 1024,
+      "aspectRatio": "16:9"
+    },
+    {
+      "name": "Kindle Fire HD 7",
+      "size": 7,
+      "width": 600,
+      "height": 1024,
+      "aspectRatio": "16:9"
+    },
+    {
+      "name": "Kindle Fire HD 8.9",
+      "size": 8.9,
+      "width": 800,
+      "height": 1280,
+      "aspectRatio": "16:10"
+    },
+    {
+      "name": "Kindle Fire HDX 7",
+      "size": 7,
+      "width": 800,
+      "height": 1280,
+      "aspectRatio": "16:10"
+    },
+    {
+      "name": "Kindle Fire HDX 8.9",
+      "size": 8.9,
+      "width": 800,
+      "height": 1280,
+      "aspectRatio": "16:10"
+    }
+  ]
+}

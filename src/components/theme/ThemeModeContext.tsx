@@ -7,7 +7,7 @@ export const Context = createContext<[TThemeMode, React.Dispatch<React.SetStateA
   () => {},
 ])
 
-export default function ThemeModeProvider({ children }: TReactChildren) {
+export const ThemeModeProvider = ({ children }: TReactChildren) => {
   const [localStorage] = useLocalStorage<TThemeMode>(ThemeKey, LightMode)
   const [theme, setTheme] = useState<TThemeMode>(localStorage)
 

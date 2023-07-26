@@ -1,11 +1,11 @@
 import { useContext, useEffect } from 'react'
+import { ActionTypes, AppContext } from '../../../contexts/AppContext'
 import { routes } from '../ApiRouteSchema'
-import { ActionTypes, DataContext } from '../DataProvider'
 import { TScreenListResponse } from '../db/indexApi'
 import useAxios from '../fetch/useAxios'
 
 export const useListScreensAction = () => {
-  const [_dataState, dispatch] = useContext(DataContext)
+  const [_dataState, dispatch] = useContext(AppContext)
   const [{ response, loading, error }] = useAxios<{ payload: TScreenListResponse }>({
     url: `${routes.baseUrl}${routes.root}/${routes.screens.path}`,
     method: 'GET',
