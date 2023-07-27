@@ -4,9 +4,10 @@ export interface IScreenDataInput extends ScreenDataEnumFields {
 }
 
 export interface IScreenData {
-  aspectRatioFloat: number
   hSize: number
   vSize: number
+  hApsectRatio: number
+  vApsectRatio: number
 }
 
 export interface IScreenSpec {

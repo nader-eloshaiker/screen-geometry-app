@@ -12,7 +12,7 @@ import { routes } from '../api/ApiRouteSchema'
 import CreateScreenForm from './CreateScreenForm'
 
 export default function SideNav() {
-  const [{ screens, query }] = useContext(AppContext)
+  const [{ selections: screens, query }] = useContext(AppContext)
   const [{ deleteId, setDeleteId, executeDelete }] = useDeleteScreenAction()
   const [{ favoriteId, setFavoriteId, executeFavorite }] = useFavoriteScreenAction()
   // const submit = useSubmit()

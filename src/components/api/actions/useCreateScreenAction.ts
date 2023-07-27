@@ -13,7 +13,7 @@ export const useCreateScreenAction = () => {
 
   useEffect(() => {
     if (response && !loading && !error) {
-      dispatch({ type: ActionTypes.CREATE, payload: response.data.payload.item })
+      dispatch({ type: ActionTypes.ADD, payload: response.data.payload.item })
     }
 
     dispatch({ type: ActionTypes.LOADING, payload: loading })

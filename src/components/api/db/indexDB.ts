@@ -1,7 +1,8 @@
 import localforage from 'localforage'
 import { matchSorter } from 'match-sorter'
 import sortBy from 'sort-by'
-import { IScreenDataInput, IScreen } from '../../../models/Screen'
+import { IScreen, IScreenDataInput } from '../../../models/Screen'
+import { createScreen } from '../../utils/Screen'
 
 const storageKey = 'screens'
 
@@ -14,30 +15,9 @@ export async function getItemList(query?: string): Promise<Array<IScreen>> {
   return list.sort(sortBy('diagonalSize', 'aspectRatio'))
 }
 
-export function createScreenEntry(data: IScreenDataInput): IScreen {
-  data.diagonalSize = data.diagonalSize || 27
-  data.aspectRatio = data.aspectRatio || '16:9'
-  const id = Math.random().toString(36).substring(2, 9)
-  const aspectRatio = data.aspectRatio.split(':') // [width, height]
-  const aspectRatioFloat = parseFloat(aspectRatio[0]) / parseFloat(aspectRatio[1])
-  const hSize = Math.sqrt(Math.pow(data.diagonalSize, 2) / (1 + Math.pow(aspectRatioFloat, 2)))
-  const vSize = hSize * aspectRatioFloat
-  const item: IScreen = {
-    id,
-    tag: data,
-    data: {
-      aspectRatioFloat,
-      hSize,
-      vSize,
-    },
-    favorite: false,
-  }
-  return item
-}
-
 export async function createItem(data: IScreenDataInput): Promise<IScreen> {
   await fakeNetwork()
-  const item = createScreenEntry(data)
+  const item = createScreen(data)
   const list: Array<IScreen> = await getItemList()
   list.unshift(item)
   await set(list)
