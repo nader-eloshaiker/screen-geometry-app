@@ -49,7 +49,7 @@ export default function SideNav() {
   }, [favoriteId])
 
   return (
-    <div className='flex flex-col gap-1 p-2 lg:h-full rounded-xl sidebar'>
+    <div className='flex flex-col gap-1 p-2 lg:h-full rounded-xl sidebar w-72'>
       <div className='px-2 pt-2'>
         <label className='text-lg'>Add Screen</label>
         <CreateScreenForm />

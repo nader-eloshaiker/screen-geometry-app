@@ -7,8 +7,8 @@ export type TAutoCompleteItem = { id: string; label: string }
 type TProps = {
   items: Array<TAutoCompleteItem> // we are using this type for autocomplete
   value: string
-  onChange(val: string): () => void
-  onSelect(item: TAutoCompleteItem): () => void
+  onChange(val: string): void
+  onSelect(item: TAutoCompleteItem): void
 }
 
 // we are using dropdown, input and menu component from daisyui
