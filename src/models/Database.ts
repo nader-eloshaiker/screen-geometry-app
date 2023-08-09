@@ -1,3 +1,5 @@
+import { IScreenData, IScreenDataInput, IScreenSpec } from './Screen'
+
 export interface IDataBaseEntry {
   name: string
   size?: number
@@ -6,22 +8,13 @@ export interface IDataBaseEntry {
   aspectRatio: string
 }
 
-export interface ISearchData {
+export type ISearchData = Partial<IScreenData> & Pick<IScreenData, 'hApsectRatio'> & Pick<IScreenData, 'vApsectRatio'>
+export type ISearchTag = Partial<IScreenDataInput> & Pick<IScreenDataInput, 'aspectRatio'>
+export type ISearchSpec = Partial<IScreenSpec> & Pick<IScreenSpec, 'vRes'> & Pick<IScreenSpec, 'hRes'>
+export interface ISearch {
   id: string
-  tag: {
-    diagonalSize?: number
-    aspectRatio: string
-  }
-  data: {
-    hSize?: number
-    vSize?: number
-    hApsectRatio: number
-    vApsectRatio: number
-  }
-  spec?: {
-    hRes: number
-    vRes: number
-    ppi: number
-    refreshRate?: number
-  }
+  label: string
+  tag: ISearchTag
+  data: ISearchData
+  spec?: ISearchSpec
 }

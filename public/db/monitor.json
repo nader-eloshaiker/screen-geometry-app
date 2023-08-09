@@ -1,154 +1,158 @@
-{
-  "monitor": [
-    {
-      "name": "CGA",
-      "width": 320,
-      "height": 200,
-      "aspectRatio": "4:3"
-    },
-    {
-      "name": "VGA",
-      "width": 640,
-      "height": 480,
-      "aspectRatio": "4:3"
-    },
-    {
-      "name": "WVGA",
-      "width": 768,
-      "height": 480,
-      "aspectRatio": "16:10"
-    },
-    {
-      "name": "SVGA",
-      "width": 800,
-      "height": 600,
-      "aspectRatio": "4:3"
-    },
-    {
-      "name": "WSVGA",
-      "width": 1024,
-      "height": 600,
-      "aspectRatio": "16:9"
-    },
-    {
-      "name": "XGA",
-      "width": 1024,
-      "height": 768,
-      "aspectRatio": "4:3"
-    },
-    {
-      "name": "SXGA",
-      "width": 1280,
-      "height": 1024,
-      "aspectRatio": "5:4"
-    },
-    {
-      "name": "SXGA+",
-      "width": 1400,
-      "height": 1050,
-      "aspectRatio": "4:3"
-    },
-    {
-      "name": "WXGA+",
-      "width": 1600,
-      "height": 900,
-      "aspectRatio": "16:9"
-    },
-    {
-      "name": "WXGA+",
-      "width": 1440,
-      "height": 900,
-      "aspectRatio": "16:10"
-    },
-    {
-      "name": "WSXGA+",
-      "width": 1680,
-      "height": 1050,
-      "aspectRatio": "16:10"
-    },
-    {
-      "name": "Full HD",
-      "width": 1920,
-      "height": 1080,
-      "aspectRatio": "16:9"
-    },
-    {
-      "name": "HD+",
-      "width": 1600,
-      "height": 900,
-      "aspectRatio": "4:3"
-    },
-    {
-      "name": "UXGA",
-      "width": 1600,
-      "height": 1200,
-      "aspectRatio": "4:3"
-    },
-    {
-      "name": "WUXGA",
-      "width": 1920,
-      "height": 1200,
-      "aspectRatio": "16:10"
-    },
-    {
-      "name": "QHD",
-      "width": 2560,
-      "height": 1440,
-      "aspectRatio": "16:9"
-    },
-    {
-      "name": "WQHD",
-      "width": 3440,
-      "height": 1440,
-      "aspectRatio": "21:9"
-    },
-    {
-      "name": "WQXGA",
-      "width": 2560,
-      "height": 1600,
-      "aspectRatio": "16:10"
-    },
-    {
-      "name": "WQHD+",
-      "width": 3840,
-      "height": 1600,
-      "aspectRatio": "21:9"
-    },
-    {
-      "name": "4K UHD",
-      "width": 3840,
-      "height": 2160,
-      "aspectRatio": "16:9"
-    },
-    {
-      "name": "5K UHD",
-      "width": 5120,
-      "height": 2880,
-      "aspectRatio": "16:9"
-    },
-    {
-      "name": "5K2K WUHD",
-      "width": 5120,
-      "height": 2160,
-      "aspectRatio": "21:9"
-    },
-    {
-      "name": "6K UHD",
-      "width": 6144,
-      "height": 2880,
-      "aspectRatio": "16:9"
-    },
-    {
-      "name": "8K UHD",
-      "width": 7680,
-      "height": 4320,
-      "aspectRatio": "16:9"
-    },
-    {
-      "name": "10K UHD",
-      "width": 10240,
-      "height": 4320,
-      "aspectRatio": "21:9"
-    }
-  ]
-}
+[
+  {
+    "name": "CGA",
+    "width": 320,
+    "height": 200,
+    "aspectRatio": "4:3"
+  },
+  {
+    "name": "VGA",
+    "width": 640,
+    "height": 480,
+    "aspectRatio": "4:3"
+  },
+  {
+    "name": "WVGA",
+    "width": 768,
+    "height": 480,
+    "aspectRatio": "16:10"
+  },
+  {
+    "name": "SVGA",
+    "width": 800,
+    "height": 600,
+    "aspectRatio": "4:3"
+  },
+  {
+    "name": "WSVGA",
+    "width": 1024,
+    "height": 600,
+    "aspectRatio": "16:9"
+  },
+  {
+    "name": "XGA",
+    "width": 1024,
+    "height": 768,
+    "aspectRatio": "4:3"
+  },
+  {
+    "name": "SXGA",
+    "width": 1280,
+    "height": 1024,
+    "aspectRatio": "5:4"
+  },
+  {
+    "name": "SXGA+",
+    "width": 1400,
+    "height": 1050,
+    "aspectRatio": "4:3"
+  },
+  {
+    "name": "WXGA+",
+    "width": 1600,
+    "height": 900,
+    "aspectRatio": "16:9"
+  },
+  {
+    "name": "WXGA+",
+    "width": 1440,
+    "height": 900,
+    "aspectRatio": "16:10"
+  },
+  {
+    "name": "WSXGA+",
+    "width": 1680,
+    "height": 1050,
+    "aspectRatio": "16:10"
+  },
+  {
+    "name": "Full HD",
+    "width": 1920,
+    "height": 1080,
+    "aspectRatio": "16:9"
+  },
+  {
+    "name": "HD+",
+    "width": 1600,
+    "height": 900,
+    "aspectRatio": "4:3"
+  },
+  {
+    "name": "UXGA",
+    "width": 1600,
+    "height": 1200,
+    "aspectRatio": "4:3"
+  },
+  {
+    "name": "WUXGA",
+    "width": 1920,
+    "height": 1200,
+    "aspectRatio": "16:10"
+  },
+  {
+    "name": "QHD",
+    "width": 2560,
+    "height": 1440,
+    "aspectRatio": "16:9"
+  },
+  {
+    "name": "5K Dual QHD",
+    "width": 5120,
+    "height": 1440,
+    "aspectRatio": "32:9"
+  },
+  {
+    "name": "WQHD",
+    "width": 3440,
+    "height": 1440,
+    "aspectRatio": "21:9"
+  },
+  {
+    "name": "WQXGA",
+    "width": 2560,
+    "height": 1600,
+    "aspectRatio": "16:10"
+  },
+  {
+    "name": "WQHD+",
+    "width": 3840,
+    "height": 1600,
+    "aspectRatio": "21:9"
+  },
+  {
+    "name": "4K UHD",
+    "width": 3840,
+    "height": 2160,
+    "aspectRatio": "16:9"
+  },
+  {
+    "name": "5K UHD",
+    "width": 5120,
+    "height": 2880,
+    "aspectRatio": "16:9"
+  },
+  {
+    "name": "5K2K WUHD",
+    "width": 5120,
+    "height": 2160,
+    "aspectRatio": "21:9"
+  },
+  {
+    "name": "6K UHD",
+    "width": 6144,
+    "height": 2880,
+    "aspectRatio": "16:9"
+  },
+  {
+    "name": "8K UHD",
+    "width": 7680,
+    "height": 4320,
+    "aspectRatio": "16:9"
+  },
+  {
+    "name": "10K UHD",
+    "width": 10240,
+    "height": 4320,
+    "aspectRatio": "21:9"
+  }
+]

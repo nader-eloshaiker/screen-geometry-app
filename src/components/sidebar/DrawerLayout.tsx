@@ -1,6 +1,6 @@
 import { useContext } from 'react'
-import './DrawerLayout.css'
 import { Context } from './DrawerContext'
+import './DrawerLayout.css'
 import SideNav from './SideNav'
 
 export const sideNavId = 'sidenav-drawer'

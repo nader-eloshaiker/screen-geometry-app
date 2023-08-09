@@ -2,7 +2,7 @@ import localforage from 'localforage'
 import { matchSorter } from 'match-sorter'
 import sortBy from 'sort-by'
 import { IScreen, IScreenDataInput } from '../../../models/Screen'
-import { createScreen } from '../../utils/Screen'
+import { transformScreen } from '../../../utils/ScreenTransformation'
 
 const storageKey = 'screens'
 
@@ -17,7 +17,7 @@ export async function getItemList(query?: string): Promise<Array<IScreen>> {
 
 export async function createItem(data: IScreenDataInput): Promise<IScreen> {
   await fakeNetwork()
-  const item = createScreen(data)
+  const item = transformScreen(data)
   const list: Array<IScreen> = await getItemList()
   list.unshift(item)
   await set(list)

@@ -2,8 +2,10 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import { SubmitHandler, useController, UseControllerProps, useForm } from 'react-hook-form'
 import { NumericFormat } from 'react-number-format'
 import * as yup from 'yup'
+import { ISearch } from '../../models/Database'
 import { IScreenDataInput, ScreenDataEnum } from '../../models/Screen'
 import { useCreateScreenAction } from '../api/actions/useCreateScreenAction'
+import AutocompleteScreen from './AutocompleteScreen'
 
 const parseFormNumber = (value: string | number | undefined, strict = true) => {
   if (!value || value == null) {
@@ -31,6 +33,7 @@ const DiagonalInput = (props: UseControllerProps<IScreenDataInput>) => {
       decimalScale={1}
       thousandSeparator=','
       onBlur={field.onBlur}
+      autoComplete='off'
       onChange={(e) => {
         field.onChange(parseFormNumber(e.target.value) as string | number | React.ChangeEvent<Element>) // send data to hook form
       }}
@@ -58,12 +61,21 @@ export default function CreateScreenForm() {
     register,
     formState: { errors },
     control,
+    setValue,
     handleSubmit,
   } = useForm<IScreenDataInput>({
     resolver: yupResolver(screenDataSchema),
   })
   const [{ executeCreate }] = useCreateScreenAction()
 
+  const onSelect = (item: ISearch) => {
+    console.log(item)
+    setValue(ScreenDataEnum.aspectRatio, item.tag.aspectRatio, {
+      shouldValidate: true,
+      shouldDirty: false,
+      shouldTouch: false,
+    })
+  }
   const onSubmit: SubmitHandler<IScreenDataInput> = (form) => {
     executeCreate(form)
   }
@@ -71,6 +83,7 @@ export default function CreateScreenForm() {
   return (
     /* "handleSubmit" will validate your inputs before invoking "onSubmit" */
     <form method='post' onSubmit={handleSubmit(onSubmit)}>
+      <AutocompleteScreen onSelect={onSelect} />
       <div className='flex flex-col gap-2'>
         <div className='w-full form-control'>
           <label className='label'>
@@ -91,6 +104,7 @@ export default function CreateScreenForm() {
           <input
             type='text'
             className='w-full input input-bordered'
+            autoComplete='off'
             placeholder='16:9'
             {...register(ScreenDataEnum.aspectRatio)}
           />
