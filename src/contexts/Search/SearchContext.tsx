@@ -1,7 +1,7 @@
 import { createContext, Dispatch, useReducer } from 'react'
 
-import { IDataBaseEntry, ISearch } from '../models/Database'
-import { transformSearchData } from '../utils/ScreenTransformation'
+import { IDataBaseEntry, ISearch } from '../../models/Database'
+import { transformSearchData } from '../../utils/ScreenTransformation'
 
 export enum SearchActionTypes {
   LOAD = 'load',
@@ -14,7 +14,7 @@ export type TDatabaseAction =
   | { type: SearchActionTypes.SEARCH; payload: string }
   | { type: SearchActionTypes.RESET; payload?: undefined }
 
-const initialDatabaseState = {
+export const initialDatabaseState = {
   monitorData: [] as ISearch[],
   results: [] as ISearch[],
   query: '',
@@ -22,7 +22,7 @@ const initialDatabaseState = {
 
 type IDabaseState = typeof initialDatabaseState
 
-const searchReducer = (state: IDabaseState, { type, payload }: TDatabaseAction): IDabaseState => {
+export const searchReducer = (state: IDabaseState, { type, payload }: TDatabaseAction): IDabaseState => {
   switch (type) {
     case SearchActionTypes.LOAD:
       if (state.monitorData.length > 0) {
@@ -58,9 +58,3 @@ const searchReducer = (state: IDabaseState, { type, payload }: TDatabaseAction):
 }
 
 export const SearchContext = createContext<[IDabaseState, Dispatch<TDatabaseAction>]>([initialDatabaseState, () => {}])
-
-export const SearchProvider = ({ children }: TReactChildren) => {
-  const [database, dispatch] = useReducer(searchReducer, initialDatabaseState)
-
-  return database ? <SearchContext.Provider value={[database, dispatch]}>{children}</SearchContext.Provider> : null
-}

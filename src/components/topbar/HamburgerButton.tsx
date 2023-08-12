@@ -1,13 +1,12 @@
-import { useContext } from 'react'
 import { twMerge } from 'tailwind-merge'
 import CloseIcon from '../../assets/icons/Close'
 import HamburgerIcon from '../../assets/icons/Hamburger'
-import { Context } from '../sidebar/DrawerContext'
+import { useDrawerContext } from '../sidebar/context/useDrawerContext'
 
 type TProps = TRestProps & { className?: string }
 
 export default function HamburgerButton({ className, ...rest }: TProps) {
-  const drawerRef = useContext(Context)
+  const drawerRef = useDrawerContext()
 
   const toggleDrawer = () => {
     drawerRef?.current?.click()

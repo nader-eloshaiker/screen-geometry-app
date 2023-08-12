@@ -1,9 +1,10 @@
-import { useContext, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { ActionTypes } from '../../contexts/App/AppContext'
 import { useAppContext } from '../../contexts/App/useAppContext'
-import { SearchActionTypes, SearchContext } from '../../contexts/SearchContext'
+import { SearchActionTypes } from '../../contexts/Search/SearchContext'
 import { IDataBaseEntry, ISearch } from '../../models/Database'
 import Autocomplete, { TAutoCompleteItem } from '../elements/Autocomplete'
+import { useSearchContext } from '../../contexts/Search/useSearchContext'
 
 type TProps = TRestProps & {
   onSelect: (item: ISearch) => void
@@ -19,7 +20,7 @@ const AutocompleteScreen = ({ onSelect, ...rest }: TProps) => {
   // a list to show on the dropdown when user types
   const [items, setItems] = useState<Array<TAutoCompleteItem>>([])
 
-  const [db, dispatchSearch] = useContext(SearchContext)
+  const [db, dispatchSearch] = useSearchContext()
   const [_, dispatchApp] = useAppContext()
 
   useEffect(() => {

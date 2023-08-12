@@ -1,12 +1,11 @@
-import { useContext } from 'react'
-import { Context } from './DrawerContext'
 import './DrawerLayout.css'
 import SideNav from './SideNav'
+import { useDrawerContext } from './context/useDrawerContext'
 
 export const sideNavId = 'sidenav-drawer'
 
 export default function DrawerLayout({ children }: TReactChildren) {
-  const drawerRef = useContext(Context)
+  const drawerRef = useDrawerContext()
 
   return (
     <div className='my-6 drawer grow lg:drawer-open'>
