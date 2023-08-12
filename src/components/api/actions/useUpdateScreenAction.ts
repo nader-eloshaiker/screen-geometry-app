@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { ActionTypes } from '../../../contexts/App/AppContext'
+import { ActionTypes } from '../../../contexts/App/AppProvider'
 import { useAppContext } from '../../../contexts/App/useAppContext'
 import { IScreen } from '../../../models/Screen'
 import { routes } from '../ApiRouteSchema'

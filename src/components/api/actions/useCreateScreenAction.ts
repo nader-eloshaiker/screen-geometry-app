@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { ActionTypes } from '../../../contexts/App/AppContext'
+import { ActionTypes } from '../../../contexts/App/AppProvider'
 import { useAppContext } from '../../../contexts/App/useAppContext'
 import { routes } from '../ApiRouteSchema'
 import { TScreenResponse } from '../db/indexApi'
