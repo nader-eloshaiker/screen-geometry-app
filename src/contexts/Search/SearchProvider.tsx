@@ -1,5 +1,5 @@
 import { useReducer } from 'react'
-import { IDabaseState, SearchContext, initialDatabaseState } from './SearchContext'
+import { IDabaseState, initialDatabaseState, SearchContext } from './SearchContext'
 
 import { IDataBaseEntry } from '../../models/Database'
 import { transformSearchData } from '../../utils/ScreenTransformation'
@@ -15,7 +15,7 @@ export type TDatabaseAction =
   | { type: SearchActionTypes.SEARCH; payload: string }
   | { type: SearchActionTypes.RESET; payload?: undefined }
 
-export const searchReducer = (state: IDabaseState, { type, payload }: TDatabaseAction): IDabaseState => {
+const searchReducer = (state: IDabaseState, { type, payload }: TDatabaseAction): IDabaseState => {
   switch (type) {
     case SearchActionTypes.LOAD:
       if (state.monitorData.length > 0) {

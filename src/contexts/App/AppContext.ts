@@ -1,6 +1,6 @@
 import { createContext } from 'react'
-import { TScreenAction } from './AppProvider'
 import { IScreen } from '../../models/Screen'
+import { TScreenAction } from './AppProvider'
 
 export type TLoadingTag = { status: boolean; tag: string }
 

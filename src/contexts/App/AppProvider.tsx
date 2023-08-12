@@ -1,5 +1,5 @@
 import { useReducer } from 'react'
-import { AppContext, IScreenState, TLoadingTag, initialScreenState } from './AppContext'
+import { AppContext, initialScreenState, IScreenState, TLoadingTag } from './AppContext'
 
 import { TScreenListResponse } from '../../components/api/db/indexApi'
 import { IScreen } from '../../models/Screen'
@@ -27,7 +27,7 @@ const generateLoadingTag = (val: TLoadingTag, list: Array<TLoadingTag>) => {
   return { loadingTag: newList, loading: status } as const
 }
 
-export const appReducer = (state: IScreenState, { type, payload }: TScreenAction): IScreenState => {
+const appReducer = (state: IScreenState, { type, payload }: TScreenAction): IScreenState => {
   switch (type) {
     case ActionTypes.LIST:
       return { ...state, selections: payload.list, query: payload.q }
