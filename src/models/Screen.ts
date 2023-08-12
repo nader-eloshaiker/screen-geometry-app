@@ -16,11 +16,24 @@ export interface IScreenSpec {
   ppi: number
   refreshRate?: number
 }
+
+export interface IScreenRender {
+  width: number
+  height: number
+  pixelSize?: number
+  color: {
+    r: number
+    g: number
+    b: number
+  }
+}
+
 export interface IScreen {
   id: string
   tag: IScreenDataInput
   data: IScreenData
   spec?: IScreenSpec
+  render: IScreenRender
   favorite: boolean
   notes?: string
 }

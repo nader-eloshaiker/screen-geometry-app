@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react'
+import { ActionTypes } from '../../contexts/App/AppProvider'
 import { useAppContext } from '../../contexts/App/useAppContext'
+import { SearchActionTypes } from '../../contexts/Search/SearchProvider'
+import { useSearchContext } from '../../contexts/Search/useSearchContext'
 import { IDataBaseEntry, ISearch } from '../../models/Database'
 import Autocomplete, { TAutoCompleteItem } from '../elements/Autocomplete'
-import { useSearchContext } from '../../contexts/Search/useSearchContext'
-import { ActionTypes } from '../../contexts/App/AppProvider'
-import { SearchActionTypes } from '../../contexts/Search/SearchProvider'
 
 type TProps = TRestProps & {
   onSelect: (item: ISearch) => void

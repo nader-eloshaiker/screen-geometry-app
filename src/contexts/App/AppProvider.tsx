@@ -3,6 +3,7 @@ import { AppContext, initialScreenState, IScreenState, TLoadingTag } from './App
 
 import { TScreenListResponse } from '../../components/api/db/indexApi'
 import { IScreen } from '../../models/Screen'
+import { getRandomInt } from '../../utils/RandomNumber'
 
 export enum ActionTypes {
   LIST = 'list',
@@ -27,21 +28,53 @@ const generateLoadingTag = (val: TLoadingTag, list: Array<TLoadingTag>) => {
   return { loadingTag: newList, loading: status } as const
 }
 
+const rebalanceRender = (list: IScreen[]) => {
+  if (list.length === 0 || list.length === 1) {
+    return list
+  }
+
+  const sorted = list.sort((a, b) => a.data.hSize - b.data.hSize)
+  const biggest = sorted[0]
+
+  for (const screen of sorted) {
+    screen.render = {
+      width: screen.data.hSize / biggest.data.hSize,
+      height: screen.data.vSize / biggest.data.vSize,
+      color: {
+        r: screen.render.color.r || getRandomInt(256),
+        g: screen.render.color.g || getRandomInt(256),
+        b: screen.render.color.b || getRandomInt(256),
+      },
+    }
+  }
+
+  return sorted
+}
+
 const appReducer = (state: IScreenState, { type, payload }: TScreenAction): IScreenState => {
   switch (type) {
     case ActionTypes.LIST:
       return { ...state, selections: payload.list, query: payload.q }
     case ActionTypes.DELETE:
-      return { ...state, selections: state.selections.filter((screen) => screen.id !== payload) }
+      // eslint-disable-next-line no-case-declarations
+      const deletion = state.selections.filter((screen) => screen.id !== payload)
+
+      return { ...state, selections: rebalanceRender(deletion) }
     case ActionTypes.UPDATE:
+      // eslint-disable-next-line no-case-declarations
+      const modification = state.selections.map((screen) =>
+        payload && screen.id !== payload.id ? screen : payload,
+      ) as IScreen[]
+
       return {
         ...state,
-        selections: state.selections.map((screen) =>
-          payload && screen.id !== payload.id ? screen : payload,
-        ) as IScreen[],
+        selections: rebalanceRender(modification),
       }
     case ActionTypes.ADD:
-      return { ...state, selections: [...state.selections, payload] }
+      // eslint-disable-next-line no-case-declarations
+      const addition = [...state.selections, payload]
+
+      return { ...state, selections: rebalanceRender(addition) }
     case ActionTypes.LOADING:
       // eslint-disable-next-line no-case-declarations
       const result = generateLoadingTag(payload, state.loadingTag)
