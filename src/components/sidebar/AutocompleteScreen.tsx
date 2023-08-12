@@ -5,11 +5,11 @@ import { SearchActionTypes, SearchContext } from '../../contexts/SearchContext'
 import { IDataBaseEntry, ISearch } from '../../models/Database'
 import Autocomplete, { TAutoCompleteItem } from '../elements/Autocomplete'
 
-type TProps = {
+type TProps = TRestProps & {
   onSelect: (item: ISearch) => void
 }
 
-const AutocompleteScreen = ({ onSelect }: TProps) => {
+const AutocompleteScreen = ({ onSelect, ...rest }: TProps) => {
   // query typed by user
   const [val, setVal] = useState('')
 
@@ -62,7 +62,7 @@ const AutocompleteScreen = ({ onSelect }: TProps) => {
   }, [db.results])
 
   // use the common auto complete component here.
-  return <Autocomplete items={items} value={val} onChange={setVal} onSelect={setSelected} />
+  return <Autocomplete items={items} value={val} onChange={setVal} onSelect={setSelected} {...rest} />
 }
 
 export default AutocompleteScreen

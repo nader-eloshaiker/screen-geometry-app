@@ -9,15 +9,15 @@ const getAspectRatio = (str: string) => {
 const generateLabel = (entry: IDataBaseEntry, data: ISearchData) => {
   let str = entry.name
 
+  if (entry.size && entry.size !== 0) {
+    str += ` ${entry.size}"`
+  }
+
   if (entry.width && entry.height !== 0) {
     str += ` ${entry.width}x${entry.height}`
   }
 
   str += ` ${data.hApsectRatio}:${data.vApsectRatio}`
-
-  if (entry.size && entry.size !== 0) {
-    str += ` ${entry.size}"`
-  }
 
   return str
 }

@@ -4,7 +4,7 @@ import cn from 'classnames'
 import { ChangeEvent, memo, useRef, useState } from 'react'
 
 export type TAutoCompleteItem = { id: string; label: string }
-type TProps = {
+type TProps = TRestProps & {
   items: Array<TAutoCompleteItem> // we are using this type for autocomplete
   value: string
   onChange(val: string): void
@@ -12,8 +12,7 @@ type TProps = {
 }
 
 // we are using dropdown, input and menu component from daisyui
-const Autocomplete = (props: TProps) => {
-  const { items = [], value = '', onChange = () => {}, onSelect = () => {} } = props
+const Autocomplete = ({ items = [], value = '', onChange = () => {}, onSelect = () => {}, ...rest }: TProps) => {
   const ref = useRef<HTMLDivElement>(null)
   const [open, setOpen] = useState(false)
   const [inputValue, setInputValue] = useState(items.length === 1 ? items[0].label : value)
@@ -44,14 +43,14 @@ const Autocomplete = (props: TProps) => {
     >
       <input
         type='text'
-        className='w-full input input-bordered'
+        className='w-full input input-bordered input-md'
         value={inputValue}
         onChange={handleChange}
         placeholder='Type something..'
         tabIndex={0}
       />
       {items.length > 0 && (
-        <div className='flex-col overflow-auto z-[1] rounded-md dropdown-content bg-base-200 top-14 max-h-60'>
+        <div {...rest}>
           <ul
             className='menu menu-compact '
             // use ref to calculate the width of parent

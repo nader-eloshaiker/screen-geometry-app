@@ -1,6 +1,4 @@
 import localforage from 'localforage'
-import { matchSorter } from 'match-sorter'
-import sortBy from 'sort-by'
 import { IScreen, IScreenDataInput } from '../../../models/Screen'
 import { transformScreen } from '../../../utils/ScreenTransformation'
 
@@ -8,11 +6,9 @@ const storageKey = 'screens'
 
 export async function getItemList(query?: string): Promise<Array<IScreen>> {
   await fakeNetwork(`getScreens:${query}`)
-  let list: Array<IScreen> = (await localforage.getItem(storageKey)) || []
-  if (query) {
-    list = matchSorter(list, query, { keys: ['diagonalSize', 'aspectRatio'] })
-  }
-  return list.sort(sortBy('diagonalSize', 'aspectRatio'))
+  const list: Array<IScreen> = (await localforage.getItem(storageKey)) || []
+
+  return list
 }
 
 export async function createItem(data: IScreenDataInput): Promise<IScreen> {

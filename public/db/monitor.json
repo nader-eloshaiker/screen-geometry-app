@@ -37,6 +37,7 @@
   },
   {
     "name": "SXGA",
+    "size": 19,
     "width": 1280,
     "height": 1024,
     "aspectRatio": "5:4"
@@ -67,6 +68,28 @@
   },
   {
     "name": "Full HD",
+    "size": 22,
+    "width": 1920,
+    "height": 1080,
+    "aspectRatio": "16:9"
+  },
+  {
+    "name": "Full HD",
+    "size": 24,
+    "width": 1920,
+    "height": 1080,
+    "aspectRatio": "16:9"
+  },
+  {
+    "name": "Full HD",
+    "size": 25,
+    "width": 1920,
+    "height": 1080,
+    "aspectRatio": "16:9"
+  },
+  {
+    "name": "Full HD",
+    "size": 27,
     "width": 1920,
     "height": 1080,
     "aspectRatio": "16:9"
@@ -85,27 +108,31 @@
   },
   {
     "name": "WUXGA",
+    "size": 24,
     "width": 1920,
     "height": 1200,
     "aspectRatio": "16:10"
   },
   {
     "name": "QHD",
+    "size": 24,
     "width": 2560,
     "height": 1440,
     "aspectRatio": "16:9"
   },
   {
-    "name": "5K Dual QHD",
+    "name": "QHD",
+    "size": 27,
+    "width": 2560,
+    "height": 1440,
+    "aspectRatio": "16:9"
+  },
+  {
+    "name": "5K Dual QHD 49\"",
+    "size": 49,
     "width": 5120,
     "height": 1440,
     "aspectRatio": "32:9"
-  },
-  {
-    "name": "WQHD",
-    "width": 3440,
-    "height": 1440,
-    "aspectRatio": "21:9"
   },
   {
     "name": "WQXGA",
@@ -114,45 +141,80 @@
     "aspectRatio": "16:10"
   },
   {
+    "name": "WQHD",
+    "size": 34,
+    "width": 3440,
+    "height": 1440,
+    "aspectRatio": "21:9"
+  },
+  {
     "name": "WQHD+",
+    "size": 38,
     "width": 3840,
     "height": 1600,
     "aspectRatio": "21:9"
   },
   {
     "name": "4K UHD",
+    "size": 27,
     "width": 3840,
     "height": 2160,
     "aspectRatio": "16:9"
   },
   {
-    "name": "5K UHD",
-    "width": 5120,
-    "height": 2880,
+    "name": "4K UHD",
+    "size": 32,
+    "width": 3840,
+    "height": 2160,
+    "aspectRatio": "16:9"
+  },
+  {
+    "name": "4K UHD",
+    "size": 43,
+    "width": 3840,
+    "height": 2160,
     "aspectRatio": "16:9"
   },
   {
     "name": "5K2K WUHD",
+    "size": 34,
     "width": 5120,
     "height": 2160,
     "aspectRatio": "21:9"
   },
   {
-    "name": "6K UHD",
-    "width": 6144,
+    "name": "5K2K WUHD",
+    "size": 40,
+    "width": 5120,
+    "height": 2160,
+    "aspectRatio": "21:9"
+  },
+  {
+    "name": "5K UHD",
+    "size": 27,
+    "width": 5120,
     "height": 2880,
     "aspectRatio": "16:9"
   },
   {
-    "name": "8K UHD",
-    "width": 7680,
-    "height": 4320,
+    "name": "Apple Studio Display",
+    "size": 27,
+    "width": 5120,
+    "height": 2880,
     "aspectRatio": "16:9"
   },
   {
-    "name": "10K UHD",
-    "width": 10240,
-    "height": 4320,
-    "aspectRatio": "21:9"
+    "name": "Apple Pro Display XDR",
+    "size": 32,
+    "width": 6144,
+    "height": 3160,
+    "aspectRatio": "16:9"
+  },
+  {
+    "name": "6K UHD",
+    "size": 32,
+    "width": 6144,
+    "height": 3456,
+    "aspectRatio": "16:9"
   }
 ]
