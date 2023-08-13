@@ -14,7 +14,6 @@ export interface IScreenSpec {
   hRes: number
   vRes: number
   ppi: number
-  refreshRate?: number
 }
 
 export interface IScreenRender {
@@ -35,7 +34,6 @@ export interface IScreen {
   spec?: IScreenSpec
   render: IScreenRender
   favorite: boolean
-  notes?: string
 }
 
 export enum ScreenDataEnum {

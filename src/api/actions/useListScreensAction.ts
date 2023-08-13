@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
-import { ActionTypes } from '../../../contexts/App/AppProvider'
-import { useAppContext } from '../../../contexts/App/useAppContext'
+import { ActionTypes } from '../../contexts/App/AppManager'
+import { useAppContext } from '../../contexts/App/useAppContext'
 import { routes } from '../ApiRouteSchema'
 import { TScreenListResponse } from '../db/indexApi'
 import useAxios from '../fetch/useAxios'

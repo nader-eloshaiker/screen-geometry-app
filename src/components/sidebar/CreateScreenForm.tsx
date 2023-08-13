@@ -1,9 +1,9 @@
 import { yupResolver } from '@hookform/resolvers/yup'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import * as yup from 'yup'
+import { useCreateScreenAction } from '../../api/actions/useCreateScreenAction'
 import { ISearch } from '../../models/Database'
 import { IScreenDataInput, ScreenDataEnum } from '../../models/Screen'
-import { useCreateScreenAction } from '../api/actions/useCreateScreenAction'
 import AutocompleteScreen from './AutocompleteScreen'
 
 const screenDataSchema = yup
@@ -49,7 +49,10 @@ export default function CreateScreenForm() {
 
   return (
     <>
-      <AutocompleteScreen onSelect={onSelect} className='z-20 flex-col overflow-auto rounded-md dropdown-content bg-base-200 top-14 max-h-60' />
+      <AutocompleteScreen
+        onSelect={onSelect}
+        className='z-20 flex-col overflow-auto rounded-md dropdown-content bg-base-200 top-14 max-h-60'
+      />
 
       {/* "handleSubmit" will validate your inputs before invoking "onSubmit" */}
       <form method='post' onSubmit={handleSubmit(onSubmit)}>
@@ -67,7 +70,11 @@ export default function CreateScreenForm() {
                   placeholder='27'
                   {...register(ScreenDataEnum.diagonalSize)}
                 />
-                <input className='flex-none w-24 rounded-l-none rounded-r-lg input input-md' placeholder="inches" readOnly/>
+                <input
+                  className='flex-none w-24 rounded-l-none rounded-r-lg input input-md'
+                  placeholder='inches'
+                  readOnly
+                />
               </div>
               {errors[ScreenDataEnum.diagonalSize] && (
                 <div className='text-error'>{errors[ScreenDataEnum.diagonalSize].message}</div>

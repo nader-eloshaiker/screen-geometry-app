@@ -1,7 +1,14 @@
 import { AxiosInstance, AxiosRequestConfig } from 'axios'
 import MockAdapter from 'axios-mock-adapter'
 import { routes } from '../ApiRouteSchema'
-import { createItemAction, deleteItemAction, favouriteItemAction, getScreen, getScreenList, updateItemAction } from '../db/indexApi'
+import {
+  createItemAction,
+  deleteItemAction,
+  favouriteItemAction,
+  getScreen,
+  getScreenList,
+  updateItemAction,
+} from '../db/indexApi'
 
 // Stub out the API calls using axios-mock-adapter for indexAPI to store data in the browser's IndexedDB
 // The stubbed API calls can later be replaced with real API calls to a backend store
@@ -11,7 +18,7 @@ export const generateStub = (axiosInstance: AxiosInstance) => {
   const debug = (config: AxiosRequestConfig, response: unknown) => {
     console.debug(`axios adapter: [${config.method}] ${config.url}`, '\n', config, '\n', response)
   }
-  // eslint-disable-next-line prettier/prettier, no-useless-escape
+
   const screenUrl = new RegExp(routes.baseUrl + routes.root + '/' + routes.screens.path + '/\\S+')
   const screenFavUrl = new RegExp(
     routes.baseUrl + routes.root + '/' + routes.screens.path + '/\\S+' + '/' + routes.screens.actions.favorite,

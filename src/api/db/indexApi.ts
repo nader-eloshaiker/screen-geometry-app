@@ -1,6 +1,6 @@
 import { Params } from 'react-router-dom'
-import { IScreen, IScreenDataInput } from '../../../models/Screen'
-import { routes } from '../../../routes/AppRouteSchema'
+import { IScreen, IScreenDataInput } from '../../models/Screen'
+import { routes } from '../../routes/AppRouteSchema'
 import { createItem, deleteItem, getItem, getItemList, updateItem } from './indexDB'
 
 export type TScreenListResponse = {

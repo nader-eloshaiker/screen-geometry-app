@@ -1,10 +1,10 @@
 import { Outlet, useNavigation } from 'react-router-dom'
-import { useListScreensAction } from '../components/api/actions/useListScreensAction'
-import Footer from '../components/Footer'
-import DrawerLayout from '../components/sidebar/DrawerLayout'
-import Header from '../components/topbar/Header'
-import { useAppContext } from '../contexts/App/useAppContext'
+import { useListScreensAction } from '../api/actions/useListScreensAction'
+import Footer from '../components/footer/Footer'
+import Header from '../components/header/Header'
 import { DrawerProvider } from '../components/sidebar/context/DrawerProvider'
+import DrawerLayout from '../components/sidebar/DrawerLayout'
+import { useAppContext } from '../contexts/App/useAppContext'
 
 export default function Root() {
   const navigation = useNavigation()

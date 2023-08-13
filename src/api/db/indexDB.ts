@@ -1,6 +1,6 @@
 import localforage from 'localforage'
-import { IScreen, IScreenDataInput } from '../../../models/Screen'
-import { transformScreen } from '../../../utils/ScreenTransformation'
+import { IScreen, IScreenDataInput } from '../../models/Screen'
+import { transformScreen } from '../../utils/ScreenTransformation'
 
 const storageKey = 'screens'
 

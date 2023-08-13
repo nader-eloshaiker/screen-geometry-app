@@ -2,13 +2,13 @@
 
 import { useEffect } from 'react'
 import { NavLink } from 'react-router-dom'
+import { useDeleteScreenAction } from '../../api/actions/useDeleteScreenAction'
+import { useFavoriteScreenAction } from '../../api/actions/useFavoriteScreenAction'
+import { routes } from '../../api/ApiRouteSchema'
 import CloseIcon from '../../assets/icons/Close'
 import StarOutlineIcon from '../../assets/icons/StarOutline'
 import StarSolidIcon from '../../assets/icons/StarSolid'
 import { useAppContext } from '../../contexts/App/useAppContext'
-import { useDeleteScreenAction } from '../api/actions/useDeleteScreenAction'
-import { useFavoriteScreenAction } from '../api/actions/useFavoriteScreenAction'
-import { routes } from '../api/ApiRouteSchema'
 import CreateScreenForm from './CreateScreenForm'
 
 export default function SideNav() {
