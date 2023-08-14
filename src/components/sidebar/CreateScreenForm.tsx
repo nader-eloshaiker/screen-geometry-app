@@ -5,6 +5,7 @@ import { useCreateScreenAction } from '../../api/actions/useCreateScreenAction'
 import { ISearch } from '../../models/Database'
 import { IScreenDataInput, ScreenDataEnum } from '../../models/Screen'
 import AutocompleteScreen from './AutocompleteScreen'
+import './CreateScreenForm.css'
 
 const screenDataSchema = yup
   .object({
@@ -66,14 +67,16 @@ export default function CreateScreenForm() {
                 <input
                   type='number'
                   autoComplete='off'
-                  className='z-10 w-full rounded-l-lg rounded-r-none grow input input-md'
+                  className='w-full rounded-l-lg rounded-r-none grow input input-md'
                   placeholder='27'
                   {...register(ScreenDataEnum.diagonalSize)}
                 />
                 <input
+                  type='text'
+                  id='suffix'
                   className='flex-none w-24 rounded-l-none rounded-r-lg input input-md'
                   placeholder='inches'
-                  readOnly
+                  disabled
                 />
               </div>
               {errors[ScreenDataEnum.diagonalSize] && (
