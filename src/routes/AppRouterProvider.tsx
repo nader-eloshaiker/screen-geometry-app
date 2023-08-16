@@ -2,7 +2,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import Contact from '../pages/Contacts'
 import EditContact from '../pages/EditContact'
 import ErrorManager from '../pages/ErrorManger'
-import Home from '../pages/Home'
+import Geometry from '../pages/Geometry'
 import Root from '../pages/Root'
 import { routes } from './AppRouteSchema'
 
@@ -16,10 +16,10 @@ export default function AppRouterProvider() {
         {
           errorElement: <ErrorManager />,
           children: [
-            { index: true, element: <Home /> },
+            { index: true, element: <Geometry /> },
             {
               path: routes.screens.path + '/' + routes.screens.actions.create,
-              element: <Home />,
+              element: <Geometry />,
             },
             {
               path: routes.screens.path + '/' + routes.screens.key,

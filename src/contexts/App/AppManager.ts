@@ -1,6 +1,6 @@
 import { TScreenListResponse } from '../../api/db/indexApi'
 import { IScreen } from '../../models/Screen'
-import { getRandomInt } from '../../utils/RandomNumber'
+import { normaliseScreenRender } from '../../utils/ScreenCalc'
 
 export type TLoadingTag = { status: boolean; tag: string }
 
@@ -36,38 +36,18 @@ const generateLoadingTag = (val: TLoadingTag, list: Array<TLoadingTag>) => {
   return { loadingTag: newList, loading: status } as const
 }
 
-const rebalanceRender = (list: IScreen[]) => {
-  if (list.length === 0 || list.length === 1) {
-    return list
-  }
-
-  const sorted = list.sort((a, b) => a.data.hSize - b.data.hSize)
-  const biggest = sorted[0]
-
-  for (const screen of sorted) {
-    screen.render = {
-      width: screen.data.hSize / biggest.data.hSize,
-      height: screen.data.vSize / biggest.data.vSize,
-      color: {
-        r: screen.render.color.r || getRandomInt(256),
-        g: screen.render.color.g || getRandomInt(256),
-        b: screen.render.color.b || getRandomInt(256),
-      },
-    }
-  }
-
-  return sorted
-}
-
 export const appReducer = (state: IScreenState, { type, payload }: TScreenAction): IScreenState => {
   switch (type) {
     case ActionTypes.LIST:
-      return { ...state, selections: payload.list, query: payload.q }
+      // eslint-disable-next-line no-case-declarations
+      const list = normaliseScreenRender(payload.list)
+
+      return { ...state, selections: list, query: payload.q }
     case ActionTypes.DELETE:
       // eslint-disable-next-line no-case-declarations
       const deletion = state.selections.filter((screen) => screen.id !== payload)
 
-      return { ...state, selections: rebalanceRender(deletion) }
+      return { ...state, selections: normaliseScreenRender(deletion) }
     case ActionTypes.UPDATE:
       // eslint-disable-next-line no-case-declarations
       const modification = state.selections.map((screen) =>
@@ -76,13 +56,13 @@ export const appReducer = (state: IScreenState, { type, payload }: TScreenAction
 
       return {
         ...state,
-        selections: rebalanceRender(modification),
+        selections: normaliseScreenRender(modification),
       }
     case ActionTypes.ADD:
       // eslint-disable-next-line no-case-declarations
-      const addition = [...state.selections, payload]
+      const additions = normaliseScreenRender([...state.selections, payload])
 
-      return { ...state, selections: rebalanceRender(addition) }
+      return { ...state, selections: additions }
     case ActionTypes.LOADING:
       // eslint-disable-next-line no-case-declarations
       const result = generateLoadingTag(payload, state.loadingTag)

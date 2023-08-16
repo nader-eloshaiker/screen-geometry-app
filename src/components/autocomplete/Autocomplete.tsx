@@ -1,10 +1,12 @@
 // ./components/Autocomplete.tsx
 
 import cn from 'classnames'
-import { ChangeEvent, memo, useRef, useState } from 'react'
+import { ChangeEvent, memo, useState } from 'react'
+import useResizeObserver from 'use-resize-observer'
 
 export type TAutoCompleteItem = { id: string; label: string }
 type TProps = TRestProps & {
+  className?: string
   items: Array<TAutoCompleteItem> // we are using this type for autocomplete
   value: string
   onChange(val: string): void
@@ -12,8 +14,15 @@ type TProps = TRestProps & {
 }
 
 // we are using dropdown, input and menu component from daisyui
-const Autocomplete = ({ items = [], value = '', onChange = () => {}, onSelect = () => {}, ...rest }: TProps) => {
-  const ref = useRef<HTMLDivElement>(null)
+const Autocomplete = ({
+  items = [],
+  value = '',
+  onChange = () => {},
+  onSelect = () => {},
+  className,
+  ...rest
+}: TProps) => {
+  const { ref: divRef, width = 1 } = useResizeObserver<HTMLDivElement>()
   const [open, setOpen] = useState(false)
   const [inputValue, setInputValue] = useState(items.length === 1 ? items[0].label : value)
 
@@ -35,11 +44,16 @@ const Autocomplete = ({ items = [], value = '', onChange = () => {}, onSelect = 
   return (
     <div
       // use classnames here to easily toggle dropdown open
-      className={cn({
-        'dropdown w-full': true,
-        'dropdown-open': open,
-      })}
-      ref={ref}
+      className={
+        cn({
+          'dropdown w-full': true,
+          'dropdown-open': open,
+        }) +
+        ' ' +
+        className
+      }
+      ref={divRef}
+      {...rest}
     >
       <input
         type='text'
@@ -50,11 +64,11 @@ const Autocomplete = ({ items = [], value = '', onChange = () => {}, onSelect = 
         tabIndex={0}
       />
       {items.length > 0 && (
-        <div {...rest}>
+        <div className='flex-col overflow-auto rounded-md dropdown-content bg-base-200 top-14 max-h-60'>
           <ul
-            className='menu menu-compact '
+            className='menu menu-compact'
             // use ref to calculate the width of parent
-            style={{ width: ref.current?.clientWidth }}
+            style={{ width: width }}
           >
             {items.map((item, index) => {
               return (

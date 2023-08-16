@@ -17,6 +17,8 @@
     "@types/axios-mock-adapter": "^1.10.0",
     "@types/classnames": "^2.3.1",
     "@types/localforage": "^0.0.34",
+    "@types/styled-components": "^5.1.26",
+    "@types/use-resize-observer": "^6.1.0",
     "@types/yup": "^0.32.0",
     "axios": "^1.4.0",
     "axios-mock-adapter": "^1.21.5",
@@ -28,6 +30,8 @@
     "react-hook-form": "^7.45.1",
     "react-router-dom": "^6.14.0",
     "react-scripts": "^5.0.1",
+    "styled-components": "^6.0.7",
+    "use-resize-observer": "^9.1.0",
     "web-vitals": "^2.1.4",
     "yup": "^1.2.0"
   },

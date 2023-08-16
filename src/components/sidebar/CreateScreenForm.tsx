@@ -50,17 +50,14 @@ export default function CreateScreenForm() {
 
   return (
     <>
-      <AutocompleteScreen
-        onSelect={onSelect}
-        className='z-20 flex-col overflow-auto rounded-md dropdown-content bg-base-200 top-14 max-h-60'
-      />
+      <AutocompleteScreen onSelect={onSelect} />
 
       {/* "handleSubmit" will validate your inputs before invoking "onSubmit" */}
       <form method='post' onSubmit={handleSubmit(onSubmit)}>
         <div className='flex flex-col gap-2'>
           <div className='w-full form-control'>
             <label className='label'>
-              <span className='label-text'>Screen Size (Diagnol)</span>
+              <span className='label-text'>Screen Size</span>
             </label>
             <div id='diagonalSize'>
               <div className='flex flex-row items-center gap-0 flex-nowrap'>

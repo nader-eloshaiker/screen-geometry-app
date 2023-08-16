@@ -10,7 +10,9 @@ export default function DrawerLayout({ children }: TReactChildren) {
   return (
     <div className='my-6 drawer grow lg:drawer-open'>
       <input id={sideNavId} type='checkbox' className='drawer-toggle' ref={drawerRef} />
-      <div className='flex flex-col items-center justify-center drawer-content'>{children}</div>
+      <div id='drawer-content' className='h-full drawer-content lg:mx-6'>
+        {children}
+      </div>
       <div className='absolute w-auto h-full drawer-side'>
         <label htmlFor={sideNavId} className='drawer-overlay'></label>
         <SideNav />

@@ -16,15 +16,17 @@ export interface IScreenSpec {
   ppi: number
 }
 
+export interface IScreenColor {
+  r: number
+  g: number
+  b: number
+}
+
 export interface IScreenRender {
   width: number
   height: number
+  color: IScreenColor
   pixelSize?: number
-  color: {
-    r: number
-    g: number
-    b: number
-  }
 }
 
 export interface IScreen {
@@ -32,13 +34,18 @@ export interface IScreen {
   tag: IScreenDataInput
   data: IScreenData
   spec?: IScreenSpec
-  render: IScreenRender
+  render?: IScreenRender
   favorite: boolean
 }
 
 export enum ScreenDataEnum {
   diagonalSize = 'diagonalSize',
   aspectRatio = 'aspectRatio',
+}
+
+export interface IDimension {
+  width: number
+  height: number
 }
 
 type ScreenDataEnumKeys = keyof typeof ScreenDataEnum
