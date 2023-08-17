@@ -12,7 +12,7 @@ import { useAppContext } from '../../contexts/App/useAppContext'
 import CreateScreenForm from './CreateScreenForm'
 
 export default function SideNav() {
-  const [{ selections: screens, query }] = useAppContext()
+  const [{ screens: screens, query }] = useAppContext()
   const [{ deleteId, setDeleteId, executeDelete }] = useDeleteScreenAction()
   const [{ favoriteId, setFavoriteId, executeFavorite }] = useFavoriteScreenAction()
   // const submit = useSubmit()

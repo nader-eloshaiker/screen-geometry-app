@@ -5,7 +5,7 @@ import { normaliseScreenRender } from '../../utils/ScreenCalc'
 export type TLoadingTag = { status: boolean; tag: string }
 
 export const initialScreenState = {
-  selections: [] as IScreen[],
+  screens: [] as IScreen[],
   query: '',
   loadingTag: [] as Array<TLoadingTag>,
   loading: false,
@@ -42,27 +42,27 @@ export const appReducer = (state: IScreenState, { type, payload }: TScreenAction
       // eslint-disable-next-line no-case-declarations
       const list = normaliseScreenRender(payload.list)
 
-      return { ...state, selections: list, query: payload.q }
+      return { ...state, screens: list, query: payload.q }
     case ActionTypes.DELETE:
       // eslint-disable-next-line no-case-declarations
-      const deletion = state.selections.filter((screen) => screen.id !== payload)
+      const deletion = state.screens.filter((screen) => screen.id !== payload)
 
-      return { ...state, selections: normaliseScreenRender(deletion) }
+      return { ...state, screens: normaliseScreenRender(deletion) }
     case ActionTypes.UPDATE:
       // eslint-disable-next-line no-case-declarations
-      const modification = state.selections.map((screen) =>
+      const modification = state.screens.map((screen) =>
         payload && screen.id !== payload.id ? screen : payload,
       ) as IScreen[]
 
       return {
         ...state,
-        selections: normaliseScreenRender(modification),
+        screens: normaliseScreenRender(modification),
       }
     case ActionTypes.ADD:
       // eslint-disable-next-line no-case-declarations
-      const additions = normaliseScreenRender([...state.selections, payload])
+      const additions = normaliseScreenRender([...state.screens, payload])
 
-      return { ...state, selections: additions }
+      return { ...state, screens: additions }
     case ActionTypes.LOADING:
       // eslint-disable-next-line no-case-declarations
       const result = generateLoadingTag(payload, state.loadingTag)
