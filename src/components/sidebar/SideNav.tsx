@@ -54,11 +54,10 @@ export default function SideNav() {
         <label className='text-lg'>Add Screen</label>
         <CreateScreenForm />
       </div>
-      <div className='divider' />
+      <div className='text-sm divider'>My Monitors</div>
       <nav id='sidebar'>
         {screens.length ? (
           <ul className='menu menu-lg'>
-            <li className='text-lg'>Selected Screens</li>
             {screens.map((item) => (
               <li key={item.id}>
                 <div className='flex flex-row items-center justify-between'>
@@ -89,7 +88,7 @@ export default function SideNav() {
           </ul>
         ) : (
           <p>
-            <i>No contacts</i>
+            <i>No monitors in your list</i>
           </p>
         )}
       </nav>

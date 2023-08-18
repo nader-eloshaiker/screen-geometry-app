@@ -1,16 +1,27 @@
 import { yupResolver } from '@hookform/resolvers/yup'
 import { SubmitHandler, useForm } from 'react-hook-form'
+import { styled } from 'styled-components'
 import * as yup from 'yup'
 import { useCreateScreenAction } from '../../api/actions/useCreateScreenAction'
 import { ISearch } from '../../models/Database'
 import { IScreenDataInput, ScreenDataEnum } from '../../models/Screen'
 import AutocompleteScreen from './AutocompleteScreen'
-import './CreateScreenForm.css'
+
+const InputSuffix = styled.span`
+  color: hsl(var(--bc) / var(--tw-placeholder-opacity));
+  --tw-placeholder-opacity: 0.6;
+`
 
 const screenDataSchema = yup.object().shape(
   {
     [ScreenDataEnum.diagonalSize]: yup
       .number()
+      .transform((value, originalValue) => {
+        if (typeof originalValue === 'string' && originalValue === '') {
+          return undefined
+        }
+        return value
+      })
       .moreThan(0, 'Diagonal size must be greater than 0')
       .required('Diagonal size is required'),
     [ScreenDataEnum.aspectRatio]: yup
@@ -28,7 +39,8 @@ const screenDataSchema = yup.object().shape(
       .optional()
       .when(ScreenDataEnum.vRes, {
         is: (v: number) => v !== undefined && v > 0,
-        then: (schema) => schema.required('Required when vertical is provided').moreThan(0, 'Must be greater than 0'),
+        then: (schema) =>
+          schema.required('Horizontal required when vertical is provided').moreThan(0, 'Must be greater than 0'),
         otherwise: (schema) => schema.notRequired(),
       }),
     [ScreenDataEnum.vRes]: yup
@@ -42,7 +54,8 @@ const screenDataSchema = yup.object().shape(
       .optional()
       .when(ScreenDataEnum.hRes, {
         is: (v: number) => v !== undefined && v > 0,
-        then: (schema) => schema.required('Required when vertical is provided').moreThan(0, 'Must be greater than 0'),
+        then: (schema) =>
+          schema.required('Vertical required when vertical is provided').moreThan(0, 'Must be greater than 0'),
         otherwise: (schema) => schema.notRequired(),
       }),
   },
@@ -52,11 +65,13 @@ const screenDataSchema = yup.object().shape(
 export default function CreateScreenForm() {
   const {
     register,
-    formState: { errors },
+    formState: { errors, isDirty, isValid },
     setValue,
     handleSubmit,
+    reset,
   } = useForm<IScreenDataInput>({
     resolver: yupResolver(screenDataSchema),
+    mode: 'onChange',
   })
   const [{ executeCreate }] = useCreateScreenAction()
 
@@ -88,40 +103,35 @@ export default function CreateScreenForm() {
 
       <div className='text-sm divider'>Or</div>
 
-      {/* "handleSubmit" will validate your inputs before invoking "onSubmit" */}
       <form method='post' onSubmit={handleSubmit(onSubmit)}>
         <div className='flex flex-col gap-2'>
           <div id='screenTag' className='flex flex-row gap-2'>
-            <div id='diagnolSizeControl' className='w-full form-control'>
-              <label className='label'>
+            {/* diagnolSize */}
+            <div id='screenSizeControl' className='flex flex-col mb-4 form-control'>
+              <label htmlFor={ScreenDataEnum.diagonalSize} className='label'>
                 <span className='label-text'>Screen Size</span>
               </label>
-              <div id='diagonalSize'>
-                <div className='flex flex-row items-center gap-0 flex-nowrap'>
-                  <input
-                    type='number'
-                    autoComplete='off'
-                    className={`w-full rounded-l-lg rounded-r-none grow input input-md${
-                      errors[ScreenDataEnum.aspectRatio] && ' input-error'
-                    }`}
-                    placeholder='27'
-                    {...register(ScreenDataEnum.diagonalSize)}
-                  />
-                  <input
-                    type='text'
-                    id='suffix'
-                    className='flex-none pl-1 rounded-l-none rounded-r-lg w-9 input input-md'
-                    placeholder='in'
-                    disabled
-                  />
-                </div>
-                {errors[ScreenDataEnum.diagonalSize] && (
-                  <div className='text-xs text-error'>{errors[ScreenDataEnum.diagonalSize].message}</div>
-                )}
+              <div className='relative'>
+                <InputSuffix className='absolute top-0 right-0 flex w-10 h-full border border-transparent'>
+                  <div className='z-10 flex items-center justify-center w-full h-full rounded-tr rounded-br text-md'>
+                    in
+                  </div>
+                </InputSuffix>
+
+                <input
+                  type='number'
+                  autoComplete='off'
+                  className={`relative pr-10 w-full input-bordered input input-md${
+                    errors[ScreenDataEnum.diagonalSize] && ' input-error'
+                  }`}
+                  placeholder='27'
+                  {...register(ScreenDataEnum.diagonalSize)}
+                />
               </div>
             </div>
-            {/* include validation with required or other standard HTML validation rules */}
-            <div id='as[ectRationControl' className='w-full form-control'>
+
+            {/* aspectRation */}
+            <div id='aspectRatioControl' className='w-full form-control'>
               <label className='label'>
                 <span className='label-text'>Aspect Ratio</span>
               </label>
@@ -134,73 +144,85 @@ export default function CreateScreenForm() {
                 placeholder='16:9'
                 {...register(ScreenDataEnum.aspectRatio)}
               />
-              {/* errors will return when field validation fails  */}
-              {errors[ScreenDataEnum.aspectRatio] && (
-                <div className='text-xs text-error'>{errors[ScreenDataEnum.aspectRatio].message}</div>
-              )}
             </div>
           </div>
+
           <div className='text-sm divider'>Optional</div>
+
           <div id='screenData' className='flex flex-row gap-2'>
-            <div id='hResControl' className='w-full form-control'>
-              <label className='label'>
-                <span className='label-text'>Horizontal</span>
+            {/* hRes */}
+            <div id='hSizeControl' className='flex flex-col mb-4 form-control'>
+              <label htmlFor={ScreenDataEnum.hRes} className='label'>
+                <span className='label-text'>Horizontal Res</span>
               </label>
-              <div id='hRes'>
-                <div className='flex flex-row items-center gap-0 flex-nowrap'>
-                  <input
-                    type='number'
-                    autoComplete='off'
-                    className={`w-full rounded-l-lg rounded-r-none grow input input-md${
-                      errors[ScreenDataEnum.hRes] && ' input-error'
-                    }`}
-                    placeholder='1024'
-                    {...register(ScreenDataEnum.hRes)}
-                  />
-                  <input
-                    type='text'
-                    id='suffix'
-                    className='flex-none pl-1 rounded-l-none rounded-r-lg w-9 input input-md'
-                    placeholder='px'
-                    disabled
-                  />
-                </div>
-                {errors[ScreenDataEnum.hRes] && (
-                  <div className='text-xs text-error'>{errors[ScreenDataEnum.hRes].message}</div>
-                )}
+              <div className='relative'>
+                <InputSuffix className='absolute top-0 right-0 flex w-10 h-full border border-transparent'>
+                  <div className='z-10 flex items-center justify-center w-full h-full rounded-tr rounded-br text-md'>
+                    px
+                  </div>
+                </InputSuffix>
+
+                <input
+                  type='number'
+                  autoComplete='off'
+                  className={`relative pr-10 w-full input-bordered input input-md${
+                    errors[ScreenDataEnum.hRes] && ' input-error'
+                  }`}
+                  placeholder='1024'
+                  {...register(ScreenDataEnum.hRes)}
+                />
               </div>
             </div>
-            <div id='vResControl' className='w-full form-control'>
-              <label className='label'>
-                <span className='label-text'>Vertical</span>
+
+            {/* vRes */}
+            <div id='hSizeControl' className='flex flex-col mb-4 form-control'>
+              <label htmlFor={ScreenDataEnum.vRes} className='label'>
+                <span className='label-text'>Vertical Res</span>
               </label>
-              <div id='vRes'>
-                <div className='flex flex-row items-center gap-0 flex-nowrap'>
-                  <input
-                    type='number'
-                    autoComplete='off'
-                    className={`w-full rounded-l-lg rounded-r-none grow input input-md${
-                      errors[ScreenDataEnum.vRes] && ' input-error'
-                    }`}
-                    placeholder='768'
-                    {...register(ScreenDataEnum.vRes)}
-                  />
-                  <input
-                    type='text'
-                    id='suffix'
-                    className='flex-none pl-1 rounded-l-none rounded-r-lg w-9 input input-md'
-                    placeholder='px'
-                    disabled
-                  />
-                </div>
-                {errors[ScreenDataEnum.vRes] && (
-                  <div className='text-xs text-error'>{errors[ScreenDataEnum.vRes].message}</div>
-                )}
+              <div className='relative'>
+                <InputSuffix className='absolute top-0 right-0 flex w-10 h-full border border-transparent'>
+                  <div className='z-10 flex items-center justify-center w-full h-full rounded-tr rounded-br text-md'>
+                    px
+                  </div>
+                </InputSuffix>
+
+                <input
+                  type='number'
+                  autoComplete='off'
+                  className={`relative pr-10 w-full input-bordered input input-md${
+                    errors[ScreenDataEnum.vRes] && ' input-error'
+                  }`}
+                  placeholder='768'
+                  {...register(ScreenDataEnum.vRes)}
+                />
               </div>
             </div>
           </div>
-          <div className='flex flex-row-reverse pt-2'>
-            <button id='submitButton' type='submit' className='btn-neutral btn'>
+
+          {errors[ScreenDataEnum.diagonalSize] && (
+            <div className='text-xs text-error'>{errors[ScreenDataEnum.diagonalSize].message}</div>
+          )}
+          {errors[ScreenDataEnum.aspectRatio] && (
+            <div className='text-xs text-error'>{errors[ScreenDataEnum.aspectRatio].message}</div>
+          )}
+          {errors[ScreenDataEnum.hRes] && (
+            <div className='text-xs text-error'>{errors[ScreenDataEnum.hRes].message}</div>
+          )}
+          {errors[ScreenDataEnum.vRes] && (
+            <div className='text-xs text-error'>{errors[ScreenDataEnum.vRes].message}</div>
+          )}
+
+          <div className='flex flex-row justify-between mt-6'>
+            <button
+              id='resetButton'
+              type='reset'
+              className='btn-neutral btn'
+              disabled={!isDirty}
+              onClick={() => reset()}
+            >
+              Reset
+            </button>
+            <button id='submitButton' type='submit' className='btn-neutral btn' disabled={!isDirty || !isValid}>
               Create
             </button>
           </div>
