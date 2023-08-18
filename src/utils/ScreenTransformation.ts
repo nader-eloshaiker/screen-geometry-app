@@ -66,7 +66,7 @@ export const transformSearchData = (entry: IDataBaseEntry): ISearch => {
   const spec = createSpec(entry.width, entry.height, entry.size)
 
   const item: ISearch = {
-    id: entry.name,
+    id: `${entry.name}${entry.size || ''}${entry.aspectRatio}`,
     label: generateLabel(entry, data),
     tag: {
       diagonalSize: entry.size,

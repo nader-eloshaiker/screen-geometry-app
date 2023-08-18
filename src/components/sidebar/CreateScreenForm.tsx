@@ -212,7 +212,7 @@ export default function CreateScreenForm() {
             <div className='text-xs text-error'>{errors[ScreenDataEnum.vRes].message}</div>
           )}
 
-          <div className='flex flex-row justify-between mt-6'>
+          <div className='flex flex-row justify-between mt-2'>
             <button
               id='resetButton'
               type='reset'
