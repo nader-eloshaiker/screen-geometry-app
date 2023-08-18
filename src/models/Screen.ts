@@ -1,6 +1,15 @@
-export interface IScreenDataInput extends ScreenDataEnumFields {
+export enum ScreenDataEnum {
+  diagonalSize = 'diagonalSize',
+  aspectRatio = 'aspectRatio',
+  hRes = 'hRes',
+  vRes = 'vRes',
+}
+
+export interface IScreenDataInput {
   diagonalSize: number
   aspectRatio: string
+  hRes: number | undefined
+  vRes: number | undefined
 }
 
 export interface IScreenData {
@@ -38,15 +47,7 @@ export interface IScreen {
   favorite: boolean
 }
 
-export enum ScreenDataEnum {
-  diagonalSize = 'diagonalSize',
-  aspectRatio = 'aspectRatio',
-}
-
 export interface IDimension {
   width: number
   height: number
 }
-
-type ScreenDataEnumKeys = keyof typeof ScreenDataEnum
-type ScreenDataEnumFields = { [key in ScreenDataEnumKeys]: number | string }

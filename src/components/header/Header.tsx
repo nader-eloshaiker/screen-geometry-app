@@ -5,7 +5,7 @@ export default function Header() {
   return (
     <>
       <div className='grid h-10 header place-content-center'>
-        <h1 className='text-3xl'>Sage Screen Geometry</h1>
+        <h1 className='text-3xl'>Screen Geometry</h1>
       </div>
       <div className='sticky top-0 z-10 sidebar rounded-b-xl'>
         <header>

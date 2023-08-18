@@ -7,6 +7,7 @@ import useResizeObserver from 'use-resize-observer'
 export type TAutoCompleteItem = { id: string; label: string }
 type TProps = TRestProps & {
   className?: string
+  placeholder?: string
   items: Array<TAutoCompleteItem> // we are using this type for autocomplete
   value: string
   onChange(val: string): void
@@ -20,6 +21,7 @@ const Autocomplete = ({
   onChange = () => {},
   onSelect = () => {},
   className,
+  placeholder,
   ...rest
 }: TProps) => {
   const { ref: divRef, width = 1 } = useResizeObserver<HTMLDivElement>()
@@ -60,11 +62,11 @@ const Autocomplete = ({
         className='w-full input input-bordered input-md'
         value={inputValue}
         onChange={handleChange}
-        placeholder='Type something..'
+        placeholder={placeholder || 'Type something..'}
         tabIndex={0}
       />
       {items.length > 0 && (
-        <div className='flex-col overflow-auto rounded-md dropdown-content bg-base-200 top-14 max-h-60'>
+        <div className='z-10 flex-col overflow-auto rounded-md dropdown-content bg-base-200 top-14 max-h-80'>
           <ul
             className='menu menu-compact'
             // use ref to calculate the width of parent

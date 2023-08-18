@@ -63,7 +63,16 @@ const AutocompleteScreen = ({ onSelect, ...rest }: TProps) => {
   }, [db.results])
 
   // use the common auto complete component here.
-  return <Autocomplete items={items} value={val} onChange={setVal} onSelect={setSelected} {...rest} />
+  return (
+    <Autocomplete
+      items={items}
+      value={val}
+      onChange={setVal}
+      onSelect={setSelected}
+      placeholder='Type to filter list...'
+      {...rest}
+    />
+  )
 }
 
 export default AutocompleteScreen
