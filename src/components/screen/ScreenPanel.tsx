@@ -11,9 +11,9 @@ const Panel = styled.div<{ $width: number; $height: number; $color?: IScreenColo
   z-index: ${(props) => props.$index};
 `
 
-type TProps = { screen: IScreen; index: number; selected: boolean }
+type TProps = TRestProps & { screen: IScreen; index: number; selected: boolean }
 
-export const ScreenPanel = ({ screen, index, selected }: TProps) => {
+export const ScreenPanel = ({ screen, index, selected, ...rest }: TProps) => {
   const width = Math.round(100 * (screen.render?.width || 1))
   const height = Math.round(100 * (screen.render?.height || 1))
 
@@ -24,6 +24,7 @@ export const ScreenPanel = ({ screen, index, selected }: TProps) => {
       $height={height}
       $color={screen.render?.color}
       $index={index}
+      {...rest}
     />
   )
 }

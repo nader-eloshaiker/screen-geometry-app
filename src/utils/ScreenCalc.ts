@@ -16,7 +16,7 @@ export const normaliseScreenRender = (list: IScreen[]) => {
     return list
   }
 
-  const sorted = list.sort((a, b) => a.data.hSize - b.data.hSize)
+  const sorted = list.sort((a, b) => a.tag.diagonalSize - b.tag.diagonalSize)
   const biggest = getMaxScreenSize(sorted)
 
   for (const screen of sorted) {

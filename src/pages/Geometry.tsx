@@ -79,6 +79,9 @@ export default function Geometry() {
             screen={screen}
             index={screens.length - index}
             selected={isSelected(screen) || isHighlighted(screen)}
+            onMouseEnter={() => onHighlight(screen)}
+            onMouseOut={() => onHighlight(screen)}
+            onClick={() => onSelect(screen)}
           />
         ))}
       </Stacked>
