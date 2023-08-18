@@ -5,7 +5,7 @@ import * as yup from 'yup'
 import { useCreateScreenAction } from '../../api/actions/useCreateScreenAction'
 import { ISearch } from '../../models/Database'
 import { IScreenDataInput, ScreenDataEnum } from '../../models/Screen'
-import AutocompleteScreen from './AutocompleteScreen'
+import AutoCompleteScreen from '../autocomplete/AutoCompleteScreen'
 
 const InputSuffix = styled.span`
   color: hsl(var(--bc) / var(--tw-placeholder-opacity));
@@ -98,7 +98,7 @@ export default function CreateScreenForm() {
         <label className='label'>
           <span className='label-text'>Prepopulate from list of Monitors</span>
         </label>
-        <AutocompleteScreen onSelect={onSelect} />
+        <AutoCompleteScreen onSelect={onSelect} />
       </div>
 
       <div className='text-sm divider'>Or</div>

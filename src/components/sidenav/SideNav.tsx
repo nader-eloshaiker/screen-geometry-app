@@ -9,7 +9,7 @@ import CloseIcon from '../../assets/icons/Close'
 import StarOutlineIcon from '../../assets/icons/StarOutline'
 import StarSolidIcon from '../../assets/icons/StarSolid'
 import { useAppContext } from '../../contexts/App/useAppContext'
-import CreateScreenForm from './CreateScreenForm'
+import CreateScreenForm from '../createscreen/CreateScreenForm'
 
 export default function SideNav() {
   const [{ screens: screens, query }] = useAppContext()

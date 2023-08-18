@@ -4,13 +4,13 @@ import { useAppContext } from '../../contexts/App/useAppContext'
 import { SearchActionTypes } from '../../contexts/Search/SearchManager'
 import { useSearchContext } from '../../contexts/Search/useSearchContext'
 import { IDataBaseEntry, ISearch } from '../../models/Database'
-import Autocomplete, { TAutoCompleteItem } from '../autocomplete/Autocomplete'
+import Autocomplete, { TAutoCompleteItem } from './Autocomplete'
 
 type TProps = TRestProps & {
   onSelect: (item: ISearch) => void
 }
 
-const AutocompleteScreen = ({ onSelect, ...rest }: TProps) => {
+const AutoCompleteScreen = ({ onSelect, ...rest }: TProps) => {
   // query typed by user
   const [val, setVal] = useState('')
 
@@ -75,4 +75,4 @@ const AutocompleteScreen = ({ onSelect, ...rest }: TProps) => {
   )
 }
 
-export default AutocompleteScreen
+export default AutoCompleteScreen

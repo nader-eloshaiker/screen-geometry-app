@@ -1,8 +1,8 @@
 import { twMerge } from 'tailwind-merge'
 import MoonIcon from '../../assets/icons/Moon'
 import SunIcon from '../../assets/icons/Sun'
+import { useThemeMode } from '../../hooks/useThemeMode'
 import { DarkMode, LightMode } from './ThemeConstants'
-import { useThemeMode } from './useThemeMode'
 
 type TProps = TRestProps & { className?: string }
 
