@@ -1,38 +1,29 @@
 import styled from 'styled-components'
 import { IScreen, IScreenColor } from '../../models/Screen'
+import { createCSSColor } from '../../utils/ScreenCalc'
 
-const Panel = styled.div<{ $width: number; $height: number; $color: string; $index: number; $maxIndex: number }>`
+const Panel = styled.div<{ $width: number; $height: number; $color?: IScreenColor; $index: number }>`
   width: ${(props) => props.$width}%;
   height: ${(props) => props.$height}%;
-  border-color: ${(props) => props.$color};
-  color: ${(props) => props.$color};
+  border-color: ${(props) => createCSSColor(props.$color)};
+  color: ${(props) => createCSSColor(props.$color)};
   text-align: center;
   z-index: ${(props) => props.$index};
-  &:hover {
-    z-index: ${(props) => props.$maxIndex};
-  }
 `
 
-const createCSSColor = (color?: IScreenColor) => (color ? `rgb(${color.r}, ${color.g}, ${color.b})` : 'white')
+type TProps = { screen: IScreen; index: number; selected: boolean }
 
-type TProps = { screen: IScreen; index: number; maxIndex: number }
-
-export const ScreenPanel = ({ screen, index, maxIndex }: TProps) => {
+export const ScreenPanel = ({ screen, index, selected }: TProps) => {
   const width = Math.round(100 * (screen.render?.width || 1))
   const height = Math.round(100 * (screen.render?.height || 1))
 
   return (
     <Panel
-      className={'border-2 rounded-lg hover:border-4'}
+      className={`border-2 rounded-lg ${selected && 'border-4'}`}
       $width={width}
       $height={height}
-      $color={createCSSColor(screen.render?.color)}
+      $color={screen.render?.color}
       $index={index}
-      $maxIndex={maxIndex}
-    >
-      <span>
-        {screen.tag.diagonalSize}&quot; {screen.tag.aspectRatio}
-      </span>
-    </Panel>
+    />
   )
 }

@@ -1,4 +1,4 @@
-import { IDimension, IScreen } from '../models/Screen'
+import { IDimension, IScreen, IScreenColor } from '../models/Screen'
 import { getRandomInt } from './RandomNumber'
 
 export const getMaxScreenSize = (screens: Array<IScreen>) =>
@@ -34,3 +34,6 @@ export const normaliseScreenRender = (list: IScreen[]) => {
 
   return sorted
 }
+
+export const createCSSColor = (color?: IScreenColor, alpha?: number) =>
+  color ? `rgba(${color.r}, ${color.g}, ${color.b}, ${alpha || 1})` : 'transparent'
