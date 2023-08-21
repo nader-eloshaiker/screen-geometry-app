@@ -1,18 +1,21 @@
 import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios'
 import { useEffect, useState } from 'react'
-import { axiosInstance } from './axios'
+import { axiosInstance } from '../api/fetch/axios'
 
 const UseAxiosOptionsDefaults = {
   manualExecution: false,
 }
 
 type UseAxiosOptions = Partial<typeof UseAxiosOptionsDefaults>
+type TProps = { params?: AxiosRequestConfig; options?: UseAxiosOptions }
 
-const useAxios = <T>(axiosParams: AxiosRequestConfig, hooksOptions: UseAxiosOptions = UseAxiosOptionsDefaults) => {
-  const options = { ...UseAxiosOptionsDefaults, ...hooksOptions }
+// Must provide axiosParams when manualExecution is false (default)
+const useAxios = <T>({ params, options }: TProps) => {
+  const hookOptions = { ...UseAxiosOptionsDefaults, ...options }
+  const axiosParams = params || {}
   const [response, setResponse] = useState<AxiosResponse<T>>()
   const [error, setError] = useState<AxiosError>()
-  const [loading, setLoading] = useState(!options.manualExecution)
+  const [loading, setLoading] = useState<boolean>(!hookOptions.manualExecution)
 
   const cancel = (controller: AbortController, reason?: string) => {
     controller.abort(reason)
@@ -39,23 +42,21 @@ const useAxios = <T>(axiosParams: AxiosRequestConfig, hooksOptions: UseAxiosOpti
     }
   }
 
-  const execute = (data?: unknown) => {
+  const execute = (params: AxiosRequestConfig) => {
     const controller = new AbortController()
 
-    fetchData({ ...axiosParams, data: data || axiosParams.data }, controller)
+    fetchData(params, controller)
+
+    return () => cancel(controller, 'React effect unmount')
   }
 
   useEffect(() => {
-    if (!options.manualExecution) {
-      const controller = new AbortController()
-      fetchData(axiosParams, controller)
-
-      // cleanup for unmount
-      return () => cancel(controller, 'React effect unmount')
+    if (!hookOptions.manualExecution) {
+      return execute(axiosParams)
     }
   }, [])
 
-  return [{ response, error, loading }, { execute }] as const
+  return { loading, response, error, execute }
 }
 
 export default useAxios

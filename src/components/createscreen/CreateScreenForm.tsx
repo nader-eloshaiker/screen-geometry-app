@@ -2,7 +2,7 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { styled } from 'styled-components'
 import * as yup from 'yup'
-import { useCreateScreenAction } from '../../api/actions/useCreateScreenAction'
+import { useCreateScreenAction } from '../../hooks/api/useCreateScreenAction'
 import { ISearch } from '../../models/Database'
 import { IScreenDataInput, ScreenDataEnum } from '../../models/Screen'
 import AutoCompleteScreen from '../autocomplete/AutoCompleteScreen'
@@ -73,7 +73,7 @@ export default function CreateScreenForm() {
     resolver: yupResolver(screenDataSchema),
     mode: 'onChange',
   })
-  const [{ executeCreate }] = useCreateScreenAction()
+  const { executeCreate } = useCreateScreenAction()
 
   const onSelect = (item: ISearch) => {
     console.log(item)

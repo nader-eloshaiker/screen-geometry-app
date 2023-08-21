@@ -1,14 +1,14 @@
 import { Outlet } from 'react-router-dom'
-import { useListScreensAction } from '../api/actions/useListScreensAction'
+import DrawerLayout from '../components/drawerlayout/DrawerLayout'
 import Footer from '../components/footer/Footer'
 import Header from '../components/header/Header'
-import { DrawerProvider } from '../contexts/drawer/DrawerProvider'
-import DrawerLayout from '../components/drawerlayout/DrawerLayout'
 import { useAppContext } from '../contexts/App/useAppContext'
+import { DrawerProvider } from '../contexts/drawer/DrawerProvider'
+import { useListScreensAction } from '../hooks/api/useListScreensAction'
 import { Loading } from './Loading'
 
 export default function Root() {
-  const [dataState] = useAppContext()
+  const [{ loading }] = useAppContext()
 
   useListScreensAction()
 
@@ -19,7 +19,7 @@ export default function Root() {
           <Header />
           <DrawerLayout>
             <main role='main' className='w-full h-full'>
-              {dataState.loading ? <Loading /> : <Outlet />}
+              {loading ? <Loading /> : <Outlet />}
             </main>
           </DrawerLayout>
           <Footer />
