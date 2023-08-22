@@ -25,21 +25,7 @@ export const generateStub = (axiosInstance: AxiosInstance) => {
   )
 
   mock.onGet(`${routes.baseUrl}${routes.root}/${routes.screens.path}`).reply((config) =>
-    getScreenList(config.url || '').then((payload) => {
-      debug(config, payload)
-
-      return [
-        200,
-        {
-          payload,
-        },
-        { Accept: 'application/json', 'Content-Type': 'application/json' },
-      ]
-    }),
-  )
-
-  mock.onGet(`${routes.baseUrl}${routes.root}/${routes.screens.path}/${routes.screens.key}`).reply((config) =>
-    getScreen(config.params || {}).then((payload) => {
+    getScreenList().then((payload) => {
       debug(config, payload)
 
       return [
@@ -67,6 +53,20 @@ export const generateStub = (axiosInstance: AxiosInstance) => {
         ]
       }),
     )
+
+  mock.onGet(`${routes.baseUrl}${routes.root}/${routes.screens.path}/${routes.screens.key}`).reply((config) =>
+    getScreen(config.params || {}).then((payload) => {
+      debug(config, payload)
+
+      return [
+        200,
+        {
+          payload,
+        },
+        { Accept: 'application/json', 'Content-Type': 'application/json' },
+      ]
+    }),
+  )
 
   mock.onDelete(screenUrl).reply((config) =>
     deleteItemAction(config.url).then((payload) => {

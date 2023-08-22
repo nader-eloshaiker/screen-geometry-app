@@ -5,7 +5,6 @@ import { createItem, deleteItem, getItem, getItemList, updateItem } from './inde
 
 export type TScreenListResponse = {
   list: IScreen[]
-  q: string
 }
 
 export type TScreenResponse = {
@@ -16,12 +15,10 @@ export type TIdResponse = {
   id: string
 }
 
-export async function getScreenList(apiUrl: string): Promise<TScreenListResponse> {
-  const url = new URL(apiUrl)
-  const q = url.searchParams.get('q') || ''
-  const list = await getItemList(q)
+export async function getScreenList(): Promise<TScreenListResponse> {
+  const list = await getItemList()
 
-  return { list, q }
+  return { list }
 }
 
 export async function getScreen(params: Params): Promise<{ item: IScreen | undefined }> {
