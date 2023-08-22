@@ -19,7 +19,7 @@ export const ScreenPanel = ({ screen, index, selected, ...rest }: TProps) => {
 
   return (
     <Panel
-      className={`border-2 rounded-lg ${selected && 'border-4'}`}
+      className={`rounded-lg ${selected ? 'border-4' : 'border-2 border-dotted'}`}
       $width={width}
       $height={height}
       $color={screen.render?.color}

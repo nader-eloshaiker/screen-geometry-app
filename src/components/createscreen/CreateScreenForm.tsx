@@ -76,13 +76,24 @@ export default function CreateScreenForm() {
   const { executeCreate } = useCreateScreenAction()
 
   const onSelect = (item: ISearch) => {
-    console.log(item)
     setValue(ScreenDataEnum.aspectRatio, item.tag.aspectRatio, {
       shouldValidate: true,
       shouldDirty: true,
     })
     if (item.tag.diagonalSize) {
       setValue(ScreenDataEnum.diagonalSize, item.tag.diagonalSize, {
+        shouldValidate: true,
+        shouldDirty: true,
+      })
+    }
+    if (item.spec?.hRes) {
+      setValue(ScreenDataEnum.hRes, item.spec?.hRes, {
+        shouldValidate: true,
+        shouldDirty: true,
+      })
+    }
+    if (item.spec?.vRes) {
+      setValue(ScreenDataEnum.vRes, item.spec?.vRes, {
         shouldValidate: true,
         shouldDirty: true,
       })
@@ -96,7 +107,7 @@ export default function CreateScreenForm() {
     <>
       <div className='w-full form-control'>
         <label className='label'>
-          <span className='label-text'>Prepopulate from list of Monitors</span>
+          <span className='label-text'>Choose from list of Monitors</span>
         </label>
         <AutoCompleteScreen onSelect={onSelect} />
       </div>

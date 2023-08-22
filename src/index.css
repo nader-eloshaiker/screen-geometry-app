@@ -31,7 +31,7 @@
 }
 
 .header {
-  @apply bg-indigo-600 dark:bg-indigo-700 text-gray-50;
+  @apply bg-indigo-600 dark:bg-indigo-700 text-indigo-100 dark:text-indigo-200 ;
 }
 
 .lightModeText {

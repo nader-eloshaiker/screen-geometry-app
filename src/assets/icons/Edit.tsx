@@ -1,4 +1,4 @@
-export default function MoonIcon({ ...rest }: TRestProps) {
+export default function EditIcon({ ...rest }: TRestProps) {
   return (
     // <svg xmlns='http://www.w3.org/2000/svg' width='1em' height='1em' viewBox='0 0 50 50'>
     <svg viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg' {...rest}>

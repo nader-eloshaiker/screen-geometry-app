@@ -1,5 +1,5 @@
 import { twMerge } from 'tailwind-merge'
-import CloseIcon from '../../assets/icons/Close'
+import EditIcon from '../../assets/icons/Edit'
 import HamburgerIcon from '../../assets/icons/Hamburger'
 import { useDrawerContext } from '../../contexts/drawer/useDrawerContext'
 
@@ -17,8 +17,8 @@ export default function HamburgerButton({ className, ...rest }: TProps) {
       {/* this hidden checkbox controls the state */}
       <input type='checkbox' className='hidden' onClick={toggleDrawer} />
 
-      <CloseIcon id='theme-dark-icon' className='w-6 h-6 p-0 swap-on' fill='currentColor' />
-      <HamburgerIcon id='theme-light-icon' className='w-6 h-6 p-0 swap-off' fill='currentColor' />
+      <EditIcon id='theme-dark-icon' className='w-5 h-5 p-0 swap-off' fill='currentColor' />
+      <HamburgerIcon id='theme-light-icon' className='w-5 h-5 p-0 swap-on' fill='currentColor' />
     </label>
   )
 }
