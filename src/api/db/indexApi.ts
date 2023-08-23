@@ -47,8 +47,7 @@ export async function deleteItemAction(url: string | undefined) {
     throw new Error('No url provided!')
   }
 
-  const urlObj = new URL(url)
-  const id = urlObj.pathname.split('/').at(-1) || ''
+  const id = url.split('/').at(-1) || ''
 
   if (!id) {
     throw new Error('No id provided!')
@@ -64,8 +63,7 @@ export async function favouriteItemAction(url: string | undefined) {
     throw new Error('No url provided!')
   }
 
-  const urlObj = new URL(url)
-  const id = urlObj.pathname.split('/').at(-2) || ''
+  const id = url.split('/').at(-2) || ''
 
   if (!id) {
     throw new Error('No id provided!')
