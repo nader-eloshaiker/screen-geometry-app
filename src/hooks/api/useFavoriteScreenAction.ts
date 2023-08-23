@@ -13,7 +13,7 @@ export const useFavoriteScreenAction = () => {
 
   const executeFavorite = (id: string) => {
     execute({
-      url: `${routes.baseUrl}${routes.root}/${routes.screens.path}/${id}/${routes.screens.actions.favorite}`,
+      url: `${routes.baseUrl}${routes.basePath}/${routes.screens.path}/${id}/${routes.screens.actions.favorite}`,
       method: 'PATCH',
     })
   }

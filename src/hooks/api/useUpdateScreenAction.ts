@@ -14,7 +14,7 @@ export const useUpdateScreenAction = () => {
 
   const executeUpdate = (update: IScreen) => {
     execute({
-      url: `${routes.baseUrl}${routes.root}/${routes.screens.path}/${update?.id}`,
+      url: `${routes.baseUrl}${routes.basePath}/${routes.screens.path}/${update?.id}`,
       method: 'PUT',
       data: update,
     })

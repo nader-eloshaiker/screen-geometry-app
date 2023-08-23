@@ -1,11 +1,10 @@
-import { TScreenListResponse } from '../../api/db/indexApi'
-import { IScreen } from '../../models/Screen'
+import { ScreenItem } from '../../generated/openapi/models'
 import { normaliseScreenRender } from '../../utils/ScreenCalc'
 
 export type TLoadingTag = { status: boolean; tag: string }
 
 export const initialScreenState = {
-  screens: [] as IScreen[],
+  screens: [] as ScreenItem[],
   query: '',
   loadingTag: [] as Array<TLoadingTag>,
   loading: false,
@@ -22,9 +21,9 @@ export enum ActionTypes {
 }
 
 export type TScreenAction =
-  | { type: ActionTypes.LIST; payload: TScreenListResponse }
-  | { type: ActionTypes.UPDATE; payload: IScreen }
-  | { type: ActionTypes.ADD; payload: IScreen }
+  | { type: ActionTypes.LIST; payload: ScreenItem[] }
+  | { type: ActionTypes.UPDATE; payload: ScreenItem }
+  | { type: ActionTypes.ADD; payload: ScreenItem }
   | { type: ActionTypes.DELETE; payload: string }
   | { type: ActionTypes.LOADING; payload: { status: boolean; tag: string } }
 
@@ -40,9 +39,9 @@ export const appReducer = (state: IScreenState, { type, payload }: TScreenAction
   switch (type) {
     case ActionTypes.LIST:
       // eslint-disable-next-line no-case-declarations
-      const list = normaliseScreenRender(payload.list)
+      const list = normaliseScreenRender(payload)
 
-      return { ...state, screens: list, query: payload.q }
+      return { ...state, screens: list }
     case ActionTypes.DELETE:
       // eslint-disable-next-line no-case-declarations
       const deletion = state.screens.filter((screen) => screen.id !== payload)
@@ -52,7 +51,7 @@ export const appReducer = (state: IScreenState, { type, payload }: TScreenAction
       // eslint-disable-next-line no-case-declarations
       const modification = state.screens.map((screen) =>
         payload && screen.id !== payload.id ? screen : payload,
-      ) as IScreen[]
+      ) as ScreenItem[]
 
       return {
         ...state,

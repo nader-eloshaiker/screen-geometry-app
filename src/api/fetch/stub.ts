@@ -19,91 +19,55 @@ export const generateStub = (axiosInstance: AxiosInstance) => {
     console.debug(`axios adapter: [${config.method}] ${config.url}`, '\n', config, '\n', response)
   }
 
-  const screenUrl = new RegExp(routes.baseUrl + routes.root + '/' + routes.screens.path + '/\\S+')
+  const screenUrl = new RegExp(routes.baseUrl + routes.basePath + '/' + routes.screens.path + '/\\S+')
   const screenFavUrl = new RegExp(
-    routes.baseUrl + routes.root + '/' + routes.screens.path + '/\\S+' + '/' + routes.screens.actions.favorite,
+    routes.baseUrl + routes.basePath + '/' + routes.screens.path + '/\\S+' + '/' + routes.screens.actions.favorite,
   )
 
-  mock.onGet(`${routes.baseUrl}${routes.root}/${routes.screens.path}`).reply((config) =>
+  mock.onGet(`${routes.baseUrl}${routes.basePath}/${routes.screens.path}`).reply((config) =>
     getScreenList().then((payload) => {
       debug(config, payload)
 
-      return [
-        200,
-        {
-          payload,
-        },
-        { Accept: 'application/json', 'Content-Type': 'application/json' },
-      ]
+      return [200, payload, { Accept: 'application/json', 'Content-Type': 'application/json' }]
     }),
   )
 
   mock
-    .onPost(`${routes.baseUrl}${routes.root}/${routes.screens.path}/${routes.screens.actions.create}`)
+    .onPost(`${routes.baseUrl}${routes.basePath}/${routes.screens.path}/${routes.screens.actions.create}`)
     .reply((config) =>
       createItemAction(config.data ? JSON.parse(config.data) : {}).then((payload) => {
         debug(config, payload)
 
-        return [
-          200,
-          {
-            payload,
-          },
-          { Accept: 'application/json', 'Content-Type': 'application/json' },
-        ]
+        return [200, payload, { Accept: 'application/json', 'Content-Type': 'application/json' }]
       }),
     )
 
-  mock.onGet(`${routes.baseUrl}${routes.root}/${routes.screens.path}/${routes.screens.key}`).reply((config) =>
+  mock.onGet(`${routes.baseUrl}${routes.basePath}/${routes.screens.path}/${routes.screens.key}`).reply((config) =>
     getScreen(config.params || {}).then((payload) => {
       debug(config, payload)
 
-      return [
-        200,
-        {
-          payload,
-        },
-        { Accept: 'application/json', 'Content-Type': 'application/json' },
-      ]
+      return [200, payload, { Accept: 'application/json', 'Content-Type': 'application/json' }]
     }),
   )
 
   mock.onDelete(screenUrl).reply((config) =>
     deleteItemAction(config.url).then((payload) => {
       debug(config, payload)
-      return [
-        200,
-        {
-          payload,
-        },
-        { Accept: 'application/json', 'Content-Type': 'application/json' },
-      ]
+      return [200, payload, { Accept: 'application/json', 'Content-Type': 'application/json' }]
     }),
   )
 
   mock.onPut(screenUrl).reply((config) =>
     updateItemAction(config.data ? JSON.parse(config.data) : {}).then((payload) => {
       debug(config, payload)
-      return [
-        200,
-        {
-          payload,
-        },
-        { Accept: 'application/json', 'Content-Type': 'application/json' },
-      ]
+      return [200, payload, { Accept: 'application/json', 'Content-Type': 'application/json' }]
     }),
   )
 
   mock.onPatch(screenFavUrl).reply((config) =>
     favouriteItemAction(config.url).then((payload) => {
       debug(config, payload)
-      return [
-        200,
-        {
-          payload,
-        },
-        { Accept: 'application/json', 'Content-Type': 'application/json' },
-      ]
+      return [200, payload, { Accept: 'application/json', 'Content-Type': 'application/json' }]
     }),
   )
 

@@ -13,7 +13,7 @@ export const useDeleteScreenAction = () => {
 
   const executeDelete = (id: string) => {
     execute({
-      url: `${routes.baseUrl}${routes.root}/${routes.screens.path}/${id}`,
+      url: `${routes.baseUrl}${routes.basePath}/${routes.screens.path}/${id}`,
       method: 'DELETE',
     })
   }

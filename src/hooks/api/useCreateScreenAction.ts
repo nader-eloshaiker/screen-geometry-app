@@ -14,7 +14,7 @@ export const useCreateScreenAction = () => {
 
   const executeCreate = (data: IScreenDataInput) => {
     execute({
-      url: `${routes.baseUrl}${routes.root}/${routes.screens.path}/${routes.screens.actions.create}`,
+      url: `${routes.baseUrl}${routes.basePath}/${routes.screens.path}/${routes.screens.actions.create}`,
       method: 'POST',
       data: data,
     })

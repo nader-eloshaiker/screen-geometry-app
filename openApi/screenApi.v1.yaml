@@ -3,7 +3,7 @@ info:
   title: "screen-geometry-app-backend-serverless-apis-v1"
   version: "1.0.0"
 servers:
-- url: "https://{environment}.typicode.com:{port}/{basePath}"
+- url: "https://{environment}.typicode.com:{port}/{path}"
   variables:
     environment:
       default: jsonplaceholder
@@ -17,20 +17,22 @@ servers:
         - '443'
         - '8443'
       default: '443'
-    basePath:
+    path:
       default: "v1"
       enum:
         - "v1"
 paths:
   /screens:
     get:
+      tags:
+        - "screen list service"
       responses:
         "200":
           description: "200 response"
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/ScreenList"
+                $ref: "#/components/schemas/ScreenListResponse"
         "400":
           description: "400 response"
           content:
@@ -76,15 +78,17 @@ paths:
       security:
       - authorizer-api-v2: []
       - api_key: []
-      operationId: "GET-/v1/screens"
+      operationId: "listScreensAction"
     post:
+      tags:
+        - "screen list service"
       responses:
         "200":
           description: "200 response"
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Screen"
+                $ref: "#/components/schemas/ScreenItemRespose"
         "400":
           description: "400 response"
           content:
@@ -130,8 +134,10 @@ paths:
       security:
       - authorizer-api-v2: []
       - api_key: []
-      operationId: "POST-/v1/screens"
+      operationId: "createScreenAction"
     options:
+      tags:
+        - "screen list service"
       responses:
         "200":
           description: "200 response"
@@ -146,9 +152,11 @@ paths:
               schema:
                 type: string
           content: {}
-      operationId: "OPTIONS-/v1/screens"
+      operationId: "optionsScreenListAction"
   /screens/{id}/favorite:
     patch:
+      tags:
+        - "screen action service"
       parameters:
       - name: "id"
         in: "path"
@@ -161,7 +169,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Screen"
+                $ref: "#/components/schemas/ScreenItemRespose"
         "400":
           description: "400 response"
           content:
@@ -207,7 +215,7 @@ paths:
       security:
       - authorizer-api-v2: []
       - api_key: []
-      operationId: "PATCH-/v1/screens/{id}/favorite"
+      operationId: "favoriteScreenAction"
     options:
       parameters:
       - name: "id"
@@ -229,9 +237,11 @@ paths:
               schema:
                 type: string
           content: {}
-      operationId: "OPTIONS-/v1/screens/{id}/favorite"
+      operationId: "optionsFavoriteScreenAction"
   /screens{id}:
     get:
+      tags:
+        - "screen service"
       parameters:
       - name: "id"
         in: "path"
@@ -244,7 +254,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Screen"
+                $ref: "#/components/schemas/ScreenListResponse"
         "400":
           description: "400 response"
           content:
@@ -290,8 +300,10 @@ paths:
       security:
       - authorizer-api-v1: []
       - api_key: []
-      operationId: "GET-/v1/screens/{id}"
+      operationId: findScreenAction"
     put:
+      tags:
+        - "screen service"
       parameters:
       - name: "id"
         in: "path"
@@ -304,7 +316,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Screen"
+                $ref: "#/components/schemas/ScreenItemRespose"
         "400":
           description: "400 response"
           content:
@@ -350,8 +362,10 @@ paths:
       security:
       - authorizer-api-v1: []
       - api_key: []
-      operationId: "PUT-/v1/screens/{id}"
+      operationId: "updateScreenAction"
     delete:
+      tags:
+        - "screen service"
       parameters:
       - name: "id"
         in: "path"
@@ -410,8 +424,10 @@ paths:
       security:
       - authorizer-api-v1: []
       - api_key: []
-      operationId: "DELETE-/v1/screens/{id}"
+      operationId: "deleteScreenAction"
     options:
+      tags:
+        - "screen service"
       parameters:
       - name: "id"
         in: "path"
@@ -432,14 +448,26 @@ paths:
               schema:
                 type: string
           content: {}
-      operationId: "OPTIONS-/v1/screens/{id}"
+      operationId: "optionsScreenAction"
 components:
   schemas:
-    ScreenList:
-      type: array
-      items:
-        $ref: "#/components/schemas/Screen"
-    Screen:
+    ScreenListResponse:
+      required:
+        - "list"
+      type: object
+      properties:
+        list:
+          type: array
+          items:
+            $ref: "#/components/schemas/ScreenItem"
+    ScreenItemRespose:
+      required:
+      - "item"
+      type: object
+      properties:
+        item:
+          $ref: "#/components/schemas/ScreenItem"
+    ScreenItem:
       required:
       - "id"
       - "tag"
@@ -450,10 +478,10 @@ components:
         id:
           type: string
           minLength: 1
-        favourite:
+        favorite:
           type: boolean
         tag:
-          $ref: "#/components/schemas/ScreenDataInput"
+          $ref: "#/components/schemas/ScreenInput"
         data:
           $ref: "#/components/schemas/ScreenData"
         spec:
@@ -461,7 +489,7 @@ components:
         render:
           $ref: "#/components/schemas/ScreenRender"
       description: "Complete screen object"
-    ScreenDataInput:
+    ScreenInput:
       required:
       - "diagonalSize"
       - "aspectRatio"
