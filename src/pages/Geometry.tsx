@@ -3,6 +3,7 @@ import { styled } from 'styled-components'
 import useResizeObserver from 'use-resize-observer'
 import CloseIcon from '../assets/icons/Close'
 import EditIcon from '../assets/icons/Edit'
+import ImageIcon from '../assets/icons/Image'
 import StarOutlineIcon from '../assets/icons/StarOutline'
 import StarSolidIcon from '../assets/icons/StarSolid'
 import ApiError from '../components/apierror/ApiError'
@@ -28,22 +29,39 @@ const Stacked = styled.div<{ $width: number; $height: number }>`
   }
 `
 
+const TableSkeleton = (cols: number, rows: number) => {
+  const tableCols = []
+  for (let i = 0; i < cols; i++) {
+    tableCols.push(
+      <td>
+        <div key={i} className='w-full h-6 bg-gray-300 border-2 rounded-md animate-pulse' />
+      </td>,
+    )
+  }
+  const tableRows = []
+  for (let i = 0; i < rows; i++) {
+    tableRows.push(<tr key={i}>{tableCols}</tr>)
+  }
+
+  return tableRows
+}
+
 export default function Geometry() {
   const { ref: divRef, width = 1 } = useResizeObserver<HTMLDivElement>()
   const [{ screens }, dispatch] = useAppContext()
   const [highlighted, setHighlighted] = useState<ScreenItem>()
   const { executeFavorite } = useFavoriteScreenAction()
   const { executeDelete } = useDeleteScreenAction()
-  const maxScreenSize = getMaxScreenSize(screens)
+  const maxScreenSize = screens.length > 0 ? getMaxScreenSize(screens) : { width: 47, height: 16 } // max possible screen size
   const maxPanelSize: IDimension = { width, height: Math.round(maxScreenSize.height * (width / maxScreenSize.width)) }
 
-  const { isLoading, error, data } = useListScreensAction()
+  const { isLoading: isScreenListLoading, error: screenListError, data: screenListResponse } = useListScreensAction()
 
   useEffect(() => {
-    if (data && data.list.length > 0) {
-      dispatch({ type: ActionTypes.LIST, payload: data.list })
+    if (screenListResponse && screenListResponse.list.length > 0) {
+      dispatch({ type: ActionTypes.LIST, payload: screenListResponse.list })
     }
-  }, [data])
+  }, [screenListResponse])
 
   const onFavourite = (screen: ScreenItem) => {
     executeFavorite(screen.id)
@@ -73,24 +91,23 @@ export default function Geometry() {
 
   return (
     <div className='w-full h-full' ref={divRef}>
-      <ApiError errorResponse={error} />
-      {isLoading ? (
-        <div className='toast toast-center'>Loading...</div>
-      ) : (
-        <table className='table'>
-          <thead>
-            <tr>
-              <th>Pin</th>
-              <th>Size</th>
-              <th>Aspect</th>
-              <th>Width</th>
-              <th>Height</th>
-              <th>Resolution</th>
-              <th>Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            {screens.map((screen) => (
+      <ApiError errorResponse={screenListError} />
+
+      <table className='table'>
+        <thead>
+          <tr>
+            <th>Pin</th>
+            <th>Size</th>
+            <th>Aspect</th>
+            <th>Width</th>
+            <th>Height</th>
+            <th>Resolution</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          {!isScreenListLoading ? (
+            screens.map((screen) => (
               <tr
                 style={
                   isHighlighted(screen) || screen.favorite
@@ -127,23 +144,32 @@ export default function Geometry() {
                   </div>
                 </td>
               </tr>
-            ))}
-          </tbody>
-        </table>
-      )}
+            ))
+          ) : (
+            <>{TableSkeleton(7, 5)}</>
+          )}
+        </tbody>
+      </table>
+
       <div className='py-6' />
       <Stacked id='geometry' $width={maxPanelSize.width} $height={maxPanelSize.height}>
-        {screens.map((screen, index) => (
-          <ScreenPanel
-            key={screen.id}
-            screen={screen}
-            index={screens.length - index}
-            selected={screen.favorite || isHighlighted(screen)}
-            onMouseEnter={() => onHighlightActive(screen)}
-            onMouseOut={() => onHighlightPassive()}
-            onClick={() => onHighlightClick(screen)}
-          />
-        ))}
+        {!isScreenListLoading ? (
+          screens.map((screen, index) => (
+            <ScreenPanel
+              key={screen.id}
+              screen={screen}
+              index={screens.length - index}
+              selected={screen.favorite || isHighlighted(screen)}
+              onMouseEnter={() => onHighlightActive(screen)}
+              onMouseOut={() => onHighlightPassive()}
+              onClick={() => onHighlightClick(screen)}
+            />
+          ))
+        ) : (
+          <div className='flex items-center justify-center w-full h-full bg-gray-300 border-2 rounded-md animate-pulse'>
+            <ImageIcon className='w-10 h-10' />
+          </div>
+        )}
       </Stacked>
     </div>
   )
