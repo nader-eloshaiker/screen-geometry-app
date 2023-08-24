@@ -28,21 +28,24 @@ const Stacked = styled.div<{ width: number; height: number }>`
   }
 `
 
-const TableSkeleton = (cols: number, rows: number) => {
+type TTableProps = { cols: number; rows: number }
+
+const TableSkeleton = ({ cols, rows }: TTableProps) => {
   const tableCols = []
   for (let i = 0; i < cols; i++) {
     tableCols.push(
-      <td>
+      <td key={i}>
         <div key={i} className='w-full h-6 bg-gray-300 border-2 rounded-md animate-pulse' />
       </td>,
     )
   }
+
   const tableRows = []
   for (let i = 0; i < rows; i++) {
     tableRows.push(<tr key={i}>{tableCols}</tr>)
   }
 
-  return tableRows
+  return <tbody>{tableRows}</tbody>
 }
 
 export default function Geometry() {
@@ -87,12 +90,6 @@ export default function Geometry() {
 
   return (
     <div className='w-full h-full' ref={divRef}>
-      <div className='toast toast-center'>
-        <ApiError errorResponse={screenListError} />
-        <ApiError errorResponse={favouriteError} />
-        <ApiError errorResponse={deleteError} />
-      </div>
-
       <table className='table'>
         <thead>
           <tr>
@@ -105,9 +102,9 @@ export default function Geometry() {
             <th>Action</th>
           </tr>
         </thead>
-        <tbody>
-          {!isScreenListLoading ? (
-            screens.map((screen) => (
+        {!isScreenListLoading ? (
+          <tbody>
+            {screens.map((screen) => (
               <tr
                 style={isHighlighted(screen) ? { backgroundColor: createCSSColor(screen.render?.color, 0.2) } : {}}
                 key={screen.id}
@@ -155,11 +152,11 @@ export default function Geometry() {
                   </div>
                 </td>
               </tr>
-            ))
-          ) : (
-            <>{TableSkeleton(7, 5)}</>
-          )}
-        </tbody>
+            ))}
+          </tbody>
+        ) : (
+          <TableSkeleton cols={7} rows={5} />
+        )}
       </table>
 
       <div className='py-6' />
@@ -182,6 +179,11 @@ export default function Geometry() {
           </div>
         )}
       </Stacked>
+      <div className='toast toast-center'>
+        <ApiError errorResponse={screenListError} />
+        <ApiError errorResponse={favouriteError} />
+        <ApiError errorResponse={deleteError} />
+      </div>
     </div>
   )
 }

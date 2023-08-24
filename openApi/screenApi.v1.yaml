@@ -3,24 +3,24 @@ info:
   title: "screen-geometry-app-backend-serverless-apis-v1"
   version: "1.0.0"
 servers:
-- url: "https://{environment}.typicode.com:{port}/{path}"
-  variables:
-    environment:
-      default: jsonplaceholder
-      enum:
-        - jsonplaceholder
-        - api
-        - dev
-        - staging
-    port:
-      enum:
-        - '443'
-        - '8443'
-      default: '443'
-    path:
-      default: "v1"
-      enum:
-        - "v1"
+  - url: "https://{environment}.typicode.com:{port}/{path}"
+    variables:
+      environment:
+        default: jsonplaceholder
+        enum:
+          - jsonplaceholder
+          - api
+          - dev
+          - staging
+      port:
+        enum:
+          - '443'
+          - '8443'
+        default: '443'
+      path:
+        default: "v1"
+        enum:
+          - "v1"
 paths:
   /screens:
     get:
@@ -76,12 +76,20 @@ paths:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
       security:
-      - authorizer-api-v2: []
-      - api_key: []
+        - authorizer-api-v2: []
+        - api_key: []
       operationId: "listScreensAction"
+  /screens/create:
     post:
       tags:
         - "screen list service"
+      requestBody:
+        description: Primitive for generating a ScreenItem object
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ScreenInput'
       responses:
         "200":
           description: "200 response"
@@ -132,8 +140,8 @@ paths:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
       security:
-      - authorizer-api-v2: []
-      - api_key: []
+        - authorizer-api-v2: []
+        - api_key: []
       operationId: "createScreenAction"
     options:
       tags:
@@ -158,11 +166,11 @@ paths:
       tags:
         - "screen action service"
       parameters:
-      - name: "id"
-        in: "path"
-        required: true
-        schema:
-          type: string
+        - name: "id"
+          in: "path"
+          required: true
+          schema:
+            type: string
       responses:
         "200":
           description: "200 response"
@@ -213,16 +221,16 @@ paths:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
       security:
-      - authorizer-api-v2: []
-      - api_key: []
+        - authorizer-api-v2: []
+        - api_key: []
       operationId: "favoriteScreenAction"
     options:
       parameters:
-      - name: "id"
-        in: "path"
-        required: true
-        schema:
-          type: string
+        - name: "id"
+          in: "path"
+          required: true
+          schema:
+            type: string
       responses:
         "200":
           description: "200 response"
@@ -243,11 +251,11 @@ paths:
       tags:
         - "screen service"
       parameters:
-      - name: "id"
-        in: "path"
-        required: true
-        schema:
-          type: string
+        - name: "id"
+          in: "path"
+          required: true
+          schema:
+            type: string
       responses:
         "200":
           description: "200 response"
@@ -298,18 +306,25 @@ paths:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
       security:
-      - authorizer-api-v1: []
-      - api_key: []
+        - authorizer-api-v1: []
+        - api_key: []
       operationId: findScreenAction"
     put:
       tags:
         - "screen service"
       parameters:
-      - name: "id"
-        in: "path"
+        - name: "id"
+          in: "path"
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: Update an existent screen in list
         required: true
-        schema:
-          type: string
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ScreenItem'
       responses:
         "200":
           description: "200 response"
@@ -360,18 +375,18 @@ paths:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
       security:
-      - authorizer-api-v1: []
-      - api_key: []
+        - authorizer-api-v1: []
+        - api_key: []
       operationId: "updateScreenAction"
     delete:
       tags:
         - "screen service"
       parameters:
-      - name: "id"
-        in: "path"
-        required: true
-        schema:
-          type: string
+        - name: "id"
+          in: "path"
+          required: true
+          schema:
+            type: string
       responses:
         "200":
           description: "200 response"
@@ -422,18 +437,18 @@ paths:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
       security:
-      - authorizer-api-v1: []
-      - api_key: []
+        - authorizer-api-v1: []
+        - api_key: []
       operationId: "deleteScreenAction"
     options:
       tags:
         - "screen service"
       parameters:
-      - name: "id"
-        in: "path"
-        required: true
-        schema:
-          type: string
+        - name: "id"
+          in: "path"
+          required: true
+          schema:
+            type: string
       responses:
         "200":
           description: "200 response"
@@ -469,17 +484,17 @@ components:
           type: string
     ScreenItemRespose:
       required:
-      - "item"
+        - "item"
       type: object
       properties:
         item:
           $ref: "#/components/schemas/ScreenItem"
     ScreenItem:
       required:
-      - "id"
-      - "tag"
-      - "data"
-      - "favorite"
+        - "id"
+        - "tag"
+        - "data"
+        - "favorite"
       type: object
       properties:
         id:
@@ -498,8 +513,8 @@ components:
       description: "Complete screen object"
     ScreenInput:
       required:
-      - "diagonalSize"
-      - "aspectRatio"
+        - "diagonalSize"
+        - "aspectRatio"
       type: object
       properties:
         diagonalSize:
@@ -518,10 +533,10 @@ components:
       description: "Screen primitive data"
     ScreenData:
       required:
-      - "hSize"
-      - "vSize"
-      - "hAspectRatio"
-      - "vAspectRatio"
+        - "hSize"
+        - "vSize"
+        - "hAspectRatio"
+        - "vAspectRatio"
       type: object
       properties:
         hSize:
@@ -543,9 +558,9 @@ components:
       description: "Screen physical characteristics"
     ScreenSpec:
       required:
-      - "hRes"
-      - "vRes"
-      - "ppi"
+        - "hRes"
+        - "vRes"
+        - "ppi"
       type: object
       properties:
         hRes:
@@ -563,9 +578,9 @@ components:
       description: "Screen resolution characteristics"
     ScreenRender:
       required:
-      - "width"
-      - "height"
-      - "color"
+        - "width"
+        - "height"
+        - "color"
       type: object
       properties:
         width:
@@ -585,9 +600,9 @@ components:
       description: "Screen representation in UI"
     ScreenColor:
       required:
-      - "r"
-      - "g"
-      - "b"
+        - "r"
+        - "g"
+        - "b"
       type: object
       properties:
         r:
@@ -653,7 +668,7 @@ components:
 x-amazon-apigateway-policy:
   Version: "1.0.0"
   Statement:
-  - Effect: "Allow"
-    Principal: "*"
-    Action: "execute-api:Invoke"
-    Resource: "arn:aws:execute-api:ap-southeast-1:123456789012:abcdefabcd/*/*/*"
+    - Effect: "Allow"
+      Principal: "*"
+      Action: "execute-api:Invoke"
+      Resource: "arn:aws:execute-api:ap-southeast-1:123456789012:abcdefabcd/*/*/*"

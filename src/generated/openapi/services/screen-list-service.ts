@@ -14,7 +14,7 @@ import type {
 } from '@tanstack/react-query'
 import { useMutation, useQuery } from '@tanstack/react-query'
 import { useCustomAxios } from '../../../api/mutator/useCustomAxios'
-import type { ErrorResponse, ScreenItemRespose, ScreenListResponse } from '../models'
+import type { ErrorResponse, ScreenInput, ScreenItemRespose, ScreenListResponse } from '../models'
 
 export const useListScreensActionHook = () => {
   const listScreensAction = useCustomAxios<ScreenListResponse>()
@@ -67,26 +67,27 @@ export const useListScreensAction = <
 export const useCreateScreenActionHook = () => {
   const createScreenAction = useCustomAxios<ScreenItemRespose>()
 
-  return () => {
-    return createScreenAction({ url: `/screens`, method: 'post' })
+  return (screenInput: ScreenInput) => {
+    return createScreenAction({
+      url: `/screens/create`,
+      method: 'post',
+      headers: { 'Content-Type': 'application/json' },
+      data: screenInput,
+    })
   }
 }
 
-export const useCreateScreenActionMutationOptions = <
-  TError = ErrorResponse,
-  TVariables = void,
-  TContext = unknown,
->(options?: {
+export const useCreateScreenActionMutationOptions = <TError = ErrorResponse, TContext = unknown>(options?: {
   mutation?: UseMutationOptions<
     Awaited<ReturnType<ReturnType<typeof useCreateScreenActionHook>>>,
     TError,
-    TVariables,
+    { data: ScreenInput },
     TContext
   >
 }): UseMutationOptions<
   Awaited<ReturnType<ReturnType<typeof useCreateScreenActionHook>>>,
   TError,
-  TVariables,
+  { data: ScreenInput },
   TContext
 > => {
   const { mutation: mutationOptions } = options ?? {}
@@ -95,9 +96,11 @@ export const useCreateScreenActionMutationOptions = <
 
   const mutationFn: MutationFunction<
     Awaited<ReturnType<ReturnType<typeof useCreateScreenActionHook>>>,
-    TVariables
-  > = () => {
-    return createScreenAction()
+    { data: ScreenInput }
+  > = (props) => {
+    const { data } = props ?? {}
+
+    return createScreenAction(data)
   }
 
   return { mutationFn, ...mutationOptions }
@@ -106,14 +109,14 @@ export const useCreateScreenActionMutationOptions = <
 export type CreateScreenActionMutationResult = NonNullable<
   Awaited<ReturnType<ReturnType<typeof useCreateScreenActionHook>>>
 >
-
+export type CreateScreenActionMutationBody = ScreenInput
 export type CreateScreenActionMutationError = ErrorResponse
 
-export const useCreateScreenAction = <TError = ErrorResponse, TVariables = void, TContext = unknown>(options?: {
+export const useCreateScreenAction = <TError = ErrorResponse, TContext = unknown>(options?: {
   mutation?: UseMutationOptions<
     Awaited<ReturnType<ReturnType<typeof useCreateScreenActionHook>>>,
     TError,
-    TVariables,
+    { data: ScreenInput },
     TContext
   >
 }) => {
