@@ -18,7 +18,7 @@ const generateLabel = (entry: DataBaseEntry, data: SearchData) => {
     str += ` ${entry.width}x${entry.height}`
   }
 
-  str += ` ${data.hApsectRatio}:${data.vApsectRatio}`
+  str += ` ${data.hAspectRatio}:${data.vAspectRatio}`
 
   return str
 }
@@ -60,16 +60,16 @@ export const transformScreenInput = (data: ScreenInput): ScreenItem => {
 }
 
 export const transformSearchData = (entry: DataBaseEntry): SearchItem => {
-  const [hApsectRatio, vApsectRatio] = getAspectRatio(entry.aspectRatio)
+  const [hAspectRatio, vAspectRatio] = getAspectRatio(entry.aspectRatio)
 
   const data: SearchData = {
-    hApsectRatio,
-    vApsectRatio,
+    hAspectRatio,
+    vAspectRatio,
   }
 
   if (entry.size && entry.size !== 0) {
-    data.hSize = hApsectRatio * (entry.size / Math.sqrt(Math.pow(hApsectRatio, 2) + Math.pow(vApsectRatio, 2)))
-    data.vSize = vApsectRatio * (entry.size / Math.sqrt(Math.pow(hApsectRatio, 2) + Math.pow(vApsectRatio, 2)))
+    data.hSize = hAspectRatio * (entry.size / Math.sqrt(Math.pow(hAspectRatio, 2) + Math.pow(vAspectRatio, 2)))
+    data.vSize = vAspectRatio * (entry.size / Math.sqrt(Math.pow(hAspectRatio, 2) + Math.pow(vAspectRatio, 2)))
   }
 
   const spec = createSpec(entry.width, entry.height, entry.size)

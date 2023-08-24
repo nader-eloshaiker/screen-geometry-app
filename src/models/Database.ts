@@ -10,11 +10,10 @@ export interface DataBaseEntry {
 
 export type SearchData = Partial<ScreenData> & Pick<ScreenData, 'hAspectRatio'> & Pick<ScreenData, 'vAspectRatio'>
 export type SearchTag = Partial<ScreenInput> & Pick<ScreenInput, 'aspectRatio'>
-export type SearchSpec = Partial<ScreenSpec> & Pick<ScreenSpec, 'vRes'> & Pick<ScreenSpec, 'hRes'>
 export interface SearchItem {
   id: string
   label: string
   tag: SearchTag
   data: SearchData
-  spec?: SearchSpec
+  spec?: ScreenSpec
 }
