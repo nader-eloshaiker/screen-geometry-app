@@ -1,4 +1,4 @@
 import { createContext, Dispatch } from 'react'
-import { IDabaseState, initialDatabaseState, TDatabaseAction } from './SearchManager'
+import { DatabaseState, initialDatabaseState, DatabaseAction } from './SearchManager'
 
-export const SearchContext = createContext<[IDabaseState, Dispatch<TDatabaseAction>]>([initialDatabaseState, () => {}])
+export const SearchContext = createContext<[DatabaseState, Dispatch<DatabaseAction>]>([initialDatabaseState, () => {}])

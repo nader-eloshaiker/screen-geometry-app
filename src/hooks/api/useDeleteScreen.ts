@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { ActionTypes } from '../../contexts/App/AppManager'
+import { AppActionTypes } from '../../contexts/App/AppManager'
 import { useAppContext } from '../../contexts/App/useAppContext'
 import { useDeleteScreenAction } from '../../generated/openapi/services/screen-service'
 
@@ -14,7 +14,7 @@ export const useDeleteScreen = () => {
 
   useEffect(() => {
     if (deleteResponse) {
-      dispatch({ type: ActionTypes.DELETE, payload: deleteResponse.id })
+      dispatch({ type: AppActionTypes.DELETE, payload: deleteResponse.id })
     }
   }, [deleteResponse])
 

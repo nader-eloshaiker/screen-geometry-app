@@ -1,18 +1,18 @@
 import { ScreenItem } from '../../generated/openapi/models'
 import { normaliseScreenRender } from '../../utils/ScreenCalc'
 
-export type TLoadingTag = { status: boolean; tag: string }
+export type LoadingTag = { status: boolean; tag: string }
 
 export const initialScreenState = {
   screens: [] as ScreenItem[],
   query: '',
-  loadingTag: [] as Array<TLoadingTag>,
+  loadingTag: [] as Array<LoadingTag>,
   loading: false,
 }
 
-export type IScreenState = typeof initialScreenState
+export type ScreenState = typeof initialScreenState
 
-export enum ActionTypes {
+export enum AppActionTypes {
   LIST = 'list',
   UPDATE = 'update',
   ADD = 'add',
@@ -20,34 +20,34 @@ export enum ActionTypes {
   LOADING = 'loading',
 }
 
-export type TScreenAction =
-  | { type: ActionTypes.LIST; payload: ScreenItem[] }
-  | { type: ActionTypes.UPDATE; payload: ScreenItem }
-  | { type: ActionTypes.ADD; payload: ScreenItem }
-  | { type: ActionTypes.DELETE; payload: string }
-  | { type: ActionTypes.LOADING; payload: { status: boolean; tag: string } }
+export type ScreenAction =
+  | { type: AppActionTypes.LIST; payload: ScreenItem[] }
+  | { type: AppActionTypes.UPDATE; payload: ScreenItem }
+  | { type: AppActionTypes.ADD; payload: ScreenItem }
+  | { type: AppActionTypes.DELETE; payload: string }
+  | { type: AppActionTypes.LOADING; payload: { status: boolean; tag: string } }
 
-const generateLoadingTag = (val: TLoadingTag, list: Array<TLoadingTag>) => {
+const generateLoadingTag = (val: LoadingTag, list: Array<LoadingTag>) => {
   const index = list.findIndex((item) => item.tag === val.tag)
   const newList = index === -1 ? [...list, val] : list.with(index, val)
-  const status = newList.some((item: TLoadingTag) => item.status)
+  const status = newList.some((item: LoadingTag) => item.status)
 
   return { loadingTag: newList, loading: status } as const
 }
 
-export const appReducer = (state: IScreenState, { type, payload }: TScreenAction): IScreenState => {
+export const appReducer = (state: ScreenState, { type, payload }: ScreenAction): ScreenState => {
   switch (type) {
-    case ActionTypes.LIST:
+    case AppActionTypes.LIST:
       // eslint-disable-next-line no-case-declarations
       const list = normaliseScreenRender(payload)
 
       return { ...state, screens: list }
-    case ActionTypes.DELETE:
+    case AppActionTypes.DELETE:
       // eslint-disable-next-line no-case-declarations
       const deletion = state.screens.filter((screen) => screen.id !== payload)
 
       return { ...state, screens: normaliseScreenRender(deletion) }
-    case ActionTypes.UPDATE:
+    case AppActionTypes.UPDATE:
       // eslint-disable-next-line no-case-declarations
       const modification = state.screens.map((screen) =>
         payload && screen.id !== payload.id ? screen : payload,
@@ -57,12 +57,12 @@ export const appReducer = (state: IScreenState, { type, payload }: TScreenAction
         ...state,
         screens: normaliseScreenRender(modification),
       }
-    case ActionTypes.ADD:
+    case AppActionTypes.ADD:
       // eslint-disable-next-line no-case-declarations
       const additions = normaliseScreenRender([...state.screens, payload])
 
       return { ...state, screens: additions }
-    case ActionTypes.LOADING:
+    case AppActionTypes.LOADING:
       // eslint-disable-next-line no-case-declarations
       const result = generateLoadingTag(payload, state.loadingTag)
 

@@ -7,7 +7,7 @@ export const initialDatabaseState = {
   query: '',
 }
 
-export type IDabaseState = typeof initialDatabaseState
+export type DatabaseState = typeof initialDatabaseState
 
 export enum SearchActionTypes {
   LOAD = 'load',
@@ -15,12 +15,12 @@ export enum SearchActionTypes {
   RESET = 'reset',
 }
 
-export type TDatabaseAction =
+export type DatabaseAction =
   | { type: SearchActionTypes.LOAD; payload: DataBaseEntry[] }
   | { type: SearchActionTypes.SEARCH; payload: string }
   | { type: SearchActionTypes.RESET; payload?: undefined }
 
-export const searchReducer = (state: IDabaseState, { type, payload }: TDatabaseAction): IDabaseState => {
+export const searchReducer = (state: DatabaseState, { type, payload }: DatabaseAction): DatabaseState => {
   switch (type) {
     case SearchActionTypes.LOAD:
       if (state.monitorData.length > 0) {
