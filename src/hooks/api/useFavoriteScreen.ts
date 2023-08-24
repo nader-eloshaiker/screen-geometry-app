@@ -18,5 +18,11 @@ export const useFavoriteScreen = () => {
     }
   }, [favoriteResponse])
 
-  return { isFavoriteLoading, favouriteError, favoriteAction }
+  useEffect(() => {
+    if (favouriteError) {
+      dispatch({ type: AppActionTypes.ADD_ERROR, payload: { error: favouriteError.error, tag: 'favorite' } })
+    }
+  }, [favouriteError])
+
+  return { isFavoriteLoading, favoriteResponse, favouriteError, favoriteAction }
 }

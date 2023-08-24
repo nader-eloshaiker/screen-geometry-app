@@ -70,7 +70,7 @@ export default function CreateScreenForm() {
     resolver: yupResolver(screenDataSchema),
     mode: 'onChange',
   })
-  const { isCreateLoading, createError, createAction } = useCreateScreen()
+  const { isCreateLoading, createAction } = useCreateScreen()
 
   const onSelect = (item: SearchItem) => {
     setValue(ScreenDataEnum.aspectRatio, item.tag.aspectRatio, {
@@ -256,7 +256,6 @@ export default function CreateScreenForm() {
           </div>
         </div>
       </form>
-      {createError && <div className='text-xs text-error'>{JSON.stringify(createError)}</div>}
     </>
   )
 }

@@ -14,7 +14,13 @@ export const useCreateScreen = () => {
     }
   }, [createResponse])
 
+  useEffect(() => {
+    if (createError) {
+      dispatch({ type: AppActionTypes.ADD_ERROR, payload: { error: createError.error, tag: 'create' } })
+    }
+  }, [createError])
+
   const createAction = (screenInput: ScreenInput) => mutate({ data: screenInput })
 
-  return { isCreateLoading, createError, createAction }
+  return { isCreateLoading, createResponse, createError, createAction }
 }

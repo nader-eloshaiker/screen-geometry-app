@@ -14,7 +14,13 @@ export const useUpdateScreen = () => {
     }
   }, [updateResponse])
 
+  useEffect(() => {
+    if (updateError) {
+      dispatch({ type: AppActionTypes.ADD_ERROR, payload: { error: updateError.error, tag: 'update' } })
+    }
+  }, [updateError])
+
   const updateAction = (screen: ScreenItem) => mutate({ id: screen.id, data: screen })
 
-  return { isUpdateLoading, updateError, updateAction }
+  return { isUpdateLoading, updateResponse, updateError, updateAction }
 }

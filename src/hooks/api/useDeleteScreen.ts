@@ -18,5 +18,11 @@ export const useDeleteScreen = () => {
     }
   }, [deleteResponse])
 
-  return { isDeleteLoading, deleteError, deleteAction }
+  useEffect(() => {
+    if (deleteError) {
+      dispatch({ type: AppActionTypes.ADD_ERROR, payload: { error: deleteError.error, tag: 'delete' } })
+    }
+  }, [deleteError])
+
+  return { isDeleteLoading, deleteResponse, deleteError, deleteAction }
 }

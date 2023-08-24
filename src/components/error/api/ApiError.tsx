@@ -1,11 +1,11 @@
-import { ErrorResponse } from '../../../generated/openapi/models'
+import { ErrorTag } from '../../../contexts/App/AppManager'
 
 type TProps = {
-  errorResponse: ErrorResponse | null
+  errorTag: ErrorTag
 }
 
-export default function ApiError({ errorResponse }: TProps) {
-  const error = errorResponse?.error
+export const ApiError = ({ errorTag }: TProps) => {
+  const error = errorTag.error
 
   return (
     error && (

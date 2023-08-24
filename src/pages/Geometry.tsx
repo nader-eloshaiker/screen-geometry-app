@@ -56,9 +56,9 @@ export default function Geometry() {
   const maxScreenSize = screens.length > 0 ? getMaxScreenSize(screens) : { width: 47, height: 16 } // max possible screen size
   const maxPanelSize: Dimensions = { width, height: Math.round(maxScreenSize.height * (width / maxScreenSize.width)) }
 
-  const { isScreenListLoading, screenListError } = useListScreens()
-  const { isFavoriteLoading, favouriteError, favoriteAction } = useFavoriteScreen()
-  const { isDeleteLoading, deleteError, deleteAction } = useDeleteScreen()
+  const { isScreenListLoading } = useListScreens()
+  const { isFavoriteLoading, favoriteAction } = useFavoriteScreen()
+  const { isDeleteLoading, deleteAction } = useDeleteScreen()
 
   const onFavourite = (screen: ScreenItem) => {
     setSelected(screen)
