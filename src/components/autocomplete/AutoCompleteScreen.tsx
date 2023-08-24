@@ -1,13 +1,13 @@
 import { useEffect, useState } from 'react'
-import { ActionTypes } from '../../contexts/App/AppManager'
+import { AppActionTypes } from '../../contexts/App/AppManager'
 import { useAppContext } from '../../contexts/App/useAppContext'
 import { SearchActionTypes } from '../../contexts/Search/SearchManager'
 import { useSearchContext } from '../../contexts/Search/useSearchContext'
-import { IDataBaseEntry, ISearch } from '../../models/Database'
+import { DataBaseEntry, SearchItem } from '../../models/Database'
 import Autocomplete, { TAutoCompleteItem } from './Autocomplete'
 
 type TProps = TRestProps & {
-  onSelect: (item: ISearch) => void
+  onSelect: (item: SearchItem) => void
 }
 
 const AutoCompleteScreen = ({ onSelect, ...rest }: TProps) => {
@@ -27,10 +27,10 @@ const AutoCompleteScreen = ({ onSelect, ...rest }: TProps) => {
     const fetchData = async () => {
       const url = 'db/monitor.json'
       try {
-        dispatchApp({ type: ActionTypes.LOADING, payload: { status: true, tag: 'loadDB' } })
+        dispatchApp({ type: AppActionTypes.LOADING, payload: { status: true, tag: 'loadDB' } })
 
         const response = await fetch(url)
-        const dbEntries = (await response.json()) as IDataBaseEntry[]
+        const dbEntries = (await response.json()) as DataBaseEntry[]
 
         dispatchSearch({ type: SearchActionTypes.LOAD, payload: dbEntries })
       } catch (error) {
@@ -38,7 +38,7 @@ const AutoCompleteScreen = ({ onSelect, ...rest }: TProps) => {
         dispatchSearch({ type: SearchActionTypes.RESET })
         console.error(`Unable to fetch screen DB ${url} :: `, error)
       } finally {
-        dispatchApp({ type: ActionTypes.LOADING, payload: { status: false, tag: 'loadDB' } })
+        dispatchApp({ type: AppActionTypes.LOADING, payload: { status: false, tag: 'loadDB' } })
       }
     }
 

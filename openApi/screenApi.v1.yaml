@@ -578,8 +578,6 @@ components:
       description: "Screen resolution characteristics"
     ScreenRender:
       required:
-        - "width"
-        - "height"
         - "color"
       type: object
       properties:

@@ -1,6 +1,6 @@
-import { IScreenData, IScreenDataInput, IScreenSpec } from './Screen'
+import { ScreenData, ScreenInput, ScreenSpec } from '../generated/openapi/models'
 
-export interface IDataBaseEntry {
+export interface DataBaseEntry {
   name: string
   size?: number
   width: number
@@ -8,13 +8,12 @@ export interface IDataBaseEntry {
   aspectRatio: string
 }
 
-export type ISearchData = Partial<IScreenData> & Pick<IScreenData, 'hApsectRatio'> & Pick<IScreenData, 'vApsectRatio'>
-export type ISearchTag = Partial<IScreenDataInput> & Pick<IScreenDataInput, 'aspectRatio'>
-export type ISearchSpec = Partial<IScreenSpec> & Pick<IScreenSpec, 'vRes'> & Pick<IScreenSpec, 'hRes'>
-export interface ISearch {
+export type SearchData = Partial<ScreenData> & Pick<ScreenData, 'hAspectRatio'> & Pick<ScreenData, 'vAspectRatio'>
+export type SearchTag = Partial<ScreenInput> & Pick<ScreenInput, 'aspectRatio'>
+export interface SearchItem {
   id: string
   label: string
-  tag: ISearchTag
-  data: ISearchData
-  spec?: ISearchSpec
+  tag: SearchTag
+  data: SearchData
+  spec?: ScreenSpec
 }

@@ -5,7 +5,7 @@ export enum ScreenDataEnum {
   vRes = 'vRes',
 }
 
-export interface IDimension {
+export interface Dimensions {
   width: number
   height: number
 }

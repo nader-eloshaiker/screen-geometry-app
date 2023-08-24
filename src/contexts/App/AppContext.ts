@@ -1,4 +1,4 @@
 import { createContext } from 'react'
-import { initialScreenState, IScreenState, TScreenAction } from './AppManager'
+import { initialScreenState, ScreenAction, ScreenState } from './AppManager'
 
-export const AppContext = createContext<[IScreenState, React.Dispatch<TScreenAction>]>([initialScreenState, () => {}])
+export const AppContext = createContext<[ScreenState, React.Dispatch<ScreenAction>]>([initialScreenState, () => {}])

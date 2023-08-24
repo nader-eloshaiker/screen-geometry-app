@@ -13,7 +13,7 @@ import { ScreenItem } from '../generated/openapi/models'
 import { useDeleteScreen } from '../hooks/api/useDeleteScreen'
 import { useFavoriteScreen } from '../hooks/api/useFavoriteScreen'
 import { useListScreens } from '../hooks/api/useListScreens'
-import { IDimension } from '../models/Screen'
+import { Dimensions } from '../models/Screen'
 import { createCSSColor, getMaxScreenSize } from '../utils/ScreenCalc'
 
 const Stacked = styled.div<{ width: number; height: number }>`
@@ -54,7 +54,7 @@ export default function Geometry() {
   const [highlighted, setHighlighted] = useState<ScreenItem>()
   const [selected, setSelected] = useState<ScreenItem>()
   const maxScreenSize = screens.length > 0 ? getMaxScreenSize(screens) : { width: 47, height: 16 } // max possible screen size
-  const maxPanelSize: IDimension = { width, height: Math.round(maxScreenSize.height * (width / maxScreenSize.width)) }
+  const maxPanelSize: Dimensions = { width, height: Math.round(maxScreenSize.height * (width / maxScreenSize.width)) }
 
   const { isScreenListLoading, screenListError } = useListScreens()
   const { isFavoriteLoading, favouriteError, favoriteAction } = useFavoriteScreen()

@@ -4,7 +4,7 @@ import { styled } from 'styled-components'
 import * as yup from 'yup'
 import { ScreenInput } from '../../generated/openapi/models'
 import { useCreateScreen } from '../../hooks/api/useCreateScreen'
-import { ISearch } from '../../models/Database'
+import { SearchItem } from '../../models/Database'
 import { ScreenDataEnum } from '../../models/Screen'
 import AutoCompleteScreen from '../autocomplete/AutoCompleteScreen'
 
@@ -76,7 +76,7 @@ export default function CreateScreenForm() {
   })
   const { isCreateLoading, createError, createAction } = useCreateScreen()
 
-  const onSelect = (item: ISearch) => {
+  const onSelect = (item: SearchItem) => {
     setValue(ScreenDataEnum.aspectRatio, item.tag.aspectRatio, {
       shouldValidate: true,
       shouldDirty: true,

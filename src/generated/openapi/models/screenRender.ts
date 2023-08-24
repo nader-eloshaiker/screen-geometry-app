@@ -10,8 +10,8 @@ import type { ScreenColor } from './screenColor'
  * Screen representation in UI
  */
 export interface ScreenRender {
-  width: number
-  height: number
+  width?: number
+  height?: number
   pixelSize?: number
   color: ScreenColor
 }

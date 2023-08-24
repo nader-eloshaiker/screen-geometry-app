@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { ActionTypes } from '../../contexts/App/AppManager'
+import { AppActionTypes } from '../../contexts/App/AppManager'
 import { useAppContext } from '../../contexts/App/useAppContext'
 import { ScreenItem } from '../../generated/openapi/models'
 import { useUpdateScreenAction } from '../../generated/openapi/services/screen-service'
@@ -10,7 +10,7 @@ export const useUpdateScreen = () => {
 
   useEffect(() => {
     if (updateResponse) {
-      dispatch({ type: ActionTypes.UPDATE, payload: updateResponse.item })
+      dispatch({ type: AppActionTypes.UPDATE, payload: updateResponse.item })
     }
   }, [updateResponse])
 

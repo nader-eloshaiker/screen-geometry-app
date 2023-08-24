@@ -1,9 +1,8 @@
 import styled from 'styled-components'
-import { ScreenItem } from '../../generated/openapi/models'
-import { IScreenColor } from '../../models/Screen'
+import { ScreenColor, ScreenItem } from '../../generated/openapi/models'
 import { createCSSColor } from '../../utils/ScreenCalc'
 
-const Panel = styled.div<{ $width: number; $height: number; $color?: IScreenColor; $index: number }>`
+const Panel = styled.div<{ $width: number; $height: number; $color?: ScreenColor; $index: number }>`
   width: ${(props) => props.$width}%;
   height: ${(props) => props.$height}%;
   border-color: ${(props) => createCSSColor(props.$color)};
