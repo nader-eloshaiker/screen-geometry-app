@@ -1,5 +1,5 @@
-import { ScreenInput, ScreenItem } from '../generated/openapi/models'
-import { DataBaseEntry, SearchData, SearchItem, SearchSpec } from '../models/Database'
+import { ScreenInput, ScreenItem, ScreenSpec } from '../generated/openapi/models'
+import { DataBaseEntry, SearchData, SearchItem } from '../models/Database'
 import { getRandomInt } from './RandomNumber'
 
 const getAspectRatio = (str: string) => {
@@ -23,14 +23,14 @@ const generateLabel = (entry: DataBaseEntry, data: SearchData) => {
   return str
 }
 
-const createSpec = (width?: number, height?: number, size?: number): SearchSpec | undefined => {
+const createSpec = (width?: number, height?: number, size?: number): ScreenSpec | undefined => {
   if (!width || !height) {
     return undefined
   }
   return {
     hRes: width,
     vRes: height,
-    ppi: size && Math.sqrt(Math.pow(width, 2) + Math.pow(height, 2)) / size,
+    ppi: size ? Math.sqrt(Math.pow(width, 2) + Math.pow(height, 2)) / size : 0, // size is optional for search data
   }
 }
 

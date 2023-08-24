@@ -3,9 +3,11 @@
 import cn from 'classnames'
 import { ChangeEvent, memo, useState } from 'react'
 import useResizeObserver from 'use-resize-observer'
+import { InputPlaceholder } from '../inputplaceholder/InputPlaceholder'
 
 export type TAutoCompleteItem = { id: string; label: string }
 type TProps = TRestProps & {
+  isLoading: boolean
   className?: string
   placeholder?: string
   items: Array<TAutoCompleteItem> // we are using this type for autocomplete
@@ -22,6 +24,7 @@ const Autocomplete = ({
   onSelect = () => {},
   className,
   placeholder,
+  isLoading,
   ...rest
 }: TProps) => {
   const { ref: divRef, width = 1 } = useResizeObserver<HTMLDivElement>()
@@ -50,23 +53,28 @@ const Autocomplete = ({
         cn({
           'dropdown w-full': true,
           'dropdown-open': open,
-        }) +
-        ' ' +
-        className
+          relative: isLoading,
+        }) + (className ? ' ' + className : '')
       }
       ref={divRef}
       {...rest}
     >
+      {isLoading && (
+        <InputPlaceholder className='absolute flex w-full h-full left-3/4'>
+          <span className='z-10 flex items-center justify-center loading loading-spinner loading-md' />
+        </InputPlaceholder>
+      )}
       <input
         type='text'
-        className='w-full input input-bordered input-md'
+        className={cn({ relative: isLoading }) + ' w-full input input-bordered input-md'}
         value={inputValue}
         onChange={handleChange}
         placeholder={placeholder || 'Type something..'}
         tabIndex={0}
+        disabled={isLoading}
       />
       {items.length > 0 && (
-        <div className='z-10 flex-col overflow-auto rounded-md dropdown-content bg-base-200 top-14 max-h-80'>
+        <div className='z-40 flex-col overflow-auto rounded-md dropdown-content bg-base-200 top-14 max-h-80'>
           <ul
             className='menu menu-compact'
             // use ref to calculate the width of parent

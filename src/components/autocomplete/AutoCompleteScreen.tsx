@@ -1,6 +1,4 @@
 import { useEffect, useState } from 'react'
-import { AppActionTypes } from '../../contexts/App/AppManager'
-import { useAppContext } from '../../contexts/App/useAppContext'
 import { SearchActionTypes } from '../../contexts/Search/SearchManager'
 import { useSearchContext } from '../../contexts/Search/useSearchContext'
 import { DataBaseEntry, SearchItem } from '../../models/Database'
@@ -13,6 +11,7 @@ type TProps = TRestProps & {
 const AutoCompleteScreen = ({ onSelect, ...rest }: TProps) => {
   // query typed by user
   const [val, setVal] = useState('')
+  const [isLoading, setIsLoading] = useState(false)
 
   // user selected item
   const [selected, setSelected] = useState<TAutoCompleteItem>()
@@ -21,13 +20,12 @@ const AutoCompleteScreen = ({ onSelect, ...rest }: TProps) => {
   const [items, setItems] = useState<Array<TAutoCompleteItem>>([])
 
   const [db, dispatchSearch] = useSearchContext()
-  const [_, dispatchApp] = useAppContext()
 
   useEffect(() => {
     const fetchData = async () => {
       const url = 'db/monitor.json'
       try {
-        dispatchApp({ type: AppActionTypes.LOADING, payload: { status: true, tag: 'loadDB' } })
+        setIsLoading(true)
 
         const response = await fetch(url)
         const dbEntries = (await response.json()) as DataBaseEntry[]
@@ -38,7 +36,7 @@ const AutoCompleteScreen = ({ onSelect, ...rest }: TProps) => {
         dispatchSearch({ type: SearchActionTypes.RESET })
         console.error(`Unable to fetch screen DB ${url} :: `, error)
       } finally {
-        dispatchApp({ type: AppActionTypes.LOADING, payload: { status: false, tag: 'loadDB' } })
+        setIsLoading(false)
       }
     }
 
@@ -70,6 +68,7 @@ const AutoCompleteScreen = ({ onSelect, ...rest }: TProps) => {
       onChange={setVal}
       onSelect={setSelected}
       placeholder='Type to filter list...'
+      isLoading={isLoading}
       {...rest}
     />
   )

@@ -3,12 +3,13 @@ import { styled } from 'styled-components'
 import useResizeObserver from 'use-resize-observer'
 import CloseIcon from '../assets/icons/Close'
 import EditIcon from '../assets/icons/Edit'
-import ImageIcon from '../assets/icons/Image'
 import StarOutlineIcon from '../assets/icons/StarOutline'
 import StarSolidIcon from '../assets/icons/StarSolid'
 import ApiError from '../components/apierror/ApiError'
 import { ScreenPanel } from '../components/screen/ScreenPanel'
 import { useAppContext } from '../contexts/App/useAppContext'
+import { SkeletonImage } from '../contexts/skeleton/SkeletonImage'
+import { SkeletonRect } from '../contexts/skeleton/SkeletonRect'
 import { ScreenItem } from '../generated/openapi/models'
 import { useDeleteScreen } from '../hooks/api/useDeleteScreen'
 import { useFavoriteScreen } from '../hooks/api/useFavoriteScreen'
@@ -35,7 +36,7 @@ const TableSkeleton = ({ cols, rows }: TTableProps) => {
   for (let i = 0; i < cols; i++) {
     tableCols.push(
       <td key={i}>
-        <div key={i} className='w-full h-6 bg-gray-300 border-2 rounded-md animate-pulse' />
+        <SkeletonRect key={i} className='w-full h-6' />
       </td>,
     )
   }
@@ -174,9 +175,7 @@ export default function Geometry() {
             />
           ))
         ) : (
-          <div className='flex items-center justify-center w-full h-full bg-gray-300 border-2 rounded-md animate-pulse'>
-            <ImageIcon className='w-10 h-10' fill='rgb(107 114 128)' />
-          </div>
+          <SkeletonImage className='w-full h-full' />
         )}
       </Stacked>
       <div className='toast toast-center'>
