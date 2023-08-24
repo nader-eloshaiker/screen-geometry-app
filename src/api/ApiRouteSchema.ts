@@ -1,6 +1,6 @@
 export const routes = {
   baseUrl: 'https://jsonplaceholder.typicode.com',
-  root: '/api',
+  basePath: '/v1',
   screens: {
     path: 'screens',
     key: ':screenId',

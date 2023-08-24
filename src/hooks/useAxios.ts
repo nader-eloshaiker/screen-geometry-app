@@ -1,6 +1,6 @@
 import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios'
 import { useEffect, useState } from 'react'
-import { axiosInstance } from '../api/fetch/axios'
+import { axiosInstance } from '../api/fetch/customAxios'
 
 const UseAxiosOptionsDefaults = {
   manualExecution: false,

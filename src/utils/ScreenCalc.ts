@@ -1,7 +1,8 @@
-import { IDimension, IScreen, IScreenColor } from '../models/Screen'
+import { ScreenItem } from '../generated/openapi/models'
+import { IDimension, IScreenColor } from '../models/Screen'
 import { getRandomInt } from './RandomNumber'
 
-export const getMaxScreenSize = (screens: Array<IScreen>) =>
+export const getMaxScreenSize = (screens: Array<ScreenItem>) =>
   screens.reduce(
     (acc, screen) => {
       const width = screen.data.hSize
@@ -11,7 +12,7 @@ export const getMaxScreenSize = (screens: Array<IScreen>) =>
     { width: 0, height: 0 } as IDimension,
   )
 
-export const normaliseScreenRender = (list: IScreen[]) => {
+export const normaliseScreenRender = (list: ScreenItem[]) => {
   if (list.length === 0) {
     return list
   }

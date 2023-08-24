@@ -4,13 +4,10 @@ import Footer from '../components/footer/Footer'
 import Header from '../components/header/Header'
 import { useAppContext } from '../contexts/App/useAppContext'
 import { DrawerProvider } from '../contexts/drawer/DrawerProvider'
-import { useListScreensAction } from '../hooks/api/useListScreensAction'
 import { Loading } from './Loading'
 
 export default function Root() {
   const [{ loading }] = useAppContext()
-
-  useListScreensAction()
 
   return (
     <DrawerProvider>

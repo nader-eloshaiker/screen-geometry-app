@@ -2,9 +2,10 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { styled } from 'styled-components'
 import * as yup from 'yup'
-import { useCreateScreenAction } from '../../hooks/api/useCreateScreenAction'
+import { ScreenInput } from '../../generated/openapi/models'
+import { useCreateScreen } from '../../hooks/api/useCreateScreen'
 import { ISearch } from '../../models/Database'
-import { IScreenDataInput, ScreenDataEnum } from '../../models/Screen'
+import { ScreenDataEnum } from '../../models/Screen'
 import AutoCompleteScreen from '../autocomplete/AutoCompleteScreen'
 
 const InputSuffix = styled.span`
@@ -69,11 +70,11 @@ export default function CreateScreenForm() {
     setValue,
     handleSubmit,
     reset,
-  } = useForm<IScreenDataInput>({
+  } = useForm<ScreenInput>({
     resolver: yupResolver(screenDataSchema),
     mode: 'onChange',
   })
-  const { executeCreate } = useCreateScreenAction()
+  const { isCreateLoading, createError, createAction } = useCreateScreen()
 
   const onSelect = (item: ISearch) => {
     setValue(ScreenDataEnum.aspectRatio, item.tag.aspectRatio, {
@@ -99,8 +100,8 @@ export default function CreateScreenForm() {
       })
     }
   }
-  const onSubmit: SubmitHandler<IScreenDataInput> = (form) => {
-    executeCreate(form)
+  const onSubmit: SubmitHandler<ScreenInput> = (form) => {
+    createAction(form)
   }
 
   return (
@@ -228,17 +229,35 @@ export default function CreateScreenForm() {
               id='resetButton'
               type='reset'
               className='btn-neutral btn'
-              disabled={!isDirty}
+              disabled={!isDirty || isCreateLoading}
               onClick={() => reset()}
             >
-              Reset
+              {isCreateLoading ? (
+                <div className='stack'>
+                  <span>Reset</span> <span className='loading loading-spinner' />
+                </div>
+              ) : (
+                'Reset'
+              )}
             </button>
-            <button id='submitButton' type='submit' className='btn-neutral btn' disabled={!isDirty || !isValid}>
-              Create
+            <button
+              id='submitButton'
+              type='submit'
+              className='btn-neutral btn'
+              disabled={!isDirty || !isValid || isCreateLoading}
+            >
+              {isCreateLoading ? (
+                <div className='stack'>
+                  <span>Create</span> <span className='loading loading-spinner' />
+                </div>
+              ) : (
+                'Create'
+              )}
             </button>
           </div>
         </div>
       </form>
+      {createError && <div className='text-xs text-error'>{JSON.stringify(createError)}</div>}
     </>
   )
 }

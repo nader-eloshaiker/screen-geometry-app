@@ -1,5 +1,6 @@
 import styled from 'styled-components'
-import { IScreen, IScreenColor } from '../../models/Screen'
+import { ScreenItem } from '../../generated/openapi/models'
+import { IScreenColor } from '../../models/Screen'
 import { createCSSColor } from '../../utils/ScreenCalc'
 
 const Panel = styled.div<{ $width: number; $height: number; $color?: IScreenColor; $index: number }>`
@@ -11,7 +12,7 @@ const Panel = styled.div<{ $width: number; $height: number; $color?: IScreenColo
   z-index: ${(props) => props.$index};
 `
 
-type TProps = TRestProps & { screen: IScreen; index: number; selected: boolean }
+type TProps = TRestProps & { screen: ScreenItem; index: number; selected: boolean }
 
 export const ScreenPanel = ({ screen, index, selected, ...rest }: TProps) => {
   const width = Math.round(100 * (screen.render?.width || 1))

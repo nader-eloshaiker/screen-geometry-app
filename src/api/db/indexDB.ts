@@ -4,8 +4,8 @@ import { transformScreen } from '../../utils/ScreenTransformation'
 
 const storageKey = 'screens'
 
-export async function getItemList(query?: string): Promise<Array<IScreen>> {
-  await fakeNetwork(`getScreens:${query}`)
+export async function getItemList(): Promise<Array<IScreen>> {
+  await fakeNetwork()
   const list: Array<IScreen> = (await localforage.getItem(storageKey)) || []
 
   return list
