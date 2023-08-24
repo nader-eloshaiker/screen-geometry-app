@@ -113,7 +113,7 @@ export default function CreateScreenForm() {
 
       <form method='post' onSubmit={handleSubmit(onSubmit)}>
         <div className='flex flex-col gap-2'>
-          <div id='screenTag' className='flex flex-row gap-2'>
+          <div id='screenTag' className='grid grid-cols-2 gap-2'>
             {/* diagnolSize */}
             <div id='screenSizeControl' className='flex flex-col mb-4 form-control'>
               <label htmlFor={ScreenDataEnum.diagonalSize} className='label'>
@@ -158,7 +158,7 @@ export default function CreateScreenForm() {
 
           <div className='text-sm divider'>Optional</div>
 
-          <div id='screenData' className='flex flex-row gap-2'>
+          <div id='screenData' className='grid grid-cols-2 gap-2 grrid'>
             {/* hRes */}
             <div id='hSizeControl' className='flex flex-col mb-4 form-control'>
               <label htmlFor={ScreenDataEnum.hRes} className='label'>
