@@ -1,12 +1,13 @@
-import { IDataBaseEntry, ISearch, ISearchData, ISearchSpec } from '../models/Database'
-import { IScreen, IScreenDataInput } from '../models/Screen'
+import { ScreenInput, ScreenItem } from '../generated/openapi/models'
+import { DataBaseEntry, SearchData, SearchItem, SearchSpec } from '../models/Database'
+import { getRandomInt } from './RandomNumber'
 
 const getAspectRatio = (str: string) => {
   const [width, height] = str.split(':')
   return [parseFloat(width), parseFloat(height)]
 }
 
-const generateLabel = (entry: IDataBaseEntry, data: ISearchData) => {
+const generateLabel = (entry: DataBaseEntry, data: SearchData) => {
   let str = entry.name
 
   if (entry.size && entry.size !== 0) {
@@ -22,7 +23,7 @@ const generateLabel = (entry: IDataBaseEntry, data: ISearchData) => {
   return str
 }
 
-const createSpec = (width?: number, height?: number, size?: number): ISearchSpec | undefined => {
+const createSpec = (width?: number, height?: number, size?: number): SearchSpec | undefined => {
   if (!width || !height) {
     return undefined
   }
@@ -33,16 +34,24 @@ const createSpec = (width?: number, height?: number, size?: number): ISearchSpec
   }
 }
 
-export const transformScreen = (data: IScreenDataInput): IScreen => {
-  const [hApsectRatio, vApsectRatio] = getAspectRatio(data.aspectRatio)
-  const item: IScreen = {
+export const transformScreenInput = (data: ScreenInput): ScreenItem => {
+  const [hAspectRatio, vAspectRatio] = getAspectRatio(data.aspectRatio)
+  const item: ScreenItem = {
     id: Math.random().toString(36).substring(2, 9),
     tag: data,
     data: {
-      hSize: hApsectRatio * (data.diagonalSize / Math.sqrt(Math.pow(hApsectRatio, 2) + Math.pow(vApsectRatio, 2))),
-      vSize: vApsectRatio * (data.diagonalSize / Math.sqrt(Math.pow(hApsectRatio, 2) + Math.pow(vApsectRatio, 2))),
-      hApsectRatio,
-      vApsectRatio,
+      hSize: hAspectRatio * (data.diagonalSize / Math.sqrt(Math.pow(hAspectRatio, 2) + Math.pow(vAspectRatio, 2))),
+      vSize: vAspectRatio * (data.diagonalSize / Math.sqrt(Math.pow(hAspectRatio, 2) + Math.pow(vAspectRatio, 2))),
+      hAspectRatio,
+      vAspectRatio,
+    },
+    spec: createSpec(data.hRes, data.vRes, data.diagonalSize),
+    render: {
+      color: {
+        r: getRandomInt(256),
+        g: getRandomInt(256),
+        b: getRandomInt(256),
+      },
     },
     favorite: false,
   }
@@ -50,10 +59,10 @@ export const transformScreen = (data: IScreenDataInput): IScreen => {
   return item
 }
 
-export const transformSearchData = (entry: IDataBaseEntry): ISearch => {
+export const transformSearchData = (entry: DataBaseEntry): SearchItem => {
   const [hApsectRatio, vApsectRatio] = getAspectRatio(entry.aspectRatio)
 
-  const data: ISearchData = {
+  const data: SearchData = {
     hApsectRatio,
     vApsectRatio,
   }
@@ -65,7 +74,7 @@ export const transformSearchData = (entry: IDataBaseEntry): ISearch => {
 
   const spec = createSpec(entry.width, entry.height, entry.size)
 
-  const item: ISearch = {
+  const item: SearchItem = {
     id: `${entry.name}${entry.size || ''}${entry.aspectRatio}`,
     label: generateLabel(entry, data),
     tag: {

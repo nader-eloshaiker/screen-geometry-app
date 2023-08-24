@@ -1,9 +1,9 @@
-import { IDataBaseEntry, ISearch } from '../../models/Database'
+import { DataBaseEntry, SearchItem } from '../../models/Database'
 import { transformSearchData } from '../../utils/ScreenTransformation'
 
 export const initialDatabaseState = {
-  monitorData: [] as ISearch[],
-  results: [] as ISearch[],
+  monitorData: [] as SearchItem[],
+  results: [] as SearchItem[],
   query: '',
 }
 
@@ -16,7 +16,7 @@ export enum SearchActionTypes {
 }
 
 export type TDatabaseAction =
-  | { type: SearchActionTypes.LOAD; payload: IDataBaseEntry[] }
+  | { type: SearchActionTypes.LOAD; payload: DataBaseEntry[] }
   | { type: SearchActionTypes.SEARCH; payload: string }
   | { type: SearchActionTypes.RESET; payload?: undefined }
 

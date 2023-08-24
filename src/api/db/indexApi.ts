@@ -1,14 +1,14 @@
 import { Params } from 'react-router-dom'
-import { IScreen, IScreenDataInput } from '../../models/Screen'
 import { routes } from '../../routes/AppRouteSchema'
+import { ScreenInput, ScreenItem } from './../../generated/openapi/models'
 import { createItem, deleteItem, getItem, getItemList, updateItem } from './indexDB'
 
 export type TScreenListResponse = {
-  list: IScreen[]
+  list: ScreenItem[]
 }
 
 export type TScreenResponse = {
-  item: IScreen
+  item: ScreenItem
 }
 
 export type TIdResponse = {
@@ -21,7 +21,7 @@ export async function getScreenList(): Promise<TScreenListResponse> {
   return { list }
 }
 
-export async function getScreen(params: Params): Promise<{ item: IScreen | undefined }> {
+export async function getScreen(params: Params): Promise<{ item: ScreenItem | undefined }> {
   const item = await getItem(params[routes.screens.key])
   if (!item) {
     throw new Error('Not Found')
@@ -30,13 +30,13 @@ export async function getScreen(params: Params): Promise<{ item: IScreen | undef
   return { item }
 }
 
-export async function updateItemAction(data: IScreen) {
+export async function updateItemAction(data: ScreenItem) {
   const item = await updateItem(data.id || '', data)
 
   return { item }
 }
 
-export async function createItemAction(data: IScreenDataInput) {
+export async function createItemAction(data: ScreenInput) {
   const item = await createItem(data)
 
   return { item }

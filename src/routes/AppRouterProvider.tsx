@@ -1,6 +1,4 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
-import Contact from '../pages/Contacts'
-import EditContact from '../pages/EditContact'
 import ErrorManager from '../pages/ErrorManger'
 import Geometry from '../pages/Geometry'
 import Root from '../pages/Root'
@@ -20,14 +18,6 @@ export default function AppRouterProvider() {
             {
               path: routes.screens.path + '/' + routes.screens.actions.create,
               element: <Geometry />,
-            },
-            {
-              path: routes.screens.path + '/' + routes.screens.key,
-              element: <Contact />,
-            },
-            {
-              path: routes.screens.path + '/' + routes.screens.key + '/' + routes.screens.actions.edit,
-              element: <EditContact />,
             },
             {
               path: routes.screens.path + routes.screens.key + '/' + routes.screens.actions.delete,

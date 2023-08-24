@@ -1,5 +1,5 @@
-import { ScreenItem } from '../generated/openapi/models'
-import { IDimension, IScreenColor } from '../models/Screen'
+import { ScreenColor, ScreenItem } from '../generated/openapi/models'
+import { Dimensions } from '../models/Screen'
 import { getRandomInt } from './RandomNumber'
 
 export const getMaxScreenSize = (screens: Array<ScreenItem>) =>
@@ -7,9 +7,9 @@ export const getMaxScreenSize = (screens: Array<ScreenItem>) =>
     (acc, screen) => {
       const width = screen.data.hSize
       const height = screen.data.vSize
-      return { width: Math.max(acc.width, width), height: Math.max(acc.height, height) } as IDimension
+      return { width: Math.max(acc.width, width), height: Math.max(acc.height, height) } as Dimensions
     },
-    { width: 0, height: 0 } as IDimension,
+    { width: 0, height: 0 } as Dimensions,
   )
 
 export const normaliseScreenRender = (list: ScreenItem[]) => {
@@ -36,5 +36,5 @@ export const normaliseScreenRender = (list: ScreenItem[]) => {
   return sorted
 }
 
-export const createCSSColor = (color?: IScreenColor, alpha?: number) =>
+export const createCSSColor = (color?: ScreenColor, alpha?: number) =>
   color ? `rgba(${color.r}, ${color.g}, ${color.b}, ${alpha || 1})` : 'transparent'

@@ -1,35 +1,35 @@
 import localforage from 'localforage'
-import { IScreen, IScreenDataInput } from '../../models/Screen'
-import { transformScreen } from '../../utils/ScreenTransformation'
+import { ScreenInput, ScreenItem } from '../../generated/openapi/models'
+import { transformScreenInput } from '../../utils/ScreenTransformation'
 
 const storageKey = 'screens'
 
-export async function getItemList(): Promise<Array<IScreen>> {
+export async function getItemList(): Promise<Array<ScreenItem>> {
   await fakeNetwork()
-  const list: Array<IScreen> = (await localforage.getItem(storageKey)) || []
+  const list: Array<ScreenItem> = (await localforage.getItem(storageKey)) || []
 
   return list
 }
 
-export async function createItem(data: IScreenDataInput): Promise<IScreen> {
+export async function createItem(data: ScreenInput): Promise<ScreenItem> {
   await fakeNetwork()
-  const item = transformScreen(data)
-  const list: Array<IScreen> = await getItemList()
+  const item = transformScreenInput(data)
+  const list: Array<ScreenItem> = await getItemList()
   list.unshift(item)
   await set(list)
   return item
 }
 
-export async function getItem(id?: string): Promise<IScreen | undefined> {
+export async function getItem(id?: string): Promise<ScreenItem | undefined> {
   await fakeNetwork(`contact:${id}`)
-  const list: Array<IScreen> = (await localforage.getItem(storageKey)) || []
+  const list: Array<ScreenItem> = (await localforage.getItem(storageKey)) || []
   const item = list.find((entry) => entry.id === id)
   return item
 }
 
-export async function updateItem(id: string, updates: IScreen): Promise<IScreen> {
+export async function updateItem(id: string, updates: ScreenItem): Promise<ScreenItem> {
   await fakeNetwork()
-  const list: Array<IScreen> = (await localforage.getItem(storageKey)) || []
+  const list: Array<ScreenItem> = (await localforage.getItem(storageKey)) || []
   const item = list.find((entry) => entry.id === id)
   if (!item) throw new Error(`No contact found for ${id}`)
   Object.assign(item, updates)
@@ -38,7 +38,7 @@ export async function updateItem(id: string, updates: IScreen): Promise<IScreen>
 }
 
 export async function deleteItem(id: string): Promise<boolean> {
-  const list: Array<IScreen> = (await localforage.getItem(storageKey)) || []
+  const list: Array<ScreenItem> = (await localforage.getItem(storageKey)) || []
   const index = list.findIndex((entry) => entry.id === id)
   if (index > -1) {
     list.splice(index, 1)
@@ -48,7 +48,7 @@ export async function deleteItem(id: string): Promise<boolean> {
   return false
 }
 
-function set(itemList: Array<IScreen>): Promise<Array<IScreen>> {
+function set(itemList: Array<ScreenItem>): Promise<Array<ScreenItem>> {
   return localforage.setItem(storageKey, itemList)
 }
 
