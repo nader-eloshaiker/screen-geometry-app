@@ -12,7 +12,6 @@ export default function Header() {
               <HamburgerButton className='lightModeText lg:hidden' />
               <ul className='flex justify-center gap-4 list-none'>
                 <li>Home</li>
-                <li>Blog</li>
                 <li>About</li>
                 <li>Contact</li>
               </ul>

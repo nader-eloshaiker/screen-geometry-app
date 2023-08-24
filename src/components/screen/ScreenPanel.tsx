@@ -1,3 +1,4 @@
+import cn from 'classnames'
 import styled from 'styled-components'
 import { ScreenColor, ScreenItem } from '../../generated/openapi/models'
 import { createCSSColor } from '../../utils/ScreenCalc'
@@ -19,7 +20,7 @@ export const ScreenPanel = ({ screen, index, selected, ...rest }: TProps) => {
 
   return (
     <Panel
-      className={`rounded-lg ${selected ? 'border-4' : 'border-2 border-dotted'}`}
+      className={cn({ 'border-4': selected, 'border-2 border-dotted': !selected }) + ' rounded-lg'}
       $width={width}
       $height={height}
       $color={screen.render?.color}

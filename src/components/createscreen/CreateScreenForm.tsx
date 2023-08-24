@@ -1,17 +1,13 @@
 import { yupResolver } from '@hookform/resolvers/yup'
+import cn from 'classnames'
 import { SubmitHandler, useForm } from 'react-hook-form'
-import { styled } from 'styled-components'
 import * as yup from 'yup'
 import { ScreenInput } from '../../generated/openapi/models'
 import { useCreateScreen } from '../../hooks/api/useCreateScreen'
 import { SearchItem } from '../../models/Database'
 import { ScreenDataEnum } from '../../models/Screen'
 import AutoCompleteScreen from '../autocomplete/AutoCompleteScreen'
-
-const InputSuffix = styled.span`
-  color: hsl(var(--bc) / var(--tw-placeholder-opacity));
-  --tw-placeholder-opacity: 0.6;
-`
+import { InputPlaceholder } from '../inputplaceholder/InputPlaceholder'
 
 const screenDataSchema = yup.object().shape(
   {
@@ -117,25 +113,26 @@ export default function CreateScreenForm() {
 
       <form method='post' onSubmit={handleSubmit(onSubmit)}>
         <div className='flex flex-col gap-2'>
-          <div id='screenTag' className='flex flex-row gap-2'>
+          <div id='screenTag' className='grid grid-cols-2 gap-2'>
             {/* diagnolSize */}
             <div id='screenSizeControl' className='flex flex-col mb-4 form-control'>
               <label htmlFor={ScreenDataEnum.diagonalSize} className='label'>
                 <span className='label-text'>Screen Size</span>
               </label>
               <div className='relative'>
-                <InputSuffix className='absolute top-0 right-0 flex w-10 h-full border border-transparent'>
+                <InputPlaceholder className='absolute top-0 right-0 flex w-10 h-full'>
                   <div className='z-10 flex items-center justify-center w-full h-full rounded-tr rounded-br text-md'>
                     in
                   </div>
-                </InputSuffix>
+                </InputPlaceholder>
 
                 <input
                   type='number'
                   autoComplete='off'
-                  className={`relative pr-10 w-full input-bordered input input-md${
-                    errors[ScreenDataEnum.diagonalSize] && ' input-error'
-                  }`}
+                  className={
+                    cn({ 'input-error': errors[ScreenDataEnum.diagonalSize] }) +
+                    ' relative pr-10 w-full input-bordered input input-md'
+                  }
                   placeholder='27'
                   {...register(ScreenDataEnum.diagonalSize)}
                 />
@@ -149,9 +146,9 @@ export default function CreateScreenForm() {
               </label>
               <input
                 type='text'
-                className={`w-full input input-bordered input-md${
-                  errors[ScreenDataEnum.aspectRatio] && ' input-error'
-                }`}
+                className={
+                  cn({ 'input-error': errors[ScreenDataEnum.aspectRatio] }) + ' w-full input input-bordered input-md'
+                }
                 autoComplete='off'
                 placeholder='16:9'
                 {...register(ScreenDataEnum.aspectRatio)}
@@ -161,25 +158,26 @@ export default function CreateScreenForm() {
 
           <div className='text-sm divider'>Optional</div>
 
-          <div id='screenData' className='flex flex-row gap-2'>
+          <div id='screenData' className='grid grid-cols-2 gap-2 grrid'>
             {/* hRes */}
             <div id='hSizeControl' className='flex flex-col mb-4 form-control'>
               <label htmlFor={ScreenDataEnum.hRes} className='label'>
                 <span className='label-text'>Horizontal Res</span>
               </label>
               <div className='relative'>
-                <InputSuffix className='absolute top-0 right-0 flex w-10 h-full border border-transparent'>
+                <InputPlaceholder className='absolute top-0 right-0 flex w-10 h-full'>
                   <div className='z-10 flex items-center justify-center w-full h-full rounded-tr rounded-br text-md'>
                     px
                   </div>
-                </InputSuffix>
+                </InputPlaceholder>
 
                 <input
                   type='number'
                   autoComplete='off'
-                  className={`relative pr-10 w-full input-bordered input input-md${
-                    errors[ScreenDataEnum.hRes] && ' input-error'
-                  }`}
+                  className={
+                    cn({ 'input-error': errors[ScreenDataEnum.hRes] }) +
+                    ' relative pr-10 w-full input-bordered input input-md'
+                  }
                   placeholder='1024'
                   {...register(ScreenDataEnum.hRes)}
                 />
@@ -192,18 +190,19 @@ export default function CreateScreenForm() {
                 <span className='label-text'>Vertical Res</span>
               </label>
               <div className='relative'>
-                <InputSuffix className='absolute top-0 right-0 flex w-10 h-full border border-transparent'>
+                <InputPlaceholder className='absolute top-0 right-0 flex w-10 h-full'>
                   <div className='z-10 flex items-center justify-center w-full h-full rounded-tr rounded-br text-md'>
                     px
                   </div>
-                </InputSuffix>
+                </InputPlaceholder>
 
                 <input
                   type='number'
                   autoComplete='off'
-                  className={`relative pr-10 w-full input-bordered input input-md${
-                    errors[ScreenDataEnum.vRes] && ' input-error'
-                  }`}
+                  className={
+                    cn({ 'input-error': errors[ScreenDataEnum.vRes] }) +
+                    ' relative pr-10 w-full input-bordered input input-md'
+                  }
                   placeholder='768'
                   {...register(ScreenDataEnum.vRes)}
                 />
