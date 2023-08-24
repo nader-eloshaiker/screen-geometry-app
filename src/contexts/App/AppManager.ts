@@ -1,7 +1,8 @@
-import { ErrorResponseError, ScreenItem } from '../../generated/openapi/models'
+import { ErrorResponse, ScreenItem } from '../../generated/openapi/models'
+import { getRandomString } from '../../utils/RandomGenerator';
 import { normaliseScreenRender } from '../../utils/ScreenCalc'
 
-export type ErrorTag = { error: ErrorResponseError; tag: string }
+export type ErrorTag = { error: ErrorResponse; tag: string }
 
 export const initialScreenState = {
   screens: [] as ScreenItem[],
@@ -25,7 +26,7 @@ export type ScreenAction =
   | { type: AppActionTypes.UPDATE; payload: ScreenItem }
   | { type: AppActionTypes.ADD; payload: ScreenItem }
   | { type: AppActionTypes.DELETE; payload: string }
-  | { type: AppActionTypes.ADD_ERROR; payload: ErrorTag }
+  | { type: AppActionTypes.ADD_ERROR; payload: ErrorResponse }
   | { type: AppActionTypes.REMOVE_ERROR; payload: string }
 
 export const appReducer = (state: ScreenState, { type, payload }: ScreenAction): ScreenState => {
@@ -56,7 +57,7 @@ export const appReducer = (state: ScreenState, { type, payload }: ScreenAction):
 
       return { ...state, screens: additions }
     case AppActionTypes.ADD_ERROR:
-      return { ...state, errorTags: [...state.errorTags, payload] }
+      return { ...state, errorTags: [...state.errorTags, { error: payload, tag: getRandomString(8) }] }
     case AppActionTypes.REMOVE_ERROR:
       return { ...state, errorTags: state.errorTags.filter((error) => error.tag !== payload) }
     default:

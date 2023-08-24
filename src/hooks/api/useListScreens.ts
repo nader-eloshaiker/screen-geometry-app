@@ -15,7 +15,7 @@ export const useListScreens = () => {
 
   useEffect(() => {
     if (screenListError) {
-      dispatch({ type: AppActionTypes.ADD_ERROR, payload: { error: screenListError.error, tag: 'list' } })
+      dispatch({ type: AppActionTypes.ADD_ERROR, payload: screenListError })
     }
   }, [screenListError])
 

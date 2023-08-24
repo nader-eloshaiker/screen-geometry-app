@@ -1,6 +1,6 @@
 import { ScreenInput, ScreenItem, ScreenSpec } from '../generated/openapi/models'
 import { DataBaseEntry, SearchData, SearchItem } from '../models/Database'
-import { getRandomInt } from './RandomNumber'
+import { getRandomInt, getRandomString } from './RandomGenerator'
 
 const getAspectRatio = (str: string) => {
   const [width, height] = str.split(':')
@@ -37,7 +37,7 @@ const createSpec = (width?: number, height?: number, size?: number): ScreenSpec 
 export const transformScreenInput = (data: ScreenInput): ScreenItem => {
   const [hAspectRatio, vAspectRatio] = getAspectRatio(data.aspectRatio)
   const item: ScreenItem = {
-    id: Math.random().toString(36).substring(2, 9),
+    id: getRandomString(8),
     tag: data,
     data: {
       hSize: hAspectRatio * (data.diagonalSize / Math.sqrt(Math.pow(hAspectRatio, 2) + Math.pow(vAspectRatio, 2))),

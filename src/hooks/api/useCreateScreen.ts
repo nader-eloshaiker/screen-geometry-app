@@ -16,7 +16,7 @@ export const useCreateScreen = () => {
 
   useEffect(() => {
     if (createError) {
-      dispatch({ type: AppActionTypes.ADD_ERROR, payload: { error: createError.error, tag: 'create' } })
+      dispatch({ type: AppActionTypes.ADD_ERROR, payload: createError })
     }
   }, [createError])
 

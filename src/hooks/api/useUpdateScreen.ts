@@ -16,7 +16,7 @@ export const useUpdateScreen = () => {
 
   useEffect(() => {
     if (updateError) {
-      dispatch({ type: AppActionTypes.ADD_ERROR, payload: { error: updateError.error, tag: 'update' } })
+      dispatch({ type: AppActionTypes.ADD_ERROR, payload: updateError })
     }
   }, [updateError])
 
