@@ -5,7 +5,6 @@ import CloseIcon from '../assets/icons/Close'
 import EditIcon from '../assets/icons/Edit'
 import StarOutlineIcon from '../assets/icons/StarOutline'
 import StarSolidIcon from '../assets/icons/StarSolid'
-import ApiError from '../components/apierror/ApiError'
 import { ScreenPanel } from '../components/screen/ScreenPanel'
 import { useAppContext } from '../contexts/App/useAppContext'
 import { SkeletonImage } from '../contexts/skeleton/SkeletonImage'
@@ -178,11 +177,6 @@ export default function Geometry() {
           <SkeletonImage className='w-full h-full' />
         )}
       </Stacked>
-      <div className='toast toast-center'>
-        <ApiError errorResponse={screenListError} />
-        <ApiError errorResponse={favouriteError} />
-        <ApiError errorResponse={deleteError} />
-      </div>
     </div>
   )
 }

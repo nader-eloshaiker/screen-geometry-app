@@ -1,3 +1,5 @@
+import { ErrorToaster } from '../error/toaster/ErrorToaster'
+
 export default function Footer() {
   return (
     <footer className='items-center justify-between grid-flow-col p-4 footer rounded-t-xl'>
@@ -27,6 +29,7 @@ export default function Footer() {
           </svg>
         </a>
       </div>
+      <ErrorToaster />
     </footer>
   )
 }

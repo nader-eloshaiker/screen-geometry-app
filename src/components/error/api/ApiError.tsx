@@ -1,4 +1,4 @@
-import { ErrorResponse } from '../../generated/openapi/models'
+import { ErrorResponse } from '../../../generated/openapi/models'
 
 type TProps = {
   errorResponse: ErrorResponse | null

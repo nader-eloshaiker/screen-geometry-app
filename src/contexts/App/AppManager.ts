@@ -1,13 +1,12 @@
-import { ScreenItem } from '../../generated/openapi/models'
+import { ErrorResponseError, ScreenItem } from '../../generated/openapi/models'
 import { normaliseScreenRender } from '../../utils/ScreenCalc'
 
-export type LoadingTag = { status: boolean; tag: string }
+export type ErrorTag = { error: ErrorResponseError; tag: string }
 
 export const initialScreenState = {
   screens: [] as ScreenItem[],
   query: '',
-  loadingTag: [] as Array<LoadingTag>,
-  loading: false,
+  errorTags: [] as Array<ErrorTag>,
 }
 
 export type ScreenState = typeof initialScreenState
@@ -17,7 +16,8 @@ export enum AppActionTypes {
   UPDATE = 'update',
   ADD = 'add',
   DELETE = 'delete',
-  LOADING = 'loading',
+  ADD_ERROR = 'add_error',
+  REMOVE_ERROR = 'remove_error',
 }
 
 export type ScreenAction =
@@ -25,15 +25,8 @@ export type ScreenAction =
   | { type: AppActionTypes.UPDATE; payload: ScreenItem }
   | { type: AppActionTypes.ADD; payload: ScreenItem }
   | { type: AppActionTypes.DELETE; payload: string }
-  | { type: AppActionTypes.LOADING; payload: { status: boolean; tag: string } }
-
-const generateLoadingTag = (val: LoadingTag, list: Array<LoadingTag>) => {
-  const index = list.findIndex((item) => item.tag === val.tag)
-  const newList = index === -1 ? [...list, val] : list.with(index, val)
-  const status = newList.some((item: LoadingTag) => item.status)
-
-  return { loadingTag: newList, loading: status } as const
-}
+  | { type: AppActionTypes.ADD_ERROR; payload: ErrorTag }
+  | { type: AppActionTypes.REMOVE_ERROR; payload: string }
 
 export const appReducer = (state: ScreenState, { type, payload }: ScreenAction): ScreenState => {
   switch (type) {
@@ -62,11 +55,10 @@ export const appReducer = (state: ScreenState, { type, payload }: ScreenAction):
       const additions = normaliseScreenRender([...state.screens, payload])
 
       return { ...state, screens: additions }
-    case AppActionTypes.LOADING:
-      // eslint-disable-next-line no-case-declarations
-      const result = generateLoadingTag(payload, state.loadingTag)
-
-      return { ...state, ...result }
+    case AppActionTypes.ADD_ERROR:
+      return { ...state, errorTags: [...state.errorTags, payload] }
+    case AppActionTypes.REMOVE_ERROR:
+      return { ...state, errorTags: state.errorTags.filter((error) => error.tag !== payload) }
     default:
       return state
   }
