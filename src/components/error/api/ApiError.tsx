@@ -1,11 +1,24 @@
-import { ErrorTag } from '../../../contexts/App/AppManager'
+import axios, { AxiosError } from 'axios'
+import { AppActionTypes, ErrorTag } from '../../../contexts/App/AppManager'
+import { useAppContext } from '../../../contexts/App/useAppContext'
+import { ErrorResponseError } from '../../../generated/openapi/models'
 
 type TProps = {
   errorTag: ErrorTag
 }
 
 export const ApiError = ({ errorTag }: TProps) => {
-  const { code, name, message } = errorTag.error
+  const axiosError = axios.isAxiosError(errorTag.error) ? (errorTag.error as AxiosError) : undefined
+  const errorResponse = !axios.isAxiosError(errorTag.error) ? (errorTag.error.error as ErrorResponseError) : undefined
+  const code = axiosError ? axiosError.code : errorResponse?.code
+  const name = axiosError ? axiosError.name : errorResponse?.status
+  const message = axiosError ? axiosError.message : errorResponse?.message
+
+  const [_, dispatch] = useAppContext()
+
+  const onClose = () => {
+    dispatch({ type: AppActionTypes.REMOVE_ERROR, payload: errorTag.tag })
+  }
 
   return (
     <div className='alert alert-error'>
@@ -29,6 +42,9 @@ export const ApiError = ({ errorTag }: TProps) => {
           {name}: {message}
         </div>
       </div>
+      <button className='btn btn-ghost btn-sm' onClick={onClose}>
+        DISMISS
+      </button>
     </div>
   )
 }

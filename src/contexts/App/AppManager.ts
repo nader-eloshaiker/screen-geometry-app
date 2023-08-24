@@ -1,8 +1,9 @@
+import axios, { AxiosError } from 'axios'
 import { ErrorResponse, ScreenItem } from '../../generated/openapi/models'
-import { getRandomString } from '../../utils/RandomGenerator';
+import { getRandomString } from '../../utils/RandomGenerator'
 import { normaliseScreenRender } from '../../utils/ScreenCalc'
 
-export type ErrorTag = { error: ErrorResponse; tag: string }
+export type ErrorTag = { error: ErrorResponse | AxiosError; tag: string }
 
 export const initialScreenState = {
   screens: [] as ScreenItem[],
@@ -26,7 +27,7 @@ export type ScreenAction =
   | { type: AppActionTypes.UPDATE; payload: ScreenItem }
   | { type: AppActionTypes.ADD; payload: ScreenItem }
   | { type: AppActionTypes.DELETE; payload: string }
-  | { type: AppActionTypes.ADD_ERROR; payload: ErrorResponse }
+  | { type: AppActionTypes.ADD_ERROR; payload: ErrorResponse | AxiosError }
   | { type: AppActionTypes.REMOVE_ERROR; payload: string }
 
 export const appReducer = (state: ScreenState, { type, payload }: ScreenAction): ScreenState => {
@@ -57,7 +58,11 @@ export const appReducer = (state: ScreenState, { type, payload }: ScreenAction):
 
       return { ...state, screens: additions }
     case AppActionTypes.ADD_ERROR:
-      return { ...state, errorTags: [...state.errorTags, { error: payload, tag: getRandomString(8) }] }
+      if (axios.isAxiosError(payload) && !axios.isCancel(payload)) {
+        return { ...state, errorTags: [...state.errorTags, { error: payload, tag: getRandomString(8) }] }
+      }
+
+      return state
     case AppActionTypes.REMOVE_ERROR:
       return { ...state, errorTags: state.errorTags.filter((error) => error.tag !== payload) }
     default:
