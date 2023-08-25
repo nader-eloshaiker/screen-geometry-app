@@ -1,16 +1,16 @@
 import { useEffect } from 'react'
-import { AppActionTypes } from '../../contexts/App/AppManager'
-import { useAppContext } from '../../contexts/App/useAppContext'
 import {
   GeneralNotificationItem,
   NotificationActionTypes,
   NotificationType,
 } from '../../contexts/Notification/NotificationManager'
 import { useNotificationContext } from '../../contexts/Notification/useNotifcationContext'
+import { ScreenActionTypes } from '../../contexts/Screen/ScreenManager'
+import { useScreenContext } from '../../contexts/Screen/useScreenContext'
 import { useFavoriteScreenAction } from '../../generated/openapi/services/screen-action-service'
 
 export const useFavoriteScreen = () => {
-  const [_, dispatchScreen] = useAppContext()
+  const [_, dispatchScreen] = useScreenContext()
   const [__, dispatchNotification] = useNotificationContext()
   const {
     isLoading: isFavoriteLoading,
@@ -21,7 +21,7 @@ export const useFavoriteScreen = () => {
 
   useEffect(() => {
     if (favoriteResponse) {
-      dispatchScreen({ type: AppActionTypes.UPDATE, payload: favoriteResponse.item })
+      dispatchScreen({ type: ScreenActionTypes.UPDATE, payload: favoriteResponse.item })
       dispatchNotification({
         type: NotificationActionTypes.ADD_NOTIFICATION,
         payload: {

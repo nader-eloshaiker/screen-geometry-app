@@ -8,7 +8,7 @@ export const initialScreenState = {
 
 export type ScreenState = typeof initialScreenState
 
-export enum AppActionTypes {
+export enum ScreenActionTypes {
   LIST = 'list',
   UPDATE = 'update',
   ADD = 'add',
@@ -16,24 +16,24 @@ export enum AppActionTypes {
 }
 
 export type ScreenAction =
-  | { type: AppActionTypes.LIST; payload: ScreenItem[] }
-  | { type: AppActionTypes.UPDATE; payload: ScreenItem }
-  | { type: AppActionTypes.ADD; payload: ScreenItem }
-  | { type: AppActionTypes.DELETE; payload: string }
+  | { type: ScreenActionTypes.LIST; payload: ScreenItem[] }
+  | { type: ScreenActionTypes.UPDATE; payload: ScreenItem }
+  | { type: ScreenActionTypes.ADD; payload: ScreenItem }
+  | { type: ScreenActionTypes.DELETE; payload: string }
 
-export const appReducer = (state: ScreenState, { type, payload }: ScreenAction): ScreenState => {
+export const screenReducer = (state: ScreenState, { type, payload }: ScreenAction): ScreenState => {
   switch (type) {
-    case AppActionTypes.LIST:
+    case ScreenActionTypes.LIST:
       // eslint-disable-next-line no-case-declarations
       const list = normaliseScreenRender(payload)
 
       return { ...state, screens: list }
-    case AppActionTypes.DELETE:
+    case ScreenActionTypes.DELETE:
       // eslint-disable-next-line no-case-declarations
       const deletion = state.screens.filter((screen) => screen.id !== payload)
 
       return { ...state, screens: normaliseScreenRender(deletion) }
-    case AppActionTypes.UPDATE:
+    case ScreenActionTypes.UPDATE:
       // eslint-disable-next-line no-case-declarations
       const modification = state.screens.map((screen) =>
         payload && screen.id !== payload.id ? screen : payload,
@@ -43,7 +43,7 @@ export const appReducer = (state: ScreenState, { type, payload }: ScreenAction):
         ...state,
         screens: normaliseScreenRender(modification),
       }
-    case AppActionTypes.ADD:
+    case ScreenActionTypes.ADD:
       // eslint-disable-next-line no-case-declarations
       const additions = normaliseScreenRender([...state.screens, payload])
 

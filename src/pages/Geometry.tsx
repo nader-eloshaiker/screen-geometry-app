@@ -6,7 +6,7 @@ import EditIcon from '../assets/icons/Edit'
 import StarOutlineIcon from '../assets/icons/StarOutline'
 import StarSolidIcon from '../assets/icons/StarSolid'
 import { ScreenPanel } from '../components/screen/ScreenPanel'
-import { useAppContext } from '../contexts/App/useAppContext'
+import { useScreenContext } from '../contexts/Screen/useScreenContext'
 import { SkeletonImage } from '../contexts/skeleton/SkeletonImage'
 import { SkeletonRect } from '../contexts/skeleton/SkeletonRect'
 import { ScreenItem } from '../generated/openapi/models'
@@ -50,7 +50,7 @@ const TableSkeleton = ({ cols, rows }: TTableProps) => {
 
 export default function Geometry() {
   const { ref: divRef, width = 1 } = useResizeObserver<HTMLDivElement>()
-  const [{ screens }] = useAppContext()
+  const [{ screens }] = useScreenContext()
   const [highlighted, setHighlighted] = useState<ScreenItem>()
   const [selected, setSelected] = useState<ScreenItem>()
   const maxScreenSize = screens.length > 0 ? getMaxScreenSize(screens) : { width: 47, height: 16 } // max possible screen size

@@ -39,7 +39,7 @@ export type NotificationAction =
   | { type: NotificationActionTypes.ADD_NOTIFICATION; payload: NotificationItem }
   | { type: NotificationActionTypes.REMOVE_NOTIFICATION; payload: string }
 
-export const appReducer = (state: NotificationState, { type, payload }: NotificationAction): NotificationState => {
+export const screenReducer = (state: NotificationState, { type, payload }: NotificationAction): NotificationState => {
   switch (type) {
     case NotificationActionTypes.ADD_NOTIFICATION:
       if (axios.isAxiosError(payload.value) && !axios.isCancel(payload.value)) {

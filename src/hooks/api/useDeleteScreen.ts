@@ -1,16 +1,16 @@
 import { useEffect } from 'react'
-import { AppActionTypes } from '../../contexts/App/AppManager'
-import { useAppContext } from '../../contexts/App/useAppContext'
 import {
   GeneralNotificationItem,
   NotificationActionTypes,
   NotificationType,
 } from '../../contexts/Notification/NotificationManager'
 import { useNotificationContext } from '../../contexts/Notification/useNotifcationContext'
+import { ScreenActionTypes } from '../../contexts/Screen/ScreenManager'
+import { useScreenContext } from '../../contexts/Screen/useScreenContext'
 import { useDeleteScreenAction } from '../../generated/openapi/services/screen-service'
 
 export const useDeleteScreen = () => {
-  const [_, dispatchScreen] = useAppContext()
+  const [_, dispatchScreen] = useScreenContext()
   const [__, dispatchNotification] = useNotificationContext()
   const {
     isLoading: isDeleteLoading,
@@ -21,7 +21,7 @@ export const useDeleteScreen = () => {
 
   useEffect(() => {
     if (deleteResponse) {
-      dispatchScreen({ type: AppActionTypes.DELETE, payload: deleteResponse.id })
+      dispatchScreen({ type: ScreenActionTypes.DELETE, payload: deleteResponse.id })
       dispatchNotification({
         type: NotificationActionTypes.ADD_NOTIFICATION,
         payload: {
