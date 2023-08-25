@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { AppActionTypes } from '../../contexts/App/AppManager'
+import { AppActionTypes, GeneralNotificationItem, NotificationType } from '../../contexts/App/AppManager'
 import { useAppContext } from '../../contexts/App/useAppContext'
 import { ScreenInput } from '../../generated/openapi/models'
 import { useCreateScreenAction } from '../../generated/openapi/services/screen-list-service'
@@ -11,12 +11,19 @@ export const useCreateScreen = () => {
   useEffect(() => {
     if (createResponse) {
       dispatch({ type: AppActionTypes.ADD, payload: createResponse.item })
+      dispatch({
+        type: AppActionTypes.ADD_NOTIFICATION,
+        payload: {
+          value: { title: 'Success', message: 'Created: Screen configuration' } as GeneralNotificationItem,
+          type: NotificationType.SUCCESS,
+        },
+      })
     }
   }, [createResponse])
 
   useEffect(() => {
     if (createError) {
-      dispatch({ type: AppActionTypes.ADD_ERROR, payload: createError })
+      dispatch({ type: AppActionTypes.ADD_NOTIFICATION, payload: { value: createError, type: NotificationType.ERROR } })
     }
   }, [createError])
 

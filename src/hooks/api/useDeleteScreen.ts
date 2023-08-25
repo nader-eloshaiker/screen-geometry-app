@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { AppActionTypes } from '../../contexts/App/AppManager'
+import { AppActionTypes, GeneralNotificationItem, NotificationType } from '../../contexts/App/AppManager'
 import { useAppContext } from '../../contexts/App/useAppContext'
 import { useDeleteScreenAction } from '../../generated/openapi/services/screen-service'
 
@@ -15,12 +15,19 @@ export const useDeleteScreen = () => {
   useEffect(() => {
     if (deleteResponse) {
       dispatch({ type: AppActionTypes.DELETE, payload: deleteResponse.id })
+      dispatch({
+        type: AppActionTypes.ADD_NOTIFICATION,
+        payload: {
+          value: { title: 'Success', message: 'Deleted: Screen configuration' } as GeneralNotificationItem,
+          type: NotificationType.SUCCESS,
+        },
+      })
     }
   }, [deleteResponse])
 
   useEffect(() => {
     if (deleteError) {
-      dispatch({ type: AppActionTypes.ADD_ERROR, payload: deleteError })
+      dispatch({ type: AppActionTypes.ADD_NOTIFICATION, payload: { value: deleteError, type: NotificationType.ERROR } })
     }
   }, [deleteError])
 

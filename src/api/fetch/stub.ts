@@ -24,7 +24,7 @@ export const generateStub = (axiosInstance: AxiosInstance) => {
     routes.baseUrl + routes.basePath + '/' + routes.screens.path + '/\\S+' + '/' + routes.screens.actions.favorite,
   )
 
-  mock.onGet(`${routes.baseUrl}${routes.basePath}/a/${routes.screens.path}`).reply((config) =>
+  mock.onGet(`${routes.baseUrl}${routes.basePath}/${routes.screens.path}`).reply((config) =>
     getScreenList().then((payload) => {
       debug(config, payload)
 

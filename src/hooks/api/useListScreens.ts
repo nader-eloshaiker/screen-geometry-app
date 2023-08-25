@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { AppActionTypes } from '../../contexts/App/AppManager'
+import { AppActionTypes, NotificationType } from '../../contexts/App/AppManager'
 import { useAppContext } from '../../contexts/App/useAppContext'
 import { useListScreensAction } from '../../generated/openapi/services/screen-list-service'
 
@@ -15,7 +15,10 @@ export const useListScreens = () => {
 
   useEffect(() => {
     if (screenListError) {
-      dispatch({ type: AppActionTypes.ADD_ERROR, payload: screenListError })
+      dispatch({
+        type: AppActionTypes.ADD_NOTIFICATION,
+        payload: { value: screenListError, type: NotificationType.ERROR },
+      })
     }
   }, [screenListError])
 

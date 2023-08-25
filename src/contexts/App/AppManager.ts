@@ -3,12 +3,32 @@ import { ErrorResponse, ScreenItem } from '../../generated/openapi/models'
 import { getRandomString } from '../../utils/RandomGenerator'
 import { normaliseScreenRender } from '../../utils/ScreenCalc'
 
-export type ErrorTag = { error: ErrorResponse | AxiosError; tag: string }
+export enum NotificationType {
+  ERROR = 'alert-error',
+  WARNING = 'alert-warning',
+  SUCCESS = 'alert-success',
+}
+
+export enum GeneralNotificationItemKeys {
+  TITLE = 'title',
+  MESSAGE = 'message',
+}
+export type GeneralNotificationItem = {
+  [GeneralNotificationItemKeys.TITLE]: string
+  [GeneralNotificationItemKeys.MESSAGE]: string
+}
+export type NotificationItem = {
+  value: ErrorResponse | AxiosError | GeneralNotificationItem
+  type: NotificationType
+}
+export type NotificationItemLogged = {
+  tag: string
+} & NotificationItem
 
 export const initialScreenState = {
   screens: [] as ScreenItem[],
   query: '',
-  errorTags: [] as Array<ErrorTag>,
+  notifications: [] as Array<NotificationItemLogged>,
 }
 
 export type ScreenState = typeof initialScreenState
@@ -18,8 +38,8 @@ export enum AppActionTypes {
   UPDATE = 'update',
   ADD = 'add',
   DELETE = 'delete',
-  ADD_ERROR = 'add_error',
-  REMOVE_ERROR = 'remove_error',
+  ADD_NOTIFICATION = 'add_notification',
+  REMOVE_NOTIFICATION = 'remove_notification',
 }
 
 export type ScreenAction =
@@ -27,8 +47,8 @@ export type ScreenAction =
   | { type: AppActionTypes.UPDATE; payload: ScreenItem }
   | { type: AppActionTypes.ADD; payload: ScreenItem }
   | { type: AppActionTypes.DELETE; payload: string }
-  | { type: AppActionTypes.ADD_ERROR; payload: ErrorResponse | AxiosError }
-  | { type: AppActionTypes.REMOVE_ERROR; payload: string }
+  | { type: AppActionTypes.ADD_NOTIFICATION; payload: NotificationItem }
+  | { type: AppActionTypes.REMOVE_NOTIFICATION; payload: string }
 
 export const appReducer = (state: ScreenState, { type, payload }: ScreenAction): ScreenState => {
   switch (type) {
@@ -57,14 +77,17 @@ export const appReducer = (state: ScreenState, { type, payload }: ScreenAction):
       const additions = normaliseScreenRender([...state.screens, payload])
 
       return { ...state, screens: additions }
-    case AppActionTypes.ADD_ERROR:
-      if (axios.isAxiosError(payload) && !axios.isCancel(payload)) {
-        return { ...state, errorTags: [...state.errorTags, { error: payload, tag: getRandomString(8) }] }
+    case AppActionTypes.ADD_NOTIFICATION:
+      if (axios.isAxiosError(payload.value) && !axios.isCancel(payload.value)) {
+        return state
       }
 
-      return state
-    case AppActionTypes.REMOVE_ERROR:
-      return { ...state, errorTags: state.errorTags.filter((error) => error.tag !== payload) }
+      return {
+        ...state,
+        notifications: [...state.notifications, { ...payload, tag: getRandomString(8) } as NotificationItemLogged],
+      }
+    case AppActionTypes.REMOVE_NOTIFICATION:
+      return { ...state, notifications: state.notifications.filter((error) => error.tag !== payload) }
     default:
       return state
   }

@@ -1,4 +1,4 @@
-import { ErrorToaster } from '../error/toaster/ErrorToaster'
+import { NotificationToaster } from '../notification/NotificationToaster'
 
 export default function Footer() {
   return (
@@ -29,7 +29,7 @@ export default function Footer() {
           </svg>
         </a>
       </div>
-      <ErrorToaster />
+      <NotificationToaster />
     </footer>
   )
 }
