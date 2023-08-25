@@ -5,9 +5,8 @@ import CloseIcon from '../assets/icons/Close'
 import EditIcon from '../assets/icons/Edit'
 import StarOutlineIcon from '../assets/icons/StarOutline'
 import StarSolidIcon from '../assets/icons/StarSolid'
-import ApiError from '../components/apierror/ApiError'
 import { ScreenPanel } from '../components/screen/ScreenPanel'
-import { useAppContext } from '../contexts/App/useAppContext'
+import { useScreenContext } from '../contexts/Screen/useScreenContext'
 import { SkeletonImage } from '../contexts/skeleton/SkeletonImage'
 import { SkeletonRect } from '../contexts/skeleton/SkeletonRect'
 import { ScreenItem } from '../generated/openapi/models'
@@ -51,15 +50,15 @@ const TableSkeleton = ({ cols, rows }: TTableProps) => {
 
 export default function Geometry() {
   const { ref: divRef, width = 1 } = useResizeObserver<HTMLDivElement>()
-  const [{ screens }] = useAppContext()
+  const [{ screens }] = useScreenContext()
   const [highlighted, setHighlighted] = useState<ScreenItem>()
   const [selected, setSelected] = useState<ScreenItem>()
   const maxScreenSize = screens.length > 0 ? getMaxScreenSize(screens) : { width: 47, height: 16 } // max possible screen size
   const maxPanelSize: Dimensions = { width, height: Math.round(maxScreenSize.height * (width / maxScreenSize.width)) }
 
-  const { isScreenListLoading, screenListError } = useListScreens()
-  const { isFavoriteLoading, favouriteError, favoriteAction } = useFavoriteScreen()
-  const { isDeleteLoading, deleteError, deleteAction } = useDeleteScreen()
+  const { isScreenListLoading } = useListScreens()
+  const { isFavoriteLoading, favoriteAction } = useFavoriteScreen()
+  const { isDeleteLoading, deleteAction } = useDeleteScreen()
 
   const onFavourite = (screen: ScreenItem) => {
     setSelected(screen)
@@ -178,11 +177,6 @@ export default function Geometry() {
           <SkeletonImage className='w-full h-full' />
         )}
       </Stacked>
-      <div className='toast toast-center'>
-        <ApiError errorResponse={screenListError} />
-        <ApiError errorResponse={favouriteError} />
-        <ApiError errorResponse={deleteError} />
-      </div>
     </div>
   )
 }

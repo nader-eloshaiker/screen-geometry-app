@@ -1,6 +1,6 @@
 import { ScreenColor, ScreenItem } from '../generated/openapi/models'
 import { Dimensions } from '../models/Screen'
-import { getRandomInt } from './RandomNumber'
+import { getRandomInt } from './RandomGenerator'
 
 export const getMaxScreenSize = (screens: Array<ScreenItem>) =>
   screens.reduce(

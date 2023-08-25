@@ -1,10 +1,17 @@
 import { useEffect } from 'react'
-import { AppActionTypes } from '../../contexts/App/AppManager'
-import { useAppContext } from '../../contexts/App/useAppContext'
+import {
+  GeneralNotificationItem,
+  NotificationActionTypes,
+  NotificationType,
+} from '../../contexts/Notification/NotificationManager'
+import { useNotificationContext } from '../../contexts/Notification/useNotifcationContext'
+import { ScreenActionTypes } from '../../contexts/Screen/ScreenManager'
+import { useScreenContext } from '../../contexts/Screen/useScreenContext'
 import { useFavoriteScreenAction } from '../../generated/openapi/services/screen-action-service'
 
 export const useFavoriteScreen = () => {
-  const [_, dispatch] = useAppContext()
+  const [_, dispatchScreen] = useScreenContext()
+  const [__, dispatchNotification] = useNotificationContext()
   const {
     isLoading: isFavoriteLoading,
     data: favoriteResponse,
@@ -14,9 +21,28 @@ export const useFavoriteScreen = () => {
 
   useEffect(() => {
     if (favoriteResponse) {
-      dispatch({ type: AppActionTypes.UPDATE, payload: favoriteResponse.item })
+      dispatchScreen({ type: ScreenActionTypes.UPDATE, payload: favoriteResponse.item })
+      dispatchNotification({
+        type: NotificationActionTypes.ADD_NOTIFICATION,
+        payload: {
+          value: {
+            title: 'Success',
+            message: `${favoriteResponse.item.favorite ? 'Favorited' : 'Unfavorited'}: Screen configuration`,
+          } as GeneralNotificationItem,
+          type: NotificationType.SUCCESS,
+        },
+      })
     }
   }, [favoriteResponse])
 
-  return { isFavoriteLoading, favouriteError, favoriteAction }
+  useEffect(() => {
+    if (favouriteError) {
+      dispatchNotification({
+        type: NotificationActionTypes.ADD_NOTIFICATION,
+        payload: { value: favouriteError, type: NotificationType.ERROR },
+      })
+    }
+  }, [favouriteError])
+
+  return { isFavoriteLoading, favoriteResponse, favouriteError, favoriteAction }
 }

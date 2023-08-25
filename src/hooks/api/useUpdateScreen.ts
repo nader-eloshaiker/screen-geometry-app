@@ -1,20 +1,43 @@
 import { useEffect } from 'react'
-import { AppActionTypes } from '../../contexts/App/AppManager'
-import { useAppContext } from '../../contexts/App/useAppContext'
+import {
+  GeneralNotificationItem,
+  NotificationActionTypes,
+  NotificationType,
+} from '../../contexts/Notification/NotificationManager'
+import { useNotificationContext } from '../../contexts/Notification/useNotifcationContext'
+import { ScreenActionTypes } from '../../contexts/Screen/ScreenManager'
+import { useScreenContext } from '../../contexts/Screen/useScreenContext'
 import { ScreenItem } from '../../generated/openapi/models'
 import { useUpdateScreenAction } from '../../generated/openapi/services/screen-service'
 
 export const useUpdateScreen = () => {
-  const [_, dispatch] = useAppContext()
+  const [_, dispatchScreen] = useScreenContext()
+  const [__, dispatchNotification] = useNotificationContext()
   const { isLoading: isUpdateLoading, data: updateResponse, error: updateError, mutate } = useUpdateScreenAction()
 
   useEffect(() => {
     if (updateResponse) {
-      dispatch({ type: AppActionTypes.UPDATE, payload: updateResponse.item })
+      dispatchScreen({ type: ScreenActionTypes.UPDATE, payload: updateResponse.item })
+      dispatchNotification({
+        type: NotificationActionTypes.ADD_NOTIFICATION,
+        payload: {
+          value: { title: 'Success', message: 'Updated: Screen configuration' } as GeneralNotificationItem,
+          type: NotificationType.SUCCESS,
+        },
+      })
     }
   }, [updateResponse])
 
+  useEffect(() => {
+    if (updateError) {
+      dispatchNotification({
+        type: NotificationActionTypes.ADD_NOTIFICATION,
+        payload: { value: updateError, type: NotificationType.ERROR },
+      })
+    }
+  }, [updateError])
+
   const updateAction = (screen: ScreenItem) => mutate({ id: screen.id, data: screen })
 
-  return { isUpdateLoading, updateError, updateAction }
+  return { isUpdateLoading, updateResponse, updateError, updateAction }
 }

@@ -1,10 +1,17 @@
 import { useEffect } from 'react'
-import { AppActionTypes } from '../../contexts/App/AppManager'
-import { useAppContext } from '../../contexts/App/useAppContext'
+import {
+  GeneralNotificationItem,
+  NotificationActionTypes,
+  NotificationType,
+} from '../../contexts/Notification/NotificationManager'
+import { useNotificationContext } from '../../contexts/Notification/useNotifcationContext'
+import { ScreenActionTypes } from '../../contexts/Screen/ScreenManager'
+import { useScreenContext } from '../../contexts/Screen/useScreenContext'
 import { useDeleteScreenAction } from '../../generated/openapi/services/screen-service'
 
 export const useDeleteScreen = () => {
-  const [_, dispatch] = useAppContext()
+  const [_, dispatchScreen] = useScreenContext()
+  const [__, dispatchNotification] = useNotificationContext()
   const {
     isLoading: isDeleteLoading,
     data: deleteResponse,
@@ -14,9 +21,25 @@ export const useDeleteScreen = () => {
 
   useEffect(() => {
     if (deleteResponse) {
-      dispatch({ type: AppActionTypes.DELETE, payload: deleteResponse.id })
+      dispatchScreen({ type: ScreenActionTypes.DELETE, payload: deleteResponse.id })
+      dispatchNotification({
+        type: NotificationActionTypes.ADD_NOTIFICATION,
+        payload: {
+          value: { title: 'Success', message: 'Deleted: Screen configuration' } as GeneralNotificationItem,
+          type: NotificationType.SUCCESS,
+        },
+      })
     }
   }, [deleteResponse])
 
-  return { isDeleteLoading, deleteError, deleteAction }
+  useEffect(() => {
+    if (deleteError) {
+      dispatchNotification({
+        type: NotificationActionTypes.ADD_NOTIFICATION,
+        payload: { value: deleteError, type: NotificationType.ERROR },
+      })
+    }
+  }, [deleteError])
+
+  return { isDeleteLoading, deleteResponse, deleteError, deleteAction }
 }
