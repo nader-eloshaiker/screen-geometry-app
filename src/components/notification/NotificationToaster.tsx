@@ -3,13 +3,13 @@ import {
   GeneralNotificationItem,
   GeneralNotificationItemKeys,
   NotificationItemLogged,
-} from '../../contexts/App/AppManager'
-import { useAppContext } from '../../contexts/App/useAppContext'
+} from '../../contexts/Notification/NotificationManager'
+import { useNotificationContext } from '../../contexts/Notification/useNotifcationContext'
 import { ErrorResponse } from '../../generated/openapi/models'
 import { NotificationAlert, NotificationProps } from './NotificationAlert'
 
 export const NotificationToaster = () => {
-  const [{ notifications }] = useAppContext()
+  const [{ notifications }] = useNotificationContext()
 
   const isGeneralNotification = ({ value }: NotificationItemLogged) => {
     const keys = Object.keys(value)

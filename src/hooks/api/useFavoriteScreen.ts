@@ -1,10 +1,17 @@
 import { useEffect } from 'react'
-import { AppActionTypes, GeneralNotificationItem, NotificationType } from '../../contexts/App/AppManager'
+import { AppActionTypes } from '../../contexts/App/AppManager'
 import { useAppContext } from '../../contexts/App/useAppContext'
+import {
+  GeneralNotificationItem,
+  NotificationActionTypes,
+  NotificationType,
+} from '../../contexts/Notification/NotificationManager'
+import { useNotificationContext } from '../../contexts/Notification/useNotifcationContext'
 import { useFavoriteScreenAction } from '../../generated/openapi/services/screen-action-service'
 
 export const useFavoriteScreen = () => {
-  const [_, dispatch] = useAppContext()
+  const [_, dispatchScreen] = useAppContext()
+  const [__, dispatchNotification] = useNotificationContext()
   const {
     isLoading: isFavoriteLoading,
     data: favoriteResponse,
@@ -14,9 +21,9 @@ export const useFavoriteScreen = () => {
 
   useEffect(() => {
     if (favoriteResponse) {
-      dispatch({ type: AppActionTypes.UPDATE, payload: favoriteResponse.item })
-      dispatch({
-        type: AppActionTypes.ADD_NOTIFICATION,
+      dispatchScreen({ type: AppActionTypes.UPDATE, payload: favoriteResponse.item })
+      dispatchNotification({
+        type: NotificationActionTypes.ADD_NOTIFICATION,
         payload: {
           value: {
             title: 'Success',
@@ -30,8 +37,8 @@ export const useFavoriteScreen = () => {
 
   useEffect(() => {
     if (favouriteError) {
-      dispatch({
-        type: AppActionTypes.ADD_NOTIFICATION,
+      dispatchNotification({
+        type: NotificationActionTypes.ADD_NOTIFICATION,
         payload: { value: favouriteError, type: NotificationType.ERROR },
       })
     }

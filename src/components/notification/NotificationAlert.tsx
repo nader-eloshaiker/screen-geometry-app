@@ -1,27 +1,27 @@
 import classNames from 'classnames'
 import { useEffect, useState } from 'react'
-import { AppActionTypes, NotificationType } from '../../contexts/App/AppManager'
-import { useAppContext } from '../../contexts/App/useAppContext'
+import { NotificationActionTypes, NotificationType } from '../../contexts/Notification/NotificationManager'
+import { useNotificationContext } from '../../contexts/Notification/useNotifcationContext'
 import { NotificationImage } from './NotificationImage'
 
 export type NotificationProps = { title: string; message: string; tag: string; type: NotificationType }
 
 export const NotificationAlert = ({ title, message, tag, type }: NotificationProps) => {
-  const [_, dispatch] = useAppContext()
+  const [_, dispatch] = useNotificationContext()
   const [isClosing, setIsClosing] = useState(false)
 
   const onClose = () => {
-    dispatch({ type: AppActionTypes.REMOVE_NOTIFICATION, payload: tag })
+    dispatch({ type: NotificationActionTypes.REMOVE_NOTIFICATION, payload: tag })
   }
 
   useEffect(() => {
     const timeoutFade = setTimeout(() => {
       type !== NotificationType.ERROR && setIsClosing(true)
-    }, 2000)
+    }, 4000)
 
     const timeoutClose = setTimeout(() => {
       type !== NotificationType.ERROR && onClose()
-    }, 4000)
+    }, 5500)
 
     return () => {
       clearTimeout(timeoutFade)

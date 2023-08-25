@@ -1,22 +1,25 @@
 import { useEffect } from 'react'
-import { AppActionTypes, NotificationType } from '../../contexts/App/AppManager'
+import { AppActionTypes } from '../../contexts/App/AppManager'
 import { useAppContext } from '../../contexts/App/useAppContext'
+import { NotificationActionTypes, NotificationType } from '../../contexts/Notification/NotificationManager'
+import { useNotificationContext } from '../../contexts/Notification/useNotifcationContext'
 import { useListScreensAction } from '../../generated/openapi/services/screen-list-service'
 
 export const useListScreens = () => {
-  const [_, dispatch] = useAppContext()
+  const [_, dispatchScreen] = useAppContext()
+  const [__, dispatchNotification] = useNotificationContext()
   const { isLoading: isScreenListLoading, error: screenListError, data: screenListResponse } = useListScreensAction()
 
   useEffect(() => {
     if (screenListResponse && screenListResponse.list.length > 0) {
-      dispatch({ type: AppActionTypes.LIST, payload: screenListResponse.list })
+      dispatchScreen({ type: AppActionTypes.LIST, payload: screenListResponse.list })
     }
   }, [screenListResponse])
 
   useEffect(() => {
     if (screenListError) {
-      dispatch({
-        type: AppActionTypes.ADD_NOTIFICATION,
+      dispatchNotification({
+        type: NotificationActionTypes.ADD_NOTIFICATION,
         payload: { value: screenListError, type: NotificationType.ERROR },
       })
     }
