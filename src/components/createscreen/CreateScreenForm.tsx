@@ -2,6 +2,7 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import cn from 'classnames'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import * as yup from 'yup'
+import { ObjectSchema } from 'yup'
 import { ScreenInput } from '../../generated/openapi/models'
 import { useCreateScreen } from '../../hooks/api/useCreateScreen'
 import { SearchItem } from '../../models/Database'
@@ -9,10 +10,11 @@ import { ScreenDataEnum } from '../../models/Screen'
 import AutoCompleteScreen from '../autocomplete/AutoCompleteScreen'
 import { InputPlaceholder } from '../inputplaceholder/InputPlaceholder'
 
-const screenDataSchema = yup.object().shape(
+const screenDataSchema: ObjectSchema<ScreenInput> = yup.object().shape(
   {
     [ScreenDataEnum.diagonalSize]: yup
       .number()
+      .required('Diagonal size is required')
       .transform((value, originalValue) => {
         if (typeof originalValue === 'string' && originalValue === '') {
           return undefined
@@ -27,33 +29,31 @@ const screenDataSchema = yup.object().shape(
       .required('Aspect ratio is required'),
     [ScreenDataEnum.hRes]: yup
       .number()
+      .optional()
       .transform((value, originalValue) => {
         if (typeof originalValue === 'string' && originalValue === '') {
           return undefined
         }
         return value
       })
-      .optional()
       .when(ScreenDataEnum.vRes, {
         is: (v: number) => v !== undefined && v > 0,
         then: (schema) =>
           schema.required('Horizontal required when vertical is provided').moreThan(0, 'Must be greater than 0'),
-        otherwise: (schema) => schema.notRequired(),
       }),
     [ScreenDataEnum.vRes]: yup
       .number()
+      .optional()
       .transform((value, originalValue) => {
         if (typeof originalValue === 'string' && originalValue === '') {
           return undefined
         }
         return value
       })
-      .optional()
       .when(ScreenDataEnum.hRes, {
         is: (v: number) => v !== undefined && v > 0,
         then: (schema) =>
           schema.required('Vertical required when vertical is provided').moreThan(0, 'Must be greater than 0'),
-        otherwise: (schema) => schema.notRequired(),
       }),
   },
   [[ScreenDataEnum.hRes, ScreenDataEnum.vRes]],
@@ -66,9 +66,10 @@ export default function CreateScreenForm() {
     setValue,
     handleSubmit,
     reset,
+    resetField,
   } = useForm<ScreenInput>({
     resolver: yupResolver(screenDataSchema),
-    mode: 'onChange',
+    mode: 'onBlur',
   })
   const { isCreateLoading, createAction } = useCreateScreen()
 
@@ -82,18 +83,24 @@ export default function CreateScreenForm() {
         shouldValidate: true,
         shouldDirty: true,
       })
+    } else {
+      resetField(ScreenDataEnum.diagonalSize)
     }
     if (item.spec?.hRes) {
       setValue(ScreenDataEnum.hRes, item.spec?.hRes, {
         shouldValidate: true,
         shouldDirty: true,
       })
+    } else {
+      resetField(ScreenDataEnum.hRes)
     }
     if (item.spec?.vRes) {
       setValue(ScreenDataEnum.vRes, item.spec?.vRes, {
         shouldValidate: true,
         shouldDirty: true,
       })
+    } else {
+      resetField(ScreenDataEnum.vRes)
     }
   }
   const onSubmit: SubmitHandler<ScreenInput> = (form) => {
@@ -113,7 +120,7 @@ export default function CreateScreenForm() {
 
       <form method='post' onSubmit={handleSubmit(onSubmit)}>
         <div className='flex flex-col gap-2'>
-          <div id='screenTag' className='grid grid-cols-2 gap-2'>
+          <div id='screenTag' className='grid grid-cols-2 gap-3'>
             {/* diagnolSize */}
             <div id='screenSizeControl' className='flex flex-col mb-4 form-control'>
               <label htmlFor={ScreenDataEnum.diagonalSize} className='label'>
@@ -158,7 +165,7 @@ export default function CreateScreenForm() {
 
           <div className='text-sm divider'>Optional</div>
 
-          <div id='screenData' className='grid grid-cols-2 gap-2 grrid'>
+          <div id='screenData' className='grid grid-cols-2 gap-3 grrid'>
             {/* hRes */}
             <div id='hSizeControl' className='flex flex-col mb-4 form-control'>
               <label htmlFor={ScreenDataEnum.hRes} className='label'>
