@@ -2,8 +2,8 @@ import { NotificationToaster } from '../notification/NotificationToaster'
 
 export default function Footer() {
   return (
-    <footer className='items-center justify-between grid-flow-col p-4 footer rounded-t-xl'>
-      <div className='items-center grid-flow-col'>
+    <footer className='footer grid-flow-col items-center justify-between rounded-t-xl p-4'>
+      <div className='grid-flow-col items-center'>
         <svg
           width='24'
           height='24'

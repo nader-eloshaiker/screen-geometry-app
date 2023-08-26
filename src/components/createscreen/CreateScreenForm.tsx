@@ -136,7 +136,7 @@ export default function CreateScreenForm() {
                   autoComplete='off'
                   className={
                     cn({ 'input-error': errors[ScreenDataEnum.diagonalSize] }) +
-                    ' relative pr-10 w-full input-bordered input input-md'
+                    ' input input-bordered input-md relative w-full pr-10'
                   }
                   placeholder='27'
                   {...register(ScreenDataEnum.diagonalSize)}
@@ -152,7 +152,7 @@ export default function CreateScreenForm() {
               <input
                 type='text'
                 className={
-                  cn({ 'input-error': errors[ScreenDataEnum.aspectRatio] }) + ' w-full input input-bordered input-md'
+                  cn({ 'input-error': errors[ScreenDataEnum.aspectRatio] }) + ' input input-bordered input-md w-full'
                 }
                 autoComplete='off'
                 placeholder='16:9'
@@ -179,7 +179,7 @@ export default function CreateScreenForm() {
                   autoComplete='off'
                   className={
                     cn({ 'input-error': errors[ScreenDataEnum.hRes] }) +
-                    ' relative pr-10 w-full input-bordered input input-md'
+                    ' input input-bordered input-md relative w-full pr-10'
                   }
                   placeholder='1024'
                   {...register(ScreenDataEnum.hRes)}
@@ -202,7 +202,7 @@ export default function CreateScreenForm() {
                   autoComplete='off'
                   className={
                     cn({ 'input-error': errors[ScreenDataEnum.vRes] }) +
-                    ' relative pr-10 w-full input-bordered input input-md'
+                    ' input input-bordered input-md relative w-full pr-10'
                   }
                   placeholder='768'
                   {...register(ScreenDataEnum.vRes)}
@@ -228,7 +228,7 @@ export default function CreateScreenForm() {
             <button
               id='resetButton'
               type='reset'
-              className='btn-neutral btn'
+              className='btn btn-neutral'
               disabled={!isDirty || isCreateLoading}
               onClick={() => reset()}
             >
@@ -243,7 +243,7 @@ export default function CreateScreenForm() {
             <button
               id='submitButton'
               type='submit'
-              className='btn-neutral btn'
+              className='btn btn-neutral'
               disabled={!isDirty || !isValid || isCreateLoading}
             >
               {isCreateLoading ? (

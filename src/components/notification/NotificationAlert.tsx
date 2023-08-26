@@ -30,7 +30,7 @@ export const NotificationAlert = ({ title, message, tag, type }: NotificationPro
   }, [])
 
   return (
-    <div className={classNames({ 'transition-opacity duration-1000 opacity-0': isClosing }) + ` alert ${type}`}>
+    <div className={classNames({ 'opacity-0 transition-opacity duration-1000': isClosing }) + ` alert ${type}`}>
       <NotificationImage type={type} />
       <div className='flex flex-col'>
         <div>{title}</div>

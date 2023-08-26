@@ -6,10 +6,10 @@ type TProps = TRestProps & { className?: string }
 export const SkeletonImage = ({ className, ...rest }: TProps) => {
   return (
     <div
-      className={twMerge(className, 'flex items-center justify-center bg-gray-300 border-2 rounded-md animate-pulse')}
+      className={twMerge(className, 'flex animate-pulse items-center justify-center rounded-md border-2 bg-gray-300')}
       {...rest}
     >
-      <ImageIcon className='w-10 h-10' fill='rgb(107 114 128)' />
+      <ImageIcon className='h-10 w-10' fill='rgb(107 114 128)' />
     </div>
   )
 }

@@ -35,7 +35,7 @@ const TableSkeleton = ({ cols, rows }: TTableProps) => {
   for (let i = 0; i < cols; i++) {
     tableCols.push(
       <td key={i}>
-        <SkeletonRect key={i} className='w-full h-6' />
+        <SkeletonRect key={i} className='h-6 w-full' />
       </td>,
     )
   }
@@ -89,7 +89,7 @@ export default function Geometry() {
   const isHighlighted = (screen: ScreenItem) => screen.id === highlighted?.id
 
   return (
-    <div className='w-full h-full' ref={divRef}>
+    <div className='h-full w-full' ref={divRef}>
       <table className='table'>
         <thead>
           <tr>
@@ -121,11 +121,11 @@ export default function Geometry() {
                   ) : (
                     <button onClick={() => onFavourite(screen)}>
                       {screen.favorite ? (
-                        <StarSolidIcon id='star-icon' className='w-4 h-4' fill={createCSSColor(screen.render?.color)} />
+                        <StarSolidIcon id='star-icon' className='h-4 w-4' fill={createCSSColor(screen.render?.color)} />
                       ) : (
                         <StarOutlineIcon
                           id='star-icon'
-                          className='w-4 h-4'
+                          className='h-4 w-4'
                           fill={createCSSColor(screen.render?.color)}
                         />
                       )}
@@ -140,13 +140,13 @@ export default function Geometry() {
                 <td>
                   <div className='flex flex-row items-center gap-3'>
                     <button>
-                      <EditIcon id='edit-icon' className='w-4 h-4' fill='currentColor' />
+                      <EditIcon id='edit-icon' className='h-4 w-4' fill='currentColor' />
                     </button>
                     {isDeleteLoading && screen.id === selected?.id ? (
                       <div className='loading loading-spinner loading-xs' />
                     ) : (
                       <button onClick={() => handleDelete(screen)}>
-                        <CloseIcon id='delete-icon' className='w-4 h-4' fill='currentColor' />
+                        <CloseIcon id='delete-icon' className='h-4 w-4' fill='currentColor' />
                       </button>
                     )}
                   </div>
@@ -174,7 +174,7 @@ export default function Geometry() {
             />
           ))
         ) : (
-          <SkeletonImage className='w-full h-full' />
+          <SkeletonImage className='h-full w-full' />
         )}
       </Stacked>
     </div>
