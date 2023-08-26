@@ -128,7 +128,7 @@
     "aspectRatio": "16:9"
   },
   {
-    "name": "5K Dual QHD 49\"",
+    "name": "5K Dual QHD",
     "size": 49,
     "width": 5120,
     "height": 1440,
@@ -216,5 +216,12 @@
     "width": 6144,
     "height": 3456,
     "aspectRatio": "16:9"
+  },
+  {
+    "name": "8K Dual UHD",
+    "size": 57,
+    "width": 7680,
+    "height": 2160,
+    "aspectRatio": "32:9"
   }
 ]
