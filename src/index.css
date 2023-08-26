@@ -18,8 +18,6 @@
   -webkit-text-size-adjust: 100%;
 } */
 
-
-
 @layer base {
   body {
     @apply bg-gradient-to-b from-gray-100 to-gray-300;
@@ -31,7 +29,7 @@
 }
 
 .header {
-  @apply bg-indigo-600 dark:bg-indigo-700 text-indigo-100 dark:text-indigo-200 ;
+  @apply bg-indigo-600 text-indigo-100 dark:bg-indigo-700 dark:text-indigo-200;
 }
 
 .lightModeText {
@@ -39,9 +37,9 @@
 }
 
 .sidebar {
-  @apply text-indigo-100 dark:text-indigo-200 dark:bg-gradient-to-b dark:from-indigo-700 dark:to-indigo-900 bg-gradient-to-b from-indigo-600 to-indigo-800;
+  @apply bg-gradient-to-b from-indigo-600 to-indigo-800 text-indigo-100 dark:bg-gradient-to-b dark:from-indigo-700 dark:to-indigo-900 dark:text-indigo-200;
 }
 
 .footer {
-  @apply text-gray-500 bg-gradient-to-b from-gray-200 to-gray-300 dark:text-gray-400 dark:bg-gradient-to-b dark:from-gray-800 dark:to-gray-900;
+  @apply bg-gradient-to-b from-gray-200 to-gray-300 text-gray-500 dark:bg-gradient-to-b dark:from-gray-800 dark:to-gray-900 dark:text-gray-400;
 }

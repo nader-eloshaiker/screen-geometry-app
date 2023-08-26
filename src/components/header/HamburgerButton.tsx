@@ -13,7 +13,7 @@ export default function HamburgerButton({ className, ...rest }: TProps) {
   }
 
   return (
-    <label className={twMerge(className, 'swap-rotate swap')} {...rest}>
+    <label className={twMerge(className, 'swap swap-rotate')} {...rest}>
       {/* this hidden checkbox controls the state */}
       <input type='checkbox' className='hidden' onClick={toggleDrawer} />
 
