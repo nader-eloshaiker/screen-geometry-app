@@ -8,7 +8,8 @@
         "eslint:recommended",
         "plugin:react/recommended",
         "plugin:@typescript-eslint/recommended",
-        "plugin:prettier/recommended"
+        "plugin:prettier/recommended",
+        "plugin:tailwindcss/recommended"
     ],
     "settings": {
         "import/resolver": {
@@ -37,7 +38,7 @@
         "ecmaVersion": "latest",
         "sourceType": "module"
     },
-    "plugins": ["react", "react-hooks", "@typescript-eslint", "prettier", "react-refresh"],
+    "plugins": ["react", "react-hooks", "@typescript-eslint", "prettier", "react-refresh", "tailwindcss"],
     "ignorePatterns": ["vite-env.d.ts", "src/generated/"],
     "rules": {
         "prettier/prettier": ["error", { "semi": false, "endOfLine":"auto" }],

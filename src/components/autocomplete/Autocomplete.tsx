@@ -60,13 +60,13 @@ const Autocomplete = ({
       {...rest}
     >
       {isLoading && (
-        <InputPlaceholder className='absolute flex w-full h-full left-3/4'>
-          <span className='z-10 flex items-center justify-center loading loading-spinner loading-md' />
+        <InputPlaceholder className='absolute left-3/4 flex h-full w-full'>
+          <span className='loading loading-spinner loading-md z-10 flex items-center justify-center' />
         </InputPlaceholder>
       )}
       <input
         type='text'
-        className={cn({ relative: isLoading }) + ' w-full input input-bordered input-md'}
+        className={cn({ relative: isLoading }) + ' input input-bordered input-md w-full'}
         value={inputValue}
         onChange={handleChange}
         placeholder={placeholder || 'Type something..'}
@@ -74,9 +74,9 @@ const Autocomplete = ({
         disabled={isLoading}
       />
       {items.length > 0 && (
-        <div className='z-40 flex-col overflow-auto rounded-md dropdown-content bg-base-200 top-14 max-h-80'>
+        <div className='dropdown-content top-14 z-40 max-h-80 flex-col overflow-auto rounded-md bg-base-200'>
           <ul
-            className='menu menu-compact'
+            className='menu'
             // use ref to calculate the width of parent
             style={{ width: width }}
           >

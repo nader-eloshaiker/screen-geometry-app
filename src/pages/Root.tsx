@@ -8,10 +8,10 @@ export default function Root() {
   return (
     <DrawerProvider>
       <div id='app-root' className='container mx-auto'>
-        <div className='flex flex-col flex-wrap min-h-screen'>
+        <div className='flex min-h-screen flex-col flex-wrap'>
           <Header />
           <DrawerLayout>
-            <main role='main' className='w-full h-full'>
+            <main role='main' className='h-full w-full'>
               <Outlet />
             </main>
           </DrawerLayout>

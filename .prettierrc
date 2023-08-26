@@ -9,5 +9,8 @@
   "plugins": [
     "prettier-plugin-organize-imports"
   ],
-  "pluginSearchDirs": false
+  "pluginSearchDirs": false,
+  "tailwindFunctions": [
+    "tw"
+  ]
 }

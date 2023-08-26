@@ -109,28 +109,26 @@ export default function CreateScreenForm() {
 
   return (
     <>
-      <div className='w-full form-control'>
+      <div className='form-control w-full'>
         <label className='label'>
           <span className='label-text'>Choose from list of Monitors</span>
         </label>
         <AutoCompleteScreen onSelect={onSelect} />
       </div>
 
-      <div className='text-sm divider'>Or</div>
+      <div className='divider text-sm'>Or</div>
 
       <form method='post' onSubmit={handleSubmit(onSubmit)}>
         <div className='flex flex-col gap-2'>
           <div id='screenTag' className='grid grid-cols-2 gap-3'>
             {/* diagnolSize */}
-            <div id='screenSizeControl' className='flex flex-col mb-4 form-control'>
+            <div id='screenSizeControl' className='form-control mb-4 flex flex-col'>
               <label htmlFor={ScreenDataEnum.diagonalSize} className='label'>
                 <span className='label-text'>Screen Size</span>
               </label>
               <div className='relative'>
-                <InputPlaceholder className='absolute top-0 right-0 flex w-10 h-full'>
-                  <div className='z-10 flex items-center justify-center w-full h-full rounded-tr rounded-br text-md'>
-                    in
-                  </div>
+                <InputPlaceholder className='absolute right-0 top-0 flex h-full w-10'>
+                  <div className='z-10 flex h-full w-full items-center justify-center rounded-r'>in</div>
                 </InputPlaceholder>
 
                 <input
@@ -138,7 +136,7 @@ export default function CreateScreenForm() {
                   autoComplete='off'
                   className={
                     cn({ 'input-error': errors[ScreenDataEnum.diagonalSize] }) +
-                    ' relative pr-10 w-full input-bordered input input-md'
+                    ' input input-bordered input-md relative w-full pr-10'
                   }
                   placeholder='27'
                   {...register(ScreenDataEnum.diagonalSize)}
@@ -147,14 +145,14 @@ export default function CreateScreenForm() {
             </div>
 
             {/* aspectRation */}
-            <div id='aspectRatioControl' className='w-full form-control'>
+            <div id='aspectRatioControl' className='form-control w-full'>
               <label className='label'>
                 <span className='label-text'>Aspect Ratio</span>
               </label>
               <input
                 type='text'
                 className={
-                  cn({ 'input-error': errors[ScreenDataEnum.aspectRatio] }) + ' w-full input input-bordered input-md'
+                  cn({ 'input-error': errors[ScreenDataEnum.aspectRatio] }) + ' input input-bordered input-md w-full'
                 }
                 autoComplete='off'
                 placeholder='16:9'
@@ -163,19 +161,17 @@ export default function CreateScreenForm() {
             </div>
           </div>
 
-          <div className='text-sm divider'>Optional</div>
+          <div className='divider text-sm'>Optional</div>
 
-          <div id='screenData' className='grid grid-cols-2 gap-3 grrid'>
+          <div id='screenData' className='grid grid-cols-2 gap-3'>
             {/* hRes */}
-            <div id='hSizeControl' className='flex flex-col mb-4 form-control'>
+            <div id='hSizeControl' className='form-control mb-4 flex flex-col'>
               <label htmlFor={ScreenDataEnum.hRes} className='label'>
                 <span className='label-text'>Horizontal Res</span>
               </label>
               <div className='relative'>
-                <InputPlaceholder className='absolute top-0 right-0 flex w-10 h-full'>
-                  <div className='z-10 flex items-center justify-center w-full h-full rounded-tr rounded-br text-md'>
-                    px
-                  </div>
+                <InputPlaceholder className='absolute right-0 top-0 flex h-full w-10'>
+                  <div className='z-10 flex h-full w-full items-center justify-center rounded-r'>px</div>
                 </InputPlaceholder>
 
                 <input
@@ -183,7 +179,7 @@ export default function CreateScreenForm() {
                   autoComplete='off'
                   className={
                     cn({ 'input-error': errors[ScreenDataEnum.hRes] }) +
-                    ' relative pr-10 w-full input-bordered input input-md'
+                    ' input input-bordered input-md relative w-full pr-10'
                   }
                   placeholder='1024'
                   {...register(ScreenDataEnum.hRes)}
@@ -192,15 +188,13 @@ export default function CreateScreenForm() {
             </div>
 
             {/* vRes */}
-            <div id='hSizeControl' className='flex flex-col mb-4 form-control'>
+            <div id='hSizeControl' className='form-control mb-4 flex flex-col'>
               <label htmlFor={ScreenDataEnum.vRes} className='label'>
                 <span className='label-text'>Vertical Res</span>
               </label>
               <div className='relative'>
-                <InputPlaceholder className='absolute top-0 right-0 flex w-10 h-full'>
-                  <div className='z-10 flex items-center justify-center w-full h-full rounded-tr rounded-br text-md'>
-                    px
-                  </div>
+                <InputPlaceholder className='absolute right-0 top-0 flex h-full w-10'>
+                  <div className='z-10 flex h-full w-full items-center justify-center rounded-r'>px</div>
                 </InputPlaceholder>
 
                 <input
@@ -208,7 +202,7 @@ export default function CreateScreenForm() {
                   autoComplete='off'
                   className={
                     cn({ 'input-error': errors[ScreenDataEnum.vRes] }) +
-                    ' relative pr-10 w-full input-bordered input input-md'
+                    ' input input-bordered input-md relative w-full pr-10'
                   }
                   placeholder='768'
                   {...register(ScreenDataEnum.vRes)}
@@ -230,11 +224,11 @@ export default function CreateScreenForm() {
             <div className='text-xs text-error'>{errors[ScreenDataEnum.vRes].message}</div>
           )}
 
-          <div className='flex flex-row justify-between mt-2'>
+          <div className='mt-2 flex flex-row justify-between'>
             <button
               id='resetButton'
               type='reset'
-              className='btn-neutral btn'
+              className='btn btn-neutral'
               disabled={!isDirty || isCreateLoading}
               onClick={() => reset()}
             >
@@ -249,7 +243,7 @@ export default function CreateScreenForm() {
             <button
               id='submitButton'
               type='submit'
-              className='btn-neutral btn'
+              className='btn btn-neutral'
               disabled={!isDirty || !isValid || isCreateLoading}
             >
               {isCreateLoading ? (
