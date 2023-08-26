@@ -128,9 +128,7 @@ export default function CreateScreenForm() {
               </label>
               <div className='relative'>
                 <InputPlaceholder className='absolute top-0 right-0 flex w-10 h-full'>
-                  <div className='z-10 flex items-center justify-center w-full h-full rounded-tr rounded-br text-md'>
-                    in
-                  </div>
+                  <div className='z-10 flex items-center justify-center w-full h-full rounded-tr rounded-br'>in</div>
                 </InputPlaceholder>
 
                 <input
@@ -173,9 +171,7 @@ export default function CreateScreenForm() {
               </label>
               <div className='relative'>
                 <InputPlaceholder className='absolute top-0 right-0 flex w-10 h-full'>
-                  <div className='z-10 flex items-center justify-center w-full h-full rounded-tr rounded-br text-md'>
-                    px
-                  </div>
+                  <div className='z-10 flex items-center justify-center w-full h-full rounded-tr rounded-br'>px</div>
                 </InputPlaceholder>
 
                 <input
@@ -198,9 +194,7 @@ export default function CreateScreenForm() {
               </label>
               <div className='relative'>
                 <InputPlaceholder className='absolute top-0 right-0 flex w-10 h-full'>
-                  <div className='z-10 flex items-center justify-center w-full h-full rounded-tr rounded-br text-md'>
-                    px
-                  </div>
+                  <div className='z-10 flex items-center justify-center w-full h-full rounded-tr rounded-br'>px</div>
                 </InputPlaceholder>
 
                 <input

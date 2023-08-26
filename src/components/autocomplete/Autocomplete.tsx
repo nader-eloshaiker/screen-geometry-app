@@ -76,7 +76,7 @@ const Autocomplete = ({
       {items.length > 0 && (
         <div className='z-40 flex-col overflow-auto rounded-md dropdown-content bg-base-200 top-14 max-h-80'>
           <ul
-            className='menu menu-compact'
+            className='menu'
             // use ref to calculate the width of parent
             style={{ width: width }}
           >
