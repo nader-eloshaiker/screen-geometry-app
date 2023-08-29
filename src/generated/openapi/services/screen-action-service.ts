@@ -6,11 +6,11 @@
  */
 import type { MutationFunction, UseMutationOptions } from '@tanstack/react-query'
 import { useMutation } from '@tanstack/react-query'
-import { useCustomAxios } from '../../../api/mutator/useCustomAxios'
+import { useApiAxios } from '../../../api/fetch/useApiAxios'
 import type { ErrorResponse, ScreenItemRespose } from '../models'
 
 export const useFavoriteScreenActionHook = () => {
-  const favoriteScreenAction = useCustomAxios<ScreenItemRespose>()
+  const favoriteScreenAction = useApiAxios<ScreenItemRespose>()
 
   return (id: string) => {
     return favoriteScreenAction({ url: `/screens/${id}/favorite`, method: 'patch' })

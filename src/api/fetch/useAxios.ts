@@ -1,9 +1,14 @@
 import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios'
 import { useEffect, useState } from 'react'
-import { axiosInstance } from '../api/fetch/customAxios'
+
+export const axiosInstance = axios.create({
+  timeout: 2000,
+  headers: { Accept: 'application/json', 'Content-Type': 'application/json' },
+})
 
 const UseAxiosOptionsDefaults = {
   manualExecution: false,
+  skip: false,
 }
 
 type UseAxiosOptions = Partial<typeof UseAxiosOptionsDefaults>
@@ -28,7 +33,7 @@ const useAxios = <T>({ params, options }: TProps) => {
   const fetchData = async (params: AxiosRequestConfig, controller: AbortController) => {
     try {
       setLoading(true)
-      const result = await axiosInstance.request({ ...params, signal: controller.signal })
+      const result = await axiosInstance.request<T>({ ...params, signal: controller.signal })
       setResponse(result)
     } catch (error) {
       if (axios.isAxiosError(error)) {
@@ -44,16 +49,23 @@ const useAxios = <T>({ params, options }: TProps) => {
 
   const execute = (params: AxiosRequestConfig) => {
     const controller = new AbortController()
+    const terminate = (msg: string) => {
+      cancel(controller, msg)
+    }
 
     fetchData(params, controller)
 
-    return () => cancel(controller, 'React effect unmount')
+    return terminate
   }
 
   useEffect(() => {
-    if (!hookOptions.manualExecution) {
-      return execute(axiosParams)
-    }
+    if (hookOptions.manualExecution || hookOptions.skip) return
+
+    const controller = new AbortController()
+
+    fetchData(axiosParams, controller)
+
+    return () => cancel(controller, 'React effect unmount')
   }, [])
 
   return { loading, response, error, execute }

@@ -39,7 +39,7 @@
         "sourceType": "module"
     },
     "plugins": ["react", "react-hooks", "@typescript-eslint", "prettier", "react-refresh", "tailwindcss"],
-    "ignorePatterns": ["vite-env.d.ts", "src/generated/"],
+    "ignorePatterns": ["vite-env.d.ts", "src/generated/**/*"],
     "rules": {
         "prettier/prettier": ["error", { "semi": false, "endOfLine":"auto" }],
         "no-empty-function": "off",
