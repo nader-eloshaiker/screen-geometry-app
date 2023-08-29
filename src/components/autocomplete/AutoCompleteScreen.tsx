@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import useAxios from '../../api/fetch/useAxios'
 import { SearchActionTypes } from '../../contexts/Search/SearchManager'
 import { useSearchContext } from '../../contexts/Search/useSearchContext'
 import { DataBaseEntry, SearchItem } from '../../models/Database'
@@ -11,7 +12,6 @@ type TProps = TRestProps & {
 const AutoCompleteScreen = ({ onSelect, ...rest }: TProps) => {
   // query typed by user
   const [val, setVal] = useState('')
-  const [isLoading, setIsLoading] = useState(false)
 
   // user selected item
   const [selected, setSelected] = useState<TAutoCompleteItem>()
@@ -21,29 +21,40 @@ const AutoCompleteScreen = ({ onSelect, ...rest }: TProps) => {
 
   const [db, dispatchSearch] = useSearchContext()
 
+  const { response, loading } = useAxios<DataBaseEntry[]>({
+    params: { url: 'db/monitor.json' },
+    options: { skip: db.monitorData.length > 0 },
+  })
+
   useEffect(() => {
-    const fetchData = async () => {
-      const url = 'db/monitor.json'
-      try {
-        setIsLoading(true)
-
-        const response = await fetch(url)
-        const dbEntries = (await response.json()) as DataBaseEntry[]
-
-        dispatchSearch({ type: SearchActionTypes.LOAD, payload: dbEntries })
-      } catch (error) {
-        // fail quitely as it is not a big deal, autocomplete will not work
-        dispatchSearch({ type: SearchActionTypes.RESET })
-        console.error(`Unable to fetch screen DB ${url} :: `, error)
-      } finally {
-        setIsLoading(false)
-      }
+    if (response) {
+      dispatchSearch({ type: SearchActionTypes.LOAD, payload: response.data })
     }
+  }, [response])
 
-    if (db.monitorData.length === 0) {
-      fetchData()
-    }
-  }, [db])
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     const url = 'db/monitor.json'
+  //     try {
+  //       setIsLoading(true)
+
+  //       const response = await fetch(url)
+  //       const dbEntries = (await response.json()) as DataBaseEntry[]
+
+  //       dispatchSearch({ type: SearchActionTypes.LOAD, payload: dbEntries })
+  //     } catch (error) {
+  //       // fail quitely as it is not a big deal, autocomplete will not work
+  //       dispatchSearch({ type: SearchActionTypes.RESET })
+  //       console.error(`Unable to fetch screen DB ${url} :: `, error)
+  //     } finally {
+  //       setIsLoading(false)
+  //     }
+  //   }
+
+  //   if (db.monitorData.length === 0) {
+  //     fetchData()
+  //   }
+  // }, [db])
 
   useEffect(() => {
     dispatchSearch({ type: SearchActionTypes.SEARCH, payload: val })
@@ -68,7 +79,7 @@ const AutoCompleteScreen = ({ onSelect, ...rest }: TProps) => {
       onChange={setVal}
       onSelect={setSelected}
       placeholder='Type to filter list...'
-      isLoading={isLoading}
+      isLoading={loading}
       {...rest}
     />
   )

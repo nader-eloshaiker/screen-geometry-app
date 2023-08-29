@@ -13,11 +13,11 @@ import type {
   UseQueryResult,
 } from '@tanstack/react-query'
 import { useMutation, useQuery } from '@tanstack/react-query'
-import { useCustomAxios } from '../../../api/mutator/useCustomAxios'
+import { useApiAxios } from '../../../api/fetch/useApiAxios'
 import type { ErrorResponse, ScreenInput, ScreenItemRespose, ScreenListResponse } from '../models'
 
 export const useListScreensActionHook = () => {
-  const listScreensAction = useCustomAxios<ScreenListResponse>()
+  const listScreensAction = useApiAxios<ScreenListResponse>()
 
   return (signal?: AbortSignal) => {
     return listScreensAction({ url: `/screens`, method: 'get', signal })
@@ -65,7 +65,7 @@ export const useListScreensAction = <
 }
 
 export const useCreateScreenActionHook = () => {
-  const createScreenAction = useCustomAxios<ScreenItemRespose>()
+  const createScreenAction = useApiAxios<ScreenItemRespose>()
 
   return (screenInput: ScreenInput) => {
     return createScreenAction({

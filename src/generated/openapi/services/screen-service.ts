@@ -13,11 +13,11 @@ import type {
   UseQueryResult,
 } from '@tanstack/react-query'
 import { useMutation, useQuery } from '@tanstack/react-query'
-import { useCustomAxios } from '../../../api/mutator/useCustomAxios'
+import { useApiAxios } from '../../../api/fetch/useApiAxios'
 import type { ErrorResponse, ScreenIdResponse, ScreenItem, ScreenItemRespose, ScreenListResponse } from '../models'
 
 export const useFindScreenActionHook = () => {
-  const findScreenAction = useCustomAxios<ScreenListResponse>()
+  const findScreenAction = useApiAxios<ScreenListResponse>()
 
   return (id: string, signal?: AbortSignal) => {
     return findScreenAction({ url: `/screens/${id}`, method: 'get', signal })
@@ -67,7 +67,7 @@ export const useFindScreenAction = <
 }
 
 export const useUpdateScreenActionHook = () => {
-  const updateScreenAction = useCustomAxios<ScreenItemRespose>()
+  const updateScreenAction = useApiAxios<ScreenItemRespose>()
 
   return (id: string, screenItem: ScreenItem) => {
     return updateScreenAction({
@@ -127,7 +127,7 @@ export const useUpdateScreenAction = <TError = ErrorResponse, TContext = unknown
   return useMutation(mutationOptions)
 }
 export const useDeleteScreenActionHook = () => {
-  const deleteScreenAction = useCustomAxios<ScreenIdResponse>()
+  const deleteScreenAction = useApiAxios<ScreenIdResponse>()
 
   return (id: string) => {
     return deleteScreenAction({ url: `/screens/${id}`, method: 'delete' })

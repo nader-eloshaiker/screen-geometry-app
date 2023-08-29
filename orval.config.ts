@@ -12,8 +12,8 @@ export default defineConfig({
       clean: true,
       override: {
         mutator: {
-          path: './src/api/mutator/useCustomAxios.ts',
-          name: 'useCustomAxios',
+          path: './src/api/fetch/useApiAxios.ts',
+          name: 'useApiAxios',
         },
         query: {
           useQuery: true,
