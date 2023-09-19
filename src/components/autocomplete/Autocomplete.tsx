@@ -1,8 +1,8 @@
 // ./components/Autocomplete.tsx
 
 import cn from 'classnames'
-import { ChangeEvent, memo, useState } from 'react'
-import useResizeObserver from 'use-resize-observer'
+import { ChangeEvent, memo, useRef, useState } from 'react'
+import { useElementSize } from '../../hooks/useElementSize'
 import { InputPlaceholder } from '../inputplaceholder/InputPlaceholder'
 
 export type TAutoCompleteItem = { id: string; label: string }
@@ -17,7 +17,7 @@ type TProps = TRestProps & {
 }
 
 // we are using dropdown, input and menu component from daisyui
-const Autocomplete = ({
+export const AutoComplete = ({
   items = [],
   value = '',
   onChange = () => {},
@@ -27,7 +27,9 @@ const Autocomplete = ({
   isLoading,
   ...rest
 }: TProps) => {
-  const { ref: divRef, width = 1 } = useResizeObserver<HTMLDivElement>()
+  const divRef = useRef<HTMLDivElement>(null)
+  const { width } = useElementSize(divRef)
+  // const { ref: divRef, width = 1 } = useResizeObserver<HTMLDivElement>()
   const [open, setOpen] = useState(false)
   const [inputValue, setInputValue] = useState(items.length === 1 ? items[0].label : value)
 
@@ -48,10 +50,11 @@ const Autocomplete = ({
 
   return (
     <div
+      data-testid='autoComplete'
       // use classnames here to easily toggle dropdown open
       className={
         cn({
-          'dropdown w-full': true,
+          'dropdown dropdown-hover w-full': true,
           'dropdown-open': open,
           relative: isLoading,
         }) + (className ? ' ' + className : '')
@@ -60,11 +63,13 @@ const Autocomplete = ({
       {...rest}
     >
       {isLoading && (
-        <InputPlaceholder className='absolute left-3/4 flex h-full w-full'>
+        <InputPlaceholder data-testid='autoCompleteLoading' className='absolute left-3/4 flex h-full w-full'>
           <span className='loading loading-spinner loading-md z-10 flex items-center justify-center' />
         </InputPlaceholder>
       )}
       <input
+        name='autoCompleteInput'
+        data-testid='autoCompleteInput'
         type='text'
         className={cn({ relative: isLoading }) + ' input input-bordered input-md w-full'}
         value={inputValue}
@@ -74,7 +79,10 @@ const Autocomplete = ({
         disabled={isLoading}
       />
       {items.length > 0 && (
-        <div className='dropdown-content top-14 z-40 max-h-80 flex-col overflow-auto rounded-md bg-base-200'>
+        <div
+          data-testid='autoCompleteResults'
+          className='dropdown-content top-14 z-40 max-h-80 flex-col overflow-auto rounded-md bg-base-200'
+        >
           <ul
             className='menu'
             // use ref to calculate the width of parent
@@ -99,6 +107,6 @@ const Autocomplete = ({
   )
 }
 
-const MemoAutocomplete = memo(Autocomplete)
+const MemoAutocomplete = memo(AutoComplete)
 
 export default MemoAutocomplete

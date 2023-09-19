@@ -1,7 +1,7 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
-import { App } from './App.tsx'
-import reportWebVitals from './reportWebVitals.ts'
+import { App } from './App'
+import reportWebVitals from './reportWebVitals'
 
 createRoot(document.getElementById('root') as HTMLElement).render(
   <StrictMode>

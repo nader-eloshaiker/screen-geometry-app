@@ -1,12 +1,14 @@
 {
     "env": {
         "browser": true,
-        "es2021": true,
-        "jest": true
+        "es2020": true,
+        "jest": true,
+        "node": true
     },
     "extends": [
         "eslint:recommended",
         "plugin:react/recommended",
+        "plugin:@typescript-eslint/eslint-recommended",
         "plugin:@typescript-eslint/recommended",
         "plugin:prettier/recommended",
         "plugin:tailwindcss/recommended"
@@ -16,14 +18,11 @@
             "typescript": {}
         },
         "react": {
-        "createClass": "createReactClass", // Regex for Component Factory to use,
-                                            // default to "createReactClass"
-        "pragma": "React",  // Pragma to use, default to "React"
-        "fragment": "Fragment",  // Fragment to use (may be a property of <pragma>), default to "Fragment"
-        "version": "detect", // React version. "detect" automatically picks the version you have installed.
-                            // You can also use `16.0`, `16.3`, etc, if you want to override the detected value.
-                            // It will default to "latest" and warn if missing, and to "detect" in the future
-        "flowVersion": "0.53" // Flow version
+            "createClass": "createReactClass", // Regex for Component Factory to use, default to "createReactClass"
+            "pragma": "React",  // Pragma to use, default to "React"
+            "fragment": "Fragment",  // Fragment to use (may be a property of <pragma>), default to "Fragment"
+            "version": "detect", // React version. "detect" automatically picks the version you have installed.
+            "flowVersion": "0.53" // Flow version
         }
     },
     "globals": {
@@ -41,15 +40,7 @@
     "plugins": ["react", "react-hooks", "@typescript-eslint", "prettier", "react-refresh", "tailwindcss"],
     "ignorePatterns": ["vite-env.d.ts", "src/generated/**/*"],
     "rules": {
-        "prettier/prettier": ["error", { "semi": false, "endOfLine":"auto" }],
-        "no-empty-function": "off",
-        "@typescript-eslint/no-empty-function": "off",
-        "react/react-in-jsx-scope": "off",
-        "camelcase": "error",
-        "spaced-comment": "error",
-        "quotes": ["error", "single"],
-        "no-duplicate-imports": "error",
-        "no-unused-vars": "off",
+        "@typescript-eslint/explicit-module-boundary-types": "off",
         "@typescript-eslint/no-unused-vars": [
             "warn",
             {
@@ -58,9 +49,25 @@
             "caughtErrorsIgnorePattern": "^_"
             }
         ],
+        "@typescript-eslint/no-non-null-assertion": "off",
+        "@typescript-eslint/no-empty-function": "off",
+        "prettier/prettier": ["error", { "semi": false, "endOfLine":"auto" }],
+        "no-empty-function": "off",
+        "react/react-in-jsx-scope": "off",
+        "react-hooks/rules-of-hooks": "error",
+        "react-hooks/exhaustive-deps": "warn",
+        "react/prop-types": "off",
+        "camelcase": "error",
+        "quotes": ["error", "single"],
+        "no-duplicate-imports": "error",
+        "no-unused-vars": "off",
         "react-refresh/only-export-components": [
             "warn",
             { "allowConstantExport": true }
-        ]
+        ],
+        "tailwindcss/classnames-order": "warn",
+        "tailwindcss/no-custom-classname": "warn",
+        "tailwindcss/no-contradicting-classname": "error"
+    
     }
 }
