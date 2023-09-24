@@ -136,7 +136,7 @@ export default function CreateScreenForm() {
                   autoComplete='off'
                   className={
                     cn({ 'input-error': errors[ScreenDataEnum.diagonalSize] }) +
-                    ' input input-bordered input-md relative w-full pr-10'
+                    ' input input-bordered input-md relative w-full pr-10 shadow-md'
                   }
                   placeholder='27'
                   {...register(ScreenDataEnum.diagonalSize)}
@@ -152,7 +152,8 @@ export default function CreateScreenForm() {
               <input
                 type='text'
                 className={
-                  cn({ 'input-error': errors[ScreenDataEnum.aspectRatio] }) + ' input input-bordered input-md w-full'
+                  cn({ 'input-error': errors[ScreenDataEnum.aspectRatio] }) +
+                  ' input input-bordered input-md w-full shadow-md'
                 }
                 autoComplete='off'
                 placeholder='16:9'
@@ -179,7 +180,7 @@ export default function CreateScreenForm() {
                   autoComplete='off'
                   className={
                     cn({ 'input-error': errors[ScreenDataEnum.hRes] }) +
-                    ' input input-bordered input-md relative w-full pr-10'
+                    ' input input-bordered input-md relative w-full pr-10 shadow-md'
                   }
                   placeholder='1024'
                   {...register(ScreenDataEnum.hRes)}
@@ -202,7 +203,7 @@ export default function CreateScreenForm() {
                   autoComplete='off'
                   className={
                     cn({ 'input-error': errors[ScreenDataEnum.vRes] }) +
-                    ' input input-bordered input-md relative w-full pr-10'
+                    ' input input-bordered input-md relative w-full pr-10 shadow-md'
                   }
                   placeholder='768'
                   {...register(ScreenDataEnum.vRes)}

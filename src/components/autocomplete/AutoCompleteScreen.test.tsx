@@ -1,7 +1,8 @@
-import { act, cleanup, fireEvent, render, RenderResult, screen, waitFor } from '@testing-library/react'
+import { cleanup, fireEvent, render, RenderResult, waitFor } from '@testing-library/react'
 import { AxiosResponse } from 'axios'
 import { RefObject } from 'react'
 import { afterEach, beforeEach, describe, expect, Mock, vi } from 'vitest'
+import { SearchProvider } from '../../contexts/Search/SearchProvider'
 import { ElementSize, useElementSize } from '../../hooks/useElementSize'
 import { DataBaseEntry } from '../../models/Database'
 import AutoCompleteScreen from './AutoCompleteScreen'
@@ -92,30 +93,45 @@ describe('AutoCompleteScreen', () => {
   })
 
   test.skip('renders autocomplete component with an input field', async () => {
-    await waitFor(() => render(<AutoCompleteScreen onSelect={vi.fn()} />))
+    const { getByPlaceholderText } = await waitFor<RenderResult>(() =>
+      render(
+        <SearchProvider>
+          <AutoCompleteScreen onSelect={vi.fn()} />
+        </SearchProvider>,
+      ),
+    )
     // use this to view what is being rendered
     // screen.debug()
 
-    expect(screen.getByPlaceholderText('Type to filter list...')).toBeInTheDocument()
+    expect(getByPlaceholderText('Type to filter list...')).toBeInTheDocument()
   })
 
   test.skip('fetches data from API and updates the context', async () => {
-    act(() => render(<AutoCompleteScreen onSelect={vi.fn()} />))
+    const { getByText, getByPlaceholderText } = await waitFor<RenderResult>(() =>
+      render(
+        <SearchProvider>
+          <AutoCompleteScreen onSelect={vi.fn()} />
+        </SearchProvider>,
+      ),
+    )
 
     // Verify that the loading indicator is displayed
-    expect(screen.getByText('Loading...')).toBeDefined()
+    // need to understand how to test this
+    expect(getByText('Loading...')).toBeDefined()
 
-    // Verify that the context is updated with the fetched data
-    expect(screen.getByPlaceholderText('Type to filter list...')).toBeDefined()
-    expect(screen.getByPlaceholderText('Type to filter list...')).toEqual('')
+    expect(getByPlaceholderText('Type to filter list...')).toBeInTheDocument()
   })
 
   test('updates the context when the input value changes', async () => {
-    const { getByTestId } = await waitFor<RenderResult>(() => render(<AutoCompleteScreen onSelect={vi.fn()} />))
+    const { getByTestId, container } = await waitFor<RenderResult>(() =>
+      render(
+        <SearchProvider>
+          <AutoCompleteScreen onSelect={vi.fn()} />
+        </SearchProvider>,
+      ),
+    )
 
     const inputElement = getByTestId('autoCompleteInput')
-    const containerElement = getByTestId('autoComplete')
-    // const inputElement = getByPlaceholderText('Type to filter list...')
 
     await waitFor(() => {
       fireEvent.change(inputElement, {
@@ -125,37 +141,31 @@ describe('AutoCompleteScreen', () => {
       })
     })
 
-    await waitFor(() => {
-      fireEvent.click(containerElement)
-    })
-
     expect(inputElement).toHaveValue('WQHD+')
+    expect(container.querySelectorAll('li').length).toEqual(1)
   })
 
-  test.skip('renders the autocomplete dropdown with no items when input is empty', async () => {
-    await waitFor(() => render(<AutoCompleteScreen onSelect={vi.fn()} />))
-    const inputElement: HTMLInputElement = screen.getByTestId('SearchInput')
-    // const inputElement: HTMLInputElement = screen.getByPlaceholderText('Type to filter list...')
+  test('renders the autocomplete dropdown with no items when input does not match', async () => {
+    const { getByTestId, container } = await waitFor<RenderResult>(() =>
+      render(
+        <SearchProvider>
+          <AutoCompleteScreen onSelect={vi.fn()} />
+        </SearchProvider>,
+      ),
+    )
+
+    const inputElement = getByTestId('autoCompleteInput')
 
     // Type 'a' in the input field
     await waitFor(() => {
       fireEvent.change(inputElement, {
         target: {
-          value: 'WQHD+',
+          value: 'AAAA',
         },
       })
     })
 
-    // Clear the input field
-    await waitFor(() => {
-      fireEvent.change(inputElement, {
-        target: {
-          value: '',
-        },
-      })
-    })
-
-    // Verify that the autocomplete dropdown is not rendered
-    expect(screen.queryByRole('listbox')).toBeNull()
+    expect(inputElement).toHaveValue('AAAA')
+    expect(container.querySelectorAll('li').length).toEqual(0)
   })
 })

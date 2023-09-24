@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react'
-import useAxios from '../../api/fetch/useAxios'
+import { useAxios } from '../../api/fetch/useAxios'
 import { SearchActionTypes } from '../../contexts/Search/SearchManager'
 import { useSearchContext } from '../../contexts/Search/useSearchContext'
 import { DataBaseEntry, SearchItem } from '../../models/Database'
-import Autocomplete, { TAutoCompleteItem } from './Autocomplete'
+import AutoComplete, { TAutoCompleteItem } from './Autocomplete'
 
 type TProps = TRestProps & {
   onSelect: (item: SearchItem) => void
@@ -30,42 +30,18 @@ const AutoCompleteScreen = ({ onSelect, ...rest }: TProps) => {
     if (response) {
       dispatchSearch({ type: SearchActionTypes.LOAD, payload: response.data })
     }
-  }, [response])
-
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     const url = 'db/monitor.json'
-  //     try {
-  //       setIsLoading(true)
-
-  //       const response = await fetch(url)
-  //       const dbEntries = (await response.json()) as DataBaseEntry[]
-
-  //       dispatchSearch({ type: SearchActionTypes.LOAD, payload: dbEntries })
-  //     } catch (error) {
-  //       // fail quitely as it is not a big deal, autocomplete will not work
-  //       dispatchSearch({ type: SearchActionTypes.RESET })
-  //       console.error(`Unable to fetch screen DB ${url} :: `, error)
-  //     } finally {
-  //       setIsLoading(false)
-  //     }
-  //   }
-
-  //   if (db.monitorData.length === 0) {
-  //     fetchData()
-  //   }
-  // }, [db])
+  }, [dispatchSearch, response])
 
   useEffect(() => {
     dispatchSearch({ type: SearchActionTypes.SEARCH, payload: val })
-  }, [val])
+  }, [dispatchSearch, val])
 
   useEffect(() => {
     const dbEntry = selected && db.monitorData.find((item) => item.id === selected.id)
     if (dbEntry) {
       onSelect(dbEntry)
     }
-  }, [selected])
+  }, [db.monitorData, onSelect, selected])
 
   useEffect(() => {
     setItems(db.results.map((p) => ({ id: p.id, label: p.label })))
@@ -73,7 +49,7 @@ const AutoCompleteScreen = ({ onSelect, ...rest }: TProps) => {
 
   // use the common auto complete component here.
   return (
-    <Autocomplete
+    <AutoComplete
       items={items}
       value={val}
       onChange={setVal}

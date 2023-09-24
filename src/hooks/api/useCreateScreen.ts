@@ -26,7 +26,7 @@ export const useCreateScreen = () => {
         },
       })
     }
-  }, [createResponse])
+  }, [createResponse, dispatchNotification, dispatchScreen])
 
   useEffect(() => {
     if (createError) {
@@ -35,7 +35,7 @@ export const useCreateScreen = () => {
         payload: { value: createError, type: NotificationType.ERROR },
       })
     }
-  }, [createError])
+  }, [createError, dispatchNotification])
 
   const createAction = (screenInput: ScreenInput) => mutate({ data: screenInput })
 

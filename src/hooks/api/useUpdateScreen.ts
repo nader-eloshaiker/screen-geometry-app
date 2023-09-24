@@ -26,7 +26,7 @@ export const useUpdateScreen = () => {
         },
       })
     }
-  }, [updateResponse])
+  }, [dispatchNotification, dispatchScreen, updateResponse])
 
   useEffect(() => {
     if (updateError) {
@@ -35,7 +35,7 @@ export const useUpdateScreen = () => {
         payload: { value: updateError, type: NotificationType.ERROR },
       })
     }
-  }, [updateError])
+  }, [dispatchNotification, updateError])
 
   const updateAction = (screen: ScreenItem) => mutate({ id: screen.id, data: screen })
 

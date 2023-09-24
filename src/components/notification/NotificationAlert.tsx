@@ -1,5 +1,5 @@
 import classNames from 'classnames'
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { NotificationActionTypes, NotificationType } from '../../contexts/Notification/NotificationManager'
 import { useNotificationContext } from '../../contexts/Notification/useNotifcationContext'
 import { NotificationImage } from './NotificationImage'
@@ -10,9 +10,9 @@ export const NotificationAlert = ({ title, message, tag, type }: NotificationPro
   const [_, dispatch] = useNotificationContext()
   const [isClosing, setIsClosing] = useState(false)
 
-  const onClose = () => {
+  const onClose = useCallback(() => {
     dispatch({ type: NotificationActionTypes.REMOVE_NOTIFICATION, payload: tag })
-  }
+  }, [dispatch, tag])
 
   useEffect(() => {
     const timeoutFade = setTimeout(() => {
@@ -27,7 +27,7 @@ export const NotificationAlert = ({ title, message, tag, type }: NotificationPro
       clearTimeout(timeoutFade)
       clearTimeout(timeoutClose)
     }
-  }, [])
+  }, [onClose, type])
 
   return (
     <div className={classNames({ 'opacity-0 transition-opacity duration-1000': isClosing }) + ` alert ${type}`}>
