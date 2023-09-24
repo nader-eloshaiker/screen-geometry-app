@@ -30,7 +30,7 @@ export const useDeleteScreen = () => {
         },
       })
     }
-  }, [deleteResponse])
+  }, [deleteResponse, dispatchNotification, dispatchScreen])
 
   useEffect(() => {
     if (deleteError) {
@@ -39,7 +39,7 @@ export const useDeleteScreen = () => {
         payload: { value: deleteError, type: NotificationType.ERROR },
       })
     }
-  }, [deleteError])
+  }, [deleteError, dispatchNotification])
 
   return { isDeleteLoading, deleteResponse, deleteError, deleteAction }
 }

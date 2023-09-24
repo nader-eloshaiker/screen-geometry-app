@@ -1,6 +1,5 @@
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import { styled } from 'styled-components'
-import useResizeObserver from 'use-resize-observer'
 import CloseIcon from '../assets/icons/Close'
 import EditIcon from '../assets/icons/Edit'
 import StarOutlineIcon from '../assets/icons/StarOutline'
@@ -13,6 +12,7 @@ import { ScreenItem } from '../generated/openapi/models'
 import { useDeleteScreen } from '../hooks/api/useDeleteScreen'
 import { useFavoriteScreen } from '../hooks/api/useFavoriteScreen'
 import { useListScreens } from '../hooks/api/useListScreens'
+import { useElementSize } from '../hooks/useElementSize'
 import { Dimensions } from '../models/Screen'
 import { createCSSColor, getMaxScreenSize } from '../utils/ScreenCalc'
 
@@ -49,7 +49,8 @@ const TableSkeleton = ({ cols, rows }: TTableProps) => {
 }
 
 export default function Geometry() {
-  const { ref: divRef, width = 1 } = useResizeObserver<HTMLDivElement>()
+  const divRef = useRef<HTMLDivElement>(null)
+  const { width } = useElementSize(divRef)
   const [{ screens }] = useScreenContext()
   const [highlighted, setHighlighted] = useState<ScreenItem>()
   const [selected, setSelected] = useState<ScreenItem>()

@@ -14,7 +14,7 @@ export const useListScreens = () => {
     if (screenListResponse && screenListResponse.list.length > 0) {
       dispatchScreen({ type: ScreenActionTypes.LIST, payload: screenListResponse.list })
     }
-  }, [screenListResponse])
+  }, [dispatchScreen, screenListResponse])
 
   useEffect(() => {
     if (screenListError) {
@@ -23,7 +23,7 @@ export const useListScreens = () => {
         payload: { value: screenListError, type: NotificationType.ERROR },
       })
     }
-  }, [screenListError])
+  }, [dispatchNotification, screenListError])
 
   return { isScreenListLoading, screenListResponse, screenListError }
 }

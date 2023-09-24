@@ -33,7 +33,7 @@ export const useFavoriteScreen = () => {
         },
       })
     }
-  }, [favoriteResponse])
+  }, [dispatchNotification, dispatchScreen, favoriteResponse])
 
   useEffect(() => {
     if (favouriteError) {
@@ -42,7 +42,7 @@ export const useFavoriteScreen = () => {
         payload: { value: favouriteError, type: NotificationType.ERROR },
       })
     }
-  }, [favouriteError])
+  }, [dispatchNotification, favouriteError])
 
   return { isFavoriteLoading, favoriteResponse, favouriteError, favoriteAction }
 }

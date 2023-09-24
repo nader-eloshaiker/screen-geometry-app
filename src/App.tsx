@@ -1,10 +1,10 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
-import { NotificationProvider } from './contexts/Notification/NotificationProvider.tsx'
-import { ScreenProvider } from './contexts/Screen/ScreenProvider.tsx'
-import { SearchProvider } from './contexts/Search/SearchProvider.tsx'
-import { ThemeModeProvider } from './contexts/theme/ThemeModeProvider.tsx'
+import { NotificationProvider } from './contexts/Notification/NotificationProvider'
+import { ScreenProvider } from './contexts/Screen/ScreenProvider'
+import { SearchProvider } from './contexts/Search/SearchProvider'
+import { ThemeModeProvider } from './contexts/theme/ThemeModeProvider'
 import './index.css'
-import AppRouterProvider from './routes/AppRouterProvider.tsx'
+import AppRouterProvider from './routes/AppRouterProvider'
 
 const queryClient = new QueryClient()
 
