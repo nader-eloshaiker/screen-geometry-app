@@ -1,15 +1,13 @@
+import { RefObject } from 'react'
 import { twMerge } from 'tailwind-merge'
 import EditIcon from '../../assets/icons/Edit'
 import HamburgerIcon from '../../assets/icons/Hamburger'
-import { useDrawerContext } from '../../contexts/drawer/useDrawerContext'
 
-type TProps = TRestProps & { className?: string }
+type TProps = TRestProps & { className?: string; drawerRef: RefObject<HTMLInputElement> }
 
-export default function HamburgerButton({ className, ...rest }: TProps) {
-  const drawerRef = useDrawerContext()
-
+export const ScreenButton = ({ className, drawerRef, ...rest }: TProps) => {
   const toggleDrawer = () => {
-    drawerRef?.current?.click()
+    drawerRef.current?.click()
   }
 
   return (

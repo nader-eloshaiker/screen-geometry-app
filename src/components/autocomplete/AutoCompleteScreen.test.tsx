@@ -5,7 +5,7 @@ import { afterEach, beforeEach, describe, expect, Mock, vi } from 'vitest'
 import { SearchProvider } from '../../contexts/Search/SearchProvider'
 import { ElementSize, useElementSize } from '../../hooks/useElementSize'
 import { DataBaseEntry } from '../../models/Database'
-import AutoCompleteScreen from './AutoCompleteScreen'
+import { AutoCompleteScreen } from './AutoCompleteScreen'
 
 const mocks = vi.hoisted(() => ({
   axios: {

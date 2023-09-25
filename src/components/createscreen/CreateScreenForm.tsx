@@ -7,7 +7,7 @@ import { ScreenInput } from '../../generated/openapi/models'
 import { useCreateScreen } from '../../hooks/api/useCreateScreen'
 import { SearchItem } from '../../models/Database'
 import { ScreenDataEnum } from '../../models/Screen'
-import AutoCompleteScreen from '../autocomplete/AutoCompleteScreen'
+import { AutoCompleteScreen } from '../autocomplete/AutoCompleteScreen'
 import { InputPlaceholder } from '../inputplaceholder/InputPlaceholder'
 
 const screenDataSchema: ObjectSchema<ScreenInput> = yup.object().shape(
@@ -59,7 +59,7 @@ const screenDataSchema: ObjectSchema<ScreenInput> = yup.object().shape(
   [[ScreenDataEnum.hRes, ScreenDataEnum.vRes]],
 )
 
-export default function CreateScreenForm() {
+export const CreateScreenForm = () => {
   const {
     register,
     formState: { errors, isDirty, isValid },
