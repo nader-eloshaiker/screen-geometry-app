@@ -95,10 +95,10 @@ export default function Geometry() {
 
   return (
     <div className='my-6 h-full w-full' ref={divSizeRef}>
-      <div className='flex w-full justify-end'>
-        <ScreenButton drawerRef={drawerRef} />
-      </div>
       <ScreenFormDrawer drawerRef={drawerRef}>
+        <div className='flex w-full justify-end'>
+          <ScreenButton drawerRef={drawerRef} />
+        </div>
         <table className='table'>
           <thead>
             <tr>
