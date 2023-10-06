@@ -96,7 +96,7 @@ export default function Geometry() {
   return (
     <div className='my-6 h-full w-full' ref={divSizeRef}>
       <ScreenFormDrawer drawerRef={drawerRef}>
-        <div className='flex w-full justify-end'>
+        <div className='flex w-full justify-end pb-4'>
           <ScreenButton drawerRef={drawerRef} />
         </div>
         <table className='table'>
@@ -104,10 +104,13 @@ export default function Geometry() {
             <tr>
               <th>Pin</th>
               <th>Size</th>
-              <th>Aspect</th>
-              <th>Width</th>
-              <th>Height</th>
-              <th>Resolution</th>
+              <th>Ratio</th>
+              <th>
+                <span className='table-cell md:hidden'>W/H Size</span>
+                <span className='hidden md:table-cell'>Dimensions</span>
+              </th>
+              <th className='hidden md:table-cell'>Resolution</th>
+              <th className='hidden md:table-cell'>Pixels/Inch</th>
               <th>Action</th>
             </tr>
           </thead>
@@ -147,9 +150,14 @@ export default function Geometry() {
                   </td>
                   <td>{screen.tag.diagonalSize}&quot;</td>
                   <td>{screen.tag.aspectRatio}</td>
-                  <td>{Math.round(screen.data.hSize * 100) / 100}&quot;</td>
-                  <td>{Math.round(screen.data.vSize * 100) / 100}&quot;</td>
-                  <td>{screen.spec && `${screen.spec.hRes} x ${screen.spec.vRes}`}</td>
+                  <td>
+                    {Math.round((screen.data.hSize * 100) / 100)}&quot; x {Math.round((screen.data.vSize * 100) / 100)}
+                    &quot;
+                  </td>
+                  <td className='hidden md:table-cell'>{screen.spec && `${screen.spec.hRes} x ${screen.spec.vRes}`}</td>
+                  <td className='hidden md:table-cell'>
+                    {screen.spec && `${Math.round((screen.spec.ppi * 100) / 100)}`}
+                  </td>
                   <td>
                     <div className='flex flex-row items-center gap-3'>
                       <button>
@@ -172,7 +180,7 @@ export default function Geometry() {
           )}
         </table>
 
-        <div className='py-6' />
+        <div className='py-4' />
         <Stacked id='geometry' width={maxPanelSize.width} height={maxPanelSize.height}>
           {!isScreenListLoading ? (
             screens.map((screen, index) => (
