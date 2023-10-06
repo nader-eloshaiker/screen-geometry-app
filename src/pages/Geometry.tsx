@@ -4,6 +4,8 @@ import CloseIcon from '../assets/icons/Close'
 import EditIcon from '../assets/icons/Edit'
 import StarOutlineIcon from '../assets/icons/StarOutline'
 import StarSolidIcon from '../assets/icons/StarSolid'
+import { ScreenButton } from '../components/createscreen/CreateButton'
+import { ScreenFormDrawer } from '../components/createscreen/drawer/ScreenFormDrawer'
 import { ScreenPanel } from '../components/screen/ScreenPanel'
 import { SkeletonImage } from '../components/skeleton/SkeletonImage'
 import { SkeletonRect } from '../components/skeleton/SkeletonRect'
@@ -49,11 +51,13 @@ const TableSkeleton = ({ cols, rows }: TTableProps) => {
 }
 
 export default function Geometry() {
-  const divRef = useRef<HTMLDivElement>(null)
-  const { width } = useElementSize(divRef)
+  const divSizeRef = useRef<HTMLDivElement>(null)
+  const drawerRef = useRef<HTMLInputElement>(null)
+  const { width } = useElementSize(divSizeRef)
   const [{ screens }] = useScreenContext()
   const [highlighted, setHighlighted] = useState<ScreenItem>()
   const [selected, setSelected] = useState<ScreenItem>()
+
   const maxScreenSize = screens.length > 0 ? getMaxScreenSize(screens) : { width: 47, height: 16 } // max possible screen size
   const maxPanelSize: Dimensions = { width, height: Math.round(maxScreenSize.height * (width / maxScreenSize.width)) }
 
@@ -90,94 +94,113 @@ export default function Geometry() {
   const isHighlighted = (screen: ScreenItem) => screen.id === highlighted?.id
 
   return (
-    <div className='h-full w-full' ref={divRef}>
-      <table className='table'>
-        <thead>
-          <tr>
-            <th>Pin</th>
-            <th>Size</th>
-            <th>Aspect</th>
-            <th>Width</th>
-            <th>Height</th>
-            <th>Resolution</th>
-            <th>Action</th>
-          </tr>
-        </thead>
-        {!isScreenListLoading ? (
-          <tbody>
-            {screens.map((screen) => (
-              <tr
-                style={isHighlighted(screen) ? { backgroundColor: createCSSColor(screen.render?.color, 0.2) } : {}}
+    <div className='my-6 h-full w-full' ref={divSizeRef}>
+      <ScreenFormDrawer drawerRef={drawerRef}>
+        <div className='flex w-full justify-end pb-4'>
+          <ScreenButton drawerRef={drawerRef} />
+        </div>
+        <table className='table'>
+          <thead>
+            <tr>
+              <th className='text-center'>Pin</th>
+              <th className='text-center'>Size</th>
+              <th className='text-center'>Ratio</th>
+              <th className='hidden text-center sm:table-cell'>Dimensions</th>
+              <th className='hidden text-center md:table-cell'>Resolution</th>
+              <th className='flex justify-center'>
+                <span className='table-cell md:hidden'>PPI</span>
+                <span className='hidden md:table-cell'>Pixels/Inch</span>
+              </th>
+              <th className='text-center'>Action</th>
+            </tr>
+          </thead>
+          {!isScreenListLoading ? (
+            <tbody>
+              {screens.map((screen) => (
+                <tr
+                  style={isHighlighted(screen) ? { backgroundColor: createCSSColor(screen.render?.color, 0.2) } : {}}
+                  key={screen.id}
+                  onMouseEnter={() => onHighlightActive(screen)}
+                  onMouseOut={() => onHighlightPassive()}
+                  onClick={() => onHighlightClick(screen)}
+                >
+                  <td>
+                    <div className='flex items-center justify-center'>
+                      {isFavoriteLoading && screen.id === selected?.id ? (
+                        <div
+                          className='loading loading-spinner loading-xs'
+                          style={{ color: createCSSColor(screen.render?.color) }}
+                        />
+                      ) : (
+                        <button onClick={() => onFavourite(screen)}>
+                          {screen.favorite ? (
+                            <StarSolidIcon
+                              id='star-icon'
+                              className='h-4 w-4'
+                              fill={createCSSColor(screen.render?.color)}
+                            />
+                          ) : (
+                            <StarOutlineIcon
+                              id='star-icon'
+                              className='h-4 w-4'
+                              fill={createCSSColor(screen.render?.color)}
+                            />
+                          )}
+                        </button>
+                      )}
+                    </div>
+                  </td>
+                  <td className='text-center'>{screen.tag.diagonalSize}&quot;</td>
+                  <td className='text-center'>{screen.tag.aspectRatio}</td>
+                  <td className='hidden text-center sm:table-cell'>
+                    {Math.round((screen.data.hSize * 100) / 100)}&quot; x {Math.round((screen.data.vSize * 100) / 100)}
+                    &quot;
+                  </td>
+                  <td className='hidden text-center md:table-cell'>
+                    {screen.spec && `${screen.spec.hRes} x ${screen.spec.vRes}`}
+                  </td>
+                  <td className='text-center'>{screen.spec && `${Math.round((screen.spec.ppi * 100) / 100)}`}</td>
+                  <td>
+                    <div className='flex flex-col items-center justify-center gap-3 2xs:flex-row'>
+                      <button>
+                        <EditIcon id='edit-icon' className='h-4 w-4' fill='currentColor' />
+                      </button>
+                      {isDeleteLoading && screen.id === selected?.id ? (
+                        <div className='loading loading-spinner loading-xs' />
+                      ) : (
+                        <button onClick={() => handleDelete(screen)}>
+                          <CloseIcon id='delete-icon' className='h-4 w-4' fill='currentColor' />
+                        </button>
+                      )}
+                    </div>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          ) : (
+            <TableSkeleton cols={7} rows={5} />
+          )}
+        </table>
+
+        <div className='py-4' />
+        <Stacked id='geometry' width={maxPanelSize.width} height={maxPanelSize.height}>
+          {!isScreenListLoading ? (
+            screens.map((screen, index) => (
+              <ScreenPanel
                 key={screen.id}
+                screen={screen}
+                index={screens.length - index}
+                selected={screen.favorite || isHighlighted(screen)}
                 onMouseEnter={() => onHighlightActive(screen)}
                 onMouseOut={() => onHighlightPassive()}
                 onClick={() => onHighlightClick(screen)}
-              >
-                <td>
-                  {isFavoriteLoading && screen.id === selected?.id ? (
-                    <div
-                      className='loading loading-spinner loading-xs'
-                      style={{ color: createCSSColor(screen.render?.color) }}
-                    />
-                  ) : (
-                    <button onClick={() => onFavourite(screen)}>
-                      {screen.favorite ? (
-                        <StarSolidIcon id='star-icon' className='h-4 w-4' fill={createCSSColor(screen.render?.color)} />
-                      ) : (
-                        <StarOutlineIcon
-                          id='star-icon'
-                          className='h-4 w-4'
-                          fill={createCSSColor(screen.render?.color)}
-                        />
-                      )}
-                    </button>
-                  )}
-                </td>
-                <td>{screen.tag.diagonalSize}&quot;</td>
-                <td>{screen.tag.aspectRatio}</td>
-                <td>{Math.round(screen.data.hSize * 100) / 100}&quot;</td>
-                <td>{Math.round(screen.data.vSize * 100) / 100}&quot;</td>
-                <td>{screen.spec && `${screen.spec.hRes} x ${screen.spec.vRes}`}</td>
-                <td>
-                  <div className='flex flex-row items-center gap-3'>
-                    <button>
-                      <EditIcon id='edit-icon' className='h-4 w-4' fill='currentColor' />
-                    </button>
-                    {isDeleteLoading && screen.id === selected?.id ? (
-                      <div className='loading loading-spinner loading-xs' />
-                    ) : (
-                      <button onClick={() => handleDelete(screen)}>
-                        <CloseIcon id='delete-icon' className='h-4 w-4' fill='currentColor' />
-                      </button>
-                    )}
-                  </div>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        ) : (
-          <TableSkeleton cols={7} rows={5} />
-        )}
-      </table>
-
-      <div className='py-6' />
-      <Stacked id='geometry' width={maxPanelSize.width} height={maxPanelSize.height}>
-        {!isScreenListLoading ? (
-          screens.map((screen, index) => (
-            <ScreenPanel
-              key={screen.id}
-              screen={screen}
-              index={screens.length - index}
-              selected={screen.favorite || isHighlighted(screen)}
-              onMouseEnter={() => onHighlightActive(screen)}
-              onMouseOut={() => onHighlightPassive()}
-              onClick={() => onHighlightClick(screen)}
-            />
-          ))
-        ) : (
-          <SkeletonImage className='h-full w-full' />
-        )}
-      </Stacked>
+              />
+            ))
+          ) : (
+            <SkeletonImage className='h-full w-full' />
+          )}
+        </Stacked>
+      </ScreenFormDrawer>
     </div>
   )
 }

@@ -1,23 +1,17 @@
 import { Outlet } from 'react-router-dom'
-import DrawerLayout from '../components/drawerlayout/DrawerLayout'
 import Footer from '../components/footer/Footer'
 import Header from '../components/header/Header'
-import { DrawerProvider } from '../contexts/drawer/DrawerProvider'
 
 export default function Root() {
   return (
-    <DrawerProvider>
-      <div id='app-root' className='container mx-auto'>
-        <div className='flex min-h-screen flex-col flex-wrap'>
-          <Header />
-          <DrawerLayout>
-            <main role='main' className='h-full w-full'>
-              <Outlet />
-            </main>
-          </DrawerLayout>
-          <Footer />
-        </div>
+    <div id='app-root' className='container mx-auto flex-1'>
+      <div className='flex min-h-screen flex-col flex-wrap'>
+        <Header />
+        <main role='main' className='flex-1 px-2 sm:px-4'>
+          <Outlet />
+        </main>
+        <Footer />
       </div>
-    </DrawerProvider>
+    </div>
   )
 }

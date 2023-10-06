@@ -9,7 +9,7 @@ type TProps = TRestProps & {
   onSelect: (item: SearchItem) => void
 }
 
-const AutoCompleteScreen = ({ onSelect, ...rest }: TProps) => {
+export const AutoCompleteScreen = ({ onSelect, ...rest }: TProps) => {
   // query typed by user
   const [val, setVal] = useState('')
 
@@ -60,5 +60,3 @@ const AutoCompleteScreen = ({ onSelect, ...rest }: TProps) => {
     />
   )
 }
-
-export default AutoCompleteScreen
