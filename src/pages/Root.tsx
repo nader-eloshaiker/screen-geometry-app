@@ -7,7 +7,7 @@ export default function Root() {
     <div id='app-root' className='container mx-auto flex-1'>
       <div className='flex min-h-screen flex-col flex-wrap'>
         <Header />
-        <main role='main' className='flex-1 px-4'>
+        <main role='main' className='flex-1 px-2 sm:px-4'>
           <Outlet />
         </main>
         <Footer />

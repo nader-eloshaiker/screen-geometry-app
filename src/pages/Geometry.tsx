@@ -102,16 +102,16 @@ export default function Geometry() {
         <table className='table'>
           <thead>
             <tr>
-              <th>Pin</th>
-              <th>Size</th>
-              <th>Ratio</th>
-              <th>
-                <span className='table-cell md:hidden'>W/H Size</span>
-                <span className='hidden md:table-cell'>Dimensions</span>
+              <th className='text-center'>Pin</th>
+              <th className='text-center'>Size</th>
+              <th className='text-center'>Ratio</th>
+              <th className='hidden text-center sm:table-cell'>Dimensions</th>
+              <th className='hidden text-center md:table-cell'>Resolution</th>
+              <th className='flex justify-center'>
+                <span className='table-cell md:hidden'>PPI</span>
+                <span className='hidden md:table-cell'>Pixels/Inch</span>
               </th>
-              <th className='hidden md:table-cell'>Resolution</th>
-              <th className='hidden md:table-cell'>Pixels/Inch</th>
-              <th>Action</th>
+              <th className='text-center'>Action</th>
             </tr>
           </thead>
           {!isScreenListLoading ? (
@@ -125,41 +125,43 @@ export default function Geometry() {
                   onClick={() => onHighlightClick(screen)}
                 >
                   <td>
-                    {isFavoriteLoading && screen.id === selected?.id ? (
-                      <div
-                        className='loading loading-spinner loading-xs'
-                        style={{ color: createCSSColor(screen.render?.color) }}
-                      />
-                    ) : (
-                      <button onClick={() => onFavourite(screen)}>
-                        {screen.favorite ? (
-                          <StarSolidIcon
-                            id='star-icon'
-                            className='h-4 w-4'
-                            fill={createCSSColor(screen.render?.color)}
-                          />
-                        ) : (
-                          <StarOutlineIcon
-                            id='star-icon'
-                            className='h-4 w-4'
-                            fill={createCSSColor(screen.render?.color)}
-                          />
-                        )}
-                      </button>
-                    )}
+                    <div className='flex items-center justify-center'>
+                      {isFavoriteLoading && screen.id === selected?.id ? (
+                        <div
+                          className='loading loading-spinner loading-xs'
+                          style={{ color: createCSSColor(screen.render?.color) }}
+                        />
+                      ) : (
+                        <button onClick={() => onFavourite(screen)}>
+                          {screen.favorite ? (
+                            <StarSolidIcon
+                              id='star-icon'
+                              className='h-4 w-4'
+                              fill={createCSSColor(screen.render?.color)}
+                            />
+                          ) : (
+                            <StarOutlineIcon
+                              id='star-icon'
+                              className='h-4 w-4'
+                              fill={createCSSColor(screen.render?.color)}
+                            />
+                          )}
+                        </button>
+                      )}
+                    </div>
                   </td>
-                  <td>{screen.tag.diagonalSize}&quot;</td>
-                  <td>{screen.tag.aspectRatio}</td>
-                  <td>
+                  <td className='text-center'>{screen.tag.diagonalSize}&quot;</td>
+                  <td className='text-center'>{screen.tag.aspectRatio}</td>
+                  <td className='hidden text-center sm:table-cell'>
                     {Math.round((screen.data.hSize * 100) / 100)}&quot; x {Math.round((screen.data.vSize * 100) / 100)}
                     &quot;
                   </td>
-                  <td className='hidden md:table-cell'>{screen.spec && `${screen.spec.hRes} x ${screen.spec.vRes}`}</td>
-                  <td className='hidden md:table-cell'>
-                    {screen.spec && `${Math.round((screen.spec.ppi * 100) / 100)}`}
+                  <td className='hidden text-center md:table-cell'>
+                    {screen.spec && `${screen.spec.hRes} x ${screen.spec.vRes}`}
                   </td>
+                  <td className='text-center'>{screen.spec && `${Math.round((screen.spec.ppi * 100) / 100)}`}</td>
                   <td>
-                    <div className='flex flex-row items-center gap-3'>
+                    <div className='flex flex-col items-center justify-center gap-3 2xs:flex-row'>
                       <button>
                         <EditIcon id='edit-icon' className='h-4 w-4' fill='currentColor' />
                       </button>

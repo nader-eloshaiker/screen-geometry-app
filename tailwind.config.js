@@ -5,12 +5,20 @@ import typograhpy from '@tailwindcss/typography'
 import daisyui from 'daisyui'
 // import darkTheme from 'daisyui/src/theming/themes'
 import colors from 'tailwindcss/colors'
+import defaultTheme from 'tailwindcss/defaultTheme'
 
 module.exports = {
   mode: 'jit',
   content: ['./src/index.html', './src/**/*.{js,ts,jsx,tsx,html}'],
   theme: {
     extend: {
+      screens: {
+        xs: '425px',
+        '2xs': '375px',
+        '3xs': '320px',
+        ...defaultTheme.screens,
+        '3xl': '1600px',
+      },
       colors: {
         current: 'currentColor',
         lightGray: colors.slate[400],
