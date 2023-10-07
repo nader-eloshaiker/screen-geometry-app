@@ -7,7 +7,7 @@ import { useListScreensAction } from '../../generated/openapi/services/screen-li
 
 export const useListScreens = () => {
   const [_, dispatchScreen] = useScreenContext()
-  const [__, dispatchNotification] = useNotificationContext()
+  const { dispatch: dispatchNotification } = useNotificationContext()
   const { isLoading: isScreenListLoading, error: screenListError, data: screenListResponse } = useListScreensAction()
 
   useEffect(() => {

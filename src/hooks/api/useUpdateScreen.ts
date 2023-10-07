@@ -12,7 +12,7 @@ import { useUpdateScreenAction } from '../../generated/openapi/services/screen-s
 
 export const useUpdateScreen = () => {
   const [_, dispatchScreen] = useScreenContext()
-  const [__, dispatchNotification] = useNotificationContext()
+  const { dispatch: dispatchNotification } = useNotificationContext()
   const { isLoading: isUpdateLoading, data: updateResponse, error: updateError, mutate } = useUpdateScreenAction()
 
   useEffect(() => {

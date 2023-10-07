@@ -11,7 +11,7 @@ import { useFavoriteScreenAction } from '../../generated/openapi/services/screen
 
 export const useFavoriteScreen = () => {
   const [_, dispatchScreen] = useScreenContext()
-  const [__, dispatchNotification] = useNotificationContext()
+  const { dispatch: dispatchNotification } = useNotificationContext()
   const {
     isLoading: isFavoriteLoading,
     data: favoriteResponse,

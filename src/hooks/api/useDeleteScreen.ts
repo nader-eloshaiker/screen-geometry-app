@@ -11,7 +11,7 @@ import { useDeleteScreenAction } from '../../generated/openapi/services/screen-s
 
 export const useDeleteScreen = () => {
   const [_, dispatchScreen] = useScreenContext()
-  const [__, dispatchNotification] = useNotificationContext()
+  const { dispatch: dispatchNotification } = useNotificationContext()
   const {
     isLoading: isDeleteLoading,
     data: deleteResponse,

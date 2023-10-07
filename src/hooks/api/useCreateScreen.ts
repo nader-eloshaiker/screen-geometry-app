@@ -12,7 +12,7 @@ import { useCreateScreenAction } from '../../generated/openapi/services/screen-l
 
 export const useCreateScreen = () => {
   const [_, dispatchScreen] = useScreenContext()
-  const [__, dispatchNotification] = useNotificationContext()
+  const { dispatch: dispatchNotification } = useNotificationContext()
   const { isLoading: isCreateLoading, data: createResponse, error: createError, mutate } = useCreateScreenAction()
 
   useEffect(() => {

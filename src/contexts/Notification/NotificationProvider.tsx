@@ -1,11 +1,11 @@
-import { useReducer } from 'react'
+import { useMemo, useReducer } from 'react'
 import { NotificationContext } from './NotificationContext'
-import { initialNotificationState, screenReducer } from './NotificationManager'
+import { initialNotificationState, notificationReducer } from './NotificationManager'
 
 export const NotificationProvider = ({ children }: TReactChildren) => {
-  const [screens, dispatch] = useReducer(screenReducer, initialNotificationState)
+  const [state, dispatch] = useReducer(notificationReducer, initialNotificationState)
 
-  return screens ? (
-    <NotificationContext.Provider value={[screens, dispatch]}>{children}</NotificationContext.Provider>
-  ) : null
+  const contextValue = useMemo(() => ({ state, dispatch }), [state])
+
+  return <NotificationContext.Provider value={contextValue}>{children}</NotificationContext.Provider>
 }
