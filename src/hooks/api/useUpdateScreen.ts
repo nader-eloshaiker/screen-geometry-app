@@ -11,7 +11,7 @@ import { ScreenItem } from '../../generated/openapi/models'
 import { useUpdateScreenAction } from '../../generated/openapi/services/screen-service'
 
 export const useUpdateScreen = () => {
-  const [_, dispatchScreen] = useScreenContext()
+  const { dispatch: dispatchScreen } = useScreenContext()
   const { dispatch: dispatchNotification } = useNotificationContext()
   const { isLoading: isUpdateLoading, data: updateResponse, error: updateError, mutate } = useUpdateScreenAction()
 

@@ -19,7 +19,7 @@ export const AutoCompleteScreen = ({ onSelect, ...rest }: TProps) => {
   // a list to show on the dropdown when user types
   const [items, setItems] = useState<Array<TAutoCompleteItem>>([])
 
-  const [db, dispatchSearch] = useSearchContext()
+  const { state: db, dispatch: dispatchSearch } = useSearchContext()
 
   const { response, loading } = useAxios<DataBaseEntry[]>({
     params: { url: 'db/monitor.json' },
