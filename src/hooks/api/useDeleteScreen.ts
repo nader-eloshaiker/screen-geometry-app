@@ -10,7 +10,7 @@ import { useScreenContext } from '../../contexts/Screen/useScreenContext'
 import { useDeleteScreenAction } from '../../generated/openapi/services/screen-service'
 
 export const useDeleteScreen = () => {
-  const [_, dispatchScreen] = useScreenContext()
+  const { dispatch: dispatchScreen } = useScreenContext()
   const { dispatch: dispatchNotification } = useNotificationContext()
   const {
     isLoading: isDeleteLoading,

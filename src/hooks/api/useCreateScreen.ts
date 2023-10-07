@@ -11,7 +11,7 @@ import { ScreenInput } from '../../generated/openapi/models'
 import { useCreateScreenAction } from '../../generated/openapi/services/screen-list-service'
 
 export const useCreateScreen = () => {
-  const [_, dispatchScreen] = useScreenContext()
+  const { dispatch: dispatchScreen } = useScreenContext()
   const { dispatch: dispatchNotification } = useNotificationContext()
   const { isLoading: isCreateLoading, data: createResponse, error: createError, mutate } = useCreateScreenAction()
 

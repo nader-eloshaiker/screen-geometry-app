@@ -58,7 +58,9 @@ export default function Geometry() {
   const divSizeRef = useRef<HTMLDivElement>(null)
   const drawerRef = useRef<HTMLInputElement>(null)
   const { width } = useElementSize(divSizeRef)
-  const [{ screens }] = useScreenContext()
+  const {
+    state: { screens },
+  } = useScreenContext()
   const [highlighted, setHighlighted] = useState<ScreenItem>()
   const [selected, setSelected] = useState<ScreenItem>()
 

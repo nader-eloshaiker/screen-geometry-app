@@ -6,7 +6,7 @@ import { useScreenContext } from '../../contexts/Screen/useScreenContext'
 import { useListScreensAction } from '../../generated/openapi/services/screen-list-service'
 
 export const useListScreens = () => {
-  const [_, dispatchScreen] = useScreenContext()
+  const { dispatch: dispatchScreen } = useScreenContext()
   const { dispatch: dispatchNotification } = useNotificationContext()
   const { isLoading: isScreenListLoading, error: screenListError, data: screenListResponse } = useListScreensAction()
 
