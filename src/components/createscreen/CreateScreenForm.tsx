@@ -1,5 +1,6 @@
 import { yupResolver } from '@hookform/resolvers/yup'
 import cn from 'classnames'
+import { useCallback } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import * as yup from 'yup'
 import { ObjectSchema } from 'yup'
@@ -73,36 +74,40 @@ export const CreateScreenForm = () => {
   })
   const { isCreateLoading, createAction } = useCreateScreen()
 
-  const onSelect = (item: SearchItem) => {
-    setValue(ScreenDataEnum.aspectRatio, item.tag.aspectRatio, {
-      shouldValidate: true,
-      shouldDirty: true,
-    })
-    if (item.tag.diagonalSize) {
-      setValue(ScreenDataEnum.diagonalSize, item.tag.diagonalSize, {
+  const onSelect = useCallback(
+    (item: SearchItem) => {
+      setValue(ScreenDataEnum.aspectRatio, item.tag.aspectRatio, {
         shouldValidate: true,
         shouldDirty: true,
       })
-    } else {
-      resetField(ScreenDataEnum.diagonalSize)
-    }
-    if (item.spec?.hRes) {
-      setValue(ScreenDataEnum.hRes, item.spec?.hRes, {
-        shouldValidate: true,
-        shouldDirty: true,
-      })
-    } else {
-      resetField(ScreenDataEnum.hRes)
-    }
-    if (item.spec?.vRes) {
-      setValue(ScreenDataEnum.vRes, item.spec?.vRes, {
-        shouldValidate: true,
-        shouldDirty: true,
-      })
-    } else {
-      resetField(ScreenDataEnum.vRes)
-    }
-  }
+      if (item.tag.diagonalSize) {
+        setValue(ScreenDataEnum.diagonalSize, item.tag.diagonalSize, {
+          shouldValidate: true,
+          shouldDirty: true,
+        })
+      } else {
+        resetField(ScreenDataEnum.diagonalSize)
+      }
+      if (item.spec?.hRes) {
+        setValue(ScreenDataEnum.hRes, item.spec?.hRes, {
+          shouldValidate: true,
+          shouldDirty: true,
+        })
+      } else {
+        resetField(ScreenDataEnum.hRes)
+      }
+      if (item.spec?.vRes) {
+        setValue(ScreenDataEnum.vRes, item.spec?.vRes, {
+          shouldValidate: true,
+          shouldDirty: true,
+        })
+      } else {
+        resetField(ScreenDataEnum.vRes)
+      }
+    },
+    [resetField, setValue],
+  )
+
   const onSubmit: SubmitHandler<ScreenInput> = (form) => {
     createAction(form)
   }
