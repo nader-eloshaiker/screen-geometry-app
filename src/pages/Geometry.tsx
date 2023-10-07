@@ -16,6 +16,7 @@ import { useFavoriteScreen } from '../hooks/api/useFavoriteScreen'
 import { useListScreens } from '../hooks/api/useListScreens'
 import { useElementSize } from '../hooks/useElementSize'
 import { Dimensions } from '../models/Screen'
+import { getRandomString } from '../utils/RandomGenerator'
 import { createCSSColor, getMaxScreenSize } from '../utils/ScreenCalc'
 
 const Stacked = styled.div<{ width: number; height: number }>`
@@ -35,16 +36,19 @@ type TTableProps = { cols: number; rows: number }
 const TableSkeleton = ({ cols, rows }: TTableProps) => {
   const tableCols = []
   for (let i = 0; i < cols; i++) {
+    const key = getRandomString(4)
     tableCols.push(
-      <td key={i}>
-        <SkeletonRect key={i} className='h-6 w-full' />
+      <td key={key}>
+        <SkeletonRect key={key} className='h-6 w-full' />
       </td>,
     )
   }
 
   const tableRows = []
   for (let i = 0; i < rows; i++) {
-    tableRows.push(<tr key={i}>{tableCols}</tr>)
+    const key = getRandomString(4)
+
+    tableRows.push(<tr key={key}>{tableCols}</tr>)
   }
 
   return <tbody>{tableRows}</tbody>
