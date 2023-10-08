@@ -1,14 +1,16 @@
-import { RefObject, useState } from 'react'
+import { useState } from 'react'
 import { twMerge } from 'tailwind-merge'
 import CloseIcon from '../../assets/icons/Close'
 import EditIcon from '../../assets/icons/Edit'
+import { useInputReferenceContext } from '../../contexts/reference/useInputReferenceContext'
 
-type TProps = TRestProps & { className?: string; drawerRef: RefObject<HTMLInputElement> }
+type TProps = TRestProps & { className?: string }
 
-export const ScreenButton = ({ className, drawerRef, ...rest }: TProps) => {
+export const ScreenButton = ({ className, ...rest }: TProps) => {
   const [isOpen, setIsOpen] = useState<boolean>(false)
+  const drawerRef = useInputReferenceContext()
   const toggleDrawer = () => {
-    drawerRef.current?.click()
+    drawerRef?.current?.click()
     setIsOpen(!isOpen)
   }
 

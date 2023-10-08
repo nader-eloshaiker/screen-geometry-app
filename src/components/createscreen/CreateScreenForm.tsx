@@ -4,6 +4,7 @@ import { useCallback } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import * as yup from 'yup'
 import { ObjectSchema } from 'yup'
+import { useInputReferenceContext } from '../../contexts/reference/useInputReferenceContext'
 import { ScreenInput } from '../../generated/openapi/models'
 import { useCreateScreen } from '../../hooks/api/useCreateScreen'
 import { SearchItem } from '../../models/Database'
@@ -73,6 +74,7 @@ export const CreateScreenForm = () => {
     mode: 'onBlur',
   })
   const { isCreateLoading, createAction } = useCreateScreen()
+  const drawerRef = useInputReferenceContext()
 
   const onSelect = useCallback(
     (item: SearchItem) => {
@@ -244,6 +246,20 @@ export const CreateScreenForm = () => {
                 </div>
               ) : (
                 'Reset'
+              )}
+            </button>
+            <button
+              id='cancelButton'
+              type='button'
+              className='btn btn-neutral'
+              onClick={() => drawerRef?.current?.click()}
+            >
+              {isCreateLoading ? (
+                <div className='stack'>
+                  <span>Cancel</span> <span className='loading loading-spinner' />
+                </div>
+              ) : (
+                'Cancel'
               )}
             </button>
             <button

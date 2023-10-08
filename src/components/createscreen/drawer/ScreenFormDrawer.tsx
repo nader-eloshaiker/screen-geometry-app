@@ -1,10 +1,11 @@
-import { RefObject } from 'react'
+import { useInputReferenceContext } from '../../../contexts/reference/useInputReferenceContext'
 import { CreateScreen } from '../CreateScreen'
 import './ScreenFormDrawer.css'
 
-type Props = TReactChildren & { drawerRef: RefObject<HTMLInputElement> }
+type Props = TReactChildren
 
-export const ScreenFormDrawer = ({ drawerRef, children }: Props) => {
+export const ScreenFormDrawer = ({ children }: Props) => {
+  const drawerRef = useInputReferenceContext()
   return (
     <div className='drawer grow'>
       <input id='screenFormDrawer' type='checkbox' className='drawer-toggle' ref={drawerRef} />

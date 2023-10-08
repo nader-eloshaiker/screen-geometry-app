@@ -1,5 +1,3 @@
-// components/Navbar.tsx
-
 import { CreateScreenForm } from './CreateScreenForm'
 
 export const CreateScreen = () => {
