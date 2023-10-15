@@ -116,7 +116,7 @@ export const CreateScreenForm = () => {
 
   return (
     <>
-      <div className='form-control w-full'>
+      <div className='form-control mb-4 flex w-full flex-col'>
         <label className='label'>
           <span className='label-text'>Choose from list of Monitors</span>
         </label>
@@ -232,36 +232,38 @@ export const CreateScreenForm = () => {
             <div className='text-xs text-error'>{errors[ScreenDataEnum.vRes].message}</div>
           )}
 
-          <div className='mt-2 flex flex-row justify-between'>
-            <button
-              id='resetButton'
-              type='reset'
-              className='btn btn-neutral'
-              disabled={!isDirty || isCreateLoading}
-              onClick={() => reset()}
-            >
-              {isCreateLoading ? (
-                <div className='stack'>
-                  <span>Reset</span> <span className='loading loading-spinner' />
-                </div>
-              ) : (
-                'Reset'
-              )}
-            </button>
-            <button
-              id='cancelButton'
-              type='button'
-              className='btn btn-neutral'
-              onClick={() => drawerRef?.current?.click()}
-            >
-              {isCreateLoading ? (
-                <div className='stack'>
-                  <span>Cancel</span> <span className='loading loading-spinner' />
-                </div>
-              ) : (
-                'Cancel'
-              )}
-            </button>
+          <div className='mt-2 flex justify-between'>
+            <div className='flex gap-2'>
+              <button
+                id='cancelButton'
+                type='button'
+                className='btn btn-neutral'
+                onClick={() => drawerRef?.current?.click()}
+              >
+                {isCreateLoading ? (
+                  <div className='stack'>
+                    <span>Cancel</span> <span className='loading loading-spinner' />
+                  </div>
+                ) : (
+                  'Cancel'
+                )}
+              </button>
+              <button
+                id='resetButton'
+                type='reset'
+                className='btn btn-neutral'
+                disabled={!isDirty || isCreateLoading}
+                onClick={() => reset()}
+              >
+                {isCreateLoading ? (
+                  <div className='stack'>
+                    <span>Reset</span> <span className='loading loading-spinner' />
+                  </div>
+                ) : (
+                  'Reset'
+                )}
+              </button>
+            </div>
             <button
               id='submitButton'
               type='submit'
