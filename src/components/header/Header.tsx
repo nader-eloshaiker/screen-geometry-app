@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom'
+import { routes } from '../../routes/AppRouteSchema'
 import ThemeModeToggle from '../theme/ThemeModeToggle'
 
 export default function Header() {
@@ -9,13 +11,16 @@ export default function Header() {
           <div className='flex items-center justify-between py-4 lg:px-4'>
             <ul className='flex list-none justify-center gap-6'>
               <li>
-                <a href='/'>Home</a>
+                <Link to={routes.root.path}>Home</Link>
               </li>
               <li>
-                <a href='/about'>About</a>
+                <Link to={routes.about.path}>About</Link>
               </li>
               <li>
-                <a href='/contact'>Contact</a>
+                <Link to={routes.help.path}>Help</Link>
+              </li>
+              <li>
+                <Link to={routes.contact.path}>Contact</Link>
               </li>
             </ul>
             <ThemeModeToggle title='Dark Mode' className='lightModeText' />

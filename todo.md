@@ -3,6 +3,7 @@
 ## Features to be implemented
 
 - add dark and light colors for screen panels to data store
+- format error page
 - edit screen item
 - random color button in form
 - use dom routing in navbar
