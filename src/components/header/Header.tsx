@@ -8,9 +8,15 @@ export default function Header() {
         <header>
           <div className='flex items-center justify-between px-3 py-2 lg:px-4'>
             <ul className='flex list-none justify-center gap-4'>
-              <li>Home</li>
-              <li>About</li>
-              <li>Contact</li>
+              <li>
+                <a href='/'>Home</a>
+              </li>
+              <li>
+                <a href='/about'>About</a>
+              </li>
+              <li>
+                <a href='/contact'>Contact</a>
+              </li>
             </ul>
             <ThemeModeToggle title='Dark Mode' className='lightModeText' />
           </div>
