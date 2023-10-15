@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { twMerge } from 'tailwind-merge'
 import CloseIcon from '../../assets/icons/Close'
 import EditIcon from '../../assets/icons/Edit'
@@ -14,10 +14,14 @@ export const ScreenButton = ({ className, ...rest }: TProps) => {
     setIsOpen(!isOpen)
   }
 
+  useEffect(() => {
+    setIsOpen(drawerRef?.current?.checked ?? false)
+  }, [drawerRef, drawerRef?.current?.checked])
+
   return (
     <button className={twMerge(className, 'btn btn-secondary btn-outline w-40')} onClick={toggleDrawer} {...rest}>
       <div className='flex w-full items-center justify-between'>
-        <label className='swap swap-rotate'>
+        <label className='swap-rotate swap'>
           {/* this hidden checkbox controls the state */}
           <input type='checkbox' className='hidden' checked={isOpen} readOnly />
 
