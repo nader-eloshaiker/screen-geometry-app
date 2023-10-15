@@ -9,7 +9,9 @@ import { ErrorResponse } from '../../generated/openapi/models'
 import { NotificationAlert, NotificationProps } from './NotificationAlert'
 
 export const NotificationToaster = () => {
-  const [{ notifications }] = useNotificationContext()
+  const {
+    state: { notifications },
+  } = useNotificationContext()
 
   const isGeneralNotification = ({ value }: NotificationItemLogged) => {
     const keys = Object.keys(value)
@@ -66,8 +68,8 @@ export const NotificationToaster = () => {
 
   return (
     <div className='toast toast-end'>
-      {notifications.map((notification, index) => (
-        <NotificationAlert key={index} {...getContent(notification)} />
+      {notifications.map((notification) => (
+        <NotificationAlert key={notification.tag} {...getContent(notification)} />
       ))}
     </div>
   )

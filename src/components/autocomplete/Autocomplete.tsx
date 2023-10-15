@@ -93,7 +93,7 @@ export const AutoComplete = ({
             {items.map((item, index) => {
               return (
                 <li
-                  key={index}
+                  key={item.id}
                   tabIndex={index + 1}
                   onClick={() => handleSelect(item)}
                   className='w-full border-b border-b-base-content/10'

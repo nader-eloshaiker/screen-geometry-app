@@ -1,7 +1,7 @@
-import { createContext } from 'react'
+import { createContext, Dispatch } from 'react'
 import { initialNotificationState, NotificationAction, NotificationState } from './NotificationManager'
 
-export const NotificationContext = createContext<[NotificationState, React.Dispatch<NotificationAction>]>([
-  initialNotificationState,
-  () => {},
-])
+export const NotificationContext = createContext<{
+  state: NotificationState
+  dispatch: Dispatch<NotificationAction>
+}>({ state: initialNotificationState, dispatch: () => {} })

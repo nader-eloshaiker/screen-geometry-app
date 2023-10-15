@@ -1,10 +1,11 @@
-import { useReducer } from 'react'
+import { useMemo, useReducer } from 'react'
 import { SearchContext } from './SearchContext'
 
 import { initialDatabaseState, searchReducer } from './SearchManager'
 
 export const SearchProvider = ({ children }: TReactChildren) => {
-  const [database, dispatch] = useReducer(searchReducer, initialDatabaseState)
+  const [state, dispatch] = useReducer(searchReducer, initialDatabaseState)
+  const contextValue = useMemo(() => ({ state, dispatch }), [state])
 
-  return database ? <SearchContext.Provider value={[database, dispatch]}>{children}</SearchContext.Provider> : null
+  return <SearchContext.Provider value={contextValue}>{children}</SearchContext.Provider>
 }

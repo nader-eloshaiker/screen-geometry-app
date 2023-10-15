@@ -3,7 +3,7 @@
 import forms from '@tailwindcss/forms'
 import typograhpy from '@tailwindcss/typography'
 import daisyui from 'daisyui'
-// import darkTheme from 'daisyui/src/theming/themes'
+import daisyuiThemes from 'daisyui/src/theming/themes'
 import colors from 'tailwindcss/colors'
 import defaultTheme from 'tailwindcss/defaultTheme'
 
@@ -40,22 +40,35 @@ module.exports = {
   darkMode: ['class', '[data-theme="dark"]'],
   daisyui: {
     themes: [
-      'light',
+      {
+        light: {
+          ...daisyuiThemes['[data-theme=light]'],
+          '.btn-action': {
+            color: '#d1620d',
+            'border-color': '#d1620d',
+          },
+          '.btn-action:hover': {
+            color: '#fde68a',
+            'border-color': '#d1620d',
+            'background-color': '#d1620d',
+          },
+        },
+      },
       'dark',
-      // {
-      //   dark: {
-      //     ...darkTheme['[data-theme=dark]'],
-      //     primary: '#259cf7',
-      //     secondary: '#e5ed76',
-      //     accent: '#70c411',
-      //     neutral: '#232634',
-      //     'base-100': '#ffffff',
-      //     info: '#5fa7ce',
-      //     success: '#5edec4',
-      //     warning: '#f5cc51',
-      //     error: '#e63342',
-      //   },
-      // },
+      {
+        dark: {
+          ...daisyuiThemes['[data-theme=dark]'],
+          '.btn-action': {
+            color: '#d1620d',
+            'border-color': '#d1620d',
+          },
+          '.btn-action:hover': {
+            color: '#fde68a',
+            'border-color': '#d1620d',
+            'background-color': '#d1620d',
+          },
+        },
+      },
     ],
   },
 }

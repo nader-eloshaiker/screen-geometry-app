@@ -7,7 +7,7 @@ import { NotificationImage } from './NotificationImage'
 export type NotificationProps = { title: string; message: string; tag: string; type: NotificationType }
 
 export const NotificationAlert = ({ title, message, tag, type }: NotificationProps) => {
-  const [_, dispatch] = useNotificationContext()
+  const { dispatch } = useNotificationContext()
   const [isClosing, setIsClosing] = useState(false)
 
   const onClose = useCallback(() => {

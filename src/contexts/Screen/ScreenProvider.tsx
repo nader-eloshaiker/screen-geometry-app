@@ -1,9 +1,16 @@
-import { useReducer } from 'react'
+import { useMemo, useReducer } from 'react'
 import { ScreenContext } from './ScreenContext'
 import { initialScreenState, screenReducer } from './ScreenManager'
 
 export const ScreenProvider = ({ children }: TReactChildren) => {
-  const [screens, dispatch] = useReducer(screenReducer, initialScreenState)
+  const [state, dispatch] = useReducer(screenReducer, initialScreenState)
+  const contextValue = useMemo(
+    () => ({
+      state,
+      dispatch,
+    }),
+    [state],
+  )
 
-  return screens ? <ScreenContext.Provider value={[screens, dispatch]}>{children}</ScreenContext.Provider> : null
+  return <ScreenContext.Provider value={contextValue}>{children}</ScreenContext.Provider>
 }

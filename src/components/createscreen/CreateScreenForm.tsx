@@ -1,8 +1,10 @@
 import { yupResolver } from '@hookform/resolvers/yup'
 import cn from 'classnames'
+import { useCallback } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import * as yup from 'yup'
 import { ObjectSchema } from 'yup'
+import { useInputReferenceContext } from '../../contexts/reference/useInputReferenceContext'
 import { ScreenInput } from '../../generated/openapi/models'
 import { useCreateScreen } from '../../hooks/api/useCreateScreen'
 import { SearchItem } from '../../models/Database'
@@ -72,44 +74,49 @@ export const CreateScreenForm = () => {
     mode: 'onBlur',
   })
   const { isCreateLoading, createAction } = useCreateScreen()
+  const drawerRef = useInputReferenceContext()
 
-  const onSelect = (item: SearchItem) => {
-    setValue(ScreenDataEnum.aspectRatio, item.tag.aspectRatio, {
-      shouldValidate: true,
-      shouldDirty: true,
-    })
-    if (item.tag.diagonalSize) {
-      setValue(ScreenDataEnum.diagonalSize, item.tag.diagonalSize, {
+  const onSelect = useCallback(
+    (item: SearchItem) => {
+      setValue(ScreenDataEnum.aspectRatio, item.tag.aspectRatio, {
         shouldValidate: true,
         shouldDirty: true,
       })
-    } else {
-      resetField(ScreenDataEnum.diagonalSize)
-    }
-    if (item.spec?.hRes) {
-      setValue(ScreenDataEnum.hRes, item.spec?.hRes, {
-        shouldValidate: true,
-        shouldDirty: true,
-      })
-    } else {
-      resetField(ScreenDataEnum.hRes)
-    }
-    if (item.spec?.vRes) {
-      setValue(ScreenDataEnum.vRes, item.spec?.vRes, {
-        shouldValidate: true,
-        shouldDirty: true,
-      })
-    } else {
-      resetField(ScreenDataEnum.vRes)
-    }
-  }
+      if (item.tag.diagonalSize) {
+        setValue(ScreenDataEnum.diagonalSize, item.tag.diagonalSize, {
+          shouldValidate: true,
+          shouldDirty: true,
+        })
+      } else {
+        resetField(ScreenDataEnum.diagonalSize)
+      }
+      if (item.spec?.hRes) {
+        setValue(ScreenDataEnum.hRes, item.spec?.hRes, {
+          shouldValidate: true,
+          shouldDirty: true,
+        })
+      } else {
+        resetField(ScreenDataEnum.hRes)
+      }
+      if (item.spec?.vRes) {
+        setValue(ScreenDataEnum.vRes, item.spec?.vRes, {
+          shouldValidate: true,
+          shouldDirty: true,
+        })
+      } else {
+        resetField(ScreenDataEnum.vRes)
+      }
+    },
+    [resetField, setValue],
+  )
+
   const onSubmit: SubmitHandler<ScreenInput> = (form) => {
     createAction(form)
   }
 
   return (
     <>
-      <div className='form-control w-full'>
+      <div className='form-control mb-4 flex w-full flex-col'>
         <label className='label'>
           <span className='label-text'>Choose from list of Monitors</span>
         </label>
@@ -213,34 +220,52 @@ export const CreateScreenForm = () => {
           </div>
 
           {errors[ScreenDataEnum.diagonalSize] && (
-            <div className='text-xs text-error'>{errors[ScreenDataEnum.diagonalSize].message}</div>
+            <div className='text-sm text-error'>{errors[ScreenDataEnum.diagonalSize].message}</div>
           )}
           {errors[ScreenDataEnum.aspectRatio] && (
-            <div className='text-xs text-error'>{errors[ScreenDataEnum.aspectRatio].message}</div>
+            <div className='text-sm text-error'>{errors[ScreenDataEnum.aspectRatio].message}</div>
           )}
           {errors[ScreenDataEnum.hRes] && (
-            <div className='text-xs text-error'>{errors[ScreenDataEnum.hRes].message}</div>
+            <div className='text-sm text-error'>{errors[ScreenDataEnum.hRes].message}</div>
           )}
           {errors[ScreenDataEnum.vRes] && (
-            <div className='text-xs text-error'>{errors[ScreenDataEnum.vRes].message}</div>
+            <div className='text-sm text-error'>{errors[ScreenDataEnum.vRes].message}</div>
           )}
 
-          <div className='mt-2 flex flex-row justify-between'>
-            <button
-              id='resetButton'
-              type='reset'
-              className='btn btn-neutral'
-              disabled={!isDirty || isCreateLoading}
-              onClick={() => reset()}
-            >
-              {isCreateLoading ? (
-                <div className='stack'>
-                  <span>Reset</span> <span className='loading loading-spinner' />
-                </div>
-              ) : (
-                'Reset'
-              )}
-            </button>
+          <div className='divider text-sm' />
+
+          <div className='mt-2 flex justify-between'>
+            <div className='flex gap-2'>
+              <button
+                id='cancelButton'
+                type='button'
+                className='btn btn-neutral'
+                onClick={() => drawerRef?.current?.click()}
+              >
+                {isCreateLoading ? (
+                  <div className='stack'>
+                    <span>Cancel</span> <span className='loading loading-spinner' />
+                  </div>
+                ) : (
+                  'Cancel'
+                )}
+              </button>
+              <button
+                id='resetButton'
+                type='reset'
+                className='btn btn-neutral'
+                disabled={isCreateLoading}
+                onClick={() => reset()}
+              >
+                {isCreateLoading ? (
+                  <div className='stack'>
+                    <span>Reset</span> <span className='loading loading-spinner' />
+                  </div>
+                ) : (
+                  'Reset'
+                )}
+              </button>
+            </div>
             <button
               id='submitButton'
               type='submit'
