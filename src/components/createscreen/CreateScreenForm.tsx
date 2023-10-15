@@ -219,6 +219,8 @@ export const CreateScreenForm = () => {
             </div>
           </div>
 
+          <div className='divider text-sm' />
+
           {errors[ScreenDataEnum.diagonalSize] && (
             <div className='text-xs text-error'>{errors[ScreenDataEnum.diagonalSize].message}</div>
           )}
