@@ -12,7 +12,7 @@ export const ScreenFormDrawer = ({ children }: Props) => {
       <div id='drawer-content' className='drawer-content h-full'>
         {children}
       </div>
-      <div className='drawer-side absolute mx-4 h-full w-auto'>
+      <div className='drawer-side absolute h-full w-auto'>
         <label htmlFor='screenFormDrawer' className='drawer-overlay'></label>
         <CreateScreen />
       </div>

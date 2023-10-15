@@ -103,7 +103,10 @@ export default function Geometry() {
     <InputReferenceProvider>
       <div className='my-6 h-full w-full' ref={divSizeRef}>
         <ScreenFormDrawer>
-          <div className='flex w-full justify-end pb-4'>
+          <div className='flex w-full items-end justify-between pb-4'>
+            <label className='label'>
+              <span className='text-xl'>Comparison Table</span>
+            </label>
             <ScreenButton />
           </div>
           <table className='table'>
@@ -169,7 +172,7 @@ export default function Geometry() {
                     </td>
                     <td className='text-center'>{screen.spec && `${Math.round((screen.spec.ppi * 100) / 100)}`}</td>
                     <td>
-                      <div className='flex flex-col items-center justify-center gap-3 2xs:flex-row'>
+                      <div className='flex flex-row items-center justify-center gap-3'>
                         <button>
                           <EditIcon id='edit-icon' className='h-4 w-4' fill='currentColor' />
                         </button>
@@ -190,7 +193,9 @@ export default function Geometry() {
             )}
           </table>
 
-          <div className='py-4' />
+          <label className='label py-4'>
+            <span className='text-xl'>Visual Comparison</span>
+          </label>
           <Stacked id='geometry' width={maxPanelSize.width} height={maxPanelSize.height}>
             {!isScreenListLoading ? (
               screens.map((screen, index) => (

@@ -219,20 +219,20 @@ export const CreateScreenForm = () => {
             </div>
           </div>
 
-          <div className='divider text-sm' />
-
           {errors[ScreenDataEnum.diagonalSize] && (
-            <div className='text-xs text-error'>{errors[ScreenDataEnum.diagonalSize].message}</div>
+            <div className='text-sm text-error'>{errors[ScreenDataEnum.diagonalSize].message}</div>
           )}
           {errors[ScreenDataEnum.aspectRatio] && (
-            <div className='text-xs text-error'>{errors[ScreenDataEnum.aspectRatio].message}</div>
+            <div className='text-sm text-error'>{errors[ScreenDataEnum.aspectRatio].message}</div>
           )}
           {errors[ScreenDataEnum.hRes] && (
-            <div className='text-xs text-error'>{errors[ScreenDataEnum.hRes].message}</div>
+            <div className='text-sm text-error'>{errors[ScreenDataEnum.hRes].message}</div>
           )}
           {errors[ScreenDataEnum.vRes] && (
-            <div className='text-xs text-error'>{errors[ScreenDataEnum.vRes].message}</div>
+            <div className='text-sm text-error'>{errors[ScreenDataEnum.vRes].message}</div>
           )}
+
+          <div className='divider text-sm' />
 
           <div className='mt-2 flex justify-between'>
             <div className='flex gap-2'>
@@ -254,7 +254,7 @@ export const CreateScreenForm = () => {
                 id='resetButton'
                 type='reset'
                 className='btn btn-neutral'
-                disabled={!isDirty || isCreateLoading}
+                disabled={isCreateLoading}
                 onClick={() => reset()}
               >
                 {isCreateLoading ? (

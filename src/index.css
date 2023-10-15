@@ -20,26 +20,26 @@
 
 @layer base {
   body {
-    @apply bg-gradient-to-b from-gray-100 to-gray-300;
+    @apply bg-gradient-to-b from-stone-100 to-stone-300;
   }
 
   .dark body {
-    @apply bg-gradient-to-b from-gray-800 to-gray-950;
+    @apply bg-gradient-to-b from-stone-700 to-stone-900;
   }
 }
 
 .header {
-  @apply bg-indigo-600 text-indigo-100 dark:bg-indigo-700 dark:text-indigo-200;
+  @apply bg-teal-500 text-teal-100 dark:bg-teal-700 dark:text-teal-200;
 }
 
 .lightModeText {
-  @apply text-indigo-200;
+  @apply text-teal-200;
 }
 
 .sidebar {
-  @apply bg-gradient-to-b from-indigo-600 to-indigo-800 text-indigo-100 dark:bg-gradient-to-b dark:from-indigo-700 dark:to-indigo-900 dark:text-indigo-200;
+  @apply bg-gradient-to-b from-teal-500 to-teal-700 text-teal-100 dark:bg-gradient-to-b dark:from-teal-700 dark:to-teal-900 dark:text-teal-200;
 }
 
 .footer {
-  @apply bg-gradient-to-b from-gray-200 to-gray-300 text-gray-500 dark:bg-gradient-to-b dark:from-gray-800 dark:to-gray-900 dark:text-gray-400;
+  @apply bg-gradient-to-b from-stone-200 to-stone-300 text-stone-500 dark:bg-gradient-to-b dark:from-stone-800 dark:to-stone-900 dark:text-stone-400;
 }

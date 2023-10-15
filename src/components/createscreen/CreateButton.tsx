@@ -19,7 +19,7 @@ export const ScreenButton = ({ className, ...rest }: TProps) => {
   }, [drawerRef, drawerRef?.current?.checked])
 
   return (
-    <button className={twMerge(className, 'btn btn-secondary btn-outline w-40')} onClick={toggleDrawer} {...rest}>
+    <button className={twMerge(className, 'btn btn-accent btn-outline w-40')} onClick={toggleDrawer} {...rest}>
       <div className='flex w-full items-center justify-between'>
         <label className='swap-rotate swap'>
           {/* this hidden checkbox controls the state */}
