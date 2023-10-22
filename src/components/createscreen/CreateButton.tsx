@@ -21,7 +21,7 @@ export const ScreenButton = ({ className, ...rest }: TProps) => {
   return (
     <button className={twMerge(className, 'btn btn-accent btn-outline w-40')} onClick={toggleDrawer} {...rest}>
       <div className='flex w-full items-center justify-between'>
-        <label className='swap-rotate swap'>
+        <label className='swap swap-rotate'>
           {/* this hidden checkbox controls the state */}
           <input type='checkbox' className='hidden' checked={isOpen} readOnly />
 
