@@ -5,7 +5,7 @@ import ThemeModeToggle from '../theme/ThemeModeToggle'
 export default function Header() {
   return (
     <>
-      <div className='header grid place-content-center pt-2 text-2xl'>Screen Geometry</div>
+      <div className='header grid place-content-center pt-2 text-2xl'>{import.meta.env.VITE_APP_TITLE}</div>
       <div className='sidebar sticky top-0 z-10 rounded-b-xl px-2'>
         <header>
           <div className='flex items-center justify-between py-4 lg:px-4'>
