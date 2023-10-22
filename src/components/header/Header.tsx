@@ -3,7 +3,7 @@ import ThemeModeToggle from '../theme/ThemeModeToggle'
 export default function Header() {
   return (
     <>
-      <div className='header grid place-content-center pt-2 text-xl'>Screen Geometry</div>
+      <div className='header grid place-content-center pt-2 text-xl'>{import.meta.env.VITE_APP_TITLE}</div>
       <div className='sidebar sticky top-0 z-10 rounded-b-xl'>
         <header>
           <div className='flex items-center justify-between px-3 py-2 lg:px-4'>

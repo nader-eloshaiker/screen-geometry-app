@@ -1,6 +1,6 @@
 {
   "name": "screen-geometry-app",
-  "version": "0.2.0",
+  "version": "0.8",
   "private": true,
   "license": "MIT",
   "type": "module",
@@ -9,8 +9,9 @@
     "url": "https://github.com/nader-eloshaiker"
   },
   "scripts": {
-    "dev": "vite",
-    "build": "tsc && vite build",
+    "dev": "vite --mode dev",
+    "build": "tsc && vite build --mode dev",
+    "build:prod": "tsc && vite build --mode prod",
     "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "lint:fix": "eslint src --fix --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "format": "prettier --write src",
@@ -35,9 +36,7 @@
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.45.1",
     "react-router-dom": "^6.14.0",
-    "react-scripts": "^5.0.1",
     "styled-components": "^6.0.7",
-    "vite-plugin-checker": "^0.6.2",
     "web-vitals": "^2.1.4",
     "yup": "^1.2.0"
   },
@@ -86,10 +85,12 @@
     "postcss": "^8.4.31",
     "prettier": "^2.8.8",
     "prettier-plugin-organize-imports": "^3.2.2",
+    "react-scripts": "^5.0.1",
     "tailwind-merge": "^1.13.2",
     "tailwindcss": "^3.3.3",
     "typescript": "^4.9.5",
     "vite": "^4.3.9",
+    "vite-plugin-checker": "^0.6.2",
     "vite-tsconfig-paths": "^4.2.0",
     "vitest": "^0.34.4"
   },

@@ -19,12 +19,12 @@ export const generateStub = (axiosInstance: AxiosInstance) => {
     console.debug(`axios adapter: [${config.method}] ${config.url}`, '\n', config, '\n', response)
   }
 
-  const screenUrl = new RegExp(routes.baseUrl + routes.basePath + '/' + routes.screens.path + '/\\S+')
+  const screenUrl = new RegExp(routes.apiUrl + routes.apiPathVer + '/' + routes.screens.path + '/\\S+')
   const screenFavUrl = new RegExp(
-    routes.baseUrl + routes.basePath + '/' + routes.screens.path + '/\\S+' + '/' + routes.screens.actions.favorite,
+    routes.apiUrl + routes.apiPathVer + '/' + routes.screens.path + '/\\S+' + '/' + routes.screens.actions.favorite,
   )
 
-  mock.onGet(`${routes.baseUrl}${routes.basePath}/${routes.screens.path}`).reply((config) =>
+  mock.onGet(`${routes.apiUrl}${routes.apiPathVer}/${routes.screens.path}`).reply((config) =>
     getScreenList().then((payload) => {
       debug(config, payload)
 
@@ -33,7 +33,7 @@ export const generateStub = (axiosInstance: AxiosInstance) => {
   )
 
   mock
-    .onPost(`${routes.baseUrl}${routes.basePath}/${routes.screens.path}/${routes.screens.actions.create}`)
+    .onPost(`${routes.apiUrl}${routes.apiPathVer}/${routes.screens.path}/${routes.screens.actions.create}`)
     .reply((config) =>
       createItemAction(config.data ? JSON.parse(config.data) : {}).then((payload) => {
         debug(config, payload)
@@ -42,7 +42,7 @@ export const generateStub = (axiosInstance: AxiosInstance) => {
       }),
     )
 
-  mock.onGet(`${routes.baseUrl}${routes.basePath}/${routes.screens.path}/${routes.screens.key}`).reply((config) =>
+  mock.onGet(`${routes.apiUrl}${routes.apiPathVer}/${routes.screens.path}/${routes.screens.key}`).reply((config) =>
     getScreen(config.params || {}).then((payload) => {
       debug(config, payload)
 
