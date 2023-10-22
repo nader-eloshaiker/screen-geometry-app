@@ -1,6 +1,6 @@
 export const routes = {
-  baseUrl: 'https://jsonplaceholder.typicode.com',
-  basePath: '/v1',
+  apiUrl: import.meta.env.VITE_API_URL,
+  apiPathVer: '/v1',
   screens: {
     path: 'screens',
     key: ':screenId',

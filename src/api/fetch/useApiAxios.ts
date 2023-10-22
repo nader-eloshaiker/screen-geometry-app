@@ -3,7 +3,7 @@ import { routes } from '../ApiRouteSchema'
 import { generateStub } from '../endpoint/stub'
 
 const apiAxiosInstance = axios.create({
-  baseURL: routes.baseUrl + routes.basePath,
+  baseURL: `${routes.apiUrl}${routes.apiPathVer}`,
   timeout: 2000,
   headers: { Accept: 'application/json', 'Content-Type': 'application/json' },
 })
@@ -11,7 +11,8 @@ const apiAxiosInstance = axios.create({
 generateStub(apiAxiosInstance)
 
 export const useApiAxios = <T>(): ((config: AxiosRequestConfig) => Promise<T>) => {
-  const token = '6fd3e689-e78f-4b20-bb78-eaa9d119b6c0' // Do what you want
+  // ToDo: implement token management
+  const token = ''
 
   return (config: AxiosRequestConfig) => {
     const source = Axios.CancelToken.source()
