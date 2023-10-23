@@ -28,7 +28,7 @@
     "@react-hook/resize-observer": "^1.2.6",
     "@tanstack/react-query": "^4.33.0",
     "axios": "^1.5.1",
-    "axios-mock-adapter": "^1.21.5",
+    "axios-mock-adapter": "^1.22.0",
     "classnames": "^2.3.2",
     "daisyui": "^3.9.2",
     "localforage": "^1.10.0",
