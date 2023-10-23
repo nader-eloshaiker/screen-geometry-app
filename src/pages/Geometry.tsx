@@ -101,7 +101,7 @@ export default function Geometry() {
 
   return (
     <InputReferenceProvider>
-      <div className='my-6 h-full w-full' ref={divSizeRef}>
+      <div className='my-6 h-full' ref={divSizeRef}>
         <ScreenFormDrawer>
           <div className='flex w-full items-end justify-between pb-4'>
             <label className='label'>

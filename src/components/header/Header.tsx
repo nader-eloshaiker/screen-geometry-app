@@ -17,10 +17,10 @@ export default function Header() {
                 <Link to={routes.about.path}>About</Link>
               </li>
               <li>
-                <Link to={routes.help.path}>Help</Link>
+                <Link to={routes.contact.path}>Contact</Link>
               </li>
               <li>
-                <Link to={routes.contact.path}>Contact</Link>
+                <Link to={routes.help.path}>Help</Link>
               </li>
             </ul>
             <ThemeModeToggle title='Dark Mode' className='lightModeText' />

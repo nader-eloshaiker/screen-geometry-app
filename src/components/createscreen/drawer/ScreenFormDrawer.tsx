@@ -7,7 +7,7 @@ type Props = TReactChildren
 export const ScreenFormDrawer = ({ children }: Props) => {
   const drawerRef = useInputReferenceContext()
   return (
-    <div className='drawer grow'>
+    <div className='drawer h-full grow'>
       <input id='screenFormDrawer' type='checkbox' className='drawer-toggle' ref={drawerRef} />
       <div id='drawer-content' className='drawer-content h-full'>
         {children}
