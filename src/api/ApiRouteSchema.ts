@@ -7,6 +7,7 @@ export const routes = {
     actions: {
       favorite: 'favorite',
       create: 'create',
+      createList: 'createlist',
     },
   },
 }

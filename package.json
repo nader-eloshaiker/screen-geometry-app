@@ -96,7 +96,7 @@
     "vitest": "^0.34.6"
   },
   "lint-staged": {
-    "*.{ts,tsx}": "npm run lint:fix",
+    "**/*.{ts,tsx,js} !(src/generated/**/*)": "npm run lint:fix",
     "*.{ts,tsx,js,css,md*}": "npm run format"
   }
 }

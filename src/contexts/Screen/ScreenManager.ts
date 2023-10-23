@@ -12,6 +12,7 @@ export enum ScreenActionTypes {
   LIST = 'list',
   UPDATE = 'update',
   ADD = 'add',
+  ADD_LIST = 'add_list',
   DELETE = 'delete',
 }
 
@@ -19,6 +20,7 @@ export type ScreenAction =
   | { type: ScreenActionTypes.LIST; payload: ScreenItem[] }
   | { type: ScreenActionTypes.UPDATE; payload: ScreenItem }
   | { type: ScreenActionTypes.ADD; payload: ScreenItem }
+  | { type: ScreenActionTypes.ADD_LIST; payload: ScreenItem[] }
   | { type: ScreenActionTypes.DELETE; payload: string }
 
 export const screenReducer = (state: ScreenState, { type, payload }: ScreenAction): ScreenState => {
@@ -35,9 +37,7 @@ export const screenReducer = (state: ScreenState, { type, payload }: ScreenActio
       return { ...state, screens: normaliseScreenRender(deletion) }
     case ScreenActionTypes.UPDATE:
       // eslint-disable-next-line no-case-declarations
-      const modification = state.screens.map((screen) =>
-        payload && screen.id !== payload.id ? screen : payload,
-      ) as ScreenItem[]
+      const modification = state.screens.map((screen) => (payload && screen.id !== payload.id ? screen : payload))
 
       return {
         ...state,
@@ -48,5 +48,10 @@ export const screenReducer = (state: ScreenState, { type, payload }: ScreenActio
       const additions = normaliseScreenRender([...state.screens, payload])
 
       return { ...state, screens: additions }
+    case ScreenActionTypes.ADD_LIST:
+      // eslint-disable-next-line no-case-declarations
+      const additionList = normaliseScreenRender([...state.screens, ...payload])
+
+      return { ...state, screens: additionList }
   }
 }

@@ -3,6 +3,7 @@ import MockAdapter from 'axios-mock-adapter'
 import { routes } from '../ApiRouteSchema'
 import {
   createItemAction,
+  createItemListAction,
   deleteItemAction,
   favouriteItemAction,
   getScreen,
@@ -36,6 +37,16 @@ export const generateStub = (axiosInstance: AxiosInstance) => {
     .onPost(`${routes.apiUrl}${routes.apiPathVer}/${routes.screens.path}/${routes.screens.actions.create}`)
     .reply((config) =>
       createItemAction(config.data ? JSON.parse(config.data) : {}).then((payload) => {
+        debug(config, payload)
+
+        return [200, payload, { Accept: 'application/json', 'Content-Type': 'application/json' }]
+      }),
+    )
+
+  mock
+    .onPost(`${routes.apiUrl}${routes.apiPathVer}/${routes.screens.path}/${routes.screens.actions.createList}`)
+    .reply((config) =>
+      createItemListAction(config.data ? JSON.parse(config.data) : {}).then((payload) => {
         debug(config, payload)
 
         return [200, payload, { Accept: 'application/json', 'Content-Type': 'application/json' }]

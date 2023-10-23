@@ -5,9 +5,11 @@ import { ScreenFormDrawer } from '../components/createscreen/drawer/ScreenFormDr
 import { ScreenPanel } from '../components/screen/ScreenPanel'
 import { ScreenTable } from '../components/screen/ScreenTable'
 import { SkeletonImage } from '../components/skeleton/SkeletonImage'
+import { defaultScreenInputList } from '../constants/defaultScreenList'
 import { InputReferenceProvider } from '../contexts/reference/InputReferenceProvider'
 import { useScreenContext } from '../contexts/Screen/useScreenContext'
 import { ScreenItem } from '../generated/openapi/models'
+import { useCreateScreenList } from '../hooks/api/useCreateScreenList'
 import { useListScreens } from '../hooks/api/useListScreens'
 import { useElementSize } from '../hooks/useElementSize'
 import { Dimensions } from '../models/Screen'
@@ -37,6 +39,7 @@ export default function Geometry() {
   const maxPanelSize: Dimensions = { width, height: Math.round(maxScreenSize.height * (width / maxScreenSize.width)) }
 
   const { isScreenListLoading } = useListScreens()
+  const { isCreateListLoading, createListAction } = useCreateScreenList()
 
   const onHighlightActive = (screen: ScreenItem) => {
     setHighlighted(screen)
@@ -54,6 +57,10 @@ export default function Geometry() {
     }
   }
 
+  const onLoadDefault = () => {
+    createListAction(defaultScreenInputList)
+  }
+
   const isHighlighted = (screen: ScreenItem) => screen.id === highlighted?.id
 
   return (
@@ -62,7 +69,7 @@ export default function Geometry() {
         <ScreenFormDrawer>
           <div className='flex w-full items-end justify-between pb-4'>
             <label className='label'>
-              <span className='text-xl'>Comparison Table</span>
+              <span className='text-xl'>Table</span>
             </label>
             <ScreenButton />
           </div>
@@ -75,26 +82,48 @@ export default function Geometry() {
             onHighlightClick={onHighlightClick}
           />
 
-          <label className='label py-4'>
-            <span className='text-xl'>Visual Comparison</span>
-          </label>
-          <Stacked width={maxPanelSize.width} height={maxPanelSize.height}>
-            {!isScreenListLoading ? (
-              screens.map((screen, index) => (
-                <ScreenPanel
-                  key={screen.id}
-                  screen={screen}
-                  index={screens.length - index}
-                  selected={screen.favorite || isHighlighted(screen)}
-                  onMouseEnter={() => onHighlightActive(screen)}
-                  onMouseOut={() => onHighlightPassive()}
-                  onClick={() => onHighlightClick(screen)}
-                />
-              ))
-            ) : (
-              <SkeletonImage className='h-full w-full' />
-            )}
-          </Stacked>
+          {screens.length === 0 && !isScreenListLoading && (
+            <div className='flex flex-col items-center'>
+              <div className='label py-4'>
+                <span className='text-xl'>No List Found</span>
+              </div>
+              <div className='flex flex-col items-center gap-2 py-6'>
+                <div>Click here to populate default list</div>
+                <button
+                  className='btn btn-accent btn-outline w-40'
+                  onClick={onLoadDefault}
+                  disabled={isCreateListLoading}
+                >
+                  {isCreateListLoading ? <span className='loading loading-spinner'></span> : 'Load Screens'}
+                </button>
+              </div>
+            </div>
+          )}
+
+          {(screens.length > 0 || isScreenListLoading) && (
+            <>
+              <label className='label py-4'>
+                <span className='text-xl'>Overlay</span>
+              </label>
+              <Stacked width={maxPanelSize.width} height={maxPanelSize.height}>
+                {!isScreenListLoading ? (
+                  screens.map((screen, index) => (
+                    <ScreenPanel
+                      key={screen.id}
+                      screen={screen}
+                      index={screens.length - index}
+                      selected={screen.favorite || isHighlighted(screen)}
+                      onMouseEnter={() => onHighlightActive(screen)}
+                      onMouseOut={() => onHighlightPassive()}
+                      onClick={() => onHighlightClick(screen)}
+                    />
+                  ))
+                ) : (
+                  <SkeletonImage className='h-full w-full' />
+                )}
+              </Stacked>
+            </>
+          )}
         </ScreenFormDrawer>
       </div>
     </InputReferenceProvider>
