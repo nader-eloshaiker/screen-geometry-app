@@ -8,9 +8,5 @@
   "bracketSpacing": true,
   "plugins": [
     "prettier-plugin-organize-imports"
-  ],
-  "pluginSearchDirs": false,
-  "tailwindFunctions": [
-    "tw"
   ]
 }

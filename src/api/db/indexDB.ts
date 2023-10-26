@@ -31,14 +31,14 @@ export async function createItemList(data: ScreenInputList): Promise<Array<Scree
 
 export async function getItem(id?: string): Promise<ScreenItem | undefined> {
   await fakeNetwork(`contact:${id}`)
-  const list: Array<ScreenItem> = (await localforage.getItem(storageKey)) || []
+  const list: Array<ScreenItem> = (await localforage.getItem(storageKey)) ?? []
   const item = list.find((entry) => entry.id === id)
   return item
 }
 
 export async function updateItem(id: string, updates: ScreenItem): Promise<ScreenItem> {
   await fakeNetwork()
-  const list: Array<ScreenItem> = (await localforage.getItem(storageKey)) || []
+  const list: Array<ScreenItem> = (await localforage.getItem(storageKey)) ?? []
   const item = list.find((entry) => entry.id === id)
   if (!item) throw new Error(`No contact found for ${id}`)
   Object.assign(item, updates)
@@ -47,7 +47,7 @@ export async function updateItem(id: string, updates: ScreenItem): Promise<Scree
 }
 
 export async function deleteItem(id: string): Promise<boolean> {
-  const list: Array<ScreenItem> = (await localforage.getItem(storageKey)) || []
+  const list: Array<ScreenItem> = (await localforage.getItem(storageKey)) ?? []
   const index = list.findIndex((entry) => entry.id === id)
   if (index > -1) {
     list.splice(index, 1)

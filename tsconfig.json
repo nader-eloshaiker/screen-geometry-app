@@ -41,15 +41,9 @@
 
     /* Completeness */
     "skipDefaultLibCheck": true,
-    "skipLibCheck": true,
-
+    "skipLibCheck": true
   },
-  "include": [
-    "**/*.ts",
-    "**/*.tsx",
-    "**/**/*.ts",
-    "**/**/*.tsx"
-  ],
+  "include": ["**/*.ts", "**/*.tsx", "**/**/*.ts", "**/**/*.tsx"],
   "exclude": ["no de_modules"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
