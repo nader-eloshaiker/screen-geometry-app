@@ -607,7 +607,7 @@ components:
           $ref: '#/components/schemas/ScreenTag'
         data:
           $ref: '#/components/schemas/ScreenData'
-        color: 
+        color:
           $ref: '#/components/schemas/ScreenColor'
         spec:
           $ref: '#/components/schemas/ScreenSpec'

@@ -19,10 +19,6 @@ export default function AppRouterProvider() {
           children: [
             { index: true, element: <Geometry /> },
             {
-              path: routes.screens.path + '/' + routes.screens.actions.create,
-              element: <Geometry />,
-            },
-            {
               path: routes.about.path,
               element: <About />,
             },

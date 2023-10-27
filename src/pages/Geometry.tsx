@@ -15,7 +15,7 @@ import { useElementSize } from '../hooks/useElementSize'
 import { Dimensions } from '../models/Screen'
 import { getMaxScreenSize } from '../utils/ScreenCalc'
 
-const Stacked = styled.div<{ width: number; height: number }>`
+const Stacked = styled.div<{ height: number }>`
   display: inline-grid;
   place-items: start;
   align-items: flex-end;
@@ -95,11 +95,11 @@ export default function Geometry() {
           )}
 
           {(screens.length > 0 || isScreenListLoading) && (
-            <>
+            <div>
               <label className='label py-4'>
                 <span className='text-xl'>Overlay</span>
               </label>
-              <Stacked width={maxPanelSize.width} height={maxPanelSize.height}>
+              <Stacked height={maxPanelSize.height}>
                 {!isScreenListLoading ? (
                   screens.map((screen, index) => (
                     <ScreenPanel
@@ -115,7 +115,7 @@ export default function Geometry() {
                   <SkeletonImage className='h-full w-full' />
                 )}
               </Stacked>
-            </>
+            </div>
           )}
         </ScreenFormDrawer>
       </div>
