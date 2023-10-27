@@ -1,7 +1,7 @@
 import { Params } from 'react-router-dom'
 import { routes } from '../../routes/AppRouteSchema'
-import { ScreenInput, ScreenItem } from './../../generated/openapi/models'
-import { createItem, deleteItem, getItem, getItemList, updateItem } from './indexDB'
+import { ScreenInput, ScreenInputList, ScreenItem } from './../../generated/openapi/models'
+import { createItem, createItemList, deleteItem, getItem, getItemList, updateItem } from './indexDB'
 
 export type TScreenListResponse = {
   list: ScreenItem[]
@@ -40,6 +40,12 @@ export async function createItemAction(data: ScreenInput) {
   const item = await createItem(data)
 
   return { item }
+}
+
+export async function createItemListAction(data: ScreenInputList) {
+  const list = await createItemList(data)
+
+  return { list }
 }
 
 export async function deleteItemAction(url: string | undefined) {

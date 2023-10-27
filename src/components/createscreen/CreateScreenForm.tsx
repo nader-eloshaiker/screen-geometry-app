@@ -1,14 +1,15 @@
 import { yupResolver } from '@hookform/resolvers/yup'
 import cn from 'classnames'
-import { useCallback } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import * as yup from 'yup'
 import { ObjectSchema } from 'yup'
 import { useInputReferenceContext } from '../../contexts/reference/useInputReferenceContext'
-import { ScreenInput } from '../../generated/openapi/models'
+import { ScreenColor, ScreenInput } from '../../generated/openapi/models'
 import { useCreateScreen } from '../../hooks/api/useCreateScreen'
 import { SearchItem } from '../../models/Database'
 import { ScreenDataEnum } from '../../models/Screen'
+import { createCSSColor } from '../../utils/ScreenCalc'
 import { AutoCompleteScreen } from '../autocomplete/AutoCompleteScreen'
 import { InputPlaceholder } from '../inputplaceholder/InputPlaceholder'
 
@@ -57,6 +58,14 @@ const screenDataSchema: ObjectSchema<ScreenInput> = yup.object().shape(
         then: (schema) =>
           schema.required('Vertical required when vertical is provided').moreThan(0, 'Must be greater than 0'),
       }),
+    [ScreenDataEnum.lightColor]: yup
+      .string()
+      //.matches(/^#([a-f0-9]{6})\b$/, { excludeEmptyString: true, message: 'Light colour theme' })
+      .required('Light color theme is required'),
+    [ScreenDataEnum.darkColor]: yup
+      .string()
+      //.matches(/^#([a-f0-9]{6})\b$/, { excludeEmptyString: true, message: 'Dark colour theme' })
+      .required('Dark color theme is required'),
   },
   [[ScreenDataEnum.hRes, ScreenDataEnum.vRes]],
 )
@@ -75,6 +84,7 @@ export const CreateScreenForm = () => {
   })
   const { isCreateLoading, createAction } = useCreateScreen()
   const drawerRef = useInputReferenceContext()
+  const [screenColor, setScreenColor] = useState<ScreenColor>()
 
   const onSelect = useCallback(
     (item: SearchItem) => {
@@ -112,7 +122,29 @@ export const CreateScreenForm = () => {
 
   const onSubmit: SubmitHandler<ScreenInput> = (form) => {
     createAction(form)
+    onGenerateColor()
   }
+
+  const onGenerateColor = () => {
+    setScreenColor(createCSSColor())
+  }
+
+  useEffect(() => {
+    onGenerateColor()
+  }, [])
+
+  useEffect(() => {
+    if (!screenColor) return
+
+    setValue(ScreenDataEnum.darkColor, screenColor.darkColor, {
+      shouldValidate: true,
+      shouldDirty: true,
+    })
+    setValue(ScreenDataEnum.lightColor, screenColor.lightColor, {
+      shouldValidate: true,
+      shouldDirty: true,
+    })
+  }, [screenColor, setValue])
 
   return (
     <>
@@ -219,6 +251,36 @@ export const CreateScreenForm = () => {
             </div>
           </div>
 
+          <div className='divider text-sm'>Theme Color</div>
+
+          <div id='screenColour' className='grid grid-cols-3 gap-3'>
+            {/* lightColor */}
+            <div id='lightColour' className='form-control mb-4 flex flex-col'>
+              <div
+                className=' input input-bordered input-md flex w-full items-center justify-center shadow-md'
+                style={{ backgroundColor: screenColor?.lightColor }}
+              >
+                <span className='text-sm'>Light</span>
+              </div>
+              <input hidden {...register(ScreenDataEnum.lightColor)} />
+            </div>
+            {/* darkColor */}
+            <div id='darkColour' className='form-control mb-4 flex flex-col'>
+              <div
+                className='input input-bordered flex h-full w-full items-center justify-center text-sm shadow-md'
+                style={{ backgroundColor: screenColor?.darkColor }}
+              >
+                <span className='text-sm'>Dark</span>
+              </div>
+              <input hidden {...register(ScreenDataEnum.darkColor)} />
+            </div>
+            <button id='genColorButton' type='button' className='btn btn-neutral' onClick={onGenerateColor}>
+              Change
+            </button>
+          </div>
+
+          <div className='divider' />
+
           {errors[ScreenDataEnum.diagonalSize] && (
             <div className='text-sm text-error'>{errors[ScreenDataEnum.diagonalSize].message}</div>
           )}
@@ -231,8 +293,6 @@ export const CreateScreenForm = () => {
           {errors[ScreenDataEnum.vRes] && (
             <div className='text-sm text-error'>{errors[ScreenDataEnum.vRes].message}</div>
           )}
-
-          <div className='divider text-sm' />
 
           <div className='mt-2 flex justify-between'>
             <div className='flex gap-2'>

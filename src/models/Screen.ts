@@ -3,6 +3,8 @@ export enum ScreenDataEnum {
   aspectRatio = 'aspectRatio',
   hRes = 'hRes',
   vRes = 'vRes',
+  lightColor = 'lightColor',
+  darkColor = 'darkColor',
 }
 
 export interface Dimensions {

@@ -13,6 +13,7 @@
     "module": "esnext",
     "moduleResolution": "node",
     "resolveJsonModule": true,
+    "allowUmdGlobalAccess": true,
     // "baseUrl": ".", // This must be specified if "paths" is.
     // "paths": {
     //   "*": ["*", "generated/*"]
@@ -40,10 +41,9 @@
 
     /* Completeness */
     "skipDefaultLibCheck": true,
-    "skipLibCheck": true,
-
+    "skipLibCheck": true
   },
-  "include": ["src/**/*"],
-  "exclude": ["node_modules"],
+  "include": ["**/*.ts", "**/*.tsx", "**/**/*.ts", "**/**/*.tsx"],
+  "exclude": ["no de_modules"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

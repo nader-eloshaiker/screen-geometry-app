@@ -1,6 +1,6 @@
 {
   "name": "screen-geometry-app",
-  "version": "0.8",
+  "version": "0.8.0",
   "private": true,
   "license": "MIT",
   "type": "module",
@@ -14,7 +14,7 @@
     "build:prod": "tsc && vite build --mode prod",
     "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "lint:fix": "eslint src --fix --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-    "format": "prettier --write src",
+    "format": "prettier --write .",
     "preview": "vite preview",
     "gen:spec": "orval --config ./orval.config.ts",
     "prepare": "husky install",
@@ -36,6 +36,7 @@
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.45.1",
     "react-router-dom": "^6.16.0",
+    "simpler-color": "^1.0.1",
     "styled-components": "^6.1.0",
     "vite-plugin-checker": "^0.6.2",
     "web-vitals": "^2.1.4",
@@ -96,7 +97,7 @@
     "vitest": "^0.34.6"
   },
   "lint-staged": {
-    "*.{ts,tsx}": "npm run lint:fix",
+    "**/*.{ts,tsx,js} !(src/generated/**/*)": "npm run lint:fix",
     "*.{ts,tsx,js,css,md*}": "npm run format"
   }
 }

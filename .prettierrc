@@ -6,11 +6,5 @@
   "trailingComma": "all",
   "jsxSingleQuote": true,
   "bracketSpacing": true,
-  "plugins": [
-    "prettier-plugin-organize-imports"
-  ],
-  "pluginSearchDirs": false,
-  "tailwindFunctions": [
-    "tw"
-  ]
+  "plugins": ["prettier-plugin-organize-imports"]
 }

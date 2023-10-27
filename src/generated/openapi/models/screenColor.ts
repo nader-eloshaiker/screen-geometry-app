@@ -6,10 +6,9 @@
  */
 
 /**
- * Screen representation color
+ * Screen representation colors in hex format
  */
 export interface ScreenColor {
-  r: number
-  g: number
-  b: number
+  lightColor: string
+  darkColor: string
 }

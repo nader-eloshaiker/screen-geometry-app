@@ -4,12 +4,6 @@
  * screen-geometry-app-backend-serverless-apis-v1
  * OpenAPI spec version: 1.0.0
  */
+import type { ScreenInput } from './screenInput'
 
-/**
- * Screen representation in UI
- */
-export interface ScreenRender {
-  width?: number
-  height?: number
-  pixelSize?: number
-}
+export type ScreenInputList = ScreenInput[]
