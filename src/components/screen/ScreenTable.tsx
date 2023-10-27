@@ -6,9 +6,10 @@ import StarSolidIcon from '../../assets/icons/StarSolid'
 import { ScreenItem } from '../../generated/openapi/models'
 import { useDeleteScreen } from '../../hooks/api/useDeleteScreen'
 import { useFavoriteScreen } from '../../hooks/api/useFavoriteScreen'
+import { useThemeMode } from '../../hooks/useThemeMode'
 import { getRandomString } from '../../utils/RandomGenerator'
-import { createCSSColor } from '../../utils/ScreenCalc'
 import { SkeletonRect } from '../skeleton/SkeletonRect'
+import { DarkMode } from '../theme/ThemeConstants'
 
 type TTableProps = { cols: number; rows: number }
 
@@ -37,8 +38,7 @@ type Props = {
   screens: ScreenItem[]
   isScreenListLoading: boolean
   isHighlighted: (screen: ScreenItem) => boolean
-  onHighlightActive: (screen: ScreenItem) => void
-  onHighlightPassive: () => void
+  setHighLighted: (screen: ScreenItem | undefined) => void
   onHighlightClick: (screen: ScreenItem) => void
 }
 
@@ -46,13 +46,13 @@ export const ScreenTable = ({
   screens,
   isScreenListLoading,
   isHighlighted,
-  onHighlightActive,
-  onHighlightPassive,
+  setHighLighted,
   onHighlightClick,
 }: Props) => {
   const { isDeleteLoading, deleteAction } = useDeleteScreen()
   const { isFavoriteLoading, favoriteAction } = useFavoriteScreen()
   const [selected, setSelected] = useState<ScreenItem>()
+  const [themeMode] = useThemeMode()
 
   const onFavourite = (screen: ScreenItem) => {
     setSelected(screen)
@@ -84,10 +84,18 @@ export const ScreenTable = ({
         <tbody>
           {screens.map((screen) => (
             <tr
-              style={isHighlighted(screen) ? { backgroundColor: createCSSColor(screen.render?.color, 0.2) } : {}}
+              style={
+                isHighlighted(screen)
+                  ? {
+                      backgroundColor: `${
+                        themeMode === DarkMode ? screen.color.lightColor : screen.color.darkColor
+                      }${Math.round(0.2 * 255).toString(16)}`,
+                    }
+                  : {}
+              }
               key={screen.id}
-              onMouseEnter={() => onHighlightActive(screen)}
-              onMouseOut={() => onHighlightPassive()}
+              onMouseEnter={() => setHighLighted(screen)}
+              onMouseOut={() => setHighLighted(undefined)}
               onClick={() => onHighlightClick(screen)}
             >
               <td>
@@ -95,17 +103,21 @@ export const ScreenTable = ({
                   {isFavoriteLoading && screen.id === selected?.id ? (
                     <div
                       className='loading loading-spinner loading-xs'
-                      style={{ color: createCSSColor(screen.render?.color) }}
+                      style={{ color: themeMode === DarkMode ? screen.color.lightColor : screen.color.darkColor }}
                     />
                   ) : (
                     <button onClick={() => onFavourite(screen)}>
                       {screen.favorite ? (
-                        <StarSolidIcon id='star-icon' className='h-4 w-4' fill={createCSSColor(screen.render?.color)} />
+                        <StarSolidIcon
+                          id='star-icon'
+                          className='h-4 w-4'
+                          fill={themeMode === DarkMode ? screen.color.lightColor : screen.color.darkColor}
+                        />
                       ) : (
                         <StarOutlineIcon
                           id='star-icon'
                           className='h-4 w-4'
-                          fill={createCSSColor(screen.render?.color)}
+                          fill={themeMode === DarkMode ? screen.color.lightColor : screen.color.darkColor}
                         />
                       )}
                     </button>

@@ -594,6 +594,7 @@ components:
         - 'id'
         - 'tag'
         - 'data'
+        - 'color'
         - 'favorite'
       type: object
       properties:
@@ -603,9 +604,11 @@ components:
         favorite:
           type: boolean
         tag:
-          $ref: '#/components/schemas/ScreenInput'
+          $ref: '#/components/schemas/ScreenTag'
         data:
           $ref: '#/components/schemas/ScreenData'
+        color:
+          $ref: '#/components/schemas/ScreenColor'
         spec:
           $ref: '#/components/schemas/ScreenSpec'
         render:
@@ -615,7 +618,7 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/ScreenInput'
-    ScreenInput:
+    ScreenTag:
       required:
         - 'diagonalSize'
         - 'aspectRatio'
@@ -628,6 +631,32 @@ components:
         aspectRatio:
           minLength: 3
           type: string
+      description: 'Screen primitive data'
+    ScreenInput:
+      required:
+        - 'diagonalSize'
+        - 'aspectRatio'
+        - 'lightColor'
+        - 'darkColor'
+      type: object
+      properties:
+        diagonalSize:
+          type: number
+          minimum: 0
+          exclusiveMinimum: true
+        aspectRatio:
+          minLength: 3
+          type: string
+        lightColor:
+          type: string
+          minLength: 7
+          maxLength: 7
+          pattern: '#([a-f0-9]{6})\b'
+        darkColor:
+          type: string
+          minLength: 7
+          maxLength: 7
+          pattern: '#([a-f0-9]{6})\b'
         hRes:
           type: integer
           minimum: 0
@@ -681,8 +710,6 @@ components:
           exclusiveMinimum: true
       description: 'Screen resolution characteristics'
     ScreenRender:
-      required:
-        - 'color'
       type: object
       properties:
         width:
@@ -697,35 +724,24 @@ components:
           type: integer
           minimum: 0
           exclusiveMinimum: true
-        color:
-          $ref: '#/components/schemas/ScreenColor'
       description: 'Screen representation in UI'
     ScreenColor:
       required:
-        - 'r'
-        - 'g'
-        - 'b'
+        - 'lightColor'
+        - 'darkColor'
       type: object
       properties:
-        r:
-          type: integer
-          minimum: 0
-          exclusiveMinimum: false
-          maximum: 255
-          exclusiveMaximum: false
-        g:
-          type: integer
-          minimum: 0
-          exclusiveMinimum: false
-          maximum: 255
-          exclusiveMaximum: false
-        b:
-          type: integer
-          minimum: 0
-          exclusiveMinimum: false
-          maximum: 255
-          exclusiveMaximum: false
-      description: 'Screen representation color'
+        lightColor:
+          type: string
+          minLength: 7
+          maxLength: 7
+          pattern: '#([a-f0-9]{6})\b'
+        darkColor:
+          type: string
+          minLength: 7
+          maxLength: 7
+          pattern: '#([a-f0-9]{6})\b'
+      description: 'Screen representation colors in hex format'
     ErrorResponse:
       required:
         - 'error'

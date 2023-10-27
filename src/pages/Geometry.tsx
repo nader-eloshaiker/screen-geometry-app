@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react'
+import { useCallback, useRef, useState } from 'react'
 import styled from 'styled-components'
 import { ScreenButton } from '../components/createscreen/CreateButton'
 import { ScreenFormDrawer } from '../components/createscreen/drawer/ScreenFormDrawer'
@@ -15,7 +15,7 @@ import { useElementSize } from '../hooks/useElementSize'
 import { Dimensions } from '../models/Screen'
 import { getMaxScreenSize } from '../utils/ScreenCalc'
 
-const Stacked = styled.div<{ width: number; height: number }>`
+const Stacked = styled.div<{ height: number }>`
   display: inline-grid;
   place-items: start;
   align-items: flex-end;
@@ -33,7 +33,7 @@ export default function Geometry() {
   const {
     state: { screens },
   } = useScreenContext()
-  const [highlighted, setHighlighted] = useState<ScreenItem>()
+  const [highlighted, setHighlighted] = useState<ScreenItem | undefined>()
 
   const maxScreenSize = screens.length > 0 ? getMaxScreenSize(screens) : { width: 47, height: 16 } // max possible screen size
   const maxPanelSize: Dimensions = { width, height: Math.round(maxScreenSize.height * (width / maxScreenSize.width)) }
@@ -41,27 +41,22 @@ export default function Geometry() {
   const { isScreenListLoading } = useListScreens()
   const { isCreateListLoading, createListAction } = useCreateScreenList()
 
-  const onHighlightActive = (screen: ScreenItem) => {
-    setHighlighted(screen)
-  }
+  const onHighlightClick = useCallback(
+    (screen: ScreenItem) => {
+      if (screen.id === highlighted?.id) {
+        setHighlighted(undefined)
+      } else {
+        setHighlighted(screen)
+      }
+    },
+    [highlighted],
+  )
 
-  const onHighlightPassive = () => {
-    setHighlighted(undefined)
-  }
-
-  const onHighlightClick = (screen: ScreenItem) => {
-    if (screen.id === highlighted?.id) {
-      setHighlighted(undefined)
-    } else {
-      setHighlighted(screen)
-    }
-  }
-
-  const onLoadDefault = () => {
+  const onLoadDefault = useCallback(() => {
     createListAction(defaultScreenInputList)
-  }
+  }, [createListAction])
 
-  const isHighlighted = (screen: ScreenItem) => screen.id === highlighted?.id
+  const isHighlighted = useCallback((screen: ScreenItem) => screen.id === highlighted?.id, [highlighted])
 
   return (
     <InputReferenceProvider>
@@ -77,8 +72,7 @@ export default function Geometry() {
             screens={screens}
             isScreenListLoading={isScreenListLoading}
             isHighlighted={isHighlighted}
-            onHighlightActive={onHighlightActive}
-            onHighlightPassive={onHighlightPassive}
+            setHighLighted={setHighlighted}
             onHighlightClick={onHighlightClick}
           />
 
@@ -101,28 +95,27 @@ export default function Geometry() {
           )}
 
           {(screens.length > 0 || isScreenListLoading) && (
-            <>
+            <div>
               <label className='label py-4'>
                 <span className='text-xl'>Overlay</span>
               </label>
-              <Stacked width={maxPanelSize.width} height={maxPanelSize.height}>
+              <Stacked height={maxPanelSize.height}>
                 {!isScreenListLoading ? (
                   screens.map((screen, index) => (
                     <ScreenPanel
                       key={screen.id}
                       screen={screen}
                       index={screens.length - index}
-                      selected={screen.favorite || isHighlighted(screen)}
-                      onMouseEnter={() => onHighlightActive(screen)}
-                      onMouseOut={() => onHighlightPassive()}
-                      onClick={() => onHighlightClick(screen)}
+                      isHighlighted={isHighlighted}
+                      setHighLighted={setHighlighted}
+                      onHighlightClick={onHighlightClick}
                     />
                   ))
                 ) : (
                   <SkeletonImage className='h-full w-full' />
                 )}
               </Stacked>
-            </>
+            </div>
           )}
         </ScreenFormDrawer>
       </div>

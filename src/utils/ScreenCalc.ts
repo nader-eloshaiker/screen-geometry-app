@@ -1,6 +1,19 @@
+import { lightness } from 'simpler-color'
 import { ScreenColor, ScreenItem } from '../generated/openapi/models'
 import { Dimensions } from '../models/Screen'
-import { getRandomInt } from './RandomGenerator'
+
+const hslToHex = (hue: number, saturation: number, light: number) => {
+  const lightPercentage = light / 100
+  const alpha = (saturation * Math.min(lightPercentage, 1 - lightPercentage)) / 100
+  const toHex = (n: number) => {
+    const k = (n + hue / 30) % 12
+    const color = lightPercentage - alpha * Math.max(Math.min(k - 3, 9 - k, 1), -1)
+    return Math.round(255 * color)
+      .toString(16)
+      .padStart(2, '0') // convert to Hex and prefix "0" if needed
+  }
+  return `#${toHex(0)}${toHex(8)}${toHex(4)}`
+}
 
 export const getMaxScreenSize = (screens: Array<ScreenItem>) =>
   screens.reduce(
@@ -21,20 +34,24 @@ export const normaliseScreenRender = (list: ScreenItem[]) => {
   const biggest = getMaxScreenSize(sorted)
 
   for (const screen of sorted) {
-    const color = screen.render?.color
     screen.render = {
       width: screen.data.hSize / biggest.width,
       height: screen.data.vSize / biggest.height,
-      color: {
-        r: color?.r || getRandomInt(256),
-        g: color?.g || getRandomInt(256),
-        b: color?.b || getRandomInt(256),
-      },
     }
   }
 
   return sorted
 }
 
-export const createCSSColor = (color?: ScreenColor, alpha?: number) =>
-  color ? `rgba(${color.r}, ${color.g}, ${color.b}, ${alpha || 1})` : 'transparent'
+export const createCSSColor = (): ScreenColor => {
+  const hue = Math.random() * 360
+  const saturation = Math.random() * 50 // 100
+  const light = Math.random() * 50 // 100
+  // const randomColor = `hsl(${hue}, ${saturation}%, ${lightness}%)`
+  const baseColor = hslToHex(hue, saturation, light)
+
+  return {
+    lightColor: lightness(baseColor, 60),
+    darkColor: lightness(baseColor, 40),
+  }
+}
