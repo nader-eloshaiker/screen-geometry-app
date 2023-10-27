@@ -4,10 +4,11 @@
  * screen-geometry-app-backend-serverless-apis-v1
  * OpenAPI spec version: 1.0.0
  */
+import type { ScreenColor } from './screenColor'
 import type { ScreenData } from './screenData'
-import type { ScreenInput } from './screenInput'
 import type { ScreenRender } from './screenRender'
 import type { ScreenSpec } from './screenSpec'
+import type { ScreenTag } from './screenTag'
 
 /**
  * Complete screen object
@@ -15,8 +16,9 @@ import type { ScreenSpec } from './screenSpec'
 export interface ScreenItem {
   id: string
   favorite: boolean
-  tag: ScreenInput
+  tag: ScreenTag
   data: ScreenData
+  color: ScreenColor
   spec?: ScreenSpec
   render?: ScreenRender
 }

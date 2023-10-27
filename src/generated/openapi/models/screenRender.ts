@@ -4,7 +4,6 @@
  * screen-geometry-app-backend-serverless-apis-v1
  * OpenAPI spec version: 1.0.0
  */
-import type { ScreenColor } from './screenColor'
 
 /**
  * Screen representation in UI
@@ -13,5 +12,4 @@ export interface ScreenRender {
   width?: number
   height?: number
   pixelSize?: number
-  color: ScreenColor
 }

@@ -8,11 +8,7 @@
 /**
  * Screen primitive data
  */
-export interface ScreenInput {
+export interface ScreenTag {
   diagonalSize: number
   aspectRatio: string
-  lightColor: string
-  darkColor: string
-  hRes?: number
-  vRes?: number
 }
