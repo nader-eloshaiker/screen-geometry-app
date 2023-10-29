@@ -53,7 +53,6 @@ export const ScreenTable = ({
   const { isFavoriteLoading, favoriteAction } = useFavoriteScreen()
   const [selected, setSelected] = useState<ScreenItem>()
   const [themeMode] = useThemeMode()
-  console.log('screens:', JSON.stringify(screens, null, 2))
 
   const onFavourite = (screen: ScreenItem) => {
     setSelected(screen)

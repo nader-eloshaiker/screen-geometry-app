@@ -1,6 +1,6 @@
 import { yupResolver } from '@hookform/resolvers/yup'
 import cn from 'classnames'
-import { useCallback, useEffect, useState } from 'react'
+import { useCallback, useState } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import * as yup from 'yup'
 import { ObjectSchema } from 'yup'
@@ -84,7 +84,19 @@ export const CreateScreenForm = () => {
   })
   const { isCreateLoading, createAction } = useCreateScreen()
   const drawerRef = useInputReferenceContext()
-  const [screenColor, setScreenColor] = useState<ScreenColor>()
+  const [screenColor, setScreenColor] = useState<ScreenColor>(() => {
+    const color = createCSSColor()
+    setValue(ScreenDataEnum.darkColor, color.darkColor, {
+      shouldValidate: true,
+      shouldDirty: true,
+    })
+    setValue(ScreenDataEnum.lightColor, color.lightColor, {
+      shouldValidate: true,
+      shouldDirty: true,
+    })
+
+    return color
+  })
 
   const onSelect = useCallback(
     (item: SearchItem) => {
@@ -120,22 +132,9 @@ export const CreateScreenForm = () => {
     [resetField, setValue],
   )
 
-  const onSubmit: SubmitHandler<ScreenInput> = (form) => {
-    createAction(form)
-    onGenerateColor()
-  }
-
-  const onGenerateColor = () => {
-    setScreenColor(createCSSColor())
-  }
-
-  useEffect(() => {
-    onGenerateColor()
-  }, [])
-
-  useEffect(() => {
-    if (!screenColor) return
-
+  const onGenerateColor = useCallback(() => {
+    const color = createCSSColor()
+    setScreenColor(color)
     setValue(ScreenDataEnum.darkColor, screenColor.darkColor, {
       shouldValidate: true,
       shouldDirty: true,
@@ -145,6 +144,19 @@ export const CreateScreenForm = () => {
       shouldDirty: true,
     })
   }, [screenColor, setValue])
+
+  const onSubmit: SubmitHandler<ScreenInput> = useCallback(
+    (form: ScreenInput) => {
+      createAction(form)
+      onGenerateColor()
+    },
+    [createAction, onGenerateColor],
+  )
+
+  const onReset = useCallback(() => {
+    reset()
+    onGenerateColor()
+  }, [onGenerateColor, reset])
 
   return (
     <>
@@ -299,7 +311,7 @@ export const CreateScreenForm = () => {
                 type='reset'
                 className='btn btn-neutral'
                 disabled={isCreateLoading}
-                onClick={() => reset()}
+                onClick={onReset}
               >
                 {isCreateLoading ? (
                   <div className='stack'>
