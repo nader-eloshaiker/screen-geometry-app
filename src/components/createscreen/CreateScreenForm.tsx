@@ -11,7 +11,7 @@ import { SearchItem } from '../../models/Database'
 import { ScreenDataEnum } from '../../models/Screen'
 import { createCSSColor } from '../../utils/ScreenCalc'
 import { AutoCompleteScreen } from '../autocomplete/AutoCompleteScreen'
-import { InputPlaceholder } from '../inputplaceholder/InputPlaceholder'
+import { InputSuffix } from '../input-suffix/InputSuffix'
 
 const screenDataSchema: ObjectSchema<ScreenInput> = yup.object().shape(
   {
@@ -165,22 +165,17 @@ export const CreateScreenForm = () => {
               <label htmlFor={ScreenDataEnum.diagonalSize} className='label'>
                 <span className='label-text'>Screen Size</span>
               </label>
-              <div className='relative'>
-                <InputPlaceholder className='absolute right-0 top-0 flex h-full w-10'>
-                  <div className='z-10 flex h-full w-full items-center justify-center rounded-r'>in</div>
-                </InputPlaceholder>
-
+              <InputSuffix suffix='in'>
                 <input
                   type='number'
                   autoComplete='off'
-                  className={
-                    cn({ 'input-error': errors[ScreenDataEnum.diagonalSize] }) +
-                    ' input input-bordered input-md relative w-full pr-10 shadow-md'
-                  }
+                  className={cn('input input-bordered input-md relative w-full pr-10 shadow-md', {
+                    'input-error': errors[ScreenDataEnum.diagonalSize],
+                  })}
                   placeholder='27'
                   {...register(ScreenDataEnum.diagonalSize)}
                 />
-              </div>
+              </InputSuffix>
             </div>
 
             {/* aspectRation */}
@@ -190,10 +185,9 @@ export const CreateScreenForm = () => {
               </label>
               <input
                 type='text'
-                className={
-                  cn({ 'input-error': errors[ScreenDataEnum.aspectRatio] }) +
-                  ' input input-bordered input-md w-full shadow-md'
-                }
+                className={cn('input input-bordered input-md w-full shadow-md', {
+                  'input-error': errors[ScreenDataEnum.aspectRatio],
+                })}
                 autoComplete='off'
                 placeholder='16:9'
                 {...register(ScreenDataEnum.aspectRatio)}
@@ -209,22 +203,17 @@ export const CreateScreenForm = () => {
               <label htmlFor={ScreenDataEnum.hRes} className='label'>
                 <span className='label-text'>Horizontal Res</span>
               </label>
-              <div className='relative'>
-                <InputPlaceholder className='absolute right-0 top-0 flex h-full w-10'>
-                  <div className='z-10 flex h-full w-full items-center justify-center rounded-r'>px</div>
-                </InputPlaceholder>
-
+              <InputSuffix suffix='px'>
                 <input
                   type='number'
                   autoComplete='off'
-                  className={
-                    cn({ 'input-error': errors[ScreenDataEnum.hRes] }) +
-                    ' input input-bordered input-md relative w-full pr-10 shadow-md'
-                  }
+                  className={cn('input input-bordered input-md relative w-full pr-10 shadow-md', {
+                    'input-error': errors[ScreenDataEnum.hRes],
+                  })}
                   placeholder='1024'
                   {...register(ScreenDataEnum.hRes)}
                 />
-              </div>
+              </InputSuffix>
             </div>
 
             {/* vRes */}
@@ -232,22 +221,17 @@ export const CreateScreenForm = () => {
               <label htmlFor={ScreenDataEnum.vRes} className='label'>
                 <span className='label-text'>Vertical Res</span>
               </label>
-              <div className='relative'>
-                <InputPlaceholder className='absolute right-0 top-0 flex h-full w-10'>
-                  <div className='z-10 flex h-full w-full items-center justify-center rounded-r'>px</div>
-                </InputPlaceholder>
-
+              <InputSuffix suffix='px'>
                 <input
                   type='number'
                   autoComplete='off'
-                  className={
-                    cn({ 'input-error': errors[ScreenDataEnum.vRes] }) +
-                    ' input input-bordered input-md relative w-full pr-10 shadow-md'
-                  }
+                  className={cn('input input-bordered input-md relative w-full pr-10 shadow-md', {
+                    'input-error': errors[ScreenDataEnum.vRes],
+                  })}
                   placeholder='768'
                   {...register(ScreenDataEnum.vRes)}
                 />
-              </div>
+              </InputSuffix>
             </div>
           </div>
 

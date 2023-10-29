@@ -8,12 +8,11 @@ export const ScreenFormDrawer = ({ children }: Props) => {
   const drawerRef = useInputReferenceContext()
   return (
     <div className='drawer h-full grow'>
-      <input id='screenFormDrawer' type='checkbox' className='drawer-toggle' ref={drawerRef} />
-      <div id='drawer-content' className='drawer-content h-full'>
+      <div id='drawer-content' className='drawer-content'>
         {children}
       </div>
-      <div className='drawer-side absolute h-full w-auto'>
-        <label htmlFor='screenFormDrawer' className='drawer-overlay'></label>
+      <input id='screenFormDrawer' type='checkbox' className='drawer-toggle' ref={drawerRef} />
+      <div className='drawer-side w-auto'>
         <CreateScreen />
       </div>
     </div>

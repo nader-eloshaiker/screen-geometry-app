@@ -60,7 +60,7 @@ export default function Geometry() {
 
   return (
     <InputReferenceProvider>
-      <div className='my-6 h-full' ref={divSizeRef}>
+      <div className='flex flex-1 flex-col' ref={divSizeRef}>
         <ScreenFormDrawer>
           <div className='flex w-full items-end justify-between pb-4'>
             <label className='label'>
@@ -77,7 +77,7 @@ export default function Geometry() {
           />
 
           {screens.length === 0 && !isScreenListLoading && (
-            <div className='flex flex-col items-center'>
+            <div className='flex h-full flex-col items-center'>
               <div className='label py-4'>
                 <span className='text-xl'>No List Found</span>
               </div>
@@ -96,8 +96,8 @@ export default function Geometry() {
 
           {(screens.length > 0 || isScreenListLoading) && (
             <div>
-              <label className='label py-4'>
-                <span className='text-xl'>Overlay</span>
+              <label className='label py-6'>
+                <span className='text-xl'>Physical Screens</span>
               </label>
               <Stacked height={maxPanelSize.height}>
                 {!isScreenListLoading ? (

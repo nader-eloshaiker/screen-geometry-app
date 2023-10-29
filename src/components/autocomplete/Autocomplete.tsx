@@ -4,7 +4,7 @@ import cn from 'classnames'
 import { ChangeEvent, memo, useRef, useState } from 'react'
 import MagnifyGlassIcon from '../../assets/icons/MagnifyGlass'
 import { useElementSize } from '../../hooks/useElementSize'
-import { InputPlaceholder } from '../inputplaceholder/InputPlaceholder'
+import { InputSuffix, SuffixLocation } from '../input-suffix/InputSuffix'
 
 export type TAutoCompleteItem = { id: string; label: string }
 type TProps = TRestProps & {
@@ -53,37 +53,39 @@ export const AutoComplete = ({
     <div
       data-testid='autoComplete'
       // use classnames here to easily toggle dropdown open
-      className={
-        cn({
-          'dropdown w-full relative': true,
-          'dropdown-open': open,
-        }) + (className ? ' ' + className : '')
-      }
+      className={cn(className, {
+        'dropdown w-full relative': true,
+        'dropdown-open': open,
+      })}
       ref={divRef}
       {...rest}
     >
-      <InputPlaceholder data-testid='autoCompleteLoading' className='absolute z-10 flex h-full w-8 items-center pl-2'>
-        {isLoading ? (
-          <span className='loading loading-spinner loading-md' />
-        ) : (
-          <MagnifyGlassIcon className='flex h-6 w-6' />
-        )}
-      </InputPlaceholder>
-      <input
-        name='autoCompleteInput'
-        data-testid='autoCompleteInput'
-        type='text'
-        className={cn({ relative: isLoading }) + ' input input-md w-full pl-10 relative shadow-md'}
-        value={inputValue}
-        onChange={handleChange}
-        placeholder={placeholder || 'Type something..'}
-        tabIndex={0}
-        disabled={isLoading}
-      />
+      <InputSuffix
+        suffix={
+          isLoading ? (
+            <span data-testid='autoCompleteLoading' className='loading loading-spinner loading-md' />
+          ) : (
+            <MagnifyGlassIcon data-testid='autoCompleteIcon' className='h-6 w-6' />
+          )
+        }
+        location={SuffixLocation.left}
+      >
+        <input
+          name='autoCompleteInput'
+          data-testid='autoCompleteInput'
+          type='text'
+          className='input input-md relative w-full pl-12 shadow-md'
+          value={inputValue}
+          onChange={handleChange}
+          placeholder={placeholder || 'Type something..'}
+          tabIndex={0}
+          disabled={isLoading}
+        />
+      </InputSuffix>
       {items.length > 0 && (
         <div
           data-testid='autoCompleteResults'
-          className='dropdown-content top-14 z-40 max-h-80 flex-col overflow-auto rounded-md bg-base-200'
+          className='dropdown-content top-14 z-[1] max-h-80 flex-col overflow-auto rounded-md bg-base-200'
         >
           <ul
             className='menu'
