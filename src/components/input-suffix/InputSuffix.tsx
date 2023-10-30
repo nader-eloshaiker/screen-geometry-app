@@ -14,7 +14,7 @@ export const InputSuffix = ({ suffix, location = SuffixLocation.right, children 
     <div className='relative'>
       {children}
       <InputPlaceholder
-        className={cn(' absolute top-0 flex h-full w-fit items-center rounded-r', {
+        className={cn('absolute top-0 flex h-full w-fit items-center rounded-r', {
           'mr-4 right-0': location === SuffixLocation.right,
           'ml-4 left-0': location === SuffixLocation.left,
         })}

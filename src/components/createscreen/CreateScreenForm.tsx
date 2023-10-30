@@ -181,7 +181,7 @@ export const CreateScreenForm = () => {
                 <input
                   type='number'
                   autoComplete='off'
-                  className={cn('input input-bordered input-md relative w-full pr-10 shadow-md', {
+                  className={cn('input input-bordered input-md w-full pr-10 shadow-md', {
                     'input-error': errors[ScreenDataEnum.diagonalSize],
                   })}
                   placeholder='27'
@@ -219,7 +219,7 @@ export const CreateScreenForm = () => {
                 <input
                   type='number'
                   autoComplete='off'
-                  className={cn('input input-bordered input-md relative w-full pr-10 shadow-md', {
+                  className={cn('input input-bordered input-md w-full pr-10 shadow-md', {
                     'input-error': errors[ScreenDataEnum.hRes],
                   })}
                   placeholder='1024'
@@ -237,7 +237,7 @@ export const CreateScreenForm = () => {
                 <input
                   type='number'
                   autoComplete='off'
-                  className={cn('input input-bordered input-md relative w-full pr-10 shadow-md', {
+                  className={cn('input input-bordered input-md w-full pr-10 shadow-md', {
                     'input-error': errors[ScreenDataEnum.vRes],
                   })}
                   placeholder='768'

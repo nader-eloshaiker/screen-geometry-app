@@ -12,7 +12,7 @@ export const ScreenFormDrawer = ({ children }: Props) => {
         {children}
       </div>
       <input id='screenFormDrawer' type='checkbox' className='drawer-toggle' ref={drawerRef} />
-      <div className='drawer-side w-auto'>
+      <div className='drawer-side absolute h-fit w-auto'>
         <CreateScreen />
       </div>
     </div>

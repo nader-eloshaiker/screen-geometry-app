@@ -54,7 +54,7 @@ export const AutoComplete = ({
       data-testid='autoComplete'
       // use classnames here to easily toggle dropdown open
       className={cn(className, {
-        'dropdown w-full relative': true,
+        'dropdown w-full': true,
         'dropdown-open': open,
       })}
       ref={divRef}
