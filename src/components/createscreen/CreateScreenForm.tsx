@@ -1,6 +1,6 @@
 import { yupResolver } from '@hookform/resolvers/yup'
 import cn from 'classnames'
-import { useCallback, useEffect, useState } from 'react'
+import { useCallback, useState } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import * as yup from 'yup'
 import { ObjectSchema } from 'yup'
@@ -11,7 +11,7 @@ import { SearchItem } from '../../models/Database'
 import { ScreenDataEnum } from '../../models/Screen'
 import { createCSSColor } from '../../utils/ScreenCalc'
 import { AutoCompleteScreen } from '../autocomplete/AutoCompleteScreen'
-import { InputPlaceholder } from '../inputplaceholder/InputPlaceholder'
+import { InputSuffix } from '../input-suffix/InputSuffix'
 
 const screenDataSchema: ObjectSchema<ScreenInput> = yup.object().shape(
   {
@@ -84,7 +84,21 @@ export const CreateScreenForm = () => {
   })
   const { isCreateLoading, createAction } = useCreateScreen()
   const drawerRef = useInputReferenceContext()
-  const [screenColor, setScreenColor] = useState<ScreenColor>()
+  const [screenColor, setScreenColor] = useState<ScreenColor>(() => {
+    const color = createCSSColor()
+    setValue(ScreenDataEnum.darkColor, color.darkColor, {
+      shouldValidate: true,
+      shouldDirty: true,
+    })
+    setValue(ScreenDataEnum.lightColor, color.lightColor, {
+      shouldValidate: true,
+      shouldDirty: true,
+    })
+
+    return color
+  })
+
+  const [searchValue, setSearchValue] = useState('')
 
   const onSelect = useCallback(
     (item: SearchItem) => {
@@ -120,22 +134,9 @@ export const CreateScreenForm = () => {
     [resetField, setValue],
   )
 
-  const onSubmit: SubmitHandler<ScreenInput> = (form) => {
-    createAction(form)
-    onGenerateColor()
-  }
-
-  const onGenerateColor = () => {
-    setScreenColor(createCSSColor())
-  }
-
-  useEffect(() => {
-    onGenerateColor()
-  }, [])
-
-  useEffect(() => {
-    if (!screenColor) return
-
+  const onGenerateColor = useCallback(() => {
+    const color = createCSSColor()
+    setScreenColor(color)
     setValue(ScreenDataEnum.darkColor, screenColor.darkColor, {
       shouldValidate: true,
       shouldDirty: true,
@@ -146,13 +147,27 @@ export const CreateScreenForm = () => {
     })
   }, [screenColor, setValue])
 
+  const onSubmit: SubmitHandler<ScreenInput> = useCallback(
+    (form: ScreenInput) => {
+      createAction(form)
+      onGenerateColor()
+    },
+    [createAction, onGenerateColor],
+  )
+
+  const onReset = useCallback(() => {
+    reset()
+    onGenerateColor()
+    setSearchValue('')
+  }, [onGenerateColor, reset])
+
   return (
     <>
       <div className='form-control mb-4 flex w-full flex-col'>
         <label className='label'>
-          <span className='label-text'>Choose from list of Monitors</span>
+          <span className='text-sm'>Choose from list of Monitors</span>
         </label>
-        <AutoCompleteScreen onSelect={onSelect} />
+        <AutoCompleteScreen onSelect={onSelect} searchValue={searchValue} setSearchValue={setSearchValue} />
       </div>
 
       <div className='divider text-sm'>Or</div>
@@ -163,37 +178,31 @@ export const CreateScreenForm = () => {
             {/* diagnolSize */}
             <div id='screenSizeControl' className='form-control mb-4 flex flex-col'>
               <label htmlFor={ScreenDataEnum.diagonalSize} className='label'>
-                <span className='label-text'>Screen Size</span>
+                <span className='text-sm'>Screen Size</span>
               </label>
-              <div className='relative'>
-                <InputPlaceholder className='absolute right-0 top-0 flex h-full w-10'>
-                  <div className='z-10 flex h-full w-full items-center justify-center rounded-r'>in</div>
-                </InputPlaceholder>
-
+              <InputSuffix suffix='in'>
                 <input
                   type='number'
                   autoComplete='off'
-                  className={
-                    cn({ 'input-error': errors[ScreenDataEnum.diagonalSize] }) +
-                    ' input input-bordered input-md relative w-full pr-10 shadow-md'
-                  }
+                  className={cn('input input-bordered input-md w-full pr-10 shadow-md', {
+                    'input-error': errors[ScreenDataEnum.diagonalSize],
+                  })}
                   placeholder='27'
                   {...register(ScreenDataEnum.diagonalSize)}
                 />
-              </div>
+              </InputSuffix>
             </div>
 
             {/* aspectRation */}
             <div id='aspectRatioControl' className='form-control w-full'>
               <label className='label'>
-                <span className='label-text'>Aspect Ratio</span>
+                <span className='text-sm'>Aspect Ratio</span>
               </label>
               <input
                 type='text'
-                className={
-                  cn({ 'input-error': errors[ScreenDataEnum.aspectRatio] }) +
-                  ' input input-bordered input-md w-full shadow-md'
-                }
+                className={cn('input input-bordered input-md w-full shadow-md', {
+                  'input-error': errors[ScreenDataEnum.aspectRatio],
+                })}
                 autoComplete='off'
                 placeholder='16:9'
                 {...register(ScreenDataEnum.aspectRatio)}
@@ -207,47 +216,37 @@ export const CreateScreenForm = () => {
             {/* hRes */}
             <div id='hSizeControl' className='form-control mb-4 flex flex-col'>
               <label htmlFor={ScreenDataEnum.hRes} className='label'>
-                <span className='label-text'>Horizontal Res</span>
+                <span className='text-sm'>Horizontal Res</span>
               </label>
-              <div className='relative'>
-                <InputPlaceholder className='absolute right-0 top-0 flex h-full w-10'>
-                  <div className='z-10 flex h-full w-full items-center justify-center rounded-r'>px</div>
-                </InputPlaceholder>
-
+              <InputSuffix suffix='px'>
                 <input
                   type='number'
                   autoComplete='off'
-                  className={
-                    cn({ 'input-error': errors[ScreenDataEnum.hRes] }) +
-                    ' input input-bordered input-md relative w-full pr-10 shadow-md'
-                  }
+                  className={cn('input input-bordered input-md w-full pr-10 shadow-md', {
+                    'input-error': errors[ScreenDataEnum.hRes],
+                  })}
                   placeholder='1024'
                   {...register(ScreenDataEnum.hRes)}
                 />
-              </div>
+              </InputSuffix>
             </div>
 
             {/* vRes */}
             <div id='hSizeControl' className='form-control mb-4 flex flex-col'>
               <label htmlFor={ScreenDataEnum.vRes} className='label'>
-                <span className='label-text'>Vertical Res</span>
+                <span className='text-sm'>Vertical Res</span>
               </label>
-              <div className='relative'>
-                <InputPlaceholder className='absolute right-0 top-0 flex h-full w-10'>
-                  <div className='z-10 flex h-full w-full items-center justify-center rounded-r'>px</div>
-                </InputPlaceholder>
-
+              <InputSuffix suffix='px'>
                 <input
                   type='number'
                   autoComplete='off'
-                  className={
-                    cn({ 'input-error': errors[ScreenDataEnum.vRes] }) +
-                    ' input input-bordered input-md relative w-full pr-10 shadow-md'
-                  }
+                  className={cn('input input-bordered input-md w-full pr-10 shadow-md', {
+                    'input-error': errors[ScreenDataEnum.vRes],
+                  })}
                   placeholder='768'
                   {...register(ScreenDataEnum.vRes)}
                 />
-              </div>
+              </InputSuffix>
             </div>
           </div>
 
@@ -257,7 +256,7 @@ export const CreateScreenForm = () => {
             {/* lightColor */}
             <div id='lightColour' className='form-control mb-4 flex flex-col'>
               <div
-                className=' input input-bordered input-md flex w-full items-center justify-center shadow-md'
+                className=' input input-bordered input-md flex w-full items-center justify-center text-black shadow-md'
                 style={{ backgroundColor: screenColor?.lightColor }}
               >
                 <span className='text-sm'>Light</span>
@@ -267,7 +266,7 @@ export const CreateScreenForm = () => {
             {/* darkColor */}
             <div id='darkColour' className='form-control mb-4 flex flex-col'>
               <div
-                className='input input-bordered flex h-full w-full items-center justify-center text-sm shadow-md'
+                className='input input-bordered flex h-full w-full items-center justify-center text-sm text-white shadow-md'
                 style={{ backgroundColor: screenColor?.darkColor }}
               >
                 <span className='text-sm'>Dark</span>
@@ -315,7 +314,7 @@ export const CreateScreenForm = () => {
                 type='reset'
                 className='btn btn-neutral'
                 disabled={isCreateLoading}
-                onClick={() => reset()}
+                onClick={onReset}
               >
                 {isCreateLoading ? (
                   <div className='stack'>

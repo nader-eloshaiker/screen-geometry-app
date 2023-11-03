@@ -29,15 +29,15 @@
 }
 
 .header {
-  @apply bg-teal-500 text-teal-100 dark:bg-teal-700 dark:text-teal-200;
+  @apply text-amber-200 dark:text-amber-100;
 }
 
 .lightModeText {
-  @apply text-teal-200;
+  @apply text-amber-950 dark:text-amber-50;
 }
 
 .sidebar {
-  @apply bg-gradient-to-b from-teal-500 to-teal-700 text-teal-100 dark:bg-gradient-to-b dark:from-teal-700 dark:to-teal-900 dark:text-teal-200;
+  @apply bg-gradient-to-b from-amber-500 to-amber-700 text-amber-950 dark:bg-gradient-to-b dark:from-amber-600 dark:to-amber-800 dark:text-amber-50;
 }
 
 .footer {
