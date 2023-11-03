@@ -65,7 +65,7 @@
     "@types/styled-components": "^5.1.26",
     "@types/tailwindcss": "^3.1.0",
     "@types/yup": "^0.32.0",
-    "@typescript-eslint/eslint-plugin": "^5.60.0",
+    "@typescript-eslint/eslint-plugin": "^6.9.1",
     "@typescript-eslint/parser": "^5.60.0",
     "@vitejs/plugin-react": "^4.1.0",
     "@vitest/coverage-v8": "^0.34.6",
