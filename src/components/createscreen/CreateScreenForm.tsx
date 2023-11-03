@@ -98,6 +98,8 @@ export const CreateScreenForm = () => {
     return color
   })
 
+  const [searchValue, setSearchValue] = useState('')
+
   const onSelect = useCallback(
     (item: SearchItem) => {
       setValue(ScreenDataEnum.aspectRatio, item.tag.aspectRatio, {
@@ -156,6 +158,7 @@ export const CreateScreenForm = () => {
   const onReset = useCallback(() => {
     reset()
     onGenerateColor()
+    setSearchValue('')
   }, [onGenerateColor, reset])
 
   return (
@@ -164,7 +167,7 @@ export const CreateScreenForm = () => {
         <label className='label'>
           <span className='text-sm'>Choose from list of Monitors</span>
         </label>
-        <AutoCompleteScreen onSelect={onSelect} />
+        <AutoCompleteScreen onSelect={onSelect} searchValue={searchValue} setSearchValue={setSearchValue} />
       </div>
 
       <div className='divider text-sm'>Or</div>

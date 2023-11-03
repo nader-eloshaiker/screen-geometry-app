@@ -1,7 +1,7 @@
 // ./components/Autocomplete.tsx
 
 import cn from 'classnames'
-import { ChangeEvent, memo, useRef, useState } from 'react'
+import { ChangeEvent, memo, useCallback, useRef, useState } from 'react'
 import MagnifyGlassIcon from '../../assets/icons/MagnifyGlass'
 import { useElementSize } from '../../hooks/useElementSize'
 import { InputSuffix, SuffixLocation } from '../input-suffix/InputSuffix'
@@ -30,24 +30,27 @@ export const AutoComplete = ({
 }: TProps) => {
   const divRef = useRef<HTMLDivElement>(null)
   const { width } = useElementSize(divRef)
-  // const { ref: divRef, width = 1 } = useResizeObserver<HTMLDivElement>()
   const [open, setOpen] = useState(false)
-  const [inputValue, setInputValue] = useState(items.length === 1 ? items[0].label : value)
 
-  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
-    onChange(event.target.value)
-    setInputValue(event.target.value)
-  }
+  const handleChange = useCallback(
+    (event: ChangeEvent<HTMLInputElement>) => {
+      onChange(event.target.value)
+    },
+    [onChange],
+  )
 
-  const handleSelect = (item: TAutoCompleteItem) => {
-    setInputValue(item.label)
-    onSelect(item)
-    setOpen(false)
-    // force close of the dropdown
-    if (document.activeElement instanceof HTMLElement) {
-      document.activeElement.blur()
-    }
-  }
+  const handleSelect = useCallback(
+    (item: TAutoCompleteItem) => {
+      onChange(item.label)
+      onSelect(item)
+      setOpen(false)
+      // force close of the dropdown
+      if (document.activeElement instanceof HTMLElement) {
+        document.activeElement.blur()
+      }
+    },
+    [onChange, onSelect],
+  )
 
   return (
     <div
@@ -75,7 +78,7 @@ export const AutoComplete = ({
           data-testid='autoCompleteInput'
           type='text'
           className='input input-md relative w-full pl-12 shadow-md'
-          value={inputValue}
+          value={value}
           onChange={handleChange}
           placeholder={placeholder || 'Type something..'}
           tabIndex={0}
