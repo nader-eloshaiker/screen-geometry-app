@@ -7,12 +7,11 @@ import AutoComplete, { TAutoCompleteItem } from './Autocomplete'
 
 type TProps = TRestProps & {
   onSelect: (item: SearchItem) => void
+  searchValue: string
+  setSearchValue: (value: string) => void
 }
 
-export const AutoCompleteScreen = ({ onSelect, ...rest }: TProps) => {
-  // query typed by user
-  const [val, setVal] = useState('')
-
+export const AutoCompleteScreen = ({ onSelect, searchValue, setSearchValue, ...rest }: TProps) => {
   // user selected item
   const [selected, setSelected] = useState<TAutoCompleteItem>()
 
@@ -33,8 +32,8 @@ export const AutoCompleteScreen = ({ onSelect, ...rest }: TProps) => {
   }, [dispatchSearch, response])
 
   useEffect(() => {
-    dispatchSearch({ type: SearchActionTypes.SEARCH, payload: val })
-  }, [dispatchSearch, val])
+    dispatchSearch({ type: SearchActionTypes.SEARCH, payload: searchValue })
+  }, [dispatchSearch, searchValue])
 
   useEffect(() => {
     const dbEntry = selected && db.monitorData.find((item) => item.id === selected.id)
@@ -51,8 +50,8 @@ export const AutoCompleteScreen = ({ onSelect, ...rest }: TProps) => {
   return (
     <AutoComplete
       items={items}
-      value={val}
-      onChange={setVal}
+      value={searchValue}
+      onChange={setSearchValue}
       onSelect={setSelected}
       placeholder='Type to filter list...'
       isLoading={loading}

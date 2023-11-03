@@ -18,10 +18,10 @@ export default function ErrorManager() {
   }
 
   return (
-    <div id='error-page'>
-      <h1>Oops!</h1>
-      <p>Sorry, an unexpected error has occurred.</p>
-      <p>
+    <div id='error-page' className='h-full'>
+      <h1 className='mb-4 text-3xl font-bold'>How to get hold of me</h1>
+      <p className='mb-4'>Sorry, an unexpected error has occurred.</p>
+      <p className='mb-4'>
         <i>{errorMessage}</i>
       </p>
     </div>
