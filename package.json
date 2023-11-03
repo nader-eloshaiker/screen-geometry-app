@@ -34,7 +34,7 @@
     "localforage": "^1.10.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-hook-form": "^7.45.1",
+    "react-hook-form": "^7.47.0",
     "react-router-dom": "^6.16.0",
     "simpler-color": "^1.0.1",
     "styled-components": "^6.1.0",
