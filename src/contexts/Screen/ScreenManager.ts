@@ -34,7 +34,7 @@ export const screenReducer = (state: ScreenState, { type, payload }: ScreenActio
       // eslint-disable-next-line no-case-declarations
       const deletion = state.screens.filter((screen) => screen.id !== payload)
 
-      return { ...state, screens: normaliseScreenRender(deletion) }
+      return { ...state, screens: deletion }
     case ScreenActionTypes.UPDATE:
       // eslint-disable-next-line no-case-declarations
       const modification = state.screens.map((screen) => (payload && screen.id !== payload.id ? screen : payload))
