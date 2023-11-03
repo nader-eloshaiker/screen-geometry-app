@@ -96,7 +96,7 @@ describe('AutoCompleteScreen', () => {
     const { getByPlaceholderText } = await waitFor<RenderResult>(() =>
       render(
         <SearchProvider>
-          <AutoCompleteScreen onSelect={vi.fn()} />
+          <AutoCompleteScreen onSelect={vi.fn()} searchValue='' setSearchValue={vi.fn()} />
         </SearchProvider>,
       ),
     )
@@ -110,7 +110,7 @@ describe('AutoCompleteScreen', () => {
     const { getByText, getByPlaceholderText } = await waitFor<RenderResult>(() =>
       render(
         <SearchProvider>
-          <AutoCompleteScreen onSelect={vi.fn()} />
+          <AutoCompleteScreen onSelect={vi.fn()} searchValue='' setSearchValue={vi.fn()} />
         </SearchProvider>,
       ),
     )
@@ -126,7 +126,7 @@ describe('AutoCompleteScreen', () => {
     const { getByTestId, container } = await waitFor<RenderResult>(() =>
       render(
         <SearchProvider>
-          <AutoCompleteScreen onSelect={vi.fn()} />
+          <AutoCompleteScreen onSelect={vi.fn()} searchValue='' setSearchValue={vi.fn()} />
         </SearchProvider>,
       ),
     )
@@ -149,7 +149,7 @@ describe('AutoCompleteScreen', () => {
     const { getByTestId, container } = await waitFor<RenderResult>(() =>
       render(
         <SearchProvider>
-          <AutoCompleteScreen onSelect={vi.fn()} />
+          <AutoCompleteScreen onSelect={vi.fn()} searchValue='' setSearchValue={vi.fn()} />
         </SearchProvider>,
       ),
     )

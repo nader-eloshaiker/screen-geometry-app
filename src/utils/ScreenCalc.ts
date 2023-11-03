@@ -30,7 +30,8 @@ export const normaliseScreenRender = (list: ScreenItem[]) => {
     return list
   }
 
-  const sorted = list.sort((a, b) => a.tag.diagonalSize - b.tag.diagonalSize)
+  // srot in reverse order to avoid using z-index when hovering over panel
+  const sorted = list.sort((a, b) => b.tag.diagonalSize - a.tag.diagonalSize)
   const biggest = getMaxScreenSize(sorted)
 
   for (const screen of sorted) {
@@ -45,13 +46,13 @@ export const normaliseScreenRender = (list: ScreenItem[]) => {
 
 export const createCSSColor = (): ScreenColor => {
   const hue = Math.random() * 360
-  const saturation = Math.random() * 50 // 100
+  const saturation = Math.random() * 100
   const light = Math.random() * 50 // 100
   // const randomColor = `hsl(${hue}, ${saturation}%, ${lightness}%)`
   const baseColor = hslToHex(hue, saturation, light)
 
   return {
-    lightColor: lightness(baseColor, 60),
-    darkColor: lightness(baseColor, 40),
+    lightColor: lightness(baseColor, 70),
+    darkColor: lightness(baseColor, 30),
   }
 }

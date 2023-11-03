@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useCallback, useState } from 'react'
 import CloseIcon from '../../assets/icons/Close'
 import EditIcon from '../../assets/icons/Edit'
 import StarOutlineIcon from '../../assets/icons/StarOutline'
@@ -54,15 +54,21 @@ export const ScreenTable = ({
   const [selected, setSelected] = useState<ScreenItem>()
   const [themeMode] = useThemeMode()
 
-  const onFavourite = (screen: ScreenItem) => {
-    setSelected(screen)
-    favoriteAction({ id: screen.id })
-  }
+  const onFavourite = useCallback(
+    (screen: ScreenItem) => {
+      setSelected(screen)
+      favoriteAction({ id: screen.id })
+    },
+    [favoriteAction],
+  )
 
-  const handleDelete = (screen: ScreenItem) => {
-    setSelected(screen)
-    deleteAction({ id: screen.id })
-  }
+  const handleDelete = useCallback(
+    (screen: ScreenItem) => {
+      setSelected(screen)
+      deleteAction({ id: screen.id })
+    },
+    [deleteAction],
+  )
 
   return (
     <table className='table'>

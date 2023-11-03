@@ -1,6 +1,6 @@
 export const About = () => {
   return (
-    <div className='h-full p-4'>
+    <div className='h-full'>
       <h1 className='mb-4 text-3xl font-bold'>Welcome to Screen Geometry</h1>
       <p className='mb-4'>
         Hey there! We know choosing a monitor can be a real head-scratcher. With a zillion options out there, it&aposs
