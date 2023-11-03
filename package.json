@@ -39,7 +39,7 @@
     "simpler-color": "^1.0.1",
     "styled-components": "^6.1.0",
     "vite-plugin-checker": "^0.6.2",
-    "web-vitals": "^2.1.4",
+    "web-vitals": "^3.5.0",
     "yup": "^1.2.0"
   },
   "devDependencies": {
