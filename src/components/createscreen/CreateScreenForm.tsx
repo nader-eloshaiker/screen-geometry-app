@@ -162,7 +162,7 @@ export const CreateScreenForm = () => {
     <>
       <div className='form-control mb-4 flex w-full flex-col'>
         <label className='label'>
-          <span className='label-text'>Choose from list of Monitors</span>
+          <span className='text-sm'>Choose from list of Monitors</span>
         </label>
         <AutoCompleteScreen onSelect={onSelect} />
       </div>
@@ -175,7 +175,7 @@ export const CreateScreenForm = () => {
             {/* diagnolSize */}
             <div id='screenSizeControl' className='form-control mb-4 flex flex-col'>
               <label htmlFor={ScreenDataEnum.diagonalSize} className='label'>
-                <span className='label-text'>Screen Size</span>
+                <span className='text-sm'>Screen Size</span>
               </label>
               <InputSuffix suffix='in'>
                 <input
@@ -193,7 +193,7 @@ export const CreateScreenForm = () => {
             {/* aspectRation */}
             <div id='aspectRatioControl' className='form-control w-full'>
               <label className='label'>
-                <span className='label-text'>Aspect Ratio</span>
+                <span className='text-sm'>Aspect Ratio</span>
               </label>
               <input
                 type='text'
@@ -213,7 +213,7 @@ export const CreateScreenForm = () => {
             {/* hRes */}
             <div id='hSizeControl' className='form-control mb-4 flex flex-col'>
               <label htmlFor={ScreenDataEnum.hRes} className='label'>
-                <span className='label-text'>Horizontal Res</span>
+                <span className='text-sm'>Horizontal Res</span>
               </label>
               <InputSuffix suffix='px'>
                 <input
@@ -231,7 +231,7 @@ export const CreateScreenForm = () => {
             {/* vRes */}
             <div id='hSizeControl' className='form-control mb-4 flex flex-col'>
               <label htmlFor={ScreenDataEnum.vRes} className='label'>
-                <span className='label-text'>Vertical Res</span>
+                <span className='text-sm'>Vertical Res</span>
               </label>
               <InputSuffix suffix='px'>
                 <input
@@ -253,7 +253,7 @@ export const CreateScreenForm = () => {
             {/* lightColor */}
             <div id='lightColour' className='form-control mb-4 flex flex-col'>
               <div
-                className=' input input-bordered input-md flex w-full items-center justify-center shadow-md'
+                className=' input input-bordered input-md flex w-full items-center justify-center text-black shadow-md'
                 style={{ backgroundColor: screenColor?.lightColor }}
               >
                 <span className='text-sm'>Light</span>
@@ -263,7 +263,7 @@ export const CreateScreenForm = () => {
             {/* darkColor */}
             <div id='darkColour' className='form-control mb-4 flex flex-col'>
               <div
-                className='input input-bordered flex h-full w-full items-center justify-center text-sm shadow-md'
+                className='input input-bordered flex h-full w-full items-center justify-center text-sm text-white shadow-md'
                 style={{ backgroundColor: screenColor?.darkColor }}
               >
                 <span className='text-sm'>Dark</span>

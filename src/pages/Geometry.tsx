@@ -84,7 +84,7 @@ export default function Geometry() {
               <div className='flex flex-col items-center gap-2 py-6'>
                 <div>Click here to populate default list</div>
                 <button
-                  className='btn btn-accent btn-outline w-40'
+                  className='btn btn-primary btn-outline w-40'
                   onClick={onLoadDefault}
                   disabled={isCreateListLoading}
                 >
