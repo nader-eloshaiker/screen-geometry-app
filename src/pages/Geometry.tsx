@@ -6,7 +6,7 @@ import { ScreenPanel } from '../components/screen/ScreenPanel'
 import { ScreenTable } from '../components/screen/ScreenTable'
 import { SkeletonImage } from '../components/skeleton/SkeletonImage'
 import { defaultScreenInputList } from '../constants/defaultScreenList'
-import { InputReferenceProvider } from '../contexts/reference/InputReferenceProvider'
+import { FormDrawerProvider } from '../contexts/FormDrawer/FormDrawerProvider'
 import { useScreenContext } from '../contexts/Screen/useScreenContext'
 import { ScreenItem } from '../generated/openapi/models'
 import { useCreateScreenList } from '../hooks/api/useCreateScreenList'
@@ -59,7 +59,7 @@ export default function Geometry() {
   const isHighlighted = useCallback((screen: ScreenItem) => screen.id === highlighted?.id, [highlighted])
 
   return (
-    <InputReferenceProvider>
+    <FormDrawerProvider>
       <div className='flex flex-1 flex-col' ref={divSizeRef}>
         <ScreenFormDrawer>
           <div className='flex w-full items-end justify-between pb-4'>
@@ -119,6 +119,6 @@ export default function Geometry() {
           )}
         </ScreenFormDrawer>
       </div>
-    </InputReferenceProvider>
+    </FormDrawerProvider>
   )
 }

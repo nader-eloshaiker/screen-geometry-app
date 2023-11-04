@@ -1,8 +1,9 @@
-import { useCallback, useState } from 'react'
+import { useState } from 'react'
 import CloseIcon from '../../assets/icons/Close'
 import EditIcon from '../../assets/icons/Edit'
 import StarOutlineIcon from '../../assets/icons/StarOutline'
 import StarSolidIcon from '../../assets/icons/StarSolid'
+import { useFormDrawerContext } from '../../contexts/FormDrawer/useFormDrawaerContext'
 import { ScreenItem } from '../../generated/openapi/models'
 import { useDeleteScreen } from '../../hooks/api/useDeleteScreen'
 import { useFavoriteScreen } from '../../hooks/api/useFavoriteScreen'
@@ -51,24 +52,24 @@ export const ScreenTable = ({
 }: Props) => {
   const { isDeleteLoading, deleteAction } = useDeleteScreen()
   const { isFavoriteLoading, favoriteAction } = useFavoriteScreen()
+  const { setOpen } = useFormDrawerContext()
   const [selected, setSelected] = useState<ScreenItem>()
   const [themeMode] = useThemeMode()
 
-  const onFavourite = useCallback(
-    (screen: ScreenItem) => {
-      setSelected(screen)
-      favoriteAction({ id: screen.id })
-    },
-    [favoriteAction],
-  )
+  const onFavourite = (screen: ScreenItem) => {
+    setSelected(screen)
+    favoriteAction({ id: screen.id })
+  }
 
-  const handleDelete = useCallback(
-    (screen: ScreenItem) => {
-      setSelected(screen)
-      deleteAction({ id: screen.id })
-    },
-    [deleteAction],
-  )
+  const handleDelete = (screen: ScreenItem) => {
+    setSelected(screen)
+    deleteAction({ id: screen.id })
+  }
+
+  const handleEdit = (screen: ScreenItem) => {
+    setSelected(screen)
+    setOpen(true)
+  }
 
   return (
     <table className='table'>
@@ -102,6 +103,7 @@ export const ScreenTable = ({
               key={screen.id}
               onMouseEnter={() => setHighLighted(screen)}
               onMouseOut={() => setHighLighted(undefined)}
+              onBlur={() => setHighLighted(undefined)}
               onClick={() => onHighlightClick(screen)}
             >
               <td>
@@ -142,7 +144,7 @@ export const ScreenTable = ({
               <td className='text-center'>{screen.spec && `${Math.round((screen.spec.ppi * 100) / 100)}`}</td>
               <td>
                 <div className='flex flex-row items-center justify-center gap-3'>
-                  <button>
+                  <button onClick={() => handleEdit(screen)}>
                     <EditIcon id='edit-icon' className='h-4 w-4' fill='currentColor' />
                   </button>
                   {isDeleteLoading && screen.id === selected?.id ? (

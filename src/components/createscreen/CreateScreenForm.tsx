@@ -4,7 +4,7 @@ import { useCallback, useState } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import * as yup from 'yup'
 import { ObjectSchema } from 'yup'
-import { useInputReferenceContext } from '../../contexts/reference/useInputReferenceContext'
+import { useFormDrawerContext } from '../../contexts/FormDrawer/useFormDrawaerContext'
 import { ScreenColor, ScreenInput } from '../../generated/openapi/models'
 import { useCreateScreen } from '../../hooks/api/useCreateScreen'
 import { SearchItem } from '../../models/Database'
@@ -83,7 +83,6 @@ export const CreateScreenForm = () => {
     mode: 'onBlur',
   })
   const { isCreateLoading, createAction } = useCreateScreen()
-  const drawerRef = useInputReferenceContext()
   const [screenColor, setScreenColor] = useState<ScreenColor>(() => {
     const color = createCSSColor()
     setValue(ScreenDataEnum.darkColor, color.darkColor, {
@@ -97,6 +96,9 @@ export const CreateScreenForm = () => {
 
     return color
   })
+
+  const { setOpen } = useFormDrawerContext()
+  const closeFormDrawer = useCallback(() => setOpen(false), [setOpen])
 
   const [searchValue, setSearchValue] = useState('')
 
@@ -134,7 +136,7 @@ export const CreateScreenForm = () => {
     [resetField, setValue],
   )
 
-  const onGenerateColor = useCallback(() => {
+  const onGenerateColor = () => {
     const color = createCSSColor()
     setScreenColor(color)
     setValue(ScreenDataEnum.darkColor, screenColor.darkColor, {
@@ -145,21 +147,18 @@ export const CreateScreenForm = () => {
       shouldValidate: true,
       shouldDirty: true,
     })
-  }, [screenColor, setValue])
+  }
 
-  const onSubmit: SubmitHandler<ScreenInput> = useCallback(
-    (form: ScreenInput) => {
-      createAction(form)
-      onGenerateColor()
-    },
-    [createAction, onGenerateColor],
-  )
+  const onSubmit: SubmitHandler<ScreenInput> = (form: ScreenInput) => {
+    createAction(form)
+    onGenerateColor()
+  }
 
-  const onReset = useCallback(() => {
+  const onReset = () => {
     reset()
     onGenerateColor()
     setSearchValue('')
-  }, [onGenerateColor, reset])
+  }
 
   return (
     <>
@@ -295,12 +294,7 @@ export const CreateScreenForm = () => {
 
           <div className='mt-2 flex justify-between'>
             <div className='flex gap-2'>
-              <button
-                id='cancelButton'
-                type='button'
-                className='btn btn-neutral'
-                onClick={() => drawerRef?.current?.click()}
-              >
+              <button id='cancelButton' type='button' className='btn btn-neutral' onClick={closeFormDrawer}>
                 {isCreateLoading ? (
                   <div className='stack'>
                     <span>Cancel</span> <span className='loading loading-spinner' />

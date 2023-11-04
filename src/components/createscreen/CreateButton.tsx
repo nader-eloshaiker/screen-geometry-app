@@ -1,27 +1,21 @@
-import { useEffect, useState } from 'react'
 import { twMerge } from 'tailwind-merge'
 import CloseIcon from '../../assets/icons/Close'
 import EditIcon from '../../assets/icons/Edit'
-import { useInputReferenceContext } from '../../contexts/reference/useInputReferenceContext'
+import { useFormDrawerContext } from '../../contexts/FormDrawer/useFormDrawaerContext'
 
 type TProps = TRestProps & { className?: string }
 
 export const ScreenButton = ({ className, ...rest }: TProps) => {
-  const [isOpen, setIsOpen] = useState<boolean>(false)
-  const drawerRef = useInputReferenceContext()
-  const toggleDrawer = () => {
-    drawerRef?.current?.click()
-    setIsOpen(!isOpen)
-  }
-
-  useEffect(() => {
-    setIsOpen(drawerRef?.current?.checked ?? false)
-  }, [drawerRef, drawerRef?.current?.checked])
+  const { isOpen, setOpen } = useFormDrawerContext()
 
   return (
-    <button className={twMerge(className, 'btn btn-primary btn-outline w-40')} onClick={toggleDrawer} {...rest}>
+    <button
+      className={twMerge(className, 'btn btn-primary btn-outline w-40')}
+      onClick={() => setOpen(!isOpen)}
+      {...rest}
+    >
       <div className='flex w-full items-center justify-between'>
-        <label className='swap-rotate swap'>
+        <label className='swap swap-rotate'>
           {/* this hidden checkbox controls the state */}
           <input type='checkbox' className='hidden' checked={isOpen} readOnly />
 
