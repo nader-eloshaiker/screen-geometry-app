@@ -3,14 +3,14 @@ import { useCallback, useState } from 'react'
 import { FormProvider, SubmitHandler, useForm } from 'react-hook-form'
 import * as yup from 'yup'
 import { ObjectSchema } from 'yup'
-import { FormDrawerActionTypes } from '../../../contexts/FormDrawer/FormDrawerManager'
-import { useFormDrawerContext } from '../../../contexts/FormDrawer/useFormDrawaerContext'
-import { ScreenColor, ScreenInput } from '../../../generated/openapi/models'
-import { useCreateScreen } from '../../../hooks/api/useCreateScreen'
-import { SearchItem } from '../../../models/Database'
-import { ScreenDataEnum } from '../../../models/Screen'
-import { createCSSColor } from '../../../utils/ScreenCalc'
-import { AutoCompleteScreen } from '../../autocomplete/AutoCompleteScreen'
+import { FormDrawerActionTypes } from '../../../../contexts/FormDrawer/FormDrawerManager'
+import { useFormDrawerContext } from '../../../../contexts/FormDrawer/useFormDrawaerContext'
+import { ScreenColor, ScreenInput } from '../../../../generated/openapi/models'
+import { useCreateScreen } from '../../../../hooks/api/useCreateScreen'
+import { SearchItem } from '../../../../models/Database'
+import { ScreenDataEnum } from '../../../../models/Screen'
+import { createCSSColor } from '../../../../utils/ScreenCalc'
+import { AutoCompleteScreen } from '../../../autocomplete/AutoCompleteScreen'
 import { ColorField } from './ColorField'
 import { InputField } from './InputField'
 
@@ -161,6 +161,9 @@ export const ScreenForm = () => {
 
   return (
     <FormProvider {...methods}>
+      <label className='label'>
+        <span className='text-lg'>Add Screen</span>
+      </label>
       <div className='form-control mb-4 flex w-full flex-col'>
         <label className='label'>
           <span className='text-sm'>Choose from list of Monitors</span>

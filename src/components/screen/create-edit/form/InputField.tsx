@@ -1,7 +1,7 @@
 import cn from 'classnames'
 import { useFormContext } from 'react-hook-form'
-import { ScreenDataEnum } from '../../../models/Screen'
-import { FixLocation, InputFix } from '../../input-suffix/InputFix'
+import { ScreenDataEnum } from '../../../../models/Screen'
+import { FixLocation, InputFix } from '../../../input-suffix/InputFix'
 
 type Props = TRestProps & {
   formKey: ScreenDataEnum

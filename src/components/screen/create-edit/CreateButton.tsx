@@ -1,8 +1,8 @@
 import { twMerge } from 'tailwind-merge'
-import CloseIcon from '../../assets/icons/Close'
-import EditIcon from '../../assets/icons/Edit'
-import { FormDrawerActionTypes } from '../../contexts/FormDrawer/FormDrawerManager'
-import { useFormDrawerContext } from '../../contexts/FormDrawer/useFormDrawaerContext'
+import CloseIcon from '../../../assets/icons/Close'
+import EditIcon from '../../../assets/icons/Edit'
+import { FormDrawerActionTypes } from '../../../contexts/FormDrawer/FormDrawerManager'
+import { useFormDrawerContext } from '../../../contexts/FormDrawer/useFormDrawaerContext'
 
 type TProps = TRestProps & { className?: string }
 

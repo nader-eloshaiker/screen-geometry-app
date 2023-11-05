@@ -1,5 +1,5 @@
 import { useFormContext } from 'react-hook-form'
-import { ScreenDataEnum } from '../../../models/Screen'
+import { ScreenDataEnum } from '../../../../models/Screen'
 
 type Props = { formKey: ScreenDataEnum; title: string; color: string }
 
