@@ -11,6 +11,7 @@ import { SearchItem } from '../../../../models/Database'
 import { ScreenDataEnum } from '../../../../models/Screen'
 import { createCSSColor } from '../../../../utils/ScreenCalc'
 import { AutoCompleteScreen } from '../../../autocomplete/AutoCompleteScreen'
+import { DarkMode, LightMode } from '../../../theme/ThemeConstants'
 import { ColorField } from './ColorField'
 import { InputField } from './InputField'
 
@@ -219,8 +220,18 @@ export const ScreenForm = () => {
           <div className='divider text-sm'>Theme Color</div>
 
           <div id='screenColour' className='grid grid-cols-3 gap-3'>
-            <ColorField formKey={ScreenDataEnum.lightColor} title='Light' color={screenColor?.lightColor} />
-            <ColorField formKey={ScreenDataEnum.darkColor} title='Light' color={screenColor?.darkColor} />
+            <ColorField
+              formKey={ScreenDataEnum.lightColor}
+              title='Light'
+              color={screenColor?.lightColor}
+              mode={LightMode}
+            />
+            <ColorField
+              formKey={ScreenDataEnum.darkColor}
+              title='Dark'
+              color={screenColor?.darkColor}
+              mode={DarkMode}
+            />
             <button id='genColorButton' type='button' className='btn btn-neutral' onClick={onGenerateColor}>
               Change
             </button>
@@ -247,14 +258,15 @@ export const ScreenForm = () => {
                 id='cancelButton'
                 type='button'
                 className='btn btn-neutral'
+                disabled={isCreateLoading}
                 onClick={() => dispatch({ type: FormDrawerActionTypes.Toggle, payload: { open: false } })}
               >
                 {isCreateLoading ? (
                   <div className='stack'>
-                    <span>Cancel</span> <span className='loading loading-spinner' />
+                    <span>Close</span> <span className='loading loading-spinner' />
                   </div>
                 ) : (
-                  'Cancel'
+                  'close'
                 )}
               </button>
               <button
