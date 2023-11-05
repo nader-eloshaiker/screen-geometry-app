@@ -1,18 +1,10 @@
-import { useEffect, useMemo, useRef, useState } from 'react'
+import { useMemo, useReducer } from 'react'
 import { FormDrawerContext } from './FormDrawerContext'
+import { formDrawerReducer, initialFormDrawerState } from './FormDrawerManager'
 
 export const FormDrawerProvider = ({ children }: TReactChildren) => {
-  const [isOpen, setOpen] = useState<boolean>(false)
-  const reference = useRef<HTMLInputElement>(null)
-  const contextValue = useMemo(() => ({ isOpen, setOpen, reference }), [isOpen, setOpen, reference])
-
-  useEffect(() => {
-    if (reference.current?.checked && !isOpen) {
-      reference.current?.click()
-    } else if (!reference.current?.checked && isOpen) {
-      reference.current?.click()
-    }
-  }, [isOpen])
+  const [state, dispatch] = useReducer(formDrawerReducer, initialFormDrawerState)
+  const contextValue = useMemo(() => ({ state, dispatch }), [state, dispatch])
 
   return <FormDrawerContext.Provider value={contextValue}>{children}</FormDrawerContext.Provider>
 }

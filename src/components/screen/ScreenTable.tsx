@@ -3,6 +3,7 @@ import CloseIcon from '../../assets/icons/Close'
 import EditIcon from '../../assets/icons/Edit'
 import StarOutlineIcon from '../../assets/icons/StarOutline'
 import StarSolidIcon from '../../assets/icons/StarSolid'
+import { FormDrawerActionTypes } from '../../contexts/FormDrawer/FormDrawerManager'
 import { useFormDrawerContext } from '../../contexts/FormDrawer/useFormDrawaerContext'
 import { ScreenItem } from '../../generated/openapi/models'
 import { useDeleteScreen } from '../../hooks/api/useDeleteScreen'
@@ -52,7 +53,7 @@ export const ScreenTable = ({
 }: Props) => {
   const { isDeleteLoading, deleteAction } = useDeleteScreen()
   const { isFavoriteLoading, favoriteAction } = useFavoriteScreen()
-  const { setOpen } = useFormDrawerContext()
+  const { dispatch } = useFormDrawerContext()
   const [selected, setSelected] = useState<ScreenItem>()
   const [themeMode] = useThemeMode()
 
@@ -68,7 +69,7 @@ export const ScreenTable = ({
 
   const handleEdit = (screen: ScreenItem) => {
     setSelected(screen)
-    setOpen(true)
+    dispatch({ type: FormDrawerActionTypes.Edit, payload: { id: screen.id } })
   }
 
   return (

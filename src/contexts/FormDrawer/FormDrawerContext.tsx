@@ -1,7 +1,7 @@
-import { createContext, Dispatch, RefObject, SetStateAction } from 'react'
+import { createContext, Dispatch } from 'react'
+import { FormDrawerAction, FormDrawerState, initialFormDrawerState } from './FormDrawerManager'
 
-export const FormDrawerContext = createContext<{
-  isOpen: boolean
-  setOpen: Dispatch<SetStateAction<boolean>>
-  reference: RefObject<HTMLInputElement> | null
-}>({ isOpen: false, setOpen: () => {}, reference: null })
+export const FormDrawerContext = createContext<{ state: FormDrawerState; dispatch: Dispatch<FormDrawerAction> }>({
+  state: initialFormDrawerState,
+  dispatch: () => {},
+})

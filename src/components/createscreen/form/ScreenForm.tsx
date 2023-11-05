@@ -3,6 +3,7 @@ import { useCallback, useState } from 'react'
 import { FormProvider, SubmitHandler, useForm } from 'react-hook-form'
 import * as yup from 'yup'
 import { ObjectSchema } from 'yup'
+import { FormDrawerActionTypes } from '../../../contexts/FormDrawer/FormDrawerManager'
 import { useFormDrawerContext } from '../../../contexts/FormDrawer/useFormDrawaerContext'
 import { ScreenColor, ScreenInput } from '../../../generated/openapi/models'
 import { useCreateScreen } from '../../../hooks/api/useCreateScreen'
@@ -97,7 +98,7 @@ export const ScreenForm = () => {
     return color
   })
 
-  const { setOpen } = useFormDrawerContext()
+  const { dispatch } = useFormDrawerContext()
   const [searchValue, setSearchValue] = useState('')
 
   const onSelect = useCallback(
@@ -239,7 +240,12 @@ export const ScreenForm = () => {
 
           <div className='mt-2 flex justify-between'>
             <div className='flex gap-2'>
-              <button id='cancelButton' type='button' className='btn btn-neutral' onClick={() => setOpen(false)}>
+              <button
+                id='cancelButton'
+                type='button'
+                className='btn btn-neutral'
+                onClick={() => dispatch({ type: FormDrawerActionTypes.Toggle, payload: { open: false } })}
+              >
                 {isCreateLoading ? (
                   <div className='stack'>
                     <span>Cancel</span> <span className='loading loading-spinner' />
