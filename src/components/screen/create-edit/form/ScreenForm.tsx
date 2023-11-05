@@ -1,4 +1,5 @@
 import { yupResolver } from '@hookform/resolvers/yup'
+import cn from 'classnames'
 import { useCallback, useState } from 'react'
 import { FormProvider, SubmitHandler, useForm } from 'react-hook-form'
 import * as yup from 'yup'
@@ -261,13 +262,7 @@ export const ScreenForm = () => {
                 disabled={isCreateLoading}
                 onClick={() => dispatch({ type: FormDrawerActionTypes.Toggle, payload: { open: false } })}
               >
-                {isCreateLoading ? (
-                  <div className='stack'>
-                    <span>Close</span> <span className='loading loading-spinner' />
-                  </div>
-                ) : (
-                  'close'
-                )}
+                close
               </button>
               <button
                 id='resetButton'
@@ -276,24 +271,19 @@ export const ScreenForm = () => {
                 disabled={isCreateLoading}
                 onClick={onReset}
               >
-                {isCreateLoading ? (
-                  <div className='stack'>
-                    <span>Reset</span> <span className='loading loading-spinner' />
-                  </div>
-                ) : (
-                  'Reset'
-                )}
+                Reset
               </button>
             </div>
             <button
               id='submitButton'
               type='submit'
-              className='btn btn-neutral'
-              disabled={!isDirty || !isValid || isCreateLoading}
+              className={cn('btn btn-neutral', { 'pointer-events-none': isCreateLoading })}
+              disabled={!isDirty || !isValid}
             >
               {isCreateLoading ? (
-                <div className='stack'>
-                  <span>Create</span> <span className='loading loading-spinner' />
+                <div className='stack items-center justify-center'>
+                  <div className='loading loading-spinner' />
+                  <div>Create</div>
                 </div>
               ) : (
                 'Create'
