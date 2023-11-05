@@ -1,6 +1,6 @@
 import { yupResolver } from '@hookform/resolvers/yup'
 import cn from 'classnames'
-import { useCallback, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { FormProvider, SubmitHandler, useForm } from 'react-hook-form'
 import * as yup from 'yup'
 import { ObjectSchema } from 'yup'
@@ -100,8 +100,12 @@ export const ScreenForm = () => {
     return color
   })
 
-  const { dispatch } = useFormDrawerContext()
+  const { state, dispatch } = useFormDrawerContext()
   const [searchValue, setSearchValue] = useState('')
+
+  useEffect(() => {
+    console.log('state.mode', state.mode)
+  }, [state.mode])
 
   const onSelect = useCallback(
     (item: SearchItem) => {
@@ -220,20 +224,22 @@ export const ScreenForm = () => {
 
           <div className='divider text-sm'>Theme Color</div>
 
-          <div id='screenColour' className='grid grid-cols-3 gap-3'>
-            <ColorField
-              formKey={ScreenDataEnum.lightColor}
-              title='Light'
-              color={screenColor?.lightColor}
-              mode={LightMode}
-            />
-            <ColorField
-              formKey={ScreenDataEnum.darkColor}
-              title='Dark'
-              color={screenColor?.darkColor}
-              mode={DarkMode}
-            />
-            <button id='genColorButton' type='button' className='btn btn-neutral' onClick={onGenerateColor}>
+          <div className='flex justify-between'>
+            <div className='flex gap-2'>
+              <ColorField
+                formKey={ScreenDataEnum.lightColor}
+                title='Light'
+                color={screenColor?.lightColor}
+                mode={LightMode}
+              />
+              <ColorField
+                formKey={ScreenDataEnum.darkColor}
+                title='Dark'
+                color={screenColor?.darkColor}
+                mode={DarkMode}
+              />
+            </div>
+            <button id='genColorButton' type='button' className='btn btn-neutral w-24' onClick={onGenerateColor}>
               Change
             </button>
           </div>
@@ -258,7 +264,7 @@ export const ScreenForm = () => {
               <button
                 id='cancelButton'
                 type='button'
-                className='btn btn-neutral'
+                className='btn btn-neutral w-24'
                 disabled={isCreateLoading}
                 onClick={() => dispatch({ type: FormDrawerActionTypes.Toggle, payload: { open: false } })}
               >
@@ -267,7 +273,7 @@ export const ScreenForm = () => {
               <button
                 id='resetButton'
                 type='reset'
-                className='btn btn-neutral'
+                className='btn btn-neutral w-24'
                 disabled={isCreateLoading}
                 onClick={onReset}
               >
@@ -277,7 +283,7 @@ export const ScreenForm = () => {
             <button
               id='submitButton'
               type='submit'
-              className={cn('btn btn-neutral', { 'pointer-events-none': isCreateLoading })}
+              className={cn('btn btn-neutral w-24', { 'pointer-events-none': isCreateLoading })}
               disabled={!isDirty || !isValid}
             >
               {isCreateLoading ? (

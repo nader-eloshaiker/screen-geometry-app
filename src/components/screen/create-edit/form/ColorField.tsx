@@ -10,7 +10,7 @@ export const ColorField = ({ formKey, title, color, mode }: Props) => {
   return (
     <div className='form-control mb-4 flex flex-col'>
       <div
-        className={cn('input input-bordered input-md flex w-full items-center justify-center shadow-md', {
+        className={cn('input input-bordered input-md flex items-center justify-center shadow-md w-24', {
           'text-black': mode === LightMode,
           'text-white': mode === DarkMode,
         })}
