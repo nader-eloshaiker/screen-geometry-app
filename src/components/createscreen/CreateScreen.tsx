@@ -1,4 +1,4 @@
-import { CreateScreenForm } from './CreateScreenForm'
+import { ScreenForm } from './form/ScreenForm'
 
 export const CreateScreen = () => {
   return (
@@ -7,7 +7,7 @@ export const CreateScreen = () => {
         <label className='label'>
           <span className='text-lg'>Add Screen</span>
         </label>
-        <CreateScreenForm />
+        <ScreenForm />
       </div>
     </div>
   )

@@ -4,7 +4,7 @@ import cn from 'classnames'
 import { ChangeEvent, KeyboardEvent, memo, useRef, useState } from 'react'
 import MagnifyGlassIcon from '../../assets/icons/MagnifyGlass'
 import { useElementSize } from '../../hooks/useElementSize'
-import { InputSuffix, SuffixLocation } from '../input-suffix/InputSuffix'
+import { FixLocation, InputFix } from '../input-suffix/InputFix'
 
 export type TAutoCompleteItem = { id: string; label: string }
 type TProps = TRestProps & {
@@ -63,15 +63,15 @@ export const AutoComplete = ({
       ref={divRef}
       {...rest}
     >
-      <InputSuffix
-        suffix={
+      <InputFix
+        fix={
           isLoading ? (
             <span data-testid='autoCompleteLoading' className='loading loading-spinner loading-md' />
           ) : (
             <MagnifyGlassIcon data-testid='autoCompleteIcon' className='h-6 w-6' />
           )
         }
-        location={SuffixLocation.left}
+        location={FixLocation.prefix}
       >
         <input
           name='autoCompleteInput'
@@ -84,7 +84,7 @@ export const AutoComplete = ({
           tabIndex={0}
           disabled={isLoading}
         />
-      </InputSuffix>
+      </InputFix>
       {items.length > 0 && (
         <div
           data-testid='autoCompleteResults'
