@@ -1,3 +1,4 @@
+import { UseMutationOptions } from '@tanstack/react-query'
 import { useEffect } from 'react'
 import {
   GeneralNotificationItem,
@@ -7,13 +8,27 @@ import {
 import { useNotificationContext } from '../../contexts/Notification/useNotifcationContext'
 import { ScreenActionTypes } from '../../contexts/Screen/ScreenManager'
 import { useScreenContext } from '../../contexts/Screen/useScreenContext'
-import { ScreenItem } from '../../generated/openapi/models'
+import { ErrorResponse, ScreenItem, ScreenItemResponse } from '../../generated/openapi/models'
 import { useUpdateScreenAction } from '../../generated/openapi/services/screen-service'
 
-export const useUpdateScreen = () => {
+export type UpdateScreenOptions = UseMutationOptions<
+  ScreenItemResponse,
+  ErrorResponse,
+  {
+    id: string
+    data: ScreenItem
+  }
+>
+
+export const useUpdateScreen = (queryOptions?: UpdateScreenOptions) => {
   const { dispatch: dispatchScreen } = useScreenContext()
   const { dispatch: dispatchNotification } = useNotificationContext()
-  const { isLoading: isUpdateLoading, data: updateResponse, error: updateError, mutate } = useUpdateScreenAction()
+  const {
+    isLoading: isUpdateLoading,
+    data: updateResponse,
+    error: updateError,
+    mutate,
+  } = useUpdateScreenAction({ mutation: queryOptions })
 
   useEffect(() => {
     if (updateResponse) {

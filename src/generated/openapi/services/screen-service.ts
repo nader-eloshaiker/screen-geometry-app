@@ -14,10 +14,10 @@ import type {
 } from '@tanstack/react-query'
 import { useMutation, useQuery } from '@tanstack/react-query'
 import { useApiAxios } from '../../../api/fetch/useApiAxios'
-import type { ErrorResponse, ScreenIdResponse, ScreenItem, ScreenItemRespose, ScreenListResponse } from '../models'
+import type { ErrorResponse, ScreenIdResponse, ScreenItem, ScreenItemResponse } from '../models'
 
 export const useFindScreenActionHook = () => {
-  const findScreenAction = useApiAxios<ScreenListResponse>()
+  const findScreenAction = useApiAxios<ScreenItemResponse>()
 
   return (id: string, signal?: AbortSignal) => {
     return findScreenAction({ url: `/screens/${id}`, method: 'get', signal })
@@ -67,7 +67,7 @@ export const useFindScreenAction = <
 }
 
 export const useUpdateScreenActionHook = () => {
-  const updateScreenAction = useApiAxios<ScreenItemRespose>()
+  const updateScreenAction = useApiAxios<ScreenItemResponse>()
 
   return (id: string, screenItem: ScreenItem) => {
     return updateScreenAction({
