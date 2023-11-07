@@ -20,11 +20,11 @@ export const useFindScreenActionHook = () => {
   const findScreenAction = useApiAxios<ScreenItemResponse>()
 
   return (id: string, signal?: AbortSignal) => {
-    return findScreenAction({ url: `/screens/${id}`, method: 'get', signal })
+    return findScreenAction({ url: `/screen/${id}`, method: 'get', signal })
   }
 }
 
-export const getFindScreenActionQueryKey = (id: string) => [`/screens/${id}`] as const
+export const getFindScreenActionQueryKey = (id: string) => [`/screen/${id}`] as const
 
 export const useFindScreenActionQueryOptions = <
   TData = Awaited<ReturnType<ReturnType<typeof useFindScreenActionHook>>>,
@@ -71,7 +71,7 @@ export const useUpdateScreenActionHook = () => {
 
   return (id: string, screenItem: ScreenItem) => {
     return updateScreenAction({
-      url: `/screens/${id}`,
+      url: `/screen/${id}`,
       method: 'put',
       headers: { 'Content-Type': 'application/json' },
       data: screenItem,
@@ -130,7 +130,7 @@ export const useDeleteScreenActionHook = () => {
   const deleteScreenAction = useApiAxios<ScreenIdResponse>()
 
   return (id: string) => {
-    return deleteScreenAction({ url: `/screens/${id}`, method: 'delete' })
+    return deleteScreenAction({ url: `/screen/${id}`, method: 'delete' })
   }
 }
 

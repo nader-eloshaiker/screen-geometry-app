@@ -13,7 +13,7 @@ export const useFavoriteScreenActionHook = () => {
   const favoriteScreenAction = useApiAxios<ScreenItemResponse>()
 
   return (id: string) => {
-    return favoriteScreenAction({ url: `/screens/${id}/favorite`, method: 'patch' })
+    return favoriteScreenAction({ url: `/screen/${id}/favorite`, method: 'patch' })
   }
 }
 
