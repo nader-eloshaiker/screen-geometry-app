@@ -2,80 +2,24 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import cn from 'classnames'
 import { useCallback, useEffect, useState } from 'react'
 import { FormProvider, SubmitHandler, useForm } from 'react-hook-form'
-import * as yup from 'yup'
-import { ObjectSchema } from 'yup'
-import { FormDrawerActionTypes } from '../../../../contexts/FormDrawer/FormDrawerManager'
+import { FormDrawerActionTypes, FormDrawerMode } from '../../../../contexts/FormDrawer/FormDrawerManager'
 import { useFormDrawerContext } from '../../../../contexts/FormDrawer/useFormDrawaerContext'
 import { ScreenColor, ScreenInput } from '../../../../generated/openapi/models'
 import { useCreateScreen } from '../../../../hooks/api/useCreateScreen'
+import { FindScreenOptions, useFindScreen } from '../../../../hooks/api/useFindScreens'
 import { SearchItem } from '../../../../models/Database'
 import { ScreenDataEnum } from '../../../../models/Screen'
 import { createCSSColor } from '../../../../utils/ScreenCalc'
+import { transformScreenItem } from '../../../../utils/ScreenTransformation'
 import { AutoCompleteScreen } from '../../../autocomplete/AutoCompleteScreen'
 import { DarkMode, LightMode } from '../../../theme/ThemeConstants'
 import { ColorField } from './ColorField'
 import { InputField } from './InputField'
-
-const screenDataSchema: ObjectSchema<ScreenInput> = yup.object().shape(
-  {
-    [ScreenDataEnum.diagonalSize]: yup
-      .number()
-      .required('Diagonal size is required')
-      .transform((value, originalValue) => {
-        if (typeof originalValue === 'string' && originalValue === '') {
-          return undefined
-        }
-        return value
-      })
-      .moreThan(0, 'Diagonal size must be greater than 0')
-      .required('Diagonal size is required'),
-    [ScreenDataEnum.aspectRatio]: yup
-      .string()
-      .matches(/^\d+:\d+$/, { excludeEmptyString: true, message: 'Aspect ratio must be in the form of 16:9' })
-      .required('Aspect ratio is required'),
-    [ScreenDataEnum.hRes]: yup
-      .number()
-      .optional()
-      .transform((value, originalValue) => {
-        if (typeof originalValue === 'string' && originalValue === '') {
-          return undefined
-        }
-        return value
-      })
-      .when(ScreenDataEnum.vRes, {
-        is: (v: number) => v !== undefined && v > 0,
-        then: (schema) =>
-          schema.required('Horizontal required when vertical is provided').moreThan(0, 'Must be greater than 0'),
-      }),
-    [ScreenDataEnum.vRes]: yup
-      .number()
-      .optional()
-      .transform((value, originalValue) => {
-        if (typeof originalValue === 'string' && originalValue === '') {
-          return undefined
-        }
-        return value
-      })
-      .when(ScreenDataEnum.hRes, {
-        is: (v: number) => v !== undefined && v > 0,
-        then: (schema) =>
-          schema.required('Vertical required when vertical is provided').moreThan(0, 'Must be greater than 0'),
-      }),
-    [ScreenDataEnum.lightColor]: yup
-      .string()
-      //.matches(/^#([a-f0-9]{6})\b$/, { excludeEmptyString: true, message: 'Light colour theme' })
-      .required('Light color theme is required'),
-    [ScreenDataEnum.darkColor]: yup
-      .string()
-      //.matches(/^#([a-f0-9]{6})\b$/, { excludeEmptyString: true, message: 'Dark colour theme' })
-      .required('Dark color theme is required'),
-  },
-  [[ScreenDataEnum.hRes, ScreenDataEnum.vRes]],
-)
+import { ScreenFormSchema } from './ScreenFormSchema'
 
 export const ScreenForm = () => {
   const methods = useForm<ScreenInput>({
-    resolver: yupResolver(screenDataSchema),
+    resolver: yupResolver(ScreenFormSchema),
     mode: 'onBlur',
   })
   const {
@@ -100,12 +44,24 @@ export const ScreenForm = () => {
     return color
   })
 
-  const { state, dispatch } = useFormDrawerContext()
+  const { formDrawerState, dispatchFormDrawer } = useFormDrawerContext()
+  const [editScreen, setEditScreen] = useState<ScreenInput | undefined>(undefined)
   const [searchValue, setSearchValue] = useState('')
 
+  const queryOptions: FindScreenOptions = {
+    enabled: formDrawerState.mode === FormDrawerMode.Edit && !!formDrawerState.id,
+    keepPreviousData: true,
+  }
+  const { screenItemResponse } = useFindScreen(formDrawerState.id ?? '', queryOptions)
   useEffect(() => {
-    console.log('state.mode', state.mode)
-  }, [state.mode])
+    if (screenItemResponse) {
+      const inputScreen = transformScreenItem(screenItemResponse.item)
+      setEditScreen(inputScreen)
+    }
+  }, [screenItemResponse])
+  useEffect(() => {
+    reset(editScreen)
+  }, [editScreen, reset])
 
   const onSelect = useCallback(
     (item: SearchItem) => {
@@ -266,7 +222,7 @@ export const ScreenForm = () => {
                 type='button'
                 className='btn btn-neutral w-24'
                 disabled={isCreateLoading}
-                onClick={() => dispatch({ type: FormDrawerActionTypes.Toggle, payload: { open: false } })}
+                onClick={() => dispatchFormDrawer({ type: FormDrawerActionTypes.Toggle, payload: { open: false } })}
               >
                 close
               </button>
@@ -289,7 +245,7 @@ export const ScreenForm = () => {
               {isCreateLoading ? (
                 <div className='stack items-center justify-center'>
                   <div className='loading loading-spinner' />
-                  <div>Create</div>
+                  <div>{!editScreen ? 'Create' : 'Update'}</div>
                 </div>
               ) : (
                 'Create'

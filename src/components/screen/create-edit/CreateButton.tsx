@@ -7,22 +7,22 @@ import { useFormDrawerContext } from '../../../contexts/FormDrawer/useFormDrawae
 type TProps = TRestProps & { className?: string }
 
 export const ScreenButton = ({ className, ...rest }: TProps) => {
-  const { state, dispatch } = useFormDrawerContext()
+  const { formDrawerState, dispatchFormDrawer } = useFormDrawerContext()
 
   return (
     <button
       className={twMerge(className, 'btn btn-primary btn-outline w-40')}
-      onClick={() => dispatch({ type: FormDrawerActionTypes.Toggle })}
+      onClick={() => dispatchFormDrawer({ type: FormDrawerActionTypes.Toggle })}
       {...rest}
     >
       <div className='flex w-full items-center justify-between'>
-        <label className='swap swap-rotate'>
+        <label className='swap-rotate swap'>
           {/* this hidden checkbox controls the state */}
-          <input type='checkbox' className='hidden' checked={state.open} readOnly />
+          <input type='checkbox' className='hidden' checked={formDrawerState.open} readOnly />
           <EditIcon id='theme-dark-icon' className='swap-off h-5 w-5 p-0' fill='currentColor' />
           <CloseIcon id='theme-light-icon' className='swap-on h-5 w-5 p-0' fill='currentColor' />
         </label>
-        {state.open ? 'Close Editor' : 'Open Editor'}
+        {formDrawerState.open ? 'Close Editor' : 'Open Editor'}
       </div>
     </button>
   )

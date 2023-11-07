@@ -53,7 +53,7 @@ export const ScreenTable = ({
 }: Props) => {
   const { isDeleteLoading, deleteAction } = useDeleteScreen()
   const { isFavoriteLoading, favoriteAction } = useFavoriteScreen()
-  const { dispatch } = useFormDrawerContext()
+  const { dispatchFormDrawer } = useFormDrawerContext()
   const [selected, setSelected] = useState<ScreenItem>()
   const [themeMode] = useThemeMode()
 
@@ -69,7 +69,8 @@ export const ScreenTable = ({
 
   const handleEdit = (screen: ScreenItem) => {
     setSelected(screen)
-    dispatch({ type: FormDrawerActionTypes.Edit, payload: { id: screen.id } })
+
+    dispatchFormDrawer({ type: FormDrawerActionTypes.Edit, payload: { id: screen.id } })
   }
 
   return (

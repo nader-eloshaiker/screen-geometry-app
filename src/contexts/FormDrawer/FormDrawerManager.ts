@@ -27,7 +27,7 @@ export const formDrawerReducer = (state: FormDrawerState, { type, payload }: For
       return {
         ...state,
         id: undefined,
-        mode: payload?.open ?? !state.open ? FormDrawerMode.Close : FormDrawerMode.Create,
+        mode: payload?.open ?? !state.open ? FormDrawerMode.Create : FormDrawerMode.Close,
         open: payload?.open ?? !state.open,
       }
     case FormDrawerActionTypes.Edit:

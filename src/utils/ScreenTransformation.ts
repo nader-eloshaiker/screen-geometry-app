@@ -34,6 +34,19 @@ const createSpec = (width?: number, height?: number, size?: number): ScreenSpec 
   }
 }
 
+export const transformScreenItem = (data: ScreenItem): ScreenInput => {
+  const item: ScreenInput = {
+    diagonalSize: data.tag.diagonalSize,
+    aspectRatio: data.tag.aspectRatio,
+    hRes: data.spec?.hRes,
+    vRes: data.spec?.vRes,
+    lightColor: data.color.lightColor,
+    darkColor: data.color.darkColor,
+  }
+
+  return item
+}
+
 export const transformScreenInput = (data: ScreenInput): ScreenItem => {
   const [hAspectRatio, vAspectRatio] = getAspectRatio(data.aspectRatio)
   const item: ScreenItem = {

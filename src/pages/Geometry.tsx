@@ -62,7 +62,7 @@ export default function Geometry() {
     <FormDrawerProvider>
       <div className='flex flex-1 flex-col' ref={divSizeRef}>
         <ScreenFormDrawer>
-          <div className='flex w-full items-end justify-between pb-4'>
+          <div className='mx-2 flex items-end justify-between pb-4'>
             <label className='label'>
               <span className='text-xl'>Table</span>
             </label>
@@ -95,7 +95,7 @@ export default function Geometry() {
           )}
 
           {(screens.length > 0 || isScreenListLoading) && (
-            <div>
+            <div className='mx-2'>
               <label className='label py-6'>
                 <span className='text-xl'>Physical Screens</span>
               </label>
