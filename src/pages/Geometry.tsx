@@ -64,7 +64,7 @@ export default function Geometry() {
         <ScreenFormDrawer>
           <div className='mx-2 flex items-end justify-between pb-4'>
             <label className='label'>
-              <span className='text-xl'>Table</span>
+              <span className='text-xl'>Screen Specs</span>
             </label>
             <ScreenButton />
           </div>
@@ -97,7 +97,7 @@ export default function Geometry() {
           {(screens.length > 0 || isScreenListLoading) && (
             <div className='mx-2'>
               <label className='label py-6'>
-                <span className='text-xl'>Physical Screens</span>
+                <span className='text-xl'>Physical Screen Comparison</span>
               </label>
               <Stacked height={maxPanelSize.height}>
                 {!isScreenListLoading ? (
