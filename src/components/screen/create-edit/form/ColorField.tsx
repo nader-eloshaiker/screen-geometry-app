@@ -3,10 +3,10 @@ import { useFormContext } from 'react-hook-form'
 import { ScreenDataEnum } from '../../../../models/Screen'
 import { DarkMode, LightMode, TThemeMode } from '../../../theme/ThemeConstants'
 
-type Props = { formKey: ScreenDataEnum; title: string; color: string; mode: TThemeMode }
+type Props = { formKey: ScreenDataEnum; title: string; mode: TThemeMode }
 
-export const ColorField = ({ formKey, title, color, mode }: Props) => {
-  const { register } = useFormContext()
+export const ColorField = ({ formKey, title, mode }: Props) => {
+  const { register, getValues } = useFormContext()
   return (
     <div className='form-control mb-4 flex flex-col'>
       <div
@@ -14,7 +14,7 @@ export const ColorField = ({ formKey, title, color, mode }: Props) => {
           'text-black': mode === LightMode,
           'text-white': mode === DarkMode,
         })}
-        style={{ backgroundColor: color }}
+        style={{ backgroundColor: getValues(formKey) }}
       >
         <span className='text-sm'>{title}</span>
       </div>

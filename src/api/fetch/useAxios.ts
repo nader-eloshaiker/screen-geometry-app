@@ -64,6 +64,12 @@ export const useAxios = <T>({ params: axiosParams = {}, options }: TProps) => {
     [cancel, fetchData],
   )
 
+  const reset = useCallback(() => {
+    setResponse(undefined)
+    setError(undefined)
+    setLoading(false)
+  }, [setResponse])
+
   useEffect(() => {
     if (hookOptions.manualExecution || hookOptions.skip) return
 
@@ -75,5 +81,5 @@ export const useAxios = <T>({ params: axiosParams = {}, options }: TProps) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  return { loading, response, error, execute }
+  return { loading, response, error, execute, reset }
 }

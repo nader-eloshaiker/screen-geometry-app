@@ -14,7 +14,7 @@ import type {
 } from '@tanstack/react-query'
 import { useMutation, useQuery } from '@tanstack/react-query'
 import { useApiAxios } from '../../../api/fetch/useApiAxios'
-import type { ErrorResponse, ScreenIdResponse, ScreenItem, ScreenItemResponse } from '../models'
+import type { ErrorResponse, ScreenIdResponse, ScreenInput, ScreenItemResponse } from '../models'
 
 export const useFindScreenActionHook = () => {
   const findScreenAction = useApiAxios<ScreenItemResponse>()
@@ -69,12 +69,12 @@ export const useFindScreenAction = <
 export const useUpdateScreenActionHook = () => {
   const updateScreenAction = useApiAxios<ScreenItemResponse>()
 
-  return (id: string, screenItem: ScreenItem) => {
+  return (id: string, screenInput: ScreenInput) => {
     return updateScreenAction({
       url: `/screen/${id}`,
       method: 'put',
       headers: { 'Content-Type': 'application/json' },
-      data: screenItem,
+      data: screenInput,
     })
   }
 }
@@ -83,13 +83,13 @@ export const useUpdateScreenActionMutationOptions = <TError = ErrorResponse, TCo
   mutation?: UseMutationOptions<
     Awaited<ReturnType<ReturnType<typeof useUpdateScreenActionHook>>>,
     TError,
-    { id: string; data: ScreenItem },
+    { id: string; data: ScreenInput },
     TContext
   >
 }): UseMutationOptions<
   Awaited<ReturnType<ReturnType<typeof useUpdateScreenActionHook>>>,
   TError,
-  { id: string; data: ScreenItem },
+  { id: string; data: ScreenInput },
   TContext
 > => {
   const { mutation: mutationOptions } = options ?? {}
@@ -98,7 +98,7 @@ export const useUpdateScreenActionMutationOptions = <TError = ErrorResponse, TCo
 
   const mutationFn: MutationFunction<
     Awaited<ReturnType<ReturnType<typeof useUpdateScreenActionHook>>>,
-    { id: string; data: ScreenItem }
+    { id: string; data: ScreenInput }
   > = (props) => {
     const { id, data } = props ?? {}
 
@@ -111,14 +111,14 @@ export const useUpdateScreenActionMutationOptions = <TError = ErrorResponse, TCo
 export type UpdateScreenActionMutationResult = NonNullable<
   Awaited<ReturnType<ReturnType<typeof useUpdateScreenActionHook>>>
 >
-export type UpdateScreenActionMutationBody = ScreenItem
+export type UpdateScreenActionMutationBody = ScreenInput
 export type UpdateScreenActionMutationError = ErrorResponse
 
 export const useUpdateScreenAction = <TError = ErrorResponse, TContext = unknown>(options?: {
   mutation?: UseMutationOptions<
     Awaited<ReturnType<ReturnType<typeof useUpdateScreenActionHook>>>,
     TError,
-    { id: string; data: ScreenItem },
+    { id: string; data: ScreenInput },
     TContext
   >
 }) => {

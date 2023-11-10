@@ -8,7 +8,7 @@ import {
 import { useNotificationContext } from '../../contexts/Notification/useNotifcationContext'
 import { ScreenActionTypes } from '../../contexts/Screen/ScreenManager'
 import { useScreenContext } from '../../contexts/Screen/useScreenContext'
-import { ErrorResponse, ScreenItem, ScreenItemResponse } from '../../generated/openapi/models'
+import { ErrorResponse, ScreenInput, ScreenItemResponse } from '../../generated/openapi/models'
 import { useUpdateScreenAction } from '../../generated/openapi/services/screen-service'
 
 export type UpdateScreenOptions = UseMutationOptions<
@@ -16,7 +16,7 @@ export type UpdateScreenOptions = UseMutationOptions<
   ErrorResponse,
   {
     id: string
-    data: ScreenItem
+    data: ScreenInput
   }
 >
 
@@ -27,7 +27,7 @@ export const useUpdateScreen = (queryOptions?: UpdateScreenOptions) => {
     isLoading: isUpdateLoading,
     data: updateResponse,
     error: updateError,
-    mutate,
+    mutate: updateAction,
   } = useUpdateScreenAction({ mutation: queryOptions })
 
   useEffect(() => {
@@ -51,8 +51,6 @@ export const useUpdateScreen = (queryOptions?: UpdateScreenOptions) => {
       })
     }
   }, [dispatchNotification, updateError])
-
-  const updateAction = (screen: ScreenItem) => mutate({ id: screen.id, data: screen })
 
   return { isUpdateLoading, updateResponse, updateError, updateAction }
 }

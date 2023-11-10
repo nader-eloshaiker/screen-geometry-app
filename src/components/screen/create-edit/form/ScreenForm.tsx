@@ -2,24 +2,32 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import cn from 'classnames'
 import { useCallback, useEffect, useState } from 'react'
 import { FormProvider, SubmitHandler, useForm } from 'react-hook-form'
-import { FormDrawerActionTypes, FormDrawerMode } from '../../../../contexts/FormDrawer/FormDrawerManager'
+import { FormDrawerActionTypes } from '../../../../contexts/FormDrawer/FormDrawerManager'
 import { useFormDrawerContext } from '../../../../contexts/FormDrawer/useFormDrawaerContext'
-import { ScreenColor, ScreenInput } from '../../../../generated/openapi/models'
+import { ScreenInput } from '../../../../generated/openapi/models'
 import { useCreateScreen } from '../../../../hooks/api/useCreateScreen'
-import { FindScreenOptions, useFindScreen } from '../../../../hooks/api/useFindScreens'
+import { useUpdateScreen } from '../../../../hooks/api/useUpdateScreen'
 import { SearchItem } from '../../../../models/Database'
 import { ScreenDataEnum } from '../../../../models/Screen'
 import { createCSSColor } from '../../../../utils/ScreenCalc'
-import { transformScreenItem } from '../../../../utils/ScreenTransformation'
 import { AutoCompleteScreen } from '../../../autocomplete/AutoCompleteScreen'
 import { DarkMode, LightMode } from '../../../theme/ThemeConstants'
 import { ColorField } from './ColorField'
 import { InputField } from './InputField'
 import { ScreenFormSchema } from './ScreenFormSchema'
 
-export const ScreenForm = () => {
+type Props = {
+  defaultValues: ScreenInput
+  editMode: boolean
+}
+
+export const ScreenForm = ({ defaultValues, editMode }: Props) => {
+  const { formDrawerState, dispatchFormDrawer } = useFormDrawerContext()
+  const [searchValue, setSearchValue] = useState('')
+
   const methods = useForm<ScreenInput>({
     resolver: yupResolver(ScreenFormSchema),
+    defaultValues: defaultValues,
     mode: 'onBlur',
   })
   const {
@@ -30,38 +38,12 @@ export const ScreenForm = () => {
     resetField,
   } = methods
   const { isCreateLoading, createAction } = useCreateScreen()
-  const [screenColor, setScreenColor] = useState<ScreenColor>(() => {
-    const color = createCSSColor()
-    setValue(ScreenDataEnum.darkColor, color.darkColor, {
-      shouldValidate: true,
-      shouldDirty: true,
-    })
-    setValue(ScreenDataEnum.lightColor, color.lightColor, {
-      shouldValidate: true,
-      shouldDirty: true,
-    })
+  const { isUpdateLoading, updateAction } = useUpdateScreen()
 
-    return color
-  })
-
-  const { formDrawerState, dispatchFormDrawer } = useFormDrawerContext()
-  const [editScreen, setEditScreen] = useState<ScreenInput | undefined>(undefined)
-  const [searchValue, setSearchValue] = useState('')
-
-  const queryOptions: FindScreenOptions = {
-    enabled: formDrawerState.mode === FormDrawerMode.Edit && !!formDrawerState.id,
-    keepPreviousData: true,
-  }
-  const { screenItemResponse } = useFindScreen(formDrawerState.id ?? '', queryOptions)
+  // preset the form with the selected screen
   useEffect(() => {
-    if (screenItemResponse) {
-      const inputScreen = transformScreenItem(screenItemResponse.item)
-      setEditScreen(inputScreen)
-    }
-  }, [screenItemResponse])
-  useEffect(() => {
-    reset(editScreen)
-  }, [editScreen, reset])
+    reset(defaultValues)
+  }, [defaultValues, reset])
 
   const onSelect = useCallback(
     (item: SearchItem) => {
@@ -99,32 +81,39 @@ export const ScreenForm = () => {
 
   const onGenerateColor = () => {
     const color = createCSSColor()
-    setScreenColor(color)
-    setValue(ScreenDataEnum.darkColor, screenColor.darkColor, {
+    setValue(ScreenDataEnum.darkColor, color.darkColor, {
       shouldValidate: true,
       shouldDirty: true,
     })
-    setValue(ScreenDataEnum.lightColor, screenColor.lightColor, {
+    setValue(ScreenDataEnum.lightColor, color.lightColor, {
       shouldValidate: true,
       shouldDirty: true,
     })
   }
 
   const onSubmit: SubmitHandler<ScreenInput> = (form: ScreenInput) => {
-    createAction(form)
+    if (editMode) {
+      updateAction({ id: formDrawerState.id ?? '', data: form })
+    } else {
+      createAction(form)
+    }
     onGenerateColor()
   }
 
   const onReset = () => {
     reset()
-    onGenerateColor()
     setSearchValue('')
+  }
+
+  const onClose = () => {
+    reset()
+    dispatchFormDrawer({ type: FormDrawerActionTypes.Toggle, payload: { open: false } })
   }
 
   return (
     <FormProvider {...methods}>
       <label className='label'>
-        <span className='text-lg'>Add Screen</span>
+        <span className='text-lg'>{!editMode ? 'Add' : 'Edit'} Screen</span>
       </label>
       <div className='form-control mb-4 flex w-full flex-col'>
         <label className='label'>
@@ -182,18 +171,8 @@ export const ScreenForm = () => {
 
           <div className='flex justify-between'>
             <div className='flex gap-2'>
-              <ColorField
-                formKey={ScreenDataEnum.lightColor}
-                title='Light'
-                color={screenColor?.lightColor}
-                mode={LightMode}
-              />
-              <ColorField
-                formKey={ScreenDataEnum.darkColor}
-                title='Dark'
-                color={screenColor?.darkColor}
-                mode={DarkMode}
-              />
+              <ColorField formKey={ScreenDataEnum.lightColor} title='Light' mode={LightMode} />
+              <ColorField formKey={ScreenDataEnum.darkColor} title='Dark' mode={DarkMode} />
             </div>
             <button id='genColorButton' type='button' className='btn btn-neutral w-24' onClick={onGenerateColor}>
               Change
@@ -221,16 +200,16 @@ export const ScreenForm = () => {
                 id='cancelButton'
                 type='button'
                 className='btn btn-neutral w-24'
-                disabled={isCreateLoading}
-                onClick={() => dispatchFormDrawer({ type: FormDrawerActionTypes.Toggle, payload: { open: false } })}
+                disabled={isCreateLoading || isUpdateLoading}
+                onClick={onClose}
               >
                 close
               </button>
               <button
                 id='resetButton'
-                type='reset'
+                type='button'
                 className='btn btn-neutral w-24'
-                disabled={isCreateLoading}
+                disabled={isCreateLoading || isUpdateLoading}
                 onClick={onReset}
               >
                 Reset
@@ -239,16 +218,16 @@ export const ScreenForm = () => {
             <button
               id='submitButton'
               type='submit'
-              className={cn('btn btn-neutral w-24', { 'pointer-events-none': isCreateLoading })}
+              className={cn('btn btn-neutral w-24', { 'pointer-events-none': isCreateLoading || isUpdateLoading })}
               disabled={!isDirty || !isValid}
             >
-              {isCreateLoading ? (
+              {isCreateLoading || isUpdateLoading ? (
                 <div className='stack items-center justify-center'>
                   <div className='loading loading-spinner' />
-                  <div>{!editScreen ? 'Create' : 'Update'}</div>
+                  <div>{!editMode ? 'Create' : 'Update'}</div>
                 </div>
               ) : (
-                'Create'
+                <div>{!editMode ? 'Create' : 'Update'}</div>
               )}
             </button>
           </div>

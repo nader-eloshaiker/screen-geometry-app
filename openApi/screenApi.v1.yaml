@@ -405,7 +405,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/ScreenItem'
+              $ref: '#/components/schemas/ScreenInput'
       responses:
         '200':
           description: '200 response'

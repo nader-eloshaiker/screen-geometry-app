@@ -47,10 +47,10 @@ export const transformScreenItem = (data: ScreenItem): ScreenInput => {
   return item
 }
 
-export const transformScreenInput = (data: ScreenInput): ScreenItem => {
+export const transformScreenInput = (data: ScreenInput, id?: string): ScreenItem => {
   const [hAspectRatio, vAspectRatio] = getAspectRatio(data.aspectRatio)
   const item: ScreenItem = {
-    id: getRandomString(8),
+    id: id ?? getRandomString(8),
     tag: {
       diagonalSize: data.diagonalSize,
       aspectRatio: data.aspectRatio,

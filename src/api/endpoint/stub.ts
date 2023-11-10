@@ -80,7 +80,7 @@ export const generateStub = (axiosInstance: AxiosInstance) => {
   )
 
   mock.onPut(screenIdUrl).reply((config) =>
-    updateItemAction(config.data ? JSON.parse(config.data) : {}).then((payload) => {
+    updateItemAction(paramScreenId(config.url), config.data ? JSON.parse(config.data) : {}).then((payload) => {
       debug(config, payload, 'updateItemAction')
       return [200, payload, { Accept: 'application/json', 'Content-Type': 'application/json' }]
     }),
