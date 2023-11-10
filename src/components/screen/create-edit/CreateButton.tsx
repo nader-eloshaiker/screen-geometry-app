@@ -22,7 +22,7 @@ export const ScreenButton = ({ className, ...rest }: TProps) => {
           <EditIcon id='theme-dark-icon' className='swap-off h-5 w-5 p-0' fill='currentColor' />
           <CloseIcon id='theme-light-icon' className='swap-on h-5 w-5 p-0' fill='currentColor' />
         </label>
-        {formDrawerState.open ? 'Close Editor' : 'Open Editor'}
+        {formDrawerState.open ? 'Close Editor' : 'New Screen'}
       </div>
     </button>
   )
