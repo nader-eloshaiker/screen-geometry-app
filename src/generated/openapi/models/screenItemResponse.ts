@@ -6,6 +6,6 @@
  */
 import type { ScreenItem } from './screenItem'
 
-export interface ScreenItemRespose {
+export interface ScreenItemResponse {
   item: ScreenItem
 }

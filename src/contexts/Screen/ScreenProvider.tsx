@@ -9,7 +9,7 @@ export const ScreenProvider = ({ children }: TReactChildren) => {
       state,
       dispatch,
     }),
-    [state],
+    [state, dispatch],
   )
 
   return <ScreenContext.Provider value={contextValue}>{children}</ScreenContext.Provider>

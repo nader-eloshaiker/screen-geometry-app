@@ -17,7 +17,8 @@ export type GeneralNotificationItem = {
   [GeneralNotificationItemKeys.MESSAGE]: string
 }
 export type NotificationItem = {
-  value: ErrorResponse | AxiosError | GeneralNotificationItem
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  value: ErrorResponse | GeneralNotificationItem | AxiosError<unknown, any> | object
   type: NotificationType
 }
 export type NotificationItemLogged = {
