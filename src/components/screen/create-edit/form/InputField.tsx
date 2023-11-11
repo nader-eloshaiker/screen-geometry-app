@@ -10,9 +10,10 @@ type Props = TRestProps & {
   fix?: string
   fixLocation?: FixLocation
   className?: string
+  isLoading?: boolean
 }
 
-export const InputField = ({ formKey, title, fix, fixLocation, className, ...rest }: Props) => {
+export const InputField = ({ formKey, title, fix, fixLocation, className, isLoading = false, ...rest }: Props) => {
   const {
     register,
     formState: { errors },
@@ -31,6 +32,7 @@ export const InputField = ({ formKey, title, fix, fixLocation, className, ...res
               className,
               cn('input input-bordered input-md w-full pr-10 shadow-md', {
                 'input-error': errors[formKey],
+                'animate-pulse pointer-events-none': isLoading,
               }),
             )}
             {...register(formKey)}
@@ -41,6 +43,7 @@ export const InputField = ({ formKey, title, fix, fixLocation, className, ...res
           {...rest}
           className={cn('input input-bordered input-md w-full pr-10 shadow-md', {
             'input-error': errors[formKey],
+            'animate-pulse pointer-events-none': isLoading,
           })}
           {...register(formKey)}
         />

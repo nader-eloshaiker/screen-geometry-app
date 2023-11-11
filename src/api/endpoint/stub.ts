@@ -15,7 +15,7 @@ import {
 // Stub out the API calls using axios-mock-adapter for indexAPI to store data in the browser's IndexedDB
 // The stubbed API calls can later be replaced with real API calls to a backend store
 export const generateStub = (axiosInstance: AxiosInstance) => {
-  const mock = new MockAdapter(axiosInstance, { onNoMatch: 'passthrough', delayResponse: 1000 })
+  const mock = new MockAdapter(axiosInstance, { onNoMatch: 'passthrough', delayResponse: 3000 })
 
   const debug = (config: AxiosRequestConfig, response: unknown, stub: string) => {
     console.debug(

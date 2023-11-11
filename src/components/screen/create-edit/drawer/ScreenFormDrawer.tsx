@@ -28,7 +28,7 @@ export const ScreenFormDrawer = ({ children }: Props) => {
     enabled: formDrawerState.mode === FormDrawerMode.Edit && !!formDrawerState.id,
     keepPreviousData: true,
   }
-  const { screenItemResponse } = useFindScreen(formDrawerState.id ?? '', queryOptions)
+  const { screenItemResponse, isScreenItemLoading } = useFindScreen(formDrawerState.id ?? '', queryOptions)
 
   useEffect(() => {
     if (screenItemResponse && formDrawerState.mode === FormDrawerMode.Edit) {
@@ -52,7 +52,7 @@ export const ScreenFormDrawer = ({ children }: Props) => {
       <div className='drawer-side absolute h-fit w-auto duration-100 ease-in'>
         <div className='sidebar flex-1 rounded-xl p-2 md:w-96'>
           <div className='p-2'>
-            <ScreenForm defaultValues={defaultValues} editMode={editMode} />
+            <ScreenForm defaultValues={defaultValues} editMode={editMode} isLoading={editMode && isScreenItemLoading} />
           </div>
         </div>
       </div>

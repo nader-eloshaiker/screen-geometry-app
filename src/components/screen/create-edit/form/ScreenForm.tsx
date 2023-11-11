@@ -19,9 +19,10 @@ import { ScreenFormSchema } from './ScreenFormSchema'
 type Props = {
   defaultValues: ScreenInput
   editMode: boolean
+  isLoading: boolean
 }
 
-export const ScreenForm = ({ defaultValues, editMode }: Props) => {
+export const ScreenForm = ({ defaultValues, editMode, isLoading }: Props) => {
   const { formDrawerState, dispatchFormDrawer } = useFormDrawerContext()
   const [searchValue, setSearchValue] = useState('')
 
@@ -134,6 +135,7 @@ export const ScreenForm = ({ defaultValues, editMode }: Props) => {
               fix='in'
               autoComplete='off'
               placeholder='27"'
+              isLoading={isLoading}
             />
 
             <InputField
@@ -142,6 +144,7 @@ export const ScreenForm = ({ defaultValues, editMode }: Props) => {
               type='text'
               autoComplete='off'
               placeholder='16:9'
+              isLoading={isLoading}
             />
           </div>
 
@@ -155,6 +158,7 @@ export const ScreenForm = ({ defaultValues, editMode }: Props) => {
               fix='px'
               autoComplete='off'
               placeholder='27"'
+              isLoading={isLoading}
             />
 
             <InputField
@@ -164,6 +168,7 @@ export const ScreenForm = ({ defaultValues, editMode }: Props) => {
               fix='px'
               autoComplete='off'
               placeholder='27"'
+              isLoading={isLoading}
             />
           </div>
 
@@ -171,10 +176,16 @@ export const ScreenForm = ({ defaultValues, editMode }: Props) => {
 
           <div className='flex justify-between'>
             <div className='flex gap-2'>
-              <ColorField formKey={ScreenDataEnum.lightColor} title='Light' mode={LightMode} />
-              <ColorField formKey={ScreenDataEnum.darkColor} title='Dark' mode={DarkMode} />
+              <ColorField formKey={ScreenDataEnum.lightColor} title='Light' mode={LightMode} isLoading={isLoading} />
+              <ColorField formKey={ScreenDataEnum.darkColor} title='Dark' mode={DarkMode} isLoading={isLoading} />
             </div>
-            <button id='genColorButton' type='button' className='btn btn-neutral w-24' onClick={onGenerateColor}>
+            <button
+              id='genColorButton'
+              type='button'
+              className='btn btn-neutral w-24'
+              onClick={onGenerateColor}
+              disabled={isLoading}
+            >
               Change
             </button>
           </div>
@@ -200,7 +211,7 @@ export const ScreenForm = ({ defaultValues, editMode }: Props) => {
                 id='cancelButton'
                 type='button'
                 className='btn btn-neutral w-24'
-                disabled={isCreateLoading || isUpdateLoading}
+                disabled={isCreateLoading || isUpdateLoading || isLoading}
                 onClick={onClose}
               >
                 close
@@ -209,7 +220,7 @@ export const ScreenForm = ({ defaultValues, editMode }: Props) => {
                 id='resetButton'
                 type='button'
                 className='btn btn-neutral w-24'
-                disabled={isCreateLoading || isUpdateLoading}
+                disabled={isCreateLoading || isUpdateLoading || isLoading}
                 onClick={onReset}
               >
                 Reset
