@@ -1,4 +1,6 @@
+import { UseMutationOptions } from '@tanstack/react-query'
 import { useEffect } from 'react'
+import { ErrorResponse } from 'react-router-dom'
 import {
   GeneralNotificationItem,
   NotificationActionTypes,
@@ -7,9 +9,12 @@ import {
 import { useNotificationContext } from '../../contexts/Notification/useNotifcationContext'
 import { ScreenActionTypes } from '../../contexts/Screen/ScreenManager'
 import { useScreenContext } from '../../contexts/Screen/useScreenContext'
+import { ScreenItemResponse } from '../../generated/openapi/models'
 import { useFavoriteScreenAction } from '../../generated/openapi/services/screen-action-service'
 
-export const useFavoriteScreen = () => {
+export type FavouriteScreenOptions = UseMutationOptions<ScreenItemResponse, ErrorResponse, { id: string }>
+
+export const useFavoriteScreen = (queryOptions?: FavouriteScreenOptions) => {
   const { dispatch: dispatchScreen } = useScreenContext()
   const { dispatch: dispatchNotification } = useNotificationContext()
   const {
@@ -17,7 +22,7 @@ export const useFavoriteScreen = () => {
     data: favoriteResponse,
     error: favouriteError,
     mutate: favoriteAction,
-  } = useFavoriteScreenAction()
+  } = useFavoriteScreenAction({ mutation: queryOptions })
 
   useEffect(() => {
     if (favoriteResponse) {

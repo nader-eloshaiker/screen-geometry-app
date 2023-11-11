@@ -14,7 +14,7 @@ import type {
 } from '@tanstack/react-query'
 import { useMutation, useQuery } from '@tanstack/react-query'
 import { useApiAxios } from '../../../api/fetch/useApiAxios'
-import type { ErrorResponse, ScreenInput, ScreenInputList, ScreenItemRespose, ScreenListResponse } from '../models'
+import type { ErrorResponse, ScreenInput, ScreenInputList, ScreenItemResponse, ScreenListResponse } from '../models'
 
 export const useListScreensActionHook = () => {
   const listScreensAction = useApiAxios<ScreenListResponse>()
@@ -64,72 +64,12 @@ export const useListScreensAction = <
   return query
 }
 
-export const useCreateScreenActionHook = () => {
-  const createScreenAction = useApiAxios<ScreenItemRespose>()
-
-  return (screenInput: ScreenInput) => {
-    return createScreenAction({
-      url: `/screens/create`,
-      method: 'post',
-      headers: { 'Content-Type': 'application/json' },
-      data: screenInput,
-    })
-  }
-}
-
-export const useCreateScreenActionMutationOptions = <TError = ErrorResponse, TContext = unknown>(options?: {
-  mutation?: UseMutationOptions<
-    Awaited<ReturnType<ReturnType<typeof useCreateScreenActionHook>>>,
-    TError,
-    { data: ScreenInput },
-    TContext
-  >
-}): UseMutationOptions<
-  Awaited<ReturnType<ReturnType<typeof useCreateScreenActionHook>>>,
-  TError,
-  { data: ScreenInput },
-  TContext
-> => {
-  const { mutation: mutationOptions } = options ?? {}
-
-  const createScreenAction = useCreateScreenActionHook()
-
-  const mutationFn: MutationFunction<
-    Awaited<ReturnType<ReturnType<typeof useCreateScreenActionHook>>>,
-    { data: ScreenInput }
-  > = (props) => {
-    const { data } = props ?? {}
-
-    return createScreenAction(data)
-  }
-
-  return { mutationFn, ...mutationOptions }
-}
-
-export type CreateScreenActionMutationResult = NonNullable<
-  Awaited<ReturnType<ReturnType<typeof useCreateScreenActionHook>>>
->
-export type CreateScreenActionMutationBody = ScreenInput
-export type CreateScreenActionMutationError = ErrorResponse
-
-export const useCreateScreenAction = <TError = ErrorResponse, TContext = unknown>(options?: {
-  mutation?: UseMutationOptions<
-    Awaited<ReturnType<ReturnType<typeof useCreateScreenActionHook>>>,
-    TError,
-    { data: ScreenInput },
-    TContext
-  >
-}) => {
-  const mutationOptions = useCreateScreenActionMutationOptions(options)
-
-  return useMutation(mutationOptions)
-}
 export const useCreateScreenListActionHook = () => {
   const createScreenListAction = useApiAxios<ScreenListResponse>()
 
   return (screenInputList: ScreenInputList) => {
     return createScreenListAction({
-      url: `/screens/createlist`,
+      url: `/screens`,
       method: 'post',
       headers: { 'Content-Type': 'application/json' },
       data: screenInputList,
@@ -181,6 +121,66 @@ export const useCreateScreenListAction = <TError = ErrorResponse, TContext = unk
   >
 }) => {
   const mutationOptions = useCreateScreenListActionMutationOptions(options)
+
+  return useMutation(mutationOptions)
+}
+export const useCreateScreenActionHook = () => {
+  const createScreenAction = useApiAxios<ScreenItemResponse>()
+
+  return (screenInput: ScreenInput) => {
+    return createScreenAction({
+      url: `/screen`,
+      method: 'post',
+      headers: { 'Content-Type': 'application/json' },
+      data: screenInput,
+    })
+  }
+}
+
+export const useCreateScreenActionMutationOptions = <TError = ErrorResponse, TContext = unknown>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<ReturnType<typeof useCreateScreenActionHook>>>,
+    TError,
+    { data: ScreenInput },
+    TContext
+  >
+}): UseMutationOptions<
+  Awaited<ReturnType<ReturnType<typeof useCreateScreenActionHook>>>,
+  TError,
+  { data: ScreenInput },
+  TContext
+> => {
+  const { mutation: mutationOptions } = options ?? {}
+
+  const createScreenAction = useCreateScreenActionHook()
+
+  const mutationFn: MutationFunction<
+    Awaited<ReturnType<ReturnType<typeof useCreateScreenActionHook>>>,
+    { data: ScreenInput }
+  > = (props) => {
+    const { data } = props ?? {}
+
+    return createScreenAction(data)
+  }
+
+  return { mutationFn, ...mutationOptions }
+}
+
+export type CreateScreenActionMutationResult = NonNullable<
+  Awaited<ReturnType<ReturnType<typeof useCreateScreenActionHook>>>
+>
+export type CreateScreenActionMutationBody = ScreenInput
+export type CreateScreenActionMutationError = ErrorResponse
+
+export const useCreateScreenAction = <TError = ErrorResponse, TContext = unknown>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<ReturnType<typeof useCreateScreenActionHook>>>,
+    TError,
+    { data: ScreenInput },
+    TContext
+  >
+}) => {
+  const mutationOptions = useCreateScreenActionMutationOptions(options)
 
   return useMutation(mutationOptions)
 }

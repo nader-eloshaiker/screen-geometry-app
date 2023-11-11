@@ -1,12 +1,12 @@
 import { useCallback, useRef, useState } from 'react'
 import styled from 'styled-components'
-import { ScreenButton } from '../components/createscreen/CreateButton'
-import { ScreenFormDrawer } from '../components/createscreen/drawer/ScreenFormDrawer'
+import { ScreenButton } from '../components/screen/create-edit/CreateButton'
+import { ScreenFormDrawer } from '../components/screen/create-edit/drawer/ScreenFormDrawer'
 import { ScreenPanel } from '../components/screen/ScreenPanel'
 import { ScreenTable } from '../components/screen/ScreenTable'
 import { SkeletonImage } from '../components/skeleton/SkeletonImage'
 import { defaultScreenInputList } from '../constants/defaultScreenList'
-import { InputReferenceProvider } from '../contexts/reference/InputReferenceProvider'
+import { FormDrawerProvider } from '../contexts/FormDrawer/FormDrawerProvider'
 import { useScreenContext } from '../contexts/Screen/useScreenContext'
 import { ScreenItem } from '../generated/openapi/models'
 import { useCreateScreenList } from '../hooks/api/useCreateScreenList'
@@ -59,12 +59,12 @@ export default function Geometry() {
   const isHighlighted = useCallback((screen: ScreenItem) => screen.id === highlighted?.id, [highlighted])
 
   return (
-    <InputReferenceProvider>
+    <FormDrawerProvider>
       <div className='flex flex-1 flex-col' ref={divSizeRef}>
         <ScreenFormDrawer>
-          <div className='flex w-full items-end justify-between pb-4'>
+          <div className='mx-2 flex items-end justify-between pb-4'>
             <label className='label'>
-              <span className='text-xl'>Table</span>
+              <span className='text-xl'>Screen Specs</span>
             </label>
             <ScreenButton />
           </div>
@@ -95,9 +95,9 @@ export default function Geometry() {
           )}
 
           {(screens.length > 0 || isScreenListLoading) && (
-            <div>
+            <div className='mx-2'>
               <label className='label py-6'>
-                <span className='text-xl'>Physical Screens</span>
+                <span className='text-xl'>Physical Screen Comparison</span>
               </label>
               <Stacked height={maxPanelSize.height}>
                 {!isScreenListLoading ? (
@@ -119,6 +119,6 @@ export default function Geometry() {
           )}
         </ScreenFormDrawer>
       </div>
-    </InputReferenceProvider>
+    </FormDrawerProvider>
   )
 }
