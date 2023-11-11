@@ -10,7 +10,7 @@ export type FindScreenOptions = UseQueryOptions<ScreenItemResponse, ErrorRespons
 export const useFindScreen = (id: string, queryOptions?: FindScreenOptions) => {
   const { dispatch: dispatchNotification } = useNotificationContext()
   const {
-    isLoading: isScreenItemLoading,
+    isFetching: isScreenItemLoading,
     error: screenItemError,
     data: screenItemResponse,
   } = useFindScreenAction(id, { query: queryOptions })

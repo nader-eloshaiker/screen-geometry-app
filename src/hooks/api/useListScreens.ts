@@ -14,7 +14,7 @@ export const useListScreens = (queryOptions?: ListScreenOptions) => {
   const { dispatch: dispatchScreen } = useScreenContext()
   const { dispatch: dispatchNotification } = useNotificationContext()
   const {
-    isLoading: isScreenListLoading,
+    isFetching: isScreenListLoading,
     error: screenListError,
     data: screenListResponse,
   } = useListScreensAction({ query: queryOptions })

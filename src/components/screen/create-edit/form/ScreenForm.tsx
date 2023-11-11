@@ -233,10 +233,7 @@ export const ScreenForm = ({ defaultValues, editMode, isLoading }: Props) => {
               disabled={!isDirty || !isValid}
             >
               {isCreateLoading || isUpdateLoading ? (
-                <div className='stack items-center justify-center'>
-                  <div className='loading loading-spinner' />
-                  <div>{!editMode ? 'Create' : 'Update'}</div>
-                </div>
+                <div className='loading loading-spinner items-center justify-center' />
               ) : (
                 <div>{!editMode ? 'Create' : 'Update'}</div>
               )}
