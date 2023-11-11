@@ -1,10 +1,10 @@
 // ./components/Autocomplete.tsx
 
 import cn from 'classnames'
-import { ChangeEvent, memo, useCallback, useRef, useState } from 'react'
+import { ChangeEvent, KeyboardEvent, memo, useRef, useState } from 'react'
 import MagnifyGlassIcon from '../../assets/icons/MagnifyGlass'
 import { useElementSize } from '../../hooks/useElementSize'
-import { InputSuffix, SuffixLocation } from '../input-suffix/InputSuffix'
+import { FixLocation, InputFix } from '../input-suffix/InputFix'
 
 export type TAutoCompleteItem = { id: string; label: string }
 type TProps = TRestProps & {
@@ -32,25 +32,25 @@ export const AutoComplete = ({
   const { width } = useElementSize(divRef)
   const [open, setOpen] = useState(false)
 
-  const handleChange = useCallback(
-    (event: ChangeEvent<HTMLInputElement>) => {
-      onChange(event.target.value)
-    },
-    [onChange],
-  )
+  const handleChange = ({ target }: ChangeEvent<HTMLInputElement>) => {
+    onChange(target.value)
+  }
 
-  const handleSelect = useCallback(
-    (item: TAutoCompleteItem) => {
-      onChange(item.label)
-      onSelect(item)
-      setOpen(false)
-      // force close of the dropdown
-      if (document.activeElement instanceof HTMLElement) {
-        document.activeElement.blur()
-      }
-    },
-    [onChange, onSelect],
-  )
+  const handleSelect = (item: TAutoCompleteItem) => {
+    onChange(item.label)
+    onSelect(item)
+    setOpen(false)
+    // force close of the dropdown
+    if (document.activeElement instanceof HTMLElement) {
+      document.activeElement.blur()
+    }
+  }
+
+  const handleKeyDown = (event: KeyboardEvent<HTMLLIElement>, item: TAutoCompleteItem) => {
+    if (event.code === 'Enter') {
+      handleSelect(item)
+    }
+  }
 
   return (
     <div
@@ -63,15 +63,15 @@ export const AutoComplete = ({
       ref={divRef}
       {...rest}
     >
-      <InputSuffix
-        suffix={
+      <InputFix
+        fix={
           isLoading ? (
             <span data-testid='autoCompleteLoading' className='loading loading-spinner loading-md' />
           ) : (
             <MagnifyGlassIcon data-testid='autoCompleteIcon' className='h-6 w-6' />
           )
         }
-        location={SuffixLocation.left}
+        location={FixLocation.prefix}
       >
         <input
           name='autoCompleteInput'
@@ -80,11 +80,11 @@ export const AutoComplete = ({
           className='input input-md relative w-full pl-12 shadow-md'
           value={value}
           onChange={handleChange}
-          placeholder={placeholder || 'Type something..'}
+          placeholder={placeholder ?? 'Type something..'}
           tabIndex={0}
           disabled={isLoading}
         />
-      </InputSuffix>
+      </InputFix>
       {items.length > 0 && (
         <div
           data-testid='autoCompleteResults'
@@ -101,6 +101,7 @@ export const AutoComplete = ({
                   key={item.id}
                   tabIndex={index + 1}
                   onClick={() => handleSelect(item)}
+                  onKeyDown={(event) => handleKeyDown(event, item)}
                   className='w-full border-b border-b-base-content/10'
                 >
                   <button>{item.label}</button>
