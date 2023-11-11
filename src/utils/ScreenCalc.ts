@@ -52,7 +52,7 @@ export const createCSSColor = (): ScreenColor => {
   const baseColor = hslToHex(hue, saturation, light)
 
   return {
-    lightColor: lightness(baseColor, 70),
+    lightColor: lightness(baseColor, 65),
     darkColor: lightness(baseColor, 30),
   }
 }
