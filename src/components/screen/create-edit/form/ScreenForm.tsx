@@ -94,7 +94,7 @@ export const ScreenForm = ({ defaultValues, editMode, isLoading }: Props) => {
 
   const onSubmit: SubmitHandler<ScreenInput> = (form: ScreenInput) => {
     if (editMode) {
-      updateAction({ id: formDrawerState.id ?? '', data: form })
+      updateAction({ id: formDrawerState.id ?? '', data: form }, { onSuccess: onClose })
     } else {
       createAction(form)
     }
