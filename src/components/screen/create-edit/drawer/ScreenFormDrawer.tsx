@@ -31,11 +31,11 @@ export const ScreenFormDrawer = ({ children }: Props) => {
   const { screenItemResponse, isScreenItemLoading } = useFindScreen(formDrawerState.id ?? '', queryOptions)
 
   useEffect(() => {
-    if (screenItemResponse && formDrawerState.mode === FormDrawerMode.Edit) {
+    if (screenItemResponse && formDrawerState.mode === FormDrawerMode.Edit && !isScreenItemLoading) {
       const inputScreen = transformScreenItem(screenItemResponse.item)
       setDefaultValues(inputScreen)
     }
-  }, [formDrawerState.mode, screenItemResponse])
+  }, [formDrawerState.mode, isScreenItemLoading, screenItemResponse])
 
   return (
     <div className='drawer h-full grow'>
