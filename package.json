@@ -55,7 +55,7 @@
     "@types/jsdom": "^21.1.2",
     "@types/lint-staged": "^13.2.0",
     "@types/node": "^16.18.36",
-    "@types/react": "^18.2.14",
+    "@types/react": "^18.2.37",
     "@types/react-dom": "^18.2.6",
     "@types/react-router-dom": "^5.3.3",
     "@types/styled-components": "^5.1.26",
