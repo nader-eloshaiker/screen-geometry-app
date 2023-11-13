@@ -16,20 +16,20 @@ I have been considering what my next monitor purchase will be and it has been di
 
 **Run in development** (using vite)
 
-    npm run dev
+    pnpm run dev
 
 **Linting**
 
-    npm run lint:fix
+    pnpm run lint:fix
 
 **Build** (using vite)
 
-    npm run build
+    pnpm run build
 
 **Generate API Client** (using orval)
 Code is checked in for review ease. This can also help when working on a 'work in progress' published spec, as it allows the developer to control which spec the client is generated from in other feature branches and in main branches.
 
-    npm run gen:spec
+    pnpm run gen:spec
 
 ## Architecture
 
@@ -104,7 +104,7 @@ Before starting frontend and backend engineers start development, it is encourag
 
 ### 3.2 Vite
 
-I discovered this little gem to replace npm and it is lightning quick. You can read more about [Vite](https://vitejs.dev/), but to summarise what they have on their site for convenience:
+I discovered this little gem to replace pnpm and it is lightning quick. You can read more about [Vite](https://vitejs.dev/), but to summarise what they have on their site for convenience:
 
 - `Instant Server Start` On demand file serving over native ESM, no bundling required!
 - `Lightning Fast HMR` Hot Module Replacement (HMR) that stays fast regardless of app size.
