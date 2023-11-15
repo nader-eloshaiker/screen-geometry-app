@@ -7,7 +7,7 @@ import daisyuiThemes from 'daisyui/src/theming/themes'
 import colors from 'tailwindcss/colors'
 import defaultTheme from 'tailwindcss/defaultTheme'
 
-module.exports = {
+export default {
   mode: 'jit',
   content: ['./src/index.html', './src/**/*.{js,ts,jsx,tsx,html}'],
   theme: {

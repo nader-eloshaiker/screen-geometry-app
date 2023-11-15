@@ -25,7 +25,7 @@
     "outDir": "./dist",
 
     /* Language and Environment */
-    "target": "ES2020",
+    "target": "ESNext",
     "lib": ["esnext", "DOM", "DOM.Iterable"],
     "jsx": "react-jsx",
     "useDefineForClassFields": true,
