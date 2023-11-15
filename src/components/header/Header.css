@@ -1,0 +1,12 @@
+.menubar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--navbar-padding, 0.5rem /* 8px */);
+  min-height: 4rem /* 64px */;
+  width: 100%;
+}
+:where(.menubar > *) {
+  display: inline-flex;
+  align-items: center;
+}
