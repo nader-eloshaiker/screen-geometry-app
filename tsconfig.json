@@ -44,6 +44,6 @@
     "skipLibCheck": true
   },
   "include": ["**/*.ts", "**/*.tsx", "**/**/*.ts", "**/**/*.tsx"],
-  "exclude": ["no de_modules"],
+  "exclude": ["node_modules"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

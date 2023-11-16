@@ -1,13 +1,11 @@
 /** @type {import('tailwindcss').Config} */
 
-import forms from '@tailwindcss/forms'
-import typograhpy from '@tailwindcss/typography'
 import daisyui from 'daisyui'
 import daisyuiThemes from 'daisyui/src/theming/themes'
 import colors from 'tailwindcss/colors'
 import defaultTheme from 'tailwindcss/defaultTheme'
 
-module.exports = {
+export default {
   mode: 'jit',
   content: ['./src/index.html', './src/**/*.{js,ts,jsx,tsx,html}'],
   theme: {
@@ -36,7 +34,7 @@ module.exports = {
       },
     },
   },
-  plugins: [forms, typograhpy, daisyui],
+  plugins: [daisyui],
   darkMode: ['class', '[data-theme="dark"]'],
   daisyui: {
     themes: [

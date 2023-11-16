@@ -1,4 +1,4 @@
-import { AxiosRequestConfig, default as axios, default as Axios } from 'axios'
+import { default as Axios, AxiosRequestConfig, default as axios } from 'axios'
 import { routes } from '../ApiRouteSchema'
 import { generateStub } from '../endpoint/stub'
 
