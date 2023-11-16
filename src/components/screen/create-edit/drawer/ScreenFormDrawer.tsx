@@ -6,7 +6,6 @@ import { FindScreenOptions, useFindScreen } from '../../../../hooks/api/useFindS
 import { transformScreenItem } from '../../../../utils/ScreenTransformation'
 import { DefaultValues } from '../form/DefaultValues'
 import { ScreenForm } from '../form/ScreenForm'
-import './ScreenFormDrawer.css'
 
 type Props = TReactChildren
 

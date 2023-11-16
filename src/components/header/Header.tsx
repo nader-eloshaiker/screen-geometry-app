@@ -2,7 +2,6 @@ import cn from 'classnames'
 import { Link, useLocation } from 'react-router-dom'
 import { routes } from '../../routes/AppRouteSchema'
 import ThemeModeToggle from '../theme/ThemeModeToggle'
-import './Header.css'
 
 export default function Header() {
   const { pathname } = useLocation()
@@ -10,7 +9,7 @@ export default function Header() {
   return (
     <header className='sidebar rounded-b-xl'>
       <div className='grid place-content-center pt-2 text-2xl'>{import.meta.env.VITE_APP_TITLE}</div>
-      <div className='menubar'>
+      <div className='navbar justify-between'>
         <ul className='menu rounded-box menu-horizontal gap-4'>
           <li>
             <Link

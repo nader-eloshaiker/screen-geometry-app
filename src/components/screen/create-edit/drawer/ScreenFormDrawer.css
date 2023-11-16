@@ -1,3 +1,0 @@
-.drawer-toggle:checked ~ .drawer-side > .drawer-overlay {
-  @apply bg-transparent;
-}
