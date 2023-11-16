@@ -1,7 +1,5 @@
 /** @type {import('tailwindcss').Config} */
 
-import forms from '@tailwindcss/forms'
-import typograhpy from '@tailwindcss/typography'
 import daisyui from 'daisyui'
 import daisyuiThemes from 'daisyui/src/theming/themes'
 import colors from 'tailwindcss/colors'
@@ -36,7 +34,7 @@ export default {
       },
     },
   },
-  plugins: [forms, typograhpy, daisyui],
+  plugins: [daisyui],
   darkMode: ['class', '[data-theme="dark"]'],
   daisyui: {
     themes: [

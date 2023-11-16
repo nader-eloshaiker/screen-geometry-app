@@ -59,12 +59,6 @@ importers:
         specifier: ^1.2.0
         version: 1.2.0
     devDependencies:
-      '@tailwindcss/forms':
-        specifier: ^0.5.3
-        version: 0.5.3(tailwindcss@3.3.5)
-      '@tailwindcss/typography':
-        specifier: ^0.5.9
-        version: 0.5.9(tailwindcss@3.3.5)
       '@testing-library/jest-dom':
         specifier: ^6.1.2
         version: 6.1.2(vitest@0.34.6)
@@ -1457,29 +1451,6 @@ packages:
       '@stoplight/types': 13.19.0
       '@stoplight/yaml-ast-parser': 0.0.48
       tslib: 2.6.2
-    dev: true
-
-  /@tailwindcss/forms@0.5.3(tailwindcss@3.3.5):
-    resolution:
-      { integrity: sha512-y5mb86JUoiUgBjY/o6FJSFZSEttfb3Q5gllE4xoKjAAD+vBrnIhE4dViwUuow3va8mpH4s9jyUbUbrRGoRdc2Q== }
-    peerDependencies:
-      tailwindcss: '>=3.0.0 || >= 3.0.0-alpha.1'
-    dependencies:
-      mini-svg-data-uri: 1.4.4
-      tailwindcss: 3.3.5
-    dev: true
-
-  /@tailwindcss/typography@0.5.9(tailwindcss@3.3.5):
-    resolution:
-      { integrity: sha512-t8Sg3DyynFysV9f4JDOVISGsjazNb48AeIYQwcL+Bsq5uf4RYL75C1giZ43KISjeDGBaTN3Kxh7Xj/vRSMJUUg== }
-    peerDependencies:
-      tailwindcss: '>=3.0.0 || insiders'
-    dependencies:
-      lodash.castarray: 4.4.0
-      lodash.isplainobject: 4.0.6
-      lodash.merge: 4.6.2
-      postcss-selector-parser: 6.0.10
-      tailwindcss: 3.3.5
     dev: true
 
   /@tanstack/query-core@4.33.0:
@@ -4936,11 +4907,6 @@ packages:
     dependencies:
       p-locate: 5.0.0
 
-  /lodash.castarray@4.4.0:
-    resolution:
-      { integrity: sha512-aVx8ztPv7/2ULbArGJ2Y42bG1mEQ5mGjpdvrbJcJFU3TbYybe+QlLS4pst9zV52ymy2in1KpFPiZnAOATxD4+Q== }
-    dev: true
-
   /lodash.debounce@4.0.8:
     resolution:
       { integrity: sha512-FT1yDzDYEoYWhnSGnpE/4Kj1fLZkDFyqRb7fNt6FdYOSxlUWAtp42Eh6Wb0rGIv/m9Bgo7x4GhQbm5Ys4SG5ow== }
@@ -4954,11 +4920,6 @@ packages:
   /lodash.isempty@4.4.0:
     resolution:
       { integrity: sha512-oKMuF3xEeqDltrGMfDxAPGIVMSSRv8tbRSODbrs4KGsRRLEhrW8N8Rd4DRgB2+621hY8A8XwwrTVhXWpxFvMzg== }
-    dev: true
-
-  /lodash.isplainobject@4.0.6:
-    resolution:
-      { integrity: sha512-oSXzaWypCMHkPC3NvBEaPHf0KsA5mvPrOPgQWDsbg8n7orZ290M0BmC/jgRZ4vcJ6DTAhjrsSYgdsW/F+MFOBA== }
     dev: true
 
   /lodash.merge@4.6.2:
@@ -5128,12 +5089,6 @@ packages:
     resolution:
       { integrity: sha512-I9jwMn07Sy/IwOj3zVkVik2JTvgpaykDZEigL6Rx6N9LbMywwUSMtxET+7lVoDLLd3O3IXwJwvuuns8UB/HeAg== }
     engines: { node: '>=4' }
-    dev: true
-
-  /mini-svg-data-uri@1.4.4:
-    resolution:
-      { integrity: sha512-r9deDe9p5FJUPZAk3A59wGH7Ii9YrjjWw0jmw/liSbHl2CHiyXj6FcDXDu2K3TjVAXqiJdaw3xxwlZZr9E6nHg== }
-    hasBin: true
     dev: true
 
   /minimatch@3.1.2:
@@ -5711,15 +5666,6 @@ packages:
     dependencies:
       postcss: 8.4.31
       postcss-selector-parser: 6.0.13
-    dev: true
-
-  /postcss-selector-parser@6.0.10:
-    resolution:
-      { integrity: sha512-IQ7TZdoaqbT+LCpShg46jnZVlhWD2w6iQYAcYXfHARZ7X1t/UGhhceQDs5X0cGqKvYlHNOuv7Oa1xmb0oQuA3w== }
-    engines: { node: '>=4' }
-    dependencies:
-      cssesc: 3.0.0
-      util-deprecate: 1.0.2
     dev: true
 
   /postcss-selector-parser@6.0.13:
