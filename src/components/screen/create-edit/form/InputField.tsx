@@ -1,19 +1,27 @@
 import cn from 'classnames'
 import { useFormContext } from 'react-hook-form'
-import { twMerge } from 'tailwind-merge'
 import { ScreenDataEnum } from '../../../../models/Screen'
-import { FixLocation, InputFix } from '../../../input-suffix/InputFix'
+import { InputFix } from '../../../input-suffix/InputFix'
+import { FixLocation } from '../../../input-suffix/InputFix.type'
 
 type Props = TRestProps & {
   formKey: ScreenDataEnum
   title: string
   fix?: string
+  fixWidth?: number
   fixLocation?: FixLocation
-  className?: string
   isLoading?: boolean
 }
 
-export const InputField = ({ formKey, title, fix, fixLocation, className, isLoading = false, ...rest }: Props) => {
+export const InputField = ({
+  formKey,
+  title,
+  fix,
+  fixWidth,
+  fixLocation = FixLocation.suffix,
+  isLoading = false,
+  ...rest
+}: Props) => {
   const {
     register,
     formState: { errors },
@@ -28,22 +36,21 @@ export const InputField = ({ formKey, title, fix, fixLocation, className, isLoad
         <InputFix fix={fix} location={fixLocation}>
           <input
             {...rest}
-            className={twMerge(
-              className,
-              cn('input input-bordered input-md w-full pr-10 shadow-md', {
-                'input-error': errors[formKey],
-                'animate-pulse pointer-events-none': isLoading,
-              }),
-            )}
+            className={cn('input input-bordered input-md w-full shadow-md', {
+              'input-error': errors[formKey],
+              [`!pr-${fixWidth}`]: fixLocation === FixLocation.suffix && fixWidth,
+              [`!pl-${fixWidth}`]: fixLocation === FixLocation.prefix && fixWidth,
+              'skeleton bg-neutral-300 dark:bg-neutral-700 pointer-events-none rounded-lg': isLoading,
+            })}
             {...register(formKey)}
           />
         </InputFix>
       ) : (
         <input
           {...rest}
-          className={cn('input input-bordered input-md w-full pr-10 shadow-md', {
+          className={cn('input input-bordered input-md w-full shadow-md', {
             'input-error': errors[formKey],
-            'animate-pulse pointer-events-none': isLoading,
+            'skeleton bg-neutral-300 dark:bg-neutral-700 pointer-events-none rounded-lg': isLoading,
           })}
           {...register(formKey)}
         />

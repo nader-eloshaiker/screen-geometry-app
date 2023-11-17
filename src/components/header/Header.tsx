@@ -10,7 +10,7 @@ export default function Header() {
     <header className='sidebar rounded-b-xl'>
       <div className='grid place-content-center pt-2 text-2xl'>{import.meta.env.VITE_APP_TITLE}</div>
       <div className='navbar justify-between'>
-        <ul className='menu rounded-box menu-horizontal gap-4'>
+        <ul className='menu menu-horizontal gap-4 rounded-box'>
           <li>
             <Link
               className={cn('atext-sm sm:text-base', { active: pathname === routes.root.path })}

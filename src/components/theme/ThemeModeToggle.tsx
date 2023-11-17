@@ -15,9 +15,9 @@ export default function ThemeModeToggle({ className, ...rest }: TProps) {
   }
 
   return (
-    <label className={twMerge(className, 'swap-rotate swap')} {...rest}>
+    <label className={twMerge('swap-rotate swap', className)} {...rest}>
       {/* this hidden checkbox controls the state */}
-      <input type='checkbox' className='hidden' onClick={handleChange} />
+      <input type='checkbox' checked={!isDarkMode} className='theme-controller' onClick={handleChange} />
 
       <SunIcon id='theme-dark-icon' className='swap-on h-5 w-5 p-0' fill='currentColor' />
       <MoonIcon id='theme-light-icon' className='swap-off h-5 w-5 p-0' fill='currentColor' />

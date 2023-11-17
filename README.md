@@ -14,6 +14,11 @@ I have been considering what my next monitor purchase will be and it has been di
 
 ## Dev'ing the App
 
+**Installing dependencies**
+
+    npm install -g pnpm
+    pnpm i
+
 **Run in development** (using vite)
 
     pnpm run dev
@@ -123,6 +128,11 @@ I discovered this little gem to replace pnpm and it is lightning quick. You can 
 
 ### 4.1 Core
 
+- PNPM
+  - pnpm is up to 2x faster than npm
+  - Files inside node_modules are cloned or hard linked from a single content-addressable storage
+  - pnpm has built-in support for multiple packages in a repository
+  - pnpm creates a non-flat node_modules by default, so code has no access to arbitrary packages
 - TypeScript
   - This is such an important addition to JavaScript when generating code from an API Spec. Just remember that defining a `type` on an API response is ill advised, stick with `interface`.
   - Type safety may mean more code, but it also means less unit tests and more importantly, less bugs. I remember the days when your code will break unexpectedly due to a missing or incorrect prop!

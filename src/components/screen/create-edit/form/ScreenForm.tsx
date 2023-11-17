@@ -130,6 +130,7 @@ export const ScreenForm = ({ defaultValues, editMode, isLoading }: Props) => {
           <div id='screenTag' className='grid grid-cols-2 gap-3'>
             <InputField
               formKey={ScreenDataEnum.diagonalSize}
+              fixWidth={10}
               title='Screen Size'
               type='number'
               fix='in'
@@ -153,6 +154,7 @@ export const ScreenForm = ({ defaultValues, editMode, isLoading }: Props) => {
           <div id='screenData' className='grid grid-cols-2 gap-3'>
             <InputField
               formKey={ScreenDataEnum.hRes}
+              fixWidth={10}
               title='Horizontal Res'
               type='number'
               fix='px'
@@ -163,6 +165,7 @@ export const ScreenForm = ({ defaultValues, editMode, isLoading }: Props) => {
 
             <InputField
               formKey={ScreenDataEnum.vRes}
+              fixWidth={10}
               title='Vertical Res'
               type='number'
               fix='px'
@@ -175,7 +178,7 @@ export const ScreenForm = ({ defaultValues, editMode, isLoading }: Props) => {
           <div className='divider text-sm'>Theme Color</div>
 
           <div className='flex justify-between'>
-            <div className='flex gap-2'>
+            <div className='flex gap-4'>
               <ColorField formKey={ScreenDataEnum.lightColor} title='Light' mode={LightMode} isLoading={isLoading} />
               <ColorField formKey={ScreenDataEnum.darkColor} title='Dark' mode={DarkMode} isLoading={isLoading} />
             </div>
@@ -206,7 +209,7 @@ export const ScreenForm = ({ defaultValues, editMode, isLoading }: Props) => {
           )}
 
           <div className='mt-2 flex justify-between'>
-            <div className='flex gap-2'>
+            <div className='flex gap-4'>
               <button
                 id='cancelButton'
                 type='button'
