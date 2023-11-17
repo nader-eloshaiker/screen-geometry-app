@@ -4,7 +4,8 @@ import cn from 'classnames'
 import { ChangeEvent, KeyboardEvent, memo, useRef, useState } from 'react'
 import MagnifyGlassIcon from '../../assets/icons/MagnifyGlass'
 import { useElementSize } from '../../hooks/useElementSize'
-import { FixLocation, InputFix } from '../input-suffix/InputFix'
+import { InputFix } from '../input-suffix/InputFix'
+import { FixLocation } from '../input-suffix/InputFix.type'
 
 export type TAutoCompleteItem = { id: string; label: string }
 type TProps = TRestProps & {
@@ -77,7 +78,7 @@ export const AutoComplete = ({
           name='autoCompleteInput'
           data-testid='autoCompleteInput'
           type='text'
-          className='input input-md relative w-full pl-12 shadow-md'
+          className='input input-md relative w-full !pl-12 shadow-md'
           value={value}
           onChange={handleChange}
           placeholder={placeholder ?? 'Type something..'}

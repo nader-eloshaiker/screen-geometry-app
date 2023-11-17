@@ -1,7 +1,7 @@
 /** @type {import('tailwindcss').Config} */
 
 import daisyui from 'daisyui'
-import daisyuiThemes from 'daisyui/src/theming/themes'
+import { themes as daisyuiThemes } from 'daisyui/src/theming/themes'
 import colors from 'tailwindcss/colors'
 import defaultTheme from 'tailwindcss/defaultTheme'
 
@@ -40,7 +40,7 @@ export default {
     themes: [
       {
         light: {
-          ...daisyuiThemes['[data-theme=light]'],
+          ...daisyuiThemes['light'],
           // 'color-scheme': 'light',
           primary: '#e37c07',
           'primary-content': '#f5ecdc',
@@ -59,7 +59,7 @@ export default {
       'dark',
       {
         dark: {
-          ...daisyuiThemes['[data-theme=dark]'],
+          ...daisyuiThemes['dark'],
           // 'color-scheme': 'dark',
           primary: '#cc5b14',
           'primary-content': '#f5ecdc',
