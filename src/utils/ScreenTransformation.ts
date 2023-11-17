@@ -34,10 +34,23 @@ const createSpec = (width?: number, height?: number, size?: number): ScreenSpec 
   }
 }
 
-export const transformScreenInput = (data: ScreenInput): ScreenItem => {
+export const transformScreenItem = (data: ScreenItem): ScreenInput => {
+  const item: ScreenInput = {
+    diagonalSize: data.tag.diagonalSize,
+    aspectRatio: data.tag.aspectRatio,
+    hRes: data.spec?.hRes,
+    vRes: data.spec?.vRes,
+    lightColor: data.color.lightColor,
+    darkColor: data.color.darkColor,
+  }
+
+  return item
+}
+
+export const transformScreenInput = (data: ScreenInput, id?: string): ScreenItem => {
   const [hAspectRatio, vAspectRatio] = getAspectRatio(data.aspectRatio)
   const item: ScreenItem = {
-    id: getRandomString(8),
+    id: id ?? getRandomString(8),
     tag: {
       diagonalSize: data.diagonalSize,
       aspectRatio: data.aspectRatio,

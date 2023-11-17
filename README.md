@@ -5,31 +5,36 @@ I have been considering what my next monitor purchase will be and it has been di
 
 ## How the user interacts with the App
 
-1.  Search > User has a search bar a list of preconfigured monitors that can be filtered by user text.
-2.  Creating a monitor configuration > User must enter at least, a monitor size and an aspect ratio to create a monitor entry.
-3.  Screen Configuration Table > User data is rendered onto a table. Table allows the user to "_Favorite_" a particular screen to permanently highlight it in the GUI Panel. Moving the mouse over or clinking each column will temporarily highlight the GUI panel and table row.
-4.  Screen GUI Panel > As user adds a screen configuration it will be displayed with a relative size to the others, allowing to compare screen realestate. Moving mouse over each screen panel, will temporarily highlight the screen outline and the respective table row. Screens that have been favorited, will stay highlighted permanently until "unfavorited".
+1. Search > User has a search bar a list of preconfigured monitors that can be filtered by user text.
+2. Creating a monitor configuration > User must enter at least, a monitor size and an aspect ratio to create a monitor entry.
+3. Screen Configuration Table > User data is rendered onto a table. Table allows the user to "_Favorite_" a particular screen to permanently highlight it in the GUI Panel. Moving the mouse over or clinking each column will temporarily highlight the GUI panel and table row.
+4. Screen GUI Panel > As user adds a screen configuration it will be displayed with a relative size to the others, allowing to compare screen realestate. Moving mouse over each screen panel, will temporarily highlight the screen outline and the respective table row. Screens that have been favorited, will stay highlighted permanently until "unfavorited".
 
 [Read here](./docs/UserGuide.md) for a more detailed explaination
 
 ## Dev'ing the App
 
+**Installing dependencies**
+
+    npm install -g pnpm
+    pnpm i
+
 **Run in development** (using vite)
 
-    npm run dev
+    pnpm run dev
 
 **Linting**
 
-    npm run lint:fix
+    pnpm run lint:fix
 
 **Build** (using vite)
 
-    npm run build
+    pnpm run build
 
 **Generate API Client** (using orval)
 Code is checked in for review ease. This can also help when working on a 'work in progress' published spec, as it allows the developer to control which spec the client is generated from in other feature branches and in main branches.
 
-    npm run gen:spec
+    pnpm run gen:spec
 
 ## Architecture
 
@@ -104,7 +109,7 @@ Before starting frontend and backend engineers start development, it is encourag
 
 ### 3.2 Vite
 
-I discovered this little gem to replace npm and it is lightning quick. You can read more about [Vite](https://vitejs.dev/), but to summarise what they have on their site for convenience:
+I discovered this little gem to replace pnpm and it is lightning quick. You can read more about [Vite](https://vitejs.dev/), but to summarise what they have on their site for convenience:
 
 - `Instant Server Start` On demand file serving over native ESM, no bundling required!
 - `Lightning Fast HMR` Hot Module Replacement (HMR) that stays fast regardless of app size.
@@ -123,6 +128,11 @@ I discovered this little gem to replace npm and it is lightning quick. You can r
 
 ### 4.1 Core
 
+- PNPM
+  - pnpm is up to 2x faster than npm
+  - Files inside node_modules are cloned or hard linked from a single content-addressable storage
+  - pnpm has built-in support for multiple packages in a repository
+  - pnpm creates a non-flat node_modules by default, so code has no access to arbitrary packages
 - TypeScript
   - This is such an important addition to JavaScript when generating code from an API Spec. Just remember that defining a `type` on an API response is ill advised, stick with `interface`.
   - Type safety may mean more code, but it also means less unit tests and more importantly, less bugs. I remember the days when your code will break unexpectedly due to a missing or incorrect prop!

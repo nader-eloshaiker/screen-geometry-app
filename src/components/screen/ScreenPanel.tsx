@@ -10,7 +10,6 @@ const Panel = styled.div<{ $width: number; $height: number; $color?: string; $in
   border-color: ${(props) => props.$color};
   color: ${(props) => props.$color};
   text-align: center;
-  z-index: ${(props) => props.$index};
 `
 
 type TProps = TRestProps & {
@@ -29,7 +28,7 @@ export const ScreenPanel = ({ screen, index, setHighLighted, isHighlighted, onHi
 
   return (
     <Panel
-      className={cn({ 'border-4': selected, 'border-2 border-dashed': !selected }) + ' rounded-lg'}
+      className={cn('rounded-lg', { 'border-4': selected, 'border-2 border-dashed': !selected })}
       $width={width}
       $height={height}
       $color={themeMode === DarkMode ? screen.color.lightColor : screen.color.darkColor}

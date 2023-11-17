@@ -3,10 +3,12 @@ export const routes = {
   apiPathVer: '/v1',
   screens: {
     path: 'screens',
-    key: ':screenId',
+  },
+  screen: {
+    path: 'screen',
+    key: ':id',
     actions: {
       favorite: 'favorite',
-      create: 'create',
       createList: 'createlist',
     },
   },
