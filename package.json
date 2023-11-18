@@ -62,7 +62,7 @@
     "@vitest/coverage-v8": "^0.34.6",
     "@vitest/ui": "^0.34.6",
     "autoprefixer": "^10.4.16",
-    "daisyui": "^4.1.0",
+    "daisyui": "^4.4.0",
     "eslint": "^8.48.0",
     "eslint-config-prettier": "^9.0.0",
     "eslint-import-resolver-typescript": "^3.6.1",
@@ -89,7 +89,7 @@
     "defaults"
   ],
   "lint-staged": {
-    "**/*.{ts,tsx,js} !(src/generated/**/*)": "npm run lint:fix",
-    "*.{ts,tsx,js,css,md*}": "npm run format"
+    "**/*.{ts,tsx,js,json,yaml} !(src/generated/**/*)": "npm run lint:fix",
+    "*.{ts,tsx,js,csss,json,yaml,md*}": "npm run format"
   }
 }
