@@ -89,7 +89,7 @@
     "defaults"
   ],
   "lint-staged": {
-    "**/*.{ts,tsx,js} !(src/generated/**/*)": "npm run lint:fix",
-    "*.{ts,tsx,js,css,md*}": "npm run format"
+    "**/*.{ts,tsx,js,json,yaml} !(src/generated/**/*)": "npm run lint:fix",
+    "*.{ts,tsx,js,csss,json,yaml,md*}": "npm run format"
   }
 }
