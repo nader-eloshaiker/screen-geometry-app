@@ -1,7 +1,6 @@
 /** @type {import('tailwindcss').Config} */
-
 import daisyui from 'daisyui'
-import { themes as daisyuiThemes } from 'daisyui/src/theming/themes'
+import * as daisyuiThemes from 'daisyui/src/theming/themes'
 import colors from 'tailwindcss/colors'
 import defaultTheme from 'tailwindcss/defaultTheme'
 
@@ -54,6 +53,7 @@ export default {
           // 'base-200': '#F2F2F2',
           // 'base-300': '#E5E6E6',
           // 'base-content': '#1f2937',
+          error: '#960300',
         },
       },
       'dark',
@@ -77,7 +77,7 @@ export default {
           // info: '#419ec3',
           // success: '#19cca2',
           // warning: '#fbb565',
-          // error: '#fc5985',
+          error: '#750100',
         },
       },
     ],
