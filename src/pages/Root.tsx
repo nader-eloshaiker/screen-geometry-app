@@ -6,7 +6,7 @@ export default function Root() {
   return (
     <div id='app-root' className='container mx-auto flex h-screen min-h-screen flex-col overflow-hidden'>
       <Header />
-      <main role='main' className='my-6 h-full flex-1 overflow-y-auto px-2 md:px-6 xl:px-2'>
+      <main role='main' className='my-6 flex-1 overflow-y-auto px-2 md:px-6 xl:px-2'>
         <Outlet />
       </main>
       <Footer />
