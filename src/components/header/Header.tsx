@@ -44,7 +44,7 @@ export default function Header() {
             </Link>
           </li>
         </ul>
-        <ThemeModeToggle className='mr-2 opacity-50 transition-opacity hover:opacity-100' />
+        <ThemeModeToggle className='mr-2 opacity-50 transition duration-500 ease-in-out hover:opacity-100' />
       </div>
     </header>
   )
