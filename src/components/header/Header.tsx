@@ -8,9 +8,9 @@ export default function Header() {
 
   return (
     <header className='sidebar rounded-b-xl'>
-      <div className='grid place-content-center pt-2 text-2xl'>{import.meta.env.VITE_APP_TITLE}</div>
-      <div className='navbar justify-between'>
-        <ul className='menu menu-horizontal gap-4 rounded-box'>
+      <div className='pt-2 text-center text-2xl'>{import.meta.env.VITE_APP_TITLE}</div>
+      <div className='navbar justify-between px-3'>
+        <ul className='menu menu-horizontal gap-4 rounded-box p-0'>
           <li>
             <Link
               className={cn('atext-sm sm:text-base', { active: pathname === routes.root.path })}
@@ -44,7 +44,7 @@ export default function Header() {
             </Link>
           </li>
         </ul>
-        <ThemeModeToggle title='Dark Mode' className='lightModeText btn btn-ghost' />
+        <ThemeModeToggle className='mr-2 opacity-50 transition-opacity hover:opacity-100' />
       </div>
     </header>
   )

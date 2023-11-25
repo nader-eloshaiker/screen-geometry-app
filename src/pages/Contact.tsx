@@ -21,7 +21,7 @@ const ListItem = ({ href, icon, text }: ListItemProps) => {
 
 export const Contact = () => {
   return (
-    <div className='h-full px-2 md:px-6 xl:px-2'>
+    <div className='h-full'>
       <h1 className='mb-4 text-3xl font-bold'>How to engage with me or this app</h1>
       <p className='mb-8'>
         Hey there! I&apos;m always happy to hear from you. Whether you&apos;ve got a question, feedback, or just want to

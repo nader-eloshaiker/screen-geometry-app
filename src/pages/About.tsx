@@ -1,11 +1,12 @@
 export const About = () => {
   return (
-    <div className='flex h-full flex-col justify-between px-2 md:px-6 xl:px-2'>
+    <div className='flex h-full flex-col justify-between'>
       <div>
         <h1 className='mb-4 text-3xl font-bold'>Welcome to Screen Geometry</h1>
+        <p className='mb-4'>Hey there, I&apos;m Nader!</p>
         <p className='mb-4'>
-          Hey there! We know choosing a monitor can be a real head-scratcher. With a zillion options out there, it&aposs
-          like finding a needle in a haystack. But fret not, I&apos;m here to make your life easier.
+          I know choosing a monitor can be a real head-scratcher. With a zillion options out there, it&aposs like
+          finding a needle in a haystack. But fret not, I&apos;m here to make your life easier.
         </p>
         <p className='mb-4'>
           So, what&apos;s this all about? Well, I&apos;ve cooked up a handy tool that lets you compare monitor screen
@@ -24,12 +25,13 @@ export const About = () => {
           perfect screen together!
         </p>
         <p className='mb-4'>
-          P.S. Have questions or feedback? I&apos;m all ears. Feel free to reach out and let us know how I can make this
-          experience even better for you.
+          P.S. Have questions or feedback? I&apos;m all ears. Feel free to reach out and let me know how I can make this
+          experience even better for you. Go to the contact page for details on how to get in touch.
         </p>
       </div>
       <div>
-        <p className='mb-4 text-right text-sm'>Version: {import.meta.env.PACKAGE_VERSION}</p>
+        <p className='mb-1 text-right'>All The Best</p>
+        <p className='mb-4 text-right italic'>Nader</p>
       </div>
     </div>
   )
