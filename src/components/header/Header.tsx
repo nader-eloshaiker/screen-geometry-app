@@ -24,10 +24,13 @@ export default function Header() {
       {/* small header */}
       <div className='flex w-full flex-row xs:hidden'>
         <div className='dropdown'>
-          <label tabIndex={0} className='btn btn-circle btn-ghost'>
+          <label tabIndex={0} className='btn btn-square btn-ghost'>
             <HamburgerIcon className='h-6 w-6' />
           </label>
-          <ul tabIndex={0} className='menu dropdown-content menu-sm z-[1] mt-3 w-52 rounded-box bg-base-100 p-2 shadow'>
+          <ul
+            tabIndex={0}
+            className='menu dropdown-content menu-sm z-[1] ml-2 mt-3 w-52 rounded-box bg-base-100 p-2 shadow-lg'
+          >
             <NavMenuItem pathname={pathname} route={routes.root.path} title='Home' />
             <NavMenuItem pathname={pathname} route={routes.about.path} title='About' />
             <NavMenuItem pathname={pathname} route={routes.contact.path} title='Contact' />
