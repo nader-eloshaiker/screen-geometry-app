@@ -1,4 +1,4 @@
-# Screen Geometry!
+# Screen Geometry
 
 This app is more for show casing some **Dev Tooling**, **Web Dev Frame Works**, **Testing Practices** and **Automated Deployments**. However, as a bonus, it is a useful tool for _comparing different monitor screen configurations_.
 I have been considering what my next monitor purchase will be and it has been difficult to conceptualise the different monitor sizes and aspect ratios when I only own a 27" - 16:9 monitor. So this app also has some utility outside of being a reference for frontend tech.
@@ -27,4 +27,4 @@ Once the users data is stored, the data is rendered onto a table. This table all
 
 The configuration GUI is located directly below the table and show an outline of the monitor size. As the user adds more screen configurations, they will be added with a relative size to the others. This allows the user to view all the monitors with respect to each other to appreciate the variations in screen realestate.
 Moving your mouse over each screen, it will temporarily highlight the screen outline and also highlight the respective table row.
-Screens that have been hidden, will not be visible in the comparison panel until the are set to "visible again".
+Screens that have been hidden, will not be visible in the comparison panel until the are set to "visible" again.
