@@ -84,7 +84,7 @@ export default function Geometry() {
               <div className='flex flex-col items-center gap-2 py-6'>
                 <div>Click here to populate default list</div>
                 <button
-                  className='btn btn-primary btn-outline w-40'
+                  className='btn btn-outline btn-primary w-40'
                   onClick={onLoadDefault}
                   disabled={isCreateListLoading}
                 >
@@ -101,16 +101,18 @@ export default function Geometry() {
               </label>
               <Stacked height={maxPanelSize.height}>
                 {!isScreenListLoading ? (
-                  screens.map((screen, index) => (
-                    <ScreenPanel
-                      key={screen.id}
-                      screen={screen}
-                      index={screens.length - index}
-                      isHighlighted={isHighlighted}
-                      setHighLighted={setHighlighted}
-                      onHighlightClick={onHighlightClick}
-                    />
-                  ))
+                  screens
+                    .filter((screen) => screen.visible)
+                    .map((screen, index) => (
+                      <ScreenPanel
+                        key={screen.id}
+                        screen={screen}
+                        index={screens.length - index}
+                        isHighlighted={isHighlighted}
+                        setHighLighted={setHighlighted}
+                        onHighlightClick={onHighlightClick}
+                      />
+                    ))
                 ) : (
                   <SkeletonImage className='h-full w-full' />
                 )}
