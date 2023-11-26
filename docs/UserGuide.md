@@ -21,10 +21,10 @@ The user can also add resolution to be able to get a more detailed comparison of
 
 #### 1.3 Screen Configuration Table
 
-Once the users data is stored, the data is rendered onto a table. This table allows the user to "_Favorite_" a particular screen so that it remains accentuated in the GUI Panel (described below) for better reference. Moving the mouse over each column or clicking on a column will temporarily highlight the GUI representation as well as highlight the row.
+Once the users data is stored, the data is rendered onto a table. This table allows the user to "_Show/Hide_" a particular screen from the Physical Screen Comparison panel (described below) for better reference. Moving the mouse over each column or clicking on a column will temporarily highlight the GUI representation as well as highlight the row.
 
 #### 1.4 Screen Configuration GUI
 
 The configuration GUI is located directly below the table and show an outline of the monitor size. As the user adds more screen configurations, they will be added with a relative size to the others. This allows the user to view all the monitors with respect to each other to appreciate the variations in screen realestate.
 Moving your mouse over each screen, it will temporarily highlight the screen outline and also highlight the respective table row.
-Screens that have been favorited, will stay highlighted permanently or unless "unfavorited".
+Screens that have been hidden, will not be visible in the comparison panel until the are set to "visible again".

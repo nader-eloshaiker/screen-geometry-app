@@ -24,7 +24,7 @@ export const ScreenPanel = ({ screen, index, setHighLighted, isHighlighted, onHi
   const [themeMode] = useThemeMode()
   const width = Math.round(100 * (screen.render?.width ?? 1))
   const height = Math.round(100 * (screen.render?.height ?? 1))
-  const selected = screen.favorite || isHighlighted(screen)
+  const selected = screen.visible || isHighlighted(screen)
 
   return (
     <Panel

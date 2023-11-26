@@ -7,7 +7,7 @@ import { FormDrawerActionTypes } from '../../contexts/FormDrawer/FormDrawerManag
 import { useFormDrawerContext } from '../../contexts/FormDrawer/useFormDrawaerContext'
 import { ScreenItem } from '../../generated/openapi/models'
 import { useDeleteScreen } from '../../hooks/api/useDeleteScreen'
-import { useFavoriteScreen } from '../../hooks/api/useFavoriteScreen'
+import { useShowScreen } from '../../hooks/api/useShowScreen'
 import { useThemeMode } from '../../hooks/useThemeMode'
 import { getRandomString } from '../../utils/RandomGenerator'
 import { SkeletonRect } from '../skeleton/SkeletonRect'
@@ -52,14 +52,14 @@ export const ScreenTable = ({
   onHighlightClick,
 }: Props) => {
   const { isDeleteLoading, deleteAction } = useDeleteScreen()
-  const { isFavoriteLoading, favoriteAction } = useFavoriteScreen()
+  const { isVisibleLoading, visibleAction } = useShowScreen()
   const { dispatchFormDrawer } = useFormDrawerContext()
   const [selected, setSelected] = useState<ScreenItem>()
   const [themeMode] = useThemeMode()
 
-  const onFavourite = (screen: ScreenItem) => {
+  const onShow = (screen: ScreenItem) => {
     setSelected(screen)
-    favoriteAction({ id: screen.id })
+    visibleAction({ id: screen.id })
   }
 
   const handleDelete = (screen: ScreenItem) => {
@@ -110,14 +110,14 @@ export const ScreenTable = ({
             >
               <td>
                 <div className='flex items-center justify-center'>
-                  {isFavoriteLoading && screen.id === selected?.id ? (
+                  {isVisibleLoading && screen.id === selected?.id ? (
                     <div
                       className='loading loading-spinner loading-xs'
                       style={{ color: themeMode === DarkMode ? screen.color.lightColor : screen.color.darkColor }}
                     />
                   ) : (
-                    <button onClick={() => onFavourite(screen)}>
-                      {screen.favorite ? (
+                    <button onClick={() => onShow(screen)}>
+                      {screen.visible ? (
                         <StarSolidIcon
                           id='star-icon'
                           className='h-4 w-4'

@@ -7,8 +7,8 @@ I have been considering what my next monitor purchase will be and it has been di
 
 1. Search > User has a search bar a list of preconfigured monitors that can be filtered by user text.
 2. Creating a monitor configuration > User must enter at least, a monitor size and an aspect ratio to create a monitor entry.
-3. Screen Configuration Table > User data is rendered onto a table. Table allows the user to "_Favorite_" a particular screen to permanently highlight it in the GUI Panel. Moving the mouse over or clinking each column will temporarily highlight the GUI panel and table row.
-4. Screen GUI Panel > As user adds a screen configuration it will be displayed with a relative size to the others, allowing to compare screen realestate. Moving mouse over each screen panel, will temporarily highlight the screen outline and the respective table row. Screens that have been favorited, will stay highlighted permanently until "unfavorited".
+3. Screen Configuration Table > User data is rendered onto a table. Table allows the user to "_Show/Hide_" a particular screen in the Physical Screen Comparison panel. Moving the mouse over or clinking each column will temporarily highlight the GUI panel and table row.
+4. Screen GUI Panel > As user adds a screen configuration it will be displayed with a relative size to the others, allowing to compare screen realestate. Moving mouse over each screen panel, will temporarily highlight the screen outline and the respective table row. Screens that have been hidden, will not be visible in the Screen Comparison Panel.
 
 [Read here](./docs/UserGuide.md) for a more detailed explaination
 

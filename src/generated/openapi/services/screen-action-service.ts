@@ -9,58 +9,62 @@ import { useMutation } from '@tanstack/react-query'
 import { useApiAxios } from '../../../api/fetch/useApiAxios'
 import type { ErrorResponse, ScreenItemResponse } from '../models'
 
-export const useFavoriteScreenActionHook = () => {
-  const favoriteScreenAction = useApiAxios<ScreenItemResponse>()
+type AwaitedInput<T> = PromiseLike<T> | T
+
+type Awaited<O> = O extends AwaitedInput<infer T> ? T : never
+
+export const useShowScreenActionHook = () => {
+  const showScreenAction = useApiAxios<ScreenItemResponse>()
 
   return (id: string) => {
-    return favoriteScreenAction({ url: `/screen/${id}/favorite`, method: 'patch' })
+    return showScreenAction({ url: `/screen/${id}/show`, method: 'patch' })
   }
 }
 
-export const useFavoriteScreenActionMutationOptions = <TError = ErrorResponse, TContext = unknown>(options?: {
+export const useShowScreenActionMutationOptions = <TError = ErrorResponse, TContext = unknown>(options?: {
   mutation?: UseMutationOptions<
-    Awaited<ReturnType<ReturnType<typeof useFavoriteScreenActionHook>>>,
+    Awaited<ReturnType<ReturnType<typeof useShowScreenActionHook>>>,
     TError,
     { id: string },
     TContext
   >
 }): UseMutationOptions<
-  Awaited<ReturnType<ReturnType<typeof useFavoriteScreenActionHook>>>,
+  Awaited<ReturnType<ReturnType<typeof useShowScreenActionHook>>>,
   TError,
   { id: string },
   TContext
 > => {
   const { mutation: mutationOptions } = options ?? {}
 
-  const favoriteScreenAction = useFavoriteScreenActionHook()
+  const showScreenAction = useShowScreenActionHook()
 
   const mutationFn: MutationFunction<
-    Awaited<ReturnType<ReturnType<typeof useFavoriteScreenActionHook>>>,
+    Awaited<ReturnType<ReturnType<typeof useShowScreenActionHook>>>,
     { id: string }
   > = (props) => {
     const { id } = props ?? {}
 
-    return favoriteScreenAction(id)
+    return showScreenAction(id)
   }
 
   return { mutationFn, ...mutationOptions }
 }
 
-export type FavoriteScreenActionMutationResult = NonNullable<
-  Awaited<ReturnType<ReturnType<typeof useFavoriteScreenActionHook>>>
+export type ShowScreenActionMutationResult = NonNullable<
+  Awaited<ReturnType<ReturnType<typeof useShowScreenActionHook>>>
 >
 
-export type FavoriteScreenActionMutationError = ErrorResponse
+export type ShowScreenActionMutationError = ErrorResponse
 
-export const useFavoriteScreenAction = <TError = ErrorResponse, TContext = unknown>(options?: {
+export const useShowScreenAction = <TError = ErrorResponse, TContext = unknown>(options?: {
   mutation?: UseMutationOptions<
-    Awaited<ReturnType<ReturnType<typeof useFavoriteScreenActionHook>>>,
+    Awaited<ReturnType<ReturnType<typeof useShowScreenActionHook>>>,
     TError,
     { id: string },
     TContext
   >
 }) => {
-  const mutationOptions = useFavoriteScreenActionMutationOptions(options)
+  const mutationOptions = useShowScreenActionMutationOptions(options)
 
   return useMutation(mutationOptions)
 }

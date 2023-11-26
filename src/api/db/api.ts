@@ -64,7 +64,7 @@ export async function deleteItemAction(id: string | undefined) {
   return { id }
 }
 
-export async function favouriteItemAction(id: string | undefined) {
+export async function showItemAction(id: string | undefined) {
   if (!id) {
     throw new Error('No id provided!')
   }
@@ -74,7 +74,7 @@ export async function favouriteItemAction(id: string | undefined) {
   const item = data
     ? await updateItem(id, {
         ...data,
-        favorite: !data.favorite, // === 'true',
+        visible: !data.visible, // === 'true',
       })
     : null
 

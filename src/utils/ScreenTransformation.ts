@@ -66,7 +66,7 @@ export const transformScreenInput = (data: ScreenInput, id?: string): ScreenItem
       lightColor: data.lightColor,
       darkColor: data.darkColor,
     },
-    favorite: false,
+    visible: true,
   }
 
   return item

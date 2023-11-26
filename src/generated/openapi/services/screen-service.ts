@@ -16,6 +16,10 @@ import { useMutation, useQuery } from '@tanstack/react-query'
 import { useApiAxios } from '../../../api/fetch/useApiAxios'
 import type { ErrorResponse, ScreenIdResponse, ScreenInput, ScreenItemResponse } from '../models'
 
+type AwaitedInput<T> = PromiseLike<T> | T
+
+type Awaited<O> = O extends AwaitedInput<infer T> ? T : never
+
 export const useFindScreenActionHook = () => {
   const findScreenAction = useApiAxios<ScreenItemResponse>()
 
