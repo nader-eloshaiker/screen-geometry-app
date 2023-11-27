@@ -38,7 +38,7 @@ export default function Geometry() {
   const maxScreenSize = screens.length > 0 ? getMaxScreenSize(screens) : { width: 47, height: 16 } // max possible screen size
   const maxPanelSize: Dimensions = { width, height: Math.round(maxScreenSize.height * (width / maxScreenSize.width)) }
 
-  const { isScreenListLoading } = useListScreens()
+  const { isScreenListLoading } = useListScreens({ refetchOnWindowFocus: false })
   const { isCreateListLoading, createListAction } = useCreateScreenList()
 
   const onHighlightClick = useCallback(
