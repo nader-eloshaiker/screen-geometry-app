@@ -8,16 +8,23 @@ import {
 import { useNotificationContext } from '../../contexts/Notification/useNotifcationContext'
 import { ScreenActionTypes } from '../../contexts/Screen/ScreenManager'
 import { useScreenContext } from '../../contexts/Screen/useScreenContext'
-import { ErrorResponse, ScreenInputList, ScreenListResponse } from '../../generated/openapi/models'
-import { useCreateScreenListAction } from '../../generated/openapi/services/screen-list-service'
+import { ErrorResponse, ScreenInputList } from '../../generated/openapi/models'
+import {
+  useCreateScreenListAction,
+  useCreateScreenListActionHook,
+} from '../../generated/openapi/services/screen-list-service'
 
-export type CreateListScreenOptions = UseMutationOptions<ScreenListResponse, ErrorResponse, { data: ScreenInputList }>
+export type CreateListScreenOptions = UseMutationOptions<
+  Awaited<ReturnType<ReturnType<typeof useCreateScreenListActionHook>>>,
+  ErrorResponse,
+  { data: ScreenInputList }
+>
 
 export const useCreateScreenList = (queryOptions?: CreateListScreenOptions) => {
   const { dispatch: dispatchScreen } = useScreenContext()
   const { dispatch: dispatchNotification } = useNotificationContext()
   const {
-    isLoading: isCreateListLoading,
+    isPending: isCreateListLoading,
     data: createListResponse,
     error: createListError,
     mutate,

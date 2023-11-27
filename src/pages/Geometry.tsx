@@ -1,3 +1,4 @@
+import { keepPreviousData } from '@tanstack/react-query'
 import { useCallback, useRef, useState } from 'react'
 import styled from 'styled-components'
 import { ScreenPanel } from '../components/screen/ScreenPanel'
@@ -38,7 +39,10 @@ export default function Geometry() {
   const maxScreenSize = screens.length > 0 ? getMaxScreenSize(screens) : { width: 47, height: 16 } // max possible screen size
   const maxPanelSize: Dimensions = { width, height: Math.round(maxScreenSize.height * (width / maxScreenSize.width)) }
 
-  const { isScreenListLoading } = useListScreens({ refetchOnWindowFocus: false })
+  const { isScreenListLoading } = useListScreens({
+    placeholderData: keepPreviousData,
+    queryKey: ['Geometry', 'useCreateScreenList'],
+  })
   const { isCreateListLoading, createListAction } = useCreateScreenList()
 
   const onHighlightClick = useCallback(

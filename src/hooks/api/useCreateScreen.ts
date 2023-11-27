@@ -17,7 +17,7 @@ export const useCreateScreen = (queryOptions?: CreateScreenOptions) => {
   const { dispatch: dispatchScreen } = useScreenContext()
   const { dispatch: dispatchNotification } = useNotificationContext()
   const {
-    isLoading: isCreateLoading,
+    isPending: isCreateLoading,
     data: createResponse,
     error: createError,
     mutate,

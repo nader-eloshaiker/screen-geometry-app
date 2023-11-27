@@ -6,9 +6,13 @@ import { useNotificationContext } from '../../contexts/Notification/useNotifcati
 import { ScreenActionTypes } from '../../contexts/Screen/ScreenManager'
 import { useScreenContext } from '../../contexts/Screen/useScreenContext'
 import { ScreenListResponse } from '../../generated/openapi/models'
-import { useListScreensAction } from '../../generated/openapi/services/screen-list-service'
+import { useListScreensAction, useListScreensActionHook } from '../../generated/openapi/services/screen-list-service'
 
-export type ListScreenOptions = UseQueryOptions<ScreenListResponse, ErrorResponse>
+export type ListScreenOptions = UseQueryOptions<
+  Awaited<ReturnType<ReturnType<typeof useListScreensActionHook>>>,
+  ErrorResponse,
+  ScreenListResponse
+>
 
 export const useListScreens = (queryOptions?: ListScreenOptions) => {
   const { dispatch: dispatchScreen } = useScreenContext()
@@ -17,7 +21,7 @@ export const useListScreens = (queryOptions?: ListScreenOptions) => {
     isFetching: isScreenListLoading,
     error: screenListError,
     data: screenListResponse,
-  } = useListScreensAction({ query: queryOptions })
+  } = useListScreensAction<ScreenListResponse, ErrorResponse>({ query: queryOptions })
 
   useEffect(() => {
     if (screenListResponse && screenListResponse.list.length > 0) {

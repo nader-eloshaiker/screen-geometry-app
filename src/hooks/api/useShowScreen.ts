@@ -9,16 +9,19 @@ import {
 import { useNotificationContext } from '../../contexts/Notification/useNotifcationContext'
 import { ScreenActionTypes } from '../../contexts/Screen/ScreenManager'
 import { useScreenContext } from '../../contexts/Screen/useScreenContext'
-import { ScreenItemResponse } from '../../generated/openapi/models'
-import { useShowScreenAction } from '../../generated/openapi/services/screen-action-service'
+import { useShowScreenAction, useShowScreenActionHook } from '../../generated/openapi/services/screen-action-service'
 
-export type ShowScreenOptions = UseMutationOptions<ScreenItemResponse, ErrorResponse, { id: string }>
+export type ShowScreenOptions = UseMutationOptions<
+  Awaited<ReturnType<ReturnType<typeof useShowScreenActionHook>>>,
+  ErrorResponse,
+  { id: string }
+>
 
 export const useShowScreen = (queryOptions?: ShowScreenOptions) => {
   const { dispatch: dispatchScreen } = useScreenContext()
   const { dispatch: dispatchNotification } = useNotificationContext()
   const {
-    isLoading: isVisibleLoading,
+    isPending: isVisibleLoading,
     data: visibleResponse,
     error: visibleError,
     mutate: visibleAction,

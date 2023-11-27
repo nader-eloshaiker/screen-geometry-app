@@ -9,16 +9,19 @@ import {
 import { useNotificationContext } from '../../contexts/Notification/useNotifcationContext'
 import { ScreenActionTypes } from '../../contexts/Screen/ScreenManager'
 import { useScreenContext } from '../../contexts/Screen/useScreenContext'
-import { ScreenIdResponse } from '../../generated/openapi/models'
-import { useDeleteScreenAction } from '../../generated/openapi/services/screen-service'
+import { useDeleteScreenAction, useDeleteScreenActionHook } from '../../generated/openapi/services/screen-service'
 
-export type DeleteScreenOptions = UseMutationOptions<ScreenIdResponse, ErrorResponse, { id: string }>
+export type DeleteScreenOptions = UseMutationOptions<
+  Awaited<ReturnType<ReturnType<typeof useDeleteScreenActionHook>>>,
+  ErrorResponse,
+  { id: string }
+>
 
 export const useDeleteScreen = (queryOptions?: DeleteScreenOptions) => {
   const { dispatch: dispatchScreen } = useScreenContext()
   const { dispatch: dispatchNotification } = useNotificationContext()
   const {
-    isLoading: isDeleteLoading,
+    isPending: isDeleteLoading,
     data: deleteResponse,
     error: deleteError,
     mutate: deleteAction,
