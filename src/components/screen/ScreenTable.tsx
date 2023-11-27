@@ -4,33 +4,32 @@ import CloseIcon from '../../assets/icons/Close'
 import EditIcon from '../../assets/icons/Edit'
 import { FormDrawerActionTypes } from '../../contexts/FormDrawer/FormDrawerManager'
 import { useFormDrawerContext } from '../../contexts/FormDrawer/useFormDrawaerContext'
-import { ScreenItem } from '../../generated/openapi/models'
+import { ScreenColor, ScreenItem } from '../../generated/openapi/models'
 import { useDeleteScreen } from '../../hooks/api/useDeleteScreen'
 import { useShowScreen } from '../../hooks/api/useShowScreen'
 import { useThemeMode } from '../../hooks/useThemeMode'
 import { getRandomString } from '../../utils/RandomGenerator'
 import { SkeletonRect } from '../skeleton/SkeletonRect'
-import { DarkMode } from '../theme/ThemeConstants'
+import { DarkMode, TThemeMode } from '../theme/ThemeConstants'
 
 const StyledCheckbox = styled.input<{ $color: string }>`
   border-color: ${(props) => props.$color};
-  color: ${(props) => props.$color};
 
   &:checked {
-    /* border-color: ${(props) => props.$color};
-    background-color: ${(props) => props.$color};
-    color: ${(props) => props.$color}; */
-    .checkbox[checked='true'],
-    .checkbox[aria-checked='true'] {
-      --tw-border-opacity: 1;
-      border-color: ${(props) => props.$color};
-      --tw-bg-opacity: 1;
-      background-color: ${(props) => props.$color};
-      --tw-text-opacity: 1;
-      color: ${(props) => props.$color};
-    }
+    --chkbg: ${(props) => props.$color};
   }
 `
+
+const StyledTableRow = styled.tr<{ $color: string; $highlighted: boolean }>`
+  background-color: ${(props) => (props.$highlighted ? props.$color : 'transparent')};
+  &:hover {
+    background-color: ${(props) => props.$color};
+  }
+`
+const bgColor = (themeMode: TThemeMode, color: ScreenColor) =>
+  `${themeMode === DarkMode ? color.lightColor : color.darkColor}${Math.round(0.2 * 255).toString(16)}`
+const fgColor = (themeMode: TThemeMode, color: ScreenColor) =>
+  themeMode === DarkMode ? color.lightColor : color.darkColor
 
 type TTableProps = { cols: number; rows: number }
 
@@ -111,16 +110,10 @@ export const ScreenTable = ({
       {!isScreenListLoading ? (
         <tbody>
           {screens.map((screen) => (
-            <tr
-              style={
-                isHighlighted(screen)
-                  ? {
-                      backgroundColor: `${
-                        themeMode === DarkMode ? screen.color.lightColor : screen.color.darkColor
-                      }${Math.round(0.2 * 255).toString(16)}`,
-                    }
-                  : {}
-              }
+            <StyledTableRow
+              className='cursor-pointer'
+              $highlighted={isHighlighted(screen)}
+              $color={bgColor(themeMode, screen.color)}
               key={screen.id}
               onMouseEnter={() => setHighLighted(screen)}
               onMouseOut={() => setHighLighted(undefined)}
@@ -137,7 +130,7 @@ export const ScreenTable = ({
                   ) : (
                     <StyledCheckbox
                       type='checkbox'
-                      $color={themeMode === DarkMode ? screen.color.lightColor : screen.color.darkColor}
+                      $color={fgColor(themeMode, screen.color)}
                       checked={screen.visible}
                       className='checkbox checkbox-sm'
                       onChange={() => onShow(screen)}
@@ -169,7 +162,7 @@ export const ScreenTable = ({
                   )}
                 </div>
               </td>
-            </tr>
+            </StyledTableRow>
           ))}
         </tbody>
       ) : (
