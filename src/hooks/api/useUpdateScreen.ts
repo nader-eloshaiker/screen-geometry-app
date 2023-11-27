@@ -8,23 +8,20 @@ import {
 import { useNotificationContext } from '../../contexts/Notification/useNotifcationContext'
 import { ScreenActionTypes } from '../../contexts/Screen/ScreenManager'
 import { useScreenContext } from '../../contexts/Screen/useScreenContext'
-import { ErrorResponse, ScreenInput, ScreenItemResponse } from '../../generated/openapi/models'
-import { useUpdateScreenAction } from '../../generated/openapi/services/screen-service'
+import { ErrorResponse, ScreenInput } from '../../generated/openapi/models'
+import { useUpdateScreenAction, useUpdateScreenActionHook } from '../../generated/openapi/services/screen-service'
 
 export type UpdateScreenOptions = UseMutationOptions<
-  ScreenItemResponse,
+  Awaited<ReturnType<ReturnType<typeof useUpdateScreenActionHook>>>,
   ErrorResponse,
-  {
-    id: string
-    data: ScreenInput
-  }
+  { id: string; data: ScreenInput }
 >
 
 export const useUpdateScreen = (queryOptions?: UpdateScreenOptions) => {
   const { dispatch: dispatchScreen } = useScreenContext()
   const { dispatch: dispatchNotification } = useNotificationContext()
   const {
-    isLoading: isUpdateLoading,
+    isPending: isUpdateLoading,
     data: updateResponse,
     error: updateError,
     mutate: updateAction,

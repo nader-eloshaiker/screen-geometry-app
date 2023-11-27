@@ -16,14 +16,16 @@ const hslToHex = (hue: number, saturation: number, light: number) => {
 }
 
 export const getMaxScreenSize = (screens: Array<ScreenItem>) =>
-  screens.reduce(
-    (acc, screen) => {
-      const width = screen.data.hSize
-      const height = screen.data.vSize
-      return { width: Math.max(acc.width, width), height: Math.max(acc.height, height) } as Dimensions
-    },
-    { width: 0, height: 0 } as Dimensions,
-  )
+  screens
+    .filter((screen) => screen.visible)
+    .reduce(
+      (acc, screen) => {
+        const width = screen.data.hSize
+        const height = screen.data.vSize
+        return { width: Math.max(acc.width, width), height: Math.max(acc.height, height) } as Dimensions
+      },
+      { width: 0, height: 0 } as Dimensions,
+    )
 
 export const normaliseScreenRender = (list: ScreenItem[]) => {
   if (list.length === 0) {

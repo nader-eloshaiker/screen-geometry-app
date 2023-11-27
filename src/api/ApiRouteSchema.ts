@@ -8,7 +8,7 @@ export const routes = {
     path: 'screen',
     key: ':id',
     actions: {
-      favorite: 'favorite',
+      show: 'show',
       createList: 'createlist',
     },
   },

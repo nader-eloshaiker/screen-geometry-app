@@ -1,3 +1,4 @@
+import { keepPreviousData } from '@tanstack/react-query'
 import { useCallback, useRef, useState } from 'react'
 import styled from 'styled-components'
 import { ScreenPanel } from '../components/screen/ScreenPanel'
@@ -38,7 +39,10 @@ export default function Geometry() {
   const maxScreenSize = screens.length > 0 ? getMaxScreenSize(screens) : { width: 47, height: 16 } // max possible screen size
   const maxPanelSize: Dimensions = { width, height: Math.round(maxScreenSize.height * (width / maxScreenSize.width)) }
 
-  const { isScreenListLoading } = useListScreens()
+  const { isScreenListLoading } = useListScreens({
+    placeholderData: keepPreviousData,
+    queryKey: ['Geometry', 'useCreateScreenList'],
+  })
   const { isCreateListLoading, createListAction } = useCreateScreenList()
 
   const onHighlightClick = useCallback(
@@ -84,7 +88,7 @@ export default function Geometry() {
               <div className='flex flex-col items-center gap-2 py-6'>
                 <div>Click here to populate default list</div>
                 <button
-                  className='btn btn-primary btn-outline w-40'
+                  className='btn btn-outline btn-primary w-40'
                   onClick={onLoadDefault}
                   disabled={isCreateListLoading}
                 >
@@ -101,16 +105,18 @@ export default function Geometry() {
               </label>
               <Stacked height={maxPanelSize.height}>
                 {!isScreenListLoading ? (
-                  screens.map((screen, index) => (
-                    <ScreenPanel
-                      key={screen.id}
-                      screen={screen}
-                      index={screens.length - index}
-                      isHighlighted={isHighlighted}
-                      setHighLighted={setHighlighted}
-                      onHighlightClick={onHighlightClick}
-                    />
-                  ))
+                  screens
+                    .filter((screen) => screen.visible)
+                    .map((screen, index) => (
+                      <ScreenPanel
+                        key={screen.id}
+                        screen={screen}
+                        index={screens.length - index}
+                        isHighlighted={isHighlighted}
+                        setHighLighted={setHighlighted}
+                        onHighlightClick={onHighlightClick}
+                      />
+                    ))
                 ) : (
                   <SkeletonImage className='h-full w-full' />
                 )}
