@@ -1,5 +1,6 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import { About } from '../pages/About'
+import { BoundyErrorManager } from '../pages/BoundryErrorManger'
 import { Contact } from '../pages/Contact'
 import ErrorManager from '../pages/ErrorManger'
 import Geometry from '../pages/Geometry'
@@ -12,7 +13,7 @@ export default function AppRouterProvider() {
     {
       path: routes.root.path,
       element: <Root />,
-      errorElement: <ErrorManager />,
+      errorElement: <BoundyErrorManager />,
       children: [
         {
           errorElement: <ErrorManager />,

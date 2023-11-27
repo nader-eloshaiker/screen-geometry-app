@@ -1,17 +1,35 @@
 import { useState } from 'react'
+import styled from 'styled-components'
 import CloseIcon from '../../assets/icons/Close'
 import EditIcon from '../../assets/icons/Edit'
-import StarOutlineIcon from '../../assets/icons/StarOutline'
-import StarSolidIcon from '../../assets/icons/StarSolid'
 import { FormDrawerActionTypes } from '../../contexts/FormDrawer/FormDrawerManager'
 import { useFormDrawerContext } from '../../contexts/FormDrawer/useFormDrawaerContext'
-import { ScreenItem } from '../../generated/openapi/models'
+import { ScreenColor, ScreenItem } from '../../generated/openapi/models'
 import { useDeleteScreen } from '../../hooks/api/useDeleteScreen'
-import { useFavoriteScreen } from '../../hooks/api/useFavoriteScreen'
+import { useShowScreen } from '../../hooks/api/useShowScreen'
 import { useThemeMode } from '../../hooks/useThemeMode'
 import { getRandomString } from '../../utils/RandomGenerator'
 import { SkeletonRect } from '../skeleton/SkeletonRect'
-import { DarkMode } from '../theme/ThemeConstants'
+import { DarkMode, TThemeMode } from '../theme/ThemeConstants'
+
+const StyledCheckbox = styled.input<{ $color: string }>`
+  border-color: ${(props) => props.$color};
+
+  &:checked {
+    --chkbg: ${(props) => props.$color};
+  }
+`
+
+const StyledTableRow = styled.tr<{ $color: string; $highlighted: boolean }>`
+  background-color: ${(props) => (props.$highlighted ? props.$color : 'transparent')};
+  &:hover {
+    background-color: ${(props) => props.$color};
+  }
+`
+const bgColor = (themeMode: TThemeMode, color: ScreenColor) =>
+  `${themeMode === DarkMode ? color.lightColor : color.darkColor}${Math.round(0.2 * 255).toString(16)}`
+const fgColor = (themeMode: TThemeMode, color: ScreenColor) =>
+  themeMode === DarkMode ? color.lightColor : color.darkColor
 
 type TTableProps = { cols: number; rows: number }
 
@@ -52,14 +70,14 @@ export const ScreenTable = ({
   onHighlightClick,
 }: Props) => {
   const { isDeleteLoading, deleteAction } = useDeleteScreen()
-  const { isFavoriteLoading, favoriteAction } = useFavoriteScreen()
+  const { isVisibleLoading, visibleAction } = useShowScreen()
   const { dispatchFormDrawer } = useFormDrawerContext()
   const [selected, setSelected] = useState<ScreenItem>()
   const [themeMode] = useThemeMode()
 
-  const onFavourite = (screen: ScreenItem) => {
+  const onShow = (screen: ScreenItem) => {
     setSelected(screen)
-    favoriteAction({ id: screen.id })
+    visibleAction({ id: screen.id })
   }
 
   const handleDelete = (screen: ScreenItem) => {
@@ -77,7 +95,7 @@ export const ScreenTable = ({
     <table className='table'>
       <thead>
         <tr>
-          <th className='text-center'>Pin</th>
+          <th className='text-center'>Show</th>
           <th className='text-center'>Size</th>
           <th className='text-center'>Ratio</th>
           <th className='hidden text-center sm:table-cell'>Dimensions</th>
@@ -92,16 +110,10 @@ export const ScreenTable = ({
       {!isScreenListLoading ? (
         <tbody>
           {screens.map((screen) => (
-            <tr
-              style={
-                isHighlighted(screen)
-                  ? {
-                      backgroundColor: `${
-                        themeMode === DarkMode ? screen.color.lightColor : screen.color.darkColor
-                      }${Math.round(0.2 * 255).toString(16)}`,
-                    }
-                  : {}
-              }
+            <StyledTableRow
+              className='cursor-pointer'
+              $highlighted={isHighlighted(screen)}
+              $color={bgColor(themeMode, screen.color)}
               key={screen.id}
               onMouseEnter={() => setHighLighted(screen)}
               onMouseOut={() => setHighLighted(undefined)}
@@ -110,27 +122,19 @@ export const ScreenTable = ({
             >
               <td>
                 <div className='flex items-center justify-center'>
-                  {isFavoriteLoading && screen.id === selected?.id ? (
+                  {isVisibleLoading && screen.id === selected?.id ? (
                     <div
                       className='loading loading-spinner loading-xs'
                       style={{ color: themeMode === DarkMode ? screen.color.lightColor : screen.color.darkColor }}
                     />
                   ) : (
-                    <button onClick={() => onFavourite(screen)}>
-                      {screen.favorite ? (
-                        <StarSolidIcon
-                          id='star-icon'
-                          className='h-4 w-4'
-                          fill={themeMode === DarkMode ? screen.color.lightColor : screen.color.darkColor}
-                        />
-                      ) : (
-                        <StarOutlineIcon
-                          id='star-icon'
-                          className='h-4 w-4'
-                          fill={themeMode === DarkMode ? screen.color.lightColor : screen.color.darkColor}
-                        />
-                      )}
-                    </button>
+                    <StyledCheckbox
+                      type='checkbox'
+                      $color={fgColor(themeMode, screen.color)}
+                      checked={screen.visible}
+                      className='checkbox checkbox-sm'
+                      onChange={() => onShow(screen)}
+                    />
                   )}
                 </div>
               </td>
@@ -158,7 +162,7 @@ export const ScreenTable = ({
                   )}
                 </div>
               </td>
-            </tr>
+            </StyledTableRow>
           ))}
         </tbody>
       ) : (

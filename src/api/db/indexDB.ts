@@ -68,7 +68,7 @@ async function fakeNetwork(key?: string): Promise<void> {
   if (!key) {
     fakeCache = {}
   }
-  const defKey: string = key || ''
+  const defKey: string = key ?? ''
   if (fakeCache[defKey]) {
     return
   }

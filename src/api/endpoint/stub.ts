@@ -6,9 +6,9 @@ import {
   createItemAction,
   createItemListAction,
   deleteItemAction,
-  favouriteItemAction,
   getScreen,
   getScreenList,
+  showItemAction,
   updateItemAction,
 } from '../db/api'
 
@@ -86,12 +86,12 @@ export const generateStub = (axiosInstance: AxiosInstance) => {
     }),
   )
 
-  const screenFavUrl = new RegExp(
-    '^' + routes.apiUrl + routes.apiPathVer + '/' + routes.screen.path + '/[^.]+/' + routes.screen.actions.favorite,
+  const screenShowUrl = new RegExp(
+    '^' + routes.apiUrl + routes.apiPathVer + '/' + routes.screen.path + '/[^.]+/' + routes.screen.actions.show,
   )
-  mock.onPatch(screenFavUrl).reply((config) =>
-    favouriteItemAction(paramScreenId(config.url, routes.screen.actions.favorite)).then((payload) => {
-      debug(config, payload, 'favouriteItemAction')
+  mock.onPatch(screenShowUrl).reply((config) =>
+    showItemAction(paramScreenId(config.url, routes.screen.actions.show)).then((payload) => {
+      debug(config, payload, 'showItemAction')
       return [200, payload, { Accept: 'application/json', 'Content-Type': 'application/json' }]
     }),
   )

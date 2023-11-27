@@ -15,7 +15,7 @@ import type { ScreenTag } from './screenTag'
  */
 export interface ScreenItem {
   id: string
-  favorite: boolean
+  visible: boolean
   tag: ScreenTag
   data: ScreenData
   color: ScreenColor

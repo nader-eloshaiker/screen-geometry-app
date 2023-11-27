@@ -10,44 +10,49 @@ import { useNotificationContext } from '../../contexts/Notification/useNotifcati
 import { ScreenActionTypes } from '../../contexts/Screen/ScreenManager'
 import { useScreenContext } from '../../contexts/Screen/useScreenContext'
 import { ScreenItemResponse } from '../../generated/openapi/models'
-import { useFavoriteScreenAction } from '../../generated/openapi/services/screen-action-service'
+import { useShowScreenAction } from '../../generated/openapi/services/screen-action-service'
 
-export type FavouriteScreenOptions = UseMutationOptions<ScreenItemResponse, ErrorResponse, { id: string }>
+export type ShowScreenOptions = UseMutationOptions<ScreenItemResponse, ErrorResponse, { id: string }>
 
-export const useFavoriteScreen = (queryOptions?: FavouriteScreenOptions) => {
+export const useShowScreen = (queryOptions?: ShowScreenOptions) => {
   const { dispatch: dispatchScreen } = useScreenContext()
   const { dispatch: dispatchNotification } = useNotificationContext()
   const {
-    isLoading: isFavoriteLoading,
-    data: favoriteResponse,
-    error: favouriteError,
-    mutate: favoriteAction,
-  } = useFavoriteScreenAction({ mutation: queryOptions })
+    isLoading: isVisibleLoading,
+    data: visibleResponse,
+    error: visibleError,
+    mutate: visibleAction,
+  } = useShowScreenAction({ mutation: queryOptions })
 
   useEffect(() => {
-    if (favoriteResponse) {
-      dispatchScreen({ type: ScreenActionTypes.UPDATE, payload: favoriteResponse.item })
+    if (visibleResponse) {
+      dispatchScreen({ type: ScreenActionTypes.UPDATE, payload: visibleResponse.item })
       dispatchNotification({
         type: NotificationActionTypes.ADD_NOTIFICATION,
         payload: {
           value: {
             title: 'Success',
-            message: `${favoriteResponse.item.favorite ? 'Favorited' : 'Unfavorited'}: Screen configuration`,
+            message: `${visibleResponse.item.visible ? 'Shown' : 'Hidden'}: Screen configuration`,
           } as GeneralNotificationItem,
           type: NotificationType.SUCCESS,
         },
       })
     }
-  }, [dispatchNotification, dispatchScreen, favoriteResponse])
+  }, [dispatchNotification, dispatchScreen, visibleResponse])
 
   useEffect(() => {
-    if (favouriteError) {
+    if (visibleError) {
       dispatchNotification({
         type: NotificationActionTypes.ADD_NOTIFICATION,
-        payload: { value: favouriteError, type: NotificationType.ERROR },
+        payload: { value: visibleError, type: NotificationType.ERROR },
       })
     }
-  }, [dispatchNotification, favouriteError])
+  }, [dispatchNotification, visibleError])
 
-  return { isFavoriteLoading, favoriteResponse, favouriteError, favoriteAction }
+  return {
+    isVisibleLoading,
+    visibleResponse,
+    visibleError,
+    visibleAction,
+  }
 }
