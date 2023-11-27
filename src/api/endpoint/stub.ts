@@ -38,7 +38,7 @@ export const generateStub = (axiosInstance: AxiosInstance) => {
       return undefined
     }
 
-    const regexp = pathToRegexp(`/${routes.screen.path}/${routes.screen.key}` + action ? `/${action}` : '')
+    const regexp = pathToRegexp(`/${routes.screen.path}/${routes.screen.key}${action ? `/${action}` : ''}`)
     const match = regexp.exec(url)
 
     if (!match || match.length < 2) {

@@ -1,8 +1,7 @@
 import { useState } from 'react'
+import styled from 'styled-components'
 import CloseIcon from '../../assets/icons/Close'
 import EditIcon from '../../assets/icons/Edit'
-import StarOutlineIcon from '../../assets/icons/StarOutline'
-import StarSolidIcon from '../../assets/icons/StarSolid'
 import { FormDrawerActionTypes } from '../../contexts/FormDrawer/FormDrawerManager'
 import { useFormDrawerContext } from '../../contexts/FormDrawer/useFormDrawaerContext'
 import { ScreenItem } from '../../generated/openapi/models'
@@ -12,6 +11,26 @@ import { useThemeMode } from '../../hooks/useThemeMode'
 import { getRandomString } from '../../utils/RandomGenerator'
 import { SkeletonRect } from '../skeleton/SkeletonRect'
 import { DarkMode } from '../theme/ThemeConstants'
+
+const StyledCheckbox = styled.input<{ $color: string }>`
+  border-color: ${(props) => props.$color};
+  color: ${(props) => props.$color};
+
+  &:checked {
+    /* border-color: ${(props) => props.$color};
+    background-color: ${(props) => props.$color};
+    color: ${(props) => props.$color}; */
+    .checkbox[checked='true'],
+    .checkbox[aria-checked='true'] {
+      --tw-border-opacity: 1;
+      border-color: ${(props) => props.$color};
+      --tw-bg-opacity: 1;
+      background-color: ${(props) => props.$color};
+      --tw-text-opacity: 1;
+      color: ${(props) => props.$color};
+    }
+  }
+`
 
 type TTableProps = { cols: number; rows: number }
 
@@ -77,7 +96,7 @@ export const ScreenTable = ({
     <table className='table'>
       <thead>
         <tr>
-          <th className='text-center'>Pin</th>
+          <th className='text-center'>Show</th>
           <th className='text-center'>Size</th>
           <th className='text-center'>Ratio</th>
           <th className='hidden text-center sm:table-cell'>Dimensions</th>
@@ -116,21 +135,13 @@ export const ScreenTable = ({
                       style={{ color: themeMode === DarkMode ? screen.color.lightColor : screen.color.darkColor }}
                     />
                   ) : (
-                    <button onClick={() => onShow(screen)}>
-                      {screen.visible ? (
-                        <StarSolidIcon
-                          id='star-icon'
-                          className='h-4 w-4'
-                          fill={themeMode === DarkMode ? screen.color.lightColor : screen.color.darkColor}
-                        />
-                      ) : (
-                        <StarOutlineIcon
-                          id='star-icon'
-                          className='h-4 w-4'
-                          fill={themeMode === DarkMode ? screen.color.lightColor : screen.color.darkColor}
-                        />
-                      )}
-                    </button>
+                    <StyledCheckbox
+                      type='checkbox'
+                      $color={themeMode === DarkMode ? screen.color.lightColor : screen.color.darkColor}
+                      checked={screen.visible}
+                      className='checkbox checkbox-sm'
+                      onChange={() => onShow(screen)}
+                    />
                   )}
                 </div>
               </td>

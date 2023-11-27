@@ -114,8 +114,8 @@ importers:
         specifier: ^10.4.16
         version: 10.4.16(postcss@8.4.31)
       daisyui:
-        specifier: ^4.4.0
-        version: 4.4.0(postcss@8.4.31)
+        specifier: ^4.4.9
+        version: 4.4.9(postcss@8.4.31)
       eslint:
         specifier: ^8.48.0
         version: 8.52.0
@@ -2719,9 +2719,9 @@ packages:
     engines: { node: ^12.20.0 || ^14.13.1 || >=16.0.0 }
     dev: true
 
-  /daisyui@4.4.0(postcss@8.4.31):
+  /daisyui@4.4.9(postcss@8.4.31):
     resolution:
-      { integrity: sha512-4d1wh+aFqzx3tRvs6kbzRqdxwbSa2jzkuIqMHVgwGnl4k9/p7xZnGfJYWlA+knKmJVLvKXbFyFcR9w8oHGcKbw== }
+      { integrity: sha512-Wqk1f3rQbiDSMfzC/ZufQQi139dY4mCMZJ/hmYIIGpCi0MFndU0wJ575tEGzi2YrCZOagsWhbOeWE7DD/B5pVw== }
     engines: { node: '>=16.9.0' }
     dependencies:
       css-selector-tokenizer: 0.8.0
