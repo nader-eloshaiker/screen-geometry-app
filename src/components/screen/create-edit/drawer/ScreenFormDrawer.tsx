@@ -1,3 +1,4 @@
+import { keepPreviousData } from '@tanstack/react-query'
 import { useEffect, useState } from 'react'
 import { FormDrawerMode } from '../../../../contexts/FormDrawer/FormDrawerManager'
 import { useFormDrawerContext } from '../../../../contexts/FormDrawer/useFormDrawaerContext'
@@ -24,8 +25,9 @@ export const ScreenFormDrawer = ({ children }: Props) => {
   }, [formDrawerState.mode])
 
   const queryOptions: FindScreenOptions = {
+    queryKey: ['ScreenFormDrawer', 'useFindScreen'],
     enabled: formDrawerState.mode === FormDrawerMode.Edit && !!formDrawerState.id,
-    keepPreviousData: true,
+    placeholderData: keepPreviousData,
   }
   const { screenItemResponse, isScreenItemLoading } = useFindScreen(formDrawerState.id ?? '', queryOptions)
 
