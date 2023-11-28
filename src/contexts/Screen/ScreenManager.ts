@@ -33,7 +33,7 @@ export const screenReducer = (state: ScreenState, { type, payload }: ScreenActio
     case ScreenActionTypes.DELETE: {
       const deletion = state.screens.filter((screen) => screen.id !== payload)
 
-      return { ...state, screens: deletion }
+      return { ...state, screens: normaliseScreenRender(deletion) }
     }
     case ScreenActionTypes.UPDATE: {
       const modification = state.screens.map((screen) => (payload && screen.id !== payload.id ? screen : payload))
