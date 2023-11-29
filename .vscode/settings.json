@@ -6,7 +6,17 @@
   "editor.formatOnSaveMode": "file", // required to format on save
   "files.autoSave": "onFocusChange", // optional but recommended
   "vs-code-prettier-eslint.prettierLast": false, // set as "true" to run 'prettier' last not first
-  "typescript.tsdk": "./node_modules/typescript/lib"
+  "typescript.tsdk": "./node_modules/typescript/lib",
+  "search.exclude": {
+    // Avoid polluting search results with lockfile content
+    "pnpm-lock.yaml": true
+  },
+  // Ensure VSCode uses pnpm instead of npm
+  "npm.packageManager": "pnpm",
+  // For those using file-nesting, nest the new files. E.g.:
+  "explorer.fileNesting.patterns": {
+    "package.json": "pnpm-workspace.yaml, pnpm-lock.yaml"
+  }
   // "[javascript]": {
   //   "editor.defaultFormatter": "esbenp.prettier-vscode"
   // },
