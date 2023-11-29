@@ -1,5 +1,5 @@
 import { keepPreviousData } from '@tanstack/react-query'
-import { useCallback, useRef, useState } from 'react'
+import { useRef, useState } from 'react'
 import styled from 'styled-components'
 import { ScreenPanel } from '../components/screen/ScreenPanel'
 import { ScreenTable } from '../components/screen/ScreenTable'
@@ -45,22 +45,19 @@ export default function Geometry() {
   })
   const { isCreateListLoading, createListAction } = useCreateScreenList()
 
-  const onHighlightClick = useCallback(
-    (screen: ScreenItem) => {
-      if (screen.id === highlighted?.id) {
-        setHighlighted(undefined)
-      } else {
-        setHighlighted(screen)
-      }
-    },
-    [highlighted],
-  )
+  const onHighlightClick = (screen: ScreenItem) => {
+    if (screen.id === highlighted?.id) {
+      setHighlighted(undefined)
+    } else {
+      setHighlighted(screen)
+    }
+  }
 
-  const onLoadDefault = useCallback(() => {
+  const onLoadDefault = () => {
     createListAction(defaultScreenInputList)
-  }, [createListAction])
+  }
 
-  const isHighlighted = useCallback((screen: ScreenItem) => screen.id === highlighted?.id, [highlighted])
+  const isHighlighted = (screen: ScreenItem) => screen.id === highlighted?.id
 
   return (
     <FormDrawerProvider>
@@ -92,7 +89,7 @@ export default function Geometry() {
                   onClick={onLoadDefault}
                   disabled={isCreateListLoading}
                 >
-                  {isCreateListLoading ? <span className='loading loading-spinner'></span> : 'Load Screens'}
+                  Load Screens
                 </button>
               </div>
             </div>
