@@ -37,10 +37,12 @@ export const normaliseScreenRender = (list: ScreenItem[]) => {
   const biggest = getMaxScreenSize(sorted)
 
   for (const screen of sorted) {
-    screen.render = {
-      width: screen.data.hSize / biggest.width,
-      height: screen.data.vSize / biggest.height,
-    }
+    screen.render = screen.visible
+      ? {
+          width: screen.data.hSize / biggest.width,
+          height: screen.data.vSize / biggest.height,
+        }
+      : { width: 0, height: 0 }
   }
 
   return sorted

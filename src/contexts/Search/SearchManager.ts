@@ -18,20 +18,20 @@ export enum SearchActionTypes {
 export type DatabaseAction =
   | { type: SearchActionTypes.LOAD; payload: DataBaseEntry[] }
   | { type: SearchActionTypes.SEARCH; payload: string }
-  | { type: SearchActionTypes.RESET; payload?: undefined }
+  | { type: SearchActionTypes.RESET; payload: undefined }
 
 export const searchReducer = (state: DatabaseState, { type, payload }: DatabaseAction): DatabaseState => {
   switch (type) {
-    case SearchActionTypes.LOAD:
+    case SearchActionTypes.LOAD: {
       if (state.monitorData.length > 0) {
         return state
       }
 
-      // eslint-disable-next-line no-case-declarations
       const monitorData = payload.map((item) => transformSearchData(item))
 
       return { ...state, monitorData, results: [...monitorData] }
-    case SearchActionTypes.SEARCH:
+    }
+    case SearchActionTypes.SEARCH: {
       if (state.query === payload) {
         return state
       }
@@ -41,16 +41,21 @@ export const searchReducer = (state: DatabaseState, { type, payload }: DatabaseA
         query: payload,
         results:
           payload?.length > 0
-            ? state.monitorData.filter((item) => item.label.toLowerCase().indexOf(payload.toLowerCase()) > -1).sort()
+            ? state.monitorData
+                .filter((item) => item.label.toLowerCase().indexOf(payload.toLowerCase()) > -1)
+                .sort((a, b) => a.label.localeCompare(b.label))
             : [...state.monitorData],
       }
-    case SearchActionTypes.RESET:
+    }
+    case SearchActionTypes.RESET: {
       if (state.query === '') {
         return state
       }
 
       return { ...state, query: '', results: [...state.monitorData] }
-    default:
+    }
+    default: {
       return state
+    }
   }
 }

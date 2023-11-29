@@ -25,33 +25,33 @@ export type ScreenAction =
 
 export const screenReducer = (state: ScreenState, { type, payload }: ScreenAction): ScreenState => {
   switch (type) {
-    case ScreenActionTypes.LIST:
-      // eslint-disable-next-line no-case-declarations
+    case ScreenActionTypes.LIST: {
       const list = normaliseScreenRender(payload)
 
       return { ...state, screens: list }
-    case ScreenActionTypes.DELETE:
-      // eslint-disable-next-line no-case-declarations
+    }
+    case ScreenActionTypes.DELETE: {
       const deletion = state.screens.filter((screen) => screen.id !== payload)
 
-      return { ...state, screens: deletion }
-    case ScreenActionTypes.UPDATE:
-      // eslint-disable-next-line no-case-declarations
+      return { ...state, screens: normaliseScreenRender(deletion) }
+    }
+    case ScreenActionTypes.UPDATE: {
       const modification = state.screens.map((screen) => (payload && screen.id !== payload.id ? screen : payload))
 
       return {
         ...state,
         screens: normaliseScreenRender(modification),
       }
-    case ScreenActionTypes.ADD:
-      // eslint-disable-next-line no-case-declarations
+    }
+    case ScreenActionTypes.ADD: {
       const additions = normaliseScreenRender([...state.screens, payload])
 
       return { ...state, screens: additions }
-    case ScreenActionTypes.ADD_LIST:
-      // eslint-disable-next-line no-case-declarations
+    }
+    case ScreenActionTypes.ADD_LIST: {
       const additionList = normaliseScreenRender([...state.screens, ...payload])
 
       return { ...state, screens: additionList }
+    }
   }
 }

@@ -24,6 +24,10 @@
     "coverage": "vitest run --coverage",
     "typecheck": "tsc --project tsconfig.json --noEmit"
   },
+  "engines": {
+    "node": ">=18",
+    "pnpm": ">=8"
+  },
   "dependencies": {
     "@hookform/resolvers": "^3.1.1",
     "@react-hook/resize-observer": "^1.2.6",
@@ -62,7 +66,7 @@
     "@vitest/coverage-v8": "^0.34.6",
     "@vitest/ui": "^0.34.6",
     "autoprefixer": "^10.4.16",
-    "daisyui": "^4.4.10",
+    "daisyui": "^4.4.14",
     "eslint": "^8.54.0",
     "eslint-config-prettier": "^9.0.0",
     "eslint-import-resolver-typescript": "^3.6.1",
