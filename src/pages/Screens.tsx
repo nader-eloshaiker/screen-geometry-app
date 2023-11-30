@@ -28,7 +28,7 @@ const Stacked = styled.div<{ height: number }>`
   }
 `
 
-export default function Geometry() {
+export default function Screens() {
   const divSizeRef = useRef<HTMLDivElement>(null)
   const { width } = useElementSize(divSizeRef)
   const {
@@ -41,7 +41,7 @@ export default function Geometry() {
 
   const { isScreenListLoading } = useListScreens({
     placeholderData: keepPreviousData,
-    queryKey: ['Geometry', 'useCreateScreenList'],
+    queryKey: ['Screens', 'useCreateScreenList'],
   })
   const { isCreateListLoading, createListAction } = useCreateScreenList()
 
@@ -89,7 +89,7 @@ export default function Geometry() {
                   onClick={onLoadDefault}
                   disabled={isCreateListLoading}
                 >
-                  Load Screens
+                  {isCreateListLoading ? <span className='loading loading-spinner'></span> : 'Load Screens'}
                 </button>
               </div>
             </div>

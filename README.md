@@ -1,5 +1,12 @@
 # Screen Geometry
 
+This is a tool to help visually compare different screen sizes to help you choose which monitor to buy. It does this by overlaying different screen sizes ontop of each other for
+easy comparison as well as tabulate the specs.
+
+![Demo video](./public/media/ScreenGeometry.640p.gif)
+
+## Purpose
+
 This app is more for show casing some **Dev Tooling**, **Web Dev Frame Works**, **Testing Practices** and **Automated Deployments**. However, as a bonus, it is a useful tool for _comparing different monitor screen configurations_.
 I have been considering what my next monitor purchase will be and it has been difficult to conceptualise the different monitor sizes and aspect ratios when I only own a 27" - 16:9 monitor. So this app also has some utility outside of being a reference for frontend tech.
 
