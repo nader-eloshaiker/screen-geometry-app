@@ -1,23 +1,14 @@
-export const routes = {
+export const appRoutes = {
   root: {
     path: '/',
   },
-  about: {
-    path: '/about',
+  screens: {
+    path: '/Screens',
   },
   help: {
     path: '/help',
   },
   contact: {
     path: '/contact',
-  },
-  screens: {
-    path: 'screens',
-    key: ':id',
-    actions: {
-      create: 'create',
-      delete: 'delete',
-      edit: 'edit',
-    },
   },
 }
