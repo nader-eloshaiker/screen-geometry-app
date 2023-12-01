@@ -1,7 +1,7 @@
 import { AxiosInstance, AxiosRequestConfig } from 'axios'
 import MockAdapter from 'axios-mock-adapter'
 import { pathToRegexp } from 'path-to-regexp'
-import { routes } from '../ApiRouteSchema'
+import { apiRoutes } from '../ApiRouteSchema'
 import {
   createItemAction,
   createItemListAction,
@@ -30,7 +30,7 @@ export const generateStub = (axiosInstance: AxiosInstance) => {
   }
 
   const screenIdUrl = new RegExp(
-    '^' + routes.apiUrl + routes.apiPathVer + '/' + routes.screen.path + '/' + '(?:([^/]+?))/?$',
+    '^' + apiRoutes.apiUrl + apiRoutes.apiPathVer + '/' + apiRoutes.screen.path + '/' + '(?:([^/]+?))/?$',
   )
 
   const paramScreenId = (url: string | undefined, action?: string) => {
@@ -38,7 +38,7 @@ export const generateStub = (axiosInstance: AxiosInstance) => {
       return undefined
     }
 
-    const regexp = pathToRegexp(`/${routes.screen.path}/${routes.screen.key}${action ? `/${action}` : ''}`)
+    const regexp = pathToRegexp(`/${apiRoutes.screen.path}/${apiRoutes.screen.key}${action ? `/${action}` : ''}`)
     const match = regexp.exec(url)
 
     if (!match || match.length < 2) {
@@ -48,7 +48,7 @@ export const generateStub = (axiosInstance: AxiosInstance) => {
     return match[1]
   }
 
-  mock.onGet(`${routes.apiUrl}${routes.apiPathVer}/${routes.screens.path}`).reply((config) =>
+  mock.onGet(`${apiRoutes.apiUrl}${apiRoutes.apiPathVer}/${apiRoutes.screens.path}`).reply((config) =>
     getScreenList().then((payload) => {
       debug(config, payload, 'getScreenList')
 
@@ -56,7 +56,7 @@ export const generateStub = (axiosInstance: AxiosInstance) => {
     }),
   )
 
-  mock.onPost(`${routes.apiUrl}${routes.apiPathVer}/${routes.screens.path}`).reply((config) =>
+  mock.onPost(`${apiRoutes.apiUrl}${apiRoutes.apiPathVer}/${apiRoutes.screens.path}`).reply((config) =>
     createItemListAction(config.data ? JSON.parse(config.data) : {}).then((payload) => {
       debug(config, payload, 'createItemListAction')
 
@@ -87,16 +87,22 @@ export const generateStub = (axiosInstance: AxiosInstance) => {
   )
 
   const screenShowUrl = new RegExp(
-    '^' + routes.apiUrl + routes.apiPathVer + '/' + routes.screen.path + '/[^.]+/' + routes.screen.actions.show,
+    '^' +
+      apiRoutes.apiUrl +
+      apiRoutes.apiPathVer +
+      '/' +
+      apiRoutes.screen.path +
+      '/[^.]+/' +
+      apiRoutes.screen.actions.show,
   )
   mock.onPatch(screenShowUrl).reply((config) =>
-    showItemAction(paramScreenId(config.url, routes.screen.actions.show)).then((payload) => {
+    showItemAction(paramScreenId(config.url, apiRoutes.screen.actions.show)).then((payload) => {
       debug(config, payload, 'showItemAction')
       return [200, payload, { Accept: 'application/json', 'Content-Type': 'application/json' }]
     }),
   )
 
-  mock.onPost(`${routes.apiUrl}${routes.apiPathVer}/${routes.screen.path}`).reply((config) =>
+  mock.onPost(`${apiRoutes.apiUrl}${apiRoutes.apiPathVer}/${apiRoutes.screen.path}`).reply((config) =>
     createItemAction(config.data ? JSON.parse(config.data) : {}).then((payload) => {
       debug(config, payload, 'createItemAction')
       return [200, payload, { Accept: 'application/json', 'Content-Type': 'application/json' }]
