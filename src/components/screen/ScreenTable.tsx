@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import styled from 'styled-components'
+import { twMerge } from 'tailwind-merge'
 import CloseIcon from '../../assets/icons/Close'
 import EditIcon from '../../assets/icons/Edit'
 import { FormDrawerActionTypes } from '../../contexts/FormDrawer/FormDrawerManager'
@@ -56,18 +57,20 @@ const TableSkeleton = ({ cols, rows }: TTableProps) => {
 
 type Props = {
   screens: ScreenItem[]
-  isScreenListLoading: boolean
-  isHighlighted: (screen: ScreenItem) => boolean
-  setHighLighted: (screen: ScreenItem | undefined) => void
-  onHighlightClick: (screen: ScreenItem) => void
+  isScreenListLoading?: boolean
+  className?: string
+  isHighlighted?: (screen: ScreenItem) => boolean
+  setHighLighted?: (screen: ScreenItem | undefined) => void
+  onHighlightClick?: (screen: ScreenItem) => void
 }
 
 export const ScreenTable = ({
   screens,
-  isScreenListLoading,
-  isHighlighted,
-  setHighLighted,
-  onHighlightClick,
+  isScreenListLoading = false,
+  className,
+  isHighlighted = () => false,
+  setHighLighted = () => {},
+  onHighlightClick = () => {},
 }: Props) => {
   const { isDeleteLoading, deleteAction } = useDeleteScreen()
   const { isVisibleLoading, visibleAction } = useShowScreen()
@@ -92,7 +95,7 @@ export const ScreenTable = ({
   }
 
   return (
-    <table className='table'>
+    <table className={twMerge('table', className)}>
       <thead>
         <tr>
           <th className='text-center'>Show</th>
