@@ -1,9 +1,9 @@
 import { default as Axios, AxiosRequestConfig, default as axios } from 'axios'
-import { routes } from '../ApiRouteSchema'
+import { apiRoutes } from '../ApiRouteSchema'
 import { generateStub } from '../endpoint/stub'
 
 const apiAxiosInstance = axios.create({
-  baseURL: `${routes.apiUrl}${routes.apiPathVer}`,
+  baseURL: `${apiRoutes.apiUrl}${apiRoutes.apiPathVer}`,
   timeout: 2000,
   headers: { Accept: 'application/json', 'Content-Type': 'application/json' },
 })

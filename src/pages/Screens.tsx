@@ -1,5 +1,5 @@
 import { keepPreviousData } from '@tanstack/react-query'
-import { useCallback, useRef, useState } from 'react'
+import { useRef, useState } from 'react'
 import styled from 'styled-components'
 import { ScreenPanel } from '../components/screen/ScreenPanel'
 import { ScreenTable } from '../components/screen/ScreenTable'
@@ -28,7 +28,7 @@ const Stacked = styled.div<{ height: number }>`
   }
 `
 
-export default function Geometry() {
+export default function Screens() {
   const divSizeRef = useRef<HTMLDivElement>(null)
   const { width } = useElementSize(divSizeRef)
   const {
@@ -41,26 +41,23 @@ export default function Geometry() {
 
   const { isScreenListLoading } = useListScreens({
     placeholderData: keepPreviousData,
-    queryKey: ['Geometry', 'useCreateScreenList'],
+    queryKey: ['Screens', 'useCreateScreenList'],
   })
   const { isCreateListLoading, createListAction } = useCreateScreenList()
 
-  const onHighlightClick = useCallback(
-    (screen: ScreenItem) => {
-      if (screen.id === highlighted?.id) {
-        setHighlighted(undefined)
-      } else {
-        setHighlighted(screen)
-      }
-    },
-    [highlighted],
-  )
+  const onHighlightClick = (screen: ScreenItem) => {
+    if (screen.id === highlighted?.id) {
+      setHighlighted(undefined)
+    } else {
+      setHighlighted(screen)
+    }
+  }
 
-  const onLoadDefault = useCallback(() => {
+  const onLoadDefault = () => {
     createListAction(defaultScreenInputList)
-  }, [createListAction])
+  }
 
-  const isHighlighted = useCallback((screen: ScreenItem) => screen.id === highlighted?.id, [highlighted])
+  const isHighlighted = (screen: ScreenItem) => screen.id === highlighted?.id
 
   return (
     <FormDrawerProvider>

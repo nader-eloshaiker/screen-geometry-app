@@ -13,12 +13,11 @@ export const useElementSize = (target: RefObject<HTMLElement>) => {
   const [size, setSize] = useState<ElementSize>(initRect)
 
   useLayoutEffect(() => {
-    if (target.current !== null && target.current !== undefined) {
-      const { height, width, x, y } = target.current.getBoundingClientRect()
-      setSize({ height, width, x, y })
-    }
+    const { height, width, x, y } = target.current?.getBoundingClientRect() ?? initRect
+    setSize({ height, width, x, y })
   }, [target])
 
+  // where the magic really happens
   useResizeObserver(target, (entry) => setSize(entry.contentRect))
 
   return size

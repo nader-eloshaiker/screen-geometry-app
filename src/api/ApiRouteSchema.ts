@@ -1,4 +1,4 @@
-export const routes = {
+export const apiRoutes = {
   apiUrl: import.meta.env.VITE_API_URL,
   apiPathVer: '/v1',
   screens: {
