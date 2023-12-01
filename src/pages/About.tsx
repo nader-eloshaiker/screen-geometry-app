@@ -33,10 +33,10 @@ export const About = () => {
         <div className='my-6 flex flex-col items-center'>
           <label className='my-6 text-lg'>Checkout this Demo</label>
           <img
-            width='640'
-            height='496'
+            width='600'
+            height='619'
             className='rounded-md border-2 border-base-300 shadow-lg'
-            src='/media/ScreenGeometry.640p.gif'
+            src='/media/ScreenGeometry.gif'
           />
         </div>
         <p className='mb-4'>

@@ -3,7 +3,7 @@
 This is a tool to help visually compare different screen sizes to help you choose which monitor to buy. It does this by overlaying different screen sizes ontop of each other for
 easy comparison as well as tabulate the specs.
 
-![Demo video](./public/media/ScreenGeometry.640p.gif)
+![Demo video](./public/media/ScreenGeometry.gif)
 
 ## Purpose
 
