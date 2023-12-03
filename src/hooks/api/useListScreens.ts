@@ -7,12 +7,6 @@ import { useScreenContext } from '../../contexts/Screen/useScreenContext'
 import { ScreenListResponse } from '../../generated/openapi/models'
 import { useListScreensAction } from '../../generated/openapi/services/screen-list-service'
 
-// export type ListScreenOptions = UseQueryOptions<
-//   Awaited<ReturnType<ReturnType<typeof useListScreensActionHook>>>,
-//   ErrorResponse,
-//   ScreenListResponse
-// >
-
 type ActionParams = Parameters<typeof useListScreensAction<ScreenListResponse, ErrorResponse>>
 type QueryOptions = ActionParams[0]
 

@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { SearchActionTypes } from '../../contexts/Search/SearchManager'
 import { useSearchContext } from '../../contexts/Search/useSearchContext'
-import { useListSearchItems } from '../../hooks/api/useListSearchItems'
+import { useSearchList } from '../../hooks/api/useSearchList'
 import { SearchItem } from '../../models/Database'
 import AutoComplete, { TAutoCompleteItem } from './Autocomplete'
 
@@ -20,15 +20,15 @@ export const AutoCompleteScreen = ({ onSelect, searchValue, setSearchValue, ...r
 
   const { state: db, dispatch: dispatchSearch } = useSearchContext()
 
-  const { data, isFetching: loading } = useListSearchItems({
+  const { isSearchListLoading, searchListResponse } = useSearchList({
     query: { enabled: db.monitorData.length === 0, staleTime: Infinity, queryKey: ['useListSearchItems'] },
   })
 
   useEffect(() => {
-    if (data) {
-      dispatchSearch({ type: SearchActionTypes.LOAD, payload: data })
+    if (searchListResponse) {
+      dispatchSearch({ type: SearchActionTypes.LOAD, payload: searchListResponse })
     }
-  }, [dispatchSearch, data])
+  }, [dispatchSearch, searchListResponse])
 
   useEffect(() => {
     dispatchSearch({ type: SearchActionTypes.SEARCH, payload: searchValue })
@@ -53,7 +53,7 @@ export const AutoCompleteScreen = ({ onSelect, searchValue, setSearchValue, ...r
       onChange={setSearchValue}
       onSelect={setSelected}
       placeholder='Type to filter list...'
-      isLoading={!!loading}
+      isLoading={isSearchListLoading}
       {...rest}
     />
   )

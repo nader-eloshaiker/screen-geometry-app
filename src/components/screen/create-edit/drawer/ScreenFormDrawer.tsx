@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 import { FormDrawerActionTypes, FormDrawerMode } from '../../../../contexts/FormDrawer/FormDrawerManager'
 import { useFormDrawerContext } from '../../../../contexts/FormDrawer/useFormDrawaerContext'
 import { ScreenInput } from '../../../../generated/openapi/models'
-import { FindScreenOptions, useFindScreen } from '../../../../hooks/api/useFindScreens'
+import { useFindScreen } from '../../../../hooks/api/useFindScreens'
 import { transformScreenItem } from '../../../../utils/ScreenTransformation'
 import { ScreenForm } from '../form/ScreenForm'
 
@@ -14,12 +14,13 @@ export const ScreenFormDrawer = ({ children }: Props) => {
   const [defaultValues, setDefaultValues] = useState<ScreenInput>()
   const [editMode, setEditMode] = useState<boolean>(false)
 
-  const queryOptions: FindScreenOptions = {
-    queryKey: ['useFindScreen'],
-    enabled: formDrawerState.mode === FormDrawerMode.Edit && !!formDrawerState.id,
-    placeholderData: keepPreviousData,
-  }
-  const { screenItemResponse, isScreenItemLoading } = useFindScreen(formDrawerState.id ?? '', queryOptions)
+  const { screenItemResponse, isScreenItemLoading } = useFindScreen(formDrawerState.id ?? '', {
+    query: {
+      queryKey: ['useFindScreen'],
+      enabled: formDrawerState.mode === FormDrawerMode.Edit && !!formDrawerState.id,
+      placeholderData: keepPreviousData,
+    },
+  })
   const onCloseAction = () => {
     dispatchFormDrawer({ type: FormDrawerActionTypes.Toggle, payload: { open: false } })
   }

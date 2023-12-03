@@ -1,4 +1,3 @@
-import { UseMutationOptions } from '@tanstack/react-query'
 import { useEffect } from 'react'
 import { ErrorResponse } from 'react-router-dom'
 import {
@@ -9,15 +8,13 @@ import {
 import { useNotificationContext } from '../../contexts/Notification/useNotifcationContext'
 import { ScreenActionTypes } from '../../contexts/Screen/ScreenManager'
 import { useScreenContext } from '../../contexts/Screen/useScreenContext'
-import { useDeleteScreenAction, useDeleteScreenActionHook } from '../../generated/openapi/services/screen-service'
+import { ScreenIdResponse } from '../../generated/openapi/models'
+import { useDeleteScreenAction } from '../../generated/openapi/services/screen-service'
 
-export type DeleteScreenOptions = UseMutationOptions<
-  Awaited<ReturnType<ReturnType<typeof useDeleteScreenActionHook>>>,
-  ErrorResponse,
-  { id: string }
->
+type ActionParams = Parameters<typeof useDeleteScreenAction<ScreenIdResponse, ErrorResponse>>
+type QueryOptions = ActionParams[0]
 
-export const useDeleteScreen = (queryOptions?: DeleteScreenOptions) => {
+export const useDeleteScreen = (queryOptions?: QueryOptions) => {
   const { dispatch: dispatchScreen } = useScreenContext()
   const { dispatch: dispatchNotification } = useNotificationContext()
   const {
@@ -25,7 +22,7 @@ export const useDeleteScreen = (queryOptions?: DeleteScreenOptions) => {
     data: deleteResponse,
     error: deleteError,
     mutate: deleteAction,
-  } = useDeleteScreenAction({ mutation: queryOptions })
+  } = useDeleteScreenAction(queryOptions)
 
   useEffect(() => {
     if (deleteResponse) {

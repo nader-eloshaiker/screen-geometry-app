@@ -1,4 +1,3 @@
-import { UseMutationOptions } from '@tanstack/react-query'
 import { useEffect } from 'react'
 import {
   GeneralNotificationItem,
@@ -11,9 +10,10 @@ import { useScreenContext } from '../../contexts/Screen/useScreenContext'
 import { ErrorResponse, ScreenInput, ScreenItemResponse } from '../../generated/openapi/models'
 import { useCreateScreenAction } from '../../generated/openapi/services/screen-list-service'
 
-export type CreateScreenOptions = UseMutationOptions<ScreenItemResponse, ErrorResponse, { data: ScreenInput }>
+type ActionParams = Parameters<typeof useCreateScreenAction<ScreenItemResponse, ErrorResponse>>
+type QueryOptions = ActionParams[0]
 
-export const useCreateScreen = (queryOptions?: CreateScreenOptions) => {
+export const useCreateScreen = (queryOptions?: QueryOptions) => {
   const { dispatch: dispatchScreen } = useScreenContext()
   const { dispatch: dispatchNotification } = useNotificationContext()
   const {
@@ -21,7 +21,7 @@ export const useCreateScreen = (queryOptions?: CreateScreenOptions) => {
     data: createResponse,
     error: createError,
     mutate,
-  } = useCreateScreenAction({ mutation: queryOptions })
+  } = useCreateScreenAction(queryOptions)
 
   useEffect(() => {
     if (createResponse) {
