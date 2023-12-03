@@ -2,7 +2,8 @@ import GithubIcon from '../../assets/icons/Github'
 import { NotificationToaster } from '../notification/NotificationToaster'
 
 export default function Footer() {
-  const semVer = import.meta.env.PACKAGE_VERSION.split('.')
+  const ver = import.meta.env.PACKAGE_VERSION
+  const semVer = ver.split('.')
   const version = `${semVer[0]}.${semVer[1]}`
 
   return (

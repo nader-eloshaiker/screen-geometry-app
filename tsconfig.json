@@ -1,47 +1,25 @@
 {
   "compilerOptions": {
-    /* https://www.typescriptlang.org/tsconfig */
+    "target": "ES2022",
+    "useDefineForClassFields": true,
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "module": "ESNext",
+    "skipLibCheck": true,
+    "types": ["vitest/globals"],
 
-    /* Type Checking */
+    /* Bundler mode */
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "jsx": "react-jsx",
+
+    /* Linting */
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "noFallthroughCasesInSwitch": true,
-
-    /* Modules */
-
-    "module": "esnext",
-    "moduleResolution": "node",
-    "resolveJsonModule": true,
-    "allowUmdGlobalAccess": true,
-    // "baseUrl": ".", // This must be specified if "paths" is.
-    // "paths": {
-    //   "*": ["*", "generated/*"]
-    // },
-
-    /* Emit */
-    "noEmit": true,
-    "types": ["node", "vite/client", "vitest/globals"],
-    "outDir": "./dist",
-
-    /* Language and Environment */
-    "target": "ES2020",
-    "lib": ["esnext", "DOM", "DOM.Iterable"],
-    "jsx": "react-jsx",
-    "useDefineForClassFields": true,
-
-    /* Interop Constraints */
-    "allowSyntheticDefaultImports": true,
-    "esModuleInterop": true,
-    "isolatedModules": true,
-    "forceConsistentCasingInFileNames": true,
-
-    /* JavaScript Support */
-    "allowJs": true,
-
-    /* Completeness */
-    "skipDefaultLibCheck": true,
-    "skipLibCheck": true
+    "noFallthroughCasesInSwitch": true
   },
   "include": ["**/*.ts", "**/*.tsx", "**/**/*.ts", "**/**/*.tsx"],
   "exclude": ["node_modules"],
