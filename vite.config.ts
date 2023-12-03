@@ -1,3 +1,4 @@
+/// <reference types="vitest" />
 import react from '@vitejs/plugin-react'
 import { defineConfig } from 'vite'
 import { checker } from 'vite-plugin-checker'
@@ -15,4 +16,12 @@ export default defineConfig({
       enableBuild: true,
     }),
   ],
+  test: {
+    globals: true,
+    clearMocks: true,
+    mockReset: true,
+    environment: 'jsdom',
+    setupFiles: 'src/vitest.setup.ts',
+    include: ['src/**/*.test.{ts,tsx}'],
+  },
 })
