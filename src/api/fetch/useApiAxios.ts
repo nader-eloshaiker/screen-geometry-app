@@ -22,7 +22,16 @@ export const useApiAxios = <T>(): ((config: AxiosRequestConfig) => Promise<T>) =
         Authorization: `Bearer ${token}`,
       },
       cancelToken: source.token,
-    }).then(({ data }) => data)
+    })
+      .then(({ data }) => {
+        console.info(`axios success: [${config.method}] ${config.url}`, '\nrequest:', config.data, '\nresponse:', data)
+
+        return data
+      })
+      .catch((error) => {
+        console.info(`axios termianted: [${config.method}] ${config.url}`, '\nconfig:', config)
+        throw error
+      })
 
     // @ts-expect-error this is a hack to add cancel method to promise
     promise.cancel = () => {

@@ -15,7 +15,7 @@ export const ScreenFormDrawer = ({ children }: Props) => {
   const [editMode, setEditMode] = useState<boolean>(false)
 
   const queryOptions: FindScreenOptions = {
-    queryKey: ['ScreenFormDrawer', 'useFindScreen'],
+    queryKey: ['useFindScreen'],
     enabled: formDrawerState.mode === FormDrawerMode.Edit && !!formDrawerState.id,
     placeholderData: keepPreviousData,
   }

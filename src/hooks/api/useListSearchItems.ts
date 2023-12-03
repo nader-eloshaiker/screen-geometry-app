@@ -7,33 +7,29 @@ import { useSearchContext } from '../../contexts/Search/useSearchContext'
 import { DataBaseEntry } from '../../models/Database'
 import { useListSearchItemsAction } from './useListSearchItemsAction'
 
-type ActionParams = ArgumentTypes<typeof useListSearchItemsAction>
+type ActionParams = Parameters<typeof useListSearchItemsAction<Array<DataBaseEntry>, ErrorResponse>>
 type ListSearchItemsOptions = ActionParams[0]
 
 export const useListSearchItems = (queryOptions?: ListSearchItemsOptions) => {
   const { dispatch: dispatchScreen } = useSearchContext()
   const { dispatch: dispatchNotification } = useNotificationContext()
 
-  const {
-    isFetching: isSearchItemsLoading,
-    error: searchItemsError,
-    data: searchItemsResponse,
-  } = useListSearchItemsAction<Array<DataBaseEntry>, ErrorResponse>(queryOptions)
+  const { isFetching, error, data } = useListSearchItemsAction(queryOptions)
 
   useEffect(() => {
-    if (searchItemsResponse && searchItemsResponse.length > 0) {
-      dispatchScreen({ type: SearchActionTypes.LOAD, payload: searchItemsResponse })
+    if (data && data.length > 0) {
+      dispatchScreen({ type: SearchActionTypes.LOAD, payload: data })
     }
-  }, [dispatchScreen, searchItemsResponse])
+  }, [dispatchScreen, data])
 
   useEffect(() => {
-    if (searchItemsError) {
+    if (error) {
       dispatchNotification({
         type: NotificationActionTypes.ADD_NOTIFICATION,
-        payload: { value: searchItemsError, type: NotificationType.ERROR },
+        payload: { value: error, type: NotificationType.ERROR },
       })
     }
-  }, [dispatchNotification, searchItemsError])
+  }, [dispatchNotification, error])
 
-  return { isSearchItemsLoading, searchItemsResponse, searchItemsError }
+  return { isFetching, error, data }
 }

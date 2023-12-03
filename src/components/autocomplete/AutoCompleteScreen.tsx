@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react'
-import { useAxios } from '../../api/fetch/useAxios'
 import { SearchActionTypes } from '../../contexts/Search/SearchManager'
 import { useSearchContext } from '../../contexts/Search/useSearchContext'
-import { DataBaseEntry, SearchItem } from '../../models/Database'
+import { useListSearchItems } from '../../hooks/api/useListSearchItems'
+import { SearchItem } from '../../models/Database'
 import AutoComplete, { TAutoCompleteItem } from './Autocomplete'
 
 type TProps = TRestProps & {
@@ -20,16 +20,15 @@ export const AutoCompleteScreen = ({ onSelect, searchValue, setSearchValue, ...r
 
   const { state: db, dispatch: dispatchSearch } = useSearchContext()
 
-  const { response, loading } = useAxios<DataBaseEntry[]>({
-    params: { url: 'db/monitor.json' },
-    options: { skip: db.monitorData.length > 0 },
+  const { data, isFetching: loading } = useListSearchItems({
+    query: { enabled: db.monitorData.length > 0, staleTime: Infinity, queryKey: ['useListSearchItems'] },
   })
 
   useEffect(() => {
-    if (response) {
-      dispatchSearch({ type: SearchActionTypes.LOAD, payload: response.data })
+    if (data) {
+      dispatchSearch({ type: SearchActionTypes.LOAD, payload: data })
     }
-  }, [dispatchSearch, response])
+  }, [dispatchSearch, data])
 
   useEffect(() => {
     dispatchSearch({ type: SearchActionTypes.SEARCH, payload: searchValue })

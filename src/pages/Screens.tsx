@@ -30,7 +30,7 @@ export default function Screens() {
   const { isScreenListLoading } = useListScreens({
     query: {
       placeholderData: keepPreviousData,
-      queryKey: ['Screens', 'useCreateScreenList'],
+      queryKey: ['useCreateScreenList'],
     },
   })
   const { isCreateListLoading, createListAction } = useCreateScreenList()

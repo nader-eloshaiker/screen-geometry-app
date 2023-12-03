@@ -13,7 +13,7 @@ import { useListScreensAction } from '../../generated/openapi/services/screen-li
 //   ScreenListResponse
 // >
 
-type ActionParams = ArgumentTypes<typeof useListScreensAction>
+type ActionParams = Parameters<typeof useListScreensAction<ScreenListResponse, ErrorResponse>>
 type QueryOptions = ActionParams[0]
 
 export const useListScreens = (queryOptions?: QueryOptions) => {
