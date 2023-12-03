@@ -53,7 +53,7 @@ export const ScreenFormDrawer = ({ children }: Props) => {
         onChange={(_e) => {}}
       />
       <div className='drawer-side absolute h-fit w-auto duration-100 ease-in'>
-        <div className='sidebar flex-1 rounded-xl p-2 md:w-96'>
+        <div className='sidebar rounded-xl p-2 md:w-96'>
           <div className='p-2'>
             <ScreenForm
               defaultValues={defaultValues}

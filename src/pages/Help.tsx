@@ -20,6 +20,9 @@ const Section = tw.div`
 const Diagram = tw.div`
   my-8 flex w-full justify-center
 `
+const DiagramPanel = tw.div`
+my-8 flex justify-center
+`
 const Paragraph = tw.div`
   mb-6
 `
@@ -99,6 +102,7 @@ export const Help = () => {
           </div>
         </Diagram>
       </Section>
+
       <Section>
         <Heading>Hide / Show</Heading>
         <Paragraph>
@@ -118,6 +122,7 @@ export const Help = () => {
           </div>
         </Diagram>
       </Section>
+
       <Section>
         <Heading className='mb-4 text-2xl font-bold'>Delete</Heading>
         <Paragraph>
@@ -126,22 +131,26 @@ export const Help = () => {
           <strong>action</strong> column of the Screen Specs table.
         </Paragraph>
       </Section>
+
       <Section>
         <Heading className='mb-4 text-2xl font-bold'>Create</Heading>
         <Paragraph>
           To create a new screen, click the <ScreenButton className='pointer-events-none mx-4 shadow-lg' /> button in
           the top right corner. This will open a form in the sidebar as show below.
         </Paragraph>
-        <div className='sidebar mb-6 flex-1 rounded-xl p-2 md:w-96'>
-          <div className='pointer-events-none p-2'>
-            <ScreenForm />
+        <DiagramPanel>
+          <div className='sidebar mb-6 w-96 rounded-xl p-2'>
+            <div className='pointer-events-none p-2'>
+              <ScreenForm />
+            </div>
           </div>
-        </div>
+        </DiagramPanel>
         <Paragraph>
           You can then either use the search feature to populate the details or enter the details of the screen you want
           to create. Once you are happy with the details, click Create.
         </Paragraph>
       </Section>
+
       <Section>
         <Heading className='mb-4 text-2xl font-bold'>Create / Update</Heading>
         <Paragraph>
