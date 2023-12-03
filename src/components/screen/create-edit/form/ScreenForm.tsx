@@ -2,8 +2,6 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import cn from 'classnames'
 import { useCallback, useEffect, useState } from 'react'
 import { FormProvider, SubmitHandler, useForm } from 'react-hook-form'
-import { FormDrawerActionTypes } from '../../../../contexts/FormDrawer/FormDrawerManager'
-import { useFormDrawerContext } from '../../../../contexts/FormDrawer/useFormDrawaerContext'
 import { ScreenInput } from '../../../../generated/openapi/models'
 import { useCreateScreen } from '../../../../hooks/api/useCreateScreen'
 import { useUpdateScreen } from '../../../../hooks/api/useUpdateScreen'
@@ -13,22 +11,28 @@ import { createCSSColor } from '../../../../utils/ScreenCalc'
 import { AutoCompleteScreen } from '../../../autocomplete/AutoCompleteScreen'
 import { DarkMode, LightMode } from '../../../theme/ThemeConstants'
 import { ColorField } from './ColorField'
+import { DefaultInputValues } from './DefaultInputValues'
 import { InputField } from './InputField'
 import { ScreenFormSchema } from './ScreenFormSchema'
 
 type Props = {
-  defaultValues: ScreenInput
-  editMode: boolean
-  isLoading: boolean
+  defaultValues?: ScreenInput
+  editId?: string
+  isLoading?: boolean
+  onCloseAction?: () => void
 }
 
-export const ScreenForm = ({ defaultValues, editMode, isLoading }: Props) => {
-  const { formDrawerState, dispatchFormDrawer } = useFormDrawerContext()
+export const ScreenForm = ({
+  defaultValues,
+  editId = undefined,
+  isLoading = false,
+  onCloseAction = () => {},
+}: Props) => {
   const [searchValue, setSearchValue] = useState('')
 
   const methods = useForm<ScreenInput>({
     resolver: yupResolver(ScreenFormSchema),
-    defaultValues: defaultValues,
+    defaultValues: defaultValues ?? DefaultInputValues(),
     mode: 'onBlur',
   })
   const {
@@ -43,7 +47,11 @@ export const ScreenForm = ({ defaultValues, editMode, isLoading }: Props) => {
 
   // preset the form with the selected screen
   useEffect(() => {
-    reset(defaultValues)
+    if (defaultValues) {
+      reset(defaultValues)
+    } else {
+      reset(DefaultInputValues())
+    }
   }, [defaultValues, reset])
 
   const onSelect = useCallback(
@@ -80,7 +88,7 @@ export const ScreenForm = ({ defaultValues, editMode, isLoading }: Props) => {
     [resetField, setValue],
   )
 
-  const onGenerateColor = () => {
+  const onGenerateColor = useCallback(() => {
     const color = createCSSColor()
     setValue(ScreenDataEnum.darkColor, color.darkColor, {
       shouldValidate: true,
@@ -90,31 +98,34 @@ export const ScreenForm = ({ defaultValues, editMode, isLoading }: Props) => {
       shouldValidate: true,
       shouldDirty: true,
     })
-  }
+  }, [setValue])
 
-  const onSubmit: SubmitHandler<ScreenInput> = (form: ScreenInput) => {
-    if (editMode) {
-      updateAction({ id: formDrawerState.id ?? '', data: form }, { onSuccess: onClose })
-    } else {
-      createAction(form)
-    }
-    onGenerateColor()
-  }
-
-  const onReset = () => {
+  const onReset = useCallback(() => {
     reset()
     setSearchValue('')
-  }
+  }, [reset])
 
-  const onClose = () => {
+  const onClose = useCallback(() => {
     reset()
-    dispatchFormDrawer({ type: FormDrawerActionTypes.Toggle, payload: { open: false } })
-  }
+    onCloseAction()
+  }, [onCloseAction, reset])
+
+  const onSubmit: SubmitHandler<ScreenInput> = useCallback(
+    (form: ScreenInput) => {
+      if (editId) {
+        updateAction({ id: editId, data: form }, { onSuccess: onClose })
+      } else {
+        createAction(form)
+      }
+      onGenerateColor()
+    },
+    [createAction, editId, onClose, onGenerateColor, updateAction],
+  )
 
   return (
     <FormProvider {...methods}>
       <label className='label'>
-        <span className='text-lg'>{!editMode ? 'Add' : 'Edit'} Screen</span>
+        <span className='text-lg'>{!editId ? 'Add' : 'Edit'} Screen</span>
       </label>
       <div className='form-control mb-4 flex w-full flex-col'>
         <label className='label'>
@@ -238,7 +249,7 @@ export const ScreenForm = ({ defaultValues, editMode, isLoading }: Props) => {
               {isCreateLoading || isUpdateLoading ? (
                 <div className='loading loading-spinner items-center justify-center' />
               ) : (
-                <div>{!editMode ? 'Create' : 'Update'}</div>
+                <div>{!editId ? 'Create' : 'Update'}</div>
               )}
             </button>
           </div>

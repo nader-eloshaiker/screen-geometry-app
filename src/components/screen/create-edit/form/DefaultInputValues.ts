@@ -1,7 +1,7 @@
 import { ScreenInput } from '../../../../generated/openapi/models'
 import { createCSSColor } from '../../../../utils/ScreenCalc'
 
-export const DefaultValues = () => {
+export const DefaultInputValues = () => {
   const color = createCSSColor()
   const value: ScreenInput = {
     aspectRatio: '',

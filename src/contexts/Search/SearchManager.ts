@@ -2,6 +2,7 @@ import { DataBaseEntry, SearchItem } from '../../models/Database'
 import { transformSearchData } from '../../utils/ScreenTransformation'
 
 export const initialDatabaseState = {
+  isLoading: false,
   monitorData: [] as SearchItem[],
   results: [] as SearchItem[],
   query: '',

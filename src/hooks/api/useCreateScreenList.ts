@@ -8,7 +8,7 @@ import {
 import { useNotificationContext } from '../../contexts/Notification/useNotifcationContext'
 import { ScreenActionTypes } from '../../contexts/Screen/ScreenManager'
 import { useScreenContext } from '../../contexts/Screen/useScreenContext'
-import { ErrorResponse, ScreenInputList } from '../../generated/openapi/models'
+import { ErrorResponse, ScreenInputList, ScreenListResponse } from '../../generated/openapi/models'
 import {
   useCreateScreenListAction,
   useCreateScreenListActionHook,
@@ -19,8 +19,10 @@ export type CreateListScreenOptions = UseMutationOptions<
   ErrorResponse,
   { data: ScreenInputList }
 >
+type ActionParams = Parameters<typeof useCreateScreenListAction<ScreenListResponse, ErrorResponse>>
+type QueryOptions = ActionParams[0]
 
-export const useCreateScreenList = (queryOptions?: CreateListScreenOptions) => {
+export const useCreateScreenList = (queryOptions?: QueryOptions) => {
   const { dispatch: dispatchScreen } = useScreenContext()
   const { dispatch: dispatchNotification } = useNotificationContext()
   const {
@@ -28,7 +30,7 @@ export const useCreateScreenList = (queryOptions?: CreateListScreenOptions) => {
     data: createListResponse,
     error: createListError,
     mutate,
-  } = useCreateScreenListAction({ mutation: queryOptions })
+  } = useCreateScreenListAction(queryOptions)
 
   useEffect(() => {
     if (createListResponse) {

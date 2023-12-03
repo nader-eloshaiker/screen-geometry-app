@@ -1,11 +1,11 @@
 import { keepPreviousData } from '@tanstack/react-query'
 import { useRef, useState } from 'react'
-import styled from 'styled-components'
 import { ScreenPanel } from '../components/screen/ScreenPanel'
 import { ScreenTable } from '../components/screen/ScreenTable'
 import { ScreenButton } from '../components/screen/create-edit/CreateButton'
 import { ScreenFormDrawer } from '../components/screen/create-edit/drawer/ScreenFormDrawer'
 import { SkeletonImage } from '../components/skeleton/SkeletonImage'
+import { Stacked } from '../components/stacked/Stacked'
 import { defaultScreenInputList } from '../constants/defaultScreenList'
 import { FormDrawerProvider } from '../contexts/FormDrawer/FormDrawerProvider'
 import { useScreenContext } from '../contexts/Screen/useScreenContext'
@@ -15,18 +15,6 @@ import { useListScreens } from '../hooks/api/useListScreens'
 import { useElementSize } from '../hooks/useElementSize'
 import { Dimensions } from '../models/Screen'
 import { getMaxScreenSize } from '../utils/ScreenCalc'
-
-const Stacked = styled.div<{ height: number }>`
-  display: inline-grid;
-  place-items: start;
-  align-items: flex-end;
-  width: 100%;
-  height: ${(props) => props.height}px;
-  * {
-    grid-column-start: 1;
-    grid-row-start: 1;
-  }
-`
 
 export default function Screens() {
   const divSizeRef = useRef<HTMLDivElement>(null)
@@ -40,8 +28,10 @@ export default function Screens() {
   const maxPanelSize: Dimensions = { width, height: Math.round(maxScreenSize.height * (width / maxScreenSize.width)) }
 
   const { isScreenListLoading } = useListScreens({
-    placeholderData: keepPreviousData,
-    queryKey: ['Screens', 'useCreateScreenList'],
+    query: {
+      placeholderData: keepPreviousData,
+      queryKey: ['useCreateScreenList'],
+    },
   })
   const { isCreateListLoading, createListAction } = useCreateScreenList()
 
@@ -104,11 +94,10 @@ export default function Screens() {
                 {!isScreenListLoading ? (
                   screens
                     .filter((screen) => screen.visible)
-                    .map((screen, index) => (
+                    .map((screen) => (
                       <ScreenPanel
                         key={screen.id}
                         screen={screen}
-                        index={screens.length - index}
                         isHighlighted={isHighlighted}
                         setHighLighted={setHighlighted}
                         onHighlightClick={onHighlightClick}
