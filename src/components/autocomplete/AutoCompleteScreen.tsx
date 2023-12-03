@@ -21,7 +21,7 @@ export const AutoCompleteScreen = ({ onSelect, searchValue, setSearchValue, ...r
   const { state: db, dispatch: dispatchSearch } = useSearchContext()
 
   const { data, isFetching: loading } = useListSearchItems({
-    query: { enabled: db.monitorData.length > 0, staleTime: Infinity, queryKey: ['useListSearchItems'] },
+    query: { enabled: db.monitorData.length === 0, staleTime: Infinity, queryKey: ['useListSearchItems'] },
   })
 
   useEffect(() => {
