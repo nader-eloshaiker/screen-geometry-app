@@ -28,8 +28,10 @@ export default function Screens() {
   const maxPanelSize: Dimensions = { width, height: Math.round(maxScreenSize.height * (width / maxScreenSize.width)) }
 
   const { isScreenListLoading } = useListScreens({
-    placeholderData: keepPreviousData,
-    queryKey: ['Screens', 'useCreateScreenList'],
+    query: {
+      placeholderData: keepPreviousData,
+      queryKey: ['Screens', 'useCreateScreenList'],
+    },
   })
   const { isCreateListLoading, createListAction } = useCreateScreenList()
 

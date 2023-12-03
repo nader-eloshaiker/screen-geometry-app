@@ -64,6 +64,7 @@ export const AutoComplete = ({
       ref={divRef}
       {...rest}
     >
+      <div>isLoading:{JSON.stringify(isLoading)}</div>
       <InputFix
         fix={
           isLoading ? (

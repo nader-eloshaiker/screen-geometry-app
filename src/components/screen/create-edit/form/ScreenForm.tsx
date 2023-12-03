@@ -11,7 +11,7 @@ import { createCSSColor } from '../../../../utils/ScreenCalc'
 import { AutoCompleteScreen } from '../../../autocomplete/AutoCompleteScreen'
 import { DarkMode, LightMode } from '../../../theme/ThemeConstants'
 import { ColorField } from './ColorField'
-import { DefaultInputValues } from './DefaultValues'
+import { DefaultInputValues } from './DefaultInputValues'
 import { InputField } from './InputField'
 import { ScreenFormSchema } from './ScreenFormSchema'
 

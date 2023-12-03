@@ -54,7 +54,7 @@ export const AutoCompleteScreen = ({ onSelect, searchValue, setSearchValue, ...r
       onChange={setSearchValue}
       onSelect={setSelected}
       placeholder='Type to filter list...'
-      isLoading={loading}
+      isLoading={!!loading}
       {...rest}
     />
   )
