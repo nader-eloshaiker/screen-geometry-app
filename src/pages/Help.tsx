@@ -102,8 +102,8 @@ export const Help = () => {
       <Section>
         <Heading>Hide / Show</Heading>
         <Paragraph>
-          You can choose to exclude a screen from the the `Physical Screen Comparison` by unchecking the `Show` check
-          box
+          You can choose to exclude a screen from the the <strong>Physical Screen Comparison</strong> by unchecking the{' '}
+          <strong>Show</strong> check box
         </Paragraph>
         <Diagram>
           <div className='flex flex-col rounded-lg border-2 p-6 shadow-lg'>
@@ -123,25 +123,32 @@ export const Help = () => {
         <Paragraph>
           To delete an existing screen, click on the
           <CloseIcon id='edit-icon' className='mx-4 inline h-8 w-8 shadow-lg' fill='currentColor' /> icon in the
-          `action` column of the Screen Specs table.
+          <strong>action</strong> column of the Screen Specs table.
         </Paragraph>
       </Section>
       <Section>
         <Heading className='mb-4 text-2xl font-bold'>Create</Heading>
         <Paragraph>
           To create a new screen, click the <ScreenButton className='pointer-events-none mx-4 shadow-lg' /> button in
-          the top right corner.
+          the top right corner. This will open a form in the sidebar as show below.
         </Paragraph>
-        <Diagram>
-          <ScreenForm />
-        </Diagram>
+        <div className='sidebar mb-6 flex-1 rounded-xl p-2 md:w-96'>
+          <div className='pointer-events-none p-2'>
+            <ScreenForm />
+          </div>
+        </div>
+        <Paragraph>
+          You can then either use the search feature to populate the details or enter the details of the screen you want
+          to create. Once you are happy with the details, click Create.
+        </Paragraph>
       </Section>
       <Section>
         <Heading className='mb-4 text-2xl font-bold'>Create / Update</Heading>
         <Paragraph>
           To edit an existing screen, click on the
-          <EditIcon id='edit-icon' className='mx-4 inline h-8 w-8 shadow-lg' fill='currentColor' /> icon in the `action`
-          column of the Screen Specs table. Then make your changes and click the `Update` button.
+          <EditIcon id='edit-icon' className='mx-4 inline h-8 w-8 shadow-lg' fill='currentColor' /> icon in the{' '}
+          <strong>action</strong> column of the Screen Specs table. Then make your changes and click the{' '}
+          <strong>Update</strong> button.
         </Paragraph>
       </Section>
     </div>
