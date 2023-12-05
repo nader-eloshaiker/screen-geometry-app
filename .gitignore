@@ -19,6 +19,9 @@ dist-ssr
 /.next/
 /out/
 
+# vitest
+.vitest-preview
+
 # misc
 .DS_Store
 .env.local

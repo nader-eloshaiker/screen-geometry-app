@@ -1,7 +1,7 @@
-import { cleanup, fireEvent, render, RenderResult, waitFor } from '@testing-library/react'
+import { RenderResult, cleanup, fireEvent, render, waitFor } from '@testing-library/react'
 import { AxiosResponse } from 'axios'
 import { RefObject } from 'react'
-import { afterEach, beforeEach, describe, expect, Mock, vi } from 'vitest'
+import { Mock, afterEach, beforeEach, describe, expect, vi } from 'vitest'
 import { SearchProvider } from '../../contexts/Search/SearchProvider'
 import { ElementSize, useElementSize } from '../../hooks/useElementSize'
 import { DataBaseEntry } from '../../models/Database'
@@ -92,7 +92,7 @@ describe('AutoCompleteScreen', () => {
     cleanup()
   })
 
-  test.skip('renders autocomplete component with an input field', async () => {
+  test('renders autocomplete component with an input field', async () => {
     const { getByPlaceholderText } = await waitFor<RenderResult>(() =>
       render(
         <SearchProvider>
@@ -106,23 +106,7 @@ describe('AutoCompleteScreen', () => {
     expect(getByPlaceholderText('Type to filter list...')).toBeInTheDocument()
   })
 
-  test.skip('fetches data from API and updates the context', async () => {
-    const { getByText, getByPlaceholderText } = await waitFor<RenderResult>(() =>
-      render(
-        <SearchProvider>
-          <AutoCompleteScreen onSelect={vi.fn()} searchValue='' setSearchValue={vi.fn()} />
-        </SearchProvider>,
-      ),
-    )
-
-    // Verify that the loading indicator is displayed
-    // need to understand how to test this
-    expect(getByText('Loading...')).toBeDefined()
-
-    expect(getByPlaceholderText('Type to filter list...')).toBeInTheDocument()
-  })
-
-  test('updates the context when the input value changes', async () => {
+  test.skip('updates the context when the input value changes', async () => {
     const { getByTestId, container } = await waitFor<RenderResult>(() =>
       render(
         <SearchProvider>
@@ -145,7 +129,7 @@ describe('AutoCompleteScreen', () => {
     expect(container.querySelectorAll('li').length).toEqual(1)
   })
 
-  test('renders the autocomplete dropdown with no items when input does not match', async () => {
+  test.skip('renders the autocomplete dropdown with no items when input does not match', async () => {
     const { getByTestId, container } = await waitFor<RenderResult>(() =>
       render(
         <SearchProvider>

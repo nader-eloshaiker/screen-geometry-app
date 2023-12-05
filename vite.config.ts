@@ -17,6 +17,7 @@ export default defineConfig({
     }),
   ],
   test: {
+    css: true,
     globals: true,
     clearMocks: true,
     mockReset: true,
