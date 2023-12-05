@@ -21,8 +21,13 @@ export default defineConfig({
     globals: true,
     clearMocks: true,
     mockReset: true,
+    coverage: {
+      provider: 'v8',
+      reporter: ['text', 'json', 'html'],
+    },
     environment: 'jsdom',
     setupFiles: 'src/vitest.setup.ts',
     include: ['src/**/*.test.{ts,tsx}'],
+    exclude: ['src/**/node_modules/**/*', 'src/generated/**/*'],
   },
 })

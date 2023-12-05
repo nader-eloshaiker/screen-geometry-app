@@ -19,8 +19,8 @@
     "preview": "vite preview",
     "gen:spec": "orval --config ./orval.config.ts",
     "prepare": "husky install",
-    "test": "vitest",
-    "test:ui": "vitest --ui",
+    "test": "vitest --coverage",
+    "test:ui": "vitest --ui  --coverage",
     "coverage": "vitest run --coverage",
     "typecheck": "tsc --project tsconfig.json --noEmit"
   },
