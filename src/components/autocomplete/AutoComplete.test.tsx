@@ -1,16 +1,19 @@
-import { RenderResult, cleanup, fireEvent, render, screen, waitFor } from '@testing-library/react'
-import { RefObject } from 'react'
-import { Mock, afterEach, beforeEach, describe, expect, vi } from 'vitest'
-import { ElementSize, useElementSize } from '../../hooks/useElementSize'
+import { RenderResult, cleanup, fireEvent, render, waitFor } from '@testing-library/react'
+import { afterEach, beforeEach, describe, expect, vi } from 'vitest'
+import { ElementSize } from '../../hooks/useElementSize'
 
 import { AutoComplete } from './Autocomplete'
+
+const mocks = vi.hoisted(() => ({
+  useElementSize: vi.fn(),
+}))
 
 vi.mock('../../hooks/useElementSize', async () => {
   const actual = await vi.importActual('../../hooks/useElementSize')
   return {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     ...(actual as any),
-    useElementSize: vi.fn(),
+    useElementSize: mocks.useElementSize,
   }
 })
 
@@ -37,8 +40,7 @@ describe('AutoCompleteScreen', () => {
       x: 0,
       y: 0,
     }
-    const useElementSizeMock = useElementSize as Mock<[target: RefObject<HTMLElement>], ElementSize>
-    useElementSizeMock.mockImplementation(() => useElementSizeResponse)
+    mocks.useElementSize.mockImplementation(() => useElementSizeResponse)
   })
 
   afterEach(() => {
@@ -58,8 +60,6 @@ describe('AutoCompleteScreen', () => {
       render(<AutoComplete items={searchList} value='' isLoading={true} placeholder='Type to filter list...' />),
     )
 
-    // screen.debug()
-
     expect(getByPlaceholderText('Loading...')).toBeDefined()
   })
 
@@ -68,10 +68,6 @@ describe('AutoCompleteScreen', () => {
       <AutoComplete items={searchList} value='' isLoading={false} placeholder='Type to filter list...' />,
     )
     const inputElement = getByTestId('autoCompleteInput') as HTMLInputElement
-    fireEvent.click(inputElement)
-    screen.debug()
-
-    // Type 'a' in the input field
     const listElements = container.querySelectorAll('li')
     fireEvent.click(listElements[0])
 

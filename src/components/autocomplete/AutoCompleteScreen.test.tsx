@@ -1,33 +1,21 @@
-import { RenderResult, cleanup, fireEvent, render, waitFor } from '@testing-library/react'
+import { RenderResult, cleanup, fireEvent, render, screen, waitFor } from '@testing-library/react'
 import { AxiosResponse } from 'axios'
-import { RefObject } from 'react'
-import { Mock, afterEach, beforeEach, describe, expect, vi } from 'vitest'
+import { afterEach, beforeEach, describe, expect, vi } from 'vitest'
 import { SearchProvider } from '../../contexts/Search/SearchProvider'
-import { ElementSize, useElementSize } from '../../hooks/useElementSize'
+import { ElementSize } from '../../hooks/useElementSize'
 import { DataBaseEntry } from '../../models/Database'
 import { AutoCompleteScreen } from './AutoCompleteScreen'
 
 const mocks = vi.hoisted(() => ({
-  axios: {
-    get: vi.fn(),
-    post: vi.fn(),
-    request: vi.fn(),
-    // and any other request type you want to mock
-  },
+  useQuery: vi.fn(),
+  useElementSize: vi.fn(),
 }))
 
-vi.mock('axios', async (importActual) => {
-  const actual = await importActual<typeof import('axios')>()
+vi.mock('@tanstack/react-query', async (importActual) => {
+  const actual = await importActual<typeof import('@tanstack/react-query')>()
   return {
-    default: {
-      ...actual.default,
-      create: vi.fn(() => ({
-        ...actual.default.create(),
-        get: mocks.axios.get,
-        post: mocks.axios.post,
-        request: mocks.axios.request,
-      })),
-    },
+    ...actual,
+    useQuery: mocks.useQuery,
   }
 })
 
@@ -36,7 +24,7 @@ vi.mock('../../hooks/useElementSize', async () => {
   return {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     ...(actual as any),
-    useElementSize: vi.fn(),
+    useElementSize: mocks.useElementSize,
   }
 })
 
@@ -50,8 +38,7 @@ describe('AutoCompleteScreen', () => {
       x: 0,
       y: 0,
     }
-    const useElementSizeMock = useElementSize as Mock<[target: RefObject<HTMLElement>], ElementSize>
-    useElementSizeMock.mockImplementation(() => useElementSizeResponse)
+    mocks.useElementSize.mockImplementation(() => useElementSizeResponse)
 
     const axiosRequestResponse = {
       data: [
@@ -85,14 +72,14 @@ describe('AutoCompleteScreen', () => {
         },
       ],
     } as AxiosResponse<DataBaseEntry[]>
-    mocks.axios.request.mockResolvedValue(axiosRequestResponse)
+    mocks.useQuery.mockReturnValue({ axiosRequestResponse, isLoading: false, isSuccess: true })
   })
 
   afterEach(() => {
     cleanup()
   })
 
-  test('renders autocomplete component with an input field', async () => {
+  test.only('renders autocomplete component with an input field', async () => {
     const { getByPlaceholderText } = await waitFor<RenderResult>(() =>
       render(
         <SearchProvider>
@@ -101,12 +88,12 @@ describe('AutoCompleteScreen', () => {
       ),
     )
     // use this to view what is being rendered
-    // screen.debug()
+    screen.debug()
 
-    expect(getByPlaceholderText('Type to filter list...')).toBeInTheDocument()
+    expect(getByPlaceholderText('Type to filter list...')).toBeDefined()
   })
 
-  test.skip('updates the context when the input value changes', async () => {
+  test('updates the context when the input value changes', async () => {
     const { getByTestId, container } = await waitFor<RenderResult>(() =>
       render(
         <SearchProvider>
@@ -129,7 +116,7 @@ describe('AutoCompleteScreen', () => {
     expect(container.querySelectorAll('li').length).toEqual(1)
   })
 
-  test.skip('renders the autocomplete dropdown with no items when input does not match', async () => {
+  test('renders the autocomplete dropdown with no items when input does not match', async () => {
     const { getByTestId, container } = await waitFor<RenderResult>(() =>
       render(
         <SearchProvider>
