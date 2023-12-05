@@ -38,8 +38,8 @@ export const InputField = ({
             {...rest}
             className={cn('input input-bordered input-md w-full shadow-md', {
               'input-error': errors[formKey],
-              [`!pr-${fixWidth}`]: fixLocation === FixLocation.suffix && fixWidth,
-              [`!pl-${fixWidth}`]: fixLocation === FixLocation.prefix && fixWidth,
+              [`!pr-${(fixWidth ?? 0).toString()}`]: fixLocation === FixLocation.suffix && fixWidth,
+              [`!pl-${(fixWidth ?? 0).toString()}`]: fixLocation === FixLocation.prefix && fixWidth,
               'skeleton bg-neutral-300 dark:bg-neutral-700 pointer-events-none rounded-lg': isLoading,
             })}
             {...register(formKey)}
