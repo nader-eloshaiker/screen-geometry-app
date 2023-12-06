@@ -21,6 +21,7 @@ export default defineConfig({
     globals: true,
     clearMocks: true,
     mockReset: true,
+    reporters: ['verbose'],
     coverage: {
       provider: 'v8',
       reporter: ['text', 'json', 'html'],

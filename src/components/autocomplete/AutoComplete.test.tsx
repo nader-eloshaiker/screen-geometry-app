@@ -1,5 +1,4 @@
 import { RenderResult, cleanup, fireEvent, render, waitFor } from '@testing-library/react'
-import { afterEach, beforeEach, describe, expect, vi } from 'vitest'
 import { ElementSize } from '../../hooks/useElementSize'
 
 import { AutoComplete } from './Autocomplete'
@@ -17,7 +16,7 @@ vi.mock('../../hooks/useElementSize', async () => {
   }
 })
 
-describe('AutoCompleteScreen', () => {
+describe('#AutoComplete', () => {
   const searchList = [
     {
       label: 'AAAA',

@@ -1,6 +1,5 @@
 import { RenderResult, cleanup, fireEvent, render, screen, waitFor } from '@testing-library/react'
 import { AxiosResponse } from 'axios'
-import { afterEach, beforeEach, describe, expect, vi } from 'vitest'
 import { SearchProvider } from '../../contexts/Search/SearchProvider'
 import { ElementSize } from '../../hooks/useElementSize'
 import { DataBaseEntry } from '../../models/Database'
@@ -28,7 +27,7 @@ vi.mock('../../hooks/useElementSize', async () => {
   }
 })
 
-describe('AutoCompleteScreen', () => {
+describe('#AutoCompleteScreen', () => {
   // let searchContextSpy
 
   beforeEach(() => {
