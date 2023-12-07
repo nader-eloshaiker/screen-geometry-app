@@ -11,7 +11,7 @@ type ActionParams = Parameters<typeof useSearchListAction<Array<DataBaseEntry>, 
 type QueryOptions = ActionParams[0]
 
 export const useSearchList = (queryOptions?: QueryOptions) => {
-  const { dispatch: dispatchScreen } = useSearchContext()
+  const { dispatch: dispatchSearch } = useSearchContext()
   const { dispatch: dispatchNotification } = useNotificationContext()
 
   const {
@@ -22,9 +22,9 @@ export const useSearchList = (queryOptions?: QueryOptions) => {
 
   useEffect(() => {
     if (searchListResponse && searchListResponse.length > 0) {
-      dispatchScreen({ type: SearchActionTypes.LOAD, payload: searchListResponse })
+      dispatchSearch({ type: SearchActionTypes.LOAD, payload: searchListResponse })
     }
-  }, [dispatchScreen, searchListResponse])
+  }, [dispatchSearch, searchListResponse])
 
   useEffect(() => {
     if (searchListError) {
