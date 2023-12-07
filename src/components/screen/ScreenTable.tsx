@@ -110,7 +110,9 @@ export const ScreenTable = ({
           <th className='text-center'>Action</th>
         </tr>
       </thead>
-      {!isScreenListLoading ? (
+      {screens.length === 0 && isScreenListLoading ? (
+        <TableSkeleton cols={7} rows={5} />
+      ) : (
         <tbody>
           {screens.map((screen) => (
             <StyledTableRow
@@ -168,8 +170,6 @@ export const ScreenTable = ({
             </StyledTableRow>
           ))}
         </tbody>
-      ) : (
-        <TableSkeleton cols={7} rows={5} />
       )}
     </table>
   )
