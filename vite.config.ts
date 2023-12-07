@@ -18,6 +18,7 @@ export default defineConfig({
   ],
   test: {
     css: true,
+    cache: false,
     globals: true,
     clearMocks: true,
     mockReset: true,

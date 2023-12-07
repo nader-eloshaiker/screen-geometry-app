@@ -34,7 +34,7 @@ export default function Header() {
     <header className='sidebar rounded-b-xl'>
       {/* small header */}
       <div className='flex w-full flex-row xs:hidden'>
-        <div className='dropdown'>
+        <div className='dropdown' data-testid='nav-menu'>
           <label tabIndex={0} className='btn btn-square btn-ghost'>
             <HamburgerIcon className='h-6 w-6' />
           </label>
