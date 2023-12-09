@@ -74,7 +74,6 @@ export const AutoComplete = ({
       >
         <input
           name='autoCompleteInput'
-          data-testid='autoCompleteInput'
           type='text'
           className='input input-md relative w-full !pl-12 shadow-md'
           value={inputValue}

@@ -7,12 +7,11 @@ import AutoComplete, { TAutoCompleteItem } from './Autocomplete'
 
 type TProps = TRestProps & {
   onSelect: (item: SearchItem) => void
-  searchValue: string
-  setSearchValue: (value: string) => void
+  onReset: string
 }
 
-export const AutoCompleteScreen = ({ onSelect, searchValue, setSearchValue, ...rest }: TProps) => {
-  // user selected item
+export const AutoCompleteScreen = ({ onSelect, onReset, ...rest }: TProps) => {
+  const [searchValue, setSearchValue] = useState('')
   const [selected, setSelected] = useState<TAutoCompleteItem>()
 
   // a list to show on the dropdown when user types
@@ -33,6 +32,10 @@ export const AutoCompleteScreen = ({ onSelect, searchValue, setSearchValue, ...r
   useEffect(() => {
     dispatchSearch({ type: SearchActionTypes.SEARCH, payload: searchValue })
   }, [dispatchSearch, searchValue])
+
+  useEffect(() => {
+    setSearchValue(onReset)
+  }, [dispatchSearch, onReset])
 
   useEffect(() => {
     const dbEntry = selected && db.monitorData.find((item) => item.id === selected.id)

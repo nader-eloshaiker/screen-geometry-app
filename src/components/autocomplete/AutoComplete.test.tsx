@@ -1,4 +1,4 @@
-import { RenderResult, cleanup, fireEvent, render, waitFor } from '@testing-library/react'
+import { cleanup, fireEvent, render } from '@testing-library/react'
 import { ElementSize } from '../../hooks/useElementSize'
 
 import { AutoComplete } from './Autocomplete'
@@ -46,30 +46,29 @@ describe('#AutoComplete', () => {
     cleanup()
   })
 
-  test('renders autocomplete component with an input field', async () => {
-    const { getByPlaceholderText } = await waitFor<RenderResult>(() =>
-      render(<AutoComplete items={searchList} value='' isLoading={false} placeholder='Type to filter list...' />),
+  test('renders autocomplete component with an input field', () => {
+    const { getByPlaceholderText } = render(
+      <AutoComplete items={searchList} value='' isLoading={false} placeholder='Type to filter list...' />,
     )
 
     expect(getByPlaceholderText('Type to filter list...')).toBeInTheDocument()
   })
 
-  test('displays loading message', async () => {
-    const { getByPlaceholderText } = await waitFor<RenderResult>(() =>
-      render(<AutoComplete items={searchList} value='' isLoading={true} placeholder='Type to filter list...' />),
+  test('displays loading message', () => {
+    const { getByPlaceholderText } = render(
+      <AutoComplete items={searchList} value='' isLoading={true} placeholder='Type to filter list...' />,
     )
 
-    expect(getByPlaceholderText('Loading...')).toBeDefined()
+    expect(getByPlaceholderText('Loading...')).toBeInTheDocument()
   })
 
-  test('renders the autocomplete dropdown and make a selectin', async () => {
-    const { container, getByTestId } = render(
+  test('renders the autocomplete dropdown and make a selectin', () => {
+    const { container, getByPlaceholderText } = render(
       <AutoComplete items={searchList} value='' isLoading={false} placeholder='Type to filter list...' />,
     )
-    const inputElement = getByTestId('autoCompleteInput') as HTMLInputElement
     const listElements = container.querySelectorAll('li')
     fireEvent.click(listElements[0])
 
-    expect(inputElement).toHaveValue(searchList[0].label)
+    expect(getByPlaceholderText('Type to filter list...')).toHaveValue(searchList[0].label)
   })
 })

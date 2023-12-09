@@ -9,7 +9,6 @@ import { Stacked } from '../components/stacked/Stacked'
 import { defaultScreenInputList } from '../constants/defaultScreenList'
 import { FormDrawerProvider } from '../contexts/FormDrawer/FormDrawerProvider'
 import { useScreenContext } from '../contexts/Screen/useScreenContext'
-import { SearchProvider } from '../contexts/Search/SearchProvider'
 import { ScreenItem } from '../generated/openapi/models'
 import { useCreateScreenList } from '../hooks/api/useCreateScreenList'
 import { useListScreens } from '../hooks/api/useListScreens'
@@ -51,69 +50,67 @@ export default function Screens() {
   const isHighlighted = (screen: ScreenItem) => screen.id === highlighted?.id
 
   return (
-    <SearchProvider>
-      <div className='flex flex-1 flex-col' ref={divSizeRef}>
-        <FormDrawerProvider>
-          <ScreenFormDrawer>
-            <div className='mx-2 flex items-end justify-between pb-4'>
-              <label className='label'>
-                <span className='text-xl'>Screen Specs</span>
-              </label>
-              <ScreenButton />
+    <div className='flex flex-1 flex-col' ref={divSizeRef}>
+      <FormDrawerProvider>
+        <ScreenFormDrawer>
+          <div className='mx-2 flex items-end justify-between pb-4'>
+            <label className='label'>
+              <span className='text-xl'>Screen Specs</span>
+            </label>
+            <ScreenButton />
+          </div>
+          <ScreenTable
+            screens={screens}
+            isScreenListLoading={isScreenListLoading}
+            isHighlighted={isHighlighted}
+            setHighLighted={setHighlighted}
+            onHighlightClick={onHighlightClick}
+          />
+
+          {screens.length === 0 && !isScreenListLoading && (
+            <div className='flex h-full flex-col items-center'>
+              <div className='label py-4'>
+                <span className='text-xl'>No List Found</span>
+              </div>
+              <div className='flex flex-col items-center gap-2 py-6'>
+                <div>Click here to populate default list</div>
+                <button
+                  className='btn btn-outline btn-primary w-40'
+                  onClick={onLoadDefault}
+                  disabled={isCreateListLoading}
+                >
+                  {isCreateListLoading ? <span className='loading loading-spinner'></span> : 'Load Screens'}
+                </button>
+              </div>
             </div>
-            <ScreenTable
-              screens={screens}
-              isScreenListLoading={isScreenListLoading}
-              isHighlighted={isHighlighted}
-              setHighLighted={setHighlighted}
-              onHighlightClick={onHighlightClick}
-            />
+          )}
 
-            {screens.length === 0 && !isScreenListLoading && (
-              <div className='flex h-full flex-col items-center'>
-                <div className='label py-4'>
-                  <span className='text-xl'>No List Found</span>
-                </div>
-                <div className='flex flex-col items-center gap-2 py-6'>
-                  <div>Click here to populate default list</div>
-                  <button
-                    className='btn btn-outline btn-primary w-40'
-                    onClick={onLoadDefault}
-                    disabled={isCreateListLoading}
-                  >
-                    {isCreateListLoading ? <span className='loading loading-spinner'></span> : 'Load Screens'}
-                  </button>
-                </div>
-              </div>
-            )}
-
-            {(screens.length > 0 || isScreenListLoading) && (
-              <div className='mx-2'>
-                <label className='label py-6'>
-                  <span className='text-xl'>Physical Screen Comparison</span>
-                </label>
-                <Stacked height={maxPanelSize.height}>
-                  {screens.length === 0 && isScreenListLoading ? (
-                    <SkeletonImage className='h-full w-full' />
-                  ) : (
-                    screens
-                      .filter((screen) => screen.visible)
-                      .map((screen) => (
-                        <ScreenPanel
-                          key={screen.id}
-                          screen={screen}
-                          isHighlighted={isHighlighted}
-                          setHighLighted={setHighlighted}
-                          onHighlightClick={onHighlightClick}
-                        />
-                      ))
-                  )}
-                </Stacked>
-              </div>
-            )}
-          </ScreenFormDrawer>
-        </FormDrawerProvider>
-      </div>
-    </SearchProvider>
+          {(screens.length > 0 || isScreenListLoading) && (
+            <div className='mx-2'>
+              <label className='label py-6'>
+                <span className='text-xl'>Physical Screen Comparison</span>
+              </label>
+              <Stacked height={maxPanelSize.height}>
+                {screens.length === 0 && isScreenListLoading ? (
+                  <SkeletonImage className='h-full w-full' />
+                ) : (
+                  screens
+                    .filter((screen) => screen.visible)
+                    .map((screen) => (
+                      <ScreenPanel
+                        key={screen.id}
+                        screen={screen}
+                        isHighlighted={isHighlighted}
+                        setHighLighted={setHighlighted}
+                        onHighlightClick={onHighlightClick}
+                      />
+                    ))
+                )}
+              </Stacked>
+            </div>
+          )}
+        </ScreenFormDrawer>
+      </FormDrawerProvider>
+    </div>
   )
 }

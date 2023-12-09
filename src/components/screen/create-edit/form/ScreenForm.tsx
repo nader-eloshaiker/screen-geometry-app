@@ -28,7 +28,7 @@ export const ScreenForm = ({
   isLoading = false,
   onCloseAction = () => {},
 }: Props) => {
-  const [searchValue, setSearchValue] = useState('')
+  const [resetValue, setResetValue] = useState('')
 
   const methods = useForm<ScreenInput>({
     resolver: yupResolver(ScreenFormSchema),
@@ -54,7 +54,7 @@ export const ScreenForm = ({
     }
   }, [defaultValues, reset])
 
-  const onSelect = useCallback(
+  const selectAction = useCallback(
     (item: SearchItem) => {
       setValue(ScreenDataEnum.aspectRatio, item.tag.aspectRatio, {
         shouldValidate: true,
@@ -102,7 +102,7 @@ export const ScreenForm = ({
 
   const onReset = useCallback(() => {
     reset()
-    setSearchValue('')
+    setResetValue('')
   }, [reset])
 
   const onClose = useCallback(() => {
@@ -131,7 +131,7 @@ export const ScreenForm = ({
         <label className='label'>
           <span className='text-sm'>Choose from list of Monitors</span>
         </label>
-        <AutoCompleteScreen onSelect={onSelect} searchValue={searchValue} setSearchValue={setSearchValue} />
+        <AutoCompleteScreen onSelect={selectAction} onReset={resetValue} />
       </div>
 
       <div className='divider text-sm'>Or</div>

@@ -1,19 +1,21 @@
-import { RenderResult, cleanup, fireEvent, render, screen, waitFor } from '@testing-library/react'
+import { cleanup, fireEvent, render } from '@testing-library/react'
+import { NotificationProvider } from '../../contexts/Notification/NotificationProvider'
 import { SearchProvider } from '../../contexts/Search/SearchProvider'
+import * as useSearchListAction from '../../hooks/api/useSearchListAction'
 import { ElementSize } from '../../hooks/useElementSize'
 import { DataBaseEntry } from '../../models/Database'
 import { AutoCompleteScreen } from './AutoCompleteScreen'
 
 const mocks = vi.hoisted(() => ({
-  useSearchList: vi.fn(),
+  useSearchListAction: vi.fn(),
   useElementSize: vi.fn(),
 }))
 
-vi.mock('../../hooks/api/useSearchList', async (importActual) => {
-  const actual = await importActual<typeof import('../../hooks/api/useSearchList')>()
+vi.mock('../../hooks/api/useSearchListAction', async (importActual) => {
+  const actual = await importActual<typeof useSearchListAction>()
   return {
     ...actual,
-    useSearchList: mocks.useSearchList,
+    useSearchListAction: mocks.useSearchListAction,
   }
 })
 
@@ -69,7 +71,7 @@ describe('#AutoCompleteScreen', () => {
       },
     ]
 
-    mocks.useSearchList.mockReturnValue({ searchListResponse, isSearchListLoading: true, searchListError: undefined })
+    mocks.useSearchListAction.mockReturnValue({ data: searchListResponse, isFetching: false, error: undefined })
   })
 
   afterEach(() => {
@@ -78,9 +80,11 @@ describe('#AutoCompleteScreen', () => {
 
   test('renders autocomplete component with an input field', () => {
     const { getByPlaceholderText } = render(
-      <SearchProvider>
-        <AutoCompleteScreen onSelect={vi.fn()} searchValue='' setSearchValue={vi.fn()} />
-      </SearchProvider>,
+      <NotificationProvider>
+        <SearchProvider>
+          <AutoCompleteScreen onSelect={vi.fn()} onReset='' />
+        </SearchProvider>
+      </NotificationProvider>,
     )
     // use this to view what is being rendered
     // screen.debug()
@@ -88,42 +92,36 @@ describe('#AutoCompleteScreen', () => {
     expect(getByPlaceholderText('Type to filter list...')).toBeDefined()
   })
 
-  test('updates the context when the input value changes', async () => {
-    const { getByTestId, container } = await waitFor<RenderResult>(() =>
-      render(
+  test('updates the context when the input value changes', () => {
+    const { getByPlaceholderText, container } = render(
+      <NotificationProvider>
         <SearchProvider>
-          <AutoCompleteScreen onSelect={vi.fn()} searchValue='' setSearchValue={vi.fn()} />
-        </SearchProvider>,
-      ),
+          <AutoCompleteScreen onSelect={vi.fn()} onReset='' />
+        </SearchProvider>
+      </NotificationProvider>,
     )
 
-    const inputElement = getByTestId('autoCompleteInput')
-
-    await waitFor(() => {
-      fireEvent.change(inputElement, {
-        target: {
-          value: 'WQHD+',
-        },
-      })
-      fireEvent.submit(inputElement)
+    const inputElement = getByPlaceholderText('Type to filter list...')
+    fireEvent.change(inputElement, {
+      target: {
+        value: 'WQHD',
+      },
     })
-    screen.debug()
 
     expect(inputElement).toHaveValue('WQHD')
-    expect(container.querySelectorAll('li').length).toEqual(1)
+    expect(container.querySelectorAll('li').length).toEqual(2)
   })
 
   test('renders the autocomplete dropdown with no items when input does not match', () => {
-    const { getByTestId, container } = render(
-      <SearchProvider>
-        <AutoCompleteScreen onSelect={vi.fn()} searchValue='' setSearchValue={vi.fn()} />
-      </SearchProvider>,
+    const { getByPlaceholderText, container } = render(
+      <NotificationProvider>
+        <SearchProvider>
+          <AutoCompleteScreen onSelect={vi.fn()} onReset='' />
+        </SearchProvider>
+      </NotificationProvider>,
     )
 
-    const inputElement = getByTestId('autoCompleteInput')
-
-    // Type 'a' in the input field
-
+    const inputElement = getByPlaceholderText('Type to filter list...')
     fireEvent.change(inputElement, {
       target: {
         value: 'AAAA',
