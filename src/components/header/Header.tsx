@@ -51,7 +51,7 @@ export default function Header() {
       {/* large header */}
       <div className='hidden pt-2 text-center text-2xl  xs:block'>{import.meta.env.VITE_APP_TITLE}</div>
       <div className='navbar hidden justify-between px-3  xs:flex'>
-        <ul className='menu menu-horizontal gap-4 rounded-box p-0'>
+        <ul className='menu menu-horizontal gap-2 rounded-box p-0'>
           <NavMenu pathname={pathname} />
         </ul>
         <ThemeModeToggle className='mr-2 opacity-50 transition duration-500 ease-in-out hover:opacity-100' />

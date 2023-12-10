@@ -17,18 +17,20 @@ export default defineConfig({
     }),
   ],
   test: {
-    css: true,
+    css: {
+      include: /.+/,
+    },
     globals: true,
     clearMocks: true,
     mockReset: true,
-    reporters: ['verbose'],
+    reporters: ['verbose', 'html'],
     coverage: {
       provider: 'v8',
       reporter: ['text', 'json', 'html'],
     },
     environment: 'jsdom',
-    setupFiles: 'src/vitest.setup.ts',
+    setupFiles: './src/vitest.setup.ts',
     include: ['src/**/*.test.{ts,tsx}'],
-    exclude: ['src/**/node_modules/**/*', 'src/generated/**/*'],
+    exclude: ['src/**/node_modules/**/*', 'src/generated/**/*', 'src/tests/**/*'],
   },
 })
