@@ -1,4 +1,4 @@
-import cn from 'classnames'
+import { clsx } from 'clsx'
 import styled from 'styled-components'
 import { ScreenItem } from '../../generated/openapi/models'
 import { useThemeMode } from '../../hooks/useThemeMode'
@@ -33,7 +33,7 @@ export const ScreenPanel = ({
 
   return (
     <Panel
-      className={cn('rounded-lg', { 'border-4': selected, 'border-2 border-dashed': !selected })}
+      className={clsx('rounded-lg', { 'border-4': selected, 'border-2 border-dashed': !selected })}
       $width={width}
       $height={height}
       $color={themeMode === DarkMode ? screen.color.lightColor : screen.color.darkColor}

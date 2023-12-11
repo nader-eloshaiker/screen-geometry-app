@@ -1,4 +1,4 @@
-import cn from 'classnames'
+import { clsx } from 'clsx'
 import { Link, useLocation } from 'react-router-dom'
 import HamburgerIcon from '../../assets/icons/Hamburger'
 import { appRoutes } from '../../routes/AppRouteSchema'
@@ -8,7 +8,7 @@ type NavMenuItemProps = { pathname: string; route: string; title: string }
 const NavMenuItem = ({ pathname, route, title }: NavMenuItemProps) => {
   return (
     <li>
-      <Link className={cn('text-sm sm:text-base', { active: pathname === route })} to={route}>
+      <Link className={clsx('text-sm sm:text-base', { active: pathname === route })} to={route}>
         {title}
       </Link>
     </li>
@@ -46,7 +46,10 @@ export default function Header() {
           </ul>
         </div>
         <div className='flex-1 pt-2 text-center text-2xl'>{import.meta.env.VITE_APP_TITLE}</div>
-        <ThemeModeToggle className='mr-2 opacity-50 transition duration-500 ease-in-out hover:opacity-100' />
+        <ThemeModeToggle
+          className='mr-2 opacity-50 transition duration-500 ease-in-out hover:opacity-100'
+          id='themeToggleTiny'
+        />
       </div>
       {/* large header */}
       <div className='hidden pt-2 text-center text-2xl  xs:block'>{import.meta.env.VITE_APP_TITLE}</div>
@@ -54,7 +57,10 @@ export default function Header() {
         <ul className='menu menu-horizontal gap-2 rounded-box p-0'>
           <NavMenu pathname={pathname} />
         </ul>
-        <ThemeModeToggle className='mr-2 opacity-50 transition duration-500 ease-in-out hover:opacity-100' />
+        <ThemeModeToggle
+          className='mr-2 opacity-50 transition duration-500 ease-in-out hover:opacity-100'
+          id='themeToggle'
+        />
       </div>
     </header>
   )

@@ -1,4 +1,4 @@
-import cn from 'classnames'
+import { clsx } from 'clsx'
 import { ReactNode } from 'react'
 
 import { styled } from 'styled-components'
@@ -16,7 +16,7 @@ export const InputFix = ({ fix: suffix, location, children }: Props) => {
     <div className='relative'>
       {children}
       <InputPlaceholder
-        className={cn('absolute top-0 flex h-full w-fit items-center rounded-r pointer-events-none', {
+        className={clsx('pointer-events-none absolute top-0 flex h-full w-fit items-center rounded-r', {
           'mr-4 right-0': location === FixLocation.suffix,
           'ml-4 left-0': location === FixLocation.prefix,
         })}

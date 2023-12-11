@@ -22,9 +22,6 @@ importers:
       axios-mock-adapter:
         specifier: ^1.22.0
         version: 1.22.0(axios@1.6.2)
-      classnames:
-        specifier: ^2.3.2
-        version: 2.3.2
       localforage:
         specifier: ^1.10.0
         version: 1.10.0
@@ -110,6 +107,9 @@ importers:
       autoprefixer:
         specifier: ^10.4.16
         version: 10.4.16(postcss@8.4.31)
+      clsx:
+        specifier: ^2.0.0
+        version: 2.0.0
       daisyui:
         specifier: ^4.4.19
         version: 4.4.19(postcss@8.4.31)
@@ -2526,11 +2526,6 @@ packages:
     optionalDependencies:
       fsevents: 2.3.3
 
-  /classnames@2.3.2:
-    resolution:
-      { integrity: sha512-CSbhY4cFEJRe6/GQzIk5qXZ4Jeg5pcsP7b5peFSDpffpe1cqjASH/n9UTjBwOp6XpMSTwQ8Za2K5V02ueA7Tmw== }
-    dev: false
-
   /cli-cursor@4.0.0:
     resolution:
       { integrity: sha512-VGtlMu3x/4DOtIUwEkRezxUZ2lBacNJCHash0N0WeZDBS+7Ux1dm3XWAgWYxLJFMMdOeXMHXorshEFhbMSGelg== }
@@ -2556,6 +2551,12 @@ packages:
       string-width: 4.2.3
       strip-ansi: 6.0.1
       wrap-ansi: 7.0.0
+    dev: true
+
+  /clsx@2.0.0:
+    resolution:
+      { integrity: sha512-rQ1+kcj+ttHG0MKVGBUXwayCCF1oh39BF5COIpRzuCEv8Mwjv0XucrI2ExNTOn9IlLifGClWQcU9BrZORvtw6Q== }
+    engines: { node: '>=6' }
     dev: true
 
   /color-convert@1.9.3:

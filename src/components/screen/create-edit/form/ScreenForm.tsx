@@ -1,5 +1,5 @@
 import { yupResolver } from '@hookform/resolvers/yup'
-import cn from 'classnames'
+import { clsx } from 'clsx'
 import { useCallback, useEffect, useState } from 'react'
 import { FormProvider, SubmitHandler, useForm } from 'react-hook-form'
 import { ScreenInput } from '../../../../generated/openapi/models'
@@ -204,7 +204,7 @@ export const ScreenForm = ({
             </button>
           </div>
 
-          <div className='divider' />
+          <div className='divider text-sm'>Finish</div>
 
           {errors[ScreenDataEnum.diagonalSize] && (
             <div className='text-sm text-error'>{errors[ScreenDataEnum.diagonalSize].message}</div>
@@ -219,7 +219,7 @@ export const ScreenForm = ({
             <div className='text-sm text-error'>{errors[ScreenDataEnum.vRes].message}</div>
           )}
 
-          <div className='mt-2 flex justify-between'>
+          <div className='flex justify-between'>
             <div className='flex gap-4'>
               <button
                 id='cancelButton'
@@ -243,7 +243,7 @@ export const ScreenForm = ({
             <button
               id='submitButton'
               type='submit'
-              className={cn('btn btn-neutral w-24', { 'pointer-events-none': isCreateLoading || isUpdateLoading })}
+              className={clsx('btn btn-neutral w-24', { 'pointer-events-none': isCreateLoading || isUpdateLoading })}
               disabled={!isDirty || !isValid}
             >
               {isCreateLoading || isUpdateLoading ? (

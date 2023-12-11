@@ -1,4 +1,4 @@
-import cn from 'classnames'
+import { clsx } from 'clsx'
 import { useFormContext } from 'react-hook-form'
 import { ScreenDataEnum } from '../../../../models/Screen'
 import { InputFix } from '../../../input-suffix/InputFix'
@@ -28,33 +28,35 @@ export const InputField = ({
   } = useFormContext()
 
   return (
-    <div id='hSizeControl' className='form-control mb-4 flex flex-col'>
-      <label htmlFor={formKey} className='label'>
+    <label htmlFor={formKey} className='form-control mb-2 flex flex-col'>
+      <div className='label'>
         <span className='text-sm'>{title}</span>
-      </label>
+      </div>
       {fix ? (
         <InputFix fix={fix} location={fixLocation}>
           <input
             {...rest}
-            className={cn('input input-bordered input-md w-full shadow-md', {
+            className={clsx('input input-bordered input-md w-full shadow-md', {
               'input-error': errors[formKey],
               [`!pr-${(fixWidth ?? 0).toString()}`]: fixLocation === FixLocation.suffix && fixWidth,
               [`!pl-${(fixWidth ?? 0).toString()}`]: fixLocation === FixLocation.prefix && fixWidth,
               'skeleton bg-neutral-300 dark:bg-neutral-700 pointer-events-none rounded-lg': isLoading,
             })}
+            id={formKey}
             {...register(formKey)}
           />
         </InputFix>
       ) : (
         <input
           {...rest}
-          className={cn('input input-bordered input-md w-full shadow-md', {
+          className={clsx('input input-bordered input-md w-full shadow-md', {
             'input-error': errors[formKey],
             'skeleton bg-neutral-300 dark:bg-neutral-700 pointer-events-none rounded-lg': isLoading,
           })}
+          id={formKey}
           {...register(formKey)}
         />
       )}
-    </div>
+    </label>
   )
 }

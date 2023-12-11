@@ -1,4 +1,4 @@
-import cn from 'classnames'
+import { clsx } from 'clsx'
 import { useFormContext } from 'react-hook-form'
 import { ScreenDataEnum } from '../../../../models/Screen'
 import { DarkMode, LightMode, TThemeMode } from '../../../theme/ThemeConstants'
@@ -10,7 +10,7 @@ export const ColorField = ({ formKey, title, mode, isLoading = false }: Props) =
   return (
     <div className='form-control mb-4 flex flex-col'>
       <div
-        className={cn('input input-bordered input-md flex items-center justify-center shadow-md w-24', {
+        className={clsx('input input-bordered input-md flex w-24 items-center justify-center shadow-md', {
           'text-black': mode === LightMode,
           'text-white': mode === DarkMode,
           'animate-pulse pointer-events-none': isLoading,

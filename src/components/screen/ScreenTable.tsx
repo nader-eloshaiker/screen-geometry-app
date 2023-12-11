@@ -135,6 +135,7 @@ export const ScreenTable = ({
                   ) : (
                     <StyledCheckbox
                       type='checkbox'
+                      id={screen.id}
                       $color={fgColor(themeMode, screen.color)}
                       checked={screen.visible}
                       className='checkbox checkbox-sm'

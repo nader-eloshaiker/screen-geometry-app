@@ -1,6 +1,6 @@
 // ./components/Autocomplete.tsx
 
-import cn from 'classnames'
+import { clsx } from 'clsx'
 import { ChangeEvent, KeyboardEvent, memo, useRef, useState } from 'react'
 import MagnifyGlassIcon from '../../assets/icons/MagnifyGlass'
 import { useElementSize } from '../../hooks/useElementSize'
@@ -59,7 +59,7 @@ export const AutoComplete = ({
   return (
     <div
       // use classnames here to easily toggle dropdown open
-      className={cn(className, {
+      className={clsx(className, {
         'dropdown w-full': true,
         'dropdown-open': open,
       })}
