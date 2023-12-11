@@ -8,7 +8,7 @@ type NavMenuItemProps = { pathname: string; route: string; title: string }
 const NavMenuItem = ({ pathname, route, title }: NavMenuItemProps) => {
   return (
     <li>
-      <Link className={cn('atext-sm sm:text-base', { active: pathname === route })} to={route}>
+      <Link className={cn('text-sm sm:text-base', { active: pathname === route })} to={route}>
         {title}
       </Link>
     </li>
