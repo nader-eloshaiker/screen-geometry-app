@@ -1,9 +1,9 @@
 import { useCallback } from 'react'
-import { ScreenActionTypes } from '../../contexts/Screen/ScreenManager'
-import { useScreenContext } from '../../contexts/Screen/useScreenContext'
-import { ScreenInput, ScreenItemResponse } from '../../generated/openapi/models'
-import { useUpdateScreenAction } from '../../generated/openapi/services/screen-service'
-import { useApiMutation } from '../fetch/useApiMutation'
+import { ScreenActionTypes } from '../../../contexts/Screen/ScreenManager'
+import { useScreenContext } from '../../../contexts/Screen/useScreenContext'
+import { ScreenInput, ScreenItemResponse } from '../../../generated/openapi/models'
+import { useUpdateScreenAction } from '../../../generated/openapi/services/screen-service'
+import { useApiMutation } from '../useApiMutation'
 
 export const useUpdateScreen = () => {
   const { dispatch } = useScreenContext()

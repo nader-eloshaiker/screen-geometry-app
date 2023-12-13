@@ -1,9 +1,9 @@
 import { useCallback } from 'react'
-import { ScreenActionTypes } from '../../contexts/Screen/ScreenManager'
-import { useScreenContext } from '../../contexts/Screen/useScreenContext'
-import { ScreenIdResponse } from '../../generated/openapi/models'
-import { useDeleteScreenAction } from '../../generated/openapi/services/screen-service'
-import { useApiMutation } from '../fetch/useApiMutation'
+import { ScreenActionTypes } from '../../../contexts/Screen/ScreenManager'
+import { useScreenContext } from '../../../contexts/Screen/useScreenContext'
+import { ScreenIdResponse } from '../../../generated/openapi/models'
+import { useDeleteScreenAction } from '../../../generated/openapi/services/screen-service'
+import { useApiMutation } from '../useApiMutation'
 
 const success = { title: 'Deleted', message: 'Screen configuration' }
 

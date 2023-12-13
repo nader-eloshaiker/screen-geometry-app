@@ -1,8 +1,8 @@
 import { useCallback } from 'react'
-import { SearchActionTypes } from '../../contexts/Search/SearchManager'
-import { useSearchContext } from '../../contexts/Search/useSearchContext'
-import { DataBaseEntry } from '../../models/Database'
-import { useApiQuery } from '../fetch/useApiQuery'
+import { SearchActionTypes } from '../../../contexts/Search/SearchManager'
+import { useSearchContext } from '../../../contexts/Search/useSearchContext'
+import { DataBaseEntry } from '../../../models/Database'
+import { useApiQuery } from '../useApiQuery'
 import { useSearchListAction } from './useSearchListAction'
 
 export const useSearchList = (enabled: boolean) => {
