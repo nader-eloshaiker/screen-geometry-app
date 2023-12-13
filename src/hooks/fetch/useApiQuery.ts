@@ -4,22 +4,22 @@ import { NotificationActionTypes, NotificationType } from '../../contexts/Notifi
 import { useNotificationContext } from '../../contexts/Notification/useNotifcationContext'
 import { ErrorResponse } from '../../generated/openapi/models'
 
-export const useAppQuery = <TData, TError = ErrorResponse>({
-  useRequest,
-  callback,
+export const useApiQuery = <TData, TError = ErrorResponse>({
+  useApiRequest,
+  apiCallback,
 }: {
-  useRequest(): UseQueryResult<TData, TError> & { queryKey: QueryKey }
-  callback?(data: TData | undefined): void
+  useApiRequest(): UseQueryResult<TData, TError> & { queryKey: QueryKey }
+  apiCallback?(data: TData | undefined): void
 }) => {
   const { dispatch } = useNotificationContext()
-  const { isFetching, error, data } = useRequest()
+  const { isFetching, error, data } = useApiRequest()
 
   useEffect(() => {
-    if (!callback || !data) {
+    if (!apiCallback || !data) {
       return
     }
-    callback(data)
-  }, [callback, data])
+    apiCallback(data)
+  }, [apiCallback, data])
 
   useEffect(() => {
     if (error) {

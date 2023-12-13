@@ -8,23 +8,23 @@ import {
 import { useNotificationContext } from '../../contexts/Notification/useNotifcationContext'
 import { ErrorResponse } from '../../generated/openapi/models'
 
-export const useAppMutation = <TData, TVariables, TError = ErrorResponse, TContext = unknown>({
-  useRequest,
-  callback,
+export const useApiMutation = <TData, TVariables, TError = ErrorResponse, TContext = unknown>({
+  useApiRequest,
+  apiCallback,
   success,
 }: {
-  useRequest(): UseMutationResult<TData, TError, TVariables, TContext>
-  callback?(data: TData | undefined): void
+  useApiRequest(): UseMutationResult<TData, TError, TVariables, TContext>
+  apiCallback?(data: TData | undefined): void
   success?: { title: string; message: string }
 }) => {
   const { dispatch } = useNotificationContext()
-  const { isPending, error, data, mutate: useMutate } = useRequest()
+  const { isPending, error, data, mutate: useMutate } = useApiRequest()
 
   useEffect(() => {
-    if (!callback || !data) {
+    if (!apiCallback || !data) {
       return
     }
-    callback(data)
+    apiCallback(data)
 
     if (success) {
       const { title, message } = success
@@ -36,7 +36,7 @@ export const useAppMutation = <TData, TVariables, TError = ErrorResponse, TConte
         },
       })
     }
-  }, [callback, data, dispatch, success])
+  }, [apiCallback, data, dispatch, success])
 
   useEffect(() => {
     if (error) {

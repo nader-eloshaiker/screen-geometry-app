@@ -4,15 +4,15 @@ import { ScreenActionTypes } from '../../contexts/Screen/ScreenManager'
 import { useScreenContext } from '../../contexts/Screen/useScreenContext'
 import { ScreenListResponse } from '../../generated/openapi/models'
 import { useListScreensAction } from '../../generated/openapi/services/screen-list-service'
-import { useAppQuery } from '../fetch/useAppQuery'
+import { useApiQuery } from '../fetch/useApiQuery'
 
 export const useListScreens = () => {
   const { dispatch } = useScreenContext()
-  const callback = useCallback(
+  const apiCallback = useCallback(
     (data: ScreenListResponse) => dispatch({ type: ScreenActionTypes.LOAD, payload: data?.list }),
     [dispatch],
   )
-  const useRequest = () =>
+  const useApiRequest = () =>
     useListScreensAction({
       query: {
         placeholderData: keepPreviousData,
@@ -20,8 +20,8 @@ export const useListScreens = () => {
       },
     })
 
-  return useAppQuery<ScreenListResponse>({
-    useRequest,
-    callback,
+  return useApiQuery<ScreenListResponse>({
+    useApiRequest,
+    apiCallback,
   })
 }
