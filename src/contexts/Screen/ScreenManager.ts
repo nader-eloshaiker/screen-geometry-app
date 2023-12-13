@@ -1,5 +1,5 @@
-import { ScreenItem } from '../../generated/openapi/models'
-import { normaliseScreenRender } from '../../utils/ScreenCalc'
+import { ScreenItem } from '@openapi/models'
+import { normaliseScreenRender } from '@utils/ScreenCalc'
 
 export const initialScreenState = {
   screens: [] as ScreenItem[],

@@ -1,5 +1,5 @@
-import { attachThemeClass, LightMode, ThemeKey, TThemeMode } from '../components/theme/ThemeConstants'
-import { useThemeModeContext } from '../contexts/theme/useThemeModeContext'
+import { attachThemeClass, LightMode, ThemeKey, TThemeMode } from '@components/theme/ThemeConstants'
+import { useThemeModeContext } from '@contexts/theme/useThemeModeContext'
 import useLocalStorage from './useLocalStorage'
 
 export const useThemeMode = (): [TThemeMode, (value: TThemeMode) => void] => {

@@ -1,10 +1,10 @@
-import { cleanup, fireEvent, render, RenderResult, waitFor } from '@testing-library/react'
+import { SearchProvider } from '@contexts/Search/SearchProvider'
+import { ElementSize, useElementSize } from '@hooks/useElementSize'
+import { DataBaseEntry } from '@models/Database'
+import { RenderResult, cleanup, fireEvent, render, waitFor } from '@testing-library/react'
 import { AxiosResponse } from 'axios'
 import { RefObject } from 'react'
-import { afterEach, beforeEach, describe, expect, Mock, vi } from 'vitest'
-import { SearchProvider } from '../../contexts/Search/SearchProvider'
-import { ElementSize, useElementSize } from '../../hooks/useElementSize'
-import { DataBaseEntry } from '../../models/Database'
+import { Mock, afterEach, beforeEach, describe, expect, vi } from 'vitest'
 import { AutoCompleteScreen } from './AutoCompleteScreen'
 
 const mocks = vi.hoisted(() => ({
@@ -31,8 +31,8 @@ vi.mock('axios', async (importActual) => {
   }
 })
 
-vi.mock('../../hooks/useElementSize', async () => {
-  const actual = await vi.importActual('../../hooks/useElementSize')
+vi.mock('@hooks/useElementSize', async () => {
+  const actual = await vi.importActual('@hooks/useElementSize')
   return {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     ...(actual as any),

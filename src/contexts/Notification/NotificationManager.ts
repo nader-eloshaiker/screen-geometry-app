@@ -1,6 +1,6 @@
+import { ErrorResponse } from '@openapi/models'
+import { getRandomString } from '@utils/RandomGenerator'
 import axios, { AxiosError } from 'axios'
-import { ErrorResponse } from '../../generated/openapi/models'
-import { getRandomString } from '../../utils/RandomGenerator'
 
 export enum NotificationType {
   ERROR = 'alert-error',

@@ -1,6 +1,6 @@
+import { ScreenInput, ScreenInputList, ScreenItem } from '@openapi/models'
+import { transformScreenInput } from '@utils/ScreenTransformation'
 import localforage from 'localforage'
-import { ScreenInput, ScreenInputList, ScreenItem } from '../../generated/openapi/models'
-import { transformScreenInput } from '../../utils/ScreenTransformation'
 
 const storageKey = 'screens'
 

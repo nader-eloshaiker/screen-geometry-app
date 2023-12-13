@@ -1,8 +1,8 @@
+import { NotificationActionTypes, NotificationType } from '@contexts/Notification/NotificationManager'
+import { useNotificationContext } from '@contexts/Notification/useNotifcationContext'
+import { ErrorResponse } from '@openapi/models'
 import type { QueryKey, UseQueryResult } from '@tanstack/react-query'
 import { useEffect } from 'react'
-import { NotificationActionTypes, NotificationType } from '../../contexts/Notification/NotificationManager'
-import { useNotificationContext } from '../../contexts/Notification/useNotifcationContext'
-import { ErrorResponse } from '../../generated/openapi/models'
 
 export const useApiQuery = <TData, TError = ErrorResponse>({
   useApiRequest,

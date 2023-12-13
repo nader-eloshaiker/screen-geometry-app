@@ -1,5 +1,6 @@
 /// <reference types="vitest" />
 import react from '@vitejs/plugin-react'
+import path from 'path'
 import { defineConfig } from 'vite'
 import { checker } from 'vite-plugin-checker'
 import packageJson from './package.json'
@@ -16,6 +17,22 @@ export default defineConfig({
       enableBuild: true,
     }),
   ],
+  resolve: {
+    alias: {
+      // '@': path.resolve(__dirname, './src'),
+      '@api': path.resolve(__dirname, '/src/api'),
+      '@assets': path.resolve(__dirname, '/src/assets'),
+      '@components': path.resolve(__dirname, '/src/components'),
+      '@constants': path.resolve(__dirname, '/src/constants'),
+      '@contexts': path.resolve(__dirname, '/src/contexts'),
+      '@hooks': path.resolve(__dirname, './src/hooks'),
+      '@models': path.resolve(__dirname, '/src/models'),
+      '@openapi': path.resolve(__dirname, '/src/generated/openapi'),
+      '@pages': path.resolve(__dirname, '/src/pages'),
+      '@routes': path.resolve(__dirname, '/src/routes'),
+      '@utils': path.resolve(__dirname, '/src/utils'),
+    },
+  },
   test: {
     globals: true,
     clearMocks: true,

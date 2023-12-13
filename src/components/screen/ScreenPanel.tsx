@@ -1,8 +1,8 @@
+import { DarkMode } from '@components/theme/ThemeConstants'
+import { useThemeMode } from '@hooks/useThemeMode'
+import { ScreenItem } from '@openapi/models'
 import cn from 'classnames'
 import styled from 'styled-components'
-import { ScreenItem } from '../../generated/openapi/models'
-import { useThemeMode } from '../../hooks/useThemeMode'
-import { DarkMode } from '../theme/ThemeConstants'
 
 const Panel = styled.div<{ $width: number; $height: number; $color?: string }>`
   width: ${(props) => props.$width}%;

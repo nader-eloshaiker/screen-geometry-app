@@ -4,9 +4,9 @@
  * screen-geometry-app-backend-serverless-apis-v1
  * OpenAPI spec version: 1.0.0
  */
+import { useApiAxios } from '@hooks/api/useApiAxios'
 import type { MutationFunction, UseMutationOptions } from '@tanstack/react-query'
 import { useMutation } from '@tanstack/react-query'
-import { useApiAxios } from '../../../hooks/api/useApiAxios'
 import type { ErrorResponse, ScreenItemResponse } from '../models'
 
 export const useShowScreenActionHook = () => {

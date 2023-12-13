@@ -1,8 +1,8 @@
+import { SearchActionTypes } from '@contexts/Search/SearchManager'
+import { useSearchContext } from '@contexts/Search/useSearchContext'
+import { useSearchList } from '@hooks/api/helpers/useSearchList'
+import { SearchItem } from '@models/Database'
 import { useEffect, useState } from 'react'
-import { SearchActionTypes } from '../../contexts/Search/SearchManager'
-import { useSearchContext } from '../../contexts/Search/useSearchContext'
-import { useSearchList } from '../../hooks/api/helpers/useSearchList'
-import { SearchItem } from '../../models/Database'
 import AutoComplete, { TAutoCompleteItem } from './Autocomplete'
 
 type TProps = TRestProps & {

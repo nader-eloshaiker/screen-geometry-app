@@ -1,7 +1,7 @@
+import { DarkMode, LightMode, TThemeMode } from '@components/theme/ThemeConstants'
+import { ScreenDataEnum } from '@models/Screen'
 import cn from 'classnames'
 import { useFormContext } from 'react-hook-form'
-import { ScreenDataEnum } from '../../../../models/Screen'
-import { DarkMode, LightMode, TThemeMode } from '../../../theme/ThemeConstants'
 
 type Props = { formKey: ScreenDataEnum; title: string; mode: TThemeMode; isLoading?: boolean }
 
