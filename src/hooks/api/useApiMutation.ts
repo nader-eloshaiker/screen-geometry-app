@@ -18,7 +18,7 @@ export const useApiMutation = <TData, TVariables, TError = ErrorResponse, TConte
   success?: { title: string; message: string }
 }) => {
   const { dispatch } = useNotificationContext()
-  const { isPending, error, data, mutate: useMutate } = useApiRequest()
+  const { isPending, error, data, mutate: useMutation } = useApiRequest()
 
   useEffect(() => {
     if (!apiCallback || !data) {
@@ -47,5 +47,5 @@ export const useApiMutation = <TData, TVariables, TError = ErrorResponse, TConte
     }
   }, [dispatch, error])
 
-  return { isPending, data, error, useMutate }
+  return { isPending, data, error, useMutation }
 }

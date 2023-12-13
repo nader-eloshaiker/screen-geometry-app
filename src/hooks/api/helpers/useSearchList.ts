@@ -3,7 +3,7 @@ import { SearchActionTypes } from '../../../contexts/Search/SearchManager'
 import { useSearchContext } from '../../../contexts/Search/useSearchContext'
 import { DataBaseEntry } from '../../../models/Database'
 import { useApiQuery } from '../useApiQuery'
-import { useSearchListAction } from './useSearchListAction'
+import { useSearchListAction } from '../useSearchListAction'
 
 export const useSearchList = (enabled: boolean) => {
   const { dispatch } = useSearchContext()

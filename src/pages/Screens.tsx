@@ -27,7 +27,7 @@ export default function Screens() {
   const maxPanelSize: Dimensions = { width, height: Math.round(maxScreenSize.height * (width / maxScreenSize.width)) }
 
   const { isFetching: isScreenListLoading } = useListScreens()
-  const { isPending: isCreateListLoading, useMutate: createListAction } = useCreateScreenList()
+  const { isPending: isCreateListLoading, useMutation: createListAction } = useCreateScreenList()
 
   const onHighlightClick = (screen: ScreenItem) => {
     if (screen.id === highlighted?.id) {

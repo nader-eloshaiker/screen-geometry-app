@@ -42,8 +42,8 @@ export const ScreenForm = ({
     reset,
     resetField,
   } = methods
-  const { isPending: isCreateLoading, useMutate: createAction } = useCreateScreen()
-  const { isPending: isUpdateLoading, useMutate: updateAction } = useUpdateScreen()
+  const { isPending: isCreateLoading, useMutation: createAction } = useCreateScreen()
+  const { isPending: isUpdateLoading, useMutation: updateAction } = useUpdateScreen()
 
   // preset the form with the selected screen
   useEffect(() => {

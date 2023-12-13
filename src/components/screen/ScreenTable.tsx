@@ -72,8 +72,8 @@ export const ScreenTable = ({
   setHighLighted = () => {},
   onHighlightClick = () => {},
 }: Props) => {
-  const { isPending: isDeleteLoading, useMutate: deleteAction } = useDeleteScreen()
-  const { isPending: isVisibleLoading, useMutate: visibleAction } = useShowScreen()
+  const { isPending: isDeleteLoading, useMutation: deleteAction } = useDeleteScreen()
+  const { isPending: isVisibleLoading, useMutation: visibleAction } = useShowScreen()
   const { dispatchFormDrawer } = useFormDrawerContext()
   const [selected, setSelected] = useState<ScreenItem>()
   const [themeMode] = useThemeMode()
