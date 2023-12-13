@@ -2,7 +2,6 @@
 
 import MagnifyGlassIcon from '@assets/icons/MagnifyGlass'
 import { InputFix } from '@components/input-suffix/InputFix'
-import { FixLocation } from '@components/input-suffix/InputFix.type'
 import { useElementSize } from '@hooks/useElementSize'
 import { clsx } from 'clsx'
 import { ChangeEvent, KeyboardEvent, memo, useRef, useState } from 'react'
@@ -70,7 +69,7 @@ export const AutoComplete = ({
         fix={
           isLoading ? <span className='loading loading-spinner loading-md' /> : <MagnifyGlassIcon className='h-6 w-6' />
         }
-        location={FixLocation.prefix}
+        fixStyle='left-0 ml-4'
       >
         <input
           name='autoCompleteInput'

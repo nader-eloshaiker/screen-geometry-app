@@ -8,20 +8,13 @@ type Props = TRestProps & {
   formKey: ScreenDataEnum
   title: string
   fix?: string
-  fixWidth?: number
+  inputStyle?: string
+  fixStyle?: string
   fixLocation?: FixLocation
   isLoading?: boolean
 }
 
-export const InputField = ({
-  formKey,
-  title,
-  fix,
-  fixWidth,
-  fixLocation = FixLocation.suffix,
-  isLoading = false,
-  ...rest
-}: Props) => {
+export const InputField = ({ formKey, title, fix, inputStyle, fixStyle, isLoading = false, ...rest }: Props) => {
   const {
     register,
     formState: { errors },
@@ -33,13 +26,11 @@ export const InputField = ({
         <span className='text-sm'>{title}</span>
       </div>
       {fix ? (
-        <InputFix fix={fix} location={fixLocation}>
+        <InputFix fix={fix} fixStyle={fixStyle ?? ''}>
           <input
             {...rest}
-            className={clsx('input input-bordered input-md w-full shadow-md', {
+            className={clsx('input input-bordered input-md w-full shadow-md', inputStyle, {
               'input-error': errors[formKey],
-              [`!pr-${(fixWidth ?? 0).toString()}`]: fixLocation === FixLocation.suffix && fixWidth,
-              [`!pl-${(fixWidth ?? 0).toString()}`]: fixLocation === FixLocation.prefix && fixWidth,
               'skeleton bg-neutral-300 dark:bg-neutral-700 pointer-events-none rounded-lg': isLoading,
             })}
             id={formKey}

@@ -141,7 +141,8 @@ export const ScreenForm = ({
           <div id='screenTag' className='grid grid-cols-2 gap-3'>
             <InputField
               formKey={ScreenDataEnum.diagonalSize}
-              fixWidth={10}
+              inputStyle='!pr-10'
+              fixStyle='right-0 mr-4'
               title='Screen Size'
               type='number'
               fix='in'
@@ -165,7 +166,8 @@ export const ScreenForm = ({
           <div id='screenData' className='grid grid-cols-2 gap-3'>
             <InputField
               formKey={ScreenDataEnum.hRes}
-              fixWidth={10}
+              inputStyle='!pr-10'
+              fixStyle='right-0 mr-4'
               title='Horizontal Res'
               type='number'
               fix='px'
@@ -176,7 +178,8 @@ export const ScreenForm = ({
 
             <InputField
               formKey={ScreenDataEnum.vRes}
-              fixWidth={10}
+              inputStyle='!pr-10'
+              fixStyle='right-0 mr-4'
               title='Vertical Res'
               type='number'
               fix='px'
