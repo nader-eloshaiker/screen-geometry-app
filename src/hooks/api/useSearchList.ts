@@ -1,39 +1,24 @@
-import { useEffect } from 'react'
-import { ErrorResponse } from 'react-router-dom'
-import { NotificationActionTypes, NotificationType } from '../../contexts/Notification/NotificationManager'
-import { useNotificationContext } from '../../contexts/Notification/useNotifcationContext'
+import { useCallback } from 'react'
 import { SearchActionTypes } from '../../contexts/Search/SearchManager'
 import { useSearchContext } from '../../contexts/Search/useSearchContext'
 import { DataBaseEntry } from '../../models/Database'
+import { useAppQuery } from '../fetch/useAppQuery'
 import { useSearchListAction } from './useSearchListAction'
 
-type ActionParams = Parameters<typeof useSearchListAction<Array<DataBaseEntry>, ErrorResponse>>
-type QueryOptions = ActionParams[0]
+export const useSearchList = (enabled: boolean) => {
+  const { dispatch } = useSearchContext()
 
-export const useSearchList = (queryOptions?: QueryOptions) => {
-  const { dispatch: dispatchScreen } = useSearchContext()
-  const { dispatch: dispatchNotification } = useNotificationContext()
+  const dispatcher = useCallback(
+    (data: Array<DataBaseEntry>) => dispatch({ type: SearchActionTypes.LOAD, payload: data }),
+    [dispatch],
+  )
+  const useRequest = () =>
+    useSearchListAction({
+      query: { enabled, staleTime: Infinity, queryKey: ['useListSearchItems'] },
+    })
 
-  const {
-    isFetching: isSearchListLoading,
-    error: searchListError,
-    data: searchListResponse,
-  } = useSearchListAction(queryOptions)
-
-  useEffect(() => {
-    if (searchListResponse && searchListResponse.length > 0) {
-      dispatchScreen({ type: SearchActionTypes.LOAD, payload: searchListResponse })
-    }
-  }, [dispatchScreen, searchListResponse])
-
-  useEffect(() => {
-    if (searchListError) {
-      dispatchNotification({
-        type: NotificationActionTypes.ADD_NOTIFICATION,
-        payload: { value: searchListError, type: NotificationType.ERROR },
-      })
-    }
-  }, [dispatchNotification, searchListError])
-
-  return { isSearchListLoading, searchListError, searchListResponse }
+  return useAppQuery<Array<DataBaseEntry>>({
+    useRequest,
+    callback: dispatcher,
+  })
 }

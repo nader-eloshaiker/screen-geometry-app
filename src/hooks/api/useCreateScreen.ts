@@ -1,51 +1,22 @@
-import { useEffect } from 'react'
-import {
-  GeneralNotificationItem,
-  NotificationActionTypes,
-  NotificationType,
-} from '../../contexts/Notification/NotificationManager'
-import { useNotificationContext } from '../../contexts/Notification/useNotifcationContext'
+import { useCallback } from 'react'
 import { ScreenActionTypes } from '../../contexts/Screen/ScreenManager'
 import { useScreenContext } from '../../contexts/Screen/useScreenContext'
-import { ErrorResponse, ScreenInput, ScreenItemResponse } from '../../generated/openapi/models'
+import { ScreenInput, ScreenItemResponse } from '../../generated/openapi/models'
 import { useCreateScreenAction } from '../../generated/openapi/services/screen-list-service'
+import { useAppMutation } from '../fetch/useAppMutation'
 
-type ActionParams = Parameters<typeof useCreateScreenAction<ScreenItemResponse, ErrorResponse>>
-type QueryOptions = ActionParams[0]
+export const useCreateScreen = () => {
+  const { dispatch } = useScreenContext()
 
-export const useCreateScreen = (queryOptions?: QueryOptions) => {
-  const { dispatch: dispatchScreen } = useScreenContext()
-  const { dispatch: dispatchNotification } = useNotificationContext()
-  const {
-    isPending: isCreateLoading,
-    data: createResponse,
-    error: createError,
-    mutate,
-  } = useCreateScreenAction(queryOptions)
+  const dispatcher = useCallback(
+    (data: ScreenItemResponse) => dispatch({ type: ScreenActionTypes.ADD, payload: data?.item }),
+    [dispatch],
+  )
+  const useRequest = () => useCreateScreenAction()
 
-  useEffect(() => {
-    if (createResponse) {
-      dispatchScreen({ type: ScreenActionTypes.ADD, payload: createResponse.item })
-      dispatchNotification({
-        type: NotificationActionTypes.ADD_NOTIFICATION,
-        payload: {
-          value: { title: 'Success', message: 'Created: Screen configuration' } as GeneralNotificationItem,
-          type: NotificationType.SUCCESS,
-        },
-      })
-    }
-  }, [createResponse, dispatchNotification, dispatchScreen])
-
-  useEffect(() => {
-    if (createError) {
-      dispatchNotification({
-        type: NotificationActionTypes.ADD_NOTIFICATION,
-        payload: { value: createError, type: NotificationType.ERROR },
-      })
-    }
-  }, [createError, dispatchNotification])
-
-  const createAction = (screenInput: ScreenInput) => mutate({ data: screenInput })
-
-  return { isCreateLoading, createResponse, createError, createAction }
+  return useAppMutation<ScreenItemResponse, { data: ScreenInput }>({
+    useRequest,
+    callback: dispatcher,
+    successMessage: 'Created: Screen configuration',
+  })
 }

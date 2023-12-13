@@ -13,59 +13,59 @@ import type {
   UseQueryResult,
 } from '@tanstack/react-query'
 import { useMutation, useQuery } from '@tanstack/react-query'
-import { useApiAxios } from '../../../api/fetch/useApiAxios'
+import { useApiAxios } from '../../../hooks/fetch/useApiAxios'
 import type { ErrorResponse, ScreenIdResponse, ScreenInput, ScreenItemResponse } from '../models'
 
-export const useFindScreenActionHook = () => {
-  const findScreenAction = useApiAxios<ScreenItemResponse>()
+export const useGetScreenActionHook = () => {
+  const getScreenAction = useApiAxios<ScreenItemResponse>()
 
   return (id: string, signal?: AbortSignal) => {
-    return findScreenAction({ url: `/screen/${id}`, method: 'GET', signal })
+    return getScreenAction({ url: `/screen/${id}`, method: 'GET', signal })
   }
 }
 
-export const getFindScreenActionQueryKey = (id: string) => {
+export const getGetScreenActionQueryKey = (id: string) => {
   return [`/screen/${id}`] as const
 }
 
-export const useFindScreenActionQueryOptions = <
-  TData = Awaited<ReturnType<ReturnType<typeof useFindScreenActionHook>>>,
+export const useGetScreenActionQueryOptions = <
+  TData = Awaited<ReturnType<ReturnType<typeof useGetScreenActionHook>>>,
   TError = ErrorResponse,
 >(
   id: string,
   options?: {
-    query?: Partial<UseQueryOptions<Awaited<ReturnType<ReturnType<typeof useFindScreenActionHook>>>, TError, TData>>
+    query?: Partial<UseQueryOptions<Awaited<ReturnType<ReturnType<typeof useGetScreenActionHook>>>, TError, TData>>
   },
 ) => {
   const { query: queryOptions } = options ?? {}
 
-  const queryKey = queryOptions?.queryKey ?? getFindScreenActionQueryKey(id)
+  const queryKey = queryOptions?.queryKey ?? getGetScreenActionQueryKey(id)
 
-  const findScreenAction = useFindScreenActionHook()
+  const getScreenAction = useGetScreenActionHook()
 
-  const queryFn: QueryFunction<Awaited<ReturnType<ReturnType<typeof useFindScreenActionHook>>>> = ({ signal }) =>
-    findScreenAction(id, signal)
+  const queryFn: QueryFunction<Awaited<ReturnType<ReturnType<typeof useGetScreenActionHook>>>> = ({ signal }) =>
+    getScreenAction(id, signal)
 
   return { queryKey, queryFn, enabled: !!id, ...queryOptions } as UseQueryOptions<
-    Awaited<ReturnType<ReturnType<typeof useFindScreenActionHook>>>,
+    Awaited<ReturnType<ReturnType<typeof useGetScreenActionHook>>>,
     TError,
     TData
   > & { queryKey: QueryKey }
 }
 
-export type FindScreenActionQueryResult = NonNullable<Awaited<ReturnType<ReturnType<typeof useFindScreenActionHook>>>>
-export type FindScreenActionQueryError = ErrorResponse
+export type GetScreenActionQueryResult = NonNullable<Awaited<ReturnType<ReturnType<typeof useGetScreenActionHook>>>>
+export type GetScreenActionQueryError = ErrorResponse
 
-export const useFindScreenAction = <
-  TData = Awaited<ReturnType<ReturnType<typeof useFindScreenActionHook>>>,
+export const useGetScreenAction = <
+  TData = Awaited<ReturnType<ReturnType<typeof useGetScreenActionHook>>>,
   TError = ErrorResponse,
 >(
   id: string,
   options?: {
-    query?: Partial<UseQueryOptions<Awaited<ReturnType<ReturnType<typeof useFindScreenActionHook>>>, TError, TData>>
+    query?: Partial<UseQueryOptions<Awaited<ReturnType<ReturnType<typeof useGetScreenActionHook>>>, TError, TData>>
   },
 ): UseQueryResult<TData, TError> & { queryKey: QueryKey } => {
-  const queryOptions = useFindScreenActionQueryOptions(id, options)
+  const queryOptions = useGetScreenActionQueryOptions(id, options)
 
   const query = useQuery(queryOptions) as UseQueryResult<TData, TError> & { queryKey: QueryKey }
 

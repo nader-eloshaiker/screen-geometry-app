@@ -9,7 +9,7 @@ export const initialScreenState = {
 export type ScreenState = typeof initialScreenState
 
 export enum ScreenActionTypes {
-  LIST = 'list',
+  LOAD = 'list',
   UPDATE = 'update',
   ADD = 'add',
   ADD_LIST = 'add_list',
@@ -17,7 +17,7 @@ export enum ScreenActionTypes {
 }
 
 export type ScreenAction =
-  | { type: ScreenActionTypes.LIST; payload: ScreenItem[] }
+  | { type: ScreenActionTypes.LOAD; payload: ScreenItem[] }
   | { type: ScreenActionTypes.UPDATE; payload: ScreenItem }
   | { type: ScreenActionTypes.ADD; payload: ScreenItem }
   | { type: ScreenActionTypes.ADD_LIST; payload: ScreenItem[] }
@@ -25,8 +25,8 @@ export type ScreenAction =
 
 export const screenReducer = (state: ScreenState, { type, payload }: ScreenAction): ScreenState => {
   switch (type) {
-    case ScreenActionTypes.LIST: {
-      const list = normaliseScreenRender(payload)
+    case ScreenActionTypes.LOAD: {
+      const list = normaliseScreenRender(payload ?? [])
 
       return { ...state, screens: list }
     }

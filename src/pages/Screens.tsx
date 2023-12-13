@@ -1,4 +1,3 @@
-import { keepPreviousData } from '@tanstack/react-query'
 import { useRef, useState } from 'react'
 import { ScreenPanel } from '../components/screen/ScreenPanel'
 import { ScreenTable } from '../components/screen/ScreenTable'
@@ -27,13 +26,8 @@ export default function Screens() {
   const maxScreenSize = screens.length > 0 ? getMaxScreenSize(screens) : { width: 47, height: 16 } // max possible screen size
   const maxPanelSize: Dimensions = { width, height: Math.round(maxScreenSize.height * (width / maxScreenSize.width)) }
 
-  const { isScreenListLoading } = useListScreens({
-    query: {
-      placeholderData: keepPreviousData,
-      queryKey: ['useCreateScreenList'],
-    },
-  })
-  const { isCreateListLoading, createListAction } = useCreateScreenList()
+  const { isFetching: isScreenListLoading } = useListScreens()
+  const { isPending: isCreateListLoading, useMutate: createListAction } = useCreateScreenList()
 
   const onHighlightClick = (screen: ScreenItem) => {
     if (screen.id === highlighted?.id) {
@@ -44,7 +38,7 @@ export default function Screens() {
   }
 
   const onLoadDefault = () => {
-    createListAction(defaultScreenInputList)
+    createListAction({ data: defaultScreenInputList })
   }
 
   const isHighlighted = (screen: ScreenItem) => screen.id === highlighted?.id

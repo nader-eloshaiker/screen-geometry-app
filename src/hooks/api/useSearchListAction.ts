@@ -11,9 +11,9 @@ import {
   type UseQueryOptions,
   type UseQueryResult,
 } from '@tanstack/react-query'
-import useApiAxios from '../../api/fetch/useApiAxios'
 import type { ErrorResponse } from '../../generated/openapi/models'
 import type { DataBaseEntry } from '../../models/Database'
+import useApiAxios from '../fetch/useApiAxios'
 
 type AwaitedInput<T> = PromiseLike<T> | T
 

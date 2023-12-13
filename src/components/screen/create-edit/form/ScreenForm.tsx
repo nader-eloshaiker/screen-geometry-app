@@ -42,8 +42,8 @@ export const ScreenForm = ({
     reset,
     resetField,
   } = methods
-  const { isCreateLoading, createAction } = useCreateScreen()
-  const { isUpdateLoading, updateAction } = useUpdateScreen()
+  const { isPending: isCreateLoading, useMutate: createAction } = useCreateScreen()
+  const { isPending: isUpdateLoading, useMutate: updateAction } = useUpdateScreen()
 
   // preset the form with the selected screen
   useEffect(() => {
@@ -115,7 +115,7 @@ export const ScreenForm = ({
       if (editId) {
         updateAction({ id: editId, data: form }, { onSuccess: onClose })
       } else {
-        createAction(form)
+        createAction({ data: form })
       }
       onGenerateColor()
     },
