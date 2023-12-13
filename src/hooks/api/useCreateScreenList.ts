@@ -5,6 +5,8 @@ import { ScreenInputList, ScreenListResponse } from '../../generated/openapi/mod
 import { useCreateScreenListAction } from '../../generated/openapi/services/screen-list-service'
 import { useAppMutation } from '../fetch/useAppMutation'
 
+const success = { title: 'Created', message: 'Screen list' }
+
 export const useCreateScreenList = () => {
   const { dispatch } = useScreenContext()
   const dispatcher = useCallback(
@@ -16,6 +18,6 @@ export const useCreateScreenList = () => {
   return useAppMutation<ScreenListResponse, { data: ScreenInputList }>({
     useRequest,
     callback: dispatcher,
-    successMessage: 'Created: Screen list',
+    success,
   })
 }

@@ -17,6 +17,6 @@ export const useUpdateScreen = () => {
   return useAppMutation<ScreenItemResponse, { id: string; data: ScreenInput }>({
     useRequest,
     callback: dispatcher,
-    successMessage: 'Updated: Screen configuration',
+    success: { title: 'Updated', message: 'Screen configuration' },
   })
 }

@@ -11,11 +11,11 @@ import { ErrorResponse } from '../../generated/openapi/models'
 export const useAppMutation = <TData, TVariables, TError = ErrorResponse, TContext = unknown>({
   useRequest,
   callback,
-  successMessage,
+  success,
 }: {
   useRequest(): UseMutationResult<TData, TError, TVariables, TContext>
   callback?(data: TData | undefined): void
-  successMessage?: string
+  success?: { title: string; message: string }
 }) => {
   const { dispatch } = useNotificationContext()
   const { isPending, error, data, mutate: useMutate } = useRequest()
@@ -26,16 +26,17 @@ export const useAppMutation = <TData, TVariables, TError = ErrorResponse, TConte
     }
     callback(data)
 
-    if (successMessage) {
+    if (success) {
+      const { title, message } = success
       dispatch({
         type: NotificationActionTypes.ADD_NOTIFICATION,
         payload: {
-          value: { title: 'Success', message: successMessage } as GeneralNotificationItem,
+          value: { title, message } as GeneralNotificationItem,
           type: NotificationType.SUCCESS,
         },
       })
     }
-  }, [callback, data, dispatch, successMessage])
+  }, [callback, data, dispatch, success])
 
   useEffect(() => {
     if (error) {

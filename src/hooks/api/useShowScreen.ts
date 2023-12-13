@@ -5,6 +5,8 @@ import { ScreenItemResponse } from '../../generated/openapi/models'
 import { useShowScreenAction } from '../../generated/openapi/services/screen-action-service'
 import { useAppMutation } from '../fetch/useAppMutation'
 
+const success = { title: 'Updated', message: 'Screen visibility' }
+
 export const useShowScreen = () => {
   const { dispatch } = useScreenContext()
 
@@ -17,6 +19,6 @@ export const useShowScreen = () => {
   return useAppMutation<ScreenItemResponse, { id: string }>({
     useRequest,
     callback: dispatcher,
-    successMessage: 'Updated: Screen visibility',
+    success,
   })
 }

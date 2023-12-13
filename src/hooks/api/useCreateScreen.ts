@@ -5,6 +5,8 @@ import { ScreenInput, ScreenItemResponse } from '../../generated/openapi/models'
 import { useCreateScreenAction } from '../../generated/openapi/services/screen-list-service'
 import { useAppMutation } from '../fetch/useAppMutation'
 
+const success = { title: 'Created', message: 'Screen configuration' }
+
 export const useCreateScreen = () => {
   const { dispatch } = useScreenContext()
 
@@ -17,6 +19,6 @@ export const useCreateScreen = () => {
   return useAppMutation<ScreenItemResponse, { data: ScreenInput }>({
     useRequest,
     callback: dispatcher,
-    successMessage: 'Created: Screen configuration',
+    success,
   })
 }
