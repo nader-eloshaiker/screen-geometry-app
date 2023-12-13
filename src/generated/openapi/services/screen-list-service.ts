@@ -13,7 +13,7 @@ import type {
   UseQueryResult,
 } from '@tanstack/react-query'
 import { useMutation, useQuery } from '@tanstack/react-query'
-import { useApiAxios } from '../../../api/fetch/useApiAxios'
+import { useApiAxios } from '../../../hooks/api/useApiAxios'
 import type { ErrorResponse, ScreenInput, ScreenInputList, ScreenItemResponse, ScreenListResponse } from '../models'
 
 export const useListScreensActionHook = () => {

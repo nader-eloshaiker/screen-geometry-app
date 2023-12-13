@@ -3,8 +3,8 @@ import { clsx } from 'clsx'
 import { useCallback, useEffect, useState } from 'react'
 import { FormProvider, SubmitHandler, useForm } from 'react-hook-form'
 import { ScreenInput } from '../../../../generated/openapi/models'
-import { useCreateScreen } from '../../../../hooks/api/useCreateScreen'
-import { useUpdateScreen } from '../../../../hooks/api/useUpdateScreen'
+import { useCreateScreen } from '../../../../hooks/api/helpers/useCreateScreen'
+import { useUpdateScreen } from '../../../../hooks/api/helpers/useUpdateScreen'
 import { SearchItem } from '../../../../models/Database'
 import { ScreenDataEnum } from '../../../../models/Screen'
 import { createCSSColor } from '../../../../utils/ScreenCalc'
@@ -42,8 +42,8 @@ export const ScreenForm = ({
     reset,
     resetField,
   } = methods
-  const { isCreateLoading, createAction } = useCreateScreen()
-  const { isUpdateLoading, updateAction } = useUpdateScreen()
+  const { isPending: isCreateLoading, useMutation: createAction } = useCreateScreen()
+  const { isPending: isUpdateLoading, useMutation: updateAction } = useUpdateScreen()
 
   // preset the form with the selected screen
   useEffect(() => {
@@ -115,7 +115,7 @@ export const ScreenForm = ({
       if (editId) {
         updateAction({ id: editId, data: form }, { onSuccess: onClose })
       } else {
-        createAction(form)
+        createAction({ data: form })
       }
       onGenerateColor()
     },

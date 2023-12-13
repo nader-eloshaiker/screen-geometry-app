@@ -4,7 +4,7 @@ import Footer from './Footer'
 
 describe('#Footer', () => {
   beforeAll(() => {
-    vi.stubEnv('PACKAGE_VERSION', '1.2.3')
+    vi.stubEnv('VITE_PACKAGE_VERSION', '1.2.3')
   })
 
   it('should render the version in the footer', async () => {

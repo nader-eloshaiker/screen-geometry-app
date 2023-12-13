@@ -28,7 +28,7 @@ export const searchReducer = (state: DatabaseState, { type, payload }: DatabaseA
         return state
       }
 
-      const monitorData = payload.map((item) => transformSearchData(item))
+      const monitorData = (payload ?? []).map((item) => transformSearchData(item))
 
       return { ...state, monitorData, results: [...monitorData] }
     }
