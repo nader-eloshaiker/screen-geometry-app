@@ -6,7 +6,7 @@
  */
 import type { MutationFunction, UseMutationOptions } from '@tanstack/react-query'
 import { useMutation } from '@tanstack/react-query'
-import { useApiAxios } from '../../../api/fetch/useApiAxios'
+import { useApiAxios } from '../../../hooks/api/useApiAxios'
 import type { ErrorResponse, ScreenItemResponse } from '../models'
 
 export const useShowScreenActionHook = () => {

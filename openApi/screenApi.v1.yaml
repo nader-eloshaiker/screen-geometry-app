@@ -389,7 +389,7 @@ paths:
       security:
         - authorizer-api-v2: []
         - api_key: []
-      operationId: findScreenAction"
+      operationId: getScreenAction"
     put:
       tags:
         - 'screen service'

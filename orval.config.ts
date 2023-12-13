@@ -12,7 +12,7 @@ export default defineConfig({
       clean: true,
       override: {
         mutator: {
-          path: './src/api/fetch/useApiAxios.ts',
+          path: './src/hooks/fetch/useApiAxios.ts',
           name: 'useApiAxios',
         },
         query: {

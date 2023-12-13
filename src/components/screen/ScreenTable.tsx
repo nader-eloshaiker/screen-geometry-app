@@ -6,8 +6,8 @@ import EditIcon from '../../assets/icons/Edit'
 import { FormDrawerActionTypes } from '../../contexts/FormDrawer/FormDrawerManager'
 import { useFormDrawerContext } from '../../contexts/FormDrawer/useFormDrawaerContext'
 import { ScreenColor, ScreenItem } from '../../generated/openapi/models'
-import { useDeleteScreen } from '../../hooks/api/useDeleteScreen'
-import { useShowScreen } from '../../hooks/api/useShowScreen'
+import { useDeleteScreen } from '../../hooks/api/helpers/useDeleteScreen'
+import { useShowScreen } from '../../hooks/api/helpers/useShowScreen'
 import { useThemeMode } from '../../hooks/useThemeMode'
 import { getRandomString } from '../../utils/RandomGenerator'
 import { SkeletonRect } from '../skeleton/SkeletonRect'
@@ -72,8 +72,8 @@ export const ScreenTable = ({
   setHighLighted = () => {},
   onHighlightClick = () => {},
 }: Props) => {
-  const { isDeleteLoading, deleteAction } = useDeleteScreen()
-  const { isVisibleLoading, visibleAction } = useShowScreen()
+  const { isPending: isDeleteLoading, useMutation: deleteAction } = useDeleteScreen()
+  const { isPending: isVisibleLoading, useMutation: visibleAction } = useShowScreen()
   const { dispatchFormDrawer } = useFormDrawerContext()
   const [selected, setSelected] = useState<ScreenItem>()
   const [themeMode] = useThemeMode()
