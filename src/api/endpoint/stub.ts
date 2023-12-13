@@ -1,7 +1,4 @@
-import { AxiosInstance, AxiosRequestConfig } from 'axios'
-import MockAdapter from 'axios-mock-adapter'
-import { pathToRegexp } from 'path-to-regexp'
-import { apiRoutes } from '../ApiRouteSchema'
+import { apiRoutes } from '@api/ApiRouteSchema'
 import {
   createItemAction,
   createItemListAction,
@@ -10,7 +7,10 @@ import {
   getScreenList,
   showItemAction,
   updateItemAction,
-} from '../db/api'
+} from '@api/db/api'
+import { AxiosInstance, AxiosRequestConfig } from 'axios'
+import MockAdapter from 'axios-mock-adapter'
+import { pathToRegexp } from 'path-to-regexp'
 
 // Stub out the API calls using axios-mock-adapter for indexAPI to store data in the browser's IndexedDB
 // The stubbed API calls can later be replaced with real API calls to a backend store

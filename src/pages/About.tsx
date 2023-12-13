@@ -1,5 +1,5 @@
+import { appRoutes } from '@routes/AppRouteSchema'
 import { useNavigate } from 'react-router-dom'
-import { appRoutes } from '../routes/AppRouteSchema'
 
 export const About = () => {
   const navigate = useNavigate()

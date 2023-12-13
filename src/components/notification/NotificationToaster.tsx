@@ -1,11 +1,11 @@
-import axios, { AxiosError } from 'axios'
 import {
   GeneralNotificationItem,
   GeneralNotificationItemKeys,
   NotificationItemLogged,
-} from '../../contexts/Notification/NotificationManager'
-import { useNotificationContext } from '../../contexts/Notification/useNotifcationContext'
-import { ErrorResponse } from '../../generated/openapi/models'
+} from '@contexts/Notification/NotificationManager'
+import { useNotificationContext } from '@contexts/Notification/useNotifcationContext'
+import { ErrorResponse } from '@openapi/models'
+import axios, { AxiosError } from 'axios'
 import { NotificationAlert, NotificationProps } from './NotificationAlert'
 
 export const NotificationToaster = () => {

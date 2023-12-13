@@ -1,5 +1,5 @@
-import { DataBaseEntry, SearchItem } from '../../models/Database'
-import { transformSearchData } from '../../utils/ScreenTransformation'
+import { DataBaseEntry, SearchItem } from '@models/Database'
+import { transformSearchData } from '@utils/ScreenTransformation'
 
 export const initialDatabaseState = {
   isLoading: false,

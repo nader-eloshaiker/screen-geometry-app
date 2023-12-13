@@ -1,8 +1,8 @@
+import GithubIcon from '@assets/icons/Github'
+import LinkedInIcon from '@assets/icons/LinkedIn'
+import TwitterIcon from '@assets/icons/Twitter'
+import XIcon from '@assets/icons/X'
 import { ReactNode } from 'react'
-import GithubIcon from '../assets/icons/Github'
-import LinkedInIcon from '../assets/icons/LinkedIn'
-import TwitterIcon from '../assets/icons/Twitter'
-import XIcon from '../assets/icons/X'
 
 type ListItemProps = TRestProps & {
   href: string

@@ -1,8 +1,8 @@
+import HamburgerIcon from '@assets/icons/Hamburger'
+import ThemeModeToggle from '@components/theme/ThemeModeToggle'
+import { appRoutes } from '@routes/AppRouteSchema'
 import { clsx } from 'clsx'
 import { Link, useLocation } from 'react-router-dom'
-import HamburgerIcon from '../../assets/icons/Hamburger'
-import { appRoutes } from '../../routes/AppRouteSchema'
-import ThemeModeToggle from '../theme/ThemeModeToggle'
 
 type NavMenuItemProps = { pathname: string; route: string; title: string }
 const NavMenuItem = ({ pathname, route, title }: NavMenuItemProps) => {

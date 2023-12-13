@@ -1,6 +1,6 @@
+import { attachThemeClass, LightMode, ThemeKey, TThemeMode } from '@components/theme/ThemeConstants'
+import useLocalStorage from '@hooks/useLocalStorage'
 import { useState } from 'react'
-import { attachThemeClass, LightMode, ThemeKey, TThemeMode } from '../../components/theme/ThemeConstants'
-import useLocalStorage from '../../hooks/useLocalStorage'
 import { ThemeModeContext } from './ThemeModeContext'
 
 export const ThemeModeProvider = ({ children }: TReactChildren) => {

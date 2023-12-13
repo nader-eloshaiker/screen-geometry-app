@@ -1,9 +1,10 @@
+import { NotificationProvider } from '@contexts/Notification/NotificationProvider'
+import { SearchProvider } from '@contexts/Search/SearchProvider'
+import { useSearchListAction } from '@hooks/api/useSearchListAction'
+import { ElementSize } from '@hooks/useElementSize'
+import { DataBaseEntry } from '@models/Database'
 import { cleanup, fireEvent, render } from '@testing-library/react'
-import { NotificationProvider } from '../../contexts/Notification/NotificationProvider'
-import { SearchProvider } from '../../contexts/Search/SearchProvider'
-import * as useSearchListAction from '../../hooks/api/useSearchListAction'
-import { ElementSize } from '../../hooks/useElementSize'
-import { DataBaseEntry } from '../../models/Database'
+import { afterEach, beforeEach, describe, expect, vi } from 'vitest'
 import { AutoCompleteScreen } from './AutoCompleteScreen'
 
 const mocks = vi.hoisted(() => ({
@@ -19,8 +20,8 @@ vi.mock('../../hooks/api/useSearchListAction', async (importActual) => {
   }
 })
 
-vi.mock('../../hooks/useElementSize', async () => {
-  const actual = await vi.importActual('../../hooks/useElementSize')
+vi.mock('@hooks/useElementSize', async () => {
+  const actual = await vi.importActual('@hooks/useElementSize')
   return {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     ...(actual as any),

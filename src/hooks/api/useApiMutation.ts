@@ -1,12 +1,12 @@
-import type { UseMutationResult } from '@tanstack/react-query'
-import { useEffect } from 'react'
 import {
   GeneralNotificationItem,
   NotificationActionTypes,
   NotificationType,
-} from '../../contexts/Notification/NotificationManager'
-import { useNotificationContext } from '../../contexts/Notification/useNotifcationContext'
-import { ErrorResponse } from '../../generated/openapi/models'
+} from '@contexts/Notification/NotificationManager'
+import { useNotificationContext } from '@contexts/Notification/useNotifcationContext'
+import { ErrorResponse } from '@openapi/models'
+import type { UseMutationResult } from '@tanstack/react-query'
+import { useEffect } from 'react'
 
 export const useApiMutation = <TData, TVariables, TError = ErrorResponse, TContext = unknown>({
   useApiRequest,
