@@ -1,5 +1,4 @@
 import { InputFix } from '@components/input-suffix/InputFix'
-import { FixLocation } from '@components/input-suffix/InputFix.type'
 import { ScreenDataEnum } from '@models/Screen'
 import { clsx } from 'clsx'
 import { useFormContext } from 'react-hook-form'
@@ -10,7 +9,6 @@ type Props = TRestProps & {
   fix?: string
   inputStyle?: string
   fixStyle?: string
-  fixLocation?: FixLocation
   isLoading?: boolean
 }
 
