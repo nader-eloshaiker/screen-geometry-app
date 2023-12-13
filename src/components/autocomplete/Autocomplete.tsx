@@ -1,5 +1,3 @@
-// ./components/Autocomplete.tsx
-
 import MagnifyGlassIcon from '@assets/icons/MagnifyGlass'
 import { InputFix } from '@components/input-suffix/InputFix'
 import { useElementSize } from '@hooks/useElementSize'
