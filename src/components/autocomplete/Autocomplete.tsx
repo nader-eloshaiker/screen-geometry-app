@@ -1,11 +1,9 @@
-// ./components/Autocomplete.tsx
-
+import MagnifyGlassIcon from '@assets/icons/MagnifyGlass'
+import { InputFix } from '@components/input-suffix/InputFix'
+import { FixLocation } from '@components/input-suffix/InputFix.type'
+import { useElementSize } from '@hooks/useElementSize'
 import cn from 'classnames'
 import { ChangeEvent, KeyboardEvent, memo, useRef, useState } from 'react'
-import MagnifyGlassIcon from '../../assets/icons/MagnifyGlass'
-import { useElementSize } from '../../hooks/useElementSize'
-import { InputFix } from '../input-suffix/InputFix'
-import { FixLocation } from '../input-suffix/InputFix.type'
 
 export type TAutoCompleteItem = { id: string; label: string }
 type TProps = TRestProps & {

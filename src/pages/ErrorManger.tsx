@@ -1,6 +1,6 @@
 import { isRouteErrorResponse, useRouteError } from 'react-router-dom'
 
-export default function ErrorManager() {
+export const ErrorManager = () => {
   const error = useRouteError()
 
   let errorMessage: string

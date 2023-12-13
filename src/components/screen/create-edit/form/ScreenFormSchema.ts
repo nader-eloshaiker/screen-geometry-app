@@ -1,7 +1,7 @@
+import { ScreenDataEnum } from '@models/Screen'
+import { ScreenInput } from '@openapi/models'
 import * as yup from 'yup'
 import { ObjectSchema } from 'yup'
-import { ScreenInput } from '../../../../generated/openapi/models'
-import { ScreenDataEnum } from '../../../../models/Screen'
 
 export const ScreenFormSchema: ObjectSchema<ScreenInput> = yup.object().shape(
   {

@@ -1,7 +1,7 @@
+import { NotificationActionTypes, NotificationType } from '@contexts/Notification/NotificationManager'
+import { useNotificationContext } from '@contexts/Notification/useNotifcationContext'
 import classNames from 'classnames'
 import { useCallback, useEffect, useState } from 'react'
-import { NotificationActionTypes, NotificationType } from '../../contexts/Notification/NotificationManager'
-import { useNotificationContext } from '../../contexts/Notification/useNotifcationContext'
 import { NotificationImage } from './NotificationImage'
 
 export type NotificationProps = { title: string; message: string; tag: string; type: NotificationType }

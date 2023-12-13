@@ -4,6 +4,8 @@
  * screen-geometry-app-backend-serverless-apis-v1
  * OpenAPI spec version: 1.0.0
  */
+import type { DataBaseEntry } from '@models/Database'
+import type { ErrorResponse } from '@openapi/models'
 import {
   useQuery,
   type QueryFunction,
@@ -11,8 +13,6 @@ import {
   type UseQueryOptions,
   type UseQueryResult,
 } from '@tanstack/react-query'
-import type { ErrorResponse } from '../../generated/openapi/models'
-import type { DataBaseEntry } from '../../models/Database'
 import useApiAxios from './useApiAxios'
 
 type AwaitedInput<T> = PromiseLike<T> | T

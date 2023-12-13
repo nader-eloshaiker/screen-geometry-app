@@ -1,21 +1,21 @@
+import { ScreenPanel } from '@components/screen/ScreenPanel'
+import { ScreenTable } from '@components/screen/ScreenTable'
+import { ScreenButton } from '@components/screen/create-edit/CreateButton'
+import { ScreenFormDrawer } from '@components/screen/create-edit/drawer/ScreenFormDrawer'
+import { SkeletonImage } from '@components/skeleton/SkeletonImage'
+import { Stacked } from '@components/stacked/Stacked'
+import { defaultScreenInputList } from '@constants/defaultScreenList'
+import { FormDrawerProvider } from '@contexts/FormDrawer/FormDrawerProvider'
+import { useScreenContext } from '@contexts/Screen/useScreenContext'
+import { useCreateScreenList } from '@hooks/api/helpers/useCreateScreenList'
+import { useListScreens } from '@hooks/api/helpers/useListScreens'
+import { useElementSize } from '@hooks/useElementSize'
+import { Dimensions } from '@models/Screen'
+import { ScreenItem } from '@openapi/models'
+import { getMaxScreenSize } from '@utils/ScreenCalc'
 import { useRef, useState } from 'react'
-import { ScreenPanel } from '../components/screen/ScreenPanel'
-import { ScreenTable } from '../components/screen/ScreenTable'
-import { ScreenButton } from '../components/screen/create-edit/CreateButton'
-import { ScreenFormDrawer } from '../components/screen/create-edit/drawer/ScreenFormDrawer'
-import { SkeletonImage } from '../components/skeleton/SkeletonImage'
-import { Stacked } from '../components/stacked/Stacked'
-import { defaultScreenInputList } from '../constants/defaultScreenList'
-import { FormDrawerProvider } from '../contexts/FormDrawer/FormDrawerProvider'
-import { useScreenContext } from '../contexts/Screen/useScreenContext'
-import { ScreenItem } from '../generated/openapi/models'
-import { useCreateScreenList } from '../hooks/api/helpers/useCreateScreenList'
-import { useListScreens } from '../hooks/api/helpers/useListScreens'
-import { useElementSize } from '../hooks/useElementSize'
-import { Dimensions } from '../models/Screen'
-import { getMaxScreenSize } from '../utils/ScreenCalc'
 
-export default function Screens() {
+export const Screens = () => {
   const divSizeRef = useRef<HTMLDivElement>(null)
   const { width } = useElementSize(divSizeRef)
   const {

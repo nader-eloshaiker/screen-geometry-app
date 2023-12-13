@@ -1,5 +1,5 @@
+import ImageIcon from '@assets/icons/Image'
 import { twMerge } from 'tailwind-merge'
-import ImageIcon from '../../assets/icons/Image'
 
 type TProps = TRestProps & { className?: string }
 

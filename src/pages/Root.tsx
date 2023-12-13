@@ -1,8 +1,8 @@
+import Footer from '@components/footer/Footer'
+import Header from '@components/header/Header'
 import { Outlet } from 'react-router-dom'
-import Footer from '../components/footer/Footer'
-import Header from '../components/header/Header'
 
-export default function Root() {
+export const Root = () => {
   return (
     <div id='app-root' className='container mx-auto flex min-h-screen flex-col'>
       <Header />
