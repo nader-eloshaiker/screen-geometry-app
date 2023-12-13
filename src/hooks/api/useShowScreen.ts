@@ -10,7 +10,7 @@ const success = { title: 'Updated', message: 'Screen visibility' }
 export const useShowScreen = () => {
   const { dispatch } = useScreenContext()
 
-  const dispatcher = useCallback(
+  const callback = useCallback(
     (data: ScreenItemResponse) => dispatch({ type: ScreenActionTypes.UPDATE, payload: data.item }),
     [dispatch],
   )
@@ -18,7 +18,7 @@ export const useShowScreen = () => {
 
   return useAppMutation<ScreenItemResponse, { id: string }>({
     useRequest,
-    callback: dispatcher,
+    callback,
     success,
   })
 }

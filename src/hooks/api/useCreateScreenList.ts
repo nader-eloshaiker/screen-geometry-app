@@ -9,7 +9,7 @@ const success = { title: 'Created', message: 'Screen list' }
 
 export const useCreateScreenList = () => {
   const { dispatch } = useScreenContext()
-  const dispatcher = useCallback(
+  const callback = useCallback(
     (data: ScreenListResponse) => dispatch({ type: ScreenActionTypes.ADD_LIST, payload: data.list }),
     [dispatch],
   )
@@ -17,7 +17,7 @@ export const useCreateScreenList = () => {
 
   return useAppMutation<ScreenListResponse, { data: ScreenInputList }>({
     useRequest,
-    callback: dispatcher,
+    callback,
     success,
   })
 }

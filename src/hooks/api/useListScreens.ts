@@ -8,7 +8,7 @@ import { useAppQuery } from '../fetch/useAppQuery'
 
 export const useListScreens = () => {
   const { dispatch } = useScreenContext()
-  const dispatcher = useCallback(
+  const callback = useCallback(
     (data: ScreenListResponse) => dispatch({ type: ScreenActionTypes.LOAD, payload: data?.list }),
     [dispatch],
   )
@@ -22,6 +22,6 @@ export const useListScreens = () => {
 
   return useAppQuery<ScreenListResponse>({
     useRequest,
-    callback: dispatcher,
+    callback,
   })
 }

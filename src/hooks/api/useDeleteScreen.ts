@@ -10,7 +10,7 @@ const success = { title: 'Deleted', message: 'Screen configuration' }
 export const useDeleteScreen = () => {
   const { dispatch } = useScreenContext()
 
-  const dispatcher = useCallback(
+  const callback = useCallback(
     (data: ScreenIdResponse) => dispatch({ type: ScreenActionTypes.DELETE, payload: data.id }),
     [dispatch],
   )
@@ -18,7 +18,7 @@ export const useDeleteScreen = () => {
 
   return useAppMutation<ScreenIdResponse, { id: string }>({
     useRequest,
-    callback: dispatcher,
+    callback,
     success,
   })
 }

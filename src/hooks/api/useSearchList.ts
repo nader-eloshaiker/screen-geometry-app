@@ -8,7 +8,7 @@ import { useSearchListAction } from './useSearchListAction'
 export const useSearchList = (enabled: boolean) => {
   const { dispatch } = useSearchContext()
 
-  const dispatcher = useCallback(
+  const callback = useCallback(
     (data: Array<DataBaseEntry>) => dispatch({ type: SearchActionTypes.LOAD, payload: data }),
     [dispatch],
   )
@@ -19,6 +19,6 @@ export const useSearchList = (enabled: boolean) => {
 
   return useAppQuery<Array<DataBaseEntry>>({
     useRequest,
-    callback: dispatcher,
+    callback,
   })
 }

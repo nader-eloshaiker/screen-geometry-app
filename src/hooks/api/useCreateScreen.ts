@@ -10,7 +10,7 @@ const success = { title: 'Created', message: 'Screen configuration' }
 export const useCreateScreen = () => {
   const { dispatch } = useScreenContext()
 
-  const dispatcher = useCallback(
+  const callback = useCallback(
     (data: ScreenItemResponse) => dispatch({ type: ScreenActionTypes.ADD, payload: data?.item }),
     [dispatch],
   )
@@ -18,7 +18,7 @@ export const useCreateScreen = () => {
 
   return useAppMutation<ScreenItemResponse, { data: ScreenInput }>({
     useRequest,
-    callback: dispatcher,
+    callback,
     success,
   })
 }

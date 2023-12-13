@@ -8,7 +8,7 @@ import { useAppMutation } from '../fetch/useAppMutation'
 export const useUpdateScreen = () => {
   const { dispatch } = useScreenContext()
 
-  const dispatcher = useCallback(
+  const callback = useCallback(
     (data: ScreenItemResponse) => dispatch({ type: ScreenActionTypes.UPDATE, payload: data.item }),
     [dispatch],
   )
@@ -16,7 +16,7 @@ export const useUpdateScreen = () => {
 
   return useAppMutation<ScreenItemResponse, { id: string; data: ScreenInput }>({
     useRequest,
-    callback: dispatcher,
+    callback,
     success: { title: 'Updated', message: 'Screen configuration' },
   })
 }
