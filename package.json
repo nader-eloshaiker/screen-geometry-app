@@ -47,7 +47,7 @@
     "yup": "^1.2.0"
   },
   "devDependencies": {
-    "@testing-library/jest-dom": "^6.1.2",
+    "@testing-library/jest-dom": "^6.1.5",
     "@testing-library/react": "^14.1.2",
     "@testing-library/user-event": "^14.4.3",
     "@types/eslint-config-prettier": "^6.11.2",
