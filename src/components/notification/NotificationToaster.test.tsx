@@ -35,12 +35,10 @@ const TestComponent = ({ payload }: { payload: NotificationItem }) => {
 
 describe('#NotificationToaster', () => {
   beforeEach(() => {
-    // mocks.dispatch.mockImplementation(() => {})
     vi.useFakeTimers()
   })
 
   afterEach(() => {
-    // mocks.dispatch.mockRestore()
     vi.useRealTimers()
   })
 
@@ -195,6 +193,29 @@ describe('#NotificationToaster', () => {
 
     act(() => {
       fireEvent.click(element)
+    })
+
+    expect(element).not.toBeInTheDocument()
+    expect(container.querySelectorAll('li')).toHaveLength(0)
+  })
+
+  it('should render the Warning', () => {
+    const warningNotification: NotificationItem = {
+      value: { title: 'aaa', message: 'bbb' } as GeneralNotificationItem,
+      type: NotificationType.WARNING,
+    }
+    const { getByText, container } = render(
+      <NotificationProvider>
+        <TestComponent payload={warningNotification} />
+      </NotificationProvider>,
+    )
+    const element = getByText('aaa')
+
+    expect(element).toBeInTheDocument()
+    expect(container.querySelectorAll('li')).toHaveLength(1)
+
+    act(() => {
+      vi.advanceTimersByTime(3500)
     })
 
     expect(element).not.toBeInTheDocument()
