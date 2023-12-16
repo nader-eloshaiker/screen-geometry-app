@@ -30,6 +30,7 @@ export default defineConfig({
       '@openapi': path.resolve(__dirname, '/src/generated/openapi'),
       '@pages': path.resolve(__dirname, '/src/pages'),
       '@routes': path.resolve(__dirname, '/src/routes'),
+      '@test': path.resolve(__dirname, '/src/test'),
       '@utils': path.resolve(__dirname, '/src/utils'),
     },
   },
