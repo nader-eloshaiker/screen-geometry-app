@@ -1,7 +1,6 @@
-import { clsx } from 'clsx'
 import { ReactNode } from 'react'
-
 import { styled } from 'styled-components'
+import { twMerge } from 'tailwind-merge'
 
 const InputPlaceholder = styled.span`
   color: var(--fallback-bc, oklch(var(--bc) / var(--tw-placeholder-opacity)));
@@ -15,7 +14,7 @@ export const InputFix = ({ fix, fixStyle, children }: Props) => {
     <div className='relative'>
       {children}
       <InputPlaceholder
-        className={clsx('pointer-events-none absolute top-0 flex h-full w-fit items-center rounded-r', fixStyle)}
+        className={twMerge('pointer-events-none absolute top-0 flex h-full w-fit items-center rounded-r', fixStyle)}
       >
         {fix}
       </InputPlaceholder>

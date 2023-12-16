@@ -46,7 +46,7 @@ export const notificationReducer = (
 ): NotificationState => {
   switch (type) {
     case NotificationActionTypes.ADD_NOTIFICATION:
-      if (axios.isAxiosError(payload.value) && !axios.isCancel(payload.value)) {
+      if (axios.isAxiosError(payload.value) && axios.isCancel(payload.value)) {
         return state
       }
 

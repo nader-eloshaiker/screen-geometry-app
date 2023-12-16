@@ -4,7 +4,6 @@ import { useSearchListAction } from '@hooks/api/useSearchListAction'
 import { ElementSize } from '@hooks/useElementSize'
 import { DataBaseEntry } from '@models/Database'
 import { cleanup, fireEvent, render } from '@testing-library/react'
-import { afterEach, beforeEach, describe, expect, vi } from 'vitest'
 import { AutoCompleteScreen } from './AutoCompleteScreen'
 
 const mocks = vi.hoisted(() => ({
@@ -12,7 +11,7 @@ const mocks = vi.hoisted(() => ({
   useElementSize: vi.fn(),
 }))
 
-vi.mock('../../hooks/api/useSearchListAction', async (importActual) => {
+vi.mock('@hooks/api/useSearchListAction', async (importActual) => {
   const actual = await importActual<typeof useSearchListAction>()
   return {
     ...actual,

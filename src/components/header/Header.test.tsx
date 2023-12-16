@@ -45,7 +45,7 @@ describe('#Header', () => {
   it.skip('should render the header without dropdown menu on a large window', () => {
     const { result } = renderHook(() => useWindowSize())
     console.log(result.current)
-    const { getByTestId, debug } = render(
+    const { getByTestId } = render(
       <ThemeModeProvider>
         <RouterProvider router={browserRouter} />
       </ThemeModeProvider>,
@@ -53,7 +53,6 @@ describe('#Header', () => {
 
     resizeWindow(1000, 640)
     const element = getByTestId('nav-menu')
-    debug()
 
     expect(element).not.toBeVisible()
   })
