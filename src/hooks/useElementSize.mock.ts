@@ -7,5 +7,7 @@ export const useElementSizeMock = (value?: ElementSizeModule.ElementSize) => {
     x: 0,
     y: 0,
   }
-  return vi.spyOn(ElementSizeModule, 'useElementSize').mockImplementation(() => useElementSizeResponse)
+  const spy = vi.spyOn(ElementSizeModule, 'useElementSize').mockImplementation(() => useElementSizeResponse)
+
+  return spy
 }

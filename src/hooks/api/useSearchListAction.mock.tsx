@@ -34,9 +34,11 @@ export const useSearchListActionMock = (value?: DataBaseEntry[]) => {
     },
   ]
 
-  return vi.spyOn(SearchListActionModule, 'useSearchListAction').mockReturnValue({
+  const spy = vi.spyOn(SearchListActionModule, 'useSearchListAction').mockReturnValue({
     data: searchListResponse,
     isFetching: false,
     error: undefined,
   } as UseQueryResult<unknown, unknown> & { queryKey: QueryKey })
+
+  return spy
 }
