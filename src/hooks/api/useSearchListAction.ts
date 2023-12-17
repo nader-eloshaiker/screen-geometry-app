@@ -61,6 +61,7 @@ export const useSearchListAction = <
   const queryOptions = useSearchListActionQueryOptions(options)
 
   const query = useQuery(queryOptions) as UseQueryResult<TData, TError> & { queryKey: QueryKey }
+  console.log(JSON.stringify(query, null, 2))
 
   query.queryKey = queryOptions.queryKey
 

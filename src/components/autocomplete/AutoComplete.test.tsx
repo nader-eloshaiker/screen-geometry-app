@@ -1,20 +1,6 @@
-import { cleanup, fireEvent, render } from '@testing-library/react'
-import { ElementSize } from '../../hooks/useElementSize'
-
+import { useElementSizeMock } from '@hooks/useElementSize.mock'
+import { fireEvent, render } from '@testing-library/react'
 import { AutoComplete } from './Autocomplete'
-
-const mocks = vi.hoisted(() => ({
-  useElementSize: vi.fn(),
-}))
-
-vi.mock('../../hooks/useElementSize', async () => {
-  const actual = await vi.importActual('../../hooks/useElementSize')
-  return {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    ...(actual as any),
-    useElementSize: mocks.useElementSize,
-  }
-})
 
 describe('#AutoComplete', () => {
   const searchList = [
@@ -33,24 +19,14 @@ describe('#AutoComplete', () => {
   ]
 
   beforeEach(() => {
-    const useElementSizeResponse: ElementSize = {
-      width: 1024,
-      height: 1024,
-      x: 0,
-      y: 0,
-    }
-    mocks.useElementSize.mockImplementation(() => useElementSizeResponse)
+    useElementSizeMock()
   })
 
-  afterEach(() => {
-    cleanup()
-  })
-
-  test('renders autocomplete component with an input field', () => {
-    const { getByPlaceholderText } = render(
+  test.only('renders autocomplete component with an input field', () => {
+    const { getByPlaceholderText, debug } = render(
       <AutoComplete items={searchList} value='' isLoading={false} placeholder='Type to filter list...' />,
     )
-
+    debug()
     expect(getByPlaceholderText('Type to filter list...')).toBeInTheDocument()
   })
 
