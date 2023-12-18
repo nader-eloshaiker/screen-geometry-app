@@ -4,15 +4,15 @@ export default defineConfig({
   screenApi: {
     output: {
       mode: 'tags',
-      target: './src/generated/openapi/services',
-      schemas: './src/generated/openapi/models',
+      target: './src/openapi/generated/services',
+      schemas: './src/openapi/generated/models',
       client: 'react-query',
       mock: false,
       prettier: true,
       clean: true,
       override: {
         mutator: {
-          path: './src/hooks/fetch/useApiAxios.ts',
+          path: './src/hooks/api/useApiAxios.ts',
           name: 'useApiAxios',
         },
         query: {

@@ -1,4 +1,4 @@
-import { ScreenData, ScreenInput, ScreenSpec } from '@openapi/models'
+import { ScreenData, ScreenInput, ScreenSpec } from '@openapi/generated/models'
 
 export interface DataBaseEntry {
   name: string

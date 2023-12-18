@@ -1,6 +1,6 @@
 import { DarkMode } from '@components/theme/ThemeConstants'
 import { useThemeMode } from '@hooks/useThemeMode'
-import { ScreenItem } from '@openapi/models'
+import { ScreenItem } from '@openapi/generated/models'
 import { clsx } from 'clsx'
 import styled from 'styled-components'
 

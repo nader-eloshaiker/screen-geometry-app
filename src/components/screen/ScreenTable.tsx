@@ -7,7 +7,7 @@ import { useFormDrawerContext } from '@contexts/FormDrawer/useFormDrawaerContext
 import { useDeleteScreen } from '@hooks/api/helpers/useDeleteScreen'
 import { useShowScreen } from '@hooks/api/helpers/useShowScreen'
 import { useThemeMode } from '@hooks/useThemeMode'
-import { ScreenColor, ScreenItem } from '@openapi/models'
+import { ScreenColor, ScreenItem } from '@openapi/generated/models'
 import { getRandomString } from '@utils/RandomGenerator'
 import { useState } from 'react'
 import styled from 'styled-components'

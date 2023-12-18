@@ -1,7 +1,7 @@
 import { ScreenActionTypes } from '@contexts/Screen/ScreenManager'
 import { useScreenContext } from '@contexts/Screen/useScreenContext'
-import { ScreenInput, ScreenItemResponse } from '@openapi/models'
-import { useUpdateScreenAction } from '@openapi/services/screen-service'
+import { ScreenInput, ScreenItemResponse } from '@openapi/generated/models'
+import { useUpdateScreenAction } from '@openapi/generated/services/screen-service'
 import { useCallback } from 'react'
 import { useApiMutation } from '../useApiMutation'
 

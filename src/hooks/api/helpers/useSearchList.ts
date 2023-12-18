@@ -2,8 +2,8 @@ import { SearchActionTypes } from '@contexts/Search/SearchManager'
 import { useSearchContext } from '@contexts/Search/useSearchContext'
 import { DataBaseEntry } from '@models/Database'
 import { useCallback } from 'react'
+import { useSearchListAction } from '../../../openapi/augmented/useSearchListAction'
 import { useApiQuery } from '../useApiQuery'
-import { useSearchListAction } from '../useSearchListAction'
 
 export const useSearchList = (enabled: boolean) => {
   const { dispatch } = useSearchContext()

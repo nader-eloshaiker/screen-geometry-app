@@ -18,7 +18,7 @@
       "@contexts/*": ["./src/contexts/*"],
       "@hooks/*": ["./src/hooks/*"],
       "@models/*": ["./src/models/*"],
-      "@openapi/*": ["./src/generated/openapi/*"],
+      "@openapi/*": ["./src/openapi/*"],
       "@pages/*": ["./src/pages/*"],
       "@routes/*": ["./src/routes/*"],
       "@test/*": ["./src/test/*"],

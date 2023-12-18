@@ -6,7 +6,7 @@ import {
 } from '@contexts/Notification/NotificationManager'
 import { NotificationProvider } from '@contexts/Notification/NotificationProvider'
 import { useNotificationContext } from '@contexts/Notification/useNotifcationContext'
-import { ErrorResponse } from '@openapi/models'
+import { ErrorResponse } from '@openapi/generated/models'
 import { fireEvent, render } from '@testing-library/react'
 import { AxiosError, InternalAxiosRequestConfig } from 'axios'
 import { useEffect } from 'react'

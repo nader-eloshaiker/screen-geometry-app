@@ -1,5 +1,5 @@
 import { DataBaseEntry, SearchData, SearchItem } from '@models/Database'
-import { ScreenInput, ScreenItem, ScreenSpec } from '@openapi/models'
+import { ScreenInput, ScreenItem, ScreenSpec } from '@openapi/generated/models'
 import { getRandomString } from './RandomGenerator'
 
 const getAspectRatio = (str: string) => {

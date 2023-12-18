@@ -1,6 +1,6 @@
 import { NotificationActionTypes, NotificationType } from '@contexts/Notification/NotificationManager'
 import { useNotificationContext } from '@contexts/Notification/useNotifcationContext'
-import { ErrorResponse } from '@openapi/models'
+import { ErrorResponse } from '@openapi/generated/models'
 import type { QueryKey, UseQueryResult } from '@tanstack/react-query'
 import { useEffect } from 'react'
 

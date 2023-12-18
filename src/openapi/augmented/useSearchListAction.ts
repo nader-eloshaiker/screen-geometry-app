@@ -5,7 +5,7 @@
  * OpenAPI spec version: 1.0.0
  */
 import type { DataBaseEntry } from '@models/Database'
-import type { ErrorResponse } from '@openapi/models'
+import type { ErrorResponse } from '@openapi/generated/models'
 import {
   useQuery,
   type QueryFunction,
@@ -13,7 +13,7 @@ import {
   type UseQueryOptions,
   type UseQueryResult,
 } from '@tanstack/react-query'
-import useApiAxios from './useApiAxios'
+import useApiAxios from '../../hooks/api/useApiAxios'
 
 type AwaitedInput<T> = PromiseLike<T> | T
 

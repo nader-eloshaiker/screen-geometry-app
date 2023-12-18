@@ -1,5 +1,5 @@
-import * as SearchListActionModule from '@hooks/api/useSearchListAction'
 import { DataBaseEntry } from '@models/Database'
+import * as SearchListActionModule from '@openapi/augmented/useSearchListAction'
 import { QueryKey, UseQueryResult } from '@tanstack/react-query'
 
 export const useSearchListActionMock = (value?: DataBaseEntry[]) => {

@@ -4,7 +4,7 @@ import {
   NotificationType,
 } from '@contexts/Notification/NotificationManager'
 import { useNotificationContext } from '@contexts/Notification/useNotifcationContext'
-import { ErrorResponse } from '@openapi/models'
+import { ErrorResponse } from '@openapi/generated/models'
 import type { UseMutationResult } from '@tanstack/react-query'
 import { useEffect } from 'react'
 

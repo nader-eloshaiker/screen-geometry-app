@@ -4,7 +4,6 @@
  * screen-geometry-app-backend-serverless-apis-v1
  * OpenAPI spec version: 1.0.0
  */
-import { useApiAxios } from '@hooks/api/useApiAxios'
 import type {
   MutationFunction,
   QueryFunction,
@@ -14,6 +13,7 @@ import type {
   UseQueryResult,
 } from '@tanstack/react-query'
 import { useMutation, useQuery } from '@tanstack/react-query'
+import { useApiAxios } from '../../../hooks/api/useApiAxios'
 import type { ErrorResponse, ScreenInput, ScreenInputList, ScreenItemResponse, ScreenListResponse } from '../models'
 
 export const useListScreensActionHook = () => {

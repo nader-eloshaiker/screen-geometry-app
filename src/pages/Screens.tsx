@@ -11,7 +11,7 @@ import { useCreateScreenList } from '@hooks/api/helpers/useCreateScreenList'
 import { useListScreens } from '@hooks/api/helpers/useListScreens'
 import { useElementSize } from '@hooks/useElementSize'
 import { Dimensions } from '@models/Screen'
-import { ScreenItem } from '@openapi/models'
+import { ScreenItem } from '@openapi/generated/models'
 import { getMaxScreenSize } from '@utils/ScreenCalc'
 import { useRef, useState } from 'react'
 

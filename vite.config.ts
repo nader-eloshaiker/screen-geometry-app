@@ -27,7 +27,7 @@ export default defineConfig({
       '@contexts': path.resolve(__dirname, '/src/contexts'),
       '@hooks': path.resolve(__dirname, './src/hooks'),
       '@models': path.resolve(__dirname, '/src/models'),
-      '@openapi': path.resolve(__dirname, '/src/generated/openapi'),
+      '@openapi': path.resolve(__dirname, '/src/openapi'),
       '@pages': path.resolve(__dirname, '/src/pages'),
       '@routes': path.resolve(__dirname, '/src/routes'),
       '@test': path.resolve(__dirname, '/src/test'),
@@ -45,11 +45,11 @@ export default defineConfig({
     coverage: {
       provider: 'v8',
       reporter: ['text', 'json', 'html'],
-      exclude: ['src/generated/**/*', 'src/tests/**/*', 'src/**/*.mock.{ts,tsx}'],
+      exclude: ['src/openapi/**/*', 'src/tests/**/*', 'src/**/*.mock.{ts,tsx}'],
     },
     environment: 'jsdom',
     setupFiles: './src/vitest.setup.ts',
     include: ['src/**/*.test.{ts,tsx}'],
-    exclude: ['src/**/node_modules/**/*', 'src/generated/**/*', 'src/tests/**/*'],
+    exclude: ['src/**/node_modules/**/*', 'src/openapi/**/*', 'src/tests/**/*'],
   },
 })
