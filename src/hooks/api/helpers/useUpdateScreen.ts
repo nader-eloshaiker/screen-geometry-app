@@ -5,6 +5,8 @@ import { useUpdateScreenAction } from '@openapi/generated/services/screen-servic
 import { useCallback } from 'react'
 import { useApiMutation } from '../useApiMutation'
 
+const success = { title: 'Updated', message: 'Screen configuration' }
+
 export const useUpdateScreen = () => {
   const { dispatch } = useScreenContext()
 
@@ -17,6 +19,6 @@ export const useUpdateScreen = () => {
   return useApiMutation<ScreenItemResponse, { id: string; data: ScreenInput }>({
     useApiRequest,
     apiCallback,
-    success: { title: 'Updated', message: 'Screen configuration' },
+    success,
   })
 }

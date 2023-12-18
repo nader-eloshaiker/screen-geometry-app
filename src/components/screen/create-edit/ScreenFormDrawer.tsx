@@ -1,10 +1,10 @@
 import { FormDrawerActionTypes, FormDrawerMode } from '@contexts/FormDrawer/FormDrawerManager'
-import { useFormDrawerContext } from '@contexts/FormDrawer/useFormDrawaerContext'
+import { useFormDrawerContext } from '@contexts/FormDrawer/useFormDrawerContext'
 import { useGetScreen } from '@hooks/api/helpers/useGetScreen'
 import { ScreenInput } from '@openapi/generated/models'
 import { transformScreenItem } from '@utils/ScreenTransformation'
 import { useEffect, useState } from 'react'
-import { ScreenForm } from '../form/ScreenForm'
+import { ScreenForm } from './form/ScreenForm'
 
 type Props = TReactChildren
 

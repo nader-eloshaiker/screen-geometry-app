@@ -19,10 +19,10 @@ export const InputField = ({ formKey, title, fix, inputStyle, fixStyle, isLoadin
   } = useFormContext()
 
   return (
-    <label htmlFor={formKey} className='form-control mb-2 flex flex-col'>
-      <div className='label'>
-        <span className='text-sm'>{title}</span>
-      </div>
+    <div className='form-control mb-2 flex flex-col'>
+      <label htmlFor={formKey} className='label text-sm'>
+        {title}
+      </label>
       {fix ? (
         <InputFix fix={fix} fixStyle={fixStyle ?? ''}>
           <input
@@ -46,6 +46,6 @@ export const InputField = ({ formKey, title, fix, inputStyle, fixStyle, isLoadin
           {...register(formKey)}
         />
       )}
-    </label>
+    </div>
   )
 }

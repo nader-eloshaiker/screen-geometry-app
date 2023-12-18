@@ -1,7 +1,7 @@
 import { ScreenPanel } from '@components/screen/ScreenPanel'
 import { ScreenTable } from '@components/screen/ScreenTable'
 import { ScreenButton } from '@components/screen/create-edit/CreateButton'
-import { ScreenFormDrawer } from '@components/screen/create-edit/drawer/ScreenFormDrawer'
+import { ScreenFormDrawer } from '@components/screen/create-edit/ScreenFormDrawer'
 import { SkeletonImage } from '@components/skeleton/SkeletonImage'
 import { Stacked } from '@components/stacked/Stacked'
 import { defaultScreenInputList } from '@constants/defaultScreenList'

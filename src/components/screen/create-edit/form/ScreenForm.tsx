@@ -196,13 +196,7 @@ export const ScreenForm = ({
               <ColorField formKey={ScreenDataEnum.lightColor} title='Light' mode={LightMode} isLoading={isLoading} />
               <ColorField formKey={ScreenDataEnum.darkColor} title='Dark' mode={DarkMode} isLoading={isLoading} />
             </div>
-            <button
-              id='genColorButton'
-              type='button'
-              className='btn btn-neutral w-24'
-              onClick={onGenerateColor}
-              disabled={isLoading}
-            >
+            <button type='button' className='btn btn-neutral w-24' onClick={onGenerateColor} disabled={isLoading}>
               Change
             </button>
           </div>
@@ -225,16 +219,14 @@ export const ScreenForm = ({
           <div className='flex justify-between'>
             <div className='flex gap-4'>
               <button
-                id='cancelButton'
                 type='button'
                 className='btn btn-neutral w-24'
                 disabled={isCreateLoading || isUpdateLoading || isLoading}
                 onClick={onClose}
               >
-                close
+                Close
               </button>
               <button
-                id='resetButton'
                 type='button'
                 className='btn btn-neutral w-24'
                 disabled={isCreateLoading || isUpdateLoading || isLoading}
@@ -244,7 +236,6 @@ export const ScreenForm = ({
               </button>
             </div>
             <button
-              id='submitButton'
               type='submit'
               className={clsx('btn btn-neutral w-24', { 'pointer-events-none': isCreateLoading || isUpdateLoading })}
               disabled={!isDirty || !isValid}
@@ -252,7 +243,7 @@ export const ScreenForm = ({
               {isCreateLoading || isUpdateLoading ? (
                 <div className='loading loading-spinner items-center justify-center' />
               ) : (
-                <div>{!editId ? 'Create' : 'Update'}</div>
+                <>{!editId ? 'Create' : 'Update'}</>
               )}
             </button>
           </div>

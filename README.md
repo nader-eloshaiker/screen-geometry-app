@@ -165,7 +165,7 @@ I discovered this little gem to replace pnpm and it is lightning quick. You can 
   - Orval allows the developer to choose which HTTP client is to be used as the underlying framework to actually make the fetch call, in this case React-Query with AXIOS
 - localforage
 
-## Automated Deployments - TBD
+## Automated Deployments
 
 The intention is to have automated builds and deployments using GitHub actions and hosting on CloudFlare. Just haven't reached that point yet.
 

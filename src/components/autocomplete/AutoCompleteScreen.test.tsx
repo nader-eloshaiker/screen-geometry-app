@@ -2,7 +2,7 @@ import { NotificationProvider } from '@contexts/Notification/NotificationProvide
 import { SearchProvider } from '@contexts/Search/SearchProvider'
 import { useElementSizeMock } from '@hooks/useElementSize.mock'
 import { useSearchListActionMock } from '@openapi/mocks/useSearchListAction.mock'
-import { cleanup, fireEvent, render } from '@testing-library/react'
+import { fireEvent, render } from '@testing-library/react'
 import { AutoCompleteScreen } from './AutoCompleteScreen'
 
 // const mocks = vi.hoisted(() => ({
@@ -15,10 +15,6 @@ describe('#AutoCompleteScreen', () => {
   beforeEach(() => {
     useElementSizeMock()
     useSearchListActionMock()
-  })
-
-  afterEach(() => {
-    cleanup()
   })
 
   test('renders autocomplete component with an input field', () => {
