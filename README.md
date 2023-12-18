@@ -169,9 +169,30 @@ I discovered this little gem to replace pnpm and it is lightning quick. You can 
 
 The intention is to have automated builds and deployments using GitHub actions and hosting on CloudFlare. Just haven't reached that point yet.
 
-## Testing - TBD
+## Testing
 
 ### Unit
+
+Testing makes use of [Vitest](https://vitest.dev/) which is a test runner much like Jest but integrates with the Vite tranformation pipeline and configuration.
+It provides a compatible api with Jest making it a drop in raplacement but runs significantly faster than Jest.
+
+#### Run test
+
+Initiating test runs and watching for changes is excuted using
+
+    pnpm run test
+
+However, you can bring up a visual console for testing using
+
+    pnpm run test:ui
+
+#### Test dashboard
+
+The console can be accessed from the [http://localhost:51204/\_\_vitest\_\_/#/](http://localhost:51204/__vitest__/#/)
+
+#### Coverage Reports
+
+Coverage reports are also generated and can be access from [http://localhost:52330/coverage/index.html](http://localhost:52330/coverage/index.html)
 
 ### Component
 
