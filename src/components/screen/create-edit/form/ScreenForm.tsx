@@ -50,7 +50,7 @@ export const ScreenForm = ({
     if (defaultValues) {
       reset(defaultValues)
     } else {
-      reset(DefaultInputValues())
+      reset()
     }
   }, [defaultValues, reset])
 
@@ -59,11 +59,13 @@ export const ScreenForm = ({
       setValue(ScreenDataEnum.aspectRatio, item.tag.aspectRatio, {
         shouldValidate: true,
         shouldDirty: true,
+        shouldTouch: true,
       })
       if (item.tag.diagonalSize) {
         setValue(ScreenDataEnum.diagonalSize, item.tag.diagonalSize, {
           shouldValidate: true,
           shouldDirty: true,
+          shouldTouch: true,
         })
       } else {
         resetField(ScreenDataEnum.diagonalSize)
@@ -72,6 +74,7 @@ export const ScreenForm = ({
         setValue(ScreenDataEnum.hRes, item.spec?.hRes, {
           shouldValidate: true,
           shouldDirty: true,
+          shouldTouch: true,
         })
       } else {
         resetField(ScreenDataEnum.hRes)
@@ -80,6 +83,7 @@ export const ScreenForm = ({
         setValue(ScreenDataEnum.vRes, item.spec?.vRes, {
           shouldValidate: true,
           shouldDirty: true,
+          shouldTouch: true,
         })
       } else {
         resetField(ScreenDataEnum.vRes)

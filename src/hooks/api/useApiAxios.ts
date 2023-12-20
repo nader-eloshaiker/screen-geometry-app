@@ -35,7 +35,7 @@ export const useApiAxios = <T>(): ((config: AxiosRequestConfig) => Promise<T>) =
 
     // @ts-expect-error this is a hack to add cancel method to promise
     promise.cancel = () => {
-      source.cancel('Query was cancelled by React Query')
+      source.cancel('axios cancelled: signalled by React Query')
     }
 
     return promise
