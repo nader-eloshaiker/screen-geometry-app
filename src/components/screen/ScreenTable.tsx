@@ -4,8 +4,8 @@ import { SkeletonRect } from '@components/skeleton/SkeletonRect'
 import { DarkMode, TThemeMode } from '@components/theme/ThemeConstants'
 import { FormDrawerActionTypes } from '@contexts/FormDrawer/FormDrawerManager'
 import { useFormDrawerContext } from '@contexts/FormDrawer/useFormDrawerContext'
-import { useDeleteScreen } from '@hooks/api/helpers/useDeleteScreen'
-import { useShowScreen } from '@hooks/api/helpers/useShowScreen'
+import { useDeleteScreenApi } from '@hooks/api/helpers/useDeleteScreenApi'
+import { useShowScreenApi } from '@hooks/api/helpers/useShowScreenApi'
 import { useThemeMode } from '@hooks/useThemeMode'
 import { ScreenColor, ScreenItem } from '@openapi/generated/models'
 import { getRandomString } from '@utils/RandomGenerator'
@@ -72,8 +72,8 @@ export const ScreenTable = ({
   setHighLighted = () => {},
   onHighlightClick = () => {},
 }: Props) => {
-  const { isPending: isDeleteLoading, useMutation: deleteAction } = useDeleteScreen()
-  const { isPending: isVisibleLoading, useMutation: visibleAction } = useShowScreen()
+  const { isPending: isDeleteLoading, useMutation: deleteAction } = useDeleteScreenApi()
+  const { isPending: isVisibleLoading, useMutation: visibleAction } = useShowScreenApi()
   const { dispatchFormDrawer } = useFormDrawerContext()
   const [selected, setSelected] = useState<ScreenItem>()
   const [themeMode] = useThemeMode()

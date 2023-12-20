@@ -1,20 +1,20 @@
 import { ScreenActionTypes } from '@contexts/Screen/ScreenManager'
 import { useScreenContext } from '@contexts/Screen/useScreenContext'
 import { ScreenItemResponse } from '@openapi/generated/models'
-import { useShowScreenAction } from '@openapi/generated/services/screen-action-service'
+import { useShowScreen } from '@openapi/generated/services/screen-service'
 import { useCallback } from 'react'
 import { useApiMutation } from '../useApiMutation'
 
 const success = { title: 'Updated', message: 'Screen visibility' }
 
-export const useShowScreen = () => {
+export const useShowScreenApi = () => {
   const { dispatch } = useScreenContext()
 
   const apiCallback = useCallback(
     (data: ScreenItemResponse) => dispatch({ type: ScreenActionTypes.UPDATE, payload: data.item }),
     [dispatch],
   )
-  const useApiRequest = () => useShowScreenAction()
+  const useApiRequest = () => useShowScreen()
 
   return useApiMutation<ScreenItemResponse, { id: string }>({
     useApiRequest,

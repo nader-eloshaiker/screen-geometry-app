@@ -1,20 +1,20 @@
 import { ScreenActionTypes } from '@contexts/Screen/ScreenManager'
 import { useScreenContext } from '@contexts/Screen/useScreenContext'
 import { ScreenInput, ScreenItemResponse } from '@openapi/generated/models'
-import { useCreateScreenAction } from '@openapi/generated/services/screen-list-service'
+import { useCreateScreen } from '@openapi/generated/services/screen-service'
 import { useCallback } from 'react'
 import { useApiMutation } from '../useApiMutation'
 
 const success = { title: 'Created', message: 'Screen configuration' }
 
-export const useCreateScreen = () => {
+export const useCreateScreenApi = () => {
   const { dispatch } = useScreenContext()
 
   const apiCallback = useCallback(
     (data: ScreenItemResponse) => dispatch({ type: ScreenActionTypes.ADD, payload: data?.item }),
     [dispatch],
   )
-  const useApiRequest = () => useCreateScreenAction()
+  const useApiRequest = () => useCreateScreen()
 
   return useApiMutation<ScreenItemResponse, { data: ScreenInput }>({
     useApiRequest,

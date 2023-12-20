@@ -1,6 +1,6 @@
 import { SearchActionTypes } from '@contexts/Search/SearchManager'
 import { useSearchContext } from '@contexts/Search/useSearchContext'
-import { useSearchList } from '@hooks/api/helpers/useSearchList'
+import { useSearchListApi } from '@hooks/api/helpers/useSearchListApi'
 import { SearchItem } from '@models/Database'
 import { useEffect, useState } from 'react'
 import AutoComplete, { TAutoCompleteItem } from './Autocomplete'
@@ -19,7 +19,7 @@ export const AutoCompleteScreen = ({ onSelect, onReset, ...rest }: TProps) => {
 
   const { state: db, dispatch: dispatchSearch } = useSearchContext()
 
-  const { isFetching: isSearchListLoading, data: searchListResponse } = useSearchList(db.monitorData.length === 0)
+  const { isFetching: isSearchListLoading, data: searchListResponse } = useSearchListApi(db.monitorData.length === 0)
 
   useEffect(() => {
     if (searchListResponse) {

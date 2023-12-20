@@ -1,5 +1,5 @@
 import { DataBaseEntry } from '@models/Database'
-import * as SearchListActionModule from '@openapi/augmented/useSearchListAction'
+import * as SearchListActionModule from '@openapi/augmented/useSearchList'
 import { QueryKey, UseQueryResult } from '@tanstack/react-query'
 
 export const useSearchListActionMock = (value?: DataBaseEntry[]) => {
@@ -34,7 +34,7 @@ export const useSearchListActionMock = (value?: DataBaseEntry[]) => {
     },
   ]
 
-  const spy = vi.spyOn(SearchListActionModule, 'useSearchListAction').mockReturnValue({
+  const spy = vi.spyOn(SearchListActionModule, 'useSearchList').mockReturnValue({
     data: searchListResponse,
     isFetching: false,
     error: undefined,

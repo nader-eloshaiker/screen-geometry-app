@@ -1,11 +1,11 @@
 import { ScreenItemResponse } from '@openapi/generated/models'
-import { useGetScreenAction } from '@openapi/generated/services/screen-service'
+import { useGetScreen } from '@openapi/generated/services/screen-service'
 import { keepPreviousData } from '@tanstack/react-query'
 import { useApiQuery } from '../useApiQuery'
 
-export const useGetScreen = (id: string, enabled: boolean) => {
+export const useGetScreenApi = (id: string, enabled: boolean) => {
   const useApiRequest = () =>
-    useGetScreenAction(id, {
+    useGetScreen(id, {
       query: {
         queryKey: ['useFindScreen'],
         enabled,

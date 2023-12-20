@@ -2,10 +2,10 @@ import { SearchActionTypes } from '@contexts/Search/SearchManager'
 import { useSearchContext } from '@contexts/Search/useSearchContext'
 import { DataBaseEntry } from '@models/Database'
 import { useCallback } from 'react'
-import { useSearchListAction } from '../../../openapi/augmented/useSearchListAction'
+import { useSearchList } from '../../../openapi/augmented/useSearchList'
 import { useApiQuery } from '../useApiQuery'
 
-export const useSearchList = (enabled: boolean) => {
+export const useSearchListApi = (enabled: boolean) => {
   const { dispatch } = useSearchContext()
 
   const apiCallback = useCallback(
@@ -13,7 +13,7 @@ export const useSearchList = (enabled: boolean) => {
     [dispatch],
   )
   const useApiRequest = () =>
-    useSearchListAction({
+    useSearchList({
       query: { enabled, staleTime: Infinity, queryKey: ['useListSearchItems'] },
     })
 

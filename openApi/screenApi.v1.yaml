@@ -1,7 +1,7 @@
 openapi: '3.0.1'
 info:
   title: 'screen-geometry-app-backend-serverless-apis-v1'
-  version: '1.0.0'
+  version: '2.0.0'
 servers:
   - url: 'https://{environment}.typicode.com:{port}/{path}'
     variables:
@@ -78,7 +78,7 @@ paths:
       security:
         - authorizer-api-v2: []
         - api_key: []
-      operationId: 'listScreensAction'
+      operationId: 'getScreenList'
     post:
       tags:
         - 'screen list service'
@@ -141,7 +141,7 @@ paths:
       security:
         - authorizer-api-v2: []
         - api_key: []
-      operationId: 'createScreenListAction'
+      operationId: 'createScreenList'
     options:
       tags:
         - 'screen list service'
@@ -159,11 +159,11 @@ paths:
               schema:
                 type: string
           content: {}
-      operationId: 'optionsListScreensAction'
+      operationId: 'optionsListScreens'
   /screen:
     post:
       tags:
-        - 'screen list service'
+        - 'screen service'
       requestBody:
         description: Primitive for generating a ScreenItem object
         required: true
@@ -223,7 +223,7 @@ paths:
       security:
         - authorizer-api-v2: []
         - api_key: []
-      operationId: 'createScreenAction'
+      operationId: 'createScreen'
     options:
       tags:
         - 'screen list service'
@@ -241,11 +241,11 @@ paths:
               schema:
                 type: string
           content: {}
-      operationId: 'optionsCreateScreenAction'
+      operationId: 'optionsCreateScreen'
   /screen/{id}/show:
     patch:
       tags:
-        - 'screen action service'
+        - 'screen service'
       parameters:
         - name: 'id'
           in: 'path'
@@ -304,7 +304,7 @@ paths:
       security:
         - authorizer-api-v2: []
         - api_key: []
-      operationId: 'showScreenAction'
+      operationId: 'showScreen'
     options:
       parameters:
         - name: 'id'
@@ -326,7 +326,7 @@ paths:
               schema:
                 type: string
           content: {}
-      operationId: 'optionsShowScreenAction'
+      operationId: 'optionsShowScreen'
   /screen/{id}:
     get:
       tags:
@@ -389,7 +389,7 @@ paths:
       security:
         - authorizer-api-v2: []
         - api_key: []
-      operationId: getScreenAction"
+      operationId: 'getScreen'
     put:
       tags:
         - 'screen service'
@@ -458,7 +458,7 @@ paths:
       security:
         - authorizer-api-v2: []
         - api_key: []
-      operationId: 'updateScreenAction'
+      operationId: 'updateScreen'
     delete:
       tags:
         - 'screen service'
@@ -520,7 +520,7 @@ paths:
       security:
         - authorizer-api-v2: []
         - api_key: []
-      operationId: 'deleteScreenAction'
+      operationId: 'deleteScreen'
     options:
       tags:
         - 'screen service'
@@ -544,7 +544,7 @@ paths:
               schema:
                 type: string
           content: {}
-      operationId: 'optionsScreenAction'
+      operationId: 'optionsScreen'
 components:
   schemas:
     ScreenListResponse:

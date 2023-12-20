@@ -1,5 +1,5 @@
 import { ScreenInput, ScreenItem, ScreenItemResponse } from '@openapi/generated/models'
-import * as ScreenListService from '@openapi/generated/services/screen-list-service'
+import * as ScreenService from '@openapi/generated/services/screen-service'
 
 // const mocks = vi.hoisted(() => ({
 //   useCreateScreenActionHook: vi.fn(),
@@ -25,7 +25,7 @@ export const useCreateScreenActionMock = (input: ScreenInput, value?: ScreenItem
     tag: { diagonalSize: 49, aspectRatio: '32:9' },
     visible: true,
   }
-  const spy = vi.spyOn(ScreenListService, 'useCreateScreenAction').mockReturnValue({
+  const spy = vi.spyOn(ScreenService, 'useCreateScreen').mockReturnValue({
     mutate: vi.fn().mockReturnValue({ item: response } as ScreenItemResponse),
     data: { item: response },
     error: null,

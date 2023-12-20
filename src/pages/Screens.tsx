@@ -7,8 +7,8 @@ import { Stacked } from '@components/stacked/Stacked'
 import { defaultScreenInputList } from '@constants/defaultScreenList'
 import { FormDrawerProvider } from '@contexts/FormDrawer/FormDrawerProvider'
 import { useScreenContext } from '@contexts/Screen/useScreenContext'
-import { useCreateScreenList } from '@hooks/api/helpers/useCreateScreenList'
-import { useListScreens } from '@hooks/api/helpers/useListScreens'
+import { useCreateScreenListApi } from '@hooks/api/helpers/useCreateScreenListApi'
+import { useGetScreensListApi } from '@hooks/api/helpers/useGetScreenListApi'
 import { useElementSize } from '@hooks/useElementSize'
 import { Dimensions } from '@models/Screen'
 import { ScreenItem } from '@openapi/generated/models'
@@ -26,8 +26,8 @@ export const Screens = () => {
   const maxScreenSize = screens.length > 0 ? getMaxScreenSize(screens) : { width: 47, height: 16 } // max possible screen size
   const maxPanelSize: Dimensions = { width, height: Math.round(maxScreenSize.height * (width / maxScreenSize.width)) }
 
-  const { isFetching: isScreenListLoading } = useListScreens()
-  const { isPending: isCreateListLoading, useMutation: createListAction } = useCreateScreenList()
+  const { isFetching: isScreenListLoading } = useGetScreensListApi()
+  const { isPending: isCreateListLoading, useMutation: createListAction } = useCreateScreenListApi()
 
   const onHighlightClick = (screen: ScreenItem) => {
     if (screen.id === highlighted?.id) {

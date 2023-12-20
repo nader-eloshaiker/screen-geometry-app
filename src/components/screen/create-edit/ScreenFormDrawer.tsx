@@ -1,6 +1,6 @@
 import { FormDrawerActionTypes, FormDrawerMode } from '@contexts/FormDrawer/FormDrawerManager'
 import { useFormDrawerContext } from '@contexts/FormDrawer/useFormDrawerContext'
-import { useGetScreen } from '@hooks/api/helpers/useGetScreen'
+import { useGetScreenApi } from '@hooks/api/helpers/useGetScreenApi'
 import { ScreenInput } from '@openapi/generated/models'
 import { transformScreenItem } from '@utils/ScreenTransformation'
 import { useEffect, useState } from 'react'
@@ -13,7 +13,7 @@ export const ScreenFormDrawer = ({ children }: Props) => {
   const [defaultValues, setDefaultValues] = useState<ScreenInput>()
   const [editMode, setEditMode] = useState<boolean>(false)
 
-  const { data: screenItemResponse, isFetching: isScreenItemLoading } = useGetScreen(
+  const { data: screenItemResponse, isFetching: isScreenItemLoading } = useGetScreenApi(
     formDrawerState.id ?? '',
     formDrawerState.mode === FormDrawerMode.Edit && !!formDrawerState.id,
   )

@@ -1,7 +1,7 @@
 import { NotificationProvider } from '@contexts/Notification/NotificationProvider'
 import { SearchProvider } from '@contexts/Search/SearchProvider'
 import { useElementSizeMock } from '@hooks/useElementSize.mock'
-import { useSearchListActionMock } from '@openapi/mocks/useSearchListAction.mock'
+import { useSearchListActionMock } from '@openapi/mocks/useSearchList.mock'
 import { fireEvent, render } from '@testing-library/react'
 import { AutoCompleteScreen } from './AutoCompleteScreen'
 

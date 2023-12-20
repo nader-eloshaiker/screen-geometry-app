@@ -1,8 +1,8 @@
 import { AutoCompleteScreen } from '@components/autocomplete/AutoCompleteScreen'
 import { DarkMode, LightMode } from '@components/theme/ThemeConstants'
 import { yupResolver } from '@hookform/resolvers/yup'
-import { useCreateScreen } from '@hooks/api/helpers/useCreateScreen'
-import { useUpdateScreen } from '@hooks/api/helpers/useUpdateScreen'
+import { useCreateScreenApi } from '@hooks/api/helpers/useCreateScreenApi'
+import { useUpdateScreenApi } from '@hooks/api/helpers/useUpdateScreenApi'
 import { SearchItem } from '@models/Database'
 import { ScreenDataEnum } from '@models/Screen'
 import { ScreenInput } from '@openapi/generated/models'
@@ -42,8 +42,8 @@ export const ScreenForm = ({
     reset,
     resetField,
   } = methods
-  const { isPending: isCreateLoading, useMutation: createAction } = useCreateScreen()
-  const { isPending: isUpdateLoading, useMutation: updateAction } = useUpdateScreen()
+  const { isPending: isCreateLoading, useMutation: createAction } = useCreateScreenApi()
+  const { isPending: isUpdateLoading, useMutation: updateAction } = useUpdateScreenApi()
 
   // preset the form with the selected screen
   useEffect(() => {
