@@ -8,11 +8,11 @@ import { useApiQuery } from '../useApiQuery'
 
 export const useGetScreensListApi = () => {
   const { dispatch } = useScreenContext()
-  const apiCallback = useCallback(
+  const responseHandler = useCallback(
     (data: ScreenListResponse) => dispatch({ type: ScreenActionTypes.LOAD, payload: data?.list }),
     [dispatch],
   )
-  const useApiRequest = () =>
+  const useRequest = () =>
     useGetScreenList({
       query: {
         placeholderData: keepPreviousData,
@@ -21,7 +21,7 @@ export const useGetScreensListApi = () => {
     })
 
   return useApiQuery<ScreenListResponse>({
-    useApiRequest,
-    apiCallback,
+    useRequest,
+    responseHandler,
   })
 }

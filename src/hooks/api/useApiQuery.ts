@@ -5,21 +5,21 @@ import type { QueryKey, UseQueryResult } from '@tanstack/react-query'
 import { useEffect } from 'react'
 
 export const useApiQuery = <TData, TError = ErrorResponse>({
-  useApiRequest,
-  apiCallback,
+  useRequest,
+  responseHandler,
 }: {
-  useApiRequest(): UseQueryResult<TData, TError> & { queryKey: QueryKey }
-  apiCallback?(data: TData | undefined): void
+  useRequest(): UseQueryResult<TData, TError> & { queryKey: QueryKey }
+  responseHandler?(data: TData | undefined): void
 }) => {
   const { dispatch } = useNotificationContext()
-  const { isFetching, error, data } = useApiRequest()
+  const { isFetching, error, data } = useRequest()
 
   useEffect(() => {
-    if (!apiCallback || !data) {
+    if (!responseHandler || !data) {
       return
     }
-    apiCallback(data)
-  }, [apiCallback, data])
+    responseHandler(data)
+  }, [responseHandler, data])
 
   useEffect(() => {
     if (error) {

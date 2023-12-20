@@ -4,7 +4,7 @@ import { keepPreviousData } from '@tanstack/react-query'
 import { useApiQuery } from '../useApiQuery'
 
 export const useGetScreenApi = (id: string, enabled: boolean) => {
-  const useApiRequest = () =>
+  const useRequest = () =>
     useGetScreen(id, {
       query: {
         queryKey: ['useFindScreen'],
@@ -14,6 +14,6 @@ export const useGetScreenApi = (id: string, enabled: boolean) => {
     })
 
   return useApiQuery<ScreenItemResponse>({
-    useApiRequest,
+    useRequest,
   })
 }

@@ -5,20 +5,20 @@ import { useDeleteScreen } from '@openapi/generated/services/screen-service'
 import { useCallback } from 'react'
 import { useApiMutation } from '../useApiMutation'
 
-const success = { title: 'Deleted', message: 'Screen configuration' }
+const successNotification = { title: 'Deleted', message: 'Screen configuration' }
 
 export const useDeleteScreenApi = () => {
   const { dispatch } = useScreenContext()
 
-  const apiCallback = useCallback(
+  const responseHandler = useCallback(
     (data: ScreenIdResponse) => dispatch({ type: ScreenActionTypes.DELETE, payload: data.id }),
     [dispatch],
   )
-  const useApiRequest = () => useDeleteScreen()
+  const useRequest = () => useDeleteScreen()
 
   return useApiMutation<ScreenIdResponse, { id: string }>({
-    useApiRequest,
-    apiCallback,
-    success,
+    useRequest,
+    responseHandler,
+    successNotification,
   })
 }

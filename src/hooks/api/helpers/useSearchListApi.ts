@@ -8,17 +8,17 @@ import { useApiQuery } from '../useApiQuery'
 export const useSearchListApi = (enabled: boolean) => {
   const { dispatch } = useSearchContext()
 
-  const apiCallback = useCallback(
+  const responseHandler = useCallback(
     (data: Array<DataBaseEntry>) => dispatch({ type: SearchActionTypes.LOAD, payload: data }),
     [dispatch],
   )
-  const useApiRequest = () =>
+  const useRequest = () =>
     useSearchList({
       query: { enabled, staleTime: Infinity, queryKey: ['useListSearchItems'] },
     })
 
   return useApiQuery<Array<DataBaseEntry>>({
-    useApiRequest,
-    apiCallback,
+    useRequest,
+    responseHandler,
   })
 }
