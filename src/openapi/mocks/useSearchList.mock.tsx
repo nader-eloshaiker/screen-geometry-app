@@ -1,39 +1,11 @@
 import { DataBaseEntry } from '@models/Database'
 import * as SearchListActionModule from '@openapi/augmented/useSearchList'
+import { searchFixtures } from '@openapi/fixtures/SearchFixtures'
 
 export type SearchListActionMock = ReturnType<typeof useSearchListActionMock>
 
 export const useSearchListActionMock = (value?: DataBaseEntry[]) => {
-  const searchListResponse: DataBaseEntry[] = value ?? [
-    {
-      name: 'WQHD',
-      size: 34,
-      width: 3440,
-      height: 1440,
-      aspectRatio: '21:9',
-    },
-    {
-      name: 'WQHD+',
-      size: 38,
-      width: 3840,
-      height: 1600,
-      aspectRatio: '21:9',
-    },
-    {
-      name: '4K UHD',
-      size: 27,
-      width: 3840,
-      height: 2160,
-      aspectRatio: '16:9',
-    },
-    {
-      name: '4K UHD',
-      size: 32,
-      width: 3840,
-      height: 2160,
-      aspectRatio: '16:9',
-    },
-  ]
+  const searchListResponse: DataBaseEntry[] = value ?? searchFixtures
 
   const spy = vi.spyOn(SearchListActionModule, 'useSearchList').mockReturnValue({
     data: searchListResponse,

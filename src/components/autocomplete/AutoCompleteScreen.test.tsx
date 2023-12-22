@@ -5,10 +5,6 @@ import { useSearchListActionMock } from '@openapi/mocks/useSearchList.mock'
 import { fireEvent, render } from '@testing-library/react'
 import { AutoCompleteScreen } from './AutoCompleteScreen'
 
-// const mocks = vi.hoisted(() => ({
-//   useSearchListAction: mockUseSearchListAction(),
-// }))
-
 describe('#AutoCompleteScreen', () => {
   // let searchContextSpy
 

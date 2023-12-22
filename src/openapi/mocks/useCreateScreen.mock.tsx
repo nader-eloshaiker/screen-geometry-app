@@ -4,20 +4,6 @@ import * as ScreenService from '@openapi/generated/services/screen-service'
 import { transformScreenInput } from '@utils/ScreenTransformation'
 import { SpyInstance } from 'vitest'
 
-// const mocks = vi.hoisted(() => ({
-//   useCreateScreenActionHook: vi.fn(),
-// }))
-
-// type ScreenListService = typeof import('@openapi/generated/services/screen-list-service')
-// vi.mock('@openapi/generated/services/screen-list-service', async (importActual) => {
-//   const actual = await importActual<ScreenListService>()
-//   return {
-//     __esModule: true,
-//     ...actual,
-//     useCreateScreenActionHook: mocks.useCreateScreenActionHook,
-//   }
-// })
-
 type UseCreateScreen = ReturnType<typeof ScreenService.useCreateScreen>
 type Props = { screenInput?: ScreenInput; id?: string; opt?: Partial<UseCreateScreen> }
 
