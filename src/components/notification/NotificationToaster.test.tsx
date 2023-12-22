@@ -143,12 +143,11 @@ describe('#NotificationToaster', () => {
       ),
       type: NotificationType.ERROR,
     }
-    const { getByText, container, debug } = render(
+    const { getByText, container } = render(
       <NotificationProvider>
         <TestComponent payload={errorNotification} />
       </NotificationProvider>,
     )
-    debug()
     const element = getByText('DISMISS')
 
     expect(element).toBeInTheDocument()

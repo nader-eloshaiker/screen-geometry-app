@@ -4,27 +4,13 @@ import * as ScreenService from '@openapi/generated/services/screen-service'
 import { transformScreenInput } from '@utils/ScreenTransformation'
 import { SpyInstance } from 'vitest'
 
-// const mocks = vi.hoisted(() => ({
-//   useCreateScreenActionHook: vi.fn(),
-// }))
-
-// type ScreenListService = typeof import('@openapi/generated/services/screen-list-service')
-// vi.mock('@openapi/generated/services/screen-list-service', async (importActual) => {
-//   const actual = await importActual<ScreenListService>()
-//   return {
-//     __esModule: true,
-//     ...actual,
-//     useCreateScreenActionHook: mocks.useCreateScreenActionHook,
-//   }
-// })
-
-type UseCreateScreen = ReturnType<typeof ScreenService.useCreateScreen>
-type Props = { screenInput?: ScreenInput; id?: string; opt?: Partial<UseCreateScreen> }
+type UseUpdateScreen = ReturnType<typeof ScreenService.useUpdateScreen>
+type Props = { screenInput?: ScreenInput; id?: string; opt?: Partial<UseUpdateScreen> }
 
 const mock = ({ spy, screenInput, id, opt }: Props & { spy: SpyInstance }) => {
   const input = screenInput ?? screenInputFixture
   const response = { ...transformScreenInput(input), id: id ?? '1' }
-  const defaultOpt: UseCreateScreen = {
+  const defaultOpt: UseUpdateScreen = {
     mutate: vi.fn().mockReturnValue({ item: response } as ScreenItemResponse),
     data: { item: response },
     error: null,
@@ -39,17 +25,17 @@ const mock = ({ spy, screenInput, id, opt }: Props & { spy: SpyInstance }) => {
     reset: vi.fn(),
     failureReason: [],
     submittedAt: 0,
-    variables: { data: input },
+    variables: { data: input, id: id ?? '1' },
     mutateAsync: vi.fn().mockResolvedValue({ item: response } as ScreenItemResponse),
   }
 
   spy.mockReturnValue({ ...defaultOpt, ...opt })
 }
 
-export type CreateScreenMock = ReturnType<typeof useCreateScreenMock>
+export type UpdateScreenMock = ReturnType<typeof useUpdateScreenMock>
 
-export const useCreateScreenMock = (screenInput?: ScreenInput, id?: string) => {
-  const spy = vi.spyOn(ScreenService, 'useCreateScreen')
+export const useUpdateScreenMock = (screenInput?: ScreenInput, id?: string) => {
+  const spy = vi.spyOn(ScreenService, 'useUpdateScreen')
   mock({ spy, screenInput, id })
 
   return {

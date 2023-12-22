@@ -23,10 +23,9 @@ describe('#AutoComplete', () => {
   })
 
   test.only('renders autocomplete component with an input field', () => {
-    const { getByPlaceholderText, debug } = render(
+    const { getByPlaceholderText } = render(
       <AutoComplete items={searchList} value='' isLoading={false} placeholder='Type to filter list...' />,
     )
-    debug()
     expect(getByPlaceholderText('Type to filter list...')).toBeInTheDocument()
   })
 

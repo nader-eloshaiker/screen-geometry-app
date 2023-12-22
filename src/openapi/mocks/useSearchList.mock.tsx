@@ -1,6 +1,8 @@
 import { DataBaseEntry } from '@models/Database'
 import * as SearchListActionModule from '@openapi/augmented/useSearchList'
 
+export type SearchListActionMock = ReturnType<typeof useSearchListActionMock>
+
 export const useSearchListActionMock = (value?: DataBaseEntry[]) => {
   const searchListResponse: DataBaseEntry[] = value ?? [
     {
