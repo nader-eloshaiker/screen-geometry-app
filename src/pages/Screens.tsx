@@ -1,17 +1,17 @@
 import { ScreenPanel } from '@components/screen/ScreenPanel'
 import { ScreenTable } from '@components/screen/ScreenTable'
 import { ScreenButton } from '@components/screen/create-edit/CreateButton'
-import { ScreenFormDrawer } from '@components/screen/create-edit/drawer/ScreenFormDrawer'
+import { ScreenFormDrawer } from '@components/screen/create-edit/ScreenFormDrawer'
 import { SkeletonImage } from '@components/skeleton/SkeletonImage'
 import { Stacked } from '@components/stacked/Stacked'
 import { defaultScreenInputList } from '@constants/defaultScreenList'
 import { FormDrawerProvider } from '@contexts/FormDrawer/FormDrawerProvider'
 import { useScreenContext } from '@contexts/Screen/useScreenContext'
-import { useCreateScreenList } from '@hooks/api/helpers/useCreateScreenList'
-import { useListScreens } from '@hooks/api/helpers/useListScreens'
+import { useCreateScreenListApi } from '@hooks/api/helpers/useCreateScreenListApi'
+import { useGetScreensListApi } from '@hooks/api/helpers/useGetScreenListApi'
 import { useElementSize } from '@hooks/useElementSize'
 import { Dimensions } from '@models/Screen'
-import { ScreenItem } from '@openapi/models'
+import { ScreenItem } from '@openapi/generated/models'
 import { getMaxScreenSize } from '@utils/ScreenCalc'
 import { useRef, useState } from 'react'
 
@@ -26,8 +26,8 @@ export const Screens = () => {
   const maxScreenSize = screens.length > 0 ? getMaxScreenSize(screens) : { width: 47, height: 16 } // max possible screen size
   const maxPanelSize: Dimensions = { width, height: Math.round(maxScreenSize.height * (width / maxScreenSize.width)) }
 
-  const { isFetching: isScreenListLoading } = useListScreens()
-  const { isPending: isCreateListLoading, useMutation: createListAction } = useCreateScreenList()
+  const { isFetching: isScreenListLoading } = useGetScreensListApi()
+  const { isPending: isCreateListLoading, useMutation: createListAction } = useCreateScreenListApi()
 
   const onHighlightClick = (screen: ScreenItem) => {
     if (screen.id === highlighted?.id) {
@@ -44,8 +44,8 @@ export const Screens = () => {
   const isHighlighted = (screen: ScreenItem) => screen.id === highlighted?.id
 
   return (
-    <FormDrawerProvider>
-      <div className='flex flex-1 flex-col' ref={divSizeRef}>
+    <div className='flex flex-1 flex-col' ref={divSizeRef}>
+      <FormDrawerProvider>
         <ScreenFormDrawer>
           <div className='mx-2 flex items-end justify-between pb-4'>
             <label className='label'>
@@ -85,7 +85,9 @@ export const Screens = () => {
                 <span className='text-xl'>Physical Screen Comparison</span>
               </label>
               <Stacked height={maxPanelSize.height}>
-                {!isScreenListLoading ? (
+                {screens.length === 0 && isScreenListLoading ? (
+                  <SkeletonImage className='h-full w-full' />
+                ) : (
                   screens
                     .filter((screen) => screen.visible)
                     .map((screen) => (
@@ -97,14 +99,12 @@ export const Screens = () => {
                         onHighlightClick={onHighlightClick}
                       />
                     ))
-                ) : (
-                  <SkeletonImage className='h-full w-full' />
                 )}
               </Stacked>
             </div>
           )}
         </ScreenFormDrawer>
-      </div>
-    </FormDrawerProvider>
+      </FormDrawerProvider>
+    </div>
   )
 }

@@ -3,11 +3,11 @@ import EditIcon from '@assets/icons/Edit'
 import { SkeletonRect } from '@components/skeleton/SkeletonRect'
 import { DarkMode, TThemeMode } from '@components/theme/ThemeConstants'
 import { FormDrawerActionTypes } from '@contexts/FormDrawer/FormDrawerManager'
-import { useFormDrawerContext } from '@contexts/FormDrawer/useFormDrawaerContext'
-import { useDeleteScreen } from '@hooks/api/helpers/useDeleteScreen'
-import { useShowScreen } from '@hooks/api/helpers/useShowScreen'
+import { useFormDrawerContext } from '@contexts/FormDrawer/useFormDrawerContext'
+import { useDeleteScreenApi } from '@hooks/api/helpers/useDeleteScreenApi'
+import { useShowScreenApi } from '@hooks/api/helpers/useShowScreenApi'
 import { useThemeMode } from '@hooks/useThemeMode'
-import { ScreenColor, ScreenItem } from '@openapi/models'
+import { ScreenColor, ScreenItem } from '@openapi/generated/models'
 import { getRandomString } from '@utils/RandomGenerator'
 import { useState } from 'react'
 import styled from 'styled-components'
@@ -72,8 +72,8 @@ export const ScreenTable = ({
   setHighLighted = () => {},
   onHighlightClick = () => {},
 }: Props) => {
-  const { isPending: isDeleteLoading, useMutation: deleteAction } = useDeleteScreen()
-  const { isPending: isVisibleLoading, useMutation: visibleAction } = useShowScreen()
+  const { isPending: isDeleteLoading, useMutation: deleteAction } = useDeleteScreenApi()
+  const { isPending: isVisibleLoading, useMutation: visibleAction } = useShowScreenApi()
   const { dispatchFormDrawer } = useFormDrawerContext()
   const [selected, setSelected] = useState<ScreenItem>()
   const [themeMode] = useThemeMode()
@@ -110,7 +110,9 @@ export const ScreenTable = ({
           <th className='text-center'>Action</th>
         </tr>
       </thead>
-      {!isScreenListLoading ? (
+      {screens.length === 0 && isScreenListLoading ? (
+        <TableSkeleton cols={7} rows={5} />
+      ) : (
         <tbody>
           {screens.map((screen) => (
             <StyledTableRow
@@ -133,6 +135,7 @@ export const ScreenTable = ({
                   ) : (
                     <StyledCheckbox
                       type='checkbox'
+                      id={screen.id}
                       $color={fgColor(themeMode, screen.color)}
                       checked={screen.visible}
                       className='checkbox checkbox-sm'
@@ -168,8 +171,6 @@ export const ScreenTable = ({
             </StyledTableRow>
           ))}
         </tbody>
-      ) : (
-        <TableSkeleton cols={7} rows={5} />
       )}
     </table>
   )

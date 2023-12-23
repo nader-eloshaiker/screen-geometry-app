@@ -1,13 +1,13 @@
-import { ScreenInput } from '@openapi/models'
+import { ScreenInput } from '@openapi/generated/models'
 import { createCSSColor } from '@utils/ScreenCalc'
 
 export const DefaultInputValues = () => {
   const color = createCSSColor()
-  const value: ScreenInput = {
-    aspectRatio: '',
-    diagonalSize: 0,
-    hRes: 0,
-    vRes: 0,
+  const value: Partial<ScreenInput> = {
+    aspectRatio: undefined,
+    diagonalSize: undefined,
+    hRes: undefined,
+    vRes: undefined,
     lightColor: color.lightColor,
     darkColor: color.darkColor,
   }

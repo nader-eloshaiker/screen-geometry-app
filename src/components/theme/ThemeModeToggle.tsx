@@ -4,9 +4,9 @@ import { useThemeMode } from '@hooks/useThemeMode'
 import { twMerge } from 'tailwind-merge'
 import { DarkMode, LightMode } from './ThemeConstants'
 
-type TProps = TRestProps & { className?: string }
+type TProps = TRestProps & { className?: string; id: string }
 
-export default function ThemeModeToggle({ className, ...rest }: TProps) {
+export default function ThemeModeToggle({ className, id, ...rest }: TProps) {
   const [themeState, setThemeState] = useThemeMode()
   const isDarkMode = themeState === DarkMode
 
@@ -19,6 +19,7 @@ export default function ThemeModeToggle({ className, ...rest }: TProps) {
       {/* this hidden checkbox controls the state */}
       <input
         type='checkbox'
+        id={id}
         checked={!isDarkMode}
         className='theme-controller toggle toggle-primary toggle-md col-span-2 col-start-1'
         onChange={handleChange}

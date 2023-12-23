@@ -11,17 +11,18 @@
     "baseUrl": ".",
     "paths": {
       // "@/*": ["./src/*"],
+      "@api/*": ["./src/api/*"],
       "@assets/*": ["./src/assets/*"],
       "@components/*": ["./src/components/*"],
       "@constants/*": ["./src/constants/*"],
       "@contexts/*": ["./src/contexts/*"],
       "@hooks/*": ["./src/hooks/*"],
       "@models/*": ["./src/models/*"],
-      "@openapi/*": ["./src/generated/openapi/*"],
+      "@openapi/*": ["./src/openapi/*"],
       "@pages/*": ["./src/pages/*"],
       "@routes/*": ["./src/routes/*"],
-      "@utils/*": ["./src/utils/*"],
-      "@api/*": ["./src/api/*"]
+      "@test/*": ["./src/test/*"],
+      "@utils/*": ["./src/utils/*"]
     },
 
     /* Bundler mode */

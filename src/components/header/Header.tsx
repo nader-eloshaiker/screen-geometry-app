@@ -1,14 +1,14 @@
 import HamburgerIcon from '@assets/icons/Hamburger'
 import ThemeModeToggle from '@components/theme/ThemeModeToggle'
 import { appRoutes } from '@routes/AppRouteSchema'
-import cn from 'classnames'
+import { clsx } from 'clsx'
 import { Link, useLocation } from 'react-router-dom'
 
 type NavMenuItemProps = { pathname: string; route: string; title: string }
 const NavMenuItem = ({ pathname, route, title }: NavMenuItemProps) => {
   return (
     <li>
-      <Link className={cn('atext-sm sm:text-base', { active: pathname === route })} to={route}>
+      <Link className={clsx('text-sm sm:text-base', { active: pathname === route })} to={route}>
         {title}
       </Link>
     </li>
@@ -34,7 +34,7 @@ export default function Header() {
     <header className='sidebar rounded-b-xl'>
       {/* small header */}
       <div className='flex w-full flex-row xs:hidden'>
-        <div className='dropdown'>
+        <div className='dropdown' data-testid='nav-menu'>
           <label tabIndex={0} className='btn btn-square btn-ghost'>
             <HamburgerIcon className='h-6 w-6' />
           </label>
@@ -46,15 +46,21 @@ export default function Header() {
           </ul>
         </div>
         <div className='flex-1 pt-2 text-center text-2xl'>{import.meta.env.VITE_APP_TITLE}</div>
-        <ThemeModeToggle className='mr-2 opacity-50 transition duration-500 ease-in-out hover:opacity-100' />
+        <ThemeModeToggle
+          className='mr-2 opacity-50 transition duration-500 ease-in-out hover:opacity-100'
+          id='themeToggleTiny'
+        />
       </div>
       {/* large header */}
       <div className='hidden pt-2 text-center text-2xl  xs:block'>{import.meta.env.VITE_APP_TITLE}</div>
       <div className='navbar hidden justify-between px-3  xs:flex'>
-        <ul className='menu menu-horizontal gap-4 rounded-box p-0'>
+        <ul className='menu menu-horizontal gap-2 rounded-box p-0'>
           <NavMenu pathname={pathname} />
         </ul>
-        <ThemeModeToggle className='mr-2 opacity-50 transition duration-500 ease-in-out hover:opacity-100' />
+        <ThemeModeToggle
+          className='mr-2 opacity-50 transition duration-500 ease-in-out hover:opacity-100'
+          id='themeToggle'
+        />
       </div>
     </header>
   )

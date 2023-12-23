@@ -1,4 +1,4 @@
-import { ScreenInputList } from '@openapi/models'
+import { ScreenInputList } from '@openapi/generated/models'
 
 export const defaultScreenInputList: ScreenInputList = [
   {

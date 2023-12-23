@@ -1,168 +1,66 @@
+import { NotificationProvider } from '@contexts/Notification/NotificationProvider'
 import { SearchProvider } from '@contexts/Search/SearchProvider'
-import { ElementSize, useElementSize } from '@hooks/useElementSize'
-import { DataBaseEntry } from '@models/Database'
-import { RenderResult, cleanup, fireEvent, render, waitFor } from '@testing-library/react'
-import { AxiosResponse } from 'axios'
-import { RefObject } from 'react'
-import { Mock, afterEach, beforeEach, describe, expect, vi } from 'vitest'
+import { useElementSizeMock } from '@hooks/useElementSize.mock'
+import { useSearchListActionMock } from '@openapi/mocks/useSearchList.mock'
+import { fireEvent, render } from '@testing-library/react'
 import { AutoCompleteScreen } from './AutoCompleteScreen'
 
-const mocks = vi.hoisted(() => ({
-  axios: {
-    get: vi.fn(),
-    post: vi.fn(),
-    request: vi.fn(),
-    // and any other request type you want to mock
-  },
-}))
-
-vi.mock('axios', async (importActual) => {
-  const actual = await importActual<typeof import('axios')>()
-  return {
-    default: {
-      ...actual.default,
-      create: vi.fn(() => ({
-        ...actual.default.create(),
-        get: mocks.axios.get,
-        post: mocks.axios.post,
-        request: mocks.axios.request,
-      })),
-    },
-  }
-})
-
-vi.mock('@hooks/useElementSize', async () => {
-  const actual = await vi.importActual('@hooks/useElementSize')
-  return {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    ...(actual as any),
-    useElementSize: vi.fn(),
-  }
-})
-
-describe('AutoCompleteScreen', () => {
+describe('#AutoCompleteScreen', () => {
   // let searchContextSpy
 
   beforeEach(() => {
-    const useElementSizeResponse: ElementSize = {
-      width: 1024,
-      height: 1024,
-      x: 0,
-      y: 0,
-    }
-    const useElementSizeMock = useElementSize as Mock<[target: RefObject<HTMLElement>], ElementSize>
-    useElementSizeMock.mockImplementation(() => useElementSizeResponse)
-
-    const axiosRequestResponse = {
-      data: [
-        {
-          name: 'WQHD',
-          size: 34,
-          width: 3440,
-          height: 1440,
-          aspectRatio: '21:9',
-        },
-        {
-          name: 'WQHD+',
-          size: 38,
-          width: 3840,
-          height: 1600,
-          aspectRatio: '21:9',
-        },
-        {
-          name: '4K UHD',
-          size: 27,
-          width: 3840,
-          height: 2160,
-          aspectRatio: '16:9',
-        },
-        {
-          name: '4K UHD',
-          size: 32,
-          width: 3840,
-          height: 2160,
-          aspectRatio: '16:9',
-        },
-      ],
-    } as AxiosResponse<DataBaseEntry[]>
-    mocks.axios.request.mockResolvedValue(axiosRequestResponse)
+    useElementSizeMock()
+    useSearchListActionMock()
   })
 
-  afterEach(() => {
-    cleanup()
-  })
-
-  test.skip('renders autocomplete component with an input field', async () => {
-    const { getByPlaceholderText } = await waitFor<RenderResult>(() =>
-      render(
+  test('renders autocomplete component with an input field', () => {
+    const { getByPlaceholderText } = render(
+      <NotificationProvider>
         <SearchProvider>
-          <AutoCompleteScreen onSelect={vi.fn()} searchValue='' setSearchValue={vi.fn()} />
-        </SearchProvider>,
-      ),
+          <AutoCompleteScreen onSelect={vi.fn()} onReset='' />
+        </SearchProvider>
+      </NotificationProvider>,
     )
     // use this to view what is being rendered
     // screen.debug()
 
-    expect(getByPlaceholderText('Type to filter list...')).toBeInTheDocument()
+    expect(getByPlaceholderText('Type to filter list...')).toBeDefined()
   })
 
-  test.skip('fetches data from API and updates the context', async () => {
-    const { getByText, getByPlaceholderText } = await waitFor<RenderResult>(() =>
-      render(
+  test('updates the context when the input value changes', () => {
+    const { getByPlaceholderText, container } = render(
+      <NotificationProvider>
         <SearchProvider>
-          <AutoCompleteScreen onSelect={vi.fn()} searchValue='' setSearchValue={vi.fn()} />
-        </SearchProvider>,
-      ),
+          <AutoCompleteScreen onSelect={vi.fn()} onReset='' />
+        </SearchProvider>
+      </NotificationProvider>,
     )
 
-    // Verify that the loading indicator is displayed
-    // need to understand how to test this
-    expect(getByText('Loading...')).toBeDefined()
-
-    expect(getByPlaceholderText('Type to filter list...')).toBeInTheDocument()
-  })
-
-  test('updates the context when the input value changes', async () => {
-    const { getByTestId, container } = await waitFor<RenderResult>(() =>
-      render(
-        <SearchProvider>
-          <AutoCompleteScreen onSelect={vi.fn()} searchValue='' setSearchValue={vi.fn()} />
-        </SearchProvider>,
-      ),
-    )
-
-    const inputElement = getByTestId('autoCompleteInput')
-
-    await waitFor(() => {
-      fireEvent.change(inputElement, {
-        target: {
-          value: 'WQHD+',
-        },
-      })
+    const inputElement = getByPlaceholderText('Type to filter list...')
+    fireEvent.change(inputElement, {
+      target: {
+        value: 'WQHD',
+      },
     })
 
-    expect(inputElement).toHaveValue('WQHD+')
-    expect(container.querySelectorAll('li').length).toEqual(1)
+    expect(inputElement).toHaveValue('WQHD')
+    expect(container.querySelectorAll('li').length).toEqual(2)
   })
 
-  test('renders the autocomplete dropdown with no items when input does not match', async () => {
-    const { getByTestId, container } = await waitFor<RenderResult>(() =>
-      render(
+  test('renders the autocomplete dropdown with no items when input does not match', () => {
+    const { getByPlaceholderText, container } = render(
+      <NotificationProvider>
         <SearchProvider>
-          <AutoCompleteScreen onSelect={vi.fn()} searchValue='' setSearchValue={vi.fn()} />
-        </SearchProvider>,
-      ),
+          <AutoCompleteScreen onSelect={vi.fn()} onReset='' />
+        </SearchProvider>
+      </NotificationProvider>,
     )
 
-    const inputElement = getByTestId('autoCompleteInput')
-
-    // Type 'a' in the input field
-    await waitFor(() => {
-      fireEvent.change(inputElement, {
-        target: {
-          value: 'AAAA',
-        },
-      })
+    const inputElement = getByPlaceholderText('Type to filter list...')
+    fireEvent.change(inputElement, {
+      target: {
+        value: 'AAAA',
+      },
     })
 
     expect(inputElement).toHaveValue('AAAA')
