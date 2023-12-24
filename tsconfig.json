@@ -11,7 +11,6 @@
     "baseUrl": ".",
     "paths": {
       // "@/*": ["./src/*"],
-      "@api/*": ["src/server/*"],
       "@assets/*": ["./src/assets/*"],
       "@components/*": ["./src/components/*"],
       "@constants/*": ["./src/constants/*"],
@@ -21,6 +20,7 @@
       "@openapi/*": ["./src/openapi/*"],
       "@pages/*": ["./src/pages/*"],
       "@routes/*": ["./src/routes/*"],
+      "@server/*": ["src/server/*"],
       "@test/*": ["./src/test/*"],
       "@utils/*": ["./src/utils/*"]
     },

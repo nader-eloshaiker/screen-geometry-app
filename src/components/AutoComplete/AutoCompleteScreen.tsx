@@ -3,7 +3,7 @@ import { useSearchContext } from '@contexts/Search/useSearchContext'
 import { useSearchListApi } from '@hooks/api/helpers/useSearchListApi'
 import { SearchItem } from '@models/Database'
 import { useEffect, useState } from 'react'
-import AutoComplete, { TAutoCompleteItem } from './Autocomplete'
+import ListInputField, { TListItem } from '../ListInputFIeld/ListInputField'
 
 type TProps = TRestProps & {
   onSelect: (item: SearchItem) => void
@@ -12,10 +12,10 @@ type TProps = TRestProps & {
 
 export const AutoCompleteScreen = ({ onSelect, onReset, ...rest }: TProps) => {
   const [searchValue, setSearchValue] = useState('')
-  const [selected, setSelected] = useState<TAutoCompleteItem>()
+  const [selected, setSelected] = useState<TListItem>()
 
   // a list to show on the dropdown when user types
-  const [items, setItems] = useState<Array<TAutoCompleteItem>>([])
+  const [items, setItems] = useState<Array<TListItem>>([])
 
   const { state: db, dispatch: dispatchSearch } = useSearchContext()
 
@@ -48,7 +48,7 @@ export const AutoCompleteScreen = ({ onSelect, onReset, ...rest }: TProps) => {
 
   // use the common auto complete component here.
   return (
-    <AutoComplete
+    <ListInputField
       items={items}
       value={searchValue}
       onChange={setSearchValue}

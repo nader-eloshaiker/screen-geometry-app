@@ -4,19 +4,27 @@ import { useElementSize } from '@hooks/useElementSize'
 import { clsx } from 'clsx'
 import { ChangeEvent, KeyboardEvent, memo, useRef, useState } from 'react'
 
-export type TAutoCompleteItem = { id: string; label: string }
+export type TListItem = { id: string; label: string }
 type TProps = TRestProps & {
+  /**
+   * Show the component in the loading state.
+   */
   isLoading: boolean
+  /**
+   * The placeholder text when the input is empty.
+   */
   className?: string
+  /**
+   * The placeholder text when the input is empty.
+   */
   placeholder?: string
-  items: Array<TAutoCompleteItem> // we are using this type for autocomplete
+  items: Array<TListItem>
   value: string
   onChange?: (val: string) => void
-  onSelect?: (item: TAutoCompleteItem) => void
+  onSelect?: (item: TListItem) => void
 }
 
-// we are using dropdown, input and menu component from daisyui
-export const AutoComplete = ({
+export const ListInputField = ({
   items = [],
   value = '',
   onChange = () => {},
@@ -36,7 +44,7 @@ export const AutoComplete = ({
     setInputValue(target.value)
   }
 
-  const handleSelect = (item: TAutoCompleteItem) => {
+  const handleSelect = (item: TListItem) => {
     setInputValue(item.label)
     onChange(item.label)
     onSelect(item)
@@ -47,7 +55,7 @@ export const AutoComplete = ({
     }
   }
 
-  const handleKeyDown = (event: KeyboardEvent<HTMLLIElement>, item: TAutoCompleteItem) => {
+  const handleKeyDown = (event: KeyboardEvent<HTMLLIElement>, item: TListItem) => {
     if (event.code === 'Enter') {
       handleSelect(item)
     }
@@ -70,7 +78,7 @@ export const AutoComplete = ({
         fixStyle='left-0 ml-4'
       >
         <input
-          name='autoCompleteInput'
+          name='ListInputFieldInput'
           type='text'
           className='input input-md relative w-full !pl-12 shadow-md'
           value={inputValue}
@@ -107,6 +115,6 @@ export const AutoComplete = ({
   )
 }
 
-const MemoAutocomplete = memo(AutoComplete)
+const MemoListInputField = memo(ListInputField)
 
-export default MemoAutocomplete
+export default MemoListInputField

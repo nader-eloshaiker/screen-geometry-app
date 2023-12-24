@@ -1,6 +1,6 @@
+import { apiRoutes } from '@server/ApiRouteSchema'
+import { generateStub } from '@server/endpoint/stub'
 import { default as Axios, AxiosRequestConfig, default as axios } from 'axios'
-import { apiRoutes } from 'src/server/ApiRouteSchema'
-import { generateStub } from 'src/server/endpoint/stub'
 
 const apiAxiosInstance = axios.create({
   baseURL: `${apiRoutes.apiUrl}${apiRoutes.apiPathVer}`,
