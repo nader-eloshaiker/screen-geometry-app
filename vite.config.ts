@@ -46,7 +46,7 @@ export default defineConfig({
     coverage: {
       provider: 'v8',
       reporter: ['text', 'json', 'html'],
-      exclude: ['src/openapi/**/*', 'src/tests/**/*', 'src/**/*.mock.{ts,tsx}'],
+      exclude: ['src/openapi/**/*', 'src/test/**/*', 'src/**/*.mock.{ts,tsx}'],
     },
     environment: 'jsdom',
     setupFiles: './src/vitest.setup.ts',

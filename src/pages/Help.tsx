@@ -141,7 +141,7 @@ export const Help = () => {
         <DiagramPanel>
           <div className='sidebar mb-6 w-96 rounded-xl p-2'>
             <div className='pointer-events-none p-2'>
-              <ScreenForm />
+              <ScreenForm isLoading={false} />
             </div>
           </div>
         </DiagramPanel>

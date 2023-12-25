@@ -16,23 +16,16 @@ import { InputField } from './InputField'
 import { ScreenFormSchema } from './ScreenFormSchema'
 
 type Props = {
-  defaultValues?: ScreenInput
+  defaultValues?: ScreenInput | null
   editId?: string
-  isLoading?: boolean
-  onCloseAction?: () => void
+  isLoading: boolean
+  onClose?: () => void
 }
 
-export const ScreenForm = ({
-  defaultValues,
-  editId = undefined,
-  isLoading = false,
-  onCloseAction = () => {},
-}: Props) => {
-  const [resetValue, setResetValue] = useState('')
-
+export const ScreenForm = ({ defaultValues = null, editId = undefined, isLoading, onClose = () => {} }: Props) => {
   const methods = useForm<ScreenInput>({
     resolver: yupResolver(ScreenFormSchema),
-    defaultValues: defaultValues ?? DefaultInputValues(),
+    defaultValues: DefaultInputValues(),
     mode: 'onBlur',
   })
   const {
@@ -44,17 +37,9 @@ export const ScreenForm = ({
   } = methods
   const { isPending: isCreateLoading, useMutation: createAction } = useCreateScreenApi()
   const { isPending: isUpdateLoading, useMutation: updateAction } = useUpdateScreenApi()
+  const [clearSearchHandler, setClearSearchHandler] = useState<() => void>(() => {})
 
-  // preset the form with the selected screen
-  useEffect(() => {
-    if (defaultValues) {
-      reset(defaultValues)
-    } else {
-      reset()
-    }
-  }, [defaultValues, reset])
-
-  const selectAction = useCallback(
+  const selectHandler = useCallback(
     (item: SearchItem) => {
       setValue(ScreenDataEnum.aspectRatio, item.tag.aspectRatio, {
         shouldValidate: true,
@@ -92,7 +77,7 @@ export const ScreenForm = ({
     [resetField, setValue],
   )
 
-  const onGenerateColor = useCallback(() => {
+  const generateColorHandler = useCallback(() => {
     const color = createCSSColor()
     setValue(ScreenDataEnum.darkColor, color.darkColor, {
       shouldValidate: true,
@@ -104,27 +89,33 @@ export const ScreenForm = ({
     })
   }, [setValue])
 
-  const onReset = useCallback(() => {
+  const resetHandler = useCallback(() => {
+    clearSearchHandler()
     reset()
-    setResetValue('')
-  }, [reset])
+  }, [reset, clearSearchHandler])
 
-  const onClose = useCallback(() => {
-    reset()
-    onCloseAction()
-  }, [onCloseAction, reset])
+  const closeHandler = useCallback(() => {
+    clearSearchHandler()
+    onClose()
+  }, [clearSearchHandler, onClose])
 
-  const onSubmit: SubmitHandler<ScreenInput> = useCallback(
+  const submitHandler: SubmitHandler<ScreenInput> = useCallback(
     (form: ScreenInput) => {
       if (editId) {
         updateAction({ id: editId, data: form }, { onSuccess: onClose })
       } else {
         createAction({ data: form })
       }
-      onGenerateColor()
+      clearSearchHandler()
+      generateColorHandler()
     },
-    [createAction, editId, onClose, onGenerateColor, updateAction],
+    [createAction, editId, onClose, generateColorHandler, clearSearchHandler, updateAction],
   )
+
+  // preset the form with the selected screen
+  useEffect(() => {
+    reset(defaultValues ?? DefaultInputValues())
+  }, [defaultValues, reset])
 
   return (
     <FormProvider {...methods}>
@@ -135,12 +126,12 @@ export const ScreenForm = ({
         <label className='label'>
           <span className='text-sm'>Choose from list of Monitors</span>
         </label>
-        <AutoCompleteScreen onSelect={selectAction} onReset={resetValue} />
+        <AutoCompleteScreen onSelectScreen={selectHandler} setClearSearchHandler={setClearSearchHandler} />
       </div>
 
       <div className='divider text-sm'>Or</div>
 
-      <form method='post' onSubmit={handleSubmit(onSubmit)}>
+      <form method='post' onSubmit={handleSubmit(submitHandler)}>
         <div className='flex flex-col gap-2'>
           <div id='screenTag' className='grid grid-cols-2 gap-3'>
             <InputField
@@ -200,7 +191,7 @@ export const ScreenForm = ({
               <ColorField formKey={ScreenDataEnum.lightColor} title='Light' mode={LightMode} isLoading={isLoading} />
               <ColorField formKey={ScreenDataEnum.darkColor} title='Dark' mode={DarkMode} isLoading={isLoading} />
             </div>
-            <button type='button' className='btn btn-neutral w-24' onClick={onGenerateColor} disabled={isLoading}>
+            <button type='button' className='btn btn-neutral w-24' onClick={generateColorHandler} disabled={isLoading}>
               Change
             </button>
           </div>
@@ -226,7 +217,7 @@ export const ScreenForm = ({
                 type='button'
                 className='btn btn-neutral w-24'
                 disabled={isCreateLoading || isUpdateLoading || isLoading}
-                onClick={onClose}
+                onClick={closeHandler}
               >
                 Close
               </button>
@@ -234,7 +225,7 @@ export const ScreenForm = ({
                 type='button'
                 className='btn btn-neutral w-24'
                 disabled={isCreateLoading || isUpdateLoading || isLoading}
-                onClick={onReset}
+                onClick={resetHandler}
               >
                 Reset
               </button>

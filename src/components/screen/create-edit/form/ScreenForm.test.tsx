@@ -2,7 +2,6 @@ import { NotificationProvider } from '@contexts/Notification/NotificationProvide
 import { ScreenState } from '@contexts/Screen/ScreenManager'
 import { ScreenProvider } from '@contexts/Screen/ScreenProvider'
 import { useScreenContext } from '@contexts/Screen/useScreenContext'
-import { SearchProvider } from '@contexts/Search/SearchProvider'
 import { useElementSizeMock } from '@hooks/useElementSize.mock'
 import { screenInputFixture } from '@openapi/fixtures/ScreenFixtures'
 import { ScreenInput, ScreenItem } from '@openapi/generated/models'
@@ -23,14 +22,14 @@ type Props = {
   initialise?: ScreenItem[]
   onCloseAction?: () => void
 }
-const TestComponent = ({ defaultValues, editId, isLoading, onCloseAction }: Props) => {
+const TestComponent = ({ defaultValues, editId, isLoading = false, onCloseAction }: Props) => {
   const {
     state: { screens },
   } = useScreenContext()
 
   return (
     <>
-      <ScreenForm defaultValues={defaultValues} editId={editId} isLoading={isLoading} onCloseAction={onCloseAction} />
+      <ScreenForm defaultValues={defaultValues} editId={editId} isLoading={isLoading} onClose={onCloseAction} />
       <div>
         <h1>Screens</h1>
         {screens.map((screen) => (
@@ -61,14 +60,12 @@ const RootTestComponent = ({
     <QueryClientProvider client={queryClient}>
       <NotificationProvider>
         <ScreenProvider initialise={state}>
-          <SearchProvider>
-            <TestComponent
-              defaultValues={defaultValues}
-              editId={editId}
-              isLoading={isLoading}
-              onCloseAction={onCloseAction}
-            />
-          </SearchProvider>
+          <TestComponent
+            defaultValues={defaultValues}
+            editId={editId}
+            isLoading={isLoading}
+            onCloseAction={onCloseAction}
+          />
         </ScreenProvider>
       </NotificationProvider>
     </QueryClientProvider>

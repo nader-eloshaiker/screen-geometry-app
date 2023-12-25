@@ -40,6 +40,6 @@
     "noFallthroughCasesInSwitch": true
   },
   "include": ["*.ts", "src"],
-  "exclude": ["node_modules"],
+  "exclude": ["node_modules", "coverage", "dist", "build"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

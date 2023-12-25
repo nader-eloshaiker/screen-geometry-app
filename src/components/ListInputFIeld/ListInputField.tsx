@@ -2,42 +2,38 @@ import MagnifyGlassIcon from '@assets/icons/MagnifyGlass'
 import { InputFix } from '@components/input-suffix/InputFix'
 import { useElementSize } from '@hooks/useElementSize'
 import { clsx } from 'clsx'
-import { ChangeEvent, KeyboardEvent, memo, useRef, useState } from 'react'
+import { ChangeEvent, KeyboardEvent, memo, useCallback, useEffect, useRef, useState } from 'react'
 
 export type TListItem = { id: string; label: string }
 type TProps = TRestProps & {
-  /**
-   * Show the component in the loading state.
-   */
-  isLoading: boolean
-  /**
-   * The placeholder text when the input is empty.
-   */
-  className?: string
-  /**
-   * The placeholder text when the input is empty.
-   */
-  placeholder?: string
   items: Array<TListItem>
-  value: string
+  isLoading: boolean
+  className?: string
+  placeholder?: string
   onChange?: (val: string) => void
   onSelect?: (item: TListItem) => void
+  setClearHandler?: (func: () => void) => void
 }
 
 export const ListInputField = ({
   items = [],
-  value = '',
-  onChange = () => {},
-  onSelect = () => {},
   className,
   placeholder,
   isLoading,
+  onChange = () => {},
+  onSelect = () => {},
+  setClearHandler = () => {},
   ...rest
 }: TProps) => {
-  const divRef = useRef<HTMLDivElement>(null)
-  const [inputValue, setInputValue] = useState(value)
-  const { width } = useElementSize(divRef)
+  const [inputValue, setInputValue] = useState('')
   const [open, setOpen] = useState(false)
+
+  const divRef = useRef<HTMLDivElement>(null)
+  const { width } = useElementSize(divRef)
+
+  const handleClear = useCallback(() => {
+    setInputValue('')
+  }, [])
 
   const handleChange = ({ target }: ChangeEvent<HTMLInputElement>) => {
     onChange(target.value)
@@ -60,6 +56,14 @@ export const ListInputField = ({
       handleSelect(item)
     }
   }
+
+  useEffect(() => {
+    if (!setClearHandler || !handleClear) {
+      return
+    }
+
+    setClearHandler(() => handleClear)
+  }, [setClearHandler, handleClear])
 
   return (
     <div
