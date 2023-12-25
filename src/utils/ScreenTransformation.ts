@@ -48,20 +48,23 @@ export const transformScreenItem = (data: ScreenItem): ScreenInput => {
 }
 
 export const transformScreenInput = (data: ScreenInput, id?: string): ScreenItem => {
-  const [hAspectRatio, vAspectRatio] = getAspectRatio(data.aspectRatio)
+  const [hAspectRatio, vAspectRatio] = getAspectRatio(data.aspectRatio ?? '')
+  const diagonalSize = data.diagonalSize ?? 0
+  const hSize = hAspectRatio * (diagonalSize / Math.sqrt(Math.pow(hAspectRatio, 2) + Math.pow(vAspectRatio, 2)))
+  const vSize = vAspectRatio * (diagonalSize / Math.sqrt(Math.pow(hAspectRatio, 2) + Math.pow(vAspectRatio, 2)))
   const item: ScreenItem = {
     id: id ?? getRandomString(8),
     tag: {
-      diagonalSize: data.diagonalSize,
-      aspectRatio: data.aspectRatio,
+      diagonalSize,
+      aspectRatio: data.aspectRatio ?? '',
     },
     data: {
-      hSize: hAspectRatio * (data.diagonalSize / Math.sqrt(Math.pow(hAspectRatio, 2) + Math.pow(vAspectRatio, 2))),
-      vSize: vAspectRatio * (data.diagonalSize / Math.sqrt(Math.pow(hAspectRatio, 2) + Math.pow(vAspectRatio, 2))),
+      hSize,
+      vSize,
       hAspectRatio,
       vAspectRatio,
     },
-    spec: createSpec(data.hRes, data.vRes, data.diagonalSize),
+    spec: createSpec(data.hRes ?? 0, data.vRes ?? 0, diagonalSize),
     color: {
       lightColor: data.lightColor,
       darkColor: data.darkColor,

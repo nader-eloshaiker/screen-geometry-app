@@ -9,10 +9,10 @@
  * Screen primitive data
  */
 export interface ScreenInput {
-  aspectRatio: string
+  aspectRatio: string | null
   darkColor: string
-  diagonalSize: number
-  hRes?: number
+  diagonalSize: number | null
+  hRes?: number | null
   lightColor: string
-  vRes?: number
+  vRes?: number | null
 }

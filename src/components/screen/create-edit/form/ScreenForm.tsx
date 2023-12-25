@@ -39,45 +39,42 @@ export const ScreenForm = ({ defaultValues = null, editId = undefined, isLoading
   const { isPending: isUpdateLoading, useMutation: updateAction } = useUpdateScreenApi()
   const [clearSearchHandler, setClearSearchHandler] = useState<() => void>(() => {})
 
-  const selectHandler = useCallback(
-    (item: SearchItem) => {
-      setValue(ScreenDataEnum.aspectRatio, item.tag.aspectRatio, {
+  const selectHandler = (item: SearchItem) => {
+    setValue(ScreenDataEnum.aspectRatio, item.tag.aspectRatio, {
+      shouldValidate: true,
+      shouldDirty: true,
+      shouldTouch: true,
+    })
+    if (item.tag.diagonalSize) {
+      setValue(ScreenDataEnum.diagonalSize, item.tag.diagonalSize, {
         shouldValidate: true,
         shouldDirty: true,
         shouldTouch: true,
       })
-      if (item.tag.diagonalSize) {
-        setValue(ScreenDataEnum.diagonalSize, item.tag.diagonalSize, {
-          shouldValidate: true,
-          shouldDirty: true,
-          shouldTouch: true,
-        })
-      } else {
-        resetField(ScreenDataEnum.diagonalSize)
-      }
-      if (item.spec?.hRes) {
-        setValue(ScreenDataEnum.hRes, item.spec?.hRes, {
-          shouldValidate: true,
-          shouldDirty: true,
-          shouldTouch: true,
-        })
-      } else {
-        resetField(ScreenDataEnum.hRes)
-      }
-      if (item.spec?.vRes) {
-        setValue(ScreenDataEnum.vRes, item.spec?.vRes, {
-          shouldValidate: true,
-          shouldDirty: true,
-          shouldTouch: true,
-        })
-      } else {
-        resetField(ScreenDataEnum.vRes)
-      }
-    },
-    [resetField, setValue],
-  )
+    } else {
+      resetField(ScreenDataEnum.diagonalSize)
+    }
+    if (item.spec?.hRes) {
+      setValue(ScreenDataEnum.hRes, item.spec?.hRes, {
+        shouldValidate: true,
+        shouldDirty: true,
+        shouldTouch: true,
+      })
+    } else {
+      resetField(ScreenDataEnum.hRes)
+    }
+    if (item.spec?.vRes) {
+      setValue(ScreenDataEnum.vRes, item.spec?.vRes, {
+        shouldValidate: true,
+        shouldDirty: true,
+        shouldTouch: true,
+      })
+    } else {
+      resetField(ScreenDataEnum.vRes)
+    }
+  }
 
-  const generateColorHandler = useCallback(() => {
+  const generateColorHandler = () => {
     const color = createCSSColor()
     setValue(ScreenDataEnum.darkColor, color.darkColor, {
       shouldValidate: true,
@@ -87,30 +84,27 @@ export const ScreenForm = ({ defaultValues = null, editId = undefined, isLoading
       shouldValidate: true,
       shouldDirty: true,
     })
-  }, [setValue])
+  }
 
-  const resetHandler = useCallback(() => {
+  const resetHandler = () => {
     clearSearchHandler()
     reset()
-  }, [reset, clearSearchHandler])
+  }
 
   const closeHandler = useCallback(() => {
     clearSearchHandler()
     onClose()
   }, [clearSearchHandler, onClose])
 
-  const submitHandler: SubmitHandler<ScreenInput> = useCallback(
-    (form: ScreenInput) => {
-      if (editId) {
-        updateAction({ id: editId, data: form }, { onSuccess: onClose })
-      } else {
-        createAction({ data: form })
-      }
-      clearSearchHandler()
-      generateColorHandler()
-    },
-    [createAction, editId, onClose, generateColorHandler, clearSearchHandler, updateAction],
-  )
+  const submitHandler: SubmitHandler<ScreenInput> = (form: ScreenInput) => {
+    if (editId) {
+      updateAction({ id: editId, data: form }, { onSuccess: onClose })
+    } else {
+      createAction({ data: form })
+    }
+    clearSearchHandler()
+    generateColorHandler()
+  }
 
   // preset the form with the selected screen
   useEffect(() => {

@@ -623,10 +623,12 @@ components:
       properties:
         diagonalSize:
           type: number
+          nullable: true
           minimum: 0
           exclusiveMinimum: true
         aspectRatio:
           minLength: 3
+          nullable: true
           type: string
         lightColor:
           type: string
@@ -640,10 +642,12 @@ components:
           pattern: '#([a-f0-9]{6})\b'
         hRes:
           type: integer
+          nullable: true
           minimum: 0
           exclusiveMinimum: true
         vRes:
           type: number
+          nullable: true
       description: 'Screen primitive data'
     ScreenData:
       required:
