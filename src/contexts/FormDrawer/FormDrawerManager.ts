@@ -13,22 +13,31 @@ export const initialFormDrawerState = {
 export type FormDrawerState = typeof initialFormDrawerState
 
 export enum FormDrawerActionTypes {
-  Toggle = 'toggle',
+  Create = 'create',
+  Close = 'close',
   Edit = 'edit',
 }
 
 export type FormDrawerAction =
-  | { type: FormDrawerActionTypes.Toggle; payload?: { open: boolean } }
   | { type: FormDrawerActionTypes.Edit; payload: { id: string } }
+  | { type: FormDrawerActionTypes.Create; payload?: undefined }
+  | { type: FormDrawerActionTypes.Close; payload?: undefined }
 
 export const formDrawerReducer = (state: FormDrawerState, { type, payload }: FormDrawerAction): FormDrawerState => {
   switch (type) {
-    case FormDrawerActionTypes.Toggle:
+    case FormDrawerActionTypes.Close:
       return {
         ...state,
         id: undefined,
-        mode: payload?.open ?? !state.open ? FormDrawerMode.Create : FormDrawerMode.Close,
-        open: payload?.open ?? !state.open,
+        mode: FormDrawerMode.Close,
+        open: false,
+      }
+    case FormDrawerActionTypes.Create:
+      return {
+        ...state,
+        id: undefined,
+        mode: FormDrawerMode.Create,
+        open: true,
       }
     case FormDrawerActionTypes.Edit:
       return { ...state, id: payload.id, mode: FormDrawerMode.Edit, open: true }

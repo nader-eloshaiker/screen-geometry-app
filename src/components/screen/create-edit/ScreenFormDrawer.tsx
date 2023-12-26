@@ -18,7 +18,7 @@ export const ScreenFormDrawer = ({ children }: Props) => {
     formDrawerState.mode === FormDrawerMode.Edit && !!formDrawerState.id,
   )
   const closeHandler = () => {
-    dispatchFormDrawer({ type: FormDrawerActionTypes.Toggle, payload: { open: false } })
+    dispatchFormDrawer({ type: FormDrawerActionTypes.Close })
     setDefaultValues(null)
   }
 
