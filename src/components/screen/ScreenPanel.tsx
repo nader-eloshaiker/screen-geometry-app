@@ -12,7 +12,7 @@ const Panel = styled.div<{ $width: number; $height: number; $color?: string }>`
   text-align: center;
 `
 
-const isEven = (num: number) => num % 2 == 0
+// const isEven = (num: number) => num % 2 == 0
 
 type TProps = TRestProps & {
   screen: ScreenItem
@@ -53,17 +53,17 @@ export const ScreenPanel = ({
             {Array.from({ length: vPixelCount }, (_, i) => (
               <tr key={i}>
                 {Array.from({ length: hPixelCount }, (_, j) => (
-                  <td
-                    key={j}
-                    className='p-0'
-                    style={{
-                      backgroundColor: isEven(i + j)
-                        ? 'none'
-                        : themeMode === DarkMode
-                          ? `${screen.color.lightColor}18`
-                          : `${screen.color.darkColor}18`,
-                    }}
-                  ></td>
+                  <td key={j} className='p-0.5'>
+                    <div
+                      className='h-full w-full'
+                      style={{
+                        backgroundColor:
+                          themeMode === DarkMode ? `${screen.color.lightColor}18` : `${screen.color.darkColor}18`,
+                      }}
+                    >
+                      {' '}
+                    </div>
+                  </td>
                 ))}
               </tr>
             ))}
