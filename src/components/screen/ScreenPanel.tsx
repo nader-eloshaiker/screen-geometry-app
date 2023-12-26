@@ -12,6 +12,8 @@ const Panel = styled.div<{ $width: number; $height: number; $color?: string }>`
   text-align: center;
 `
 
+const isEven = (num: number) => num % 2 == 0
+
 type TProps = TRestProps & {
   screen: ScreenItem
   isHighlighted?: (screen: ScreenItem) => boolean
@@ -30,6 +32,9 @@ export const ScreenPanel = ({
   const width = Math.round(100 * (screen.render?.width ?? 1))
   const height = Math.round(100 * (screen.render?.height ?? 1))
   const selected = isHighlighted(screen)
+  // const pixelCount = (screen.spec?.hRes ?? 1) * (screen.spec?.vRes ?? 1)
+  const vPixelCount = Math.round((screen.spec?.vRes ?? 1) / 100)
+  const hPixelCount = Math.round((screen.spec?.hRes ?? 1) / 100)
 
   return (
     <Panel
@@ -41,6 +46,30 @@ export const ScreenPanel = ({
       onMouseLeave={() => setHighLighted(undefined)}
       onClick={() => onHighlightClick(screen)}
       {...rest}
-    />
+    >
+      {selected && (
+        <table className='h-full w-full'>
+          <tbody>
+            {Array.from({ length: vPixelCount }, (_, i) => (
+              <tr key={i}>
+                {Array.from({ length: hPixelCount }, (_, j) => (
+                  <td
+                    key={j}
+                    className='p-0'
+                    style={{
+                      backgroundColor: isEven(i + j)
+                        ? 'none'
+                        : themeMode === DarkMode
+                          ? `${screen.color.lightColor}18`
+                          : `${screen.color.darkColor}18`,
+                    }}
+                  ></td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      )}
+    </Panel>
   )
 }
