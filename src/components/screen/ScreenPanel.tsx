@@ -32,9 +32,9 @@ export const ScreenPanel = ({
   const width = Math.round(100 * (screen.render?.width ?? 1))
   const height = Math.round(100 * (screen.render?.height ?? 1))
   const selected = isHighlighted(screen)
-  // const pixelCount = (screen.spec?.hRes ?? 1) * (screen.spec?.vRes ?? 1)
   const vPixelCount = Math.round((screen.spec?.vRes ?? 1) / 100)
   const hPixelCount = Math.round((screen.spec?.hRes ?? 1) / 100)
+  const color = themeMode === DarkMode ? `${screen.color.lightColor}18` : `${screen.color.darkColor}18`
 
   return (
     <Panel
@@ -55,14 +55,11 @@ export const ScreenPanel = ({
                 {Array.from({ length: hPixelCount }, (_, j) => (
                   <td key={j} className='p-0.5'>
                     <div
-                      className='h-full w-full'
+                      className='h-full w-full rounded-full'
                       style={{
-                        backgroundColor:
-                          themeMode === DarkMode ? `${screen.color.lightColor}18` : `${screen.color.darkColor}18`,
+                        backgroundColor: color,
                       }}
-                    >
-                      {' '}
-                    </div>
+                    ></div>
                   </td>
                 ))}
               </tr>
