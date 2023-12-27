@@ -1,5 +1,6 @@
+import CloseIcon from '@assets/icons/Close'
 import MagnifyGlassIcon from '@assets/icons/MagnifyGlass'
-import { InputFix } from '@components/input-suffix/InputFix'
+import { InputOverlay, OverlayInputField } from '@components/OverlayInputField/OverlayInputField'
 import { useElementSize } from '@hooks/useElementSize'
 import { clsx } from 'clsx'
 import { ChangeEvent, KeyboardEvent, memo, useCallback, useEffect, useRef, useState } from 'react'
@@ -26,6 +27,7 @@ export const ListInputField = ({
   ...rest
 }: TProps) => {
   const [inputValue, setInputValue] = useState('')
+  const [overlays, setOverlays] = useState<Array<InputOverlay>>([])
   const [open, setOpen] = useState(false)
 
   const divRef = useRef<HTMLDivElement>(null)
@@ -58,6 +60,34 @@ export const ListInputField = ({
   }
 
   useEffect(() => {
+    const stdOverlay: InputOverlay = {
+      overlay: isLoading ? (
+        <span className='loading loading-spinner loading-md' />
+      ) : (
+        <MagnifyGlassIcon className='h-6 w-6' />
+      ),
+      style: 'left-0 ml-4',
+    }
+
+    if (!inputValue) {
+      setOverlays([stdOverlay])
+      return
+    } else {
+      setOverlays([
+        stdOverlay,
+        {
+          overlay: (
+            <button className='btn btn-circle btn-xs'>
+              <CloseIcon className='h-4 w-4' onClick={handleClear} />
+            </button>
+          ),
+          style: 'right-0 mr-4',
+        },
+      ])
+    }
+  }, [inputValue, isLoading, handleClear])
+
+  useEffect(() => {
     if (!setClearHandler || !handleClear) {
       return
     }
@@ -75,12 +105,7 @@ export const ListInputField = ({
       ref={divRef}
       {...rest}
     >
-      <InputFix
-        fix={
-          isLoading ? <span className='loading loading-spinner loading-md' /> : <MagnifyGlassIcon className='h-6 w-6' />
-        }
-        fixStyle='left-0 ml-4'
-      >
+      <OverlayInputField overlays={overlays}>
         <input
           name='ListInputFieldInput'
           type='text'
@@ -91,7 +116,7 @@ export const ListInputField = ({
           tabIndex={0}
           disabled={isLoading}
         />
-      </InputFix>
+      </OverlayInputField>
       {items.length > 0 && (
         <div className='dropdown-content top-14 z-[1] max-h-80 flex-col overflow-auto rounded-md bg-base-200'>
           <ul

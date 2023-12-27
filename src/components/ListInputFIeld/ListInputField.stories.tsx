@@ -63,6 +63,13 @@ const meta = {
         type: 'function',
       },
     },
+    setClearHandler: {
+      description: 'Attach clear handler to a state in the parent component.',
+      table: { category: 'event handler' },
+      control: {
+        type: 'function',
+      },
+    },
   },
 } satisfies Meta<typeof ListInputField>
 

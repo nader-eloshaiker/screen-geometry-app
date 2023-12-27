@@ -131,10 +131,10 @@ export const ScreenForm = ({ defaultValues = null, editId = undefined, isLoading
             <InputField
               formKey={ScreenDataEnum.diagonalSize}
               inputStyle='!pr-10'
-              fixStyle='right-0 mr-4'
+              overlayStyle='right-0 mr-4'
               title='Screen Size'
               type='number'
-              fix='in'
+              overlay='in'
               autoComplete='off'
               placeholder='27"'
               isLoading={isLoading}
@@ -156,10 +156,10 @@ export const ScreenForm = ({ defaultValues = null, editId = undefined, isLoading
             <InputField
               formKey={ScreenDataEnum.hRes}
               inputStyle='!pr-10'
-              fixStyle='right-0 mr-4'
+              overlayStyle='right-0 mr-4'
               title='Horizontal Res'
               type='number'
-              fix='px'
+              overlay='px'
               autoComplete='off'
               placeholder='27"'
               isLoading={isLoading}
@@ -168,10 +168,10 @@ export const ScreenForm = ({ defaultValues = null, editId = undefined, isLoading
             <InputField
               formKey={ScreenDataEnum.vRes}
               inputStyle='!pr-10'
-              fixStyle='right-0 mr-4'
+              overlayStyle='right-0 mr-4'
               title='Vertical Res'
               type='number'
-              fix='px'
+              overlay='px'
               autoComplete='off'
               placeholder='27"'
               isLoading={isLoading}
