@@ -6,9 +6,6 @@ import '../src/index.css'
 
 const preview: Preview = {
   parameters: {
-    docs: {
-      toc: true, // 👈 Enables the table of contents
-    },
     actions: { argTypesRegex: '^on[A-Z].*' },
     controls: {
       matchers: {

@@ -66,7 +66,7 @@ export const ListInputField = ({
       ) : (
         <MagnifyGlassIcon className='h-6 w-6' />
       ),
-      style: 'left-0 ml-4',
+      overlayClassName: 'left-0 ml-4',
     }
 
     if (!inputValue) {
@@ -81,7 +81,8 @@ export const ListInputField = ({
               <CloseIcon className='h-4 w-4' onClick={handleClear} />
             </button>
           ),
-          style: 'right-0 mr-4',
+          overlayClassName: 'right-0 mr-4',
+          pointerEvents: true,
         },
       ])
     }
@@ -105,18 +106,17 @@ export const ListInputField = ({
       ref={divRef}
       {...rest}
     >
-      <OverlayInputField overlays={overlays}>
-        <input
-          name='ListInputFieldInput'
-          type='text'
-          className='input input-md relative w-full !pl-12 shadow-md'
-          value={inputValue}
-          onChange={handleChange}
-          placeholder={isLoading ? 'Loading...' : placeholder ?? 'Type something...'}
-          tabIndex={0}
-          disabled={isLoading}
-        />
-      </OverlayInputField>
+      <OverlayInputField
+        overlays={overlays}
+        name='ListInputFieldInput'
+        type='text'
+        className='!pl-12'
+        value={inputValue}
+        onChange={handleChange}
+        placeholder={isLoading ? 'Loading...' : placeholder ?? 'Type something...'}
+        tabIndex={0}
+        disabled={isLoading}
+      />
       {items.length > 0 && (
         <div className='dropdown-content top-14 z-[1] max-h-80 flex-col overflow-auto rounded-md bg-base-200'>
           <ul

@@ -13,9 +13,7 @@ const config: StorybookConfig = {
     name: '@storybook/react-vite',
     options: {},
   },
-  features: {
-    storyStoreV7: true,
-  },
+  features: {},
   docs: {
     autodocs: 'tag',
   },

@@ -32,17 +32,16 @@ export const InputField = ({
         {title}
       </label>
       {overlay ? (
-        <OverlayInputField overlays={[{ overlay: overlay, style: overlayStyle ?? '' }]}>
-          <input
-            {...rest}
-            className={clsx('input input-bordered input-md w-full shadow-md', inputStyle, {
-              'input-error': errors[formKey],
-              'skeleton bg-neutral-300 dark:bg-neutral-700 pointer-events-none rounded-lg': isLoading,
-            })}
-            id={formKey}
-            {...register(formKey)}
-          />
-        </OverlayInputField>
+        <OverlayInputField
+          overlays={[{ overlay: overlay, overlayClassName: overlayStyle ?? '' }]}
+          {...rest}
+          className={clsx(inputStyle, {
+            'input-error': errors[formKey],
+            'skeleton bg-neutral-300 dark:bg-neutral-700 pointer-events-none rounded-lg': isLoading,
+          })}
+          id={formKey}
+          {...register(formKey)}
+        />
       ) : (
         <input
           {...rest}
