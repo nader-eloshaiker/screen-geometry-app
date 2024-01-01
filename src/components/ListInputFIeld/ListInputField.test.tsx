@@ -1,8 +1,8 @@
 import { useElementSizeMock } from '@hooks/useElementSize.mock'
 import { fireEvent, render } from '@testing-library/react'
-import { AutoComplete } from './Autocomplete'
+import { ListInputField } from './ListInputField'
 
-describe('#AutoComplete', () => {
+describe('#ListInputField', () => {
   const searchList = [
     {
       label: 'AAAA',
@@ -22,24 +22,24 @@ describe('#AutoComplete', () => {
     useElementSizeMock()
   })
 
-  test.only('renders autocomplete component with an input field', () => {
+  test('renders ListInputField component with an input field', () => {
     const { getByPlaceholderText } = render(
-      <AutoComplete items={searchList} value='' isLoading={false} placeholder='Type to filter list...' />,
+      <ListInputField items={searchList} value='' isLoading={false} placeholder='Type to filter list...' />,
     )
     expect(getByPlaceholderText('Type to filter list...')).toBeInTheDocument()
   })
 
   test('displays loading message', () => {
     const { getByPlaceholderText } = render(
-      <AutoComplete items={searchList} value='' isLoading={true} placeholder='Type to filter list...' />,
+      <ListInputField items={searchList} value='' isLoading={true} placeholder='Type to filter list...' />,
     )
 
     expect(getByPlaceholderText('Loading...')).toBeInTheDocument()
   })
 
-  test('renders the autocomplete dropdown and make a selectin', () => {
+  test('renders the ListInputField dropdown and make a selectin', () => {
     const { container, getByPlaceholderText } = render(
-      <AutoComplete items={searchList} value='' isLoading={false} placeholder='Type to filter list...' />,
+      <ListInputField items={searchList} value='' isLoading={false} placeholder='Type to filter list...' />,
     )
     const listElements = container.querySelectorAll('li')
     fireEvent.click(listElements[0])

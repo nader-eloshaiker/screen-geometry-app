@@ -10,6 +10,7 @@ export default defineConfig({
   define: {
     'import.meta.env.VITE_PACKAGE_VERSION': JSON.stringify(packageJson.version),
   },
+  assetsInclude: ['/sb-preview/runtime.js'],
   plugins: [
     react(),
     checker({
@@ -20,7 +21,6 @@ export default defineConfig({
   resolve: {
     alias: {
       // '@': path.resolve(__dirname, './src'),
-      '@api': path.resolve(__dirname, '/src/api'),
       '@assets': path.resolve(__dirname, '/src/assets'),
       '@components': path.resolve(__dirname, '/src/components'),
       '@constants': path.resolve(__dirname, '/src/constants'),
@@ -30,6 +30,7 @@ export default defineConfig({
       '@openapi': path.resolve(__dirname, '/src/openapi'),
       '@pages': path.resolve(__dirname, '/src/pages'),
       '@routes': path.resolve(__dirname, '/src/routes'),
+      '@server': path.resolve(__dirname, '/src/server'),
       '@test': path.resolve(__dirname, '/src/test'),
       '@utils': path.resolve(__dirname, '/src/utils'),
     },
@@ -45,7 +46,7 @@ export default defineConfig({
     coverage: {
       provider: 'v8',
       reporter: ['text', 'json', 'html'],
-      exclude: ['src/openapi/**/*', 'src/tests/**/*', 'src/**/*.mock.{ts,tsx}'],
+      exclude: ['src/openapi/**/*', 'src/test/**/*', 'src/**/*.mock.{ts,tsx}'],
     },
     environment: 'jsdom',
     setupFiles: './src/vitest.setup.ts',

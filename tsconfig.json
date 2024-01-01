@@ -11,7 +11,6 @@
     "baseUrl": ".",
     "paths": {
       // "@/*": ["./src/*"],
-      "@api/*": ["./src/api/*"],
       "@assets/*": ["./src/assets/*"],
       "@components/*": ["./src/components/*"],
       "@constants/*": ["./src/constants/*"],
@@ -21,6 +20,7 @@
       "@openapi/*": ["./src/openapi/*"],
       "@pages/*": ["./src/pages/*"],
       "@routes/*": ["./src/routes/*"],
+      "@server/*": ["src/server/*"],
       "@test/*": ["./src/test/*"],
       "@utils/*": ["./src/utils/*"]
     },
@@ -40,6 +40,6 @@
     "noFallthroughCasesInSwitch": true
   },
   "include": ["*.ts", "src"],
-  "exclude": ["node_modules"],
+  "exclude": ["node_modules", "coverage", "dist", "build"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

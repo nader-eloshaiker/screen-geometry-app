@@ -21,7 +21,7 @@ export default defineConfig({
       },
     },
     input: {
-      target: './openApi/screenApi.v1.yaml',
+      target: './src/openapi/spec/screenApi.v1.yaml',
     },
   },
 })

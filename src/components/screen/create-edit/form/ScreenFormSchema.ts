@@ -30,7 +30,7 @@ export const ScreenFormSchema: ObjectSchema<ScreenInput> = yup.object().shape(
         return value
       })
       .when(ScreenDataEnum.vRes, {
-        is: (v: number) => v !== undefined && v > 0,
+        is: (v: number) => v && v > 0,
         then: (schema) =>
           schema.required('Horizontal required when vertical is provided').moreThan(0, 'Must be greater than 0'),
       }),
@@ -44,7 +44,7 @@ export const ScreenFormSchema: ObjectSchema<ScreenInput> = yup.object().shape(
         return value
       })
       .when(ScreenDataEnum.hRes, {
-        is: (v: number) => v !== undefined && v > 0,
+        is: (v: number) => v && v > 0,
         then: (schema) =>
           schema.required('Vertical required when vertical is provided').moreThan(0, 'Must be greater than 0'),
       }),

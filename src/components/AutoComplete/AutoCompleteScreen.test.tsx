@@ -1,5 +1,4 @@
 import { NotificationProvider } from '@contexts/Notification/NotificationProvider'
-import { SearchProvider } from '@contexts/Search/SearchProvider'
 import { useElementSizeMock } from '@hooks/useElementSize.mock'
 import { useSearchListActionMock } from '@openapi/mocks/useSearchList.mock'
 import { fireEvent, render } from '@testing-library/react'
@@ -16,9 +15,7 @@ describe('#AutoCompleteScreen', () => {
   test('renders autocomplete component with an input field', () => {
     const { getByPlaceholderText } = render(
       <NotificationProvider>
-        <SearchProvider>
-          <AutoCompleteScreen onSelect={vi.fn()} onReset='' />
-        </SearchProvider>
+        <AutoCompleteScreen onSelectScreen={vi.fn()} setClearSearchHandler={vi.fn} />
       </NotificationProvider>,
     )
     // use this to view what is being rendered
@@ -30,9 +27,7 @@ describe('#AutoCompleteScreen', () => {
   test('updates the context when the input value changes', () => {
     const { getByPlaceholderText, container } = render(
       <NotificationProvider>
-        <SearchProvider>
-          <AutoCompleteScreen onSelect={vi.fn()} onReset='' />
-        </SearchProvider>
+        <AutoCompleteScreen onSelectScreen={vi.fn()} setClearSearchHandler={vi.fn} />
       </NotificationProvider>,
     )
 
@@ -50,9 +45,7 @@ describe('#AutoCompleteScreen', () => {
   test('renders the autocomplete dropdown with no items when input does not match', () => {
     const { getByPlaceholderText, container } = render(
       <NotificationProvider>
-        <SearchProvider>
-          <AutoCompleteScreen onSelect={vi.fn()} onReset='' />
-        </SearchProvider>
+        <AutoCompleteScreen onSelectScreen={vi.fn()} onReset='' />
       </NotificationProvider>,
     )
 
