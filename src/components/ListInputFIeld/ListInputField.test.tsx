@@ -1,5 +1,6 @@
 import { useElementSizeMock } from '@hooks/useElementSize.mock'
-import { fireEvent, render } from '@testing-library/react'
+import { useInteractComponent } from '@test/utils/useInteractComponent'
+import { render } from '@testing-library/react'
 import { ListInputField } from './ListInputField'
 
 describe('#ListInputField', () => {
@@ -37,12 +38,12 @@ describe('#ListInputField', () => {
     expect(getByPlaceholderText('Loading...')).toBeInTheDocument()
   })
 
-  test('renders the ListInputField dropdown and make a selectin', () => {
-    const { container, getByPlaceholderText } = render(
+  test('renders the ListInputField dropdown and make a selectin', async () => {
+    const { user, container, getByPlaceholderText } = useInteractComponent(
       <ListInputField items={searchList} value='' isLoading={false} placeholder='Type to filter list...' />,
     )
     const listElements = container.querySelectorAll('li')
-    fireEvent.click(listElements[0])
+    await user.click(listElements[0])
 
     expect(getByPlaceholderText('Type to filter list...')).toHaveValue(searchList[0].label)
   })
