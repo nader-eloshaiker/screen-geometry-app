@@ -208,13 +208,20 @@ describe('#NotificationToaster', () => {
         <TestComponent payload={warningNotification} />
       </NotificationProvider>,
     )
-    const element = getByText('aaa')
+    const element = getByText('DISMISS')
 
     expect(element).toBeInTheDocument()
     expect(container.querySelectorAll('li')).toHaveLength(1)
 
     act(() => {
       vi.advanceTimersByTime(3500)
+    })
+
+    expect(element).toBeInTheDocument()
+    expect(container.querySelectorAll('li')).toHaveLength(1)
+
+    act(() => {
+      fireEvent.click(element)
     })
 
     expect(element).not.toBeInTheDocument()

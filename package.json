@@ -23,9 +23,9 @@
     "test:ui": "vitest --ui  --coverage",
     "coverage": "vitest run --coverage",
     "typecheck": "tsc --project tsconfig.json --noEmit",
-    "build-storybook": "storybook build",
     "sb": "storybook dev -p 6006",
-    "sb:build": "storybook build --docs"
+    "sb:build": "storybook build",
+    "sb:build:docs": "storybook build --docs"
   },
   "engines": {
     "node": ">=18",
