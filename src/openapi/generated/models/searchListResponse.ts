@@ -3,6 +3,8 @@
  * Do not edit manually.
  * screen-geometry-app-backend-serverless-apis-v1
  */
-import type { ScreenInput } from './screenInput'
+import type { SearchItem } from './searchItem'
 
-export type ScreenInputList = ScreenInput[]
+export interface SearchListResponse {
+  list: SearchItem[]
+}
