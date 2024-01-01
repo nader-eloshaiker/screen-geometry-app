@@ -22,7 +22,7 @@ describe('#ListInputField', () => {
     useElementSizeMock()
   })
 
-  test.only('renders ListInputField component with an input field', () => {
+  test('renders ListInputField component with an input field', () => {
     const { getByPlaceholderText } = render(
       <ListInputField items={searchList} value='' isLoading={false} placeholder='Type to filter list...' />,
     )

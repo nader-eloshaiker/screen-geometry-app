@@ -24,7 +24,7 @@ const NotificationToasterStory = ({ notification }: StoryProps) => {
   }, [dispatch, notification, state.notifications.length])
 
   return (
-    <div className='h-56 w-full'>
+    <div className='h-48 w-56'>
       <NotificationToaster />
     </div>
   )
@@ -41,10 +41,6 @@ const meta = {
       description: {
         story: 'Notification toaster for displaying messages to the user.',
       },
-      // story: {
-      //   inline: false,
-      //   iframeHeight: 300,
-      // },
     },
   },
   argTypes: {
@@ -70,7 +66,7 @@ export const SuccessNotification: Story = {
 export const WarningNotification: Story = {
   args: {
     notification: {
-      value: { title: 'Warning', message: 'This is a Warniong notification' },
+      value: { title: 'Warning', message: 'This is a Warning notification' },
       type: NotificationType.WARNING,
     },
   },

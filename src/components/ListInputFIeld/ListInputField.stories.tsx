@@ -1,4 +1,5 @@
 import type { Meta, StoryFn, StoryObj } from '@storybook/react'
+import { expect, userEvent, within } from '@storybook/test'
 import { ListInputField } from './ListInputField'
 
 const meta = {
@@ -7,7 +8,7 @@ const meta = {
   decorators: [
     (Story: StoryFn) => {
       return (
-        <div className='h-48'>
+        <div className='h-48 w-48'>
           <Story />
         </div>
       )
@@ -92,5 +93,18 @@ export const Default: Story = {
     onChange: () => {},
     onSelect: () => {},
     setClearHandler: () => {},
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement)
+    expect(canvasElement.querySelector('ul')).not.toBeVisible()
+
+    const inputElement = canvas.getByPlaceholderText('Type to filter list...')
+    await expect(inputElement).toBeInTheDocument()
+
+    await userEvent.click(inputElement, {
+      delay: 100,
+    })
+
+    expect(canvasElement.querySelector('ul')).toBeVisible()
   },
 }

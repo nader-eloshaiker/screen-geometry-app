@@ -19,7 +19,7 @@ const meta = {
     overlays: {
       description: 'Content to be displayed in the field.',
       table: { category: 'content', type: { summary: 'Array<InputOverlay>' } },
-      control: 'object',
+      control: { type: 'object', requied: true },
     },
     register: {
       description: 'React Hook Form register.',
