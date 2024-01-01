@@ -3,8 +3,8 @@ import useLocalStorage from '@hooks/useLocalStorage'
 import { useState } from 'react'
 import { ThemeModeContext } from './ThemeModeContext'
 
-export const ThemeModeProvider = ({ children }: TReactChildren) => {
-  const [localStorage] = useLocalStorage<TThemeMode>(ThemeKey, LightMode)
+export const ThemeModeProvider = ({ children, initialise }: TReactChildren & { initialise?: TThemeMode }) => {
+  const [localStorage] = useLocalStorage<TThemeMode>(ThemeKey, initialise ?? LightMode)
   const [theme, setTheme] = useState<TThemeMode>(localStorage)
 
   attachThemeClass(theme)

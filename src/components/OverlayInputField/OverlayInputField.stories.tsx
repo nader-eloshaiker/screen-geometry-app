@@ -7,14 +7,13 @@ const meta = {
   component: OverlayInputField,
   tags: ['autodocs'],
   parameters: {
-    // Optional parameter to center the component in the Canvas. More info: https://storybook.js.org/docs/configure/story-layout
     layout: 'centered',
     actions: {
       handles: ['click .btn'],
     },
     docs: {
       description: {
-        story: ' InputField with dropdown list',
+        story: 'Input field with overlayed elements on top of the input field.',
       },
     },
   },
@@ -67,11 +66,6 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
-/*
- *👇 Render functions are a framework specific feature to allow you control on how the component renders.
- * See https://storybook.js.org/docs/api/csf
- * to learn how to use render functions.
- */
 export const ImageOverlay: Story = {
   args: {
     placeholder: 'Type something...',

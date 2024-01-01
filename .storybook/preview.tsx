@@ -16,16 +16,14 @@ const preview: Preview = {
   },
 }
 
-const withThemeProvider = (Story: any): React.ReactNode => {
-  return (
-    <ThemeModeProvider>
-      <Story />
-    </ThemeModeProvider>
-  )
-}
-
 export const decorators = [
-  withThemeProvider,
+  (Story: any): React.ReactNode => {
+    return (
+      <ThemeModeProvider>
+        <Story />
+      </ThemeModeProvider>
+    )
+  },
   withThemeByClassName({
     themes: {
       light: 'light',

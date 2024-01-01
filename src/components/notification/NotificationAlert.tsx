@@ -16,11 +16,11 @@ export const NotificationAlert = ({ title, message, tag, type }: NotificationPro
 
   useEffect(() => {
     const timeoutFade = setTimeout(() => {
-      type !== NotificationType.ERROR && setIsClosing(true)
+      type === NotificationType.SUCCESS && setIsClosing(true)
     }, 3000)
 
     const timeoutClose = setTimeout(() => {
-      type !== NotificationType.ERROR && onClose()
+      type === NotificationType.SUCCESS && onClose()
     }, 3500)
 
     return () => {
@@ -36,7 +36,7 @@ export const NotificationAlert = ({ title, message, tag, type }: NotificationPro
         <div className='font-semibold'>{title}</div>
         <div>{message}</div>
       </div>
-      {type === NotificationType.ERROR && (
+      {type !== NotificationType.SUCCESS && (
         <button className='btn btn-ghost btn-sm' onClick={onClose}>
           DISMISS
         </button>
