@@ -8,12 +8,9 @@ const meta = {
   tags: ['autodocs'],
   parameters: {
     layout: 'centered',
-    actions: {
-      handles: ['click .btn'],
-    },
     docs: {
       description: {
-        story: 'Input field with overlayed elements on top of the input field.',
+        story: 'HTML Input field with overlayed elements on top of it.',
       },
     },
   },
@@ -22,6 +19,11 @@ const meta = {
     overlays: {
       description: 'Content to be displayed in the field.',
       table: { category: 'content', type: { summary: 'Array<InputOverlay>' } },
+      control: 'object',
+    },
+    register: {
+      description: 'React Hook Form register.',
+      table: { category: 'content', type: { summary: 'UseFormRegisterReturn' } },
       control: 'object',
     },
     className: {

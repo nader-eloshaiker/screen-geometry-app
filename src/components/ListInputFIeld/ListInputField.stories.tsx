@@ -1,14 +1,23 @@
-import type { Meta, StoryObj } from '@storybook/react'
+import type { Meta, StoryFn, StoryObj } from '@storybook/react'
 import { ListInputField } from './ListInputField'
 
 const meta = {
   title: 'components/ListInputField',
   component: ListInputField,
+  decorators: [
+    (Story: StoryFn) => {
+      return (
+        <div className='h-48'>
+          <Story />
+        </div>
+      )
+    },
+  ],
   tags: ['autodocs'],
   parameters: {
     layout: 'centered',
     actions: {
-      handles: ['click .btn'],
+      handles: ['change input', 'select item'],
     },
     docs: {
       description: {

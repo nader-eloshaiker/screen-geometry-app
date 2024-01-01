@@ -37,9 +37,6 @@ const meta = {
   tags: ['autodocs'],
   parameters: {
     layout: 'centered',
-    actions: {
-      handles: ['click .btn'],
-    },
     docs: {
       description: {
         story: 'Notification toaster for displaying messages to the user.',

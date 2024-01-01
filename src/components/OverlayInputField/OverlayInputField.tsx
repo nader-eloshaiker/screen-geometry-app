@@ -1,12 +1,15 @@
 import clsx from 'clsx'
-import { ReactNode } from 'react'
+import { InputHTMLAttributes, ReactNode } from 'react'
+import { UseFormRegisterReturn } from 'react-hook-form'
 import { styled } from 'styled-components'
 import { twMerge } from 'tailwind-merge'
 
 export type InputOverlay = { overlay: string | ReactNode; overlayClassName: string; pointerEvents?: boolean }
 
-interface Props extends React.InputHTMLAttributes<HTMLInputElement> {
+type Props = InputHTMLAttributes<HTMLInputElement> & {
+  className?: string
   overlays: Array<InputOverlay>
+  register?: UseFormRegisterReturn
 }
 
 const InputPlaceholder = styled.span`
@@ -14,15 +17,12 @@ const InputPlaceholder = styled.span`
   --tw-placeholder-opacity: 0.6;
 `
 
-export const OverlayInputField = ({ overlays, ...props }: Props) => {
-  const propsWithOverrides = {
-    ...props,
-    className: twMerge('relative input input-bordered input-md w-full shadow-md', props.className),
-  }
+export const OverlayInputField = ({ overlays, className, register, ...props }: Props) => {
+  const newClassName = twMerge('relative input input-bordered input-md w-full shadow-md', className)
 
   return (
     <div className='relative'>
-      <input {...propsWithOverrides} />
+      <input className={newClassName} {...props} {...register} />
       {overlays.map(({ overlay, overlayClassName, pointerEvents = false }, index) => (
         <InputPlaceholder
           key={index.toString()}
