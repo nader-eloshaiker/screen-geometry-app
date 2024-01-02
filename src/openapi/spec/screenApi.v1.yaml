@@ -672,13 +672,21 @@ components:
             $ref: '#/components/schemas/SearchItem'
     SearchItem:
       required:
+        - 'id'
         - 'name'
+        - 'label'
         - 'aspectRatio'
         - 'hRes'
         - 'vRes'
       type: object
       properties:
+        id:
+          type: string
+          minLength: 1
         name:
+          type: string
+          minLength: 1
+        label:
           type: string
           minLength: 1
         aspectRatio:

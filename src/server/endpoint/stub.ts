@@ -1,16 +1,17 @@
-import { AxiosInstance, AxiosRequestConfig } from 'axios'
-import MockAdapter from 'axios-mock-adapter'
-import { pathToRegexp } from 'path-to-regexp'
-import { apiRoutes } from '../ApiRouteSchema'
+import { apiRoutes } from '@server/ApiRouteSchema'
 import {
   createItemAction,
   createItemListAction,
   deleteItemAction,
   getScreen,
   getScreenList,
+  getSearchList,
   showItemAction,
   updateItemAction,
-} from '../db/api'
+} from '@server/db/api'
+import { AxiosInstance, AxiosRequestConfig } from 'axios'
+import MockAdapter from 'axios-mock-adapter'
+import { pathToRegexp } from 'path-to-regexp'
 
 // Stub out the API calls using axios-mock-adapter for indexAPI to store data in the browser's IndexedDB
 // The stubbed API calls can later be replaced with real API calls to a backend store
@@ -105,6 +106,14 @@ export const generateStub = (axiosInstance: AxiosInstance) => {
   mock.onPost(`${apiRoutes.apiUrl}${apiRoutes.apiPathVer}/${apiRoutes.screen.path}`).reply((config) =>
     createItemAction(config.data ? JSON.parse(config.data) : {}).then((payload) => {
       debug(config, payload, 'createItemAction')
+      return [200, payload, { Accept: 'application/json', 'Content-Type': 'application/json' }]
+    }),
+  )
+
+  mock.onGet(`${apiRoutes.apiUrl}${apiRoutes.apiPathVer}/${apiRoutes.search.path}`).reply((config) =>
+    getSearchList(config.params).then((payload) => {
+      debug(config, payload, 'getSearchList')
+
       return [200, payload, { Accept: 'application/json', 'Content-Type': 'application/json' }]
     }),
   )

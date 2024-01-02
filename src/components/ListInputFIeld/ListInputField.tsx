@@ -5,10 +5,22 @@ import { useElementSize } from '@hooks/useElementSize'
 import { clsx } from 'clsx'
 import { ChangeEvent, KeyboardEvent, memo, useCallback, useEffect, useRef, useState } from 'react'
 
+const standardOverlay: InputOverlay = {
+  overlay: <MagnifyGlassIcon className='h-6 w-6' />,
+
+  overlayClassName: 'left-0 ml-4',
+}
+
+const loadingOverlay: InputOverlay = {
+  overlay: <span className='loading loading-spinner loading-md' />,
+  overlayClassName: 'left-0 ml-4',
+}
+
 export type TListItem = { id: string; label: string }
 type TProps = TRestProps & {
   items: Array<TListItem>
-  isLoading: boolean
+  isLoading?: boolean
+  disableOnLoading?: boolean
   className?: string
   placeholder?: string
   onChange?: (val: string) => void
@@ -20,7 +32,8 @@ export const ListInputField = ({
   items = [],
   className,
   placeholder,
-  isLoading,
+  isLoading = false,
+  disableOnLoading = true,
   onChange = () => {},
   onSelect = () => {},
   setClearHandler = () => {},
@@ -38,7 +51,6 @@ export const ListInputField = ({
   }, [])
 
   const handleChange = ({ target }: ChangeEvent<HTMLInputElement>) => {
-    onChange(target.value)
     setInputValue(target.value)
   }
 
@@ -60,18 +72,10 @@ export const ListInputField = ({
   }
 
   useEffect(() => {
-    const stdOverlay: InputOverlay = {
-      overlay: isLoading ? (
-        <span className='loading loading-spinner loading-md' />
-      ) : (
-        <MagnifyGlassIcon className='h-6 w-6' />
-      ),
-      overlayClassName: 'left-0 ml-4',
-    }
+    const stdOverlay = isLoading ? loadingOverlay : standardOverlay
 
     if (!inputValue) {
       setOverlays([stdOverlay])
-      return
     } else {
       setOverlays([
         stdOverlay,
@@ -86,7 +90,9 @@ export const ListInputField = ({
         },
       ])
     }
-  }, [inputValue, isLoading, handleClear])
+
+    onChange(inputValue)
+  }, [inputValue, isLoading, handleClear, onChange])
 
   useEffect(() => {
     if (!setClearHandler || !handleClear) {
@@ -115,7 +121,7 @@ export const ListInputField = ({
         onChange={handleChange}
         placeholder={isLoading ? 'Loading...' : placeholder ?? 'Type something...'}
         tabIndex={0}
-        disabled={isLoading}
+        disabled={isLoading && disableOnLoading}
       />
       {items.length > 0 && (
         <div className='dropdown-content top-14 z-[1] max-h-80 flex-col overflow-auto rounded-md bg-base-200'>

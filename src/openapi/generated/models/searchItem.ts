@@ -11,6 +11,8 @@ export interface SearchItem {
   aspectRatio: string
   diagonalSize?: number
   hRes: number
+  id: string
+  label: string
   name: string
   vRes: number
 }
