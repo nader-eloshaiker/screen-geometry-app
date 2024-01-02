@@ -3,7 +3,7 @@ import { useInteractComponent } from '@test/utils/useInteractComponent'
 import { render } from '@testing-library/react'
 import { ListInputField } from './ListInputField'
 
-describe.skip('#ListInputField', () => {
+describe('#ListInputField', () => {
   const searchList = [
     {
       label: 'AAAA',
@@ -25,14 +25,30 @@ describe.skip('#ListInputField', () => {
 
   test('renders ListInputField component with an input field', () => {
     const { getByPlaceholderText } = render(
-      <ListInputField items={searchList} value='' isLoading={false} placeholder='Type to filter list...' />,
+      <ListInputField
+        items={searchList}
+        value=''
+        isLoading={false}
+        placeholder='Type to filter list...'
+        onChange={() => {}}
+        onSelect={() => {}}
+        setClearHandler={() => {}}
+      />,
     )
     expect(getByPlaceholderText('Type to filter list...')).toBeInTheDocument()
   })
 
   test('displays loading message', () => {
     const { getByPlaceholderText } = render(
-      <ListInputField items={searchList} value='' isLoading={true} placeholder='Type to filter list...' />,
+      <ListInputField
+        items={searchList}
+        value=''
+        isLoading={true}
+        placeholder='Type to filter list...'
+        onChange={() => {}}
+        onSelect={() => {}}
+        setClearHandler={() => {}}
+      />,
     )
 
     expect(getByPlaceholderText('Loading...')).toBeInTheDocument()
