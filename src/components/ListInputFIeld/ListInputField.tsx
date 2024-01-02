@@ -1,6 +1,7 @@
 import CloseIcon from '@assets/icons/Close'
 import MagnifyGlassIcon from '@assets/icons/MagnifyGlass'
 import { InputOverlay, OverlayInputField } from '@components/OverlayInputField/OverlayInputField'
+import { useDebounce } from '@hooks/useDebounce'
 import { useElementSize } from '@hooks/useElementSize'
 import { clsx } from 'clsx'
 import { ChangeEvent, KeyboardEvent, memo, useCallback, useEffect, useRef, useState } from 'react'
@@ -19,10 +20,10 @@ const loadingOverlay: InputOverlay = {
 export type TListItem = { id: string; label: string }
 type TProps = TRestProps & {
   items: Array<TListItem>
-  isLoading?: boolean
-  disableOnLoading?: boolean
   className?: string
   placeholder?: string
+  isLoading?: boolean
+  disableOnLoading?: boolean
   onChange?: (val: string) => void
   onSelect?: (item: TListItem) => void
   setClearHandler?: (func: () => void) => void
@@ -42,6 +43,7 @@ export const ListInputField = ({
   const [inputValue, setInputValue] = useState('')
   const [overlays, setOverlays] = useState<Array<InputOverlay>>([])
   const [open, setOpen] = useState(false)
+  const debouncedValue = useDebounce(inputValue, 500)
 
   const divRef = useRef<HTMLDivElement>(null)
   const { width } = useElementSize(divRef)
@@ -90,9 +92,7 @@ export const ListInputField = ({
         },
       ])
     }
-
-    onChange(inputValue)
-  }, [inputValue, isLoading, handleClear, onChange])
+  }, [inputValue, isLoading, handleClear])
 
   useEffect(() => {
     if (!setClearHandler || !handleClear) {
@@ -101,6 +101,10 @@ export const ListInputField = ({
 
     setClearHandler(() => handleClear)
   }, [setClearHandler, handleClear])
+
+  useEffect(() => {
+    onChange(debouncedValue)
+  }, [debouncedValue, onChange])
 
   return (
     <div
