@@ -28,6 +28,9 @@ importers:
       localforage:
         specifier: ^1.10.0
         version: 1.10.0
+      minisearch:
+        specifier: ^6.3.0
+        version: 6.3.0
       path-to-regexp:
         specifier: ^6.2.1
         version: 6.2.1
@@ -9550,6 +9553,11 @@ packages:
       { integrity: sha512-jYofLM5Dam9279rdkWzqHozUo4ybjdZmCsDHePy5V/PbBcVMiSZR97gmAy45aqi8CK1lG2ECd356FU86avfwUQ== }
     engines: { node: '>=16 || 14 >=14.17' }
     dev: true
+
+  /minisearch@6.3.0:
+    resolution:
+      { integrity: sha512-ihFnidEeU8iXzcVHy74dhkxh/dn8Dc08ERl0xwoMMGqp4+LvRSCgicb+zGqWthVokQKvCSxITlh3P08OzdTYCQ== }
+    dev: false
 
   /minizlib@2.1.2:
     resolution:
