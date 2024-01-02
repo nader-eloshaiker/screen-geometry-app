@@ -47,7 +47,7 @@ const meta = {
     notification: {
       description: 'Notification to be displayed.',
       table: { category: 'content', type: { summary: 'NotificationItem' } },
-      control: 'object',
+      control: { type: 'object', required: true },
     },
   },
 } satisfies Meta<typeof NotificationToasterStory>
