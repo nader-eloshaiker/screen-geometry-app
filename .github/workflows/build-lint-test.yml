@@ -1,16 +1,16 @@
 name: Build Lint Test Application
 
-# Controls when the action will run. 
+# Controls when the action will run.
 on:
   # Triggers the workflow on push or pull request events but only for the main branch
   push:
     branches:
-      - '*'         # matches every branch that doesn't contain a '/'
-      - '*/*'       # matches every branch containing a single '/'
-      - '**'        # matches every branch
-      - '!master'   # excludes master 
+      - '*' # matches every branch that doesn't contain a '/'
+      - '*/*' # matches every branch containing a single '/'
+      - '**' # matches every branch
+      - '!master' # excludes master
   pull_request:
-    branches: [ develop ]
+    branches: [develop]
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -51,4 +51,4 @@ jobs:
           pnpm ci
           pnpm run build --if-present
           pnpm run lint
-          pnpm test      
+          pnpm test
