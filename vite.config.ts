@@ -6,6 +6,7 @@ import { defineConfig } from 'vitest/config'
 import packageJson from './package.json'
 
 export default defineConfig({
+  base: './',
   define: {
     'import.meta.env.VITE_PACKAGE_VERSION': JSON.stringify(packageJson.version),
   },
