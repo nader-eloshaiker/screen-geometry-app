@@ -1,6 +1,7 @@
 import { ScreenInput, ScreenInputList, ScreenItem } from '@openapi/generated/models'
+import { search } from '@server/searchClient'
 import { transformScreenInput } from '@utils/ScreenTransformation'
-import { createItem, createItemList, deleteItem, getItem, getItemList, updateItem } from './indexDB'
+import { createItem, createItemList, deleteItem, getItem, getItemList, updateItem } from './db/indexDB'
 
 export type TScreenListResponse = {
   list: ScreenItem[]
@@ -12,6 +13,13 @@ export type TScreenResponse = {
 
 export type TIdResponse = {
   id: string
+}
+
+export async function getSearchList(params: Record<string, string>) {
+  const term = params.term?.toLowerCase().trim() ?? ''
+  const results = search(term)
+
+  return { list: results }
 }
 
 export async function getScreenList(): Promise<TScreenListResponse> {

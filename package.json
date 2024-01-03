@@ -8,6 +8,11 @@
     "name": "Nader Eloshaiker",
     "url": "https://github.com/nader-eloshaiker"
   },
+  "packageManager": "pnpm@8.10.5",
+  "engines": {
+    "node": ">=18",
+    "pnpm": ">=8"
+  },
   "scripts": {
     "preinstall": "npx only-allow pnpm",
     "dev": "vite --mode dev",
@@ -27,10 +32,6 @@
     "sb:build": "storybook build",
     "sb:build:docs": "storybook build --docs"
   },
-  "engines": {
-    "node": ">=18",
-    "pnpm": ">=8"
-  },
   "dependencies": {
     "@hookform/resolvers": "^3.3.2",
     "@react-hook/resize-observer": "^1.2.6",
@@ -39,6 +40,7 @@
     "axios-mock-adapter": "^1.22.0",
     "clsx": "^2.0.0",
     "localforage": "^1.10.0",
+    "minisearch": "^6.3.0",
     "path-to-regexp": "^6.2.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

@@ -1,10 +1,10 @@
 import { screenInputFixture } from '@openapi/fixtures/ScreenFixtures'
 import { ScreenInput, ScreenItemResponse } from '@openapi/generated/models'
-import * as ScreenService from '@openapi/generated/services/screen-service'
+import * as ScreenServiceModule from '@openapi/generated/services/screen-service'
 import { transformScreenInput } from '@utils/ScreenTransformation'
 import { SpyInstance } from 'vitest'
 
-type UseCreateScreen = ReturnType<typeof ScreenService.useCreateScreen>
+type UseCreateScreen = ReturnType<typeof ScreenServiceModule.useCreateScreen>
 type Props = { screenInput?: ScreenInput; id?: string; opt?: Partial<UseCreateScreen> }
 
 const mock = ({ spy, screenInput, id, opt }: Props & { spy: SpyInstance }) => {
@@ -35,7 +35,7 @@ const mock = ({ spy, screenInput, id, opt }: Props & { spy: SpyInstance }) => {
 export type CreateScreenMock = ReturnType<typeof useCreateScreenMock>
 
 export const useCreateScreenMock = (screenInput?: ScreenInput, id?: string) => {
-  const spy = vi.spyOn(ScreenService, 'useCreateScreen')
+  const spy = vi.spyOn(ScreenServiceModule, 'useCreateScreen')
   mock({ spy, screenInput, id })
 
   return {

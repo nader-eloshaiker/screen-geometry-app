@@ -1,16 +1,29 @@
 import CloseIcon from '@assets/icons/Close'
 import MagnifyGlassIcon from '@assets/icons/MagnifyGlass'
 import { InputOverlay, OverlayInputField } from '@components/OverlayInputField/OverlayInputField'
+import { useDebounce } from '@hooks/useDebounce'
 import { useElementSize } from '@hooks/useElementSize'
 import { clsx } from 'clsx'
 import { ChangeEvent, KeyboardEvent, memo, useCallback, useEffect, useRef, useState } from 'react'
 
+const standardOverlay: InputOverlay = {
+  overlay: <MagnifyGlassIcon className='h-6 w-6' />,
+
+  overlayClassName: 'left-0 ml-4',
+}
+
+const loadingOverlay: InputOverlay = {
+  overlay: <span className='loading loading-spinner loading-md' />,
+  overlayClassName: 'left-0 ml-4',
+}
+
 export type TListItem = { id: string; label: string }
 type TProps = TRestProps & {
   items: Array<TListItem>
-  isLoading: boolean
   className?: string
   placeholder?: string
+  isLoading?: boolean
+  disableOnLoading?: boolean
   onChange?: (val: string) => void
   onSelect?: (item: TListItem) => void
   setClearHandler?: (func: () => void) => void
@@ -20,7 +33,8 @@ export const ListInputField = ({
   items = [],
   className,
   placeholder,
-  isLoading,
+  isLoading = false,
+  disableOnLoading = true,
   onChange = () => {},
   onSelect = () => {},
   setClearHandler = () => {},
@@ -29,6 +43,7 @@ export const ListInputField = ({
   const [inputValue, setInputValue] = useState('')
   const [overlays, setOverlays] = useState<Array<InputOverlay>>([])
   const [open, setOpen] = useState(false)
+  const debouncedValue = useDebounce(inputValue, 500)
 
   const divRef = useRef<HTMLDivElement>(null)
   const { width } = useElementSize(divRef)
@@ -38,7 +53,6 @@ export const ListInputField = ({
   }, [])
 
   const handleChange = ({ target }: ChangeEvent<HTMLInputElement>) => {
-    onChange(target.value)
     setInputValue(target.value)
   }
 
@@ -60,24 +74,16 @@ export const ListInputField = ({
   }
 
   useEffect(() => {
-    const stdOverlay: InputOverlay = {
-      overlay: isLoading ? (
-        <span className='loading loading-spinner loading-md' />
-      ) : (
-        <MagnifyGlassIcon className='h-6 w-6' />
-      ),
-      overlayClassName: 'left-0 ml-4',
-    }
+    const stdOverlay = isLoading ? loadingOverlay : standardOverlay
 
     if (!inputValue) {
       setOverlays([stdOverlay])
-      return
     } else {
       setOverlays([
         stdOverlay,
         {
           overlay: (
-            <button className='btn btn-circle btn-xs'>
+            <button className='btn btn-circle btn-xs' role='reset'>
               <CloseIcon className='h-4 w-4' onClick={handleClear} />
             </button>
           ),
@@ -95,6 +101,10 @@ export const ListInputField = ({
 
     setClearHandler(() => handleClear)
   }, [setClearHandler, handleClear])
+
+  useEffect(() => {
+    onChange(debouncedValue)
+  }, [debouncedValue, onChange])
 
   return (
     <div
@@ -115,7 +125,7 @@ export const ListInputField = ({
         onChange={handleChange}
         placeholder={isLoading ? 'Loading...' : placeholder ?? 'Type something...'}
         tabIndex={0}
-        disabled={isLoading}
+        disabled={isLoading && disableOnLoading}
       />
       {items.length > 0 && (
         <div className='dropdown-content top-14 z-[1] max-h-80 flex-col overflow-auto rounded-md bg-base-200'>

@@ -24,22 +24,22 @@ const meta = {
     register: {
       description: 'React Hook Form register.',
       table: { category: 'content', type: { summary: 'UseFormRegisterReturn' } },
-      control: 'object',
+      control: { type: 'object' },
     },
     className: {
       description: 'Manage the style of the input field to allow for the overlays to be viewed correctly.',
       table: { category: 'format', type: { summary: 'string' } },
-      control: 'text',
+      control: { type: 'text' },
     },
     disabled: {
       description: 'Disable user actions.',
       table: { category: 'format', type: { summary: 'boolean' }, defaultValue: { summary: 'false' } },
-      control: 'boolean',
+      control: { type: 'boolean' },
     },
     value: {
       description: 'The value of the input field.',
       table: { category: 'content', type: { summary: 'string' }, defaultValue: { summary: '""' } },
-      control: 'text',
+      control: { type: 'text' },
     },
     type: {
       description: 'The type of the input field',
@@ -49,18 +49,18 @@ const meta = {
         defaultValue: { summary: 'text' },
       },
       options: ['text', 'password', 'email', 'number', 'tel', 'url', 'search'],
-      control: 'select',
+      control: { type: 'select' },
     },
     placeholder: {
       description: 'The placeholder text when the input is empty.',
       table: { category: 'content', type: { summary: 'string' } },
-      control: 'text',
+      control: { type: 'text' },
     },
     onChange: {
       description: 'Input field change handler.',
       table: { category: 'event', type: { summary: 'function' } },
       action: 'onChange',
-      control: 'function',
+      control: { type: 'function' },
     },
   },
 } satisfies Meta<typeof OverlayInputField>

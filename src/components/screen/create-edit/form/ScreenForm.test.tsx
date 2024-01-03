@@ -243,10 +243,10 @@ describe('#ScreenForm', () => {
       const listElement = container.querySelectorAll('li')[0]
       await user.click(listElement)
 
-      expect(getByLabelText('Screen Size')).toHaveValue(38)
+      expect(getByLabelText('Screen Size')).toHaveValue(34)
       expect(getByLabelText('Aspect Ratio')).toHaveValue('21:9')
-      expect(getByLabelText('Horizontal Res')).toHaveValue(3840)
-      expect(getByLabelText('Vertical Res')).toHaveValue(1600)
+      expect(getByLabelText('Horizontal Res')).toHaveValue(3440)
+      expect(getByLabelText('Vertical Res')).toHaveValue(1440)
 
       expect(getByText('Light')).toBeInTheDocument()
       expect(getByText('Dark')).toBeInTheDocument()

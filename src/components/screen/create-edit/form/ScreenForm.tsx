@@ -3,8 +3,8 @@ import { DarkMode, LightMode } from '@components/theme/ThemeConstants'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useCreateScreenApi } from '@hooks/api/helpers/useCreateScreenApi'
 import { useUpdateScreenApi } from '@hooks/api/helpers/useUpdateScreenApi'
-import { SearchItem } from '@models/Database'
 import { ScreenDataEnum } from '@models/Screen'
+import { SearchScreenItem } from '@models/Search'
 import { ScreenInput } from '@openapi/generated/models'
 import { createCSSColor } from '@utils/ScreenCalc'
 import { clsx } from 'clsx'
@@ -39,7 +39,7 @@ export const ScreenForm = ({ defaultValues = null, editId = undefined, isLoading
   const { isPending: isUpdateLoading, useMutation: updateAction } = useUpdateScreenApi()
   const [clearSearchHandler, setClearSearchHandler] = useState<() => void>(() => {})
 
-  const selectHandler = (item: SearchItem) => {
+  const selectHandler = (item: SearchScreenItem) => {
     setValue(ScreenDataEnum.aspectRatio, item.tag.aspectRatio, {
       shouldValidate: true,
       shouldDirty: true,

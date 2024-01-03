@@ -12,4 +12,7 @@ export const apiRoutes = {
       createList: 'createlist',
     },
   },
+  search: {
+    path: 'search',
+  },
 }

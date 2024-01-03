@@ -1,13 +1,13 @@
-import { DataBaseEntry } from '@models/Database'
-import * as SearchListActionModule from '@openapi/augmented/useSearchList'
 import { searchFixtures } from '@openapi/fixtures/SearchFixtures'
+import { SearchItem, SearchListResponse } from '@openapi/generated/models'
+import * as ScreenSearchListModule from '@openapi/generated/services/search-list-service'
 
 export type SearchListActionMock = ReturnType<typeof useSearchListActionMock>
 
-export const useSearchListActionMock = (value?: DataBaseEntry[]) => {
-  const searchListResponse: DataBaseEntry[] = value ?? searchFixtures
+export const useSearchListActionMock = (value?: SearchItem[]) => {
+  const searchListResponse: SearchListResponse = { list: value ?? searchFixtures }
 
-  const spy = vi.spyOn(SearchListActionModule, 'useSearchList').mockReturnValue({
+  const spy = vi.spyOn(ScreenSearchListModule, 'useGetSearchList').mockReturnValue({
     data: searchListResponse,
     refetch: vi.fn().mockReturnValue({ data: searchListResponse }),
     fetchStatus: 'idle',

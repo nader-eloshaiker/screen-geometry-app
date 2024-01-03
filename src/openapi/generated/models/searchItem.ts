@@ -5,10 +5,14 @@
  */
 
 /**
- * Screen resolution characteristics
+ * Complete search object
  */
-export interface ScreenSpec {
+export interface SearchItem {
+  aspectRatio: string
+  diagonalSize?: number
   hRes: number
-  ppi: number
+  id: string
+  label: string
+  name: string
   vRes: number
 }
