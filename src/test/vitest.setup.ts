@@ -1,5 +1,5 @@
 import '@testing-library/jest-dom'
-import './index.css'
+import '../index.css'
 
 global.ResizeObserver = vi.fn().mockImplementation(() => ({
   observe: vi.fn(),
