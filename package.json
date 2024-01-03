@@ -26,7 +26,7 @@
     "prepare": "husky install",
     "test": "vitest --coverage",
     "test:ui": "vitest --ui  --coverage",
-    "test:ci": "vitest --run --coverage --reporter=json --outputFile=./coverage/report.json",
+    "test:ci": "vitest --run --coverage.enabled true",
     "typecheck": "tsc --project tsconfig.json --noEmit",
     "sb": "storybook dev -p 6006",
     "sb:build": "storybook build",

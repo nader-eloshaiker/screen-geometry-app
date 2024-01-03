@@ -45,7 +45,9 @@ export default defineConfig({
     reporters: ['verbose'],
     coverage: {
       provider: 'v8', //'istanbul',
+      reporter: ['text', 'json-summary', 'json', 'clover', 'html'],
       exclude: ['src/openapi/**/*', 'src/test/**/*', 'src/**/*.mock.{ts,tsx}'],
+      reportOnFailure: true,
     },
     environment: 'jsdom',
     setupFiles: './src/vitest.setup.ts',
