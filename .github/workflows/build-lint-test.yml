@@ -49,6 +49,6 @@ jobs:
       - name: pnpm ci, build and test
         run: |
           pnpm install
-          pnpm run build
+          pnpm run build:prod
           pnpm run lint
           pnpm test
