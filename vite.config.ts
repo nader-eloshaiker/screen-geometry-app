@@ -48,6 +48,13 @@ export default defineConfig({
       reporter: ['text', 'json-summary', 'json', 'clover', 'html'],
       exclude: ['src/openapi/**/*', 'src/test/**/*', 'src/**/*.mock.{ts,tsx}'],
       reportOnFailure: true,
+      thresholds: {
+        lines: 60,
+        branches: 60,
+        functions: 60,
+        statements: 60,
+        autoUpdate: true,
+      },
     },
     environment: 'jsdom',
     setupFiles: './src/vitest.setup.ts',
