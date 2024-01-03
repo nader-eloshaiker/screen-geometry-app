@@ -44,7 +44,7 @@ export default defineConfig({
     mockReset: true,
     reporters: ['verbose'],
     coverage: {
-      provider: 'v8',
+      provider: 'v8', //'istanbul',
       exclude: ['src/openapi/**/*', 'src/test/**/*', 'src/**/*.mock.{ts,tsx}'],
     },
     environment: 'jsdom',
