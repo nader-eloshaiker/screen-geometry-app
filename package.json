@@ -15,9 +15,9 @@
   },
   "scripts": {
     "preinstall": "npx only-allow pnpm",
-    "dev": "vite --mode dev",
-    "build": "tsc && vite build --mode dev",
-    "build:prod": "tsc && vite build --mode prod",
+    "dev": "vite --mode dev --base=/",
+    "build": "tsc && vite build --mode dev --base=/",
+    "build:prod": "tsc && vite build --mode prod --base=/screen-geometry-app/",
     "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "lint:fix": "eslint src --fix --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "format": "prettier --write .",
