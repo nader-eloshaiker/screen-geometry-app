@@ -8743,6 +8743,12 @@ packages:
     engines: { node: '>=8' }
     dev: true
 
+  /istanbul-lib-coverage@3.2.2:
+    resolution:
+      { integrity: sha512-O8dpsF+r0WV/8MNRKfnmrtCWhuKjxrq2w+jpzBL5UZKTi2LeVWnWOmWRxFlesJONmc+wLAGvKQZEOanko0LFTg== }
+    engines: { node: '>=8' }
+    dev: true
+
   /istanbul-lib-instrument@5.2.1:
     resolution:
       { integrity: sha512-pzqtp31nLv/XFOzXGuvhCb8qhjmTVo5vjVk19XE4CRlSWz0KoeJ3bw9XsA7nOp9YBf4qHjwBxkDzKcME/J29Yg== }
@@ -8762,7 +8768,7 @@ packages:
       { integrity: sha512-GCfE1mtsHGOELCU8e/Z7YWzpmybrx/+dSTfLrvY8qRmaY6zXTKWn6WQIjaAFw069icm6GVMNkgu0NzI4iPZUNw== }
     engines: { node: '>=10' }
     dependencies:
-      istanbul-lib-coverage: 3.2.0
+      istanbul-lib-coverage: 3.2.2
       make-dir: 4.0.0
       supports-color: 7.2.0
     dev: true
@@ -8773,7 +8779,7 @@ packages:
     engines: { node: '>=10' }
     dependencies:
       debug: 4.3.4
-      istanbul-lib-coverage: 3.2.0
+      istanbul-lib-coverage: 3.2.2
       source-map: 0.6.1
     transitivePeerDependencies:
       - supports-color
