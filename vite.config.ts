@@ -1,11 +1,10 @@
 /// <reference types="vitest" />
 import react from '@vitejs/plugin-react'
 import path from 'path'
-import { defineConfig } from 'vite'
 import { checker } from 'vite-plugin-checker'
+import { defineConfig } from 'vitest/config'
 import packageJson from './package.json'
 
-// https://vitejs.dev/config
 export default defineConfig({
   define: {
     'import.meta.env.VITE_PACKAGE_VERSION': JSON.stringify(packageJson.version),
@@ -50,7 +49,7 @@ export default defineConfig({
       reportOnFailure: true,
       thresholds: {
         lines: 60,
-        branches: 60,
+        branches: 64.84,
         functions: 60,
         statements: 60,
         autoUpdate: true,
