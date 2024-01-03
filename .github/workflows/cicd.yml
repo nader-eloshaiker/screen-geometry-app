@@ -46,12 +46,17 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-pnpm-store-
 
-      - name: pnpm install, build and test
-        run: |
-          pnpm install
-          pnpm build:prod
-          pnpm lint
-          pnpm test:ci
+      - name: install
+        run: pnpm install
+
+      - name: build
+        run: pnpm build:prod
+
+      - name: lint
+        run: pnpm lint
+
+      - name: test
+        run: pnpm test:ci
 
       - name: Report coverage
         # Set if: always() to also generate the report if tests are failing
