@@ -9,36 +9,33 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import { appRoutes } from './AppRouteSchema'
 
 export default function AppRouterProvider() {
-  const router = createBrowserRouter(
-    [
-      {
-        path: appRoutes.root.path,
-        element: <Root />,
-        errorElement: <BoundyErrorManager />,
-        children: [
-          {
-            errorElement: <ErrorManager />,
-            children: [
-              { index: true, element: <About /> },
-              {
-                path: appRoutes.screens.path,
-                element: <Screens />,
-              },
-              {
-                path: appRoutes.help.path,
-                element: <Help />,
-              },
-              {
-                path: appRoutes.contact.path,
-                element: <Contact />,
-              },
-            ],
-          },
-        ],
-      },
-    ],
-    { basename: './' },
-  )
+  const router = createBrowserRouter([
+    {
+      path: appRoutes.root.path,
+      element: <Root />,
+      errorElement: <BoundyErrorManager />,
+      children: [
+        {
+          errorElement: <ErrorManager />,
+          children: [
+            { index: true, element: <About /> },
+            {
+              path: appRoutes.screens.path,
+              element: <Screens />,
+            },
+            {
+              path: appRoutes.help.path,
+              element: <Help />,
+            },
+            {
+              path: appRoutes.contact.path,
+              element: <Contact />,
+            },
+          ],
+        },
+      ],
+    },
+  ])
 
   return <RouterProvider router={router} />
 }
