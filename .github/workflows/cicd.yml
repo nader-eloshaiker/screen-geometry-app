@@ -51,10 +51,10 @@ jobs:
           pnpm install
           pnpm build:prod
           pnpm lint
-          pnpm test:ci
 
       - name: Upload coverage
         uses: ArtiomTr/jest-coverage-report-action@v2
         with:
-          coverage-file: ./coverage/report.json
-          base-coverage-file: ./coverage/develop/report.json
+          test-script: pnpm test:ci
+          # coverage-file: ./coverage/report.json
+          # base-coverage-file: ./coverage/develop/report.json
