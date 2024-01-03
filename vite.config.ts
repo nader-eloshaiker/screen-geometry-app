@@ -1,11 +1,10 @@
 /// <reference types="vitest" />
 import react from '@vitejs/plugin-react'
 import path from 'path'
-import { defineConfig } from 'vite'
 import { checker } from 'vite-plugin-checker'
+import { defineConfig } from 'vitest/config'
 import packageJson from './package.json'
 
-// https://vitejs.dev/config
 export default defineConfig({
   define: {
     'import.meta.env.VITE_PACKAGE_VERSION': JSON.stringify(packageJson.version),
@@ -48,9 +47,16 @@ export default defineConfig({
       reporter: ['text', 'json-summary', 'json', 'clover', 'html'],
       exclude: ['src/openapi/**/*', 'src/test/**/*', 'src/**/*.mock.{ts,tsx}'],
       reportOnFailure: true,
+      thresholds: {
+        lines: 45,
+        branches: 64.84,
+        functions: 45,
+        statements: 45,
+        autoUpdate: true,
+      },
     },
     environment: 'jsdom',
-    setupFiles: './src/vitest.setup.ts',
+    setupFiles: './src/test/vitest.setup.ts',
     include: ['src/**/*.test.{ts,tsx}'],
     exclude: ['src/**/node_modules/**/*', 'src/openapi/**/*', 'src/tests/**/*'],
   },
