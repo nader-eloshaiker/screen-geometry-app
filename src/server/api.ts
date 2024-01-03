@@ -1,7 +1,7 @@
 import { ScreenInput, ScreenInputList, ScreenItem } from '@openapi/generated/models'
+import { search } from '@server/searchClient'
 import { transformScreenInput } from '@utils/ScreenTransformation'
-import { createItem, createItemList, deleteItem, getItem, getItemList, updateItem } from './indexDB'
-import { search } from './searchClient'
+import { createItem, createItemList, deleteItem, getItem, getItemList, updateItem } from './db/indexDB'
 
 export type TScreenListResponse = {
   list: ScreenItem[]

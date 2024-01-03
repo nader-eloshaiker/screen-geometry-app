@@ -1,4 +1,3 @@
-import { apiRoutes } from '@server/ApiRouteSchema'
 import {
   createItemAction,
   createItemListAction,
@@ -8,7 +7,8 @@ import {
   getSearchList,
   showItemAction,
   updateItemAction,
-} from '@server/db/api'
+} from '@server/api'
+import { apiRoutes } from '@server/meta/ApiRouteSchema'
 import { AxiosInstance, AxiosRequestConfig } from 'axios'
 import MockAdapter from 'axios-mock-adapter'
 import { pathToRegexp } from 'path-to-regexp'

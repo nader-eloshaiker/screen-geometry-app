@@ -1,6 +1,6 @@
 import { SearchItem } from '@openapi/generated/models'
+import { SearchDB } from '@server/db/searchDB'
 import MiniSearch, { SearchResult } from 'minisearch'
-import { SearchDB } from './searchDB'
 
 const searchEngine = new MiniSearch({
   fields: ['id', 'name', 'aspectRatio', 'diagonalSize', 'vRes', 'hRes'],
