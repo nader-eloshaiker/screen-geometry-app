@@ -3,11 +3,11 @@ import { useElementSizeMock } from '@hooks/useElementSize.mock'
 import { useSearchListActionMock } from '@openapi/mocks/useSearchList.mock'
 import { useInteractComponent } from '@test/utils/useInteractComponent'
 import { getByRole, render, waitFor } from '@testing-library/react'
-import { SpyInstance } from 'vitest'
+import { MockInstance } from 'vitest'
 import { AutoCompleteScreen } from './AutoCompleteScreen'
 
 describe('#AutoCompleteScreen', () => {
-  let searchContextSpy: SpyInstance
+  let searchContextSpy: MockInstance
 
   beforeEach(() => {
     useElementSizeMock()

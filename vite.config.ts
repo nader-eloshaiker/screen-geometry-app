@@ -2,7 +2,7 @@
 import react from '@vitejs/plugin-react'
 import path from 'path'
 import { checker } from 'vite-plugin-checker'
-import { defineConfig } from 'vitest/config'
+import { configDefaults, defineConfig } from 'vitest/config'
 import packageJson from './package.json'
 
 export default defineConfig({
@@ -46,19 +46,20 @@ export default defineConfig({
     coverage: {
       provider: 'v8', //'istanbul',
       reporter: ['text', 'json-summary', 'json', 'clover', 'html'],
-      exclude: ['src/openapi/**/*', 'src/test/**/*', 'src/**/*.mock.{ts,tsx}'],
+      include: ['src/**/*.{ts,tsx}'],
+      exclude: [...configDefaults.exclude, 'src/openapi/**/*', 'src/test/**.*', 'src/**/*.mock.{ts,tsx}'],
       reportOnFailure: true,
       thresholds: {
-        lines: 45,
-        branches: 64.84,
-        functions: 45,
-        statements: 45,
+        lines: 50.58,
+        branches: 66.26,
+        functions: 47.68,
+        statements: 50.58,
         autoUpdate: true,
       },
     },
     environment: 'jsdom',
     setupFiles: './src/test/vitest.setup.ts',
     include: ['src/**/*.test.{ts,tsx}'],
-    exclude: ['src/**/node_modules/**/*', 'src/openapi/**/*', 'src/tests/**/*'],
+    exclude: [...configDefaults.exclude, 'src/openapi/**/*', 'src/test/**.*', 'src/**/*.mock.{ts,tsx}'],
   },
 })

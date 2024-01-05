@@ -43,6 +43,7 @@ jobs:
           run_install: false
 
       - name: Get pnpm store directory
+        id: pnpm-cache
         shell: bash
         run: |
           echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
@@ -59,6 +60,8 @@ jobs:
         run: |
           pnpm install
           pnpm build:prod
+          pnpm test:ci
+          pnpm sb:build:ci
 
       - name: Setup Pages
         uses: actions/configure-pages@v4
