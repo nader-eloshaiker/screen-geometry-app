@@ -1,3 +1,5 @@
+![Coverage Badge](https://img.shields.io/endpoint?url=https://nader-eloshaiker.github.io/screen-geometry-app/coverage/report.json)
+
 # Screen Geometry
 
 This is a tool to help visually compare different screen sizes to help you choose which monitor to buy. It does this by overlaying different screen sizes ontop of each other for

@@ -2,12 +2,12 @@ import { screenInputFixture } from '@openapi/fixtures/ScreenFixtures'
 import { ScreenInput, ScreenItemResponse } from '@openapi/generated/models'
 import * as ScreenServiceModule from '@openapi/generated/services/screen-service'
 import { transformScreenInput } from '@utils/ScreenTransformation'
-import { SpyInstance } from 'vitest'
+import { MockInstance } from 'vitest'
 
 type UseUpdateScreen = ReturnType<typeof ScreenServiceModule.useUpdateScreen>
 type Props = { screenInput?: ScreenInput; id?: string; opt?: Partial<UseUpdateScreen> }
 
-const mock = ({ spy, screenInput, id, opt }: Props & { spy: SpyInstance }) => {
+const mock = ({ spy, screenInput, id, opt }: Props & { spy: MockInstance }) => {
   const input = screenInput ?? screenInputFixture
   const response = { ...transformScreenInput(input), id: id ?? '1' }
   const defaultOpt: UseUpdateScreen = {
