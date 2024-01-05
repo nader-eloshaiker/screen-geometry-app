@@ -1,6 +1,10 @@
-![Coverage Badge](https://img.shields.io/endpoint?url=https://nader-eloshaiker.github.io/screen-geometry-app/coverage/report.json)
-
 # Screen Geometry
+
+![Coverage Badge](./docs/coverage.svg)
+
+[App URL](https://nader-eloshaiker.github.io/screen-geometry-app/)
+[Coverage](https://nader-eloshaiker.github.io/screen-geometry-app/coverage)
+[StoryBook](https://nader-eloshaiker.github.io/screen-geometry-app/storybook)
 
 This is a tool to help visually compare different screen sizes to help you choose which monitor to buy. It does this by overlaying different screen sizes ontop of each other for
 easy comparison as well as tabulate the specs.
@@ -23,24 +27,24 @@ I have been considering what my next monitor purchase will be and it has been di
 
 ## Dev'ing the App
 
-**Installing dependencies**
+Installing dependencies
 
     npm install -g pnpm
     pnpm i
 
-**Run in development** (using vite)
+Run in development (using vite)
 
     pnpm run dev
 
-**Linting**
+Linting
 
     pnpm run lint:fix
 
-**Build** (using vite)
+Build (using vite)
 
     pnpm run build
 
-**Generate API Client** (using orval)
+Generate API Client\*\* (using orval)
 Code is checked in for review ease. This can also help when working on a 'work in progress' published spec, as it allows the developer to control which spec the client is generated from in other feature branches and in main branches.
 
     pnpm run gen:spec
@@ -158,6 +162,7 @@ I discovered this little gem to replace pnpm and it is lightning quick. You can 
 - Styled Components
 - TailwindCSS
 - DaisyUI
+- StoryBook
 
 ### 4.2 API
 
@@ -190,12 +195,15 @@ However, you can bring up a visual console for testing using
 
 #### Test dashboard
 
-The console can be accessed from the [http://localhost:51204/\_\_vitest\_\_/#/](http://localhost:51204/__vitest__/#/)
+The console can be accessed from the [http://localhost](http://localhost:51204/__vitest__/#/)
+They are also published to github pages at ![Coverage](https://nader-eloshaiker.github.io/screen-geometry-app/coverage)
 
 #### Coverage Reports
 
-Coverage reports are also generated and can be access from [http://localhost:52330/coverage/index.html](http://localhost:52330/coverage/index.html)
+Coverage reports are also generated and can be access from from within the testing console above
 
 ### Component
+
+Storybook interactions is utilised to run a visual test on managed components.
 
 ### Smoke
