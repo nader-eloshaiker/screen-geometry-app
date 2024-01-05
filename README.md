@@ -204,4 +204,6 @@ Coverage reports are also generated and can be access from from within the testi
 
 ### Component
 
+Storybook interactions is utilised to run a visual test on managed components.
+
 ### Smoke
