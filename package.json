@@ -28,7 +28,7 @@
     "test:ui": "vitest --ui  --coverage",
     "test:ci": "pnpm test:ci:run && pnpm test:ci:coverage && pnpm test:badge",
     "test:ci:run": "vitest --run --coverage --reporter=json --outputFile.json=./dist/coverage/report.json",
-    "test:ci:coverage": "copy ./coverage/**/* ./dist/",
+    "test:ci:coverage": "copy ./coverage/* ./dist/",
     "test:badge": "coverage-badges-cli --output=docs/coverage.svg --type=statements --icon=docs/vitest.svg",
     "typecheck": "tsc --project tsconfig.json --noEmit",
     "sb": "storybook dev -p 6006",
