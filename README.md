@@ -27,24 +27,24 @@ I have been considering what my next monitor purchase will be and it has been di
 
 ## Dev'ing the App
 
-**Installing dependencies**
+Installing dependencies
 
     npm install -g pnpm
     pnpm i
 
-**Run in development** (using vite)
+Run in development (using vite)
 
     pnpm run dev
 
-**Linting**
+Linting
 
     pnpm run lint:fix
 
-**Build** (using vite)
+Build (using vite)
 
     pnpm run build
 
-**Generate API Client** (using orval)
+Generate API Client\*\* (using orval)
 Code is checked in for review ease. This can also help when working on a 'work in progress' published spec, as it allows the developer to control which spec the client is generated from in other feature branches and in main branches.
 
     pnpm run gen:spec
