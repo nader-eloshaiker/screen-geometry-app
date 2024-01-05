@@ -2,9 +2,9 @@
 
 ![Coverage Badge](./docs/coverage.svg)
 
-![URL](https://nader-eloshaiker.github.io/screen-geometry-app/)
-![Coverage](https://nader-eloshaiker.github.io/screen-geometry-app/coverage)
-![StoryBook](https://nader-eloshaiker.github.io/screen-geometry-app/storybook)
+[App URL](https://nader-eloshaiker.github.io/screen-geometry-app/)
+[Coverage](https://nader-eloshaiker.github.io/screen-geometry-app/coverage)
+[StoryBook](https://nader-eloshaiker.github.io/screen-geometry-app/storybook)
 
 This is a tool to help visually compare different screen sizes to help you choose which monitor to buy. It does this by overlaying different screen sizes ontop of each other for
 easy comparison as well as tabulate the specs.
@@ -162,6 +162,7 @@ I discovered this little gem to replace pnpm and it is lightning quick. You can 
 - Styled Components
 - TailwindCSS
 - DaisyUI
+- StoryBook
 
 ### 4.2 API
 
@@ -194,11 +195,12 @@ However, you can bring up a visual console for testing using
 
 #### Test dashboard
 
-The console can be accessed from the [http://localhost:51204/\_\_vitest\_\_/#/](http://localhost:51204/__vitest__/#/)
+The console can be accessed from the [http://localhost](http://localhost:51204/__vitest__/#/)
+They are also published to github pages at ![Coverage](https://nader-eloshaiker.github.io/screen-geometry-app/coverage)
 
 #### Coverage Reports
 
-Coverage reports are also generated and can be access from [http://localhost:52330/coverage/index.html](http://localhost:52330/coverage/index.html)
+Coverage reports are also generated and can be access from from within the testing console above
 
 ### Component
 
