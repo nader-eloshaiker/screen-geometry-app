@@ -1,7 +1,7 @@
 import CloseIcon from '@assets/icons/Close'
 import EditIcon from '@assets/icons/Edit'
 import { SkeletonRect } from '@components/Skeleton/SkeletonRect'
-import { DarkMode, TThemeMode } from '@components/Theme/ThemeConstants'
+import { DarkMode, TThemeMode } from '@components/theme/ThemeConstants'
 import { FormDrawerActionTypes } from '@contexts/FormDrawer/FormDrawerManager'
 import { useFormDrawerContext } from '@contexts/FormDrawer/useFormDrawerContext'
 import { useDeleteScreenApi } from '@hooks/api/helpers/useDeleteScreenApi'

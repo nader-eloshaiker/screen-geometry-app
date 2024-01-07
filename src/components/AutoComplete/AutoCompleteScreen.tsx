@@ -2,7 +2,7 @@ import { useSearchListApi } from '@hooks/api/helpers/useSearchListApi'
 import { SearchScreenItem } from '@models/Search'
 import { transformSearchData } from '@utils/ScreenTransformation'
 import { useCallback, useEffect, useState } from 'react'
-import ListInputField, { TListItem } from '../ListInputFIeld/ListInputField'
+import ListInputField, { TListItem } from '../listinputFIeld/ListInputField'
 
 type TProps = TRestProps & {
   onSelectScreen: (item: SearchScreenItem) => void
