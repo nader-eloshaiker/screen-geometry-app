@@ -38,7 +38,7 @@ export const ScreenPanel = ({
 
   return (
     <Panel
-      className={clsx('rounded-lg', { 'border-4': selected, 'border-2 border-dashed': !selected })}
+      className={clsx('rounded-lg', { 'outline-4': selected, 'outline-2 outline-dashed': !selected })}
       $width={width}
       $height={height}
       $color={themeMode === DarkMode ? screen.color.lightColor : screen.color.darkColor}
