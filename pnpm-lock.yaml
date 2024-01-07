@@ -98,8 +98,8 @@ devDependencies:
     specifier: ^6.11.2
     version: 6.11.2
   '@types/eslint-plugin-prettier':
-    specifier: ^3.1.2
-    version: 3.1.2
+    specifier: ^3.1.3
+    version: 3.1.3
   '@types/jsdom':
     specifier: ^21.1.2
     version: 21.1.2
@@ -4432,8 +4432,8 @@ packages:
     resolution: {integrity: sha512-H9aSpNEGTyL1fJ65CIuqHMAH741pKg7jZ/Y2cdFAmqtD90PsRrmp8Cpj76PgSffSTkRLGihe1X6QlM4ec639ZA==}
     dev: true
 
-  /@types/eslint-plugin-prettier@3.1.2:
-    resolution: {integrity: sha512-+93WHgRJxdsNU+nhBJYs/o72QTVxAxrvIRDf13u0D4wLERt7Ab4Y5ezc3lh3oOSO8VUbnqdgG2m5U0AT77eFfg==}
+  /@types/eslint-plugin-prettier@3.1.3:
+    resolution: {integrity: sha512-Jk+lgBZM0u9ETUyqe2HvykL1j6uE7L1oEqbInWtsVHT6sP+AdwLb4ncmQBqASTS+YzYOPF6hKX0zgEhblRMjqA==}
     dependencies:
       '@types/eslint': 8.44.2
     dev: true
