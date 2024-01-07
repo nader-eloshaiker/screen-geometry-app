@@ -1,4 +1,4 @@
-import { AutoCompleteScreen } from '@components/autoComplete/AutoCompleteScreen'
+import { AutoCompleteScreen } from '@components/auto-complete/AutoCompleteScreen'
 import { NotificationProvider } from '@contexts/Notification/NotificationProvider'
 import { useElementSizeMock } from '@hooks/useElementSize.mock'
 import { useSearchListActionMock } from '@openapi/mocks/useSearchList.mock'

@@ -1,6 +1,6 @@
 import CloseIcon from '@assets/icons/Close'
 import MagnifyGlassIcon from '@assets/icons/MagnifyGlass'
-import { InputOverlay, OverlayInputField } from '@components/overlayInputField/OverlayInputField'
+import { InputOverlay, OverlayInputField } from '@components/overlay-input-field/OverlayInputField'
 import { useDebounce } from '@hooks/useDebounce'
 import { useElementSize } from '@hooks/useElementSize'
 import { clsx } from 'clsx'

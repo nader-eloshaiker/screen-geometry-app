@@ -1,6 +1,6 @@
 import CloseIcon from '@assets/icons/Close'
 import EditIcon from '@assets/icons/Edit'
-import { SkeletonRect } from '@components/Skeleton/SkeletonRect'
+import { SkeletonRect } from '@components/skeleton/SkeletonRect'
 import { DarkMode, TThemeMode } from '@components/theme/ThemeConstants'
 import { FormDrawerActionTypes } from '@contexts/FormDrawer/FormDrawerManager'
 import { useFormDrawerContext } from '@contexts/FormDrawer/useFormDrawerContext'
