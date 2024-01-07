@@ -1,4 +1,4 @@
-import { AutoCompleteScreen } from '@components/AutoComplete/AutoCompleteScreen'
+import { AutoCompleteScreen } from '@components/auto-complete/AutoCompleteScreen'
 import { DarkMode, LightMode } from '@components/theme/ThemeConstants'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useCreateScreenApi } from '@hooks/api/helpers/useCreateScreenApi'

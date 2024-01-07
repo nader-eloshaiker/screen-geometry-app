@@ -46,6 +46,7 @@ export default defineConfig({
     coverage: {
       provider: 'v8', //'istanbul',
       reporter: ['text', 'json-summary', 'json', 'clover', 'html'],
+      reportsDirectory: 'reports/coverage',
       include: ['src/**/*.{ts,tsx}'],
       exclude: [...configDefaults.exclude, 'src/openapi/**/*', 'src/test/**.*', 'src/**/*.mock.{ts,tsx}'],
       reportOnFailure: true,
@@ -60,6 +61,5 @@ export default defineConfig({
     environment: 'jsdom',
     setupFiles: './src/test/vitest.setup.ts',
     include: ['src/**/*.test.{ts,tsx}'],
-    exclude: [...configDefaults.exclude, 'src/openapi/**/*', 'src/test/**.*', 'src/**/*.mock.{ts,tsx}'],
   },
 })
