@@ -41,7 +41,7 @@ export const Help = () => {
   const maxPanelSize: Dimensions = { width, height: Math.round(maxScreenSize.height * (width / maxScreenSize.width)) }
 
   return (
-    <div className='h-full' ref={divSizeRef}>
+    <div className='h-full'>
       <Section>
         <Heading>Getting started</Heading>
         <Paragraph>
@@ -82,7 +82,7 @@ export const Help = () => {
           corresponding panel and vice versa.
         </Paragraph>
         <Diagram>
-          <div className='flex flex-col gap-4 rounded-lg border-2 p-6 shadow-lg'>
+          <div ref={divSizeRef} className='flex flex-col gap-4 rounded-lg border-2 p-6 shadow-lg'>
             <ScreenTable
               className='pointer-events-none'
               screens={smallList}
@@ -141,7 +141,7 @@ export const Help = () => {
         <DiagramPanel>
           <div className='sidebar mb-6 w-96 rounded-xl p-2'>
             <div className='pointer-events-none p-2'>
-              <ScreenForm />
+              <ScreenForm isLoading={false} />
             </div>
           </div>
         </DiagramPanel>

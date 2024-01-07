@@ -34,7 +34,7 @@ export const About = () => {
           <label className='my-6 text-lg'>Checkout this Demo</label>
           <img
             className='h-auto max-w-full rounded-md border-2 border-base-300 shadow-lg'
-            src='/media/ScreenGeometry.gif'
+            src='./media/ScreenGeometry.gif'
           />
         </div>
         <p className='mb-4'>

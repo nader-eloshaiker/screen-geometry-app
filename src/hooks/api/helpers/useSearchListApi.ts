@@ -1,24 +1,18 @@
-import { SearchActionTypes } from '@contexts/Search/SearchManager'
-import { useSearchContext } from '@contexts/Search/useSearchContext'
-import { DataBaseEntry } from '@models/Database'
-import { useCallback } from 'react'
-import { useSearchList } from '../../../openapi/augmented/useSearchList'
+import { GetSearchListParams, SearchListResponse } from '@openapi/generated/models'
+import { useGetSearchList } from '@openapi/generated/services/search-list-service'
+import { keepPreviousData } from '@tanstack/react-query'
 import { useApiQuery } from '../useApiQuery'
 
-export const useSearchListApi = (enabled: boolean) => {
-  const { dispatch } = useSearchContext()
+// type ActionParams = Parameters<typeof useSearchList<SearchListResponse>, ErrorResponse>>
+// type QueryOptions = ActionParams[0]
 
-  const responseHandler = useCallback(
-    (data: Array<DataBaseEntry>) => dispatch({ type: SearchActionTypes.LOAD, payload: data }),
-    [dispatch],
-  )
+export const useSearchListApi = (params: GetSearchListParams) => {
   const useRequest = () =>
-    useSearchList({
-      query: { enabled, staleTime: Infinity, queryKey: ['useListSearchItems'] },
+    useGetSearchList(params, {
+      query: { queryKey: ['useGetSearchList', ...Object.values(params)], placeholderData: keepPreviousData },
     })
 
-  return useApiQuery<Array<DataBaseEntry>>({
+  return useApiQuery<SearchListResponse>({
     useRequest,
-    responseHandler,
   })
 }

@@ -1,10 +1,10 @@
-import { AutoCompleteScreen } from '@components/autocomplete/AutoCompleteScreen'
+import { AutoCompleteScreen } from '@components/AutoComplete/AutoCompleteScreen'
 import { DarkMode, LightMode } from '@components/theme/ThemeConstants'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useCreateScreenApi } from '@hooks/api/helpers/useCreateScreenApi'
 import { useUpdateScreenApi } from '@hooks/api/helpers/useUpdateScreenApi'
-import { SearchItem } from '@models/Database'
 import { ScreenDataEnum } from '@models/Screen'
+import { SearchScreenItem } from '@models/Search'
 import { ScreenInput } from '@openapi/generated/models'
 import { createCSSColor } from '@utils/ScreenCalc'
 import { clsx } from 'clsx'
@@ -16,23 +16,16 @@ import { InputField } from './InputField'
 import { ScreenFormSchema } from './ScreenFormSchema'
 
 type Props = {
-  defaultValues?: ScreenInput
+  defaultValues?: ScreenInput | null
   editId?: string
-  isLoading?: boolean
-  onCloseAction?: () => void
+  isLoading: boolean
+  onClose?: () => void
 }
 
-export const ScreenForm = ({
-  defaultValues,
-  editId = undefined,
-  isLoading = false,
-  onCloseAction = () => {},
-}: Props) => {
-  const [resetValue, setResetValue] = useState('')
-
+export const ScreenForm = ({ defaultValues = null, editId = undefined, isLoading, onClose = () => {} }: Props) => {
   const methods = useForm<ScreenInput>({
     resolver: yupResolver(ScreenFormSchema),
-    defaultValues: defaultValues ?? DefaultInputValues(),
+    defaultValues: DefaultInputValues(),
     mode: 'onBlur',
   })
   const {
@@ -44,55 +37,44 @@ export const ScreenForm = ({
   } = methods
   const { isPending: isCreateLoading, useMutation: createAction } = useCreateScreenApi()
   const { isPending: isUpdateLoading, useMutation: updateAction } = useUpdateScreenApi()
+  const [clearSearchHandler, setClearSearchHandler] = useState<() => void>(() => {})
 
-  // preset the form with the selected screen
-  useEffect(() => {
-    if (defaultValues) {
-      reset(defaultValues)
-    } else {
-      reset()
-    }
-  }, [defaultValues, reset])
-
-  const selectAction = useCallback(
-    (item: SearchItem) => {
-      setValue(ScreenDataEnum.aspectRatio, item.tag.aspectRatio, {
+  const selectHandler = (item: SearchScreenItem) => {
+    setValue(ScreenDataEnum.aspectRatio, item.tag.aspectRatio, {
+      shouldValidate: true,
+      shouldDirty: true,
+      shouldTouch: true,
+    })
+    if (item.tag.diagonalSize) {
+      setValue(ScreenDataEnum.diagonalSize, item.tag.diagonalSize, {
         shouldValidate: true,
         shouldDirty: true,
         shouldTouch: true,
       })
-      if (item.tag.diagonalSize) {
-        setValue(ScreenDataEnum.diagonalSize, item.tag.diagonalSize, {
-          shouldValidate: true,
-          shouldDirty: true,
-          shouldTouch: true,
-        })
-      } else {
-        resetField(ScreenDataEnum.diagonalSize)
-      }
-      if (item.spec?.hRes) {
-        setValue(ScreenDataEnum.hRes, item.spec?.hRes, {
-          shouldValidate: true,
-          shouldDirty: true,
-          shouldTouch: true,
-        })
-      } else {
-        resetField(ScreenDataEnum.hRes)
-      }
-      if (item.spec?.vRes) {
-        setValue(ScreenDataEnum.vRes, item.spec?.vRes, {
-          shouldValidate: true,
-          shouldDirty: true,
-          shouldTouch: true,
-        })
-      } else {
-        resetField(ScreenDataEnum.vRes)
-      }
-    },
-    [resetField, setValue],
-  )
+    } else {
+      resetField(ScreenDataEnum.diagonalSize)
+    }
+    if (item.spec?.hRes) {
+      setValue(ScreenDataEnum.hRes, item.spec?.hRes, {
+        shouldValidate: true,
+        shouldDirty: true,
+        shouldTouch: true,
+      })
+    } else {
+      resetField(ScreenDataEnum.hRes)
+    }
+    if (item.spec?.vRes) {
+      setValue(ScreenDataEnum.vRes, item.spec?.vRes, {
+        shouldValidate: true,
+        shouldDirty: true,
+        shouldTouch: true,
+      })
+    } else {
+      resetField(ScreenDataEnum.vRes)
+    }
+  }
 
-  const onGenerateColor = useCallback(() => {
+  const generateColorHandler = () => {
     const color = createCSSColor()
     setValue(ScreenDataEnum.darkColor, color.darkColor, {
       shouldValidate: true,
@@ -102,29 +84,32 @@ export const ScreenForm = ({
       shouldValidate: true,
       shouldDirty: true,
     })
-  }, [setValue])
+  }
 
-  const onReset = useCallback(() => {
+  const resetHandler = () => {
+    clearSearchHandler()
     reset()
-    setResetValue('')
-  }, [reset])
+  }
 
-  const onClose = useCallback(() => {
-    reset()
-    onCloseAction()
-  }, [onCloseAction, reset])
+  const closeHandler = useCallback(() => {
+    clearSearchHandler()
+    onClose()
+  }, [clearSearchHandler, onClose])
 
-  const onSubmit: SubmitHandler<ScreenInput> = useCallback(
-    (form: ScreenInput) => {
-      if (editId) {
-        updateAction({ id: editId, data: form }, { onSuccess: onClose })
-      } else {
-        createAction({ data: form })
-      }
-      onGenerateColor()
-    },
-    [createAction, editId, onClose, onGenerateColor, updateAction],
-  )
+  const submitHandler: SubmitHandler<ScreenInput> = (form: ScreenInput) => {
+    if (editId) {
+      updateAction({ id: editId, data: form }, { onSuccess: onClose })
+    } else {
+      createAction({ data: form })
+    }
+    clearSearchHandler()
+    generateColorHandler()
+  }
+
+  // preset the form with the selected screen
+  useEffect(() => {
+    reset(defaultValues ?? DefaultInputValues())
+  }, [defaultValues, reset])
 
   return (
     <FormProvider {...methods}>
@@ -135,21 +120,21 @@ export const ScreenForm = ({
         <label className='label'>
           <span className='text-sm'>Choose from list of Monitors</span>
         </label>
-        <AutoCompleteScreen onSelect={selectAction} onReset={resetValue} />
+        <AutoCompleteScreen onSelectScreen={selectHandler} setClearSearchHandler={setClearSearchHandler} />
       </div>
 
       <div className='divider text-sm'>Or</div>
 
-      <form method='post' onSubmit={handleSubmit(onSubmit)}>
+      <form method='post' onSubmit={handleSubmit(submitHandler)}>
         <div className='flex flex-col gap-2'>
           <div id='screenTag' className='grid grid-cols-2 gap-3'>
             <InputField
               formKey={ScreenDataEnum.diagonalSize}
               inputStyle='!pr-10'
-              fixStyle='right-0 mr-4'
+              overlayStyle='right-0 mr-4'
               title='Screen Size'
               type='number'
-              fix='in'
+              overlay='in'
               autoComplete='off'
               placeholder='27"'
               isLoading={isLoading}
@@ -171,10 +156,10 @@ export const ScreenForm = ({
             <InputField
               formKey={ScreenDataEnum.hRes}
               inputStyle='!pr-10'
-              fixStyle='right-0 mr-4'
+              overlayStyle='right-0 mr-4'
               title='Horizontal Res'
               type='number'
-              fix='px'
+              overlay='px'
               autoComplete='off'
               placeholder='27"'
               isLoading={isLoading}
@@ -183,10 +168,10 @@ export const ScreenForm = ({
             <InputField
               formKey={ScreenDataEnum.vRes}
               inputStyle='!pr-10'
-              fixStyle='right-0 mr-4'
+              overlayStyle='right-0 mr-4'
               title='Vertical Res'
               type='number'
-              fix='px'
+              overlay='px'
               autoComplete='off'
               placeholder='27"'
               isLoading={isLoading}
@@ -200,7 +185,7 @@ export const ScreenForm = ({
               <ColorField formKey={ScreenDataEnum.lightColor} title='Light' mode={LightMode} isLoading={isLoading} />
               <ColorField formKey={ScreenDataEnum.darkColor} title='Dark' mode={DarkMode} isLoading={isLoading} />
             </div>
-            <button type='button' className='btn btn-neutral w-24' onClick={onGenerateColor} disabled={isLoading}>
+            <button type='button' className='btn btn-neutral w-24' onClick={generateColorHandler} disabled={isLoading}>
               Change
             </button>
           </div>
@@ -226,7 +211,7 @@ export const ScreenForm = ({
                 type='button'
                 className='btn btn-neutral w-24'
                 disabled={isCreateLoading || isUpdateLoading || isLoading}
-                onClick={onClose}
+                onClick={closeHandler}
               >
                 Close
               </button>
@@ -234,7 +219,7 @@ export const ScreenForm = ({
                 type='button'
                 className='btn btn-neutral w-24'
                 disabled={isCreateLoading || isUpdateLoading || isLoading}
-                onClick={onReset}
+                onClick={resetHandler}
               >
                 Reset
               </button>

@@ -10,15 +10,16 @@ type Props = TReactChildren
 
 export const ScreenFormDrawer = ({ children }: Props) => {
   const { formDrawerState, dispatchFormDrawer } = useFormDrawerContext()
-  const [defaultValues, setDefaultValues] = useState<ScreenInput>()
+  const [defaultValues, setDefaultValues] = useState<ScreenInput | null>(null)
   const [editMode, setEditMode] = useState<boolean>(false)
 
   const { data: screenItemResponse, isFetching: isScreenItemLoading } = useGetScreenApi(
     formDrawerState.id ?? '',
     formDrawerState.mode === FormDrawerMode.Edit && !!formDrawerState.id,
   )
-  const onCloseAction = () => {
-    dispatchFormDrawer({ type: FormDrawerActionTypes.Toggle, payload: { open: false } })
+  const closeHandler = () => {
+    dispatchFormDrawer({ type: FormDrawerActionTypes.Close })
+    setDefaultValues(null)
   }
 
   useEffect(() => {
@@ -55,7 +56,7 @@ export const ScreenFormDrawer = ({ children }: Props) => {
               defaultValues={defaultValues}
               editId={formDrawerState.id}
               isLoading={editMode && isScreenItemLoading}
-              onCloseAction={onCloseAction}
+              onClose={closeHandler}
             />
           </div>
         </div>

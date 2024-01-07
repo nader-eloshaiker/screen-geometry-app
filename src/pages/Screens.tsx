@@ -47,12 +47,12 @@ export const Screens = () => {
     <div className='flex flex-1 flex-col' ref={divSizeRef}>
       <FormDrawerProvider>
         <ScreenFormDrawer>
-          <div className='mx-2 flex items-end justify-between pb-4'>
-            <label className='label'>
-              <span className='text-xl'>Screen Specs</span>
-            </label>
+          <div className='flex w-full flex-row-reverse'>
             <ScreenButton />
           </div>
+          <label className='label'>
+            <span className='text-xl'>Screen Specs</span>
+          </label>
           <ScreenTable
             screens={screens}
             isScreenListLoading={isScreenListLoading}
@@ -82,7 +82,7 @@ export const Screens = () => {
           {(screens.length > 0 || isScreenListLoading) && (
             <div className='mx-2'>
               <label className='label py-6'>
-                <span className='text-xl'>Physical Screen Comparison</span>
+                <span className='text-xl'>Size and Pixel Density Comparison</span>
               </label>
               <Stacked height={maxPanelSize.height}>
                 {screens.length === 0 && isScreenListLoading ? (

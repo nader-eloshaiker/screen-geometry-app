@@ -1,5 +1,5 @@
-import { DataBaseEntry, SearchData, SearchItem } from '@models/Database'
-import { ScreenInput, ScreenItem, ScreenSpec } from '@openapi/generated/models'
+import { SearchData, SearchScreenItem } from '@models/Search'
+import { ScreenInput, ScreenItem, ScreenSpec, SearchItem } from '@openapi/generated/models'
 import { getRandomString } from './RandomGenerator'
 
 const getAspectRatio = (str: string) => {
@@ -7,15 +7,15 @@ const getAspectRatio = (str: string) => {
   return [parseFloat(width), parseFloat(height)]
 }
 
-const generateLabel = (entry: DataBaseEntry, data: SearchData) => {
+const generateLabel = (entry: SearchItem, data: SearchData) => {
   let str = entry.name
 
-  if (entry.size && entry.size !== 0) {
-    str += ` ${entry.size}"`
+  if (entry.diagonalSize && entry.diagonalSize !== 0) {
+    str += ` ${entry.diagonalSize}"`
   }
 
-  if (entry.width && entry.height !== 0) {
-    str += ` ${entry.width}x${entry.height}`
+  if (entry.hRes && entry.vRes !== 0) {
+    str += ` ${entry.hRes}x${entry.vRes}`
   }
 
   str += ` ${data.hAspectRatio}:${data.vAspectRatio}`
@@ -48,20 +48,23 @@ export const transformScreenItem = (data: ScreenItem): ScreenInput => {
 }
 
 export const transformScreenInput = (data: ScreenInput, id?: string): ScreenItem => {
-  const [hAspectRatio, vAspectRatio] = getAspectRatio(data.aspectRatio)
+  const [hAspectRatio, vAspectRatio] = getAspectRatio(data.aspectRatio ?? '')
+  const diagonalSize = data.diagonalSize ?? 0
+  const hSize = hAspectRatio * (diagonalSize / Math.sqrt(Math.pow(hAspectRatio, 2) + Math.pow(vAspectRatio, 2)))
+  const vSize = vAspectRatio * (diagonalSize / Math.sqrt(Math.pow(hAspectRatio, 2) + Math.pow(vAspectRatio, 2)))
   const item: ScreenItem = {
     id: id ?? getRandomString(8),
     tag: {
-      diagonalSize: data.diagonalSize,
-      aspectRatio: data.aspectRatio,
+      diagonalSize,
+      aspectRatio: data.aspectRatio ?? '',
     },
     data: {
-      hSize: hAspectRatio * (data.diagonalSize / Math.sqrt(Math.pow(hAspectRatio, 2) + Math.pow(vAspectRatio, 2))),
-      vSize: vAspectRatio * (data.diagonalSize / Math.sqrt(Math.pow(hAspectRatio, 2) + Math.pow(vAspectRatio, 2))),
+      hSize,
+      vSize,
       hAspectRatio,
       vAspectRatio,
     },
-    spec: createSpec(data.hRes, data.vRes, data.diagonalSize),
+    spec: createSpec(data.hRes ?? 0, data.vRes ?? 0, diagonalSize),
     color: {
       lightColor: data.lightColor,
       darkColor: data.darkColor,
@@ -72,7 +75,7 @@ export const transformScreenInput = (data: ScreenInput, id?: string): ScreenItem
   return item
 }
 
-export const transformSearchData = (entry: DataBaseEntry): SearchItem => {
+export const transformSearchData = (entry: SearchItem): SearchScreenItem => {
   const [hAspectRatio, vAspectRatio] = getAspectRatio(entry.aspectRatio)
 
   const data: SearchData = {
@@ -80,18 +83,18 @@ export const transformSearchData = (entry: DataBaseEntry): SearchItem => {
     vAspectRatio,
   }
 
-  if (entry.size && entry.size !== 0) {
-    data.hSize = hAspectRatio * (entry.size / Math.sqrt(Math.pow(hAspectRatio, 2) + Math.pow(vAspectRatio, 2)))
-    data.vSize = vAspectRatio * (entry.size / Math.sqrt(Math.pow(hAspectRatio, 2) + Math.pow(vAspectRatio, 2)))
+  if (entry.diagonalSize && entry.diagonalSize !== 0) {
+    data.hSize = hAspectRatio * (entry.diagonalSize / Math.sqrt(Math.pow(hAspectRatio, 2) + Math.pow(vAspectRatio, 2)))
+    data.vSize = vAspectRatio * (entry.diagonalSize / Math.sqrt(Math.pow(hAspectRatio, 2) + Math.pow(vAspectRatio, 2)))
   }
 
-  const spec = createSpec(entry.width, entry.height, entry.size)
+  const spec = createSpec(entry.hRes, entry.vRes, entry.diagonalSize)
 
-  const item: SearchItem = {
-    id: `${entry.name}${entry.size ?? ''}${entry.aspectRatio}`,
+  const item: SearchScreenItem = {
+    id: `${entry.name}${entry.diagonalSize ?? ''}${entry.aspectRatio}`,
     label: generateLabel(entry, data),
     tag: {
-      diagonalSize: entry.size,
+      diagonalSize: entry.diagonalSize,
       aspectRatio: entry.aspectRatio,
     },
     data,

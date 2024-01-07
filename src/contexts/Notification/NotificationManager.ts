@@ -45,17 +45,21 @@ export const notificationReducer = (
   { type, payload }: NotificationAction,
 ): NotificationState => {
   switch (type) {
-    case NotificationActionTypes.ADD_NOTIFICATION:
+    case NotificationActionTypes.ADD_NOTIFICATION: {
       if (axios.isAxiosError(payload.value) && axios.isCancel(payload.value)) {
         return state
       }
 
+      const loggedItem: NotificationItemLogged = { ...payload, tag: getRandomString(8) }
+
       return {
         ...state,
-        notifications: [...state.notifications, { ...payload, tag: getRandomString(8) } as NotificationItemLogged],
+        notifications: [...state.notifications, loggedItem],
       }
-    case NotificationActionTypes.REMOVE_NOTIFICATION:
+    }
+    case NotificationActionTypes.REMOVE_NOTIFICATION: {
       return { ...state, notifications: state.notifications.filter((error) => error.tag !== payload) }
+    }
     default:
       return state
   }

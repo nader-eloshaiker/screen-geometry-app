@@ -1,5 +1,13 @@
 # Screen Geometry
 
+![Coverage Badge](./docs/coverage.svg)
+
+## Links
+
+- [App URL](https://nader-eloshaiker.github.io/screen-geometry-app/)
+- [Coverage](https://nader-eloshaiker.github.io/screen-geometry-app/coverage)
+- [StoryBook](https://nader-eloshaiker.github.io/screen-geometry-app/storybook)
+
 This is a tool to help visually compare different screen sizes to help you choose which monitor to buy. It does this by overlaying different screen sizes ontop of each other for
 easy comparison as well as tabulate the specs.
 
@@ -21,24 +29,24 @@ I have been considering what my next monitor purchase will be and it has been di
 
 ## Dev'ing the App
 
-**Installing dependencies**
+Installing dependencies
 
     npm install -g pnpm
     pnpm i
 
-**Run in development** (using vite)
+Run in development (using vite)
 
     pnpm run dev
 
-**Linting**
+Linting
 
     pnpm run lint:fix
 
-**Build** (using vite)
+Build (using vite)
 
     pnpm run build
 
-**Generate API Client** (using orval)
+Generate API Client\*\* (using orval)
 Code is checked in for review ease. This can also help when working on a 'work in progress' published spec, as it allows the developer to control which spec the client is generated from in other feature branches and in main branches.
 
     pnpm run gen:spec
@@ -93,9 +101,9 @@ sub3E --Store Mutated Data--> sub2B
 sub2B --Retrieve Mutated Data--> sub3E
 ```
 
-## 3 Dev Tooling
+## Dev Tooling
 
-### 3.1 Orval
+### Orval
 
 #### Description
 
@@ -114,7 +122,7 @@ Another bonus is that you do not have to (and nor should you) write tests for th
 
 Before starting frontend and backend engineers start development, it is encouraged that a 1 point card be created for the two engineers to sit down and hand craft the new or modified API together, referring to any design or wireframe guide. With the spec generated, this will allow the engineers to work in parallel on the feature, with the confidence that the end result will successfully integrate.
 
-### 3.2 Vite
+### Vite
 
 I discovered this little gem to replace pnpm and it is lightning quick. You can read more about [Vite](https://vitejs.dev/), but to summarise what they have on their site for convenience:
 
@@ -125,21 +133,20 @@ I discovered this little gem to replace pnpm and it is lightning quick. You can 
 - `Universal Plugins` Rollup-superset plugin interface shared between dev and build.
 - `Fully Typed APIs` Flexible programmatic APIs with full TypeScript typing.
 
-### 3.3 The usual staples
+### Language
 
 - ESlint
 - Prettier
-- Typescript (which really is a pre-compiler tool for javascript rather than a fully fledged language).
-
-## 4 Web Dev Frameworks
-
-### 4.1 Core
-
 - PNPM
   - pnpm is up to 2x faster than npm
   - Files inside node_modules are cloned or hard linked from a single content-addressable storage
   - pnpm has built-in support for multiple packages in a repository
   - pnpm creates a non-flat node_modules by default, so code has no access to arbitrary packages
+
+## Web Dev Frameworks
+
+### Core
+
 - TypeScript
   - This is such an important addition to JavaScript when generating code from an API Spec. Just remember that defining a `type` on an API response is ill advised, stick with `interface`.
   - Type safety may mean more code, but it also means less unit tests and more importantly, less bugs. I remember the days when your code will break unexpectedly due to a missing or incorrect prop!
@@ -151,13 +158,14 @@ I discovered this little gem to replace pnpm and it is lightning quick. You can 
 - React-Hook-Form
 - YUP (Form Resolver)
 
-### 4.2 GUI
+### GUI
 
 - Styled Components
 - TailwindCSS
 - DaisyUI
+- StoryBook
 
-### 4.2 API
+### API
 
 - Axios
 - React-Query
@@ -165,9 +173,27 @@ I discovered this little gem to replace pnpm and it is lightning quick. You can 
   - Orval allows the developer to choose which HTTP client is to be used as the underlying framework to actually make the fetch call, in this case React-Query with AXIOS
 - localforage
 
-## Automated Deployments
+## DevOps
 
-The intention is to have automated builds and deployments using GitHub actions and hosting on CloudFlare. Just haven't reached that point yet.
+### GitHub Actions Workflow
+
+#### CI/CD
+
+- PNPM cache management to store dependencies based on package lock hash
+- Publish coverage report to PR and action output
+- Run:
+  - install
+  - build production
+  - lint
+  - unit tests
+
+#### Deplopyment
+
+- build prod
+- build storyblock docs
+- build coverage
+- build coverage badge
+- deploy assets to GitHub Pages
 
 ## Testing
 
@@ -188,12 +214,15 @@ However, you can bring up a visual console for testing using
 
 #### Test dashboard
 
-The console can be accessed from the [http://localhost:51204/\_\_vitest\_\_/#/](http://localhost:51204/__vitest__/#/)
+The console can be accessed from the [http://localhost](http://localhost:51204/__vitest__/#/)
+They are also published to github pages at ![Coverage](https://nader-eloshaiker.github.io/screen-geometry-app/coverage)
 
 #### Coverage Reports
 
-Coverage reports are also generated and can be access from [http://localhost:52330/coverage/index.html](http://localhost:52330/coverage/index.html)
+Coverage reports are also generated and can be access from from within the testing console above
 
 ### Component
+
+Storybook interactions is utilised to run a visual test on managed components.
 
 ### Smoke
