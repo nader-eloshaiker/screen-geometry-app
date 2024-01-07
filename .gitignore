@@ -11,6 +11,7 @@ dist-ssr
 
 # testing
 /coverage
+/reports
 
 # production
 /build

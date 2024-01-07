@@ -18,7 +18,7 @@
     "preinstall": "npx only-allow pnpm",
     "dev": "vite --mode dev --base=/",
     "build": "tsc && vite build --mode dev --base=/",
-    "build:prod": "tsc && vite build --mode prod --base=/screen-geometry-app/",
+    "build:prod": "tsc && vite build --mode prod --base=/",
     "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "lint:fix": "eslint src --fix --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "format": "prettier --write .",
@@ -27,14 +27,14 @@
     "prepare": "husky install",
     "test": "vitest --coverage",
     "test:ui": "vitest --ui  --coverage",
-    "test:ci": "pnpm test:ci:run && pnpm test:ci:coverage && pnpm test:badge",
-    "test:ci:run": "vitest --run --coverage --reporter=json --outputFile.json=./dist/coverage/report.json",
-    "test:ci:coverage": "copy ./coverage/* ./dist/",
-    "test:badge": "coverage-badges-cli --output=docs/coverage.svg --type=statements --icon=docs/vitest.svg",
+    "test:ci": "vitest --run --coverage",
+    "test:badge": "coverage-badges-cli --source=reports/coverage/coverage-summary.json --output=docs/coverage.svg --icon=docs/vitest.svg",
     "typecheck": "tsc --project tsconfig.json --noEmit",
     "sb": "storybook dev -p 6006",
     "sb:build": "storybook build",
-    "sb:build:ci": "storybook build --docs --output-dir=./dist/storybook"
+    "report": "pnpm report:sb && pnpm report:test",
+    "report:sb": "storybook build --docs --output-dir=./reports/storybook",
+    "report:test": "pnpm test:ci && pnpm test:badge"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.3.2",
@@ -83,7 +83,6 @@
     "@vitest/coverage-v8": "^1.1.1",
     "@vitest/ui": "^1.1.1",
     "autoprefixer": "^10.4.16",
-    "copy": "^0.3.2",
     "coverage-badges-cli": "^1.2.5",
     "daisyui": "^4.4.19",
     "eslint": "^8.56.0",
@@ -116,7 +115,7 @@
     "defaults"
   ],
   "lint-staged": {
-    "**/*.{ts,tsx,js,json,yaml} !(src/generated/**/*)": "npm run lint:fix",
+    "**/*.{ts,tsx,js,json,yaml} !(src/openapi/generated/**/*)": "npm run lint:fix",
     "*.{ts,tsx,js,csss,json,yaml,md*}": "npm run format"
   }
 }
