@@ -1,10 +1,10 @@
+import { AutoCompleteScreen } from '@components/AutoComplete/AutoCompleteScreen'
 import { NotificationProvider } from '@contexts/Notification/NotificationProvider'
 import { useElementSizeMock } from '@hooks/useElementSize.mock'
 import { useSearchListActionMock } from '@openapi/mocks/useSearchList.mock'
 import { useInteractComponent } from '@test/utils/useInteractComponent'
 import { getByRole, render, waitFor } from '@testing-library/react'
 import { MockInstance } from 'vitest'
-import { AutoCompleteScreen } from './AutoCompleteScreen'
 
 describe('#AutoCompleteScreen', () => {
   let searchContextSpy: MockInstance

@@ -1,4 +1,4 @@
-import { attachThemeClass, LightMode, ThemeKey, TThemeMode } from '@components/theme/ThemeConstants'
+import { attachThemeClass, LightMode, ThemeKey, TThemeMode } from '@components/Theme/ThemeConstants'
 import { useThemeModeContext } from '@contexts/theme/useThemeModeContext'
 import useLocalStorage from './useLocalStorage'
 

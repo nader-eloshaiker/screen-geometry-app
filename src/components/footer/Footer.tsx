@@ -1,5 +1,5 @@
 import GithubIcon from '@assets/icons/Github'
-import { NotificationToaster } from '@components/notification/NotificationToaster'
+import { NotificationToaster } from '@components/Notification/NotificationToaster'
 
 export default function Footer() {
   const ver = import.meta.env.VITE_PACKAGE_VERSION

@@ -1,5 +1,5 @@
-import Footer from '@components/footer/Footer'
-import Header from '@components/header/Header'
+import Footer from '@components/Footer/Footer'
+import Header from '@components/Header/Header'
 import { isRouteErrorResponse, useRouteError } from 'react-router-dom'
 
 const RootBoundary = () => {
