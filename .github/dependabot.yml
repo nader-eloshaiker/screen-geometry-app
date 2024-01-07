@@ -15,7 +15,7 @@ updates:
       interval: 'weekly'
 
   # Maintain dependencies for npm
-  - package-ecosystem: 'pnpm'
+  - package-ecosystem: 'npm'
     directory: '/'
     schedule:
       interval: 'weekly'
