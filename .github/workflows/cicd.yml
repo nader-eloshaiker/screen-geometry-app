@@ -10,7 +10,8 @@ on:
       - '**' # matches every branch
       - '!master' # excludes master
   pull_request:
-    branches: [develop]
+    branches:
+      - develop
 
 permissions:
   contents: read
@@ -19,6 +20,7 @@ permissions:
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   build:
+    name: Build Validations
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
 
@@ -50,16 +52,16 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-pnpm-store-
 
-      - name: install
+      - name: Run pnpm install
         run: pnpm install
 
-      - name: build
+      - name: Run pnpm build:prod
         run: pnpm build:prod
 
-      - name: lint
+      - name: Run pnpm lint
         run: pnpm lint
 
-      - name: test
+      - name: Run pnpm test
         run: pnpm test:ci
 
       - name: Report coverage
