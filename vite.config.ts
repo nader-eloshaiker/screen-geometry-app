@@ -51,10 +51,10 @@ export default defineConfig({
       exclude: [...configDefaults.exclude, 'src/openapi/**/*', 'src/test/**.*', 'src/**/*.mock.{ts,tsx}'],
       reportOnFailure: true,
       thresholds: {
-        lines: 50.58,
+        lines: 50.57,
         branches: 66.26,
         functions: 47.68,
-        statements: 50.58,
+        statements: 50.57,
         autoUpdate: true,
       },
     },

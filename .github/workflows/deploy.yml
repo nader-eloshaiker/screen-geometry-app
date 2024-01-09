@@ -4,7 +4,7 @@ name: Deploy
 on:
   # Runs on pushes targeting the default branch
   push:
-    branches: 
+    branches:
       - 'develop'
 
 # Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
@@ -117,7 +117,7 @@ jobs:
 
       - name: Run pnpm install
         run: pnpm install
-      
+
       - name: Run pnpm build
         run: pnpm build
 

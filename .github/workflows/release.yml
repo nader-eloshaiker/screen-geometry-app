@@ -4,7 +4,7 @@ name: Release
 on:
   # Runs on pushes targeting the default branch
   push:
-    branches: 
+    branches:
       - 'main'
 
 # Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
@@ -37,18 +37,18 @@ jobs:
       - name: 'Run cat package.json'
         run: cat ./package.json
 
-      - name:  'Version Bump'
+      - name: 'Version Bump'
         id: version-bump
-        uses:  'phips28/gh-action-bump-version@master'
+        uses: 'phips28/gh-action-bump-version@master'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           tag-prefix: 'v'
           target-branch: 'main'
           commit-message: 'CI: bumps version to {{version}}'
-          minor-wording:  'feat,minor'
-          major-wording:  'break,major'
-          patch-wording:  'fix,patch'    
+          minor-wording: 'feat,minor'
+          major-wording: 'break,major'
+          patch-wording: 'fix,patch'
 
       - name: 'cat package.json'
         run: cat ./package.json
@@ -97,7 +97,7 @@ jobs:
 
       - name: Run pnpm install
         run: pnpm install
-      
+
       - name: Run pnpm build:prod
         run: pnpm build:prod
 
@@ -112,4 +112,3 @@ jobs:
           wranglerVersion: '3'
           # Optional: Enable this if you want to have GitHub Deployments triggered
           gitHubToken: ${{ secrets.GITHUB_TOKEN }}
-      
