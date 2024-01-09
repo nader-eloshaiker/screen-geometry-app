@@ -128,5 +128,7 @@ jobs:
           accountId: f00d9267a758bc42b9ef03e97b077541
           projectName: screengeometry
           directory: ./dist
+          branch: master
+          wranglerVersion: '3'
           # Optional: Enable this if you want to have GitHub Deployments triggered
           gitHubToken: ${{ secrets.GITHUB_TOKEN }}
