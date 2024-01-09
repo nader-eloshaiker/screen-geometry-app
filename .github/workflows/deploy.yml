@@ -4,7 +4,11 @@ name: Deployment Pipeline
 on:
   # Runs on pushes targeting the default branch
   push:
+<<<<<<< HEAD
     branches: ['develop']
+=======
+    branches: ['develop', 'master']
+>>>>>>> develop
 
 # Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
 # However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
@@ -13,6 +17,43 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
+<<<<<<< HEAD
+=======
+
+  version_management:
+    name: Bump Version Automation
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          ref: ${{ github.ref }}
+
+      - name: 'Run cat package.json'
+        run: cat ./package.json
+
+      - name:  'Version Bump'
+        id: version-bump
+        uses:  'phips28/gh-action-bump-version@master'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag-prefix: 'v'
+          target-branch: 'develop'
+          commit-message: 'CI: bumps version to {{version}}'
+
+      - name: 'cat package.json'
+        run: cat ./package.json
+
+      - name: 'Output Step'
+        env:
+          NEW_TAG: ${{ steps.version-bump.outputs.newTag }}
+        run: echo "new tag $NEW_TAG"
+
+>>>>>>> develop
   deploy_reports:
     name: Deploy Reports
     environment:
@@ -24,6 +65,10 @@ jobs:
       pages: write
       id-token: write
       deployments: write
+<<<<<<< HEAD
+=======
+    needs: version_management
+>>>>>>> develop
 
     steps:
       - name: Checkout
@@ -78,6 +123,10 @@ jobs:
       pages: write
       id-token: write
       deployments: write
+<<<<<<< HEAD
+=======
+    needs: version_management
+>>>>>>> develop
 
     steps:
       - name: Checkout
