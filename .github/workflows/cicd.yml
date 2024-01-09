@@ -13,13 +13,17 @@ on:
     branches:
       - develop
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 permissions:
   contents: read
   pull-requests: write
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  build:
+  validate:
     name: Build Validations
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
@@ -54,8 +58,8 @@ jobs:
       - name: Run pnpm install
         run: pnpm install
 
-      - name: Run pnpm build:prod
-        run: pnpm build:prod
+      - name: Run pnpm build
+        run: pnpm build
 
       - name: Run pnpm lint
         run: pnpm lint
