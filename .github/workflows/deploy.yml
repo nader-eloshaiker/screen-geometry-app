@@ -15,6 +15,9 @@ concurrency:
 
 jobs:
   validate_build:
+    permissions:
+      contents: read
+      pull-requests: write
     uses: ./.github/workflows/validation.yml
 
   deploy_reports:
