@@ -105,9 +105,9 @@ jobs:
         uses: cloudflare/pages-action@v1
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          accountId: f00d9267a758bc42b9ef03e97b077541
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           projectName: screengeometry
-          branch: master
+          branch: ${{ github.head_ref || github.ref_name }}
           directory: ./dist
           wranglerVersion: '3'
           # Optional: Enable this if you want to have GitHub Deployments triggered
