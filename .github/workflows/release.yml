@@ -14,6 +14,8 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
+  validate_build:
+    uses: ./.github/workflows/validation.yml
 
   version_management:
     name: Bump Version Automation
@@ -21,6 +23,8 @@ jobs:
     permissions:
       contents: write
       pull-requests: write
+    needs: [validate_build]
+
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -59,7 +63,7 @@ jobs:
       pages: write
       id-token: write
       deployments: write
-    needs: version_management
+    needs: [version_management]
 
     steps:
       - name: Checkout
