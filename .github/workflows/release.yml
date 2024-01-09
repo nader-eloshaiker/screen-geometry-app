@@ -4,8 +4,8 @@ name: Release
 on:
   # Runs on pushes targeting the default branch
   push:
-    branches: 
-      - 'master'
+    branches:
+      - 'main'
 
 # Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
 # However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
@@ -37,18 +37,18 @@ jobs:
       - name: 'Run cat package.json'
         run: cat ./package.json
 
-      - name:  'Version Bump'
+      - name: 'Version Bump'
         id: version-bump
-        uses:  'phips28/gh-action-bump-version@master'
+        uses: 'phips28/gh-action-bump-version@master'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           tag-prefix: 'v'
-          target-branch: 'develop'
+          target-branch: 'main'
           commit-message: 'CI: bumps version to {{version}}'
-          minor-wording:  'feat,minor'
-          major-wording:  'break,major'
-          patch-wording:  'fix,patch'    
+          minor-wording: 'feat,minor'
+          major-wording: 'break,major'
+          patch-wording: 'fix,patch'
 
       - name: 'cat package.json'
         run: cat ./package.json
@@ -97,7 +97,7 @@ jobs:
 
       - name: Run pnpm install
         run: pnpm install
-      
+
       - name: Run pnpm build:prod
         run: pnpm build:prod
 
@@ -105,9 +105,10 @@ jobs:
         uses: cloudflare/pages-action@v1
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          accountId: f00d9267a758bc42b9ef03e97b077541
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           projectName: screengeometry
+          branch: main
           directory: ./dist
+          wranglerVersion: '3'
           # Optional: Enable this if you want to have GitHub Deployments triggered
           gitHubToken: ${{ secrets.GITHUB_TOKEN }}
-      

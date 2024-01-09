@@ -9,8 +9,9 @@ export const About = () => {
         <h1 className='mb-4 text-3xl font-bold'>Welcome to Screen Geometry</h1>
         <p className='mb-4'>Hey there, I&apos;m Nader!</p>
         <p className='mb-4'>
-          I know choosing a monitor can be a real head-scratcher because we have so much choice. Well I&apos;ve cooked
-          up a handy tool that lets you compare screen sizes and resolutions to help you decide.
+          I know choosing a monitor, phone or even a tablet, based on the LCD screen information can be a real
+          head-scratcher because we have so much choice. Well I&apos;ve cooked up a handy tool that lets you compare
+          screen sizes and resolutions to help you decide.
         </p>
         <p className='mb-4'>
           Whether you&apos;re a gamer on the hunt for the perfect screen to level up your gaming experience or a design
