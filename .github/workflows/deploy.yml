@@ -6,13 +6,6 @@ on:
   push:
     branches: ['develop', 'master']
 
-# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
-permissions:
-  contents: write
-  pages: write
-  id-token: write
-  deployments: write
-
 # Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
 # However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
 concurrency:
@@ -24,6 +17,9 @@ jobs:
   version_management:
     name: Bump Version Automation
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -57,6 +53,11 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+      deployments: write
     needs: version_management
 
     steps:
@@ -107,6 +108,11 @@ jobs:
   deploy_app:
     name: Deploy App to Cloudflare Pages
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+      deployments: write
     needs: version_management
 
     steps:
