@@ -44,7 +44,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           tag-prefix: 'v'
-          target-branch: 'master'
+          target-branch: 'main'
           commit-message: 'CI: bumps version to {{version}}'
           minor-wording:  'feat,minor'
           major-wording:  'break,major'
