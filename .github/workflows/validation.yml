@@ -11,10 +11,10 @@ on:
       - '!develop' # excludes develop as it is called by another workflow
       - '!master' # excludes master as it is called by another workflow
   # not required as the workflow is triggered by push events
-  # pull_request:
-  #   branches:
-  #     - develop
-  #     - master
+  pull_request:
+    branches:
+      - develop
+      - master
   workflow_call:
 
 concurrency:
