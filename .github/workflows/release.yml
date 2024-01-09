@@ -1,83 +1,65 @@
 # Simple workflow for deploying static content to GitHub Pages
-name: Deployment Pipeline
+name: Release
 
 on:
   # Runs on pushes targeting the default branch
   push:
-    branches: ['develop']
+    branches: 
+      - 'master'
 
 # Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
 # However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
 concurrency:
-  group: 'deploy'
+  group: 'release'
   cancel-in-progress: false
 
 jobs:
-  deploy_reports:
-    name: Deploy Reports
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+
+  version_management:
+    name: Bump Version Automation
     runs-on: ubuntu-latest
     permissions:
-      contents: read
-      pages: write
-      id-token: write
-      deployments: write
-
+      contents: write
+      pull-requests: write
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Install Node.js
-        uses: actions/setup-node@v4
+        uses: actions/checkout@v2
         with:
-          node-version-file: '.nvmrc'
+          ref: ${{ github.ref }}
 
-      - name: Install pnpm
-        uses: pnpm/action-setup@v2
+      - name: 'Run cat package.json'
+        run: cat ./package.json
+
+      - name:  'Version Bump'
+        id: version-bump
+        uses:  'phips28/gh-action-bump-version@master'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          run_install: false
+          tag-prefix: 'v'
+          target-branch: 'develop'
+          commit-message: 'CI: bumps version to {{version}}'
+          minor-wording:  'feat,minor'
+          major-wording:  'break,major'
+          patch-wording:  'fix,patch'    
 
-      - name: Get pnpm store directory
-        id: pnpm-cache
-        shell: bash
-        run: echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
+      - name: 'cat package.json'
+        run: cat ./package.json
 
-      - name: Setup pnpm cache
-        uses: actions/cache@v3
-        with:
-          path: ${{ env.STORE_PATH }}
-          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
-          restore-keys: |
-            ${{ runner.os }}-pnpm-store-
-
-      - name: Run pnpm install
-        run: pnpm install
-
-      - name: Run pnpm report
-        run: pnpm report
-
-      - name: Setup Pages
-        uses: actions/configure-pages@v4
-
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: './reports'
-
-      - name: Deploy to reports to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+      - name: 'Output Step'
+        env:
+          NEW_TAG: ${{ steps.version-bump.outputs.newTag }}
+        run: echo "new tag $NEW_TAG"
 
   deploy_app:
-    name: Deploy Development Build
+    name: Deploy Production Build
     runs-on: ubuntu-latest
     permissions:
       contents: read
       pages: write
       id-token: write
       deployments: write
+    needs: version_management
 
     steps:
       - name: Checkout
@@ -109,10 +91,10 @@ jobs:
       - name: Run pnpm install
         run: pnpm install
       
-      - name: Run pnpm build
-        run: pnpm build
+      - name: Run pnpm build:prod
+        run: pnpm build:prod
 
-      - name: Deploy app to Cloudflare Pages
+      - name: Deploy production App to Cloudflare Pages
         uses: cloudflare/pages-action@v1
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
@@ -121,3 +103,4 @@ jobs:
           directory: ./dist
           # Optional: Enable this if you want to have GitHub Deployments triggered
           gitHubToken: ${{ secrets.GITHUB_TOKEN }}
+      
