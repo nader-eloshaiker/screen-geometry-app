@@ -30,7 +30,7 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-        with:  
+        with:
           token: ${{ secrets.ACTION_GITHUB_TOKEN }}
 
       - name: 'Run cat package.json'
@@ -43,7 +43,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.ACTION_GITHUB_TOKEN }}
         with:
           tag-prefix: 'v'
-          target-branch: 'main'
+          target-branch: 'develop'
           commit-message: 'CI: bumps version to {{version}}'
           minor-wording: 'feat,minor'
           major-wording: 'break,major'

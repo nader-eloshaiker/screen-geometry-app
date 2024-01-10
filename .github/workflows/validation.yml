@@ -13,7 +13,7 @@ on:
   # not required as the workflow is triggered by push events
   pull_request:
     branches:
-      - develop
+      # - develop # disabled as this is called by pushes in branches already as part of PRs
       - main
   workflow_call:
 
