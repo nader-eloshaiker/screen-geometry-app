@@ -9,12 +9,12 @@ on:
       # - '*/*' # matches every branch containing a single '/'
       - '**' # matches every branch
       - '!develop' # excludes develop as it is called by another workflow
-      - '!master' # excludes master as it is called by another workflow
+      - '!main' # excludes main as it is called by another workflow
   # not required as the workflow is triggered by push events
   pull_request:
     branches:
       - develop
-      - master
+      - main
   workflow_call:
 
 concurrency:
