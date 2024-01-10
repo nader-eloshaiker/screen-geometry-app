@@ -36,9 +36,10 @@ export default defineConfig({
     },
   },
   test: {
-    css: {
-      include: /.+/,
-    },
+    // Do not process css files (is slow)
+    // css: {
+    //   include: /.+/,
+    // },
     globals: true,
     clearMocks: true,
     mockReset: true,
@@ -51,10 +52,10 @@ export default defineConfig({
       exclude: [...configDefaults.exclude, 'src/openapi/**/*', 'src/test/**.*', 'src/**/*.mock.{ts,tsx}'],
       reportOnFailure: true,
       thresholds: {
-        lines: 50.57,
+        lines: 50.61,
         branches: 66.26,
         functions: 47.68,
-        statements: 50.57,
+        statements: 50.61,
         autoUpdate: true,
       },
     },

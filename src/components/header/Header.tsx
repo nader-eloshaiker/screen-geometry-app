@@ -33,7 +33,7 @@ export default function Header() {
   return (
     <header className='sidebar rounded-b-xl'>
       {/* small header */}
-      <div className='flex w-full flex-row xs:hidden'>
+      <div className='flex w-full flex-row xs:hidden' data-testid='small-header'>
         <div className='dropdown' data-testid='nav-menu'>
           <label tabIndex={0} className='btn btn-square btn-ghost'>
             <HamburgerIcon className='h-6 w-6' />
@@ -52,8 +52,10 @@ export default function Header() {
         />
       </div>
       {/* large header */}
-      <div className='hidden pt-2 text-center text-2xl  xs:block'>{import.meta.env.VITE_APP_TITLE}</div>
-      <div className='navbar hidden justify-between px-3  xs:flex'>
+      <div className='hidden pt-2 text-center text-2xl  xs:block' data-testid='large-header-title'>
+        {import.meta.env.VITE_APP_TITLE}
+      </div>
+      <div className='navbar hidden justify-between px-3  xs:flex' data-testid='large-header-menu'>
         <ul className='menu menu-horizontal gap-2 rounded-box p-0'>
           <NavMenu pathname={pathname} />
         </ul>
