@@ -2,9 +2,9 @@ import GithubIcon from '@assets/icons/Github'
 import { NotificationToaster } from '@components/notification/NotificationToaster'
 
 export default function Footer() {
-  const ver = import.meta.env.VITE_PACKAGE_VERSION
-  const semVer = ver.split('.')
-  const version = `${semVer[0]}.${semVer[1]}`
+  const longVer = import.meta.env.VITE_PACKAGE_VERSION
+  const semVer = longVer.split('.')
+  const shortVer = `${semVer[0]}.${semVer[1]}`
 
   return (
     <footer className='footer grid-flow-col items-center justify-between rounded-t-xl p-4 pb-2'>
@@ -23,7 +23,8 @@ export default function Footer() {
         <span className='text-xs'>© 2023 All right reserved</span>
       </div>
       <div className='grid-flow-col items-center gap-2 2xs:gap-3'>
-        <span className='text-xs'>Version {version}</span>
+        <span className='text-xs 2xs:hidden'>Version {shortVer}</span>
+        <span className='hidden text-xs 2xs:block'>Version {longVer}</span>
         <a href='https://github.com/nader-eloshaiker/screen-geometry-app'>
           <GithubIcon className='h-6 w-6 fill-current' />
         </a>

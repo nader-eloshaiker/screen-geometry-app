@@ -20,44 +20,6 @@ jobs:
       pull-requests: write
     uses: ./.github/workflows/validation.yml
 
-  version_management:
-    name: Bump Version Automation
-    runs-on: ubuntu-latest
-    permissions:
-      contents: write
-      pull-requests: write
-    needs: [validate_build]
-
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-        with:
-          ref: ${{ github.ref }}
-
-      - name: 'Run cat package.json'
-        run: cat ./package.json
-
-      - name: 'Version Bump'
-        id: version-bump
-        uses: 'phips28/gh-action-bump-version@master'
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          tag-prefix: 'v'
-          target-branch: 'main'
-          commit-message: 'CI: bumps version to {{version}}'
-          minor-wording: 'feat,minor'
-          major-wording: 'break,major'
-          patch-wording: 'fix,patch'
-
-      - name: 'cat package.json'
-        run: cat ./package.json
-
-      - name: 'Output Step'
-        env:
-          NEW_TAG: ${{ steps.version-bump.outputs.newTag }}
-        run: echo "new tag $NEW_TAG"
-
   deploy_app:
     name: Deploy Production Build
     runs-on: ubuntu-latest
@@ -66,7 +28,7 @@ jobs:
       pages: write
       id-token: write
       deployments: write
-    needs: [version_management]
+    needs: [validate_build]
 
     steps:
       - name: Checkout
