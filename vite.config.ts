@@ -52,11 +52,11 @@ export default defineConfig({
       exclude: [...configDefaults.exclude, 'src/openapi/**/*', 'src/test/**.*', 'src/**/*.mock.{ts,tsx}'],
       reportOnFailure: true,
       thresholds: {
-        lines: 50.61,
-        branches: 66.26,
-        functions: 47.68,
-        statements: 50.61,
-        autoUpdate: true,
+        lines: 50,
+        branches: 65,
+        functions: 47,
+        statements: 50,
+        // autoUpdate: true, // Update thresholds when writing tests, disabled due to refactoring tests changes coverage
       },
     },
     environment: 'jsdom',
