@@ -34,7 +34,7 @@ jobs:
         with:
           token: ${{ secrets.ACTION_GITHUB_TOKEN }}
           target-branch: ${{ github.ref_name }}
-          manifest-file: stage-rp-manifest.json
+          manifest-file: .github/workflows/.release-please-manifest.json
 
       - name: 'Output Step'
         env:
