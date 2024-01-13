@@ -14,11 +14,11 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  validate_build:
-    permissions:
-      contents: read
-      pull-requests: write
-    uses: ./.github/workflows/validation.yml
+  # validate_build:
+  #   permissions:
+  #     contents: read
+  #     pull-requests: write
+  #   uses: ./.github/workflows/validation.yml
 
   version_management:
     name: Version Management
@@ -26,7 +26,7 @@ jobs:
     permissions:
       contents: write
       pull-requests: write
-    needs: [validate_build]
+    # needs: [validate_build]
     steps:
       - name: Prep Release
         id: generate_release
@@ -34,7 +34,7 @@ jobs:
         with:
           token: ${{ secrets.ACTION_GITHUB_TOKEN }}
           target-branch: ${{ github.ref_name }}
-          manifest-file: release-please-manifest.json
+          release-type: 'node'
 
       - name: 'Output Step'
         env:

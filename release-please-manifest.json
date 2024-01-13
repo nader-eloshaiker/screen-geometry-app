@@ -1,8 +1,0 @@
-{
-  "release-type": "node",
-  "packages": {
-    "dist": {
-      "name": "ScreenGeometry"
-    }
-  }
-}
