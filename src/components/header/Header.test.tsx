@@ -1,4 +1,4 @@
-import { act, fireEvent, render, renderHook } from '@testing-library/react'
+import { fireEvent, render, renderHook, waitFor } from '@testing-library/react'
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 import { ThemeModeProvider } from '../../contexts/theme/ThemeModeProvider'
 import { useWindowSize } from '../../test/utils/useWindowsSize'
@@ -17,8 +17,8 @@ vi.mock('react-router-dome', async () => {
   }
 })
 
-const resizeWindow = (x: number, y: number) => {
-  act(() => {
+const resizeWindow = async (x: number, y: number) => {
+  await waitFor(() => {
     window.innerWidth = x
     window.innerHeight = y
     fireEvent(window, new Event('resize'))
@@ -42,7 +42,7 @@ describe('#Header', () => {
   })
 
   // cannot be tested due to tailwindcss not getting parsed
-  it.skip('should render the header without dropdown menu on a large window', () => {
+  it.skip('should render the header without dropdown menu on a large window', async () => {
     const { result } = renderHook(() => useWindowSize())
     console.log(result.current)
     const { getByTestId } = render(
@@ -51,13 +51,15 @@ describe('#Header', () => {
       </ThemeModeProvider>,
     )
 
-    resizeWindow(1000, 640)
-    const element = getByTestId('nav-menu')
+    await resizeWindow(1000, 1000)
+    console.log(result.current)
 
-    expect(element).not.toBeVisible()
+    const element = getByTestId('small-header')
+
+    expect(element).toHaveClass('a')
   })
 
-  it('should render the header with dropdown menu on a small window', () => {
+  it('should render the header with dropdown menu on a small window', async () => {
     const { getByTestId } = render(
       <ThemeModeProvider>
         <RouterProvider router={browserRouter} />
@@ -65,7 +67,7 @@ describe('#Header', () => {
     )
 
     resizeWindow(1000, 320)
-    const element = getByTestId('nav-menu')
+    const element = getByTestId('small-header')
 
     expect(element).toBeVisible()
   })

@@ -1,5 +1,5 @@
 import { NotificationProvider } from '@contexts/Notification/NotificationProvider'
-import { RenderResult, render, waitFor } from '@testing-library/react'
+import { render } from '@testing-library/react'
 import Footer from './Footer'
 
 describe('#Footer', () => {
@@ -8,15 +8,13 @@ describe('#Footer', () => {
   })
 
   it('should render the version in the footer', async () => {
-    const { getByText } = await waitFor<RenderResult>(() =>
-      render(
-        <NotificationProvider>
-          <Footer />
-        </NotificationProvider>,
-      ),
+    const { getByText } = render(
+      <NotificationProvider>
+        <Footer />
+      </NotificationProvider>,
     )
 
-    const element = getByText('Version 1.2')
+    const element = getByText('Version 1.2.3')
 
     expect(element).toBeInTheDocument()
   })

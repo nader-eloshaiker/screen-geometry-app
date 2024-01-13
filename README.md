@@ -1,7 +1,8 @@
 # Screen Geometry
 
 ![Coverage Badge](./docs/coverage.svg)
-[![CI/CD Pipeline](https://github.com/nader-eloshaiker/screen-geometry-app/actions/workflows/cicd.yml/badge.svg)](https://github.com/nader-eloshaiker/screen-geometry-app/actions/workflows/cicd.yml)
+[![Validation](https://github.com/nader-eloshaiker/screen-geometry-app/actions/workflows/validation.yml/badge.svg)](https://github.com/nader-eloshaiker/screen-geometry-app/actions/workflows/validation.yml)
+[![Deploy](https://github.com/nader-eloshaiker/screen-geometry-app/actions/workflows/deploy.yml/badge.svg)](https://github.com/nader-eloshaiker/screen-geometry-app/actions/workflows/deploy.yml)
 
 Links
 
