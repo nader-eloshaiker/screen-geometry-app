@@ -28,12 +28,15 @@ jobs:
       pull-requests: write
     # needs: [validate_build]
     steps:
+      - name: Calculate repo short name
+        run: echo "REPO_NAME=${GITHUB_REPOSITORY#*/}" >> $GITHUB_ENV
+
       - name: Prep Release
         id: generate_release
-        uses: google-github-actions/release-please-action@v4
+        uses: google-github-actions/release-please-action@v3
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          target-branch: ${{ github.ref_name }}
+          package-name: ${{ env.REPO_NAME }}
           release-type: 'node'
 
       - name: 'Output Step'
