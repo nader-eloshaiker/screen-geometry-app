@@ -3,7 +3,7 @@ name: Release
 
 on:
   # Runs on pushes targeting the default branch
-  release: 
+  release:
     types: [released]
 
 # Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.

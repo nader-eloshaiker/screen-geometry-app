@@ -40,8 +40,8 @@ jobs:
         with:
           token: ${{ secrets.ACTION_GITHUB_TOKEN }}
           target-branch: ${{ github.ref_name }}
-          manifest-file: stage-rp-manifest.json      
-      
+          manifest-file: stage-rp-manifest.json
+
       - name: 'cat package.json'
         run: cat ./package.json
       - name: 'Output Step'
