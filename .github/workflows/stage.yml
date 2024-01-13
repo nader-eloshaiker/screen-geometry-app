@@ -1,5 +1,5 @@
 # Simple workflow for deploying static content to GitHub Pages
-name: Deploy
+name: Stage
 
 on:
   # Runs on pushes targeting the default branch
@@ -21,39 +21,32 @@ jobs:
     uses: ./.github/workflows/validation.yml
 
   version_management:
-    name: Bump Version Automation
+    name: Version Management
     runs-on: ubuntu-latest
     permissions:
       contents: write
       pull-requests: write
     needs: [validate_build]
     steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-        with:
-          token: ${{ secrets.ACTION_GITHUB_TOKEN }}
+      - name: Calculate repo short name
+        run: echo "REPO_NAME=${GITHUB_REPOSITORY#*/}" >> $GITHUB_ENV
 
       - name: 'Run cat package.json'
         run: cat ./package.json
 
-      - name: 'Version Bump'
-        id: version-bump
-        uses: 'phips28/gh-action-bump-version@master'
-        env:
-          GITHUB_TOKEN: ${{ secrets.ACTION_GITHUB_TOKEN }}
+      - name: Prep Release
+        id: generate_release
+        uses: google-github-actions/release-please-action@v4
         with:
-          tag-prefix: 'v'
-          target-branch: 'develop'
-          commit-message: 'CI: bumps version to {{version}}'
-          minor-wording: 'feat,minor'
-          major-wording: 'break,major'
-          patch-wording: 'fix,patch'
-
+          token: ${{ secrets.ACTION_GITHUB_TOKEN }}
+          target-branch: ${{ github.ref_name }}
+          manifest-file: stage-rp-manifest.json      
+      
       - name: 'cat package.json'
         run: cat ./package.json
       - name: 'Output Step'
         env:
-          NEW_TAG: ${{ steps.version-bump.outputs.newTag }}
+          NEW_TAG: ${{ steps.generate_release.outputs.tag_name }}
         run: echo "new tag $NEW_TAG"
 
   deploy_reports:
@@ -114,8 +107,8 @@ jobs:
         id: deployment
         uses: actions/deploy-pages@v4
 
-  deploy_app:
-    name: Deploy Development Build
+  stagging:
+    name: Deploy Build to Stagging
     runs-on: ubuntu-latest
     permissions:
       contents: read
