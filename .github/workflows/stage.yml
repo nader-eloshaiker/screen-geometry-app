@@ -28,22 +28,14 @@ jobs:
       pull-requests: write
     needs: [validate_build]
     steps:
-      - name: Calculate repo short name
-        run: echo "REPO_NAME=${GITHUB_REPOSITORY#*/}" >> $GITHUB_ENV
-
-      - name: 'Run cat package.json'
-        run: cat ./package.json
-
       - name: Prep Release
         id: generate_release
         uses: google-github-actions/release-please-action@v4
         with:
           token: ${{ secrets.ACTION_GITHUB_TOKEN }}
-          target-branch: develop
+          target-branch: ${{ github.ref_name }}
           manifest-file: stage-rp-manifest.json
 
-      - name: 'cat package.json'
-        run: cat ./package.json
       - name: 'Output Step'
         env:
           NEW_TAG: ${{ steps.generate_release.outputs.tag_name }}
