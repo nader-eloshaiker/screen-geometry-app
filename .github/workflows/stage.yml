@@ -1,24 +1,48 @@
-# Simple workflow for deploying static content to GitHub Pages
-name: Deploy
+name: Stage
 
 on:
-  # Runs on pushes targeting the default branch
   push:
     branches:
-      - 'develop'
+      - 'main'
 
-# Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
-# However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
 concurrency:
   group: 'deploy'
   cancel-in-progress: false
 
 jobs:
-  validate_build:
+  # NOTE: This is a work in progress. The idea is to validate the build before
+  # validate_build:
+  #   permissions:
+  #     contents: read
+  #     pull-requests: write
+  #   uses: ./.github/workflows/validation.yml
+
+  version_management:
+    name: Version Management
+    runs-on: ubuntu-latest
     permissions:
-      contents: read
+      contents: write
       pull-requests: write
-    uses: ./.github/workflows/validation.yml
+    # needs: [validate_build]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Calculate repo short name
+        run: echo "REPO_NAME=${GITHUB_REPOSITORY#*/}" >> $GITHUB_ENV
+
+      - name: Prep Release
+        id: generate_release
+        uses: google-github-actions/release-please-action@v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          package-name: ${{ env.REPO_NAME }}
+          release-type: 'node'
+
+      - name: 'Output Step'
+        env:
+          NEW_TAG: ${{ steps.generate_release.outputs.tag_name }}
+        run: echo "new tag $NEW_TAG created for $REPO_NAME"
 
   deploy_reports:
     name: Deploy Reports
@@ -31,7 +55,7 @@ jobs:
       pages: write
       id-token: write
       deployments: write
-    needs: [validate_build]
+    needs: [version_management]
 
     steps:
       - name: Checkout
@@ -78,15 +102,15 @@ jobs:
         id: deployment
         uses: actions/deploy-pages@v4
 
-  deploy_app:
-    name: Deploy Development Build
+  stagging:
+    name: Deploy Build to Stagging
     runs-on: ubuntu-latest
     permissions:
       contents: read
       pages: write
       id-token: write
       deployments: write
-    needs: [validate_build]
+    needs: [version_management]
 
     steps:
       - name: Checkout
@@ -125,7 +149,7 @@ jobs:
         uses: cloudflare/pages-action@v1
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          accountId: f00d9267a758bc42b9ef03e97b077541
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           projectName: screengeometry
           directory: ./dist
           branch: main

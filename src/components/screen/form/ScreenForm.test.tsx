@@ -118,10 +118,10 @@ describe('#ScreenForm', () => {
     })
 
     test('show loading when creating a screen', async () => {
-      const editId = '1'
+      const editId = undefined
       createScreenSpy.override({ opt: { isPending: true } })
 
-      const { container } = render(<RootTestComponent defaultValues={screenInputFixture} editId={editId} />)
+      const { container } = render(<RootTestComponent defaultValues={undefined} editId={editId} />)
 
       const spinners = await waitFor(() =>
         container.getElementsByClassName('loading loading-spinner items-center justify-center'),
