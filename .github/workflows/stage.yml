@@ -1,59 +1,44 @@
-# Simple workflow for deploying static content to GitHub Pages
-name: Deploy
+name: Stage
 
 on:
-  # Runs on pushes targeting the default branch
   push:
     branches:
       - 'develop'
 
-# Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
-# However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
 concurrency:
   group: 'deploy'
   cancel-in-progress: false
 
 jobs:
-  validate_build:
-    permissions:
-      contents: read
-      pull-requests: write
-    uses: ./.github/workflows/validation.yml
+  # NOTE: This is a work in progress. The idea is to validate the build before
+  # validate_build:
+  #   permissions:
+  #     contents: read
+  #     pull-requests: write
+  #   uses: ./.github/workflows/validation.yml
 
   version_management:
-    name: Bump Version Automation
+    name: Version Management
     runs-on: ubuntu-latest
     permissions:
       contents: write
       pull-requests: write
-    needs: [validate_build]
+    # needs: [validate_build]
     steps:
-      - name: Checkout
-        uses: actions/checkout@v2
+      - name: Calculate repo short name
+        run: echo "REPO_NAME=${GITHUB_REPOSITORY#*/}" >> $GITHUB_ENV
+
+      - name: Prep Release
+        id: generate_release
+        uses: google-github-actions/release-please-action@v3
         with:
-          token: ${{ secrets.ACTION_GITHUB_TOKEN }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+          package-name: ${{ env.REPO_NAME }}
+          release-type: 'node'
 
-      - name: 'Run cat package.json'
-        run: cat ./package.json
-
-      - name: 'Version Bump'
-        id: version-bump
-        uses: 'phips28/gh-action-bump-version@master'
-        env:
-          GITHUB_TOKEN: ${{ secrets.ACTION_GITHUB_TOKEN }}
-        with:
-          tag-prefix: 'v'
-          target-branch: 'develop'
-          commit-message: 'CI: bumps version to {{version}}'
-          minor-wording: 'feat,minor'
-          major-wording: 'break,major'
-          patch-wording: 'fix,patch'
-
-      - name: 'cat package.json'
-        run: cat ./package.json
       - name: 'Output Step'
         env:
-          NEW_TAG: ${{ steps.version-bump.outputs.newTag }}
+          NEW_TAG: ${{ steps.generate_release.outputs.tag_name }}
         run: echo "new tag $NEW_TAG"
 
   deploy_reports:
@@ -114,8 +99,8 @@ jobs:
         id: deployment
         uses: actions/deploy-pages@v4
 
-  deploy_app:
-    name: Deploy Development Build
+  stagging:
+    name: Deploy Build to Stagging
     runs-on: ubuntu-latest
     permissions:
       contents: read

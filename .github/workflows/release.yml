@@ -3,15 +3,18 @@ name: Release
 
 on:
   # Runs on pushes targeting the default branch
-  push:
-    branches:
-      - 'main'
+  release:
+    types: [released]
 
 # Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
 # However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
 concurrency:
   group: 'release'
   cancel-in-progress: false
+
+permissions:
+  contents: write
+  pull-requests: write
 
 jobs:
   validate_build:
@@ -20,7 +23,7 @@ jobs:
       pull-requests: write
     uses: ./.github/workflows/validation.yml
 
-  deploy_app:
+  deploy_prod:
     name: Deploy Production Build
     runs-on: ubuntu-latest
     permissions:
@@ -28,7 +31,8 @@ jobs:
       pages: write
       id-token: write
       deployments: write
-    needs: [validate_build]
+    needs:
+      - validate_build
 
     steps:
       - name: Checkout
@@ -69,7 +73,7 @@ jobs:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           projectName: screengeometry
-          branch: main
+          branch: develop
           directory: ./dist
           wranglerVersion: '3'
           # Optional: Enable this if you want to have GitHub Deployments triggered
