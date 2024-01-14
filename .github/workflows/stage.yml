@@ -34,6 +34,18 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           release-type: 'node'
 
+      - name: Create archive
+        run: |
+          cd dist
+          zip -r ../ScreenGeometry.zip .
+          cd ..
+      
+      - name: Upload Release Artifact
+        if: ${{ steps.release.outputs.release_created }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: gh release upload ${{ steps.release.outputs.tag_name }} ./ScreenGeometry.zip
+
   deploy_reports:
     name: Deploy Reports
     environment:
