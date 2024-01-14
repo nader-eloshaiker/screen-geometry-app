@@ -95,8 +95,8 @@ devDependencies:
     specifier: ^14.5.2
     version: 14.5.2(@testing-library/dom@9.3.3)
   '@types/eslint-config-prettier':
-    specifier: ^6.11.2
-    version: 6.11.2
+    specifier: ^6.11.3
+    version: 6.11.3
   '@types/eslint-plugin-prettier':
     specifier: ^3.1.3
     version: 3.1.3
@@ -4511,8 +4511,8 @@ packages:
     resolution: {integrity: sha512-AjwI4MvWx3HAOaZqYsjKWyEObT9lcVV0Y0V8nXo6cXzN8ZiMxVhf6F3d/UNvXVGKrEzL/Dluc5p+y9GkzlTWig==}
     dev: true
 
-  /@types/eslint-config-prettier@6.11.2:
-    resolution: {integrity: sha512-H9aSpNEGTyL1fJ65CIuqHMAH741pKg7jZ/Y2cdFAmqtD90PsRrmp8Cpj76PgSffSTkRLGihe1X6QlM4ec639ZA==}
+  /@types/eslint-config-prettier@6.11.3:
+    resolution: {integrity: sha512-3wXCiM8croUnhg9LdtZUJQwNcQYGWxxdOWDjPe1ykCqJFPVpzAKfs/2dgSoCtAvdPeaponcWPI7mPcGGp9dkKQ==}
     dev: true
 
   /@types/eslint-plugin-prettier@3.1.3:
