@@ -7,7 +7,7 @@
 
 Links
 
-- [App URL](https://nader-eloshaiker.github.io/screen-geometry-app/)
+- [App URL](https://screengeometry.pages.dev/)
 - [Coverage](https://nader-eloshaiker.github.io/screen-geometry-app/coverage)
 - [StoryBook](https://nader-eloshaiker.github.io/screen-geometry-app/storybook)
 
