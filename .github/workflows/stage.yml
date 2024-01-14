@@ -10,6 +10,7 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
+  # NOTE: This is a work in progress. The idea is to validate the build before
   # validate_build:
   #   permissions:
   #     contents: read
