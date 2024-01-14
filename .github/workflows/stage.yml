@@ -28,21 +28,12 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Calculate repo short name
-        run: echo "REPO_NAME=${GITHUB_REPOSITORY#*/}" >> $GITHUB_ENV
-
       - name: Prep Release
-        id: generate_release
-        uses: google-github-actions/release-please-action@v3
+        id: release
+        uses: google-github-actions/release-please-action@v4
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          package-name: ${{ env.REPO_NAME }}
           release-type: 'node'
-
-      - name: 'Output Step'
-        env:
-          NEW_TAG: ${{ steps.generate_release.outputs.tag_name }}
-        run: echo "new tag $NEW_TAG created for $REPO_NAME"
 
   deploy_reports:
     name: Deploy Reports
