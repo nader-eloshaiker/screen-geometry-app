@@ -2,7 +2,8 @@
 
 ![Coverage Badge](./docs/coverage.svg)
 [![Validation](https://github.com/nader-eloshaiker/screen-geometry-app/actions/workflows/validation.yml/badge.svg)](https://github.com/nader-eloshaiker/screen-geometry-app/actions/workflows/validation.yml)
-[![Deploy](https://github.com/nader-eloshaiker/screen-geometry-app/actions/workflows/deploy.yml/badge.svg)](https://github.com/nader-eloshaiker/screen-geometry-app/actions/workflows/deploy.yml)
+[![Stage](https://github.com/nader-eloshaiker/screen-geometry-app/actions/workflows/stage.yml/badge.svg)](https://github.com/nader-eloshaiker/screen-geometry-app/actions/workflows/stage.yml)
+[![Release](https://github.com/nader-eloshaiker/screen-geometry-app/actions/workflows/release.yml/badge.svg)](https://github.com/nader-eloshaiker/screen-geometry-app/actions/workflows/release.yml)
 
 Links
 
