@@ -3,7 +3,7 @@ name: Stage
 on:
   push:
     branches:
-      - 'develop'
+      - 'main'
 
 concurrency:
   group: 'deploy'
@@ -25,6 +25,9 @@ jobs:
       pull-requests: write
     # needs: [validate_build]
     steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
       - name: Calculate repo short name
         run: echo "REPO_NAME=${GITHUB_REPOSITORY#*/}" >> $GITHUB_ENV
 
@@ -39,7 +42,7 @@ jobs:
       - name: 'Output Step'
         env:
           NEW_TAG: ${{ steps.generate_release.outputs.tag_name }}
-        run: echo "new tag $NEW_TAG"
+        run: echo "new tag $NEW_TAG created for $REPO_NAME"
 
   deploy_reports:
     name: Deploy Reports
@@ -146,10 +149,10 @@ jobs:
         uses: cloudflare/pages-action@v1
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          accountId: f00d9267a758bc42b9ef03e97b077541
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           projectName: screengeometry
           directory: ./dist
-          branch: develop
+          branch: main
           wranglerVersion: '3'
           # Optional: Enable this if you want to have GitHub Deployments triggered
           gitHubToken: ${{ secrets.GITHUB_TOKEN }}
