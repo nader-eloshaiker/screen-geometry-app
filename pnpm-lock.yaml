@@ -131,8 +131,8 @@ devDependencies:
     specifier: ^4.2.1
     version: 4.2.1(vite@5.0.10)
   '@vitest/coverage-v8':
-    specifier: ^1.1.1
-    version: 1.1.1(vitest@1.1.2)
+    specifier: ^1.2.0
+    version: 1.2.0(vitest@1.1.2)
   '@vitest/ui':
     specifier: ^1.1.1
     version: 1.1.1(vitest@1.1.2)
@@ -5072,8 +5072,8 @@ packages:
       - supports-color
     dev: true
 
-  /@vitest/coverage-v8@1.1.1(vitest@1.1.2):
-    resolution: {integrity: sha512-TCXSh6sA92t7D5p7HJ64sPCi+szP8E3NiKTsR3YR8vVEVZB9yclQu2btktCthxahKBl7PwheP5OuejYg13xccg==}
+  /@vitest/coverage-v8@1.2.0(vitest@1.1.2):
+    resolution: {integrity: sha512-YvX8ULTUm1+zkvkl14IqXYGxE1h13OXKPoDsxazARKlp4YLrP28hHEBdplaU7ZTN/Yn6zy6Z3JadWNRJwcmyrQ==}
     peerDependencies:
       vitest: ^1.0.0
     dependencies:
