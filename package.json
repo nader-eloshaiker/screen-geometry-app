@@ -81,7 +81,7 @@
     "@typescript-eslint/parser": "^6.10.0",
     "@vitejs/plugin-react": "^4.2.1",
     "@vitest/coverage-v8": "^1.2.0",
-    "@vitest/ui": "^1.1.1",
+    "@vitest/ui": "^1.2.0",
     "autoprefixer": "^10.4.16",
     "coverage-badges-cli": "^1.2.5",
     "daisyui": "^4.4.19",
