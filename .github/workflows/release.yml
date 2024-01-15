@@ -17,6 +17,12 @@ permissions:
   pull-requests: write
 
 jobs:
+  validate_build:
+    permissions:
+      contents: read
+      pull-requests: write
+    uses: ./.github/workflows/validation.yml
+
   deploy_prod:
     name: Deploy Production Build
     runs-on: ubuntu-latest
@@ -25,6 +31,8 @@ jobs:
       pages: write
       id-token: write
       deployments: write
+    needs:
+      - validate_build
 
     steps:
       - name: Checkout
@@ -60,7 +68,7 @@ jobs:
         run: pnpm build:prod
 
       - name: Deploy production App to Cloudflare Pages
-        uses: cloudflare/pages-action@v1.5.0
+        uses: cloudflare/pages-action@v1
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
