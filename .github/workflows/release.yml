@@ -18,6 +18,11 @@ permissions:
 
 jobs:
   validate_build:
+<<<<<<< Updated upstream
+=======
+    if: "${{ github.event.pull_request.merged == true && startsWith(github.event.pull_request.title, 'chore(main): release') }}"
+    name: Validate Build
+>>>>>>> Stashed changes
     permissions:
       contents: read
       pull-requests: write
