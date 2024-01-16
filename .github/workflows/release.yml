@@ -3,8 +3,9 @@ name: Release
 
 on:
   # Runs on pushes targeting the default branch
-  release:
-    types: [released]
+  pull_request: 
+    types: [closed]
+    branches: [main]
 
 # Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
 # However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
@@ -18,11 +19,8 @@ permissions:
 
 jobs:
   validate_build:
-<<<<<<< Updated upstream
-=======
     if: "${{ github.event.pull_request.merged == true && startsWith(github.event.pull_request.title, 'chore(main): release') }}"
     name: Validate Build
->>>>>>> Stashed changes
     permissions:
       contents: read
       pull-requests: write
@@ -73,11 +71,11 @@ jobs:
         run: pnpm build:prod
 
       - name: Deploy production App to Cloudflare Pages
-        uses: cloudflare/pages-action@v1
+        uses: ./.github/actions/cloudflare-pages-action
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          projectName: screengeometry
+          projectName: ScreenGeometry
           branch: main
           directory: ./dist
           wranglerVersion: '3'
