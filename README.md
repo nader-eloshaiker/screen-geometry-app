@@ -211,6 +211,14 @@ Run Validation step consisting of:
 
 - PNPM cache management to store dependencies based on package lock hash
 
+## GitOps
+
+### Develop Branch
+
+### Feature Branch
+
+### Main Branch
+
 ## Testing
 
 ### Unit
