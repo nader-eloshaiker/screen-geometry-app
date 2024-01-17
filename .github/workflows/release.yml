@@ -3,7 +3,7 @@ name: Release
 
 on:
   # Runs on pushes targeting the default branch
-  pull_request: 
+  pull_request:
     types: [closed]
     branches: [main]
 
