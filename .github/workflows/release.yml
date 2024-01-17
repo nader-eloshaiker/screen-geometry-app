@@ -20,14 +20,14 @@ permissions:
 jobs:
   validate_build:
     if: "${{ github.event.pull_request.merged == true && startsWith(github.event.pull_request.title, 'chore(main): release') }}"
-    name: Validate Build
+    name: Valid Build
     permissions:
       contents: read
       pull-requests: write
     uses: ./.github/workflows/validation.yml
 
   deploy_prod:
-    name: Deploy Production Build
+    name: Deployed App to Production
     runs-on: ubuntu-latest
     permissions:
       contents: read

@@ -11,14 +11,14 @@ concurrency:
 
 jobs:
   validate_build:
-    name: Validate Build
+    name: Valid Build
     permissions:
       contents: read
       pull-requests: write
     uses: ./.github/workflows/validation.yml
 
   version_management:
-    name: Version Management
+    name: Version Generated
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -42,7 +42,7 @@ jobs:
         run: echo "new tag [$NEW_TAG] created for $REPO_NAME"
 
   deploy_reports:
-    name: Deploy Reports
+    name: Deployed Reports
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
@@ -100,7 +100,7 @@ jobs:
         uses: actions/deploy-pages@v4
 
   stagging:
-    name: Deploy Build to Stagging
+    name: Deployed App to Stagging
     runs-on: ubuntu-latest
     permissions:
       contents: read
