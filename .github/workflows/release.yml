@@ -3,7 +3,7 @@ name: Release
 
 on:
   # Runs on pushes targeting the default branch
-  pull_request: 
+  pull_request:
     types: [closed]
     branches: [main]
 
@@ -20,14 +20,14 @@ permissions:
 jobs:
   validate_build:
     if: "${{ github.event.pull_request.merged == true && startsWith(github.event.pull_request.title, 'chore(main): release') }}"
-    name: Validate Build
+    name: Valid Build
     permissions:
       contents: read
       pull-requests: write
     uses: ./.github/workflows/validation.yml
 
   deploy_prod:
-    name: Deploy Production Build
+    name: Deployed App to Production
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -76,7 +76,6 @@ jobs:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           projectName: ScreenGeometry
-          branch: main
           directory: ./dist
           wranglerVersion: '3'
           # Optional: Enable this if you want to have GitHub Deployments triggered
