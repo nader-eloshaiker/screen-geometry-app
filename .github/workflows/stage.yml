@@ -10,12 +10,12 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  # NOTE: This is a work in progress. The idea is to validate the build before
-  # validate_build:
-  #   permissions:
-  #     contents: read
-  #     pull-requests: write
-  #   uses: ./.github/workflows/validation.yml
+  validate_build:
+    name: Validate Build
+    permissions:
+      contents: read
+      pull-requests: write
+    uses: ./.github/workflows/validation.yml
 
   version_management:
     name: Version Management
@@ -23,13 +23,10 @@ jobs:
     permissions:
       contents: write
       pull-requests: write
-    # needs: [validate_build]
+    needs: [validate_build]
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-
-      - name: Calculate repo short name
-        run: echo "REPO_NAME=${GITHUB_REPOSITORY#*/}" >> $GITHUB_ENV
 
       - name: Prep Release
         id: generate_release
@@ -146,7 +143,7 @@ jobs:
         run: pnpm build
 
       - name: Deploy app to Cloudflare Pages
-        uses: cloudflare/pages-action@v1
+        uses: ./.github/actions/cloudflare-pages-action
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}

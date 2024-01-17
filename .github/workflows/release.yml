@@ -71,7 +71,7 @@ jobs:
         run: pnpm build:prod
 
       - name: Deploy production App to Cloudflare Pages
-        uses: cloudflare/pages-action@v1
+        uses: ./.github/actions/cloudflare-pages-action
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
