@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.12.1](https://github.com/nader-eloshaiker/screen-geometry-app/compare/v0.12.0...v0.12.1) (2024-01-17)
+
+
+### Bug Fixes
+
+* add content to gitops in readme ([#243](https://github.com/nader-eloshaiker/screen-geometry-app/issues/243)) ([d223820](https://github.com/nader-eloshaiker/screen-geometry-app/commit/d223820f3397dcf36196d36c6ef5eb525cc493ed))
+
 ## [0.12.0](https://github.com/nader-eloshaiker/screen-geometry-app/compare/v0.11.4...v0.12.0) (2024-01-17)
 
 
