@@ -216,7 +216,7 @@ Run Validation step consisting of:
 ### Develop Branch
 
 All merges to this branch must be done via a pull request. On merge, the release pr is either generated or if one exists, then it is updated
-according to the semVer and commit history. An accompanying tag is also generated.
+according to the semVer and commit history. An accompanying tag is also generated. The release PR distination is the main branch.
 
 ### Feature Branch
 
@@ -234,7 +234,7 @@ The most important prefixes you should have in mind are:
 
 ### Main Branch
 
-This branch is used purely for deployment to cloudflare in production environment.
+This branch is used purely for deployment to cloudflare in the production environment by merging the release PR.
 
 ## Testing
 

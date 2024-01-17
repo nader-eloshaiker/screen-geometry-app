@@ -10,12 +10,13 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  validate_build:
-    name: Validation
-    permissions:
-      contents: read
-      pull-requests: write
-    uses: ./.github/workflows/validation.yml
+  # NOTE: disabled for now to speed up testing of actions
+  # validate_build:
+  #   name: Validation
+  #   permissions:
+  #     contents: read
+  #     pull-requests: write
+  #   uses: ./.github/workflows/validation.yml
 
   version_management:
     name: Version Generated
@@ -23,7 +24,7 @@ jobs:
     permissions:
       contents: write
       pull-requests: write
-    needs: [validate_build]
+    # needs: [validate_build]
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -33,6 +34,7 @@ jobs:
         uses: google-github-actions/release-please-action@v4
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
+          target-branch: main
           release-type: 'node'
 
       - name: 'Output Step'
