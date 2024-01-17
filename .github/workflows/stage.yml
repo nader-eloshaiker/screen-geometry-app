@@ -11,7 +11,7 @@ concurrency:
 
 jobs:
   validate_build:
-    name: Valid Build
+    name: Tested
     permissions:
       contents: read
       pull-requests: write
@@ -147,7 +147,7 @@ jobs:
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          projectName: ScreenGeometry
+          projectName: screengeometry
           directory: ./dist
           wranglerVersion: '3'
           # Optional: Enable this if you want to have GitHub Deployments triggered

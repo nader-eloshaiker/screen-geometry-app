@@ -20,7 +20,7 @@ permissions:
 jobs:
   validate_build:
     if: "${{ github.event.pull_request.merged == true && startsWith(github.event.pull_request.title, 'chore(main): release') }}"
-    name: Valid Build
+    name: Tested
     permissions:
       contents: read
       pull-requests: write
@@ -75,7 +75,7 @@ jobs:
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          projectName: ScreenGeometry
+          projectName: screengeometry
           directory: ./dist
           wranglerVersion: '3'
           # Optional: Enable this if you want to have GitHub Deployments triggered
