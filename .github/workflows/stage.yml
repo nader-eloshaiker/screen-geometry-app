@@ -142,8 +142,8 @@ jobs:
       - name: Run pnpm build
         run: pnpm build
 
-      - name: Deploy app to Cloudflare Pages
-        uses: ./.github/actions/cloudflare-pages-action
+      - name: Deploy app to Cloudflare Pages Preview
+        uses: cloudflare/pages-action@v1
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
