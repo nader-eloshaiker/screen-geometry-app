@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.11.4](https://github.com/nader-eloshaiker/screen-geometry-app/compare/v0.11.3...v0.11.4) (2024-01-17)
+
+
+### Bug Fixes
+
+* branching for cloudflare preview and name validate_build step ([#220](https://github.com/nader-eloshaiker/screen-geometry-app/issues/220)) ([436872e](https://github.com/nader-eloshaiker/screen-geometry-app/commit/436872eefd6384f5e488ef3dfc62d2f906242850))
+
 ## [0.11.3](https://github.com/nader-eloshaiker/screen-geometry-app/compare/v0.11.2...v0.11.3) (2024-01-15)
 
 
