@@ -213,7 +213,7 @@ Run Validation step consisting of:
 
 ## GitOps
 
-### Develop Branch
+### Develop Branch | Default Branch
 
 All merges to this branch must be done via a pull request. On merge, the release pr is either generated or if one exists, then it is updated
 according to the semVer and commit history. An accompanying tag is also generated.
