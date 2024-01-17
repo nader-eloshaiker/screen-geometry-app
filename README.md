@@ -7,7 +7,8 @@
 
 Links
 
-- [App URL (cloudflare pages)](https://screengeometry.pages.dev) Or [App URL (official)](https://screengeometry.com)
+- App URL Production [screengeometry.com](https://screengeometry.com) (official) or [screengeometry.pages.dev](https://screengeometry.pages.dev) (cloudflare pages)
+- App URL Develop [screengeometry.com](https://develop.screengeometry.com) (official) or [screengeometry.pages.dev](https://develop.screengeometry.pages.dev) (cloudflare pages)
 - [Coverage](https://nader-eloshaiker.github.io/screen-geometry-app/coverage)
 - [StoryBook](https://nader-eloshaiker.github.io/screen-geometry-app/storybook)
 
