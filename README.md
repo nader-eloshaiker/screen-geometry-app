@@ -215,9 +215,26 @@ Run Validation step consisting of:
 
 ### Develop Branch
 
+All merges to this branch must be done via a pull request. On merge, the release pr is either generated or if one exists, then it is updated
+according to the semVer and commit history. An accompanying tag is also generated.
+
 ### Feature Branch
 
+All changes are expected to be done using a feature branch and all commits must follow the semVer standard.
+
+Every commit must be prefixed so that semVer can be generated for a release.
+
+Release Please assumes you are using Conventional Commit messages.
+
+The most important prefixes you should have in mind are:
+
+- fix: which represents bug fixes, and correlates to a SemVer patch.
+- feat: which represents a new feature, and correlates to a SemVer minor.
+- feat!:, or fix!:, refactor!:, etc., which represent a breaking change (indicated by the !) and will result in a SemVer major.
+
 ### Main Branch
+
+This branch is used purely for deployment to cloudflare in production environment.
 
 ## Testing
 
