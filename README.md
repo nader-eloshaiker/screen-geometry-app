@@ -8,7 +8,7 @@
 Links
 
 - App URL Production [screengeometry.com](https://screengeometry.com) (official) or [screengeometry.pages.dev](https://screengeometry.pages.dev) (cloudflare pages)
-- App URL Develop [screengeometry.com](https://develop.screengeometry.com) (official) or [screengeometry.pages.dev](https://develop.screengeometry.pages.dev) (cloudflare pages)
+- App URL Develop [screengeometry.com](https://develop.screengeometry.com) (official) or [screengeometry.pages.dev](https://develop.screengeometry.pages.dev) (cloudflare pages)](develop.screengeometry.com) (official) or [screengeometry.pages.dev](https://develop.screengeometry.pages.dev) (cloudflare pages))
 - [Coverage](https://nader-eloshaiker.github.io/screen-geometry-app/coverage)
 - [StoryBook](https://nader-eloshaiker.github.io/screen-geometry-app/storybook)
 
@@ -183,21 +183,33 @@ I discovered this little gem to replace pnpm and it is lightning quick. You can 
 
 #### CI/CD
 
+The repo makes use of GitHub actions for running actions, GitHub pages for hosting reports and Cloudflare for hosting the app
+
+Actions are triggered on the following events:
+
+##### Push to feature branch: Run Validation
+
+Run Validation step consisting of:
+
+- install
+- build
+- lint
+- unit tests
+
+##### Push to develop branch
+
+- Run validation step
+- Generate a PR release to main with version bump and changelog if not preset or else update existing
+- Build and deploy app with source map to cloudflare pages using [https://develop.screengeometry.pages.dev](https://develop.screengeometry.pages.dev)
+- Build and deploy storybook asset to github pages [https://nader-eloshaiker.github.io/screen-geometry-app/storybook](https://nader-eloshaiker.github.io/screen-geometry-app/storybook)
+- Build and deploy coverage asset to github pages[https://nader-eloshaiker.github.io/screen-geometry-app/coverage](https://nader-eloshaiker.github.io/screen-geometry-app/coverage)
+
+##### Push to main branch
+
+- Run validation step
+- Build production and deploy app to cloudflare pages using [https://screengeometry.pages.dev](https://screengeometry.pages.dev)
+
 - PNPM cache management to store dependencies based on package lock hash
-- Publish coverage report to PR and action output
-- Run:
-  - install
-  - build production
-  - lint
-  - unit tests
-
-#### Deplopyment
-
-- build prod
-- build storyblock docs
-- build coverage
-- build coverage badge
-- deploy assets to GitHub Pages
 
 ## Testing
 

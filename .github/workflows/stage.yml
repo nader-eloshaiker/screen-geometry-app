@@ -3,7 +3,7 @@ name: Stage
 on:
   push:
     branches:
-      - 'develop'
+      - develop
 
 concurrency:
   group: 'deploy'
