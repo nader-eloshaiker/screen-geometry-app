@@ -70,8 +70,8 @@ jobs:
       - name: Run pnpm build:prod
         run: pnpm build:prod
 
-      - name: Deploy production App to Cloudflare Pages
-        uses: ./.github/actions/cloudflare-pages-action
+      - name: Deploy App to Cloudflare Pages Production
+        uses: cloudflare/pages-action@v1
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
