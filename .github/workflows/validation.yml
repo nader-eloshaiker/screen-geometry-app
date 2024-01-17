@@ -11,10 +11,10 @@ on:
       - '!develop' # excludes develop as it is called by another workflow
       - '!main' # excludes main as it is called by another workflow
   # not required as the workflow is triggered by push events
-  # pull_request:
-  #   branches:
-  #     # - develop # disabled as this is called by pushes in branches already as part of PRs
-  #     - main
+  pull_request:
+    branches:
+      - develop
+      - main
   workflow_call:
 
 concurrency:
@@ -61,9 +61,6 @@ jobs:
 
       - name: Run pnpm install
         run: pnpm install
-
-      - name: Run pnpm build
-        run: pnpm build
 
       - name: Run pnpm lint
         run: pnpm lint
