@@ -204,7 +204,7 @@ Run Validation step consisting of:
 - Build and deploy storybook asset to github pages [https://nader-eloshaiker.github.io/screen-geometry-app/storybook](https://nader-eloshaiker.github.io/screen-geometry-app/storybook)
 - Build and deploy coverage asset to github pages[https://nader-eloshaiker.github.io/screen-geometry-app/coverage](https://nader-eloshaiker.github.io/screen-geometry-app/coverage)
 
-##### Merge PR to main branch
+##### Push to main branch
 
 - Run validation step
 - Build production and deploy app to cloudflare pages using [https://screengeometry.pages.dev](https://screengeometry.pages.dev)
