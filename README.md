@@ -7,8 +7,10 @@
 
 Links
 
-- App URL Production [screengeometry.com](https://screengeometry.com) (official) or [screengeometry.pages.dev](https://screengeometry.pages.dev) (cloudflare pages)
-- App URL Stagging [stagging.screengeometry.com](https://stagging.screengeometry.com) (official) or [screengeometry.pages.dev](https://stagging.screengeometry.pages.dev) (cloudflare pages)
+- App Production [screengeometry.com](https://screengeometry.com) (official)
+- App Stagging [stagging.screengeometry.com](https://stagging.screengeometry.com) (official)
+- App Production [screengeometry.pages.dev](https://screengeometry.pages.dev) (cloudflare pages)
+- App Stagging [stagging.screengeometry.pages.dev](https://stagging.screengeometry.pages.dev) (cloudflare pages)
 - [Coverage](https://nader-eloshaiker.github.io/screen-geometry-app/coverage)
 - [StoryBook](https://nader-eloshaiker.github.io/screen-geometry-app/storybook)
 
