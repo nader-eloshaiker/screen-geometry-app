@@ -152,7 +152,7 @@ jobs:
           projectName: screengeometry
           directory: ./dist
           branch: stagging
-          environmentName: stagging
+          environmentName: screengeometry (Preview)
           wranglerVersion: '3'
           # Optional: Enable this if you want to have GitHub Deployments triggered
           gitHubToken: ${{ secrets.GITHUB_TOKEN }}

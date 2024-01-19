@@ -67,7 +67,7 @@ jobs:
           projectName: screengeometry
           directory: ./dist
           branch: main
-          environmentName: production
+          environmentName: screengeometry (Production)
           wranglerVersion: '3'
           # Optional: Enable this if you want to have GitHub Deployments triggered
           gitHubToken: ${{ secrets.GITHUB_TOKEN }}
