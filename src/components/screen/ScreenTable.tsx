@@ -157,13 +157,13 @@ export const ScreenTable = ({
               <td>
                 <div className='flex flex-row items-center justify-center gap-3'>
                   <button onClick={() => handleEdit(screen)}>
-                    <EditIcon id='edit-icon' className='h-4 w-4' fill='currentColor' />
+                    <EditIcon id='edit-icon' className='size-4' fill='currentColor' />
                   </button>
                   {isDeleteLoading && screen.id === selected?.id ? (
                     <div className='loading loading-spinner loading-xs' />
                   ) : (
                     <button onClick={() => handleDelete(screen)}>
-                      <CloseIcon id='delete-icon' className='h-4 w-4' fill='currentColor' />
+                      <CloseIcon id='delete-icon' className='size-4' fill='currentColor' />
                     </button>
                   )}
                 </div>

@@ -15,7 +15,7 @@ export const ScreenButton = ({ className, ...rest }: TProps) => {
       disabled={formDrawerState.open}
       {...rest}
     >
-      <EditIcon id='theme-dark-icon' className='swap-off h-5 w-5 p-0' fill='currentColor' />
+      <EditIcon id='theme-dark-icon' className='swap-off size-5 p-0' fill='currentColor' />
       Create Screen
     </button>
   )

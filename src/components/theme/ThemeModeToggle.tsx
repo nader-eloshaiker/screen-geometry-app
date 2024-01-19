@@ -24,8 +24,8 @@ export default function ThemeModeToggle({ className, id, ...rest }: TProps) {
         className='theme-controller toggle toggle-primary toggle-md col-span-2 col-start-1'
         onChange={handleChange}
       />
-      <MoonIcon className='swap-off col-start-1 row-start-1 h-4 w-4 p-0' fill='currentColor' />
-      <SunIcon className='swap-on col-start-2 row-start-1 h-4 w-4 p-0' fill='currentColor' />
+      <MoonIcon className='swap-off col-start-1 row-start-1 size-4 p-0' fill='currentColor' />
+      <SunIcon className='swap-on col-start-2 row-start-1 size-4 p-0' fill='currentColor' />
     </label>
   )
 }

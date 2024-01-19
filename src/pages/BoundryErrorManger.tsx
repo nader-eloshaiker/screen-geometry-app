@@ -28,7 +28,7 @@ const RootBoundary = () => {
 
 export const BoundyErrorManager = () => {
   return (
-    <div id='app-root' className='container mx-auto flex h-full min-h-screen w-full flex-col justify-between'>
+    <div id='app-root' className='container mx-auto flex size-full min-h-screen flex-col justify-between'>
       <Header />
       <main role='main' className='my-6 flex h-full flex-col justify-center px-2 md:px-6 xl:px-2'>
         <div className='flex h-full flex-row justify-center px-2 md:px-6 xl:px-2'>
