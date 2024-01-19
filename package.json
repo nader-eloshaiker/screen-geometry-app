@@ -115,7 +115,7 @@
     "defaults"
   ],
   "lint-staged": {
-    "**/*.{ts,tsx,js,json,yaml} !(src/openapi/generated/**/*)": "npm run lint:fix",
-    "*.{ts,tsx,js,csss,json,yaml,md*}": "npm run format"
+    "**/*.{ts,tsx,js,json,yaml,yml} !(src/openapi/generated/**/*)": "npm run lint:fix",
+    "*.{ts,tsx,js,csss,json,yaml,yml,md*}": "npm run format"
   }
 }

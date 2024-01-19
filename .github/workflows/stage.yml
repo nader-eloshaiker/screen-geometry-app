@@ -2,6 +2,8 @@ name: Stage
 
 on:
   push:
+    tags:
+      - '!*'
     branches:
       - main
 
@@ -153,5 +155,4 @@ jobs:
           branch: stagging
           environmentName: screengeometry (Preview)
           wranglerVersion: '3'
-          # Optional: Enable this if you want to have GitHub Deployments triggered
           gitHubToken: ${{ secrets.GITHUB_TOKEN }}
