@@ -215,10 +215,11 @@ Run Validation step consisting of:
 
 ## GitOps
 
-### Develop Branch | Default Branch
+### Develop Branch
 
-All merges to this branch must be done via a pull request. On merge, the release pr is either generated or if one exists, then it is updated
-according to the semVer and commit history. An accompanying tag is also generated.
+THERE IS NO DEVELOP BRANCH.
+
+This repo uses trunk based releasing.
 
 ### Feature Branch
 
@@ -234,9 +235,13 @@ The most important prefixes you should have in mind are:
 - feat: which represents a new feature, and correlates to a SemVer minor.
 - feat!:, or fix!:, refactor!:, etc., which represent a breaking change (indicated by the !) and will result in a SemVer major.
 
-### Main Branch
+### Main Branch | Default Branch
 
-This branch is used purely for deployment to cloudflare in the production environment.
+All merges to this branch must be done via a pull request.
+
+On merge, the release pr is either generated or if one exists, then it is updated according to the semVer and commit history. An accompanying tag is also generated.
+
+When the release pr is merged to main, then a release is deployed to production.
 
 ## Testing
 
