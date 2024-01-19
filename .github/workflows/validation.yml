@@ -73,3 +73,18 @@ jobs:
           name: 'Frontend'
           json-summary-path: './reports/coverage/coverage-summary.json'
           json-final-path: './reports/coverage/coverage-final.json'
+
+      - name: Run pnpm build
+        run: pnpm build
+  
+      - name: Deploy app to Cloudflare Pages Preview
+        uses: nader-eloshaiker/cloudlfare-pages-action
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          projectName: screengeometry
+          directory: ./dist
+          environmentName: stagging
+          wranglerVersion: '3'
+          # Optional: Enable this if you want to have GitHub Deployments triggered
+          gitHubToken: ${{ secrets.GITHUB_TOKEN }}
