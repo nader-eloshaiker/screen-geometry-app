@@ -6,29 +6,21 @@ on:
       # - '*' # matches every branch that doesn't contain a '/'
       # - '*/*' # matches every branch containing a single '/'
       - '**' # matches every branch
-      - 'release-please--branches--develop--components--screen-geometry-app' # matches a specific branch
-      - '!develop' # excludes develop as it is called by another workflow
+      - '!develp' # excludes develp as it is called by another workflow
       - '!main' # excludes main as it is called by another workflow
-  # not required as the workflow is triggered by push events
-  # pull_request:
-  #   branches:
-  #     - develop
-  #     - main
+  pull_request:
+    branches:
+      - develop
+      - main
   workflow_call:
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
-# permissions:
-#   contents: read
-#   pull-requests: write
-
 permissions:
   contents: read
-  pages: write
-  id-token: write
-  deployments: write
+  pull-requests: write
 
 jobs:
   validate:
@@ -64,33 +56,18 @@ jobs:
       - name: Run pnpm install
         run: pnpm install
 
-      # - name: Run pnpm lint
-      #   run: pnpm lint
+      - name: Run pnpm lint
+        run: pnpm lint
 
-      # - name: Run pnpm test
-      #   run: pnpm test:ci
+      - name: Run pnpm test
+        run: pnpm test:ci
 
-      # - name: Report coverage
-      #   # Set if: always() to also generate the report if tests are failing
-      #   # Only works if you set `reportOnFailure: true` in your vite config as specified above
-      #   if: always()
-      #   uses: davelosert/vitest-coverage-report-action@v2
-      #   with:
-      #     name: 'Frontend'
-      #     json-summary-path: './reports/coverage/coverage-summary.json'
-      #     json-final-path: './reports/coverage/coverage-final.json'
-
-      - name: Run pnpm build
-        run: pnpm build
-  
-      - name: Deploy app to Cloudflare Pages Preview
-        uses: nader-eloshaiker/cloudlfare-pages-action@v1.0.0
+      - name: Report coverage
+        # Set if: always() to also generate the report if tests are failing
+        # Only works if you set `reportOnFailure: true` in your vite config as specified above
+        if: always()
+        uses: davelosert/vitest-coverage-report-action@v2
         with:
-          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          projectName: screengeometry
-          directory: ./dist
-          environmentName: stagging
-          wranglerVersion: '3'
-          # Optional: Enable this if you want to have GitHub Deployments triggered
-          gitHubToken: ${{ secrets.GITHUB_TOKEN }}
+          name: 'Frontend'
+          json-summary-path: './reports/coverage/coverage-summary.json'
+          json-final-path: './reports/coverage/coverage-final.json'
