@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.12.3](https://github.com/nader-eloshaiker/screen-geometry-app/compare/v0.12.2...v0.12.3) (2024-01-19)
+
+
+### Bug Fixes
+
+* spelling error in branch name ([#250](https://github.com/nader-eloshaiker/screen-geometry-app/issues/250)) ([85cd90b](https://github.com/nader-eloshaiker/screen-geometry-app/commit/85cd90bb4cf2255a3ac06ff25bd3207aa4e2c84d))
+
 ## [0.12.2](https://github.com/nader-eloshaiker/screen-geometry-app/compare/v0.12.1...v0.12.2) (2024-01-17)
 
 
