@@ -93,4 +93,4 @@ jobs:
           environmentName: stagging
           wranglerVersion: '3'
           # Optional: Enable this if you want to have GitHub Deployments triggered
-          gitHubToken: ${{ secrets.ACTION_GITHUB_TOKEN }}
+          gitHubToken: ${{ secrets.GITHUB_TOKEN }}
