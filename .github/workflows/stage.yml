@@ -10,13 +10,12 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  # NOTE: disabled for now to speed up testing of actions
-  # validate_build:
-  #   name: Validation
-  #   permissions:
-  #     contents: read
-  #     pull-requests: write
-  #   uses: ./.github/workflows/validation.yml
+  validate_build:
+    name: Validation
+    permissions:
+      contents: read
+      pull-requests: write
+    uses: ./.github/workflows/validation.yml
 
   version_management:
     name: Version Generated
@@ -24,7 +23,7 @@ jobs:
     permissions:
       contents: write
       pull-requests: write
-    # needs: [validate_build]
+    needs: [validate_build]
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -146,12 +145,14 @@ jobs:
         run: pnpm build
 
       - name: Deploy app to Cloudflare Pages Preview
-        uses: cloudflare/pages-action@v1
+        uses: nader-eloshaiker/cloudlfare-pages-action@v1.0.0
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           projectName: screengeometry
           directory: ./dist
+          branch: stagging
+          environmentName: screengeometry (Preview)
           wranglerVersion: '3'
           # Optional: Enable this if you want to have GitHub Deployments triggered
           gitHubToken: ${{ secrets.GITHUB_TOKEN }}
