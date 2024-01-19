@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.12.4](https://github.com/nader-eloshaiker/screen-geometry-app/compare/v0.12.3...v0.12.4) (2024-01-19)
+
+
+### Bug Fixes
+
+* update to latest pnpm and eslint-plugin-tailwindcss ([#258](https://github.com/nader-eloshaiker/screen-geometry-app/issues/258)) ([573e236](https://github.com/nader-eloshaiker/screen-geometry-app/commit/573e236c603e20409b89634c6548557656f7eebf))
+
 ## [0.12.3](https://github.com/nader-eloshaiker/screen-geometry-app/compare/v0.12.2...v0.12.3) (2024-01-19)
 
 
