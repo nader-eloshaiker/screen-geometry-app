@@ -2,9 +2,11 @@
 name: Release
 
 on:
-  pull_request:
-    types: [closed]
-    branches: [main]
+  push:
+    tags:
+    - '*'
+    branches:
+      - main
 
 # Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
 # However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
@@ -18,7 +20,6 @@ permissions:
 
 jobs:
   deploy_prod:
-    if: "${{ github.event.pull_request.merged == true && startsWith(github.event.pull_request.title, 'chore(main): release') }}"
     name: Deployed App to Production
     runs-on: ubuntu-latest
     permissions:

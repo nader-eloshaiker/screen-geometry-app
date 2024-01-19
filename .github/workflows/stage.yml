@@ -2,9 +2,6 @@ name: Stage
 
 on:
   push:
-    tags:
-      - '*' # Push events to every tag not containing /
-      # - '**' # Push events to every tag including hierarchical tags like v1.0/beta
     branches:
       - main
 
