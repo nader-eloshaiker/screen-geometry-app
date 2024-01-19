@@ -7,7 +7,10 @@
 
 Links
 
-- [App URL (cloudflare pages)](https://screengeometry.pages.dev) Or [App URL (official)](https://screengeometry.com)
+- App Production [screengeometry.com](https://screengeometry.com) (official)
+- App Stagging [stagging.screengeometry.com](https://stagging.screengeometry.com) (official)
+- App Production [screengeometry.pages.dev](https://screengeometry.pages.dev) (cloudflare pages)
+- App Stagging [stagging.screengeometry.pages.dev](https://stagging.screengeometry.pages.dev) (cloudflare pages)
 - [Coverage](https://nader-eloshaiker.github.io/screen-geometry-app/coverage)
 - [StoryBook](https://nader-eloshaiker.github.io/screen-geometry-app/storybook)
 
@@ -182,21 +185,58 @@ I discovered this little gem to replace pnpm and it is lightning quick. You can 
 
 #### CI/CD
 
+The repo makes use of GitHub actions for running actions, GitHub pages for hosting reports and Cloudflare for hosting the app
+
+Actions are triggered on the following events:
+
+##### Push to feature branch: Run Validation
+
+Run Validation step consisting of:
+
+- install
+- build
+- lint
+- unit tests
+
+##### Push to develop branch
+
+- Run validation step
+- Generate a PR release to main with version bump and changelog if not preset or else update existing
+- Build and deploy app with source map to cloudflare pages using [https://stagging.screengeometry.pages.dev](https://stagging.screengeometry.pages.dev)
+- Build and deploy storybook asset to github pages [https://nader-eloshaiker.github.io/screen-geometry-app/storybook](https://nader-eloshaiker.github.io/screen-geometry-app/storybook)
+- Build and deploy coverage asset to github pages[https://nader-eloshaiker.github.io/screen-geometry-app/coverage](https://nader-eloshaiker.github.io/screen-geometry-app/coverage)
+
+##### Push to main branch
+
+- Run validation step
+- Build production and deploy app to cloudflare pages using [https://screengeometry.pages.dev](https://screengeometry.pages.dev)
+
 - PNPM cache management to store dependencies based on package lock hash
-- Publish coverage report to PR and action output
-- Run:
-  - install
-  - build production
-  - lint
-  - unit tests
 
-#### Deplopyment
+## GitOps
 
-- build prod
-- build storyblock docs
-- build coverage
-- build coverage badge
-- deploy assets to GitHub Pages
+### Develop Branch | Default Branch
+
+All merges to this branch must be done via a pull request. On merge, the release pr is either generated or if one exists, then it is updated
+according to the semVer and commit history. An accompanying tag is also generated.
+
+### Feature Branch
+
+All changes are expected to be done using a feature branch and all commits must follow the semVer standard.
+
+Every commit must be prefixed so that semVer can be generated for a release.
+
+Release Please assumes you are using Conventional Commit messages.
+
+The most important prefixes you should have in mind are:
+
+- fix: which represents bug fixes, and correlates to a SemVer patch.
+- feat: which represents a new feature, and correlates to a SemVer minor.
+- feat!:, or fix!:, refactor!:, etc., which represent a breaking change (indicated by the !) and will result in a SemVer major.
+
+### Main Branch
+
+This branch is used purely for deployment to cloudflare in the production environment.
 
 ## Testing
 
@@ -218,7 +258,7 @@ However, you can bring up a visual console for testing using
 #### Test dashboard
 
 The console can be accessed from the [http://localhost](http://localhost:51204/__vitest__/#/)
-They are also published to github pages at ![Coverage](https://nader-eloshaiker.github.io/screen-geometry-app/coverage)
+They are also published to github pages at [Coverage](https://nader-eloshaiker.github.io/screen-geometry-app/coverage)
 
 #### Coverage Reports
 

@@ -1,20 +1,15 @@
 name: Validation
 
-# Controls when the action will run.
 on:
-  # Triggers the workflow on push or pull request events but only for the main branch
   push:
     branches:
       # - '*' # matches every branch that doesn't contain a '/'
       # - '*/*' # matches every branch containing a single '/'
       - '**' # matches every branch
-      - '!develop' # excludes develop as it is called by another workflow
       - '!main' # excludes main as it is called by another workflow
-  # not required as the workflow is triggered by push events
-  # pull_request:
-  #   branches:
-  #     # - develop # disabled as this is called by pushes in branches already as part of PRs
-  #     - main
+  pull_request:
+    branches:
+      - main
   workflow_call:
 
 concurrency:
@@ -25,14 +20,11 @@ permissions:
   contents: read
   pull-requests: write
 
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   validate:
-    name: Build Validations
-    # The type of runner that the job will run on
+    name: Tested
     runs-on: ubuntu-latest
 
-    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -52,7 +44,7 @@ jobs:
         run: echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
 
       - name: Setup pnpm cache
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: ${{ env.STORE_PATH }}
           key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
@@ -61,9 +53,6 @@ jobs:
 
       - name: Run pnpm install
         run: pnpm install
-
-      - name: Run pnpm build
-        run: pnpm build
 
       - name: Run pnpm lint
         run: pnpm lint

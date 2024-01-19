@@ -3,7 +3,7 @@ name: Stage
 on:
   push:
     branches:
-      - 'main'
+      - main
 
 concurrency:
   group: 'deploy'
@@ -11,13 +11,14 @@ concurrency:
 
 jobs:
   validate_build:
+    name: Validation
     permissions:
       contents: read
       pull-requests: write
     uses: ./.github/workflows/validation.yml
 
   version_management:
-    name: Version Management
+    name: Version Generated
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -28,14 +29,22 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Prep Release
-        id: release
+        id: generate_release
         uses: google-github-actions/release-please-action@v4
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
+          # The short ref name of the branch or tag that triggered
+          #  the workflow run. For example, `main` or `1.x`
+          target-branch: ${{ github.ref_name }}
           release-type: 'node'
 
+      - name: 'Output Step'
+        env:
+          NEW_TAG: ${{ steps.generate_release.outputs.tag_name }}
+        run: echo "new tag [$NEW_TAG] created for $REPO_NAME"
+
   deploy_reports:
-    name: Deploy Reports
+    name: Deployed Reports
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
@@ -67,7 +76,7 @@ jobs:
         run: echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
 
       - name: Setup pnpm cache
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: ${{ env.STORE_PATH }}
           key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
@@ -93,7 +102,7 @@ jobs:
         uses: actions/deploy-pages@v4
 
   stagging:
-    name: Deploy Build to Stagging
+    name: Deployed App to Stagging
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -122,7 +131,7 @@ jobs:
         run: echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
 
       - name: Setup pnpm cache
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: ${{ env.STORE_PATH }}
           key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
@@ -135,14 +144,15 @@ jobs:
       - name: Run pnpm build
         run: pnpm build
 
-      - name: Deploy app to Cloudflare Pages
-        uses: cloudflare/pages-action@v1
+      - name: Deploy app to Cloudflare Pages Preview
+        uses: nader-eloshaiker/cloudlfare-pages-action@v1.0.0
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           projectName: screengeometry
           directory: ./dist
           branch: stagging
+          environmentName: screengeometry (Preview)
           wranglerVersion: '3'
           # Optional: Enable this if you want to have GitHub Deployments triggered
           gitHubToken: ${{ secrets.GITHUB_TOKEN }}
