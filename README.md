@@ -7,8 +7,10 @@
 
 Links
 
-- App URL Production [screengeometry.com](https://screengeometry.com) (official) or [screengeometry.pages.dev](https://screengeometry.pages.dev) (cloudflare pages)
-- App URL Develop [screengeometry.com](https://develop.screengeometry.com) (official) or [screengeometry.pages.dev](https://develop.screengeometry.pages.dev) (cloudflare pages)](develop.screengeometry.com) (official) or [screengeometry.pages.dev](https://develop.screengeometry.pages.dev) (cloudflare pages))
+- App Production [screengeometry.com](https://screengeometry.com) (official)
+- App Stagging [stagging.screengeometry.com](https://stagging.screengeometry.com) (official)
+- App Production [screengeometry.pages.dev](https://screengeometry.pages.dev) (cloudflare pages)
+- App Stagging [stagging.screengeometry.pages.dev](https://stagging.screengeometry.pages.dev) (cloudflare pages)
 - [Coverage](https://nader-eloshaiker.github.io/screen-geometry-app/coverage)
 - [StoryBook](https://nader-eloshaiker.github.io/screen-geometry-app/storybook)
 
@@ -200,7 +202,7 @@ Run Validation step consisting of:
 
 - Run validation step
 - Generate a PR release to main with version bump and changelog if not preset or else update existing
-- Build and deploy app with source map to cloudflare pages using [https://develop.screengeometry.pages.dev](https://develop.screengeometry.pages.dev)
+- Build and deploy app with source map to cloudflare pages using [https://stagging.screengeometry.pages.dev](https://stagging.screengeometry.pages.dev)
 - Build and deploy storybook asset to github pages [https://nader-eloshaiker.github.io/screen-geometry-app/storybook](https://nader-eloshaiker.github.io/screen-geometry-app/storybook)
 - Build and deploy coverage asset to github pages[https://nader-eloshaiker.github.io/screen-geometry-app/coverage](https://nader-eloshaiker.github.io/screen-geometry-app/coverage)
 
@@ -256,7 +258,7 @@ However, you can bring up a visual console for testing using
 #### Test dashboard
 
 The console can be accessed from the [http://localhost](http://localhost:51204/__vitest__/#/)
-They are also published to github pages at ![Coverage](https://nader-eloshaiker.github.io/screen-geometry-app/coverage)
+They are also published to github pages at [Coverage](https://nader-eloshaiker.github.io/screen-geometry-app/coverage)
 
 #### Coverage Reports
 
