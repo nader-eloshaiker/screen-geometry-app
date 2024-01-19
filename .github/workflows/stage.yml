@@ -2,8 +2,6 @@ name: Stage
 
 on:
   push:
-    tags:
-      - '!v*'
     branches:
       - main
 
