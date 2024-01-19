@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.12.5](https://github.com/nader-eloshaiker/screen-geometry-app/compare/v0.12.4...v0.12.5) (2024-01-19)
+
+
+### Bug Fixes
+
+* correct readme for trunk based releasing ([#262](https://github.com/nader-eloshaiker/screen-geometry-app/issues/262)) ([c6627a8](https://github.com/nader-eloshaiker/screen-geometry-app/commit/c6627a8ab235507e565cc104de9fad16331d9408))
+
 ## [0.12.4](https://github.com/nader-eloshaiker/screen-geometry-app/compare/v0.12.3...v0.12.4) (2024-01-19)
 
 
