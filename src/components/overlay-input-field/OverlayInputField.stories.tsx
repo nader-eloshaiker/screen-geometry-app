@@ -75,7 +75,7 @@ export const ImageOverlay: Story = {
     disabled: false,
     overlays: [
       {
-        overlay: <MagnifyGlassIcon className='h-6 w-6' />,
+        overlay: <MagnifyGlassIcon className='size-6' />,
         overlayClassName: 'left-0 ml-4',
       },
     ],
@@ -101,7 +101,7 @@ export const CombinationOverlay: Story = {
     disabled: false,
     overlays: [
       {
-        overlay: <MagnifyGlassIcon className='h-6 w-6' />,
+        overlay: <MagnifyGlassIcon className='size-6' />,
         overlayClassName: 'left-0 ml-4',
       },
       {

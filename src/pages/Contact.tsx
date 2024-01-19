@@ -39,7 +39,7 @@ export const Contact = () => {
       <div className='mb-8 flex flex-col gap-4 p-4'>
         <ListItem
           href='https://github.com/nader-eloshaiker/screen-geometry-app'
-          icon={<GithubIcon className='h-6 w-6 fill-current' />}
+          icon={<GithubIcon className='size-6 fill-current' />}
           text='Github Code Repository'
         />
       </div>
@@ -49,7 +49,7 @@ export const Contact = () => {
       <div className='mb-8 flex flex-col gap-4 p-4'>
         <ListItem
           href='https://github.com/nader-eloshaiker/screen-geometry-app/discussions/80'
-          icon={<GithubIcon className='h-6 w-6 fill-current' />}
+          icon={<GithubIcon className='size-6 fill-current' />}
           text='Github Discussions'
         />
       </div>
@@ -62,12 +62,12 @@ export const Contact = () => {
       <div className='mb-8 flex flex-col gap-4 p-4'>
         <ListItem
           href='https://github.com/nader-eloshaiker/screen-geometry-app/issues'
-          icon={<GithubIcon className='h-6 w-6 fill-current' />}
+          icon={<GithubIcon className='size-6 fill-current' />}
           text='Github Issues'
         />
         <ListItem
           href='https://docs.github.com/en/get-started/quickstart/contributing-to-projects'
-          icon={<GithubIcon className='h-6 w-6 fill-current' />}
+          icon={<GithubIcon className='size-6 fill-current' />}
           text='Contributing'
         />
       </div>
@@ -78,15 +78,15 @@ export const Contact = () => {
         hearing from you!
       </p>
       <div className='mb-8 flex flex-col gap-4 p-4'>
-        <ListItem href='https://x.com/nadereloshaiker' icon={<XIcon className='h-6 w-6 fill-current' />} text='X' />
+        <ListItem href='https://x.com/nadereloshaiker' icon={<XIcon className='size-6 fill-current' />} text='X' />
         <ListItem
           href='https://twitter.com/nadereloshaiker'
-          icon={<TwitterIcon className='h-6 w-6 fill-current' />}
+          icon={<TwitterIcon className='size-6 fill-current' />}
           text='Twitter'
         />
         <ListItem
           href='https://www.linkedin.com/in/nadereloshaiker'
-          icon={<LinkedInIcon className='h-6 w-6 fill-current' />}
+          icon={<LinkedInIcon className='size-6 fill-current' />}
           text='LinkedIn'
         />
       </div>

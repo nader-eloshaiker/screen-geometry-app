@@ -7,7 +7,7 @@ import { clsx } from 'clsx'
 import { ChangeEvent, KeyboardEvent, memo, useCallback, useEffect, useRef, useState } from 'react'
 
 const standardOverlay: InputOverlay = {
-  overlay: <MagnifyGlassIcon className='h-6 w-6' />,
+  overlay: <MagnifyGlassIcon className='size-6' />,
 
   overlayClassName: 'left-0 ml-4',
 }
@@ -84,7 +84,7 @@ export const ListInputField = ({
         {
           overlay: (
             <button className='btn btn-circle btn-xs' role='reset'>
-              <CloseIcon className='h-4 w-4' onClick={handleClear} />
+              <CloseIcon className='size-4' onClick={handleClear} />
             </button>
           ),
           overlayClassName: 'right-0 mr-4',

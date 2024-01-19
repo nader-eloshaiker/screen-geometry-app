@@ -86,7 +86,7 @@ export const Screens = () => {
               </label>
               <Stacked height={maxPanelSize.height}>
                 {screens.length === 0 && isScreenListLoading ? (
-                  <SkeletonImage className='h-full w-full' />
+                  <SkeletonImage className='size-full' />
                 ) : (
                   screens
                     .filter((screen) => screen.visible)

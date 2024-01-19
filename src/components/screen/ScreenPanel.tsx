@@ -7,7 +7,6 @@ import styled from 'styled-components'
 const Panel = styled.div<{ $width: number; $height: number; $color?: string }>`
   width: ${(props) => props.$width}%;
   height: ${(props) => props.$height}%;
-  border-color: ${(props) => props.$color};
   color: ${(props) => props.$color};
   text-align: center;
 `
@@ -38,7 +37,7 @@ export const ScreenPanel = ({
 
   return (
     <Panel
-      className={clsx('rounded-lg', { 'outline-4': selected, 'outline-2 outline-dashed': !selected })}
+      className={clsx('rounded-lg', { 'outline outline-4': selected, 'outline-dashed outline-2': !selected })}
       $width={width}
       $height={height}
       $color={themeMode === DarkMode ? screen.color.lightColor : screen.color.darkColor}
@@ -48,14 +47,14 @@ export const ScreenPanel = ({
       {...rest}
     >
       {selected && (
-        <table className='h-full w-full'>
+        <table className='size-full'>
           <tbody>
             {Array.from({ length: vPixelCount }, (_, i) => (
               <tr key={i}>
                 {Array.from({ length: hPixelCount }, (_, j) => (
                   <td key={j} className='p-0.5'>
                     <div
-                      className='h-full w-full rounded-full'
+                      className='size-full rounded-full'
                       style={{
                         backgroundColor: color,
                       }}

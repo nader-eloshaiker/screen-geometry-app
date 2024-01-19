@@ -26,7 +26,7 @@ export default function Footer() {
         <span className='text-xs 2xs:hidden'>v{shortVer}</span>
         <span className='hidden text-xs 2xs:block'>Version {longVer}</span>
         <a href='https://github.com/nader-eloshaiker/screen-geometry-app'>
-          <GithubIcon className='h-6 w-6 fill-current' />
+          <GithubIcon className='size-6 fill-current' />
         </a>
       </div>
       <NotificationToaster />

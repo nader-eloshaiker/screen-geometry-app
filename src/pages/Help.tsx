@@ -127,7 +127,7 @@ export const Help = () => {
         <Heading className='mb-4 text-2xl font-bold'>Delete</Heading>
         <Paragraph>
           To delete an existing screen, click on the
-          <CloseIcon id='edit-icon' className='mx-4 inline h-8 w-8 shadow-lg' fill='currentColor' /> icon in the
+          <CloseIcon id='edit-icon' className='mx-4 inline size-8 shadow-lg' fill='currentColor' /> icon in the
           <strong>action</strong> column of the Screen Specs table.
         </Paragraph>
       </Section>
@@ -155,7 +155,7 @@ export const Help = () => {
         <Heading className='mb-4 text-2xl font-bold'>Create / Update</Heading>
         <Paragraph>
           To edit an existing screen, click on the
-          <EditIcon id='edit-icon' className='mx-4 inline h-8 w-8 shadow-lg' fill='currentColor' /> icon in the{' '}
+          <EditIcon id='edit-icon' className='mx-4 inline size-8 shadow-lg' fill='currentColor' /> icon in the{' '}
           <strong>action</strong> column of the Screen Specs table. Then make your changes and click the{' '}
           <strong>Update</strong> button.
         </Paragraph>

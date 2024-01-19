@@ -8,7 +8,7 @@ const meta = {
   decorators: [
     (Story: StoryFn) => {
       return (
-        <div className='h-48 w-48'>
+        <div className='size-48'>
           <Story />
         </div>
       )
