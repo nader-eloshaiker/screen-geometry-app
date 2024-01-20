@@ -11,6 +11,8 @@ on:
         default: 'v1.0.0'
   # Auto deploy on new release from release please PR
   push:
+    branches:
+      - main
     tags:
       - '*'
     paths:
