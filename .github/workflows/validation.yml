@@ -22,7 +22,7 @@ permissions:
 
 jobs:
   validate:
-    name: Tested
+    name: Tests Passed
     runs-on: ubuntu-latest
 
     steps:
