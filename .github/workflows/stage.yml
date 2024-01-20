@@ -4,6 +4,13 @@ on:
   push:
     branches:
       - main
+    # Don't run on new release from release please PR
+    tags-ignore:
+      - '*'
+    paths-ignore:
+      - 'package.json'
+      - 'pnpm-lock.yaml'
+      - 'CHANGELOG.md'
 
 concurrency:
   group: 'deploy'
@@ -18,7 +25,7 @@ jobs:
     uses: ./.github/workflows/validation.yml
 
   version_management:
-    name: Version Generated
+    name: Release Managed
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -32,10 +39,13 @@ jobs:
         id: generate_release
         uses: google-github-actions/release-please-action@v4
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+          # This is so that actions can run on the release PR
+          token: ${{ secrets.ACTION_GITHUB_TOKEN }}
           # example, `main` or `1.x`
           target-branch: ${{ github.ref_name }}
           release-type: 'node'
+          # ensure all committed files are considered for release
+          path: '.'
 
       - name: 'Output Step'
         env:
@@ -43,7 +53,7 @@ jobs:
         run: echo "new tag [$NEW_TAG] created for $REPO_NAME"
 
   deploy_reports:
-    name: Deployed Reports
+    name: Reports Deployed
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
@@ -101,7 +111,7 @@ jobs:
         uses: actions/deploy-pages@v4
 
   stagging:
-    name: Deployed App to Stagging
+    name: App Deployed to Stagging
     runs-on: ubuntu-latest
     permissions:
       contents: read
