@@ -1,21 +1,31 @@
 # Screen Geometry
 
 ![Coverage Badge](./docs/coverage.svg)
+
 [![Validation](https://github.com/nader-eloshaiker/screen-geometry-app/actions/workflows/validation.yml/badge.svg)](https://github.com/nader-eloshaiker/screen-geometry-app/actions/workflows/validation.yml)
-[![Stage](https://github.com/nader-eloshaiker/screen-geometry-app/actions/workflows/stage.yml/badge.svg)](https://github.com/nader-eloshaiker/screen-geometry-app/actions/workflows/stage.yml)
-[![Release](https://github.com/nader-eloshaiker/screen-geometry-app/actions/workflows/release.yml/badge.svg)](https://github.com/nader-eloshaiker/screen-geometry-app/actions/workflows/release.yml)
+[![CI/CD](https://github.com/nader-eloshaiker/screen-geometry-app/actions/workflows/cicd.yml/badge.svg)](https://github.com/nader-eloshaiker/screen-geometry-app/actions/workflows/cicd.yml)
+[![Release Deployment](https://github.com/nader-eloshaiker/screen-geometry-app/actions/workflows/release.yml/badge.svg)](https://github.com/nader-eloshaiker/screen-geometry-app/actions/workflows/release.yml)
+[![Staging Deployment](https://github.com/nader-eloshaiker/screen-geometry-app/actions/workflows/staging.yml/badge.svg)](https://github.com/nader-eloshaiker/screen-geometry-app/actions/workflows/staging.yml)
 
-Links
+## Description
 
-- App Production [screengeometry.com](https://screengeometry.com) (official)
-- App Staging [staging.screengeometry.com](https://staging.screengeometry.com) (official)
-- App Production [screengeometry.pages.dev](https://screengeometry.pages.dev) (cloudflare pages)
-- App Staging [staging.screengeometry.pages.dev](https://staging.screengeometry.pages.dev) (cloudflare pages)
+This is a tool to help visually compare different screen sizes to help you choose which monitor, phone, or tablet to buy. It does this by overlaying different screen sizes ontop of each other for
+easy comparison as well as tabulate the specs.
+
+## Links
+
+### Official App urls
+
+- Production [screengeometry.com](https://screengeometry.com)
+- Staging [staging.screengeometry.com](https://staging.screengeometry.com)
+- Develop [develop.screengeometry.com](https://develop.screengeometry.com)
+
+### Reports
+
 - [Coverage](https://nader-eloshaiker.github.io/screen-geometry-app/coverage)
 - [StoryBook](https://nader-eloshaiker.github.io/screen-geometry-app/storybook)
 
-This is a tool to help visually compare different screen sizes to help you choose which monitor to buy. It does this by overlaying different screen sizes ontop of each other for
-easy comparison as well as tabulate the specs.
+## App Demo
 
 ![Demo video](./public/media/ScreenGeometry.gif)
 
