@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.13.1](https://github.com/nader-eloshaiker/screen-geometry-app/compare/v0.13.0...v0.13.1) (2024-01-20)
+
+
+### Bug Fixes
+
+* remove package lock file from trigger ([#270](https://github.com/nader-eloshaiker/screen-geometry-app/issues/270)) ([ba961e5](https://github.com/nader-eloshaiker/screen-geometry-app/commit/ba961e51c2de44dbde276cc76ff3f9957deb5f09))
+
 ## [0.13.0](https://github.com/nader-eloshaiker/screen-geometry-app/compare/v0.12.5...v0.13.0) (2024-01-20)
 
 
