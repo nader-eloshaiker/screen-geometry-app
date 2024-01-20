@@ -9,7 +9,6 @@ on:
       - '*'
     paths-ignore:
       - 'package.json'
-      - 'pnpm-lock.yaml'
       - 'CHANGELOG.md'
 
 concurrency:
