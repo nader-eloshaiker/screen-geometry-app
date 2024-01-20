@@ -15,7 +15,6 @@ on:
       - '*'
     paths:
       - 'package.json'
-      - 'pnpm-lock.yaml'
       - 'CHANGELOG.md'
 
 # Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
