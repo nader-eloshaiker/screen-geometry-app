@@ -189,29 +189,37 @@ The repo makes use of GitHub actions for running actions, GitHub pages for hosti
 
 Actions are triggered on the following events:
 
-##### Push to feature branch: Run Validation
+##### Push to feature branch: Run Validation Action
 
 Run Validation step consisting of:
 
+- pnpm cache management to store dependencies based on package lock hash
 - install
 - build
 - lint
 - unit tests
+- report coverage
 
-##### Push to develop branch
+##### Push to main branch from feature branch: Run CI/CD Action
 
 - Run validation step
+- pnpm cache management to store dependencies based on package lock hash
 - Generate a PR release to main with version bump and changelog if not preset or else update existing
-- Build and deploy app with source map to cloudflare pages using [https://staging.screengeometry.pages.dev](https://staging.screengeometry.pages.dev)
+- Build and deploy app with source map for debugging to cloudflare pages develop environment using [https://develop.screengeometry.pages.dev](https://develop.screengeometry.pages.dev)
 - Build and deploy storybook asset to github pages [https://nader-eloshaiker.github.io/screen-geometry-app/storybook](https://nader-eloshaiker.github.io/screen-geometry-app/storybook)
 - Build and deploy coverage asset to github pages[https://nader-eloshaiker.github.io/screen-geometry-app/coverage](https://nader-eloshaiker.github.io/screen-geometry-app/coverage)
 
-##### Push to main branch
+##### Push to release branch: Run Staging Deployment Action
 
 - Run validation step
-- Build production and deploy app to cloudflare pages using [https://screengeometry.pages.dev](https://screengeometry.pages.dev)
+- pnpm cache management to store dependencies based on package lock hash
+- Build production and deploy app to cloudflare pages staging environment using [https://staging.screengeometry.pages.dev](https://staging.screengeometry.pages.dev)
 
-- PNPM cache management to store dependencies based on package lock hash
+##### Push to main from release branch: Run Release Deployment Action
+
+- Run validation step
+- pnpm cache management to store dependencies based on package lock hash
+- Build production and deploy app to cloudflare pages production environment using [https://staging.screengeometry.pages.dev](https://staging.screengeometry.pages.dev)
 
 ## GitOps
 
@@ -239,9 +247,55 @@ The most important prefixes you should have in mind are:
 
 All merges to this branch must be done via a pull request.
 
-On merge, the release pr is either generated or if one exists, then it is updated according to the semVer and commit history. An accompanying tag is also generated.
+On merge from feature, the release pr is either generated or if one exists, then it is updated according to the semVer and commit history. An accompanying tag is also generated in the pr.
 
 When the release pr is merged to main, then a release is deployed to production.
+
+All merges to this branch require **Tests Passed** and **CodeQL** statuses before they are able to proceed with the merge. This includes the release branches/prs.
+
+### Workflow
+
+```mermaid
+gitGraph TB:
+
+commit
+commit
+commit tag: "v1.0.0"
+
+branch featureA order: 1
+commit id: "feat(1):"
+commit id: "fix(2):"
+checkout main
+merge featureA
+
+branch release order: 4
+commit tag: "v1.1.0"
+
+checkout main
+branch featureB order: 2
+commit id: "chore(3):"
+checkout main
+merge featureB
+
+checkout release
+merge main
+commit tag: "v1.1.0"
+
+checkout main
+branch featureC order: 3
+commit id: "feat!(4):"
+commit id: "feat(5):"
+checkout main
+merge featureC
+
+checkout release
+merge main
+commit tag: "v2.0.0"
+checkout main
+merge release tag: "release v2.0.0"
+
+
+```
 
 ## Testing
 

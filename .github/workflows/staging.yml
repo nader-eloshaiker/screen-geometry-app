@@ -1,5 +1,5 @@
 # Simple workflow for deploying static content to GitHub Pages
-name: Release
+name: Staging Deployment
 
 on:
   push:
@@ -52,8 +52,8 @@ jobs:
       - name: Run pnpm install
         run: pnpm install
 
-      - name: Run pnpm build
-        run: pnpm build
+      - name: Run pnpm build:prod
+        run: pnpm build:prod
 
       - name: Deploy app to Cloudflare Pages Staging
         uses: nader-eloshaiker/cloudlfare-pages-action@v1.0.0

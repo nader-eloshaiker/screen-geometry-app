@@ -1,5 +1,5 @@
 # Simple workflow for deploying static content to GitHub Pages
-name: Release
+name: Release Deployment
 
 on:
   # can be used to roll back to a previous release
@@ -82,71 +82,3 @@ jobs:
           wranglerVersion: '3'
           # Optional: Enable this if you want to have GitHub Deployments triggered
           gitHubToken: ${{ secrets.GITHUB_TOKEN }}
-
-  deploy_staging_develop:
-    name: App Deployed to Staging and Develop
-    runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      pages: write
-      id-token: write
-      deployments: write
-
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-        with:
-          ref: ${{ inputs.tag || github.ref }}
-
-      - name: Install Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version-file: '.nvmrc'
-
-      - name: Install pnpm
-        uses: pnpm/action-setup@v2
-        with:
-          run_install: false
-
-      - name: Get pnpm store directory
-        id: pnpm-cache
-        shell: bash
-        run: echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
-
-      - name: Setup pnpm cache
-        uses: actions/cache@v4
-        with:
-          path: ${{ env.STORE_PATH }}
-          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
-          restore-keys: |
-            ${{ runner.os }}-pnpm-store-
-
-      - name: Run pnpm install
-        run: pnpm install
-
-      - name: Run pnpm build
-        run: pnpm build
-
-      - name: Deploy app to Cloudflare Pages Staging
-        uses: nader-eloshaiker/cloudlfare-pages-action@v1.0.0
-        with:
-          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          projectName: screengeometry
-          directory: ./dist
-          branch: staging
-          environmentName: screengeometry (Staging)
-          wranglerVersion: '3'
-          gitHubToken: ${{ secrets.ACTION_GITHUB_TOKEN }}
-
-      - name: Deploy app to Cloudflare Pages Develop
-        uses: nader-eloshaiker/cloudlfare-pages-action@v1.0.0
-        with:
-          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          projectName: screengeometry
-          directory: ./dist
-          branch: develop
-          environmentName: screengeometry (Develop)
-          wranglerVersion: '3'
-          gitHubToken: ${{ secrets.ACTION_GITHUB_TOKEN }}
