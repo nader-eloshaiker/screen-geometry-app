@@ -256,7 +256,7 @@ All merges to this branch require **Tests Passed** and **CodeQL** statuses befor
 ### Workflow
 
 ```mermaid
-gitGraph TB:
+gitGraph
 
 commit
 commit
