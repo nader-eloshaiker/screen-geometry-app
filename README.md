@@ -8,9 +8,9 @@
 Links
 
 - App Production [screengeometry.com](https://screengeometry.com) (official)
-- App Stagging [stagging.screengeometry.com](https://stagging.screengeometry.com) (official)
+- App Staging [staging.screengeometry.com](https://staging.screengeometry.com) (official)
 - App Production [screengeometry.pages.dev](https://screengeometry.pages.dev) (cloudflare pages)
-- App Stagging [stagging.screengeometry.pages.dev](https://stagging.screengeometry.pages.dev) (cloudflare pages)
+- App Staging [staging.screengeometry.pages.dev](https://staging.screengeometry.pages.dev) (cloudflare pages)
 - [Coverage](https://nader-eloshaiker.github.io/screen-geometry-app/coverage)
 - [StoryBook](https://nader-eloshaiker.github.io/screen-geometry-app/storybook)
 
@@ -202,7 +202,7 @@ Run Validation step consisting of:
 
 - Run validation step
 - Generate a PR release to main with version bump and changelog if not preset or else update existing
-- Build and deploy app with source map to cloudflare pages using [https://stagging.screengeometry.pages.dev](https://stagging.screengeometry.pages.dev)
+- Build and deploy app with source map to cloudflare pages using [https://staging.screengeometry.pages.dev](https://staging.screengeometry.pages.dev)
 - Build and deploy storybook asset to github pages [https://nader-eloshaiker.github.io/screen-geometry-app/storybook](https://nader-eloshaiker.github.io/screen-geometry-app/storybook)
 - Build and deploy coverage asset to github pages[https://nader-eloshaiker.github.io/screen-geometry-app/coverage](https://nader-eloshaiker.github.io/screen-geometry-app/coverage)
 

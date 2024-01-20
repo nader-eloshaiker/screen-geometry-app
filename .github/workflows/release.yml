@@ -70,7 +70,7 @@ jobs:
       - name: Run pnpm build:prod
         run: pnpm build:prod
 
-      - name: Deploy app to Cloudflare Pages Preview
+      - name: Deploy app to Cloudflare Pages Production
         uses: nader-eloshaiker/cloudlfare-pages-action@v1.0.0
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
@@ -83,8 +83,8 @@ jobs:
           # Optional: Enable this if you want to have GitHub Deployments triggered
           gitHubToken: ${{ secrets.GITHUB_TOKEN }}
 
-  stagging:
-    name: App Deployed to Stagging
+  deploy_staging_develop:
+    name: App Deployed to Staging and Develop
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -127,14 +127,26 @@ jobs:
       - name: Run pnpm build
         run: pnpm build
 
-      - name: Deploy app to Cloudflare Pages Preview
+      - name: Deploy app to Cloudflare Pages Staging
         uses: nader-eloshaiker/cloudlfare-pages-action@v1.0.0
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           projectName: screengeometry
           directory: ./dist
-          branch: stagging
-          environmentName: screengeometry (Preview)
+          branch: staging
+          environmentName: screengeometry (Staging)
           wranglerVersion: '3'
-          gitHubToken: ${{ secrets.GITHUB_TOKEN }}
+          gitHubToken: ${{ secrets.ACTION_GITHUB_TOKEN }}
+
+      - name: Deploy app to Cloudflare Pages Develop
+        uses: nader-eloshaiker/cloudlfare-pages-action@v1.0.0
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          projectName: screengeometry
+          directory: ./dist
+          branch: develop
+          environmentName: screengeometry (Develop)
+          wranglerVersion: '3'
+          gitHubToken: ${{ secrets.ACTION_GITHUB_TOKEN }}

@@ -1,4 +1,4 @@
-name: Stage
+name: CI/CD
 
 on:
   push:
@@ -109,8 +109,8 @@ jobs:
         id: deployment
         uses: actions/deploy-pages@v4
 
-  stagging:
-    name: App Deployed to Stagging
+  staging:
+    name: App Deployed to Staging
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -152,14 +152,14 @@ jobs:
       - name: Run pnpm build
         run: pnpm build
 
-      - name: Deploy app to Cloudflare Pages Preview
+      - name: Deploy app to Cloudflare Pages Develop
         uses: nader-eloshaiker/cloudlfare-pages-action@v1.0.0
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           projectName: screengeometry
           directory: ./dist
-          branch: stagging
-          environmentName: screengeometry (Preview)
+          branch: develop
+          environmentName: screengeometry (Develop)
           wranglerVersion: '3'
-          gitHubToken: ${{ secrets.GITHUB_TOKEN }}
+          gitHubToken: ${{ secrets.ACTION_GITHUB_TOKEN }}
