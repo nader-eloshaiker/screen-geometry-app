@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.13.3](https://github.com/nader-eloshaiker/screen-geometry-app/compare/v0.13.2...v0.13.3) (2024-01-20)
+
+
+### Bug Fixes
+
+* **doc:** fix gitgraph rendering in readme ([#275](https://github.com/nader-eloshaiker/screen-geometry-app/issues/275)) ([0bb7588](https://github.com/nader-eloshaiker/screen-geometry-app/commit/0bb7588cd145febe76cb1c35ea32c23e9daa18d2))
+
 ## [0.13.2](https://github.com/nader-eloshaiker/screen-geometry-app/compare/v0.13.1...v0.13.2) (2024-01-20)
 
 
