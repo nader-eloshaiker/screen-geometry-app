@@ -1,23 +1,10 @@
 # Simple workflow for deploying static content to GitHub Pages
-name: Release Deployment
+name: Staging Deployment
 
 on:
-  # can be used to roll back to a previous release
-  workflow_dispatch:
-    inputs:
-      tag:
-        description: 'Tag to release'
-        required: true
-        default: 'v1.0.0'
-  # Auto deploy on new release from release please PR
   push:
     branches:
-      - main
-    tags:
-      - '*'
-    paths:
-      - 'package.json'
-      - 'CHANGELOG.md'
+      - release-please--branches--main--components--screen-geometry-app
 
 # Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
 # However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
@@ -26,8 +13,8 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  deploy_prod:
-    name: App Deployed to Production
+  deploy_staging:
+    name: App Deployed to Staging
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -38,8 +25,6 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-        with:
-          ref: ${{ inputs.tag || github.ref }}
 
       - name: Install Node.js
         uses: actions/setup-node@v4
@@ -70,15 +55,14 @@ jobs:
       - name: Run pnpm build:prod
         run: pnpm build:prod
 
-      - name: Deploy app to Cloudflare Pages Production
+      - name: Deploy app to Cloudflare Pages Staging
         uses: nader-eloshaiker/cloudlfare-pages-action@v1.0.0
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           projectName: screengeometry
           directory: ./dist
-          branch: main
-          environmentName: screengeometry (Production)
+          branch: staging
+          environmentName: screengeometry (Staging)
           wranglerVersion: '3'
-          # Optional: Enable this if you want to have GitHub Deployments triggered
-          gitHubToken: ${{ secrets.GITHUB_TOKEN }}
+          gitHubToken: ${{ secrets.ACTION_GITHUB_TOKEN }}
