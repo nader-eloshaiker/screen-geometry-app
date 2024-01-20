@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.13.2](https://github.com/nader-eloshaiker/screen-geometry-app/compare/v0.13.1...v0.13.2) (2024-01-20)
+
+
+### Bug Fixes
+
+* add branch requirement to release trigger ([#272](https://github.com/nader-eloshaiker/screen-geometry-app/issues/272)) ([2aaa1f9](https://github.com/nader-eloshaiker/screen-geometry-app/commit/2aaa1f9b912c9574a3bcb557666648c236f9d8fd))
+
 ## [0.13.1](https://github.com/nader-eloshaiker/screen-geometry-app/compare/v0.13.0...v0.13.1) (2024-01-20)
 
 
