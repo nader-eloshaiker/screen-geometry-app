@@ -5,7 +5,6 @@
 [![Validation](https://github.com/nader-eloshaiker/screen-geometry-app/actions/workflows/validation.yml/badge.svg)](https://github.com/nader-eloshaiker/screen-geometry-app/actions/workflows/validation.yml)
 [![CI/CD](https://github.com/nader-eloshaiker/screen-geometry-app/actions/workflows/cicd.yml/badge.svg)](https://github.com/nader-eloshaiker/screen-geometry-app/actions/workflows/cicd.yml)
 [![Release Deployment](https://github.com/nader-eloshaiker/screen-geometry-app/actions/workflows/release.yml/badge.svg)](https://github.com/nader-eloshaiker/screen-geometry-app/actions/workflows/release.yml)
-[![Staging Deployment](https://github.com/nader-eloshaiker/screen-geometry-app/actions/workflows/staging.yml/badge.svg)](https://github.com/nader-eloshaiker/screen-geometry-app/actions/workflows/staging.yml)
 
 ## Description
 
@@ -17,7 +16,6 @@ easy comparison as well as tabulate the specs.
 ### Official App urls
 
 - Production [screengeometry.com](https://screengeometry.com)
-- Staging [staging.screengeometry.com](https://staging.screengeometry.com)
 - Develop [develop.screengeometry.com](https://develop.screengeometry.com)
 
 ### Reports
@@ -219,11 +217,9 @@ Run Validation step consisting of:
 - Build and deploy storybook asset to github pages [https://nader-eloshaiker.github.io/screen-geometry-app/storybook](https://nader-eloshaiker.github.io/screen-geometry-app/storybook)
 - Build and deploy coverage asset to github pages[https://nader-eloshaiker.github.io/screen-geometry-app/coverage](https://nader-eloshaiker.github.io/screen-geometry-app/coverage)
 
-##### Push to release branch: Run Staging Deployment Action
+##### Push to release branch
 
-- Run validation step
-- pnpm cache management to store dependencies based on package lock hash
-- Build production and deploy app to cloudflare pages staging environment using [https://staging.screengeometry.pages.dev](https://staging.screengeometry.pages.dev)
+- Run validation step, this is to facilitate merging back to main.
 
 ##### Push to main from release branch: Run Release Deployment Action
 
