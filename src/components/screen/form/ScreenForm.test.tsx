@@ -5,13 +5,15 @@ import { useScreenContext } from '@contexts/Screen/useScreenContext'
 import { useElementSizeMock } from '@hooks/useElementSize.mock'
 import { screenInputFixture } from '@openapi/fixtures/ScreenFixtures'
 import { ScreenInput, ScreenItem } from '@openapi/generated/models'
+import { getSearchListServiceMock } from '@openapi/generated/services/search-list-service'
 import { CreateScreenMock, useCreateScreenMock } from '@openapi/mocks/useCreateScreen.mock'
-import { useSearchListActionMock } from '@openapi/mocks/useSearchList.mock'
 import { UpdateScreenMock, useUpdateScreenMock } from '@openapi/mocks/useUpdateScreen.mock'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { useInteractComponent } from '@test/utils/useInteractComponent'
+import { resetMSWEventStack, useMSWEventStack } from '@test/utils/useMSWEventStack'
 import { render, waitFor } from '@testing-library/react'
 import { transformScreenInput } from '@utils/ScreenTransformation'
+import { setupServer } from 'msw/node'
 import { useEffect, useState } from 'react'
 import { ScreenForm } from './ScreenForm'
 
@@ -76,28 +78,42 @@ describe('#ScreenForm', () => {
   let createScreenSpy: CreateScreenMock
   let updateScreenSpy: UpdateScreenMock
 
+  const server = setupServer(...getSearchListServiceMock())
+  // const mswRequestEventSpy = useMSWEventStack(server)
+  useMSWEventStack(server)
+
+  beforeAll(() => {
+    server.listen()
+  })
+
+  afterAll(() => {
+    server.close()
+  })
+
   beforeEach(() => {
-    useSearchListActionMock()
     useElementSizeMock()
+    resetMSWEventStack()
 
     createScreenSpy = useCreateScreenMock()
     updateScreenSpy = useUpdateScreenMock()
   })
   afterEach(() => {
     vi.clearAllMocks()
+    server.resetHandlers()
+    server.restoreHandlers()
   })
 
   describe('#close', () => {
     test('close button', async () => {
       const onCloseAction = vi.fn()
-      const { user, getByText } = useInteractComponent(
+      const test = useInteractComponent(
         <RootTestComponent defaultValues={screenInputFixture} onCloseAction={onCloseAction} />,
       )
 
-      const closeButton = getByText('Close')
+      const closeButton = await test.findByText('Close')
       expect(closeButton).toBeEnabled()
-      await user.click(closeButton)
 
+      await test.user.click(closeButton)
       expect(onCloseAction).toHaveBeenCalledTimes(1)
     })
   })
@@ -134,56 +150,51 @@ describe('#ScreenForm', () => {
     test('renders the screen form', async () => {
       const editId = '1'
 
-      const { getByText, getByLabelText } = render(
-        <RootTestComponent defaultValues={screenInputFixture} editId={editId} />,
-      )
+      const test = render(<RootTestComponent defaultValues={screenInputFixture} editId={editId} />)
 
-      const element = await waitFor(() => getByText('Edit Screen'))
+      const element = await test.findByText('Edit Screen')
       expect(element).toBeDefined()
 
-      expect(getByLabelText('Screen Size')).toHaveValue(49)
-      expect(getByLabelText('Aspect Ratio')).toHaveValue('32:9')
-      expect(getByLabelText('Horizontal Res')).toHaveValue(5120)
-      expect(getByLabelText('Vertical Res')).toHaveValue(1440)
+      expect(await test.findByLabelText('Screen Size')).toHaveValue(49)
+      expect(await test.findByLabelText('Aspect Ratio')).toHaveValue('32:9')
+      expect(await test.findByLabelText('Horizontal Res')).toHaveValue(5120)
+      expect(await test.findByLabelText('Vertical Res')).toHaveValue(1440)
 
-      expect(getByText('Light')).toHaveStyle({ backgroundColor: '#000000' })
-      expect(getByText('Dark')).toHaveStyle({ backgroundColor: '#FFFFFF' })
+      expect(await test.findByText('Light')).toHaveStyle({ backgroundColor: '#000000' })
+      expect(await test.findByText('Dark')).toHaveStyle({ backgroundColor: '#FFFFFF' })
 
-      expect(getByText('Update')).toBeDisabled()
-      expect(getByText('Reset')).toBeEnabled()
-      expect(getByText('Close')).toBeEnabled()
+      expect(await test.findByText('Update')).toBeDisabled()
+      expect(await test.findByText('Reset')).toBeEnabled()
+      expect(await test.findByText('Close')).toBeEnabled()
     })
 
     test('reset screen form', async () => {
       const editId = '1'
 
-      const { user, getByText, getByLabelText } = useInteractComponent(
-        <RootTestComponent defaultValues={screenInputFixture} editId={editId} />,
-      )
-      const resetButton = getByText('Reset')
+      const test = useInteractComponent(<RootTestComponent defaultValues={screenInputFixture} editId={editId} />)
+      const resetButton = await test.findByText('Reset')
 
-      await user.clear(getByLabelText('Screen Size'))
-      await user.type(getByLabelText('Screen Size'), '27')
-      expect(getByLabelText('Screen Size')).toHaveValue(27)
+      const inputScreenSize = await test.findByLabelText('Screen Size')
+      await test.user.clear(inputScreenSize)
+      await test.user.type(inputScreenSize, '27')
+      expect(inputScreenSize).toHaveValue(27)
 
-      await user.click(resetButton)
-      expect(getByLabelText('Screen Size')).toHaveValue(49)
+      await test.user.click(resetButton)
+      expect(inputScreenSize).toHaveValue(49)
     })
 
     test('change screen theme colors', async () => {
       const editId = '1'
 
-      const { user, getByText } = useInteractComponent(
-        <RootTestComponent defaultValues={screenInputFixture} editId={editId} />,
-      )
-      const changeButton = getByText('Change')
-      const lightColor = getByText('Light')
-      const darkColor = getByText('Dark')
+      const test = useInteractComponent(<RootTestComponent defaultValues={screenInputFixture} editId={editId} />)
+      const changeButton = await test.findByText('Change')
+      const lightColor = await test.findByText('Light')
+      const darkColor = await test.findByText('Dark')
 
       expect(lightColor).toHaveStyle({ backgroundColor: '#000000' })
       expect(darkColor).toHaveStyle({ backgroundColor: '#FFFFFF' })
 
-      await user.click(changeButton)
+      await test.user.click(changeButton)
 
       expect(lightColor).not.toHaveStyle({ backgroundColor: '#000000' })
       expect(darkColor).not.toHaveStyle({ backgroundColor: '#FFFFFF' })
@@ -195,18 +206,19 @@ describe('#ScreenForm', () => {
       updateScreenSpy.override({ screenInput: modifiedValues, id: editId })
       const initialise = [{ ...transformScreenInput(screenInputFixture), id: editId }]
 
-      const { user, getByLabelText, container, getByText } = useInteractComponent(
+      const test = useInteractComponent(
         <RootTestComponent defaultValues={screenInputFixture} editId={editId} initialise={initialise} />,
       )
 
-      await user.type(getByLabelText('Screen Size'), '38')
+      const inputScreenSize = await test.findByLabelText('Screen Size')
+      await test.user.type(inputScreenSize, '38')
 
-      const updateButton = getByText('Update')
+      const updateButton = await test.findByText('Update')
       expect(updateButton).toBeEnabled()
-      await user.click(updateButton)
+      await test.user.click(updateButton)
 
       expect(updateButton).toBeEnabled()
-      const h2Element = container.querySelectorAll('h2')
+      const h2Element = test.container.querySelectorAll('h2')
       expect(h2Element).toHaveLength(1)
       expect(h2Element[0]).toHaveTextContent('"diagonalSize":32')
     })
@@ -214,65 +226,61 @@ describe('#ScreenForm', () => {
 
   describe('#CreateMode', () => {
     test('renders the screen form', async () => {
-      const { getByText, getByLabelText } = render(<RootTestComponent defaultValues={undefined} />)
+      const test = render(<RootTestComponent defaultValues={undefined} />)
 
-      const element = await waitFor(() => getByText('Add Screen'))
+      const element = await test.findByText('Add Screen')
 
       expect(element).toBeDefined()
-      expect(getByLabelText('Screen Size')).toHaveValue(null)
-      expect(getByLabelText('Aspect Ratio')).toHaveValue('')
-      expect(getByLabelText('Horizontal Res')).toHaveValue(null)
-      expect(getByLabelText('Vertical Res')).toHaveValue(null)
+      expect(await test.findByLabelText('Screen Size')).toHaveValue(null)
+      expect(await test.findByLabelText('Aspect Ratio')).toHaveValue('')
+      expect(await test.findByLabelText('Horizontal Res')).toHaveValue(null)
+      expect(await test.findByLabelText('Vertical Res')).toHaveValue(null)
 
-      expect(getByText('Light')).toBeInTheDocument()
-      expect(getByText('Dark')).toBeInTheDocument()
+      expect(await test.findByText('Light')).toBeInTheDocument()
+      expect(await test.findByText('Dark')).toBeInTheDocument()
 
-      expect(getByText('Create')).toBeDisabled()
-      expect(getByText('Reset')).toBeEnabled()
-      expect(getByText('Close')).toBeEnabled()
+      expect(await test.findByText('Create')).toBeDisabled()
+      expect(await test.findByText('Reset')).toBeEnabled()
+      expect(await test.findByText('Close')).toBeEnabled()
     })
 
     test('select a screen from list and populate form', async () => {
-      const { user, getByText, getByLabelText, getByPlaceholderText, container } = useInteractComponent(
-        <RootTestComponent defaultValues={undefined} />,
-      )
+      const test = useInteractComponent(<RootTestComponent defaultValues={undefined} />)
 
-      const inputElement = getByPlaceholderText('Type to filter list...')
-      await user.type(inputElement, 'WQHD+')
+      const inputElement = await test.findByPlaceholderText('Type to filter list...')
+      await test.user.type(inputElement, 'WQHD+')
 
-      const listElement = container.querySelectorAll('li')[0]
-      await user.click(listElement)
+      const listElement = test.container.querySelectorAll('li')[0]
+      await test.user.click(listElement)
 
-      expect(getByLabelText('Screen Size')).toHaveValue(34)
-      expect(getByLabelText('Aspect Ratio')).toHaveValue('21:9')
-      expect(getByLabelText('Horizontal Res')).toHaveValue(3440)
-      expect(getByLabelText('Vertical Res')).toHaveValue(1440)
+      expect(await test.findByLabelText('Screen Size')).toHaveValue(34)
+      expect(await test.findByLabelText('Aspect Ratio')).toHaveValue('21:9')
+      expect(await test.findByLabelText('Horizontal Res')).toHaveValue(3440)
+      expect(await test.findByLabelText('Vertical Res')).toHaveValue(1440)
 
-      expect(getByText('Light')).toBeInTheDocument()
-      expect(getByText('Dark')).toBeInTheDocument()
+      expect(await test.findByText('Light')).toBeInTheDocument()
+      expect(await test.findByText('Dark')).toBeInTheDocument()
 
-      expect(getByText('Create')).toBeEnabled()
-      expect(getByText('Reset')).toBeEnabled()
-      expect(getByText('Close')).toBeEnabled()
+      expect(await test.findByText('Create')).toBeEnabled()
+      expect(await test.findByText('Reset')).toBeEnabled()
+      expect(await test.findByText('Close')).toBeEnabled()
     })
 
     test('create a screen from list and populate form', async () => {
-      const { user, getByPlaceholderText, container, getByText } = useInteractComponent(
-        <RootTestComponent defaultValues={undefined} />,
-      )
+      const test = useInteractComponent(<RootTestComponent defaultValues={undefined} />)
 
-      const inputElement = getByPlaceholderText('Type to filter list...')
-      await user.type(inputElement, 'WQHD+')
+      const inputElement = await test.findByPlaceholderText('Type to filter list...')
+      await test.user.type(inputElement, 'WQHD+')
 
-      const listElement = container.querySelectorAll('li')[0]
-      await user.click(listElement)
+      const listElement = test.container.querySelectorAll('li')[0]
+      await test.user.click(listElement)
 
-      const createButton = getByText('Create')
+      const createButton = await test.findByText('Create')
       expect(createButton).toBeEnabled()
-      await user.click(createButton)
+      await test.user.click(createButton)
 
-      expect(getByText('Create')).toBeEnabled()
-      const h2Element = container.querySelectorAll('h2')
+      expect(test.getByText('Create')).toBeEnabled()
+      const h2Element = test.container.querySelectorAll('h2')
       expect(h2Element).toHaveLength(1)
       expect(h2Element[0]).toHaveTextContent('"diagonalSize":49')
     })
