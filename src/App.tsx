@@ -1,22 +1,20 @@
 import { NotificationProvider } from '@contexts/Notification/NotificationProvider'
+import { QueryProvider } from '@contexts/Query/QueryProvider'
 import { ScreenProvider } from '@contexts/Screen/ScreenProvider'
 import { ThemeModeProvider } from '@contexts/theme/ThemeModeProvider'
 import AppRouterProvider from '@routes/AppRouterProvider'
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import './index.css'
-
-const queryClient = new QueryClient()
 
 export const App = () => {
   return (
     <ThemeModeProvider>
-      <QueryClientProvider client={queryClient}>
+      <QueryProvider>
         <NotificationProvider>
           <ScreenProvider>
             <AppRouterProvider />
           </ScreenProvider>
         </NotificationProvider>
-      </QueryClientProvider>
+      </QueryProvider>
     </ThemeModeProvider>
   )
 }

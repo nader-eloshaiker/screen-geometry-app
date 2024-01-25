@@ -3,6 +3,7 @@
  * Do not edit manually.
  * screen-geometry-app-backend-serverless-apis-v1
  */
+import { faker } from '@faker-js/faker'
 import type {
   MutationFunction,
   QueryFunction,
@@ -12,6 +13,7 @@ import type {
   UseQueryResult,
 } from '@tanstack/react-query'
 import { useMutation, useQuery } from '@tanstack/react-query'
+import { HttpResponse, delay, http } from 'msw'
 import { useApiAxios } from '../../../hooks/api/useApiAxios'
 import type { ErrorResponse, ScreenIdResponse, ScreenInput, ScreenItemResponse } from '../models'
 
@@ -285,3 +287,177 @@ export const useDeleteScreen = <TError = ErrorResponse, TContext = unknown>(opti
 
   return useMutation(mutationOptions)
 }
+
+export const getCreateScreenMock = () => ({
+  item: {
+    color: { darkColor: faker.word.sample(), lightColor: faker.word.sample() },
+    data: {
+      hAspectRatio: faker.number.int({ min: 0, max: undefined }),
+      hSize: faker.number.int({ min: 0, max: undefined }),
+      vAspectRatio: faker.number.int({ min: 0, max: undefined }),
+      vSize: faker.number.int({ min: 0, max: undefined }),
+    },
+    id: faker.word.sample(),
+    render: faker.helpers.arrayElement([
+      {
+        height: faker.helpers.arrayElement([faker.number.int({ min: 0, max: undefined }), undefined]),
+        pixelSize: faker.helpers.arrayElement([faker.number.int({ min: 0, max: undefined }), undefined]),
+        width: faker.helpers.arrayElement([faker.number.int({ min: 0, max: undefined }), undefined]),
+      },
+      undefined,
+    ]),
+    spec: faker.helpers.arrayElement([
+      {
+        hRes: faker.number.int({ min: 0, max: undefined }),
+        ppi: faker.number.int({ min: 0, max: undefined }),
+        vRes: faker.number.int({ min: 0, max: undefined }),
+      },
+      undefined,
+    ]),
+    tag: { aspectRatio: faker.word.sample(), diagonalSize: faker.number.int({ min: 0, max: undefined }) },
+    visible: faker.datatype.boolean(),
+  },
+})
+
+export const getShowScreenMock = () => ({
+  item: {
+    color: { darkColor: faker.word.sample(), lightColor: faker.word.sample() },
+    data: {
+      hAspectRatio: faker.number.int({ min: 0, max: undefined }),
+      hSize: faker.number.int({ min: 0, max: undefined }),
+      vAspectRatio: faker.number.int({ min: 0, max: undefined }),
+      vSize: faker.number.int({ min: 0, max: undefined }),
+    },
+    id: faker.word.sample(),
+    render: faker.helpers.arrayElement([
+      {
+        height: faker.helpers.arrayElement([faker.number.int({ min: 0, max: undefined }), undefined]),
+        pixelSize: faker.helpers.arrayElement([faker.number.int({ min: 0, max: undefined }), undefined]),
+        width: faker.helpers.arrayElement([faker.number.int({ min: 0, max: undefined }), undefined]),
+      },
+      undefined,
+    ]),
+    spec: faker.helpers.arrayElement([
+      {
+        hRes: faker.number.int({ min: 0, max: undefined }),
+        ppi: faker.number.int({ min: 0, max: undefined }),
+        vRes: faker.number.int({ min: 0, max: undefined }),
+      },
+      undefined,
+    ]),
+    tag: { aspectRatio: faker.word.sample(), diagonalSize: faker.number.int({ min: 0, max: undefined }) },
+    visible: faker.datatype.boolean(),
+  },
+})
+
+export const getGetScreenMock = () => ({
+  item: {
+    color: { darkColor: faker.word.sample(), lightColor: faker.word.sample() },
+    data: {
+      hAspectRatio: faker.number.int({ min: 0, max: undefined }),
+      hSize: faker.number.int({ min: 0, max: undefined }),
+      vAspectRatio: faker.number.int({ min: 0, max: undefined }),
+      vSize: faker.number.int({ min: 0, max: undefined }),
+    },
+    id: faker.word.sample(),
+    render: faker.helpers.arrayElement([
+      {
+        height: faker.helpers.arrayElement([faker.number.int({ min: 0, max: undefined }), undefined]),
+        pixelSize: faker.helpers.arrayElement([faker.number.int({ min: 0, max: undefined }), undefined]),
+        width: faker.helpers.arrayElement([faker.number.int({ min: 0, max: undefined }), undefined]),
+      },
+      undefined,
+    ]),
+    spec: faker.helpers.arrayElement([
+      {
+        hRes: faker.number.int({ min: 0, max: undefined }),
+        ppi: faker.number.int({ min: 0, max: undefined }),
+        vRes: faker.number.int({ min: 0, max: undefined }),
+      },
+      undefined,
+    ]),
+    tag: { aspectRatio: faker.word.sample(), diagonalSize: faker.number.int({ min: 0, max: undefined }) },
+    visible: faker.datatype.boolean(),
+  },
+})
+
+export const getUpdateScreenMock = () => ({
+  item: {
+    color: { darkColor: faker.word.sample(), lightColor: faker.word.sample() },
+    data: {
+      hAspectRatio: faker.number.int({ min: 0, max: undefined }),
+      hSize: faker.number.int({ min: 0, max: undefined }),
+      vAspectRatio: faker.number.int({ min: 0, max: undefined }),
+      vSize: faker.number.int({ min: 0, max: undefined }),
+    },
+    id: faker.word.sample(),
+    render: faker.helpers.arrayElement([
+      {
+        height: faker.helpers.arrayElement([faker.number.int({ min: 0, max: undefined }), undefined]),
+        pixelSize: faker.helpers.arrayElement([faker.number.int({ min: 0, max: undefined }), undefined]),
+        width: faker.helpers.arrayElement([faker.number.int({ min: 0, max: undefined }), undefined]),
+      },
+      undefined,
+    ]),
+    spec: faker.helpers.arrayElement([
+      {
+        hRes: faker.number.int({ min: 0, max: undefined }),
+        ppi: faker.number.int({ min: 0, max: undefined }),
+        vRes: faker.number.int({ min: 0, max: undefined }),
+      },
+      undefined,
+    ]),
+    tag: { aspectRatio: faker.word.sample(), diagonalSize: faker.number.int({ min: 0, max: undefined }) },
+    visible: faker.datatype.boolean(),
+  },
+})
+
+export const getDeleteScreenMock = () => ({ id: faker.word.sample() })
+
+export const getScreenServiceMock = () => [
+  http.post('*/screen', async () => {
+    await delay(1)
+    return new HttpResponse(JSON.stringify(getCreateScreenMock()), {
+      status: 200,
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+  }),
+  http.patch('*/screen/:id/show', async () => {
+    await delay(1)
+    return new HttpResponse(JSON.stringify(getShowScreenMock()), {
+      status: 200,
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+  }),
+  http.get('*/screen/:id', async () => {
+    await delay(1)
+    return new HttpResponse(JSON.stringify(getGetScreenMock()), {
+      status: 200,
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+  }),
+  http.put('*/screen/:id', async () => {
+    await delay(1)
+    return new HttpResponse(JSON.stringify(getUpdateScreenMock()), {
+      status: 200,
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+  }),
+  http.delete('*/screen/:id', async () => {
+    await delay(1)
+    return new HttpResponse(JSON.stringify(getDeleteScreenMock()), {
+      status: 200,
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+  }),
+]

@@ -12,23 +12,23 @@ export const useApiQuery = <TData, TError = ErrorResponse>({
   responseHandler?(data: TData | undefined): void
 }) => {
   const { dispatch } = useNotificationContext()
-  const { isFetching, error, data } = useRequest()
+  const request = useRequest()
 
   useEffect(() => {
-    if (!responseHandler || !data) {
+    if (!responseHandler || !request.data) {
       return
     }
-    responseHandler(data)
-  }, [responseHandler, data])
+    responseHandler(request.data)
+  }, [responseHandler, request.data])
 
   useEffect(() => {
-    if (error) {
+    if (request.error) {
       dispatch({
         type: NotificationActionTypes.ADD_NOTIFICATION,
-        payload: { value: error, type: NotificationType.ERROR },
+        payload: { value: request.error, type: NotificationType.ERROR },
       })
     }
-  }, [dispatch, error])
+  }, [dispatch, request.error])
 
-  return { isFetching, data, error }
+  return request
 }

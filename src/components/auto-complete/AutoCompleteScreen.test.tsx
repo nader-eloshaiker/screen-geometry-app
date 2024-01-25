@@ -1,68 +1,96 @@
 import { AutoCompleteScreen } from '@components/auto-complete/AutoCompleteScreen'
 import { NotificationProvider } from '@contexts/Notification/NotificationProvider'
+import { QueryProvider } from '@contexts/Query/QueryProvider'
 import { useElementSizeMock } from '@hooks/useElementSize.mock'
-import { useSearchListActionMock } from '@openapi/mocks/useSearchList.mock'
+import { getSearchListServiceMock } from '@openapi/generated/services/search-list-service'
 import { useInteractComponent } from '@test/utils/useInteractComponent'
-import { getByRole, render, waitFor } from '@testing-library/react'
-import { MockInstance } from 'vitest'
+import { resetMSWEventStack, useMSWEventStack } from '@test/utils/useMSWEventStack'
+import { render, waitFor } from '@testing-library/react'
+import { setupServer } from 'msw/node'
 
+const scheduler = typeof setImmediate === 'function' ? setImmediate : setTimeout
+
+export const flushPromises = () => {
+  return new Promise((resolve) => {
+    scheduler(resolve)
+  })
+}
 describe('#AutoCompleteScreen', () => {
-  let searchContextSpy: MockInstance
+  const server = setupServer(...getSearchListServiceMock())
+  const mswRequestEventSpy = useMSWEventStack(server)
+
+  beforeAll(() => {
+    server.listen()
+  })
 
   beforeEach(() => {
     useElementSizeMock()
-    searchContextSpy = useSearchListActionMock()
+    resetMSWEventStack()
   })
 
-  test('renders autocomplete component with an input field', () => {
-    const { getByPlaceholderText } = render(
-      <NotificationProvider>
-        <AutoCompleteScreen onSelectScreen={vi.fn()} setClearSearchHandler={vi.fn} />
-      </NotificationProvider>,
-    )
-    // use this to view what is being rendered
-    // screen.debug()
+  afterEach(() => {
+    server.resetHandlers()
+    server.restoreHandlers()
+  })
 
-    expect(getByPlaceholderText('Type to filter list...')).toBeDefined()
+  afterAll(() => {
+    server.close()
+  })
+
+  test('renders autocomplete component with an input field', async () => {
+    const test = render(
+      <QueryProvider>
+        <NotificationProvider>
+          <AutoCompleteScreen onSelectScreen={vi.fn()} setClearSearchHandler={vi.fn} />
+        </NotificationProvider>
+      </QueryProvider>,
+    )
+
+    const inputElement = await test.findByPlaceholderText('Type to filter list...')
+    expect(inputElement).toBeDefined()
   })
 
   test('calls backend search api a limited time as the user enters a search term', async () => {
-    const { user, getByPlaceholderText } = useInteractComponent(
-      <NotificationProvider>
-        <AutoCompleteScreen onSelectScreen={vi.fn()} setClearSearchHandler={vi.fn} />
-      </NotificationProvider>,
+    const test = useInteractComponent(
+      <QueryProvider>
+        <NotificationProvider>
+          <AutoCompleteScreen onSelectScreen={vi.fn()} setClearSearchHandler={vi.fn} />
+        </NotificationProvider>
+      </QueryProvider>,
     )
 
-    const inputElement = getByPlaceholderText('Type to filter list...')
-    await user.type(inputElement, 'WQHD')
+    const inputElement = await test.findByPlaceholderText('Type to filter list...')
+    expect(inputElement).toBeDefined()
+    await test.user.type(inputElement, 'WQHD')
 
-    waitFor(() => {
-      const spyCalls = searchContextSpy.mock.calls
-      expect(spyCalls.length).toBe(2)
-      expect(spyCalls[1][0]).toBe({ term: 'WQHD' })
+    await waitFor(() => {
+      expect(mswRequestEventSpy[mswRequestEventSpy.length - 1]).toEqual(
+        expect.stringContaining('/v1/search?term=WQHD'), // expect.stringMatching(/\/v1\/search\?term=WQHD$/i),
+      )
     })
   })
 
   test('clears search results and requests a full list from search engine', async () => {
-    const { user, getByPlaceholderText, container } = useInteractComponent(
-      <NotificationProvider>
-        <AutoCompleteScreen onSelectScreen={vi.fn()} setClearSearchHandler={vi.fn} />
-      </NotificationProvider>,
+    const test = useInteractComponent(
+      <QueryProvider>
+        <NotificationProvider>
+          <AutoCompleteScreen onSelectScreen={vi.fn()} setClearSearchHandler={vi.fn} />
+        </NotificationProvider>
+      </QueryProvider>,
     )
 
-    const inputElement = getByPlaceholderText('Type to filter list...')
-    await user.type(inputElement, 'WQHD')
+    const inputElement = await test.findByPlaceholderText('Type to filter list...')
+    await test.user.type(inputElement, 'WQHD')
 
-    waitFor(() => {
-      expect(searchContextSpy.mock.calls.length).toBe(2)
+    await waitFor(() => {
+      expect(mswRequestEventSpy[mswRequestEventSpy.length - 1]).toEqual(expect.stringContaining('/v1/search?term=WQHD'))
     })
 
-    const clearButton = getByRole(container, 'reset')
-    await user.click(clearButton)
+    const clearButton = await test.findByRole('reset')
+    await test.user.click(clearButton)
 
-    waitFor(() => {
-      expect(searchContextSpy.mock.calls.length).toBe(3)
-      expect(searchContextSpy.mock.calls[2][0]).toBe({ term: '' })
+    await waitFor(() => {
+      expect(mswRequestEventSpy[mswRequestEventSpy.length - 1]).toEqual(expect.stringContaining('/v1/search?term='))
     })
   })
 })

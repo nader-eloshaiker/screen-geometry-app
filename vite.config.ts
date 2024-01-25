@@ -49,7 +49,13 @@ export default defineConfig({
       reporter: ['text', 'json-summary', 'json', 'clover', 'html'],
       reportsDirectory: 'reports/coverage',
       include: ['src/**/*.{ts,tsx}'],
-      exclude: [...configDefaults.exclude, 'src/openapi/**/*', 'src/test/**.*', 'src/**/*.mock.{ts,tsx}'],
+      exclude: [
+        ...configDefaults.exclude,
+        'src/openapi/**/*',
+        'src/test/**/*',
+        'src/**/*.mock.{ts,tsx}',
+        'src/**/*.d.ts',
+      ],
       reportOnFailure: true,
       thresholds: {
         lines: 50,

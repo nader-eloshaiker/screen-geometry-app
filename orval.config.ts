@@ -7,7 +7,11 @@ export default defineConfig({
       target: './src/openapi/generated/services',
       schemas: './src/openapi/generated/models',
       client: 'react-query',
-      mock: false,
+      mock: {
+        type: 'msw',
+        delay: 1, // do not set to 0, it will break tests, large number will timeout tests
+        useExamples: true,
+      },
       prettier: true,
       tslint: true,
       clean: true,

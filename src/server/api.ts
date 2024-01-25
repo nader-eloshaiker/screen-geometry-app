@@ -1,5 +1,5 @@
 import { ScreenInput, ScreenInputList, ScreenItem } from '@openapi/generated/models'
-import { search } from '@server/searchClient'
+import { search } from '@server/searchEngine'
 import { transformScreenInput } from '@utils/ScreenTransformation'
 import { createItem, createItemList, deleteItem, getItem, getItemList, updateItem } from './db/indexDB'
 

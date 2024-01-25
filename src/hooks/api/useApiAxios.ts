@@ -24,12 +24,22 @@ export const useApiAxios = <T>(): ((config: AxiosRequestConfig) => Promise<T>) =
       cancelToken: source.token,
     })
       .then(({ data }) => {
-        console.info(`axios success: [${config.method}] ${config.url}`, '\nrequest:', config.data, '\nresponse:', data)
+        if (!process.env.VITEST) {
+          console.info(
+            `axios success: [${config.method}] ${config.url}`,
+            '\nrequest:',
+            config.data,
+            '\nresponse:',
+            data,
+          )
+        }
 
         return data
       })
       .catch((error) => {
-        console.info(`axios termianted: [${config.method}] ${config.url}`, '\nconfig:', config)
+        if (!process.env.VITEST) {
+          console.info(`axios termianted: [${config.method}] ${config.url}`, '\nconfig:', config)
+        }
         throw error
       })
 
