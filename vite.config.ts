@@ -53,6 +53,7 @@ export default defineConfig({
         ...configDefaults.exclude,
         'src/openapi/**/*',
         'src/test/**/*',
+        'src/assets/**/*',
         'src/**/*.mock.{ts,tsx}',
         'src/**/*.d.ts',
       ],

@@ -17,11 +17,11 @@ import { pathToRegexp } from 'path-to-regexp'
 // The stubbed API calls can later be replaced with real API calls to a backend store
 export const generateStub = (axiosInstance: AxiosInstance) => {
   // use explicit mocks with fixtures for testing
-  if (process.env.VITEST) {
+  if (import.meta.env.NODE_ENV) {
     console.debug('TEST ENV: using explicit mocks with fixtures for testing')
     return
   } else {
-    console.debug('PROD ENV: using axios-mock-adapter for indexAPI to store data in the browser')
+    console.debug('REAL ENV: using axios-mock-adapter for indexAPI to store data in the browser')
   }
 
   const delayResponse = 1000

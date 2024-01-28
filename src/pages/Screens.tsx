@@ -13,7 +13,7 @@ import { useElementSize } from '@hooks/useElementSize'
 import { Dimensions } from '@models/Screen'
 import { ScreenItem } from '@openapi/generated/models'
 import { getMaxScreenSize } from '@utils/ScreenCalc'
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 export const Screens = () => {
   const divSizeRef = useRef<HTMLDivElement>(null)
@@ -42,6 +42,10 @@ export const Screens = () => {
   }
 
   const isHighlighted = (screen: ScreenItem) => screen.id === highlighted?.id
+
+  useEffect(() => {
+    console.log('screens:', JSON.stringify(screens, null, 2))
+  }, [screens])
 
   return (
     <div className='flex flex-1 flex-col' ref={divSizeRef}>

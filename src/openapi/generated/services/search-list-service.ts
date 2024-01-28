@@ -5,7 +5,7 @@
  */
 import type { QueryFunction, QueryKey, UseQueryOptions, UseQueryResult } from '@tanstack/react-query'
 import { useQuery } from '@tanstack/react-query'
-import { HttpResponse, http } from 'msw'
+import { HttpResponse, delay, http } from 'msw'
 import { useApiAxios } from '../../../hooks/api/useApiAxios'
 import type { ErrorResponse, GetSearchListParams, SearchListResponse } from '../models'
 
@@ -110,7 +110,7 @@ export const getGetSearchListMock = () => ({
 
 export const getSearchListServiceMock = () => [
   http.get('*/search', async () => {
-    // await delay(1)
+    await delay(10)
     return new HttpResponse(JSON.stringify(getGetSearchListMock()), {
       status: 200,
       headers: {

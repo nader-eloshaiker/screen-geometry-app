@@ -1,37 +1,34 @@
 import { NotificationProvider } from '@contexts/Notification/NotificationProvider'
-import { ScreenState } from '@contexts/Screen/ScreenManager'
+import { QueryProvider } from '@contexts/Query/QueryProvider'
 import { ScreenProvider } from '@contexts/Screen/ScreenProvider'
 import { useScreenContext } from '@contexts/Screen/useScreenContext'
 import { useElementSizeMock } from '@hooks/useElementSize.mock'
 import { screenInputFixture } from '@openapi/fixtures/ScreenFixtures'
 import { ScreenInput, ScreenItem } from '@openapi/generated/models'
+import { getScreenListServiceMock } from '@openapi/generated/services/screen-list-service'
+import { getScreenServiceMock } from '@openapi/generated/services/screen-service'
 import { getSearchListServiceMock } from '@openapi/generated/services/search-list-service'
-import { CreateScreenMock, useCreateScreenMock } from '@openapi/mocks/useCreateScreen.mock'
-import { UpdateScreenMock, useUpdateScreenMock } from '@openapi/mocks/useUpdateScreen.mock'
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { useInteractComponent } from '@test/utils/useInteractComponent'
 import { resetMSWEventStack, useMSWEventStack } from '@test/utils/useMSWEventStack'
-import { render, waitFor } from '@testing-library/react'
+import { render } from '@testing-library/react'
 import { transformScreenInput } from '@utils/ScreenTransformation'
 import { setupServer } from 'msw/node'
-import { useEffect, useState } from 'react'
 import { ScreenForm } from './ScreenForm'
 
 type Props = {
   defaultValues: ScreenInput | undefined
   editId?: string | undefined
-  isLoading?: boolean
   initialise?: ScreenItem[]
   onCloseAction?: () => void
 }
-const TestComponent = ({ defaultValues, editId, isLoading = false, onCloseAction }: Props) => {
+const TestComponent = ({ defaultValues, editId, onCloseAction }: Props) => {
   const {
     state: { screens },
   } = useScreenContext()
 
   return (
     <>
-      <ScreenForm defaultValues={defaultValues} editId={editId} isLoading={isLoading} onClose={onCloseAction} />
+      <ScreenForm defaultValues={defaultValues} editId={editId} isLoading={false} onClose={onCloseAction} />
       <div>
         <h1>Screens</h1>
         {screens.map((screen) => (
@@ -42,43 +39,20 @@ const TestComponent = ({ defaultValues, editId, isLoading = false, onCloseAction
   )
 }
 
-const RootTestComponent = ({
-  defaultValues,
-  editId,
-  initialise,
-  isLoading = false,
-  onCloseAction = () => {},
-}: Props) => {
-  const queryClient = new QueryClient()
-  const [state, setState] = useState<ScreenState>()
-
-  useEffect(() => {
-    if (editId && initialise) {
-      setState({ screens: initialise, query: '' })
-    }
-  }, [editId, initialise])
-
+const RootTestComponent = ({ defaultValues, editId, initialise, onCloseAction = () => {} }: Props) => {
   return (
-    <QueryClientProvider client={queryClient}>
+    <QueryProvider>
       <NotificationProvider>
-        <ScreenProvider initialise={state}>
-          <TestComponent
-            defaultValues={defaultValues}
-            editId={editId}
-            isLoading={isLoading}
-            onCloseAction={onCloseAction}
-          />
+        <ScreenProvider initialise={{ screens: initialise ?? [], query: '' }}>
+          <TestComponent defaultValues={defaultValues} editId={editId} onCloseAction={onCloseAction} />
         </ScreenProvider>
       </NotificationProvider>
-    </QueryClientProvider>
+    </QueryProvider>
   )
 }
 
 describe('#ScreenForm', () => {
-  let createScreenSpy: CreateScreenMock
-  let updateScreenSpy: UpdateScreenMock
-
-  const server = setupServer(...getSearchListServiceMock())
+  const server = setupServer(...getSearchListServiceMock(), ...getScreenServiceMock(), ...getScreenListServiceMock())
   // const mswRequestEventSpy = useMSWEventStack(server)
   useMSWEventStack(server)
 
@@ -93,10 +67,8 @@ describe('#ScreenForm', () => {
   beforeEach(() => {
     useElementSizeMock()
     resetMSWEventStack()
-
-    createScreenSpy = useCreateScreenMock()
-    updateScreenSpy = useUpdateScreenMock()
   })
+
   afterEach(() => {
     vi.clearAllMocks()
     server.resetHandlers()
@@ -118,31 +90,44 @@ describe('#ScreenForm', () => {
     })
   })
 
+  // testing load state is proplematic with MSW response is pending
   describe('#LoadingMode', () => {
     test('show loading when updating a screen', async () => {
       const editId = '1'
-      updateScreenSpy.override({ opt: { isPending: true } })
+      const test = useInteractComponent(<RootTestComponent defaultValues={screenInputFixture} editId={editId} />)
 
-      const { container } = useInteractComponent(
-        <RootTestComponent defaultValues={screenInputFixture} editId={editId} />,
-      )
+      const inputScreenSize = await test.findByLabelText('Screen Size')
+      await test.user.clear(inputScreenSize)
+      await test.user.type(inputScreenSize, '27')
 
-      const spinners = await waitFor(() =>
-        container.getElementsByClassName('loading loading-spinner items-center justify-center'),
-      )
-      expect(spinners).toHaveLength(1)
+      const submitButton = await test.findByText('Update')
+      await test.user.click(submitButton)
+
+      const submitButtonBusy = await test.findByTestId('busySubmitButton')
+      expect(submitButtonBusy).toBeInTheDocument()
     })
 
     test('show loading when creating a screen', async () => {
-      const editId = undefined
-      createScreenSpy.override({ opt: { isPending: true } })
+      const test = useInteractComponent(<RootTestComponent defaultValues={undefined} editId={undefined} />)
 
-      const { container } = render(<RootTestComponent defaultValues={undefined} editId={editId} />)
+      const inputScreenSize = await test.findByLabelText('Screen Size')
+      await test.user.type(inputScreenSize, '27')
 
-      const spinners = await waitFor(() =>
-        container.getElementsByClassName('loading loading-spinner items-center justify-center'),
-      )
-      expect(spinners).toHaveLength(1)
+      const ratioElement = await test.findByLabelText('Aspect Ratio')
+      await test.user.type(ratioElement, '32:9')
+
+      const hResElement = await test.findByLabelText('Horizontal Res')
+      await test.user.type(hResElement, '5120')
+
+      const vResElement = await test.findByLabelText('Vertical Res')
+      await test.user.type(vResElement, '1440')
+
+      // test.debug()
+      const submitButton = await test.findByText('Create')
+      await test.user.click(submitButton)
+
+      const submitButtonBusy = await test.findByTestId('busySubmitButton')
+      expect(submitButtonBusy).toBeInTheDocument()
     })
   })
 
@@ -201,26 +186,25 @@ describe('#ScreenForm', () => {
     })
 
     test('update a screen from list and populate form', async () => {
-      const modifiedValues: ScreenInput = { ...screenInputFixture, diagonalSize: 32 }
-      const editId = '1'
-      updateScreenSpy.override({ screenInput: modifiedValues, id: editId })
-      const initialise = [{ ...transformScreenInput(screenInputFixture), id: editId }]
+      const editId = '5HjERJbH'
+      const initialise: Array<ScreenItem> = [{ ...transformScreenInput(screenInputFixture), id: editId }]
 
       const test = useInteractComponent(
         <RootTestComponent defaultValues={screenInputFixture} editId={editId} initialise={initialise} />,
       )
 
+      await test.findByPlaceholderText('Type to filter list...')
       const inputScreenSize = await test.findByLabelText('Screen Size')
+      await test.user.clear(inputScreenSize)
       await test.user.type(inputScreenSize, '38')
 
       const updateButton = await test.findByText('Update')
-      expect(updateButton).toBeEnabled()
       await test.user.click(updateButton)
+      expect(await test.findByText('Update')).toBeEnabled()
 
-      expect(updateButton).toBeEnabled()
       const h2Element = test.container.querySelectorAll('h2')
       expect(h2Element).toHaveLength(1)
-      expect(h2Element[0]).toHaveTextContent('"diagonalSize":32')
+      expect(h2Element[0]).toHaveTextContent('"diagonalSize":38')
     })
   })
 
@@ -279,7 +263,7 @@ describe('#ScreenForm', () => {
       expect(createButton).toBeEnabled()
       await test.user.click(createButton)
 
-      expect(test.getByText('Create')).toBeEnabled()
+      expect(await test.findByText('Create')).toBeEnabled()
       const h2Element = test.container.querySelectorAll('h2')
       expect(h2Element).toHaveLength(1)
       expect(h2Element[0]).toHaveTextContent('"diagonalSize":49')

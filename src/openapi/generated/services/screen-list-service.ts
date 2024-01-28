@@ -194,7 +194,7 @@ export const getCreateScreenListMock = () => ({
 
 export const getScreenListServiceMock = () => [
   http.get('*/screens', async () => {
-    await delay(1)
+    await delay(10)
     return new HttpResponse(JSON.stringify(getGetScreenListMock()), {
       status: 200,
       headers: {
@@ -203,7 +203,7 @@ export const getScreenListServiceMock = () => [
     })
   }),
   http.post('*/screens', async () => {
-    await delay(1)
+    await delay(10)
     return new HttpResponse(JSON.stringify(getCreateScreenListMock()), {
       status: 200,
       headers: {

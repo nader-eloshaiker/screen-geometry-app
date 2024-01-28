@@ -9,7 +9,7 @@ export default defineConfig({
       client: 'react-query',
       mock: {
         type: 'msw',
-        delay: 1, // do not set to 0, it will break tests, large number will timeout tests
+        delay: 10, // 10ms to speed up unit tests
         useExamples: true,
       },
       prettier: true,

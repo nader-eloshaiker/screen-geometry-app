@@ -18,6 +18,7 @@ export const flushPromises = () => {
 describe('#AutoCompleteScreen', () => {
   const server = setupServer(...getSearchListServiceMock())
   const mswRequestEventSpy = useMSWEventStack(server)
+  // let searchListApiSpy: MockInstance
 
   beforeAll(() => {
     server.listen()
@@ -26,6 +27,9 @@ describe('#AutoCompleteScreen', () => {
   beforeEach(() => {
     useElementSizeMock()
     resetMSWEventStack()
+    // queryClient.clear()
+    // queryClient.resetQueries()
+    // searchListApiSpy = vi.spyOn(useSearchListApi, 'useSearchListApi')
   })
 
   afterEach(() => {
