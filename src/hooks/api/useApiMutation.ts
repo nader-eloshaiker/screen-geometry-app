@@ -18,13 +18,13 @@ export const useApiMutation = <TData, TVariables, TError = ErrorResponse, TConte
   successNotification?: { title: string; message: string }
 }) => {
   const { dispatch } = useNotificationContext()
-  const { isPending, error, data, mutate: useMutation } = useRequest()
+  const request = useRequest()
 
   useEffect(() => {
-    if (!responseHandler || !data) {
+    if (!responseHandler || !request.data) {
       return
     }
-    responseHandler(data)
+    responseHandler(request.data)
 
     if (successNotification) {
       const { title, message } = successNotification
@@ -36,16 +36,16 @@ export const useApiMutation = <TData, TVariables, TError = ErrorResponse, TConte
         },
       })
     }
-  }, [responseHandler, data, dispatch, successNotification])
+  }, [responseHandler, request.data, dispatch, successNotification])
 
   useEffect(() => {
-    if (error) {
+    if (request.error) {
       dispatch({
         type: NotificationActionTypes.ADD_NOTIFICATION,
-        payload: { value: error, type: NotificationType.ERROR },
+        payload: { value: request.error, type: NotificationType.ERROR },
       })
     }
-  }, [dispatch, error])
+  }, [dispatch, request.error])
 
-  return { isPending, data, error, useMutation }
+  return request
 }

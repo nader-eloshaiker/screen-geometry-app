@@ -35,8 +35,8 @@ export const ScreenForm = ({ defaultValues = null, editId = undefined, isLoading
     reset,
     resetField,
   } = methods
-  const { isPending: isCreateLoading, useMutation: createAction } = useCreateScreenApi()
-  const { isPending: isUpdateLoading, useMutation: updateAction } = useUpdateScreenApi()
+  const { isPending: isCreateLoading, mutate: createAction } = useCreateScreenApi()
+  const { isPending: isUpdateLoading, mutate: updateAction } = useUpdateScreenApi()
   const [clearSearchHandler, setClearSearchHandler] = useState<() => void>(() => {})
 
   // NOTE: this is a hack to get around the fact that the form is not re-rendering when the defaultValues prop changes
