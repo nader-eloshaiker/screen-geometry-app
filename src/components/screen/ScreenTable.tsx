@@ -72,19 +72,17 @@ export const ScreenTable = ({
   setHighLighted = () => {},
   onHighlightClick = () => {},
 }: Props) => {
-  const { isPending: isDeleteLoading, mutate: deleteAction } = useDeleteScreenApi()
-  const { isPending: isVisibleLoading, mutate: visibleAction } = useShowScreenApi()
+  const { isPending: isDeletePending, mutate: deleteAction, variables: deleteParams } = useDeleteScreenApi()
+  const { isPending: isShowPending, mutate: showAction, variables: showParams } = useShowScreenApi()
   const { dispatchFormDrawer } = useFormDrawerContext()
-  const [selected, setSelected] = useState<ScreenItem>()
+  const [_, setSelected] = useState<ScreenItem>()
   const [themeMode] = useThemeMode()
 
   const onShow = (screen: ScreenItem) => {
-    setSelected(screen)
-    visibleAction({ id: screen.id })
+    showAction({ id: screen.id })
   }
 
   const handleDelete = (screen: ScreenItem) => {
-    setSelected(screen)
     deleteAction({ id: screen.id })
   }
 
@@ -127,7 +125,7 @@ export const ScreenTable = ({
             >
               <td>
                 <div className='flex items-center justify-center'>
-                  {isVisibleLoading && screen.id === selected?.id ? (
+                  {isShowPending && screen.id === showParams?.id ? (
                     <div
                       className='loading loading-spinner loading-xs'
                       style={{ color: themeMode === DarkMode ? screen.color.lightColor : screen.color.darkColor }}
@@ -159,7 +157,7 @@ export const ScreenTable = ({
                   <button onClick={() => handleEdit(screen)}>
                     <EditIcon id='edit-icon' className='size-4' fill='currentColor' />
                   </button>
-                  {isDeleteLoading && screen.id === selected?.id ? (
+                  {isDeletePending && screen.id === deleteParams?.id ? (
                     <div className='loading loading-spinner loading-xs' />
                   ) : (
                     <button onClick={() => handleDelete(screen)}>
