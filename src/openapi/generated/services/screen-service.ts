@@ -3,7 +3,6 @@
  * Do not edit manually.
  * screen-geometry-app-backend-serverless-apis-v1
  */
-import { faker } from '@faker-js/faker'
 import type {
   MutationFunction,
   QueryFunction,
@@ -302,63 +301,25 @@ export const getCreateScreenMock = () => ({
 
 export const getShowScreenMock = () => ({
   item: {
-    color: { darkColor: faker.word.sample(), lightColor: faker.word.sample() },
-    data: {
-      hAspectRatio: faker.number.int({ min: 0, max: undefined }),
-      hSize: faker.number.int({ min: 0, max: undefined }),
-      vAspectRatio: faker.number.int({ min: 0, max: undefined }),
-      vSize: faker.number.int({ min: 0, max: undefined }),
-    },
-    id: faker.word.sample(),
-    render: faker.helpers.arrayElement([
-      {
-        height: faker.helpers.arrayElement([faker.number.int({ min: 0, max: undefined }), undefined]),
-        pixelSize: faker.helpers.arrayElement([faker.number.int({ min: 0, max: undefined }), undefined]),
-        width: faker.helpers.arrayElement([faker.number.int({ min: 0, max: undefined }), undefined]),
-      },
-      undefined,
-    ]),
-    spec: faker.helpers.arrayElement([
-      {
-        hRes: faker.number.int({ min: 0, max: undefined }),
-        ppi: faker.number.int({ min: 0, max: undefined }),
-        vRes: faker.number.int({ min: 0, max: undefined }),
-      },
-      undefined,
-    ]),
-    tag: { aspectRatio: faker.word.sample(), diagonalSize: faker.number.int({ min: 0, max: undefined }) },
-    visible: faker.datatype.boolean(),
+    id: '5HjERJbH',
+    tag: { diagonalSize: 38, aspectRatio: '21:9' },
+    data: { hSize: 34.9275111406862, vSize: 14.968933346008372, hAspectRatio: 21, vAspectRatio: 9 },
+    spec: { hRes: 3840, vRes: 1600, ppi: 109.47368421052632 },
+    color: { lightColor: '#F6693C', darkColor: '#C33609' },
+    visible: true,
+    render: { width: 0.7404619058450888, height: 0.7100596596986617 },
   },
 })
 
 export const getGetScreenMock = () => ({
   item: {
-    color: { darkColor: faker.word.sample(), lightColor: faker.word.sample() },
-    data: {
-      hAspectRatio: faker.number.int({ min: 0, max: undefined }),
-      hSize: faker.number.int({ min: 0, max: undefined }),
-      vAspectRatio: faker.number.int({ min: 0, max: undefined }),
-      vSize: faker.number.int({ min: 0, max: undefined }),
-    },
-    id: faker.word.sample(),
-    render: faker.helpers.arrayElement([
-      {
-        height: faker.helpers.arrayElement([faker.number.int({ min: 0, max: undefined }), undefined]),
-        pixelSize: faker.helpers.arrayElement([faker.number.int({ min: 0, max: undefined }), undefined]),
-        width: faker.helpers.arrayElement([faker.number.int({ min: 0, max: undefined }), undefined]),
-      },
-      undefined,
-    ]),
-    spec: faker.helpers.arrayElement([
-      {
-        hRes: faker.number.int({ min: 0, max: undefined }),
-        ppi: faker.number.int({ min: 0, max: undefined }),
-        vRes: faker.number.int({ min: 0, max: undefined }),
-      },
-      undefined,
-    ]),
-    tag: { aspectRatio: faker.word.sample(), diagonalSize: faker.number.int({ min: 0, max: undefined }) },
-    visible: faker.datatype.boolean(),
+    id: '5HjERJbH',
+    tag: { diagonalSize: 38, aspectRatio: '21:9' },
+    data: { hSize: 34.9275111406862, vSize: 14.968933346008372, hAspectRatio: 21, vAspectRatio: 9 },
+    spec: { hRes: 3840, vRes: 1600, ppi: 109.47368421052632 },
+    color: { lightColor: '#F6693C', darkColor: '#C33609' },
+    visible: true,
+    render: { width: 0.7404619058450888, height: 0.7100596596986617 },
   },
 })
 
@@ -374,7 +335,7 @@ export const getUpdateScreenMock = () => ({
   },
 })
 
-export const getDeleteScreenMock = () => ({ id: faker.word.sample() })
+export const getDeleteScreenMock = () => ({ id: '5HjERJbH' })
 
 export const getScreenServiceMock = () => [
   http.post('*/screen', async () => {

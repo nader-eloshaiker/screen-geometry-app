@@ -3,7 +3,6 @@
  * Do not edit manually.
  * screen-geometry-app-backend-serverless-apis-v1
  */
-import { faker } from '@faker-js/faker'
 import type {
   MutationFunction,
   QueryFunction,
@@ -131,65 +130,77 @@ export const useCreateScreenList = <TError = ErrorResponse, TContext = unknown>(
 }
 
 export const getGetScreenListMock = () => ({
-  list: Array.from({ length: faker.number.int({ min: 1, max: 10 }) }, (_, i) => i + 1).map(() => ({
-    color: { darkColor: faker.word.sample(), lightColor: faker.word.sample() },
-    data: {
-      hAspectRatio: faker.number.int({ min: 0, max: undefined }),
-      hSize: faker.number.int({ min: 0, max: undefined }),
-      vAspectRatio: faker.number.int({ min: 0, max: undefined }),
-      vSize: faker.number.int({ min: 0, max: undefined }),
+  list: [
+    {
+      id: 'pVesw1Iu',
+      tag: { diagonalSize: 34, aspectRatio: '21:9' },
+      data: { hSize: 31.25093102061397, vSize: 13.3932561516917, hAspectRatio: 21, vAspectRatio: 9 },
+      spec: { hRes: 3440, vRes: 1440, ppi: 109.68340725465096 },
+      color: { lightColor: '#FCDF50', darkColor: '#967E03' },
+      visible: true,
     },
-    id: faker.word.sample(),
-    render: faker.helpers.arrayElement([
-      {
-        height: faker.helpers.arrayElement([faker.number.int({ min: 0, max: undefined }), undefined]),
-        pixelSize: faker.helpers.arrayElement([faker.number.int({ min: 0, max: undefined }), undefined]),
-        width: faker.helpers.arrayElement([faker.number.int({ min: 0, max: undefined }), undefined]),
-      },
-      undefined,
-    ]),
-    spec: faker.helpers.arrayElement([
-      {
-        hRes: faker.number.int({ min: 0, max: undefined }),
-        ppi: faker.number.int({ min: 0, max: undefined }),
-        vRes: faker.number.int({ min: 0, max: undefined }),
-      },
-      undefined,
-    ]),
-    tag: { aspectRatio: faker.word.sample(), diagonalSize: faker.number.int({ min: 0, max: undefined }) },
-    visible: faker.datatype.boolean(),
-  })),
+    {
+      id: 'wbXsutUI',
+      tag: { diagonalSize: 38, aspectRatio: '21:9' },
+      data: { hSize: 34.9275111406862, vSize: 14.968933346008372, hAspectRatio: 21, vAspectRatio: 9 },
+      spec: { hRes: 3840, vRes: 1600, ppi: 109.47368421052632 },
+      color: { lightColor: '#F6693C', darkColor: '#C33609' },
+      visible: true,
+    },
+    {
+      id: 'LnAg4nPQ',
+      tag: { diagonalSize: 27, aspectRatio: '16:9' },
+      data: { hSize: 23.53253950236283, vSize: 13.237053470079092, hAspectRatio: 16, vAspectRatio: 9 },
+      spec: { hRes: 3840, vRes: 2160, ppi: 163.17830889498507 },
+      color: { lightColor: '#67E5AA', darkColor: '#168350' },
+      visible: true,
+    },
+    {
+      id: 'oxrH4rCU',
+      tag: { diagonalSize: 49, aspectRatio: '32:9' },
+      data: { hSize: 47.169896067541046, vSize: 13.26653326899592, hAspectRatio: 32, vAspectRatio: 9 },
+      spec: { hRes: 5120, vRes: 1440, ppi: 108.54380498674065 },
+      color: { lightColor: '#64E8DD', darkColor: '#14857B' },
+      visible: true,
+    },
+  ],
 })
 
 export const getCreateScreenListMock = () => ({
-  list: Array.from({ length: faker.number.int({ min: 1, max: 10 }) }, (_, i) => i + 1).map(() => ({
-    color: { darkColor: faker.word.sample(), lightColor: faker.word.sample() },
-    data: {
-      hAspectRatio: faker.number.int({ min: 0, max: undefined }),
-      hSize: faker.number.int({ min: 0, max: undefined }),
-      vAspectRatio: faker.number.int({ min: 0, max: undefined }),
-      vSize: faker.number.int({ min: 0, max: undefined }),
+  list: [
+    {
+      id: 'pVesw1Iu',
+      tag: { diagonalSize: 34, aspectRatio: '21:9' },
+      data: { hSize: 31.25093102061397, vSize: 13.3932561516917, hAspectRatio: 21, vAspectRatio: 9 },
+      spec: { hRes: 3440, vRes: 1440, ppi: 109.68340725465096 },
+      color: { lightColor: '#FCDF50', darkColor: '#967E03' },
+      visible: true,
     },
-    id: faker.word.sample(),
-    render: faker.helpers.arrayElement([
-      {
-        height: faker.helpers.arrayElement([faker.number.int({ min: 0, max: undefined }), undefined]),
-        pixelSize: faker.helpers.arrayElement([faker.number.int({ min: 0, max: undefined }), undefined]),
-        width: faker.helpers.arrayElement([faker.number.int({ min: 0, max: undefined }), undefined]),
-      },
-      undefined,
-    ]),
-    spec: faker.helpers.arrayElement([
-      {
-        hRes: faker.number.int({ min: 0, max: undefined }),
-        ppi: faker.number.int({ min: 0, max: undefined }),
-        vRes: faker.number.int({ min: 0, max: undefined }),
-      },
-      undefined,
-    ]),
-    tag: { aspectRatio: faker.word.sample(), diagonalSize: faker.number.int({ min: 0, max: undefined }) },
-    visible: faker.datatype.boolean(),
-  })),
+    {
+      id: 'wbXsutUI',
+      tag: { diagonalSize: 38, aspectRatio: '21:9' },
+      data: { hSize: 34.9275111406862, vSize: 14.968933346008372, hAspectRatio: 21, vAspectRatio: 9 },
+      spec: { hRes: 3840, vRes: 1600, ppi: 109.47368421052632 },
+      color: { lightColor: '#F6693C', darkColor: '#C33609' },
+      visible: true,
+    },
+    {
+      id: 'LnAg4nPQ',
+      tag: { diagonalSize: 27, aspectRatio: '16:9' },
+      data: { hSize: 23.53253950236283, vSize: 13.237053470079092, hAspectRatio: 16, vAspectRatio: 9 },
+      spec: { hRes: 3840, vRes: 2160, ppi: 163.17830889498507 },
+      color: { lightColor: '#67E5AA', darkColor: '#168350' },
+      visible: true,
+    },
+    {
+      id: 'oxrH4rCU',
+      tag: { diagonalSize: 49, aspectRatio: '32:9' },
+      data: { hSize: 47.169896067541046, vSize: 13.26653326899592, hAspectRatio: 32, vAspectRatio: 9 },
+      spec: { hRes: 5120, vRes: 1440, ppi: 108.54380498674065 },
+      color: { lightColor: '#64E8DD', darkColor: '#14857B' },
+      visible: true,
+    },
+  ],
 })
 
 export const getScreenListServiceMock = () => [
