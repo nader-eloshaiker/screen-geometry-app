@@ -1,5 +1,4 @@
 import { apiRoutes } from '@server/meta/ApiRouteSchema'
-import { generateStub } from '@server/server'
 import { default as Axios, AxiosRequestConfig, default as axios } from 'axios'
 
 const apiAxiosInstance = axios.create({
@@ -7,8 +6,6 @@ const apiAxiosInstance = axios.create({
   timeout: 2000,
   headers: { Accept: 'application/json', 'Content-Type': 'application/json' },
 })
-
-generateStub(apiAxiosInstance)
 
 export const useApiAxios = <T>(): ((config: AxiosRequestConfig) => Promise<T>) => {
   // ToDo: implement token management

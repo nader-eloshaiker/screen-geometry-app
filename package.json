@@ -26,7 +26,7 @@
     "gen:spec": "orval --config ./orval.config.ts",
     "prepare": "husky install",
     "test": "vitest --coverage",
-    "test:ui": "vitest --ui  --coverage",
+    "test:ui": "vitest --ui --coverage.enabled=true",
     "test:ci": "vitest --run --coverage",
     "test:badge": "coverage-badges-cli --source=reports/coverage/coverage-summary.json --output=docs/coverage.svg --icon=docs/vitest.svg",
     "typecheck": "tsc --project tsconfig.json --noEmit",
@@ -41,10 +41,10 @@
     "@react-hook/resize-observer": "^1.2.6",
     "@tanstack/react-query": "^5.8.7",
     "axios": "^1.6.5",
-    "axios-mock-adapter": "^1.22.0",
     "clsx": "^2.1.0",
     "localforage": "^1.10.0",
     "minisearch": "^6.3.0",
+    "msw": "^2.1.3",
     "path-to-regexp": "^6.2.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -100,7 +100,6 @@
     "husky": "^8.0.3",
     "jsdom": "^23.0.1",
     "lint-staged": "^15.2.0",
-    "msw": "^2.1.3",
     "orval": "^6.23.0",
     "prettier": "^3.1.0",
     "prettier-plugin-organize-imports": "^3.2.4",
@@ -112,7 +111,7 @@
     "typescript": "^5.3.3",
     "vite": "^5.0.10",
     "vite-plugin-checker": "^0.6.2",
-    "vitest": "^1.1.2"
+    "vitest": "^1.2.2"
   },
   "browserslist": [
     "defaults"
@@ -120,5 +119,10 @@
   "lint-staged": {
     "**/*.{ts,tsx,js,json,yaml,yml} !(src/openapi/generated/**/*)": "npm run lint:fix",
     "*.{ts,tsx,js,csss,json,yaml,yml,md*}": "npm run format"
+  },
+  "msw": {
+    "workerDirectory": [
+      "public"
+    ]
   }
 }

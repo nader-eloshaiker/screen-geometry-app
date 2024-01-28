@@ -15,8 +15,8 @@ export type TIdResponse = {
   id: string
 }
 
-export async function getSearchList(params: Record<string, string>) {
-  const term = params.term?.toLowerCase().trim() ?? ''
+export async function getSearchList(params: URLSearchParams) {
+  const term = params.get('term')?.toLowerCase().trim() ?? ''
   const results = search(term)
 
   return { list: results }

@@ -1,3 +1,4 @@
+import { ScreenInput, ScreenInputList } from '@openapi/generated/models'
 import {
   createItemAction,
   createItemListAction,
@@ -9,123 +10,143 @@ import {
   updateItemAction,
 } from '@server/api'
 import { apiRoutes } from '@server/meta/ApiRouteSchema'
-import { AxiosInstance, AxiosRequestConfig } from 'axios'
-import MockAdapter from 'axios-mock-adapter'
-import { pathToRegexp } from 'path-to-regexp'
+import { HttpResponse, delay, http, passthrough } from 'msw'
+import { setupWorker } from 'msw/browser'
 
 // Stub out the API calls using axios-mock-adapter for indexAPI to store data in the browser's IndexedDB
 // The stubbed API calls can later be replaced with real API calls to a backend store
-export const generateStub = (axiosInstance: AxiosInstance) => {
+export const generateStub = async () => {
   // use explicit mocks with fixtures for testing
   if (import.meta.env.NODE_ENV) {
-    console.debug('TEST ENV: using explicit mocks with fixtures for testing')
-    return
-  } else {
-    console.debug('REAL ENV: using axios-mock-adapter for indexAPI to store data in the browser')
+    console.debug('[MSW] Browser MockServiceWorker Disabled')
+    return Promise.resolve()
   }
 
   const delayResponse = 1000
-  const mock = new MockAdapter(axiosInstance, { onNoMatch: 'passthrough', delayResponse })
 
-  const debug = (config: AxiosRequestConfig, response: unknown, stub: string) => {
-    console.debug(
-      `axios adapter: [${config.method}] ${config.url}`,
-      '\n',
-      `intercepted: ${stub}`,
-      '\n',
-      config,
-      '\n',
-      response,
-    )
-  }
+  const screenListMocks = () => [
+    http.get(`${apiRoutes.apiUrl}${apiRoutes.apiPathVer}/${apiRoutes.screens.path}`, async () => {
+      await delay(delayResponse)
 
-  const screenIdUrl = new RegExp(
-    '^' + apiRoutes.apiUrl + apiRoutes.apiPathVer + '/' + apiRoutes.screen.path + '/' + '(?:([^/]+?))/?$',
-  )
+      const payload = await getScreenList()
 
-  const paramScreenId = (url: string | undefined, action?: string) => {
-    if (!url) {
-      return undefined
-    }
-
-    const regexp = pathToRegexp(`/${apiRoutes.screen.path}/${apiRoutes.screen.key}${action ? `/${action}` : ''}`)
-    const match = regexp.exec(url)
-
-    if (!match || match.length < 2) {
-      return undefined
-    }
-
-    return match[1]
-  }
-
-  mock.onGet(`${apiRoutes.apiUrl}${apiRoutes.apiPathVer}/${apiRoutes.screens.path}`).reply((config) =>
-    getScreenList().then((payload) => {
-      debug(config, payload, 'getScreenList')
-
-      return [200, payload, { Accept: 'application/json', 'Content-Type': 'application/json' }]
+      return new HttpResponse(JSON.stringify(payload), {
+        status: 200,
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
     }),
-  )
+    http.post(`${apiRoutes.apiUrl}${apiRoutes.apiPathVer}/${apiRoutes.screens.path}`, async (resolver) => {
+      await delay(delayResponse)
 
-  mock.onPost(`${apiRoutes.apiUrl}${apiRoutes.apiPathVer}/${apiRoutes.screens.path}`).reply((config) =>
-    createItemListAction(config.data ? JSON.parse(config.data) : {}).then((payload) => {
-      debug(config, payload, 'createItemListAction')
+      const requestBody = await resolver.request.json()
+      const payload = await createItemListAction(requestBody as ScreenInputList)
 
-      return [200, payload, { Accept: 'application/json', 'Content-Type': 'application/json' }]
+      return new HttpResponse(JSON.stringify(payload), {
+        status: 200,
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
     }),
-  )
+  ]
 
-  mock.onGet(screenIdUrl).reply((config) =>
-    getScreen(paramScreenId(config.url)).then((payload) => {
-      debug(config, payload, 'getScreen')
+  const screenMocks = () => [
+    http.get(`${apiRoutes.apiUrl}${apiRoutes.apiPathVer}/${apiRoutes.screen.path}/:screenId`, async (resolver) => {
+      await delay(delayResponse)
 
-      return [200, payload, { Accept: 'application/json', 'Content-Type': 'application/json' }]
+      const { screenId } = resolver.params as { screenId: string }
+      const payload = await getScreen(screenId)
+
+      return new HttpResponse(JSON.stringify(payload), {
+        status: 200,
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
     }),
-  )
+    http.delete(`${apiRoutes.apiUrl}${apiRoutes.apiPathVer}/${apiRoutes.screen.path}/:screenId`, async (resolver) => {
+      await delay(delayResponse)
 
-  mock.onDelete(screenIdUrl).reply((config) =>
-    deleteItemAction(paramScreenId(config.url)).then((payload) => {
-      debug(config, payload, 'deleteItemAction')
-      return [200, payload, { Accept: 'application/json', 'Content-Type': 'application/json' }]
+      const { screenId } = resolver.params as { screenId: string }
+      const payload = await deleteItemAction(screenId)
+
+      return new HttpResponse(JSON.stringify(payload), {
+        status: 200,
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
     }),
-  )
+    http.put(`${apiRoutes.apiUrl}${apiRoutes.apiPathVer}/${apiRoutes.screen.path}/:screenId`, async (resolver) => {
+      await delay(delayResponse)
 
-  mock.onPut(screenIdUrl).reply((config) =>
-    updateItemAction(paramScreenId(config.url), config.data ? JSON.parse(config.data) : {}).then((payload) => {
-      debug(config, payload, 'updateItemAction')
-      return [200, payload, { Accept: 'application/json', 'Content-Type': 'application/json' }]
+      const { screenId } = resolver.params as { screenId: string }
+      const requestBody = await resolver.request.json()
+      const payload = await updateItemAction(screenId, requestBody as ScreenInput)
+
+      return new HttpResponse(JSON.stringify(payload), {
+        status: 200,
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
     }),
-  )
+    http.patch(
+      `${apiRoutes.apiUrl}${apiRoutes.apiPathVer}/${apiRoutes.screen.path}/:screenId/show`,
+      async (resolver) => {
+        await delay(delayResponse)
 
-  const screenShowUrl = new RegExp(
-    '^' +
-      apiRoutes.apiUrl +
-      apiRoutes.apiPathVer +
-      '/' +
-      apiRoutes.screen.path +
-      '/[^.]+/' +
-      apiRoutes.screen.actions.show,
-  )
-  mock.onPatch(screenShowUrl).reply((config) =>
-    showItemAction(paramScreenId(config.url, apiRoutes.screen.actions.show)).then((payload) => {
-      debug(config, payload, 'showItemAction')
-      return [200, payload, { Accept: 'application/json', 'Content-Type': 'application/json' }]
+        const { screenId } = resolver.params as { screenId: string }
+        const payload = await showItemAction(screenId)
+
+        return new HttpResponse(JSON.stringify(payload), {
+          status: 200,
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        })
+      },
+    ),
+    http.post(`${apiRoutes.apiUrl}${apiRoutes.apiPathVer}/${apiRoutes.screen.path}`, async (resolver) => {
+      await delay(delayResponse)
+
+      const requestBody = await resolver.request.json()
+      const payload = await createItemAction(requestBody as ScreenInput)
+
+      return new HttpResponse(JSON.stringify(payload), {
+        status: 200,
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
     }),
-  )
+  ]
 
-  mock.onPost(`${apiRoutes.apiUrl}${apiRoutes.apiPathVer}/${apiRoutes.screen.path}`).reply((config) =>
-    createItemAction(config.data ? JSON.parse(config.data) : {}).then((payload) => {
-      debug(config, payload, 'createItemAction')
-      return [200, payload, { Accept: 'application/json', 'Content-Type': 'application/json' }]
+  const searchMocks = () => [
+    http.get(`${apiRoutes.apiUrl}${apiRoutes.apiPathVer}/${apiRoutes.search.path}`, async (resolver) => {
+      await delay(delayResponse)
+
+      const url = new URL(resolver.request.url)
+      const payload = await getSearchList(url.searchParams)
+
+      return new HttpResponse(JSON.stringify(payload), {
+        status: 200,
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
     }),
-  )
+  ]
 
-  mock.onGet(`${apiRoutes.apiUrl}${apiRoutes.apiPathVer}/${apiRoutes.search.path}`).reply((config) =>
-    getSearchList(config.params).then((payload) => {
-      debug(config, payload, 'getSearchList')
-
-      return [200, payload, { Accept: 'application/json', 'Content-Type': 'application/json' }]
+  const passthroughMocks = () => [
+    http.get('*', async () => {
+      return passthrough()
     }),
-  )
+  ]
 
-  return mock
+  const server = setupWorker(...searchMocks(), ...screenListMocks(), ...screenMocks(), ...passthroughMocks())
+
+  return server.start()
 }
