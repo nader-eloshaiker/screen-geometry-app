@@ -4,7 +4,7 @@ import { ScreenListResponse } from '@openapi/generated/models'
 import { useGetScreenList } from '@openapi/generated/services/screen-list-service'
 import { keepPreviousData } from '@tanstack/react-query'
 import { useCallback } from 'react'
-import { useApiQuery } from '../useApiQuery'
+import { useApiEffectHandler } from '../useApiEffectHandler'
 
 export const useGetScreensListApi = () => {
   const { dispatch } = useScreenContext()
@@ -12,17 +12,20 @@ export const useGetScreensListApi = () => {
     (data: ScreenListResponse) => dispatch({ type: ScreenActionTypes.LOAD, payload: data?.list }),
     [dispatch],
   )
-  const useRequest = () =>
-    useGetScreenList({
-      query: {
-        refetchOnWindowFocus: false,
-        placeholderData: keepPreviousData,
-        queryKey: ['useCreateScreenList'],
-      },
-    })
 
-  return useApiQuery<ScreenListResponse>({
-    useRequest,
+  const request = useGetScreenList<ScreenListResponse>({
+    query: {
+      refetchOnWindowFocus: false,
+      placeholderData: keepPreviousData,
+      queryKey: ['useCreateScreenList'],
+    },
+  })
+
+  useApiEffectHandler<ScreenListResponse>({
+    data: request.data,
+    error: request.error,
     responseHandler,
   })
+
+  return request
 }

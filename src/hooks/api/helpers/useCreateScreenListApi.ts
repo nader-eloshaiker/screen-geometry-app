@@ -1,9 +1,9 @@
 import { ScreenActionTypes } from '@contexts/Screen/ScreenManager'
 import { useScreenContext } from '@contexts/Screen/useScreenContext'
-import { ScreenInputList, ScreenListResponse } from '@openapi/generated/models'
+import { ScreenListResponse } from '@openapi/generated/models'
 import { useCreateScreenList } from '@openapi/generated/services/screen-list-service'
 import { useCallback } from 'react'
-import { useApiMutation } from '../useApiMutation'
+import { useApiEffectHandler } from '../useApiEffectHandler'
 
 const successNotification = { title: 'Created', message: 'Screen list' }
 
@@ -13,11 +13,14 @@ export const useCreateScreenListApi = () => {
     (data: ScreenListResponse) => dispatch({ type: ScreenActionTypes.ADD_LIST, payload: data.list }),
     [dispatch],
   )
-  const useRequest = () => useCreateScreenList()
+  const request = useCreateScreenList()
 
-  return useApiMutation<ScreenListResponse, { data: ScreenInputList }>({
-    useRequest,
+  useApiEffectHandler<ScreenListResponse>({
+    data: request.data,
+    error: request.error,
     responseHandler,
     successNotification,
   })
+
+  return request
 }

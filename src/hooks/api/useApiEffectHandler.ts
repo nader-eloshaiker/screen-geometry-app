@@ -5,26 +5,26 @@ import {
 } from '@contexts/Notification/NotificationManager'
 import { useNotificationContext } from '@contexts/Notification/useNotifcationContext'
 import { ErrorResponse } from '@openapi/generated/models'
-import type { UseMutationResult } from '@tanstack/react-query'
 import { useEffect } from 'react'
 
-export const useApiMutation = <TData, TVariables, TError = ErrorResponse, TContext = unknown>({
-  useRequest,
+export const useApiEffectHandler = <TData>({
+  data,
+  error,
   responseHandler,
   successNotification,
 }: {
-  useRequest(): UseMutationResult<TData, TError, TVariables, TContext>
+  data?: TData
+  error?: ErrorResponse | null
   responseHandler?(data: TData | undefined): void
   successNotification?: { title: string; message: string }
 }) => {
   const { dispatch } = useNotificationContext()
-  const request = useRequest()
 
   useEffect(() => {
-    if (!responseHandler || !request.data) {
+    if (!responseHandler || !data) {
       return
     }
-    responseHandler(request.data)
+    responseHandler(data)
 
     if (successNotification) {
       const { title, message } = successNotification
@@ -36,16 +36,14 @@ export const useApiMutation = <TData, TVariables, TError = ErrorResponse, TConte
         },
       })
     }
-  }, [responseHandler, request.data, dispatch, successNotification])
+  }, [responseHandler, data, dispatch, successNotification])
 
   useEffect(() => {
-    if (request.error) {
+    if (error) {
       dispatch({
         type: NotificationActionTypes.ADD_NOTIFICATION,
-        payload: { value: request.error, type: NotificationType.ERROR },
+        payload: { value: error, type: NotificationType.ERROR },
       })
     }
-  }, [dispatch, request.error])
-
-  return request
+  }, [dispatch, error])
 }

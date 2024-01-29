@@ -88,7 +88,6 @@ export const ScreenTable = ({
 
   const handleEdit = (screen: ScreenItem) => {
     setSelected(screen)
-
     dispatchFormDrawer({ type: FormDrawerActionTypes.Edit, payload: { id: screen.id } })
   }
 
