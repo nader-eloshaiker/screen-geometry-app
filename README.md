@@ -69,14 +69,11 @@ Code is checked in for review ease. This can also help when working on a 'work i
 
 This app generally follows a typical SPA (single page application) and access data from a backend using REST. However, given the simplicity of the app and its purpose, it does not require a fully fledged backend. This has lead to some unique design decisions.
 
-- The host will serve not only the WebApp, but also, a JSON file containing a list of preconfigured popular screen configuration available to consumers.
-- When the web browser executes the WebApp, on initialisation, it will fetch the JSON file as it would any other asset used by the app.
-- This will then be used to pre-populate the search bar, allowing user to pick from a list of configurations rather than having to manually fill out the form.
-- API calls are made for typical CRUD operations for the user configured screens.
-- API calls are intercepted and routed to a frontend stub that runs in the browser as part of the WebApp
-- The stub access the browser IndexedDB to persist the data
+- API calls are made for typical CRUD operations for all the user generated content.
+- API calls are intercepted and routed to a frontend mock service that runs in the browser as part of the WebApp using a [Mock Service Worker](https://mswjs.io/)).
+- The mock accesses the browser's IndexedDB to persist the data and an in-browser search engine.
 
-This approach literally is a **Serverless implementation** but also allow for a future enhancement for a real server to persist the user data without a major refactor of the frontend architecture.
+This approach literally is a **Serverless implementation** but also allows for a future enhancement to implement a real server to search and persist the user data without a major refactor of the frontend architecture.
 
 Refer to the diagram below for a visual representation.
 
@@ -84,7 +81,6 @@ Refer to the diagram below for a visual representation.
 graph TB
 subgraph sub1[Static Asset Host]
 sub1A("WebApp")
-sub1B[("Static Data (JSON)")]
 end
 
 subgraph sub2[Web Browser]
@@ -96,8 +92,8 @@ subgraph sub3[Local WebApp]
 sub3A(HTML/JavaScript)
 sub3B(API)
 sub3C(HTTP Client)
-sub3D(Interceptor)
-sub3E(Stub)
+sub3D(Mock Service Worker)
+sub3E(Mock)
 end
 
 sub1A -- Download--> sub3A
@@ -122,6 +118,14 @@ sub2B --Retrieve Mutated Data--> sub3E
 #### Description
 
 Orval is a client API code generator. It takes an [OpenAPI or Swagger spec](https://swagger.io/specification/) (in yaml format) and generates not only the the endpoints complete with urls, but also the data models exchanged between client and server. You can read more here [orval.dev](https://orval.dev/) Note that there are many more tools such as one from Swagger themselves called [OpenAPI Tools](https://github.com/OpenAPITools/openapi-generator) and [Redux Toolkit OpenAPI code-generator](https://redux-toolkit.js.org/rtk-query/usage/code-generation). These are all very good tools, I just settled on this one because the generated code was easy to ready and allowed me to choose the underlying HTTP framework.
+
+#### Output
+
+Orval has been configure to generate:
+
+- Services using [React Query](https://tanstack.com/query) with [AXIOS](https://axios-http.com/) as the HTTP Client
+- Data models within the API calls.
+- Mock data from the `exmaples` field in the OpenAPI Spec that utilises [Mock Service Worker](https://mswjs.io/)
 
 #### One source of truth
 
@@ -309,6 +313,8 @@ merge release tag: "release v2.0.0"
 
 Testing makes use of [Vitest](https://vitest.dev/) which is a test runner much like Jest but integrates with the Vite tranformation pipeline and configuration.
 It provides a compatible api with Jest making it a drop in raplacement but runs significantly faster than Jest.
+
+The mock data that was generated using Orval from the `example` field of the OpenAPI spec, is used to provision an instance of [MSWjs](https://mswjs.io/) specifically used for unit testing.
 
 #### Run test
 
