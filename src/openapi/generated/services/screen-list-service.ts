@@ -140,7 +140,7 @@ export const getGetScreenListMock = () => ({
       visible: true,
     },
     {
-      id: 'wbXsutUI',
+      id: '5HjERJbH',
       tag: { diagonalSize: 38, aspectRatio: '21:9' },
       data: { hSize: 34.9275111406862, vSize: 14.968933346008372, hAspectRatio: 21, vAspectRatio: 9 },
       spec: { hRes: 3840, vRes: 1600, ppi: 109.47368421052632 },
@@ -177,7 +177,7 @@ export const getCreateScreenListMock = () => ({
       visible: true,
     },
     {
-      id: 'wbXsutUI',
+      id: '5HjERJbH',
       tag: { diagonalSize: 38, aspectRatio: '21:9' },
       data: { hSize: 34.9275111406862, vSize: 14.968933346008372, hAspectRatio: 21, vAspectRatio: 9 },
       spec: { hRes: 3840, vRes: 1600, ppi: 109.47368421052632 },

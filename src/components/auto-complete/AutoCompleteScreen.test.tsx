@@ -5,20 +5,22 @@ import { useElementSizeMock } from '@hooks/useElementSize.mock'
 import { getSearchListServiceMock } from '@openapi/generated/services/search-list-service'
 import { useInteractComponent } from '@test/utils/useInteractComponent'
 import { resetMSWEventStack, useMSWEventStack } from '@test/utils/useMSWEventStack'
-import { render, waitFor } from '@testing-library/react'
+import { waitFor } from '@testing-library/react'
 import { setupServer } from 'msw/node'
 
-const scheduler = typeof setImmediate === 'function' ? setImmediate : setTimeout
-
-export const flushPromises = () => {
-  return new Promise((resolve) => {
-    scheduler(resolve)
-  })
+const TestComponent = () => {
+  return (
+    <QueryProvider>
+      <NotificationProvider>
+        <AutoCompleteScreen onSelectScreen={vi.fn()} setClearSearchHandler={vi.fn} />
+      </NotificationProvider>
+    </QueryProvider>
+  )
 }
+
 describe('#AutoCompleteScreen', () => {
   const server = setupServer(...getSearchListServiceMock())
   const mswRequestEventSpy = useMSWEventStack(server)
-  // let searchListApiSpy: MockInstance
 
   beforeAll(() => {
     server.listen()
@@ -27,9 +29,6 @@ describe('#AutoCompleteScreen', () => {
   beforeEach(() => {
     useElementSizeMock()
     resetMSWEventStack()
-    // queryClient.clear()
-    // queryClient.resetQueries()
-    // searchListApiSpy = vi.spyOn(useSearchListApi, 'useSearchListApi')
   })
 
   afterEach(() => {
@@ -42,26 +41,14 @@ describe('#AutoCompleteScreen', () => {
   })
 
   test('renders autocomplete component with an input field', async () => {
-    const test = render(
-      <QueryProvider>
-        <NotificationProvider>
-          <AutoCompleteScreen onSelectScreen={vi.fn()} setClearSearchHandler={vi.fn} />
-        </NotificationProvider>
-      </QueryProvider>,
-    )
+    const test = useInteractComponent(<TestComponent />)
 
     const inputElement = await test.findByPlaceholderText('Type to filter list...')
     expect(inputElement).toBeDefined()
   })
 
   test('calls backend search api a limited time as the user enters a search term', async () => {
-    const test = useInteractComponent(
-      <QueryProvider>
-        <NotificationProvider>
-          <AutoCompleteScreen onSelectScreen={vi.fn()} setClearSearchHandler={vi.fn} />
-        </NotificationProvider>
-      </QueryProvider>,
-    )
+    const test = useInteractComponent(<TestComponent />)
 
     const inputElement = await test.findByPlaceholderText('Type to filter list...')
     expect(inputElement).toBeDefined()
@@ -75,13 +62,7 @@ describe('#AutoCompleteScreen', () => {
   })
 
   test('clears search results and requests a full list from search engine', async () => {
-    const test = useInteractComponent(
-      <QueryProvider>
-        <NotificationProvider>
-          <AutoCompleteScreen onSelectScreen={vi.fn()} setClearSearchHandler={vi.fn} />
-        </NotificationProvider>
-      </QueryProvider>,
-    )
+    const test = useInteractComponent(<TestComponent />)
 
     const inputElement = await test.findByPlaceholderText('Type to filter list...')
     await test.user.type(inputElement, 'WQHD')

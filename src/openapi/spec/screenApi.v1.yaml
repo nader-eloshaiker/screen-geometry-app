@@ -197,7 +197,7 @@ paths:
                       lightColor: '#FCDF50'
                       darkColor: '#967E03'
                     visible: true
-                  - id: wbXsutUI
+                  - id: 5HjERJbH
                     tag:
                       diagonalSize: 38
                       aspectRatio: '21:9'
@@ -330,7 +330,7 @@ paths:
                       lightColor: '#FCDF50'
                       darkColor: '#967E03'
                     visible: true
-                  - id: wbXsutUI
+                  - id: 5HjERJbH
                     tag:
                       diagonalSize: 38
                       aspectRatio: '21:9'
@@ -584,7 +584,7 @@ paths:
                   color:
                     lightColor: '#F6693C'
                     darkColor: '#C33609'
-                  visible: true
+                  visible: false
                   render:
                     width: 0.7404619058450888
                     height: 0.7100596596986617

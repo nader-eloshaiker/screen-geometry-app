@@ -306,7 +306,7 @@ export const getShowScreenMock = () => ({
     data: { hSize: 34.9275111406862, vSize: 14.968933346008372, hAspectRatio: 21, vAspectRatio: 9 },
     spec: { hRes: 3840, vRes: 1600, ppi: 109.47368421052632 },
     color: { lightColor: '#F6693C', darkColor: '#C33609' },
-    visible: true,
+    visible: false,
     render: { width: 0.7404619058450888, height: 0.7100596596986617 },
   },
 })

@@ -49,7 +49,11 @@ const TableSkeleton = ({ cols, rows }: TTableProps) => {
   for (let i = 0; i < rows; i++) {
     const key = getRandomString(4)
 
-    tableRows.push(<tr key={key}>{tableCols}</tr>)
+    tableRows.push(
+      <tr data-testid='SkeletonTableRow' key={key}>
+        {tableCols}
+      </tr>,
+    )
   }
 
   return <tbody>{tableRows}</tbody>
@@ -132,6 +136,7 @@ export const ScreenTable = ({
                   ) : (
                     <StyledCheckbox
                       type='checkbox'
+                      aria-label='show checkbox'
                       id={screen.id}
                       $color={fgColor(themeMode, screen.color)}
                       checked={screen.visible}
@@ -141,25 +146,31 @@ export const ScreenTable = ({
                   )}
                 </div>
               </td>
-              <td className='text-center'>{screen.tag.diagonalSize}&quot;</td>
-              <td className='text-center'>{screen.tag.aspectRatio}</td>
-              <td className='hidden text-center sm:table-cell'>
+              <td role='cell' className='text-center'>
+                {screen.tag.diagonalSize}&quot;
+              </td>
+              <td role='cell' className='text-center'>
+                {screen.tag.aspectRatio}
+              </td>
+              <td role='cell' className='hidden text-center sm:table-cell'>
                 {Math.round((screen.data.hSize * 100) / 100)}&quot; x {Math.round((screen.data.vSize * 100) / 100)}
                 &quot;
               </td>
               <td className='hidden text-center md:table-cell'>
                 {screen.spec && `${screen.spec.hRes} x ${screen.spec.vRes}`}
               </td>
-              <td className='text-center'>{screen.spec && `${Math.round((screen.spec.ppi * 100) / 100)}`}</td>
-              <td>
+              <td role='cell' className='text-center'>
+                {screen.spec && `${Math.round((screen.spec.ppi * 100) / 100)}`}
+              </td>
+              <td role='cell'>
                 <div className='flex flex-row items-center justify-center gap-3'>
-                  <button onClick={() => handleEdit(screen)}>
+                  <button aria-label='edit button' onClick={() => handleEdit(screen)}>
                     <EditIcon id='edit-icon' className='size-4' fill='currentColor' />
                   </button>
                   {isDeletePending && screen.id === deleteParams?.id ? (
                     <div className='loading loading-spinner loading-xs' />
                   ) : (
-                    <button onClick={() => handleDelete(screen)}>
+                    <button aria-label='delete button' onClick={() => handleDelete(screen)}>
                       <CloseIcon id='delete-icon' className='size-4' fill='currentColor' />
                     </button>
                   )}
