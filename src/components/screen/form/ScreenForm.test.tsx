@@ -10,7 +10,7 @@ import { getScreenServiceMock } from '@openapi/generated/services/screen-service
 import { getSearchListServiceMock } from '@openapi/generated/services/search-list-service'
 import { useInteractComponent } from '@test/utils/useInteractComponent'
 import { resetMSWEventStack, useMSWEventStack } from '@test/utils/useMSWEventStack'
-import { render } from '@testing-library/react'
+import { render, waitFor } from '@testing-library/react'
 import { transformScreenInput } from '@utils/ScreenTransformation'
 import { setupServer } from 'msw/node'
 import { ScreenForm } from './ScreenForm'
@@ -103,8 +103,7 @@ describe('#ScreenForm', () => {
       const submitButton = await test.findByText('Update')
       await test.user.click(submitButton)
 
-      const submitButtonBusy = await test.findByTestId('busySubmitButton')
-      expect(submitButtonBusy).toBeInTheDocument()
+      waitFor(() => expect(test.getByTestId('busySubmitButton')).toBeInTheDocument())
     })
 
     test('show loading when creating a screen', async () => {
@@ -126,8 +125,7 @@ describe('#ScreenForm', () => {
       const submitButton = await test.findByText('Create')
       await test.user.click(submitButton)
 
-      const submitButtonBusy = await test.findByTestId('busySubmitButton')
-      expect(submitButtonBusy).toBeInTheDocument()
+      waitFor(() => expect(test.getByTestId('busySubmitButton')).toBeInTheDocument())
     })
   })
 

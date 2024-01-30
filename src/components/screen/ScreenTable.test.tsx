@@ -70,10 +70,7 @@ describe('#ScreenTable', () => {
       expect.stringContaining('method:DELETE|url:http://localhost:3000/undefined/v1/screen/pVesw1Iu'),
     )
 
-    waitFor(() => {
-      const rowElements = test.queryAllByRole('row')
-      expect(rowElements.length).toBe(4)
-    })
+    waitFor(() => expect(test.queryAllByRole('row').length).toBe(4))
   })
   test('hide a screen row when show button is clicked', async () => {
     const test = useInteractComponent(<TestComponent />)
@@ -82,8 +79,6 @@ describe('#ScreenTable', () => {
     const showElement = showElements[0]
 
     await test.user.click(showElement)
-
-    console.log('mswRequestEventSpy', mswRequestEventSpy)
 
     expect(mswRequestEventSpy[mswRequestEventSpy.length - 1]).toEqual(
       expect.stringContaining('method:PATCH|url:http://localhost:3000/undefined/v1/screen/pVesw1Iu/show'),
