@@ -61,10 +61,10 @@ export default defineConfig({
       ],
       reportOnFailure: true,
       thresholds: {
-        lines: 50,
-        branches: 65,
-        functions: 47,
-        statements: 50,
+        lines: 55,
+        branches: 75,
+        functions: 60,
+        statements: 55,
         // autoUpdate: true, // Update thresholds when writing tests, disabled due to refactoring tests changes coverage
       },
     },
