@@ -51,10 +51,12 @@ export default defineConfig({
       include: ['src/**/*.{ts,tsx}'],
       exclude: [
         ...configDefaults.exclude,
+        'src/reportWebVitals.ts',
         'src/openapi/**/*',
         'src/test/**/*',
         'src/assets/**/*',
         'src/**/*.mock.{ts,tsx}',
+        'src/**/*.stories.tsx',
         'src/**/*.d.ts',
       ],
       reportOnFailure: true,
