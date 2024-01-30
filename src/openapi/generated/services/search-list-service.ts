@@ -5,6 +5,7 @@
  */
 import type { QueryFunction, QueryKey, UseQueryOptions, UseQueryResult } from '@tanstack/react-query'
 import { useQuery } from '@tanstack/react-query'
+import { HttpResponse, delay, http } from 'msw'
 import { useApiAxios } from '../../../hooks/api/useApiAxios'
 import type { ErrorResponse, GetSearchListParams, SearchListResponse } from '../models'
 
@@ -65,3 +66,56 @@ export const useGetSearchList = <
 
   return query
 }
+
+export const getGetSearchListMock = () => ({
+  list: [
+    {
+      id: 'WQHD3421:9',
+      name: 'WQHD',
+      label: 'WQHD 34" 3440x1440 21:9',
+      aspectRatio: '21:9',
+      diagonalSize: 34,
+      vRes: 1440,
+      hRes: 3440,
+    },
+    {
+      id: 'WQHD+3821:9',
+      name: 'WQHD+',
+      label: 'WQHD+ 38" 3840x1600 21:9',
+      aspectRatio: '21:9',
+      diagonalSize: 38,
+      vRes: 1600,
+      hRes: 3840,
+    },
+    {
+      id: '4KUHD2716:9',
+      name: '4K UHD',
+      label: '4K UHD 27" 3840x2160 16:9',
+      aspectRatio: '16:9',
+      diagonalSize: 27,
+      vRes: 2160,
+      hRes: 3840,
+    },
+    {
+      id: '4KUHD3216:9',
+      name: '4K UHD',
+      label: '4K UHD 32" 3840x2160 16:9',
+      aspectRatio: '16:9',
+      diagonalSize: 32,
+      vRes: 2160,
+      hRes: 3840,
+    },
+  ],
+})
+
+export const getSearchListServiceMock = () => [
+  http.get('*/search', async () => {
+    await delay(10)
+    return new HttpResponse(JSON.stringify(getGetSearchListMock()), {
+      status: 200,
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+  }),
+]

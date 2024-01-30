@@ -12,6 +12,7 @@ import type {
   UseQueryResult,
 } from '@tanstack/react-query'
 import { useMutation, useQuery } from '@tanstack/react-query'
+import { HttpResponse, delay, http } from 'msw'
 import { useApiAxios } from '../../../hooks/api/useApiAxios'
 import type { ErrorResponse, ScreenInputList, ScreenListResponse } from '../models'
 
@@ -127,3 +128,98 @@ export const useCreateScreenList = <TError = ErrorResponse, TContext = unknown>(
 
   return useMutation(mutationOptions)
 }
+
+export const getGetScreenListMock = () => ({
+  list: [
+    {
+      id: 'pVesw1Iu',
+      tag: { diagonalSize: 34, aspectRatio: '21:9' },
+      data: { hSize: 31.25093102061397, vSize: 13.3932561516917, hAspectRatio: 21, vAspectRatio: 9 },
+      spec: { hRes: 3440, vRes: 1440, ppi: 109.68340725465096 },
+      color: { lightColor: '#FCDF50', darkColor: '#967E03' },
+      visible: true,
+    },
+    {
+      id: '5HjERJbH',
+      tag: { diagonalSize: 38, aspectRatio: '21:9' },
+      data: { hSize: 34.9275111406862, vSize: 14.968933346008372, hAspectRatio: 21, vAspectRatio: 9 },
+      spec: { hRes: 3840, vRes: 1600, ppi: 109.47368421052632 },
+      color: { lightColor: '#F6693C', darkColor: '#C33609' },
+      visible: true,
+    },
+    {
+      id: 'LnAg4nPQ',
+      tag: { diagonalSize: 27, aspectRatio: '16:9' },
+      data: { hSize: 23.53253950236283, vSize: 13.237053470079092, hAspectRatio: 16, vAspectRatio: 9 },
+      spec: { hRes: 3840, vRes: 2160, ppi: 163.17830889498507 },
+      color: { lightColor: '#67E5AA', darkColor: '#168350' },
+      visible: true,
+    },
+    {
+      id: 'oxrH4rCU',
+      tag: { diagonalSize: 49, aspectRatio: '32:9' },
+      data: { hSize: 47.169896067541046, vSize: 13.26653326899592, hAspectRatio: 32, vAspectRatio: 9 },
+      spec: { hRes: 5120, vRes: 1440, ppi: 108.54380498674065 },
+      color: { lightColor: '#64E8DD', darkColor: '#14857B' },
+      visible: true,
+    },
+  ],
+})
+
+export const getCreateScreenListMock = () => ({
+  list: [
+    {
+      id: 'pVesw1Iu',
+      tag: { diagonalSize: 34, aspectRatio: '21:9' },
+      data: { hSize: 31.25093102061397, vSize: 13.3932561516917, hAspectRatio: 21, vAspectRatio: 9 },
+      spec: { hRes: 3440, vRes: 1440, ppi: 109.68340725465096 },
+      color: { lightColor: '#FCDF50', darkColor: '#967E03' },
+      visible: true,
+    },
+    {
+      id: '5HjERJbH',
+      tag: { diagonalSize: 38, aspectRatio: '21:9' },
+      data: { hSize: 34.9275111406862, vSize: 14.968933346008372, hAspectRatio: 21, vAspectRatio: 9 },
+      spec: { hRes: 3840, vRes: 1600, ppi: 109.47368421052632 },
+      color: { lightColor: '#F6693C', darkColor: '#C33609' },
+      visible: true,
+    },
+    {
+      id: 'LnAg4nPQ',
+      tag: { diagonalSize: 27, aspectRatio: '16:9' },
+      data: { hSize: 23.53253950236283, vSize: 13.237053470079092, hAspectRatio: 16, vAspectRatio: 9 },
+      spec: { hRes: 3840, vRes: 2160, ppi: 163.17830889498507 },
+      color: { lightColor: '#67E5AA', darkColor: '#168350' },
+      visible: true,
+    },
+    {
+      id: 'oxrH4rCU',
+      tag: { diagonalSize: 49, aspectRatio: '32:9' },
+      data: { hSize: 47.169896067541046, vSize: 13.26653326899592, hAspectRatio: 32, vAspectRatio: 9 },
+      spec: { hRes: 5120, vRes: 1440, ppi: 108.54380498674065 },
+      color: { lightColor: '#64E8DD', darkColor: '#14857B' },
+      visible: true,
+    },
+  ],
+})
+
+export const getScreenListServiceMock = () => [
+  http.get('*/screens', async () => {
+    await delay(10)
+    return new HttpResponse(JSON.stringify(getGetScreenListMock()), {
+      status: 200,
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+  }),
+  http.post('*/screens', async () => {
+    await delay(10)
+    return new HttpResponse(JSON.stringify(getCreateScreenListMock()), {
+      status: 200,
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+  }),
+]

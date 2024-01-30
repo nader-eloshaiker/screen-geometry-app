@@ -1,5 +1,4 @@
 import { apiRoutes } from '@server/meta/ApiRouteSchema'
-import { generateStub } from '@server/server'
 import { default as Axios, AxiosRequestConfig, default as axios } from 'axios'
 
 const apiAxiosInstance = axios.create({
@@ -7,8 +6,6 @@ const apiAxiosInstance = axios.create({
   timeout: 2000,
   headers: { Accept: 'application/json', 'Content-Type': 'application/json' },
 })
-
-generateStub(apiAxiosInstance)
 
 export const useApiAxios = <T>(): ((config: AxiosRequestConfig) => Promise<T>) => {
   // ToDo: implement token management
@@ -24,12 +21,23 @@ export const useApiAxios = <T>(): ((config: AxiosRequestConfig) => Promise<T>) =
       cancelToken: source.token,
     })
       .then(({ data }) => {
-        console.info(`axios success: [${config.method}] ${config.url}`, '\nrequest:', config.data, '\nresponse:', data)
+        // if (!import.meta.env.NODE_TEST) {
+        //   console.info(
+        //     `axios success: [${config.method}] ${config.url}`,
+        //     '\nrequest:',
+        //     config.data,
+        //     '\nresponse:',
+        //     data,
+        //   )
+        // }
 
         return data
       })
       .catch((error) => {
-        console.info(`axios termianted: [${config.method}] ${config.url}`, '\nconfig:', config)
+        // if (!import.meta.env.NODE_TEST) {
+        //   console.info(`axios termianted: [${config.method}] ${config.url}`, '\nconfig:', config)
+        // }
+
         throw error
       })
 

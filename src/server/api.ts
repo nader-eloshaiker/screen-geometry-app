@@ -1,5 +1,5 @@
 import { ScreenInput, ScreenInputList, ScreenItem } from '@openapi/generated/models'
-import { search } from '@server/searchClient'
+import { search } from '@server/searchEngine'
 import { transformScreenInput } from '@utils/ScreenTransformation'
 import { createItem, createItemList, deleteItem, getItem, getItemList, updateItem } from './db/indexDB'
 
@@ -15,8 +15,8 @@ export type TIdResponse = {
   id: string
 }
 
-export async function getSearchList(params: Record<string, string>) {
-  const term = params.term?.toLowerCase().trim() ?? ''
+export async function getSearchList(params: URLSearchParams) {
+  const term = params.get('term')?.toLowerCase().trim() ?? ''
   const results = search(term)
 
   return { list: results }

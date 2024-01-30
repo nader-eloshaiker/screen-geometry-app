@@ -5,20 +5,20 @@ import {
 } from '@contexts/Notification/NotificationManager'
 import { useNotificationContext } from '@contexts/Notification/useNotifcationContext'
 import { ErrorResponse } from '@openapi/generated/models'
-import type { UseMutationResult } from '@tanstack/react-query'
 import { useEffect } from 'react'
 
-export const useApiMutation = <TData, TVariables, TError = ErrorResponse, TContext = unknown>({
-  useRequest,
+export const useApiEffectHandler = <TData>({
+  data,
+  error,
   responseHandler,
   successNotification,
 }: {
-  useRequest(): UseMutationResult<TData, TError, TVariables, TContext>
+  data?: TData
+  error?: ErrorResponse | null
   responseHandler?(data: TData | undefined): void
   successNotification?: { title: string; message: string }
 }) => {
   const { dispatch } = useNotificationContext()
-  const { isPending, error, data, mutate: useMutation } = useRequest()
 
   useEffect(() => {
     if (!responseHandler || !data) {
@@ -46,6 +46,4 @@ export const useApiMutation = <TData, TVariables, TError = ErrorResponse, TConte
       })
     }
   }, [dispatch, error])
-
-  return { isPending, data, error, useMutation }
 }

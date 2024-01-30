@@ -12,6 +12,7 @@ import type {
   UseQueryResult,
 } from '@tanstack/react-query'
 import { useMutation, useQuery } from '@tanstack/react-query'
+import { HttpResponse, delay, http } from 'msw'
 import { useApiAxios } from '../../../hooks/api/useApiAxios'
 import type { ErrorResponse, ScreenIdResponse, ScreenInput, ScreenItemResponse } from '../models'
 
@@ -285,3 +286,101 @@ export const useDeleteScreen = <TError = ErrorResponse, TContext = unknown>(opti
 
   return useMutation(mutationOptions)
 }
+
+export const getCreateScreenMock = () => ({
+  item: {
+    id: 'ttUL6ooF',
+    tag: { diagonalSize: 49, aspectRatio: '32:9' },
+    data: { hSize: 47.169896067541046, vSize: 13.26653326899592, hAspectRatio: 32, vAspectRatio: 9 },
+    spec: { hRes: 5120, vRes: 1440, ppi: 108.54380498674065 },
+    color: { lightColor: '#64E8DD', darkColor: '#14857B' },
+    visible: true,
+    render: { width: 1, height: 0.6293053673644803 },
+  },
+})
+
+export const getShowScreenMock = () => ({
+  item: {
+    id: '5HjERJbH',
+    tag: { diagonalSize: 38, aspectRatio: '21:9' },
+    data: { hSize: 34.9275111406862, vSize: 14.968933346008372, hAspectRatio: 21, vAspectRatio: 9 },
+    spec: { hRes: 3840, vRes: 1600, ppi: 109.47368421052632 },
+    color: { lightColor: '#F6693C', darkColor: '#C33609' },
+    visible: false,
+    render: { width: 0.7404619058450888, height: 0.7100596596986617 },
+  },
+})
+
+export const getGetScreenMock = () => ({
+  item: {
+    id: '5HjERJbH',
+    tag: { diagonalSize: 38, aspectRatio: '21:9' },
+    data: { hSize: 34.9275111406862, vSize: 14.968933346008372, hAspectRatio: 21, vAspectRatio: 9 },
+    spec: { hRes: 3840, vRes: 1600, ppi: 109.47368421052632 },
+    color: { lightColor: '#F6693C', darkColor: '#C33609' },
+    visible: true,
+    render: { width: 0.7404619058450888, height: 0.7100596596986617 },
+  },
+})
+
+export const getUpdateScreenMock = () => ({
+  item: {
+    id: '5HjERJbH',
+    tag: { diagonalSize: 38, aspectRatio: '21:9' },
+    data: { hSize: 34.9275111406862, vSize: 14.968933346008372, hAspectRatio: 21, vAspectRatio: 9 },
+    spec: { hRes: 3840, vRes: 1600, ppi: 109.47368421052632 },
+    color: { lightColor: '#F6693C', darkColor: '#C33609' },
+    visible: true,
+    render: { width: 0.7404619058450888, height: 0.7100596596986617 },
+  },
+})
+
+export const getDeleteScreenMock = () => ({ id: '5HjERJbH' })
+
+export const getScreenServiceMock = () => [
+  http.post('*/screen', async () => {
+    await delay(10)
+    return new HttpResponse(JSON.stringify(getCreateScreenMock()), {
+      status: 200,
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+  }),
+  http.patch('*/screen/:id/show', async () => {
+    await delay(10)
+    return new HttpResponse(JSON.stringify(getShowScreenMock()), {
+      status: 200,
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+  }),
+  http.get('*/screen/:id', async () => {
+    await delay(10)
+    return new HttpResponse(JSON.stringify(getGetScreenMock()), {
+      status: 200,
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+  }),
+  http.put('*/screen/:id', async () => {
+    await delay(10)
+    return new HttpResponse(JSON.stringify(getUpdateScreenMock()), {
+      status: 200,
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+  }),
+  http.delete('*/screen/:id', async () => {
+    await delay(10)
+    return new HttpResponse(JSON.stringify(getDeleteScreenMock()), {
+      status: 200,
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+  }),
+]

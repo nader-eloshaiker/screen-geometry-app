@@ -7,10 +7,9 @@ import {
 import { NotificationProvider } from '@contexts/Notification/NotificationProvider'
 import { useNotificationContext } from '@contexts/Notification/useNotifcationContext'
 import { ErrorResponse } from '@openapi/generated/models'
-import { fireEvent, render } from '@testing-library/react'
+import { act, fireEvent, render } from '@testing-library/react'
 import { AxiosError, InternalAxiosRequestConfig } from 'axios'
 import { useEffect } from 'react'
-import { act } from 'react-dom/test-utils'
 import { NotificationToaster } from './NotificationToaster'
 
 const TestComponent = ({ payload }: { payload: NotificationItem }) => {
