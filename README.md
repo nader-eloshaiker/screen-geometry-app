@@ -1,6 +1,6 @@
 # Screen Geometry
 
-![Coverage Badge](./docs/coverage.svg)
+![Coverage Badge](https://nader-eloshaiker.github.io/screen-geometry-app/coverage/coverage.svg)
 
 [![Validation](https://github.com/nader-eloshaiker/screen-geometry-app/actions/workflows/validation.yml/badge.svg)](https://github.com/nader-eloshaiker/screen-geometry-app/actions/workflows/validation.yml)
 [![CI/CD](https://github.com/nader-eloshaiker/screen-geometry-app/actions/workflows/cicd.yml/badge.svg)](https://github.com/nader-eloshaiker/screen-geometry-app/actions/workflows/cicd.yml)
