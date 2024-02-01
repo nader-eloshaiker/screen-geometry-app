@@ -24,6 +24,12 @@ jobs:
   validate:
     name: Tests Passed
     runs-on: ubuntu-latest
+    # temp for deploying
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+      deployments: write
 
     steps:
       - name: Checkout
@@ -69,3 +75,19 @@ jobs:
           name: 'Frontend'
           json-summary-path: './reports/coverage/coverage-summary.json'
           json-final-path: './reports/coverage/coverage-final.json'
+
+      # temp for deploying
+      - name: Run pnpm report
+        run: pnpm report
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: './reports'
+
+      - name: Deploy to reports to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
