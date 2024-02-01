@@ -21,11 +21,31 @@ jsonfile
   )
   .then(({ Coverage, Lines, Statements, Functions, Branches }) =>
     Promise.all([
-      jsonfile.writeFile('./reports/badges/coverage.json', { Coverage }, { spaces: 2 }),
-      jsonfile.writeFile('./reports/badges/lines.json', { Lines }, { spaces: 2 }),
-      jsonfile.writeFile('./reports/badges/statements.json', { Statements }, { spaces: 2 }),
-      jsonfile.writeFile('./reports/badges/functions.json', { Functions }, { spaces: 2 }),
-      jsonfile.writeFile('./reports/badges/branches.json', { Branches }, { spaces: 2 }),
+      jsonfile.writeFile(
+        './reports/badges/coverage.json',
+        { label: 'Coverage', message: Coverage, namedLogo: 'vitest' },
+        { spaces: 2 },
+      ),
+      jsonfile.writeFile(
+        './reports/badges/lines.json',
+        { label: 'Lines', message: Lines, namedLogo: 'vitest' },
+        { spaces: 2 },
+      ),
+      jsonfile.writeFile(
+        './reports/badges/statements.json',
+        { label: 'Statements', message: Statements, namedLogo: 'vitest' },
+        { spaces: 2 },
+      ),
+      jsonfile.writeFile(
+        './reports/badges/functions.json',
+        { label: 'Functions', message: Functions, namedLogo: 'vitest' },
+        { spaces: 2 },
+      ),
+      jsonfile.writeFile(
+        './reports/badges/branches.json',
+        { label: 'Branches', message: Branches, namedLogo: 'vitest' },
+        { spaces: 2 },
+      ),
     ]),
   )
   .catch((err) => {
