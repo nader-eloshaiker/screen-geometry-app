@@ -23,27 +23,27 @@ jsonfile
     Promise.all([
       jsonfile.writeFile(
         './reports/badges/coverage.json',
-        { label: 'Coverage', message: Coverage, namedLogo: 'vitest' },
+        { label: 'Coverage', message: String(Coverage), namedLogo: 'vitest' },
         { spaces: 2 },
       ),
       jsonfile.writeFile(
         './reports/badges/lines.json',
-        { label: 'Lines', message: Lines, namedLogo: 'vitest' },
+        { label: 'Lines', message: String(Lines), namedLogo: 'vitest' },
         { spaces: 2 },
       ),
       jsonfile.writeFile(
         './reports/badges/statements.json',
-        { label: 'Statements', message: Statements, namedLogo: 'vitest' },
+        { label: 'Statements', message: String(Statements), namedLogo: 'vitest' },
         { spaces: 2 },
       ),
       jsonfile.writeFile(
         './reports/badges/functions.json',
-        { label: 'Functions', message: Functions, namedLogo: 'vitest' },
+        { label: 'Functions', message: String(Functions), namedLogo: 'vitest' },
         { spaces: 2 },
       ),
       jsonfile.writeFile(
         './reports/badges/branches.json',
-        { label: 'Branches', message: Branches, namedLogo: 'vitest' },
+        { label: 'Branches', message: String(Branches), namedLogo: 'vitest' },
         { spaces: 2 },
       ),
     ]),
