@@ -7,9 +7,6 @@ on:
       # - '*/*' # matches every branch containing a single '/'
       - '**' # matches every branch
       - '!main' # excludes main as it is called by another workflow
-  pull_request:
-    branches:
-      - main
   workflow_call:
 
 concurrency:
