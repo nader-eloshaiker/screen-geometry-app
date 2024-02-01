@@ -44,6 +44,9 @@ importers:
       react-hook-form:
         specifier: ^7.48.2
         version: 7.48.2(react@18.2.0)
+      react-lazy-load-image-component:
+        specifier: ^1.6.0
+        version: 1.6.0(react-dom@18.2.0)(react@18.2.0)
       react-router-dom:
         specifier: ^6.21.1
         version: 6.21.1(react-dom@18.2.0)(react@18.2.0)
@@ -120,6 +123,9 @@ importers:
       '@types/react-dom':
         specifier: ^18.2.17
         version: 18.2.17
+      '@types/react-lazy-load-image-component':
+        specifier: ^1.6.3
+        version: 1.6.3
       '@types/react-router-dom':
         specifier: ^5.3.3
         version: 5.3.3
@@ -4821,6 +4827,13 @@ packages:
       '@types/react': 18.2.45
     dev: true
 
+  /@types/react-lazy-load-image-component@1.6.3:
+    resolution: {integrity: sha512-HsIsYz7yWWTh/bftdzGnijKD26JyofLRqM/RM80sxs7Gk13G83ew8R/ra2XzXuiZfjNEjAq/Va+NBHFF9ciwxA==}
+    dependencies:
+      '@types/react': 18.2.45
+      csstype: 3.1.2
+    dev: true
+
   /@types/react-router-dom@5.3.3:
     resolution: {integrity: sha512-kpqnYK4wcdm5UaWI3fLcELopqLrHgLqNsdpHauzlQktfkHL3npOSwtj1Uz9oKBAzs7lFtVkV8j83voAz2D8fhw==}
     dependencies:
@@ -8779,6 +8792,10 @@ packages:
     resolution: {integrity: sha512-hXt6Ul/5yWjfklSGvLQl8vM//l3FtyHZeuelpzK6mm99pNvN9yTDruNZPEJZD1oWrqo+izBmB7oUfWgcCX7s4Q==}
     dev: false
 
+  /lodash.throttle@4.1.1:
+    resolution: {integrity: sha512-wIkUCfVKpVsWo3JSZlc+8MB5it+2AN5W8J7YVMST30UrvcQNZ1Okbj+rbVniijTWE6FGYy4XJq/rHkas8qJMLQ==}
+    dev: false
+
   /lodash.topath@4.5.2:
     resolution: {integrity: sha512-1/W4dM+35DwvE/iEd1M9ekewOSTlpFekhw9mhAtrwjVqUr83/ilQiyAvmg4tVX7Unkcfl1KC+i9WdaT4B6aQcg==}
     dev: true
@@ -10142,6 +10159,18 @@ packages:
   /react-is@18.2.0:
     resolution: {integrity: sha512-xWGDIW6x921xtzPkhiULtthJHoJvBbF3q26fzloPCK0hsvxtPVelvftw3zjbHWSkR2km9Z+4uxbDDK/6Zw9B8w==}
     dev: true
+
+  /react-lazy-load-image-component@1.6.0(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-8KFkDTgjh+0+PVbH+cx0AgxLGbdTsxWMnxXzU5HEUztqewk9ufQAu8cstjZhyvtMIPsdMcPZfA0WAa7HtjQbBQ==}
+    peerDependencies:
+      react: ^15.x.x || ^16.x.x || ^17.x.x || ^18.x.x
+      react-dom: ^15.x.x || ^16.x.x || ^17.x.x || ^18.x.x
+    dependencies:
+      lodash.debounce: 4.0.8
+      lodash.throttle: 4.1.1
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
+    dev: false
 
   /react-refresh@0.14.0:
     resolution: {integrity: sha512-wViHqhAd8OHeLS/IRMJjTSDHF3U9eWi62F/MledQGPdJGDhodXJ9PBLNGr6WWL7qlH12Mt3TyTpbS+hGXMjCzQ==}

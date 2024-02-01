@@ -1,4 +1,5 @@
 import { appRoutes } from '@routes/AppRouteSchema'
+import { LazyLoadImage } from 'react-lazy-load-image-component'
 import { useNavigate } from 'react-router-dom'
 
 export const About = () => {
@@ -33,9 +34,12 @@ export const About = () => {
         </p>
         <div className='my-6 flex flex-col items-center'>
           <label className='my-6 text-lg'>Checkout this Demo</label>
-          <img
+          <LazyLoadImage
             className='h-auto max-w-full rounded-md border-2 border-base-300 shadow-lg'
-            src='./media/ScreenGeometry.gif'
+            src='./media/ScreenGeometryAnim.gif'
+            placeholderSrc='./media/ScreenGeometry.gif'
+            width={508}
+            height={528}
           />
         </div>
         <p className='mb-4'>
