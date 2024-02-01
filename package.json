@@ -28,7 +28,7 @@
     "test": "vitest --coverage",
     "test:ui": "vitest --ui --coverage.enabled=true",
     "test:ci": "vitest --run --coverage",
-    "test:badge": "node utils/parseCoverage.cjs",
+    "test:badge": "node utils/createCoverageBadges.cjs",
     "typecheck": "tsc --project tsconfig.json --noEmit",
     "sb": "storybook dev -p 6006",
     "sb:build": "storybook build",
