@@ -50,7 +50,7 @@
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.48.2",
     "react-lazy-load-image-component": "^1.6.0",
-    "react-router-dom": "^6.21.1",
+    "react-router-dom": "^6.21.3",
     "simpler-color": "^1.0.1",
     "vite-plugin-checker": "^0.6.2",
     "web-vitals": "^3.5.1",
