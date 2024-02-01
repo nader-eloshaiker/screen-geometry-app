@@ -6,10 +6,7 @@ on:
       - main
     # Don't run on new release from release please PR
     tags-ignore:
-      - '*'
-    paths-ignore:
-      - 'package.json'
-      - 'CHANGELOG.md'
+      - 'v*'
 
 concurrency:
   group: 'deploy'
