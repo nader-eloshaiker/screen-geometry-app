@@ -1,10 +1,11 @@
 # Screen Geometry
 
-![Coverage Badge](https://nader-eloshaiker.github.io/screen-geometry-app/coverage/coverage.svg)
-
 [![Validation](https://github.com/nader-eloshaiker/screen-geometry-app/actions/workflows/validation.yml/badge.svg)](https://github.com/nader-eloshaiker/screen-geometry-app/actions/workflows/validation.yml)
 [![CI/CD](https://github.com/nader-eloshaiker/screen-geometry-app/actions/workflows/cicd.yml/badge.svg)](https://github.com/nader-eloshaiker/screen-geometry-app/actions/workflows/cicd.yml)
 [![Release Deployment](https://github.com/nader-eloshaiker/screen-geometry-app/actions/workflows/release.yml/badge.svg)](https://github.com/nader-eloshaiker/screen-geometry-app/actions/workflows/release.yml)
+
+![Coverage Badge](https://nader-eloshaiker.github.io/screen-geometry-app/badges/statements.svg) ![Coverage Badge](https://nader-eloshaiker.github.io/screen-geometry-app/badges/branches.svg) ![Coverage Badge](https://nader-eloshaiker.github.io/screen-geometry-app/badges/functions.svg)
+![Coverage Badge](https://nader-eloshaiker.github.io/screen-geometry-app/badges/lines.svg)
 
 ## Description
 

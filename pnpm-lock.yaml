@@ -186,9 +186,15 @@ importers:
       jsdom:
         specifier: ^23.0.1
         version: 23.0.1
+      jsonfile:
+        specifier: ^6.1.0
+        version: 6.1.0
       lint-staged:
         specifier: ^15.2.0
         version: 15.2.0
+      mkdirp:
+        specifier: ^3.0.1
+        version: 3.0.1
       orval:
         specifier: ^6.23.0
         version: 6.23.0(@vitest/ui@1.2.0)(jsdom@23.0.1)(typescript@5.3.3)
@@ -9074,6 +9080,12 @@ packages:
 
   /mkdirp@1.0.4:
     resolution: {integrity: sha512-vVqVZQyf3WLx2Shd0qJ9xuvqgAyKPLAiqITEtqW0oIUjzo3PePDd6fW9iFz30ef7Ysp/oiWqbhszeGWW2T6Gzw==}
+    engines: {node: '>=10'}
+    hasBin: true
+    dev: true
+
+  /mkdirp@3.0.1:
+    resolution: {integrity: sha512-+NsyUUAZDmo6YVHzL/stxSu3t9YS1iljliy3BSDrXJ/dkn1KYdmtZODGGjLcc9XLgVVpH4KshHB8XmZgMhaBXg==}
     engines: {node: '>=10'}
     hasBin: true
     dev: true
