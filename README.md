@@ -26,7 +26,7 @@ easy comparison as well as tabulate the specs.
 
 ## App Demo
 
-![Demo video](./public/media/ScreenGeometry.gif)
+![Demo video](./public/media/ScreenGeometryAnim.gif)
 
 ## Purpose
 
