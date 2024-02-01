@@ -14,7 +14,7 @@ on:
     branches:
       - main
     tags:
-      - '*'
+      - 'v*'
     paths:
       - 'package.json'
       - 'CHANGELOG.md'
