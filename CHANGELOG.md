@@ -1,5 +1,22 @@
 # Changelog
 
+## [0.14.0](https://github.com/nader-eloshaiker/screen-geometry-app/compare/v0.13.3...v0.14.0) (2024-02-01)
+
+
+### Features
+
+* **app:** lazy load animation ([#291](https://github.com/nader-eloshaiker/screen-geometry-app/issues/291)) ([3913a15](https://github.com/nader-eloshaiker/screen-geometry-app/commit/3913a15683560da6179706dd3bec1c54f1311ded))
+* **test:** adjust coverage badges ([#290](https://github.com/nader-eloshaiker/screen-geometry-app/issues/290)) ([7a24ccb](https://github.com/nader-eloshaiker/screen-geometry-app/commit/7a24ccb00f63ba3fb7f2cadbabf440214e911a88))
+* **test:** migrate mocking/stubbing for tests and app to MockServiceWorker ([#281](https://github.com/nader-eloshaiker/screen-geometry-app/issues/281)) ([3b06bca](https://github.com/nader-eloshaiker/screen-geometry-app/commit/3b06bca9542cb5c13e37b94b2f35776d7e9c0a98))
+* **test:** parse coverage reports for badges ([#286](https://github.com/nader-eloshaiker/screen-geometry-app/issues/286)) ([f4d324f](https://github.com/nader-eloshaiker/screen-geometry-app/commit/f4d324f3aff75b15918c48b2b1047d12666d1052))
+
+
+### Bug Fixes
+
+* **env:** change location of coverage badge to non tracked folder ([#285](https://github.com/nader-eloshaiker/screen-geometry-app/issues/285)) ([0b1b171](https://github.com/nader-eloshaiker/screen-geometry-app/commit/0b1b1713ddb8f51bac6121b1408a7901f2885a58))
+* remove staging evn ([#279](https://github.com/nader-eloshaiker/screen-geometry-app/issues/279)) ([9909394](https://github.com/nader-eloshaiker/screen-geometry-app/commit/99093944685cfb7e22349369585630b2fc795ddf))
+* update links and badges ([#277](https://github.com/nader-eloshaiker/screen-geometry-app/issues/277)) ([1629010](https://github.com/nader-eloshaiker/screen-geometry-app/commit/16290105772184e9035ea677478803ea19d1a0e3))
+
 ## [0.13.3](https://github.com/nader-eloshaiker/screen-geometry-app/compare/v0.13.2...v0.13.3) (2024-01-20)
 
 
