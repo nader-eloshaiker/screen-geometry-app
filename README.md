@@ -1,6 +1,9 @@
 # Screen Geometry
 
-![Coverage Badge](https://img.shields.io/endpoint?url=https%3A%2F%2Fnader-eloshaiker.github.io%2Fscreen-geometry-app%2Fbadges%2Fcoverage.json) ![GitHub Release](https://img.shields.io/github/v/release/nader-eloshaiker/screen-geometry-app)
+![Coverage Badge](https://nader-eloshaiker.github.io/screen-geometry-app/badges/statements.svg) ![Coverage Badge](https://nader-eloshaiker.github.io/screen-geometry-app/badges/branches.svg) ![Coverage Badge](https://nader-eloshaiker.github.io/screen-geometry-app/badges/functions.svg)
+![Coverage Badge](https://nader-eloshaiker.github.io/screen-geometry-app/badges/lines.svg)
+
+![GitHub Release](https://img.shields.io/github/v/release/nader-eloshaiker/screen-geometry-app)
 
 [![Validation](https://github.com/nader-eloshaiker/screen-geometry-app/actions/workflows/validation.yml/badge.svg)](https://github.com/nader-eloshaiker/screen-geometry-app/actions/workflows/validation.yml)
 [![CI/CD](https://github.com/nader-eloshaiker/screen-geometry-app/actions/workflows/cicd.yml/badge.svg)](https://github.com/nader-eloshaiker/screen-geometry-app/actions/workflows/cicd.yml)

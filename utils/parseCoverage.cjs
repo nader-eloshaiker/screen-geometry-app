@@ -24,6 +24,11 @@ const getBadgeObject = (label, message) => ({
   labelColor: '#444d57',
 })
 
+const getBadgeUrl = (badgeObj) =>
+  `https://img.shields.io/badge/${encodeURI(badgeObj.label)}-${encodeURI(badgeObj.message)}-${encodeURI(
+    badgeObj.color,
+  )}.svg?logo=${encodeURI(badgeObj.namedLogo)}`
+
 const downloadBadge = (url, filename) =>
   https.get(url, (res) => {
     if (res.statusCode !== 200) {
@@ -70,6 +75,13 @@ jsonfile
       jsonfile.writeFile('./reports/badges/functions.json', functions, { spaces: 2 }),
       jsonfile.writeFile('./reports/badges/branches.json', branches, { spaces: 2 }),
     ])
+  })
+  .then(([{ coverage, lines, statements, functions, branches }]) => {
+    downloadBadge(getBadgeUrl(coverage), './reports/badges/coverage.svg')
+    downloadBadge(getBadgeUrl(lines), './reports/badges/lines.svg')
+    downloadBadge(getBadgeUrl(statements), './reports/badges/statements.svg')
+    downloadBadge(getBadgeUrl(functions), './reports/badges/functions.svg')
+    downloadBadge(getBadgeUrl(branches), './reports/badges/branches.svg')
   })
   .catch((err) => {
     console.error(err)
