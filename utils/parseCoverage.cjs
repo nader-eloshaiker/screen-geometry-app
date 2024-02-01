@@ -18,7 +18,7 @@ const getMessageColor = (percentage) => {
 
 const getBadgeObject = (label, message) => ({
   label,
-  message: String(message) + '%',
+  message: String(message.toFixed()) + '%',
   namedLogo: 'vitest',
   color: getMessageColor(message),
   labelColor: '#444d57',
