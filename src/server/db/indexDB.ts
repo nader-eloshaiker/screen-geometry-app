@@ -29,15 +29,21 @@ export async function createItemList(data: ScreenInputList): Promise<Array<Scree
 export async function getItem(id?: string): Promise<ScreenItem | undefined> {
   const list: Array<ScreenItem> = await getItemList()
   const item = list.find((entry) => entry.id === id)
+
+  if (!item) throw new Error(`No screen found for ${id}`)
+
   return item
 }
 
 export async function updateItem(id: string, updates: ScreenItem): Promise<ScreenItem> {
   const list: Array<ScreenItem> = await getItemList()
   const item = list.find((entry) => entry.id === id)
+
   if (!item) throw new Error(`No screen found for ${id}`)
+
   Object.assign(item, updates)
   await set(list)
+
   return item
 }
 

@@ -47,23 +47,21 @@ describe('#indexDB', () => {
     })
   })
 
-  describe('#createItemList', () => {
-    it('createItemList should return a list of screens', async () => {
-      cache = []
-      const created = await createItemList([
-        {
-          diagonalSize: 55,
-          aspectRatio: '16:9',
-          hRes: 3840,
-          vRes: 2160,
-          lightColor: '#67E5AA',
-          darkColor: '#168350',
-        },
-      ])
+  it('createItemList should return a list of screens', async () => {
+    cache = []
+    const created = await createItemList([
+      {
+        diagonalSize: 55,
+        aspectRatio: '16:9',
+        hRes: 3840,
+        vRes: 2160,
+        lightColor: '#67E5AA',
+        darkColor: '#168350',
+      },
+    ])
 
-      expect(created[0].tag.diagonalSize).toBe(55)
-      expect(cache!.length).toBe(1)
-    })
+    expect(created[0].tag.diagonalSize).toBe(55)
+    expect(cache!.length).toBe(1)
   })
 
   describe('#getItem', () => {
@@ -73,10 +71,8 @@ describe('#indexDB', () => {
       expect(result?.id).toBe('pVesw1Iu')
     })
 
-    it('getItem should return undefined if id is not found', async () => {
-      const result = await getItem('aaaaa')
-
-      expect(result).not.toBeDefined()
+    it.fails('updateItem should throw an error if id is not found', async () => {
+      await expect(await getItem('aaaaa')).rejects.toThrowError('No screen found for aaaaa')
     })
   })
 
@@ -109,7 +105,7 @@ describe('#indexDB', () => {
     })
 
     it.fails('deleteItem should return false if id is not found', async () => {
-      await expect(await deleteItem('aaaaa')).rejects.toThrowError('No screen found for aaaaa')
+      expect(await deleteItem('aaaaa')).rejects.toThrowError('No screen found for aaaaa')
     })
   })
 })

@@ -1,13 +1,13 @@
 import { ScreenInput, ScreenInputList } from '@openapi/generated/models'
 import {
-  createItemAction,
-  createItemListAction,
-  deleteItemAction,
+  createScreen,
+  createScreenList,
+  deleteScreen,
   getScreen,
   getScreenList,
   getSearchList,
-  showItemAction,
-  updateItemAction,
+  showScreen,
+  updateScreen,
 } from '@server/api'
 import { apiRoutes } from '@server/meta/ApiRouteSchema'
 import { HttpResponse, delay, http, passthrough } from 'msw'
@@ -41,7 +41,7 @@ export const generateStub = async () => {
       await delay(delayResponse)
 
       const requestBody = await resolver.request.json()
-      const payload = await createItemListAction(requestBody as ScreenInputList)
+      const payload = await createScreenList(requestBody as ScreenInputList)
 
       return new HttpResponse(JSON.stringify(payload), {
         status: 200,
@@ -70,7 +70,7 @@ export const generateStub = async () => {
       await delay(delayResponse)
 
       const { screenId } = resolver.params as { screenId: string }
-      const payload = await deleteItemAction(screenId)
+      const payload = await deleteScreen(screenId)
 
       return new HttpResponse(JSON.stringify(payload), {
         status: 200,
@@ -84,7 +84,7 @@ export const generateStub = async () => {
 
       const { screenId } = resolver.params as { screenId: string }
       const requestBody = await resolver.request.json()
-      const payload = await updateItemAction(screenId, requestBody as ScreenInput)
+      const payload = await updateScreen(screenId, requestBody as ScreenInput)
 
       return new HttpResponse(JSON.stringify(payload), {
         status: 200,
@@ -99,7 +99,7 @@ export const generateStub = async () => {
         await delay(delayResponse)
 
         const { screenId } = resolver.params as { screenId: string }
-        const payload = await showItemAction(screenId)
+        const payload = await showScreen(screenId)
 
         return new HttpResponse(JSON.stringify(payload), {
           status: 200,
@@ -113,7 +113,7 @@ export const generateStub = async () => {
       await delay(delayResponse)
 
       const requestBody = await resolver.request.json()
-      const payload = await createItemAction(requestBody as ScreenInput)
+      const payload = await createScreen(requestBody as ScreenInput)
 
       return new HttpResponse(JSON.stringify(payload), {
         status: 200,

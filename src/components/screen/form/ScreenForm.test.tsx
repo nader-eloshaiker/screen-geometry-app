@@ -65,14 +65,11 @@ describe('#ScreenForm', () => {
   })
 
   beforeEach(() => {
-    useElementSizeMock()
-    resetMSWEventStack()
-  })
-
-  afterEach(() => {
     vi.clearAllMocks()
     server.resetHandlers()
     server.restoreHandlers()
+    useElementSizeMock()
+    resetMSWEventStack()
   })
 
   describe('#close', () => {
