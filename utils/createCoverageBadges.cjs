@@ -9,8 +9,6 @@ const getMessageColor = (percentage) => {
   let color = 'brightgreen'
   if (percentage < 50) {
     color = 'red'
-  } else if (percentage < 65) {
-    color = 'yellow'
   } else if (percentage < 80) {
     color = 'orange'
   }
