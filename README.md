@@ -1,11 +1,10 @@
 # Screen Geometry
 
-[![Validation](https://github.com/nader-eloshaiker/screen-geometry-app/actions/workflows/validation.yml/badge.svg)](https://github.com/nader-eloshaiker/screen-geometry-app/actions/workflows/validation.yml)
+[![Validation](./docs/ba/badge.svg)](https://github.com/nader-eloshaiker/screen-geometry-app/actions/workflows/validation.yml)
 [![CI/CD](https://github.com/nader-eloshaiker/screen-geometry-app/actions/workflows/cicd.yml/badge.svg)](https://github.com/nader-eloshaiker/screen-geometry-app/actions/workflows/cicd.yml)
 [![Production](https://github.com/nader-eloshaiker/screen-geometry-app/actions/workflows/release.yml/badge.svg)](https://github.com/nader-eloshaiker/screen-geometry-app/actions/workflows/release.yml)
 
-![Statements Badge](https://nader-eloshaiker.github.io/screen-geometry-app/badges/statements.svg) ![Branches Badge](https://nader-eloshaiker.github.io/screen-geometry-app/badges/branches.svg) ![Functions Badge](https://nader-eloshaiker.github.io/screen-geometry-app/badges/functions.svg)
-![Lines Badge](https://nader-eloshaiker.github.io/screen-geometry-app/badges/lines.svg)
+![Statements Badge](./docs/badges/statements.svg) ![Branches Badge](./docs/badges/branches.svg) ![Functions Badge](./docs/functions.svg) ![Lines Badge](./docs/badges/lines.svg)
 
 ## Description
 
