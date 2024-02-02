@@ -29,54 +29,37 @@ export async function getScreenList(): Promise<TScreenListResponse> {
 }
 
 export async function getScreen(id: string | undefined): Promise<{ item: ScreenItem | undefined }> {
-  if (!id) {
-    throw new Error('No id provided!')
-  }
   const item = await getItem(id)
-  if (!item) {
-    throw new Error('Not Found')
-  }
 
   return { item }
 }
 
-export async function updateItemAction(id: string | undefined, data: ScreenInput) {
-  if (!id) {
-    throw new Error('No id provided!')
-  }
+export async function updateScreen(id: string, data: ScreenInput) {
   const screenItem = transformScreenInput(data, id)
   const item = await updateItem(id, screenItem)
 
   return { item }
 }
 
-export async function createItemAction(data: ScreenInput) {
+export async function createScreen(data: ScreenInput) {
   const item = await createItem(data)
 
   return { item }
 }
 
-export async function createItemListAction(data: ScreenInputList) {
+export async function createScreenList(data: ScreenInputList) {
   const list = await createItemList(data)
 
   return { list }
 }
 
-export async function deleteItemAction(id: string | undefined) {
-  if (!id) {
-    throw new Error('No id provided!')
-  }
-
+export async function deleteScreen(id: string) {
   await deleteItem(id)
 
   return { id }
 }
 
-export async function showItemAction(id: string | undefined) {
-  if (!id) {
-    throw new Error('No id provided!')
-  }
-
+export async function showScreen(id: string) {
   const data = await getItem(id)
 
   const item = data
