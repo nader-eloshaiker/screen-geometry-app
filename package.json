@@ -28,13 +28,13 @@
     "test": "vitest --coverage",
     "test:ui": "vitest --ui --coverage.enabled=true",
     "test:ci": "vitest --run --coverage",
-    "test:badge": "node utils/createCoverageBadges.cjs",
+    "test:badge": "vitest --run --coverage && node utils/createCoverageBadges.cjs",
     "typecheck": "tsc --project tsconfig.json --noEmit",
     "sb": "storybook dev -p 6006",
     "sb:build": "storybook build",
     "report": "pnpm report:sb && pnpm report:test",
     "report:sb": "storybook build --docs --output-dir=./reports/storybook",
-    "report:test": "pnpm test:ci && pnpm test:badge"
+    "report:test": "pnpm test:ci"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.3.4",
