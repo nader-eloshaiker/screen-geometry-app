@@ -27,29 +27,29 @@ export async function createItemList(data: ScreenInputList): Promise<Array<Scree
 }
 
 export async function getItem(id?: string): Promise<ScreenItem | undefined> {
-  const list: Array<ScreenItem> = (await localforage.getItem(storageKey)) ?? []
+  const list: Array<ScreenItem> = await getItemList()
   const item = list.find((entry) => entry.id === id)
   return item
 }
 
 export async function updateItem(id: string, updates: ScreenItem): Promise<ScreenItem> {
-  const list: Array<ScreenItem> = (await localforage.getItem(storageKey)) ?? []
+  const list: Array<ScreenItem> = await getItemList()
   const item = list.find((entry) => entry.id === id)
-  if (!item) throw new Error(`No contact found for ${id}`)
+  if (!item) throw new Error(`No screen found for ${id}`)
   Object.assign(item, updates)
   await set(list)
   return item
 }
 
-export async function deleteItem(id: string): Promise<boolean> {
-  const list: Array<ScreenItem> = (await localforage.getItem(storageKey)) ?? []
+export async function deleteItem(id: string): Promise<string> {
+  const list: Array<ScreenItem> = await getItemList()
   const index = list.findIndex((entry) => entry.id === id)
-  if (index > -1) {
-    list.splice(index, 1)
-    await set(list)
-    return true
-  }
-  return false
+
+  if (index === -1) throw new Error(`No screen found for ${id}`)
+
+  list.splice(index, 1)
+  await set(list)
+  return id
 }
 
 function set(itemList: Array<ScreenItem>): Promise<Array<ScreenItem>> {
