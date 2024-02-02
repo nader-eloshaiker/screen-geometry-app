@@ -1,5 +1,5 @@
 export const apiRoutes = {
-  apiUrl: import.meta.env.VITE_API_URL,
+  apiUrl: import.meta.env.VITE_API_URL ?? 'http://fakeapi.com',
   apiPathVer: '/v1',
   screens: {
     path: 'screens',

@@ -4,10 +4,9 @@ import { useElementSizeMock } from '@hooks/useElementSize.mock'
 import { ScreenItem } from '@openapi/generated/models'
 import { getGetScreenListMock, getScreenListServiceMock } from '@openapi/generated/services/screen-list-service'
 import { getScreenServiceMock } from '@openapi/generated/services/screen-service'
+import { mswWithSpy, resetMSW, startMSW, stopMSW } from '@test/mocks/mockMSW'
 import { useInteractComponent } from '@test/utils/useInteractComponent'
-import { resetMSWEventStack, useMSWEventStack } from '@test/utils/useMSWEventStack'
 import { waitFor } from '@testing-library/react'
-import { setupServer } from 'msw/node'
 import { ScreenTable } from './ScreenTable'
 
 const TestComponent = ({
@@ -27,22 +26,19 @@ const TestComponent = ({
 }
 
 describe('#ScreenTable', () => {
-  const server = setupServer(...getScreenListServiceMock(), ...getScreenServiceMock())
-  const mswRequestEventSpy = useMSWEventStack(server)
+  const mswRequestEventSpy = mswWithSpy(...getScreenServiceMock(), ...getScreenListServiceMock())
 
-  beforeAll(() => {
-    server.listen()
+  beforeAll(async () => {
+    startMSW()
+  })
+
+  afterAll(async () => {
+    stopMSW()
   })
 
   beforeEach(() => {
-    server.resetHandlers()
-    server.restoreHandlers()
     useElementSizeMock()
-    resetMSWEventStack()
-  })
-
-  afterAll(() => {
-    server.close()
+    resetMSW()
   })
 
   test('renders screen table component with a table and rows', async () => {
@@ -67,7 +63,7 @@ describe('#ScreenTable', () => {
     await test.user.click(deleteElement)
 
     expect(mswRequestEventSpy[mswRequestEventSpy.length - 1]).toEqual(
-      expect.stringContaining('method:DELETE|url:http://localhost:3000/undefined/v1/screen/pVesw1Iu'),
+      expect.stringContaining('method:DELETE|url:http://fakeapi.com/v1/screen/pVesw1Iu'),
     )
 
     waitFor(() => expect(test.queryAllByRole('row').length).toBe(4))
@@ -81,7 +77,7 @@ describe('#ScreenTable', () => {
     await test.user.click(showElement)
 
     expect(mswRequestEventSpy[mswRequestEventSpy.length - 1]).toEqual(
-      expect.stringContaining('method:PATCH|url:http://localhost:3000/undefined/v1/screen/pVesw1Iu/show'),
+      expect.stringContaining('method:PATCH|url:http://fakeapi.com/v1/screen/pVesw1Iu/show'),
     )
   })
 

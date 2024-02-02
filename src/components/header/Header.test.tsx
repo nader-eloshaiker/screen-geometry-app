@@ -1,7 +1,7 @@
 import { fireEvent, render, renderHook, waitFor } from '@testing-library/react'
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 import { ThemeModeProvider } from '../../contexts/theme/ThemeModeProvider'
-import { useWindowSize } from '../../test/utils/useWindowsSize'
+import { useWindowSize } from '../../test/mocks/useWindowsSize'
 import Header from './Header'
 
 const mocks = vi.hoisted(() => ({

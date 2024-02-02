@@ -3,10 +3,9 @@ import { NotificationProvider } from '@contexts/Notification/NotificationProvide
 import { QueryProvider } from '@contexts/Query/QueryProvider'
 import { useElementSizeMock } from '@hooks/useElementSize.mock'
 import { getSearchListServiceMock } from '@openapi/generated/services/search-list-service'
+import { mswWithSpy, resetMSW, startMSW, stopMSW } from '@test/mocks/mockMSW'
 import { useInteractComponent } from '@test/utils/useInteractComponent'
-import { resetMSWEventStack, useMSWEventStack } from '@test/utils/useMSWEventStack'
 import { waitFor } from '@testing-library/react'
-import { setupServer } from 'msw/node'
 
 const TestComponent = () => {
   return (
@@ -19,25 +18,19 @@ const TestComponent = () => {
 }
 
 describe('#AutoCompleteScreen', () => {
-  const server = setupServer(...getSearchListServiceMock())
-  const mswRequestEventSpy = useMSWEventStack(server)
+  const mswRequestEventSpy = mswWithSpy(...getSearchListServiceMock())
 
-  beforeAll(() => {
-    server.listen()
+  beforeAll(async () => {
+    startMSW()
+  })
+
+  afterAll(async () => {
+    stopMSW()
   })
 
   beforeEach(() => {
     useElementSizeMock()
-    resetMSWEventStack()
-  })
-
-  afterEach(() => {
-    server.resetHandlers()
-    server.restoreHandlers()
-  })
-
-  afterAll(() => {
-    server.close()
+    resetMSW()
   })
 
   test('renders autocomplete component with an input field', async () => {

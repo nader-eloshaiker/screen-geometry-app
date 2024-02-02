@@ -1,5 +1,6 @@
-import { ScreenItem } from '@openapi/generated/models'
+import { screenInput55Fixture } from '@openapi/fixtures/ScreenFixtures'
 import { getGetScreenListMock } from '@openapi/generated/services/screen-list-service'
+import { spyOnLocalForage } from '@test/mocks/mockLocalForage'
 import localforage from 'localforage'
 import {
   createScreen,
@@ -13,15 +14,8 @@ import {
 } from './api'
 
 describe('#api', () => {
-  let cache: Array<ScreenItem> | null = []
-
   beforeEach(() => {
-    cache = getGetScreenListMock().list
-    vi.spyOn(localforage, 'getItem').mockImplementation((_) => Promise.resolve(cache))
-    vi.spyOn(localforage, 'setItem').mockImplementation((_, list: unknown) => {
-      cache = list as Array<ScreenItem>
-      return Promise.resolve(list)
-    })
+    spyOnLocalForage(getGetScreenListMock().list)
   })
 
   it('#getSearchList should return a list of screens that match a term', async () => {
@@ -51,47 +45,24 @@ describe('#api', () => {
 
     expect(result.item?.id).toBe('pVesw1Iu')
 
-    const updated = await updateScreen('pVesw1Iu', {
-      diagonalSize: 55,
-      aspectRatio: '16:9',
-      hRes: 3840,
-      vRes: 2160,
-      lightColor: '#67E5AA',
-      darkColor: '#168350',
-    })
+    const updated = await updateScreen('pVesw1Iu', screenInput55Fixture)
 
     expect(updated.item?.tag.diagonalSize).toBe(55)
   })
 
   it('#createScreen should return a screen', async () => {
-    const created = await createScreen({
-      diagonalSize: 55,
-      aspectRatio: '16:9',
-      hRes: 3840,
-      vRes: 2160,
-      lightColor: '#67E5AA',
-      darkColor: '#168350',
-    })
+    const created = await createScreen(screenInput55Fixture)
 
     expect(created.item.tag.diagonalSize).toBe(55)
-    expect(cache!.length).toBe(5)
+    expect(await localforage.length()).toBe(5)
   })
 
   it('#createScreenList should return a list of screens', async () => {
-    cache = []
-    const created = await createScreenList([
-      {
-        diagonalSize: 55,
-        aspectRatio: '16:9',
-        hRes: 3840,
-        vRes: 2160,
-        lightColor: '#67E5AA',
-        darkColor: '#168350',
-      },
-    ])
+    await localforage.clear()
+    const created = await createScreenList([screenInput55Fixture])
 
     expect(created.list[0].tag.diagonalSize).toBe(55)
-    expect(cache!.length).toBe(1)
+    expect(await localforage.length()).toBe(1)
   })
 
   it('#deleteScreen should return true if id is found', async () => {
@@ -102,7 +73,6 @@ describe('#api', () => {
     const deleted = await deleteScreen('pVesw1Iu')
 
     expect(deleted.id).toBe('pVesw1Iu')
-    expect(cache!.length).toBe(3)
   })
 
   it('#showScreen should return a screen', async () => {

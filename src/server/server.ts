@@ -11,18 +11,11 @@ import {
 } from '@server/api'
 import { apiRoutes } from '@server/meta/ApiRouteSchema'
 import { HttpResponse, delay, http, passthrough } from 'msw'
-import { setupWorker } from 'msw/browser'
 
 // Stub out the API calls using axios-mock-adapter for indexAPI to store data in the browser's IndexedDB
 // The stubbed API calls can later be replaced with real API calls to a backend store
-export const generateStub = async () => {
-  // use explicit mocks with fixtures for testing
-  if (import.meta.env.NODE_ENV) {
-    console.debug('[MSW] Browser MockServiceWorker Disabled')
-    return Promise.resolve()
-  }
-
-  const delayResponse = 1000
+export const generateStub = (responseTime?: number) => {
+  const delayResponse = responseTime ?? 1000
 
   const screenListMocks = () => [
     http.get(`${apiRoutes.apiUrl}${apiRoutes.apiPathVer}/${apiRoutes.screens.path}`, async () => {
@@ -146,7 +139,10 @@ export const generateStub = async () => {
     }),
   ]
 
-  const server = setupWorker(...searchMocks(), ...screenListMocks(), ...screenMocks(), ...passthroughMocks())
-
-  return server.start()
+  return {
+    screenListMocks,
+    screenMocks,
+    searchMocks,
+    passthroughMocks,
+  }
 }

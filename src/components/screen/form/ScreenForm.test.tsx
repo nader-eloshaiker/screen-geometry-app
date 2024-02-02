@@ -8,11 +8,10 @@ import { ScreenInput, ScreenItem } from '@openapi/generated/models'
 import { getScreenListServiceMock } from '@openapi/generated/services/screen-list-service'
 import { getScreenServiceMock } from '@openapi/generated/services/screen-service'
 import { getSearchListServiceMock } from '@openapi/generated/services/search-list-service'
+import { mswWithSpy, resetMSW, startMSW, stopMSW } from '@test/mocks/mockMSW'
 import { useInteractComponent } from '@test/utils/useInteractComponent'
-import { resetMSWEventStack, useMSWEventStack } from '@test/utils/useMSWEventStack'
 import { render, waitFor } from '@testing-library/react'
 import { transformScreenInput } from '@utils/ScreenTransformation'
-import { setupServer } from 'msw/node'
 import { ScreenForm } from './ScreenForm'
 
 type Props = {
@@ -52,24 +51,19 @@ const RootTestComponent = ({ defaultValues, editId, initialise, onCloseAction = 
 }
 
 describe('#ScreenForm', () => {
-  const server = setupServer(...getSearchListServiceMock(), ...getScreenServiceMock(), ...getScreenListServiceMock())
-  // const mswRequestEventSpy = useMSWEventStack(server)
-  useMSWEventStack(server)
+  mswWithSpy(...getSearchListServiceMock(), ...getScreenServiceMock(), ...getScreenListServiceMock())
 
-  beforeAll(() => {
-    server.listen()
+  beforeAll(async () => {
+    startMSW()
   })
 
-  afterAll(() => {
-    server.close()
+  afterAll(async () => {
+    stopMSW()
   })
 
   beforeEach(() => {
-    vi.clearAllMocks()
-    server.resetHandlers()
-    server.restoreHandlers()
     useElementSizeMock()
-    resetMSWEventStack()
+    resetMSW()
   })
 
   describe('#close', () => {

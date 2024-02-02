@@ -1,18 +1,13 @@
-import { ScreenItem } from '@openapi/generated/models'
+import { screenInput55Fixture } from '@openapi/fixtures/ScreenFixtures'
 import { getGetScreenListMock } from '@openapi/generated/services/screen-list-service'
+import { getGetScreenMock } from '@openapi/generated/services/screen-service'
+import { spyOnLocalForage } from '@test/mocks/mockLocalForage'
 import localforage from 'localforage'
 import { createItem, createItemList, deleteItem, getItem, getItemList, updateItem } from './indexDB'
 
 describe('#indexDB', () => {
-  let cache: Array<ScreenItem> | null = []
-
   beforeEach(() => {
-    cache = getGetScreenListMock().list
-    vi.spyOn(localforage, 'getItem').mockImplementation((_) => Promise.resolve(cache))
-    vi.spyOn(localforage, 'setItem').mockImplementation((_, list: unknown) => {
-      cache = list as Array<ScreenItem>
-      return Promise.resolve(list)
-    })
+    spyOnLocalForage(getGetScreenListMock().list)
   })
 
   describe('#getItemList', () => {
@@ -23,7 +18,7 @@ describe('#indexDB', () => {
     })
 
     it('getItemList should return an empty list if no screens are found', async () => {
-      cache = null
+      await localforage.clear()
 
       const result = await getItemList()
 
@@ -33,35 +28,19 @@ describe('#indexDB', () => {
 
   describe('#createItem', () => {
     it('createItem should return a screen', async () => {
-      const created = await createItem({
-        diagonalSize: 55,
-        aspectRatio: '16:9',
-        hRes: 3840,
-        vRes: 2160,
-        lightColor: '#67E5AA',
-        darkColor: '#168350',
-      })
+      const created = await createItem(screenInput55Fixture)
 
       expect(created.tag.diagonalSize).toBe(55)
-      expect(cache!.length).toBe(5)
+      expect(await localforage.length()).toBe(5)
     })
   })
 
   it('createItemList should return a list of screens', async () => {
-    cache = []
-    const created = await createItemList([
-      {
-        diagonalSize: 55,
-        aspectRatio: '16:9',
-        hRes: 3840,
-        vRes: 2160,
-        lightColor: '#67E5AA',
-        darkColor: '#168350',
-      },
-    ])
+    await localforage.clear()
+    const created = await createItemList([screenInput55Fixture])
 
     expect(created[0].tag.diagonalSize).toBe(55)
-    expect(cache!.length).toBe(1)
+    expect(await localforage.length()).toBe(1)
   })
 
   describe('#getItem', () => {
@@ -78,17 +57,20 @@ describe('#indexDB', () => {
 
   describe('#updateItem', () => {
     it('updateItem should return a screens', async () => {
-      const result = await getItem('pVesw1Iu')
+      const result = await getItem('5HjERJbH')
 
-      expect(result?.id).toBe('pVesw1Iu')
+      expect(result?.id).toBe('5HjERJbH')
 
-      const updated = await updateItem('pVesw1Iu', { ...cache![0], tag: { aspectRatio: '4:3', diagonalSize: 21 } })
+      const updated = await updateItem('5HjERJbH', {
+        ...getGetScreenMock().item,
+        tag: { aspectRatio: '4:3', diagonalSize: 21 },
+      })
 
       expect(updated.tag.diagonalSize).toBe(21)
     })
 
     it.fails('updateItem should throw an error if id is not found', async () => {
-      await expect(await updateItem('aaaaa', cache![0])).rejects.toThrowError('No screen found for aaaaa')
+      await expect(await updateItem('aaaaa', getGetScreenMock().item)).rejects.toThrowError('No screen found for aaaaa')
     })
   })
 
@@ -101,7 +83,7 @@ describe('#indexDB', () => {
       const deleted = await deleteItem('pVesw1Iu')
 
       expect(deleted).toBe('pVesw1Iu')
-      expect(cache!.length).toBe(3)
+      expect(await localforage.length()).toBe(3)
     })
 
     it.fails('deleteItem should return false if id is not found', async () => {
