@@ -9,11 +9,11 @@ It provides a compatible api with Jest making it a drop in raplacement but runs 
 
 Initiating test runs and watching for changes is excuted using
 
-    pnpm run test
+    pnpm test
 
 However, you can bring up a visual console for testing using
 
-    pnpm run test:ui
+    pnpm test:ui
 
 ### Test dashboard
 
@@ -34,4 +34,22 @@ The mock data that was generated using Orval from the `example` field of the Ope
 
 [Storybook interactions](https://storybook.js.org/docs/essentials/interactions) is utilised to run a visual test on managed components. They are also published to [StoryBook Reports](https://nader-eloshaiker.github.io/screen-geometry-app/storybook)
 
-## Smoke
+## Smoke /E2E
+
+### Run test
+
+End to end testing uses [PlayWright](https://playwright.dev/)
+
+The primary reason for using this tool, is its ability to [codegen](https://playwright.dev/docs/codegen) tests which makes for far more efficient process for authoring end to end testing.
+
+Initiating test runs and watching for changes is excuted using
+
+    pnpm e2e
+
+However, you can bring up a visual console for testing using
+
+    pnpm e2e:ui
+
+Visual reporting can be run using
+
+    pnpm e2e:report

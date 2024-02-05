@@ -3,6 +3,8 @@
     "dbaeumer.vscode-eslint",
     "esbenp.prettier-vscode",
     "bradlc.vscode-tailwindcss",
-    "rvest.vs-code-prettier-eslint"
+    "rvest.vs-code-prettier-eslint",
+    "zixuanchen.vitest-explorer",
+    "ms-playwright.playwright"
   ]
 }

@@ -73,7 +73,11 @@ export const Screens = () => {
                   onClick={onLoadDefault}
                   disabled={isCreateListLoading}
                 >
-                  {isCreateListLoading ? <span className='loading loading-spinner'></span> : 'Load Screens'}
+                  {isCreateListLoading ? (
+                    <span data-testid='ButtonSpinner' className='loading loading-spinner'></span>
+                  ) : (
+                    'Load Screens'
+                  )}
                 </button>
               </div>
             </div>
@@ -86,12 +90,13 @@ export const Screens = () => {
               </label>
               <Stacked height={maxPanelSize.height}>
                 {screens.length === 0 && isScreenListLoading ? (
-                  <SkeletonImage className='size-full' />
+                  <SkeletonImage data-testid='SkeletonImage' className='size-full' />
                 ) : (
                   screens
                     .filter((screen) => screen.visible)
                     .map((screen) => (
                       <ScreenPanel
+                        data-testid={`ScreenPanel-${screen.tag.diagonalSize}`}
                         key={screen.id}
                         screen={screen}
                         isHighlighted={isHighlighted}
