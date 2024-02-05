@@ -32,7 +32,7 @@ jobs:
           node-version-file: '.nvmrc'
 
       - name: Install pnpm
-        uses: pnpm/action-setup@v2
+        uses: pnpm/action-setup@v2.4.0
         with:
           run_install: false
 
@@ -81,7 +81,7 @@ jobs:
           node-version-file: '.nvmrc'
 
       - name: Install pnpm
-        uses: pnpm/action-setup@v2
+        uses: pnpm/action-setup@v2.4.0
         with:
           run_install: false
 
@@ -106,7 +106,7 @@ jobs:
       - name: Run Playwright tests
         run: pnpm e2e
 
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: playwright-report
