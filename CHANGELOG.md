@@ -1,5 +1,18 @@
 # Changelog
 
+## [0.15.0](https://github.com/nader-eloshaiker/screen-geometry-app/compare/v0.14.0...v0.15.0) (2024-02-05)
+
+
+### Features
+
+* **test:** increase test coverage ([#297](https://github.com/nader-eloshaiker/screen-geometry-app/issues/297)) ([e3f31c0](https://github.com/nader-eloshaiker/screen-geometry-app/commit/e3f31c09a14adc451e95cf151316cbe0f3424749))
+
+
+### Bug Fixes
+
+* **app:** update production badge ([#294](https://github.com/nader-eloshaiker/screen-geometry-app/issues/294)) ([ac805c7](https://github.com/nader-eloshaiker/screen-geometry-app/commit/ac805c76e785e275f0710306c7534eba47656f65))
+* **docs:** move badges to docs to avoid caching ([#298](https://github.com/nader-eloshaiker/screen-geometry-app/issues/298)) ([111e423](https://github.com/nader-eloshaiker/screen-geometry-app/commit/111e4238fa18d025ff3d26e3e62f4325a728fc47))
+
 ## [0.14.0](https://github.com/nader-eloshaiker/screen-geometry-app/compare/v0.13.3...v0.14.0) (2024-02-01)
 
 
