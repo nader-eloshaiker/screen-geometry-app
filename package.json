@@ -16,9 +16,10 @@
   },
   "scripts": {
     "preinstall": "npx only-allow pnpm",
-    "dev": "vite --mode dev --base=/",
-    "build": "tsc && vite build --mode dev --base=/",
-    "build:prod": "tsc && vite build --mode prod --base=/",
+    "dev": "vite --mode dev",
+    "dev:e2e": "vite --mode dev --port 3000",
+    "build": "tsc && vite build --mode dev",
+    "build:prod": "tsc && vite build --mode prod",
     "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "lint:fix": "eslint src --fix --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "format": "prettier --write .",
