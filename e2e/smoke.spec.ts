@@ -1,6 +1,6 @@
 import { expect, test } from '@playwright/test'
 
-test('test', async ({ page }) => {
+test('Smoke Test Screens Page', async ({ page }) => {
   // Load Page and Naviate to Screens
   await page.goto('/')
   await page.getByRole('link', { name: 'Screens' }).click()

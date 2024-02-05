@@ -32,6 +32,7 @@
     "test:badge": "vitest --run --coverage && node utils/createCoverageBadges.cjs",
     "e2e": "pnpm exec playwright test",
     "e2e:ui": "pnpm exec playwright test --ui",
+    "e2e:install": "pnpm exec playwright install --with-deps",
     "e2e:report": "pnpm exec playwright show-report",
     "typecheck": "tsc --project tsconfig.json --noEmit",
     "sb": "storybook dev -p 6006",
