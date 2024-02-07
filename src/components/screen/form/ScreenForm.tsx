@@ -9,6 +9,7 @@ import { ScreenInput } from '@openapi/generated/models'
 import { createCSSColor } from '@utils/ScreenCalc'
 import { clsx } from 'clsx'
 import { useCallback, useEffect, useState } from 'react'
+import ReactGA from 'react-ga'
 import { FormProvider, SubmitHandler, useForm } from 'react-hook-form'
 import { ColorField } from './ColorField'
 import { DefaultInputValues } from './DefaultInputValues'
@@ -99,6 +100,12 @@ export const ScreenForm = ({ defaultValues = null, editId = undefined, isLoading
   }, [clearSearchHandler, onClose])
 
   const submitHandler: SubmitHandler<ScreenInput> = (form: ScreenInput) => {
+    ReactGA.event({
+      category: 'Submit Button Click',
+      action: `Submited ${editId ? 'Update' : 'Create'} Screen Button`,
+      label: 'Screens Page',
+    })
+
     if (editId) {
       updateAction({ id: editId, data: form }, { onSuccess: onClose })
     } else {

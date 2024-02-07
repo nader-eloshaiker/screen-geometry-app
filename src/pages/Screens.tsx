@@ -14,6 +14,7 @@ import { Dimensions } from '@models/Screen'
 import { ScreenItem } from '@openapi/generated/models'
 import { getMaxScreenSize } from '@utils/ScreenCalc'
 import { useRef, useState } from 'react'
+import ReactGA from 'react-ga'
 import { Helmet } from 'react-helmet-async'
 
 export const Screens = () => {
@@ -39,6 +40,11 @@ export const Screens = () => {
   }
 
   const onLoadDefault = () => {
+    ReactGA.event({
+      category: 'Button Click',
+      action: 'Clicked load default list',
+      label: 'Screens Page',
+    })
     createListAction({ data: defaultScreenInputList })
   }
 
