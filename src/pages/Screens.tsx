@@ -14,7 +14,7 @@ import { Dimensions } from '@models/Screen'
 import { ScreenItem } from '@openapi/generated/models'
 import { getMaxScreenSize } from '@utils/ScreenCalc'
 import { useRef, useState } from 'react'
-import ReactGA from 'react-ga'
+import ReactGA from 'react-ga4'
 import { Helmet } from 'react-helmet-async'
 
 export const Screens = () => {

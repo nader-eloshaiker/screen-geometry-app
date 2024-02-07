@@ -1,13 +1,13 @@
 import Footer from '@components/footer/Footer'
 import Header from '@components/header/Header'
 import { useEffect } from 'react'
-import ReactGA from 'react-ga'
+import ReactGA from 'react-ga4'
 import { Outlet, useLocation } from 'react-router-dom'
 
 export const Root = () => {
   const location = useLocation()
   useEffect(() => {
-    ReactGA.pageview(location.pathname + location.search)
+    ReactGA.send({ hitType: 'pageview', page: location.pathname + location.search, title: location.pathname })
   }, [location])
   return (
     <div id='app-root' className='container mx-auto flex min-h-screen flex-col'>
