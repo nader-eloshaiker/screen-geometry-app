@@ -2,6 +2,7 @@ import { generateStub } from '@server/server'
 import { setupWorker } from 'msw/browser'
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
+import { Helmet, HelmetProvider } from 'react-helmet-async'
 import { App } from './App'
 import reportWebVitals from './reportWebVitals'
 
@@ -19,7 +20,12 @@ const createServiceWorker = async () => {
 createServiceWorker().then(() => {
   createRoot(document.getElementById('root') as HTMLElement).render(
     <StrictMode>
-      <App />
+      <HelmetProvider>
+        <Helmet>
+          <title>Screen Geometry</title>
+        </Helmet>
+        <App />
+      </HelmetProvider>
     </StrictMode>,
   )
 

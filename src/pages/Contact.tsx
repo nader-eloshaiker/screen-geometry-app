@@ -3,7 +3,7 @@ import LinkedInIcon from '@assets/icons/LinkedIn'
 import TwitterIcon from '@assets/icons/Twitter'
 import XIcon from '@assets/icons/X'
 import { ReactNode } from 'react'
-import { Helmet } from 'react-helmet'
+import { Helmet } from 'react-helmet-async'
 
 type ListItemProps = TRestProps & {
   href: string

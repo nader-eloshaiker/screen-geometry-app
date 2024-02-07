@@ -14,7 +14,7 @@ import { Dimensions } from '@models/Screen'
 import { ScreenItem } from '@openapi/generated/models'
 import { getMaxScreenSize } from '@utils/ScreenCalc'
 import { useRef, useState } from 'react'
-import { Helmet } from 'react-helmet'
+import { Helmet } from 'react-helmet-async'
 
 export const Screens = () => {
   const divSizeRef = useRef<HTMLDivElement>(null)

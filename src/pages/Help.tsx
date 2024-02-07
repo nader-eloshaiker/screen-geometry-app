@@ -12,7 +12,7 @@ import { ScreenItem } from '@openapi/generated/models'
 import { getMaxScreenSize, normaliseScreenRender } from '@utils/ScreenCalc'
 import { transformScreenInput } from '@utils/ScreenTransformation'
 import { useRef } from 'react'
-import { Helmet } from 'react-helmet'
+import { Helmet } from 'react-helmet-async'
 import tw from 'tailwind-styled-components'
 
 const Section = tw.div`

@@ -1,6 +1,6 @@
 import Footer from '@components/footer/Footer'
 import Header from '@components/header/Header'
-import { Helmet } from 'react-helmet'
+import { Helmet } from 'react-helmet-async'
 import { isRouteErrorResponse, useRouteError } from 'react-router-dom'
 
 const RootBoundary = () => {
