@@ -55,7 +55,11 @@ export const About = () => {
           </p>
           <p className='mb-4'>
             P.S. Have questions or feedback? I&apos;m all ears. Feel free to reach out and let me know how I can make
-            this experience even better for you. Go to the contact page for details on how to get in touch.
+            this experience even better for you. Go to the contact page for details on how to get in touch. Also, show
+            your support by starring the project on{' '}
+            <a className='link' href='https://github.com/nader-eloshaiker/screen-geometry-app'>
+              Github
+            </a>
           </p>
         </div>
         <div>
