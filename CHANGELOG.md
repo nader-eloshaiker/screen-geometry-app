@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.0](https://github.com/nader-eloshaiker/screen-geometry-app/compare/v0.15.0...v1.0.0) (2024-02-07)
+
+
+### Miscellaneous Chores
+
+* release v1.0.0 ([1e22660](https://github.com/nader-eloshaiker/screen-geometry-app/commit/1e22660ca27303461db993540caede6c86052a4c))
+
 ## [0.15.0](https://github.com/nader-eloshaiker/screen-geometry-app/compare/v0.14.0...v0.15.0) (2024-02-05)
 
 
