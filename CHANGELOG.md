@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.0.1](https://github.com/nader-eloshaiker/screen-geometry-app/compare/v1.0.0...v1.0.1) (2024-02-07)
+
+
+### Bug Fixes
+
+* **app:** upgrade to google analytics 4 ([34c3d6c](https://github.com/nader-eloshaiker/screen-geometry-app/commit/34c3d6c49d5272aabe130c4cd6464b1a83eb653e))
+* upgrade to google analytics 4 ([#311](https://github.com/nader-eloshaiker/screen-geometry-app/issues/311)) ([34c3d6c](https://github.com/nader-eloshaiker/screen-geometry-app/commit/34c3d6c49d5272aabe130c4cd6464b1a83eb653e))
+
 ## [1.0.0](https://github.com/nader-eloshaiker/screen-geometry-app/compare/v0.15.0...v1.0.0) (2024-02-07)
 
 
