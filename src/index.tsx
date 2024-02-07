@@ -2,8 +2,12 @@ import { generateStub } from '@server/server'
 import { setupWorker } from 'msw/browser'
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
+import ReactGA from 'react-ga'
+import { Helmet, HelmetProvider } from 'react-helmet-async'
 import { App } from './App'
 import reportWebVitals from './reportWebVitals'
+
+ReactGA.initialize('G-LPQCBDMC1D')
 
 const createServiceWorker = async () => {
   const { searchMocks, screenListMocks, screenMocks, passthroughMocks } = generateStub()
@@ -19,7 +23,12 @@ const createServiceWorker = async () => {
 createServiceWorker().then(() => {
   createRoot(document.getElementById('root') as HTMLElement).render(
     <StrictMode>
-      <App />
+      <HelmetProvider>
+        <Helmet>
+          <title>Screen Geometry</title>
+        </Helmet>
+        <App />
+      </HelmetProvider>
     </StrictMode>,
   )
 

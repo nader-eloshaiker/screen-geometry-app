@@ -10,6 +10,7 @@ import { useThemeMode } from '@hooks/useThemeMode'
 import { ScreenColor, ScreenItem } from '@openapi/generated/models'
 import { getRandomString } from '@utils/RandomGenerator'
 import { useState } from 'react'
+import ReactGA from 'react-ga'
 import styled from 'styled-components'
 import { twMerge } from 'tailwind-merge'
 
@@ -83,14 +84,29 @@ export const ScreenTable = ({
   const [themeMode] = useThemeMode()
 
   const onShow = (screen: ScreenItem) => {
+    ReactGA.event({
+      category: 'Checkbox Click',
+      action: 'Clicked show',
+      label: 'Screens Page',
+    })
     showAction({ id: screen.id })
   }
 
   const handleDelete = (screen: ScreenItem) => {
+    ReactGA.event({
+      category: 'Button Click',
+      action: 'Clicked delete',
+      label: 'Screens Page',
+    })
     deleteAction({ id: screen.id })
   }
 
   const handleEdit = (screen: ScreenItem) => {
+    ReactGA.event({
+      category: 'Button Click',
+      action: 'Clicked edit',
+      label: 'Screens Page',
+    })
     setSelected(screen)
     dispatchFormDrawer({ type: FormDrawerActionTypes.Edit, payload: { id: screen.id } })
   }

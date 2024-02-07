@@ -1,3 +1,4 @@
+import { Helmet } from 'react-helmet-async'
 import { isRouteErrorResponse, useRouteError } from 'react-router-dom'
 
 export const ErrorManager = () => {
@@ -18,12 +19,25 @@ export const ErrorManager = () => {
   }
 
   return (
-    <div className='flex h-full flex-col justify-between'>
-      <h1 className='mb-4 text-3xl font-bold'>How to get hold of me</h1>
-      <p className='mb-4'>Sorry, an unexpected error has occurred.</p>
-      <p className='mb-4'>
-        <i>{errorMessage}</i>
-      </p>
-    </div>
+    <>
+      <Helmet>
+        <title>Service Error - Screen Geometry</title>
+        <meta name='description' content='A service error has occured' />
+      </Helmet>
+
+      <div className='flex h-full flex-row justify-center px-2 md:px-6 xl:px-2'>
+        <div className='mockup-code w-96'>
+          <pre data-prefix='1'>
+            <code>Dang it! A Service Error has occured 😵‍💫</code>
+          </pre>
+          <pre data-prefix='2'>
+            <code></code>
+          </pre>
+          <pre data-prefix='3' className='bg-warning text-warning-content'>
+            <code>{errorMessage}</code>
+          </pre>
+        </div>
+      </div>
+    </>
   )
 }
