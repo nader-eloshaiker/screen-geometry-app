@@ -146,8 +146,8 @@ jobs:
       - name: Run pnpm install
         run: pnpm install
 
-      - name: Run pnpm build
-        run: pnpm build
+      - name: Run pnpm build:dev
+        run: pnpm build:dev
 
       - name: Deploy app to Cloudflare Pages Develop
         uses: nader-eloshaiker/cloudlfare-pages-action@v1.0.0
