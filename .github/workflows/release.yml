@@ -27,8 +27,9 @@ concurrency:
 
 jobs:
   deploy_prod:
-    name: App Deployed to Production
+    name: Deploy App to Cloudflare Pages Production
     runs-on: ubuntu-latest
+    environment: cloudflare-production
     permissions:
       contents: read
       pages: write
@@ -78,7 +79,7 @@ jobs:
           projectName: screengeometry
           directory: ./dist
           branch: main
-          environmentName: screengeometry (Production)
+          environmentName: cloudflare-production
           wranglerVersion: '3'
           # Optional: Enable this if you want to have GitHub Deployments triggered
           gitHubToken: ${{ secrets.GITHUB_TOKEN }}

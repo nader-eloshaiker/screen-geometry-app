@@ -14,14 +14,14 @@ concurrency:
 
 jobs:
   validate_build:
-    name: Validation
+    name: Validate
     permissions:
       contents: read
       pull-requests: write
     uses: ./.github/workflows/validation.yml
 
   version_management:
-    name: Release Managed
+    name: Manage Release Version
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -49,7 +49,7 @@ jobs:
         run: echo "new tag [$NEW_TAG] created for $REPO_NAME"
 
   deploy_reports:
-    name: Reports Deployed
+    name: Deploy Reports
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
@@ -106,8 +106,8 @@ jobs:
         id: deployment
         uses: actions/deploy-pages@v4
 
-  staging:
-    name: App Deployed to Staging
+  Deploy:
+    name: Deploy App to Cloudflare Pages Preview
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -149,7 +149,7 @@ jobs:
       - name: Run pnpm build:dev
         run: pnpm build:dev
 
-      - name: Deploy app to Cloudflare Pages Develop
+      - name: Deploy app to Cloudflare Pages Preview
         uses: nader-eloshaiker/cloudlfare-pages-action@v1.0.0
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
@@ -157,6 +157,6 @@ jobs:
           projectName: screengeometry
           directory: ./dist
           branch: develop
-          environmentName: screengeometry (Develop)
+          environmentName: cloudflare-preview
           wranglerVersion: '3'
           gitHubToken: ${{ secrets.ACTION_GITHUB_TOKEN }}

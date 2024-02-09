@@ -19,7 +19,7 @@ permissions:
 
 jobs:
   Unit-Test:
-    name: Unit Tests Passed
+    name: Unit Tests
     runs-on: ubuntu-latest
 
     steps:
@@ -67,7 +67,7 @@ jobs:
           json-final-path: './reports/coverage/coverage-final.json'
 
   E2E-Test:
-    name: E2E Tests Passed
+    name: E2E Tests
     runs-on: ubuntu-latest
     timeout-minutes: 20
 
