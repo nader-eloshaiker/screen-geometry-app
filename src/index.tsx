@@ -8,8 +8,7 @@ import { App } from './App'
 import reportWebVitals from './reportWebVitals'
 
 const testMode = !import.meta.env.DEV
-const trackingId = import.meta.env.VITE_GA_TRACKING_ID
-
+const trackingId = process.env.GA_TRACKING_ID ?? import.meta.env.VITE_GA_TRACKING_ID
 ReactGA.initialize(trackingId, { testMode })
 
 const createServiceWorker = async () => {
