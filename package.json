@@ -75,7 +75,7 @@
     "@storybook/react": "^7.6.6",
     "@storybook/react-vite": "^7.6.7",
     "@storybook/test": "^7.6.12",
-    "@tanstack/react-query-devtools": "^5.17.21",
+    "@tanstack/react-query-devtools": "^5.18.1",
     "@testing-library/jest-dom": "^6.1.6",
     "@testing-library/react": "^14.1.2",
     "@testing-library/user-event": "^14.5.2",
