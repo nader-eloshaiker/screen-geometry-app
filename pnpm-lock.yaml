@@ -4,245 +4,243 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
-importers:
+dependencies:
+  '@hookform/resolvers':
+    specifier: ^3.3.4
+    version: 3.3.4(react-hook-form@7.50.0)
+  '@react-hook/resize-observer':
+    specifier: ^1.2.6
+    version: 1.2.6(react@18.2.0)
+  '@tanstack/react-query':
+    specifier: ^5.8.7
+    version: 5.8.7(react-dom@18.2.0)(react@18.2.0)
+  axios:
+    specifier: ^1.6.5
+    version: 1.6.5
+  clsx:
+    specifier: ^2.1.0
+    version: 2.1.0
+  localforage:
+    specifier: ^1.10.0
+    version: 1.10.0
+  minisearch:
+    specifier: ^6.3.0
+    version: 6.3.0
+  msw:
+    specifier: ^2.1.3
+    version: 2.1.3(typescript@5.3.3)
+  path-to-regexp:
+    specifier: ^6.2.1
+    version: 6.2.1
+  react:
+    specifier: ^18.2.0
+    version: 18.2.0
+  react-dom:
+    specifier: ^18.2.0
+    version: 18.2.0(react@18.2.0)
+  react-ga4:
+    specifier: ^1.4.1
+    version: 1.4.1
+  react-hook-form:
+    specifier: ^7.50.0
+    version: 7.50.0(react@18.2.0)
+  react-lazy-load-image-component:
+    specifier: ^1.6.0
+    version: 1.6.0(react-dom@18.2.0)(react@18.2.0)
+  react-router-dom:
+    specifier: ^6.21.3
+    version: 6.21.3(react-dom@18.2.0)(react@18.2.0)
+  simpler-color:
+    specifier: ^1.0.1
+    version: 1.0.1
+  vite-plugin-checker:
+    specifier: ^0.6.2
+    version: 0.6.2(eslint@8.56.0)(typescript@5.3.3)(vite@5.0.10)
+  web-vitals:
+    specifier: ^3.5.1
+    version: 3.5.1
+  yup:
+    specifier: ^1.3.3
+    version: 1.3.3
 
-  .:
-    dependencies:
-      '@hookform/resolvers':
-        specifier: ^3.3.4
-        version: 3.3.4(react-hook-form@7.50.0)
-      '@react-hook/resize-observer':
-        specifier: ^1.2.6
-        version: 1.2.6(react@18.2.0)
-      '@tanstack/react-query':
-        specifier: ^5.8.7
-        version: 5.8.7(react-dom@18.2.0)(react@18.2.0)
-      axios:
-        specifier: ^1.6.5
-        version: 1.6.5
-      clsx:
-        specifier: ^2.1.0
-        version: 2.1.0
-      localforage:
-        specifier: ^1.10.0
-        version: 1.10.0
-      minisearch:
-        specifier: ^6.3.0
-        version: 6.3.0
-      msw:
-        specifier: ^2.1.3
-        version: 2.1.3(typescript@5.3.3)
-      path-to-regexp:
-        specifier: ^6.2.1
-        version: 6.2.1
-      react:
-        specifier: ^18.2.0
-        version: 18.2.0
-      react-dom:
-        specifier: ^18.2.0
-        version: 18.2.0(react@18.2.0)
-      react-ga4:
-        specifier: ^1.4.1
-        version: 1.4.1
-      react-hook-form:
-        specifier: ^7.50.0
-        version: 7.50.0(react@18.2.0)
-      react-lazy-load-image-component:
-        specifier: ^1.6.0
-        version: 1.6.0(react-dom@18.2.0)(react@18.2.0)
-      react-router-dom:
-        specifier: ^6.21.3
-        version: 6.21.3(react-dom@18.2.0)(react@18.2.0)
-      simpler-color:
-        specifier: ^1.0.1
-        version: 1.0.1
-      vite-plugin-checker:
-        specifier: ^0.6.2
-        version: 0.6.2(eslint@8.56.0)(typescript@5.3.3)(vite@5.0.10)
-      web-vitals:
-        specifier: ^3.5.1
-        version: 3.5.1
-      yup:
-        specifier: ^1.3.3
-        version: 1.3.3
-    devDependencies:
-      '@playwright/test':
-        specifier: ^1.41.2
-        version: 1.41.2
-      '@storybook/addon-essentials':
-        specifier: ^7.6.7
-        version: 7.6.7(@types/react-dom@18.2.17)(@types/react@18.2.45)(react-dom@18.2.0)(react@18.2.0)
-      '@storybook/addon-interactions':
-        specifier: ^7.6.12
-        version: 7.6.12
-      '@storybook/addon-links':
-        specifier: ^7.6.6
-        version: 7.6.6(react@18.2.0)
-      '@storybook/addon-onboarding':
-        specifier: ^1.0.10
-        version: 1.0.10(react-dom@18.2.0)(react@18.2.0)
-      '@storybook/addon-themes':
-        specifier: ^7.6.12
-        version: 7.6.12
-      '@storybook/blocks':
-        specifier: ^7.6.6
-        version: 7.6.6(@types/react-dom@18.2.17)(@types/react@18.2.45)(react-dom@18.2.0)(react@18.2.0)
-      '@storybook/react':
-        specifier: ^7.6.6
-        version: 7.6.7(react-dom@18.2.0)(react@18.2.0)(typescript@5.3.3)
-      '@storybook/react-vite':
-        specifier: ^7.6.7
-        version: 7.6.7(react-dom@18.2.0)(react@18.2.0)(typescript@5.3.3)(vite@5.0.10)
-      '@storybook/test':
-        specifier: ^7.6.12
-        version: 7.6.12(vitest@1.2.2)
-      '@tanstack/react-query-devtools':
-        specifier: ^5.17.21
-        version: 5.17.21(@tanstack/react-query@5.8.7)(react@18.2.0)
-      '@testing-library/jest-dom':
-        specifier: ^6.1.6
-        version: 6.1.6(vitest@1.2.2)
-      '@testing-library/react':
-        specifier: ^14.1.2
-        version: 14.1.2(react-dom@18.2.0)(react@18.2.0)
-      '@testing-library/user-event':
-        specifier: ^14.5.2
-        version: 14.5.2(@testing-library/dom@9.3.3)
-      '@types/eslint-config-prettier':
-        specifier: ^6.11.3
-        version: 6.11.3
-      '@types/eslint-plugin-prettier':
-        specifier: ^3.1.3
-        version: 3.1.3
-      '@types/jsdom':
-        specifier: ^21.1.2
-        version: 21.1.2
-      '@types/lint-staged':
-        specifier: ^13.2.0
-        version: 13.2.0
-      '@types/node':
-        specifier: ^20.11.2
-        version: 20.11.2
-      '@types/react':
-        specifier: ^18.2.45
-        version: 18.2.45
-      '@types/react-dom':
-        specifier: ^18.2.17
-        version: 18.2.17
-      '@types/react-helmet':
-        specifier: ^6.1.11
-        version: 6.1.11
-      '@types/react-lazy-load-image-component':
-        specifier: ^1.6.3
-        version: 1.6.3
-      '@types/react-router-dom':
-        specifier: ^5.3.3
-        version: 5.3.3
-      '@types/styled-components':
-        specifier: ^5.1.26
-        version: 5.1.26
-      '@typescript-eslint/eslint-plugin':
-        specifier: ^6.18.1
-        version: 6.18.1(@typescript-eslint/parser@6.11.0)(eslint@8.56.0)(typescript@5.3.3)
-      '@typescript-eslint/parser':
-        specifier: ^6.10.0
-        version: 6.11.0(eslint@8.56.0)(typescript@5.3.3)
-      '@vitejs/plugin-react':
-        specifier: ^4.2.1
-        version: 4.2.1(vite@5.0.10)
-      '@vitest/coverage-v8':
-        specifier: ^1.2.0
-        version: 1.2.0(vitest@1.2.2)
-      '@vitest/ui':
-        specifier: ^1.2.0
-        version: 1.2.0(vitest@1.2.2)
-      autoprefixer:
-        specifier: ^10.4.16
-        version: 10.4.16(postcss@8.4.32)
-      daisyui:
-        specifier: ^4.4.19
-        version: 4.4.19(postcss@8.4.32)
-      eslint:
-        specifier: ^8.56.0
-        version: 8.56.0
-      eslint-config-prettier:
-        specifier: ^9.1.0
-        version: 9.1.0(eslint@8.56.0)
-      eslint-import-resolver-typescript:
-        specifier: ^3.6.1
-        version: 3.6.1(@typescript-eslint/parser@6.11.0)(eslint-plugin-import@2.29.1)(eslint@8.56.0)
-      eslint-plugin-import:
-        specifier: ^2.29.1
-        version: 2.29.1(@typescript-eslint/parser@6.11.0)(eslint-import-resolver-typescript@3.6.1)(eslint@8.56.0)
-      eslint-plugin-prettier:
-        specifier: ^5.1.2
-        version: 5.1.2(eslint-config-prettier@9.1.0)(eslint@8.56.0)(prettier@3.1.0)
-      eslint-plugin-react:
-        specifier: ^7.33.2
-        version: 7.33.2(eslint@8.56.0)
-      eslint-plugin-react-hooks:
-        specifier: ^4.6.0
-        version: 4.6.0(eslint@8.56.0)
-      eslint-plugin-react-refresh:
-        specifier: ^0.4.5
-        version: 0.4.5(eslint@8.56.0)
-      eslint-plugin-storybook:
-        specifier: ^0.6.15
-        version: 0.6.15(eslint@8.56.0)(typescript@5.3.3)
-      eslint-plugin-tailwindcss:
-        specifier: ^3.14.0
-        version: 3.14.0(tailwindcss@3.4.1)
-      husky:
-        specifier: ^8.0.3
-        version: 8.0.3
-      jsdom:
-        specifier: ^23.0.1
-        version: 23.0.1
-      jsonfile:
-        specifier: ^6.1.0
-        version: 6.1.0
-      lint-staged:
-        specifier: ^15.2.0
-        version: 15.2.0
-      mkdirp:
-        specifier: ^3.0.1
-        version: 3.0.1
-      orval:
-        specifier: ^6.23.0
-        version: 6.23.0(@vitest/ui@1.2.0)(jsdom@23.0.1)(typescript@5.3.3)
-      prettier:
-        specifier: ^3.1.0
-        version: 3.1.0
-      prettier-plugin-organize-imports:
-        specifier: ^3.2.4
-        version: 3.2.4(prettier@3.1.0)(typescript@5.3.3)
-      react-helmet-async:
-        specifier: ^2.0.4
-        version: 2.0.4(react-dom@18.2.0)(react@18.2.0)
-      storybook:
-        specifier: ^7.6.6
-        version: 7.6.6
-      styled-components:
-        specifier: ^6.1.6
-        version: 6.1.6(react-dom@18.2.0)(react@18.2.0)
-      tailwind-merge:
-        specifier: ^2.2.0
-        version: 2.2.0
-      tailwind-styled-components:
-        specifier: ^2.2.0
-        version: 2.2.0(react-dom@18.2.0)(react@18.2.0)
-      tailwindcss:
-        specifier: ^3.4.1
-        version: 3.4.1
-      typescript:
-        specifier: ^5.3.3
-        version: 5.3.3
-      vite:
-        specifier: ^5.0.10
-        version: 5.0.10(@types/node@20.11.2)
-      vitest:
-        specifier: ^1.2.2
-        version: 1.2.2(@types/node@20.11.2)(@vitest/ui@1.2.0)(jsdom@23.0.1)
+devDependencies:
+  '@playwright/test':
+    specifier: ^1.41.2
+    version: 1.41.2
+  '@storybook/addon-essentials':
+    specifier: ^7.6.7
+    version: 7.6.7(@types/react-dom@18.2.17)(@types/react@18.2.45)(react-dom@18.2.0)(react@18.2.0)
+  '@storybook/addon-interactions':
+    specifier: ^7.6.12
+    version: 7.6.12
+  '@storybook/addon-links':
+    specifier: ^7.6.6
+    version: 7.6.6(react@18.2.0)
+  '@storybook/addon-onboarding':
+    specifier: ^1.0.10
+    version: 1.0.10(react-dom@18.2.0)(react@18.2.0)
+  '@storybook/addon-themes':
+    specifier: ^7.6.12
+    version: 7.6.12
+  '@storybook/blocks':
+    specifier: ^7.6.6
+    version: 7.6.6(@types/react-dom@18.2.17)(@types/react@18.2.45)(react-dom@18.2.0)(react@18.2.0)
+  '@storybook/react':
+    specifier: ^7.6.6
+    version: 7.6.7(react-dom@18.2.0)(react@18.2.0)(typescript@5.3.3)
+  '@storybook/react-vite':
+    specifier: ^7.6.7
+    version: 7.6.7(react-dom@18.2.0)(react@18.2.0)(typescript@5.3.3)(vite@5.0.10)
+  '@storybook/test':
+    specifier: ^7.6.12
+    version: 7.6.12(vitest@1.2.2)
+  '@tanstack/react-query-devtools':
+    specifier: ^5.17.21
+    version: 5.17.21(@tanstack/react-query@5.8.7)(react@18.2.0)
+  '@testing-library/jest-dom':
+    specifier: ^6.1.6
+    version: 6.1.6(vitest@1.2.2)
+  '@testing-library/react':
+    specifier: ^14.1.2
+    version: 14.1.2(react-dom@18.2.0)(react@18.2.0)
+  '@testing-library/user-event':
+    specifier: ^14.5.2
+    version: 14.5.2(@testing-library/dom@9.3.3)
+  '@types/eslint-config-prettier':
+    specifier: ^6.11.3
+    version: 6.11.3
+  '@types/eslint-plugin-prettier':
+    specifier: ^3.1.3
+    version: 3.1.3
+  '@types/jsdom':
+    specifier: ^21.1.2
+    version: 21.1.2
+  '@types/lint-staged':
+    specifier: ^13.2.0
+    version: 13.2.0
+  '@types/node':
+    specifier: ^20.11.2
+    version: 20.11.2
+  '@types/react':
+    specifier: ^18.2.45
+    version: 18.2.45
+  '@types/react-dom':
+    specifier: ^18.2.17
+    version: 18.2.17
+  '@types/react-helmet':
+    specifier: ^6.1.11
+    version: 6.1.11
+  '@types/react-lazy-load-image-component':
+    specifier: ^1.6.3
+    version: 1.6.3
+  '@types/react-router-dom':
+    specifier: ^5.3.3
+    version: 5.3.3
+  '@types/styled-components':
+    specifier: ^5.1.26
+    version: 5.1.26
+  '@typescript-eslint/eslint-plugin':
+    specifier: ^6.18.1
+    version: 6.18.1(@typescript-eslint/parser@6.11.0)(eslint@8.56.0)(typescript@5.3.3)
+  '@typescript-eslint/parser':
+    specifier: ^6.10.0
+    version: 6.11.0(eslint@8.56.0)(typescript@5.3.3)
+  '@vitejs/plugin-react':
+    specifier: ^4.2.1
+    version: 4.2.1(vite@5.0.10)
+  '@vitest/coverage-v8':
+    specifier: ^1.2.0
+    version: 1.2.0(vitest@1.2.2)
+  '@vitest/ui':
+    specifier: ^1.2.2
+    version: 1.2.2(vitest@1.2.2)
+  autoprefixer:
+    specifier: ^10.4.16
+    version: 10.4.16(postcss@8.4.32)
+  daisyui:
+    specifier: ^4.4.19
+    version: 4.4.19(postcss@8.4.32)
+  eslint:
+    specifier: ^8.56.0
+    version: 8.56.0
+  eslint-config-prettier:
+    specifier: ^9.1.0
+    version: 9.1.0(eslint@8.56.0)
+  eslint-import-resolver-typescript:
+    specifier: ^3.6.1
+    version: 3.6.1(@typescript-eslint/parser@6.11.0)(eslint-plugin-import@2.29.1)(eslint@8.56.0)
+  eslint-plugin-import:
+    specifier: ^2.29.1
+    version: 2.29.1(@typescript-eslint/parser@6.11.0)(eslint-import-resolver-typescript@3.6.1)(eslint@8.56.0)
+  eslint-plugin-prettier:
+    specifier: ^5.1.2
+    version: 5.1.2(eslint-config-prettier@9.1.0)(eslint@8.56.0)(prettier@3.1.0)
+  eslint-plugin-react:
+    specifier: ^7.33.2
+    version: 7.33.2(eslint@8.56.0)
+  eslint-plugin-react-hooks:
+    specifier: ^4.6.0
+    version: 4.6.0(eslint@8.56.0)
+  eslint-plugin-react-refresh:
+    specifier: ^0.4.5
+    version: 0.4.5(eslint@8.56.0)
+  eslint-plugin-storybook:
+    specifier: ^0.6.15
+    version: 0.6.15(eslint@8.56.0)(typescript@5.3.3)
+  eslint-plugin-tailwindcss:
+    specifier: ^3.14.0
+    version: 3.14.0(tailwindcss@3.4.1)
+  husky:
+    specifier: ^8.0.3
+    version: 8.0.3
+  jsdom:
+    specifier: ^23.0.1
+    version: 23.0.1
+  jsonfile:
+    specifier: ^6.1.0
+    version: 6.1.0
+  lint-staged:
+    specifier: ^15.2.0
+    version: 15.2.0
+  mkdirp:
+    specifier: ^3.0.1
+    version: 3.0.1
+  orval:
+    specifier: ^6.23.0
+    version: 6.23.0(@vitest/ui@1.2.2)(jsdom@23.0.1)(typescript@5.3.3)
+  prettier:
+    specifier: ^3.1.0
+    version: 3.1.0
+  prettier-plugin-organize-imports:
+    specifier: ^3.2.4
+    version: 3.2.4(prettier@3.1.0)(typescript@5.3.3)
+  react-helmet-async:
+    specifier: ^2.0.4
+    version: 2.0.4(react-dom@18.2.0)(react@18.2.0)
+  storybook:
+    specifier: ^7.6.6
+    version: 7.6.6
+  styled-components:
+    specifier: ^6.1.6
+    version: 6.1.6(react-dom@18.2.0)(react@18.2.0)
+  tailwind-merge:
+    specifier: ^2.2.0
+    version: 2.2.0
+  tailwind-styled-components:
+    specifier: ^2.2.0
+    version: 2.2.0(react-dom@18.2.0)(react@18.2.0)
+  tailwindcss:
+    specifier: ^3.4.1
+    version: 3.4.1
+  typescript:
+    specifier: ^5.3.3
+    version: 5.3.3
+  vite:
+    specifier: ^5.0.10
+    version: 5.0.10(@types/node@20.11.2)
+  vitest:
+    specifier: ^1.2.2
+    version: 1.2.2(@types/node@20.11.2)(@vitest/ui@1.2.2)(jsdom@23.0.1)
 
 packages:
 
@@ -2438,12 +2436,12 @@ packages:
       - supports-color
     dev: true
 
-  /@orval/query@6.23.0(@vitest/ui@1.2.0)(jsdom@23.0.1):
+  /@orval/query@6.23.0(@vitest/ui@1.2.2)(jsdom@23.0.1):
     resolution: {integrity: sha512-SSMj+4I8a9TzHfp0oGWvT7sZSmWrN9pmH/NTU7hgmk5cLS4qghTWL6b+nOfB8WRUOPqltnRu/qgDRHx8/xhZHg==}
     dependencies:
       '@orval/core': 6.23.0
       lodash.omitby: 4.6.0
-      vitest: 0.34.6(@vitest/ui@1.2.0)(jsdom@23.0.1)
+      vitest: 0.34.6(@vitest/ui@1.2.2)(jsdom@23.0.1)
     transitivePeerDependencies:
       - '@edge-runtime/vm'
       - '@vitest/browser'
@@ -4524,7 +4522,7 @@ packages:
       dom-accessibility-api: 0.5.16
       lodash: 4.17.21
       redent: 3.0.0
-      vitest: 1.2.2(@types/node@20.11.2)(@vitest/ui@1.2.0)(jsdom@23.0.1)
+      vitest: 1.2.2(@types/node@20.11.2)(@vitest/ui@1.2.2)(jsdom@23.0.1)
     dev: true
 
   /@testing-library/react@14.1.2(react-dom@18.2.0)(react@18.2.0):
@@ -5238,7 +5236,7 @@ packages:
       std-env: 3.7.0
       test-exclude: 6.0.0
       v8-to-istanbul: 9.2.0
-      vitest: 1.2.2(@types/node@20.11.2)(@vitest/ui@1.2.0)(jsdom@23.0.1)
+      vitest: 1.2.2(@types/node@20.11.2)(@vitest/ui@1.2.2)(jsdom@23.0.1)
     transitivePeerDependencies:
       - supports-color
     dev: true
@@ -5303,19 +5301,19 @@ packages:
       tinyspy: 2.2.0
     dev: true
 
-  /@vitest/ui@1.2.0(vitest@1.2.2):
-    resolution: {integrity: sha512-AFU8FBiSioYacEd0b8+2R/4GJJhxseD6bNIiEVntb505u1B/mcNMTVRepZql7r3RQJZQ7uijY9QyLdhlbh4XvA==}
+  /@vitest/ui@1.2.2(vitest@1.2.2):
+    resolution: {integrity: sha512-CG+5fa8lyoBr+9i+UZGS31Qw81v33QlD10uecHxN2CLJVN+jLnqx4pGzGvFFeJ7jSnUCT0AlbmVWY6fU6NJZmw==}
     peerDependencies:
       vitest: ^1.0.0
     dependencies:
-      '@vitest/utils': 1.2.0
+      '@vitest/utils': 1.2.2
       fast-glob: 3.3.2
       fflate: 0.8.1
       flatted: 3.2.9
       pathe: 1.1.1
       picocolors: 1.0.0
       sirv: 2.0.4
-      vitest: 1.2.2(@types/node@20.11.2)(@vitest/ui@1.2.0)(jsdom@23.0.1)
+      vitest: 1.2.2(@types/node@20.11.2)(@vitest/ui@1.2.2)(jsdom@23.0.1)
     dev: true
 
   /@vitest/utils@0.34.6:
@@ -5330,15 +5328,6 @@ packages:
     resolution: {integrity: sha512-ziAavQLpCYS9sLOorGrFFKmy2gnfiNU0ZJ15TsMz/K92NAPS/rp9K4z6AJQQk5Y8adCy4Iwpxy7pQumQ/psnRg==}
     dependencies:
       diff-sequences: 29.6.3
-      loupe: 2.3.7
-      pretty-format: 29.7.0
-    dev: true
-
-  /@vitest/utils@1.2.0:
-    resolution: {integrity: sha512-FyD5bpugsXlwVpTcGLDf3wSPYy8g541fQt14qtzo8mJ4LdEpDKZ9mQy2+qdJm2TZRpjY5JLXihXCgIxiRJgi5g==}
-    dependencies:
-      diff-sequences: 29.6.3
-      estree-walker: 3.0.3
       loupe: 2.3.7
       pretty-format: 29.7.0
     dev: true
@@ -9513,7 +9502,7 @@ packages:
       strip-ansi: 6.0.1
       wcwidth: 1.0.1
 
-  /orval@6.23.0(@vitest/ui@1.2.0)(jsdom@23.0.1)(typescript@5.3.3):
+  /orval@6.23.0(@vitest/ui@1.2.2)(jsdom@23.0.1)(typescript@5.3.3):
     resolution: {integrity: sha512-elAyEIIpf/1kydP5V33UtONfkuN3v7L8ogzF/eJNzhvv4zsq8TwEADiY8GAw5EyzOiFFF07SSJxtoY4ez1FmFg==}
     hasBin: true
     dependencies:
@@ -9522,7 +9511,7 @@ packages:
       '@orval/axios': 6.23.0
       '@orval/core': 6.23.0
       '@orval/mock': 6.23.0
-      '@orval/query': 6.23.0(@vitest/ui@1.2.0)(jsdom@23.0.1)
+      '@orval/query': 6.23.0(@vitest/ui@1.2.2)(jsdom@23.0.1)
       '@orval/swr': 6.23.0
       '@orval/zod': 6.23.0
       ajv: 8.12.0
@@ -11927,7 +11916,7 @@ packages:
     optionalDependencies:
       fsevents: 2.3.3
 
-  /vitest@0.34.6(@vitest/ui@1.2.0)(jsdom@23.0.1):
+  /vitest@0.34.6(@vitest/ui@1.2.2)(jsdom@23.0.1):
     resolution: {integrity: sha512-+5CALsOvbNKnS+ZHMXtuUC7nL8/7F1F2DnHGjSsszX8zCjWSSviphCb/NuS9Nzf4Q03KyyDRBAXhF/8lffME4Q==}
     engines: {node: '>=v14.18.0'}
     hasBin: true
@@ -11965,7 +11954,7 @@ packages:
       '@vitest/runner': 0.34.6
       '@vitest/snapshot': 0.34.6
       '@vitest/spy': 0.34.6
-      '@vitest/ui': 1.2.0(vitest@1.2.2)
+      '@vitest/ui': 1.2.2(vitest@1.2.2)
       '@vitest/utils': 0.34.6
       acorn: 8.11.2
       acorn-walk: 8.3.1
@@ -11994,7 +11983,7 @@ packages:
       - terser
     dev: true
 
-  /vitest@1.2.2(@types/node@20.11.2)(@vitest/ui@1.2.0)(jsdom@23.0.1):
+  /vitest@1.2.2(@types/node@20.11.2)(@vitest/ui@1.2.2)(jsdom@23.0.1):
     resolution: {integrity: sha512-d5Ouvrnms3GD9USIK36KG8OZ5bEvKEkITFtnGv56HFaSlbItJuYr7hv2Lkn903+AvRAgSixiamozUVfORUekjw==}
     engines: {node: ^18.0.0 || >=20.0.0}
     hasBin: true
@@ -12024,7 +12013,7 @@ packages:
       '@vitest/runner': 1.2.2
       '@vitest/snapshot': 1.2.2
       '@vitest/spy': 1.2.2
-      '@vitest/ui': 1.2.0(vitest@1.2.2)
+      '@vitest/ui': 1.2.2(vitest@1.2.2)
       '@vitest/utils': 1.2.2
       acorn-walk: 8.3.2
       cac: 6.7.14
