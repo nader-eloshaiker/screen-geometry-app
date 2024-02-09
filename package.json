@@ -95,7 +95,7 @@
     "@vitejs/plugin-react": "^4.2.1",
     "@vitest/coverage-v8": "^1.2.0",
     "@vitest/ui": "^1.2.2",
-    "autoprefixer": "^10.4.16",
+    "autoprefixer": "^10.4.17",
     "daisyui": "^4.4.19",
     "eslint": "^8.56.0",
     "eslint-config-prettier": "^9.1.0",
