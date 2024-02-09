@@ -1,5 +1,15 @@
 # Changelog
 
+## [1.0.2](https://github.com/nader-eloshaiker/screen-geometry-app/compare/v1.0.1...v1.0.2) (2024-02-09)
+
+
+### Bug Fixes
+
+* loosen trigger for production release ([#315](https://github.com/nader-eloshaiker/screen-geometry-app/issues/315)) ([3746ade](https://github.com/nader-eloshaiker/screen-geometry-app/commit/3746adeb2381bb268be728ab762d0b6821a19d71))
+* **ops:** loosen trigger for production release ([3746ade](https://github.com/nader-eloshaiker/screen-geometry-app/commit/3746adeb2381bb268be728ab762d0b6821a19d71))
+* release action trigger ([#316](https://github.com/nader-eloshaiker/screen-geometry-app/issues/316)) ([18ff427](https://github.com/nader-eloshaiker/screen-geometry-app/commit/18ff4274e5201860d1a200385ddfdb4839e6e99b))
+* Store analytics key in variables manager ([#313](https://github.com/nader-eloshaiker/screen-geometry-app/issues/313)) ([eb7632f](https://github.com/nader-eloshaiker/screen-geometry-app/commit/eb7632f6c50640d3bcc51025af7ae88b32a83f49))
+
 ## [1.0.1](https://github.com/nader-eloshaiker/screen-geometry-app/compare/v1.0.0...v1.0.1) (2024-02-07)
 
 
