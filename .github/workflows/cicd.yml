@@ -4,9 +4,6 @@ on:
   push:
     branches:
       - main
-    # Don't run on new release from release please PR
-    tags-ignore:
-      - 'v*'
 
 concurrency:
   group: 'deploy'
