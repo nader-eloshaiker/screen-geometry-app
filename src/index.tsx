@@ -7,7 +7,9 @@ import { Helmet, HelmetProvider } from 'react-helmet-async'
 import { App } from './App'
 import reportWebVitals from './reportWebVitals'
 
-ReactGA.initialize('G-LPQCBDMC1D')
+const testMode = !import.meta.env.DEV
+const trackingId = process.env.GA_TRACKING_ID ?? import.meta.env.VITE_GA_TRACKING_ID
+ReactGA.initialize(trackingId, { testMode })
 
 const createServiceWorker = async () => {
   const { searchMocks, screenListMocks, screenMocks, passthroughMocks } = generateStub()

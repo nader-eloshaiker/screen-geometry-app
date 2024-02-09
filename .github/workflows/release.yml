@@ -27,8 +27,9 @@ concurrency:
 
 jobs:
   deploy_prod:
-    name: App Deployed to Production
+    name: Deploy App to Cloudflare Pages Production
     runs-on: ubuntu-latest
+    environment: cloudflare-production
     permissions:
       contents: read
       pages: write
@@ -68,7 +69,7 @@ jobs:
         run: pnpm install
 
       - name: Run pnpm build:prod
-        run: pnpm build:prod
+        run: GA_TRACKING_ID=${{ vars.GA_TRACKING_ID }} pnpm build:prod
 
       - name: Deploy app to Cloudflare Pages Production
         uses: nader-eloshaiker/cloudlfare-pages-action@v1.0.0
@@ -78,7 +79,7 @@ jobs:
           projectName: screengeometry
           directory: ./dist
           branch: main
-          environmentName: screengeometry (Production)
+          environmentName: cloudflare-production
           wranglerVersion: '3'
           # Optional: Enable this if you want to have GitHub Deployments triggered
           gitHubToken: ${{ secrets.GITHUB_TOKEN }}
