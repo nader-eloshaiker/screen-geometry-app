@@ -15,10 +15,14 @@ easy comparison as well as tabulate the specs.
 
 ### Official App urls
 
+The app is hosted in Cloudflare and is deployed from the main branch.
+
 - Production [screengeometry.com](https://screengeometry.com)
 - Develop [develop.screengeometry.com](https://develop.screengeometry.com)
 
 ### Reports
+
+The reports are hosted in Github Pages and are deploed from the main branch.
 
 - [Coverage](https://nader-eloshaiker.github.io/screen-geometry-app/coverage)
 - [StoryBook](https://nader-eloshaiker.github.io/screen-geometry-app/storybook)
