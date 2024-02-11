@@ -137,9 +137,9 @@ export const ScreenTable = ({
               $highlighted={isHighlighted(screen)}
               $color={bgColor(themeMode, screen.color)}
               key={screen.id}
-              onMouseEnter={() => setHighLighted(screen)}
+              onMouseOver={() => setHighLighted(screen)}
               onMouseOut={() => setHighLighted(undefined)}
-              onBlur={() => setHighLighted(undefined)}
+              // onBlur={() => setHighLighted(undefined)}
               onClick={() => onHighlightClick(screen)}
             >
               <td>
