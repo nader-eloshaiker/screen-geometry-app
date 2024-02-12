@@ -2,7 +2,6 @@
 
 [![Validation](https://github.com/nader-eloshaiker/screen-geometry-app/actions/workflows/validation.yml/badge.svg)](https://github.com/nader-eloshaiker/screen-geometry-app/actions/workflows/validation.yml)
 [![CI/CD](https://github.com/nader-eloshaiker/screen-geometry-app/actions/workflows/cicd.yml/badge.svg)](https://github.com/nader-eloshaiker/screen-geometry-app/actions/workflows/cicd.yml)
-[![Deploy Preview](https://github.com/nader-eloshaiker/screen-geometry-app/actions/workflows/deploy_preview.yml/badge.svg)](https://github.com/nader-eloshaiker/screen-geometry-app/actions/workflows/deploy_preview.yml)
 [![Deploy Production](https://github.com/nader-eloshaiker/screen-geometry-app/actions/workflows/deploy_production.yml/badge.svg)](https://github.com/nader-eloshaiker/screen-geometry-app/actions/workflows/deploy_production.yml)
 
 ![Statements Badge](./docs/badges/statements.svg) ![Branches Badge](./docs/badges/branches.svg) ![Functions Badge](./docs/badges/functions.svg) ![Lines Badge](./docs/badges/lines.svg)
