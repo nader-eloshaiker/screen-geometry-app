@@ -22,8 +22,8 @@ const StyledCheckbox = styled.input<{ $color: string }>`
   }
 `
 
-const StyledTableRow = styled.tr<{ $color: string; $highlighted: boolean }>`
-  background-color: ${(props) => (props.$highlighted ? props.$color : 'transparent')};
+const StyledTableRow = styled.tr<{ $color: string; $isHighlighted: boolean }>`
+  background-color: ${(props) => (props.$isHighlighted ? props.$color : 'transparent')};
   &:hover {
     background-color: ${(props) => props.$color};
   }
@@ -130,12 +130,12 @@ export const ScreenTable = ({
           {screens.map((screen) => (
             <StyledTableRow
               className='cursor-pointer'
-              $highlighted={screen.id === highlighted?.id}
+              $isHighlighted={screen.id === highlighted?.id}
               $color={bgColor(themeMode, screen.color)}
               key={screen.id}
               onClick={() => setHighLighted(screen.id === highlighted?.id ? undefined : screen)}
-              onMouseOver={() => setHighLighted(screen.id === highlighted?.id ? undefined : screen)}
-              onMouseOut={() => setHighLighted(undefined)}
+              onMouseEnter={() => setHighLighted(screen.id === highlighted?.id ? undefined : screen)}
+              onMouseLeave={() => setHighLighted(undefined)}
             >
               <td>
                 <div className='flex items-center justify-center'>
