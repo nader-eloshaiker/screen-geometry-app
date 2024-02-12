@@ -9,7 +9,7 @@ import { useShowScreenApi } from '@hooks/api/helpers/useShowScreenApi'
 import { useThemeMode } from '@hooks/useThemeMode'
 import { ScreenColor, ScreenItem } from '@openapi/generated/models'
 import { getRandomString } from '@utils/RandomGenerator'
-import { Dispatch, SetStateAction, useState } from 'react'
+import { Dispatch, SetStateAction } from 'react'
 import ReactGA from 'react-ga4'
 import styled from 'styled-components'
 import { twMerge } from 'tailwind-merge'
@@ -78,7 +78,6 @@ export const ScreenTable = ({
   const { isPending: isDeletePending, mutate: deleteAction, variables: deleteParams } = useDeleteScreenApi()
   const { isPending: isShowPending, mutate: showAction, variables: showParams } = useShowScreenApi()
   const { dispatchFormDrawer } = useFormDrawerContext()
-  const [_, setSelected] = useState<ScreenItem>()
   const [themeMode] = useThemeMode()
 
   const onShow = (screen: ScreenItem) => {
@@ -105,7 +104,6 @@ export const ScreenTable = ({
       action: 'Clicked edit',
       label: 'Screens Page',
     })
-    setSelected(screen)
     dispatchFormDrawer({ type: FormDrawerActionTypes.Edit, payload: { id: screen.id } })
   }
 
@@ -132,13 +130,12 @@ export const ScreenTable = ({
           {screens.map((screen) => (
             <StyledTableRow
               className='cursor-pointer'
-              $highlighted={isHighlighted(screen)}
+              $highlighted={screen.id === highlighted?.id}
               $color={bgColor(themeMode, screen.color)}
               key={screen.id}
-              onMouseOver={() => setHighLighted(screen)}
+              onClick={() => setHighLighted(screen.id === highlighted?.id ? undefined : screen)}
+              onMouseOver={() => setHighLighted(screen.id === highlighted?.id ? undefined : screen)}
               onMouseOut={() => setHighLighted(undefined)}
-              // onBlur={() => setHighLighted(undefined)}
-              onClick={() => onHighlightClick(screen)}
             >
               <td>
                 <div className='flex items-center justify-center'>

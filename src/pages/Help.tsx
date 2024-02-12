@@ -90,11 +90,7 @@ export const Help = () => {
           </Paragraph>
           <Diagram>
             <div ref={divSizeRef} className='flex flex-col gap-4 rounded-lg border-2 p-6 shadow-lg'>
-              <ScreenTable
-                className='pointer-events-none'
-                screens={smallList}
-                isHighlighted={(screen: ScreenItem) => screen.id === smallList[0].id}
-              />
+              <ScreenTable className='pointer-events-none' screens={smallList} highlighted={smallList[0]} />
               <Stacked height={maxPanelSize.height}>
                 {smallList
                   .filter((screen) => screen.visible)
