@@ -4,7 +4,7 @@ on:
   workflow_call:
     inputs:
       ref:
-        required: false
+        required: true
         type: string
         description: 'The commit to deploy to, otherwise the default branch will be used.'
 
@@ -27,7 +27,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
         with:
-          ref: ${{ github.event.inputs.ref || github.ref}}
+          ref: ${{ github.event.inputs.ref }}
 
       - name: Install Node.js
         uses: actions/setup-node@v4
