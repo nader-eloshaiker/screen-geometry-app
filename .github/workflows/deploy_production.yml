@@ -66,7 +66,7 @@ jobs:
         run: GA_TRACKING_ID=${{ vars.GA_TRACKING_ID }} pnpm build:prod
 
       - name: Deploy app to Cloudflare Pages Production
-        uses: nader-eloshaiker/cloudlfare-pages-action@v1.0.0
+        uses: nader-eloshaiker/cloudlfare-pages-action@v1.1.0
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
