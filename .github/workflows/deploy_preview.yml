@@ -3,10 +3,10 @@ name: Deploy Preview
 on:
   workflow_call:
     inputs:
-      commit:
-        required: true
+      ref:
+        required: false
         type: string
-        description: 'The commit to deploy to'
+        description: 'The commit to deploy to, otherwise the default branch will be used.'
 
 concurrency:
   group: 'deploy_preview'
@@ -26,7 +26,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
         with:
-          ref: ${{ github.event.inputs.commit || github.ref}}
+          ref: ${{ github.event.inputs.ref || github.ref}}
 
       - name: Install Node.js
         uses: actions/setup-node@v4
