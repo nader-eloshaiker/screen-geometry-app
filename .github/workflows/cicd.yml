@@ -147,7 +147,7 @@ jobs:
       - name: Run pnpm build:dev
         run: pnpm build:dev
 
-      - name: Deploy app to Cloudflare Pages Preview
+      - name: Deploy app to Preview
         uses: nader-eloshaiker/cloudlfare-pages-action@v1.1.0
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
