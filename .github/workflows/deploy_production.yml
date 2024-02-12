@@ -21,7 +21,7 @@ concurrency:
 
 jobs:
   deploy_prod:
-    name: Deploy App to Cloudflare Pages Production
+    name: Cloudflare Pages Production
     runs-on: ubuntu-latest
     environment: cloudflare-production
     permissions:
