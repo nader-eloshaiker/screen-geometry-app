@@ -1,5 +1,19 @@
 # Changelog
 
+## [1.1.0](https://github.com/nader-eloshaiker/screen-geometry-app/compare/v1.0.3...v1.1.0) (2024-02-12)
+
+
+### Features
+
+* mobile selection ([#325](https://github.com/nader-eloshaiker/screen-geometry-app/issues/325)) ([8cd4dd8](https://github.com/nader-eloshaiker/screen-geometry-app/commit/8cd4dd8f9476a2a78a1209d3b151551cf2fe4160))
+
+
+### Bug Fixes
+
+* mobile interface with screen selection ([#322](https://github.com/nader-eloshaiker/screen-geometry-app/issues/322)) ([5f0a4b5](https://github.com/nader-eloshaiker/screen-geometry-app/commit/5f0a4b5669f94c2a89e9d58d4b8fe0bafc9d34b0))
+* mobile selection ([#328](https://github.com/nader-eloshaiker/screen-geometry-app/issues/328)) ([c661628](https://github.com/nader-eloshaiker/screen-geometry-app/commit/c661628a0b42a701f6f5bb07d139d47f02a10a37))
+* mobile selection ([#329](https://github.com/nader-eloshaiker/screen-geometry-app/issues/329)) ([0a49877](https://github.com/nader-eloshaiker/screen-geometry-app/commit/0a49877d0820538781fe779114dddc7977e13195))
+
 ## [1.0.3](https://github.com/nader-eloshaiker/screen-geometry-app/compare/v1.0.2...v1.0.3) (2024-02-09)
 
 
