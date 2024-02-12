@@ -9,7 +9,7 @@ import { useShowScreenApi } from '@hooks/api/helpers/useShowScreenApi'
 import { useThemeMode } from '@hooks/useThemeMode'
 import { ScreenColor, ScreenItem } from '@openapi/generated/models'
 import { getRandomString } from '@utils/RandomGenerator'
-import { useState } from 'react'
+import { Dispatch, SetStateAction } from 'react'
 import ReactGA from 'react-ga4'
 import styled from 'styled-components'
 import { twMerge } from 'tailwind-merge'
@@ -64,23 +64,20 @@ type Props = {
   screens: ScreenItem[]
   isScreenListLoading?: boolean
   className?: string
-  isHighlighted?: (screen: ScreenItem) => boolean
-  setHighLighted?: (screen: ScreenItem | undefined) => void
-  onHighlightClick?: (screen: ScreenItem) => void
+  highlighted?: ScreenItem
+  setHighLighted?: Dispatch<SetStateAction<ScreenItem | undefined>>
 }
 
 export const ScreenTable = ({
   screens,
   isScreenListLoading = false,
   className,
-  isHighlighted = () => false,
+  highlighted = undefined,
   setHighLighted = () => {},
-  onHighlightClick = () => {},
 }: Props) => {
   const { isPending: isDeletePending, mutate: deleteAction, variables: deleteParams } = useDeleteScreenApi()
   const { isPending: isShowPending, mutate: showAction, variables: showParams } = useShowScreenApi()
   const { dispatchFormDrawer } = useFormDrawerContext()
-  const [_, setSelected] = useState<ScreenItem>()
   const [themeMode] = useThemeMode()
 
   const onShow = (screen: ScreenItem) => {
@@ -107,7 +104,6 @@ export const ScreenTable = ({
       action: 'Clicked edit',
       label: 'Screens Page',
     })
-    setSelected(screen)
     dispatchFormDrawer({ type: FormDrawerActionTypes.Edit, payload: { id: screen.id } })
   }
 
@@ -134,13 +130,12 @@ export const ScreenTable = ({
           {screens.map((screen) => (
             <StyledTableRow
               className='cursor-pointer'
-              $highlighted={isHighlighted(screen)}
+              $highlighted={screen.id === highlighted?.id}
               $color={bgColor(themeMode, screen.color)}
               key={screen.id}
-              onMouseEnter={() => setHighLighted(screen)}
+              onClick={() => setHighLighted(screen.id === highlighted?.id ? undefined : screen)}
+              onMouseOver={() => setHighLighted(screen.id === highlighted?.id ? undefined : screen)}
               onMouseOut={() => setHighLighted(undefined)}
-              onBlur={() => setHighLighted(undefined)}
-              onClick={() => onHighlightClick(screen)}
             >
               <td>
                 <div className='flex items-center justify-center'>
@@ -162,23 +157,17 @@ export const ScreenTable = ({
                   )}
                 </div>
               </td>
-              <td role='cell' className='text-center'>
-                {screen.tag.diagonalSize}&quot;
-              </td>
-              <td role='cell' className='text-center'>
-                {screen.tag.aspectRatio}
-              </td>
-              <td role='cell' className='hidden text-center sm:table-cell'>
+              <td className='text-center'>{screen.tag.diagonalSize}&quot;</td>
+              <td className='text-center'>{screen.tag.aspectRatio}</td>
+              <td className='hidden text-center sm:table-cell'>
                 {Math.round((screen.data.hSize * 100) / 100)}&quot; x {Math.round((screen.data.vSize * 100) / 100)}
                 &quot;
               </td>
               <td className='hidden text-center md:table-cell'>
                 {screen.spec && `${screen.spec.hRes} x ${screen.spec.vRes}`}
               </td>
-              <td role='cell' className='text-center'>
-                {screen.spec && `${Math.round((screen.spec.ppi * 100) / 100)}`}
-              </td>
-              <td role='cell'>
+              <td className='text-center'>{screen.spec && `${Math.round((screen.spec.ppi * 100) / 100)}`}</td>
+              <td>
                 <div className='flex flex-row items-center justify-center gap-3'>
                   <button aria-label='edit button' onClick={() => handleEdit(screen)}>
                     <EditIcon id='edit-icon' className='size-4' fill='currentColor' />

@@ -2,12 +2,14 @@ import { DarkMode } from '@components/theme/ThemeConstants'
 import { useThemeMode } from '@hooks/useThemeMode'
 import { ScreenItem } from '@openapi/generated/models'
 import { clsx } from 'clsx'
+import { Dispatch, SetStateAction, useEffect, useState } from 'react'
 import styled from 'styled-components'
 
 const Panel = styled.div<{ $width: number; $height: number; $color?: string }>`
   width: ${(props) => props.$width}%;
   height: ${(props) => props.$height}%;
   color: ${(props) => props.$color};
+  border-color: ${(props) => props.$color};
   text-align: center;
 `
 
@@ -15,48 +17,67 @@ const Panel = styled.div<{ $width: number; $height: number; $color?: string }>`
 
 type TProps = TRestProps & {
   screen: ScreenItem
-  isHighlighted?: (screen: ScreenItem) => boolean
-  setHighLighted?: (screen: ScreenItem | undefined) => void
-  onHighlightClick?: (screen: ScreenItem) => void
+  highlighted?: ScreenItem
+  setHighLighted?: Dispatch<SetStateAction<ScreenItem | undefined>>
 }
 
-export const ScreenPanel = ({
-  screen,
-  isHighlighted = () => false,
-  setHighLighted = () => {},
-  onHighlightClick = () => {},
-  ...rest
-}: TProps) => {
+type PanelConfig = {
+  width: number
+  height: number
+  color: string
+  vPixelCount: number
+  hPixelCount: number
+}
+
+export const ScreenPanel = ({ screen, highlighted = undefined, setHighLighted = () => {}, ...rest }: TProps) => {
+  const [selected, setSelected] = useState(false)
+  const [config, setConfig] = useState<PanelConfig>({
+    width: 0,
+    height: 0,
+    color: '',
+    vPixelCount: 0,
+    hPixelCount: 0,
+  })
   const [themeMode] = useThemeMode()
-  const width = Math.round(100 * (screen.render?.width ?? 1))
-  const height = Math.round(100 * (screen.render?.height ?? 1))
-  const selected = isHighlighted(screen)
-  const vPixelCount = Math.round((screen.spec?.vRes ?? 1) / 100)
-  const hPixelCount = Math.round((screen.spec?.hRes ?? 1) / 100)
-  const color = themeMode === DarkMode ? `${screen.color.lightColor}18` : `${screen.color.darkColor}18`
+
+  useEffect(() => {
+    setSelected(screen.id === highlighted?.id)
+  }, [highlighted, screen.id])
+
+  useEffect(() => {
+    setConfig({
+      width: Math.round(100 * (screen.render?.width ?? 1)),
+      height: Math.round(100 * (screen.render?.height ?? 1)),
+      color: themeMode === DarkMode ? `${screen.color.lightColor}18` : `${screen.color.darkColor}18`,
+      vPixelCount: Math.round((screen.spec?.vRes ?? 1) / 100),
+      hPixelCount: Math.round((screen.spec?.hRes ?? 1) / 100),
+    })
+  }, [screen, themeMode])
 
   return (
     <Panel
-      className={clsx('rounded-lg', { 'outline outline-4': selected, 'outline-dashed outline-2': !selected })}
-      $width={width}
-      $height={height}
+      className={clsx('m-2 box-border rounded-lg', {
+        'border-solid border-4': selected,
+        'border-dashed border-2': !selected,
+      })}
+      $width={config.width}
+      $height={config.height}
       $color={themeMode === DarkMode ? screen.color.lightColor : screen.color.darkColor}
-      onMouseEnter={() => setHighLighted(screen)}
-      onMouseLeave={() => setHighLighted(undefined)}
-      onClick={() => onHighlightClick(screen)}
+      onMouseOver={() => setHighLighted(selected ? undefined : screen)}
+      onMouseOut={() => setHighLighted(undefined)}
       {...rest}
     >
       {selected && (
         <table className='size-full'>
           <tbody>
-            {Array.from({ length: vPixelCount }, (_, i) => (
+            {Array.from({ length: config.vPixelCount }, (_, i) => (
               <tr key={i}>
-                {Array.from({ length: hPixelCount }, (_, j) => (
+                {Array.from({ length: config.hPixelCount }, (_, j) => (
                   <td key={j} className='p-0.5'>
                     <div
-                      className='size-full rounded-full'
+                      className='size-full'
                       style={{
-                        backgroundColor: color,
+                        backgroundColor: config.color,
                       }}
                     ></div>
                   </td>

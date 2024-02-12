@@ -4,7 +4,8 @@ import { ScreenPanel } from './ScreenPanel'
 
 describe('#ScreenPanel', () => {
   test('render screen panel component with a table representing the pixel density when selected', () => {
-    const test = useInteractComponent(<ScreenPanel screen={getGetScreenMock().item} isHighlighted={() => true} />)
+    const screenItem = getGetScreenMock().item
+    const test = useInteractComponent(<ScreenPanel screen={screenItem} highlighted={screenItem} />)
 
     const tableElement = test.getByRole('table')
     expect(tableElement).toBeInTheDocument()
@@ -17,7 +18,7 @@ describe('#ScreenPanel', () => {
   })
 
   test('render screen panel component with NO table representing the pixel density when NOT selected', () => {
-    const test = useInteractComponent(<ScreenPanel screen={getGetScreenMock().item} isHighlighted={() => false} />)
+    const test = useInteractComponent(<ScreenPanel screen={getGetScreenMock().item} highlighted={undefined} />)
 
     const tableElement = test.container.querySelector('table')
     expect(tableElement).not.toBeInTheDocument()
