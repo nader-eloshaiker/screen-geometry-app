@@ -14,8 +14,9 @@ concurrency:
 
 jobs:
   deploy_app:
-    name: Deploy App to Cloudflare Pages Preview
+    name: Cloudflare Pages Preview
     runs-on: ubuntu-latest
+    environment: cloudflare-preview
     permissions:
       contents: read
       pages: write

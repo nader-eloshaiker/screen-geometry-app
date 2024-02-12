@@ -104,7 +104,7 @@ jobs:
         uses: actions/deploy-pages@v4
 
   deploy_app:
-    name: Deploy App to Cloudflare Pages Preview
+    name: Deploy App
     permissions:
       contents: read
       pages: write

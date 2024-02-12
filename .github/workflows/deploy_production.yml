@@ -21,7 +21,7 @@ concurrency:
 
 jobs:
   deploy_prod:
-    name: Deploy App to Cloudflare Pages Production
+    name: Cloudflare Pages Production
     runs-on: ubuntu-latest
     environment: cloudflare-production
     permissions:
@@ -34,7 +34,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
         with:
-          ref: ${{ inputs.tag || github.ref }}
+          ref: ${{ github.event.inputs.tag || github.ref }}
 
       - name: Install Node.js
         uses: actions/setup-node@v4
