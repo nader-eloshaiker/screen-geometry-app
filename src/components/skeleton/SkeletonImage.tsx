@@ -6,6 +6,7 @@ type TProps = TRestProps & { className?: string }
 export const SkeletonImage = ({ className, ...rest }: TProps) => {
   return (
     <div
+      data-testid='SkeletonImage'
       className={twMerge(
         className,
         'flex items-center justify-center rounded-md skeleton bg-neutral-300 dark:bg-neutral-600 ',
