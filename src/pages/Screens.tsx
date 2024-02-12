@@ -13,7 +13,7 @@ import { useElementSize } from '@hooks/useElementSize'
 import { Dimensions } from '@models/Screen'
 import { ScreenItem } from '@openapi/generated/models'
 import { getMaxScreenSize } from '@utils/ScreenCalc'
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import ReactGA from 'react-ga4'
 import { Helmet } from 'react-helmet-async'
 
@@ -24,20 +24,18 @@ export const Screens = () => {
     state: { screens },
   } = useScreenContext()
   const [highlighted, setHighlighted] = useState<ScreenItem | undefined>()
-
-  const maxScreenSize = screens.length > 0 ? getMaxScreenSize(screens) : { width: 47, height: 16 } // max possible screen size
-  const maxPanelSize: Dimensions = { width, height: Math.round(maxScreenSize.height * (width / maxScreenSize.width)) }
+  const [maxPanelSize, setMaxPanelSize] = useState<Dimensions>({ width, height: 0 })
 
   const { isFetching: isScreenListLoading } = useGetScreensListApi()
   const { isPending: isCreateListLoading, mutate: createListAction } = useCreateScreenListApi()
 
-  const onHighlightClick = (screen: ScreenItem) => {
-    if (screen.id === highlighted?.id) {
-      setHighlighted(undefined)
-    } else {
-      setHighlighted(screen)
-    }
-  }
+  // const onHighlightClick = (screen: ScreenItem) => {
+  //   if (screen.id === highlighted?.id) {
+  //     setHighlighted(undefined)
+  //   } else {
+  //     setHighlighted(screen)
+  //   }
+  // }
 
   const onLoadDefault = () => {
     ReactGA.event({
@@ -48,7 +46,10 @@ export const Screens = () => {
     createListAction({ data: defaultScreenInputList })
   }
 
-  const isHighlighted = (screen: ScreenItem) => screen.id === highlighted?.id
+  useEffect(() => {
+    const widestScreen = screens.length > 0 ? getMaxScreenSize(screens) : { width: 47, height: 16 }
+    setMaxPanelSize({ width, height: Math.round(widestScreen.height * (width / widestScreen.width)) })
+  }, [screens, width])
 
   return (
     <>
@@ -69,9 +70,8 @@ export const Screens = () => {
             <ScreenTable
               screens={screens}
               isScreenListLoading={isScreenListLoading}
-              isHighlighted={isHighlighted}
+              highlighted={highlighted}
               setHighLighted={setHighlighted}
-              onHighlightClick={onHighlightClick}
             />
 
             {screens.length === 0 && !isScreenListLoading && (
@@ -112,9 +112,8 @@ export const Screens = () => {
                           data-testid={`ScreenPanel-${screen.tag.diagonalSize}`}
                           key={screen.id}
                           screen={screen}
-                          isHighlighted={isHighlighted}
+                          highlighted={highlighted}
                           setHighLighted={setHighlighted}
-                          onHighlightClick={onHighlightClick}
                         />
                       ))
                   )}

@@ -9,7 +9,7 @@ import { useShowScreenApi } from '@hooks/api/helpers/useShowScreenApi'
 import { useThemeMode } from '@hooks/useThemeMode'
 import { ScreenColor, ScreenItem } from '@openapi/generated/models'
 import { getRandomString } from '@utils/RandomGenerator'
-import { useState } from 'react'
+import { Dispatch, SetStateAction, useState } from 'react'
 import ReactGA from 'react-ga4'
 import styled from 'styled-components'
 import { twMerge } from 'tailwind-merge'
@@ -64,18 +64,16 @@ type Props = {
   screens: ScreenItem[]
   isScreenListLoading?: boolean
   className?: string
-  isHighlighted?: (screen: ScreenItem) => boolean
-  setHighLighted?: (screen: ScreenItem | undefined) => void
-  onHighlightClick?: (screen: ScreenItem) => void
+  highlighted?: ScreenItem
+  setHighLighted?: Dispatch<SetStateAction<ScreenItem | undefined>>
 }
 
 export const ScreenTable = ({
   screens,
   isScreenListLoading = false,
   className,
-  isHighlighted = () => false,
+  highlighted = undefined,
   setHighLighted = () => {},
-  onHighlightClick = () => {},
 }: Props) => {
   const { isPending: isDeletePending, mutate: deleteAction, variables: deleteParams } = useDeleteScreenApi()
   const { isPending: isShowPending, mutate: showAction, variables: showParams } = useShowScreenApi()
