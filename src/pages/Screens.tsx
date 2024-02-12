@@ -29,14 +29,6 @@ export const Screens = () => {
   const { isFetching: isScreenListLoading } = useGetScreensListApi()
   const { isPending: isCreateListLoading, mutate: createListAction } = useCreateScreenListApi()
 
-  // const onHighlightClick = (screen: ScreenItem) => {
-  //   if (screen.id === highlighted?.id) {
-  //     setHighlighted(undefined)
-  //   } else {
-  //     setHighlighted(screen)
-  //   }
-  // }
-
   const onLoadDefault = () => {
     ReactGA.event({
       category: 'Button Click',
