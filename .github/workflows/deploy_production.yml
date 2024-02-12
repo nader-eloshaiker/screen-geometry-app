@@ -1,0 +1,79 @@
+# Simple workflow for deploying static content to GitHub Pages
+name: Deploy Production
+
+on:
+  # can be used to roll back to a previous release
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: 'Tag to release'
+        required: true
+        default: 'v1.0.0'
+  # Auto deploy on new release from release please PR
+  release:
+    types: [published]
+
+# Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
+# However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
+concurrency:
+  group: 'deploy_production'
+  cancel-in-progress: false
+
+jobs:
+  deploy_prod:
+    name: Deploy App to Cloudflare Pages Production
+    runs-on: ubuntu-latest
+    environment: cloudflare-production
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+      deployments: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.tag || github.ref }}
+
+      - name: Install Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: '.nvmrc'
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v3.0.0
+        with:
+          run_install: false
+
+      - name: Get pnpm store directory
+        id: pnpm-cache
+        shell: bash
+        run: echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
+
+      - name: Setup pnpm cache
+        uses: actions/cache@v4
+        with:
+          path: ${{ env.STORE_PATH }}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
+
+      - name: Run pnpm install
+        run: pnpm install
+
+      - name: Run pnpm build:prod
+        run: GA_TRACKING_ID=${{ vars.GA_TRACKING_ID }} pnpm build:prod
+
+      - name: Deploy app to Cloudflare Pages Production
+        uses: nader-eloshaiker/cloudlfare-pages-action@v1.0.0
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          projectName: screengeometry
+          directory: ./dist
+          branch: main
+          environmentName: cloudflare-production
+          wranglerVersion: '3'
+          # Optional: Enable this if you want to have GitHub Deployments triggered
+          gitHubToken: ${{ secrets.GITHUB_TOKEN }}

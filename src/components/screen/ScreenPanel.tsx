@@ -63,7 +63,7 @@ export const ScreenPanel = ({ screen, highlighted = undefined, setHighLighted = 
       $width={config.width}
       $height={config.height}
       $color={themeMode === DarkMode ? screen.color.lightColor : screen.color.darkColor}
-      onClick={() => setHighLighted(screen.id === highlighted?.id ? undefined : screen)}
+      // onClick={() => setHighLighted(screen.id === highlighted?.id ? undefined : screen)}
       onMouseEnter={() => setHighLighted(selected ? undefined : screen)}
       onMouseLeave={() => setHighLighted(undefined)}
       {...rest}
