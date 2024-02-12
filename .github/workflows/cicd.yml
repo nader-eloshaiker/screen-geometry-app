@@ -111,4 +111,6 @@ jobs:
       id-token: write
       deployments: write
     uses: ./.github/workflows/deploy_preview.yml
+    with:
+      ref: ${{ github.ref }}
     needs: [version_management]
