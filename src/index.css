@@ -14,7 +14,7 @@ html:before {
 }
 
 body {
-  @apply bg-stone-200 dark:bg-stone-800
+  @apply bg-stone-200 dark:bg-stone-800;
 }
 
 .header {
