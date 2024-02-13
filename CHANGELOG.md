@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.2.0](https://github.com/nader-eloshaiker/screen-geometry-app/compare/v1.1.0...v1.2.0) (2024-02-13)
+
+
+### Features
+
+* **app:** replace demo images with modern formats ([b83f6ce](https://github.com/nader-eloshaiker/screen-geometry-app/commit/b83f6ce00d0d1e61cadfb701267dbea2cf212ca2))
+* replace demo images with modern formats ([#336](https://github.com/nader-eloshaiker/screen-geometry-app/issues/336)) ([b83f6ce](https://github.com/nader-eloshaiker/screen-geometry-app/commit/b83f6ce00d0d1e61cadfb701267dbea2cf212ca2))
+
 ## [1.1.0](https://github.com/nader-eloshaiker/screen-geometry-app/compare/v1.0.3...v1.1.0) (2024-02-12)
 
 
