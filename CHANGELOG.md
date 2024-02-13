@@ -1,5 +1,14 @@
 # Changelog
 
+## [1.3.0](https://github.com/nader-eloshaiker/screen-geometry-app/compare/v1.2.0...v1.3.0) (2024-02-13)
+
+
+### Features
+
+* **app:** extend colors to overscroll ([6a13577](https://github.com/nader-eloshaiker/screen-geometry-app/commit/6a1357750a16cdc83f0f710006c3d17e95d34202))
+* colors overscroll ([#339](https://github.com/nader-eloshaiker/screen-geometry-app/issues/339)) ([0ee8bb4](https://github.com/nader-eloshaiker/screen-geometry-app/commit/0ee8bb40609d96e1d36a7a40b72ab51b7ba45c60))
+* extend colors to overscroll ([#338](https://github.com/nader-eloshaiker/screen-geometry-app/issues/338)) ([6a13577](https://github.com/nader-eloshaiker/screen-geometry-app/commit/6a1357750a16cdc83f0f710006c3d17e95d34202))
+
 ## [1.2.0](https://github.com/nader-eloshaiker/screen-geometry-app/compare/v1.1.0...v1.2.0) (2024-02-13)
 
 
