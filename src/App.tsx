@@ -7,14 +7,14 @@ import './index.css'
 
 export const App = () => {
   return (
-    <ThemeModeProvider>
-      <QueryProvider>
+    <QueryProvider>
+      <ThemeModeProvider>
         <NotificationProvider>
           <ScreenProvider>
             <AppRouterProvider />
           </ScreenProvider>
         </NotificationProvider>
-      </QueryProvider>
-    </ThemeModeProvider>
+      </ThemeModeProvider>
+    </QueryProvider>
   )
 }

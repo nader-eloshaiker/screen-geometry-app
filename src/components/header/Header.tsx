@@ -1,6 +1,6 @@
 import HamburgerIcon from '@assets/icons/Hamburger'
 import ThemeModeToggle from '@components/theme/ThemeModeToggle'
-import { appRoutes } from '@routes/AppRouteSchema'
+import { RouteSchema } from '@routes/RouteSchema'
 import { clsx } from 'clsx'
 import { Link, useLocation } from 'react-router-dom'
 
@@ -19,10 +19,10 @@ type NavMenuProps = { pathname: string }
 const NavMenu = ({ pathname }: NavMenuProps) => {
   return (
     <>
-      <NavMenuItem pathname={pathname} route={appRoutes.root.path} title='Home' />
-      <NavMenuItem pathname={pathname} route={appRoutes.screens.path} title='Screens' />
-      <NavMenuItem pathname={pathname} route={appRoutes.contact.path} title='Contact' />
-      <NavMenuItem pathname={pathname} route={appRoutes.help.path} title='Help' />
+      <NavMenuItem pathname={pathname} route={RouteSchema.root.path} title='Home' />
+      <NavMenuItem pathname={pathname} route={RouteSchema.screens.path} title='Screens' />
+      <NavMenuItem pathname={pathname} route={RouteSchema.contact.path} title='Contact' />
+      <NavMenuItem pathname={pathname} route={RouteSchema.help.path} title='Help' />
     </>
   )
 }
