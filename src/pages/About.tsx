@@ -1,4 +1,4 @@
-import { appRoutes } from '@routes/AppRouteSchema'
+import { RouteSchema } from '@routes/RouteSchema'
 import { Helmet } from 'react-helmet-async'
 import { LazyLoadImage } from 'react-lazy-load-image-component'
 import { useNavigate } from 'react-router-dom'
@@ -32,7 +32,7 @@ export const About = () => {
               type='button'
               className='btn btn-primary mx-2 w-24 shadow-lg'
               onClick={() => {
-                navigate(appRoutes.screens.path)
+                navigate(RouteSchema.screens.path)
               }}
             >
               Screens

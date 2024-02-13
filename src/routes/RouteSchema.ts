@@ -1,4 +1,4 @@
-export const appRoutes = {
+export const RouteSchema = {
   root: {
     path: '/',
   },
