@@ -29,7 +29,7 @@ The reports are hosted in Github Pages and are deployed on every merge to the ma
 
 ## App Demo
 
-![Demo video](./public/media/ScreenGeometryAnim.gif)
+![Demo video](./public/media/demo-anim.webp)
 
 ## Purpose
 
