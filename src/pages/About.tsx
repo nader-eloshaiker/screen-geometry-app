@@ -43,8 +43,8 @@ export const About = () => {
             <label className='my-6 text-lg'>Checkout this Demo</label>
             <LazyLoadImage
               className='h-auto max-w-full rounded-md border-2 border-base-300 shadow-lg'
-              src='./media/ScreenGeometryAnim.gif'
-              placeholderSrc='./media/ScreenGeometry.jpg'
+              src='./media/demo-anim.webp'
+              placeholderSrc='./media/demo.png'
               width={508}
               height={528}
             />
