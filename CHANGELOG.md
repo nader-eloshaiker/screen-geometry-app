@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.3.1](https://github.com/nader-eloshaiker/screen-geometry-app/compare/v1.3.0...v1.3.1) (2024-02-14)
+
+
+### Bug Fixes
+
+* overscroll safari ([#341](https://github.com/nader-eloshaiker/screen-geometry-app/issues/341)) ([fd22a0e](https://github.com/nader-eloshaiker/screen-geometry-app/commit/fd22a0e1774fe59ab1e62b40b8bbd9f33a48e9c1))
+
 ## [1.3.0](https://github.com/nader-eloshaiker/screen-geometry-app/compare/v1.2.0...v1.3.0) (2024-02-13)
 
 
