@@ -44,7 +44,7 @@ export const About = () => {
             <LazyLoadImage
               className='h-auto max-w-full rounded-md border-2 border-base-300 shadow-lg'
               src='./media/demo-anim.webp'
-              placeholderSrc='./media/demo.png'
+              placeholderSrc='./media/demo.webp'
               width={508}
               height={528}
             />
