@@ -1,26 +1,16 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <!-- Google tag (gtag.js) -->
-    <!-- Note required as it is implemented in React-G4 -->
-    <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=%VITE_GA_TRACKING_ID%"></script>
-    <script>
-      window.dataLayer = window.dataLayer || []
-      function gtag() {
-        dataLayer.push(arguments)
-      }
-      gtag('js', new Date())
-
-      gtag('config', '%VITE_GA_TRACKING_ID%')
-    </script> -->
-
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0 viewport-fit=cover" />
     <meta name="author" content="Nader Eloshaiker" />
     <meta name="title" content="Screen Geometry" />
-    <meta name="description" content="Visually compare electronic screen sizes and resolutions" />
+    <meta name="description" content="Visually compare monitors or screen sizes and resolutions" />
     <meta name="keywords" content="screen monitor LCD size res resolution pixels ppi diagonal compare visual" />
     <meta name="robots" content="index, follow, archive" />
+
+    <meta name="theme-color" content="#f59e0b" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#d97706" media="(prefers-color-scheme: dark)" />
 
     <link rel="icon" type="image/svg+xml" href="/logo.svg" />
     <link rel="icon" sizes="192x192" href="/icon-192.png" />
@@ -30,7 +20,10 @@
     <title>Screen Geometry</title>
   </head>
   <body>
-    <div id="root"></div>
+    <div id="root">
+      <h1 style="text-align: center">Screen Geometry</h1>
+      <h2 style="text-align: center">Visually compare monitors or screen sizes and resolutions</h2>
+    </div>
     <script type="module" src="/src/index.tsx"></script>
   </body>
 </html>

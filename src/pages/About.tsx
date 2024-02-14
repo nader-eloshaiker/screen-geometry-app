@@ -1,4 +1,4 @@
-import { appRoutes } from '@routes/AppRouteSchema'
+import { RouteSchema } from '@routes/RouteSchema'
 import { Helmet } from 'react-helmet-async'
 import { LazyLoadImage } from 'react-lazy-load-image-component'
 import { useNavigate } from 'react-router-dom'
@@ -32,7 +32,7 @@ export const About = () => {
               type='button'
               className='btn btn-primary mx-2 w-24 shadow-lg'
               onClick={() => {
-                navigate(appRoutes.screens.path)
+                navigate(RouteSchema.screens.path)
               }}
             >
               Screens
@@ -43,8 +43,8 @@ export const About = () => {
             <label className='my-6 text-lg'>Checkout this Demo</label>
             <LazyLoadImage
               className='h-auto max-w-full rounded-md border-2 border-base-300 shadow-lg'
-              src='./media/ScreenGeometryAnim.gif'
-              placeholderSrc='./media/ScreenGeometry.jpg'
+              src='./media/demo-anim.webp'
+              placeholderSrc='./media/demo.webp'
               width={508}
               height={528}
             />

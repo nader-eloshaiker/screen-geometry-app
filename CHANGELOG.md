@@ -1,5 +1,29 @@
 # Changelog
 
+## [1.3.1](https://github.com/nader-eloshaiker/screen-geometry-app/compare/v1.3.0...v1.3.1) (2024-02-14)
+
+
+### Bug Fixes
+
+* overscroll safari ([#341](https://github.com/nader-eloshaiker/screen-geometry-app/issues/341)) ([fd22a0e](https://github.com/nader-eloshaiker/screen-geometry-app/commit/fd22a0e1774fe59ab1e62b40b8bbd9f33a48e9c1))
+
+## [1.3.0](https://github.com/nader-eloshaiker/screen-geometry-app/compare/v1.2.0...v1.3.0) (2024-02-13)
+
+
+### Features
+
+* **app:** extend colors to overscroll ([6a13577](https://github.com/nader-eloshaiker/screen-geometry-app/commit/6a1357750a16cdc83f0f710006c3d17e95d34202))
+* colors overscroll ([#339](https://github.com/nader-eloshaiker/screen-geometry-app/issues/339)) ([0ee8bb4](https://github.com/nader-eloshaiker/screen-geometry-app/commit/0ee8bb40609d96e1d36a7a40b72ab51b7ba45c60))
+* extend colors to overscroll ([#338](https://github.com/nader-eloshaiker/screen-geometry-app/issues/338)) ([6a13577](https://github.com/nader-eloshaiker/screen-geometry-app/commit/6a1357750a16cdc83f0f710006c3d17e95d34202))
+
+## [1.2.0](https://github.com/nader-eloshaiker/screen-geometry-app/compare/v1.1.0...v1.2.0) (2024-02-13)
+
+
+### Features
+
+* **app:** replace demo images with modern formats ([b83f6ce](https://github.com/nader-eloshaiker/screen-geometry-app/commit/b83f6ce00d0d1e61cadfb701267dbea2cf212ca2))
+* replace demo images with modern formats ([#336](https://github.com/nader-eloshaiker/screen-geometry-app/issues/336)) ([b83f6ce](https://github.com/nader-eloshaiker/screen-geometry-app/commit/b83f6ce00d0d1e61cadfb701267dbea2cf212ca2))
+
 ## [1.1.0](https://github.com/nader-eloshaiker/screen-geometry-app/compare/v1.0.3...v1.1.0) (2024-02-12)
 
 
