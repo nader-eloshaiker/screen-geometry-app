@@ -1,5 +1,14 @@
 # Changelog
 
+## [1.3.2](https://github.com/nader-eloshaiker/screen-geometry-app/compare/v1.3.1...v1.3.2) (2024-02-15)
+
+
+### Bug Fixes
+
+* **app:** change format of demo image ([46bed75](https://github.com/nader-eloshaiker/screen-geometry-app/commit/46bed75cd47f67442acb87bafda8a586c1121f82))
+* change format of demo image ([#343](https://github.com/nader-eloshaiker/screen-geometry-app/issues/343)) ([46bed75](https://github.com/nader-eloshaiker/screen-geometry-app/commit/46bed75cd47f67442acb87bafda8a586c1121f82))
+* panel table pixel spacing ([#344](https://github.com/nader-eloshaiker/screen-geometry-app/issues/344)) ([d0e1d23](https://github.com/nader-eloshaiker/screen-geometry-app/commit/d0e1d230171d485f443bfc70d4f4331f3649c28a))
+
 ## [1.3.1](https://github.com/nader-eloshaiker/screen-geometry-app/compare/v1.3.0...v1.3.1) (2024-02-14)
 
 
