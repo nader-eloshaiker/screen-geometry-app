@@ -69,12 +69,12 @@ export const ScreenPanel = ({ screen, highlighted = undefined, setHighLighted = 
       {...rest}
     >
       {selected && (
-        <table className='size-full'>
+        <table className='size-full border-separate border-spacing-px'>
           <tbody>
             {Array.from({ length: config.vPixelCount }, (_, i) => (
               <tr key={i}>
                 {Array.from({ length: config.hPixelCount }, (_, j) => (
-                  <td key={j} className='p-0.5'>
+                  <td key={j}>
                     <div
                       className='size-full'
                       style={{
