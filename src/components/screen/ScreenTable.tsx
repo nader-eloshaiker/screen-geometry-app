@@ -108,7 +108,7 @@ export const ScreenTable = ({
   }
 
   return (
-    <table className={twMerge('table', className)}>
+    <table data-testid='ScreenTable' className={twMerge('table', className)}>
       <thead>
         <tr>
           <th className='text-center'>Show</th>
