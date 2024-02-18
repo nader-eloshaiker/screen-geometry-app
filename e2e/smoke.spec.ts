@@ -16,18 +16,22 @@ test('Smoke Test Screens Page', async ({ page }) => {
   await expect(page.locator('div').filter({ hasText: 'CreatedScreen list' }).nth(3)).toBeVisible()
 
   // Check for table data
-  await expect(page.locator('#drawer-content > table > tbody > tr')).toHaveCount(6)
-  await expect(page.locator('#drawer-content')).toContainText('49"')
-  await expect(page.locator('#drawer-content')).toContainText('40"')
-  await expect(page.locator('#drawer-content')).toContainText('38"')
-  await expect(page.locator('#drawer-content')).toContainText('34"')
-  await expect(page.locator('#drawer-content')).toContainText('32"')
-  await expect(page.locator('#drawer-content')).toContainText('27"')
+  const tableOriginal = await page.getByTestId('ScreenTable')
+  await expect(tableOriginal.locator('tbody > tr')).toHaveCount(6)
+  await expect(tableOriginal).toContainText('49"')
+  await expect(tableOriginal).toContainText('40"')
+  await expect(tableOriginal).toContainText('38"')
+  await expect(tableOriginal).toContainText('34"')
+  await expect(tableOriginal).toContainText('32"')
+  await expect(tableOriginal).toContainText('27"')
 
   // Delete row and check for count
   await page.getByRole('row', { name: 'show checkbox 27" 16:9 24" x' }).getByLabel('delete button').click()
-  await expect(page.locator('#drawer-content > table > tbody > tr')).toHaveCount(5)
-  await expect(page.locator('#drawer-content')).not.toContainText('27"')
+
+  // Check for table data
+  const tableDeletedRow = await page.getByTestId('ScreenTable')
+  await expect(tableDeletedRow.locator('tbody > tr')).toHaveCount(5)
+  await expect(tableDeletedRow).not.toContainText('27"')
 
   // Create new row and check for count
   await page.getByRole('button', { name: 'Create Screen' }).click()
@@ -36,7 +40,10 @@ test('Smoke Test Screens Page', async ({ page }) => {
   await page.getByText('4K UHD 27" 3840x2160 16:').click()
   await page.getByRole('button', { name: 'Create', exact: true }).click()
   await page.getByRole('button', { name: 'Close' }).click()
-  await expect(page.locator('#drawer-content > table > tbody > tr')).toHaveCount(6)
+
+  // Check for table data
+  const tableAddedRow = await page.getByTestId('ScreenTable')
+  await expect(tableAddedRow.locator('tbody > tr')).toHaveCount(6)
 
   // Edit row and check for updated row
   await page.getByRole('row', { name: 'show checkbox 32" 16:9 28" x' }).getByLabel('edit button').click()
@@ -45,9 +52,12 @@ test('Smoke Test Screens Page', async ({ page }) => {
   await page.getByLabel('Screen Size').click()
   await page.getByLabel('Screen Size').fill('31')
   await page.getByRole('button', { name: 'Update' }).click()
-  await expect(page.locator('#drawer-content > table > tbody > tr')).toHaveCount(6)
-  await expect(page.locator('#drawer-content')).toContainText('31"')
-  await expect(page.locator('#drawer-content')).not.toContainText('32"')
+
+  // Check for table data
+  const tableUpdatedRow = await page.getByTestId('ScreenTable')
+  await expect(tableUpdatedRow.locator('tbody > tr')).toHaveCount(6)
+  await expect(tableUpdatedRow).toContainText('31"')
+  await expect(tableUpdatedRow).not.toContainText('32"')
 
   /**
    * Test for Screen Panel
@@ -60,7 +70,7 @@ test('Smoke Test Screens Page', async ({ page }) => {
   await expect(page.getByTestId('ScreenPanel-49')).toBeVisible()
 
   // Check if panel is hidden
-  await showCheckbox.uncheck()
+  showCheckbox.uncheck()
   await expect(showCheckbox).not.toBeChecked()
   await expect(page.getByTestId('ScreenPanel-49')).not.toBeVisible()
 

@@ -3,18 +3,18 @@
 @tailwind utilities;
 
 body:before {
-  @apply content-[''] fixed -z-[999] w-full h-1/2 bottom-0 bg-stone-400 dark:bg-stone-900;
+  @apply content-[''] fixed -z-[999] w-full h-1/4 bottom-0 bg-stone-400 dark:bg-stone-900;
 }
 
 html:before {
-  @apply content-[''] fixed -z-[999] w-full h-1/2 top-0 bg-amber-500;
+  @apply content-[''] fixed -z-[999] w-full h-1/4 top-0 bg-amber-500;
   &.dark {
     @apply bg-amber-600;
   }
 }
 
 body {
-  @apply bg-stone-200 dark:bg-stone-800;
+  @apply bg-stone-200 dark:bg-stone-800 overflow-x-hidden;
 }
 
 .header {

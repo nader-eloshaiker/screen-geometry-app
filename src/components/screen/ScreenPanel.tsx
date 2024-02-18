@@ -10,7 +10,6 @@ const Panel = styled.div<{ $width: number; $height: number; $color?: string }>`
   height: ${(props) => props.$height}%;
   color: ${(props) => props.$color};
   border-color: ${(props) => props.$color};
-  text-align: center;
 `
 
 // const isEven = (num: number) => num % 2 == 0
@@ -56,7 +55,7 @@ export const ScreenPanel = ({ screen, highlighted = undefined, setHighLighted = 
 
   return (
     <Panel
-      className={clsx('m-2 box-border rounded-lg', {
+      className={clsx('box-border rounded-lg', {
         'border-solid border-4': selected,
         'border-dashed border-2': !selected,
       })}
@@ -69,19 +68,17 @@ export const ScreenPanel = ({ screen, highlighted = undefined, setHighLighted = 
       {...rest}
     >
       {selected && (
-        <table className='size-full border-separate border-spacing-px'>
+        <table className='size-full border-separate border-spacing-px sm:border-spacing-0.5'>
           <tbody>
             {Array.from({ length: config.vPixelCount }, (_, i) => (
               <tr key={i}>
                 {Array.from({ length: config.hPixelCount }, (_, j) => (
-                  <td key={j}>
-                    <div
-                      className='size-full'
-                      style={{
-                        backgroundColor: config.color,
-                      }}
-                    ></div>
-                  </td>
+                  <td
+                    key={j}
+                    style={{
+                      backgroundColor: config.color,
+                    }}
+                  ></td>
                 ))}
               </tr>
             ))}

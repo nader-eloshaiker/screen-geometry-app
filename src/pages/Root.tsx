@@ -10,13 +10,11 @@ export const Root = () => {
     ReactGA.send({ hitType: 'pageview', page: location.pathname + location.search, title: location.pathname })
   }, [location])
   return (
-    <div className='flex min-h-screen flex-col'>
+    <div className='flex min-h-dvh flex-col'>
       <Header />
-      <div id='app-root' className='container mx-auto grow'>
-        <main role='main' className='my-6 size-full px-2 md:px-6 xl:px-2'>
-          <Outlet />
-        </main>
-      </div>
+      <main id='app-root' className='container mx-auto my-6 flex-auto px-2 md:px-4 xl:px-0'>
+        <Outlet />
+      </main>
       <Footer />
     </div>
   )
