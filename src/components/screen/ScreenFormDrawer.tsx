@@ -49,7 +49,7 @@ export const ScreenFormDrawer = ({ children }: Props) => {
         checked={formDrawerState.open}
         onChange={(_e) => {}}
       />
-      <div className='drawer-side absolute w-auto duration-100 ease-in'>
+      <div className='drawer-side absolute h-fit w-auto duration-100 ease-in'>
         <div className='sidebar rounded-xl p-2 md:w-96'>
           <div className='p-2'>
             <ScreenForm
