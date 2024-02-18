@@ -170,7 +170,7 @@ export const ScreenForm = ({ defaultValues = null, editId = undefined, isLoading
               type='number'
               overlay='px'
               autoComplete='off'
-              placeholder='27"'
+              placeholder='3840'
               isLoading={isLoading}
             />
 
@@ -182,7 +182,7 @@ export const ScreenForm = ({ defaultValues = null, editId = undefined, isLoading
               type='number'
               overlay='px'
               autoComplete='off'
-              placeholder='27"'
+              placeholder='2160'
               isLoading={isLoading}
             />
           </div>
