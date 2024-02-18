@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.3.3](https://github.com/nader-eloshaiker/screen-geometry-app/compare/v1.3.2...v1.3.3) (2024-02-18)
+
+
+### Bug Fixes
+
+* menu display in mobile view ([#347](https://github.com/nader-eloshaiker/screen-geometry-app/issues/347)) ([852b6ec](https://github.com/nader-eloshaiker/screen-geometry-app/commit/852b6ecca21d7a400e4fb504ef05cbd8e5102f61))
+
 ## [1.3.2](https://github.com/nader-eloshaiker/screen-geometry-app/compare/v1.3.1...v1.3.2) (2024-02-15)
 
 
