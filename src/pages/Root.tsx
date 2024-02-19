@@ -12,7 +12,7 @@ export const Root = () => {
   return (
     <div className='flex min-h-dvh flex-col'>
       <Header />
-      <main id='app-root' className='container mx-auto my-6 flex-auto px-2 md:px-4 xl:px-0'>
+      <main id='app-root' className='container mx-auto my-6 flex-auto px-0 2xs:px-2 md:px-4 xl:px-0'>
         <Outlet />
       </main>
       <Footer />
