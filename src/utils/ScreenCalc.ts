@@ -33,7 +33,7 @@ export const normaliseScreenRender = (list: ScreenItem[]) => {
   }
 
   // srot in reverse order to avoid using z-index when hovering over panel
-  const sorted = list.sort((a, b) => b.tag.diagonalSize - a.tag.diagonalSize)
+  const sorted = list.map((item) => ({ ...item }) as ScreenItem).sort((a, b) => b.tag.diagonalSize - a.tag.diagonalSize)
   const biggest = getMaxScreenSize(sorted)
 
   for (const screen of sorted) {
