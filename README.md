@@ -15,7 +15,8 @@ easy comparison as well as tabulate the specs.
 
 ### Official App urls
 
-The app is hosted in Cloudflare and is deployed from the main branch. Develop is deployed on every merge to the main branch while production is deployed on ona release event.
+The app is hosted in Cloudflare and is deployed from the main branch. Develop is deployed on every merge to the main branch while production is deployed on a release event. There is also
+a manual deploy to develop workflow action that can be used for feature branches.
 
 - Production [screengeometry.com](https://screengeometry.com)
 - Develop [develop.screengeometry.com](https://develop.screengeometry.com)
