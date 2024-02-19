@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.3.4](https://github.com/nader-eloshaiker/screen-geometry-app/compare/v1.3.3...v1.3.4) (2024-02-19)
+
+
+### Bug Fixes
+
+* update readme ([#350](https://github.com/nader-eloshaiker/screen-geometry-app/issues/350)) ([5e0d0ed](https://github.com/nader-eloshaiker/screen-geometry-app/commit/5e0d0edaba08f288e1d50759f5e0bd8199f61858))
+
 ## [1.3.3](https://github.com/nader-eloshaiker/screen-geometry-app/compare/v1.3.2...v1.3.3) (2024-02-18)
 
 
