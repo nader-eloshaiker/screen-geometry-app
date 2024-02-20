@@ -46,7 +46,7 @@ export default defineConfig({
     mockReset: true,
     reporters: ['verbose'],
     coverage: {
-      provider: 'v8', //'istanbul',
+      provider: 'istanbul', //'v8',
       reporter: ['text', 'json-summary', 'json', 'clover', 'html'],
       reportsDirectory: 'reports/coverage',
       include: ['src/**/*.{ts,tsx}'],
@@ -62,10 +62,10 @@ export default defineConfig({
       ],
       reportOnFailure: true,
       thresholds: {
-        lines: 55,
-        branches: 75,
-        functions: 60,
-        statements: 55,
+        lines: 70,
+        branches: 50,
+        functions: 70,
+        statements: 70,
         // autoUpdate: true, // Update thresholds when writing tests, disabled due to refactoring tests changes coverage
       },
     },

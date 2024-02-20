@@ -3,7 +3,7 @@ import { NotificationProvider } from '@contexts/Notification/NotificationProvide
 import { QueryProvider } from '@contexts/Query/QueryProvider'
 import { useElementSizeMock } from '@hooks/useElementSize.mock'
 import { getSearchListServiceMock } from '@openapi/generated/services/search-list-service'
-import { mswWithSpy, resetMSW, startMSW, stopMSW } from '@test/mocks/mockMSW'
+import { mswWithSpy, resetMSW, startMSW, stopMSW } from '@test/mocks/mockNodeServiceWorker'
 import { useInteractComponent } from '@test/utils/useInteractComponent'
 import { waitFor } from '@testing-library/react'
 

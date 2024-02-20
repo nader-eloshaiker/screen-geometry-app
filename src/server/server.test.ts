@@ -2,7 +2,7 @@ import { useElementSizeMock } from '@hooks/useElementSize.mock'
 import { screenInput55Fixture } from '@openapi/fixtures/ScreenFixtures'
 import { getGetScreenListMock } from '@openapi/generated/services/screen-list-service'
 import { spyOnLocalForage } from '@test/mocks/mockLocalForage'
-import { mswWithSpy, startMSW, stopMSW } from '@test/mocks/mockMSW'
+import { mswWithSpy, startMSW, stopMSW } from '@test/mocks/mockNodeServiceWorker'
 import { apiRoutes } from './meta/ApiRouteSchema'
 import { generateStub } from './server'
 
