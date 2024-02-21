@@ -9,7 +9,7 @@
     "name": "Nader Eloshaiker",
     "url": "https://github.com/nader-eloshaiker"
   },
-  "packageManager": "pnpm@8.15.1",
+  "packageManager": "pnpm@8.15.3",
   "engines": {
     "node": ">=20",
     "pnpm": ">=8"
@@ -38,6 +38,7 @@
     "e2e:report": "pnpm exec playwright show-report",
     "typecheck": "tsc --project tsconfig.json --noEmit",
     "sb": "storybook dev -p 6006",
+    "sb:test": "test-storybook -- --coverage",
     "sb:build": "storybook build",
     "report": "pnpm report:sb && pnpm report:test",
     "report:sb": "storybook build --docs --output-dir=./reports/storybook",
@@ -46,7 +47,7 @@
   "dependencies": {
     "@hookform/resolvers": "^3.3.4",
     "@react-hook/resize-observer": "^1.2.6",
-    "@tanstack/react-query": "^5.8.7",
+    "@tanstack/react-query": "^5.22.2",
     "axios": "^1.6.5",
     "clsx": "^2.1.0",
     "localforage": "^1.10.0",
@@ -66,16 +67,18 @@
   },
   "devDependencies": {
     "@playwright/test": "^1.41.2",
-    "@storybook/addon-essentials": "^7.6.7",
-    "@storybook/addon-interactions": "^7.6.12",
-    "@storybook/addon-links": "^7.6.13",
+    "@storybook/addon-coverage": "^1.0.0",
+    "@storybook/addon-essentials": "^7.6.17",
+    "@storybook/addon-interactions": "^7.6.17",
+    "@storybook/addon-links": "^7.6.17",
     "@storybook/addon-onboarding": "^1.0.11",
-    "@storybook/addon-themes": "^7.6.12",
-    "@storybook/blocks": "^7.6.6",
-    "@storybook/react": "^7.6.15",
-    "@storybook/react-vite": "^7.6.7",
-    "@storybook/test": "^7.6.12",
-    "@tanstack/react-query-devtools": "^5.18.1",
+    "@storybook/addon-themes": "^7.6.17",
+    "@storybook/blocks": "^7.6.17",
+    "@storybook/react": "^7.6.17",
+    "@storybook/react-vite": "^7.6.17",
+    "@storybook/test": "^7.6.17",
+    "@storybook/test-runner": "^0.16.0",
+    "@tanstack/react-query-devtools": "^5.24.0",
     "@testing-library/jest-dom": "^6.1.6",
     "@testing-library/react": "^14.1.2",
     "@testing-library/user-event": "^14.5.2",
@@ -93,8 +96,8 @@
     "@typescript-eslint/eslint-plugin": "^6.18.1",
     "@typescript-eslint/parser": "^6.21.0",
     "@vitejs/plugin-react": "^4.2.1",
-    "@vitest/coverage-istanbul": "^1.3.0",
-    "@vitest/ui": "^1.2.2",
+    "@vitest/coverage-istanbul": "^1.3.1",
+    "@vitest/ui": "^1.3.1",
     "autoprefixer": "^10.4.17",
     "daisyui": "^4.4.19",
     "eslint": "^8.56.0",
@@ -116,7 +119,7 @@
     "prettier": "^3.1.0",
     "prettier-plugin-organize-imports": "^3.2.4",
     "react-helmet-async": "^2.0.4",
-    "storybook": "^7.6.6",
+    "storybook": "^7.6.17",
     "styled-components": "^6.1.8",
     "tailwind-merge": "^2.2.0",
     "tailwind-styled-components": "^2.2.0",
@@ -124,7 +127,7 @@
     "typescript": "^5.3.3",
     "vite": "^5.0.10",
     "vite-plugin-checker": "^0.6.2",
-    "vitest": "^1.2.2"
+    "vitest": "^1.3.1"
   },
   "browserslist": [
     "defaults"
