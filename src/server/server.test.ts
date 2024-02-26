@@ -1,6 +1,6 @@
 import { useElementSizeMock } from '@hooks/useElementSize.mock'
-import { screenInput55Fixture } from '@openapi/fixtures/ScreenFixtures'
-import { getGetScreenListMock } from '@openapi/generated/services/screen-list-service'
+import { getGetScreenListMock } from '@screengeometry/openapi'
+import { screenInput55Fixture } from '@test/fixtures/ScreenFixtures'
 import { spyOnLocalForage } from '@test/mocks/mockLocalForage'
 import { mswWithSpy, startMSW, stopMSW } from '@test/mocks/mockNodeServiceWorker'
 import { apiRoutes } from './meta/ApiRouteSchema'
@@ -9,7 +9,12 @@ import { generateStub } from './server'
 describe('#server', () => {
   const { searchMocks, screenListMocks, screenMocks, passthroughMocks } = generateStub(1)
 
-  const mswRequestEventSpy = mswWithSpy(...searchMocks(), ...screenListMocks(), ...screenMocks(), ...passthroughMocks())
+  const mswRequestEventSpy = mswWithSpy([
+    ...searchMocks(),
+    ...screenListMocks(),
+    ...screenMocks(),
+    ...passthroughMocks(),
+  ])
 
   beforeAll(async () => {
     await startMSW()

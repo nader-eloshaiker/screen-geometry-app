@@ -1,9 +1,12 @@
 import { NotificationProvider } from '@contexts/Notification/NotificationProvider'
 import { QueryProvider } from '@contexts/Query/QueryProvider'
 import { useElementSizeMock } from '@hooks/useElementSize.mock'
-import { ScreenItem } from '@openapi/generated/models'
-import { getGetScreenListMock, getScreenListServiceMock } from '@openapi/generated/services/screen-list-service'
-import { getScreenServiceMock } from '@openapi/generated/services/screen-service'
+import {
+  ScreenItem,
+  getGetScreenListMock,
+  getScreenListServiceMock,
+  getScreenServiceMock,
+} from '@screengeometry/openapi'
 import { mswWithSpy, resetMSW, startMSW, stopMSW } from '@test/mocks/mockNodeServiceWorker'
 import { useInteractComponent } from '@test/utils/useInteractComponent'
 import { waitFor } from '@testing-library/react'
@@ -26,7 +29,7 @@ const TestComponent = ({
 }
 
 describe('#ScreenTable', () => {
-  const mswRequestEventSpy = mswWithSpy(...getScreenServiceMock(), ...getScreenListServiceMock())
+  const mswRequestEventSpy = mswWithSpy([...getScreenServiceMock(), ...getScreenListServiceMock()])
 
   beforeAll(async () => {
     startMSW()

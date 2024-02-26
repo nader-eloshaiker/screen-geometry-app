@@ -1,7 +1,6 @@
 import { ScreenActionTypes } from '@contexts/Screen/ScreenManager'
 import { useScreenContext } from '@contexts/Screen/useScreenContext'
-import { ScreenIdResponse } from '@openapi/generated/models'
-import { useDeleteScreen } from '@openapi/generated/services/screen-service'
+import { ScreenIdResponse, useDeleteScreen } from '@screengeometry/openapi'
 import { useCallback } from 'react'
 import { useApiEffectHandler } from '../useApiEffectHandler'
 

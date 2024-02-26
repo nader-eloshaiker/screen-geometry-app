@@ -1,0 +1,24 @@
+{
+  "name": "@screengeometry/openapi",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "main": "index.ts",
+  "exports": {
+    ".": {
+      "default": "./src/index.ts"
+    },
+    "./*": "./*"
+  },
+  "scripts": {
+    "build": "tsc && vite build",
+    "gen:spec": "orval --config ./orval.config.ts",
+    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0"
+  },
+  "dependencies": {
+    "@tanstack/react-query": "^5.22.2"
+  },
+  "devDependencies": {
+    "orval": "6.24.0"
+  }
+}

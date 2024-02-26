@@ -3,9 +3,11 @@ import { defineConfig } from 'orval'
 export default defineConfig({
   screenApi: {
     output: {
+      workspace: 'src/',
       mode: 'tags',
-      target: './src/openapi/generated/services',
-      schemas: './src/openapi/generated/models',
+      target: './generated/services',
+      schemas: './generated/models',
+      indexFiles: true,
       client: 'react-query',
       mock: {
         type: 'msw',
@@ -24,7 +26,7 @@ export default defineConfig({
           ...(info.description ? [info.description] : []),
         ],
         mutator: {
-          path: './src/hooks/api/useApiAxios.ts',
+          path: './axios/useApiAxios.ts',
           name: 'useApiAxios',
         },
         query: {
@@ -33,7 +35,7 @@ export default defineConfig({
       },
     },
     input: {
-      target: './src/openapi/spec/screenApi.v1.yaml',
+      target: './src/spec/screenApi.v1.yaml',
     },
   },
 })

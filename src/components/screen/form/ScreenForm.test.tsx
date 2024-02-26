@@ -3,11 +3,14 @@ import { QueryProvider } from '@contexts/Query/QueryProvider'
 import { ScreenProvider } from '@contexts/Screen/ScreenProvider'
 import { useScreenContext } from '@contexts/Screen/useScreenContext'
 import { useElementSizeMock } from '@hooks/useElementSize.mock'
-import { screenInputFixture } from '@openapi/fixtures/ScreenFixtures'
-import { ScreenInput, ScreenItem } from '@openapi/generated/models'
-import { getScreenListServiceMock } from '@openapi/generated/services/screen-list-service'
-import { getScreenServiceMock } from '@openapi/generated/services/screen-service'
-import { getSearchListServiceMock } from '@openapi/generated/services/search-list-service'
+import {
+  ScreenInput,
+  ScreenItem,
+  getScreenListServiceMock,
+  getScreenServiceMock,
+  getSearchListServiceMock,
+} from '@screengeometry/openapi'
+import { screenInputFixture } from '@test/fixtures/ScreenFixtures'
 import { mswWithSpy, resetMSW, startMSW, stopMSW } from '@test/mocks/mockNodeServiceWorker'
 import { useInteractComponent } from '@test/utils/useInteractComponent'
 import { render, waitFor } from '@testing-library/react'
@@ -51,7 +54,7 @@ const RootTestComponent = ({ defaultValues, editId, initialise, onCloseAction = 
 }
 
 describe('#ScreenForm', () => {
-  mswWithSpy(...getSearchListServiceMock(), ...getScreenServiceMock(), ...getScreenListServiceMock())
+  mswWithSpy([...getSearchListServiceMock(), ...getScreenServiceMock(), ...getScreenListServiceMock()])
 
   beforeAll(async () => {
     startMSW()

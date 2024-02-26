@@ -1,4 +1,4 @@
-import { ScreenData, ScreenInput, ScreenSpec } from '@openapi/generated/models'
+import { ScreenData, ScreenInput, ScreenSpec } from '@screengeometry/openapi'
 
 export type SearchData = Partial<ScreenData> & Pick<ScreenData, 'hAspectRatio'> & Pick<ScreenData, 'vAspectRatio'>
 export type SearchTag = Partial<ScreenInput> & Pick<ScreenInput, 'aspectRatio'>

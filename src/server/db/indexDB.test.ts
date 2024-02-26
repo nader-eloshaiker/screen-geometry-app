@@ -1,6 +1,5 @@
-import { screenInput55Fixture } from '@openapi/fixtures/ScreenFixtures'
-import { getGetScreenListMock } from '@openapi/generated/services/screen-list-service'
-import { getGetScreenMock } from '@openapi/generated/services/screen-service'
+import { getGetScreenListMock, getGetScreenMock } from '@screengeometry/openapi'
+import { screenInput55Fixture } from '@test/fixtures/ScreenFixtures'
 import { spyOnLocalForage } from '@test/mocks/mockLocalForage'
 import localforage from 'localforage'
 import { createItem, createItemList, deleteItem, getItem, getItemList, updateItem } from './indexDB'

@@ -1,4 +1,4 @@
-import { ScreenInputList } from '@openapi/generated/models'
+import { ScreenInputList } from '@screengeometry/openapi'
 
 export const defaultScreenInputList: ScreenInputList = [
   {

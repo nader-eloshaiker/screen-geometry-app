@@ -1,4 +1,4 @@
-import { SearchItem } from '@openapi/generated/models'
+import { SearchItem } from '@screengeometry/openapi'
 
 export const SearchDB: Array<SearchItem> = [
   {

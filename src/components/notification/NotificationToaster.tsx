@@ -4,7 +4,7 @@ import {
   NotificationItemLogged,
 } from '@contexts/Notification/NotificationManager'
 import { useNotificationContext } from '@contexts/Notification/useNotifcationContext'
-import { ErrorResponse } from '@openapi/generated/models'
+import { ErrorResponse } from '@screengeometry/openapi'
 import axios, { AxiosError } from 'axios'
 import { NotificationAlert, NotificationProps } from './NotificationAlert'
 

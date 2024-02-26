@@ -11,7 +11,7 @@ import { useCreateScreenListApi } from '@hooks/api/helpers/useCreateScreenListAp
 import { useGetScreensListApi } from '@hooks/api/helpers/useGetScreenListApi'
 import { useElementSize } from '@hooks/useElementSize'
 import { Dimensions } from '@models/Screen'
-import { ScreenItem } from '@openapi/generated/models'
+import { ScreenItem } from '@screengeometry/openapi'
 import { getMaxScreenSize } from '@utils/ScreenCalc'
 import { useEffect, useRef, useState } from 'react'
 import ReactGA from 'react-ga4'

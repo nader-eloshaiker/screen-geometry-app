@@ -1,7 +1,7 @@
 import { FormDrawerActionTypes, FormDrawerMode } from '@contexts/FormDrawer/FormDrawerManager'
 import { useFormDrawerContext } from '@contexts/FormDrawer/useFormDrawerContext'
 import { useGetScreenApi } from '@hooks/api/helpers/useGetScreenApi'
-import { ScreenInput } from '@openapi/generated/models'
+import { ScreenInput } from '@screengeometry/openapi'
 import { transformScreenItem } from '@utils/ScreenTransformation'
 import { useEffect, useState } from 'react'
 import { ScreenForm } from './form/ScreenForm'

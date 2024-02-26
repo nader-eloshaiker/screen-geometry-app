@@ -1,4 +1,4 @@
-import { ScreenInput, ScreenInputList, ScreenItem } from '@openapi/generated/models'
+import { ScreenInput, ScreenInputList, ScreenItem } from '@screengeometry/openapi'
 import { search } from '@server/searchEngine'
 import { transformScreenInput } from '@utils/ScreenTransformation'
 import { createItem, createItemList, deleteItem, getItem, getItemList, updateItem } from './db/indexDB'

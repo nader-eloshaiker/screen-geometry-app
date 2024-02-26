@@ -9,20 +9,6 @@
     /* paths */
     "types": ["vitest/globals"],
     "baseUrl": ".",
-    "paths": {
-      // "@/*": ["./src/*"],
-      "@assets/*": ["./src/assets/*"],
-      "@components/*": ["./src/components/*"],
-      "@constants/*": ["./src/constants/*"],
-      "@contexts/*": ["./src/contexts/*"],
-      "@hooks/*": ["./src/hooks/*"],
-      "@models/*": ["./src/models/*"],
-      "@pages/*": ["./src/pages/*"],
-      "@routes/*": ["./src/routes/*"],
-      "@server/*": ["src/server/*"],
-      "@test/*": ["./src/test/*"],
-      "@utils/*": ["./src/utils/*"]
-    },
 
     /* Bundler mode */
     "moduleResolution": "bundler",
@@ -38,7 +24,7 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["src/**/*", "packages/openapi/src/axios/useApiAxios.ts"],
+  "include": ["src/**/*", "../../src/test/fixtures"],
   "exclude": ["node_modules", "coverage", "dist", "build"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

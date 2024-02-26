@@ -1,4 +1,4 @@
-import { getGetScreenMock } from '@openapi/generated/services/screen-service'
+import { getGetScreenMock } from '@screengeometry/openapi'
 import { useInteractComponent } from '@test/utils/useInteractComponent'
 import { ScreenPanel } from './ScreenPanel'
 

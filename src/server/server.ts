@@ -1,4 +1,4 @@
-import { ScreenInput, ScreenInputList } from '@openapi/generated/models'
+import { ScreenInput, ScreenInputList } from '@screengeometry/openapi'
 import {
   createScreen,
   createScreenList,

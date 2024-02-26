@@ -2,7 +2,7 @@ import { AutoCompleteScreen } from '@components/auto-complete/AutoCompleteScreen
 import { NotificationProvider } from '@contexts/Notification/NotificationProvider'
 import { QueryProvider } from '@contexts/Query/QueryProvider'
 import { useElementSizeMock } from '@hooks/useElementSize.mock'
-import { getSearchListServiceMock } from '@openapi/generated/services/search-list-service'
+import { getSearchListServiceMock } from '@screengeometry/openapi'
 import { mswWithSpy, resetMSW, startMSW, stopMSW } from '@test/mocks/mockNodeServiceWorker'
 import { useInteractComponent } from '@test/utils/useInteractComponent'
 import { waitFor } from '@testing-library/react'
@@ -18,7 +18,7 @@ const TestComponent = () => {
 }
 
 describe('#AutoCompleteScreen', () => {
-  const mswRequestEventSpy = mswWithSpy(...getSearchListServiceMock())
+  const mswRequestEventSpy = mswWithSpy(getSearchListServiceMock())
 
   beforeAll(async () => {
     startMSW()

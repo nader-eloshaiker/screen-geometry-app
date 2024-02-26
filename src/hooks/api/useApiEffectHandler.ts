@@ -4,7 +4,7 @@ import {
   NotificationType,
 } from '@contexts/Notification/NotificationManager'
 import { useNotificationContext } from '@contexts/Notification/useNotifcationContext'
-import { ErrorResponse } from '@openapi/generated/models'
+import { ErrorResponse } from '@screengeometry/openapi'
 import { useEffect } from 'react'
 
 export const useApiEffectHandler = <TData>({

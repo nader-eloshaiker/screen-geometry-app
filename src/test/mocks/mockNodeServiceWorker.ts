@@ -1,10 +1,10 @@
-import { RequestHandler } from 'msw'
+import { HttpHandler } from 'msw'
 import { SetupServer, setupServer } from 'msw/node'
 
 const mswRequestEventStack: string[] = []
 let mswServer: SetupServer | undefined = undefined
 
-export const mswWithSpy = (...handlers: Array<RequestHandler>) => {
+export const mswWithSpy = (handlers: Array<HttpHandler>) => {
   mswServer = setupServer(...handlers)
 
   mswServer.events.on('request:start', async ({ request }) => {
@@ -21,18 +21,18 @@ export const resetMSW = () => {
   mswServer?.restoreHandlers()
 }
 
-export const startMSW = async () => {
+export const startMSW = () => {
   if (!mswServer) {
-    return Promise.resolve()
+    return
   }
 
-  await mswServer.listen()
+  mswServer.listen()
 }
 
-export const stopMSW = async () => {
+export const stopMSW = () => {
   if (!mswServer) {
-    return Promise.resolve()
+    return
   }
 
-  await mswServer.close()
+  mswServer.close()
 }

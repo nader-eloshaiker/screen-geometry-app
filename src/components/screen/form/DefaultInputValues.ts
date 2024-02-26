@@ -1,4 +1,4 @@
-import { ScreenInput } from '@openapi/generated/models'
+import { ScreenInput } from '@screengeometry/openapi'
 import { createCSSColor } from '@utils/ScreenCalc'
 
 export const DefaultInputValues = () => {

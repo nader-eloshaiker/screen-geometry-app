@@ -1,8 +1,9 @@
-import { apiRoutes } from '@server/meta/ApiRouteSchema'
+// import { apiRoutes } from '@server/meta/ApiRouteSchema'
 import { default as Axios, AxiosRequestConfig, default as axios } from 'axios'
 
 const apiAxiosInstance = axios.create({
-  baseURL: `${apiRoutes.apiUrl}${apiRoutes.apiPathVer}`,
+  // baseURL: `${apiRoutes.apiUrl}${apiRoutes.apiPathVer}`,
+  baseURL: 'https://api.screengeometry.com/v1',
   timeout: 2000,
   headers: { Accept: 'application/json', 'Content-Type': 'application/json' },
 })
@@ -21,23 +22,9 @@ export const useApiAxios = <T>(): ((config: AxiosRequestConfig) => Promise<T>) =
       cancelToken: source.token,
     })
       .then(({ data }) => {
-        // if (!import.meta.env.NODE_TEST) {
-        //   console.info(
-        //     `axios success: [${config.method}] ${config.url}`,
-        //     '\nrequest:',
-        //     config.data,
-        //     '\nresponse:',
-        //     data,
-        //   )
-        // }
-
         return data
       })
       .catch((error) => {
-        // if (!import.meta.env.NODE_TEST) {
-        //   console.info(`axios termianted: [${config.method}] ${config.url}`, '\nconfig:', config)
-        // }
-
         throw error
       })
 

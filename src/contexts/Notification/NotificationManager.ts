@@ -1,4 +1,4 @@
-import { ErrorResponse } from '@openapi/generated/models'
+import { ErrorResponse } from '@screengeometry/openapi'
 import { getRandomString } from '@utils/RandomGenerator'
 import axios, { AxiosError } from 'axios'
 

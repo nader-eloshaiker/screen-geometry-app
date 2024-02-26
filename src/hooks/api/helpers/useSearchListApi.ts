@@ -1,5 +1,4 @@
-import { ErrorResponse, GetSearchListParams, SearchListResponse } from '@openapi/generated/models'
-import { useGetSearchList } from '@openapi/generated/services/search-list-service'
+import { ErrorResponse, GetSearchListParams, SearchListResponse, useGetSearchList } from '@screengeometry/openapi'
 import { keepPreviousData } from '@tanstack/react-query'
 import { useApiEffectHandler } from '../useApiEffectHandler'
 

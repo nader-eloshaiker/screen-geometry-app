@@ -6,8 +6,12 @@
 import type { QueryFunction, QueryKey, UseQueryOptions, UseQueryResult } from '@tanstack/react-query'
 import { useQuery } from '@tanstack/react-query'
 import { HttpResponse, delay, http } from 'msw'
-import { useApiAxios } from '../../../hooks/api/useApiAxios'
+import { useApiAxios } from '../../axios/useApiAxios'
 import type { ErrorResponse, GetSearchListParams, SearchListResponse } from '../models'
+
+type AwaitedInput<T> = PromiseLike<T> | T
+
+type Awaited<O> = O extends AwaitedInput<infer T> ? T : never
 
 export const useGetSearchListHook = () => {
   const getSearchList = useApiAxios<SearchListResponse>()
@@ -67,7 +71,7 @@ export const useGetSearchList = <
   return query
 }
 
-export const getGetSearchListMock = () => ({
+export const getGetSearchListMock = (): SearchListResponse => ({
   list: [
     {
       id: 'WQHD3421:9',
@@ -108,14 +112,15 @@ export const getGetSearchListMock = () => ({
   ],
 })
 
-export const getSearchListServiceMock = () => [
-  http.get('*/search', async () => {
+export const getGetSearchListMockHandler = (overrideResponse?: SearchListResponse) => {
+  return http.get('*/search', async () => {
     await delay(10)
-    return new HttpResponse(JSON.stringify(getGetSearchListMock()), {
+    return new HttpResponse(JSON.stringify(overrideResponse ? overrideResponse : getGetSearchListMock()), {
       status: 200,
       headers: {
         'Content-Type': 'application/json',
       },
     })
-  }),
-]
+  })
+}
+export const getSearchListServiceMock = () => [getGetSearchListMockHandler()]

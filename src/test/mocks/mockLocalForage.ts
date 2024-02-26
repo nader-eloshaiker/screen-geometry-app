@@ -1,4 +1,4 @@
-import { ScreenItem } from '@openapi/generated/models'
+import { ScreenItem } from '@screengeometry/openapi'
 import localforage from 'localforage'
 
 export const spyOnLocalForage = (initial?: Array<ScreenItem>) => {

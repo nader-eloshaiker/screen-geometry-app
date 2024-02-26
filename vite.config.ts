@@ -28,7 +28,6 @@ export default defineConfig({
       '@contexts': path.resolve(__dirname, '/src/contexts'),
       '@hooks': path.resolve(__dirname, './src/hooks'),
       '@models': path.resolve(__dirname, '/src/models'),
-      '@openapi': path.resolve(__dirname, '/src/openapi'),
       '@pages': path.resolve(__dirname, '/src/pages'),
       '@routes': path.resolve(__dirname, '/src/routes'),
       '@server': path.resolve(__dirname, '/src/server'),
@@ -53,7 +52,6 @@ export default defineConfig({
       exclude: [
         ...configDefaults.exclude,
         'src/reportWebVitals.ts',
-        'src/openapi/**/*',
         'src/test/**/*',
         'src/assets/**/*',
         'src/**/*.mock.{ts,tsx}',

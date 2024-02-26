@@ -1,7 +1,6 @@
 import { ScreenActionTypes } from '@contexts/Screen/ScreenManager'
 import { useScreenContext } from '@contexts/Screen/useScreenContext'
-import { ScreenListResponse } from '@openapi/generated/models'
-import { useCreateScreenList } from '@openapi/generated/services/screen-list-service'
+import { ScreenListResponse, useCreateScreenList } from '@screengeometry/openapi'
 import { useCallback } from 'react'
 import { useApiEffectHandler } from '../useApiEffectHandler'
 

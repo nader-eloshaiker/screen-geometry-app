@@ -13,8 +13,12 @@ import type {
 } from '@tanstack/react-query'
 import { useMutation, useQuery } from '@tanstack/react-query'
 import { HttpResponse, delay, http } from 'msw'
-import { useApiAxios } from '../../../hooks/api/useApiAxios'
+import { useApiAxios } from '../../axios/useApiAxios'
 import type { ErrorResponse, ScreenInputList, ScreenListResponse } from '../models'
+
+type AwaitedInput<T> = PromiseLike<T> | T
+
+type Awaited<O> = O extends AwaitedInput<infer T> ? T : never
 
 export const useGetScreenListHook = () => {
   const getScreenList = useApiAxios<ScreenListResponse>()
@@ -129,7 +133,7 @@ export const useCreateScreenList = <TError = ErrorResponse, TContext = unknown>(
   return useMutation(mutationOptions)
 }
 
-export const getGetScreenListMock = () => ({
+export const getGetScreenListMock = (): ScreenListResponse => ({
   list: [
     {
       id: 'pVesw1Iu',
@@ -166,7 +170,7 @@ export const getGetScreenListMock = () => ({
   ],
 })
 
-export const getCreateScreenListMock = () => ({
+export const getCreateScreenListMock = (): ScreenListResponse => ({
   list: [
     {
       id: 'pVesw1Iu',
@@ -203,23 +207,27 @@ export const getCreateScreenListMock = () => ({
   ],
 })
 
-export const getScreenListServiceMock = () => [
-  http.get('*/screens', async () => {
+export const getGetScreenListMockHandler = (overrideResponse?: ScreenListResponse) => {
+  return http.get('*/screens', async () => {
     await delay(10)
-    return new HttpResponse(JSON.stringify(getGetScreenListMock()), {
+    return new HttpResponse(JSON.stringify(overrideResponse ? overrideResponse : getGetScreenListMock()), {
       status: 200,
       headers: {
         'Content-Type': 'application/json',
       },
     })
-  }),
-  http.post('*/screens', async () => {
+  })
+}
+
+export const getCreateScreenListMockHandler = (overrideResponse?: ScreenListResponse) => {
+  return http.post('*/screens', async () => {
     await delay(10)
-    return new HttpResponse(JSON.stringify(getCreateScreenListMock()), {
+    return new HttpResponse(JSON.stringify(overrideResponse ? overrideResponse : getCreateScreenListMock()), {
       status: 200,
       headers: {
         'Content-Type': 'application/json',
       },
     })
-  }),
-]
+  })
+}
+export const getScreenListServiceMock = () => [getGetScreenListMockHandler(), getCreateScreenListMockHandler()]

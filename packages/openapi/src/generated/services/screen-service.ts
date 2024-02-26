@@ -13,8 +13,12 @@ import type {
 } from '@tanstack/react-query'
 import { useMutation, useQuery } from '@tanstack/react-query'
 import { HttpResponse, delay, http } from 'msw'
-import { useApiAxios } from '../../../hooks/api/useApiAxios'
+import { useApiAxios } from '../../axios/useApiAxios'
 import type { ErrorResponse, ScreenIdResponse, ScreenInput, ScreenItemResponse } from '../models'
+
+type AwaitedInput<T> = PromiseLike<T> | T
+
+type Awaited<O> = O extends AwaitedInput<infer T> ? T : never
 
 export const useCreateScreenHook = () => {
   const createScreen = useApiAxios<ScreenItemResponse>()
@@ -287,7 +291,7 @@ export const useDeleteScreen = <TError = ErrorResponse, TContext = unknown>(opti
   return useMutation(mutationOptions)
 }
 
-export const getCreateScreenMock = () => ({
+export const getCreateScreenMock = (): ScreenItemResponse => ({
   item: {
     id: 'ttUL6ooF',
     tag: { diagonalSize: 49, aspectRatio: '32:9' },
@@ -299,7 +303,7 @@ export const getCreateScreenMock = () => ({
   },
 })
 
-export const getShowScreenMock = () => ({
+export const getShowScreenMock = (): ScreenItemResponse => ({
   item: {
     id: '5HjERJbH',
     tag: { diagonalSize: 38, aspectRatio: '21:9' },
@@ -311,7 +315,7 @@ export const getShowScreenMock = () => ({
   },
 })
 
-export const getGetScreenMock = () => ({
+export const getGetScreenMock = (): ScreenItemResponse => ({
   item: {
     id: '5HjERJbH',
     tag: { diagonalSize: 38, aspectRatio: '21:9' },
@@ -323,7 +327,7 @@ export const getGetScreenMock = () => ({
   },
 })
 
-export const getUpdateScreenMock = () => ({
+export const getUpdateScreenMock = (): ScreenItemResponse => ({
   item: {
     id: '5HjERJbH',
     tag: { diagonalSize: 38, aspectRatio: '21:9' },
@@ -335,52 +339,71 @@ export const getUpdateScreenMock = () => ({
   },
 })
 
-export const getDeleteScreenMock = () => ({ id: '5HjERJbH' })
+export const getDeleteScreenMock = (): ScreenIdResponse => ({ id: '5HjERJbH' })
 
+export const getCreateScreenMockHandler = (overrideResponse?: ScreenItemResponse) => {
+  return http.post('*/screen', async () => {
+    await delay(10)
+    return new HttpResponse(JSON.stringify(overrideResponse ? overrideResponse : getCreateScreenMock()), {
+      status: 200,
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+  })
+}
+
+export const getShowScreenMockHandler = (overrideResponse?: ScreenItemResponse) => {
+  return http.patch('*/screen/:id/show', async () => {
+    await delay(10)
+    return new HttpResponse(JSON.stringify(overrideResponse ? overrideResponse : getShowScreenMock()), {
+      status: 200,
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+  })
+}
+
+export const getGetScreenMockHandler = (overrideResponse?: ScreenItemResponse) => {
+  return http.get('*/screen/:id', async () => {
+    await delay(10)
+    return new HttpResponse(JSON.stringify(overrideResponse ? overrideResponse : getGetScreenMock()), {
+      status: 200,
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+  })
+}
+
+export const getUpdateScreenMockHandler = (overrideResponse?: ScreenItemResponse) => {
+  return http.put('*/screen/:id', async () => {
+    await delay(10)
+    return new HttpResponse(JSON.stringify(overrideResponse ? overrideResponse : getUpdateScreenMock()), {
+      status: 200,
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+  })
+}
+
+export const getDeleteScreenMockHandler = (overrideResponse?: ScreenIdResponse) => {
+  return http.delete('*/screen/:id', async () => {
+    await delay(10)
+    return new HttpResponse(JSON.stringify(overrideResponse ? overrideResponse : getDeleteScreenMock()), {
+      status: 200,
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+  })
+}
 export const getScreenServiceMock = () => [
-  http.post('*/screen', async () => {
-    await delay(10)
-    return new HttpResponse(JSON.stringify(getCreateScreenMock()), {
-      status: 200,
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    })
-  }),
-  http.patch('*/screen/:id/show', async () => {
-    await delay(10)
-    return new HttpResponse(JSON.stringify(getShowScreenMock()), {
-      status: 200,
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    })
-  }),
-  http.get('*/screen/:id', async () => {
-    await delay(10)
-    return new HttpResponse(JSON.stringify(getGetScreenMock()), {
-      status: 200,
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    })
-  }),
-  http.put('*/screen/:id', async () => {
-    await delay(10)
-    return new HttpResponse(JSON.stringify(getUpdateScreenMock()), {
-      status: 200,
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    })
-  }),
-  http.delete('*/screen/:id', async () => {
-    await delay(10)
-    return new HttpResponse(JSON.stringify(getDeleteScreenMock()), {
-      status: 200,
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    })
-  }),
+  getCreateScreenMockHandler(),
+  getShowScreenMockHandler(),
+  getGetScreenMockHandler(),
+  getUpdateScreenMockHandler(),
+  getDeleteScreenMockHandler(),
 ]

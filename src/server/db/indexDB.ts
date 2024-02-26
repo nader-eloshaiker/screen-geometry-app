@@ -1,4 +1,4 @@
-import { ScreenInput, ScreenInputList, ScreenItem } from '@openapi/generated/models'
+import { ScreenInput, ScreenInputList, ScreenItem } from '@screengeometry/openapi'
 import { transformScreenInput } from '@utils/ScreenTransformation'
 import localforage from 'localforage'
 
