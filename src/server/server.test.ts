@@ -1,13 +1,13 @@
 import { useElementSizeMock } from '@hooks/useElementSize.mock'
-import { getGetScreenListMock } from '@screengeometry/openapi'
+import { apiRoutes, getGetScreenListMock } from '@screengeometry/openapi'
 import { screenInput55Fixture } from '@test/fixtures/ScreenFixtures'
 import { spyOnLocalForage } from '@test/mocks/mockLocalForage'
 import { mswWithSpy, startMSW, stopMSW } from '@test/mocks/mockNodeServiceWorker'
-import { apiRoutes } from './meta/ApiRouteSchema'
 import { generateStub } from './server'
 
 describe('#server', () => {
-  const { searchMocks, screenListMocks, screenMocks, passthroughMocks } = generateStub(1)
+  const baseUrl = 'https://fakeapi.com'
+  const { searchMocks, screenListMocks, screenMocks, passthroughMocks } = generateStub(baseUrl, 1)
 
   const mswRequestEventSpy = mswWithSpy([
     ...searchMocks(),
@@ -30,7 +30,7 @@ describe('#server', () => {
   })
 
   it('should call the GET screens api', async () => {
-    const response = await fetch(`${apiRoutes.apiUrl}${apiRoutes.apiPathVer}/${apiRoutes.screens.path}`)
+    const response = await fetch(`${baseUrl}${apiRoutes.screens}`)
     expect(response.status).toBe(200)
     expect(response.statusText).toBe('OK')
     expect(mswRequestEventSpy[mswRequestEventSpy.length - 1]).toEqual(
@@ -39,7 +39,7 @@ describe('#server', () => {
   })
 
   it('should call the POST screens api', async () => {
-    const response = await fetch(`${apiRoutes.apiUrl}${apiRoutes.apiPathVer}/${apiRoutes.screens.path}`, {
+    const response = await fetch(`${baseUrl}${apiRoutes.screens}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -54,7 +54,7 @@ describe('#server', () => {
   })
 
   it('should call the GET screen api', async () => {
-    const response = await fetch(`${apiRoutes.apiUrl}${apiRoutes.apiPathVer}/${apiRoutes.screen.path}/pVesw1Iu`)
+    const response = await fetch(`${baseUrl}${apiRoutes.screen}/pVesw1Iu`)
     expect(response.status).toBe(200)
     expect(response.statusText).toBe('OK')
     expect(mswRequestEventSpy[mswRequestEventSpy.length - 1]).toEqual(
@@ -63,7 +63,7 @@ describe('#server', () => {
   })
 
   it('should call the DELETE screens api', async () => {
-    const response = await fetch(`${apiRoutes.apiUrl}${apiRoutes.apiPathVer}/${apiRoutes.screen.path}/pVesw1Iu`, {
+    const response = await fetch(`${baseUrl}${apiRoutes.screen}/pVesw1Iu`, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
@@ -77,7 +77,7 @@ describe('#server', () => {
   })
 
   it('should call the PUT screens api', async () => {
-    const response = await fetch(`${apiRoutes.apiUrl}${apiRoutes.apiPathVer}/${apiRoutes.screen.path}/pVesw1Iu`, {
+    const response = await fetch(`${baseUrl}${apiRoutes.screen}/pVesw1Iu`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
@@ -92,7 +92,7 @@ describe('#server', () => {
   })
 
   it('should call the PATCH screens api', async () => {
-    const response = await fetch(`${apiRoutes.apiUrl}${apiRoutes.apiPathVer}/${apiRoutes.screen.path}/pVesw1Iu/show`, {
+    const response = await fetch(`${baseUrl}${apiRoutes.screen}/pVesw1Iu/show`, {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',
@@ -107,7 +107,7 @@ describe('#server', () => {
   })
 
   it('should call the POST screens api', async () => {
-    const response = await fetch(`${apiRoutes.apiUrl}${apiRoutes.apiPathVer}/${apiRoutes.screen.path}`, {
+    const response = await fetch(`${baseUrl}${apiRoutes.screen}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -122,7 +122,7 @@ describe('#server', () => {
   })
 
   it('should call the get search api', async () => {
-    const response = await fetch(`${apiRoutes.apiUrl}${apiRoutes.apiPathVer}/${apiRoutes.search.path}`)
+    const response = await fetch(`${baseUrl}${apiRoutes.search}`)
     expect(response.status).toBe(200)
     expect(response.statusText).toBe('OK')
     expect(mswRequestEventSpy[mswRequestEventSpy.length - 1]).toEqual(

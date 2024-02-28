@@ -17,12 +17,12 @@ export const useGetSearchListHook = () => {
   const getSearchList = useApiAxios<SearchListResponse>()
 
   return (params?: GetSearchListParams, signal?: AbortSignal) => {
-    return getSearchList({ url: `/search`, method: 'GET', params, signal })
+    return getSearchList({ url: `/v1/search`, method: 'GET', params, signal })
   }
 }
 
 export const getGetSearchListQueryKey = (params?: GetSearchListParams) => {
-  return [`/search`, ...(params ? [params] : [])] as const
+  return [`/v1/search`, ...(params ? [params] : [])] as const
 }
 
 export const useGetSearchListQueryOptions = <
@@ -30,9 +30,7 @@ export const useGetSearchListQueryOptions = <
   TError = ErrorResponse,
 >(
   params?: GetSearchListParams,
-  options?: {
-    query?: Partial<UseQueryOptions<Awaited<ReturnType<ReturnType<typeof useGetSearchListHook>>>, TError, TData>>
-  },
+  options?: { query?: UseQueryOptions<Awaited<ReturnType<ReturnType<typeof useGetSearchListHook>>>, TError, TData> },
 ) => {
   const { query: queryOptions } = options ?? {}
 
@@ -58,9 +56,7 @@ export const useGetSearchList = <
   TError = ErrorResponse,
 >(
   params?: GetSearchListParams,
-  options?: {
-    query?: Partial<UseQueryOptions<Awaited<ReturnType<ReturnType<typeof useGetSearchListHook>>>, TError, TData>>
-  },
+  options?: { query?: UseQueryOptions<Awaited<ReturnType<ReturnType<typeof useGetSearchListHook>>>, TError, TData> },
 ): UseQueryResult<TData, TError> & { queryKey: QueryKey } => {
   const queryOptions = useGetSearchListQueryOptions(params, options)
 
@@ -113,7 +109,7 @@ export const getGetSearchListMock = (): SearchListResponse => ({
 })
 
 export const getGetSearchListMockHandler = (overrideResponse?: SearchListResponse) => {
-  return http.get('*/search', async () => {
+  return http.get('*/v1/search', async () => {
     await delay(10)
     return new HttpResponse(JSON.stringify(overrideResponse ? overrideResponse : getGetSearchListMock()), {
       status: 200,

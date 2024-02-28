@@ -1,11 +1,6 @@
 {
+  "extends": "@screengeometry/typescript-config/tsconfig.react.json",
   "compilerOptions": {
-    "target": "ES2022",
-    "useDefineForClassFields": true,
-    "lib": ["ES2022", "DOM", "DOM.Iterable"],
-    "module": "ESNext",
-    "skipLibCheck": true,
-
     /* paths */
     "types": ["vitest/globals"],
     "baseUrl": ".",
@@ -22,23 +17,8 @@
       "@server/*": ["src/server/*"],
       "@test/*": ["./src/test/*"],
       "@utils/*": ["./src/utils/*"]
-    },
-
-    /* Bundler mode */
-    "moduleResolution": "bundler",
-    "allowImportingTsExtensions": true,
-    "resolveJsonModule": true,
-    "isolatedModules": true,
-    "noEmit": true,
-    "jsx": "react-jsx",
-
-    /* Linting */
-    "strict": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "noFallthroughCasesInSwitch": true
+    }
   },
   "include": ["src/**/*", "packages/openapi/src/axios/useApiAxios.ts"],
-  "exclude": ["node_modules", "coverage", "dist", "build"],
-  "references": [{ "path": "./tsconfig.node.json" }]
+  "exclude": ["node_modules", "coverage", "dist", "build"]
 }

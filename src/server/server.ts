@@ -1,4 +1,4 @@
-import { ScreenInput, ScreenInputList } from '@screengeometry/openapi'
+import { apiRoutes, ScreenInput, ScreenInputList } from '@screengeometry/openapi'
 import {
   createScreen,
   createScreenList,
@@ -9,16 +9,15 @@ import {
   showScreen,
   updateScreen,
 } from '@server/api'
-import { apiRoutes } from '@server/meta/ApiRouteSchema'
-import { HttpResponse, delay, http, passthrough } from 'msw'
+import { delay, http, HttpResponse, passthrough } from 'msw'
 
 // Stub out the API calls using axios-mock-adapter for indexAPI to store data in the browser's IndexedDB
 // The stubbed API calls can later be replaced with real API calls to a backend store
-export const generateStub = (responseTime?: number) => {
+export const generateStub = (baseUrl: string, responseTime?: number) => {
   const delayResponse = responseTime ?? 1000
 
   const screenListMocks = () => [
-    http.get(`${apiRoutes.apiUrl}${apiRoutes.apiPathVer}/${apiRoutes.screens.path}`, async () => {
+    http.get(`${baseUrl}${apiRoutes.screens}`, async () => {
       await delay(delayResponse)
 
       const payload = await getScreenList()
@@ -30,7 +29,7 @@ export const generateStub = (responseTime?: number) => {
         },
       })
     }),
-    http.post(`${apiRoutes.apiUrl}${apiRoutes.apiPathVer}/${apiRoutes.screens.path}`, async (resolver) => {
+    http.post(`${baseUrl}${apiRoutes.screens}`, async (resolver) => {
       await delay(delayResponse)
 
       const requestBody = await resolver.request.json()
@@ -46,11 +45,11 @@ export const generateStub = (responseTime?: number) => {
   ]
 
   const screenMocks = () => [
-    http.get(`${apiRoutes.apiUrl}${apiRoutes.apiPathVer}/${apiRoutes.screen.path}/:screenId`, async (resolver) => {
+    http.get(`${baseUrl}${apiRoutes.screenId}`, async (resolver) => {
       await delay(delayResponse)
 
-      const { screenId } = resolver.params as { screenId: string }
-      const payload = await getScreen(screenId)
+      const { id } = resolver.params as { id: string }
+      const payload = await getScreen(id)
 
       return new HttpResponse(JSON.stringify(payload), {
         status: 200,
@@ -59,11 +58,11 @@ export const generateStub = (responseTime?: number) => {
         },
       })
     }),
-    http.delete(`${apiRoutes.apiUrl}${apiRoutes.apiPathVer}/${apiRoutes.screen.path}/:screenId`, async (resolver) => {
+    http.delete(`${baseUrl}${apiRoutes.screenId}`, async (resolver) => {
       await delay(delayResponse)
 
-      const { screenId } = resolver.params as { screenId: string }
-      const payload = await deleteScreen(screenId)
+      const { id } = resolver.params as { id: string }
+      const payload = await deleteScreen(id)
 
       return new HttpResponse(JSON.stringify(payload), {
         status: 200,
@@ -72,12 +71,12 @@ export const generateStub = (responseTime?: number) => {
         },
       })
     }),
-    http.put(`${apiRoutes.apiUrl}${apiRoutes.apiPathVer}/${apiRoutes.screen.path}/:screenId`, async (resolver) => {
+    http.put(`${baseUrl}${apiRoutes.screenId}`, async (resolver) => {
       await delay(delayResponse)
 
-      const { screenId } = resolver.params as { screenId: string }
+      const { id } = resolver.params as { id: string }
       const requestBody = await resolver.request.json()
-      const payload = await updateScreen(screenId, requestBody as ScreenInput)
+      const payload = await updateScreen(id, requestBody as ScreenInput)
 
       return new HttpResponse(JSON.stringify(payload), {
         status: 200,
@@ -86,23 +85,20 @@ export const generateStub = (responseTime?: number) => {
         },
       })
     }),
-    http.patch(
-      `${apiRoutes.apiUrl}${apiRoutes.apiPathVer}/${apiRoutes.screen.path}/:screenId/show`,
-      async (resolver) => {
-        await delay(delayResponse)
+    http.patch(`${baseUrl}${apiRoutes.screenIdShow}`, async (resolver) => {
+      await delay(delayResponse)
 
-        const { screenId } = resolver.params as { screenId: string }
-        const payload = await showScreen(screenId)
+      const { id } = resolver.params as { id: string }
+      const payload = await showScreen(id)
 
-        return new HttpResponse(JSON.stringify(payload), {
-          status: 200,
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        })
-      },
-    ),
-    http.post(`${apiRoutes.apiUrl}${apiRoutes.apiPathVer}/${apiRoutes.screen.path}`, async (resolver) => {
+      return new HttpResponse(JSON.stringify(payload), {
+        status: 200,
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+    }),
+    http.post(`${baseUrl}${apiRoutes.screen}`, async (resolver) => {
       await delay(delayResponse)
 
       const requestBody = await resolver.request.json()
@@ -118,7 +114,7 @@ export const generateStub = (responseTime?: number) => {
   ]
 
   const searchMocks = () => [
-    http.get(`${apiRoutes.apiUrl}${apiRoutes.apiPathVer}/${apiRoutes.search.path}`, async (resolver) => {
+    http.get(`${baseUrl}${apiRoutes.search}`, async (resolver) => {
       await delay(delayResponse)
 
       const url = new URL(resolver.request.url)

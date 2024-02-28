@@ -24,19 +24,19 @@ export const useGetScreenListHook = () => {
   const getScreenList = useApiAxios<ScreenListResponse>()
 
   return (signal?: AbortSignal) => {
-    return getScreenList({ url: `/screens`, method: 'GET', signal })
+    return getScreenList({ url: `/v1/screens`, method: 'GET', signal })
   }
 }
 
 export const getGetScreenListQueryKey = () => {
-  return [`/screens`] as const
+  return [`/v1/screens`] as const
 }
 
 export const useGetScreenListQueryOptions = <
   TData = Awaited<ReturnType<ReturnType<typeof useGetScreenListHook>>>,
   TError = ErrorResponse,
 >(options?: {
-  query?: Partial<UseQueryOptions<Awaited<ReturnType<ReturnType<typeof useGetScreenListHook>>>, TError, TData>>
+  query?: UseQueryOptions<Awaited<ReturnType<ReturnType<typeof useGetScreenListHook>>>, TError, TData>
 }) => {
   const { query: queryOptions } = options ?? {}
 
@@ -61,7 +61,7 @@ export const useGetScreenList = <
   TData = Awaited<ReturnType<ReturnType<typeof useGetScreenListHook>>>,
   TError = ErrorResponse,
 >(options?: {
-  query?: Partial<UseQueryOptions<Awaited<ReturnType<ReturnType<typeof useGetScreenListHook>>>, TError, TData>>
+  query?: UseQueryOptions<Awaited<ReturnType<ReturnType<typeof useGetScreenListHook>>>, TError, TData>
 }): UseQueryResult<TData, TError> & { queryKey: QueryKey } => {
   const queryOptions = useGetScreenListQueryOptions(options)
 
@@ -77,7 +77,7 @@ export const useCreateScreenListHook = () => {
 
   return (screenInputList: ScreenInputList) => {
     return createScreenList({
-      url: `/screens`,
+      url: `/v1/screens`,
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       data: screenInputList,
@@ -208,7 +208,7 @@ export const getCreateScreenListMock = (): ScreenListResponse => ({
 })
 
 export const getGetScreenListMockHandler = (overrideResponse?: ScreenListResponse) => {
-  return http.get('*/screens', async () => {
+  return http.get('*/v1/screens', async () => {
     await delay(10)
     return new HttpResponse(JSON.stringify(overrideResponse ? overrideResponse : getGetScreenListMock()), {
       status: 200,
@@ -220,7 +220,7 @@ export const getGetScreenListMockHandler = (overrideResponse?: ScreenListRespons
 }
 
 export const getCreateScreenListMockHandler = (overrideResponse?: ScreenListResponse) => {
-  return http.post('*/screens', async () => {
+  return http.post('*/v1/screens', async () => {
     await delay(10)
     return new HttpResponse(JSON.stringify(overrideResponse ? overrideResponse : getCreateScreenListMock()), {
       status: 200,

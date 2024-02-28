@@ -1,9 +1,7 @@
-// import { apiRoutes } from '@server/meta/ApiRouteSchema'
-import { default as Axios, AxiosRequestConfig, default as axios } from 'axios'
+import { default as Axios, AxiosRequestConfig } from 'axios'
 
-const apiAxiosInstance = axios.create({
-  // baseURL: `${apiRoutes.apiUrl}${apiRoutes.apiPathVer}`,
-  baseURL: 'https://api.screengeometry.com/v1',
+const apiAxiosInstance = Axios.create({
+  // baseURL: `${apiRoutes.apiUrl}${apiRoutes.apiPathVer}`, set in QueryClient.ts
   timeout: 2000,
   headers: { Accept: 'application/json', 'Content-Type': 'application/json' },
 })
