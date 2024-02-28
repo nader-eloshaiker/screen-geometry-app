@@ -14,7 +14,7 @@ paths:
   /v1/search:
     get:
       tags:
-        - 'search list service'
+        - 'search service'
       parameters:
         - name: 'limit'
           in: 'query'
@@ -137,10 +137,10 @@ paths:
       security:
         - authorizer-api-v2: []
         - api_key: []
-      operationId: 'getSearchList'
+      operationId: 'getSearch'
     options:
       tags:
-        - 'search list service'
+        - 'search service'
       responses:
         '200':
           description: '200 response'
@@ -155,7 +155,7 @@ paths:
               schema:
                 type: string
           content: {}
-      operationId: 'optionsSearchList'
+      operationId: 'optionsSearch'
   /v1/screens:
     get:
       tags:

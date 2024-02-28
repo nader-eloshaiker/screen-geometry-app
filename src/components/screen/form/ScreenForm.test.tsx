@@ -8,7 +8,7 @@ import {
   ScreenItem,
   getScreenListServiceMock,
   getScreenServiceMock,
-  getSearchListServiceMock,
+  getSearchServiceMock,
 } from '@screengeometry/openapi'
 import { screenInputFixture } from '@test/fixtures/ScreenFixtures'
 import { mswWithSpy, resetMSW, startMSW, stopMSW } from '@test/mocks/mockNodeServiceWorker'
@@ -54,7 +54,7 @@ const RootTestComponent = ({ defaultValues, editId, initialise, onCloseAction = 
 }
 
 describe('#ScreenForm', () => {
-  mswWithSpy([...getSearchListServiceMock(), ...getScreenServiceMock(), ...getScreenListServiceMock()])
+  mswWithSpy([...getSearchServiceMock(), ...getScreenServiceMock(), ...getScreenListServiceMock()])
 
   beforeAll(async () => {
     startMSW()

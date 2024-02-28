@@ -4,10 +4,10 @@
  * screen-geometry-app-backend-serverless-apis-v1
  */
 
-export type GetSearchListOrder = (typeof GetSearchListOrder)[keyof typeof GetSearchListOrder]
+export type GetSearchSort = (typeof GetSearchSort)[keyof typeof GetSearchSort]
 
 // eslint-disable-next-line @typescript-eslint/no-redeclare
-export const GetSearchListOrder = {
-  asc: 'asc',
-  desc: 'desc',
+export const GetSearchSort = {
+  name: 'name',
+  size: 'size',
 } as const

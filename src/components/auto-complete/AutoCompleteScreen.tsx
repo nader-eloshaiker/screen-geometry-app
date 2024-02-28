@@ -1,5 +1,5 @@
 import ListInputField, { TListItem } from '@components/list-input-fIeld/ListInputField'
-import { useSearchListApi } from '@hooks/api/helpers/useSearchListApi'
+import { useSearchApi } from '@hooks/api/helpers/useSearchApi'
 import { SearchScreenItem } from '@models/Search'
 import { transformSearchData } from '@utils/ScreenTransformation'
 import { useCallback, useEffect, useState } from 'react'
@@ -18,7 +18,7 @@ export const AutoCompleteScreen = ({
   const [list, setList] = useState<Array<TListItem>>([])
   const [searchTerm, setSearchTerm] = useState<string>('')
 
-  const { isFetching: isSearchListLoading, data: searchListResponse } = useSearchListApi({ term: searchTerm })
+  const { isFetching: isSearchListLoading, data: searchListResponse } = useSearchApi({ term: searchTerm })
 
   const handleSelect = (value: TListItem) => {
     if (!value) {
