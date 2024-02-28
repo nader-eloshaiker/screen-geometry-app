@@ -6,7 +6,7 @@ import { mswWithSpy, startMSW, stopMSW } from '@test/mocks/mockNodeServiceWorker
 import { generateStub } from './server'
 
 describe('#server', () => {
-  const baseUrl = 'https://fakeapi.com'
+  const baseUrl = 'http://fakeapi.com'
   const { searchMocks, screenListMocks, screenMocks, passthroughMocks } = generateStub(baseUrl, 1)
 
   const mswRequestEventSpy = mswWithSpy([

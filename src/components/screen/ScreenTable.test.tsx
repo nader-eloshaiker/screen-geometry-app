@@ -66,7 +66,7 @@ describe('#ScreenTable', () => {
     await test.user.click(deleteElement)
 
     expect(mswRequestEventSpy[mswRequestEventSpy.length - 1]).toEqual(
-      expect.stringContaining('method:DELETE|url:http://fakeapi.com/v1/screen/pVesw1Iu'),
+      expect.stringContaining('method:DELETE|url:http://dev.api.screengeometry.com/v1/screen/pVesw1Iu'),
     )
 
     waitFor(() => expect(test.queryAllByRole('row').length).toBe(4))
@@ -80,7 +80,7 @@ describe('#ScreenTable', () => {
     await test.user.click(showElement)
 
     expect(mswRequestEventSpy[mswRequestEventSpy.length - 1]).toEqual(
-      expect.stringContaining('method:PATCH|url:http://fakeapi.com/v1/screen/pVesw1Iu/show'),
+      expect.stringContaining('method:PATCH|url:http://dev.api.screengeometry.com/v1/screen/pVesw1Iu/show'),
     )
   })
 

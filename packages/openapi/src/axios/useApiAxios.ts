@@ -6,10 +6,18 @@ const apiAxiosInstance = Axios.create({
   headers: { Accept: 'application/json', 'Content-Type': 'application/json' },
 })
 
-export const useApiAxios = <T>(): ((config: AxiosRequestConfig) => Promise<T>) => {
-  // ToDo: implement token management
-  const token = ''
+// Generate a random jwt token just to make the api calls look legit
+const getRandomString = (length = 10) => {
+  const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789_'
+  let result = ''
+  for (let i = 0; i < length; i++) {
+    result += chars.charAt(Math.floor(Math.random() * chars.length))
+  }
+  return result
+}
+const token = `${getRandomString(36)}.${getRandomString(303)}.${getRandomString(43)}`
 
+export const useApiAxios = <T>(): ((config: AxiosRequestConfig) => Promise<T>) => {
   return (config: AxiosRequestConfig) => {
     const source = Axios.CancelToken.source()
     const promise = apiAxiosInstance({
@@ -34,5 +42,3 @@ export const useApiAxios = <T>(): ((config: AxiosRequestConfig) => Promise<T>) =
     return promise
   }
 }
-
-export default useApiAxios
