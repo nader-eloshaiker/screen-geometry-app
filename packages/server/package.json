@@ -1,20 +1,20 @@
 {
-  "name": "@screengeometry/openapi",
+  "name": "@screengeometry/server",
   "private": true,
   "version": "1.0.0",
   "type": "module",
-  "main": "index.ts",
+  "main": "server.ts",
   "exports": {
     ".": {
-      "default": "./src/index.ts"
+      "default": "./src/server.ts"
     },
     "./*": "./src/*"
   },
   "scripts": {
-    "gen:spec": "orval --config ./orval.config.ts",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0"
   },
   "devDependencies": {
-    "orval": "6.24.0"
+    "@screengeometry/openapi": "workspace:*",
+    "@screengeometry/typescript-config": "workspace:*"
   }
 }

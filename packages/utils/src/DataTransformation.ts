@@ -1,5 +1,4 @@
-import { SearchData, SearchScreenItem } from '@models/Search'
-import { ScreenInput, ScreenItem, ScreenSpec, SearchItem } from '@screengeometry/openapi'
+import { ScreenInput, ScreenItem, ScreenSpec, SearchData, SearchItem, SearchScreenItem } from '@screengeometry/openapi'
 import { getRandomString } from './RandomGenerator'
 
 const getAspectRatio = (str: string) => {

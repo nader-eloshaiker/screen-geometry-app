@@ -1,11 +1,10 @@
-import { baseUrl } from '@contexts/Query/QueryClient'
-import { generateStub } from '@server/server'
+import { generateStub } from '@screengeometry/server'
 import { setupWorker } from 'msw/browser'
 
-export const createServiceWorker = async () => {
+export const createBrowserServiceWorker = async (baseUrl: string, nodeEnv: boolean) => {
   const { searchMocks, screenListMocks, screenMocks, passthroughMocks } = generateStub(baseUrl)
 
-  if (import.meta.env.NODE_ENV) {
+  if (nodeEnv) {
     console.log('Browser Service Worker not started in test mode')
     return Promise.resolve()
   } else {

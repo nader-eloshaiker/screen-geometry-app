@@ -1,6 +1,6 @@
 {
   "extends": "@screengeometry/typescript-config/tsconfig.react.json",
-  "display": "OpenAPI",
-  "include": ["src/**/*", "../utils/src/DataTransformation.ts"],
+  "display": "ApiServer",
+  "include": ["src/**/*", "../serviceworker/src/NodeServiceWorker.ts"],
   "exclude": ["node_modules"]
 }

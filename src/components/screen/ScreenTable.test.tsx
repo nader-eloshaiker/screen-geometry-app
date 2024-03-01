@@ -7,7 +7,7 @@ import {
   getScreenListServiceMock,
   getScreenServiceMock,
 } from '@screengeometry/openapi'
-import { mswWithSpy, resetMSW, startMSW, stopMSW } from '@test/mocks/mockNodeServiceWorker'
+import { mswWithSpy, resetMSW, startMSW, stopMSW } from '@screengeometry/serviceworker/NodeServiceWorker'
 import { useInteractComponent } from '@test/utils/useInteractComponent'
 import { waitFor } from '@testing-library/react'
 import { ScreenTable } from './ScreenTable'

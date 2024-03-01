@@ -3,7 +3,7 @@ import { NotificationProvider } from '@contexts/Notification/NotificationProvide
 import { QueryProvider } from '@contexts/Query/QueryProvider'
 import { useElementSizeMock } from '@hooks/useElementSize.mock'
 import { getSearchServiceMock } from '@screengeometry/openapi'
-import { mswWithSpy, resetMSW, startMSW, stopMSW } from '@test/mocks/mockNodeServiceWorker'
+import { mswWithSpy, resetMSW, startMSW, stopMSW } from '@screengeometry/serviceworker/NodeServiceWorker'
 import { useInteractComponent } from '@test/utils/useInteractComponent'
 import { waitFor } from '@testing-library/react'
 

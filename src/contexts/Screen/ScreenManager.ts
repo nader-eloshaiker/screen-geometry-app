@@ -1,5 +1,5 @@
 import { ScreenItem } from '@screengeometry/openapi'
-import { normaliseScreenRender } from '@utils/ScreenCalc'
+import { normaliseScreenRender } from '@screengeometry/utils'
 
 export const initialScreenState = {
   screens: [] as ScreenItem[],

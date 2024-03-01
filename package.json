@@ -47,6 +47,10 @@
   "dependencies": {
     "@hookform/resolvers": "^3.3.4",
     "@react-hook/resize-observer": "^1.2.6",
+    "@screengeometry/openapi": "workspace:*",
+    "@screengeometry/server": "workspace:*",
+    "@screengeometry/serviceworker": "workspace:*",
+    "@screengeometry/utils": "workspace:*",
     "@tanstack/react-query": "5.24.1",
     "axios": "^1.6.7",
     "clsx": "^2.1.0",
@@ -66,7 +70,6 @@
   },
   "devDependencies": {
     "@playwright/test": "^1.41.2",
-    "@screengeometry/openapi": "workspace:*",
     "@screengeometry/typescript-config": "workspace:*",
     "@storybook/addon-coverage": "^1.0.0",
     "@storybook/addon-essentials": "^7.6.17",

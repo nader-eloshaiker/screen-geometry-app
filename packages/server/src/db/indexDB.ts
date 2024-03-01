@@ -1,5 +1,5 @@
 import { ScreenInput, ScreenInputList, ScreenItem } from '@screengeometry/openapi'
-import { transformScreenInput } from '@utils/ScreenTransformation'
+import { transformScreenInput } from '@screengeometry/utils'
 import localforage from 'localforage'
 
 const storageKey = 'screens'

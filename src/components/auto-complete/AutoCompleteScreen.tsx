@@ -1,7 +1,7 @@
 import ListInputField, { TListItem } from '@components/list-input-fIeld/ListInputField'
 import { useSearchApi } from '@hooks/api/helpers/useSearchApi'
-import { SearchScreenItem } from '@models/Search'
-import { transformSearchData } from '@utils/ScreenTransformation'
+import { SearchScreenItem } from '@screengeometry/openapi'
+import { transformSearchData } from '@screengeometry/utils'
 import { useCallback, useEffect, useState } from 'react'
 
 type TProps = TRestProps & {

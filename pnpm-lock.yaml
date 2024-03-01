@@ -14,6 +14,18 @@ importers:
       '@react-hook/resize-observer':
         specifier: ^1.2.6
         version: 1.2.6(react@18.2.0)
+      '@screengeometry/openapi':
+        specifier: workspace:*
+        version: link:packages/openapi
+      '@screengeometry/server':
+        specifier: workspace:*
+        version: link:packages/server
+      '@screengeometry/serviceworker':
+        specifier: workspace:*
+        version: link:packages/serviceworker
+      '@screengeometry/utils':
+        specifier: workspace:*
+        version: link:packages/utils
       '@tanstack/react-query':
         specifier: 5.24.1
         version: 5.24.1(react@18.2.0)
@@ -66,9 +78,6 @@ importers:
       '@playwright/test':
         specifier: ^1.41.2
         version: 1.41.2
-      '@screengeometry/openapi':
-        specifier: workspace:*
-        version: link:packages/openapi
       '@screengeometry/typescript-config':
         specifier: workspace:*
         version: link:packages/typescript-config
@@ -259,7 +268,34 @@ importers:
         specifier: 6.24.0
         version: 6.24.0(openapi-types@12.1.3)(typescript@5.3.3)
 
+  packages/server:
+    devDependencies:
+      '@screengeometry/openapi':
+        specifier: workspace:*
+        version: link:../openapi
+      '@screengeometry/typescript-config':
+        specifier: workspace:*
+        version: link:../typescript-config
+
+  packages/serviceworker:
+    devDependencies:
+      '@screengeometry/openapi':
+        specifier: workspace:*
+        version: link:../openapi
+      '@screengeometry/typescript-config':
+        specifier: workspace:*
+        version: link:../typescript-config
+
   packages/typescript-config: {}
+
+  packages/utils:
+    devDependencies:
+      '@screengeometry/openapi':
+        specifier: workspace:*
+        version: link:../openapi
+      '@screengeometry/typescript-config':
+        specifier: workspace:*
+        version: link:../typescript-config
 
 packages:
 

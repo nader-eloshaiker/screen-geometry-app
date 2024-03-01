@@ -1,4 +1,5 @@
 import { apiRoutes, ScreenInput, ScreenInputList } from '@screengeometry/openapi'
+import { delay, http, HttpResponse, passthrough } from 'msw'
 import {
   createScreen,
   createScreenList,
@@ -8,8 +9,7 @@ import {
   getSearchList,
   showScreen,
   updateScreen,
-} from '@server/api'
-import { delay, http, HttpResponse, passthrough } from 'msw'
+} from './api'
 
 // Stub out the API calls using axios-mock-adapter for indexAPI to store data in the browser's IndexedDB
 // The stubbed API calls can later be replaced with real API calls to a backend store

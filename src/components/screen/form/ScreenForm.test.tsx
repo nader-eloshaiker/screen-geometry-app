@@ -10,11 +10,11 @@ import {
   getScreenServiceMock,
   getSearchServiceMock,
 } from '@screengeometry/openapi'
+import { mswWithSpy, resetMSW, startMSW, stopMSW } from '@screengeometry/serviceworker/NodeServiceWorker'
+import { transformScreenInput } from '@screengeometry/utils'
 import { screenInputFixture } from '@test/fixtures/ScreenFixtures'
-import { mswWithSpy, resetMSW, startMSW, stopMSW } from '@test/mocks/mockNodeServiceWorker'
 import { useInteractComponent } from '@test/utils/useInteractComponent'
 import { render, waitFor } from '@testing-library/react'
-import { transformScreenInput } from '@utils/ScreenTransformation'
 import { ScreenForm } from './ScreenForm'
 
 type Props = {

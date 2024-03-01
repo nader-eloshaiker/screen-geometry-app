@@ -1,9 +1,8 @@
-import { useElementSizeMock } from '@hooks/useElementSize.mock'
 import { apiRoutes, getGetScreenListMock } from '@screengeometry/openapi'
-import { screenInput55Fixture } from '@test/fixtures/ScreenFixtures'
-import { spyOnLocalForage } from '@test/mocks/mockLocalForage'
-import { mswWithSpy, startMSW, stopMSW } from '@test/mocks/mockNodeServiceWorker'
+import { mswWithSpy, startMSW, stopMSW } from '../../serviceworker/src/NodeServiceWorker'
 import { generateStub } from './server'
+import { screenInput55Fixture } from './test/fixtures/ScreenFixtures'
+import { spyOnLocalForage } from './test/mocks/mockLocalForage'
 
 describe('#server', () => {
   const baseUrl = 'http://fakeapi.com'
@@ -25,7 +24,6 @@ describe('#server', () => {
   })
 
   beforeEach(() => {
-    useElementSizeMock()
     spyOnLocalForage(getGetScreenListMock().list)
   })
 

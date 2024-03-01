@@ -1,5 +1,5 @@
 import { ErrorResponse } from '@screengeometry/openapi'
-import { getRandomString } from '@utils/RandomGenerator'
+import { getRandomString } from '@screengeometry/utils'
 import axios, { AxiosError } from 'axios'
 
 export enum NotificationType {

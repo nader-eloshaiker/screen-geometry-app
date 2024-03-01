@@ -1,4 +1,5 @@
-import { createServiceWorker } from '@test/mocks/mockBrowserServiceWorker'
+import { baseUrl } from '@contexts/Query/QueryClient'
+import { createBrowserServiceWorker } from '@screengeometry/serviceworker/BrowserServiceWorker'
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import ReactGA from 'react-ga4'
@@ -10,7 +11,7 @@ const testMode = !import.meta.env.DEV
 const trackingId = process.env.GA_TRACKING_ID ?? import.meta.env.VITE_GA_TRACKING_ID
 ReactGA.initialize(trackingId, { testMode })
 
-createServiceWorker().then(() => {
+createBrowserServiceWorker(baseUrl, !!import.meta.env.NODE_ENV).then(() => {
   createRoot(document.getElementById('root') as HTMLElement).render(
     <StrictMode>
       <HelmetProvider>

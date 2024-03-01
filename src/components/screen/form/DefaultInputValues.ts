@@ -1,5 +1,5 @@
 import { ScreenInput } from '@screengeometry/openapi'
-import { createCSSColor } from '@utils/ScreenCalc'
+import { createCSSColor } from '@screengeometry/utils'
 
 export const DefaultInputValues = () => {
   const color = createCSSColor()

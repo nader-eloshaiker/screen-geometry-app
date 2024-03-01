@@ -1,6 +1,6 @@
 import { SearchItem } from '@screengeometry/openapi'
-import { SearchDB } from '@server/db/searchDB'
 import MiniSearch, { SearchResult } from 'minisearch'
+import { SearchDB } from './db/searchDB'
 
 const searchEngine = new MiniSearch({
   fields: ['id', 'name', 'aspectRatio', 'diagonalSize', 'vRes', 'hRes'],
