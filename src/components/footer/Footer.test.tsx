@@ -1,5 +1,5 @@
-import { NotificationProvider } from '@contexts/Notification/NotificationProvider'
 import { render } from '@testing-library/react'
+import { NotificationProvider } from 'packages/components/src/notification/context/NotificationProvider'
 import Footer from './Footer'
 
 describe('#Footer', () => {

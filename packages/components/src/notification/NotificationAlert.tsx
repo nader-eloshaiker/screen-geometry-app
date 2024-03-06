@@ -1,8 +1,8 @@
-import { NotificationActionTypes, NotificationType } from '@contexts/Notification/NotificationManager'
-import { useNotificationContext } from '@contexts/Notification/useNotifcationContext'
 import { clsx } from 'clsx'
 import { useCallback, useEffect, useState } from 'react'
 import { NotificationImage } from './NotificationImage'
+import { NotificationActionTypes, NotificationType } from './context/NotificationManager'
+import { useNotificationContext } from './context/useNotifcationContext'
 
 export type NotificationProps = { title: string; message: string; tag: string; type: NotificationType }
 
@@ -15,12 +15,16 @@ export const NotificationAlert = ({ title, message, tag, type }: NotificationPro
   }, [dispatch, tag])
 
   useEffect(() => {
+    if (type === NotificationType.SUCCESS) {
+      return
+    }
+
     const timeoutFade = setTimeout(() => {
-      type === NotificationType.SUCCESS && setIsClosing(true)
+      setIsClosing(true)
     }, 3000)
 
     const timeoutClose = setTimeout(() => {
-      type === NotificationType.SUCCESS && onClose()
+      onClose()
     }, 3500)
 
     return () => {

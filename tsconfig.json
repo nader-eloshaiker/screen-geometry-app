@@ -21,7 +21,8 @@
     "packages/serviceworker/src/BrowserServiceWorker.ts",
     "packages/utils/src/DataTransformation.ts",
     "packages/utils/src/RandomGenerator.ts",
-    "packages/utils/src/ScreenCalc.ts"
+    "packages/utils/src/ScreenCalc.ts",
+    "packages/components/src/notification"
   ],
   "exclude": ["node_modules", "coverage", "dist", "build"]
 }

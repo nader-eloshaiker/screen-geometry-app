@@ -47,9 +47,11 @@
   "dependencies": {
     "@hookform/resolvers": "^3.3.4",
     "@react-hook/resize-observer": "^1.2.6",
+    "@screengeometry/components": "workspace:*",
     "@screengeometry/openapi": "workspace:*",
     "@screengeometry/server": "workspace:*",
     "@screengeometry/serviceworker": "workspace:*",
+    "@screengeometry/tailwind-config": "workspace:*",
     "@screengeometry/utils": "workspace:*",
     "@tanstack/react-query": "5.24.1",
     "axios": "^1.6.7",
@@ -70,6 +72,7 @@
   },
   "devDependencies": {
     "@playwright/test": "^1.41.2",
+    "@screengeometry/tailwind-config": "workspace:*",
     "@screengeometry/typescript-config": "workspace:*",
     "@storybook/addon-coverage": "^1.0.0",
     "@storybook/addon-essentials": "^7.6.17",
@@ -119,6 +122,7 @@
     "jsonfile": "^6.1.0",
     "lint-staged": "^15.2.0",
     "mkdirp": "^3.0.1",
+    "postcss": "^8.4.35",
     "prettier": "^3.1.0",
     "prettier-plugin-organize-imports": "^3.2.4",
     "react-helmet-async": "^2.0.4",

@@ -1,4 +1,4 @@
-import { NotificationType } from '@contexts/Notification/NotificationManager'
+import { NotificationType } from './context/NotificationManager'
 
 type TProps = { type: NotificationType }
 

@@ -1,0 +1,18 @@
+{
+  "name": "@screengeometry/tailwind-config",
+  "version": "1.0.0",
+  "private": true,
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.17",
+    "daisyui": "^4.4.19",
+    "postcss": "^8.4.35",
+    "styled-components": "^6.1.8",
+    "tailwind-merge": "^2.2.0",
+    "tailwind-styled-components": "^2.2.0",
+    "tailwindcss": "^3.4.1"
+  }
+}

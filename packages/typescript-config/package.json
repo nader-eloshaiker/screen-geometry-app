@@ -1,9 +1,10 @@
 {
   "name": "@screengeometry/typescript-config",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "private": true,
   "license": "MIT",
   "publishConfig": {
-    "access": "public"
+    "access": "public",
+    "types": "src/types/index.d.ts"
   }
 }

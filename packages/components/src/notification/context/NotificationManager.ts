@@ -1,6 +1,5 @@
-import { ErrorResponse } from '@screengeometry/openapi'
 import { getRandomString } from '@screengeometry/utils'
-import axios, { AxiosError } from 'axios'
+import axios from 'axios'
 
 export enum NotificationType {
   ERROR = 'alert-error',
@@ -18,7 +17,7 @@ export type GeneralNotificationItem = {
 }
 export type NotificationItem = {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  value: ErrorResponse | GeneralNotificationItem | AxiosError<unknown, any> | object
+  value: object
   type: NotificationType
 }
 export type NotificationItemLogged = {

@@ -1,5 +1,4 @@
 import GithubIcon from '@assets/icons/Github'
-import { NotificationToaster } from '@components/notification/NotificationToaster'
 
 export default function Footer() {
   const longVer = import.meta.env.VITE_PACKAGE_VERSION
@@ -31,7 +30,6 @@ export default function Footer() {
               <GithubIcon className='size-6 fill-current' />
             </a>
           </div>
-          <NotificationToaster />
         </div>
       </div>
     </footer>

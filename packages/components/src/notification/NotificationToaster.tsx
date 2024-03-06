@@ -1,12 +1,12 @@
+import { ErrorResponse } from '@screengeometry/openapi'
+import axios, { AxiosError } from 'axios'
+import { NotificationAlert, NotificationProps } from './NotificationAlert'
 import {
   GeneralNotificationItem,
   GeneralNotificationItemKeys,
   NotificationItemLogged,
-} from '@contexts/Notification/NotificationManager'
-import { useNotificationContext } from '@contexts/Notification/useNotifcationContext'
-import { ErrorResponse } from '@screengeometry/openapi'
-import axios, { AxiosError } from 'axios'
-import { NotificationAlert, NotificationProps } from './NotificationAlert'
+} from './context/NotificationManager'
+import { useNotificationContext } from './context/useNotifcationContext'
 
 const isGeneralNotification = ({ value }: NotificationItemLogged) => {
   const keys = Object.keys(value)
@@ -67,7 +67,7 @@ export const NotificationToaster = () => {
   } = useNotificationContext()
 
   return (
-    <div className='toast toast-end'>
+    <div className='toast toast-bottom toast-end'>
       {notifications.map((notification) => (
         <NotificationAlert key={notification.tag} {...getContent(notification)} />
       ))}

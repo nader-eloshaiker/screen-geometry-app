@@ -1,9 +1,9 @@
-import { NotificationActionTypes, NotificationItem, NotificationType } from '@contexts/Notification/NotificationManager'
-import { NotificationProvider } from '@contexts/Notification/NotificationProvider'
-import { useNotificationContext } from '@contexts/Notification/useNotifcationContext'
 import type { Meta, StoryFn, StoryObj } from '@storybook/react'
 import { useEffect } from 'react'
 import { NotificationToaster } from './NotificationToaster'
+import { NotificationActionTypes, NotificationItem, NotificationType } from './context/NotificationManager'
+import { NotificationProvider } from './context/NotificationProvider'
+import { useNotificationContext } from './context/useNotifcationContext'
 
 const NotificationToasterDecorator = (Story: StoryFn) => (
   <NotificationProvider>

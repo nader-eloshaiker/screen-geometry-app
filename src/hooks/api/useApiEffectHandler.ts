@@ -2,8 +2,8 @@ import {
   GeneralNotificationItem,
   NotificationActionTypes,
   NotificationType,
-} from '@contexts/Notification/NotificationManager'
-import { useNotificationContext } from '@contexts/Notification/useNotifcationContext'
+  useNotificationContext,
+} from '@screengeometry/components/notification'
 import { ErrorResponse } from '@screengeometry/openapi'
 import { useEffect } from 'react'
 
