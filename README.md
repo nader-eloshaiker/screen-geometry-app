@@ -4,7 +4,7 @@
 [![CI/CD](https://github.com/nader-eloshaiker/screen-geometry-app/actions/workflows/cicd.yml/badge.svg)](https://github.com/nader-eloshaiker/screen-geometry-app/actions/workflows/cicd.yml)
 [![Deploy Production](https://github.com/nader-eloshaiker/screen-geometry-app/actions/workflows/deploy_production.yml/badge.svg)](https://github.com/nader-eloshaiker/screen-geometry-app/actions/workflows/deploy_production.yml)
 
-![Statements Badge](./docs/badges/statements.svg) ![Branches Badge](./docs/badges/branches.svg) ![Functions Badge](./docs/badges/functions.svg) ![Lines Badge](./docs/badges/lines.svg)
+![Statements Badge](./apps/docs/badges/statements.svg) ![Branches Badge](./apps/docs/badges/branches.svg) ![Functions Badge](./apps/docs/badges/functions.svg) ![Lines Badge](./apps/docs/badges/lines.svg)
 
 ## Description
 

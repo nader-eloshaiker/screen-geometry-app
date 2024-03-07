@@ -3,7 +3,7 @@ const jsonfile = require('jsonfile')
 const { mkdirp } = require('mkdirp')
 const https = require('https')
 const fs = require('fs')
-const outputPath = './docs/badges'
+const outputPath = './apps/docs/badges'
 
 const getMessageColor = (percentage) => {
   let color = 'brightgreen'

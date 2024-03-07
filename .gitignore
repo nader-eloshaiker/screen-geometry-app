@@ -5,9 +5,12 @@ node_modules
 .pnp
 .pnp.js
 
-# testing
+# results of testing
 coverage
 reports
+test-results/
+playwright-report/
+blob-report/
 
 # build output
 build
@@ -17,6 +20,9 @@ out/
 build
 dist
 
+# Misc
+.DS_Store
+*.pem
 
 # Local env files
 .env
@@ -41,12 +47,12 @@ yarn-error.log*
 # vercel
 .vercel
 
+# Turbo
+.turbo
+
 # encryption keys
 *.pem
 
-# husky
+# cache
 .husky/_
-/test-results/
-/playwright-report/
-/blob-report/
-/playwright/.cache/
+playwright/.cache/
