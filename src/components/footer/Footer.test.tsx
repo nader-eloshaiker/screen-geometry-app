@@ -1,4 +1,3 @@
-import { NotificationProvider } from '@contexts/Notification/NotificationProvider'
 import { render } from '@testing-library/react'
 import Footer from './Footer'
 
@@ -8,11 +7,7 @@ describe('#Footer', () => {
   })
 
   it('should render the version in the footer', async () => {
-    const { getByText } = render(
-      <NotificationProvider>
-        <Footer />
-      </NotificationProvider>,
-    )
+    const { getByText } = render(<Footer />)
 
     const element = getByText('Version 1.2.3')
 
