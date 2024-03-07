@@ -7,8 +7,7 @@ import defaultTheme from 'tailwindcss/defaultTheme'
 export default {
   content: [
     '../../packages/components/src/**/*.{js,ts,jsx,tsx,mdx}',
-    // temporary while splitting out components
-    './packages/components/src/**/*.{js,ts,jsx,tsx,mdx}',
+    './packages/components/src/**/*.{js,ts,jsx,tsx,mdx}', // temporary while splitting out components
     './src/**/*.{js,ts,jsx,tsx,html}',
     '!./node_modules',
   ],

@@ -39,6 +39,9 @@ export const ScreenForm = ({ defaultValues = null, editId = undefined, isLoading
   const { isPending: isUpdateLoading, mutate: updateAction } = useUpdateScreenApi()
   const [clearSearchHandler, setClearSearchHandler] = useState<() => void>(() => {})
 
+  const [searchTerm, setSearchTerm] = useState<string>('')
+  const { isFetching: isSearchListLoading, data: searchListResponse } = useSearchApi({ term: searchTerm })
+
   // NOTE: this is a hack to get around the fact that the form is not re-rendering when the defaultValues prop changes
   // Address this at the top level of te form
   const selectHandler = (item: SearchScreenItem) => {
@@ -131,7 +134,9 @@ export const ScreenForm = ({ defaultValues = null, editId = undefined, isLoading
         <AutoCompleteScreen
           onSelectScreen={selectHandler}
           setClearSearchHandler={setClearSearchHandler}
-          useSearchApi={useSearchApi}
+          isFetching={isSearchListLoading}
+          searchList={searchListResponse?.list ?? []}
+          onSearch={setSearchTerm}
         />
       </div>
 

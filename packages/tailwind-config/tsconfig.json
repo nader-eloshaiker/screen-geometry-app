@@ -1,5 +1,0 @@
-{
-  "extends": "@screengeometry/typescript-config/tsconfig.react.json",
-  "display": "TailwindConfig",
-  "exclude": ["node_modules"]
-}

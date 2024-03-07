@@ -23,6 +23,5 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true
-  },
-  "include": ["types/*.d.ts"]
+  }
 }

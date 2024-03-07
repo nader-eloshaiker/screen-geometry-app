@@ -1,74 +1,83 @@
-import { QueryProvider } from '@contexts/Query/QueryProvider'
-import { NotificationProvider } from '@screengeometry/components/notification'
-import { getSearchServiceMock } from '@screengeometry/openapi'
-import { mswWithSpy, resetMSW, startMSW, stopMSW } from '@screengeometry/serviceworker/NodeServiceWorker'
+import { getGetSearchMock } from '@screengeometry/openapi'
 import { useInteractComponent } from '@screengeometry/utils'
-import { waitFor } from '@testing-library/react'
+import { Mock } from 'vitest'
 import { useElementSizeMock } from '../hooks/useElementSize.mock'
 import { AutoCompleteScreen } from './AutoCompleteScreen'
 
-const TestComponent = () => {
+type Props = {
+  onSelectScreenSpy: Mock
+  setClearSearchHandlerSpy: Mock
+  onSearchSpy: Mock
+}
+const TestComponent = ({ onSelectScreenSpy, setClearSearchHandlerSpy, onSearchSpy }: Props) => {
   return (
-    <QueryProvider>
-      <NotificationProvider>
-        <AutoCompleteScreen onSelectScreen={vi.fn()} setClearSearchHandler={vi.fn} />
-      </NotificationProvider>
-    </QueryProvider>
+    <AutoCompleteScreen
+      onSelectScreen={onSelectScreenSpy}
+      setClearSearchHandler={setClearSearchHandlerSpy}
+      isFetching={false}
+      searchList={getGetSearchMock().list}
+      onSearch={onSearchSpy}
+    />
   )
 }
 
 describe('#AutoCompleteScreen', () => {
-  const mswRequestEventSpy = mswWithSpy(getSearchServiceMock())
-
-  beforeAll(async () => {
-    startMSW()
-  })
-
-  afterAll(async () => {
-    stopMSW()
-  })
+  let spies: Props
 
   beforeEach(() => {
+    spies.onSelectScreenSpy = vi.fn()
+    spies.setClearSearchHandlerSpy = vi.fn()
+    spies.onSearchSpy = vi.fn()
+
     useElementSizeMock()
-    resetMSW()
   })
 
   test('renders autocomplete component with an input field', async () => {
-    const test = useInteractComponent(<TestComponent />)
+    const test = useInteractComponent(
+      <TestComponent
+        onSelectScreenSpy={spies.onSelectScreenSpy}
+        setClearSearchHandlerSpy={spies.setClearSearchHandlerSpy}
+        onSearchSpy={spies.onSearchSpy}
+      />,
+    )
 
     const inputElement = await test.findByPlaceholderText('Type to filter list...')
     expect(inputElement).toBeDefined()
   })
 
   test('calls backend search api a limited time as the user enters a search term', async () => {
-    const test = useInteractComponent(<TestComponent />)
+    const test = useInteractComponent(
+      <TestComponent
+        onSelectScreenSpy={spies.onSelectScreenSpy}
+        setClearSearchHandlerSpy={spies.setClearSearchHandlerSpy}
+        onSearchSpy={spies.onSearchSpy}
+      />,
+    )
 
     const inputElement = await test.findByPlaceholderText('Type to filter list...')
     expect(inputElement).toBeDefined()
     await test.user.type(inputElement, 'WQHD')
 
-    await waitFor(() => {
-      expect(mswRequestEventSpy[mswRequestEventSpy.length - 1]).toEqual(
-        expect.stringContaining('/v1/search?term=WQHD'), // expect.stringMatching(/\/v1\/search\?term=WQHD$/i),
-      )
-    })
+    expect(spies.onSearchSpy).toHaveBeenCalledWith('WQHD')
   })
 
   test('clears search results and requests a full list from search engine', async () => {
-    const test = useInteractComponent(<TestComponent />)
+    const test = useInteractComponent(
+      <TestComponent
+        onSelectScreenSpy={spies.onSelectScreenSpy}
+        setClearSearchHandlerSpy={spies.setClearSearchHandlerSpy}
+        onSearchSpy={spies.onSearchSpy}
+      />,
+    )
 
     const inputElement = await test.findByPlaceholderText('Type to filter list...')
     await test.user.type(inputElement, 'WQHD')
 
-    await waitFor(() => {
-      expect(mswRequestEventSpy[mswRequestEventSpy.length - 1]).toEqual(expect.stringContaining('/v1/search?term=WQHD'))
-    })
+    expect(spies.onSearchSpy).toHaveBeenCalledWith('WQHD')
 
     const clearButton = await test.findByRole('reset')
     await test.user.click(clearButton)
 
-    await waitFor(() => {
-      expect(mswRequestEventSpy[mswRequestEventSpy.length - 1]).toEqual(expect.stringContaining('/v1/search?term='))
-    })
+    expect(spies.onSearchSpy).toHaveBeenCalledWith('')
   })
 })

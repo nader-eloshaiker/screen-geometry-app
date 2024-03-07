@@ -1,34 +1,34 @@
-import { SearchListResponse, SearchScreenItem, useGetSearch } from '@screengeometry/openapi'
+import { SearchItem, SearchScreenItem } from '@screengeometry/openapi'
 import { transformSearchData } from '@screengeometry/utils'
 import { useCallback, useEffect, useState } from 'react'
 import ListInputField, { TListItem } from '../listinputfield/ListInputField'
 
-type UseGetSearch = typeof useGetSearch<SearchListResponse>
-
 type TProps = TRestProps & {
   onSelectScreen: (item: SearchScreenItem) => void
   setClearSearchHandler?: (func: () => void) => void
-  useSearchApi?: UseGetSearch
+  onSearch?: (term: string) => void
+  searchList: Array<SearchItem>
+  isFetching: boolean
 }
 
 export const AutoCompleteScreen = ({
   onSelectScreen = () => {},
   setClearSearchHandler = () => {},
-  useSearchApi = () => ({ data: undefined, isFetching: false }) as ReturnType<UseGetSearch>,
+  onSearch = () => {},
+  searchList,
+  isFetching,
   ...rest
 }: TProps) => {
   const [clearHandler, setClearHandler] = useState<() => void>(() => {})
   const [list, setList] = useState<Array<TListItem>>([])
   const [searchTerm, setSearchTerm] = useState<string>('')
 
-  const { isFetching, data }: ReturnType<UseGetSearch> = useSearchApi({ term: searchTerm })
-
   const handleSelect = (value: TListItem) => {
     if (!value) {
       return
     }
 
-    const match = data?.list.find((entry) => entry.id === value.id)
+    const match = searchList.find((entry) => entry.id === value.id)
     if (match) {
       const screen = transformSearchData(match)
       onSelectScreen(screen)
@@ -40,6 +40,10 @@ export const AutoCompleteScreen = ({
   }, [clearHandler])
 
   useEffect(() => {
+    onSearch(searchTerm)
+  }, [onSearch, searchTerm])
+
+  useEffect(() => {
     if (!setClearSearchHandler || !handleResetSearch) {
       return
     }
@@ -48,11 +52,11 @@ export const AutoCompleteScreen = ({
   }, [setClearSearchHandler, handleResetSearch])
 
   useEffect(() => {
-    const newResponse = data?.list ?? []
+    const newResponse = searchList ?? []
     const newList = newResponse.map(({ id, label }) => ({ id, label }))
 
     setList(newList)
-  }, [data?.list])
+  }, [searchList])
 
   // use the common auto complete component here.
   return (

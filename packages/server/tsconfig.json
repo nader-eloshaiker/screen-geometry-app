@@ -1,6 +1,5 @@
 {
   "extends": "@screengeometry/typescript-config/tsconfig.react.json",
   "display": "ApiServer",
-  "include": ["src/**/*"],
-  "exclude": ["node_modules"]
+  "include": ["src/**/*"]
 }
