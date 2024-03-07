@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.3.5](https://github.com/nader-eloshaiker/screen-geometry-app/compare/v1.3.4...v1.3.5) (2024-03-07)
+
+
+### Bug Fixes
+
+* **app:** prevent refetch on window blur with react-query and notification placement ([d3de0ed](https://github.com/nader-eloshaiker/screen-geometry-app/commit/d3de0ed287479284f93131d37d94868007d61c32))
+* prevent refetch on window blur with react-query ([#362](https://github.com/nader-eloshaiker/screen-geometry-app/issues/362)) ([d3de0ed](https://github.com/nader-eloshaiker/screen-geometry-app/commit/d3de0ed287479284f93131d37d94868007d61c32))
+
 ## [1.3.4](https://github.com/nader-eloshaiker/screen-geometry-app/compare/v1.3.3...v1.3.4) (2024-02-19)
 
 
