@@ -1,11 +1,11 @@
-import { AutoCompleteScreen } from '@components/auto-complete/AutoCompleteScreen'
 import { QueryProvider } from '@contexts/Query/QueryProvider'
-import { useElementSizeMock } from '@hooks/useElementSize.mock'
+import { NotificationProvider } from '@screengeometry/components/notification'
 import { getSearchServiceMock } from '@screengeometry/openapi'
 import { mswWithSpy, resetMSW, startMSW, stopMSW } from '@screengeometry/serviceworker/NodeServiceWorker'
-import { useInteractComponent } from '@test/utils/useInteractComponent'
+import { useInteractComponent } from '@screengeometry/utils'
 import { waitFor } from '@testing-library/react'
-import { NotificationProvider } from 'packages/components/src/notification/context/NotificationProvider'
+import { useElementSizeMock } from '../hooks/useElementSize.mock'
+import { AutoCompleteScreen } from './AutoCompleteScreen'
 
 const TestComponent = () => {
   return (

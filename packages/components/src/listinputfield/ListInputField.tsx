@@ -1,10 +1,10 @@
-import CloseIcon from '@assets/icons/Close'
-import MagnifyGlassIcon from '@assets/icons/MagnifyGlass'
-import { InputOverlay, OverlayInputField } from '@components/overlay-input-field/OverlayInputField'
-import { useDebounce } from '@hooks/useDebounce'
-import { useElementSize } from '@hooks/useElementSize'
+import { InputOverlay, OverlayInputField } from '@screengeometry/components/overlayinputfield'
 import { clsx } from 'clsx'
 import { ChangeEvent, KeyboardEvent, memo, useCallback, useEffect, useRef, useState } from 'react'
+import { useDebounce } from '../hooks/useDebounce'
+import { useElementSize } from '../hooks/useElementSize'
+import CloseIcon from './assets/Close'
+import MagnifyGlassIcon from './assets/MagnifyGlass'
 
 const standardOverlay: InputOverlay = {
   overlay: <MagnifyGlassIcon className='size-6' />,

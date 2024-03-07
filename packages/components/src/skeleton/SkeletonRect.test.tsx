@@ -1,4 +1,4 @@
-import { useInteractComponent } from '@test/utils/useInteractComponent'
+import { useInteractComponent } from '@screengeometry/utils'
 import { SkeletonRect } from './SkeletonRect'
 
 describe('#SkeletonRect', () => {

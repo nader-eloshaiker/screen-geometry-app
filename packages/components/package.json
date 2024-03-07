@@ -5,7 +5,12 @@
   "type": "module",
   "main": "index.ts",
   "exports": {
-    "./notification": "./src/notification/index.ts"
+    "./autocomplete": "./src/autocomplete/index.ts",
+    "./hooks": "./src/hooks/index.ts",
+    "./listinputfield": "./src/listinputfield/index.ts",
+    "./notification": "./src/notification/index.ts",
+    "./overlayinputfield": "./src/overlayinputfield/index.ts",
+    "./skeleton": "./src/skeleton/index.ts"
   },
   "scripts": {
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0"

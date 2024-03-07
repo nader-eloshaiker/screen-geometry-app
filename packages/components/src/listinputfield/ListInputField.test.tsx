@@ -1,6 +1,6 @@
-import { useElementSizeMock } from '@hooks/useElementSize.mock'
 import { useInteractComponent } from '@test/utils/useInteractComponent'
 import { render } from '@testing-library/react'
+import { useElementSizeMock } from '../hooks/useElementSize.mock'
 import { ListInputField } from './ListInputField'
 
 describe('#ListInputField', () => {

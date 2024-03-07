@@ -22,7 +22,12 @@
     "packages/utils/src/DataTransformation.ts",
     "packages/utils/src/RandomGenerator.ts",
     "packages/utils/src/ScreenCalc.ts",
-    "packages/components/src/notification"
+    "packages/components/src/notification",
+    "packages/components/src/overlayinputfield",
+    "packages/components/src/listinputfield/useDebounce.ts",
+    "list-input-fIeld",
+    "packages/components/src/skeleton",
+    "packages/components/src/autocomplete"
   ],
   "exclude": ["node_modules", "coverage", "dist", "build"]
 }

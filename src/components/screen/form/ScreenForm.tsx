@@ -1,8 +1,9 @@
-import { AutoCompleteScreen } from '@components/auto-complete/AutoCompleteScreen'
 import { DarkMode, LightMode } from '@components/theme/ThemeConstants'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useCreateScreenApi } from '@hooks/api/helpers/useCreateScreenApi'
+import { useSearchApi } from '@hooks/api/helpers/useSearchApi'
 import { useUpdateScreenApi } from '@hooks/api/helpers/useUpdateScreenApi'
+import { AutoCompleteScreen } from '@screengeometry/components/autocomplete'
 import { ScreenDataEnum, ScreenInput, SearchScreenItem } from '@screengeometry/openapi'
 import { createCSSColor } from '@screengeometry/utils'
 import { clsx } from 'clsx'
@@ -127,7 +128,11 @@ export const ScreenForm = ({ defaultValues = null, editId = undefined, isLoading
         <label className='label'>
           <span className='text-sm'>Choose from list of Monitors</span>
         </label>
-        <AutoCompleteScreen onSelectScreen={selectHandler} setClearSearchHandler={setClearSearchHandler} />
+        <AutoCompleteScreen
+          onSelectScreen={selectHandler}
+          setClearSearchHandler={setClearSearchHandler}
+          useSearchApi={useSearchApi}
+        />
       </div>
 
       <div className='divider text-sm'>Or</div>

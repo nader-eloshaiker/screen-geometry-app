@@ -23,9 +23,9 @@ export const OverlayInputField = ({ overlays, className, register, ...props }: P
   return (
     <div className='relative'>
       <input className={newClassName} {...props} {...register} />
-      {overlays.map(({ overlay, overlayClassName, pointerEvents = false }, index) => (
+      {overlays.map(({ overlay, overlayClassName, pointerEvents = false }) => (
         <InputPlaceholder
-          key={index.toString()}
+          key={overlayClassName.split(' ').join('')}
           className={twMerge(
             'absolute top-0 flex h-full w-fit items-center rounded-r',
             overlayClassName,

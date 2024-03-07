@@ -1,4 +1,4 @@
-import { useInteractComponent } from '@test/utils/useInteractComponent'
+import { useInteractComponent } from '@screengeometry/utils'
 import { OverlayInputField } from './OverlayInputField'
 
 describe('#OverlayInputField', () => {

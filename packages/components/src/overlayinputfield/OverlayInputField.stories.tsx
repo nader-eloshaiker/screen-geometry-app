@@ -1,5 +1,5 @@
-import MagnifyGlassIcon from '@assets/icons/MagnifyGlass'
 import type { Meta, StoryObj } from '@storybook/react'
+import MagnifyGlassIcon from '../listinputfield/assets/MagnifyGlass'
 import { OverlayInputField } from './OverlayInputField'
 
 const meta = {

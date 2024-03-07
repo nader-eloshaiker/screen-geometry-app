@@ -15,7 +15,7 @@ export const NotificationAlert = ({ title, message, tag, type }: NotificationPro
   }, [dispatch, tag])
 
   useEffect(() => {
-    if (type === NotificationType.SUCCESS) {
+    if (type !== NotificationType.SUCCESS) {
       return
     }
 

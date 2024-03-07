@@ -1,10 +1,10 @@
-import { ErrorResponse, GetSearchParams, SearchListResponse, useGetSearch } from '@screengeometry/openapi'
+import { GetSearchParams, SearchListResponse, useGetSearch } from '@screengeometry/openapi'
 import { keepPreviousData } from '@tanstack/react-query'
 import { useApiEffectHandler } from '../useApiEffectHandler'
 
-export const useSearchApi = (params: GetSearchParams) => {
-  const request = useGetSearch<SearchListResponse, ErrorResponse>(params, {
-    query: { queryKey: ['useGetSearchList', ...Object.values(params)], placeholderData: keepPreviousData },
+export const useSearchApi = (params?: GetSearchParams) => {
+  const request = useGetSearch<SearchListResponse>(params, {
+    query: { queryKey: ['useGetSearchList', ...Object.values(params ?? {})], placeholderData: keepPreviousData },
   })
 
   useApiEffectHandler<SearchListResponse>({
