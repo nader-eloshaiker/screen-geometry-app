@@ -1,5 +1,6 @@
 import Footer from '@components/footer/Footer'
 import Header from '@components/header/Header'
+import { NotificationToaster } from '@components/notification/NotificationToaster'
 import { useEffect } from 'react'
 import ReactGA from 'react-ga4'
 import { Outlet, useLocation } from 'react-router-dom'
@@ -16,6 +17,7 @@ export const Root = () => {
         <Outlet />
       </main>
       <Footer />
+      <NotificationToaster />
     </div>
   )
 }
