@@ -1,0 +1,10 @@
+{
+  "name": "@screengeometry/prettier-config",
+  "version": "1.0.0",
+  "private": true,
+  "main": "index.js",
+  "peerDependencies": {
+    "prettier": "^3.1.0",
+    "prettier-plugin-organize-imports": "^3.2.4"
+  }
+}

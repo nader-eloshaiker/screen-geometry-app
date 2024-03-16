@@ -19,6 +19,7 @@ storybook-static
 out/
 build
 dist
+tsconfig.tsbuildinfo
 
 # Misc
 .DS_Store

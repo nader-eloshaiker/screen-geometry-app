@@ -1,5 +1,6 @@
 {
-  "extends": "@screengeometry/typescript-config/tsconfig.react.json",
+  "extends": "@screengeometry/ts-config/react",
   "display": "OpenAPI",
-  "include": ["src/**/*"]
+  "include": ["src/**/*"],
+  "exclude": ["src/generated/**/*"]
 }

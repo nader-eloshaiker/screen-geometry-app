@@ -1,10 +1,11 @@
 {
-  "extends": "@screengeometry/typescript-config/tsconfig.react.json",
+  "extends": "@screengeometry/ts-config/react",
+  "display": "Main",
   "compilerOptions": {
-    /* paths */
+    "types": ["@screengeometry/types/react", "@screengeometry/types/vite"],
+
     "baseUrl": ".",
     "paths": {
-      // "@/*": ["./src/*"],
       "@assets/*": ["./src/assets/*"],
       "@components/*": ["./src/components/*"],
       "@constants/*": ["./src/constants/*"],
@@ -15,6 +16,5 @@
       "@test/*": ["./src/test/*"]
     }
   },
-  "include": ["./src/**/*", "./packages/typescript-config/types/*.d.ts"],
-  "exclude": ["node_modules", "coverage", "dist", "build"]
+  "include": ["./src/**/*", "vite.config.ts", "package.json"]
 }

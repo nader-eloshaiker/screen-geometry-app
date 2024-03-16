@@ -1,0 +1,6 @@
+{
+  "extends": "@screengeometry/ts-config/react",
+  "display": "OpenAPI ESLint",
+  "include": ["./"],
+  "exclude": ["node_modules", "src/generated/**/*"]
+}

@@ -1,8 +1,8 @@
-import sharedConfig from '@screengeometry/tailwind-config/tailwind.config.js'
+import sharedConfig from '@screengeometry/tailwind-config'
 /** @type {import('tailwindcss').Config} */
 
 export default {
-  presets: [sharedConfig],
+  ...sharedConfig,
   content: [
     './packages/components/src/**/*.{js,ts,jsx,tsx,mdx}', // temporary while splitting out components
     './src/**/*.{js,ts,jsx,tsx,html}',

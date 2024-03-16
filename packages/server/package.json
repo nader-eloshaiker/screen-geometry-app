@@ -7,14 +7,16 @@
   "exports": {
     ".": {
       "default": "./src/server.ts"
-    },
-    "./*": "./src/*"
+    }
   },
   "scripts": {
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0"
   },
   "devDependencies": {
+    "@screengeometry/eslint-config": "workspace:*",
     "@screengeometry/openapi": "workspace:*",
-    "@screengeometry/typescript-config": "workspace:*"
+    "@screengeometry/prettier-config": "workspace:*",
+    "@screengeometry/ts-config": "workspace:*",
+    "@screengeometry/utils": "workspace:*"
   }
 }

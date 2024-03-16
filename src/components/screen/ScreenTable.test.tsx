@@ -61,7 +61,7 @@ describe('#ScreenTable', () => {
     const test = useInteractComponent(<TestComponent />)
 
     const deleteElements = await test.findAllByLabelText('delete button')
-    const deleteElement = deleteElements[0]
+    const deleteElement = deleteElements[0] as HTMLElement
 
     await test.user.click(deleteElement)
 
@@ -75,7 +75,7 @@ describe('#ScreenTable', () => {
     const test = useInteractComponent(<TestComponent />)
 
     const showElements = await test.findAllByLabelText('show checkbox')
-    const showElement = showElements[0]
+    const showElement = showElements[0] as HTMLElement
 
     await test.user.click(showElement)
 

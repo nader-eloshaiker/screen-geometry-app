@@ -226,7 +226,7 @@ describe('#ScreenForm', () => {
       const inputElement = await test.findByPlaceholderText('Type to filter list...')
       await test.user.type(inputElement, 'WQHD+')
 
-      const listElement = test.container.querySelectorAll('li')[0]
+      const listElement = test.container.querySelectorAll('li')[0] as HTMLElement
       await test.user.click(listElement)
 
       expect(await test.findByLabelText('Screen Size')).toHaveValue(34)
@@ -248,7 +248,7 @@ describe('#ScreenForm', () => {
       const inputElement = await test.findByPlaceholderText('Type to filter list...')
       await test.user.type(inputElement, 'WQHD+')
 
-      const listElement = test.container.querySelectorAll('li')[0]
+      const listElement = test.container.querySelectorAll('li')[0] as HTMLElement
       await test.user.click(listElement)
 
       const createButton = await test.findByText('Create')

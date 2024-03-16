@@ -1,0 +1,6 @@
+{
+  "extends": "@screengeometry/ts-config/node",
+  "display": "Server ESLint",
+  "include": ["./"],
+  "exclude": ["node_modules"]
+}

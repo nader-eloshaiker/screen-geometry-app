@@ -1,27 +1,26 @@
 {
-  "name": "@screengeometry/serviceworker",
+  "name": "@screengeometry/types",
   "private": true,
   "version": "1.0.0",
   "type": "module",
   "exports": {
-    "./*": "./src/*.ts"
+    "./vite": "./src/vite.d.ts",
+    "./react": "./src/react.d.ts"
   },
-  "scripts": {
-    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0"
-  },
-  "dependencies": {
-    "msw": "^2.2.1"
+  "publishConfig": {
+    "access": "public"
   },
   "devDependencies": {
     "@screengeometry/eslint-config": "workspace:*",
     "@screengeometry/prettier-config": "workspace:*",
-    "@screengeometry/server": "workspace:*",
     "@screengeometry/ts-config": "workspace:*"
   },
   "peerDependencies": {
     "@types/node": "^20.11.2",
     "eslint": "^8.56.0",
     "prettier": "^3.1.0",
-    "typescript": "^5.3.3"
+    "typescript": "^5.3.3",
+    "vite": "^5.0.10",
+    "vitest": "^1.3.1"
   }
 }

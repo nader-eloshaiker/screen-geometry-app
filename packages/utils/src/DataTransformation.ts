@@ -1,9 +1,9 @@
 import { ScreenInput, ScreenItem, ScreenSpec, SearchData, SearchItem, SearchScreenItem } from '@screengeometry/openapi'
 import { getRandomString } from './RandomGenerator'
 
-const getAspectRatio = (str: string) => {
-  const [width, height] = str.split(':')
-  return [parseFloat(width), parseFloat(height)]
+const getAspectRatio = (str: string | undefined | null) => {
+  const [width, height] = str?.split(':') ?? []
+  return [parseFloat(width ?? '1'), parseFloat(height ?? '1')] as const
 }
 
 const generateLabel = (entry: SearchItem, data: SearchData) => {
