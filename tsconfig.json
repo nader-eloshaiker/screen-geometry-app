@@ -2,7 +2,7 @@
   "extends": "@screengeometry/ts-config/react",
   "display": "Main",
   "compilerOptions": {
-    "types": ["@screengeometry/types/react", "@screengeometry/types/vite"],
+    "types": ["@screengeometry/types/react", "@screengeometry/types/vite", "vitest/globals"],
 
     "baseUrl": ".",
     "paths": {

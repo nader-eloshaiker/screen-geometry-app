@@ -2,7 +2,7 @@
   "extends": "@screengeometry/ts-config/react",
   "display": "Components",
   "compilerOptions": {
-    "types": ["@screengeometry/types/react"]
+    "types": ["@screengeometry/types/react", "vitest/globals"]
   },
   "include": ["src/"]
 }
