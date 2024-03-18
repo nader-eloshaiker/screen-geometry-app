@@ -4,5 +4,6 @@
   "compilerOptions": {
     "types": ["@screengeometry/types/react", "vitest/globals"]
   },
-  "include": ["src/"]
+  "include": ["./"],
+  "exclude": ["node_modules/**/*", "dist/**/*", "coverage/**/*"]
 }

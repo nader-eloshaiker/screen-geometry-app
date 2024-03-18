@@ -1,6 +1,0 @@
-{
-  "extends": "@screengeometry/ts-config/react",
-  "display": "Utilities ESLint",
-  "include": ["./"],
-  "exclude": ["node_modules"]
-}

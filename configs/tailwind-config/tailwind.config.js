@@ -4,6 +4,7 @@ import * as daisyuiThemes from 'daisyui/src/theming/themes'
 import colors from 'tailwindcss/colors'
 import defaultTheme from 'tailwindcss/defaultTheme'
 
+/** @type {import('tailwindcss').Config} */
 export default {
   theme: {
     extend: {

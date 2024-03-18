@@ -2,7 +2,5 @@
 module.exports = {
   extends: ['@screengeometry/eslint-config/node'],
   parser: '@typescript-eslint/parser',
-  parserOptions: {
-    project: './tsconfig.eslint.json',
-  },
+  ignorePatterns: ['node_modules/**/*', 'dist/**/*', 'coverage/**/*'],
 }

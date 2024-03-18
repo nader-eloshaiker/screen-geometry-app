@@ -1,5 +1,0 @@
-{
-  "extends": "@screengeometry/ts-config/node",
-  "display": "ServiceWorker",
-  "include": ["src/**/*"]
-}

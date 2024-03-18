@@ -9,9 +9,6 @@
   "scripts": {
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0"
   },
-  "dependencies": {
-    "msw": "^2.2.1"
-  },
   "devDependencies": {
     "@screengeometry/eslint-config": "workspace:*",
     "@screengeometry/prettier-config": "workspace:*",

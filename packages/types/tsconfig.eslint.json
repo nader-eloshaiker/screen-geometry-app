@@ -1,6 +1,0 @@
-{
-  "extends": "@screengeometry/ts-config/node",
-  "display": "ServiceWorker ESLint",
-  "include": ["./"],
-  "exclude": ["node_modules"]
-}

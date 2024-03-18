@@ -4,5 +4,7 @@ module.exports = {
   parser: '@typescript-eslint/parser',
   parserOptions: {
     project: true,
+    tsconfigRootDir: __dirname,
   },
+  ignorePatterns: ['node_modules/**/*', 'dist/**/*', 'coverage/**/*'],
 }

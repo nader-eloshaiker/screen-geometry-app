@@ -1,5 +1,6 @@
 {
   "extends": "@screengeometry/ts-config/node",
   "display": "ApiServer",
-  "include": ["src/**/*"]
+  "include": ["./"],
+  "exclude": ["node_modules/**/*", "dist/**/*", "coverage/**/*"]
 }

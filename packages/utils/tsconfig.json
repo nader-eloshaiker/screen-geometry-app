@@ -1,6 +1,9 @@
 {
   "extends": "@screengeometry/ts-config/react",
-  "display": "Utilities",
-  "include": ["./src"],
-  "exclude": ["node_modules"]
+  "display": "Components",
+  "compilerOptions": {
+    "types": ["@screengeometry/types/react", "vitest/globals"]
+  },
+  "include": ["./"],
+  "exclude": ["node_modules/**/*", "dist/**/*", "coverage/**/*"]
 }
