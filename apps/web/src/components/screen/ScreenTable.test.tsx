@@ -1,5 +1,6 @@
 import { QueryProvider } from '@contexts/Query/QueryProvider'
 import { useElementSizeMock } from '@hooks/useElementSize.mock'
+import { NotificationProvider } from '@screengeometry/components/notification'
 import {
   ScreenItem,
   getGetScreenListMock,
@@ -9,7 +10,6 @@ import {
 import { mswWithSpy, resetMSW, startMSW, stopMSW } from '@screengeometry/serviceworker/NodeServiceWorker'
 import { useInteractComponent } from '@test/utils/useInteractComponent'
 import { waitFor } from '@testing-library/react'
-import { NotificationProvider } from 'packages/components/src/notification/context/NotificationProvider'
 import { ScreenTable } from './ScreenTable'
 
 const TestComponent = ({

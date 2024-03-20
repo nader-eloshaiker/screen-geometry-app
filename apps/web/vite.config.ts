@@ -3,7 +3,7 @@ import path from 'path'
 import { defineConfig } from 'vite'
 import { checker } from 'vite-plugin-checker'
 import { configDefaults, UserConfig as VitestUserConfigInterface } from 'vitest/config'
-import packageJson from './package.json'
+import packageJson from '../../package.json'
 
 const viteTest: VitestUserConfigInterface = {
   test: {

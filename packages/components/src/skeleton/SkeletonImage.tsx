@@ -13,7 +13,7 @@ export const SkeletonImage = ({ className, ...rest }: TProps) => {
       )}
       {...rest}
     >
-      <ImageIcon className='size-20' fill='rgb(107 114 128)' />
+      <ImageIcon fill='rgb(107 114 128)' className='size-20' />
     </div>
   )
 }
