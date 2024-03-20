@@ -8,9 +8,9 @@
     "access": "public"
   },
   "dependencies": {
-    "@screengeometry/eslint-config": "workspace:*",
-    "@screengeometry/prettier-config": "workspace:*",
-    "@screengeometry/ts-config": "workspace:*"
+    "@screengeometry/eslint-config": "1.0.0",
+    "@screengeometry/prettier-config": "1.0.0",
+    "@screengeometry/ts-config": "1.0.0"
   },
   "peerDependencies": {
     "autoprefixer": "^10.4.17",

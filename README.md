@@ -55,20 +55,24 @@ Installing dependencies
 
 Run in development (using vite)
 
-    pnpm run dev
+    pnpm dev
 
 Linting
 
-    pnpm run lint:fix
+    pnpm lint:fix
 
 Build (using vite)
 
-    pnpm run build
+    pnpm build
 
 Generate API Client\*\* (using orval)
 Code is checked in for review ease. This can also help when working on a 'work in progress' published spec, as it allows the developer to control which spec the client is generated from in other feature branches and in main branches.
 
-    pnpm run gen:spec
+    pnpm gen:spec
+
+Dependency cleanup using
+
+    pnpx depcheck
 
 ## Detailed Reading
 

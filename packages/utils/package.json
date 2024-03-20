@@ -26,11 +26,11 @@
     "tailwindcss": "^3.4.1"
   },
   "devDependencies": {
-    "@screengeometry/eslint-config": "workspace:*",
-    "@screengeometry/prettier-config": "workspace:*",
-    "@screengeometry/tailwind-config": "workspace:*",
-    "@screengeometry/ts-config": "workspace:*",
-    "@screengeometry/types": "workspace:*"
+    "@screengeometry/eslint-config": "1.0.0",
+    "@screengeometry/prettier-config": "1.0.0",
+    "@screengeometry/tailwind-config": "1.0.0",
+    "@screengeometry/ts-config": "1.0.0",
+    "@screengeometry/types": "1.0.0"
   },
   "peerDependencies": {
     "@types/node": "^20.11.2",
