@@ -13,6 +13,6 @@
   "dependencies": {
     "@screengeometry/prettier-config": "1.0.0",
     "@screengeometry/eslint-config": "1.0.0",
-    "typescript": "^5.3.3"
+    "typescript": "^5.4.2"
   }
 }

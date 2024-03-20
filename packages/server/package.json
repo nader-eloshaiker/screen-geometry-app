@@ -12,6 +12,11 @@
   "scripts": {
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0"
   },
+  "dependencies": {
+    "localforage": "^1.10.0",
+    "minisearch": "^6.3.0",
+    "msw": "2.2.9"
+  },
   "devDependencies": {
     "@screengeometry/eslint-config": "1.0.0",
     "@screengeometry/openapi": "1.0.0",

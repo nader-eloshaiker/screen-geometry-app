@@ -1,9 +1,8 @@
 {
   "extends": "@screengeometry/ts-config/react",
-  "display": "Web",
+  "display": "Components",
   "compilerOptions": {
-    "types": ["@screengeometry/types/react", "@screengeometry/types/vite", "vitest/globals"],
-
+    "types": ["vitest/globals"],
     "baseUrl": ".",
     "paths": {
       "@assets/*": ["./src/assets/*"],
@@ -11,11 +10,12 @@
       "@constants/*": ["./src/constants/*"],
       "@contexts/*": ["./src/contexts/*"],
       "@hooks/*": ["./src/hooks/*"],
+      "@models/*": ["./src/models/*"],
       "@pages/*": ["./src/pages/*"],
       "@routes/*": ["./src/routes/*"],
       "@test/*": ["./src/test/*"]
     }
   },
-  "include": ["./src/**/*", "apps/web/vite.config.ts", "../../package.json"],
-  "exclude": ["node_modules/", "dist/", "coverage/"]
+  "include": ["./", "@screengeometry/types/react.d", "@screengeometry/types/vite.d"],
+  "exclude": ["node_modules/**/*", "dist/**/*", "coverage/**/*"]
 }

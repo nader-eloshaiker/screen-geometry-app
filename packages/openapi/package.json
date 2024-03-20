@@ -14,7 +14,8 @@
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0"
   },
   "dependencies": {
-    "msw": "2.2.7",
+    "axios": "^1.6.7",
+    "msw": "2.2.9",
     "@tanstack/react-query": "5.24.1"
   },
   "devDependencies": {

@@ -5,13 +5,13 @@
     "declaration": true,
     "declarationMap": true,
     "esModuleInterop": true,
-    "lib": ["es2022", "DOM", "DOM.Iterable"],
+    "lib": ["ESNext", "DOM", "DOM.Iterable"],
     "module": "ESNext",
     "moduleDetection": "force",
-    "moduleResolution": "Bundler",
+    "moduleResolution": "Node",
     "noUncheckedIndexedAccess": true,
     "skipLibCheck": true,
-    "target": "ES2022",
+    "target": "ESNext",
     "allowImportingTsExtensions": true,
     "allowSyntheticDefaultImports": true,
     "resolveJsonModule": true,
@@ -20,7 +20,8 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
     "noEmit": true,
-    "incremental": true
+    "incremental": true,
+    "isolatedModules": true
   },
   "exclude": ["node_modules", "coverage", "dist", "build"]
 }

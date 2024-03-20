@@ -4,11 +4,7 @@
   "extends": "./node.json",
   "compilerOptions": {
     "useDefineForClassFields": true,
-    "lib": ["ES2022", "DOM", "DOM.Iterable"],
     "types": ["vitest/globals"],
-    "allowImportingTsExtensions": true,
-    "resolveJsonModule": true,
-    "isolatedModules": true,
-    "jsx": "react-jsx"
+    "jsx": "preserve"
   }
 }

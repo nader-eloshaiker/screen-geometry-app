@@ -19,13 +19,11 @@ const token = `${getRandomString(36)}.${getRandomString(303)}.${getRandomString(
 
 export const useApiAxios = <T>(): ((config: AxiosRequestConfig) => Promise<T>) => {
   return (config: AxiosRequestConfig) => {
-    const source = Axios.CancelToken.source()
     const promise = apiAxiosInstance({
       ...config,
       headers: {
         Authorization: `Bearer ${token}`,
       },
-      cancelToken: source.token,
     })
       .then(({ data }) => {
         return data
@@ -33,11 +31,6 @@ export const useApiAxios = <T>(): ((config: AxiosRequestConfig) => Promise<T>) =
       .catch((error) => {
         throw error
       })
-
-    // @ts-expect-error this is a hack to add cancel method to promise
-    promise.cancel = () => {
-      source.cancel('axios cancelled: signalled by React Query')
-    }
 
     return promise
   }

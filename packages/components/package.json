@@ -28,6 +28,7 @@
     "report:test": "pnpm test:ci"
   },
   "dependencies": {
+    "@screengeometry/openapi": "1.0.0",
     "@react-hook/resize-observer": "^1.2.6",
     "@screengeometry/utils": "1.0.0",
     "autoprefixer": "^10.4.17",
@@ -39,6 +40,7 @@
     "prettier": "^3.1.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-hook-form": "^7.50.1",
     "styled-components": "^6.1.8",
     "tailwind-merge": "^2.2.0",
     "tailwind-styled-components": "^2.2.0",
@@ -73,6 +75,6 @@
     "prettier": "^3.1.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "typescript": "^5.3.3"
+    "typescript": "^5.4.2"
   }
 }

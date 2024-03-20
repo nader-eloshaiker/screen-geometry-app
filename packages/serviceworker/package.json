@@ -9,6 +9,9 @@
   "scripts": {
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0"
   },
+  "dependencies": {
+    "msw": "2.2.9"
+  },
   "devDependencies": {
     "@screengeometry/eslint-config": "1.0.0",
     "@screengeometry/prettier-config": "1.0.0",
@@ -19,6 +22,6 @@
     "@types/node": "^20.11.2",
     "eslint": "^8.56.0",
     "prettier": "^3.1.0",
-    "typescript": "^5.3.3"
+    "typescript": "^5.4.2"
   }
 }
