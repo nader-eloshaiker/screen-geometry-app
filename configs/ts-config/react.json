@@ -5,6 +5,6 @@
   "compilerOptions": {
     "useDefineForClassFields": true,
     "types": ["vitest/globals"],
-    "jsx": "preserve"
+    "jsx": "react-jsx"
   }
 }

@@ -16,7 +16,6 @@
   },
   "scripts": {
     "preinstall": "pnpx only-allow pnpm",
-    "postinstall": "syncpack fix-mismatches",
     "updatemsw": "pnpx msw init",
     "dev": "pnpm  --parallel --filter \"./**\" dev",
     "dev:e2e": "vite --mode development --port 3000",
@@ -51,9 +50,9 @@
   },
   "devDependencies": {
     "@playwright/test": "^1.41.2",
-    "@screengeometry/eslint-config": "1.0.0",
-    "@screengeometry/prettier-config": "1.0.0",
-    "@screengeometry/ts-config": "1.0.0",
+    "@screengeometry/eslint-config": "workspace:*",
+    "@screengeometry/prettier-config": "workspace:*",
+    "@screengeometry/ts-config": "workspace:*",
     "@types/eslint-config-prettier": "^6.11.3",
     "@types/eslint-plugin-prettier": "^3.1.3",
     "@types/node": "^20.11.2",
@@ -82,6 +81,11 @@
     "vite": "^5.0.10",
     "vitest": "^1.3.1"
   },
+  "workspaces": [
+    "apps/*",
+    "configs/*",
+    "packages/*"
+  ],
   "browserslist": [
     "defaults"
   ],

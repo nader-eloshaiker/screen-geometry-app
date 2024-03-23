@@ -2,8 +2,8 @@
   "extends": "@screengeometry/ts-config/react",
   "display": "OpenAPI",
   "compilerOptions": {
-    "types": ["@screengeometry/types/react.d", "vitest/globals"]
+    "types": ["vitest/globals"]
   },
-  "include": ["./"],
+  "include": ["./src"],
   "exclude": ["node_modules/**/*", "dist/**/*", "coverage/**/*"]
 }

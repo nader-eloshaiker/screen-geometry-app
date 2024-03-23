@@ -50,7 +50,7 @@ export default defineConfig({
     'import.meta.env.VITE_PACKAGE_VERSION': JSON.stringify(packageJson.version),
     'process.env': process.env,
   },
-  assetsInclude: ['/sb-preview/runtime.js'],
+  assetsInclude: ['./sb-preview/runtime.js'],
   plugins: [
     react(),
     checker({
@@ -69,6 +69,11 @@ export default defineConfig({
       '@pages': path.resolve(__dirname, '/src/pages'),
       '@routes': path.resolve(__dirname, '/src/routes'),
       '@test': path.resolve(__dirname, '/src/test'),
+      '@screengeometry/components': path.resolve(__dirname, '../../packages/components/src'),
+      '@screengeometry/openapi': path.resolve(__dirname, '../../packages/openapi/src'),
+      '@screengeometry/server': path.resolve(__dirname, '../../packages/server/src'),
+      '@screengeometry/serviceworker': path.resolve(__dirname, '../../packages/serviceworker/src'),
+      '@screengeometry/utils': path.resolve(__dirname, '../../packages/utils/src'),
     },
   },
   test: viteTest.test,

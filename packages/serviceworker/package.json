@@ -13,10 +13,10 @@
     "msw": "2.2.9"
   },
   "devDependencies": {
-    "@screengeometry/eslint-config": "1.0.0",
-    "@screengeometry/prettier-config": "1.0.0",
-    "@screengeometry/server": "1.0.0",
-    "@screengeometry/ts-config": "1.0.0"
+    "@screengeometry/eslint-config": "workspace:*",
+    "@screengeometry/prettier-config": "workspace:*",
+    "@screengeometry/server": "workspace:*",
+    "@screengeometry/ts-config": "workspace:*"
   },
   "peerDependencies": {
     "@types/node": "^20.11.2",

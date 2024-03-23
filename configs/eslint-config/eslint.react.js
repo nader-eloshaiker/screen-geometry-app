@@ -40,6 +40,9 @@ module.exports = {
       version: 'detect', // React version. "detect" automatically picks the version you have installed.
       flowVersion: '0.53', // Flow version
     },
+    tailwindcss: {
+      callees: ['classnames', 'clsx', 'cn', 'cva'],
+    },
   },
   globals: {
     React: true,

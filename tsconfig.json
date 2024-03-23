@@ -1,6 +1,11 @@
 {
   "extends": "@screengeometry/ts-config/node",
   "display": "Main",
-  "include": ["package.json"],
+  "compilerOptions": {
+    "paths": {
+      "@screengeometry/*": ["./packages/*", "./packages/*/src"]
+    }
+  },
+  "include": ["package.json", "@screengeometry/types/react.d", "@screengeometry/types/vite.d"],
   "exclude": ["node_modules/", "dist/", "coverage/"]
 }

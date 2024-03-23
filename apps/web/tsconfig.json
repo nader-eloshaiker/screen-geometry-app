@@ -2,7 +2,7 @@
   "extends": "@screengeometry/ts-config/react",
   "display": "Components",
   "compilerOptions": {
-    "types": ["vitest/globals"],
+    "types": ["vitest/globals", "@screengeometry/types/react.d", "@screengeometry/types/vite.d"],
     "baseUrl": ".",
     "paths": {
       "@assets/*": ["./src/assets/*"],
@@ -13,9 +13,14 @@
       "@models/*": ["./src/models/*"],
       "@pages/*": ["./src/pages/*"],
       "@routes/*": ["./src/routes/*"],
-      "@test/*": ["./src/test/*"]
+      "@test/*": ["./src/test/*"],
+      "@screengeometry/components": ["../../packages/components/src"],
+      "@screengeometry/openapi": ["../../packages/openapi/src"],
+      "@screengeometry/server": ["../../packages/server/src"],
+      "@screengeometry/serviceworker": ["../../packages/serviceworker/src"],
+      "@screengeometry/utils": ["../../packages/utils/src"]
     }
   },
-  "include": ["./", "@screengeometry/types/react.d", "@screengeometry/types/vite.d"],
+  "include": ["./src"],
   "exclude": ["node_modules/**/*", "dist/**/*", "coverage/**/*"]
 }

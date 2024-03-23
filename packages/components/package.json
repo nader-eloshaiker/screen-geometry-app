@@ -5,12 +5,24 @@
   "type": "module",
   "main": "index.ts",
   "exports": {
-    "./autocomplete": "./src/autocomplete/index.ts",
-    "./hooks": "./src/hooks/index.ts",
-    "./listinputfield": "./src/listinputfield/index.ts",
-    "./notification": "./src/notification/index.ts",
-    "./overlayinputfield": "./src/overlayinputfield/index.ts",
-    "./skeleton": "./src/skeleton/index.ts"
+    "./autocomplete": {
+      "default": "./src/autocomplete/index.ts"
+    },
+    "./hooks": {
+      "default": "./src/hooks/index.ts"
+    },
+    "./listinputfield": {
+      "default": "./src/listinputfield/index.ts"
+    },
+    "./notification": {
+      "default": "./src/notification/index.ts"
+    },
+    "./overlayinputfield": {
+      "default": "./src/overlayinputfield/index.ts"
+    },
+    "./skeleton": {
+      "default": "./src/skeleton/index.ts"
+    }
   },
   "scripts": {
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
@@ -28,9 +40,9 @@
     "report:test": "pnpm test:ci"
   },
   "dependencies": {
-    "@screengeometry/openapi": "1.0.0",
+    "@screengeometry/openapi": "workspace:*",
     "@react-hook/resize-observer": "^1.2.6",
-    "@screengeometry/utils": "1.0.0",
+    "@screengeometry/utils": "workspace:*",
     "autoprefixer": "^10.4.17",
     "axios": "^1.6.7",
     "clsx": "^2.1.0",
@@ -47,11 +59,11 @@
     "tailwindcss": "^3.4.1"
   },
   "devDependencies": {
-    "@screengeometry/eslint-config": "1.0.0",
-    "@screengeometry/prettier-config": "1.0.0",
-    "@screengeometry/tailwind-config": "1.0.0",
-    "@screengeometry/ts-config": "1.0.0",
-    "@screengeometry/types": "1.0.0",
+    "@screengeometry/eslint-config": "workspace:*",
+    "@screengeometry/prettier-config": "workspace:*",
+    "@screengeometry/tailwind-config": "workspace:*",
+    "@screengeometry/ts-config": "workspace:*",
+    "@screengeometry/types": "workspace:*",
     "@types/node": "^20.11.2",
     "@types/react": "^18.2.45",
     "@types/react-dom": "^18.2.17",

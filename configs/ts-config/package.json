@@ -11,8 +11,8 @@
     "access": "public"
   },
   "dependencies": {
-    "@screengeometry/prettier-config": "1.0.0",
-    "@screengeometry/eslint-config": "1.0.0",
+    "@screengeometry/prettier-config": "workspace:*",
+    "@screengeometry/eslint-config": "workspace:*",
     "typescript": "^5.4.2"
   }
 }

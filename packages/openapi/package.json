@@ -19,10 +19,10 @@
     "@tanstack/react-query": "5.24.1"
   },
   "devDependencies": {
-    "@screengeometry/eslint-config": "1.0.0",
-    "@screengeometry/prettier-config": "1.0.0",
-    "@screengeometry/tailwind-config": "1.0.0",
-    "@screengeometry/ts-config": "1.0.0",
+    "@screengeometry/eslint-config": "workspace:*",
+    "@screengeometry/prettier-config": "workspace:*",
+    "@screengeometry/tailwind-config": "workspace:*",
+    "@screengeometry/ts-config": "workspace:*",
     "orval": "6.24.0"
   }
 }

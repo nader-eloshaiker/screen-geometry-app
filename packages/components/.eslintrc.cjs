@@ -2,9 +2,6 @@
 module.exports = {
   extends: ['@screengeometry/eslint-config/react'],
   parser: '@typescript-eslint/parser',
-  parserOptions: {
-    project: true,
-    tsconfigRootDir: __dirname,
-  },
+  root: true,
   ignorePatterns: ['node_modules/**/*', 'dist/**/*', 'coverage/**/*'],
 }

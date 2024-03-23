@@ -3,17 +3,31 @@
   "private": true,
   "version": "1.0.0",
   "type": "module",
+  "typesVersions": {
+    "*": {
+      "*": [
+        "./src/*"
+      ]
+    }
+  },
   "exports": {
-    "./vite.d": "./src/vite.d.ts",
-    "./react.d": "./src/react.d.ts"
+    ".": {
+      "types": "./src/index.d.ts"
+    },
+    "./vite.d": {
+      "types": "./src/vite.d.ts"
+    },
+    "./react.d": {
+      "types": "./src/react.d.ts"
+    }
   },
   "publishConfig": {
     "access": "public"
   },
   "devDependencies": {
-    "@screengeometry/eslint-config": "1.0.0",
-    "@screengeometry/prettier-config": "1.0.0",
-    "@screengeometry/ts-config": "1.0.0"
+    "@screengeometry/eslint-config": "workspace:*",
+    "@screengeometry/prettier-config": "workspace:*",
+    "@screengeometry/ts-config": "workspace:*"
   },
   "peerDependencies": {
     "@types/node": "^20.11.2",
