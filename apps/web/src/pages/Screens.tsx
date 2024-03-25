@@ -9,7 +9,7 @@ import { useScreenContext } from '@contexts/Screen/useScreenContext'
 import { useCreateScreenListApi } from '@hooks/api/helpers/useCreateScreenListApi'
 import { useGetScreensListApi } from '@hooks/api/helpers/useGetScreenListApi'
 import { useElementSize } from '@hooks/useElementSize'
-import { SkeletonImage } from '@screengeometry/components'
+import { ImageIcon, SkeletonImage } from '@screengeometry/components'
 import { Dimensions, ScreenItem } from '@screengeometry/openapi'
 import { getMaxScreenSize } from '@screengeometry/utils'
 import { useEffect, useRef, useState } from 'react'
@@ -92,7 +92,11 @@ export const Screens = () => {
               </div>
               <Stacked height={maxPanelSize.height}>
                 {screens.length === 0 && isScreenListLoading ? (
-                  <SkeletonImage data-testid='SkeletonImage' className='size-full' />
+                  <SkeletonImage
+                    data-testid='SkeletonImage'
+                    className='size-full'
+                    image={<ImageIcon fill='rgb(107 114 128)' className='size-1/4' />}
+                  />
                 ) : (
                   screens
                     .filter((screen) => screen.visible)

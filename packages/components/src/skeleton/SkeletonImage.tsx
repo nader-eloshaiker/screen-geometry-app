@@ -1,9 +1,9 @@
+import { ReactNode } from 'react'
 import { twMerge } from 'tailwind-merge'
-import ImageIcon from './assets/Image'
 
-type TProps = TRestProps & { className?: string }
+type TProps = TRestProps & { className?: string; image: ReactNode }
 
-export const SkeletonImage = ({ className, ...rest }: TProps) => {
+export const SkeletonImage = ({ className, image, ...rest }: TProps) => {
   return (
     <div
       data-testid='SkeletonImage'
@@ -13,7 +13,7 @@ export const SkeletonImage = ({ className, ...rest }: TProps) => {
       )}
       {...rest}
     >
-      <ImageIcon fill='rgb(107 114 128)' className='size-20' />
+      {image}
     </div>
   )
 }

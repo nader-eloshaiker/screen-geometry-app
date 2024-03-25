@@ -83,7 +83,7 @@ export const ListInputField = ({
         stdOverlay,
         {
           overlay: (
-            <button className='btn btn-circle btn-xs' role='reset'>
+            <button className='btn btn-circle btn-xs'>
               <CloseIcon className='size-4' onClick={handleClear} />
             </button>
           ),
