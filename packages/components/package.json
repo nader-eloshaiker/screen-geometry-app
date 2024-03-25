@@ -3,8 +3,11 @@
   "private": true,
   "version": "1.0.0",
   "type": "module",
-  "main": "index.ts",
+  "main": "./src/index.ts",
   "exports": {
+    ".": {
+      "default": "./src/index.ts"
+    },
     "./autocomplete": {
       "default": "./src/autocomplete/index.ts"
     },

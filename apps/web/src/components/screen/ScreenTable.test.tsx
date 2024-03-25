@@ -1,6 +1,6 @@
 import { QueryProvider } from '@contexts/Query/QueryProvider'
 import { useElementSizeMock } from '@hooks/useElementSize.mock'
-import { NotificationProvider } from '@screengeometry/components/notification'
+import { NotificationProvider } from '@screengeometry/components'
 import {
   ScreenItem,
   getGetScreenListMock,

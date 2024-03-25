@@ -1,8 +1,8 @@
-import { InputOverlay, OverlayInputField } from '@screengeometry/components/overlayinputfield'
 import { clsx } from 'clsx'
 import { ChangeEvent, KeyboardEvent, memo, useCallback, useEffect, useRef, useState } from 'react'
 import { useDebounce } from '../hooks/useDebounce'
 import { useElementSize } from '../hooks/useElementSize'
+import { InputOverlay, OverlayInputField } from '../overlayinputfield'
 import CloseIcon from './assets/Close'
 import MagnifyGlassIcon from './assets/MagnifyGlass'
 

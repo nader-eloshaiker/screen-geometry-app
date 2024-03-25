@@ -1,3 +1,3 @@
-export * from '../hooks/useDebounce'
-export * from '../hooks/useElementSize'
-export * from '../hooks/useElementSize.mock'
+export * from './useDebounce'
+export * from './useElementSize'
+export * from './useElementSize.mock'

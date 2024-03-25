@@ -3,7 +3,7 @@ import {
   NotificationActionTypes,
   NotificationType,
   useNotificationContext,
-} from '@screengeometry/components/notification'
+} from '@screengeometry/components'
 import { ErrorResponse } from '@screengeometry/openapi'
 import { useEffect } from 'react'
 

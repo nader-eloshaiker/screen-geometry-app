@@ -28,7 +28,8 @@
     "tw`([^`]*)", // tw`...`
     "tw\\.[^`]+`([^`]*)`", // tw.xxx<xxx>`...`
     "tw\\(.*?\\).*?`([^`]*)" // tw(Component)<xxx>`...`
-  ]
+  ],
+  "eslint.workingDirectories": ["./apps/web", "./configs/eslint-config", "./packages/components"]
   // "[javascript]": {
   //   "editor.defaultFormatter": "esbenp.prettier-vscode"
   // },

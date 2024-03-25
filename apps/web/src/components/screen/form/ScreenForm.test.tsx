@@ -2,7 +2,7 @@ import { QueryProvider } from '@contexts/Query/QueryProvider'
 import { ScreenProvider } from '@contexts/Screen/ScreenProvider'
 import { useScreenContext } from '@contexts/Screen/useScreenContext'
 import { useElementSizeMock } from '@hooks/useElementSize.mock'
-import { NotificationProvider } from '@screengeometry/components/notification'
+import { NotificationProvider } from '@screengeometry/components'
 import {
   ScreenInput,
   ScreenItem,
