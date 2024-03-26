@@ -25,6 +25,7 @@ const viteTest: VitestUserConfigInterface = {
         ...configDefaults.exclude,
         'src/reportWebVitals.ts',
         'src/test/**/*',
+        'src/service-worker/**/*',
         'src/assets/**/*',
         'src/**/*.mock.{ts,tsx}',
         'src/**/*.stories.tsx',

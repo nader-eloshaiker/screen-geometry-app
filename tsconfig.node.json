@@ -9,7 +9,6 @@
     "isolatedModules": true,
     "lib": ["ESNext", "DOM", "DOM.Iterable"],
     "module": "ESNext",
-    "moduleDetection": "force",
     "moduleResolution": "Bundler",
     "noEmit": true,
     "noFallthroughCasesInSwitch": true,
