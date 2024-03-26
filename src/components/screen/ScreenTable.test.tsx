@@ -1,10 +1,9 @@
-import { NotificationProvider } from '@contexts/Notification/NotificationProvider'
 import { QueryProvider } from '@contexts/Query/QueryProvider'
-import { useElementSizeMock } from '@hooks/useElementSize.mock'
-import { ScreenItem } from '@openapi/generated/models'
-import { getGetScreenListMock, getScreenListServiceMock } from '@openapi/generated/services/screen-list-service'
-import { getScreenServiceMock } from '@openapi/generated/services/screen-service'
-import { mswWithSpy, resetMSW, startMSW, stopMSW } from '@test/mocks/mockMSW'
+
+import { useElementSizeMock } from '@components/common/hooks/useElementSize.mock'
+import { NotificationProvider } from '@components/common/notification'
+import { ScreenItem, getGetScreenListMock, getScreenListServiceMock, getScreenServiceMock } from '@openapi/generated'
+import { mswWithSpy, resetMSW, startMSW, stopMSW } from '@serviceworker/NodeServiceWorker'
 import { useInteractComponent } from '@test/utils/useInteractComponent'
 import { waitFor } from '@testing-library/react'
 import { ScreenTable } from './ScreenTable'
@@ -26,7 +25,7 @@ const TestComponent = ({
 }
 
 describe('#ScreenTable', () => {
-  const mswRequestEventSpy = mswWithSpy(...getScreenServiceMock(), ...getScreenListServiceMock())
+  const mswRequestEventSpy = mswWithSpy([...getScreenServiceMock(), ...getScreenListServiceMock()])
 
   beforeAll(async () => {
     startMSW()
@@ -58,12 +57,12 @@ describe('#ScreenTable', () => {
     const test = useInteractComponent(<TestComponent />)
 
     const deleteElements = await test.findAllByLabelText('delete button')
-    const deleteElement = deleteElements[0]
+    const deleteElement = deleteElements[0] as HTMLElement
 
     await test.user.click(deleteElement)
 
     expect(mswRequestEventSpy[mswRequestEventSpy.length - 1]).toEqual(
-      expect.stringContaining('method:DELETE|url:http://fakeapi.com/v1/screen/pVesw1Iu'),
+      expect.stringContaining('method:DELETE|url:http://dev.api.screengeometry.com/v1/screen/pVesw1Iu'),
     )
 
     waitFor(() => expect(test.queryAllByRole('row').length).toBe(4))
@@ -72,12 +71,12 @@ describe('#ScreenTable', () => {
     const test = useInteractComponent(<TestComponent />)
 
     const showElements = await test.findAllByLabelText('show checkbox')
-    const showElement = showElements[0]
+    const showElement = showElements[0] as HTMLElement
 
     await test.user.click(showElement)
 
     expect(mswRequestEventSpy[mswRequestEventSpy.length - 1]).toEqual(
-      expect.stringContaining('method:PATCH|url:http://fakeapi.com/v1/screen/pVesw1Iu/show'),
+      expect.stringContaining('method:PATCH|url:http://dev.api.screengeometry.com/v1/screen/pVesw1Iu/show'),
     )
   })
 

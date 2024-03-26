@@ -1,5 +1,5 @@
-import { OverlayInputField } from '@components/overlay-input-field/OverlayInputField'
-import { ScreenDataEnum } from '@models/Screen'
+import { OverlayInputField } from '@components/common/overlay-input-field/OverlayInputField'
+import { ScreenDataEnum } from '@openapi/models/Screen'
 import { clsx } from 'clsx'
 import { useFormContext } from 'react-hook-form'
 

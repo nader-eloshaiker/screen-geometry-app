@@ -1,11 +1,11 @@
-import { AutoCompleteScreen } from '@components/auto-complete/AutoCompleteScreen'
+import { AutoCompleteScreen } from '@components/common/auto-complete/AutoCompleteScreen'
 import { DarkMode, LightMode } from '@components/theme/ThemeConstants'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useCreateScreenApi } from '@hooks/api/helpers/useCreateScreenApi'
+import { useSearchApi } from '@hooks/api/helpers/useSearchApi'
 import { useUpdateScreenApi } from '@hooks/api/helpers/useUpdateScreenApi'
-import { ScreenDataEnum } from '@models/Screen'
-import { SearchScreenItem } from '@models/Search'
-import { ScreenInput } from '@openapi/generated/models'
+import { ScreenInput } from '@openapi/generated'
+import { ScreenDataEnum, SearchScreenItem } from '@openapi/models'
 import { createCSSColor } from '@utils/ScreenCalc'
 import { clsx } from 'clsx'
 import { useCallback, useEffect, useState } from 'react'
@@ -39,6 +39,9 @@ export const ScreenForm = ({ defaultValues = null, editId = undefined, isLoading
   const { isPending: isCreateLoading, mutate: createAction } = useCreateScreenApi()
   const { isPending: isUpdateLoading, mutate: updateAction } = useUpdateScreenApi()
   const [clearSearchHandler, setClearSearchHandler] = useState<() => void>(() => {})
+
+  const [searchTerm, setSearchTerm] = useState<string>('')
+  const { isFetching: isSearchListLoading, data: searchListResponse } = useSearchApi({ term: searchTerm })
 
   // NOTE: this is a hack to get around the fact that the form is not re-rendering when the defaultValues prop changes
   // Address this at the top level of te form
@@ -129,7 +132,13 @@ export const ScreenForm = ({ defaultValues = null, editId = undefined, isLoading
         <label className='label'>
           <span className='text-sm'>Choose from list of Monitors</span>
         </label>
-        <AutoCompleteScreen onSelectScreen={selectHandler} setClearSearchHandler={setClearSearchHandler} />
+        <AutoCompleteScreen
+          onSelectScreen={selectHandler}
+          setClearSearchHandler={setClearSearchHandler}
+          isFetching={isSearchListLoading}
+          searchList={searchListResponse?.list ?? []}
+          onSearch={setSearchTerm}
+        />
       </div>
 
       <div className='divider text-sm'>Or</div>

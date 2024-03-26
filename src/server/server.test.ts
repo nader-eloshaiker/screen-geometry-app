@@ -1,15 +1,20 @@
-import { useElementSizeMock } from '@hooks/useElementSize.mock'
-import { screenInput55Fixture } from '@openapi/fixtures/ScreenFixtures'
-import { getGetScreenListMock } from '@openapi/generated/services/screen-list-service'
-import { spyOnLocalForage } from '@test/mocks/mockLocalForage'
-import { mswWithSpy, startMSW, stopMSW } from '@test/mocks/mockMSW'
-import { apiRoutes } from './meta/ApiRouteSchema'
+import { getGetScreenListMock } from '@openapi/generated'
+import { apiRoutes } from '@openapi/meta'
+import { spyOnLocalForage } from '@server/test/mocks/mockLocalForage'
+import { mswWithSpy, startMSW, stopMSW } from '@serviceworker/NodeServiceWorker'
 import { generateStub } from './server'
+import { screenInput55Fixture } from './test/fixtures/ScreenFixtures'
 
 describe('#server', () => {
-  const { searchMocks, screenListMocks, screenMocks, passthroughMocks } = generateStub(1)
+  const baseUrl = 'http://fakeapi.com'
+  const { searchMocks, screenListMocks, screenMocks, passthroughMocks } = generateStub(baseUrl, 1)
 
-  const mswRequestEventSpy = mswWithSpy(...searchMocks(), ...screenListMocks(), ...screenMocks(), ...passthroughMocks())
+  const mswRequestEventSpy = mswWithSpy([
+    ...searchMocks(),
+    ...screenListMocks(),
+    ...screenMocks(),
+    ...passthroughMocks(),
+  ])
 
   beforeAll(async () => {
     await startMSW()
@@ -20,12 +25,11 @@ describe('#server', () => {
   })
 
   beforeEach(() => {
-    useElementSizeMock()
     spyOnLocalForage(getGetScreenListMock().list)
   })
 
   it('should call the GET screens api', async () => {
-    const response = await fetch(`${apiRoutes.apiUrl}${apiRoutes.apiPathVer}/${apiRoutes.screens.path}`)
+    const response = await fetch(`${baseUrl}${apiRoutes.screens}`)
     expect(response.status).toBe(200)
     expect(response.statusText).toBe('OK')
     expect(mswRequestEventSpy[mswRequestEventSpy.length - 1]).toEqual(
@@ -34,7 +38,7 @@ describe('#server', () => {
   })
 
   it('should call the POST screens api', async () => {
-    const response = await fetch(`${apiRoutes.apiUrl}${apiRoutes.apiPathVer}/${apiRoutes.screens.path}`, {
+    const response = await fetch(`${baseUrl}${apiRoutes.screens}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -49,7 +53,7 @@ describe('#server', () => {
   })
 
   it('should call the GET screen api', async () => {
-    const response = await fetch(`${apiRoutes.apiUrl}${apiRoutes.apiPathVer}/${apiRoutes.screen.path}/pVesw1Iu`)
+    const response = await fetch(`${baseUrl}${apiRoutes.screen}/pVesw1Iu`)
     expect(response.status).toBe(200)
     expect(response.statusText).toBe('OK')
     expect(mswRequestEventSpy[mswRequestEventSpy.length - 1]).toEqual(
@@ -58,7 +62,7 @@ describe('#server', () => {
   })
 
   it('should call the DELETE screens api', async () => {
-    const response = await fetch(`${apiRoutes.apiUrl}${apiRoutes.apiPathVer}/${apiRoutes.screen.path}/pVesw1Iu`, {
+    const response = await fetch(`${baseUrl}${apiRoutes.screen}/pVesw1Iu`, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
@@ -72,7 +76,7 @@ describe('#server', () => {
   })
 
   it('should call the PUT screens api', async () => {
-    const response = await fetch(`${apiRoutes.apiUrl}${apiRoutes.apiPathVer}/${apiRoutes.screen.path}/pVesw1Iu`, {
+    const response = await fetch(`${baseUrl}${apiRoutes.screen}/pVesw1Iu`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
@@ -87,7 +91,7 @@ describe('#server', () => {
   })
 
   it('should call the PATCH screens api', async () => {
-    const response = await fetch(`${apiRoutes.apiUrl}${apiRoutes.apiPathVer}/${apiRoutes.screen.path}/pVesw1Iu/show`, {
+    const response = await fetch(`${baseUrl}${apiRoutes.screen}/pVesw1Iu/show`, {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',
@@ -102,7 +106,7 @@ describe('#server', () => {
   })
 
   it('should call the POST screens api', async () => {
-    const response = await fetch(`${apiRoutes.apiUrl}${apiRoutes.apiPathVer}/${apiRoutes.screen.path}`, {
+    const response = await fetch(`${baseUrl}${apiRoutes.screen}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -117,7 +121,7 @@ describe('#server', () => {
   })
 
   it('should call the get search api', async () => {
-    const response = await fetch(`${apiRoutes.apiUrl}${apiRoutes.apiPathVer}/${apiRoutes.search.path}`)
+    const response = await fetch(`${baseUrl}${apiRoutes.search}`)
     expect(response.status).toBe(200)
     expect(response.statusText).toBe('OK')
     expect(mswRequestEventSpy[mswRequestEventSpy.length - 1]).toEqual(

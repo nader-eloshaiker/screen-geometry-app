@@ -1,17 +1,18 @@
+import { useElementSize } from '@components/common/hooks/useElementSize'
+import { ImageIcon } from '@components/common/skeleton'
+import { SkeletonImage } from '@components/common/skeleton/SkeletonImage'
 import { ScreenButton } from '@components/screen/CreateButton'
 import { ScreenFormDrawer } from '@components/screen/ScreenFormDrawer'
 import { ScreenPanel } from '@components/screen/ScreenPanel'
 import { ScreenTable } from '@components/screen/ScreenTable'
-import { SkeletonImage } from '@components/skeleton/SkeletonImage'
 import { Stacked } from '@components/stacked/Stacked'
 import { defaultScreenInputList } from '@constants/defaultScreenList'
 import { FormDrawerProvider } from '@contexts/FormDrawer/FormDrawerProvider'
 import { useScreenContext } from '@contexts/Screen/useScreenContext'
 import { useCreateScreenListApi } from '@hooks/api/helpers/useCreateScreenListApi'
 import { useGetScreensListApi } from '@hooks/api/helpers/useGetScreenListApi'
-import { useElementSize } from '@hooks/useElementSize'
-import { Dimensions } from '@models/Screen'
-import { ScreenItem } from '@openapi/generated/models'
+import { ScreenItem } from '@openapi/generated'
+import { Dimensions } from '@openapi/models'
 import { getMaxScreenSize } from '@utils/ScreenCalc'
 import { useEffect, useRef, useState } from 'react'
 import ReactGA from 'react-ga4'
@@ -93,7 +94,11 @@ export const Screens = () => {
               </div>
               <Stacked height={maxPanelSize.height}>
                 {screens.length === 0 && isScreenListLoading ? (
-                  <SkeletonImage data-testid='SkeletonImage' className='size-full' />
+                  <SkeletonImage
+                    data-testid='SkeletonImage'
+                    className='size-full'
+                    image={<ImageIcon fill='rgb(107 114 128)' className='size-1/4' />}
+                  />
                 ) : (
                   screens
                     .filter((screen) => screen.visible)

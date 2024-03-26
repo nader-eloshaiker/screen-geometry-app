@@ -1,45 +1,28 @@
 {
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "display": "React",
+  "extends": "./tsconfig.node.json",
   "compilerOptions": {
-    "target": "ES2022",
     "useDefineForClassFields": true,
-    "lib": ["ES2022", "DOM", "DOM.Iterable"],
-    "module": "ESNext",
-    "skipLibCheck": true,
-
-    /* paths */
     "types": ["vitest/globals"],
+    "jsx": "react-jsx",
     "baseUrl": ".",
     "paths": {
-      // "@/*": ["./src/*"],
       "@assets/*": ["./src/assets/*"],
       "@components/*": ["./src/components/*"],
       "@constants/*": ["./src/constants/*"],
       "@contexts/*": ["./src/contexts/*"],
       "@hooks/*": ["./src/hooks/*"],
-      "@models/*": ["./src/models/*"],
+      "@models/*": ["src/models/*"],
       "@openapi/*": ["./src/openapi/*"],
       "@pages/*": ["./src/pages/*"],
       "@routes/*": ["./src/routes/*"],
       "@server/*": ["src/server/*"],
+      "@serviceworker/*": ["src/service-worker/*"],
       "@test/*": ["./src/test/*"],
       "@utils/*": ["./src/utils/*"]
-    },
-
-    /* Bundler mode */
-    "moduleResolution": "bundler",
-    "allowImportingTsExtensions": true,
-    "resolveJsonModule": true,
-    "isolatedModules": true,
-    "noEmit": true,
-    "jsx": "react-jsx",
-
-    /* Linting */
-    "strict": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "noFallthroughCasesInSwitch": true
+    }
   },
   "include": ["src/**/*"],
-  "exclude": ["node_modules", "coverage", "dist", "build"],
-  "references": [{ "path": "./tsconfig.node.json" }]
+  "exclude": ["node_modules", "coverage", "dist", "build"]
 }

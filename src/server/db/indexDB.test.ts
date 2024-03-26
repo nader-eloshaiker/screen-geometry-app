@@ -1,8 +1,7 @@
-import { screenInput55Fixture } from '@openapi/fixtures/ScreenFixtures'
-import { getGetScreenListMock } from '@openapi/generated/services/screen-list-service'
-import { getGetScreenMock } from '@openapi/generated/services/screen-service'
-import { spyOnLocalForage } from '@test/mocks/mockLocalForage'
+import { getGetScreenListMock, getGetScreenMock } from '@openapi/generated'
+import { spyOnLocalForage } from '@server/test/mocks/mockLocalForage'
 import localforage from 'localforage'
+import { screenInput55Fixture } from '../test/fixtures/ScreenFixtures'
 import { createItem, createItemList, deleteItem, getItem, getItemList, updateItem } from './indexDB'
 
 describe('#indexDB', () => {
@@ -39,7 +38,7 @@ describe('#indexDB', () => {
     await localforage.clear()
     const created = await createItemList([screenInput55Fixture])
 
-    expect(created[0].tag.diagonalSize).toBe(55)
+    expect(created[0]!.tag.diagonalSize).toBe(55)
     expect(await localforage.length()).toBe(1)
   })
 

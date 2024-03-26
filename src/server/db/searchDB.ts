@@ -1,4 +1,4 @@
-import { SearchItem } from '@openapi/generated/models'
+import { SearchItem } from '@openapi/generated'
 
 export const SearchDB: Array<SearchItem> = [
   {

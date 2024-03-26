@@ -1,4 +1,4 @@
-import { SearchItem } from '@openapi/generated/models'
+import { SearchItem } from '@openapi/generated'
 import { SearchDB } from '@server/db/searchDB'
 import MiniSearch, { SearchResult } from 'minisearch'
 

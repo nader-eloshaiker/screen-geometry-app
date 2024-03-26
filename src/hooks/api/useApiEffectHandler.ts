@@ -2,8 +2,8 @@ import {
   GeneralNotificationItem,
   NotificationActionTypes,
   NotificationType,
-} from '@contexts/Notification/NotificationManager'
-import { useNotificationContext } from '@contexts/Notification/useNotifcationContext'
+} from '@components/common/notification/context/NotificationManager'
+import { useNotificationContext } from '@components/common/notification/context/useNotifcationContext'
 import { ErrorResponse } from '@openapi/generated/models'
 import { useEffect } from 'react'
 

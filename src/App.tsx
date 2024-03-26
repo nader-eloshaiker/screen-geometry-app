@@ -1,4 +1,4 @@
-import { NotificationProvider } from '@contexts/Notification/NotificationProvider'
+import { NotificationProvider } from '@components/common/notification/context/NotificationProvider'
 import { QueryProvider } from '@contexts/Query/QueryProvider'
 import { ScreenProvider } from '@contexts/Screen/ScreenProvider'
 import { ThemeModeProvider } from '@contexts/theme/ThemeModeProvider'

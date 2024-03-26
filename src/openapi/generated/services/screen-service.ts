@@ -13,7 +13,7 @@ import type {
 } from '@tanstack/react-query'
 import { useMutation, useQuery } from '@tanstack/react-query'
 import { HttpResponse, delay, http } from 'msw'
-import { useApiAxios } from '../../../hooks/api/useApiAxios'
+import { useApiAxios } from '../../axios/useApiAxios'
 import type { ErrorResponse, ScreenIdResponse, ScreenInput, ScreenItemResponse } from '../models'
 
 export const useCreateScreenHook = () => {
@@ -21,7 +21,7 @@ export const useCreateScreenHook = () => {
 
   return (screenInput: ScreenInput) => {
     return createScreen({
-      url: `/screen`,
+      url: `/v1/screen`,
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       data: screenInput,
@@ -78,7 +78,7 @@ export const useShowScreenHook = () => {
   const showScreen = useApiAxios<ScreenItemResponse>()
 
   return (id: string) => {
-    return showScreen({ url: `/screen/${id}/show`, method: 'PATCH' })
+    return showScreen({ url: `/v1/screen/${id}/show`, method: 'PATCH' })
   }
 }
 
@@ -125,12 +125,12 @@ export const useGetScreenHook = () => {
   const getScreen = useApiAxios<ScreenItemResponse>()
 
   return (id: string, signal?: AbortSignal) => {
-    return getScreen({ url: `/screen/${id}`, method: 'GET', signal })
+    return getScreen({ url: `/v1/screen/${id}`, method: 'GET', signal })
   }
 }
 
 export const getGetScreenQueryKey = (id: string) => {
-  return [`/screen/${id}`] as const
+  return [`/v1/screen/${id}`] as const
 }
 
 export const useGetScreenQueryOptions = <
@@ -181,7 +181,7 @@ export const useUpdateScreenHook = () => {
 
   return (id: string, screenInput: ScreenInput) => {
     return updateScreen({
-      url: `/screen/${id}`,
+      url: `/v1/screen/${id}`,
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       data: screenInput,
@@ -238,7 +238,7 @@ export const useDeleteScreenHook = () => {
   const deleteScreen = useApiAxios<ScreenIdResponse>()
 
   return (id: string) => {
-    return deleteScreen({ url: `/screen/${id}`, method: 'DELETE' })
+    return deleteScreen({ url: `/v1/screen/${id}`, method: 'DELETE' })
   }
 }
 
@@ -338,7 +338,7 @@ export const getUpdateScreenMock = () => ({
 export const getDeleteScreenMock = () => ({ id: '5HjERJbH' })
 
 export const getScreenServiceMock = () => [
-  http.post('*/screen', async () => {
+  http.post('*/v1/screen', async () => {
     await delay(10)
     return new HttpResponse(JSON.stringify(getCreateScreenMock()), {
       status: 200,
@@ -347,7 +347,7 @@ export const getScreenServiceMock = () => [
       },
     })
   }),
-  http.patch('*/screen/:id/show', async () => {
+  http.patch('*/v1/screen/:id/show', async () => {
     await delay(10)
     return new HttpResponse(JSON.stringify(getShowScreenMock()), {
       status: 200,
@@ -356,7 +356,7 @@ export const getScreenServiceMock = () => [
       },
     })
   }),
-  http.get('*/screen/:id', async () => {
+  http.get('*/v1/screen/:id', async () => {
     await delay(10)
     return new HttpResponse(JSON.stringify(getGetScreenMock()), {
       status: 200,
@@ -365,7 +365,7 @@ export const getScreenServiceMock = () => [
       },
     })
   }),
-  http.put('*/screen/:id', async () => {
+  http.put('*/v1/screen/:id', async () => {
     await delay(10)
     return new HttpResponse(JSON.stringify(getUpdateScreenMock()), {
       status: 200,
@@ -374,7 +374,7 @@ export const getScreenServiceMock = () => [
       },
     })
   }),
-  http.delete('*/screen/:id', async () => {
+  http.delete('*/v1/screen/:id', async () => {
     await delay(10)
     return new HttpResponse(JSON.stringify(getDeleteScreenMock()), {
       status: 200,

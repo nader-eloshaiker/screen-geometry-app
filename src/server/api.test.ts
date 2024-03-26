@@ -1,6 +1,5 @@
-import { screenInput55Fixture } from '@openapi/fixtures/ScreenFixtures'
-import { getGetScreenListMock } from '@openapi/generated/services/screen-list-service'
-import { spyOnLocalForage } from '@test/mocks/mockLocalForage'
+import { getGetScreenListMock } from '@openapi/generated'
+import { spyOnLocalForage } from '@server/test/mocks/mockLocalForage'
 import localforage from 'localforage'
 import {
   createScreen,
@@ -12,6 +11,7 @@ import {
   showScreen,
   updateScreen,
 } from './api'
+import { screenInput55Fixture } from './test/fixtures/ScreenFixtures'
 
 describe('#api', () => {
   beforeEach(() => {
@@ -61,7 +61,7 @@ describe('#api', () => {
     await localforage.clear()
     const created = await createScreenList([screenInput55Fixture])
 
-    expect(created.list[0].tag.diagonalSize).toBe(55)
+    expect(created.list[0]!.tag.diagonalSize).toBe(55)
     expect(await localforage.length()).toBe(1)
   })
 

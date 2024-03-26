@@ -13,19 +13,19 @@ import type {
 } from '@tanstack/react-query'
 import { useMutation, useQuery } from '@tanstack/react-query'
 import { HttpResponse, delay, http } from 'msw'
-import { useApiAxios } from '../../../hooks/api/useApiAxios'
+import { useApiAxios } from '../../axios/useApiAxios'
 import type { ErrorResponse, ScreenInputList, ScreenListResponse } from '../models'
 
 export const useGetScreenListHook = () => {
   const getScreenList = useApiAxios<ScreenListResponse>()
 
   return (signal?: AbortSignal) => {
-    return getScreenList({ url: `/screens`, method: 'GET', signal })
+    return getScreenList({ url: `/v1/screens`, method: 'GET', signal })
   }
 }
 
 export const getGetScreenListQueryKey = () => {
-  return [`/screens`] as const
+  return [`/v1/screens`] as const
 }
 
 export const useGetScreenListQueryOptions = <
@@ -73,7 +73,7 @@ export const useCreateScreenListHook = () => {
 
   return (screenInputList: ScreenInputList) => {
     return createScreenList({
-      url: `/screens`,
+      url: `/v1/screens`,
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       data: screenInputList,
@@ -204,7 +204,7 @@ export const getCreateScreenListMock = () => ({
 })
 
 export const getScreenListServiceMock = () => [
-  http.get('*/screens', async () => {
+  http.get('*/v1/screens', async () => {
     await delay(10)
     return new HttpResponse(JSON.stringify(getGetScreenListMock()), {
       status: 200,
@@ -213,7 +213,7 @@ export const getScreenListServiceMock = () => [
       },
     })
   }),
-  http.post('*/screens', async () => {
+  http.post('*/v1/screens', async () => {
     await delay(10)
     return new HttpResponse(JSON.stringify(getCreateScreenListMock()), {
       status: 200,

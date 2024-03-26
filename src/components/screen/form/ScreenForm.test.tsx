@@ -1,17 +1,20 @@
-import { NotificationProvider } from '@contexts/Notification/NotificationProvider'
+import { useElementSizeMock } from '@components/common/hooks/useElementSize.mock'
+import { NotificationProvider } from '@components/common/notification'
 import { QueryProvider } from '@contexts/Query/QueryProvider'
 import { ScreenProvider } from '@contexts/Screen/ScreenProvider'
 import { useScreenContext } from '@contexts/Screen/useScreenContext'
-import { useElementSizeMock } from '@hooks/useElementSize.mock'
-import { screenInputFixture } from '@openapi/fixtures/ScreenFixtures'
-import { ScreenInput, ScreenItem } from '@openapi/generated/models'
-import { getScreenListServiceMock } from '@openapi/generated/services/screen-list-service'
-import { getScreenServiceMock } from '@openapi/generated/services/screen-service'
-import { getSearchListServiceMock } from '@openapi/generated/services/search-list-service'
-import { mswWithSpy, resetMSW, startMSW, stopMSW } from '@test/mocks/mockMSW'
+import {
+  ScreenInput,
+  ScreenItem,
+  getScreenListServiceMock,
+  getScreenServiceMock,
+  getSearchServiceMock,
+} from '@openapi/generated'
+import { mswWithSpy, resetMSW, startMSW, stopMSW } from '@serviceworker/NodeServiceWorker'
+import { screenInputFixture } from '@test/fixtures/ScreenFixtures'
 import { useInteractComponent } from '@test/utils/useInteractComponent'
 import { render, waitFor } from '@testing-library/react'
-import { transformScreenInput } from '@utils/ScreenTransformation'
+import { transformScreenInput } from '@utils/DataTransformation'
 import { ScreenForm } from './ScreenForm'
 
 type Props = {
@@ -51,7 +54,7 @@ const RootTestComponent = ({ defaultValues, editId, initialise, onCloseAction = 
 }
 
 describe('#ScreenForm', () => {
-  mswWithSpy(...getSearchListServiceMock(), ...getScreenServiceMock(), ...getScreenListServiceMock())
+  mswWithSpy([...getSearchServiceMock(), ...getScreenServiceMock(), ...getScreenListServiceMock()])
 
   beforeAll(async () => {
     startMSW()
@@ -223,7 +226,7 @@ describe('#ScreenForm', () => {
       const inputElement = await test.findByPlaceholderText('Type to filter list...')
       await test.user.type(inputElement, 'WQHD+')
 
-      const listElement = test.container.querySelectorAll('li')[0]
+      const listElement = test.container.querySelectorAll('li')[0] as HTMLElement
       await test.user.click(listElement)
 
       expect(await test.findByLabelText('Screen Size')).toHaveValue(34)
@@ -245,7 +248,7 @@ describe('#ScreenForm', () => {
       const inputElement = await test.findByPlaceholderText('Type to filter list...')
       await test.user.type(inputElement, 'WQHD+')
 
-      const listElement = test.container.querySelectorAll('li')[0]
+      const listElement = test.container.querySelectorAll('li')[0] as HTMLElement
       await test.user.click(listElement)
 
       const createButton = await test.findByText('Create')

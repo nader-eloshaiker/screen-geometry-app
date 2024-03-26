@@ -1,31 +1,20 @@
 openapi: '3.0.1'
 info:
   title: 'screen-geometry-app-backend-serverless-apis-v1'
-  version: '3.0.0'
+  version: '3.1.0'
 servers:
-  - url: 'https://{environment}.typicode.com:{port}/{path}'
+  - url: 'https://{environment}.api.screengeometry.com'
     variables:
       environment:
-        default: jsonplaceholder
+        default: prod
         enum:
-          - jsonplaceholder
-          - api
           - dev
-          - staging
-      port:
-        enum:
-          - '443'
-          - '8443'
-        default: '443'
-      path:
-        default: 'v1'
-        enum:
-          - 'v1'
+          - prod
 paths:
-  /search:
+  /v1/search:
     get:
       tags:
-        - 'search list service'
+        - 'search service'
       parameters:
         - name: 'limit'
           in: 'query'
@@ -148,10 +137,10 @@ paths:
       security:
         - authorizer-api-v2: []
         - api_key: []
-      operationId: 'getSearchList'
+      operationId: 'getSearch'
     options:
       tags:
-        - 'search list service'
+        - 'search service'
       responses:
         '200':
           description: '200 response'
@@ -166,8 +155,8 @@ paths:
               schema:
                 type: string
           content: {}
-      operationId: 'optionsSearchList'
-  /screens:
+      operationId: 'optionsSearch'
+  /v1/screens:
     get:
       tags:
         - 'screen list service'
@@ -445,7 +434,7 @@ paths:
                 type: string
           content: {}
       operationId: 'optionsScreenList'
-  /screen:
+  /v1/screen:
     post:
       tags:
         - 'screen service'
@@ -549,7 +538,7 @@ paths:
                 type: string
           content: {}
       operationId: 'optionsCreateScreen'
-  /screen/{id}/show:
+  /v1/screen/{id}/show:
     patch:
       tags:
         - 'screen service'
@@ -635,6 +624,8 @@ paths:
         - api_key: []
       operationId: 'showScreen'
     options:
+      tags:
+        - 'screen service'
       parameters:
         - name: 'id'
           in: 'path'
@@ -656,7 +647,7 @@ paths:
                 type: string
           content: {}
       operationId: 'optionsShowScreen'
-  /screen/{id}:
+  /v1/screen/{id}:
     get:
       tags:
         - 'screen service'

@@ -1,9 +1,49 @@
 /// <reference types="vitest" />
 import react from '@vitejs/plugin-react'
 import path from 'path'
+import { defineConfig } from 'vite'
 import { checker } from 'vite-plugin-checker'
-import { configDefaults, defineConfig } from 'vitest/config'
+import { configDefaults, UserConfig as VitestUserConfigInterface } from 'vitest/config'
 import packageJson from './package.json'
+
+const viteTest: VitestUserConfigInterface = {
+  test: {
+    // Do not process css files (is slow)
+    // css: {
+    //   include: /.+/,
+    // },
+    globals: true,
+    clearMocks: true,
+    mockReset: true,
+    reporters: ['verbose'],
+    coverage: {
+      provider: 'istanbul', //'v8',
+      reporter: ['text', 'json-summary', 'json', 'clover', 'html'],
+      reportsDirectory: 'reports/coverage',
+      include: ['src/**/*.{ts,tsx}'],
+      exclude: [
+        ...configDefaults.exclude,
+        'src/reportWebVitals.ts',
+        'src/test/**/*',
+        'src/assets/**/*',
+        'src/**/*.mock.{ts,tsx}',
+        'src/**/*.stories.tsx',
+        'src/**/*.d.ts',
+      ],
+      reportOnFailure: true,
+      thresholds: {
+        lines: 70,
+        branches: 50,
+        functions: 70,
+        statements: 70,
+        // autoUpdate: true, // Update thresholds when writing tests, disabled due to refactoring tests changes coverage
+      },
+    },
+    environment: 'jsdom',
+    setupFiles: 'src/test/vitest.setup.ts',
+    include: ['src/**/*.test.{ts,tsx}'],
+  },
+}
 
 export default defineConfig({
   base: process.env.BASE_URL,
@@ -11,7 +51,7 @@ export default defineConfig({
     'import.meta.env.VITE_PACKAGE_VERSION': JSON.stringify(packageJson.version),
     'process.env': process.env,
   },
-  assetsInclude: ['/sb-preview/runtime.js'],
+  assetsInclude: ['./sb-preview/runtime.js'],
   plugins: [
     react(),
     checker({
@@ -32,45 +72,10 @@ export default defineConfig({
       '@pages': path.resolve(__dirname, '/src/pages'),
       '@routes': path.resolve(__dirname, '/src/routes'),
       '@server': path.resolve(__dirname, '/src/server'),
+      '@serviceworker': path.resolve(__dirname, '/src/service-worker'),
       '@test': path.resolve(__dirname, '/src/test'),
       '@utils': path.resolve(__dirname, '/src/utils'),
     },
   },
-  test: {
-    // Do not process css files (is slow)
-    // css: {
-    //   include: /.+/,
-    // },
-    globals: true,
-    clearMocks: true,
-    mockReset: true,
-    reporters: ['verbose'],
-    coverage: {
-      provider: 'v8', //'istanbul',
-      reporter: ['text', 'json-summary', 'json', 'clover', 'html'],
-      reportsDirectory: 'reports/coverage',
-      include: ['src/**/*.{ts,tsx}'],
-      exclude: [
-        ...configDefaults.exclude,
-        'src/reportWebVitals.ts',
-        'src/openapi/**/*',
-        'src/test/**/*',
-        'src/assets/**/*',
-        'src/**/*.mock.{ts,tsx}',
-        'src/**/*.stories.tsx',
-        'src/**/*.d.ts',
-      ],
-      reportOnFailure: true,
-      thresholds: {
-        lines: 55,
-        branches: 75,
-        functions: 60,
-        statements: 55,
-        // autoUpdate: true, // Update thresholds when writing tests, disabled due to refactoring tests changes coverage
-      },
-    },
-    environment: 'jsdom',
-    setupFiles: './src/test/vitest.setup.ts',
-    include: ['src/**/*.test.{ts,tsx}'],
-  },
+  test: viteTest.test,
 })
