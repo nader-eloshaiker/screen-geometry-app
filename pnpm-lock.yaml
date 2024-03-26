@@ -15,8 +15,8 @@ importers:
         specifier: ^1.2.6
         version: 1.2.6(react@18.2.0)
       '@tanstack/react-query':
-        specifier: ^5.8.7
-        version: 5.8.7(react-dom@18.2.0)(react@18.2.0)
+        specifier: ^5.28.8
+        version: 5.28.8(react@18.2.0)
       axios:
         specifier: ^1.6.5
         version: 1.6.5
@@ -91,8 +91,8 @@ importers:
         specifier: ^8.0.4
         version: 8.0.4(vitest@1.4.0)
       '@tanstack/react-query-devtools':
-        specifier: ^5.18.1
-        version: 5.18.1(@tanstack/react-query@5.8.7)(react@18.2.0)
+        specifier: ^5.28.8
+        version: 5.28.8(@tanstack/react-query@5.28.8)(react@18.2.0)
       '@testing-library/jest-dom':
         specifier: ^6.1.6
         version: 6.1.6(vitest@1.4.0)
@@ -154,8 +154,8 @@ importers:
         specifier: ^10.4.17
         version: 10.4.17(postcss@8.4.38)
       daisyui:
-        specifier: ^4.4.19
-        version: 4.4.19(postcss@8.4.38)
+        specifier: ^4.8.0
+        version: 4.8.0(postcss@8.4.38)
       eslint:
         specifier: ^8.56.0
         version: 8.56.0
@@ -3804,39 +3804,31 @@ packages:
       file-system-cache: 2.3.0
     dev: true
 
-  /@tanstack/query-core@5.8.7:
-    resolution: {integrity: sha512-58xOSkxxZK4SGQ/uzX8MDZHLGZCkxlgkPxnfhxUOL2uchnNHyay2UVcR3mQNMgaMwH1e2l+0n+zfS7+UJ/MAJw==}
+  /@tanstack/query-core@5.28.8:
+    resolution: {integrity: sha512-cx64XHeB0kvKxFt22ibvegPeOxnaWVFUbAuhXoIrb7+XePEexHWoB9Kq5n9qroNPkRwQZwgFAP9HNbQz5ohoIg==}
 
-  /@tanstack/query-devtools@5.18.1:
-    resolution: {integrity: sha512-U8bDnDGuwdVMT4ndegPTcjOHOmX/UOjjB7o7UalRIq3DMHLRf8Ufh4+xoAvk3LNK5GBmUBfFSw4osYe5l9n7Lw==}
+  /@tanstack/query-devtools@5.28.6:
+    resolution: {integrity: sha512-DXJGqbrsteWU9XehDf6s3k3QxwQqGUlNXpitsF1xbwkYBcDaAakiC6hjJSMfPBHOrbZCnWfAGCVf4vh2D75/xw==}
     dev: true
 
-  /@tanstack/react-query-devtools@5.18.1(@tanstack/react-query@5.8.7)(react@18.2.0):
-    resolution: {integrity: sha512-IrzAsodabSkEVBP0DHkuzcmqKFZ0EgG9ocuD/fRIrjYmbqqdHxzNmp2WmAZlkVo7hamA0ZdzvL5sjo1koFzjHA==}
+  /@tanstack/react-query-devtools@5.28.8(@tanstack/react-query@5.28.8)(react@18.2.0):
+    resolution: {integrity: sha512-NorR2ueGlGdB5PTvt1WynzjfNI/OJwiisB1r0UAwgi0Em2UalZpMltwvoIrGhJ0T2V+8b0MV5wD+cmf0PPdHGA==}
     peerDependencies:
-      '@tanstack/react-query': ^5.18.1
+      '@tanstack/react-query': ^5.28.8
       react: ^18.0.0
     dependencies:
-      '@tanstack/query-devtools': 5.18.1
-      '@tanstack/react-query': 5.8.7(react-dom@18.2.0)(react@18.2.0)
+      '@tanstack/query-devtools': 5.28.6
+      '@tanstack/react-query': 5.28.8(react@18.2.0)
       react: 18.2.0
     dev: true
 
-  /@tanstack/react-query@5.8.7(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-RYSSMmkhbJ7tPkf8w+MSRIXQLoUCm7DRnTLDcdf+uampupnriEsob3fVWTt9oaEj+AJWEKeCErDBdZeNcAzURQ==}
+  /@tanstack/react-query@5.28.8(react@18.2.0):
+    resolution: {integrity: sha512-4XYhoRmcThqziB32HsyiBLNXJcukaeGfYwAQ+fZqUUE3ZP4oB/Zy41UJdql+TUg98+vsezfbixxAwAbGHfc5Hg==}
     peerDependencies:
       react: ^18.0.0
-      react-dom: ^18.0.0
-      react-native: '*'
-    peerDependenciesMeta:
-      react-dom:
-        optional: true
-      react-native:
-        optional: true
     dependencies:
-      '@tanstack/query-core': 5.8.7
+      '@tanstack/query-core': 5.28.8
       react: 18.2.0
-      react-dom: 18.2.0(react@18.2.0)
 
   /@testing-library/dom@9.3.3:
     resolution: {integrity: sha512-fB0R+fa3AUqbLHWyxXa2kGVtf1Fe1ZZFr0Zp6AIbIAzXb2mKbEXl+PCQNUOaq5lbTab5tfctfXRNsWXxa2f7Aw==}
@@ -5731,17 +5723,17 @@ packages:
     resolution: {integrity: sha512-I7K1Uu0MBPzaFKg4nI5Q7Vs2t+3gWWW648spaF+Rg7pI9ds18Ugn+lvg4SHczUdKlHI5LWBXyqfS8+DufyBsgQ==}
     dev: true
 
-  /culori@3.2.0:
-    resolution: {integrity: sha512-HIEbTSP7vs1mPq/2P9In6QyFE0Tkpevh0k9a+FkjhD+cwsYm9WRSbn4uMdW9O0yXlNYC3ppxL3gWWPOcvEl57w==}
+  /culori@3.3.0:
+    resolution: {integrity: sha512-pHJg+jbuFsCjz9iclQBqyL3B2HLCBF71BwVNujUYEvCeQMvV97R59MNK3R2+jgJ3a1fcZgI9B3vYgz8lzr/BFQ==}
     engines: {node: ^12.20.0 || ^14.13.1 || >=16.0.0}
     dev: true
 
-  /daisyui@4.4.19(postcss@8.4.38):
-    resolution: {integrity: sha512-IjOLWwnndD4N7Ut5CDxbUsaVtbqXPeVHM92IcgxGFxpuOd3CCKW/PAXZH6JoBTHFRaN57vB9XqEhdWm5yC+bPA==}
+  /daisyui@4.8.0(postcss@8.4.38):
+    resolution: {integrity: sha512-SXy6MVzhqaa1vPZIdo5K/QAyRaQ4dbRHG+oXy7BFqJnZlwOB6bGkQRqqvClBUY2wCyiiyhk4gY5Ngi1m2JRIEA==}
     engines: {node: '>=16.9.0'}
     dependencies:
       css-selector-tokenizer: 0.8.0
-      culori: 3.2.0
+      culori: 3.3.0
       picocolors: 1.0.0
       postcss-js: 4.0.1(postcss@8.4.38)
     transitivePeerDependencies:
