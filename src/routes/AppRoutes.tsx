@@ -1,10 +1,10 @@
-import { About } from '@pages/About'
-import { BoundyErrorManager } from '@pages/BoundryErrorManger'
-import { Contact } from '@pages/Contact'
-import { ErrorManager } from '@pages/ErrorManger'
-import { Help } from '@pages/Help'
-import { Root } from '@pages/Root'
-import { Screens } from '@pages/Screens'
+import { About } from '@local/pages/About'
+import { BoundyErrorManager } from '@local/pages/BoundryErrorManger'
+import { Contact } from '@local/pages/Contact'
+import { ErrorManager } from '@local/pages/ErrorManger'
+import { Help } from '@local/pages/Help'
+import { Root } from '@local/pages/Root'
+import { Screens } from '@local/pages/Screens'
 import { RouteSchema } from './RouteSchema'
 
 export const AppRoutes = [

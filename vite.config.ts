@@ -1,4 +1,3 @@
-/// <reference types="vitest" />
 import react from '@vitejs/plugin-react'
 import path from 'path'
 import { defineConfig } from 'vite'
@@ -6,7 +5,7 @@ import { checker } from 'vite-plugin-checker'
 import { configDefaults, UserConfig as VitestUserConfigInterface } from 'vitest/config'
 import packageJson from './package.json'
 
-const viteTest: VitestUserConfigInterface = {
+const VitestUserConfig: VitestUserConfigInterface = {
   test: {
     // Do not process css files (is slow)
     // css: {
@@ -23,11 +22,12 @@ const viteTest: VitestUserConfigInterface = {
       include: ['src/**/*.{ts,tsx}'],
       exclude: [
         ...configDefaults.exclude,
-        'src/reportWebVitals.ts',
-        'src/constants/**/*',
-        'src/test/**/*',
-        'src/service-worker/**/*',
         'src/assets/**/*',
+        'src/configs/**/*',
+        'src/constants/**/*',
+        'src/packages/test/**/*',
+        'src/packages/service-worker/**/*',
+        'src/packages/openapi/generated/**/*',
         'src/**/*.mock.{ts,tsx}',
         'src/**/*.stories.tsx',
         'src/**/*.d.ts',
@@ -42,7 +42,7 @@ const viteTest: VitestUserConfigInterface = {
       },
     },
     environment: 'jsdom',
-    setupFiles: 'src/test/vitest.setup.ts',
+    setupFiles: 'src/configs/vitest.setup.ts',
     include: ['src/**/*.test.{ts,tsx}'],
   },
 }
@@ -64,20 +64,20 @@ export default defineConfig({
   resolve: {
     alias: {
       // '@': path.resolve(__dirname, './src'),
-      '@assets': path.resolve(__dirname, '/src/assets'),
-      '@components': path.resolve(__dirname, '/src/components'),
-      '@constants': path.resolve(__dirname, '/src/constants'),
-      '@contexts': path.resolve(__dirname, '/src/contexts'),
-      '@hooks': path.resolve(__dirname, './src/hooks'),
-      '@models': path.resolve(__dirname, '/src/models'),
-      '@openapi': path.resolve(__dirname, '/src/openapi'),
-      '@pages': path.resolve(__dirname, '/src/pages'),
-      '@routes': path.resolve(__dirname, '/src/routes'),
-      '@server': path.resolve(__dirname, '/src/server'),
-      '@serviceworker': path.resolve(__dirname, '/src/service-worker'),
-      '@test': path.resolve(__dirname, '/src/test'),
-      '@utils': path.resolve(__dirname, '/src/utils'),
+      '@local/assets': path.resolve(__dirname, '/src/assets'),
+      '@local/components': path.resolve(__dirname, '/src/components'),
+      '@local/constants': path.resolve(__dirname, '/src/constants'),
+      '@local/contexts': path.resolve(__dirname, '/src/contexts'),
+      '@local/hooks': path.resolve(__dirname, './src/hooks'),
+      '@packages/openapi': path.resolve(__dirname, '/src/packages/openapi'),
+      '@local/pages': path.resolve(__dirname, '/src/pages'),
+      '@local/routes': path.resolve(__dirname, '/src/routes'),
+      '@packages/server': path.resolve(__dirname, '/src/packages/server'),
+      '@packages/serviceworker': path.resolve(__dirname, '/src/packages/service-worker'),
+      '@packages/test': path.resolve(__dirname, '/src/packages/test'),
+      '@packages/uilibrary': path.resolve(__dirname, '/src/packages/ui-library'),
+      '@packages/utils': path.resolve(__dirname, '/src/packages/utils'),
     },
   },
-  test: viteTest.test,
+  test: VitestUserConfig.test,
 })

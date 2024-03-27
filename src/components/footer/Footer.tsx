@@ -1,5 +1,5 @@
-import GithubIcon from '@assets/icons/Github'
-import HashTagIcon from '@assets/icons/HashTag'
+import GithubIcon from '@local/assets/icons/Github'
+import HashTagIcon from '@local/assets/icons/HashTag'
 
 export default function Footer() {
   const longVer = import.meta.env.VITE_PACKAGE_VERSION

@@ -1,5 +1,5 @@
-import { getGetScreenMock } from '@openapi/generated/services/screen-service'
-import { useInteractComponent } from '@test/utils/useInteractComponent'
+import { getGetScreenMock } from '@packages/openapi/generated'
+import { useInteractComponent } from '@packages/test/utils/useInteractComponent'
 import { ScreenPanel } from './ScreenPanel'
 
 describe('#ScreenPanel', () => {

@@ -1,4 +1,4 @@
-import { GetSearchParams, SearchListResponse, useGetSearch } from '@openapi/generated'
+import { GetSearchParams, SearchListResponse, useGetSearch } from '@packages/openapi/generated'
 import { keepPreviousData } from '@tanstack/react-query'
 import { useApiEffectHandler } from '../useApiEffectHandler'
 

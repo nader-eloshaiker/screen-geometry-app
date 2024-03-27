@@ -1,6 +1,6 @@
-import EditIcon from '@assets/icons/Edit'
-import { FormDrawerActionTypes } from '@contexts/FormDrawer/FormDrawerManager'
-import { useFormDrawerContext } from '@contexts/FormDrawer/useFormDrawerContext'
+import EditIcon from '@local/assets/icons/Edit'
+import { FormDrawerActionTypes } from '@local/contexts/FormDrawer/FormDrawerManager'
+import { useFormDrawerContext } from '@local/contexts/FormDrawer/useFormDrawerContext'
 import { twMerge } from 'tailwind-merge'
 
 type TProps = TRestProps & { className?: string }

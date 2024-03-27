@@ -1,4 +1,4 @@
-import { useInteractComponent } from '@test/utils/useInteractComponent'
+import { useInteractComponent } from '@packages/test/utils/useInteractComponent'
 import { Stacked } from './Stacked'
 
 describe('#SkeletonImage', () => {

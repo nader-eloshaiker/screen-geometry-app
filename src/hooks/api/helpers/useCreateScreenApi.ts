@@ -1,7 +1,6 @@
-import { ScreenActionTypes } from '@contexts/Screen/ScreenManager'
-import { useScreenContext } from '@contexts/Screen/useScreenContext'
-import { ScreenItemResponse } from '@openapi/generated/models'
-import { useCreateScreen } from '@openapi/generated/services/screen-service'
+import { ScreenActionTypes } from '@local/contexts/Screen/ScreenManager'
+import { useScreenContext } from '@local/contexts/Screen/useScreenContext'
+import { ScreenItemResponse, useCreateScreen } from '@packages/openapi/generated'
 import { useCallback } from 'react'
 import { useApiEffectHandler } from '../useApiEffectHandler'
 

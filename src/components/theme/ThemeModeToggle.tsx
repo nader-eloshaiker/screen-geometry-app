@@ -1,6 +1,6 @@
-import MoonIcon from '@assets/icons/Moon'
-import SunIcon from '@assets/icons/Sun'
-import { useThemeMode } from '@hooks/useThemeMode'
+import MoonIcon from '@local/assets/icons/Moon'
+import SunIcon from '@local/assets/icons/Sun'
+import { useThemeMode } from '@local/hooks/useThemeMode'
 import { twMerge } from 'tailwind-merge'
 import { DarkMode, LightMode } from './ThemeConstants'
 

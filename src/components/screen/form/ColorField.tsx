@@ -1,5 +1,5 @@
-import { DarkMode, LightMode, TThemeMode } from '@components/theme/ThemeConstants'
-import { ScreenDataEnum } from '@openapi/models/Screen'
+import { DarkMode, LightMode, TThemeMode } from '@local/components/theme/ThemeConstants'
+import { ScreenDataEnum } from '@packages/openapi/models/Screen'
 import { clsx } from 'clsx'
 import { useFormContext } from 'react-hook-form'
 

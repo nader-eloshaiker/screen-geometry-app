@@ -1,7 +1,7 @@
-import GithubIcon from '@assets/icons/Github'
-import LinkedInIcon from '@assets/icons/LinkedIn'
-import TwitterIcon from '@assets/icons/Twitter'
-import XIcon from '@assets/icons/X'
+import GithubIcon from '@local/assets/icons/Github'
+import LinkedInIcon from '@local/assets/icons/LinkedIn'
+import TwitterIcon from '@local/assets/icons/Twitter'
+import XIcon from '@local/assets/icons/X'
 import { ReactNode } from 'react'
 import { Helmet } from 'react-helmet-async'
 

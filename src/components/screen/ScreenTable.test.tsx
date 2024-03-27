@@ -1,10 +1,15 @@
-import { QueryProvider } from '@contexts/Query/QueryProvider'
+import { QueryProvider } from '@local/contexts/Query/QueryProvider'
 
-import { useElementSizeMock } from '@components/common/hooks/useElementSize.mock'
-import { NotificationProvider } from '@components/common/notification'
-import { ScreenItem, getGetScreenListMock, getScreenListServiceMock, getScreenServiceMock } from '@openapi/generated'
-import { mswWithSpy, resetMSW, startMSW, stopMSW } from '@serviceworker/NodeServiceWorker'
-import { useInteractComponent } from '@test/utils/useInteractComponent'
+import {
+  ScreenItem,
+  getGetScreenListMock,
+  getScreenListServiceMock,
+  getScreenServiceMock,
+} from '@packages/openapi/generated'
+import { mswWithSpy, resetMSW, startMSW, stopMSW } from '@packages/serviceworker/NodeServiceWorker'
+import { useInteractComponent } from '@packages/test/utils/useInteractComponent'
+import { useElementSizeMock } from '@packages/uilibrary/hooks/useElementSize.mock'
+import { NotificationProvider } from '@packages/uilibrary/notification'
 import { waitFor } from '@testing-library/react'
 import { ScreenTable } from './ScreenTable'
 

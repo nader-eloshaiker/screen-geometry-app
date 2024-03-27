@@ -1,5 +1,4 @@
-import { ErrorResponse, ScreenItemResponse } from '@openapi/generated/models'
-import { useGetScreen } from '@openapi/generated/services/screen-service'
+import { ErrorResponse, ScreenItemResponse, useGetScreen } from '@packages/openapi/generated'
 import { keepPreviousData } from '@tanstack/react-query'
 import { useApiEffectHandler } from '../useApiEffectHandler'
 

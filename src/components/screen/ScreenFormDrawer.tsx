@@ -1,8 +1,8 @@
-import { FormDrawerActionTypes, FormDrawerMode } from '@contexts/FormDrawer/FormDrawerManager'
-import { useFormDrawerContext } from '@contexts/FormDrawer/useFormDrawerContext'
-import { useGetScreenApi } from '@hooks/api/helpers/useGetScreenApi'
-import { ScreenInput } from '@openapi/generated'
-import { transformScreenItem } from '@utils/DataTransformation'
+import { FormDrawerActionTypes, FormDrawerMode } from '@local/contexts/FormDrawer/FormDrawerManager'
+import { useFormDrawerContext } from '@local/contexts/FormDrawer/useFormDrawerContext'
+import { useGetScreenApi } from '@local/hooks/api/helpers/useGetScreenApi'
+import { ScreenInput } from '@packages/openapi/generated'
+import { transformScreenItem } from '@packages/utils/DataTransformation'
 
 import { useEffect, useState } from 'react'
 import { ScreenForm } from './form/ScreenForm'

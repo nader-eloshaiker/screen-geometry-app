@@ -1,11 +1,11 @@
-import { baseUrl } from '@contexts/Query/QueryClient'
-import { createBrowserServiceWorker } from '@serviceworker/BrowserServiceWorker'
+import { baseUrl } from '@local/contexts/Query/QueryClient'
+import { createBrowserServiceWorker } from '@packages/serviceworker/BrowserServiceWorker'
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import ReactGA from 'react-ga4'
 import { Helmet, HelmetProvider } from 'react-helmet-async'
 import { App } from './App'
-import reportWebVitals from './reportWebVitals'
+import reportWebVitals from './configs/reportWebVitals'
 
 const testMode = !import.meta.env.DEV
 const trackingId = process.env.GA_TRACKING_ID ?? import.meta.env.VITE_GA_TRACKING_ID

@@ -8,21 +8,21 @@
     "jsx": "react-jsx",
     "baseUrl": ".",
     "paths": {
-      "@assets/*": ["./src/assets/*"],
-      "@components/*": ["./src/components/*"],
-      "@constants/*": ["./src/constants/*"],
-      "@contexts/*": ["./src/contexts/*"],
-      "@hooks/*": ["./src/hooks/*"],
-      "@models/*": ["src/models/*"],
-      "@openapi/*": ["./src/openapi/*"],
-      "@pages/*": ["./src/pages/*"],
-      "@routes/*": ["./src/routes/*"],
-      "@server/*": ["src/server/*"],
-      "@serviceworker/*": ["src/service-worker/*"],
-      "@test/*": ["./src/test/*"],
-      "@utils/*": ["./src/utils/*"]
+      "@local/assets/*": ["./src/assets/*"],
+      "@local/components/*": ["./src/components/*"],
+      "@local/constants/*": ["./src/constants/*"],
+      "@local/contexts/*": ["./src/contexts/*"],
+      "@local/hooks/*": ["./src/hooks/*"],
+      "@packages/openapi/*": ["./src/packages/openapi/*"],
+      "@local/pages/*": ["./src/pages/*"],
+      "@local/routes/*": ["./src/routes/*"],
+      "@packages/server/*": ["./src/packages/server/*"],
+      "@packages/serviceworker/*": ["./src/packages/service-worker/*"],
+      "@packages/test/*": ["./src/packages/test/*"],
+      "@packages/uilibrary/*": ["./src/packages/ui-library/*"],
+      "@packages/utils/*": ["./src/packages/utils/*"]
     }
   },
-  "include": ["src/**/*"],
+  "include": ["src/**/*", "src/configs/vitest.setup.ts"],
   "exclude": ["node_modules", "coverage", "dist", "build"]
 }

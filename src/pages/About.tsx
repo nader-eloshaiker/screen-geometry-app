@@ -1,4 +1,4 @@
-import { RouteSchema } from '@routes/RouteSchema'
+import { RouteSchema } from '@local/routes/RouteSchema'
 import { Helmet } from 'react-helmet-async'
 import { LazyLoadImage } from 'react-lazy-load-image-component'
 import { useNavigate } from 'react-router-dom'

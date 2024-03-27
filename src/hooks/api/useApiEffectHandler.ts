@@ -1,10 +1,10 @@
+import { ErrorResponse } from '@packages/openapi/generated'
 import {
   GeneralNotificationItem,
   NotificationActionTypes,
   NotificationType,
-} from '@components/common/notification/context/NotificationManager'
-import { useNotificationContext } from '@components/common/notification/context/useNotifcationContext'
-import { ErrorResponse } from '@openapi/generated/models'
+  useNotificationContext,
+} from '@packages/uilibrary/notification'
 import { useEffect } from 'react'
 
 export const useApiEffectHandler = <TData>({

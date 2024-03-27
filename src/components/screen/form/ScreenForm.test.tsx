@@ -1,20 +1,20 @@
-import { useElementSizeMock } from '@components/common/hooks/useElementSize.mock'
-import { NotificationProvider } from '@components/common/notification'
-import { QueryProvider } from '@contexts/Query/QueryProvider'
-import { ScreenProvider } from '@contexts/Screen/ScreenProvider'
-import { useScreenContext } from '@contexts/Screen/useScreenContext'
+import { QueryProvider } from '@local/contexts/Query/QueryProvider'
+import { ScreenProvider } from '@local/contexts/Screen/ScreenProvider'
+import { useScreenContext } from '@local/contexts/Screen/useScreenContext'
 import {
   ScreenInput,
   ScreenItem,
   getScreenListServiceMock,
   getScreenServiceMock,
   getSearchServiceMock,
-} from '@openapi/generated'
-import { mswWithSpy, resetMSW, startMSW, stopMSW } from '@serviceworker/NodeServiceWorker'
-import { screenInputFixture } from '@test/fixtures/ScreenFixtures'
-import { useInteractComponent } from '@test/utils/useInteractComponent'
+} from '@packages/openapi/generated'
+import { mswWithSpy, resetMSW, startMSW, stopMSW } from '@packages/serviceworker/NodeServiceWorker'
+import { screenInputFixture } from '@packages/test/fixtures/ScreenFixtures'
+import { useInteractComponent } from '@packages/test/utils/useInteractComponent'
+import { useElementSizeMock } from '@packages/uilibrary/hooks/useElementSize.mock'
+import { NotificationProvider } from '@packages/uilibrary/notification'
+import { transformScreenInput } from '@packages/utils/DataTransformation'
 import { render, waitFor } from '@testing-library/react'
-import { transformScreenInput } from '@utils/DataTransformation'
 import { ScreenForm } from './ScreenForm'
 
 type Props = {
