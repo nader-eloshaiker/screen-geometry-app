@@ -1,6 +1,6 @@
-import HamburgerIcon from '@local/assets/icons/Hamburger'
-import ThemeModeToggle from '@local/components/theme/ThemeModeToggle'
-import { RouteSchema } from '@local/routes/RouteSchema'
+import HamburgerIcon from '@app/assets/icons/Hamburger'
+import ThemeModeToggle from '@app/components/theme/ThemeModeToggle'
+import { RouteSchema } from '@app/routes/RouteSchema'
 import { clsx } from 'clsx'
 import { Link, useLocation } from 'react-router-dom'
 

@@ -1,6 +1,6 @@
-import { QueryProvider } from '@local/contexts/Query/QueryProvider'
-import { ScreenProvider } from '@local/contexts/Screen/ScreenProvider'
-import { useScreenContext } from '@local/contexts/Screen/useScreenContext'
+import { QueryProvider } from '@app/contexts/Query/QueryProvider'
+import { ScreenProvider } from '@app/contexts/Screen/ScreenProvider'
+import { useScreenContext } from '@app/contexts/Screen/useScreenContext'
 import {
   ScreenInput,
   ScreenItem,

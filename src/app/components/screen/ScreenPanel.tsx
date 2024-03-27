@@ -1,5 +1,5 @@
-import { DarkMode } from '@local/components/theme/ThemeConstants'
-import { useThemeMode } from '@local/hooks/useThemeMode'
+import { DarkMode } from '@app/components/theme/ThemeConstants'
+import { useThemeMode } from '@app/hooks/useThemeMode'
 import { ScreenItem } from '@packages/openapi/generated'
 import { clsx } from 'clsx'
 import { Dispatch, SetStateAction, useEffect, useState } from 'react'

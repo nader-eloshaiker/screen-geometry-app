@@ -1,5 +1,5 @@
-import { ScreenActionTypes } from '@local/contexts/Screen/ScreenManager'
-import { useScreenContext } from '@local/contexts/Screen/useScreenContext'
+import { ScreenActionTypes } from '@app/contexts/Screen/ScreenManager'
+import { useScreenContext } from '@app/contexts/Screen/useScreenContext'
 import { ScreenListResponse, useCreateScreenList } from '@packages/openapi/generated'
 import { useCallback } from 'react'
 import { useApiEffectHandler } from '../useApiEffectHandler'

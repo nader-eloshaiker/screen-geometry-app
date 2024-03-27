@@ -1,5 +1,5 @@
-import Footer from '@local/components/footer/Footer'
-import Header from '@local/components/header/Header'
+import Footer from '@app/components/footer/Footer'
+import Header from '@app/components/header/Header'
 import { Helmet } from 'react-helmet-async'
 import { isRouteErrorResponse, useRouteError } from 'react-router-dom'
 

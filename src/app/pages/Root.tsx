@@ -1,5 +1,5 @@
-import Footer from '@local/components/footer/Footer'
-import Header from '@local/components/header/Header'
+import Footer from '@app/components/footer/Footer'
+import Header from '@app/components/header/Header'
 import { NotificationToaster } from '@packages/uilibrary/notification'
 import { useEffect } from 'react'
 import ReactGA from 'react-ga4'

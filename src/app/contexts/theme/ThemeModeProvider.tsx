@@ -1,5 +1,5 @@
-import { attachThemeClass, LightMode, ThemeKey, TThemeMode } from '@local/components/theme/ThemeConstants'
-import useLocalStorage from '@local/hooks/useLocalStorage'
+import { attachThemeClass, LightMode, ThemeKey, TThemeMode } from '@app/components/theme/ThemeConstants'
+import useLocalStorage from '@app/hooks/useLocalStorage'
 import { useState } from 'react'
 import { ThemeModeContext } from './ThemeModeContext'
 

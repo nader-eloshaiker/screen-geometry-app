@@ -1,4 +1,4 @@
-import { QueryProvider } from '@local/contexts/Query/QueryProvider'
+import { QueryProvider } from '@app/contexts/Query/QueryProvider'
 
 import {
   ScreenItem,

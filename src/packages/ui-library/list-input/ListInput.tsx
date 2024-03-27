@@ -1,5 +1,5 @@
-import CloseIcon from '@local/assets/icons/Close'
-import MagnifyGlassIcon from '@local/assets/icons/MagnifyGlass'
+import CloseIcon from '@app/assets/icons/Close'
+import MagnifyGlassIcon from '@app/assets/icons/MagnifyGlass'
 import { useDebounce } from '@packages/uilibrary/hooks/useDebounce'
 import { useElementSize } from '@packages/uilibrary/hooks/useElementSize'
 import { clsx } from 'clsx'
