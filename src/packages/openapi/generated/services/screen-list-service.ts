@@ -20,12 +20,12 @@ export const useGetScreenListHook = () => {
   const getScreenList = useApiAxios<ScreenListResponse>()
 
   return (signal?: AbortSignal) => {
-    return getScreenList({ url: `/v1/screens`, method: 'GET', signal })
+    return getScreenList({ url: '/v1/screens', method: 'GET', signal })
   }
 }
 
 export const getGetScreenListQueryKey = () => {
-  return [`/v1/screens`] as const
+  return ['/v1/screens'] as const
 }
 
 export const useGetScreenListQueryOptions = <
@@ -73,7 +73,7 @@ export const useCreateScreenListHook = () => {
 
   return (screenInputList: ScreenInputList) => {
     return createScreenList({
-      url: `/v1/screens`,
+      url: '/v1/screens',
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       data: screenInputList,

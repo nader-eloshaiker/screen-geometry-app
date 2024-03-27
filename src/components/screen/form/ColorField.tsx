@@ -10,7 +10,7 @@ export const ColorField = ({ formKey, title, mode, isLoading = false }: Props) =
   return (
     <div className='form-control mb-4 flex flex-col'>
       <label
-        className={clsx('input input-bordered input-md flex w-24 items-center justify-center text-sm shadow-md', {
+        className={clsx('input input-md input-bordered flex w-24 items-center justify-center text-sm shadow-md', {
           'text-black': mode === LightMode,
           'text-white': mode === DarkMode,
           'animate-pulse pointer-events-none': isLoading,

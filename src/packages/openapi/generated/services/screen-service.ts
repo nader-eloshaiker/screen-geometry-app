@@ -21,7 +21,7 @@ export const useCreateScreenHook = () => {
 
   return (screenInput: ScreenInput) => {
     return createScreen({
-      url: `/v1/screen`,
+      url: '/v1/screen',
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       data: screenInput,

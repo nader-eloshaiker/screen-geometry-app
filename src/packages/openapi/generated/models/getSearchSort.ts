@@ -6,7 +6,6 @@
 
 export type GetSearchSort = (typeof GetSearchSort)[keyof typeof GetSearchSort]
 
-// eslint-disable-next-line @typescript-eslint/no-redeclare
 export const GetSearchSort = {
   name: 'name',
   size: 'size',

@@ -45,7 +45,7 @@ export const InputField = ({
       ) : (
         <input
           {...rest}
-          className={clsx('input input-bordered input-md w-full shadow-md', {
+          className={clsx('input input-md input-bordered w-full shadow-md', {
             'input-error': errors[formKey],
             'skeleton bg-neutral-300 dark:bg-neutral-700 pointer-events-none rounded-lg': isLoading,
           })}

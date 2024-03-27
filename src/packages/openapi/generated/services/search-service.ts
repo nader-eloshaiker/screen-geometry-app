@@ -13,12 +13,12 @@ export const useGetSearchHook = () => {
   const getSearch = useApiAxios<SearchListResponse>()
 
   return (params?: GetSearchParams, signal?: AbortSignal) => {
-    return getSearch({ url: `/v1/search`, method: 'GET', params, signal })
+    return getSearch({ url: '/v1/search', method: 'GET', params, signal })
   }
 }
 
 export const getGetSearchQueryKey = (params?: GetSearchParams) => {
-  return [`/v1/search`, ...(params ? [params] : [])] as const
+  return ['/v1/search', ...(params ? [params] : [])] as const
 }
 
 export const useGetSearchQueryOptions = <
