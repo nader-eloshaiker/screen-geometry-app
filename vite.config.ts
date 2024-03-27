@@ -1,41 +1,11 @@
-/// <reference types="vitest" />
 import react from '@vitejs/plugin-react'
 import path from 'path'
+import { defineConfig } from 'vite'
 import { checker } from 'vite-plugin-checker'
-import { configDefaults, defineConfig } from 'vitest/config'
+import { configDefaults, UserConfig as VitestUserConfigInterface } from 'vitest/config'
 import packageJson from './package.json'
 
-export default defineConfig({
-  base: process.env.BASE_URL,
-  define: {
-    'import.meta.env.VITE_PACKAGE_VERSION': JSON.stringify(packageJson.version),
-    'process.env': process.env,
-  },
-  assetsInclude: ['/sb-preview/runtime.js'],
-  plugins: [
-    react(),
-    checker({
-      typescript: true,
-      enableBuild: true,
-    }),
-  ],
-  resolve: {
-    alias: {
-      // '@': path.resolve(__dirname, './src'),
-      '@assets': path.resolve(__dirname, '/src/assets'),
-      '@components': path.resolve(__dirname, '/src/components'),
-      '@constants': path.resolve(__dirname, '/src/constants'),
-      '@contexts': path.resolve(__dirname, '/src/contexts'),
-      '@hooks': path.resolve(__dirname, './src/hooks'),
-      '@models': path.resolve(__dirname, '/src/models'),
-      '@openapi': path.resolve(__dirname, '/src/openapi'),
-      '@pages': path.resolve(__dirname, '/src/pages'),
-      '@routes': path.resolve(__dirname, '/src/routes'),
-      '@server': path.resolve(__dirname, '/src/server'),
-      '@test': path.resolve(__dirname, '/src/test'),
-      '@utils': path.resolve(__dirname, '/src/utils'),
-    },
-  },
+const VitestUserConfig: VitestUserConfigInterface = {
   test: {
     // Do not process css files (is slow)
     // css: {
@@ -46,31 +16,57 @@ export default defineConfig({
     mockReset: true,
     reporters: ['verbose'],
     coverage: {
-      provider: 'v8', //'istanbul',
+      provider: 'istanbul', //'v8',
       reporter: ['text', 'json-summary', 'json', 'clover', 'html'],
       reportsDirectory: 'reports/coverage',
       include: ['src/**/*.{ts,tsx}'],
       exclude: [
         ...configDefaults.exclude,
-        'src/reportWebVitals.ts',
-        'src/openapi/**/*',
-        'src/test/**/*',
-        'src/assets/**/*',
+        'src/app/assets/**/*',
+        'src/configs/**/*',
+        'src/constants/**/*',
+        'src/packages/test/**/*',
+        'src/packages/serviceworker/**/*',
+        'src/packages/openapi/generated/**/*',
         'src/**/*.mock.{ts,tsx}',
         'src/**/*.stories.tsx',
         'src/**/*.d.ts',
       ],
       reportOnFailure: true,
       thresholds: {
-        lines: 55,
-        branches: 75,
-        functions: 60,
-        statements: 55,
+        lines: 70,
+        branches: 50,
+        functions: 70,
+        statements: 70,
         // autoUpdate: true, // Update thresholds when writing tests, disabled due to refactoring tests changes coverage
       },
     },
     environment: 'jsdom',
-    setupFiles: './src/test/vitest.setup.ts',
+    setupFiles: 'src/configs/vitest.setup.ts',
     include: ['src/**/*.test.{ts,tsx}'],
   },
+}
+
+export default defineConfig({
+  base: process.env.BASE_URL,
+  define: {
+    'import.meta.env.VITE_PACKAGE_VERSION': JSON.stringify(packageJson.version),
+    'process.env': process.env,
+  },
+  assetsInclude: ['./sb-preview/runtime.js'],
+  plugins: [
+    react(),
+    checker({
+      typescript: true,
+      enableBuild: true,
+    }),
+  ],
+  resolve: {
+    alias: {
+      // '@': path.resolve(__dirname, './src'),
+      '@app': path.resolve(__dirname, '/src/app'),
+      '@packages': path.resolve(__dirname, '/src/packages'),
+    },
+  },
+  test: VitestUserConfig.test,
 })

@@ -39,7 +39,7 @@
     "sourceType": "module"
   },
   "plugins": ["react", "react-hooks", "@typescript-eslint", "prettier", "react-refresh", "tailwindcss"],
-  "ignorePatterns": ["src/openapi/**/*"],
+  "ignorePatterns": ["src/packages/openapi/generated/**/*"],
   "rules": {
     "@typescript-eslint/explicit-module-boundary-types": "off",
     "@typescript-eslint/no-unused-vars": [

@@ -5,13 +5,13 @@ dist-ssr
 *.local
 
 # dependencies
-/node_modules
+**/node_modules
 /.pnp
 .pnp.js
 
 # testing
-/coverage
-/reports
+**/coverage
+**/reports
 
 # production
 /build
