@@ -4,7 +4,7 @@ import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import ReactGA from 'react-ga4'
 import { Helmet, HelmetProvider } from 'react-helmet-async'
-import { App } from './App'
+import { App } from './app/App'
 import reportWebVitals from './configs/reportWebVitals'
 
 const testMode = !import.meta.env.DEV
