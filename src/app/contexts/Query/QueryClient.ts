@@ -4,7 +4,7 @@ import axios from 'axios'
 const finalOptions = {
   defaultOptions: {
     queries: {
-      refetchOnWindowFocus: false,
+      // refetchOnWindowFocus: false,
       retry: !import.meta.env.NODE_ENV, // turn off retries for unit testing
     },
   },
