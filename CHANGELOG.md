@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.4.0](https://github.com/nader-eloshaiker/screen-geometry-app/compare/v1.3.5...v1.4.0) (2024-03-27)
+
+
+### Features
+
+* backport monorepo changes ([#369](https://github.com/nader-eloshaiker/screen-geometry-app/issues/369)) ([b20dee3](https://github.com/nader-eloshaiker/screen-geometry-app/commit/b20dee3b271b993608dc91ac442387b49d58235c))
+
+
+### Bug Fixes
+
+* report failure ([#372](https://github.com/nader-eloshaiker/screen-geometry-app/issues/372)) ([3683864](https://github.com/nader-eloshaiker/screen-geometry-app/commit/368386407b390a2b48a1cff9fea581047b2742d9))
+
 ## [1.3.5](https://github.com/nader-eloshaiker/screen-geometry-app/compare/v1.3.4...v1.3.5) (2024-03-07)
 
 
