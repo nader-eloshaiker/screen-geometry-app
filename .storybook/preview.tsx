@@ -1,7 +1,7 @@
 import { withThemeByClassName, withThemeByDataAttribute } from '@storybook/addon-themes'
 import type { Preview } from '@storybook/react'
 import React from 'react'
-import { ThemeModeProvider } from '../src/contexts/theme/ThemeModeProvider'
+import { ThemeModeProvider } from '../src/app/contexts/theme/ThemeModeProvider'
 import '../src/index.css'
 
 const preview: Preview = {
