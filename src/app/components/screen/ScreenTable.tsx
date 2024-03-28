@@ -129,7 +129,7 @@ export const ScreenTable = ({
         <tbody>
           {screens.map((screen) => (
             <StyledTableRow
-              className='cursor-pointer'
+              className='cursor-pointer transition-[background-color] duration-200 ease-out'
               $isHighlighted={screen.id === highlighted?.id}
               $color={bgColor(themeMode, screen.color)}
               key={screen.id}
