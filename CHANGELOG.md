@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.5.0](https://github.com/nader-eloshaiker/screen-geometry-app/compare/v1.4.0...v1.5.0) (2024-03-28)
+
+
+### Features
+
+* animation enhancements ([#374](https://github.com/nader-eloshaiker/screen-geometry-app/issues/374)) ([9fc9cb3](https://github.com/nader-eloshaiker/screen-geometry-app/commit/9fc9cb3f65432e3ef2cec67b4492dfaca1202740))
+
 ## [1.4.0](https://github.com/nader-eloshaiker/screen-geometry-app/compare/v1.3.5...v1.4.0) (2024-03-27)
 
 
