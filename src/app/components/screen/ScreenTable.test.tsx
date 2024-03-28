@@ -8,8 +8,8 @@ import {
 } from '@packages/openapi/generated'
 import { mswWithSpy, resetMSW, startMSW, stopMSW } from '@packages/serviceworker/NodeServiceWorker'
 import { useInteractComponent } from '@packages/test/utils/useInteractComponent'
-import { useElementSizeMock } from '@packages/uilibrary/hooks/useElementSize.mock'
-import { NotificationProvider } from '@packages/uilibrary/notification'
+import { useElementSizeMock } from '@packages/ui/hooks/useElementSize.mock'
+import { NotificationProvider } from '@packages/ui/notification'
 import { waitFor } from '@testing-library/react'
 import { ScreenTable } from './ScreenTable'
 
