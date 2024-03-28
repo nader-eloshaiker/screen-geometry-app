@@ -2,6 +2,9 @@ export const RouteSchema = {
   root: {
     path: '/',
   },
+  about: {
+    path: '/about',
+  },
   screens: {
     path: '/Screens',
   },

@@ -24,10 +24,9 @@ const StyledCheckbox = styled.input<{ $color: string }>`
 
 const StyledTableRow = styled.tr<{ $color: string; $isHighlighted: boolean }>`
   background-color: ${(props) => (props.$isHighlighted ? props.$color : 'transparent')};
-  &:hover {
-    background-color: ${(props) => props.$color};
-  }
+  ${(props) => props.$isHighlighted && `border-color: ${props.$color};`}
 `
+
 const bgColor = (themeMode: TThemeMode, color: ScreenColor) =>
   `${themeMode === DarkMode ? color.lightColor : color.darkColor}${Math.round(0.2 * 255).toString(16)}`
 const fgColor = (themeMode: TThemeMode, color: ScreenColor) =>

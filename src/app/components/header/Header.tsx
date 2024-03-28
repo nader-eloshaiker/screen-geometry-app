@@ -8,7 +8,12 @@ type NavMenuItemProps = { pathname: string; route: string; title: string }
 const NavMenuItem = ({ pathname, route, title }: NavMenuItemProps) => {
   return (
     <li>
-      <Link className={clsx('text-sm sm:text-base', { active: pathname === route })} to={route}>
+      <Link
+        className={clsx('text-sm sm:text-base', {
+          active: pathname === route,
+        })}
+        to={route}
+      >
         {title}
       </Link>
     </li>
@@ -53,11 +58,11 @@ export default function Header() {
           />
         </div>
         {/* large header */}
-        <div className='hidden pt-2 text-center text-2xl  xs:block' data-testid='large-header-title'>
+        <div className='hidden pt-2 text-center text-2xl xs:block' data-testid='large-header-title'>
           {import.meta.env.VITE_APP_TITLE}
         </div>
-        <div className='navbar hidden justify-between px-3  xs:flex' data-testid='large-header-menu'>
-          <ul className='menu menu-horizontal gap-2 rounded-box p-0'>
+        <div className='navbar hidden justify-between px-3 xs:flex' data-testid='large-header-menu'>
+          <ul className='menu menu-horizontal gap-2 rounded-box p-0 transition-all duration-200 ease-out'>
             <NavMenu pathname={pathname} />
           </ul>
           <ThemeModeToggle

@@ -14,10 +14,10 @@ html:before {
 }
 
 body {
-  scrollbar-gutter: auto;
+  scrollbar-gutter: stable;
   overflow-y: scroll;
 
-  @apply bg-stone-200 dark:bg-stone-800 overflow-x-hidden;
+  @apply bg-stone-200 dark:bg-stone-800;
 }
 
 .header {

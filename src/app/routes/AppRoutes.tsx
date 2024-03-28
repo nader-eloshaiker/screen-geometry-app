@@ -17,18 +17,10 @@ export const AppRoutes = [
         errorElement: <ErrorManager />,
         children: [
           { index: true, element: <About /> },
-          {
-            path: RouteSchema.screens.path,
-            element: <Screens />,
-          },
-          {
-            path: RouteSchema.help.path,
-            element: <Help />,
-          },
-          {
-            path: RouteSchema.contact.path,
-            element: <Contact />,
-          },
+          { path: RouteSchema.about.path, element: <About /> },
+          { path: RouteSchema.screens.path, element: <Screens /> },
+          { path: RouteSchema.help.path, element: <Help /> },
+          { path: RouteSchema.contact.path, element: <Contact /> },
         ],
       },
     ],
