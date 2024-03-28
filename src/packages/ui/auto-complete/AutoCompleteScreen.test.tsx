@@ -1,6 +1,6 @@
 import { getGetSearchMock } from '@packages/openapi/generated'
 import { useInteractComponent } from '@packages/test/utils/useInteractComponent'
-import { useElementSizeMock } from '@packages/uilibrary/hooks/useElementSize.mock'
+import { useElementSizeMock } from '@packages/ui/hooks/useElementSize.mock'
 import { waitFor } from '@testing-library/react'
 import { Mock } from 'vitest'
 import { AutoCompleteScreen } from './AutoCompleteScreen'

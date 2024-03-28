@@ -4,7 +4,7 @@ import {
   NotificationActionTypes,
   NotificationType,
   useNotificationContext,
-} from '@packages/uilibrary/notification'
+} from '@packages/ui/notification'
 import { useEffect } from 'react'
 
 export const useApiEffectHandler = <TData>({

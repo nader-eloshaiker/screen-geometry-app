@@ -1,6 +1,6 @@
 import Footer from '@app/components/footer/Footer'
 import Header from '@app/components/header/Header'
-import { NotificationToaster } from '@packages/uilibrary/notification'
+import { NotificationToaster } from '@packages/ui/notification'
 import { useEffect } from 'react'
 import ReactGA from 'react-ga4'
 import { Outlet, useLocation } from 'react-router-dom'
