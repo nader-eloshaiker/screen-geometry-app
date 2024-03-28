@@ -1,8 +1,8 @@
+/// <reference types="vitest" />
 import react from '@vitejs/plugin-react'
 import path from 'path'
-import { defineConfig } from 'vite'
 import { checker } from 'vite-plugin-checker'
-import { configDefaults, UserConfig as VitestUserConfigInterface } from 'vitest/config'
+import { UserConfig as VitestUserConfigInterface, configDefaults, defineConfig } from 'vitest/config'
 import packageJson from './package.json'
 
 const VitestUserConfig: VitestUserConfigInterface = {
@@ -14,7 +14,7 @@ const VitestUserConfig: VitestUserConfigInterface = {
     globals: true,
     clearMocks: true,
     mockReset: true,
-    reporters: ['verbose'],
+    reporters: process.env.GITHUB_ACTIONS ? ['verbose', 'github-actions'] : ['verbose'],
     coverage: {
       provider: 'istanbul', //'v8',
       reporter: ['text', 'json-summary', 'json', 'clover', 'html'],

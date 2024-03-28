@@ -39,18 +39,18 @@ export const ScreenFormDrawer = ({ children }: Props) => {
   }, [formDrawerState.mode, isScreenItemLoading, screenItemResponse])
 
   return (
-    <div className='drawer h-full grow'>
-      <div id='drawer-content' className='drawer-content'>
+    <div className='relative h-full grow overflow-x-clip'>
+      <div id='drawer-content' className='size-full'>
         {children}
       </div>
       <input
         id='screenFormDrawer'
         type='checkbox'
-        className='drawer-toggle'
+        className='peer sr-only relative'
         checked={formDrawerState.open}
         onChange={(_e) => {}}
       />
-      <div className='drawer-side absolute h-fit w-auto duration-100 ease-in'>
+      <div className='absolute left-0 top-0 -translate-x-full transition-all duration-300 ease-in peer-checked:translate-x-0 md:w-96'>
         <div className='sidebar rounded-xl p-2 md:w-96'>
           <div className='p-2'>
             <ScreenForm

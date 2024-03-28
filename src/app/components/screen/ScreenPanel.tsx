@@ -55,9 +55,9 @@ export const ScreenPanel = ({ screen, highlighted = undefined, setHighLighted = 
 
   return (
     <Panel
-      className={clsx('box-border rounded-lg', {
-        'border-solid border-4': selected,
-        'border-dashed border-2': !selected,
+      className={clsx('box-border rounded-lg transition-[border-width] duration-200 ease-out', {
+        'border-solid border-4 sm:border-8': selected,
+        'border-solid border-2': !selected,
       })}
       $width={config.width}
       $height={config.height}
