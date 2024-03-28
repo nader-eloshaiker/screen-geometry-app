@@ -48,6 +48,14 @@ I have been considering what my next monitor purchase will be and it has been di
 
 ## Dev'ing the App
 
+### Detailed Reading
+
+- [Development tools and frameworks](./docs/Development.md)
+- [Architecture](./docs/Architecture.md)
+- [DevOps](./docs/DevOps.md)
+- [GitOps](./docs/GitOps.md)
+- [Testing](./docs/Testing.md)
+
 Installing dependencies
 
     npm install -g pnpm
@@ -69,11 +77,3 @@ Generate API Client\*\* (using orval)
 Code is checked in for review ease. This can also help when working on a 'work in progress' published spec, as it allows the developer to control which spec the client is generated from in other feature branches and in main branches.
 
     pnpm run gen:spec
-
-## Detailed Reading
-
-- [Development tools and frameworks](./docs/Development.md)
-- [Architecture](./docs/Architecture.md)
-- [DevOps](./docs/DevOps.md)
-- [GitOps](./docs/GitOps.md)
-- [Testing](./docs/Testing.md)
