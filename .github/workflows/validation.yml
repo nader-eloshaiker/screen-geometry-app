@@ -63,7 +63,7 @@ jobs:
           json-final-path: './reports/coverage/coverage-final.json'
 
       - name: Upload coverage reports to Codecov
-        uses: codecov/codecov-action@v4.0.1
+        uses: codecov/codecov-action@v4.1.1
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
           slug: nader-eloshaiker/screen-geometry-app
