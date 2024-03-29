@@ -103,6 +103,12 @@ jobs:
         id: deployment
         uses: actions/deploy-pages@v4
 
+      - name: Upload coverage reports to Codecov
+        uses: codecov/codecov-action@v4.0.1
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          slug: nader-eloshaiker/screen-geometry-app
+
   deploy_app:
     needs: [version_management]
     name: Cloudflare Pages Preview
