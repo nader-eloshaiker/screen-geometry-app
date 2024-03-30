@@ -70,7 +70,7 @@ test('Smoke Test Screens Page', async ({ page }) => {
   await expect(page.getByTestId('ScreenPanel-49')).toBeVisible()
 
   // Check if panel is hidden
-  showCheckbox.uncheck()
+  await showCheckbox.uncheck()
   await expect(showCheckbox).not.toBeChecked()
   await expect(page.getByTestId('ScreenPanel-49')).not.toBeVisible()
 
