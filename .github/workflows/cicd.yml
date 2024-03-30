@@ -10,22 +10,15 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  test-unit:
-    name: Unit Tests
+  validate-build:
+    name: Validate
     permissions:
       contents: read
       pull-requests: write
-    uses: ./.github/workflows/test-unit.yml
-
-  test-e2e:
-    name: E2E Tests
-    permissions:
-      contents: read
-      pull-requests: write
-    uses: ./.github/workflows/test-e2e.yml
+    uses: ./.github/workflows/validation.yml
 
   manage-release:
-    needs: [test-unit, test-e2e]
+    needs: [validate-build]
     name: Manage Release
     runs-on: ubuntu-latest
     permissions:
