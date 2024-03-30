@@ -7,19 +7,26 @@ on:
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: false
+  cancel-in-progress: true
 
 jobs:
-  validate_build:
-    name: Validate
+  test-unit:
+    name: Unit Tests
     permissions:
       contents: read
       pull-requests: write
-    uses: ./.github/workflows/validation.yml
+    uses: ./.github/workflows/test-unit.yml
 
-  version_management:
-    needs: [validate_build]
-    name: Manage Release Version
+  test-e2e:
+    name: E2E Tests
+    permissions:
+      contents: read
+      pull-requests: write
+    uses: ./.github/workflows/test-e2e.yml
+
+  manage-release:
+    needs: [test-unit, test-e2e]
+    name: Manage Release
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -45,9 +52,9 @@ jobs:
           NEW_TAG: ${{ steps.generate_release.outputs.tag_name }}
         run: echo "new tag [$NEW_TAG] created for $REPO_NAME"
 
-  deploy_reports:
-    needs: [version_management]
-    name: Deploy Reports
+  deploy-storybook:
+    needs: [manage-release]
+    name: Deploy StoryBook
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
@@ -89,7 +96,7 @@ jobs:
         run: pnpm install
 
       - name: Run pnpm report
-        run: pnpm report
+        run: pnpm sb:build
 
       - name: Setup Pages
         uses: actions/configure-pages@v4
@@ -97,21 +104,15 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: './reports'
+          path: './storybook-static'
 
       - name: Deploy to reports to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
 
-      - name: Upload coverage reports to Codecov
-        uses: codecov/codecov-action@v4.1.1
-        with:
-          token: ${{ secrets.CODECOV_TOKEN }}
-          slug: nader-eloshaiker/screen-geometry-app
-
-  deploy_app:
-    needs: [version_management]
-    name: Cloudflare Pages Preview
+  deploy-app:
+    needs: [manage-release]
+    name: Cloudflare Pages Develop
     runs-on: ubuntu-latest
     environment: cloudflare-preview
     permissions:

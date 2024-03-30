@@ -39,10 +39,7 @@
     "e2e:report": "pnpm exec playwright show-report",
     "typecheck": "tsc --project tsconfig.json --noEmit",
     "sb": "storybook dev -p 6006",
-    "sb:build": "storybook build",
-    "report": "pnpm report:sb && pnpm report:test",
-    "report:sb": "storybook build --docs --output-dir=./reports/storybook",
-    "report:test": "pnpm test:ci"
+    "sb:build": "storybook build"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.3.4",
