@@ -4,7 +4,9 @@
 [![CI/CD](https://github.com/nader-eloshaiker/screen-geometry-app/actions/workflows/cicd.yml/badge.svg)](https://github.com/nader-eloshaiker/screen-geometry-app/actions/workflows/cicd.yml)
 [![Deploy Production](https://github.com/nader-eloshaiker/screen-geometry-app/actions/workflows/deploy_production.yml/badge.svg)](https://github.com/nader-eloshaiker/screen-geometry-app/actions/workflows/deploy_production.yml)
 
-![Statements Badge](./docs/badges/statements.svg) ![Branches Badge](./docs/badges/branches.svg) ![Functions Badge](./docs/badges/functions.svg) ![Lines Badge](./docs/badges/lines.svg)
+[![codecov](https://codecov.io/gh/nader-eloshaiker/screen-geometry-app/graph/badge.svg?token=FD9467PICM)](https://app.codecov.io/gh/nader-eloshaiker/screen-geometry-app?search=&displayType=list)
+
+[![CodeCov](https://codecov.io/gh/nader-eloshaiker/screen-geometry-app/graphs/icicle.svg?token=FD9467PICM)](https://app.codecov.io/gh/nader-eloshaiker/screen-geometry-app?search=&displayType=list)
 
 ## Description
 
@@ -25,7 +27,7 @@ a manual deploy to develop workflow action that can be used for feature branches
 
 The reports are hosted in Github Pages and are deployed on every merge to the main branch.
 
-- [Coverage](https://nader-eloshaiker.github.io/screen-geometry-app/coverage)
+- [Coverage](https://app.codecov.io/gh/nader-eloshaiker/screen-geometry-app/?search=&displayType=list)
 - [StoryBook](https://nader-eloshaiker.github.io/screen-geometry-app/storybook)
 
 ## App Demo

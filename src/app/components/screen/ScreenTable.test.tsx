@@ -10,7 +10,7 @@ import { mswWithSpy, resetMSW, startMSW, stopMSW } from '@packages/serviceworker
 import { useInteractComponent } from '@packages/test/utils/useInteractComponent'
 import { useElementSizeMock } from '@packages/ui/hooks/useElementSize.mock'
 import { NotificationProvider } from '@packages/ui/notification'
-import { waitFor } from '@testing-library/react'
+import { act, waitFor } from '@testing-library/react'
 import { ScreenTable } from './ScreenTable'
 
 const TestComponent = ({
@@ -64,7 +64,9 @@ describe('#ScreenTable', () => {
     const deleteElements = await test.findAllByLabelText('delete button')
     const deleteElement = deleteElements[0] as HTMLElement
 
-    await test.user.click(deleteElement)
+    await act(async () => {
+      await test.user.click(deleteElement)
+    })
 
     expect(mswRequestEventSpy[mswRequestEventSpy.length - 1]).toEqual(
       expect.stringContaining('method:DELETE|url:http://dev.api.screengeometry.com/v1/screen/pVesw1Iu'),
@@ -78,7 +80,9 @@ describe('#ScreenTable', () => {
     const showElements = await test.findAllByLabelText('show checkbox')
     const showElement = showElements[0] as HTMLElement
 
-    await test.user.click(showElement)
+    await act(async () => {
+      await test.user.click(showElement)
+    })
 
     expect(mswRequestEventSpy[mswRequestEventSpy.length - 1]).toEqual(
       expect.stringContaining('method:PATCH|url:http://dev.api.screengeometry.com/v1/screen/pVesw1Iu/show'),

@@ -43,7 +43,7 @@ const downloadBadge = (url, filename) =>
   })
 
 jsonfile
-  .readFile('./reports/coverage/coverage-summary.json')
+  .readFile('./coverage/coverage-summary.json')
   .then((summary) => {
     const { total } = summary
     const { lines, statements, functions, branches } = total

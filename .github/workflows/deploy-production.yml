@@ -1,18 +1,29 @@
-name: Deploy Feature
+# Simple workflow for deploying static content to GitHub Pages
+name: Deploy Production
 
 on:
+  # can be used to roll back to a previous release
   workflow_dispatch:
     inputs:
-      reference:
-        description: 'branch, tag or SHA to deploy to preview'
-        type: string
+      tag:
+        description: 'Tag to release'
         required: true
+        default: 'v1.0.0'
+  # Auto deploy on new release from release please PR
+  release:
+    types: [published]
+
+# Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
+# However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
+concurrency:
+  group: 'deploy_production'
+  cancel-in-progress: false
 
 jobs:
-  deploy_app:
-    name: Cloudflare Pages Feature
+  deploy-app:
+    name: Cloudflare Pages Production
     runs-on: ubuntu-latest
-    environment: cloudflare-preview
+    environment: cloudflare-production
     permissions:
       contents: read
       pages: write
@@ -23,7 +34,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
         with:
-          ref: ${{ github.event.inputs.reference }}
+          ref: ${{ github.event.inputs.tag || github.ref }}
 
       - name: Install Node.js
         uses: actions/setup-node@v4
@@ -51,17 +62,18 @@ jobs:
       - name: Run pnpm install
         run: pnpm install
 
-      - name: Run pnpm build:dev
-        run: pnpm build:dev
+      - name: Run pnpm build:prod
+        run: GA_TRACKING_ID=${{ vars.GA_TRACKING_ID }} pnpm build:prod
 
-      - name: Deploy app to Preview
+      - name: Deploy app to Production
         uses: nader-eloshaiker/cloudlfare-pages-action@v1.1.0
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           projectName: screengeometry
           directory: ./dist
-          branch: feature
-          environmentName: cloudflare-preview
+          branch: main
+          environmentName: cloudflare-production
           wranglerVersion: '3'
-          gitHubToken: ${{ secrets.ACTION_GITHUB_TOKEN }}
+          # Optional: Enable this if you want to have GitHub Deployments triggered
+          gitHubToken: ${{ secrets.GITHUB_TOKEN }}

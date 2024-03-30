@@ -14,7 +14,7 @@ import { useInteractComponent } from '@packages/test/utils/useInteractComponent'
 import { useElementSizeMock } from '@packages/ui/hooks/useElementSize.mock'
 import { NotificationProvider } from '@packages/ui/notification'
 import { transformScreenInput } from '@packages/utils/DataTransformation'
-import { render, waitFor } from '@testing-library/react'
+import { act, render, waitFor } from '@testing-library/react'
 import { ScreenForm } from './ScreenForm'
 
 type Props = {
@@ -79,7 +79,10 @@ describe('#ScreenForm', () => {
       const closeButton = await test.findByText('Close')
       expect(closeButton).toBeEnabled()
 
-      await test.user.click(closeButton)
+      await act(async () => {
+        await test.user.click(closeButton)
+      })
+
       expect(onCloseAction).toHaveBeenCalledTimes(1)
     })
   })
@@ -91,11 +94,15 @@ describe('#ScreenForm', () => {
       const test = useInteractComponent(<RootTestComponent defaultValues={screenInputFixture} editId={editId} />)
 
       const inputScreenSize = await test.findByLabelText('Screen Size')
-      await test.user.clear(inputScreenSize)
-      await test.user.type(inputScreenSize, '27')
+      await act(async () => {
+        await test.user.clear(inputScreenSize)
+        await test.user.type(inputScreenSize, '27')
+      })
 
       const submitButton = await test.findByText('Update')
-      await test.user.click(submitButton)
+      await act(async () => {
+        await test.user.click(submitButton)
+      })
 
       waitFor(() => expect(test.getByTestId('busySubmitButton')).toBeInTheDocument())
     })
@@ -104,20 +111,30 @@ describe('#ScreenForm', () => {
       const test = useInteractComponent(<RootTestComponent defaultValues={undefined} editId={undefined} />)
 
       const inputScreenSize = await test.findByLabelText('Screen Size')
-      await test.user.type(inputScreenSize, '27')
+      await act(async () => {
+        await test.user.type(inputScreenSize, '27')
+      })
 
       const ratioElement = await test.findByLabelText('Aspect Ratio')
-      await test.user.type(ratioElement, '32:9')
+      await act(async () => {
+        await test.user.type(ratioElement, '32:9')
+      })
 
       const hResElement = await test.findByLabelText('Horizontal Res')
-      await test.user.type(hResElement, '5120')
+      await act(async () => {
+        await test.user.type(hResElement, '5120')
+      })
 
       const vResElement = await test.findByLabelText('Vertical Res')
-      await test.user.type(vResElement, '1440')
+      await act(async () => {
+        await test.user.type(vResElement, '1440')
+      })
 
       // test.debug()
       const submitButton = await test.findByText('Create')
-      await test.user.click(submitButton)
+      await act(async () => {
+        await test.user.click(submitButton)
+      })
 
       waitFor(() => expect(test.getByTestId('busySubmitButton')).toBeInTheDocument())
     })
@@ -152,11 +169,15 @@ describe('#ScreenForm', () => {
       const resetButton = await test.findByText('Reset')
 
       const inputScreenSize = await test.findByLabelText('Screen Size')
-      await test.user.clear(inputScreenSize)
-      await test.user.type(inputScreenSize, '27')
-      expect(inputScreenSize).toHaveValue(27)
+      await act(async () => {
+        await test.user.clear(inputScreenSize)
+        await test.user.type(inputScreenSize, '27')
+        expect(inputScreenSize).toHaveValue(27)
+      })
 
-      await test.user.click(resetButton)
+      await act(async () => {
+        await test.user.click(resetButton)
+      })
       expect(inputScreenSize).toHaveValue(49)
     })
 
@@ -171,7 +192,9 @@ describe('#ScreenForm', () => {
       expect(lightColor).toHaveStyle({ backgroundColor: '#000000' })
       expect(darkColor).toHaveStyle({ backgroundColor: '#FFFFFF' })
 
-      await test.user.click(changeButton)
+      await act(async () => {
+        await test.user.click(changeButton)
+      })
 
       expect(lightColor).not.toHaveStyle({ backgroundColor: '#000000' })
       expect(darkColor).not.toHaveStyle({ backgroundColor: '#FFFFFF' })
@@ -187,11 +210,15 @@ describe('#ScreenForm', () => {
 
       await test.findByPlaceholderText('Type to filter list...')
       const inputScreenSize = await test.findByLabelText('Screen Size')
-      await test.user.clear(inputScreenSize)
-      await test.user.type(inputScreenSize, '38')
+      await act(async () => {
+        await test.user.clear(inputScreenSize)
+        await test.user.type(inputScreenSize, '38')
+      })
 
       const updateButton = await test.findByText('Update')
-      await test.user.click(updateButton)
+      await act(async () => {
+        await test.user.click(updateButton)
+      })
       expect(await test.findByText('Update')).toBeEnabled()
 
       const h2Element = test.container.querySelectorAll('h2')
@@ -224,10 +251,14 @@ describe('#ScreenForm', () => {
       const test = useInteractComponent(<RootTestComponent defaultValues={undefined} />)
 
       const inputElement = await test.findByPlaceholderText('Type to filter list...')
-      await test.user.type(inputElement, 'WQHD+')
+      await act(async () => {
+        await test.user.type(inputElement, 'WQHD+')
+      })
 
       const listElement = test.container.querySelectorAll('li')[0] as HTMLElement
-      await test.user.click(listElement)
+      await act(async () => {
+        await test.user.click(listElement)
+      })
 
       expect(await test.findByLabelText('Screen Size')).toHaveValue(34)
       expect(await test.findByLabelText('Aspect Ratio')).toHaveValue('21:9')
@@ -249,11 +280,15 @@ describe('#ScreenForm', () => {
       await test.user.type(inputElement, 'WQHD+')
 
       const listElement = test.container.querySelectorAll('li')[0] as HTMLElement
-      await test.user.click(listElement)
+      await act(async () => {
+        await test.user.click(listElement)
+      })
 
       const createButton = await test.findByText('Create')
       expect(createButton).toBeEnabled()
-      await test.user.click(createButton)
+      await act(async () => {
+        await test.user.click(createButton)
+      })
 
       expect(await test.findByText('Create')).toBeEnabled()
       const h2Element = test.container.querySelectorAll('h2')
