@@ -1,7 +1,7 @@
 import { getGetSearchMock } from '@packages/openapi/generated'
 import { useInteractComponent } from '@packages/test/utils/useInteractComponent'
 import { useElementSizeMock } from '@packages/ui/hooks/useElementSize.mock'
-import { waitFor } from '@testing-library/react'
+import { act, waitFor } from '@testing-library/react'
 import { Mock } from 'vitest'
 import { AutoCompleteScreen } from './AutoCompleteScreen'
 
@@ -59,7 +59,9 @@ describe('#AutoCompleteScreen', () => {
 
     const inputElement = await test.findByPlaceholderText('Type to filter list...')
     expect(inputElement).toBeDefined()
-    await test.user.type(inputElement, 'WQHD')
+    await act(async () => {
+      await test.user.type(inputElement, 'WQHD')
+    })
 
     waitFor(() => {
       expect(spies.onSearchSpy).toHaveBeenCalledWith('WQHD')
@@ -76,7 +78,9 @@ describe('#AutoCompleteScreen', () => {
     )
 
     const inputElement = await test.findByPlaceholderText('Type to filter list...')
-    await test.user.type(inputElement, 'WQHD')
+    await act(async () => {
+      await test.user.type(inputElement, 'WQHD')
+    })
 
     waitFor(() => {
       expect(spies.onSearchSpy).toHaveBeenCalledWith('WQHD')

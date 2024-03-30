@@ -1,5 +1,5 @@
 import { useInteractComponent } from '@packages/test/utils/useInteractComponent'
-import { render } from '@testing-library/react'
+import { act, render } from '@testing-library/react'
 import { useElementSizeMock } from '../hooks/useElementSize.mock'
 import { ListInput } from './ListInput'
 
@@ -67,7 +67,9 @@ describe('#ListInput', () => {
       />,
     )
     const listElements = container.querySelectorAll('li')
-    await user.click(listElements[0]!)
+    await act(async () => {
+      await user.click(listElements[0]!)
+    })
 
     expect(getByPlaceholderText('Type to filter list...')).toHaveValue(searchList[0]!.label)
   })
