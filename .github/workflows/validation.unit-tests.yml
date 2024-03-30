@@ -1,10 +1,11 @@
-name: Unit Tests
+name: Validation
 
 on:
   workflow_call:
 
 jobs:
   unit-test:
+    name: Unit Tests
     runs-on: ubuntu-latest
     permissions:
       contents: read

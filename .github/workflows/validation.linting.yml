@@ -1,10 +1,11 @@
-name: Linting
+name: Validation
 
 on:
   workflow_call:
 
 jobs:
   lint:
+    name: Linting
     runs-on: ubuntu-latest
     permissions:
       contents: read
