@@ -63,20 +63,28 @@ test('Smoke Test Screens Page', async ({ page }) => {
    * Test for Screen Panel
    **/
 
-  const showCheckbox = await page.getByRole('row', { name: 'show checkbox 49" 32:9 47" x' }).getByLabel('show checkbox')
+  const showCheckbox1 = await page
+    .getByRole('row', { name: 'show checkbox 49" 32:9 47" x' })
+    .getByLabel('show checkbox')
 
   // Check if panel is visible
-  await expect(showCheckbox).toBeChecked()
+  await expect(showCheckbox1).toBeChecked()
   await expect(page.getByTestId('ScreenPanel-49')).toBeVisible()
 
   // Check if panel is hidden
-  await showCheckbox.uncheck()
-  await expect(showCheckbox).not.toBeChecked()
+  const showCheckbox2 = await page
+    .getByRole('row', { name: 'show checkbox 49" 32:9 47" x' })
+    .getByLabel('show checkbox')
+  await showCheckbox2.uncheck()
+  await expect(showCheckbox2).not.toBeChecked()
   await expect(page.getByTestId('ScreenPanel-49')).not.toBeVisible()
 
   // Check if panel is visible
-  await showCheckbox.check()
-  await expect(showCheckbox).toBeChecked()
+  const showCheckbox3 = await page
+    .getByRole('row', { name: 'show checkbox 49" 32:9 47" x' })
+    .getByLabel('show checkbox')
+  await showCheckbox3.check()
+  await expect(showCheckbox3).toBeChecked()
   await expect(page.getByTestId('ScreenPanel-49')).toBeVisible()
 
   await expect(page.locator('div').filter({ hasText: 'CreatedScreen list' }).nth(3)).not.toBeVisible()
