@@ -23,18 +23,18 @@ jobs:
     permissions:
       contents: read
       pull-requests: write
-    uses: ./.github/workflows/subtask/linting.yml
+    uses: ./.github/workflows/task.linting.yml
 
   unit-test:
     name: Unit Tests
     permissions:
       contents: read
       pull-requests: write
-    uses: ./.github/workflows/subtask/unit-tests.yml
+    uses: ./.github/workflows/task.unit-tests.yml
 
   e2e-tests:
     name: E2E Tests
     permissions:
       contents: read
       pull-requests: write
-    uses: ./.github/workflows/subtask/e2e-tests.yml
+    uses: ./.github/workflows/task.e2e-tests.yml
