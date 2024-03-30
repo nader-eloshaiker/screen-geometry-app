@@ -94,8 +94,10 @@ describe('#ScreenForm', () => {
       const test = useInteractComponent(<RootTestComponent defaultValues={screenInputFixture} editId={editId} />)
 
       const inputScreenSize = await test.findByLabelText('Screen Size')
-      await test.user.clear(inputScreenSize)
-      await test.user.type(inputScreenSize, '27')
+      await act(async () => {
+        await test.user.clear(inputScreenSize)
+        await test.user.type(inputScreenSize, '27')
+      })
 
       const submitButton = await test.findByText('Update')
       await act(async () => {
@@ -109,16 +111,24 @@ describe('#ScreenForm', () => {
       const test = useInteractComponent(<RootTestComponent defaultValues={undefined} editId={undefined} />)
 
       const inputScreenSize = await test.findByLabelText('Screen Size')
-      await test.user.type(inputScreenSize, '27')
+      await act(async () => {
+        await test.user.type(inputScreenSize, '27')
+      })
 
       const ratioElement = await test.findByLabelText('Aspect Ratio')
-      await test.user.type(ratioElement, '32:9')
+      await act(async () => {
+        await test.user.type(ratioElement, '32:9')
+      })
 
       const hResElement = await test.findByLabelText('Horizontal Res')
-      await test.user.type(hResElement, '5120')
+      await act(async () => {
+        await test.user.type(hResElement, '5120')
+      })
 
       const vResElement = await test.findByLabelText('Vertical Res')
-      await test.user.type(vResElement, '1440')
+      await act(async () => {
+        await test.user.type(vResElement, '1440')
+      })
 
       // test.debug()
       const submitButton = await test.findByText('Create')
