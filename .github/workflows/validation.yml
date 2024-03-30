@@ -21,6 +21,9 @@ jobs:
   lint:
     name: Linting
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
 
     steps:
       - name: Checkout
@@ -57,6 +60,9 @@ jobs:
   unit-test:
     name: Unit Tests
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
 
     steps:
       - name: Checkout
@@ -100,6 +106,9 @@ jobs:
     name: E2E Tests
     runs-on: ubuntu-latest
     timeout-minutes: 20
+    permissions:
+      contents: read
+      pull-requests: write
 
     steps:
       - name: Checkout
