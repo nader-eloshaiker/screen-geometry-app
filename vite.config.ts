@@ -1,8 +1,10 @@
 /// <reference types="vitest" />
+import { codecovVitePlugin } from '@codecov/vite-plugin'
 import react from '@vitejs/plugin-react'
 import path from 'path'
 import { checker } from 'vite-plugin-checker'
 import { UserConfig as VitestUserConfigInterface, configDefaults, defineConfig } from 'vitest/config'
+
 import packageJson from './package.json'
 
 const VitestUserConfig: VitestUserConfigInterface = {
@@ -59,6 +61,11 @@ export default defineConfig({
     checker({
       typescript: true,
       enableBuild: true,
+    }),
+    codecovVitePlugin({
+      enableBundleAnalysis: process.env.CODECOV_TOKEN !== undefined,
+      bundleName: 'screen-geometry-app',
+      uploadToken: process.env.CODECOV_TOKEN,
     }),
   ],
   resolve: {
