@@ -93,7 +93,7 @@ jobs:
       - name: Run pnpm install
         run: pnpm install
 
-      - name: Run pnpm install
+      - name: Run pnpm build # bundle analysis for codecov
         run: pnpm build
 
       - name: Run pnpm test
