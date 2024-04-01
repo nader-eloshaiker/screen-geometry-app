@@ -1,5 +1,5 @@
 # Simple workflow for deploying static content to GitHub Pages
-name: Deploy Production
+name: Continuous Delivery
 
 on:
   # can be used to roll back to a previous release
@@ -63,7 +63,10 @@ jobs:
         run: pnpm install
 
       - name: Run pnpm build:prod
-        run: GA_TRACKING_ID=${{ vars.GA_TRACKING_ID }} pnpm build:prod
+        env:
+          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+          GA_TRACKING_ID: ${{ vars.GA_TRACKING_ID }}
+        run: pnpm build:prod
 
       - name: Deploy app to Production
         uses: nader-eloshaiker/cloudlfare-pages-action@v1.1.0
