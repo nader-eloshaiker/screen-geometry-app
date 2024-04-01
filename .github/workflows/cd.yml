@@ -21,7 +21,7 @@ concurrency:
 
 jobs:
   deploy-app:
-    name: Cloudflare Pages Production
+    name: Deploy to Production
     runs-on: ubuntu-latest
     environment: cloudflare-production
     permissions:
@@ -68,7 +68,7 @@ jobs:
           GA_TRACKING_ID: ${{ vars.GA_TRACKING_ID }}
         run: pnpm build:prod
 
-      - name: Deploy app to Production
+      - name: Deploy app
         uses: nader-eloshaiker/cloudlfare-pages-action@v1.1.0
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}

@@ -193,7 +193,7 @@ jobs:
 
   deploy-app:
     needs: [manage-release]
-    name: Cloudflare Pages Develop
+    name: Deploy to Develop
     runs-on: ubuntu-latest
     environment: cloudflare-preview
     permissions:
@@ -237,7 +237,7 @@ jobs:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
         run: pnpm build:dev
 
-      - name: Deploy app to Preview
+      - name: Deploy app
         uses: nader-eloshaiker/cloudlfare-pages-action@v1.1.0
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
