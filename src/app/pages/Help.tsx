@@ -1,6 +1,6 @@
 import CloseIcon from '@app/assets/icons/Close'
 import EditIcon from '@app/assets/icons/Edit'
-import { ScreenButton } from '@app/components/screen/CreateButton'
+import { CreateScreenButton } from '@app/components/screen/CreateButton'
 import { ScreenPanel } from '@app/components/screen/ScreenPanel'
 import { ScreenTable } from '@app/components/screen/ScreenTable'
 import { ScreenForm } from '@app/components/screen/form/ScreenForm'
@@ -75,7 +75,7 @@ export const Help = () => {
             Side Note: You can also create a new screen by clicking the button in the top right corner
           </Paragraph>
           <Diagram>
-            <ScreenButton className='pointer-events-none' />
+            <CreateScreenButton className='pointer-events-none' />
           </Diagram>
           <Paragraph>Loading the default list will populate the table with a list of screens.</Paragraph>
           <Diagram>
@@ -138,8 +138,8 @@ export const Help = () => {
         <Section>
           <Heading className='mb-4 text-2xl font-bold'>Create</Heading>
           <Paragraph>
-            To create a new screen, click the <ScreenButton className='pointer-events-none mx-4 shadow-lg' /> button in
-            the top right corner. This will open a form in the sidebar as show below.
+            To create a new screen, click the <CreateScreenButton className='pointer-events-none mx-4 shadow-lg' />{' '}
+            button in the top right corner. This will open a form in the sidebar as show below.
           </Paragraph>
           <DiagramPanel>
             <div className='sidebar mb-6 w-96 rounded-xl p-2'>

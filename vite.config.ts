@@ -35,10 +35,10 @@ const VitestUserConfig: VitestUserConfigInterface = {
       ],
       reportOnFailure: true,
       thresholds: {
-        lines: 50,
+        lines: 70,
         branches: 50,
-        functions: 50,
-        statements: 50,
+        functions: 70,
+        statements: 70,
         // autoUpdate: true, // Update thresholds when writing tests, disabled due to refactoring tests changes coverage
       },
     },

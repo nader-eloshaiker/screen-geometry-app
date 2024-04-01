@@ -5,7 +5,7 @@ import { twMerge } from 'tailwind-merge'
 
 type TProps = TRestProps & { className?: string }
 
-export const ScreenButton = ({ className, ...rest }: TProps) => {
+export const CreateScreenButton = ({ className, ...rest }: TProps) => {
   const { formDrawerState, dispatchFormDrawer } = useFormDrawerContext()
 
   return (

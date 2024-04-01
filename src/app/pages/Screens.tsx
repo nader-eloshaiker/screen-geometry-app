@@ -1,4 +1,4 @@
-import { ScreenButton } from '@app/components/screen/CreateButton'
+import { CreateScreenButton } from '@app/components/screen/CreateButton'
 import { ScreenFormDrawer } from '@app/components/screen/ScreenFormDrawer'
 import { ScreenPanel } from '@app/components/screen/ScreenPanel'
 import { ScreenTable } from '@app/components/screen/ScreenTable'
@@ -54,7 +54,7 @@ export const Screens = () => {
 
         <div className='flex flex-1 flex-col'>
           <div className='flex w-full flex-row-reverse'>
-            <ScreenButton />
+            <CreateScreenButton />
           </div>
           <div className='label' ref={divSizeRef}>
             <span className='text-xl'>Screen Specs</span>
