@@ -1,13 +1,10 @@
-import { About } from '@app/pages/About'
 import { BoundyErrorManager } from '@app/pages/BoundryErrorManger'
-import { Contact } from '@app/pages/Contact'
 import { ErrorManager } from '@app/pages/ErrorManger'
-import { Help } from '@app/pages/Help'
 import { Root } from '@app/pages/Root'
-import { Screens } from '@app/pages/Screens'
+import { RouteObject } from 'react-router-dom'
 import { RouteSchema } from './RouteSchema'
 
-export const AppRoutes = [
+export const AppRoutes: RouteObject[] = [
   {
     path: RouteSchema.root.path,
     element: <Root />,
@@ -16,11 +13,34 @@ export const AppRoutes = [
       {
         errorElement: <ErrorManager />,
         children: [
-          { index: true, element: <About /> },
-          { path: RouteSchema.about.path, element: <About /> },
-          { path: RouteSchema.screens.path, element: <Screens /> },
-          { path: RouteSchema.help.path, element: <Help /> },
-          { path: RouteSchema.contact.path, element: <Contact /> },
+          {
+            index: true,
+            async lazy() {
+              const { About } = await import('@app/pages/About')
+              return { Component: About }
+            },
+          },
+          {
+            path: RouteSchema.screens.path,
+            async lazy() {
+              const { Screens } = await import('@app/pages/Screens')
+              return { Component: Screens }
+            },
+          },
+          {
+            path: RouteSchema.help.path,
+            async lazy() {
+              const { Help } = await import('@app/pages/Help')
+              return { Component: Help }
+            },
+          },
+          {
+            path: RouteSchema.contact.path,
+            async lazy() {
+              const { Contact } = await import('@app/pages/Contact')
+              return { Component: Contact }
+            },
+          },
         ],
       },
     ],

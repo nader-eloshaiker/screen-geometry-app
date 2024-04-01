@@ -1,10 +1,10 @@
-import { useInteractComponent } from '@packages/test/utils/useInteractComponent'
+import { renderWithUserEvents } from '@packages/test/utils/RenderWithUserEvents'
 import { SkeletonImage } from './SkeletonImage'
 import { ImageIcon } from './assets/ImageIcon'
 
 describe('#SkeletonImage', () => {
   it('should render', () => {
-    const { getByTestId } = useInteractComponent(<SkeletonImage image={<ImageIcon />} />)
+    const { getByTestId } = renderWithUserEvents(<SkeletonImage image={<ImageIcon />} />)
     const element = getByTestId('SkeletonImage')
 
     expect(element).toBeInTheDocument()

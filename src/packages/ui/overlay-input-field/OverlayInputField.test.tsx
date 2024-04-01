@@ -1,9 +1,9 @@
-import { useInteractComponent } from '@packages/test/utils/useInteractComponent'
+import { renderWithUserEvents } from '@packages/test/utils/RenderWithUserEvents'
 import { OverlayInputField } from './OverlayInputField'
 
 describe('#OverlayInputField', () => {
   test('renders overlay input field component with a input and overlays', () => {
-    const test = useInteractComponent(<OverlayInputField overlays={[{ overlay: 'px', overlayClassName: 'pl10' }]} />)
+    const test = renderWithUserEvents(<OverlayInputField overlays={[{ overlay: 'px', overlayClassName: 'pl10' }]} />)
 
     const inputElement = test.getByRole('textbox')
     expect(inputElement).toBeInTheDocument()

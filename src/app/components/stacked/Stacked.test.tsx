@@ -1,9 +1,9 @@
-import { useInteractComponent } from '@packages/test/utils/useInteractComponent'
+import { renderWithUserEvents } from '@packages/test/utils/RenderWithUserEvents'
 import { Stacked } from './Stacked'
 
 describe('#SkeletonImage', () => {
   it('should render', () => {
-    const { getByText } = useInteractComponent(<Stacked height={10}>Test</Stacked>)
+    const { getByText } = renderWithUserEvents(<Stacked height={10}>Test</Stacked>)
     const element = getByText('Test')
 
     expect(element).toBeInTheDocument()

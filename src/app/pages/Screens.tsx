@@ -1,4 +1,4 @@
-import { ScreenButton } from '@app/components/screen/CreateButton'
+import { CreateScreenButton } from '@app/components/screen/CreateButton'
 import { ScreenFormDrawer } from '@app/components/screen/ScreenFormDrawer'
 import { ScreenPanel } from '@app/components/screen/ScreenPanel'
 import { ScreenTable } from '@app/components/screen/ScreenTable'
@@ -54,10 +54,10 @@ export const Screens = () => {
 
         <div className='flex flex-1 flex-col'>
           <div className='flex w-full flex-row-reverse'>
-            <ScreenButton />
+            <CreateScreenButton />
           </div>
-          <div className='label' ref={divSizeRef}>
-            <span className='text-xl'>Screen Specs</span>
+          <div className='label text-xl' ref={divSizeRef}>
+            Screen Specs
           </div>
           <ScreenTable
             screens={screens}
@@ -68,9 +68,7 @@ export const Screens = () => {
 
           {screens.length === 0 && !isScreenListLoading && (
             <div className='flex h-full flex-col items-center'>
-              <div className='label py-4'>
-                <span className='text-xl'>No List Found</span>
-              </div>
+              <div className='label py-4 text-xl'>No List Found</div>
               <div className='flex flex-col items-center gap-2 py-6'>
                 <div>Click here to populate default list</div>
                 <button
@@ -89,9 +87,7 @@ export const Screens = () => {
           )}
           {(screens.length > 0 || isScreenListLoading) && (
             <>
-              <div className='label py-6'>
-                <span className='text-xl'>Size and Pixel Density Comparison</span>
-              </div>
+              <div className='label py-6 text-xl'>Size and Pixel Density Comparison</div>
               <Stacked height={maxPanelSize.height}>
                 {screens.length === 0 && isScreenListLoading ? (
                   <SkeletonImage

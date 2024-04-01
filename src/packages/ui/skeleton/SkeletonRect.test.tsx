@@ -1,9 +1,9 @@
-import { useInteractComponent } from '@packages/test/utils/useInteractComponent'
+import { renderWithUserEvents } from '@packages/test/utils/RenderWithUserEvents'
 import { SkeletonRect } from './SkeletonRect'
 
 describe('#SkeletonRect', () => {
   it('should render', () => {
-    const { getByTestId } = useInteractComponent(<SkeletonRect />)
+    const { getByTestId } = renderWithUserEvents(<SkeletonRect />)
     const element = getByTestId('SkeletonRect')
 
     expect(element).toBeInTheDocument()

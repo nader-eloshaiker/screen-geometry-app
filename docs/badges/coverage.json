@@ -1,6 +1,6 @@
 {
   "label": "Coverage",
-  "message": "75%",
+  "message": "79%",
   "namedLogo": "vitest",
   "color": "orange",
   "labelColor": "#444d57"
