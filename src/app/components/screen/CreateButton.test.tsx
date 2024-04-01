@@ -1,6 +1,6 @@
 import { FormDrawerMode } from '@app/contexts/FormDrawer/FormDrawerManager'
 import { FormDrawerProvider } from '@app/contexts/FormDrawer/FormDrawerProvider'
-import { useInteractComponent } from '@packages/test/utils/useInteractComponent'
+import { renderWithUserEvents } from '@packages/test/utils/RenderWithUserEvents'
 import { act } from '@testing-library/react'
 import { CreateScreenButton } from './CreateButton'
 
@@ -13,7 +13,7 @@ const TestComponent = ({ formDrawerState = false }: { formDrawerState: boolean }
 }
 
 test('renders screen table component with a table and rows', async () => {
-  const test = useInteractComponent(<TestComponent formDrawerState={false} />)
+  const test = renderWithUserEvents(<TestComponent formDrawerState={false} />)
 
   const createButton = await test.findByText('Create Screen')
   expect(createButton).toBeEnabled()

@@ -1,11 +1,11 @@
 import { getGetScreenMock } from '@packages/openapi/generated'
-import { useInteractComponent } from '@packages/test/utils/useInteractComponent'
+import { renderWithUserEvents } from '@packages/test/utils/RenderWithUserEvents'
 import { ScreenPanel } from './ScreenPanel'
 
 describe('#ScreenPanel', () => {
   test('render screen panel component with a table representing the pixel density when selected', () => {
     const screenItem = getGetScreenMock().item
-    const test = useInteractComponent(<ScreenPanel screen={screenItem} highlighted={screenItem} />)
+    const test = renderWithUserEvents(<ScreenPanel screen={screenItem} highlighted={screenItem} />)
 
     const tableElement = test.getByRole('table')
     expect(tableElement).toBeInTheDocument()
@@ -18,7 +18,7 @@ describe('#ScreenPanel', () => {
   })
 
   test('render screen panel component with NO table representing the pixel density when NOT selected', () => {
-    const test = useInteractComponent(<ScreenPanel screen={getGetScreenMock().item} highlighted={undefined} />)
+    const test = renderWithUserEvents(<ScreenPanel screen={getGetScreenMock().item} highlighted={undefined} />)
 
     const tableElement = test.container.querySelector('table')
     expect(tableElement).not.toBeInTheDocument()

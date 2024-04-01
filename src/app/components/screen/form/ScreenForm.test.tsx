@@ -10,7 +10,7 @@ import {
 } from '@packages/openapi/generated'
 import { mswWithSpy, resetMSW, startMSW, stopMSW } from '@packages/serviceworker/NodeServiceWorker'
 import { screenInputFixture } from '@packages/test/fixtures/ScreenFixtures'
-import { useInteractComponent } from '@packages/test/utils/useInteractComponent'
+import { renderWithUserEvents } from '@packages/test/utils/RenderWithUserEvents'
 import { useElementSizeMock } from '@packages/ui/hooks/useElementSize.mock'
 import { NotificationProvider } from '@packages/ui/notification'
 import { transformScreenInput } from '@packages/utils/DataTransformation'
@@ -72,7 +72,7 @@ describe('#ScreenForm', () => {
   describe('#close', () => {
     test('close button', async () => {
       const onCloseAction = vi.fn()
-      const test = useInteractComponent(
+      const test = renderWithUserEvents(
         <RootTestComponent defaultValues={screenInputFixture} onCloseAction={onCloseAction} />,
       )
 
@@ -91,7 +91,7 @@ describe('#ScreenForm', () => {
   describe('#LoadingMode', () => {
     test('show loading when updating a screen', async () => {
       const editId = '1'
-      const test = useInteractComponent(<RootTestComponent defaultValues={screenInputFixture} editId={editId} />)
+      const test = renderWithUserEvents(<RootTestComponent defaultValues={screenInputFixture} editId={editId} />)
 
       const inputScreenSize = await test.findByLabelText('Screen Size')
       await act(async () => {
@@ -108,7 +108,7 @@ describe('#ScreenForm', () => {
     })
 
     test('show loading when creating a screen', async () => {
-      const test = useInteractComponent(<RootTestComponent defaultValues={undefined} editId={undefined} />)
+      const test = renderWithUserEvents(<RootTestComponent defaultValues={undefined} editId={undefined} />)
 
       const inputScreenSize = await test.findByLabelText('Screen Size')
       await act(async () => {
@@ -165,7 +165,7 @@ describe('#ScreenForm', () => {
     test('reset screen form', async () => {
       const editId = '1'
 
-      const test = useInteractComponent(<RootTestComponent defaultValues={screenInputFixture} editId={editId} />)
+      const test = renderWithUserEvents(<RootTestComponent defaultValues={screenInputFixture} editId={editId} />)
       const resetButton = await test.findByText('Reset')
 
       const inputScreenSize = await test.findByLabelText('Screen Size')
@@ -184,7 +184,7 @@ describe('#ScreenForm', () => {
     test('change screen theme colors', async () => {
       const editId = '1'
 
-      const test = useInteractComponent(<RootTestComponent defaultValues={screenInputFixture} editId={editId} />)
+      const test = renderWithUserEvents(<RootTestComponent defaultValues={screenInputFixture} editId={editId} />)
       const changeButton = await test.findByText('Change')
       const lightColor = await test.findByText('Light')
       const darkColor = await test.findByText('Dark')
@@ -204,7 +204,7 @@ describe('#ScreenForm', () => {
       const editId = '5HjERJbH'
       const initialise: Array<ScreenItem> = [{ ...transformScreenInput(screenInputFixture), id: editId }]
 
-      const test = useInteractComponent(
+      const test = renderWithUserEvents(
         <RootTestComponent defaultValues={screenInputFixture} editId={editId} initialise={initialise} />,
       )
 
@@ -248,7 +248,7 @@ describe('#ScreenForm', () => {
     })
 
     test('select a screen from list and populate form', async () => {
-      const test = useInteractComponent(<RootTestComponent defaultValues={undefined} />)
+      const test = renderWithUserEvents(<RootTestComponent defaultValues={undefined} />)
 
       const inputElement = await test.findByPlaceholderText('Type to filter list...')
       await act(async () => {
@@ -274,7 +274,7 @@ describe('#ScreenForm', () => {
     })
 
     test('create a screen from list and populate form', async () => {
-      const test = useInteractComponent(<RootTestComponent defaultValues={undefined} />)
+      const test = renderWithUserEvents(<RootTestComponent defaultValues={undefined} />)
 
       const inputElement = await test.findByPlaceholderText('Type to filter list...')
       await test.user.type(inputElement, 'WQHD+')

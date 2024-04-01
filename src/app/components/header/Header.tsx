@@ -13,6 +13,7 @@ const NavMenuItem = ({ pathname, route, title }: NavMenuItemProps) => {
           active: pathname === route,
         })}
         to={route}
+        data-testid={`link-${title}`}
       >
         {title}
       </Link>

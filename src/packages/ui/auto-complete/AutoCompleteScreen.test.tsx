@@ -1,5 +1,5 @@
 import { getGetSearchMock } from '@packages/openapi/generated'
-import { useInteractComponent } from '@packages/test/utils/useInteractComponent'
+import { renderWithUserEvents } from '@packages/test/utils/RenderWithUserEvents'
 import { useElementSizeMock } from '@packages/ui/hooks/useElementSize.mock'
 import { act, waitFor } from '@testing-library/react'
 import { Mock } from 'vitest'
@@ -36,7 +36,7 @@ describe('#AutoCompleteScreen', () => {
   })
 
   test('renders autocomplete component with an input field', async () => {
-    const test = useInteractComponent(
+    const test = renderWithUserEvents(
       <TestComponent
         onSelectScreenSpy={spies.onSelectScreenSpy}
         setClearSearchHandlerSpy={spies.setClearSearchHandlerSpy}
@@ -49,7 +49,7 @@ describe('#AutoCompleteScreen', () => {
   })
 
   test('calls backend search api a limited time as the user enters a search term', async () => {
-    const test = useInteractComponent(
+    const test = renderWithUserEvents(
       <TestComponent
         onSelectScreenSpy={spies.onSelectScreenSpy}
         setClearSearchHandlerSpy={spies.setClearSearchHandlerSpy}
@@ -69,7 +69,7 @@ describe('#AutoCompleteScreen', () => {
   })
 
   test('clears search results and requests a full list from search engine', async () => {
-    const test = useInteractComponent(
+    const test = renderWithUserEvents(
       <TestComponent
         onSelectScreenSpy={spies.onSelectScreenSpy}
         setClearSearchHandlerSpy={spies.setClearSearchHandlerSpy}

@@ -1,4 +1,4 @@
-import { useInteractComponent } from '@packages/test/utils/useInteractComponent'
+import { renderWithUserEvents } from '@packages/test/utils/RenderWithUserEvents'
 import { act, render } from '@testing-library/react'
 import { useElementSizeMock } from '../hooks/useElementSize.mock'
 import { ListInput } from './ListInput'
@@ -55,7 +55,7 @@ describe('#ListInput', () => {
   })
 
   test('renders the ListInput dropdown and make a selectin', async () => {
-    const { user, container, getByPlaceholderText } = useInteractComponent(
+    const { user, container, getByPlaceholderText } = renderWithUserEvents(
       <ListInput
         items={searchList}
         value=''
