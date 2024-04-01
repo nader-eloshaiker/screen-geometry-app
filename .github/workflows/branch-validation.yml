@@ -1,4 +1,4 @@
-name: Validation
+name: Branch Validation
 
 on:
   push:
