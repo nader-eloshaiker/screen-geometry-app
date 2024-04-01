@@ -4,7 +4,6 @@ import react from '@vitejs/plugin-react'
 import path from 'path'
 import { checker } from 'vite-plugin-checker'
 import { UserConfig as VitestUserConfigInterface, configDefaults, defineConfig } from 'vitest/config'
-
 import packageJson from './package.json'
 
 const VitestUserConfig: VitestUserConfigInterface = {

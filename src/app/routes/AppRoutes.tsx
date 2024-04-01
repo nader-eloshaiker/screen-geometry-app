@@ -21,13 +21,6 @@ export const AppRoutes: RouteObject[] = [
             },
           },
           {
-            path: RouteSchema.about.path,
-            async lazy() {
-              const { About } = await import('@app/pages/About')
-              return { Component: About }
-            },
-          },
-          {
             path: RouteSchema.screens.path,
             async lazy() {
               const { Screens } = await import('@app/pages/Screens')
