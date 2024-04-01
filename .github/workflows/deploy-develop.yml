@@ -52,6 +52,8 @@ jobs:
         run: pnpm install
 
       - name: Run pnpm build:dev
+        env:
+          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
         run: pnpm build:dev
 
       - name: Deploy app to Preview
