@@ -19,7 +19,7 @@ permissions:
 
 jobs:
   lint:
-    name: Linting
+    name: Lint
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -57,8 +57,8 @@ jobs:
       - name: Run pnpm lint
         run: pnpm lint
 
-  build-analysis:
-    name: Build Analysis
+  build:
+    name: Build
     runs-on: ubuntu-latest
     permissions:
       contents: read

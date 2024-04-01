@@ -1,8 +1,8 @@
 # Screen Geometry
 
 [![Validation](https://github.com/nader-eloshaiker/screen-geometry-app/actions/workflows/validation.yml/badge.svg)](https://github.com/nader-eloshaiker/screen-geometry-app/actions/workflows/validation.yml)
-[![CI/CD](https://github.com/nader-eloshaiker/screen-geometry-app/actions/workflows/cicd.yml/badge.svg)](https://github.com/nader-eloshaiker/screen-geometry-app/actions/workflows/cicd.yml)
-[![Deploy Production](https://github.com/nader-eloshaiker/screen-geometry-app/actions/workflows/deploy_production.yml/badge.svg)](https://github.com/nader-eloshaiker/screen-geometry-app/actions/workflows/deploy_production.yml)
+[![CI](https://github.com/nader-eloshaiker/screen-geometry-app/actions/workflows/ci.yml/badge.svg)](https://github.com/nader-eloshaiker/screen-geometry-app/actions/workflows/ci.yml)
+[![CD](https://github.com/nader-eloshaiker/screen-geometry-app/actions/workflows/cd.yml/badge.svg)](https://github.com/nader-eloshaiker/screen-geometry-app/actions/workflows/cd.yml)
 
 [![codecov](https://codecov.io/gh/nader-eloshaiker/screen-geometry-app/graph/badge.svg?token=FD9467PICM)](https://app.codecov.io/gh/nader-eloshaiker/screen-geometry-app?search=&displayType=list)
 
