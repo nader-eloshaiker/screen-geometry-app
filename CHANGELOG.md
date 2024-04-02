@@ -1,5 +1,22 @@
 # Changelog
 
+## [1.6.0](https://github.com/nader-eloshaiker/screen-geometry-app/compare/v1.5.0...v1.6.0) (2024-04-02)
+
+
+### Features
+
+* **app:** implement lazy loading of app ([#387](https://github.com/nader-eloshaiker/screen-geometry-app/issues/387)) ([1840db5](https://github.com/nader-eloshaiker/screen-geometry-app/commit/1840db5c1c672281771ce97ebb8459dfdafbca52))
+* **ops:** enhance tests ([#384](https://github.com/nader-eloshaiker/screen-geometry-app/issues/384)) ([493fbd7](https://github.com/nader-eloshaiker/screen-geometry-app/commit/493fbd7ebc92590ffe210e5cfbc6234c77c0a40b))
+* **ops:** refactor GitHub action ([#382](https://github.com/nader-eloshaiker/screen-geometry-app/issues/382)) ([8199220](https://github.com/nader-eloshaiker/screen-geometry-app/commit/8199220ee0f3cd31ad8d6ec0fc75e939b551ece0))
+* **test:** Add Codecov bundler plugin ([#383](https://github.com/nader-eloshaiker/screen-geometry-app/issues/383)) ([b5a9430](https://github.com/nader-eloshaiker/screen-geometry-app/commit/b5a9430a20d9171d58cc0461bbb109160beb6043))
+* **test:** add codecov into validation and cicd actions ([#378](https://github.com/nader-eloshaiker/screen-geometry-app/issues/378)) ([5133162](https://github.com/nader-eloshaiker/screen-geometry-app/commit/5133162a0c48e90987aca0346758433280f5d17c))
+* **test:** codecov integration ([#380](https://github.com/nader-eloshaiker/screen-geometry-app/issues/380)) ([fbe7640](https://github.com/nader-eloshaiker/screen-geometry-app/commit/fbe764016a88dc5857f57bac92af423b5daade13))
+
+
+### Bug Fixes
+
+* **test:** e2e checkbox issue ([#394](https://github.com/nader-eloshaiker/screen-geometry-app/issues/394)) ([c0352d8](https://github.com/nader-eloshaiker/screen-geometry-app/commit/c0352d8afb34defd8695b74d550378d3b3bead2b))
+
 ## [1.5.0](https://github.com/nader-eloshaiker/screen-geometry-app/compare/v1.4.0...v1.5.0) (2024-03-28)
 
 
