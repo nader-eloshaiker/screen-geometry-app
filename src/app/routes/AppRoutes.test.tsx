@@ -42,18 +42,18 @@ describe('#App', () => {
 
   it('should naviate back home page', async () => {
     const test = renderWithUserEvents(<TestComnponent />)
-    const element = await test.findAllByTestId('link-Screens')
+    const screenLink = await test.findAllByTestId('link-Screens')
 
     await act(async () => {
-      await test.user.click(element[0])
+      await test.user.click(screenLink[0])
     })
 
     waitFor(() => expect(test.getByText('Click here to populate default list')).toBeInTheDocument())
 
-    const element2 = await test.findAllByTestId('link-Home')
+    const homeLink = await test.findAllByTestId('link-Home')
 
     await act(async () => {
-      await test.user.click(element2[0])
+      await test.user.click(homeLink[0])
     })
 
     waitFor(() => expect(test.getByText('Welcome to Screen Geometry')).toBeInTheDocument())
