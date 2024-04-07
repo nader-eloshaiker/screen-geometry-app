@@ -1,4 +1,4 @@
-import { expect, test } from '@playwright/test'
+import { expect, test } from '@bgotink/playwright-coverage'
 
 test('Smoke Test Screens Page', async ({ page }) => {
   // Load Page and Naviate to Screens
