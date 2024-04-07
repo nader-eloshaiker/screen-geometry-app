@@ -38,7 +38,7 @@ export default defineConfig({
         // - or if you're running into any of the other many reasons people have for excluding files
         exclude: ['path/to/ignored/code/**'],
         // Directory in which to write coverage reports
-        resultDir: path.join(__dirname, 'playwright-report/coverage'),
+        resultDir: path.join(__dirname, 'playwright-report'),
         // Configure the reports to generate.
         // The value is an array of istanbul reports, with optional configuration attached.
         reports: [
