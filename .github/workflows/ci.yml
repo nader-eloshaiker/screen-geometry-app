@@ -10,7 +10,7 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  unit-test:
+  unit-tests:
     name: Unit Tests
     runs-on: ubuntu-latest
     permissions:
@@ -54,6 +54,60 @@ jobs:
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
           slug: nader-eloshaiker/screen-geometry-app
+          directory: coverage/vitest/
+          flags: unit
+
+  storybook-tests:
+    name: StoryBook Tests
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: '.nvmrc'
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v3.0.0
+        with:
+          run_install: false
+
+      - name: Get pnpm store directory
+        shell: bash
+        run: echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
+
+      - name: Setup pnpm cache
+        uses: actions/cache@v4
+        with:
+          path: ${{ env.STORE_PATH }}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
+
+      - name: Run pnpm install
+        run: pnpm install
+
+      - name: Run pnpm build # bundle analysis for codecov
+        env:
+          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+        run: pnpm build
+
+      - name: Run pnpm test
+        run: pnpm sb:ci
+
+      - name: Upload coverage reports to Codecov
+        uses: codecov/codecov-action@v4
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          slug: nader-eloshaiker/screen-geometry-app
+          directory: coverage/storybook/
+          flags: storybook
 
   e2e-tests:
     name: E2E Tests
@@ -103,11 +157,11 @@ jobs:
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
           slug: nader-eloshaiker/screen-geometry-app
-          directory: playwright-report/
+          directory: coverage/playwright/
           flags: e2e
 
   manage-release:
-    needs: [unit-test, e2e-tests]
+    needs: [unit-tests, storybook-tests, e2e-tests]
     name: Manage Release
     runs-on: ubuntu-latest
     permissions:

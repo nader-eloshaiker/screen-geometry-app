@@ -39,6 +39,8 @@
     "e2e:report": "pnpm exec playwright show-report",
     "typecheck": "tsc --project tsconfig.json --noEmit",
     "sb": "storybook dev -p 6006",
+    "sb:test": "test-storybook --coverage",
+    "sb:ci": "concurrently -k -s first -n \"Storybook,Test\" -c \"magenta,blue\" \"pnpm sb\" \"wait-on tcp:6006 && pnpm sb:test\"",
     "sb:build": "storybook build"
   },
   "dependencies": {
@@ -64,6 +66,7 @@
     "@bgotink/playwright-coverage": "^0.2.2",
     "@codecov/vite-plugin": "0.0.1-beta.5",
     "@playwright/test": "^1.42.1",
+    "@storybook/addon-coverage": "^1.0.1",
     "@storybook/addon-essentials": "^8.0.4",
     "@storybook/addon-interactions": "^8.0.4",
     "@storybook/addon-links": "^8.0.4",
@@ -73,6 +76,7 @@
     "@storybook/react": "^8.0.4",
     "@storybook/react-vite": "^8.0.4",
     "@storybook/test": "^8.0.4",
+    "@storybook/test-runner": "^0.17.0",
     "@tanstack/react-query-devtools": "^5.28.8",
     "@testing-library/jest-dom": "^6.4.2",
     "@testing-library/react": "^14.2.2",
@@ -94,6 +98,7 @@
     "@vitest/coverage-istanbul": "^1.4.0",
     "@vitest/ui": "^1.4.0",
     "autoprefixer": "^10.4.17",
+    "concurrently": "^8.2.2",
     "daisyui": "^4.8.0",
     "eslint": "^8.56.0",
     "eslint-config-prettier": "^9.1.0",
@@ -122,7 +127,8 @@
     "typescript": "^5.3.3",
     "vite": "^5.2.6",
     "vite-plugin-checker": "^0.6.4",
-    "vitest": "^1.4.0"
+    "vitest": "^1.4.0",
+    "wait-on": "^7.2.0"
   },
   "browserslist": [
     "defaults"
