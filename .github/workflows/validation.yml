@@ -186,6 +186,9 @@ jobs:
       - name: Run pnpm install
         run: pnpm install
 
+      - name: Install Playwright Browsers
+        run: pnpm e2e:install
+
       - name: Run pnpm sb:ci
         run: pnpm sb:ci
 
