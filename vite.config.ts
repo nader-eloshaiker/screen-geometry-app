@@ -19,7 +19,7 @@ const VitestUserConfig: VitestUserConfigInterface = {
     coverage: {
       provider: 'istanbul', //'v8',
       reporter: ['text', 'json-summary', 'json', 'clover', 'html'],
-      reportsDirectory: 'coverage',
+      reportsDirectory: 'coverage/vitest',
       include: ['src/**/*.{ts,tsx}'],
       exclude: [
         ...configDefaults.exclude,
