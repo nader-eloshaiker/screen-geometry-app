@@ -1,5 +1,14 @@
 # Changelog
 
+## [1.7.0](https://github.com/nader-eloshaiker/screen-geometry-app/compare/v1.6.0...v1.7.0) (2024-04-09)
+
+
+### Features
+
+* **test:** add playwright coverage reporting ([#395](https://github.com/nader-eloshaiker/screen-geometry-app/issues/395)) ([0122dc9](https://github.com/nader-eloshaiker/screen-geometry-app/commit/0122dc927bab8f8cf57629434274eec64411ecb3))
+* **test:** e2e coverage report ([#397](https://github.com/nader-eloshaiker/screen-geometry-app/issues/397)) ([5aa9ef1](https://github.com/nader-eloshaiker/screen-geometry-app/commit/5aa9ef18e7ca79104d6e73c583152acc7a8e6e1c))
+* **test:** storybook testing ([#400](https://github.com/nader-eloshaiker/screen-geometry-app/issues/400)) ([aef4d7d](https://github.com/nader-eloshaiker/screen-geometry-app/commit/aef4d7dc9bd1e866be7bfc31edd676f04f15ba99))
+
 ## [1.6.0](https://github.com/nader-eloshaiker/screen-geometry-app/compare/v1.5.0...v1.6.0) (2024-04-02)
 
 
