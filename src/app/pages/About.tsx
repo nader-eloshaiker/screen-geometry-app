@@ -47,6 +47,7 @@ export const About = () => {
               placeholderSrc='./media/demo.webp'
               width={508}
               height={528}
+              alt='Demo Animation'
             />
           </div>
           <p className='mb-4'>

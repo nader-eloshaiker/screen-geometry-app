@@ -15,8 +15,7 @@ export default function ThemeModeToggle({ className, id, ...rest }: TProps) {
   }
 
   return (
-    <label className={twMerge('swap cursor-pointer grid place-items-center', className)} {...rest}>
-      {/* this hidden checkbox controls the state */}
+    <label htmlFor={id} className={twMerge('swap cursor-pointer grid place-items-center', className)} {...rest}>
       <input
         type='checkbox'
         id={id}
