@@ -69,7 +69,7 @@ jobs:
         run: pnpm build:prod
 
       - name: Deploy app
-        uses: nader-eloshaiker/cloudlfare-pages-action@v1.1.0
+        uses: nader-eloshaiker/cloudlfare-pages-action@v1.2.0
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
