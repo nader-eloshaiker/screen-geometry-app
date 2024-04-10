@@ -245,20 +245,3 @@ jobs:
           slug: nader-eloshaiker/screen-geometry-app
           directory: coverage/playwright/
           flags: e2e
-
-  codecov-reports:
-    needs: [unit-test, storybook-test, e2e-tests]
-    name: Codecov Reports
-    runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      pull-requests: write
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-      - name: Downlod artifacts
-        uses: actions/download-artifact@v2
-        with:
-          name: coverage
-          path: coverage
-      - name: Upload coverage reports to Codecov
