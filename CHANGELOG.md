@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.7.1](https://github.com/nader-eloshaiker/screen-geometry-app/compare/v1.7.0...v1.7.1) (2024-04-10)
+
+
+### Bug Fixes
+
+* **app:** add missing tags to improve accessibility ([#403](https://github.com/nader-eloshaiker/screen-geometry-app/issues/403)) ([84966be](https://github.com/nader-eloshaiker/screen-geometry-app/commit/84966bec2728e0b89e86167c45691be48310cb67))
+* **ops:** remove redundant build step in validation ([#405](https://github.com/nader-eloshaiker/screen-geometry-app/issues/405)) ([59d58ac](https://github.com/nader-eloshaiker/screen-geometry-app/commit/59d58ac0d5a77feb872f08593b2c9db6c6775ad3))
+
 ## [1.7.0](https://github.com/nader-eloshaiker/screen-geometry-app/compare/v1.6.0...v1.7.0) (2024-04-09)
 
 
