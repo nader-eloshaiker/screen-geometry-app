@@ -134,11 +134,6 @@ jobs:
       - name: Run pnpm install
         run: pnpm install
 
-      - name: Run pnpm build # bundle analysis for codecov
-        env:
-          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
-        run: pnpm build
-
       - name: Run pnpm test
         run: pnpm test:ci
 
