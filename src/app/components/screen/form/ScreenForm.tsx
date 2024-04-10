@@ -129,10 +129,11 @@ export const ScreenForm = ({ defaultValues = null, editId = undefined, isLoading
         <span className='text-lg'>{!editId ? 'Add' : 'Edit'} Screen</span>
       </label>
       <div className='form-control mb-4 flex w-full flex-col'>
-        <label className='label'>
+        <label htmlFor='autoCompleteScreen' className='label'>
           <span className='text-sm'>Choose from list of Monitors</span>
         </label>
         <AutoCompleteScreen
+          id='autoCompleteScreen'
           onSelectScreen={selectHandler}
           setClearSearchHandler={setClearSearchHandler}
           isFetching={isSearchListLoading}
