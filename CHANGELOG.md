@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.7.2](https://github.com/nader-eloshaiker/screen-geometry-app/compare/v1.7.1...v1.7.2) (2024-04-11)
+
+
+### Bug Fixes
+
+* **deps:** reload static asset on deployment ([#406](https://github.com/nader-eloshaiker/screen-geometry-app/issues/406)) ([b7c524f](https://github.com/nader-eloshaiker/screen-geometry-app/commit/b7c524f8b1def29e308f172bef675b5b11061b22))
+* **deps:** update deps ([b7c524f](https://github.com/nader-eloshaiker/screen-geometry-app/commit/b7c524f8b1def29e308f172bef675b5b11061b22))
+
 ## [1.7.1](https://github.com/nader-eloshaiker/screen-geometry-app/compare/v1.7.0...v1.7.1) (2024-04-10)
 
 
