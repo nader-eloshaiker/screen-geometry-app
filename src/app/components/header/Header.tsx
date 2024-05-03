@@ -42,13 +42,10 @@ export default function Header() {
         {/* small header */}
         <div className='flex w-full flex-row xs:hidden' data-testid='small-header'>
           <div className='dropdown' data-testid='nav-menu'>
-            <div tabIndex={0} role='button' className='btn btn-square btn-ghost'>
+            <div className='btn btn-square btn-ghost'>
               <HamburgerIcon className='size-6' />
             </div>
-            <ul
-              tabIndex={0}
-              className='menu dropdown-content menu-sm z-[1] ml-2 mt-3 w-52 rounded-box bg-base-100 p-2 shadow-lg'
-            >
+            <ul className='menu dropdown-content menu-sm z-[1] ml-2 mt-3 w-52 rounded-box bg-base-100 p-2 shadow-lg'>
               <NavMenu pathname={pathname} />
             </ul>
           </div>
