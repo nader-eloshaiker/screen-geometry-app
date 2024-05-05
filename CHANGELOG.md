@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.8.0](https://github.com/nader-eloshaiker/screen-geometry-app/compare/v1.7.2...v1.8.0) (2024-05-03)
+
+
+### Features
+
+* **app:** parallel load frontend and backend ([#415](https://github.com/nader-eloshaiker/screen-geometry-app/issues/415)) ([42cd1e4](https://github.com/nader-eloshaiker/screen-geometry-app/commit/42cd1e4d4fe751b620d3f3a1656d92d4b9202f48))
+
 ## [1.7.2](https://github.com/nader-eloshaiker/screen-geometry-app/compare/v1.7.1...v1.7.2) (2024-04-11)
 
 
