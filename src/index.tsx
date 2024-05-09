@@ -11,17 +11,16 @@ const testMode = !import.meta.env.DEV
 const trackingId = process.env.GA_TRACKING_ID ?? import.meta.env.VITE_GA_TRACKING_ID
 ReactGA.initialize(trackingId, { testMode })
 
-createBrowserServiceWorker(baseUrl, !!import.meta.env.NODE_ENV).then(() => {
-  createRoot(document.getElementById('root') as HTMLElement).render(
-    <StrictMode>
-      <HelmetProvider>
-        <Helmet>
-          <title>Screen Geometry</title>
-        </Helmet>
-        <App />
-      </HelmetProvider>
-    </StrictMode>,
-  )
+createBrowserServiceWorker(baseUrl, !!import.meta.env.NODE_ENV).then(() => {})
+createRoot(document.getElementById('root') as HTMLElement).render(
+  <StrictMode>
+    <HelmetProvider>
+      <Helmet>
+        <title>Screen Geometry</title>
+      </Helmet>
+      <App />
+    </HelmetProvider>
+  </StrictMode>,
+)
 
-  reportWebVitals()
-})
+reportWebVitals()
