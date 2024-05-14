@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.9.0](https://github.com/nader-eloshaiker/screen-geometry-app/compare/v1.8.0...v1.9.0) (2024-05-14)
+
+
+### Features
+
+* **app:** refine pixel density representation ([#421](https://github.com/nader-eloshaiker/screen-geometry-app/issues/421)) ([6790d0c](https://github.com/nader-eloshaiker/screen-geometry-app/commit/6790d0c3d870109f6b0d91b5d08ba50637a39c32))
+
 ## [1.8.0](https://github.com/nader-eloshaiker/screen-geometry-app/compare/v1.7.2...v1.8.0) (2024-05-03)
 
 
