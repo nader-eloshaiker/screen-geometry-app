@@ -47,7 +47,7 @@ export const ScreenPanel = ({ screen, highlighted = undefined, setHighLighted = 
     setConfig({
       width: Math.round(100 * (screen.render?.width ?? 1)),
       height: Math.round(100 * (screen.render?.height ?? 1)),
-      color: themeMode === DarkMode ? `${screen.color.lightColor}18` : `${screen.color.darkColor}18`,
+      color: themeMode === DarkMode ? `${screen.color.lightColor}25` : `${screen.color.darkColor}25`,
       vPixelCount: Math.round((screen.spec?.vRes ?? 1) / 100),
       hPixelCount: Math.round((screen.spec?.hRes ?? 1) / 100),
     })
@@ -77,6 +77,7 @@ export const ScreenPanel = ({ screen, highlighted = undefined, setHighLighted = 
                     key={j}
                     style={{
                       backgroundColor: config.color,
+                      borderRadius: '50%',
                     }}
                   ></td>
                 ))}
