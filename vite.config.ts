@@ -1,8 +1,8 @@
 /// <reference types="vitest" />
 import { codecovVitePlugin } from '@codecov/vite-plugin'
 import react from '@vitejs/plugin-react'
-import path from 'path'
 import { checker } from 'vite-plugin-checker'
+import tsconfigPaths from 'vite-tsconfig-paths'
 import { UserConfig as VitestUserConfigInterface, configDefaults, defineConfig } from 'vitest/config'
 import packageJson from './package.json'
 
@@ -57,6 +57,7 @@ export default defineConfig({
   assetsInclude: ['./sb-preview/runtime.js'],
   plugins: [
     react(),
+    tsconfigPaths(),
     checker({
       typescript: true,
       enableBuild: true,
@@ -67,12 +68,5 @@ export default defineConfig({
       uploadToken: process.env.CODECOV_TOKEN,
     }),
   ],
-  resolve: {
-    alias: {
-      // '@': path.resolve(__dirname, './src'),
-      '@app': path.resolve(__dirname, '/src/app'),
-      '@packages': path.resolve(__dirname, '/src/packages'),
-    },
-  },
   test: VitestUserConfig.test,
 })

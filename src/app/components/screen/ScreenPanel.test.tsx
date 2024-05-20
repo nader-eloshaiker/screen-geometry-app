@@ -3,9 +3,9 @@ import { renderWithUserEvents } from '@packages/test/utils/RenderWithUserEvents'
 import { ScreenPanel } from './ScreenPanel'
 
 describe('#ScreenPanel', () => {
-  test('render screen panel component with a table representing the pixel density when selected', () => {
+  test('render screen panel component with a table representing the pixel density when selected', async () => {
     const screenItem = getGetScreenMock().item
-    const test = renderWithUserEvents(<ScreenPanel screen={screenItem} highlighted={screenItem} />)
+    const test = await renderWithUserEvents(<ScreenPanel screen={screenItem} highlighted={screenItem} />)
 
     const tableElement = test.getByRole('table')
     expect(tableElement).toBeInTheDocument()
@@ -17,8 +17,8 @@ describe('#ScreenPanel', () => {
     expect(colElements.length).toBe(608)
   })
 
-  test('render screen panel component with NO table representing the pixel density when NOT selected', () => {
-    const test = renderWithUserEvents(<ScreenPanel screen={getGetScreenMock().item} highlighted={undefined} />)
+  test('render screen panel component with NO table representing the pixel density when NOT selected', async () => {
+    const test = await renderWithUserEvents(<ScreenPanel screen={getGetScreenMock().item} highlighted={undefined} />)
 
     const tableElement = test.container.querySelector('table')
     expect(tableElement).not.toBeInTheDocument()

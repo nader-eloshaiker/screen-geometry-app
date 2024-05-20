@@ -1,13 +1,13 @@
-import { render } from '@testing-library/react'
+import { act, render } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { ReactElement } from 'react'
-import { BrowserRouter } from 'react-router-dom'
 
-export const renderWithRouter = (ui: ReactElement, { route = '/' } = {}) => {
+export const renderWithRouter = async (jsx: ReactElement, { route = '/' } = {}) => {
   window.history.pushState({}, 'Test page', route)
+  const renderedResult = await act(() => render(jsx))
 
   return {
     user: userEvent.setup(),
-    ...render(ui, { wrapper: BrowserRouter }),
+    ...renderedResult,
   }
 }

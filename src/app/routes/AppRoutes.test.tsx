@@ -24,13 +24,13 @@ const TestComnponent = () => {
 
 describe('#App', () => {
   it('should render', async () => {
-    const test = renderWithUserEvents(<TestComnponent />)
+    const test = await renderWithUserEvents(<TestComnponent />)
 
     waitFor(() => expect(test.getByText('Welcome to Screen Geometry')).toBeInTheDocument())
   })
 
   it('should naviate to the screens page', async () => {
-    const test = renderWithUserEvents(<TestComnponent />)
+    const test = await renderWithUserEvents(<TestComnponent />)
     const element = await test.findAllByTestId('link-Screens')
 
     await act(async () => {
@@ -41,7 +41,7 @@ describe('#App', () => {
   })
 
   it('should naviate back home page', async () => {
-    const test = renderWithUserEvents(<TestComnponent />)
+    const test = await renderWithUserEvents(<TestComnponent />)
     const screenLink = await test.findAllByTestId('link-Screens')
 
     await act(async () => {
@@ -60,7 +60,7 @@ describe('#App', () => {
   })
 
   it('should naviate to the contact page', async () => {
-    const test = renderWithUserEvents(<TestComnponent />)
+    const test = await renderWithUserEvents(<TestComnponent />)
     const element = await test.findAllByTestId('link-Contact')
 
     await act(async () => {
@@ -71,7 +71,7 @@ describe('#App', () => {
   })
 
   it('should naviate to the help page', async () => {
-    const test = renderWithUserEvents(<TestComnponent />)
+    const test = await renderWithUserEvents(<TestComnponent />)
     const element = await test.findAllByTestId('link-Help')
 
     await act(async () => {
