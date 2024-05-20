@@ -22,11 +22,11 @@ const TestComnponent = () => {
   )
 }
 
-describe('#App', () => {
+describe('#App', async () => {
   it('should render', async () => {
     const test = await renderWithUserEvents(<TestComnponent />)
 
-    waitFor(() => expect(test.getByText('Welcome to Screen Geometry')).toBeInTheDocument())
+    expect(await test.findByText('Welcome to Screen Geometry')).toBeInTheDocument()
   })
 
   it('should naviate to the screens page', async () => {
@@ -37,7 +37,7 @@ describe('#App', () => {
       await test.user.click(element[0])
     })
 
-    waitFor(() => expect(test.getByText('Click here to populate default list')).toBeInTheDocument())
+    waitFor(async () => expect(await test.findByText('Click here to populate default list')).toBeInTheDocument())
   })
 
   it('should naviate back home page', async () => {
@@ -48,7 +48,7 @@ describe('#App', () => {
       await test.user.click(screenLink[0])
     })
 
-    waitFor(() => expect(test.getByText('Click here to populate default list')).toBeInTheDocument())
+    waitFor(async () => expect(await test.findByText('Click here to populate default list')).toBeInTheDocument())
 
     const homeLink = await test.findAllByTestId('link-Home')
 
@@ -56,7 +56,7 @@ describe('#App', () => {
       await test.user.click(homeLink[0])
     })
 
-    waitFor(() => expect(test.getByText('Welcome to Screen Geometry')).toBeInTheDocument())
+    waitFor(async () => expect(await test.findByText('Welcome to Screen Geometry')).toBeInTheDocument())
   })
 
   it('should naviate to the contact page', async () => {
@@ -67,7 +67,7 @@ describe('#App', () => {
       await test.user.click(element[0])
     })
 
-    waitFor(() => expect(test.getByText('How to engage with me or this app')).toBeInTheDocument())
+    waitFor(async () => expect(test.findByText('How to engage with me or this app')).toBeInTheDocument())
   })
 
   it('should naviate to the help page', async () => {
@@ -78,6 +78,6 @@ describe('#App', () => {
       await test.user.click(element[0])
     })
 
-    waitFor(() => expect(test.getByText('Getting started')).toBeInTheDocument())
+    waitFor(async () => expect(test.findByText('Getting started')).toBeInTheDocument())
   })
 })
