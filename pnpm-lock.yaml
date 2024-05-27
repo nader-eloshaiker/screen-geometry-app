@@ -62,8 +62,8 @@ devDependencies:
     specifier: ^0.2.2
     version: 0.2.2(@playwright/test@1.42.1)
   '@codecov/vite-plugin':
-    specifier: 0.0.1-beta.5
-    version: 0.0.1-beta.5(vite@5.2.8)
+    specifier: 0.0.1-beta.8
+    version: 0.0.1-beta.8(vite@5.2.8)
   '@playwright/test':
     specifier: ^1.42.1
     version: 1.42.1
@@ -1760,23 +1760,24 @@ packages:
       statuses: 2.0.1
     dev: false
 
-  /@codecov/bundler-plugin-core@0.0.1-beta.5:
-    resolution: {integrity: sha512-eltwv1aRJdwonlTD47jQ2GYdKZfMv3jCviDui32JOu12ZAiI3WdJCtjWF9zxpmnHEZ30pn0WbeZir+sXSFLJHw==}
+  /@codecov/bundler-plugin-core@0.0.1-beta.8:
+    resolution: {integrity: sha512-3yxNa4N+pZxqU60XQxJ10sDKUWcDf/YaQSvODrgxLfKG/peZhSdbd92uRc7PYi73szu7lr1CVZIvVerod9C4Uw==}
     engines: {node: '>=18.0.0'}
     dependencies:
       chalk: 4.1.2
       semver: 7.6.0
-      unplugin: 1.10.0
+      unplugin: 1.10.1
       zod: 3.22.4
     dev: true
 
-  /@codecov/vite-plugin@0.0.1-beta.5(vite@5.2.8):
-    resolution: {integrity: sha512-KW+AY27lqFSOj1lY+yO7zLSNdxCaYaRTnHibRBNyCvVd76MdaResIpFr1bxjgaxVGaEtsV4mcTzDjtlgVV/+nw==}
+  /@codecov/vite-plugin@0.0.1-beta.8(vite@5.2.8):
+    resolution: {integrity: sha512-bMpn2k4w0HUnmbzQmaE8nzsVKqX72eUQVB5VlU7j+Pr225cCqj3DxWQpYibC+LAUzytZKxVEMZnrYOMTQSXHDA==}
     engines: {node: '>=18.0.0'}
     peerDependencies:
       vite: 4.x || 5.x
     dependencies:
-      '@codecov/bundler-plugin-core': 0.0.1-beta.5
+      '@codecov/bundler-plugin-core': 0.0.1-beta.8
+      unplugin: 1.10.1
       vite: 5.2.8(@types/node@20.12.5)
     dev: true
 
@@ -13112,6 +13113,16 @@ packages:
 
   /unplugin@1.10.0:
     resolution: {integrity: sha512-CuZtvvO8ua2Wl+9q2jEaqH6m3DoQ38N7pvBYQbbaeNlWGvK2l6GHiKi29aIHDPoSxdUzQ7Unevf1/ugil5X6Pg==}
+    engines: {node: '>=14.0.0'}
+    dependencies:
+      acorn: 8.11.3
+      chokidar: 3.6.0
+      webpack-sources: 3.2.3
+      webpack-virtual-modules: 0.6.1
+    dev: true
+
+  /unplugin@1.10.1:
+    resolution: {integrity: sha512-d6Mhq8RJeGA8UfKCu54Um4lFA0eSaRa3XxdAJg8tIdxbu1ubW0hBCZUL7yI2uGyYCRndvbK8FLHzqy2XKfeMsg==}
     engines: {node: '>=14.0.0'}
     dependencies:
       acorn: 8.11.3
