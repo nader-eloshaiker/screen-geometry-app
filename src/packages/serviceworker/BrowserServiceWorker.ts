@@ -1,12 +1,7 @@
 import { generateStub } from '@packages/server/server'
 import { setupWorker } from 'msw/browser'
 
-export const createBrowserServiceWorker = async (baseUrl: string, nodeEnv: boolean) => {
-  if (nodeEnv) {
-    console.log('Browser Service Worker not started in test mode')
-    return Promise.resolve()
-  }
-
+export const createBrowserServiceWorker = async (baseUrl: string) => {
   console.log('Browser Service Worker started in test mode')
   const { searchMocks, screenListMocks, screenMocks, passthroughMocks } = generateStub(baseUrl)
 
