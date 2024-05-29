@@ -188,7 +188,7 @@ jobs:
       - name: Archive code coverage results
         uses: actions/upload-artifact@v4
         with:
-          name: vitest-code-coverage-report
+          name: storybook-code-coverage-report
           path: coverage/storybook/
 
   e2e-test:
@@ -237,7 +237,7 @@ jobs:
       - name: Archive code coverage results
         uses: actions/upload-artifact@v4
         with:
-          name: vitest-code-coverage-report
+          name: e2e-code-coverage-report
           path: coverage/playwright/
 
   upload-coverage:
@@ -252,19 +252,19 @@ jobs:
       - name: Download unit test workflow run artifacts
         uses: actions/download-artifact@v4
         with:
-          name: unit-test
+          name: vitest-code-coverage-report
           path: coverage/vitest/
 
       - name: Download storybook test workflow run artifacts
         uses: actions/download-artifact@v4
         with:
-          name: storybook-test
+          name: storybook-code-coverage-report
           path: coverage/storybook/
 
       - name: Download e2e test workflow run artifacts
         uses: actions/download-artifact@v4
         with:
-          name: e2e-test
+          name: e2e-code-coverage-report
           path: coverage/playwright/
 
       - name: Display structure of downloaded files
