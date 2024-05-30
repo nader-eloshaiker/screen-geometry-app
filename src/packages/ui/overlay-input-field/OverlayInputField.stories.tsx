@@ -60,7 +60,6 @@ const meta = {
       description: 'Input field change handler.',
       table: { category: 'event', type: { summary: 'function' } },
       action: 'onChange',
-      type: 'function',
     },
   },
 } satisfies Meta<typeof OverlayInputField>
