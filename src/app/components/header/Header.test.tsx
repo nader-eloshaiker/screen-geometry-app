@@ -8,7 +8,7 @@ const mocks = vi.hoisted(() => ({
   useLocation: vi.fn(),
 }))
 
-vi.mock('react-router-dome', async () => {
+vi.mock('react-router-dom', async () => {
   const actual = await vi.importActual('react-router-dom')
   return {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any

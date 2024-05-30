@@ -13,7 +13,7 @@ const TestComponent = ({ formDrawerState = false }: { formDrawerState: boolean }
 }
 
 test('renders screen table component with a table and rows', async () => {
-  const test = renderWithUserEvents(<TestComponent formDrawerState={false} />)
+  const test = await renderWithUserEvents(<TestComponent formDrawerState={false} />)
 
   const createButton = await test.findByText('Create Screen')
   expect(createButton).toBeEnabled()
