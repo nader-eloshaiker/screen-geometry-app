@@ -6,15 +6,12 @@ const coverageConfig: AddonOptionsVite = {
   istanbul: {
     include: ['**/stories/**'],
     exclude: [
-      'src/app/assets/**/*',
-      'src/configs/**/*',
-      'src/constants/**/*',
-      'src/packages/test/**/*',
-      'src/packages/serviceworker/**/*',
-      'src/packages/openapi/generated/**/*',
-      'src/**/*.mock.{ts,tsx}',
-      'src/**/*.stories.tsx',
-      'src/**/*.d.ts',
+      'src/app/assets/**',
+      'src/configs/**',
+      'src/constants/**',
+      'src/packages/test/**',
+      'src/packages/serviceworker/**',
+      'src/packages/openapi/generated/**',
     ],
   },
 }
