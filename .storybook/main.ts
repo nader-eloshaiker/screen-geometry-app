@@ -15,6 +15,8 @@ const coverageConfig: AddonOptionsVite = {
   },
 }
 
+// TODO: review @chromatic-com/storybook
+
 const config: StorybookConfig = {
   stories: ['../src/**/*.stories.@(js|jsx|mjs|ts|tsx)'],
   addons: [
