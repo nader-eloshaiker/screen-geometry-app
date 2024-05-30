@@ -57,18 +57,15 @@ const meta = {
       description: 'Input field change handler.',
       table: { category: 'event', type: { summary: 'function' }, defaultValue: { summary: '() => {}' } },
       action: 'onChange',
-      control: { type: 'function' },
     },
     onSelect: {
       description: 'List selection handler.',
       table: { category: 'event', type: { summary: 'function' }, defaultValue: { summary: '() => {}' } },
       action: 'onSelect',
-      control: { type: 'function' },
     },
     setClearHandler: {
       description: 'Attach clear handler to a state in the parent component.',
       table: { category: 'event handler', type: { summary: 'function' }, defaultValue: { summary: '() => {}' } },
-      control: { type: 'function' },
     },
   },
 } satisfies Meta<typeof ListInput>
