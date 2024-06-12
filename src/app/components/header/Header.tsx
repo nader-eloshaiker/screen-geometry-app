@@ -1,13 +1,15 @@
-import HamburgerIcon from '@app/assets/icons/Hamburger'
 import ThemeModeToggle from '@app/components/theme/ThemeModeToggle'
 import { RouteSchema } from '@app/routes/RouteSchema'
 import { clsx } from 'clsx'
+import { AnimatePresence, motion, Variants } from 'framer-motion'
+import { useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
+import { HamburgerMenu } from './HamburgerMenu'
 
 type NavMenuItemProps = { pathname: string; route: string; title: string }
 const NavMenuItem = ({ pathname, route, title }: NavMenuItemProps) => {
   return (
-    <li>
+    <motion.li variants={menuItemVariants}>
       <Link
         className={clsx('text-sm sm:text-base', {
           active: pathname === route,
@@ -17,7 +19,7 @@ const NavMenuItem = ({ pathname, route, title }: NavMenuItemProps) => {
       >
         {title}
       </Link>
-    </li>
+    </motion.li>
   )
 }
 
@@ -33,21 +35,71 @@ const NavMenu = ({ pathname }: NavMenuProps) => {
   )
 }
 
+const menuVariants: Variants = {
+  open: {
+    scaleY: 1,
+    x: 0,
+    transition: {
+      when: 'beforeChildren',
+      staggerChildren: 0.1,
+    },
+  },
+  closed: {
+    scaleY: 0,
+    x: 0,
+    transition: {
+      when: 'afterChildren',
+      staggerChildren: 0.1,
+    },
+  },
+}
+
+const menuItemVariants: Variants = {
+  open: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      when: 'beforeChildren',
+      duration: 0.2,
+    },
+  },
+  closed: {
+    opacity: 0,
+    y: -15,
+    transition: {
+      when: 'afterChildren',
+      duration: 0.2,
+    },
+  },
+}
+
 export default function Header() {
   const { pathname } = useLocation()
+  const [mainMenu, setMainMenu] = useState(false)
 
   return (
     <header className='sidebar'>
       <div className='container mx-auto'>
         {/* small header */}
         <div className='flex w-full flex-row xs:hidden' data-testid='small-header'>
-          <div className='dropdown' data-testid='nav-menu'>
+          <div data-testid='nav-menu'>
             <div className='btn btn-square btn-ghost'>
-              <HamburgerIcon className='size-6' />
+              <HamburgerMenu width={20} height={14} isOpen={mainMenu} onClick={() => setMainMenu(!mainMenu)} />
             </div>
-            <ul className='menu dropdown-content menu-sm z-[1] ml-2 mt-3 w-52 rounded-box bg-base-100 p-2 shadow-lg'>
-              <NavMenu pathname={pathname} />
-            </ul>
+            <AnimatePresence mode='wait'>
+              {mainMenu && (
+                <motion.ul
+                  style={{ originX: 0, originY: 0 }}
+                  className='menu menu-sm absolute z-[1] ml-2 mt-3 w-52 rounded-box bg-base-100 p-2 shadow-lg'
+                  initial='closed'
+                  animate='open'
+                  exit='closed'
+                  variants={menuVariants}
+                >
+                  <NavMenu pathname={pathname} />
+                </motion.ul>
+              )}
+            </AnimatePresence>
           </div>
           <div className='flex-1 pt-2 text-center text-2xl'>{import.meta.env.VITE_APP_TITLE}</div>
           <ThemeModeToggle
