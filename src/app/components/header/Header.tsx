@@ -6,35 +6,6 @@ import { Link, useLocation } from 'react-router-dom'
 import ThemeModeToggle from '../theme/ThemeModeToggle'
 import { HamburgerMenu } from './HamburgerMenu'
 
-type NavMenuItemProps = { pathname: string; route: string; title: string }
-const NavMenuItem = ({ pathname, route, title }: NavMenuItemProps) => {
-  return (
-    <motion.li variants={menuItemVariants}>
-      <Link
-        className={clsx('', {
-          active: pathname === route,
-        })}
-        to={route}
-        data-testid={`link-${title}`}
-      >
-        {title}
-      </Link>
-    </motion.li>
-  )
-}
-
-type NavMenuProps = { pathname: string }
-const NavMenu = ({ pathname }: NavMenuProps) => {
-  return (
-    <>
-      <NavMenuItem pathname={pathname} route={RouteSchema.root.path} title='Home' />
-      <NavMenuItem pathname={pathname} route={RouteSchema.screens.path} title='Screens' />
-      <NavMenuItem pathname={pathname} route={RouteSchema.contact.path} title='Contact' />
-      <NavMenuItem pathname={pathname} route={RouteSchema.help.path} title='Help' />
-    </>
-  )
-}
-
 const menuVariants: Variants = {
   open: {
     scaleY: 1,
@@ -73,6 +44,45 @@ const menuItemVariants: Variants = {
   },
 }
 
+type NavMenuItemProps = { pathname: string; route: string; title: string }
+const NavMenuItem = ({ pathname, route, title }: NavMenuItemProps) => {
+  return (
+    <motion.li variants={menuItemVariants}>
+      <Link
+        className={clsx('text-base hover:underline', {
+          active: pathname === route,
+        })}
+        to={route}
+        data-testid={`link-${title}`}
+      >
+        {title}
+      </Link>
+    </motion.li>
+  )
+}
+
+type NavMenuProps = { pathname: string }
+const NavMenu = ({ pathname }: NavMenuProps) => {
+  return (
+    <>
+      <NavMenuItem pathname={pathname} route={RouteSchema.root.path} title='Home' />
+      <NavMenuItem pathname={pathname} route={RouteSchema.screens.path} title='Screens' />
+      <NavMenuItem pathname={pathname} route={RouteSchema.contact.path} title='Contact' />
+      <NavMenuItem pathname={pathname} route={RouteSchema.help.path} title='Help' />
+    </>
+  )
+}
+
+const ThemeToggle = ({ id }: { id: string }) => (
+  <ThemeModeToggle className='mr-2 opacity-50 transition duration-500 ease-in-out hover:opacity-100' id={id} />
+)
+
+const Title = ({ size }: { size: 'sm' | 'lg' }) => (
+  <div className={clsx('flex-1 pt-2 text-center', { 'text-2xl': size === 'lg', 'text-xl': size === 'sm' })}>
+    {import.meta.env.VITE_APP_TITLE}
+  </div>
+)
+
 export default function Header() {
   const { pathname } = useLocation()
   const [mainMenu, setMainMenu] = useState(false)
@@ -80,16 +90,17 @@ export default function Header() {
   return (
     <header className='container mx-auto bg-primary text-primary-content'>
       {/* small header */}
-      <div className='flex w-full justify-between p-2 xs:hidden' data-testid='small-header'>
+      <div className='flex w-full justify-between p-2 md:hidden' data-testid='small-header'>
         <div data-testid='nav-menu'>
-          <div className='btn btn-square btn-ghost'>
+          <div tabIndex={0} className='btn btn-ghost' role='button'>
             <HamburgerMenu width={20} height={14} isOpen={mainMenu} onClick={() => setMainMenu(!mainMenu)} />
           </div>
           <AnimatePresence mode='wait'>
             {mainMenu && (
               <motion.ul
+                tabIndex={0}
                 style={{ originX: 0, originY: 0 }}
-                className='menu menu-sm absolute z-[1] ml-2 mt-3 w-52 rounded-box bg-base-100 p-2 shadow-lg'
+                className='menu menu-sm absolute z-[1] ml-2 mt-3 w-52 rounded-md bg-primary p-2 text-primary-content shadow-lg'
                 initial='closed'
                 animate='open'
                 exit='closed'
@@ -100,25 +111,17 @@ export default function Header() {
             )}
           </AnimatePresence>
         </div>
-        <div className='flex-1 pt-2 text-center text-xl'>{import.meta.env.VITE_APP_TITLE}</div>
-        <ThemeModeToggle
-          className='mr-2 opacity-50 transition duration-500 ease-in-out hover:opacity-100'
-          id='themeToggleTiny'
-        />
+        <Title size='sm' />
+        <ThemeToggle id='themeToggleTiny' />
       </div>
       {/* large header */}
-      <div className='hidden pt-2 text-center text-2xl xs:block' data-testid='large-header-title'>
-        {import.meta.env.VITE_APP_TITLE}
-      </div>
-      <div className='navbar px-3' data-testid='large-header-menu'>
-        <ul className=' menu navbar-start menu-horizontal gap-4'>
-          <NavMenu pathname={pathname} />
-        </ul>
-        <div className='navbar-end '>
-          <ThemeModeToggle
-            className='mr-2 opacity-50 transition duration-500 ease-in-out hover:opacity-100'
-            id='themeToggle'
-          />
+      <div className='hidden pt-2 md:flex md:flex-col' data-testid='large-header-title'>
+        <Title size='lg' />
+        <div className='navbar justify-between px-3' data-testid='large-header-menu'>
+          <ul className=' menu menu-horizontal gap-4 bg-primary'>
+            <NavMenu pathname={pathname} />
+          </ul>
+          <ThemeToggle id='themeToggle' />
         </div>
       </div>
     </header>

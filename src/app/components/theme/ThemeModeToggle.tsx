@@ -15,10 +15,10 @@ export default function ThemeModeToggle({ className, id, ...rest }: TProps) {
   }
 
   return (
-    <div className={twMerge('swap cursor-pointer swap-rotate', className)} {...rest}>
+    <label htmlFor={id} className={twMerge('swap cursor-pointer swap-rotate', className)} {...rest}>
       <input type='checkbox' id={id} checked={!isDarkMode} className='theme-controller' onChange={handleChange} />
       <MoonIcon className='swap-off size-6 fill-current' />
       <SunIcon className='swap-on size-6 fill-current' />
-    </div>
+    </label>
   )
 }
