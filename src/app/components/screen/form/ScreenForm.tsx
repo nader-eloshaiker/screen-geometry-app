@@ -1,3 +1,4 @@
+import RefreshIcon from '@app/assets/icons/Refresh'
 import { DarkMode, LightMode } from '@app/components/theme/ThemeConstants'
 import { useCreateScreenApi } from '@app/hooks/api/helpers/useCreateScreenApi'
 import { useSearchApi } from '@app/hooks/api/helpers/useSearchApi'
@@ -125,11 +126,11 @@ export const ScreenForm = ({ defaultValues = null, editId = undefined, isLoading
 
   return (
     <FormProvider {...methods}>
-      <label className='label'>
-        <span className='text-lg'>{!editId ? 'Add' : 'Edit'} Screen</span>
-      </label>
-      <div className='form-control mb-4 flex w-full flex-col'>
-        <label htmlFor='autoCompleteScreen' className='label'>
+      <div className='label label-text'>
+        <span className='pb-2 text-xl'>{!editId ? 'Add' : 'Edit'} Screen</span>
+      </div>
+      <div className='form-control flex w-full flex-col pb-6'>
+        <label htmlFor='autoCompleteScreen' className='label label-text'>
           <span className='text-sm'>Choose from list of Monitors</span>
         </label>
         <AutoCompleteScreen
@@ -142,11 +143,9 @@ export const ScreenForm = ({ defaultValues = null, editId = undefined, isLoading
         />
       </div>
 
-      <div className='divider text-sm'>Or</div>
-
       <form method='post' onSubmit={handleSubmit(submitHandler)}>
-        <div className='flex flex-col gap-2'>
-          <div id='screenTag' className='grid grid-cols-2 gap-3'>
+        <div className='flex flex-col gap-6'>
+          <div id='screenTag' className='grid grid-cols-2 gap-4'>
             <InputField
               formKey={ScreenDataEnum.diagonalSize}
               inputStyle='!pr-10'
@@ -169,9 +168,7 @@ export const ScreenForm = ({ defaultValues = null, editId = undefined, isLoading
             />
           </div>
 
-          <div className='divider text-sm'>Optional</div>
-
-          <div id='screenData' className='grid grid-cols-2 gap-3'>
+          <div id='screenData' className='grid grid-cols-2 gap-4'>
             <InputField
               formKey={ScreenDataEnum.hRes}
               inputStyle='!pr-10'
@@ -197,19 +194,15 @@ export const ScreenForm = ({ defaultValues = null, editId = undefined, isLoading
             />
           </div>
 
-          <div className='divider text-sm'>Theme Color</div>
-
-          <div className='flex justify-between'>
+          <div className='flex items-end justify-between pb-6'>
             <div className='flex gap-4'>
               <ColorField formKey={ScreenDataEnum.lightColor} title='Light' mode={LightMode} isLoading={isLoading} />
               <ColorField formKey={ScreenDataEnum.darkColor} title='Dark' mode={DarkMode} isLoading={isLoading} />
             </div>
             <button type='button' className='btn btn-neutral w-24' onClick={generateColorHandler} disabled={isLoading}>
-              Change
+              <RefreshIcon className='size-6 fill-current' />
             </button>
           </div>
-
-          <div className='divider text-sm'>Finish</div>
 
           {errors[ScreenDataEnum.diagonalSize] && (
             <div className='text-sm text-error'>{errors[ScreenDataEnum.diagonalSize].message}</div>

@@ -11,7 +11,7 @@ type Props = SVGMotionProps<SVGSVGElement> & {
 export const HamburgerMenu = ({
   isOpen = false,
   width = 20,
-  height = 16,
+  height = 12,
   strokeWidth = 2,
   color = 'currentColor',
   transition,

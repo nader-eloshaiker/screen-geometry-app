@@ -28,7 +28,7 @@ export const InputField = ({
 
   return (
     <div className='form-control mb-2 flex flex-col'>
-      <label htmlFor={formKey} className='label text-sm'>
+      <label htmlFor={formKey} className='label label-text'>
         {title}
       </label>
       {overlay ? (

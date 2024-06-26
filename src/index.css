@@ -2,36 +2,30 @@
 @tailwind components;
 @tailwind utilities;
 
-body:before {
-  @apply content-[''] fixed -z-[999] w-full h-1/4 bottom-0 bg-stone-400 dark:bg-stone-900;
-}
-
-html:before {
-  @apply content-[''] fixed -z-[999] w-full h-1/4 top-0 bg-amber-500;
-  &.dark {
-    @apply bg-amber-600;
+@layer base {
+  /* remove annoying up/down buttons in number inputs */
+  input[type='number']::-webkit-inner-spin-button,
+  input[type='number']::-webkit-outer-spin-button {
+    @apply appearance-none m-0;
+  }
+  input[type='number'] {
+    appearance: textfield; /* Firefox */
   }
 }
 
-body {
-  scrollbar-gutter: stable;
-  overflow-y: scroll;
-
-  @apply bg-stone-200 dark:bg-stone-800;
+@layer base {
+  body {
+    scrollbar-gutter: stable;
+    overflow-y: scroll;
+  }
 }
 
-.header {
-  @apply text-amber-200 dark:text-amber-100;
-}
+@layer components {
+  .sidebar {
+    @apply bg-accent;
+  }
 
-.lightModeText {
-  @apply text-amber-950 dark:text-amber-50;
-}
-
-.sidebar {
-  @apply bg-gradient-to-b from-amber-500 to-amber-700 text-amber-950 dark:bg-gradient-to-b dark:from-amber-600 dark:to-amber-800 dark:text-amber-50;
-}
-
-.footer {
-  @apply bg-gradient-to-b from-stone-200 to-stone-400 text-stone-500 dark:bg-gradient-to-b dark:from-stone-800 dark:to-stone-900 dark:text-stone-400;
+  .footer {
+    @apply bg-base-200;
+  }
 }

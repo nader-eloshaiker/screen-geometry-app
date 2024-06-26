@@ -4,7 +4,7 @@ import type { StorybookConfig } from '@storybook/react-vite'
 
 const coverageConfig: AddonOptionsVite = {
   istanbul: {
-    exclude: [
+    include: [
       'src/app/assets/**',
       'src/configs/**',
       'src/constants/**',
