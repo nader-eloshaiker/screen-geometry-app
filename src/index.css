@@ -21,7 +21,6 @@
 }
 
 @layer components {
-
   .footer {
     @apply bg-base-200;
   }

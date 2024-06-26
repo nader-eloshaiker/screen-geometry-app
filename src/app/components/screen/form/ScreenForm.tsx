@@ -151,13 +151,11 @@ export const ScreenForm = ({ defaultValues = null, editId = undefined, isLoading
           <div id='screenTag' className='grid grid-cols-2 gap-4'>
             <InputField
               formKey={ScreenDataEnum.diagonalSize}
-              inputStyle='!pr-10'
-              overlayStyle='right-0 mr-4'
               title='Screen Size'
               type='number'
               overlay='in'
               autoComplete='off'
-              placeholder='27"'
+              placeholder='27'
               isLoading={isLoading}
             />
 
@@ -174,8 +172,6 @@ export const ScreenForm = ({ defaultValues = null, editId = undefined, isLoading
           <div id='screenData' className='grid grid-cols-2 gap-4'>
             <InputField
               formKey={ScreenDataEnum.hRes}
-              inputStyle='!pr-10'
-              overlayStyle='right-0 mr-4'
               title='Horizontal Res'
               type='number'
               overlay='px'
@@ -186,8 +182,6 @@ export const ScreenForm = ({ defaultValues = null, editId = undefined, isLoading
 
             <InputField
               formKey={ScreenDataEnum.vRes}
-              inputStyle='!pr-10'
-              overlayStyle='right-0 mr-4'
               title='Vertical Res'
               type='number'
               overlay='px'

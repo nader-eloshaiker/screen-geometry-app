@@ -6,15 +6,14 @@ import { clsx } from 'clsx'
 import { ChangeEvent, KeyboardEvent, memo, useCallback, useEffect, useRef, useState } from 'react'
 import { InputOverlay, OverlayInputField } from '../overlay-input-field/OverlayInputField'
 
-const standardOverlay: InputOverlay = {
-  overlay: <MagnifyGlassIcon className='size-6' />,
-
-  overlayClassName: 'left-0 ml-4',
+const activeOverlay: InputOverlay = {
+  overlay: <MagnifyGlassIcon key='1' className='size-6' />,
+  location: 'left',
 }
 
 const loadingOverlay: InputOverlay = {
-  overlay: <span className='loading loading-spinner loading-md' />,
-  overlayClassName: 'left-0 ml-4',
+  overlay: <span key='2' className='loading loading-spinner loading-md' />,
+  location: 'left',
 }
 
 export type TListItem = { id: string; label: string }
@@ -74,7 +73,7 @@ const ListInputField = ({
   }
 
   useEffect(() => {
-    const stdOverlay = isLoading ? loadingOverlay : standardOverlay
+    const stdOverlay = isLoading ? loadingOverlay : activeOverlay
 
     if (!inputValue) {
       setOverlays([stdOverlay])
@@ -83,12 +82,11 @@ const ListInputField = ({
         stdOverlay,
         {
           overlay: (
-            <button className='btn btn-circle btn-xs' role='reset'>
+            <button key='3' className='btn btn-circle btn-xs hover:cursor-pointer' role='reset'>
               <CloseIcon className='size-4' onClick={handleClear} />
             </button>
           ),
-          overlayClassName: 'right-0 mr-4',
-          pointerEvents: true,
+          location: 'right',
         },
       ])
     }
@@ -118,9 +116,9 @@ const ListInputField = ({
     >
       <OverlayInputField
         overlays={overlays}
-        name='ListInputFieldInput'
+        formKey='ListInputFieldInput'
         type='text'
-        className='!pl-12'
+        className='input-bordered input-secondary shadow-md transition-all'
         value={inputValue}
         onChange={handleChange}
         placeholder={isLoading ? 'Loading...' : placeholder ?? 'Type something...'}
