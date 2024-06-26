@@ -147,8 +147,8 @@ export const ScreenForm = ({ defaultValues = null, editId = undefined, isLoading
       </div>
 
       <form method='post' onSubmit={handleSubmit(submitHandler)}>
-        <div className='flex flex-col gap-6'>
-          <div id='screenTag' className='grid grid-cols-2 gap-4'>
+        <div className='flex flex-col gap-10'>
+          <div id='screenTag' className='grid grid-cols-2 gap-6'>
             <InputField
               formKey={ScreenDataEnum.diagonalSize}
               title='Screen Size'
@@ -169,7 +169,7 @@ export const ScreenForm = ({ defaultValues = null, editId = undefined, isLoading
             />
           </div>
 
-          <div id='screenData' className='grid grid-cols-2 gap-4'>
+          <div id='screenData' className='grid grid-cols-2 gap-6'>
             <InputField
               formKey={ScreenDataEnum.hRes}
               title='Horizontal Res'
@@ -192,7 +192,7 @@ export const ScreenForm = ({ defaultValues = null, editId = undefined, isLoading
           </div>
 
           <div className='flex items-end justify-between pb-8'>
-            <div className='flex gap-4'>
+            <div className='flex gap-6'>
               <ColorField
                 formKey={ScreenDataEnum.lightColor}
                 title='Light'
@@ -233,7 +233,7 @@ export const ScreenForm = ({ defaultValues = null, editId = undefined, isLoading
           )}
 
           <div className='flex justify-between'>
-            <div className='flex gap-4'>
+            <div className='flex gap-6'>
               <button
                 type='button'
                 className='btn btn-secondary'
