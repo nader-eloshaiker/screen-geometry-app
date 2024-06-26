@@ -44,6 +44,8 @@ export const ScreenForm = ({ defaultValues = null, editId = undefined, isLoading
   const [searchTerm, setSearchTerm] = useState<string>('')
   const { isFetching: isSearchListLoading, data: searchListResponse } = useSearchApi({ term: searchTerm })
 
+  const [toggleAnimation, setToggleAnimation] = useState<boolean>(false)
+
   // NOTE: this is a hack to get around the fact that the form is not re-rendering when the defaultValues prop changes
   // Address this at the top level of te form
   const selectHandler = (item: SearchScreenItem) => {
@@ -83,6 +85,7 @@ export const ScreenForm = ({ defaultValues = null, editId = undefined, isLoading
 
   const generateColorHandler = () => {
     const color = createCSSColor()
+
     setValue(ScreenDataEnum.darkColor, color.darkColor, {
       shouldValidate: true,
       shouldDirty: true,
@@ -194,13 +197,31 @@ export const ScreenForm = ({ defaultValues = null, editId = undefined, isLoading
             />
           </div>
 
-          <div className='flex items-end justify-between pb-6'>
+          <div className='flex items-end justify-between pb-8'>
             <div className='flex gap-4'>
-              <ColorField formKey={ScreenDataEnum.lightColor} title='Light' mode={LightMode} isLoading={isLoading} />
-              <ColorField formKey={ScreenDataEnum.darkColor} title='Dark' mode={DarkMode} isLoading={isLoading} />
+              <ColorField
+                formKey={ScreenDataEnum.lightColor}
+                title='Light'
+                mode={LightMode}
+                isLoading={isLoading}
+                className='w-24'
+              />
+              <ColorField
+                formKey={ScreenDataEnum.darkColor}
+                title='Dark'
+                mode={DarkMode}
+                isLoading={isLoading}
+                className='w-24'
+              />
             </div>
-            <button type='button' className='btn btn-neutral w-24' onClick={generateColorHandler} disabled={isLoading}>
-              <RefreshIcon className='size-6 fill-current' />
+            <button
+              type='button'
+              className='btn btn-secondary'
+              onMouseDown={() => setToggleAnimation(!toggleAnimation)}
+              onClick={generateColorHandler}
+              disabled={isLoading}
+            >
+              <RefreshIcon className='size-6 fill-current transition duration-500' toggleAnimation={toggleAnimation} />
             </button>
           </div>
 
@@ -221,7 +242,7 @@ export const ScreenForm = ({ defaultValues = null, editId = undefined, isLoading
             <div className='flex gap-4'>
               <button
                 type='button'
-                className='btn btn-neutral w-24'
+                className='btn btn-secondary'
                 disabled={isCreateLoading || isUpdateLoading || isLoading}
                 onClick={closeHandler}
               >
@@ -229,7 +250,7 @@ export const ScreenForm = ({ defaultValues = null, editId = undefined, isLoading
               </button>
               <button
                 type='button'
-                className='btn btn-neutral w-24'
+                className='btn btn-secondary'
                 disabled={isCreateLoading || isUpdateLoading || isLoading}
                 onClick={resetHandler}
               >
@@ -238,7 +259,7 @@ export const ScreenForm = ({ defaultValues = null, editId = undefined, isLoading
             </div>
             <button
               type='submit'
-              className={clsx('btn btn-neutral w-24', { 'pointer-events-none': isCreateLoading || isUpdateLoading })}
+              className={clsx('btn btn-secondary', { 'pointer-events-none': isCreateLoading || isUpdateLoading })}
               disabled={!isDirty || !isValid}
             >
               {isCreateLoading || isUpdateLoading ? (

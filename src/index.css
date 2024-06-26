@@ -21,9 +21,6 @@
 }
 
 @layer components {
-  .sidebar {
-    @apply bg-accent;
-  }
 
   .footer {
     @apply bg-base-200;

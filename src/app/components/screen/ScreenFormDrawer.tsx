@@ -50,16 +50,14 @@ export const ScreenFormDrawer = ({ children }: Props) => {
         checked={formDrawerState.open}
         onChange={(_e) => {}}
       />
-      <div className='absolute left-0 top-0 -translate-x-full transition-all duration-300 ease-in peer-checked:translate-x-0 md:w-96'>
-        <div className='sidebar rounded-xl p-2 md:w-96'>
-          <div className='p-2'>
-            <ScreenForm
-              defaultValues={defaultValues}
-              editId={formDrawerState.id}
-              isLoading={editMode && isScreenItemLoading}
-              onClose={closeHandler}
-            />
-          </div>
+      <div className='absolute left-0 top-0 -translate-x-full transition-all duration-300 ease-in peer-checked:translate-x-0'>
+        <div className='w-[22rem] rounded-xl border-4 border-secondary bg-base-300 p-6 text-base-content'>
+          <ScreenForm
+            defaultValues={defaultValues}
+            editId={formDrawerState.id}
+            isLoading={editMode && isScreenItemLoading}
+            onClose={closeHandler}
+          />
         </div>
       </div>
     </div>
