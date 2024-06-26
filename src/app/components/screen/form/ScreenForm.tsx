@@ -132,9 +132,9 @@ export const ScreenForm = ({ defaultValues = null, editId = undefined, isLoading
       <div className='label label-text'>
         <span className='pb-2 text-xl'>{!editId ? 'Add' : 'Edit'} Screen</span>
       </div>
-      <div className='form-control flex w-full flex-col pb-6'>
+      <div className='form-control flex w-full flex-col pb-10'>
         <label htmlFor='autoCompleteScreen' className='label label-text'>
-          <span className='text-sm'>Choose from list of Monitors</span>
+          <span className='text-sm'>Auto fill the form from list of Monitors</span>
         </label>
         <AutoCompleteScreen
           id='autoCompleteScreen'
