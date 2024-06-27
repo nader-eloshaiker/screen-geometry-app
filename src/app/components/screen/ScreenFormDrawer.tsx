@@ -51,7 +51,7 @@ export const ScreenFormDrawer = ({ children }: Props) => {
         onChange={(_e) => {}}
       />
       <div className='absolute left-0 top-0 -translate-x-full transition-all duration-300 ease-in peer-checked:translate-x-0'>
-        <div className='w-[22rem] rounded-xl border-4 border-secondary bg-base-300 p-6 text-base-content'>
+        <div className='w-[22rem] rounded-md bg-accent p-6 text-accent-content'>
           <ScreenForm
             defaultValues={defaultValues}
             editId={formDrawerState.id}

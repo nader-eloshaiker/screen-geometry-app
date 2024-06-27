@@ -9,7 +9,7 @@ export default function RefreshIcon({ toggleAnimation, ...rest }: TProps) {
   const [rotation, setRotation] = useState(0)
 
   useEffect(() => {
-    setRotation(rotation + 360)
+    setRotation(rotation + 180)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [toggleAnimation])
 

@@ -49,7 +49,7 @@ const NavMenuItem = ({ pathname, route, title }: NavMenuItemProps) => {
   return (
     <motion.li variants={menuItemVariants}>
       <Link
-        className={clsx('text-base no-underline md:hover:underline', {
+        className={clsx('text-base', {
           active: pathname === route,
         })}
         to={route}
@@ -88,7 +88,7 @@ export default function Header() {
   const [menuOpened, setMainMenu] = useState(false)
 
   return (
-    <header className='container mx-auto bg-primary text-primary-content'>
+    <header className='container mx-auto rounded-b-md bg-accent text-accent-content'>
       {/* small header */}
       <div className='flex w-full justify-between p-4 py-2 md:hidden' data-testid='small-header'>
         <motion.details
@@ -101,7 +101,7 @@ export default function Header() {
           <motion.ul
             tabIndex={0}
             // style={{ originX: 0, originY: 0 }}
-            className='menu dropdown-content z-[1] mt-4 w-40 gap-4 rounded-md bg-primary text-primary-content shadow'
+            className='menu dropdown-content z-[1] mt-4 w-40 gap-4 rounded-md bg-neutral text-neutral-content shadow'
             initial='closed'
             animate={menuOpened ? 'opened' : 'closed'}
             exit='closed'
@@ -117,7 +117,7 @@ export default function Header() {
       <div className='hidden p-4 md:flex md:flex-col' data-testid='large-header'>
         <Title size='lg' />
         <div className='navbar min-h-0 justify-between p-0' data-testid='large-header-menu'>
-          <ul className=' menu menu-horizontal gap-4 bg-primary p-0'>
+          <ul className=' menu menu-horizontal gap-4 bg-accent p-0'>
             <NavMenu pathname={pathname} />
           </ul>
           <ThemeToggle id='themeToggle' />

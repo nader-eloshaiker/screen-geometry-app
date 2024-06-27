@@ -15,11 +15,14 @@ export const ColorField = ({ formKey, title, mode, isLoading = false, className 
         {title} Color
       </label>
       <div
-        className={clsx('input input-md input-bordered flex items-center justify-center text-sm shadow-md', {
-          'text-black': mode === LightMode,
-          'text-white': mode === DarkMode,
-          'animate-pulse pointer-events-none': isLoading,
-        })}
+        className={clsx(
+          'input input-md input-bordered input-secondary flex items-center justify-center text-sm shadow-md',
+          {
+            'text-black': mode === LightMode,
+            'text-white': mode === DarkMode,
+            'animate-pulse pointer-events-none': isLoading,
+          },
+        )}
         style={{ backgroundColor: color }}
       >
         {color}
