@@ -48,9 +48,7 @@ describe('#App', () => {
     const test = renderWithRouter()
     const element = await test.findAllByTestId('link-Screens')
 
-    await act(async () => {
-      await test.user.click(element[0])
-    })
+    await test.user.click(element[0])
 
     expect(await test.findByText('Click here to populate default list')).toBeInTheDocument()
   })
@@ -59,17 +57,13 @@ describe('#App', () => {
     const test = renderWithRouter()
     const screenLink = await test.findAllByTestId('link-Screens')
 
-    await act(async () => {
-      await test.user.click(screenLink[0])
-    })
+    await test.user.click(screenLink[0])
 
     expect(await test.findByText('Click here to populate default list')).toBeInTheDocument()
 
     const homeLink = await test.findAllByTestId('link-Home')
 
-    await act(async () => {
-      await test.user.click(homeLink[0])
-    })
+    await test.user.click(homeLink[0])
 
     expect(await test.findByText('Welcome to Screen Geometry')).toBeInTheDocument()
   })

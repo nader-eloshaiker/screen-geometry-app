@@ -15,16 +15,10 @@ export default function ThemeModeToggle({ className, id, ...rest }: TProps) {
   }
 
   return (
-    <label htmlFor={id} className={twMerge('swap cursor-pointer grid place-items-center', className)} {...rest}>
-      <input
-        type='checkbox'
-        id={id}
-        checked={!isDarkMode}
-        className='theme-controller toggle toggle-primary toggle-md col-span-2 col-start-1'
-        onChange={handleChange}
-      />
-      <MoonIcon className='swap-off col-start-1 row-start-1 size-4 p-0' fill='currentColor' />
-      <SunIcon className='swap-on col-start-2 row-start-1 size-4 p-0' fill='currentColor' />
+    <label htmlFor={id} className={twMerge('swap cursor-pointer swap-rotate', className)} {...rest}>
+      <input type='checkbox' id={id} checked={!isDarkMode} className='theme-controller' onChange={handleChange} />
+      <MoonIcon className='swap-off size-6 fill-current' />
+      <SunIcon className='swap-on size-6 fill-current' />
     </label>
   )
 }

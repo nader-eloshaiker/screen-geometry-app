@@ -142,7 +142,7 @@ export const Help = () => {
             button in the top right corner. This will open a form in the sidebar as show below.
           </Paragraph>
           <DiagramPanel>
-            <div className='sidebar mb-6 w-96 rounded-xl p-2'>
+            <div className='mb-6 w-96 rounded-xl bg-accent p-2 text-accent-content'>
               <div className='pointer-events-none p-2'>
                 <ScreenForm isLoading={false} />
               </div>
