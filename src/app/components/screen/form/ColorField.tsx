@@ -12,7 +12,7 @@ export const ColorField = ({ formKey, title, mode, isLoading = false, className 
   return (
     <div className={twMerge('form-control flex flex-col', className)}>
       <label className='label label-text' htmlFor={formKey}>
-        {title} Color
+        {`${title} Color`}
       </label>
       <div
         className={clsx(
@@ -27,7 +27,7 @@ export const ColorField = ({ formKey, title, mode, isLoading = false, className 
       >
         {color}
       </div>
-      <input hidden {...register(formKey)} id={formKey} />
+      <input hidden {...register(formKey)} id={formKey} style={{ backgroundColor: color }} />
     </div>
   )
 }

@@ -210,6 +210,7 @@ export const ScreenForm = ({ defaultValues = null, editId = undefined, isLoading
             </div>
             <button
               type='button'
+              data-testid='generate-color-btn'
               className='btn btn-secondary'
               onMouseDown={() => setToggleAnimation(!toggleAnimation)}
               onClick={generateColorHandler}
