@@ -61,7 +61,7 @@ export const ScreenFormDrawer = ({ children }: Props) => {
         variants={variants}
         className='absolute left-0 top-0'
       >
-        <div className='w-[22rem] rounded-md bg-accent p-6 text-accent-content'>
+        <div className='w-[22rem] rounded-md bg-accent p-6 text-accent-content shadow-md'>
           <ScreenForm
             defaultValues={defaultValues}
             editId={formDrawerState.id}

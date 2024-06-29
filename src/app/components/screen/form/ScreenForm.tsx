@@ -24,11 +24,25 @@ type Props = {
   onClose?: () => void
 }
 
+const ErrorMessage = ({ message }: { message?: string }) => (
+  <div role='alert' className='alert alert-error shadow-md'>
+    <svg xmlns='http://www.w3.org/2000/svg' className='size-6 shrink-0 stroke-current' fill='none' viewBox='0 0 24 24'>
+      <path
+        strokeLinecap='round'
+        strokeLinejoin='round'
+        strokeWidth='2'
+        d='M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z'
+      />
+    </svg>
+    <span>{message}</span>
+  </div>
+)
+
 export const ScreenForm = ({ defaultValues = null, editId = undefined, isLoading, onClose = () => {} }: Props) => {
   const methods = useForm<ScreenInput>({
     resolver: yupResolver(ScreenFormSchema),
     defaultValues: DefaultInputValues(),
-    mode: 'onBlur',
+    mode: 'onSubmit',
   })
   const {
     formState: { errors, isDirty, isValid },
@@ -169,6 +183,11 @@ export const ScreenForm = ({ defaultValues = null, editId = undefined, isLoading
             />
           </div>
 
+          {errors[ScreenDataEnum.diagonalSize] && (
+            <ErrorMessage message={errors[ScreenDataEnum.diagonalSize].message} />
+          )}
+          {errors[ScreenDataEnum.aspectRatio] && <ErrorMessage message={errors[ScreenDataEnum.aspectRatio].message} />}
+
           <div id='screenData' className='grid grid-cols-2 gap-6'>
             <InputField
               formKey={ScreenDataEnum.hRes}
@@ -191,6 +210,9 @@ export const ScreenForm = ({ defaultValues = null, editId = undefined, isLoading
             />
           </div>
 
+          {errors[ScreenDataEnum.hRes] && <ErrorMessage message={errors[ScreenDataEnum.hRes].message} />}
+          {errors[ScreenDataEnum.vRes] && <ErrorMessage message={errors[ScreenDataEnum.vRes].message} />}
+
           <div className='flex items-end justify-between pb-8'>
             <div className='flex gap-6'>
               <ColorField
@@ -211,7 +233,7 @@ export const ScreenForm = ({ defaultValues = null, editId = undefined, isLoading
             <button
               type='button'
               data-testid='generate-color-btn'
-              className='btn btn-secondary'
+              className='btn btn-primary shadow-md'
               onMouseDown={() => setToggleAnimation(!toggleAnimation)}
               onClick={generateColorHandler}
               disabled={isLoading}
@@ -220,24 +242,11 @@ export const ScreenForm = ({ defaultValues = null, editId = undefined, isLoading
             </button>
           </div>
 
-          {errors[ScreenDataEnum.diagonalSize] && (
-            <div className='text-sm text-error'>{errors[ScreenDataEnum.diagonalSize].message}</div>
-          )}
-          {errors[ScreenDataEnum.aspectRatio] && (
-            <div className='text-sm text-error'>{errors[ScreenDataEnum.aspectRatio].message}</div>
-          )}
-          {errors[ScreenDataEnum.hRes] && (
-            <div className='text-sm text-error'>{errors[ScreenDataEnum.hRes].message}</div>
-          )}
-          {errors[ScreenDataEnum.vRes] && (
-            <div className='text-sm text-error'>{errors[ScreenDataEnum.vRes].message}</div>
-          )}
-
           <div className='flex justify-between'>
             <div className='flex gap-6'>
               <button
                 type='button'
-                className='btn btn-secondary'
+                className='btn btn-primary shadow-md'
                 disabled={isCreateLoading || isUpdateLoading || isLoading}
                 onClick={closeHandler}
               >
@@ -245,7 +254,7 @@ export const ScreenForm = ({ defaultValues = null, editId = undefined, isLoading
               </button>
               <button
                 type='button'
-                className='btn btn-secondary'
+                className='btn btn-primary shadow-md'
                 disabled={isCreateLoading || isUpdateLoading || isLoading}
                 onClick={resetHandler}
               >
@@ -254,7 +263,9 @@ export const ScreenForm = ({ defaultValues = null, editId = undefined, isLoading
             </div>
             <button
               type='submit'
-              className={clsx('btn btn-secondary', { 'pointer-events-none': isCreateLoading || isUpdateLoading })}
+              className={clsx('btn btn-primary shadow-md', {
+                'pointer-events-none': isCreateLoading || isUpdateLoading,
+              })}
               disabled={!isDirty || !isValid}
             >
               {isCreateLoading || isUpdateLoading ? (

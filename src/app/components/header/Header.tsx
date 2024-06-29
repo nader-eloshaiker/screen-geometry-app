@@ -78,7 +78,12 @@ const ThemeToggle = ({ id }: { id: string }) => (
 )
 
 const Title = ({ size }: { size: 'sm' | 'lg' }) => (
-  <div className={clsx('flex-1 pt-2 text-center', { 'text-2xl': size === 'lg', 'text-xl': size === 'sm' })}>
+  <div
+    className={clsx('flex-1 pt-2 text-center text-accent-content', {
+      'text-2xl': size === 'lg',
+      'text-xl': size === 'sm',
+    })}
+  >
     {import.meta.env.VITE_APP_TITLE}
   </div>
 )
@@ -88,7 +93,7 @@ export default function Header() {
   const [menuOpened, setMainMenu] = useState(false)
 
   return (
-    <header className='container mx-auto rounded-b-md bg-accent text-accent-content'>
+    <header className='container mx-auto rounded-b-md bg-accent text-accent-content shadow-md'>
       {/* small header */}
       <div className='flex w-full justify-between p-4 py-2 md:hidden' data-testid='small-header'>
         <motion.details

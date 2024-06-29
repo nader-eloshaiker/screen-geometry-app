@@ -12,14 +12,14 @@ type Props = InputHTMLAttributes<HTMLInputElement> & {
   register?: UseFormRegisterReturn
 }
 
-export const OverlayInputField = ({ formKey, title, overlays, className, register, ...props }: Props) => {
+export const OverlayInputField = ({ formKey, title, overlays, className, register, ...rest }: Props) => {
   const finalClassName = twMerge('input flex items-center gap-2', className)
 
   const content = (
     <label className={finalClassName}>
       {overlays.filter(({ location }) => location === 'left').map(({ overlay }) => overlay)}
 
-      <input id={formKey} className='w-full' {...register} {...props} />
+      <input id={formKey} className='w-full' {...register} {...rest} />
 
       {overlays.filter(({ location }) => location === 'right').map(({ overlay }) => overlay)}
     </label>
