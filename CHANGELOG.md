@@ -1,5 +1,19 @@
 # Changelog
 
+## [1.10.0](https://github.com/nader-eloshaiker/screen-geometry-app/compare/v1.9.0...v1.10.0) (2024-06-29)
+
+
+### Features
+
+* **app:** adjust styling to better support errors ([#441](https://github.com/nader-eloshaiker/screen-geometry-app/issues/441)) ([b887e87](https://github.com/nader-eloshaiker/screen-geometry-app/commit/b887e8719e966b25ec8dad1f6b401d61c809b1c5))
+* **ui:** refactor theming ([#439](https://github.com/nader-eloshaiker/screen-geometry-app/issues/439)) ([cc55bda](https://github.com/nader-eloshaiker/screen-geometry-app/commit/cc55bda7ed6d62ebcd3f99fd381108a6db392a2d))
+
+
+### Bug Fixes
+
+* **test:** add act to renderer helpers ([#425](https://github.com/nader-eloshaiker/screen-geometry-app/issues/425)) ([331d5dd](https://github.com/nader-eloshaiker/screen-geometry-app/commit/331d5ddb6f39695fda6f90fdeb88b4a5267954d8))
+* **test:** correctly test the router with mocks ([#429](https://github.com/nader-eloshaiker/screen-geometry-app/issues/429)) ([ba8cf63](https://github.com/nader-eloshaiker/screen-geometry-app/commit/ba8cf63f7a00b3d4f7e073470a455704c470d190))
+
 ## [1.9.0](https://github.com/nader-eloshaiker/screen-geometry-app/compare/v1.8.0...v1.9.0) (2024-05-14)
 
 
