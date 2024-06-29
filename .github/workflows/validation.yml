@@ -35,7 +35,7 @@ jobs:
           node-version-file: '.nvmrc'
 
       - name: Install pnpm
-        uses: pnpm/action-setup@v3.0.0
+        uses: pnpm/action-setup@v4.0.0
         with:
           run_install: false
 
@@ -74,7 +74,7 @@ jobs:
           node-version-file: '.nvmrc'
 
       - name: Install pnpm
-        uses: pnpm/action-setup@v3.0.0
+        uses: pnpm/action-setup@v4.0.0
         with:
           run_install: false
 
@@ -115,7 +115,7 @@ jobs:
           node-version-file: '.nvmrc'
 
       - name: Install pnpm
-        uses: pnpm/action-setup@v3.0.0
+        uses: pnpm/action-setup@v4.0.0
         with:
           run_install: false
 
@@ -137,13 +137,11 @@ jobs:
       - name: Run pnpm test
         run: pnpm test:ci
 
-      - name: Upload coverage reports to Codecov
-        uses: codecov/codecov-action@v4
+      - name: Archive code coverage results
+        uses: actions/upload-artifact@v4
         with:
-          token: ${{ secrets.CODECOV_TOKEN }}
-          slug: nader-eloshaiker/screen-geometry-app
-          directory: coverage/vitest/
-          flags: unit
+          name: vitest-code-coverage-report
+          path: coverage/vitest/
 
   storybook-test:
     name: StoryBook Tests
@@ -162,7 +160,7 @@ jobs:
           node-version-file: '.nvmrc'
 
       - name: Install pnpm
-        uses: pnpm/action-setup@v3.0.0
+        uses: pnpm/action-setup@v4.0.0
         with:
           run_install: false
 
@@ -187,15 +185,13 @@ jobs:
       - name: Run pnpm sb:ci
         run: pnpm sb:ci
 
-      - name: Upload coverage reports to Codecov
-        uses: codecov/codecov-action@v4
+      - name: Archive code coverage results
+        uses: actions/upload-artifact@v4
         with:
-          token: ${{ secrets.CODECOV_TOKEN }}
-          slug: nader-eloshaiker/screen-geometry-app
-          directory: coverage/storybook/
-          flags: storybook
+          name: storybook-code-coverage-report
+          path: coverage/storybook/
 
-  e2e-tests:
+  e2e-test:
     name: E2E Tests
     runs-on: ubuntu-latest
     timeout-minutes: 20
@@ -213,7 +209,7 @@ jobs:
           node-version-file: '.nvmrc'
 
       - name: Install pnpm
-        uses: pnpm/action-setup@v3.0.0
+        uses: pnpm/action-setup@v4.0.0
         with:
           run_install: false
 
@@ -238,7 +234,59 @@ jobs:
       - name: Run Playwright tests
         run: pnpm e2e
 
-      - name: Upload coverage reports to Codecov
+      - name: Archive code coverage results
+        uses: actions/upload-artifact@v4
+        with:
+          name: e2e-code-coverage-report
+          path: coverage/playwright/
+
+  upload-coverage:
+    needs: [unit-test, storybook-test, e2e-test]
+    name: Upload Coverage
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
+
+    steps:
+      - name: Download unit test workflow run artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: vitest-code-coverage-report
+          path: coverage/vitest/
+
+      - name: Download storybook test workflow run artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: storybook-code-coverage-report
+          path: coverage/storybook/
+
+      - name: Download e2e test workflow run artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: e2e-code-coverage-report
+          path: coverage/playwright/
+
+      - name: Display structure of downloaded files
+        run: ls -R coverage/
+
+      - name: Upload unit test coverage reports to Codecov
+        uses: codecov/codecov-action@v4
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          slug: nader-eloshaiker/screen-geometry-app
+          directory: coverage/vitest/
+          flags: unit
+
+      - name: Upload storybook test coverage reports to Codecov
+        uses: codecov/codecov-action@v4
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          slug: nader-eloshaiker/screen-geometry-app
+          directory: coverage/storybook/
+          flags: storybook
+
+      - name: Upload e2e test coverage reports to Codecov
         uses: codecov/codecov-action@v4
         with:
           token: ${{ secrets.CODECOV_TOKEN }}

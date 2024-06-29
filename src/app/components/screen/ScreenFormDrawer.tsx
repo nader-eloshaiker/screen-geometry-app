@@ -3,9 +3,14 @@ import { useFormDrawerContext } from '@app/contexts/FormDrawer/useFormDrawerCont
 import { useGetScreenApi } from '@app/hooks/api/helpers/useGetScreenApi'
 import { ScreenInput } from '@packages/openapi/generated'
 import { transformScreenItem } from '@packages/utils/DataTransformation'
-
+import { motion } from 'framer-motion'
 import { useEffect, useState } from 'react'
 import { ScreenForm } from './form/ScreenForm'
+
+const variants = {
+  opened: { translateX: '0' },
+  closed: { translateX: '-100%', transition: { ease: 'easeInOut' } },
+}
 
 type Props = TReactChildren
 
@@ -50,18 +55,21 @@ export const ScreenFormDrawer = ({ children }: Props) => {
         checked={formDrawerState.open}
         onChange={(_e) => {}}
       />
-      <div className='absolute left-0 top-0 -translate-x-full transition-all duration-300 ease-in peer-checked:translate-x-0 md:w-96'>
-        <div className='sidebar rounded-xl p-2 md:w-96'>
-          <div className='p-2'>
-            <ScreenForm
-              defaultValues={defaultValues}
-              editId={formDrawerState.id}
-              isLoading={editMode && isScreenItemLoading}
-              onClose={closeHandler}
-            />
-          </div>
+      <motion.div
+        initial='closed'
+        animate={formDrawerState.open ? 'opened' : 'closed'}
+        variants={variants}
+        className='absolute left-0 top-0'
+      >
+        <div className='w-[22rem] rounded-md bg-accent p-6 text-accent-content'>
+          <ScreenForm
+            defaultValues={defaultValues}
+            editId={formDrawerState.id}
+            isLoading={editMode && isScreenItemLoading}
+            onClose={closeHandler}
+          />
         </div>
-      </div>
+      </motion.div>
     </div>
   )
 }

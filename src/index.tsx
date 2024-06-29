@@ -11,17 +11,22 @@ const testMode = !import.meta.env.DEV
 const trackingId = process.env.GA_TRACKING_ID ?? import.meta.env.VITE_GA_TRACKING_ID
 ReactGA.initialize(trackingId, { testMode })
 
-createBrowserServiceWorker(baseUrl, !!import.meta.env.NODE_ENV).then(() => {
-  createRoot(document.getElementById('root') as HTMLElement).render(
-    <StrictMode>
-      <HelmetProvider>
-        <Helmet>
-          <title>Screen Geometry</title>
-        </Helmet>
-        <App />
-      </HelmetProvider>
-    </StrictMode>,
-  )
+if (import.meta.env.NODE_ENV !== 'test') {
+  // load the service worker in the background to speed up page loads
+  createBrowserServiceWorker(baseUrl).then(() => {})
+} else {
+  console.log('Browser Service Worker not started due to unit testing env')
+}
 
-  reportWebVitals()
-})
+createRoot(document.getElementById('root') as HTMLElement).render(
+  <StrictMode>
+    <HelmetProvider>
+      <Helmet>
+        <title>Screen Geometry</title>
+      </Helmet>
+      <App />
+    </HelmetProvider>
+  </StrictMode>,
+)
+
+reportWebVitals()

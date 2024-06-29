@@ -72,7 +72,7 @@ describe('#ScreenForm', () => {
   describe('#close', () => {
     test('close button', async () => {
       const onCloseAction = vi.fn()
-      const test = renderWithUserEvents(
+      const test = await renderWithUserEvents(
         <RootTestComponent defaultValues={screenInputFixture} onCloseAction={onCloseAction} />,
       )
 
@@ -91,7 +91,7 @@ describe('#ScreenForm', () => {
   describe('#LoadingMode', () => {
     test('show loading when updating a screen', async () => {
       const editId = '1'
-      const test = renderWithUserEvents(<RootTestComponent defaultValues={screenInputFixture} editId={editId} />)
+      const test = await renderWithUserEvents(<RootTestComponent defaultValues={screenInputFixture} editId={editId} />)
 
       const inputScreenSize = await test.findByLabelText('Screen Size')
       await act(async () => {
@@ -108,7 +108,7 @@ describe('#ScreenForm', () => {
     })
 
     test('show loading when creating a screen', async () => {
-      const test = renderWithUserEvents(<RootTestComponent defaultValues={undefined} editId={undefined} />)
+      const test = await renderWithUserEvents(<RootTestComponent defaultValues={undefined} editId={undefined} />)
 
       const inputScreenSize = await test.findByLabelText('Screen Size')
       await act(async () => {
@@ -154,8 +154,8 @@ describe('#ScreenForm', () => {
       expect(await test.findByLabelText('Horizontal Res')).toHaveValue(5120)
       expect(await test.findByLabelText('Vertical Res')).toHaveValue(1440)
 
-      expect(await test.findByText('Light')).toHaveStyle({ backgroundColor: '#000000' })
-      expect(await test.findByText('Dark')).toHaveStyle({ backgroundColor: '#FFFFFF' })
+      expect(await test.findByLabelText('Light Color')).toHaveStyle({ backgroundColor: '#000000' })
+      expect(await test.findByLabelText('Dark Color')).toHaveStyle({ backgroundColor: '#FFFFFF' })
 
       expect(await test.findByText('Update')).toBeDisabled()
       expect(await test.findByText('Reset')).toBeEnabled()
@@ -165,7 +165,7 @@ describe('#ScreenForm', () => {
     test('reset screen form', async () => {
       const editId = '1'
 
-      const test = renderWithUserEvents(<RootTestComponent defaultValues={screenInputFixture} editId={editId} />)
+      const test = await renderWithUserEvents(<RootTestComponent defaultValues={screenInputFixture} editId={editId} />)
       const resetButton = await test.findByText('Reset')
 
       const inputScreenSize = await test.findByLabelText('Screen Size')
@@ -184,10 +184,10 @@ describe('#ScreenForm', () => {
     test('change screen theme colors', async () => {
       const editId = '1'
 
-      const test = renderWithUserEvents(<RootTestComponent defaultValues={screenInputFixture} editId={editId} />)
-      const changeButton = await test.findByText('Change')
-      const lightColor = await test.findByText('Light')
-      const darkColor = await test.findByText('Dark')
+      const test = await renderWithUserEvents(<RootTestComponent defaultValues={screenInputFixture} editId={editId} />)
+      const changeButton = await test.findByTestId('generate-color-btn')
+      const lightColor = await test.findByLabelText('Light Color')
+      const darkColor = await test.findByLabelText('Dark Color')
 
       expect(lightColor).toHaveStyle({ backgroundColor: '#000000' })
       expect(darkColor).toHaveStyle({ backgroundColor: '#FFFFFF' })
@@ -204,7 +204,7 @@ describe('#ScreenForm', () => {
       const editId = '5HjERJbH'
       const initialise: Array<ScreenItem> = [{ ...transformScreenInput(screenInputFixture), id: editId }]
 
-      const test = renderWithUserEvents(
+      const test = await renderWithUserEvents(
         <RootTestComponent defaultValues={screenInputFixture} editId={editId} initialise={initialise} />,
       )
 
@@ -239,8 +239,8 @@ describe('#ScreenForm', () => {
       expect(await test.findByLabelText('Horizontal Res')).toHaveValue(null)
       expect(await test.findByLabelText('Vertical Res')).toHaveValue(null)
 
-      expect(await test.findByText('Light')).toBeInTheDocument()
-      expect(await test.findByText('Dark')).toBeInTheDocument()
+      expect(await test.findByLabelText('Light Color')).toBeInTheDocument()
+      expect(await test.findByLabelText('Dark Color')).toBeInTheDocument()
 
       expect(await test.findByText('Create')).toBeDisabled()
       expect(await test.findByText('Reset')).toBeEnabled()
@@ -248,7 +248,7 @@ describe('#ScreenForm', () => {
     })
 
     test('select a screen from list and populate form', async () => {
-      const test = renderWithUserEvents(<RootTestComponent defaultValues={undefined} />)
+      const test = await renderWithUserEvents(<RootTestComponent defaultValues={undefined} />)
 
       const inputElement = await test.findByPlaceholderText('Type to filter list...')
       await act(async () => {
@@ -265,8 +265,8 @@ describe('#ScreenForm', () => {
       expect(await test.findByLabelText('Horizontal Res')).toHaveValue(3440)
       expect(await test.findByLabelText('Vertical Res')).toHaveValue(1440)
 
-      expect(await test.findByText('Light')).toBeInTheDocument()
-      expect(await test.findByText('Dark')).toBeInTheDocument()
+      expect(await test.findByLabelText('Light Color')).toBeInTheDocument()
+      expect(await test.findByLabelText('Dark Color')).toBeInTheDocument()
 
       expect(await test.findByText('Create')).toBeEnabled()
       expect(await test.findByText('Reset')).toBeEnabled()
@@ -274,7 +274,7 @@ describe('#ScreenForm', () => {
     })
 
     test('create a screen from list and populate form', async () => {
-      const test = renderWithUserEvents(<RootTestComponent defaultValues={undefined} />)
+      const test = await renderWithUserEvents(<RootTestComponent defaultValues={undefined} />)
 
       const inputElement = await test.findByPlaceholderText('Type to filter list...')
       await test.user.type(inputElement, 'WQHD+')

@@ -46,7 +46,7 @@ describe('#ScreenTable', () => {
   })
 
   test('renders screen table component with a table and rows', async () => {
-    const test = renderWithUserEvents(<TestComponent />)
+    const test = await renderWithUserEvents(<TestComponent />)
 
     const tableElement = await test.findByRole('table')
     expect(tableElement).toBeDefined()
@@ -59,7 +59,7 @@ describe('#ScreenTable', () => {
   })
 
   test('remove a screen row when delete button is clicked', async () => {
-    const test = renderWithUserEvents(<TestComponent />)
+    const test = await renderWithUserEvents(<TestComponent />)
 
     const deleteElements = await test.findAllByLabelText('delete button')
     const deleteElement = deleteElements[0] as HTMLElement
@@ -75,7 +75,7 @@ describe('#ScreenTable', () => {
     waitFor(() => expect(test.queryAllByRole('row').length).toBe(4))
   })
   test('hide a screen row when show button is clicked', async () => {
-    const test = renderWithUserEvents(<TestComponent />)
+    const test = await renderWithUserEvents(<TestComponent />)
 
     const showElements = await test.findAllByLabelText('show checkbox')
     const showElement = showElements[0] as HTMLElement
@@ -90,7 +90,7 @@ describe('#ScreenTable', () => {
   })
 
   test('show skeleton table when screen list is loading', async () => {
-    const test = renderWithUserEvents(<TestComponent screens={[]} isScreenListLoading={true} />)
+    const test = await renderWithUserEvents(<TestComponent screens={[]} isScreenListLoading={true} />)
 
     const tableElement = await test.findByRole('table')
     expect(tableElement).toBeDefined()

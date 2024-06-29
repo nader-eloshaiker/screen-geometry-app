@@ -1,3 +1,4 @@
+import RefreshIcon from '@app/assets/icons/Refresh'
 import { DarkMode, LightMode } from '@app/components/theme/ThemeConstants'
 import { useCreateScreenApi } from '@app/hooks/api/helpers/useCreateScreenApi'
 import { useSearchApi } from '@app/hooks/api/helpers/useSearchApi'
@@ -43,6 +44,8 @@ export const ScreenForm = ({ defaultValues = null, editId = undefined, isLoading
   const [searchTerm, setSearchTerm] = useState<string>('')
   const { isFetching: isSearchListLoading, data: searchListResponse } = useSearchApi({ term: searchTerm })
 
+  const [toggleAnimation, setToggleAnimation] = useState<boolean>(false)
+
   // NOTE: this is a hack to get around the fact that the form is not re-rendering when the defaultValues prop changes
   // Address this at the top level of te form
   const selectHandler = (item: SearchScreenItem) => {
@@ -82,6 +85,7 @@ export const ScreenForm = ({ defaultValues = null, editId = undefined, isLoading
 
   const generateColorHandler = () => {
     const color = createCSSColor()
+
     setValue(ScreenDataEnum.darkColor, color.darkColor, {
       shouldValidate: true,
       shouldDirty: true,
@@ -125,12 +129,12 @@ export const ScreenForm = ({ defaultValues = null, editId = undefined, isLoading
 
   return (
     <FormProvider {...methods}>
-      <label className='label'>
-        <span className='text-lg'>{!editId ? 'Add' : 'Edit'} Screen</span>
-      </label>
-      <div className='form-control mb-4 flex w-full flex-col'>
-        <label htmlFor='autoCompleteScreen' className='label'>
-          <span className='text-sm'>Choose from list of Monitors</span>
+      <div className='label label-text'>
+        <span className='pb-2 text-xl'>{!editId ? 'Add' : 'Edit'} Screen</span>
+      </div>
+      <div className='form-control flex w-full flex-col pb-10'>
+        <label htmlFor='autoCompleteScreen' className='label label-text'>
+          <span className='text-sm'>Auto fill the form from list of Monitors</span>
         </label>
         <AutoCompleteScreen
           id='autoCompleteScreen'
@@ -142,20 +146,16 @@ export const ScreenForm = ({ defaultValues = null, editId = undefined, isLoading
         />
       </div>
 
-      <div className='divider text-sm'>Or</div>
-
       <form method='post' onSubmit={handleSubmit(submitHandler)}>
-        <div className='flex flex-col gap-2'>
-          <div id='screenTag' className='grid grid-cols-2 gap-3'>
+        <div className='flex flex-col gap-10'>
+          <div id='screenTag' className='grid grid-cols-2 gap-6'>
             <InputField
               formKey={ScreenDataEnum.diagonalSize}
-              inputStyle='!pr-10'
-              overlayStyle='right-0 mr-4'
               title='Screen Size'
               type='number'
               overlay='in'
               autoComplete='off'
-              placeholder='27"'
+              placeholder='27'
               isLoading={isLoading}
             />
 
@@ -169,13 +169,9 @@ export const ScreenForm = ({ defaultValues = null, editId = undefined, isLoading
             />
           </div>
 
-          <div className='divider text-sm'>Optional</div>
-
-          <div id='screenData' className='grid grid-cols-2 gap-3'>
+          <div id='screenData' className='grid grid-cols-2 gap-6'>
             <InputField
               formKey={ScreenDataEnum.hRes}
-              inputStyle='!pr-10'
-              overlayStyle='right-0 mr-4'
               title='Horizontal Res'
               type='number'
               overlay='px'
@@ -186,8 +182,6 @@ export const ScreenForm = ({ defaultValues = null, editId = undefined, isLoading
 
             <InputField
               formKey={ScreenDataEnum.vRes}
-              inputStyle='!pr-10'
-              overlayStyle='right-0 mr-4'
               title='Vertical Res'
               type='number'
               overlay='px'
@@ -197,19 +191,34 @@ export const ScreenForm = ({ defaultValues = null, editId = undefined, isLoading
             />
           </div>
 
-          <div className='divider text-sm'>Theme Color</div>
-
-          <div className='flex justify-between'>
-            <div className='flex gap-4'>
-              <ColorField formKey={ScreenDataEnum.lightColor} title='Light' mode={LightMode} isLoading={isLoading} />
-              <ColorField formKey={ScreenDataEnum.darkColor} title='Dark' mode={DarkMode} isLoading={isLoading} />
+          <div className='flex items-end justify-between pb-8'>
+            <div className='flex gap-6'>
+              <ColorField
+                formKey={ScreenDataEnum.lightColor}
+                title='Light'
+                mode={LightMode}
+                isLoading={isLoading}
+                className='w-24'
+              />
+              <ColorField
+                formKey={ScreenDataEnum.darkColor}
+                title='Dark'
+                mode={DarkMode}
+                isLoading={isLoading}
+                className='w-24'
+              />
             </div>
-            <button type='button' className='btn btn-neutral w-24' onClick={generateColorHandler} disabled={isLoading}>
-              Change
+            <button
+              type='button'
+              data-testid='generate-color-btn'
+              className='btn btn-secondary'
+              onMouseDown={() => setToggleAnimation(!toggleAnimation)}
+              onClick={generateColorHandler}
+              disabled={isLoading}
+            >
+              <RefreshIcon className='size-6 fill-current transition duration-500' toggleAnimation={toggleAnimation} />
             </button>
           </div>
-
-          <div className='divider text-sm'>Finish</div>
 
           {errors[ScreenDataEnum.diagonalSize] && (
             <div className='text-sm text-error'>{errors[ScreenDataEnum.diagonalSize].message}</div>
@@ -225,10 +234,10 @@ export const ScreenForm = ({ defaultValues = null, editId = undefined, isLoading
           )}
 
           <div className='flex justify-between'>
-            <div className='flex gap-4'>
+            <div className='flex gap-6'>
               <button
                 type='button'
-                className='btn btn-neutral w-24'
+                className='btn btn-secondary'
                 disabled={isCreateLoading || isUpdateLoading || isLoading}
                 onClick={closeHandler}
               >
@@ -236,7 +245,7 @@ export const ScreenForm = ({ defaultValues = null, editId = undefined, isLoading
               </button>
               <button
                 type='button'
-                className='btn btn-neutral w-24'
+                className='btn btn-secondary'
                 disabled={isCreateLoading || isUpdateLoading || isLoading}
                 onClick={resetHandler}
               >
@@ -245,7 +254,7 @@ export const ScreenForm = ({ defaultValues = null, editId = undefined, isLoading
             </div>
             <button
               type='submit'
-              className={clsx('btn btn-neutral w-24', { 'pointer-events-none': isCreateLoading || isUpdateLoading })}
+              className={clsx('btn btn-secondary', { 'pointer-events-none': isCreateLoading || isUpdateLoading })}
               disabled={!isDirty || !isValid}
             >
               {isCreateLoading || isUpdateLoading ? (

@@ -55,7 +55,7 @@ describe('#ListInput', () => {
   })
 
   test('renders the ListInput dropdown and make a selectin', async () => {
-    const { user, container, getByPlaceholderText } = renderWithUserEvents(
+    const { user, container, getByPlaceholderText } = await renderWithUserEvents(
       <ListInput
         items={searchList}
         value=''

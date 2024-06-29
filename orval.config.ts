@@ -3,7 +3,7 @@ import { defineConfig } from 'orval'
 export default defineConfig({
   screenApi: {
     output: {
-      workspace: 'src/openapi/generated',
+      workspace: 'src/packages/openapi/generated',
       mode: 'tags',
       target: './services',
       schemas: './models',
@@ -35,7 +35,7 @@ export default defineConfig({
       },
     },
     input: {
-      target: './src/openapi/spec/screenApi.v1.yaml',
+      target: './src/packages/openapi/spec/screenApi.v1.yaml',
     },
   },
 })

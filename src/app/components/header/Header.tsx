@@ -1,15 +1,55 @@
-import HamburgerIcon from '@app/assets/icons/Hamburger'
-import ThemeModeToggle from '@app/components/theme/ThemeModeToggle'
 import { RouteSchema } from '@app/routes/RouteSchema'
 import { clsx } from 'clsx'
+import { motion, Variants } from 'framer-motion'
+import { useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
+import ThemeModeToggle from '../theme/ThemeModeToggle'
+import { HamburgerMenu } from './HamburgerMenu'
+
+const menuVariants: Variants = {
+  opened: {
+    scaleY: 1,
+    x: 0,
+    transition: {
+      when: 'beforeChildren',
+      staggerChildren: 0.1,
+    },
+  },
+  closed: {
+    scaleY: 0,
+    x: 0,
+    transition: {
+      when: 'afterChildren',
+      staggerChildren: 0.1,
+    },
+  },
+}
+
+const menuItemVariants: Variants = {
+  opened: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      when: 'beforeChildren',
+      duration: 0.2,
+    },
+  },
+  closed: {
+    opacity: 0,
+    y: -15,
+    transition: {
+      when: 'afterChildren',
+      duration: 0.2,
+    },
+  },
+}
 
 type NavMenuItemProps = { pathname: string; route: string; title: string }
 const NavMenuItem = ({ pathname, route, title }: NavMenuItemProps) => {
   return (
-    <li>
+    <motion.li variants={menuItemVariants}>
       <Link
-        className={clsx('text-sm sm:text-base', {
+        className={clsx('text-base', {
           active: pathname === route,
         })}
         to={route}
@@ -17,7 +57,7 @@ const NavMenuItem = ({ pathname, route, title }: NavMenuItemProps) => {
       >
         {title}
       </Link>
-    </li>
+    </motion.li>
   )
 }
 
@@ -33,40 +73,54 @@ const NavMenu = ({ pathname }: NavMenuProps) => {
   )
 }
 
+const ThemeToggle = ({ id }: { id: string }) => (
+  <ThemeModeToggle className='opacity-50 hover:opacity-100 md:mr-2' id={id} />
+)
+
+const Title = ({ size }: { size: 'sm' | 'lg' }) => (
+  <div className={clsx('flex-1 pt-2 text-center', { 'text-2xl': size === 'lg', 'text-xl': size === 'sm' })}>
+    {import.meta.env.VITE_APP_TITLE}
+  </div>
+)
+
 export default function Header() {
   const { pathname } = useLocation()
+  const [menuOpened, setMainMenu] = useState(false)
 
   return (
-    <header className='sidebar'>
-      <div className='container mx-auto'>
-        {/* small header */}
-        <div className='flex w-full flex-row xs:hidden' data-testid='small-header'>
-          <div className='dropdown' data-testid='nav-menu'>
-            <div className='btn btn-square btn-ghost'>
-              <HamburgerIcon className='size-6' />
-            </div>
-            <ul className='menu dropdown-content menu-sm z-[1] ml-2 mt-3 w-52 rounded-box bg-base-100 p-2 shadow-lg'>
-              <NavMenu pathname={pathname} />
-            </ul>
-          </div>
-          <div className='flex-1 pt-2 text-center text-2xl'>{import.meta.env.VITE_APP_TITLE}</div>
-          <ThemeModeToggle
-            className='mr-2 opacity-50 transition duration-500 ease-in-out hover:opacity-100'
-            id='themeToggleTiny'
-          />
-        </div>
-        {/* large header */}
-        <div className='hidden pt-2 text-center text-2xl xs:block' data-testid='large-header-title'>
-          {import.meta.env.VITE_APP_TITLE}
-        </div>
-        <div className='navbar hidden justify-between px-3 xs:flex' data-testid='large-header-menu'>
-          <ul className='menu menu-horizontal gap-2 rounded-box p-0 transition-all duration-200 ease-out'>
+    <header className='container mx-auto rounded-b-md bg-accent text-accent-content'>
+      {/* small header */}
+      <div className='flex w-full justify-between p-4 py-2 md:hidden' data-testid='small-header'>
+        <motion.details
+          data-testid='nav-menu'
+          className={clsx('dropdown dropdown-bottom', { 'dropdown-open': menuOpened })}
+        >
+          <summary tabIndex={0} className='btn btn-ghost p-0' role='button'>
+            <HamburgerMenu width={20} height={14} isOpen={menuOpened} onClick={() => setMainMenu(!menuOpened)} />
+          </summary>
+          <motion.ul
+            tabIndex={0}
+            // style={{ originX: 0, originY: 0 }}
+            className='menu dropdown-content z-[1] mt-4 w-40 gap-4 rounded-md bg-neutral text-neutral-content shadow'
+            initial='closed'
+            animate={menuOpened ? 'opened' : 'closed'}
+            exit='closed'
+            variants={menuVariants}
+          >
+            <NavMenu pathname={pathname} />
+          </motion.ul>
+        </motion.details>
+        <Title size='sm' />
+        <ThemeToggle id='themeToggleTiny' />
+      </div>
+      {/* large header */}
+      <div className='hidden p-4 md:flex md:flex-col' data-testid='large-header'>
+        <Title size='lg' />
+        <div className='navbar min-h-0 justify-between p-0' data-testid='large-header-menu'>
+          <ul className=' menu menu-horizontal gap-4 bg-accent p-0'>
             <NavMenu pathname={pathname} />
           </ul>
-          <ThemeModeToggle
-            className='mr-2 opacity-50 transition duration-500 ease-in-out hover:opacity-100'
-            id='themeToggle'
-          />
+          <ThemeToggle id='themeToggle' />
         </div>
       </div>
     </header>
