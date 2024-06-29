@@ -211,7 +211,7 @@ export const ScreenForm = ({ defaultValues = null, editId = undefined, isLoading
             <button
               type='button'
               data-testid='generate-color-btn'
-              className='btn btn-secondary'
+              className='btn btn-primary'
               onMouseDown={() => setToggleAnimation(!toggleAnimation)}
               onClick={generateColorHandler}
               disabled={isLoading}
@@ -237,7 +237,7 @@ export const ScreenForm = ({ defaultValues = null, editId = undefined, isLoading
             <div className='flex gap-6'>
               <button
                 type='button'
-                className='btn btn-secondary'
+                className='btn btn-primary'
                 disabled={isCreateLoading || isUpdateLoading || isLoading}
                 onClick={closeHandler}
               >
@@ -245,7 +245,7 @@ export const ScreenForm = ({ defaultValues = null, editId = undefined, isLoading
               </button>
               <button
                 type='button'
-                className='btn btn-secondary'
+                className='btn btn-primary'
                 disabled={isCreateLoading || isUpdateLoading || isLoading}
                 onClick={resetHandler}
               >
@@ -254,7 +254,7 @@ export const ScreenForm = ({ defaultValues = null, editId = undefined, isLoading
             </div>
             <button
               type='submit'
-              className={clsx('btn btn-secondary', { 'pointer-events-none': isCreateLoading || isUpdateLoading })}
+              className={clsx('btn btn-primary', { 'pointer-events-none': isCreateLoading || isUpdateLoading })}
               disabled={!isDirty || !isValid}
             >
               {isCreateLoading || isUpdateLoading ? (

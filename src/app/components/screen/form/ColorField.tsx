@@ -16,7 +16,7 @@ export const ColorField = ({ formKey, title, mode, isLoading = false, className 
       </label>
       <div
         className={clsx(
-          'input input-md input-bordered input-secondary flex items-center justify-center text-sm shadow-md',
+          'input input-md input-bordered input-primary flex items-center justify-center text-sm shadow-md',
           {
             'text-black': mode === LightMode,
             'text-white': mode === DarkMode,

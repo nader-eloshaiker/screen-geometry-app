@@ -62,7 +62,7 @@ export const InputField = ({ formKey, title, overlay, isLoading = false, ...rest
             ]
           : []
       }
-      className={clsx('input-bordered input-secondary shadow-md transition-all', {
+      className={clsx('input-bordered input-primary shadow-md transition-all', {
         'input-error': errors[formKey],
         'skeleton bg-neutral-300 dark:bg-neutral-700 pointer-events-none rounded-lg': isLoading,
       })}

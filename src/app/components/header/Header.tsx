@@ -78,7 +78,12 @@ const ThemeToggle = ({ id }: { id: string }) => (
 )
 
 const Title = ({ size }: { size: 'sm' | 'lg' }) => (
-  <div className={clsx('flex-1 pt-2 text-center', { 'text-2xl': size === 'lg', 'text-xl': size === 'sm' })}>
+  <div
+    className={clsx('flex-1 pt-2 text-center text-accent-content', {
+      'text-2xl': size === 'lg',
+      'text-xl': size === 'sm',
+    })}
+  >
     {import.meta.env.VITE_APP_TITLE}
   </div>
 )
