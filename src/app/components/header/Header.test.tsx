@@ -1,21 +1,9 @@
 import { fireEvent, render, renderHook, waitFor } from '@testing-library/react'
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
+import { mockedUseLocation } from 'src/configs/vitest.setup'
 import { useWindowSize } from '../../../packages/test/mocks/useWindowsSize'
 import { ThemeModeProvider } from '../../contexts/theme/ThemeModeProvider'
 import Header from './Header'
-
-const mocks = vi.hoisted(() => ({
-  useLocation: vi.fn(),
-}))
-
-vi.mock('react-router-dome', async () => {
-  const actual = await vi.importActual('react-router-dom')
-  return {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    ...(actual as any),
-    useLocation: mocks.useLocation,
-  }
-})
 
 const resizeWindow = async (x: number, y: number) => {
   await waitFor(() => {
@@ -38,7 +26,7 @@ describe('#Header', () => {
   })
 
   beforeEach(() => {
-    mocks.useLocation.mockImplementation(() => ({ pathname: '/' }))
+    mockedUseLocation.mockImplementation(() => ({ pathname: '/' }))
   })
 
   // cannot be tested due to tailwindcss not getting parsed

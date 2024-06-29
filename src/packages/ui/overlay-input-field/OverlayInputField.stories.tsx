@@ -21,10 +21,15 @@ const meta = {
       table: { category: 'content', type: { summary: 'Array<InputOverlay>' } },
       control: { type: 'object', requied: true },
     },
-    register: {
-      description: 'React Hook Form register.',
-      table: { category: 'content', type: { summary: 'UseFormRegisterReturn' } },
-      control: { type: 'object' },
+    formKey: {
+      description: 'Unique Identifier for label matching.',
+      table: { category: 'content', type: { summary: 'string' } },
+      control: { type: 'text' },
+    },
+    title: {
+      description: 'Input heading.',
+      table: { category: 'content', type: { summary: 'string' } },
+      control: { type: 'text' },
     },
     className: {
       description: 'Manage the style of the input field to allow for the overlays to be viewed correctly.',
@@ -60,7 +65,6 @@ const meta = {
       description: 'Input field change handler.',
       table: { category: 'event', type: { summary: 'function' } },
       action: 'onChange',
-      control: { type: 'function' },
     },
   },
 } satisfies Meta<typeof OverlayInputField>
@@ -70,43 +74,54 @@ type Story = StoryObj<typeof meta>
 
 export const ImageOverlay: Story = {
   args: {
+    formKey: 'input1',
     placeholder: 'Type something...',
-    className: '!pl-12',
+    className: 'input-bordered input-secondary shadow-md',
     disabled: false,
     overlays: [
       {
-        overlay: <MagnifyGlassIcon className='size-6' />,
-        overlayClassName: 'left-0 ml-4',
+        overlay: <MagnifyGlassIcon key='1' className='size-6' />,
+        location: 'left',
       },
     ],
   },
 }
 export const TextOverlay: Story = {
   args: {
+    formKey: 'input2',
     placeholder: 'Type something...',
-    className: '!pr-14',
+    className: 'input-bordered input-secondary shadow-md',
     disabled: false,
     overlays: [
       {
-        overlay: 'text',
-        overlayClassName: 'right-0 mr-4',
+        overlay: (
+          <span key='1' className='text-sm opacity-70'>
+            text
+          </span>
+        ),
+        location: 'right',
       },
     ],
   },
 }
 export const CombinationOverlay: Story = {
   args: {
+    formKey: 'input3',
     placeholder: 'Type something...',
-    className: '!pl-12 !pr-14',
+    className: 'input-bordered input-secondary shadow-md',
     disabled: false,
     overlays: [
       {
-        overlay: <MagnifyGlassIcon className='size-6' />,
-        overlayClassName: 'left-0 ml-4',
+        overlay: <MagnifyGlassIcon key='1' className='size-6' />,
+        location: 'left',
       },
       {
-        overlay: 'text',
-        overlayClassName: 'right-0 mr-4',
+        overlay: (
+          <span key='2' className='text-sm opacity-70'>
+            text
+          </span>
+        ),
+        location: 'right',
       },
     ],
   },

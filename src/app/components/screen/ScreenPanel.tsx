@@ -9,7 +9,7 @@ const Panel = styled.div<{ $width: number; $height: number; $color?: string }>`
   width: ${(props) => props.$width}%;
   height: ${(props) => props.$height}%;
   color: ${(props) => props.$color};
-  border-color: ${(props) => props.$color};
+  outline-color: ${(props) => props.$color};
 `
 
 // const isEven = (num: number) => num % 2 == 0
@@ -47,7 +47,7 @@ export const ScreenPanel = ({ screen, highlighted = undefined, setHighLighted = 
     setConfig({
       width: Math.round(100 * (screen.render?.width ?? 1)),
       height: Math.round(100 * (screen.render?.height ?? 1)),
-      color: themeMode === DarkMode ? `${screen.color.lightColor}18` : `${screen.color.darkColor}18`,
+      color: themeMode === DarkMode ? `${screen.color.lightColor}25` : `${screen.color.darkColor}25`,
       vPixelCount: Math.round((screen.spec?.vRes ?? 1) / 100),
       hPixelCount: Math.round((screen.spec?.hRes ?? 1) / 100),
     })
@@ -55,9 +55,9 @@ export const ScreenPanel = ({ screen, highlighted = undefined, setHighLighted = 
 
   return (
     <Panel
-      className={clsx('box-border rounded-lg transition-[border-width] duration-200 ease-out', {
-        'border-solid border-4 sm:border-8': selected,
-        'border-solid border-2': !selected,
+      className={clsx('rounded-md transition-[outline-width] duration-300 ease-out', {
+        'outline outline-4 sm:outline-8': selected,
+        'outline outline-2': !selected,
       })}
       $width={config.width}
       $height={config.height}
@@ -68,7 +68,7 @@ export const ScreenPanel = ({ screen, highlighted = undefined, setHighLighted = 
       {...rest}
     >
       {selected && (
-        <table className='size-full border-separate border-spacing-px sm:border-spacing-0.5'>
+        <table className='size-full border-separate border-spacing-px md:border-spacing-0.5 lg:border-spacing-1'>
           <tbody>
             {Array.from({ length: config.vPixelCount }, (_, i) => (
               <tr key={i}>
@@ -77,7 +77,9 @@ export const ScreenPanel = ({ screen, highlighted = undefined, setHighLighted = 
                     key={j}
                     style={{
                       backgroundColor: config.color,
+                      borderRadius: '50%',
                     }}
+                    className='transition-all duration-300 ease-out'
                   ></td>
                 ))}
               </tr>

@@ -3,8 +3,8 @@ import { SkeletonImage } from './SkeletonImage'
 import { ImageIcon } from './assets/ImageIcon'
 
 describe('#SkeletonImage', () => {
-  it('should render', () => {
-    const { getByTestId } = renderWithUserEvents(<SkeletonImage image={<ImageIcon />} />)
+  it('should render', async () => {
+    const { getByTestId } = await renderWithUserEvents(<SkeletonImage image={<ImageIcon />} />)
     const element = getByTestId('SkeletonImage')
 
     expect(element).toBeInTheDocument()

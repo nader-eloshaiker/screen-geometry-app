@@ -2,8 +2,22 @@ import { renderWithUserEvents } from '@packages/test/utils/RenderWithUserEvents'
 import { OverlayInputField } from './OverlayInputField'
 
 describe('#OverlayInputField', () => {
-  test('renders overlay input field component with a input and overlays', () => {
-    const test = renderWithUserEvents(<OverlayInputField overlays={[{ overlay: 'px', overlayClassName: 'pl10' }]} />)
+  test('renders overlay input field component with a input and overlays', async () => {
+    const test = await renderWithUserEvents(
+      <OverlayInputField
+        formKey='test'
+        overlays={[
+          {
+            overlay: (
+              <span key='1' className='text-sm opacity-70'>
+                px
+              </span>
+            ),
+            location: 'right',
+          },
+        ]}
+      />,
+    )
 
     const inputElement = test.getByRole('textbox')
     expect(inputElement).toBeInTheDocument()

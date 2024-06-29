@@ -10,7 +10,7 @@ export const CreateScreenButton = ({ className, ...rest }: TProps) => {
 
   return (
     <button
-      className={twMerge('btn btn-primary btn-outline', className)}
+      className={twMerge('btn btn-secondary btn-outline', className)}
       onClick={() => dispatchFormDrawer({ type: FormDrawerActionTypes.Create })}
       disabled={formDrawerState.open}
       {...rest}

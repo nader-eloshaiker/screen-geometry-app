@@ -1,40 +1,38 @@
-import clsx from 'clsx'
 import { InputHTMLAttributes, ReactNode } from 'react'
 import { UseFormRegisterReturn } from 'react-hook-form'
-import { styled } from 'styled-components'
 import { twMerge } from 'tailwind-merge'
 
-export type InputOverlay = { overlay: string | ReactNode; overlayClassName: string; pointerEvents?: boolean }
+export type InputOverlay = { overlay: ReactNode; location: 'left' | 'right' }
 
 type Props = InputHTMLAttributes<HTMLInputElement> & {
+  formKey: string
+  title?: string
   className?: string
   overlays: Array<InputOverlay>
   register?: UseFormRegisterReturn
 }
 
-const InputPlaceholder = styled.span`
-  color: var(--fallback-bc, oklch(var(--bc) / var(--tw-placeholder-opacity)));
-  --tw-placeholder-opacity: 0.6;
-`
+export const OverlayInputField = ({ formKey, title, overlays, className, register, ...props }: Props) => {
+  const finalClassName = twMerge('input flex items-center gap-2', className)
 
-export const OverlayInputField = ({ overlays, className, register, ...props }: Props) => {
-  const newClassName = twMerge('relative input input-bordered input-md w-full shadow-md', className)
+  const content = (
+    <label className={finalClassName}>
+      {overlays.filter(({ location }) => location === 'left').map(({ overlay }) => overlay)}
 
-  return (
-    <div className='relative'>
-      <input className={newClassName} {...props} {...register} />
-      {overlays.map(({ overlay, overlayClassName, pointerEvents = false }, index) => (
-        <InputPlaceholder
-          key={index.toString()}
-          className={twMerge(
-            'absolute top-0 flex h-full w-fit items-center rounded-r',
-            overlayClassName,
-            clsx({ 'pointer-events-none': !pointerEvents }),
-          )}
-        >
-          {overlay}
-        </InputPlaceholder>
-      ))}
+      <input id={formKey} className='w-full' {...register} {...props} />
+
+      {overlays.filter(({ location }) => location === 'right').map(({ overlay }) => overlay)}
+    </label>
+  )
+
+  return title ? (
+    <div className='flex flex-col'>
+      <label htmlFor={formKey} className='label'>
+        <span className='label-text'>{title}</span>
+      </label>
+      {content}
     </div>
+  ) : (
+    content
   )
 }

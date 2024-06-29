@@ -36,7 +36,7 @@ describe('#AutoCompleteScreen', () => {
   })
 
   test('renders autocomplete component with an input field', async () => {
-    const test = renderWithUserEvents(
+    const test = await renderWithUserEvents(
       <TestComponent
         onSelectScreenSpy={spies.onSelectScreenSpy}
         setClearSearchHandlerSpy={spies.setClearSearchHandlerSpy}
@@ -49,7 +49,7 @@ describe('#AutoCompleteScreen', () => {
   })
 
   test('calls backend search api a limited time as the user enters a search term', async () => {
-    const test = renderWithUserEvents(
+    const test = await renderWithUserEvents(
       <TestComponent
         onSelectScreenSpy={spies.onSelectScreenSpy}
         setClearSearchHandlerSpy={spies.setClearSearchHandlerSpy}
@@ -69,7 +69,7 @@ describe('#AutoCompleteScreen', () => {
   })
 
   test('clears search results and requests a full list from search engine', async () => {
-    const test = renderWithUserEvents(
+    const test = await renderWithUserEvents(
       <TestComponent
         onSelectScreenSpy={spies.onSelectScreenSpy}
         setClearSearchHandlerSpy={spies.setClearSearchHandlerSpy}
