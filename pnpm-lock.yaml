@@ -60,8 +60,8 @@ importers:
         specifier: ^3.5.2
         version: 3.5.2
       yup:
-        specifier: ^1.3.3
-        version: 1.3.3
+        specifier: ^1.4.0
+        version: 1.4.0
     devDependencies:
       '@bgotink/playwright-coverage':
         specifier: ^0.2.2
@@ -7274,8 +7274,8 @@ packages:
     resolution: {integrity: sha512-9bnSc/HEW2uRy67wc+T8UwauLuPJVn28jb+GtJY16iiKWyvmYJRXVT4UamsAEGQfPohgr2q4Tq0sQbQlxTfi1g==}
     engines: {node: '>=12.20'}
 
-  yup@1.3.3:
-    resolution: {integrity: sha512-v8QwZSsHH2K3/G9WSkp6mZKO+hugKT1EmnMqLNUcfu51HU9MDyhlETT/JgtzprnrnQHPWsjc6MUDMBp/l9fNnw==}
+  yup@1.4.0:
+    resolution: {integrity: sha512-wPbgkJRCqIf+OHyiTBQoJiP5PFuAXaWiJK6AmYkzQAh5/c2K9hzSApBZG5wV9KoKSePF7sAxmNSvh/13YHkFDg==}
 
   zod@3.22.4:
     resolution: {integrity: sha512-iC+8Io04lddc+mVqQ9AZ7OQ2MrUKGN+oIQyq1vemgt46jwCwLfhq7/pwnBnNXXXZb8VTVLKwp9EDkx+ryxIWmg==}
@@ -15898,7 +15898,7 @@ snapshots:
 
   yocto-queue@1.0.0: {}
 
-  yup@1.3.3:
+  yup@1.4.0:
     dependencies:
       property-expr: 2.0.5
       tiny-case: 1.0.3
