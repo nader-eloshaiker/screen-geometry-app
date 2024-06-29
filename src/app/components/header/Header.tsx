@@ -93,7 +93,7 @@ export default function Header() {
   const [menuOpened, setMainMenu] = useState(false)
 
   return (
-    <header className='container mx-auto rounded-b-md bg-accent text-accent-content'>
+    <header className='container mx-auto rounded-b-md bg-accent text-accent-content shadow-md'>
       {/* small header */}
       <div className='flex w-full justify-between p-4 py-2 md:hidden' data-testid='small-header'>
         <motion.details

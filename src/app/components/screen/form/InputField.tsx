@@ -53,7 +53,7 @@ export const InputField = ({ formKey, title, overlay, isLoading = false, ...rest
           ? [
               {
                 overlay: (
-                  <span key='1' className='text-sm opacity-70'>
+                  <span key='1' className='fill-current text-sm opacity-70'>
                     {overlay}
                   </span>
                 ),
@@ -62,7 +62,7 @@ export const InputField = ({ formKey, title, overlay, isLoading = false, ...rest
             ]
           : []
       }
-      className={clsx('input-bordered input-primary shadow-md transition-all', {
+      className={clsx('input-bordered input-primary shadow-lg transition-all', {
         'input-error': errors[formKey],
         'skeleton bg-neutral-300 dark:bg-neutral-700 pointer-events-none rounded-lg': isLoading,
       })}

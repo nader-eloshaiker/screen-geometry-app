@@ -15,11 +15,10 @@
   body:before {
     @apply content-[''] fixed -z-10 w-full h-[600px] top-[-600px] bg-accent;
   }
-  
+
   html:before {
     @apply content-[''] fixed -z-10 w-full h-[600px] bottom-[-600px] bg-accent;
   }
-  
 
   body {
     scrollbar-gutter: stable;

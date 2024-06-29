@@ -47,7 +47,7 @@ export const ScreenPanel = ({ screen, highlighted = undefined, setHighLighted = 
     setConfig({
       width: Math.round(100 * (screen.render?.width ?? 1)),
       height: Math.round(100 * (screen.render?.height ?? 1)),
-      color: themeMode === DarkMode ? `${screen.color.lightColor}25` : `${screen.color.darkColor}25`,
+      color: themeMode === DarkMode ? `${screen.color.lightColor}35` : `${screen.color.darkColor}35`,
       vPixelCount: Math.round((screen.spec?.vRes ?? 1) / 100),
       hPixelCount: Math.round((screen.spec?.hRes ?? 1) / 100),
     })
@@ -68,7 +68,7 @@ export const ScreenPanel = ({ screen, highlighted = undefined, setHighLighted = 
       {...rest}
     >
       {selected && (
-        <table className='size-full border-separate border-spacing-px md:border-spacing-0.5 lg:border-spacing-1'>
+        <table className='size-full border-separate border-spacing-px md:border-spacing-0.5 lg:border-spacing-[0.28rem]'>
           <tbody>
             {Array.from({ length: config.vPixelCount }, (_, i) => (
               <tr key={i}>

@@ -10,19 +10,16 @@ export const ColorField = ({ formKey, title, mode, isLoading = false, className 
   const { register, getValues } = useFormContext()
   const color = getValues(formKey)
   return (
-    <div className={twMerge('form-control flex flex-col', className)}>
+    <div className={twMerge('form-control flex flex-col shadow-md', className)}>
       <label className='label label-text' htmlFor={formKey}>
         {`${title} Color`}
       </label>
       <div
-        className={clsx(
-          'input input-md input-bordered input-primary flex items-center justify-center text-sm shadow-md',
-          {
-            'text-black': mode === LightMode,
-            'text-white': mode === DarkMode,
-            'animate-pulse pointer-events-none': isLoading,
-          },
-        )}
+        className={clsx('input input-md input-bordered input-primary flex items-center justify-center text-sm', {
+          'text-black': mode === LightMode,
+          'text-white': mode === DarkMode,
+          'animate-pulse pointer-events-none': isLoading,
+        })}
         style={{ backgroundColor: color }}
       >
         {color}
