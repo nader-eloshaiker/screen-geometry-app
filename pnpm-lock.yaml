@@ -163,8 +163,8 @@ importers:
         specifier: ^8.2.2
         version: 8.2.2
       daisyui:
-        specifier: ^4.12.8
-        version: 4.12.8(postcss@8.4.38)
+        specifier: ^4.12.10
+        version: 4.12.10(postcss@8.4.38)
       eslint:
         specifier: ^8.57.0
         version: 8.57.0
@@ -3426,8 +3426,8 @@ packages:
     resolution: {integrity: sha512-YGZxdTTL9lmLkCUTpg4j0zQ7IhRB5ZmqNBbGCl3Tg6MP/d5/6sY7L5mmTjzbc6JKgVZYiqTQTNhPFsbXNGlRaA==}
     engines: {node: '>=0.8'}
 
-  daisyui@4.12.8:
-    resolution: {integrity: sha512-FDdh0z9BsWMI0VeUSwZy6rwp9frEuUgd83SCPOaCYV3iULPzcgTEQT3IlcAbMCrsriu2ziDYZfGOUwPYHkHrfw==}
+  daisyui@4.12.10:
+    resolution: {integrity: sha512-jp1RAuzbHhGdXmn957Z2XsTZStXGHzFfF0FgIOZj3Wv9sH7OZgLfXTRZNfKVYxltGUOBsG1kbWAdF5SrqjebvA==}
     engines: {node: '>=16.9.0'}
 
   data-uri-to-buffer@4.0.1:
@@ -11452,7 +11452,7 @@ snapshots:
       find-pkg: 0.1.2
       fs-exists-sync: 0.1.0
 
-  daisyui@4.12.8(postcss@8.4.38):
+  daisyui@4.12.10(postcss@8.4.38):
     dependencies:
       css-selector-tokenizer: 0.8.0
       culori: 3.3.0
@@ -14244,7 +14244,7 @@ snapshots:
   postcss@8.4.31:
     dependencies:
       nanoid: 3.3.7
-      picocolors: 1.0.0
+      picocolors: 1.0.1
       source-map-js: 1.2.0
 
   postcss@8.4.38:
