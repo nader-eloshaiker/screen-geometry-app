@@ -12,7 +12,6 @@ const menuVariants: Variants = {
     x: 0,
     transition: {
       when: 'beforeChildren',
-      staggerChildren: 0.1,
     },
   },
   closed: {
@@ -20,7 +19,6 @@ const menuVariants: Variants = {
     x: 0,
     transition: {
       when: 'afterChildren',
-      staggerChildren: 0.1,
     },
   },
 }
@@ -30,7 +28,6 @@ const menuItemVariants: Variants = {
     opacity: 1,
     y: 0,
     transition: {
-      when: 'beforeChildren',
       duration: 0.2,
     },
   },
@@ -38,7 +35,6 @@ const menuItemVariants: Variants = {
     opacity: 0,
     y: -15,
     transition: {
-      when: 'afterChildren',
       duration: 0.2,
     },
   },
