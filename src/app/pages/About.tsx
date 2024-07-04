@@ -42,7 +42,7 @@ export const About = () => {
             <label className='my-6 text-lg'>Demo</label>
             <img
               className='h-auto max-w-full rounded-md border border-base-300 object-scale-down shadow-lg'
-              src='./media/demo-lg.webp'
+              src='./media/demo.webp'
               width={384}
               height={431}
               alt='Demo Screen Capture'
