@@ -1,5 +1,5 @@
 import { AppRoutes } from '@app/routes/AppRoutes'
-import { render } from '@testing-library/react'
+import { act, render } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { createMemoryRouter } from 'react-router-dom'
 import { InteractComponent } from './RenderWithUserEvents'
@@ -12,12 +12,16 @@ export const renderWithRouter = (initialPath = '/') => {
     initialEntries: [initialPath],
   })
 
-  const comp: InteractComponent = {
-    user: userEvent.setup(),
-    ...render(<TestRoutingComponent router={router} />),
-  }
+  const a = act(() => {
+    const testRender = render(<TestRoutingComponent router={router} />)
+    const comp: InteractComponent = {
+      user: userEvent.setup(),
+      ...testRender,
+    }
+    return comp
+  })
 
-  return comp
+  return a
 }
 
 // export const renderWithRouter = (ui: ReactElement | RouteObject, routes: Array<RouteObject> = []) => {

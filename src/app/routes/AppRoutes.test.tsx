@@ -62,7 +62,6 @@ describe('#App', () => {
     expect(await test.findByText('Click here to populate default list')).toBeInTheDocument()
 
     const homeLink = await test.findAllByTestId('link-Home')
-
     await test.user.click(homeLink[0])
 
     expect(await test.findByText('Welcome to Screen Geometry')).toBeInTheDocument()

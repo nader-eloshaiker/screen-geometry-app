@@ -86,7 +86,7 @@ const Title = ({ size }: { size: 'sm' | 'lg' }) => (
 
 export default function Header() {
   const { pathname } = useLocation()
-  const [menuOpened, setMainMenu] = useState(false)
+  const [menuOpened, setMenuOpened] = useState(false)
 
   return (
     <header className='container mx-auto rounded-b-md bg-accent text-accent-content shadow-md'>
@@ -97,7 +97,7 @@ export default function Header() {
           className={clsx('dropdown dropdown-bottom', { 'dropdown-open': menuOpened })}
         >
           <summary tabIndex={0} className='btn btn-ghost p-0' role='button'>
-            <HamburgerMenu width={20} height={14} isOpen={menuOpened} onClick={() => setMainMenu(!menuOpened)} />
+            <HamburgerMenu width={20} height={14} isOpen={menuOpened} onClick={() => setMenuOpened(!menuOpened)} />
           </summary>
           <motion.ul
             tabIndex={0}
