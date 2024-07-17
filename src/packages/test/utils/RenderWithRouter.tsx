@@ -5,23 +5,23 @@ import { createMemoryRouter } from 'react-router-dom'
 import { InteractComponent } from './RenderWithUserEvents'
 import { TestRoutingComponent } from './TestRoutingComponent'
 
-export const renderWithRouter = (initialPath = '/') => {
+export const renderWithRouter = async (initialPath = '/') => {
   // window.history.pushState({}, 'About Page', routes[0] ?? '/')
 
   const router = createMemoryRouter([...AppRoutes], {
     initialEntries: [initialPath],
   })
 
-  const a = act(() => {
+  const test = await act(() => {
     const testRender = render(<TestRoutingComponent router={router} />)
-    const comp: InteractComponent = {
+    const testComponent: InteractComponent = {
       user: userEvent.setup(),
       ...testRender,
     }
-    return comp
+    return testComponent
   })
 
-  return a
+  return test
 }
 
 // export const renderWithRouter = (ui: ReactElement | RouteObject, routes: Array<RouteObject> = []) => {
