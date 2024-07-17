@@ -121,7 +121,7 @@ const ListInputField = ({
         className='input-bordered input-primary shadow-lg transition-all'
         value={inputValue}
         onChange={handleChange}
-        placeholder={isLoading ? 'Loading...' : placeholder ?? 'Type something...'}
+        placeholder={isLoading ? 'Loading...' : (placeholder ?? 'Type something...')}
         tabIndex={0}
         disabled={isLoading && disableOnLoading}
       />
