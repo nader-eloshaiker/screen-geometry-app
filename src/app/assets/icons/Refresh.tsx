@@ -5,7 +5,7 @@ type TProps = TRestProps & {
   toggleAnimation: boolean
 }
 
-export default function RefreshIcon({ toggleAnimation, ...rest }: TProps) {
+const RefreshIcon = ({ toggleAnimation, ...rest }: TProps) => {
   const [rotation, setRotation] = useState(0)
 
   useEffect(() => {
@@ -14,7 +14,15 @@ export default function RefreshIcon({ toggleAnimation, ...rest }: TProps) {
   }, [toggleAnimation])
 
   return (
-    <motion.svg key='refresh-icon' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512' {...rest}>
+    <motion.svg
+      key='refresh-icon'
+      xmlns='http://www.w3.org/2000/svg'
+      viewBox='0 0 512 512'
+      fill='currentColor'
+      stroke='currentColor'
+      {...rest}
+    >
+      <title>Refresh</title>
       <motion.path
         initial={{ rotate: 0 }}
         animate={{ rotate: rotation }}
@@ -29,3 +37,5 @@ export default function RefreshIcon({ toggleAnimation, ...rest }: TProps) {
     </motion.svg>
   )
 }
+
+export default RefreshIcon
