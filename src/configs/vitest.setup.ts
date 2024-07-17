@@ -1,3 +1,4 @@
+import { localStorageMock } from '@packages/test/mocks/localStorage'
 import '@testing-library/jest-dom'
 import '../index.css'
 
@@ -34,6 +35,11 @@ vi.mock('next/navigation', async () => {
 })
 
 global.window = Object.create(window)
+
+Object.defineProperty(window, 'localStorage', {
+  value: localStorageMock,
+})
+
 Object.defineProperty(window, 'location', {
   value: {
     href: 'https://www.example.com',

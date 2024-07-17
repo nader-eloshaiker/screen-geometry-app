@@ -1,5 +1,6 @@
 import { getScreenListServiceMock, getScreenServiceMock, getSearchServiceMock } from '@packages/openapi/generated'
 import { mswWithSpy, resetMSW, startMSW, stopMSW } from '@packages/serviceworker/NodeServiceWorker'
+import { resetLocalStorage } from '@packages/test/mocks/localStorage'
 import { renderWithRouter } from '@packages/test/utils/RenderWithRouter'
 import { useElementSizeMock } from '@packages/ui/hooks/useElementSize.mock'
 import { act } from '@testing-library/react'
@@ -23,6 +24,7 @@ describe('#App', () => {
 
   afterEach(() => {
     vi.clearAllMocks()
+    resetLocalStorage()
   })
 
   beforeAll(async () => {
