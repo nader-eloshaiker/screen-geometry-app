@@ -1,6 +1,5 @@
 import { getScreenListServiceMock, getScreenServiceMock, getSearchServiceMock } from '@packages/openapi/generated'
 import { mswWithSpy, resetMSW, startMSW, stopMSW } from '@packages/serviceworker/NodeServiceWorker'
-import { resetLocalStorage } from '@packages/test/mocks/localStorage'
 import { renderWithRouter } from '@packages/test/utils/RenderWithRouter'
 import { useElementSizeMock } from '@packages/ui/hooks/useElementSize.mock'
 import { act } from '@testing-library/react'
@@ -24,7 +23,6 @@ describe('#App', () => {
 
   afterEach(() => {
     vi.clearAllMocks()
-    resetLocalStorage()
   })
 
   beforeAll(async () => {
@@ -50,7 +48,9 @@ describe('#App', () => {
     const test = await renderWithRouter()
     const element = await test.findAllByTestId('link-Screens')
 
-    await test.user.click(element[0])
+    await act(async () => {
+      await test.user.click(element[0])
+    })
 
     expect(await test.findByText('Click here to populate default list')).toBeInTheDocument()
   })
@@ -64,7 +64,9 @@ describe('#App', () => {
     expect(await test.findByText('Click here to populate default list')).toBeInTheDocument()
 
     const homeLink = await test.findAllByTestId('link-Home')
-    await test.user.click(homeLink[0])
+    await act(async () => {
+      await test.user.click(homeLink[0])
+    })
 
     expect(await test.findByText('Welcome to Screen Geometry')).toBeInTheDocument()
   })

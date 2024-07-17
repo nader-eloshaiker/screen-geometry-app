@@ -1,4 +1,4 @@
-import { localStorageMock } from '@packages/test/mocks/localStorage'
+import { localStorageMock, resetLocalStorage } from '@packages/test/mocks/localStorage'
 import '@testing-library/jest-dom'
 import '../index.css'
 
@@ -48,4 +48,9 @@ Object.defineProperty(window, 'location', {
     reload: vi.fn(),
   },
   writable: true,
+})
+
+beforeEach(() => {
+  console.log('>>> beforeEach')
+  resetLocalStorage()
 })
