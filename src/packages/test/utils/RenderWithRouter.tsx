@@ -1,23 +1,27 @@
 import { AppRoutes } from '@app/routes/AppRoutes'
-import { render } from '@testing-library/react'
+import { act, render } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { createMemoryRouter } from 'react-router-dom'
 import { InteractComponent } from './RenderWithUserEvents'
 import { TestRoutingComponent } from './TestRoutingComponent'
 
-export const renderWithRouter = (initialPath = '/') => {
+export const renderWithRouter = async (initialPath = '/') => {
   // window.history.pushState({}, 'About Page', routes[0] ?? '/')
 
   const router = createMemoryRouter([...AppRoutes], {
     initialEntries: [initialPath],
   })
 
-  const comp: InteractComponent = {
-    user: userEvent.setup(),
-    ...render(<TestRoutingComponent router={router} />),
-  }
+  const test = await act(() => {
+    const testRender = render(<TestRoutingComponent router={router} />)
+    const testComponent: InteractComponent = {
+      user: userEvent.setup(),
+      ...testRender,
+    }
+    return testComponent
+  })
 
-  return comp
+  return test
 }
 
 // export const renderWithRouter = (ui: ReactElement | RouteObject, routes: Array<RouteObject> = []) => {

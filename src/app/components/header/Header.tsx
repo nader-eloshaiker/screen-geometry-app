@@ -12,7 +12,6 @@ const menuVariants: Variants = {
     x: 0,
     transition: {
       when: 'beforeChildren',
-      staggerChildren: 0.1,
     },
   },
   closed: {
@@ -20,7 +19,6 @@ const menuVariants: Variants = {
     x: 0,
     transition: {
       when: 'afterChildren',
-      staggerChildren: 0.1,
     },
   },
 }
@@ -30,7 +28,6 @@ const menuItemVariants: Variants = {
     opacity: 1,
     y: 0,
     transition: {
-      when: 'beforeChildren',
       duration: 0.2,
     },
   },
@@ -38,7 +35,6 @@ const menuItemVariants: Variants = {
     opacity: 0,
     y: -15,
     transition: {
-      when: 'afterChildren',
       duration: 0.2,
     },
   },
@@ -90,7 +86,7 @@ const Title = ({ size }: { size: 'sm' | 'lg' }) => (
 
 export default function Header() {
   const { pathname } = useLocation()
-  const [menuOpened, setMainMenu] = useState(false)
+  const [menuOpened, setMenuOpened] = useState(false)
 
   return (
     <header className='container mx-auto rounded-b-md bg-accent text-accent-content shadow-md'>
@@ -101,7 +97,7 @@ export default function Header() {
           className={clsx('dropdown dropdown-bottom', { 'dropdown-open': menuOpened })}
         >
           <summary tabIndex={0} className='btn btn-ghost p-0' role='button'>
-            <HamburgerMenu width={20} height={14} isOpen={menuOpened} onClick={() => setMainMenu(!menuOpened)} />
+            <HamburgerMenu width={20} height={14} isOpen={menuOpened} onClick={() => setMenuOpened(!menuOpened)} />
           </summary>
           <motion.ul
             tabIndex={0}

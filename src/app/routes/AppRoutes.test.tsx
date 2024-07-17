@@ -39,22 +39,24 @@ describe('#App', () => {
   })
 
   it('should render', async () => {
-    const test = renderWithRouter()
+    const test = await renderWithRouter()
 
     expect(await test.findByText('Welcome to Screen Geometry')).toBeInTheDocument()
   })
 
   it('should naviate to the screens page', async () => {
-    const test = renderWithRouter()
+    const test = await renderWithRouter()
     const element = await test.findAllByTestId('link-Screens')
 
-    await test.user.click(element[0])
+    await act(async () => {
+      await test.user.click(element[0])
+    })
 
     expect(await test.findByText('Click here to populate default list')).toBeInTheDocument()
   })
 
   it('should naviate back home page', async () => {
-    const test = renderWithRouter()
+    const test = await renderWithRouter()
     const screenLink = await test.findAllByTestId('link-Screens')
 
     await test.user.click(screenLink[0])
@@ -62,14 +64,15 @@ describe('#App', () => {
     expect(await test.findByText('Click here to populate default list')).toBeInTheDocument()
 
     const homeLink = await test.findAllByTestId('link-Home')
-
-    await test.user.click(homeLink[0])
+    await act(async () => {
+      await test.user.click(homeLink[0])
+    })
 
     expect(await test.findByText('Welcome to Screen Geometry')).toBeInTheDocument()
   })
 
   it('should naviate to the contact page', async () => {
-    const test = renderWithRouter()
+    const test = await renderWithRouter()
     const element = await test.findAllByTestId('link-Contact')
 
     await act(async () => {
@@ -80,7 +83,7 @@ describe('#App', () => {
   })
 
   it('should naviate to the help page', async () => {
-    const test = renderWithRouter()
+    const test = await renderWithRouter()
     const element = await test.findAllByTestId('link-Help')
 
     await act(async () => {

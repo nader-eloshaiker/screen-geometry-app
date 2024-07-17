@@ -1,6 +1,5 @@
 import { RouteSchema } from '@app/routes/RouteSchema'
 import { Helmet } from 'react-helmet-async'
-import { LazyLoadImage } from 'react-lazy-load-image-component'
 import { useNavigate } from 'react-router-dom'
 
 export const About = () => {
@@ -40,14 +39,13 @@ export const About = () => {
             to start your journey into finding the right screen.
           </p>
           <div className='my-6 flex flex-col items-center'>
-            <label className='my-6 text-lg'>Checkout this Demo</label>
-            <LazyLoadImage
-              className='h-auto max-w-full rounded-md border-2 border-base-300 shadow-lg'
-              src='./media/demo-anim.webp'
-              placeholderSrc='./media/demo.webp'
-              width={508}
-              height={528}
-              alt='Demo Animation'
+            <label className='my-6 text-lg'>Demo</label>
+            <img
+              className='h-auto max-w-full rounded-md border border-base-300 object-scale-down shadow-lg'
+              src='./media/demo.webp'
+              width={384}
+              height={431}
+              alt='Demo Screen Capture'
             />
           </div>
           <p className='mb-4'>
