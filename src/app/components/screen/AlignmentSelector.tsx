@@ -4,8 +4,9 @@ import AlignLeftIcon from '@app/assets/icons/AlignLeft'
 import AlignRightIcon from '@app/assets/icons/AlignRight'
 import AlignTopIcon from '@app/assets/icons/AlignTop'
 import AlignVertCenterIcon from '@app/assets/icons/AlignVertCenter'
+import useLocalStorage from '@app/hooks/useLocalStorage'
 import clsx from 'clsx'
-import { ComponentType, SVGProps, useEffect, useState } from 'react'
+import { ComponentType, SVGProps, useEffect } from 'react'
 
 export type Alignment = 'start' | 'center' | 'end'
 
@@ -33,21 +34,11 @@ const AlignmentSelector = ({
   CenterIcon,
   EndIcon,
 }: AlignmentSelectorProps) => {
-  const [alignment, setAlignment] = useState<Alignment>()
+  const [alignment, setAlignment] = useLocalStorage<Alignment>(storageKey, defaultValue)
 
   useEffect(() => {
-    const value = (window.localStorage.getItem(storageKey) as Alignment) ?? defaultValue
-    setAlignment(value)
-    onChange(value)
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
-
-  useEffect(() => {
-    if (!alignment) return
-
-    window.localStorage.setItem(storageKey, alignment)
     onChange(alignment)
-  }, [alignment, storageKey, onChange])
+  }, [alignment, onChange])
 
   return (
     <div className='join'>
@@ -55,19 +46,19 @@ const AlignmentSelector = ({
         className={clsx('btn btn-primary join-item ', { 'btn-outline': alignment !== 'start' })}
         onClick={() => setAlignment('start')}
       >
-        <StartIcon className='size-6' fill='currentColor' />
+        <StartIcon className='size-5' fill='currentColor' />
       </button>
       <button
         className={clsx('btn btn-primary join-item', { 'btn-outline': alignment !== 'center' })}
         onClick={() => setAlignment('center')}
       >
-        <CenterIcon className='size-6' fill='currentColor' />
+        <CenterIcon className='size-5' fill='currentColor' />
       </button>
       <button
         className={clsx('btn btn-primary join-item', { 'btn-outline': alignment !== 'end' })}
         onClick={() => setAlignment('end')}
       >
-        <EndIcon className='size-6' fill='currentColor' />
+        <EndIcon className='size-5' fill='currentColor' />
       </button>
     </div>
   )

@@ -1,4 +1,4 @@
-import { DarkMode } from '@app/components/theme/ThemeConstants'
+import { DarkMode } from '@app/components/theme/ThemeManager'
 import { useThemeMode } from '@app/hooks/useThemeMode'
 import { ScreenItem } from '@packages/openapi/generated'
 import { clsx } from 'clsx'

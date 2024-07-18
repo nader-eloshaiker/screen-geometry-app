@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction, useState } from 'react'
+import { Dispatch, SetStateAction, useEffect, useState } from 'react'
 
 const getLocalStorage = <T>(key: string, initialValue: T): T => {
   try {
@@ -16,19 +16,15 @@ const getLocalStorage = <T>(key: string, initialValue: T): T => {
 const useLocalStorage = <T>(key: string, initialValue: T) => {
   const [state, setState] = useState(() => getLocalStorage<T>(key, initialValue))
 
-  const setValue = (value: T) => {
+  useEffect(() => {
     try {
-      // If the passed value is a callback function,
-      //  then call it with the existing state.
-      const valueToStore = value instanceof Function ? value(state) : value
-      window.localStorage.setItem(key, JSON.stringify(valueToStore))
-      setState(value)
+      window.localStorage.setItem(key, JSON.stringify(state))
     } catch (error) {
       console.log(error)
     }
-  }
+  }, [key, state])
 
-  return [state, setValue] as [T, Dispatch<SetStateAction<T>>]
+  return [state, setState] as [T, Dispatch<SetStateAction<T>>]
 }
 
 export default useLocalStorage

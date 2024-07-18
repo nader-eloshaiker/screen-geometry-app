@@ -2,7 +2,7 @@ import MoonIcon from '@app/assets/icons/Moon'
 import SunIcon from '@app/assets/icons/Sun'
 import { useThemeMode } from '@app/hooks/useThemeMode'
 import { twMerge } from 'tailwind-merge'
-import { DarkMode, LightMode } from './ThemeConstants'
+import { DarkMode, LightMode } from './ThemeManager'
 
 type TProps = TRestProps & { className?: string; id: string }
 
