@@ -2,7 +2,7 @@ import { getScreenListServiceMock, getScreenServiceMock, getSearchServiceMock } 
 import { mswWithSpy, resetMSW, startMSW, stopMSW } from '@packages/serviceworker/NodeServiceWorker'
 import { renderWithRouter } from '@packages/test/utils/RenderWithRouter'
 import { useElementSizeMock } from '@packages/ui/hooks/useElementSize.mock'
-import { act } from '@testing-library/react'
+import { act, waitFor } from '@testing-library/react'
 import { HttpResponse, delay, http } from 'msw'
 
 describe('#App', () => {
@@ -52,7 +52,7 @@ describe('#App', () => {
       await test.user.click(element[0])
     })
 
-    expect(await test.findByText('Click here to populate default list')).toBeInTheDocument()
+    await waitFor(() => expect(test.queryByText('Click here to populate default list')).toBeInTheDocument())
   })
 
   it('should naviate back home page', async () => {
@@ -63,14 +63,14 @@ describe('#App', () => {
       await test.user.click(screenLink[0])
     })
 
-    expect(await test.findByText('Click here to populate default list')).toBeInTheDocument()
+    await waitFor(() => expect(test.queryByText('Click here to populate default list')).toBeInTheDocument())
 
     const homeLink = await test.findAllByTestId('link-Home')
     await act(async () => {
       await test.user.click(homeLink[0])
     })
 
-    expect(await test.findByText('Welcome to Screen Geometry')).toBeInTheDocument()
+    await waitFor(() => expect(test.queryByText('Welcome to Screen Geometry')).toBeInTheDocument())
   })
 
   it('should naviate to the contact page', async () => {
@@ -81,7 +81,7 @@ describe('#App', () => {
       await test.user.click(element[0])
     })
 
-    expect(await test.findByText('How to engage with me or this app')).toBeInTheDocument()
+    await waitFor(() => expect(test.queryByText('How to engage with me or this app')).toBeInTheDocument())
   })
 
   it('should naviate to the help page', async () => {
@@ -92,6 +92,6 @@ describe('#App', () => {
       await test.user.click(element[0])
     })
 
-    // expect(await test.findByText('Getting started')).toBeInTheDocument()
+    await waitFor(() => expect(test.queryByText('Getting started')).toBeInTheDocument())
   })
 })
