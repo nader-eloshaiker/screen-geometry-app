@@ -34,10 +34,12 @@ vi.mock('next/navigation', async () => {
   }
 })
 
+export const viLocalStorage = localStorageMock()
+
 global.window = Object.create(window)
 
 Object.defineProperty(window, 'localStorage', {
-  value: localStorageMock,
+  value: viLocalStorage,
 })
 
 Object.defineProperty(window, 'location', {
@@ -48,8 +50,4 @@ Object.defineProperty(window, 'location', {
     reload: vi.fn(),
   },
   writable: true,
-})
-
-beforeEach(() => {
-  localStorageMock.clear()
 })

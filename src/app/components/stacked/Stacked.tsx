@@ -1,12 +1,12 @@
 import styled from 'styled-components'
-import { Alignment, HAlignDefault, VAlignDefault } from '../screen/AlignmentSelector'
+import { Alignment, HAlignDefault } from '../screen/AlignmentSelector'
 
 export const Stacked = styled.div<{ height: number; $hAlign?: Alignment; $vAlign?: Alignment }>`
   padding: 0.5rem;
   display: inline-grid;
   justify-items: ${({ $hAlign }) => $hAlign ?? HAlignDefault};
   align-items: ${({ $vAlign }) => {
-    switch ($vAlign ?? VAlignDefault) {
+    switch ($vAlign) {
       case 'start':
         return 'flex-start'
       case 'end':

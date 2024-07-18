@@ -18,88 +18,6 @@ type TProps = {
   onChange: (alignment: Alignment) => void
 }
 
-export const HorizontalAlignmentSelector = ({ onChange }: TProps) => {
-  const [alignment, setAlignment] = useState<Alignment>()
-
-  useEffect(() => {
-    const value = (window.localStorage.getItem(HAlignKey) as Alignment) ?? HAlignDefault
-    setAlignment(value)
-    onChange(value)
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
-
-  useEffect(() => {
-    if (!alignment) return
-
-    window.localStorage.setItem(HAlignKey, alignment)
-    onChange(alignment)
-  }, [alignment, onChange])
-
-  return (
-    <div className='join'>
-      <button
-        className={clsx('btn btn-primary join-item ', { 'btn-outline': alignment !== 'start' })}
-        onClick={() => setAlignment('start')}
-      >
-        <AlignLeftIcon className='size-6' fill='currentColor' />
-      </button>
-      <button
-        className={clsx('btn btn-primary join-item', { 'btn-outline': alignment !== 'center' })}
-        onClick={() => setAlignment('center')}
-      >
-        <AlignHorizCenterIcon className='size-6' fill='currentColor' />
-      </button>
-      <button
-        className={clsx('btn btn-primary join-item', { 'btn-outline': alignment !== 'end' })}
-        onClick={() => setAlignment('end')}
-      >
-        <AlignRightIcon className='size-6' fill='currentColor' />
-      </button>
-    </div>
-  )
-}
-
-export const VerticalAlignmentSelectorOld = ({ onChange }: TProps) => {
-  const [alignment, setAlignment] = useState<Alignment>()
-
-  useEffect(() => {
-    const value = (window.localStorage.getItem(VAlignKey) as Alignment) ?? VAlignDefault
-    setAlignment(value)
-    onChange(value)
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
-
-  useEffect(() => {
-    if (!alignment) return
-
-    window.localStorage.setItem(VAlignKey, alignment)
-    onChange(alignment)
-  }, [alignment, onChange])
-
-  return (
-    <div className='join'>
-      <button
-        className={clsx('btn btn-primary join-item ', { 'btn-outline': alignment !== 'start' })}
-        onClick={() => setAlignment('start')}
-      >
-        <AlignTopIcon className='size-6' fill='currentColor' />
-      </button>
-      <button
-        className={clsx('btn btn-primary join-item', { 'btn-outline': alignment !== 'center' })}
-        onClick={() => setAlignment('center')}
-      >
-        <AlignVertCenterIcon className='size-6' fill='currentColor' />
-      </button>
-      <button
-        className={clsx('btn btn-primary join-item', { 'btn-outline': alignment !== 'end' })}
-        onClick={() => setAlignment('end')}
-      >
-        <AlignBottomIcon className='size-6' fill='currentColor' />
-      </button>
-    </div>
-  )
-}
-
 type AlignmentSelectorProps = TProps & {
   storageKey: string
   defaultValue: Alignment
@@ -164,6 +82,19 @@ export const VerticalAlignmentSelector = ({ onChange }: TProps) => {
       StartIcon={AlignTopIcon}
       CenterIcon={AlignVertCenterIcon}
       EndIcon={AlignBottomIcon}
+    />
+  )
+}
+
+export const HorizontalAlignmentSelector = ({ onChange }: TProps) => {
+  return (
+    <AlignmentSelector
+      storageKey={HAlignKey}
+      defaultValue={HAlignDefault}
+      onChange={onChange}
+      StartIcon={AlignLeftIcon}
+      CenterIcon={AlignHorizCenterIcon}
+      EndIcon={AlignRightIcon}
     />
   )
 }
