@@ -96,6 +96,9 @@ describe('#ScreenForm', () => {
       const inputScreenSize = await test.findByLabelText('Screen Size')
       await act(async () => {
         await test.user.clear(inputScreenSize)
+      })
+
+      await act(async () => {
         await test.user.type(inputScreenSize, '27')
       })
 
@@ -212,6 +215,8 @@ describe('#ScreenForm', () => {
       const inputScreenSize = await test.findByLabelText('Screen Size')
       await act(async () => {
         await test.user.clear(inputScreenSize)
+      })
+      await act(async () => {
         await test.user.type(inputScreenSize, '38')
       })
 

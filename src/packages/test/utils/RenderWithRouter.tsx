@@ -1,8 +1,7 @@
 import { AppRoutes } from '@app/routes/AppRoutes'
-import { act, render } from '@testing-library/react'
+import { render, waitFor } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { createMemoryRouter } from 'react-router-dom'
-import { InteractComponent } from './RenderWithUserEvents'
 import { TestRoutingComponent } from './TestRoutingComponent'
 
 export const renderWithRouter = async (initialPath = '/') => {
@@ -12,16 +11,12 @@ export const renderWithRouter = async (initialPath = '/') => {
     initialEntries: [initialPath],
   })
 
-  const test = await act(() => {
-    const testRender = render(<TestRoutingComponent router={router} />)
-    const testComponent: InteractComponent = {
-      user: userEvent.setup(),
-      ...testRender,
-    }
-    return testComponent
-  })
+  const testComponent = await waitFor(() => render(<TestRoutingComponent router={router} />))
 
-  return test
+  return {
+    user: userEvent.setup(),
+    ...testComponent,
+  }
 }
 
 // export const renderWithRouter = (ui: ReactElement | RouteObject, routes: Array<RouteObject> = []) => {
