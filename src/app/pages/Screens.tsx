@@ -94,7 +94,7 @@ export const Screens = () => {
             <>
               <div className='flex flex-col items-center gap-4 md:flex-row md:justify-between'>
                 <div className='label text-xl'>Size and Pixel Density Comparison</div>
-                <div className='flex gap-4'>
+                <div className='flex flex-wrap gap-4'>
                   <HorizontalAlignmentSelector onChange={setHAlignment} />
                   <VerticalAlignmentSelector onChange={setVAlignment} />
                 </div>
