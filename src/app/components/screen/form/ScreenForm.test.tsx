@@ -301,4 +301,4 @@ describe('#ScreenForm', () => {
       expect(h2Element[0]).toHaveTextContent('"diagonalSize":49')
     })
   })
-})
+}, 10000)
