@@ -1,4 +1,4 @@
-import { localStorageMock } from '@packages/test/mocks/localStorage'
+import MatchMediaMock from '@packages/test/mocks/mockMatchMedia'
 import '@testing-library/jest-dom'
 import '../index.css'
 
@@ -34,13 +34,7 @@ vi.mock('next/navigation', async () => {
   }
 })
 
-export const viLocalStorage = localStorageMock()
-
 global.window = Object.create(window)
-
-Object.defineProperty(window, 'localStorage', {
-  value: viLocalStorage,
-})
 
 Object.defineProperty(window, 'location', {
   value: {
@@ -50,4 +44,18 @@ Object.defineProperty(window, 'location', {
     reload: vi.fn(),
   },
   writable: true,
+})
+
+const matchMediaMock = new MatchMediaMock()
+
+beforeAll(() => {
+  matchMediaMock.useMediaQuery('(prefers-color-scheme: dark)')
+})
+
+afterEach(() => {
+  matchMediaMock.clear()
+})
+
+afterAll(() => {
+  matchMediaMock.destroy()
 })

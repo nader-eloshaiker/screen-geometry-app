@@ -14,7 +14,6 @@ const VitestUserConfig: VitestUserConfigInterface = {
     // },
     globals: true,
     clearMocks: true,
-    mockReset: true,
     reporters: process.env.GITHUB_ACTIONS ? ['verbose', 'github-actions'] : ['verbose'],
     coverage: {
       provider: 'istanbul', //'v8',
@@ -43,7 +42,7 @@ const VitestUserConfig: VitestUserConfigInterface = {
       },
     },
     environment: 'jsdom',
-    setupFiles: 'src/configs/vitest.setup.ts',
+    setupFiles: ['src/configs/vitest.setup.ts', 'vitest-localstorage-mock'],
     include: ['src/**/*.test.{ts,tsx}'],
   },
 }

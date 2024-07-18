@@ -7,7 +7,6 @@ describe('#AlignmentSelector', () => {
 
   beforeEach(() => {
     onChangeMock.mockClear()
-    window.localStorage.reset()
   })
 
   describe('VerticalAlignmentSelector', () => {
