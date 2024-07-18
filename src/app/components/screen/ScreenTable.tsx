@@ -1,6 +1,6 @@
 import CloseIcon from '@app/assets/icons/Close'
 import EditIcon from '@app/assets/icons/Edit'
-import { DarkMode, TThemeMode } from '@app/components/theme/ThemeConstants'
+import { DarkMode, TThemeMode } from '@app/components/theme/ThemeManager'
 import { FormDrawerActionTypes } from '@app/contexts/FormDrawer/FormDrawerManager'
 import { useFormDrawerContext } from '@app/contexts/FormDrawer/useFormDrawerContext'
 import { useDeleteScreenApi } from '@app/hooks/api/helpers/useDeleteScreenApi'
