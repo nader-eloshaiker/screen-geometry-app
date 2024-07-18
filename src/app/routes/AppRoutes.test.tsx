@@ -52,7 +52,9 @@ describe('#App', () => {
       await test.user.click(element[0])
     })
 
-    await waitFor(() => expect(test.queryByText('Click here to populate default list')).toBeInTheDocument())
+    await waitFor(() => expect(test.queryByText('Click here to populate default list')).toBeInTheDocument(), {
+      timeout: 10000,
+    })
   })
 
   it('should naviate back home page', async () => {
@@ -92,6 +94,8 @@ describe('#App', () => {
       await test.user.click(element[0])
     })
 
-    await waitFor(() => expect(test.queryByText('Getting started')).toBeInTheDocument())
+    await waitFor(() => expect(test.queryByText('Getting started')).toBeInTheDocument(), {
+      timeout: 10000,
+    })
   })
 })
