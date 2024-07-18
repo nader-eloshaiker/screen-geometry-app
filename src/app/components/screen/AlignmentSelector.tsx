@@ -46,19 +46,19 @@ const AlignmentSelector = ({
         className={clsx('btn btn-primary join-item ', { 'btn-outline': alignment !== 'start' })}
         onClick={() => setAlignment('start')}
       >
-        <StartIcon className='size-6' fill='currentColor' />
+        <StartIcon className='size-5' fill='currentColor' />
       </button>
       <button
         className={clsx('btn btn-primary join-item', { 'btn-outline': alignment !== 'center' })}
         onClick={() => setAlignment('center')}
       >
-        <CenterIcon className='size-6' fill='currentColor' />
+        <CenterIcon className='size-5' fill='currentColor' />
       </button>
       <button
         className={clsx('btn btn-primary join-item', { 'btn-outline': alignment !== 'end' })}
         onClick={() => setAlignment('end')}
       >
-        <EndIcon className='size-6' fill='currentColor' />
+        <EndIcon className='size-5' fill='currentColor' />
       </button>
     </div>
   )
