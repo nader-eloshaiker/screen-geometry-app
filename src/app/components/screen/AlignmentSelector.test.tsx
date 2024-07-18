@@ -28,21 +28,21 @@ describe('#AlignmentSelector', () => {
       })
 
       expect(onChangeMock).toHaveBeenCalledWith('start')
-      expect(window.localStorage.setItem).toHaveBeenCalledWith(VAlignKey, 'start')
+      expect(window.localStorage.setItem).toHaveBeenCalledWith(VAlignKey, '"start"')
 
       await act(async () => {
         await user.click(elements[1])
       })
 
       expect(onChangeMock).toHaveBeenCalledWith('center')
-      expect(window.localStorage.setItem).toHaveBeenCalledWith(VAlignKey, 'center')
+      expect(window.localStorage.setItem).toHaveBeenCalledWith(VAlignKey, '"center"')
 
       await act(async () => {
         await user.click(elements[2])
       })
 
       expect(onChangeMock).toHaveBeenCalledWith('end')
-      expect(window.localStorage.setItem).toHaveBeenCalledWith(VAlignKey, 'end')
+      expect(window.localStorage.setItem).toHaveBeenCalledWith(VAlignKey, '"end"')
     })
   })
 
@@ -64,21 +64,21 @@ describe('#AlignmentSelector', () => {
       })
 
       expect(onChangeMock).toHaveBeenCalledWith('start')
-      expect(window.localStorage.setItem).toHaveBeenCalledWith(HAlignKey, 'start')
+      expect(window.localStorage.setItem).toHaveBeenCalledWith(HAlignKey, '"start"')
 
       await act(async () => {
         await user.click(elements[1])
       })
 
       expect(onChangeMock).toHaveBeenCalledWith('center')
-      expect(window.localStorage.setItem).toHaveBeenCalledWith(HAlignKey, 'center')
+      expect(window.localStorage.setItem).toHaveBeenCalledWith(HAlignKey, '"center"')
 
       await act(async () => {
         await user.click(elements[2])
       })
 
       expect(onChangeMock).toHaveBeenCalledWith('end')
-      expect(window.localStorage.setItem).toHaveBeenCalledWith(HAlignKey, 'end')
+      expect(window.localStorage.setItem).toHaveBeenCalledWith(HAlignKey, '"end"')
     })
   })
 })
