@@ -1,3 +1,8 @@
+import {
+  Alignment,
+  HorizontalAlignmentSelector,
+  VerticalAlignmentSelector,
+} from '@app/components/screen/AlignmentSelector'
 import { CreateScreenButton } from '@app/components/screen/CreateButton'
 import { ScreenFormDrawer } from '@app/components/screen/ScreenFormDrawer'
 import { ScreenPanel } from '@app/components/screen/ScreenPanel'
@@ -26,6 +31,8 @@ export const Screens = () => {
   } = useScreenContext()
   const [highlighted, setHighlighted] = useState<ScreenItem | undefined>()
   const [maxPanelSize, setMaxPanelSize] = useState<Dimensions>({ width, height: 0 })
+  const [hAlignment, setHAlignment] = useState<Alignment>('center')
+  const [vAlignment, setVAlignment] = useState<Alignment>('end')
 
   const { isFetching: isScreenListLoading } = useGetScreensListApi()
   const { isPending: isCreateListLoading, mutate: createListAction } = useCreateScreenListApi()
@@ -52,12 +59,10 @@ export const Screens = () => {
           <meta name='description' content='Visually compare screen sizes and resolutions' />
         </Helmet>
 
-        <div className='flex flex-1 flex-col'>
-          <div className='flex w-full flex-row-reverse'>
+        <div className='flex flex-1 flex-col gap-10'>
+          <div className='flex flex-col items-center gap-4 md:flex-row md:justify-between' ref={divSizeRef}>
+            <div className='label text-xl'>Screen Specs</div>
             <CreateScreenButton />
-          </div>
-          <div className='label text-xl' ref={divSizeRef}>
-            Screen Specs
           </div>
           <ScreenTable
             screens={screens}
@@ -87,8 +92,14 @@ export const Screens = () => {
           )}
           {(screens.length > 0 || isScreenListLoading) && (
             <>
-              <div className='label py-6 text-xl'>Size and Pixel Density Comparison</div>
-              <Stacked height={maxPanelSize.height}>
+              <div className='flex flex-col items-center gap-4 md:flex-row md:justify-between'>
+                <div className='label text-xl'>Size and Pixel Density Comparison</div>
+                <div className='flex flex-wrap gap-4'>
+                  <HorizontalAlignmentSelector onChange={setHAlignment} />
+                  <VerticalAlignmentSelector onChange={setVAlignment} />
+                </div>
+              </div>
+              <Stacked height={maxPanelSize.height} $hAlign={hAlignment} $vAlign={vAlignment}>
                 {screens.length === 0 && isScreenListLoading ? (
                   <SkeletonImage
                     data-testid='SkeletonImage'

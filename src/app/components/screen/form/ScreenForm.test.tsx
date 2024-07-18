@@ -96,6 +96,9 @@ describe('#ScreenForm', () => {
       const inputScreenSize = await test.findByLabelText('Screen Size')
       await act(async () => {
         await test.user.clear(inputScreenSize)
+      })
+
+      await act(async () => {
         await test.user.type(inputScreenSize, '27')
       })
 
@@ -212,6 +215,8 @@ describe('#ScreenForm', () => {
       const inputScreenSize = await test.findByLabelText('Screen Size')
       await act(async () => {
         await test.user.clear(inputScreenSize)
+      })
+      await act(async () => {
         await test.user.type(inputScreenSize, '38')
       })
 
@@ -268,9 +273,9 @@ describe('#ScreenForm', () => {
       expect(await test.findByLabelText('Light Color')).toBeInTheDocument()
       expect(await test.findByLabelText('Dark Color')).toBeInTheDocument()
 
-      expect(await test.findByText('Create')).toBeEnabled()
-      expect(await test.findByText('Reset')).toBeEnabled()
-      expect(await test.findByText('Close')).toBeEnabled()
+      expect(await test.findByRole('button', { name: 'Create' })).toBeEnabled()
+      expect(await test.findByRole('button', { name: 'Reset' })).toBeEnabled()
+      expect(await test.findByRole('button', { name: 'Close' })).toBeEnabled()
     })
 
     test('create a screen from list and populate form', async () => {

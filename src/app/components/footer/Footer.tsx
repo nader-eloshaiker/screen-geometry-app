@@ -14,7 +14,7 @@ export default function Footer() {
         <div className='flex flex-row-reverse items-center gap-2 md:flex-row'>
           <span>Version {longVer}</span>
           <a href='https://github.com/nader-eloshaiker/screen-geometry-app'>
-            <GithubIcon className='size-6 fill-current' alt='github' />
+            <GithubIcon className='size-6 fill-current' />
           </a>
         </div>
       </div>

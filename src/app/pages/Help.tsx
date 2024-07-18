@@ -98,7 +98,7 @@ export const Help = () => {
                     <ScreenPanel
                       key={screen.id}
                       screen={screen}
-                      isHighlighted={(screen: ScreenItem) => screen.id === smallList[0].id}
+                      $isHighlighted={(screen: ScreenItem) => screen.id === smallList[0].id}
                     />
                   ))}
               </Stacked>
