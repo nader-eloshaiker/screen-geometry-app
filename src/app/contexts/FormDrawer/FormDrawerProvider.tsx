@@ -4,7 +4,7 @@ import { FormDrawerState, formDrawerReducer, initialFormDrawerState } from './Fo
 
 export const FormDrawerProvider = ({ children, initialise }: TReactChildren & { initialise?: FormDrawerState }) => {
   const [formDrawerState, dispatchFormDrawer] = useReducer(formDrawerReducer, initialise ?? initialFormDrawerState)
-  const contextValue = useMemo(() => ({ formDrawerState, dispatchFormDrawer }), [formDrawerState, dispatchFormDrawer])
+  const contextValue = useMemo(() => ({ formDrawerState, dispatchFormDrawer }), [formDrawerState])
 
   return <FormDrawerContext.Provider value={contextValue}>{children}</FormDrawerContext.Provider>
 }
