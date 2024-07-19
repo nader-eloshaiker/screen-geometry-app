@@ -1,5 +1,5 @@
 import { DarkMode } from '@app/components/theme/ThemeManager'
-import { useThemeMode } from '@app/hooks/useThemeMode'
+import { useThemeModeContext } from '@app/contexts/theme/useThemeModeContext'
 import { ScreenItem } from '@packages/openapi/generated'
 import { clsx } from 'clsx'
 import { Dispatch, SetStateAction, useEffect, useState } from 'react'
@@ -37,7 +37,7 @@ export const ScreenPanel = ({ screen, highlighted = undefined, setHighLighted = 
     vPixelCount: 0,
     hPixelCount: 0,
   })
-  const [themeMode] = useThemeMode()
+  const [themeMode] = useThemeModeContext()
 
   useEffect(() => {
     setSelected(screen.id === highlighted?.id)

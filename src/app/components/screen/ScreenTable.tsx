@@ -3,9 +3,9 @@ import EditIcon from '@app/assets/icons/Edit'
 import { DarkMode, TThemeMode } from '@app/components/theme/ThemeManager'
 import { FormDrawerActionTypes } from '@app/contexts/FormDrawer/FormDrawerManager'
 import { useFormDrawerContext } from '@app/contexts/FormDrawer/useFormDrawerContext'
+import { useThemeModeContext } from '@app/contexts/theme/useThemeModeContext'
 import { useDeleteScreenApi } from '@app/hooks/api/helpers/useDeleteScreenApi'
 import { useShowScreenApi } from '@app/hooks/api/helpers/useShowScreenApi'
-import { useThemeMode } from '@app/hooks/useThemeMode'
 import { ScreenColor, ScreenItem } from '@packages/openapi/generated'
 import { SkeletonRect } from '@packages/ui/skeleton/SkeletonRect'
 import { getRandomString } from '@packages/utils/RandomGenerator'
@@ -77,7 +77,7 @@ export const ScreenTable = ({
   const { isPending: isDeletePending, mutate: deleteAction, variables: deleteParams } = useDeleteScreenApi()
   const { isPending: isShowPending, mutate: showAction, variables: showParams } = useShowScreenApi()
   const { dispatchFormDrawer } = useFormDrawerContext()
-  const [themeMode] = useThemeMode()
+  const [themeMode] = useThemeModeContext()
 
   const onShow = (screen: ScreenItem) => {
     ReactGA.event({

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { Dispatch, SetStateAction, useEffect, useState } from 'react'
 
 const getLocalStorage = <T>(key: string, initialValue: T): T => {
   try {
@@ -24,7 +24,7 @@ const useLocalStorage = <T>(key: string, initialValue: T) => {
     }
   }, [key, state])
 
-  return [state, setState] as const
+  return [state, setState] as [T, Dispatch<SetStateAction<T>>]
 }
 
 export default useLocalStorage
