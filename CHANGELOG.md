@@ -1,5 +1,14 @@
 # Changelog
 
+## [1.11.0](https://github.com/nader-eloshaiker/screen-geometry-app/compare/v1.10.0...v1.11.0) (2024-07-19)
+
+
+### Features
+
+* **ui:** Panel Align ([#450](https://github.com/nader-eloshaiker/screen-geometry-app/issues/450)) ([db0e660](https://github.com/nader-eloshaiker/screen-geometry-app/commit/db0e6601842f447d75b012ce57039dd2e00a48c3))
+* **ui:** Panel Align ([#451](https://github.com/nader-eloshaiker/screen-geometry-app/issues/451)) ([a3c39b1](https://github.com/nader-eloshaiker/screen-geometry-app/commit/a3c39b102a9c13b1ffcbdb668fcdab8bc1ed5bed))
+* **ui:** Panel Align ([#453](https://github.com/nader-eloshaiker/screen-geometry-app/issues/453)) ([de09ed2](https://github.com/nader-eloshaiker/screen-geometry-app/commit/de09ed27dcfb9465261fa3aef24a88fdb7732dff))
+
 ## [1.10.0](https://github.com/nader-eloshaiker/screen-geometry-app/compare/v1.9.0...v1.10.0) (2024-06-29)
 
 
