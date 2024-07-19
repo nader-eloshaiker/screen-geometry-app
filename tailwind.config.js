@@ -6,6 +6,21 @@ export default {
   mode: 'jit',
   content: ['./src/index.html', './src/**/*.{js,ts,jsx,tsx,html}'],
   theme: {
+    colors: {
+      ...defaultTheme.colors,
+      lightPrimary: 'rgb(from #0096d6 r g b / <alpha-value>)',
+      lightLightContent: 'rgb(from #d6f3ff r g b / <alpha-value>)',
+      LightSecondary: 'rgb(from #9933B3 r g b / <alpha-value>)',
+      lightSecondaryContent: 'rgb(from #FFE5FF r g b / <alpha-value>)',
+      lightAccent: 'rgb(from #7FD8FF r g b / <alpha-value>)',
+      lightAccentContent: 'rgb(from #005980 r g b / <alpha-value>)',
+      darkPrimary: 'rgb(from #7FD8FF r g b / <alpha-value>)',
+      darkPrimaryContent: 'rgb(from #005980 r g b / <alpha-value>)',
+      darkSecondary: 'rgb(from #CC66E6 r g b / <alpha-value>)',
+      darkSecondaryContent: 'rgb(from #660080 r g b / <alpha-value>)',
+      darkAccent: 'rgb(from #1A739A r g b / <alpha-value>)',
+      darkAccentContent: 'rgb(from #E5FFFF r g b / <alpha-value>)',
+    },
     extend: {
       screens: {
         xs: '425px',

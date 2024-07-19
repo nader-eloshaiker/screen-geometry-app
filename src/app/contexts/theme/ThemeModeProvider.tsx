@@ -6,7 +6,8 @@ import { ThemeModeContext } from './ThemeModeContext'
 export const ThemeModeProvider = ({ children, initialise }: TReactChildren & { initialise?: TThemeMode }) => {
   const systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? DarkMode : LightMode
 
-  const [theme, setTheme] = useLocalStorage<TThemeMode>(ThemeKey, initialise ?? systemTheme)
+  const contextValue = useLocalStorage<TThemeMode>(ThemeKey, initialise ?? systemTheme)
+  const [theme, setTheme] = contextValue
 
   useEffect(() => {
     const mq = window.matchMedia('(prefers-color-scheme: dark)')
@@ -16,7 +17,9 @@ export const ThemeModeProvider = ({ children, initialise }: TReactChildren & { i
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  attachThemeClass(theme)
+  useEffect(() => {
+    attachThemeClass(theme)
+  }, [theme])
 
-  return theme ? <ThemeModeContext.Provider value={[theme, setTheme]}>{children}</ThemeModeContext.Provider> : null
+  return theme ? <ThemeModeContext.Provider value={contextValue}>{children}</ThemeModeContext.Provider> : null
 }
