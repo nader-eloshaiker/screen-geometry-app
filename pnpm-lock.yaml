@@ -82,8 +82,8 @@ importers:
         specifier: ^8.1.6
         version: 8.1.6(@jest/globals@29.7.0)(jest@29.7.0(@types/node@20.14.9))(vitest@1.6.0(@types/node@20.14.9)(@vitest/ui@1.6.0)(jsdom@23.0.1))
       '@storybook/addon-themes':
-        specifier: ^8.1.6
-        version: 8.1.6
+        specifier: ^8.1.11
+        version: 8.1.11
       '@storybook/addon-viewport':
         specifier: ^8.1.6
         version: 8.1.6
@@ -2058,8 +2058,8 @@ packages:
   '@storybook/addon-outline@8.1.6':
     resolution: {integrity: sha512-YjH3L4kxln0fLF77oDGJ2KF1I0RNrBQ9FRtqZkGMUbplxwYU0BBrguSgVeGxTLN1q/69LmL6wjFP4nLzqZARhA==}
 
-  '@storybook/addon-themes@8.1.6':
-    resolution: {integrity: sha512-h0IwK1fIHBWBAfxWmbXoISutHWRSlQwXb7BGEAsnZ9oQ4xA0REjtpqM6o5IkDFYQtDw0YHUvmBzyHSphA9boww==}
+  '@storybook/addon-themes@8.1.11':
+    resolution: {integrity: sha512-tEOzNiLSAz0/kQKkqV85V7olkJpinCaKpxRpUQpFYut/yQVl+fUchgkfCKrQZuQuvSrebhMmQQ8fbqZq8nf2pw==}
 
   '@storybook/addon-toolbars@8.1.6':
     resolution: {integrity: sha512-d1GciLzD2ZRqh7+b8+JGuCdx8x/MAobhTy+jKeK79d+QKNtPhqZ1OvyUbwObgD6XLF8B/3DvyP3r52lmYMwlnQ==}
@@ -9486,7 +9486,7 @@ snapshots:
       '@storybook/global': 5.0.0
       ts-dedent: 2.2.0
 
-  '@storybook/addon-themes@8.1.6':
+  '@storybook/addon-themes@8.1.11':
     dependencies:
       ts-dedent: 2.2.0
 
