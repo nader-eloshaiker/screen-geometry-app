@@ -44,7 +44,7 @@
     "sb:build": "storybook build"
   },
   "dependencies": {
-    "@hookform/resolvers": "^3.3.4",
+    "@hookform/resolvers": "^3.9.0",
     "@react-hook/resize-observer": "^1.2.6",
     "@tanstack/react-query": "^5.28.9",
     "axios": "^1.6.8",
