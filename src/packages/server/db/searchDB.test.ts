@@ -1,4 +1,4 @@
-import { SearchDB } from './searchDB'
+import { SearchDB } from './SearchDB'
 
 describe('#search', () => {
   it('search should return a list of screens', async () => {

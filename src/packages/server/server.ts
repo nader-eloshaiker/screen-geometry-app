@@ -1,7 +1,12 @@
 import { ScreenInput, ScreenInputList } from '@packages/openapi/generated'
 import { apiRoutes } from '@packages/openapi/meta'
+import to from '@packages/utils/await-to-js'
 import { HttpHandler, HttpResponse, delay, http, passthrough } from 'msw'
 import {
+  IdResponse,
+  ScreenListResponse,
+  ScreenResponse,
+  SearchScreenListResponse,
   createScreen,
   createScreenList,
   deleteScreen,
@@ -10,7 +15,8 @@ import {
   getSearchList,
   showScreen,
   updateScreen,
-} from './api'
+} from './api/api'
+import { DatabaseError } from './db/DatabaseError'
 
 type TReturn = {
   screenListMocks: () => HttpHandler[]
@@ -28,27 +34,31 @@ export const generateStub = (baseUrl: string, responseTime?: number): TReturn =>
     http.get(`${baseUrl}${apiRoutes.screens}`, async () => {
       await delay(delayResponse)
 
-      const payload = await getScreenList()
+      const [err, payload] = await to<ScreenListResponse>(getScreenList())
 
-      return new HttpResponse(JSON.stringify(payload), {
-        status: 200,
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      })
+      return err
+        ? new HttpResponse(null, { status: err instanceof DatabaseError ? err.code : 500, statusText: err.message })
+        : new HttpResponse(JSON.stringify(payload), {
+            status: 200,
+            headers: {
+              'Content-Type': 'application/json',
+            },
+          })
     }),
     http.post(`${baseUrl}${apiRoutes.screens}`, async (resolver) => {
       await delay(delayResponse)
 
       const requestBody = await resolver.request.json()
-      const payload = await createScreenList(requestBody as ScreenInputList)
+      const [err, payload] = await to<ScreenListResponse>(createScreenList(requestBody as ScreenInputList))
 
-      return new HttpResponse(JSON.stringify(payload), {
-        status: 200,
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      })
+      return err
+        ? new HttpResponse(null, { status: err instanceof DatabaseError ? err.code : 500, statusText: err.message })
+        : new HttpResponse(JSON.stringify(payload), {
+            status: 200,
+            headers: {
+              'Content-Type': 'application/json',
+            },
+          })
     }),
   ]
 
@@ -57,41 +67,47 @@ export const generateStub = (baseUrl: string, responseTime?: number): TReturn =>
       await delay(delayResponse)
 
       const { id } = resolver.params as { id: string }
-      const payload = await getScreen(id)
+      const [err, payload] = await to<ScreenResponse>(getScreen(id))
 
-      return new HttpResponse(JSON.stringify(payload), {
-        status: 200,
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      })
+      return err
+        ? new HttpResponse(null, { status: err instanceof DatabaseError ? err.code : 500, statusText: err.message })
+        : new HttpResponse(JSON.stringify(payload), {
+            status: 200,
+            headers: {
+              'Content-Type': 'application/json',
+            },
+          })
     }),
     http.delete(`${baseUrl}${apiRoutes.screenId}`, async (resolver) => {
       await delay(delayResponse)
 
       const { id } = resolver.params as { id: string }
-      const payload = await deleteScreen(id)
+      const [err, payload] = await to<IdResponse>(deleteScreen(id))
 
-      return new HttpResponse(JSON.stringify(payload), {
-        status: 200,
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      })
+      return err
+        ? new HttpResponse(null, { status: err instanceof DatabaseError ? err.code : 500, statusText: err.message })
+        : new HttpResponse(JSON.stringify(payload), {
+            status: 200,
+            headers: {
+              'Content-Type': 'application/json',
+            },
+          })
     }),
     http.put(`${baseUrl}${apiRoutes.screenId}`, async (resolver) => {
       await delay(delayResponse)
 
       const { id } = resolver.params as { id: string }
       const requestBody = await resolver.request.json()
-      const payload = await updateScreen(id, requestBody as ScreenInput)
+      const [err, payload] = await to<ScreenResponse>(updateScreen(id, requestBody as ScreenInput))
 
-      return new HttpResponse(JSON.stringify(payload), {
-        status: 200,
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      })
+      return err
+        ? new HttpResponse(null, { status: err instanceof DatabaseError ? err.code : 500, statusText: err.message })
+        : new HttpResponse(JSON.stringify(payload), {
+            status: 200,
+            headers: {
+              'Content-Type': 'application/json',
+            },
+          })
     }),
     http.patch(`${baseUrl}${apiRoutes.screenIdShow}`, async (resolver) => {
       await delay(delayResponse)
@@ -110,14 +126,16 @@ export const generateStub = (baseUrl: string, responseTime?: number): TReturn =>
       await delay(delayResponse)
 
       const requestBody = await resolver.request.json()
-      const payload = await createScreen(requestBody as ScreenInput)
+      const [err, payload] = await to<ScreenResponse>(createScreen(requestBody as ScreenInput))
 
-      return new HttpResponse(JSON.stringify(payload), {
-        status: 200,
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      })
+      return err
+        ? new HttpResponse(null, { status: err instanceof DatabaseError ? err.code : 500, statusText: err.message })
+        : new HttpResponse(JSON.stringify(payload), {
+            status: 200,
+            headers: {
+              'Content-Type': 'application/json',
+            },
+          })
     }),
   ]
 
@@ -126,14 +144,16 @@ export const generateStub = (baseUrl: string, responseTime?: number): TReturn =>
       await delay(delayResponse)
 
       const url = new URL(resolver.request.url)
-      const payload = await getSearchList(url.searchParams)
+      const [err, payload] = await to<SearchScreenListResponse>(getSearchList(url.searchParams))
 
-      return new HttpResponse(JSON.stringify(payload), {
-        status: 200,
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      })
+      return err
+        ? new HttpResponse(null, { status: err instanceof DatabaseError ? err.code : 500, statusText: err.message })
+        : new HttpResponse(JSON.stringify(payload), {
+            status: 200,
+            headers: {
+              'Content-Type': 'application/json',
+            },
+          })
     }),
   ]
 

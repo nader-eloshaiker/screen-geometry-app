@@ -1,6 +1,7 @@
 import { getGetScreenListMock } from '@packages/openapi/generated'
 import { spyOnLocalForage } from '@packages/server/test/mocks/mockLocalForage'
 import localforage from 'localforage'
+import { screenInput55Fixture } from '../test/fixtures/ScreenFixtures'
 import {
   createScreen,
   createScreenList,
@@ -11,7 +12,6 @@ import {
   showScreen,
   updateScreen,
 } from './api'
-import { screenInput55Fixture } from './test/fixtures/ScreenFixtures'
 
 describe('#api', () => {
   beforeEach(() => {

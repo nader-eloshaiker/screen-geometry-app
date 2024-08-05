@@ -1,5 +1,5 @@
 import { SearchItem } from '@packages/openapi/generated'
-import { SearchDB } from '@packages/server/db/searchDB'
+import { SearchDB } from '@packages/server/db/SearchDB'
 import MiniSearch, { SearchResult } from 'minisearch'
 
 const searchEngine = new MiniSearch({

@@ -2,7 +2,7 @@ import { getGetScreenListMock, getGetScreenMock } from '@packages/openapi/genera
 import { spyOnLocalForage } from '@packages/server/test/mocks/mockLocalForage'
 import localforage from 'localforage'
 import { screenInput55Fixture } from '../test/fixtures/ScreenFixtures'
-import { createItem, createItemList, deleteItem, getItem, getItemList, updateItem } from './indexDB'
+import { createItem, createItemList, deleteItem, getAllItems, getItem, updateItem } from './IndexDB'
 
 describe('#indexDB', () => {
   beforeEach(() => {
@@ -11,7 +11,7 @@ describe('#indexDB', () => {
 
   describe('#getItemList', () => {
     it('getItemList should return a list of screens', async () => {
-      const result = await getItemList()
+      const result = await getAllItems()
 
       expect(result.length).toBe(4)
     })
@@ -19,7 +19,7 @@ describe('#indexDB', () => {
     it('getItemList should return an empty list if no screens are found', async () => {
       await localforage.clear()
 
-      const result = await getItemList()
+      const result = await getAllItems()
 
       expect(result.length).toBe(0)
     })
