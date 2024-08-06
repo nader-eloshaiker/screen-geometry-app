@@ -1,7 +1,7 @@
 import { ErrorObject } from '../types/ErrorObject'
 
-export class DatabaseError extends Error implements ErrorObject {
-  public readonly name = 'DatabaseError'
+export class ApiError extends Error implements ErrorObject {
+  public readonly name = 'ApiError'
   constructor(
     message: string,
     public readonly code: number,

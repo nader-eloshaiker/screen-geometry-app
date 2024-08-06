@@ -15,10 +15,6 @@ export const getItem = async (id?: string) => {
 
   const item = list?.find((entry) => entry.id === id)
 
-  if (!item) {
-    throw new DatabaseError(`No screen found for ${id}`, 404)
-  }
-
   return item
 }
 
@@ -29,7 +25,7 @@ export const getAllItems = async () => {
     throw err
   }
 
-  return list ?? []
+  return list
 }
 
 export const createItem = async (data: ScreenInput) => {
@@ -37,14 +33,14 @@ export const createItem = async (data: ScreenInput) => {
   const [err, list] = await getStore()
 
   if (err) {
-    throw err
+    throw new DatabaseError('Database error', 500, err)
   }
 
   const newList = list ? [...list, item] : [item]
   const [err2] = await setStore(newList)
 
   if (err2) {
-    throw err2
+    err2
   }
 
   return item
@@ -62,7 +58,7 @@ export const createItemList = async (data: ScreenInputList) => {
   const [err2] = await setStore(newList)
 
   if (err2) {
-    throw err2
+    err2
   }
 
   return newList
@@ -72,13 +68,13 @@ export const updateItem = async (id: string, updates: ScreenItem) => {
   const [err, list] = await getStore()
 
   if (err) {
-    return Promise.reject(err)
+    err
   }
 
   const item = list?.find((entry) => entry.id === id)
 
   if (!list || !item) {
-    throw new DatabaseError(`No screen found for ${id}`, 404)
+    return
   }
 
   Object.assign(item, updates)
@@ -101,7 +97,7 @@ export const deleteItem = async (id: string) => {
   const index = list?.findIndex((entry) => entry.id === id) ?? -1
 
   if (!list || index === -1) {
-    throw new DatabaseError(`No screen found for ${id}`, 404)
+    return
   }
 
   list.splice(index, 1)

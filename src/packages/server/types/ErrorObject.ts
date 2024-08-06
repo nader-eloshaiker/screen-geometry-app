@@ -1,7 +1,7 @@
 export interface ErrorObject {
   code: number
   message: string
-  type: ErrorObjectTypes
+  name: ErrorObjectTypes
 }
 
-export type ErrorObjectTypes = 'DatabaseError'
+export type ErrorObjectTypes = 'DatabaseError' | 'ApiError'

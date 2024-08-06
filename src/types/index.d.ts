@@ -12,4 +12,5 @@ type TDispatch<T> = React.Dispatch<React.SetStateAction<T>>
 
 type TDispatchAction<TAction, TData> = { type: TAction; payload: TData | undefined }
 
-type Nullable<T> = { [K in keyof T]: T[K] | null }
+type Nullable<T> = T | null | undefined
+type Undefined<T> = T | undefined
