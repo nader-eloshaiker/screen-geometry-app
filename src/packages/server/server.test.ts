@@ -1,6 +1,4 @@
-import { getGetScreenListMock } from '@packages/openapi/generated'
 import { apiRoutes } from '@packages/openapi/meta'
-import { spyOnLocalForage } from '@packages/server/test/mocks/mockLocalForage'
 import { mswWithSpy, startMSW, stopMSW } from '@packages/serviceworker/NodeServiceWorker'
 import { generateStub } from './server'
 import { screenInput55Fixture } from './test/fixtures/ScreenFixtures'
@@ -22,10 +20,6 @@ describe('#server', () => {
 
   afterAll(async () => {
     await stopMSW()
-  })
-
-  beforeEach(() => {
-    spyOnLocalForage(getGetScreenListMock().list)
   })
 
   it('should call the GET screens api', async () => {

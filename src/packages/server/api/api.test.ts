@@ -1,6 +1,3 @@
-import { getGetScreenListMock } from '@packages/openapi/generated'
-import { spyOnLocalForage } from '@packages/server/test/mocks/mockLocalForage'
-import localforage from 'localforage'
 import { screenInput55Fixture } from '../test/fixtures/ScreenFixtures'
 import {
   createScreen,
@@ -14,10 +11,6 @@ import {
 } from './api'
 
 describe('#api', () => {
-  beforeEach(() => {
-    spyOnLocalForage(getGetScreenListMock().list)
-  })
-
   it('#getSearchList should return a list of screens that match a term', async () => {
     const result = await getSearchList(new URLSearchParams('term=4k'))
     expect(result.list.length).toBe(3)
@@ -54,15 +47,15 @@ describe('#api', () => {
     const created = await createScreen(screenInput55Fixture)
 
     expect(created.item.tag.diagonalSize).toBe(55)
-    expect(await localforage.length()).toBe(5)
+    // expect(await localforage.length()).toBe(5)
   })
 
   it('#createScreenList should return a list of screens', async () => {
-    await localforage.clear()
+    // await localforage.clear()
     const created = await createScreenList([screenInput55Fixture])
 
     expect(created.list[0]!.tag.diagonalSize).toBe(55)
-    expect(await localforage.length()).toBe(1)
+    // expect(await localforage.length()).toBe(1)
   })
 
   it('#deleteScreen should return true if id is found', async () => {

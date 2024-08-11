@@ -75,6 +75,13 @@ export const transformScreenInput = (data: ScreenInput, id?: string): ScreenItem
   return item
 }
 
+export const transformScreenInputKeyless = (data: ScreenInput): Omit<ScreenItem, 'id'> => {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const { id, ...keylessData } = transformScreenInput(data)
+
+  return keylessData
+}
+
 export const transformSearchData = (entry: SearchItem): SearchScreenItem => {
   const [hAspectRatio, vAspectRatio] = getAspectRatio(entry.aspectRatio)
 

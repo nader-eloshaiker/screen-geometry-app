@@ -1,4 +1,4 @@
-import { initDB } from '@packages/server/db/db'
+import { initDB } from '@packages/server/db/IndexedDB'
 import { QueryClientProvider } from '@tanstack/react-query'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import { useEffect, useState } from 'react'
@@ -9,9 +9,7 @@ type Props = TReactChildren
 export const QueryProvider = ({ children }: Props) => {
   const [_, setDBStatus] = useState(false)
   useEffect(() => {
-    const connectToDB = async () => {
-      return await initDB()
-    }
+    const connectToDB = async () => await initDB()
 
     connectToDB().then(setDBStatus).catch(console.error)
   }, [])

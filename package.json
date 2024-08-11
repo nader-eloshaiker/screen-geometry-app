@@ -50,7 +50,6 @@
     "axios": "^1.6.8",
     "clsx": "^2.1.0",
     "framer-motion": "^11.2.10",
-    "localforage": "^1.10.0",
     "minisearch": "^6.3.0",
     "msw": "^2.2.13",
     "react": "^18.3.1",

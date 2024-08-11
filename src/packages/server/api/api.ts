@@ -1,10 +1,10 @@
 import { ScreenInput, ScreenInputList, ScreenItem, SearchItem } from '@packages/openapi/generated'
-import { search } from '@packages/server/api/searchEngine'
-import { transformScreenInput } from '@packages/utils/DataTransformation'
+import { search } from '@packages/server/api/SearchService'
+import { transformScreenInput, transformScreenInputKeyless } from '@packages/utils/DataTransformation'
 import to from '@packages/utils/await-to-js'
 import { SearchResult } from 'minisearch'
 import { DatabaseError } from '../db/DatabaseError'
-import { createItem, createItemList, deleteItem, getAllItems, getItem, updateItem } from '../db/IndexDB'
+import { Stores, addAllData, addData, deleteData, getAllData, getData, updateData } from '../db/IndexedDB'
 import { ApiError } from './ApiError'
 
 export type ScreenListResponse = {
@@ -31,7 +31,7 @@ export const getSearchList = async (params: URLSearchParams) => {
 }
 
 export const getScreenList = async () => {
-  const [err, list = []] = await to<Nullable<Array<ScreenItem>>>(getAllItems())
+  const [err, list = []] = await to<Array<ScreenItem>>(getAllData<ScreenItem>(Stores.Screens))
 
   if (err) {
     throw new DatabaseError('Database error', 500, err)
@@ -40,8 +40,12 @@ export const getScreenList = async () => {
   return { list } as ScreenListResponse
 }
 
-export const getScreen = async (id: string | undefined) => {
-  const [err, item] = await to<Undefined<ScreenItem>>(getItem(id))
+export const getScreen = async (id: string) => {
+  if (!id) {
+    throw new ApiError('No parameters provided', 400)
+  }
+
+  const [err, item] = await to<Nullable<ScreenItem>>(getData<ScreenItem>(Stores.Screens, id))
 
   if (err) {
     throw new DatabaseError('Database error', 500, err)
@@ -53,8 +57,12 @@ export const getScreen = async (id: string | undefined) => {
 }
 
 export const updateScreen = async (id: string, data: ScreenInput) => {
+  if (!id || !data) {
+    throw new ApiError('No parameters provided', 400)
+  }
+
   const screenItem = transformScreenInput(data, id)
-  const [err, item] = await to<Undefined<ScreenItem>>(updateItem(id, screenItem))
+  const [err, item] = await to<Nullable<ScreenItem>>(updateData<ScreenItem>(Stores.Screens, screenItem))
 
   if (err) {
     throw new DatabaseError('Database error', 500, err)
@@ -66,7 +74,13 @@ export const updateScreen = async (id: string, data: ScreenInput) => {
 }
 
 export const createScreen = async (data: ScreenInput) => {
-  const [err, item] = await to<ScreenItem>(createItem(data))
+  if (!data) {
+    throw new ApiError('No parameters provided', 400)
+  }
+
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const keylessData = transformScreenInputKeyless(data)
+  const [err, item] = await to<Nullable<ScreenItem>>(addData<ScreenItem>(Stores.Screens, keylessData))
 
   if (err) {
     throw new DatabaseError('Database error', 500, err)
@@ -76,7 +90,12 @@ export const createScreen = async (data: ScreenInput) => {
 }
 
 export const createScreenList = async (data: ScreenInputList) => {
-  const [err, list] = await to<ScreenItem[]>(createItemList(data))
+  if (!data) {
+    throw new ApiError('No parameters provided', 400)
+  }
+
+  const keylessList = data.map((item) => transformScreenInputKeyless(item))
+  const [err, list] = await to<Nullable<Array<ScreenItem>>>(addAllData<ScreenItem>(Stores.Screens, keylessList))
 
   if (err) {
     throw new DatabaseError('Database error', 500, err)
@@ -86,7 +105,11 @@ export const createScreenList = async (data: ScreenInputList) => {
 }
 
 export const deleteScreen = async (id: string) => {
-  const [err, data] = await to<Undefined<string>>(deleteItem(id))
+  if (!id) {
+    throw new ApiError('No parameters provided', 400)
+  }
+
+  const [err, data] = await to<string>(deleteData(Stores.Screens, id))
 
   if (err) {
     throw new DatabaseError('Database error', 500, err)
@@ -98,7 +121,11 @@ export const deleteScreen = async (id: string) => {
 }
 
 export const showScreen = async (id: string) => {
-  const [err, data] = await to<Undefined<ScreenItem>>(getItem(id))
+  if (!id) {
+    throw new ApiError('No parameters provided', 400)
+  }
+
+  const [err, data] = await to<Nullable<ScreenItem>>(getData<ScreenItem>(Stores.Screens, id))
 
   if (err) {
     throw new DatabaseError('Database error', 500, err)
@@ -106,10 +133,10 @@ export const showScreen = async (id: string) => {
     throw new ApiError(`No screen found for ${id}`, 404)
   }
 
-  const [err2, item] = await to<Undefined<ScreenItem>>(
-    updateItem(id, {
+  const [err2, item] = await to<Nullable<ScreenItem>>(
+    updateData<ScreenItem>(Stores.Screens, {
       ...data,
-      visible: !data.visible, // === 'true',
+      visible: !data.visible,
     }),
   )
 

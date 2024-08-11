@@ -15,7 +15,7 @@
   "include": [
     "src/**/*",
     "src/configs/vitest.setup.ts",
-    "src/packages/server/api/searchEngine.ts",
+    "src/packages/server/api/SearchService.ts",
     "src/packages/server/server.test.ts"
   ],
   "exclude": ["node_modules", "coverage", "dist", "build"]

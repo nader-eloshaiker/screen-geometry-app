@@ -1,5 +1,5 @@
 import { SearchItem } from '@packages/openapi/generated'
-import { SearchDB } from '@packages/server/db/SearchDB'
+import { SearchStore } from '@packages/server/db/SearchStore'
 import MiniSearch, { SearchResult } from 'minisearch'
 
 const searchEngine = new MiniSearch({
@@ -7,7 +7,7 @@ const searchEngine = new MiniSearch({
   storeFields: ['id', 'name', 'label', 'aspectRatio', 'diagonalSize', 'vRes', 'hRes'],
 })
 
-searchEngine.addAll(SearchDB)
+searchEngine.addAll(SearchStore)
 
 export const search = (term: string) => {
   return (
