@@ -1,5 +1,3 @@
-let request: IDBOpenDBRequest
-let db: IDBDatabase
 const version = 3
 const dbName = 'localforage'
 
@@ -15,10 +13,10 @@ export enum Stores {
 
 export const initDB = (): Promise<boolean> => {
   return new Promise((resolve) => {
-    request = indexedDB.open(dbName, version)
+    const request = indexedDB.open(dbName, version)
 
     request.onupgradeneeded = (event) => {
-      db = request.result
+      const db = request.result
 
       console.log('current version:', event.oldVersion)
 
@@ -73,21 +71,16 @@ export const initDB = (): Promise<boolean> => {
     request.onerror = () => {
       resolve(false)
     }
-
-    db.onversionchange = () => {
-      db.close()
-      alert('Database is outdated, please reload the page.')
-    }
   })
 }
 
 export const getAllData = <T extends KeyedObject>(storeName: Stores): Promise<Array<T>> => {
   return new Promise((resolve, reject) => {
-    request = indexedDB.open(dbName, version)
+    const request = indexedDB.open(dbName, version)
 
     request.onsuccess = () => {
       console.log('request.onsuccess - getAllData')
-      db = request.result
+      const db = request.result
       const tx = db.transaction(storeName, 'readonly')
       const store = tx.objectStore(storeName)
       const res = store.getAll()
@@ -109,11 +102,11 @@ export const getAllData = <T extends KeyedObject>(storeName: Stores): Promise<Ar
 
 export const getData = <T extends KeyedObject>(storeName: Stores, key: string): Promise<T | null> => {
   return new Promise((resolve, reject) => {
-    request = indexedDB.open(dbName, version)
+    const request = indexedDB.open(dbName, version)
 
     request.onsuccess = () => {
       console.log('request.onsuccess - getAllData')
-      db = request.result
+      const db = request.result
       const tx = db.transaction(storeName, 'readonly')
       const store = tx.objectStore(storeName)
       const res = store.get(key)
@@ -136,11 +129,11 @@ export const addData = <T extends KeyedObject>(
   data: Omit<T, keyof KeyedObject>,
 ): Promise<T | null> => {
   return new Promise((resolve, reject) => {
-    request = indexedDB.open(dbName, version)
+    const request = indexedDB.open(dbName, version)
 
     request.onsuccess = () => {
       console.log('request.onsuccess - addData', data)
-      db = request.result
+      const db = request.result
       const tx = db.transaction(storeName, 'readwrite')
       const store = tx.objectStore(storeName)
       const { result: id } = store.add(data)
@@ -163,11 +156,11 @@ export const addAllData = <T extends KeyedObject>(
   data: Array<Omit<T, keyof KeyedObject>>,
 ): Promise<Array<T> | null> => {
   return new Promise((resolve, reject) => {
-    request = indexedDB.open(dbName, version)
+    const request = indexedDB.open(dbName, version)
 
     request.onsuccess = () => {
       console.log('request.onsuccess - addData', data)
-      db = request.result
+      const db = request.result
       const tx = db.transaction(storeName, 'readwrite')
       const store = tx.objectStore(storeName)
       const result = data.map((d) => {
@@ -190,11 +183,11 @@ export const addAllData = <T extends KeyedObject>(
 
 export const updateData = <T extends KeyedObject>(storeName: string, data: T): Promise<T | null> => {
   return new Promise((resolve, reject) => {
-    request = indexedDB.open(dbName, version)
+    const request = indexedDB.open(dbName, version)
 
     request.onsuccess = () => {
       console.log('request.onsuccess - addData', data)
-      db = request.result
+      const db = request.result
       const tx = db.transaction(storeName, 'readwrite')
       const store = tx.objectStore(storeName)
       store.put(data, data.id)
@@ -215,11 +208,11 @@ export const updateData = <T extends KeyedObject>(storeName: string, data: T): P
 export const deleteData = (storeName: string, key: string): Promise<string> => {
   return new Promise((resolve, reject) => {
     // again open the connection
-    request = indexedDB.open(dbName, version)
+    const request = indexedDB.open(dbName, version)
 
     request.onsuccess = () => {
       console.log('request.onsuccess - deleteData', key)
-      db = request.result
+      const db = request.result
       const tx = db.transaction(storeName, 'readwrite')
       const store = tx.objectStore(storeName)
       const res = store.delete(key)
