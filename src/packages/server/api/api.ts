@@ -62,7 +62,7 @@ export const updateScreen = async (id: string, data: ScreenInput) => {
   }
 
   const screenItem = transformScreenInput(data, id)
-  const [err, item] = await to<Nullable<ScreenItem>>(updateData<ScreenItem>(Stores.Screens, screenItem))
+  const [err, item] = await to<ScreenItem>(updateData<ScreenItem>(Stores.Screens, screenItem))
 
   if (err) {
     throw new DatabaseError('Database error', 500, err)
@@ -80,7 +80,7 @@ export const createScreen = async (data: ScreenInput) => {
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const keylessData = transformScreenInputKeyless(data)
-  const [err, item] = await to<Nullable<ScreenItem>>(addData<ScreenItem>(Stores.Screens, keylessData))
+  const [err, item] = await to<ScreenItem>(addData<ScreenItem>(Stores.Screens, keylessData))
 
   if (err) {
     throw new DatabaseError('Database error', 500, err)
@@ -95,7 +95,7 @@ export const createScreenList = async (data: ScreenInputList) => {
   }
 
   const keylessList = data.map((item) => transformScreenInputKeyless(item))
-  const [err, list] = await to<Nullable<Array<ScreenItem>>>(addAllData<ScreenItem>(Stores.Screens, keylessList))
+  const [err, list] = await to<Array<ScreenItem>>(addAllData<ScreenItem>(Stores.Screens, keylessList))
 
   if (err) {
     throw new DatabaseError('Database error', 500, err)
@@ -125,7 +125,7 @@ export const showScreen = async (id: string) => {
     throw new ApiError('No parameters provided', 400)
   }
 
-  const [err, data] = await to<Nullable<ScreenItem>>(getData<ScreenItem>(Stores.Screens, id))
+  const [err, data] = await to<Undefined<ScreenItem>>(getData<ScreenItem>(Stores.Screens, id))
 
   if (err) {
     throw new DatabaseError('Database error', 500, err)
@@ -133,7 +133,7 @@ export const showScreen = async (id: string) => {
     throw new ApiError(`No screen found for ${id}`, 404)
   }
 
-  const [err2, item] = await to<Nullable<ScreenItem>>(
+  const [err2, item] = await to<ScreenItem>(
     updateData<ScreenItem>(Stores.Screens, {
       ...data,
       visible: !data.visible,
