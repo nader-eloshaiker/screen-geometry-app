@@ -11,9 +11,10 @@ import { Dimensions } from '@packages/openapi/models/Screen'
 import { useElementSize } from '@packages/ui/hooks/useElementSize'
 import { transformScreenInput } from '@packages/utils/DataTransformation'
 import { getMaxScreenSize, normaliseScreenRender } from '@packages/utils/ScreenCalc'
-import { useRef } from 'react'
+import { useMemo, useRef } from 'react'
 import { Helmet } from 'react-helmet-async'
 import tw from 'tailwind-styled-components'
+import { ulid } from 'ulid'
 
 const Section = tw.div`
   mb-14
@@ -35,11 +36,23 @@ export const Help = () => {
   const divSizeRef = useRef<HTMLDivElement>(null)
   const { width } = useElementSize(divSizeRef)
 
-  const fullList = normaliseScreenRender(defaultScreenInputList.map((item) => transformScreenInput(item)))
-  const smallList = fullList.filter((_, index) => index < 2)
-  const invisibleList = smallList.map((item, index) => (index !== 1 ? item : { ...item, visible: false }))
-  const maxScreenSize = getMaxScreenSize(fullList) // max possible screen size
-  const maxPanelSize: Dimensions = { width, height: Math.round(maxScreenSize.height * (width / maxScreenSize.width)) }
+  const { fullList, smallList, invisibleList, maxPanelSize } = useMemo(() => {
+    const fullList = normaliseScreenRender(
+      defaultScreenInputList.map((item) => ({ ...transformScreenInput(item), id: ulid() })),
+    )
+    const smallList = fullList.filter((_, index) => index < 2)
+    const invisibleList = smallList.map((item, index) => (index !== 1 ? item : { ...item, visible: false }))
+    const maxScreenSize = getMaxScreenSize(fullList) // max possible screen size
+    const maxPanelSize: Dimensions = { width, height: Math.round(maxScreenSize.height * (width / maxScreenSize.width)) }
+
+    return {
+      fullList,
+      smallList,
+      invisibleList,
+      maxScreenSize,
+      maxPanelSize,
+    }
+  }, [width])
 
   return (
     <>

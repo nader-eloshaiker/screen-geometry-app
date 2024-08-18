@@ -1,6 +1,6 @@
 import { ErrorResponse } from '@packages/openapi/generated'
-import { getRandomString } from '@packages/utils/RandomGenerator'
 import axios, { AxiosError } from 'axios'
+import { ulid } from 'ulid'
 
 export enum NotificationType {
   ERROR = 'alert-error',
@@ -50,7 +50,7 @@ export const notificationReducer = (
         return state
       }
 
-      const loggedItem: NotificationItemLogged = { ...payload, tag: getRandomString(8) }
+      const loggedItem: NotificationItemLogged = { ...payload, tag: ulid() }
 
       return {
         ...state,

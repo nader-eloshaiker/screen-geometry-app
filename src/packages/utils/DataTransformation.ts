@@ -1,6 +1,5 @@
 import { ScreenInput, ScreenItem, ScreenSpec, SearchItem } from '@packages/openapi/generated'
 import { SearchData, SearchScreenItem } from '@packages/openapi/models'
-import { getRandomString } from './RandomGenerator'
 
 const getAspectRatio = (str: string | undefined | null) => {
   const [width, height] = str?.split(':') ?? []
@@ -47,13 +46,12 @@ export const transformScreenItem = (data: ScreenItem): ScreenInput => {
   return item
 }
 
-export const transformScreenInput = (data: ScreenInput, id?: string): ScreenItem => {
+export const transformScreenInput = (data: ScreenInput): Omit<ScreenItem, 'id'> => {
   const [hAspectRatio, vAspectRatio] = getAspectRatio(data.aspectRatio ?? '')
   const diagonalSize = data.diagonalSize ?? 0
   const hSize = hAspectRatio * (diagonalSize / Math.sqrt(Math.pow(hAspectRatio, 2) + Math.pow(vAspectRatio, 2)))
   const vSize = vAspectRatio * (diagonalSize / Math.sqrt(Math.pow(hAspectRatio, 2) + Math.pow(vAspectRatio, 2)))
-  const item: ScreenItem = {
-    id: id ?? getRandomString(8),
+  const item: Omit<ScreenItem, 'id'> = {
     tag: {
       diagonalSize,
       aspectRatio: data.aspectRatio ?? '',
@@ -73,13 +71,6 @@ export const transformScreenInput = (data: ScreenInput, id?: string): ScreenItem
   }
 
   return item
-}
-
-export const transformScreenInputKeyless = (data: ScreenInput): Omit<ScreenItem, 'id'> => {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { id, ...keylessData } = transformScreenInput(data)
-
-  return keylessData
 }
 
 export const transformSearchData = (entry: SearchItem): SearchScreenItem => {

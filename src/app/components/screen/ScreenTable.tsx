@@ -8,7 +8,6 @@ import { useDeleteScreenApi } from '@app/hooks/api/helpers/useDeleteScreenApi'
 import { useShowScreenApi } from '@app/hooks/api/helpers/useShowScreenApi'
 import { ScreenColor, ScreenItem } from '@packages/openapi/generated'
 import { SkeletonRect } from '@packages/ui/skeleton/SkeletonRect'
-import { getRandomString } from '@packages/utils/RandomGenerator'
 import { Dispatch, SetStateAction } from 'react'
 import ReactGA from 'react-ga4'
 import styled from 'styled-components'
@@ -37,20 +36,17 @@ type TTableProps = { cols: number; rows: number }
 const TableSkeleton = ({ cols, rows }: TTableProps) => {
   const tableCols = []
   for (let i = 0; i < cols; i++) {
-    const key = getRandomString(4)
     tableCols.push(
-      <td key={key}>
-        <SkeletonRect key={key} className='h-6 w-full' />
+      <td key={`table-col-${i}`}>
+        <SkeletonRect key={`table-skeleton-${i}`} className='h-6 w-full' />
       </td>,
     )
   }
 
   const tableRows = []
   for (let i = 0; i < rows; i++) {
-    const key = getRandomString(4)
-
     tableRows.push(
-      <tr data-testid='SkeletonTableRow' key={key}>
+      <tr data-testid='SkeletonTableRow' key={`table-row-${i}`}>
         {tableCols}
       </tr>,
     )

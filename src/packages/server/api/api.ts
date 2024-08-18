@@ -1,6 +1,6 @@
 import { ScreenInput, ScreenInputList, ScreenItem, SearchItem } from '@packages/openapi/generated'
 import { search } from '@packages/server/api/SearchService'
-import { transformScreenInput, transformScreenInputKeyless } from '@packages/utils/DataTransformation'
+import { transformScreenInput } from '@packages/utils/DataTransformation'
 import to from '@packages/utils/await-to-js'
 import { SearchResult } from 'minisearch'
 import { DatabaseError } from '../db/DatabaseError'
@@ -61,7 +61,7 @@ export const updateScreen = async (id: string, data: ScreenInput) => {
     throw new ApiError('No parameters provided', 400)
   }
 
-  const screenItem = transformScreenInput(data, id)
+  const screenItem = { ...transformScreenInput(data), id }
   const [err, item] = await to<ScreenItem>(updateData<ScreenItem>(Stores.Screens, screenItem))
 
   if (err) {
@@ -79,7 +79,7 @@ export const createScreen = async (data: ScreenInput) => {
   }
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const keylessData = transformScreenInputKeyless(data)
+  const keylessData = transformScreenInput(data)
   const [err, item] = await to<ScreenItem>(addData<ScreenItem>(Stores.Screens, keylessData))
 
   if (err) {
@@ -94,7 +94,7 @@ export const createScreenList = async (data: ScreenInputList) => {
     throw new ApiError('No parameters provided', 400)
   }
 
-  const keylessList = data.map((item) => transformScreenInputKeyless(item))
+  const keylessList = data.map((item) => transformScreenInput(item))
   const [err, list] = await to<Array<ScreenItem>>(addAllData<ScreenItem>(Stores.Screens, keylessList))
 
   if (err) {
