@@ -64,6 +64,7 @@ beforeAll(() => {
 })
 
 afterEach(() => {
+  // vi.spyOn(console, 'log').mockImplementation(vi.fn())
   matchMediaMock.clear()
 })
 

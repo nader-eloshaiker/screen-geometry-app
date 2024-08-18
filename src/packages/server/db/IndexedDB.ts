@@ -13,11 +13,26 @@ export enum Stores {
   DeprecatedLocalForageBlob = 'local-forage-detect-blob-support',
 }
 
-const openDatabase = (dbName: string, version?: number) => {
+const handleRequestError = (
+  request: IDBRequest | IDBOpenDBRequest | IDBTransaction,
+  reject: (reason: string) => void,
+) => {
+  request.onerror = () => {
+    const error = request.error?.message
+    if (error) {
+      reject(error)
+    } else {
+      reject('Unknown error')
+    }
+  }
+}
+
+const openDatabase = (dbName: string, version: number) => {
   const openReq = indexedDB.open(dbName, version)
   openReq.onblocked = (_event) => {
     // If some other tab is loaded with the database, then it needs to be closed
     // before we can proceed.
+    /* istanbul ignore next */
     console.log('Please close all other tabs with this site open!')
   }
 
@@ -116,30 +131,15 @@ export const initDB = (): Promise<boolean> => {
 export const getAllData = <T extends KeyedObject>(storeName: Stores): Promise<Array<T>> => {
   return new Promise((resolve, reject) => {
     const openReq = openDatabase(dbName, version)
+    handleRequestError(openReq, reject)
 
     openReq.onsuccess = () => {
       const { store } = openDatabaseTable({ openReq, storeName, mode: 'readonly' })
       const storeReq = store.getAll()
+      handleRequestError(storeReq, reject)
+
       storeReq.onsuccess = () => {
         resolve(storeReq.result as Array<T>)
-      }
-
-      storeReq.onerror = () => {
-        const error = storeReq.error?.message
-        if (error) {
-          reject(error)
-        } else {
-          reject('Unknown error')
-        }
-      }
-    }
-
-    openReq.onerror = () => {
-      const error = openReq.error?.message
-      if (error) {
-        reject(error)
-      } else {
-        reject('Unknown error')
       }
     }
   })
@@ -148,31 +148,15 @@ export const getAllData = <T extends KeyedObject>(storeName: Stores): Promise<Ar
 export const getData = <T extends KeyedObject>(storeName: Stores, key: string): Promise<T | undefined> => {
   return new Promise((resolve, reject) => {
     const openReq = openDatabase(dbName, version)
+    handleRequestError(openReq, reject)
 
     openReq.onsuccess = () => {
       const { store } = openDatabaseTable({ openReq, storeName, mode: 'readonly' })
       const storeReq = store.get(key)
+      handleRequestError(storeReq, reject)
 
       storeReq.onsuccess = () => {
         resolve(storeReq.result as T)
-      }
-
-      storeReq.onerror = () => {
-        const error = storeReq.error?.message
-        if (error) {
-          reject(error)
-        } else {
-          reject('Unknown error')
-        }
-      }
-    }
-
-    openReq.onerror = () => {
-      const error = openReq.error?.message
-      if (error) {
-        reject(error)
-      } else {
-        reject('Unknown error')
       }
     }
   })
@@ -181,32 +165,16 @@ export const getData = <T extends KeyedObject>(storeName: Stores, key: string): 
 export const addData = <T extends KeyedObject>(storeName: string, data: Omit<T, keyof KeyedObject>): Promise<T> => {
   return new Promise((resolve, reject) => {
     const openReq = openDatabase(dbName, version)
+    handleRequestError(openReq, reject)
 
     openReq.onsuccess = () => {
       const { store } = openDatabaseTable({ openReq, storeName, mode: 'readwrite' })
       const id = ulid()
       const storeReq = store.add({ ...data, id })
+      handleRequestError(storeReq, reject)
 
       storeReq.onsuccess = () => {
         resolve({ ...data, id } as T)
-      }
-
-      storeReq.onerror = () => {
-        const error = storeReq.error?.message
-        if (error) {
-          reject(error)
-        } else {
-          reject('Unknown error')
-        }
-      }
-    }
-
-    openReq.onerror = () => {
-      const error = openReq.error?.message
-      if (error) {
-        reject(error)
-      } else {
-        reject('Unknown error')
       }
     }
   })
@@ -218,32 +186,17 @@ export const addAllData = <T extends KeyedObject>(
 ): Promise<Array<T>> => {
   return new Promise((resolve, reject) => {
     const openReq = openDatabase(dbName, version)
+    handleRequestError(openReq, reject)
 
     openReq.onsuccess = () => {
       const { tx, store } = openDatabaseTable({ openReq, storeName, mode: 'readwrite' })
+      handleRequestError(tx, reject)
+
       const keyedData = data.map((d) => ({ ...d, id: ulid() }) as T)
       keyedData.forEach((d) => store.add(d))
 
       tx.oncomplete = () => {
         resolve(keyedData)
-      }
-
-      tx.onerror = () => {
-        const error = tx.error?.message
-        if (error) {
-          reject(error)
-        } else {
-          reject('Unknown error')
-        }
-      }
-    }
-
-    openReq.onerror = () => {
-      const error = openReq.error?.message
-      if (error) {
-        reject(error)
-      } else {
-        reject('Unknown error')
       }
     }
   })
@@ -252,31 +205,15 @@ export const addAllData = <T extends KeyedObject>(
 export const updateData = <T extends KeyedObject>(storeName: string, data: T): Promise<T> => {
   return new Promise((resolve, reject) => {
     const openReq = openDatabase(dbName, version)
+    handleRequestError(openReq, reject)
 
     openReq.onsuccess = () => {
       const { store } = openDatabaseTable({ openReq, storeName, mode: 'readwrite' })
       const storeReq = store.put(data)
+      handleRequestError(storeReq, reject)
 
       storeReq.onsuccess = () => {
         resolve(data)
-      }
-
-      storeReq.onerror = () => {
-        const error = storeReq.error?.message
-        if (error) {
-          reject(error)
-        } else {
-          reject('Unknown error')
-        }
-      }
-    }
-
-    openReq.onerror = () => {
-      const error = openReq.error?.message
-      if (error) {
-        reject(error)
-      } else {
-        reject('Unknown error')
       }
     }
   })
@@ -286,23 +223,16 @@ export const deleteData = (storeName: string, key: string): Promise<string> => {
   return new Promise((resolve, reject) => {
     // again open the connection
     const openReq = openDatabase(dbName, version)
+    handleRequestError(openReq, reject)
 
     openReq.onsuccess = () => {
       const { store } = openDatabaseTable({ openReq, storeName, mode: 'readwrite' })
       const storeReq = store.delete(key)
+      handleRequestError(storeReq, reject)
 
       // add listeners that will resolve the Promise
       storeReq.onsuccess = () => {
         resolve(key)
-      }
-
-      openReq.onerror = () => {
-        const error = openReq.error?.message
-        if (error) {
-          reject(error)
-        } else {
-          reject('Unknown error')
-        }
       }
     }
   })
