@@ -1,3 +1,7 @@
+import { ScreenItem } from '@packages/openapi/generated'
+import { screenItemFixture } from '@packages/test/fixtures/ScreenFixtures'
+import indexeddb from 'fake-indexeddb'
+import { addData, initDB, Stores } from '../db/IndexedDB'
 import { screenInput55Fixture } from '../test/fixtures/ScreenFixtures'
 import {
   createScreen,
@@ -11,6 +15,11 @@ import {
 } from './api'
 
 describe('#api', () => {
+  beforeAll(async () => {
+    globalThis.indexedDB = indexeddb
+    await initDB()
+  })
+
   it('#getSearchList should return a list of screens that match a term', async () => {
     const result = await getSearchList(new URLSearchParams('term=4k'))
     expect(result.list.length).toBe(3)
@@ -22,23 +31,30 @@ describe('#api', () => {
   })
 
   it('#getScreenList should return a list of screens', async () => {
+    const created = await addData<ScreenItem>(Stores.Screens, screenItemFixture)
+    expect(created).toBeDefined()
+
     const result = await getScreenList()
 
-    expect(result.list.length).toBe(4)
+    expect(result.list).toHaveLength(1)
   })
 
   it('#getScreen should return a screen', async () => {
-    const result = await getScreen('pVesw1Iu')
+    const created = await addData<ScreenItem>(Stores.Screens, screenItemFixture)
+    expect(created).toBeDefined()
 
-    expect(result.item?.id).toBe('pVesw1Iu')
+    const result = await getScreen(created.id)
+    expect(result.item.id).toBe(created.id)
   })
 
   it('#updateScreen should return a screens', async () => {
-    const result = await getScreen('pVesw1Iu')
+    const created = await addData<ScreenItem>(Stores.Screens, screenItemFixture)
+    expect(created).toBeDefined()
 
-    expect(result.item?.id).toBe('pVesw1Iu')
+    const result = await getScreen(created.id)
+    expect(result.item.id).toBe(created.id)
 
-    const updated = await updateScreen('pVesw1Iu', screenInput55Fixture)
+    const updated = await updateScreen(created.id, screenInput55Fixture)
 
     expect(updated.item?.tag.diagonalSize).toBe(55)
   })
@@ -52,24 +68,27 @@ describe('#api', () => {
 
   it('#createScreenList should return a list of screens', async () => {
     // await localforage.clear()
-    const created = await createScreenList([screenInput55Fixture])
+    const result = await createScreenList([screenInput55Fixture])
 
-    expect(created.list[0]!.tag.diagonalSize).toBe(55)
-    // expect(await localforage.length()).toBe(1)
+    expect(result.list[0]!.tag.diagonalSize).toBe(55)
+    const screen = await getScreen(result.list[0].id)
+    expect(screen.item.id).toBe(result.list[0].id)
   })
 
   it('#deleteScreen should return true if id is found', async () => {
-    const result = await getScreen('pVesw1Iu')
+    const created = await addData<ScreenItem>(Stores.Screens, screenItemFixture)
+    expect(created).toBeDefined()
 
-    expect(result.item?.id).toBe('pVesw1Iu')
+    const deleted = await deleteScreen(created.id)
 
-    const deleted = await deleteScreen('pVesw1Iu')
-
-    expect(deleted.id).toBe('pVesw1Iu')
+    expect(deleted.id).toBe(created.id)
   })
 
   it('#showScreen should return a screen', async () => {
-    const updated = await showScreen('pVesw1Iu')
+    const created = await addData<ScreenItem>(Stores.Screens, screenItemFixture)
+    expect(created).toBeDefined()
+
+    const updated = await showScreen(created.id)
 
     expect(updated.item?.visible).toBe(false)
   })

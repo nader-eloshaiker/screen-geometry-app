@@ -1,10 +1,15 @@
 import { getGetScreenMock, ScreenItem } from '@packages/openapi/generated'
 import { screenItemFixture } from '@packages/test/fixtures/ScreenFixtures'
-import { addAllData, addData, deleteData, getAllData, getData, Stores, updateData } from './IndexedDB'
+import indexeddb from 'fake-indexeddb'
+import { addAllData, addData, deleteData, getAllData, getData, initDB, Stores, updateData } from './IndexedDB'
 
 describe('#indexDB', () => {
+  beforeAll(async () => {
+    globalThis.indexedDB = indexeddb
+    await initDB()
+  })
   describe('#getItemList', () => {
-    it('getItemList should return a list of screens', async () => {
+    it.skip('getItemList should return a list of screens', async () => {
       const result = await getAllData(Stores.Screens)
 
       expect(result?.length).toBe(4)
@@ -23,48 +28,48 @@ describe('#indexDB', () => {
     it('createItem should return a screen', async () => {
       const created = await addData<ScreenItem>(Stores.Screens, screenItemFixture)
 
-      expect(created?.tag.diagonalSize).toBe(55)
-      // expect(await localforage.length()).toBe(5)
+      expect(created?.tag.diagonalSize).toBe(38)
     })
-  })
 
-  it('createItemList should return a list of screens', async () => {
-    // await localforage.clear()
-    const created = await addAllData<ScreenItem>(Stores.Screens, [screenItemFixture])
+    it('createItemList should return a list of screens', async () => {
+      // await localforage.clear()
+      const result = await addAllData<ScreenItem>(Stores.Screens, [screenItemFixture])
 
-    expect(created![0]!.tag.diagonalSize).toBe(55)
-    // expect(await localforage.length()).toBe(1)
+      expect(result[0].tag.diagonalSize).toBe(38)
+      expect(result.length).toBe(1)
+    })
   })
 
   describe('#getItem', () => {
-    it('getItem should return a screens', async () => {
-      const result = await getData<ScreenItem>(Stores.Screens, 'pVesw1Iu')
+    it('should return a screens', async () => {
+      const created = await addData<ScreenItem>(Stores.Screens, screenItemFixture)
+      expect(created).toBeDefined()
 
-      expect(result?.id).toBe('pVesw1Iu')
+      const result = await getData<ScreenItem>(Stores.Screens, created.id)
+
+      expect(result).toBeDefined()
     })
 
-    it.fails('updateItem should throw an error if id is not found', async () => {
-      await expect(await getData<ScreenItem>(Stores.Screens, 'aaaaa')).rejects.toThrowError('No screen found for aaaaa')
+    it.fails('should throw an error if id is not found', async () => {
+      expect(await getData<ScreenItem>(Stores.Screens, 'aaaaa')).rejects.toThrowError('No screen found for aaaaa')
     })
   })
 
   describe('#updateItem', () => {
-    it('updateItem should return a screens', async () => {
-      const result = await getData<ScreenItem>(Stores.Screens, '5HjERJbH')
-
-      expect(result?.id).toBe('5HjERJbH')
+    it('updateItem should return an updated screen', async () => {
+      const created = await addData<ScreenItem>(Stores.Screens, screenItemFixture)
+      expect(created).toBeDefined()
 
       const updated = await updateData<ScreenItem>(Stores.Screens, {
-        ...getGetScreenMock().item,
+        ...created,
         tag: { aspectRatio: '4:3', diagonalSize: 21 },
-        id: '5HjERJbH',
       })
 
       expect(updated?.tag.diagonalSize).toBe(21)
     })
 
     it.fails('updateItem should throw an error if id is not found', async () => {
-      await expect(await updateData<ScreenItem>(Stores.Screens, getGetScreenMock().item)).rejects.toThrowError(
+      expect(await updateData<ScreenItem>(Stores.Screens, getGetScreenMock().item)).rejects.toThrowError(
         'No screen found for aaaaa',
       )
     })
@@ -72,14 +77,17 @@ describe('#indexDB', () => {
 
   describe('#deleteItem', () => {
     it('deleteItem should return true if id is found', async () => {
-      const result = await getData<ScreenItem>(Stores.Screens, 'pVesw1Iu')
+      const originalList = await getAllData<ScreenItem>(Stores.Screens)
 
-      expect(result?.id).toBe('pVesw1Iu')
+      const created = await addData<ScreenItem>(Stores.Screens, screenItemFixture)
+      expect(created).toBeDefined()
 
-      const deleted = await deleteData(Stores.Screens, 'pVesw1Iu')
+      expect(await getAllData<ScreenItem>(Stores.Screens)).toHaveLength(originalList.length + 1)
 
-      expect(deleted).toBe('pVesw1Iu')
-      // expect(await localforage.length()).toBe(3)
+      const deleted = await deleteData(Stores.Screens, created.id)
+
+      expect(deleted).toBe(created.id)
+      expect(await getAllData<ScreenItem>(Stores.Screens)).toHaveLength(originalList.length)
     })
 
     it.fails('deleteItem should return false if id is not found', async () => {

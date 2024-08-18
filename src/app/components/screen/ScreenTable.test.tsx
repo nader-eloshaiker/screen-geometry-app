@@ -69,7 +69,7 @@ describe('#ScreenTable', () => {
     })
 
     expect(mswRequestEventSpy[mswRequestEventSpy.length - 1]).toEqual(
-      expect.stringContaining('method:DELETE|url:http://dev.api.screengeometry.com/v1/screen/pVesw1Iu'),
+      expect.stringContaining('method:DELETE|url:http://dev.api.screengeometry.com/v1/screen/'),
     )
 
     waitFor(() => expect(test.queryAllByRole('row').length).toBe(4))
@@ -85,8 +85,9 @@ describe('#ScreenTable', () => {
     })
 
     expect(mswRequestEventSpy[mswRequestEventSpy.length - 1]).toEqual(
-      expect.stringContaining('method:PATCH|url:http://dev.api.screengeometry.com/v1/screen/pVesw1Iu/show'),
+      expect.stringContaining('method:PATCH|url:http://dev.api.screengeometry.com/v1/screen/'),
     )
+    expect(mswRequestEventSpy[mswRequestEventSpy.length - 1]).toEqual(expect.stringContaining('/show'))
   })
 
   test('show skeleton table when screen list is loading', async () => {

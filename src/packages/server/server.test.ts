@@ -1,5 +1,9 @@
+import { ScreenItem } from '@packages/openapi/generated'
 import { apiRoutes } from '@packages/openapi/meta'
 import { mswWithSpy, startMSW, stopMSW } from '@packages/serviceworker/NodeServiceWorker'
+import { screenItemFixture } from '@packages/test/fixtures/ScreenFixtures'
+import indexeddb from 'fake-indexeddb'
+import { Stores, addData, initDB } from './db/IndexedDB'
 import { generateStub } from './server'
 import { screenInput55Fixture } from './test/fixtures/ScreenFixtures'
 
@@ -16,6 +20,8 @@ describe('#server', () => {
 
   beforeAll(async () => {
     await startMSW()
+    globalThis.indexedDB = indexeddb
+    await initDB()
   })
 
   afterAll(async () => {
@@ -47,16 +53,22 @@ describe('#server', () => {
   })
 
   it('should call the GET screen api', async () => {
-    const response = await fetch(`${baseUrl}${apiRoutes.screen}/pVesw1Iu`)
+    const created = await addData<ScreenItem>(Stores.Screens, screenItemFixture)
+    expect(created).toBeDefined()
+
+    const response = await fetch(`${baseUrl}${apiRoutes.screen}/${created.id}`)
     expect(response.status).toBe(200)
     expect(response.statusText).toBe('OK')
     expect(mswRequestEventSpy[mswRequestEventSpy.length - 1]).toEqual(
-      expect.stringContaining('method:GET|url:http://fakeapi.com/v1/screen/pVesw1Iu'),
+      expect.stringContaining(`method:GET|url:http://fakeapi.com/v1/screen/${created.id}`),
     )
   })
 
   it('should call the DELETE screens api', async () => {
-    const response = await fetch(`${baseUrl}${apiRoutes.screen}/pVesw1Iu`, {
+    const created = await addData<ScreenItem>(Stores.Screens, screenItemFixture)
+    expect(created).toBeDefined()
+
+    const response = await fetch(`${baseUrl}${apiRoutes.screen}/${created.id}`, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
@@ -65,12 +77,15 @@ describe('#server', () => {
     expect(response.status).toBe(200)
     expect(response.statusText).toBe('OK')
     expect(mswRequestEventSpy[mswRequestEventSpy.length - 1]).toEqual(
-      expect.stringContaining('method:DELETE|url:http://fakeapi.com/v1/screen/pVesw1Iu'),
+      expect.stringContaining(`method:DELETE|url:http://fakeapi.com/v1/screen/${created.id}`),
     )
   })
 
   it('should call the PUT screens api', async () => {
-    const response = await fetch(`${baseUrl}${apiRoutes.screen}/pVesw1Iu`, {
+    const created = await addData<ScreenItem>(Stores.Screens, screenItemFixture)
+    expect(created).toBeDefined()
+
+    const response = await fetch(`${baseUrl}${apiRoutes.screen}/${created.id}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
@@ -80,12 +95,15 @@ describe('#server', () => {
     expect(response.status).toBe(200)
     expect(response.statusText).toBe('OK')
     expect(mswRequestEventSpy[mswRequestEventSpy.length - 1]).toEqual(
-      expect.stringContaining('method:PUT|url:http://fakeapi.com/v1/screen/pVesw1Iu'),
+      expect.stringContaining(`method:PUT|url:http://fakeapi.com/v1/screen/${created.id}`),
     )
   })
 
   it('should call the PATCH screens api', async () => {
-    const response = await fetch(`${baseUrl}${apiRoutes.screen}/pVesw1Iu/show`, {
+    const created = await addData<ScreenItem>(Stores.Screens, screenItemFixture)
+    expect(created).toBeDefined()
+
+    const response = await fetch(`${baseUrl}${apiRoutes.screen}/${created.id}/show`, {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',
@@ -95,7 +113,7 @@ describe('#server', () => {
     expect(response.status).toBe(200)
     expect(response.statusText).toBe('OK')
     expect(mswRequestEventSpy[mswRequestEventSpy.length - 1]).toEqual(
-      expect.stringContaining('method:PATCH|url:http://fakeapi.com/v1/screen/pVesw1Iu/show'),
+      expect.stringContaining(`method:PATCH|url:http://fakeapi.com/v1/screen/${created.id}/show`),
     )
   })
 
