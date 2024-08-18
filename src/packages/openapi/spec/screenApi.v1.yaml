@@ -187,6 +187,7 @@ paths:
                         color:
                           lightColor: '#FCDF50'
                           darkColor: '#967E03'
+                        signature: 'dSize=34&aRatio=21:9&hRes=3440&vRes=1440'
                         visible: true
                       - id: 5HjERJbH
                         tag:
@@ -204,6 +205,7 @@ paths:
                         color:
                           lightColor: '#F6693C'
                           darkColor: '#C33609'
+                        signature: 'dSize=38&aRatio=21:9&hRes=3840&vRes=1600'
                         visible: true
                       - id: LnAg4nPQ
                         tag:
@@ -221,6 +223,7 @@ paths:
                         color:
                           lightColor: '#67E5AA'
                           darkColor: '#168350'
+                        signature: 'dSize=27&aRatio=16:9&hRes=3840&vRes=2160'
                         visible: true
                       - id: oxrH4rCU
                         tag:
@@ -238,6 +241,7 @@ paths:
                         color:
                           lightColor: '#64E8DD'
                           darkColor: '#14857B'
+                        signature: 'dSize=49&aRatio=32:9&hRes=5120&vRes=1440'
                         visible: true
                 empty:
                   value:
@@ -323,6 +327,7 @@ paths:
                     color:
                       lightColor: '#FCDF50'
                       darkColor: '#967E03'
+                    signature: 'dSize=34&aRatio=21:9&hRes=3440&vRes=1440'
                     visible: true
                   - id: 5HjERJbH
                     tag:
@@ -340,6 +345,7 @@ paths:
                     color:
                       lightColor: '#F6693C'
                       darkColor: '#C33609'
+                    signature: 'dSize=38&aRatio=21:9&hRes=3840&vRes=1600'
                     visible: true
                   - id: LnAg4nPQ
                     tag:
@@ -357,6 +363,7 @@ paths:
                     color:
                       lightColor: '#67E5AA'
                       darkColor: '#168350'
+                    signature: 'dSize=27&aRatio=16:9&hRes=3840&vRes=2160'
                     visible: true
                   - id: oxrH4rCU
                     tag:
@@ -374,6 +381,7 @@ paths:
                     color:
                       lightColor: '#64E8DD'
                       darkColor: '#14857B'
+                    signature: 'dSize=49&aRatio=32:9&hRes=5120&vRes=1440'
                     visible: true
         '400':
           description: '400 response'
@@ -475,10 +483,8 @@ paths:
                   color:
                     lightColor: '#64E8DD'
                     darkColor: '#14857B'
+                  signature: 'dSize=49&aRatio=32:9&hRes=5120&vRes=1440'
                   visible: true
-                  render:
-                    width: 1
-                    height: 0.6293053673644803
         '400':
           description: '400 response'
           content:
@@ -578,10 +584,8 @@ paths:
                   color:
                     lightColor: '#F6693C'
                     darkColor: '#C33609'
+                  signature: 'dSize=38&aRatio=21:9&hRes=3840&vRes=1600'
                   visible: false
-                  render:
-                    width: 0.7404619058450888
-                    height: 0.7100596596986617
         '400':
           description: '400 response'
           content:
@@ -687,10 +691,8 @@ paths:
                   color:
                     lightColor: '#F6693C'
                     darkColor: '#C33609'
+                  signature: 'dSize=38&aRatio=21:9&hRes=3840&vRes=1600'
                   visible: true
-                  render:
-                    width: 0.7404619058450888
-                    height: 0.7100596596986617
         '400':
           description: '400 response'
           content:
@@ -778,10 +780,8 @@ paths:
                   color:
                     lightColor: '#F6693C'
                     darkColor: '#C33609'
+                  signature: 'dSize=38&aRatio=21:9&hRes=3840&vRes=1600'
                   visible: true
-                  render:
-                    width: 0.7404619058450888
-                    height: 0.7100596596986617
         '400':
           description: '400 response'
           content:
@@ -920,7 +920,7 @@ components:
   schemas:
     SearchListResponse:
       required:
-        - 'list'
+        - list
       type: object
       properties:
         list:
@@ -929,12 +929,12 @@ components:
             $ref: '#/components/schemas/SearchItem'
     SearchItem:
       required:
-        - 'id'
-        - 'name'
-        - 'label'
-        - 'aspectRatio'
-        - 'hRes'
-        - 'vRes'
+        - id
+        - name
+        - label
+        - aspectRatio
+        - hRes
+        - vRes
       type: object
       properties:
         id:
@@ -964,7 +964,7 @@ components:
       description: 'Complete search object'
     ScreenListResponse:
       required:
-        - 'list'
+        - list
       type: object
       properties:
         list:
@@ -973,25 +973,27 @@ components:
             $ref: '#/components/schemas/ScreenItem'
     ScreenIdResponse:
       required:
-        - 'id'
+        - id
       type: object
       properties:
         id:
           type: string
     ScreenItemResponse:
       required:
-        - 'item'
+        - item
       type: object
       properties:
         item:
           $ref: '#/components/schemas/ScreenItem'
     ScreenItem:
       required:
-        - 'id'
-        - 'tag'
-        - 'data'
-        - 'color'
-        - 'visible'
+        - id
+        - tag
+        - signature
+        - data
+        - spec
+        - color
+        - visible
       type: object
       properties:
         id:
@@ -999,6 +1001,8 @@ components:
           minLength: 1
         visible:
           type: boolean
+        signature:
+          type: string
         tag:
           $ref: '#/components/schemas/ScreenTag'
         data:
@@ -1007,8 +1011,6 @@ components:
           $ref: '#/components/schemas/ScreenColor'
         spec:
           $ref: '#/components/schemas/ScreenSpec'
-        render:
-          $ref: '#/components/schemas/ScreenRender'
       description: 'Complete screen object'
     ScreenInputList:
       type: array
@@ -1016,8 +1018,8 @@ components:
         $ref: '#/components/schemas/ScreenInput'
     ScreenTag:
       required:
-        - 'diagonalSize'
-        - 'aspectRatio'
+        - diagonalSize
+        - aspectRatio
       type: object
       properties:
         diagonalSize:
@@ -1030,20 +1032,20 @@ components:
       description: 'Screen primitive data'
     ScreenInput:
       required:
-        - 'diagonalSize'
-        - 'aspectRatio'
-        - 'lightColor'
-        - 'darkColor'
+        - diagonalSize
+        - aspectRatio
+        - hRes
+        - vRes
+        - lightColor
+        - darkColor
       type: object
       properties:
         diagonalSize:
           type: number
-          nullable: true
           minimum: 0
           exclusiveMinimum: true
         aspectRatio:
           minLength: 3
-          nullable: true
           type: string
         lightColor:
           type: string
@@ -1057,19 +1059,17 @@ components:
           pattern: '#([a-f0-9]{6})\b'
         hRes:
           type: integer
-          nullable: true
           minimum: 0
           exclusiveMinimum: true
         vRes:
           type: number
-          nullable: true
       description: 'Screen primitive data'
     ScreenData:
       required:
-        - 'hSize'
-        - 'vSize'
-        - 'hAspectRatio'
-        - 'vAspectRatio'
+        - hSize
+        - vSize
+        - hAspectRatio
+        - vAspectRatio
       type: object
       properties:
         hSize:
@@ -1091,9 +1091,9 @@ components:
       description: 'Screen physical characteristics'
     ScreenSpec:
       required:
-        - 'hRes'
-        - 'vRes'
-        - 'ppi'
+        - hRes
+        - vRes
+        - ppi
       type: object
       properties:
         hRes:
@@ -1109,26 +1109,10 @@ components:
           minimum: 0
           exclusiveMinimum: true
       description: 'Screen resolution characteristics'
-    ScreenRender:
-      type: object
-      properties:
-        width:
-          type: integer
-          minimum: 0
-          exclusiveMinimum: true
-        height:
-          type: integer
-          minimum: 0
-          exclusiveMinimum: true
-        pixelSize:
-          type: integer
-          minimum: 0
-          exclusiveMinimum: true
-      description: 'Screen representation in UI'
     ScreenColor:
       required:
-        - 'lightColor'
-        - 'darkColor'
+        - lightColor
+        - darkColor
       type: object
       properties:
         lightColor:
@@ -1144,13 +1128,13 @@ components:
       description: 'Screen representation colors in hex format'
     ErrorResponse:
       required:
-        - 'error'
+        - error
       type: object
       properties:
         error:
           required:
-            - 'code'
-            - 'status'
+            - code
+            - status
           type: object
           properties:
             code:

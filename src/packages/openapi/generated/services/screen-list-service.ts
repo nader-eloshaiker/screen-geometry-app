@@ -137,6 +137,7 @@ export const getGetScreenListMock = () => ({
       data: { hSize: 31.25093102061397, vSize: 13.3932561516917, hAspectRatio: 21, vAspectRatio: 9 },
       spec: { hRes: 3440, vRes: 1440, ppi: 109.68340725465096 },
       color: { lightColor: '#FCDF50', darkColor: '#967E03' },
+      signature: 'dSize=34&aRatio=21:9&hRes=3440&vRes=1440',
       visible: true,
     },
     {
@@ -145,6 +146,7 @@ export const getGetScreenListMock = () => ({
       data: { hSize: 34.9275111406862, vSize: 14.968933346008372, hAspectRatio: 21, vAspectRatio: 9 },
       spec: { hRes: 3840, vRes: 1600, ppi: 109.47368421052632 },
       color: { lightColor: '#F6693C', darkColor: '#C33609' },
+      signature: 'dSize=38&aRatio=21:9&hRes=3840&vRes=1600',
       visible: true,
     },
     {
@@ -153,6 +155,7 @@ export const getGetScreenListMock = () => ({
       data: { hSize: 23.53253950236283, vSize: 13.237053470079092, hAspectRatio: 16, vAspectRatio: 9 },
       spec: { hRes: 3840, vRes: 2160, ppi: 163.17830889498507 },
       color: { lightColor: '#67E5AA', darkColor: '#168350' },
+      signature: 'dSize=27&aRatio=16:9&hRes=3840&vRes=2160',
       visible: true,
     },
     {
@@ -161,6 +164,7 @@ export const getGetScreenListMock = () => ({
       data: { hSize: 47.169896067541046, vSize: 13.26653326899592, hAspectRatio: 32, vAspectRatio: 9 },
       spec: { hRes: 5120, vRes: 1440, ppi: 108.54380498674065 },
       color: { lightColor: '#64E8DD', darkColor: '#14857B' },
+      signature: 'dSize=49&aRatio=32:9&hRes=5120&vRes=1440',
       visible: true,
     },
   ],
@@ -174,6 +178,7 @@ export const getCreateScreenListMock = () => ({
       data: { hSize: 31.25093102061397, vSize: 13.3932561516917, hAspectRatio: 21, vAspectRatio: 9 },
       spec: { hRes: 3440, vRes: 1440, ppi: 109.68340725465096 },
       color: { lightColor: '#FCDF50', darkColor: '#967E03' },
+      signature: 'dSize=34&aRatio=21:9&hRes=3440&vRes=1440',
       visible: true,
     },
     {
@@ -182,6 +187,7 @@ export const getCreateScreenListMock = () => ({
       data: { hSize: 34.9275111406862, vSize: 14.968933346008372, hAspectRatio: 21, vAspectRatio: 9 },
       spec: { hRes: 3840, vRes: 1600, ppi: 109.47368421052632 },
       color: { lightColor: '#F6693C', darkColor: '#C33609' },
+      signature: 'dSize=38&aRatio=21:9&hRes=3840&vRes=1600',
       visible: true,
     },
     {
@@ -190,6 +196,7 @@ export const getCreateScreenListMock = () => ({
       data: { hSize: 23.53253950236283, vSize: 13.237053470079092, hAspectRatio: 16, vAspectRatio: 9 },
       spec: { hRes: 3840, vRes: 2160, ppi: 163.17830889498507 },
       color: { lightColor: '#67E5AA', darkColor: '#168350' },
+      signature: 'dSize=27&aRatio=16:9&hRes=3840&vRes=2160',
       visible: true,
     },
     {
@@ -198,6 +205,7 @@ export const getCreateScreenListMock = () => ({
       data: { hSize: 47.169896067541046, vSize: 13.26653326899592, hAspectRatio: 32, vAspectRatio: 9 },
       spec: { hRes: 5120, vRes: 1440, ppi: 108.54380498674065 },
       color: { lightColor: '#64E8DD', darkColor: '#14857B' },
+      signature: 'dSize=49&aRatio=32:9&hRes=5120&vRes=1440',
       visible: true,
     },
   ],

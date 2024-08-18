@@ -81,9 +81,12 @@ export const initDB = (): Promise<boolean> => {
           oldResponse.onsuccess = () => {
             console.log('result', oldResponse.result)
 
-            for (const item of oldResponse.result) {
-              item.id = ulid()
-              newStore.add(item)
+            for (const item of oldResponse.result ?? []) {
+              newStore.add({
+                ...item,
+                id: ulid(),
+                signature: `dSize=${item.tag.diagonalSize}&aRatio=${item.tag.aspectRatio}&hRes=${item.spec.hRes}&vRes=${item.spec.vRes}`,
+              })
             }
 
             console.log('migration complete, removing old store')

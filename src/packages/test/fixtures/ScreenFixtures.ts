@@ -31,10 +31,7 @@ export const screenItemFixture: ScreenItem = {
     darkColor: '#C33609',
   },
   visible: true,
-  render: {
-    width: 0.7404619058450888,
-    height: 0.7100596596986617,
-  },
+  signature: 'dSize=38&aSize=21:9&hRes=3840&vRes=1600',
 }
 
 export const screenItemResponseFixture: ScreenItemResponse = {

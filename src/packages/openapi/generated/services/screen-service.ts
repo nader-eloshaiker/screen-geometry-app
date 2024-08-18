@@ -294,8 +294,8 @@ export const getCreateScreenMock = () => ({
     data: { hSize: 47.169896067541046, vSize: 13.26653326899592, hAspectRatio: 32, vAspectRatio: 9 },
     spec: { hRes: 5120, vRes: 1440, ppi: 108.54380498674065 },
     color: { lightColor: '#64E8DD', darkColor: '#14857B' },
+    signature: 'dSize=49&aRatio=32:9&hRes=5120&vRes=1440',
     visible: true,
-    render: { width: 1, height: 0.6293053673644803 },
   },
 })
 
@@ -306,8 +306,8 @@ export const getShowScreenMock = () => ({
     data: { hSize: 34.9275111406862, vSize: 14.968933346008372, hAspectRatio: 21, vAspectRatio: 9 },
     spec: { hRes: 3840, vRes: 1600, ppi: 109.47368421052632 },
     color: { lightColor: '#F6693C', darkColor: '#C33609' },
+    signature: 'dSize=38&aRatio=21:9&hRes=3840&vRes=1600',
     visible: false,
-    render: { width: 0.7404619058450888, height: 0.7100596596986617 },
   },
 })
 
@@ -318,8 +318,8 @@ export const getGetScreenMock = () => ({
     data: { hSize: 34.9275111406862, vSize: 14.968933346008372, hAspectRatio: 21, vAspectRatio: 9 },
     spec: { hRes: 3840, vRes: 1600, ppi: 109.47368421052632 },
     color: { lightColor: '#F6693C', darkColor: '#C33609' },
+    signature: 'dSize=38&aRatio=21:9&hRes=3840&vRes=1600',
     visible: true,
-    render: { width: 0.7404619058450888, height: 0.7100596596986617 },
   },
 })
 
@@ -330,8 +330,8 @@ export const getUpdateScreenMock = () => ({
     data: { hSize: 34.9275111406862, vSize: 14.968933346008372, hAspectRatio: 21, vAspectRatio: 9 },
     spec: { hRes: 3840, vRes: 1600, ppi: 109.47368421052632 },
     color: { lightColor: '#F6693C', darkColor: '#C33609' },
+    signature: 'dSize=38&aRatio=21:9&hRes=3840&vRes=1600',
     visible: true,
-    render: { width: 0.7404619058450888, height: 0.7100596596986617 },
   },
 })
 

@@ -1,6 +1,6 @@
 import { DarkMode } from '@app/components/theme/ThemeManager'
 import { useThemeModeContext } from '@app/contexts/theme/useThemeModeContext'
-import { ScreenItem } from '@packages/openapi/generated'
+import { ScreenItemRender } from '@app/models/screenItemRender'
 import { clsx } from 'clsx'
 import { Dispatch, SetStateAction, useEffect, useState } from 'react'
 import styled from 'styled-components'
@@ -15,9 +15,9 @@ const Panel = styled.div<{ $width: number; $height: number; $color?: string }>`
 // const isEven = (num: number) => num % 2 == 0
 
 type TProps = TRestProps & {
-  screen: ScreenItem
-  highlighted?: ScreenItem
-  setHighLighted?: Dispatch<SetStateAction<ScreenItem | undefined>>
+  screen: ScreenItemRender
+  highlighted?: ScreenItemRender
+  setHighLighted?: Dispatch<SetStateAction<ScreenItemRender | undefined>>
 }
 
 type PanelConfig = {

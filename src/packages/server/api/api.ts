@@ -125,7 +125,7 @@ export const showScreen = async (id: string) => {
     throw new ApiError('No parameters provided', 400)
   }
 
-  const [err, data] = await to<Undefined<ScreenItem>>(getData<ScreenItem>(Stores.Screens, id))
+  const [err, data] = await to<Undefinable<ScreenItem>>(getData<ScreenItem>(Stores.Screens, id))
 
   if (err) {
     throw new DatabaseError('Database error', 500, err)

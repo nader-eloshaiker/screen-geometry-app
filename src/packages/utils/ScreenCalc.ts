@@ -1,3 +1,4 @@
+import { ScreenItemRender } from '@app/models/screenItemRender'
 import { ScreenColor, ScreenItem } from '@packages/openapi/generated'
 import { Dimensions } from '@packages/openapi/models'
 import { lightness } from 'simpler-color'
@@ -28,24 +29,26 @@ export const getMaxScreenSize = (screens: Array<ScreenItem>) =>
     )
 
 export const normaliseScreenRender = (list: ScreenItem[]) => {
-  if (list.length === 0) {
-    return list
-  }
-
-  // srot in reverse order to avoid using z-index when hovering over panel
-  const sorted = list.map((item) => ({ ...item }) as ScreenItem).sort((a, b) => b.tag.diagonalSize - a.tag.diagonalSize)
-  const biggest = getMaxScreenSize(sorted)
-
-  for (const screen of sorted) {
-    screen.render = screen.visible
-      ? {
-          width: screen.data.hSize / biggest.width,
-          height: screen.data.vSize / biggest.height,
-        }
-      : { width: 0, height: 0 }
-  }
+  const biggest = getMaxScreenSize(list)
+  // sort in reverse order to avoid using z-index when hovering over panel
+  const sorted = list
+    .map((item) => toScreenItemRender(item, biggest))
+    .sort((a, b) => b.tag.diagonalSize - a.tag.diagonalSize)
 
   return sorted
+}
+
+export const toScreenItemRender = (screen: ScreenItem, biggest?: Dimensions) => {
+  return {
+    ...screen,
+    render:
+      screen.visible && biggest
+        ? {
+            width: screen.data.hSize / biggest.width,
+            height: screen.data.vSize / biggest.height,
+          }
+        : { width: 0, height: 0 },
+  } as ScreenItemRender
 }
 
 export const createCSSColor = (): ScreenColor => {

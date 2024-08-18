@@ -1,9 +1,9 @@
 import { QueryProvider } from '@app/contexts/Query/QueryProvider'
 import { ScreenProvider } from '@app/contexts/Screen/ScreenProvider'
 import { useScreenContext } from '@app/contexts/Screen/useScreenContext'
+import { ScreenItemRender } from '@app/models/screenItemRender'
 import {
   ScreenInput,
-  ScreenItem,
   getScreenListServiceMock,
   getScreenServiceMock,
   getSearchServiceMock,
@@ -13,6 +13,7 @@ import { screenInputFixture } from '@packages/test/fixtures/ScreenFixtures'
 import { renderWithUserEvents } from '@packages/test/utils/RenderWithUserEvents'
 import { useElementSizeMock } from '@packages/ui/hooks/useElementSize.mock'
 import { NotificationProvider } from '@packages/ui/notification'
+import { toScreenItemRender } from '@packages/utils'
 import { transformScreenInput } from '@packages/utils/DataTransformation'
 import { act, render, waitFor } from '@testing-library/react'
 import { ScreenForm } from './ScreenForm'
@@ -20,7 +21,7 @@ import { ScreenForm } from './ScreenForm'
 type Props = {
   defaultValues: ScreenInput | undefined
   editId?: string | undefined
-  initialise?: ScreenItem[]
+  initialise?: ScreenItemRender[]
   onCloseAction?: () => void
 }
 const TestComponent = ({ defaultValues, editId, onCloseAction }: Props) => {
@@ -205,7 +206,9 @@ describe('#ScreenForm', () => {
 
     test('update a screen from list and populate form', async () => {
       const editId = '5HjERJbH'
-      const initialise: Array<ScreenItem> = [{ ...transformScreenInput(screenInputFixture), id: editId }]
+      const initialise: Array<ScreenItemRender> = [
+        toScreenItemRender({ ...transformScreenInput(screenInputFixture), id: editId }),
+      ]
 
       const test = await renderWithUserEvents(
         <RootTestComponent defaultValues={screenInputFixture} editId={editId} initialise={initialise} />,

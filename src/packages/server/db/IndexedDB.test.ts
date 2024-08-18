@@ -57,6 +57,7 @@ describe('#indexDB', () => {
       const updated = await updateData<ScreenItem>(Stores.Screens, {
         ...getGetScreenMock().item,
         tag: { aspectRatio: '4:3', diagonalSize: 21 },
+        id: '5HjERJbH',
       })
 
       expect(updated?.tag.diagonalSize).toBe(21)

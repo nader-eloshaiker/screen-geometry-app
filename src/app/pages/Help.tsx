@@ -6,7 +6,7 @@ import { ScreenTable } from '@app/components/screen/ScreenTable'
 import { ScreenForm } from '@app/components/screen/form/ScreenForm'
 import { Stacked } from '@app/components/stacked/Stacked'
 import { defaultScreenInputList } from '@app/constants/defaultScreenList'
-import { ScreenItem } from '@packages/openapi/generated'
+import { ScreenItemRender } from '@app/models/screenItemRender'
 import { Dimensions } from '@packages/openapi/models/Screen'
 import { useElementSize } from '@packages/ui/hooks/useElementSize'
 import { transformScreenInput } from '@packages/utils/DataTransformation'
@@ -111,7 +111,7 @@ export const Help = () => {
                     <ScreenPanel
                       key={screen.id}
                       screen={screen}
-                      $isHighlighted={(screen: ScreenItem) => screen.id === smallList[0].id}
+                      $isHighlighted={(screen: ScreenItemRender) => screen.id === smallList[0].id}
                     />
                   ))}
               </Stacked>

@@ -5,7 +5,6 @@
  */
 import type { ScreenColor } from './screenColor'
 import type { ScreenData } from './screenData'
-import type { ScreenRender } from './screenRender'
 import type { ScreenSpec } from './screenSpec'
 import type { ScreenTag } from './screenTag'
 
@@ -16,8 +15,8 @@ export interface ScreenItem {
   color: ScreenColor
   data: ScreenData
   id: string
-  render?: ScreenRender
-  spec?: ScreenSpec
+  signature: string
+  spec: ScreenSpec
   tag: ScreenTag
   visible: boolean
 }

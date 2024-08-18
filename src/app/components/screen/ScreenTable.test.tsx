@@ -1,15 +1,12 @@
 import { QueryProvider } from '@app/contexts/Query/QueryProvider'
 
-import {
-  ScreenItem,
-  getGetScreenListMock,
-  getScreenListServiceMock,
-  getScreenServiceMock,
-} from '@packages/openapi/generated'
+import { ScreenItemRender } from '@app/models/screenItemRender'
+import { getGetScreenListMock, getScreenListServiceMock, getScreenServiceMock } from '@packages/openapi/generated'
 import { mswWithSpy, resetMSW, startMSW, stopMSW } from '@packages/serviceworker/NodeServiceWorker'
 import { renderWithUserEvents } from '@packages/test/utils/RenderWithUserEvents'
 import { useElementSizeMock } from '@packages/ui/hooks/useElementSize.mock'
 import { NotificationProvider } from '@packages/ui/notification'
+import { normaliseScreenRender } from '@packages/utils'
 import { act, waitFor } from '@testing-library/react'
 import { ScreenTable } from './ScreenTable'
 
@@ -17,13 +14,16 @@ const TestComponent = ({
   screens,
   isScreenListLoading = false,
 }: {
-  screens?: Array<ScreenItem>
+  screens?: Array<ScreenItemRender>
   isScreenListLoading?: boolean
 }) => {
   return (
     <QueryProvider>
       <NotificationProvider>
-        <ScreenTable screens={screens ?? getGetScreenListMock().list} isScreenListLoading={isScreenListLoading} />
+        <ScreenTable
+          screens={screens ?? normaliseScreenRender(getGetScreenListMock().list)}
+          isScreenListLoading={isScreenListLoading}
+        />
       </NotificationProvider>
     </QueryProvider>
   )

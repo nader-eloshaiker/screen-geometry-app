@@ -22,7 +22,15 @@ const generateLabel = (entry: SearchItem, data: SearchData) => {
   return str
 }
 
-const createSpec = (width?: number, height?: number, size?: number): ScreenSpec | undefined => {
+const createSpec = (width: number, height: number, size: number) => {
+  return {
+    hRes: width,
+    vRes: height,
+    ppi: Math.sqrt(Math.pow(width, 2) + Math.pow(height, 2)) / size, // size is optional for search data
+  }
+}
+
+const createSearchSpec = (width?: number, height?: number, size?: number): ScreenSpec | undefined => {
   if (!width || !height) {
     return undefined
   }
@@ -37,8 +45,8 @@ export const transformScreenItem = (data: ScreenItem): ScreenInput => {
   const item: ScreenInput = {
     diagonalSize: data.tag.diagonalSize,
     aspectRatio: data.tag.aspectRatio,
-    hRes: data.spec?.hRes,
-    vRes: data.spec?.vRes,
+    hRes: data.spec.hRes,
+    vRes: data.spec.vRes,
     lightColor: data.color.lightColor,
     darkColor: data.color.darkColor,
   }
@@ -46,15 +54,21 @@ export const transformScreenItem = (data: ScreenItem): ScreenInput => {
   return item
 }
 
-export const transformScreenInput = (data: ScreenInput): Omit<ScreenItem, 'id'> => {
-  const [hAspectRatio, vAspectRatio] = getAspectRatio(data.aspectRatio ?? '')
-  const diagonalSize = data.diagonalSize ?? 0
+export const transformScreenInput = ({
+  diagonalSize,
+  aspectRatio,
+  hRes,
+  vRes,
+  lightColor,
+  darkColor,
+}: ScreenInput): Omit<ScreenItem, 'id'> => {
+  const [hAspectRatio, vAspectRatio] = getAspectRatio(aspectRatio)
   const hSize = hAspectRatio * (diagonalSize / Math.sqrt(Math.pow(hAspectRatio, 2) + Math.pow(vAspectRatio, 2)))
   const vSize = vAspectRatio * (diagonalSize / Math.sqrt(Math.pow(hAspectRatio, 2) + Math.pow(vAspectRatio, 2)))
   const item: Omit<ScreenItem, 'id'> = {
     tag: {
       diagonalSize,
-      aspectRatio: data.aspectRatio ?? '',
+      aspectRatio,
     },
     data: {
       hSize,
@@ -62,12 +76,13 @@ export const transformScreenInput = (data: ScreenInput): Omit<ScreenItem, 'id'> 
       hAspectRatio,
       vAspectRatio,
     },
-    spec: createSpec(data.hRes ?? 0, data.vRes ?? 0, diagonalSize),
+    spec: createSpec(hRes, vRes, diagonalSize),
     color: {
-      lightColor: data.lightColor,
-      darkColor: data.darkColor,
+      lightColor,
+      darkColor,
     },
     visible: true,
+    signature: `dSize=${diagonalSize}&aRatio=${aspectRatio}&hRes=${hRes}&vRes=${vRes}`,
   }
 
   return item
@@ -86,7 +101,7 @@ export const transformSearchData = (entry: SearchItem): SearchScreenItem => {
     data.vSize = vAspectRatio * (entry.diagonalSize / Math.sqrt(Math.pow(hAspectRatio, 2) + Math.pow(vAspectRatio, 2)))
   }
 
-  const spec = createSpec(entry.hRes, entry.vRes, entry.diagonalSize)
+  const spec = createSearchSpec(entry.hRes, entry.vRes, entry.diagonalSize)
 
   const item: SearchScreenItem = {
     id: `${entry.name}${entry.diagonalSize ?? ''}${entry.aspectRatio}`,
