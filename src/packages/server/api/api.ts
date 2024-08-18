@@ -78,7 +78,6 @@ export const createScreen = async (data: ScreenInput) => {
     throw new ApiError('No parameters provided', 400)
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const keylessData = transformScreenInput(data)
   const [err, item] = await to<ScreenItem>(addData<ScreenItem>(Stores.Screens, keylessData))
 
