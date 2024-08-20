@@ -1,7 +1,7 @@
 import { ulid } from 'ulid'
 
-const version = 3
-const dbName = 'localforage'
+export const dbVersion = 3
+export const dbName = 'localforage'
 
 export interface KeyedObject {
   id: string
@@ -65,7 +65,7 @@ const openDatabaseTable = ({
 
 export const initDB = (): Promise<boolean> => {
   return new Promise((resolve) => {
-    const openReq = indexedDB.open(dbName, version)
+    const openReq = indexedDB.open(dbName, dbVersion)
     openReq.onupgradeneeded = (event) => {
       const db = openReq.result
 
@@ -130,7 +130,7 @@ export const initDB = (): Promise<boolean> => {
 
 export const getAllData = <T extends KeyedObject>(storeName: Stores): Promise<Array<T>> => {
   return new Promise((resolve, reject) => {
-    const openReq = openDatabase(dbName, version)
+    const openReq = openDatabase(dbName, dbVersion)
     handleRequestError(openReq, reject)
 
     openReq.onsuccess = () => {
@@ -147,7 +147,7 @@ export const getAllData = <T extends KeyedObject>(storeName: Stores): Promise<Ar
 
 export const getData = <T extends KeyedObject>(storeName: Stores, key: string): Promise<T | undefined> => {
   return new Promise((resolve, reject) => {
-    const openReq = openDatabase(dbName, version)
+    const openReq = openDatabase(dbName, dbVersion)
     handleRequestError(openReq, reject)
 
     openReq.onsuccess = () => {
@@ -164,7 +164,7 @@ export const getData = <T extends KeyedObject>(storeName: Stores, key: string): 
 
 export const addData = <T extends KeyedObject>(storeName: string, data: Omit<T, keyof KeyedObject>): Promise<T> => {
   return new Promise((resolve, reject) => {
-    const openReq = openDatabase(dbName, version)
+    const openReq = openDatabase(dbName, dbVersion)
     handleRequestError(openReq, reject)
 
     openReq.onsuccess = () => {
@@ -185,7 +185,7 @@ export const addAllData = <T extends KeyedObject>(
   data: Array<Omit<T, keyof KeyedObject>>,
 ): Promise<Array<T>> => {
   return new Promise((resolve, reject) => {
-    const openReq = openDatabase(dbName, version)
+    const openReq = openDatabase(dbName, dbVersion)
     handleRequestError(openReq, reject)
 
     openReq.onsuccess = () => {
@@ -204,7 +204,7 @@ export const addAllData = <T extends KeyedObject>(
 
 export const updateData = <T extends KeyedObject>(storeName: string, data: T): Promise<T> => {
   return new Promise((resolve, reject) => {
-    const openReq = openDatabase(dbName, version)
+    const openReq = openDatabase(dbName, dbVersion)
     handleRequestError(openReq, reject)
 
     openReq.onsuccess = () => {
@@ -222,7 +222,7 @@ export const updateData = <T extends KeyedObject>(storeName: string, data: T): P
 export const deleteData = (storeName: string, key: string): Promise<string> => {
   return new Promise((resolve, reject) => {
     // again open the connection
-    const openReq = openDatabase(dbName, version)
+    const openReq = openDatabase(dbName, dbVersion)
     handleRequestError(openReq, reject)
 
     openReq.onsuccess = () => {

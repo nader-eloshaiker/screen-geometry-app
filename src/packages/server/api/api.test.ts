@@ -1,7 +1,8 @@
 import { ScreenItem } from '@packages/openapi/generated'
 import { screenItemFixture } from '@packages/test/fixtures/ScreenFixtures'
 import indexeddb from 'fake-indexeddb'
-import { addData, initDB, Stores } from '../db/IndexedDB'
+import { addData, Stores } from '../db/IndexedDB'
+import { cleanupDB, setupDB } from '../db/IndexedDB.test'
 import { screenInput55Fixture } from '../test/fixtures/ScreenFixtures'
 import {
   createScreen,
@@ -17,7 +18,11 @@ import {
 describe('#api', () => {
   beforeAll(async () => {
     globalThis.indexedDB = indexeddb
-    await initDB()
+    setupDB()
+  })
+
+  afterEach(async () => {
+    cleanupDB()
   })
 
   it('#getSearchList should return a list of screens that match a term', async () => {

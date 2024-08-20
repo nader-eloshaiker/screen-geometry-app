@@ -3,7 +3,8 @@ import { apiRoutes } from '@packages/openapi/meta'
 import { mswWithSpy, startMSW, stopMSW } from '@packages/serviceworker/NodeServiceWorker'
 import { screenItemFixture } from '@packages/test/fixtures/ScreenFixtures'
 import indexeddb from 'fake-indexeddb'
-import { Stores, addData, initDB } from './db/IndexedDB'
+import { Stores, addData } from './db/IndexedDB'
+import { cleanupDB, setupDB } from './db/IndexedDB.test'
 import { generateStub } from './server'
 import { screenInput55Fixture } from './test/fixtures/ScreenFixtures'
 
@@ -21,11 +22,15 @@ describe('#server', () => {
   beforeAll(async () => {
     await startMSW()
     globalThis.indexedDB = indexeddb
-    await initDB()
+    setupDB()
   })
 
   afterAll(async () => {
     await stopMSW()
+  })
+
+  afterEach(async () => {
+    cleanupDB()
   })
 
   it('should call the GET screens api', async () => {
