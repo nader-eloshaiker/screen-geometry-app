@@ -1,7 +1,7 @@
 import { ulid } from 'ulid'
 
-export const dbVersion = 3
-export const dbName = 'localforage'
+export const dbVersionDefault = 3
+export const dbNameDefault = 'localforage'
 
 export interface KeyedObject {
   id: string
@@ -25,6 +25,16 @@ const handleRequestError = (
       reject('Unknown error')
     }
   }
+}
+
+type dbProps = {
+  dbName: string
+  dbVersion: number
+}
+
+const dbPropsDefault: dbProps = {
+  dbName: dbNameDefault,
+  dbVersion: dbVersionDefault,
 }
 
 const openDatabase = (dbName: string, version: number) => {
@@ -63,7 +73,10 @@ const openDatabaseTable = ({
   return { db, tx, store }
 }
 
-export const initDB = (): Promise<boolean> => {
+export const initDB = (options?: dbProps): Promise<boolean> => {
+  const { dbName, dbVersion } = { ...dbPropsDefault, ...options }
+  console.log('initDB', dbName, dbVersion)
+
   return new Promise((resolve) => {
     const openReq = indexedDB.open(dbName, dbVersion)
     openReq.onupgradeneeded = (event) => {
@@ -118,34 +131,45 @@ export const initDB = (): Promise<boolean> => {
     }
 
     openReq.onsuccess = () => {
+      openReq.result.close()
       console.log('openReq.onsuccess - initDB')
       resolve(true)
     }
 
     openReq.onerror = () => {
+      openReq.result.close()
       resolve(false)
     }
   })
 }
 
-export const getAllData = <T extends KeyedObject>(storeName: Stores): Promise<Array<T>> => {
+export const getAllData = <T extends KeyedObject>(storeName: Stores, options?: dbProps): Promise<Array<T>> => {
+  const { dbName, dbVersion } = { ...dbPropsDefault, ...options }
+
   return new Promise((resolve, reject) => {
     const openReq = openDatabase(dbName, dbVersion)
     handleRequestError(openReq, reject)
 
     openReq.onsuccess = () => {
-      const { store } = openDatabaseTable({ openReq, storeName, mode: 'readonly' })
+      const { db, store } = openDatabaseTable({ openReq, storeName, mode: 'readonly' })
       const storeReq = store.getAll()
       handleRequestError(storeReq, reject)
 
       storeReq.onsuccess = () => {
+        db.close()
         resolve(storeReq.result as Array<T>)
       }
     }
   })
 }
 
-export const getData = <T extends KeyedObject>(storeName: Stores, key: string): Promise<T | undefined> => {
+export const getData = <T extends KeyedObject>(
+  storeName: Stores,
+  key: string,
+  options?: dbProps,
+): Promise<T | undefined> => {
+  const { dbName, dbVersion } = { ...dbPropsDefault, ...options }
+
   return new Promise((resolve, reject) => {
     const openReq = openDatabase(dbName, dbVersion)
     handleRequestError(openReq, reject)
@@ -162,7 +186,13 @@ export const getData = <T extends KeyedObject>(storeName: Stores, key: string): 
   })
 }
 
-export const addData = <T extends KeyedObject>(storeName: string, data: Omit<T, keyof KeyedObject>): Promise<T> => {
+export const addData = <T extends KeyedObject>(
+  storeName: string,
+  data: Omit<T, keyof KeyedObject>,
+  options?: dbProps,
+): Promise<T> => {
+  const { dbName, dbVersion } = { ...dbPropsDefault, ...options }
+
   return new Promise((resolve, reject) => {
     const openReq = openDatabase(dbName, dbVersion)
     handleRequestError(openReq, reject)
@@ -183,7 +213,10 @@ export const addData = <T extends KeyedObject>(storeName: string, data: Omit<T, 
 export const addAllData = <T extends KeyedObject>(
   storeName: string,
   data: Array<Omit<T, keyof KeyedObject>>,
+  options?: dbProps,
 ): Promise<Array<T>> => {
+  const { dbName, dbVersion } = { ...dbPropsDefault, ...options }
+
   return new Promise((resolve, reject) => {
     const openReq = openDatabase(dbName, dbVersion)
     handleRequestError(openReq, reject)
@@ -202,7 +235,9 @@ export const addAllData = <T extends KeyedObject>(
   })
 }
 
-export const updateData = <T extends KeyedObject>(storeName: string, data: T): Promise<T> => {
+export const updateData = <T extends KeyedObject>(storeName: string, data: T, options?: dbProps): Promise<T> => {
+  const { dbName, dbVersion } = { ...dbPropsDefault, ...options }
+
   return new Promise((resolve, reject) => {
     const openReq = openDatabase(dbName, dbVersion)
     handleRequestError(openReq, reject)
@@ -219,7 +254,9 @@ export const updateData = <T extends KeyedObject>(storeName: string, data: T): P
   })
 }
 
-export const deleteData = (storeName: string, key: string): Promise<string> => {
+export const deleteData = (storeName: string, key: string, options?: dbProps): Promise<string> => {
+  const { dbName, dbVersion } = { ...dbPropsDefault, ...options }
+
   return new Promise((resolve, reject) => {
     // again open the connection
     const openReq = openDatabase(dbName, dbVersion)

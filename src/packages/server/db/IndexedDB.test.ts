@@ -1,11 +1,12 @@
 import { getGetScreenMock, ScreenItem } from '@packages/openapi/generated'
 import { screenItemFixture } from '@packages/test/fixtures/ScreenFixtures'
-import indexeddb from 'fake-indexeddb'
+import { setupV2DB } from '@packages/test/stubs/IndexedDBMigration.stub'
+import { IDBFactory } from 'fake-indexeddb'
 import {
   addAllData,
   addData,
-  dbName,
-  dbVersion,
+  dbNameDefault,
+  dbVersionDefault,
   deleteData,
   getAllData,
   getData,
@@ -15,7 +16,7 @@ import {
 } from './IndexedDB'
 
 export const setupDB = () => {
-  const openReq = indexedDB.open(dbName, dbVersion)
+  const openReq = indexedDB.open(dbNameDefault, dbVersionDefault)
   openReq.onupgradeneeded = () => {
     const db = openReq.result
     if (!db.objectStoreNames.contains(Stores.Screens)) {
@@ -24,24 +25,11 @@ export const setupDB = () => {
   }
 }
 
-export const cleanupDB = () => {
-  const openReq = indexedDB.open(dbName, dbVersion)
-  openReq.onsuccess = () => {
-    const tx = openReq.result.transaction(Stores.Screens, 'readwrite')
-    const store = tx.objectStore(Stores.Screens)
-    store.clear()
-  }
-}
-
 describe('#indexDB', () => {
   describe('#CRUD', () => {
-    beforeAll(async () => {
-      globalThis.indexedDB = indexeddb
+    beforeEach(async () => {
+      globalThis.indexedDB = new IDBFactory()
       setupDB()
-    })
-
-    afterEach(async () => {
-      cleanupDB()
     })
 
     describe('#getItemList', () => {
@@ -133,64 +121,69 @@ describe('#indexDB', () => {
   })
 
   describe('#initDB', () => {
+    beforeEach(async () => {
+      globalThis.indexedDB = new IDBFactory()
+    })
+
     it('should upgrade from v2 to v3', async () => {
-      const deleteDB = () =>
-        new Promise((resolve) => {
-          const openReq = indexedDB.deleteDatabase(dbName)
-
-          openReq.onsuccess = () => {
-            resolve(true)
-          }
-
-          openReq.onerror = () => {
-            resolve(false)
-          }
-        })
-      const setupV2DB = () =>
-        new Promise((resolve) => {
-          const openReq = indexedDB.open('localforage', 2)
-          openReq.onupgradeneeded = () => {
-            const db = openReq.result
-            db.createObjectStore(Stores.DeprecatedLocalForageBlob)
-            db.createObjectStore(Stores.DeprecatedLocalForageTable)
-
-            const tx = openReq.transaction
-            const oldStore = tx!.objectStore(Stores.DeprecatedLocalForageTable)
-            oldStore.add(
-              [
-                {
-                  id: 'I0WBgxI_',
-                  tag: { aspectRatio: '21:9', diagonalSize: 34 },
-                  spec: { hRes: 3440, vRes: 1440, ppi: 109.683 },
-                  data: { hAspectRatio: 21, vAspectRatio: 9, hSize: 31.251, vSize: 13.393 },
-                  color: { lightColor: '#FCDF50', darkColor: '#967E03' },
-                  visible: true,
-                },
-                {
-                  id: 'bxRKJe0g',
-                  tag: { aspectRatio: '21:9', diagonalSize: 38 },
-                  spec: { hRes: 3840, vRes: 1600, ppi: 109.474 },
-                  data: { hAspectRatio: 21, vAspectRatio: 9, hSize: 34.927, vSize: 14.969 },
-                  color: { lightColor: '#F6693C', darkColor: '#C33609' },
-                  visible: true,
-                },
-              ],
-              'screens',
-            )
-          }
-          openReq.onsuccess = () => {
-            openReq.result.close()
-            resolve(true)
-          }
-
-          openReq.onerror = () => {
-            resolve(false)
-          }
-        })
-
-      await deleteDB()
       await setupV2DB()
-      await initDB()
+      await initDB({
+        dbName: 'Testv2Tov3',
+        dbVersion: 3,
+      })
+
+      const result = await getAllData<ScreenItem>(Stores.Screens, { dbName: 'Testv2Tov3', dbVersion: 3 })
+
+      expect(result?.length).toBe(2)
+      expect(result.find((item) => item.tag.diagonalSize === 38)).toEqual({
+        id: expect.any(String),
+        color: {
+          darkColor: '#C33609',
+          lightColor: '#F6693C',
+        },
+        data: {
+          hAspectRatio: 21,
+          hSize: 34.927,
+          vAspectRatio: 9,
+          vSize: 14.969,
+        },
+        signature: 'dSize=38&aRatio=21:9&hRes=3840&vRes=1600',
+        spec: {
+          hRes: 3840,
+          ppi: 109.474,
+          vRes: 1600,
+        },
+        tag: {
+          aspectRatio: '21:9',
+          diagonalSize: 38,
+        },
+        visible: true,
+      })
+
+      expect(result.find((item) => item.tag.diagonalSize === 34)).toEqual({
+        id: expect.any(String),
+        color: {
+          darkColor: '#967E03',
+          lightColor: '#FCDF50',
+        },
+        data: {
+          hAspectRatio: 21,
+          hSize: 31.251,
+          vAspectRatio: 9,
+          vSize: 13.393,
+        },
+        signature: 'dSize=34&aRatio=21:9&hRes=3440&vRes=1440',
+        spec: {
+          hRes: 3440,
+          ppi: 109.683,
+          vRes: 1440,
+        },
+        tag: {
+          aspectRatio: '21:9',
+          diagonalSize: 34,
+        },
+        visible: true,
+      })
     })
   })
 })
