@@ -52,7 +52,6 @@ export const AutoCompleteScreen = <T extends TListItem>({
       setClearHandler={setClearHandler}
       placeholder='Type to filter list...'
       isLoading={isFetching}
-      disableOnLoading={false}
       {...rest}
     />
   )

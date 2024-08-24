@@ -43,11 +43,6 @@ const meta = {
       table: { category: 'format', type: { summary: 'boolean' }, defaultValue: { summary: 'false' } },
       control: { type: 'boolean' },
     },
-    disableOnLoading: {
-      description: 'Prevent user interaction while in loading state.',
-      table: { category: 'format', type: { summary: 'boolean' }, defaultValue: { summary: 'true' } },
-      control: { type: 'boolean' },
-    },
     placeholder: {
       description: 'The placeholder text when the input is empty.',
       table: { category: 'content', type: { summary: 'string' } },

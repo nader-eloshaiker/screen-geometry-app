@@ -26,7 +26,6 @@ type TProps<T extends TListItem> = {
   className?: string
   placeholder?: string
   isLoading?: boolean
-  disableOnLoading?: boolean
   onChange?: (val: string) => void
   onSelect?: (item: T) => void
   setClearHandler?: (func: () => void) => void
@@ -37,7 +36,6 @@ const ListInputField = <T extends TListItem>({
   className,
   placeholder,
   isLoading = false,
-  disableOnLoading = true,
   onChange = () => {},
   onSelect = () => {},
   setClearHandler = () => {},
@@ -127,7 +125,7 @@ const ListInputField = <T extends TListItem>({
         onChange={handleChange}
         placeholder={isLoading ? 'Loading...' : (placeholder ?? 'Type something...')}
         tabIndex={0}
-        disabled={isLoading && disableOnLoading}
+        disabled={isLoading}
       />
       {items.length > 0 && (
         <div className='dropdown-content top-14 z-[1] max-h-80 flex-col overflow-auto rounded-md bg-base-200'>
