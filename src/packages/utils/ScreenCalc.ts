@@ -21,8 +21,8 @@ export const getMaxScreenSize = (screens: Array<ScreenItem>) =>
     .filter((screen) => screen.visible)
     .reduce(
       (acc, screen) => {
-        const width = screen.data.hSize
-        const height = screen.data.vSize
+        const width = screen.specs.hSize
+        const height = screen.specs.vSize
         return { width: Math.max(acc.width, width), height: Math.max(acc.height, height) } as Dimensions
       },
       { width: 0, height: 0 } as Dimensions,
@@ -33,7 +33,7 @@ export const normaliseScreenRender = (list: ScreenItem[]) => {
   // sort in reverse order to avoid using z-index when hovering over panel
   const sorted = list
     .map((item) => toScreenItemRender(item, biggest))
-    .sort((a, b) => b.tag.diagonalSize - a.tag.diagonalSize)
+    .sort((a, b) => b.data.diagonalSize - a.data.diagonalSize)
 
   return sorted
 }
@@ -44,8 +44,8 @@ export const toScreenItemRender = (screen: ScreenItem, biggest?: Dimensions) => 
     render:
       screen.visible && biggest
         ? {
-            width: screen.data.hSize / biggest.width,
-            height: screen.data.vSize / biggest.height,
+            width: screen.specs.hSize / biggest.width,
+            height: screen.specs.vSize / biggest.height,
           }
         : { width: 0, height: 0 },
   } as ScreenItemRender

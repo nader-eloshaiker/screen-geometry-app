@@ -4,8 +4,8 @@ import { useCreateScreenApi } from '@app/hooks/api/helpers/useCreateScreenApi'
 import { useSearchApi } from '@app/hooks/api/helpers/useSearchApi'
 import { useUpdateScreenApi } from '@app/hooks/api/helpers/useUpdateScreenApi'
 import { yupResolver } from '@hookform/resolvers/yup'
-import { ScreenInput } from '@packages/openapi/generated'
-import { ScreenDataEnum, SearchScreenItem } from '@packages/openapi/models'
+import { ScreenInput, SearchItem } from '@packages/openapi/generated'
+import { ScreenDataEnum } from '@packages/openapi/models'
 import { AutoCompleteScreen } from '@packages/ui/auto-complete'
 import { createCSSColor } from '@packages/utils/ScreenCalc'
 import { clsx } from 'clsx'
@@ -62,14 +62,14 @@ export const ScreenForm = ({ defaultValues = null, editId = undefined, isLoading
 
   // NOTE: this is a hack to get around the fact that the form is not re-rendering when the defaultValues prop changes
   // Address this at the top level of te form
-  const selectHandler = (item: SearchScreenItem) => {
-    setValue(ScreenDataEnum.aspectRatio, item.tag.aspectRatio, {
+  const searchListSelectHandler = (item: SearchItem) => {
+    setValue(ScreenDataEnum.aspectRatio, item.aspectRatio, {
       shouldValidate: true,
       shouldDirty: true,
       shouldTouch: true,
     })
-    if (item.tag.diagonalSize) {
-      setValue(ScreenDataEnum.diagonalSize, item.tag.diagonalSize, {
+    if (item.diagonalSize) {
+      setValue(ScreenDataEnum.diagonalSize, item.diagonalSize, {
         shouldValidate: true,
         shouldDirty: true,
         shouldTouch: true,
@@ -77,8 +77,8 @@ export const ScreenForm = ({ defaultValues = null, editId = undefined, isLoading
     } else {
       resetField(ScreenDataEnum.diagonalSize)
     }
-    if (item.spec?.hRes) {
-      setValue(ScreenDataEnum.hRes, item.spec?.hRes, {
+    if (item.hRes) {
+      setValue(ScreenDataEnum.hRes, item.hRes, {
         shouldValidate: true,
         shouldDirty: true,
         shouldTouch: true,
@@ -86,8 +86,8 @@ export const ScreenForm = ({ defaultValues = null, editId = undefined, isLoading
     } else {
       resetField(ScreenDataEnum.hRes)
     }
-    if (item.spec?.vRes) {
-      setValue(ScreenDataEnum.vRes, item.spec?.vRes, {
+    if (item.vRes) {
+      setValue(ScreenDataEnum.vRes, item.vRes, {
         shouldValidate: true,
         shouldDirty: true,
         shouldTouch: true,
@@ -152,7 +152,7 @@ export const ScreenForm = ({ defaultValues = null, editId = undefined, isLoading
         </label>
         <AutoCompleteScreen
           id='autoCompleteScreen'
-          onSelectScreen={selectHandler}
+          onSelectItem={searchListSelectHandler}
           setClearSearchHandler={setClearSearchHandler}
           isFetching={isSearchListLoading}
           searchList={searchListResponse?.list ?? []}

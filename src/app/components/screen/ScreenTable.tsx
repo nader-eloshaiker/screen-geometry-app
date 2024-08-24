@@ -153,16 +153,14 @@ export const ScreenTable = ({
                   )}
                 </div>
               </td>
-              <td className='text-center'>{screen.tag.diagonalSize}&quot;</td>
-              <td className='text-center'>{screen.tag.aspectRatio}</td>
+              <td className='text-center'>{screen.data.diagonalSize}&quot;</td>
+              <td className='text-center'>{screen.data.aspectRatio}</td>
               <td className='hidden text-center sm:table-cell'>
-                {Math.round((screen.data.hSize * 100) / 100)}&quot; x {Math.round((screen.data.vSize * 100) / 100)}
+                {Math.round((screen.specs.hSize * 100) / 100)}&quot; x {Math.round((screen.specs.vSize * 100) / 100)}
                 &quot;
               </td>
-              <td className='hidden text-center md:table-cell'>
-                {screen.spec && `${screen.spec.hRes} x ${screen.spec.vRes}`}
-              </td>
-              <td className='text-center'>{screen.spec && `${Math.round((screen.spec.ppi * 100) / 100)}`}</td>
+              <td className='hidden text-center md:table-cell'>{`${screen.data.hRes} x ${screen.data.vRes}`}</td>
+              <td className='text-center'>{`${Math.round((screen.specs.ppi * 100) / 100)}`}</td>
               <td>
                 <div className='flex flex-row items-center justify-center gap-3'>
                   <button aria-label='edit button' onClick={() => handleEdit(screen)}>

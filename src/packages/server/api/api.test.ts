@@ -57,13 +57,13 @@ describe('#api', () => {
 
     const updated = await updateScreen(created.id, screenInput55Fixture)
 
-    expect(updated.item?.tag.diagonalSize).toBe(55)
+    expect(updated.item?.data.diagonalSize).toBe(55)
   })
 
   it('#createScreen should return a screen', async () => {
     const created = await createScreen(screenInput55Fixture)
 
-    expect(created.item.tag.diagonalSize).toBe(55)
+    expect(created.item.data.diagonalSize).toBe(55)
     // expect(await localforage.length()).toBe(5)
   })
 
@@ -71,7 +71,7 @@ describe('#api', () => {
     // await localforage.clear()
     const result = await createScreenList([screenInput55Fixture])
 
-    expect(result.list[0]!.tag.diagonalSize).toBe(55)
+    expect(result.list[0]!.data.diagonalSize).toBe(55)
     const screen = await getScreen(result.list[0].id)
     expect(screen.item.id).toBe(result.list[0].id)
   })

@@ -1,3 +1,4 @@
+import { ScreenColor, ScreenItem } from '@packages/openapi/generated'
 import { ulid } from 'ulid'
 
 export const dbVersionDefault = 3
@@ -109,12 +110,27 @@ export const initDB = (options?: dbProps): Promise<boolean> => {
           oldResponse.onsuccess = () => {
             console.log('result', oldResponse.result)
 
-            for (const item of oldResponse.result ?? []) {
-              newStore.add({
-                ...item,
+            for (const oldItem of oldResponse.result ?? []) {
+              const newItem: ScreenItem = {
                 id: ulid(),
-                signature: `dSize=${item.tag.diagonalSize}&aRatio=${item.tag.aspectRatio}&hRes=${item.spec.hRes}&vRes=${item.spec.vRes}`,
-              })
+                signature: `dSize=${oldItem.tag.diagonalSize}&aRatio=${oldItem.tag.aspectRatio}&hRes=${oldItem.spec.hRes}&vRes=${oldItem.spec.vRes}`,
+                visible: oldItem.visible as boolean,
+                data: {
+                  aspectRatio: oldItem.tag.aspectRatio as string,
+                  diagonalSize: oldItem.tag.diagonalSize as number,
+                  hRes: oldItem.spec.hRes as number,
+                  vRes: oldItem.spec.vRes as number,
+                },
+                specs: {
+                  hAspectRatio: oldItem.data.hAspectRatio as number,
+                  vAspectRatio: oldItem.data.vAspectRatio as number,
+                  ppi: oldItem.spec.ppi as number,
+                  hSize: oldItem.data.hSize as number,
+                  vSize: oldItem.data.vSize as number,
+                },
+                color: oldItem.color as ScreenColor,
+              }
+              newStore.add(newItem)
             }
 
             console.log('migration complete, removing old store')

@@ -5,11 +5,11 @@
  */
 
 /**
- * Screen physical characteristics
+ * Screen resolution characteristics
  */
 export interface ScreenData {
-  hAspectRatio: number
-  hSize: number
-  vAspectRatio: number
-  vSize: number
+  aspectRatio: string
+  diagonalSize: number
+  hRes: number
+  vRes: number
 }

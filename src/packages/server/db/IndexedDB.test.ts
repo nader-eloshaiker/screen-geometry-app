@@ -52,14 +52,14 @@ describe('#indexDB', () => {
       it('createItem should return a screen', async () => {
         const created = await addData<ScreenItem>(Stores.Screens, screenItemFixture)
 
-        expect(created?.tag.diagonalSize).toBe(38)
+        expect(created?.data.diagonalSize).toBe(38)
       })
 
       it('createItemList should return a list of screens', async () => {
         // await localforage.clear()
         const result = await addAllData<ScreenItem>(Stores.Screens, [screenItemFixture])
 
-        expect(result[0].tag.diagonalSize).toBe(38)
+        expect(result[0].data.diagonalSize).toBe(38)
         expect(result.length).toBe(1)
       })
     })
@@ -86,10 +86,10 @@ describe('#indexDB', () => {
 
         const updated = await updateData<ScreenItem>(Stores.Screens, {
           ...created,
-          tag: { aspectRatio: '4:3', diagonalSize: 21 },
+          data: { ...created.data, aspectRatio: '4:3', diagonalSize: 21 },
         })
 
-        expect(updated?.tag.diagonalSize).toBe(21)
+        expect(updated?.data.diagonalSize).toBe(21)
       })
 
       it.fails('updateItem should throw an error if id is not found', async () => {
@@ -135,52 +135,48 @@ describe('#indexDB', () => {
       const result = await getAllData<ScreenItem>(Stores.Screens, { dbName: 'Testv2Tov3', dbVersion: 3 })
 
       expect(result?.length).toBe(2)
-      expect(result.find((item) => item.tag.diagonalSize === 38)).toEqual({
+      expect(result.find((item) => item.data.diagonalSize === 38)).toEqual({
         id: expect.any(String),
         color: {
           darkColor: '#C33609',
           lightColor: '#F6693C',
         },
-        data: {
+        specs: {
           hAspectRatio: 21,
           hSize: 34.927,
           vAspectRatio: 9,
           vSize: 14.969,
+          ppi: 109.474,
         },
         signature: 'dSize=38&aRatio=21:9&hRes=3840&vRes=1600',
-        spec: {
-          hRes: 3840,
-          ppi: 109.474,
-          vRes: 1600,
-        },
-        tag: {
+        data: {
           aspectRatio: '21:9',
           diagonalSize: 38,
+          hRes: 3840,
+          vRes: 1600,
         },
         visible: true,
       })
 
-      expect(result.find((item) => item.tag.diagonalSize === 34)).toEqual({
+      expect(result.find((item) => item.data.diagonalSize === 34)).toEqual({
         id: expect.any(String),
         color: {
           darkColor: '#967E03',
           lightColor: '#FCDF50',
         },
-        data: {
+        specs: {
           hAspectRatio: 21,
           hSize: 31.251,
           vAspectRatio: 9,
           vSize: 13.393,
+          ppi: 109.683,
         },
         signature: 'dSize=34&aRatio=21:9&hRes=3440&vRes=1440',
-        spec: {
-          hRes: 3440,
-          ppi: 109.683,
-          vRes: 1440,
-        },
-        tag: {
+        data: {
           aspectRatio: '21:9',
           diagonalSize: 34,
+          hRes: 3440,
+          vRes: 1440,
         },
         visible: true,
       })

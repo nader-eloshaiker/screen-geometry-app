@@ -1,25 +1,22 @@
-import { SearchItem } from '@packages/openapi/generated'
-import { SearchScreenItem } from '@packages/openapi/models'
-import { transformSearchData } from '@packages/utils/DataTransformation'
 import { useCallback, useEffect, useState } from 'react'
 import { ListInput, TListItem } from '../list-input'
 
-type TProps = TRestProps & {
-  onSelectScreen: (item: SearchScreenItem) => void
+type TProps<T> = {
+  onSelectItem: (item: T) => void
   setClearSearchHandler?: (func: () => void) => void
   onSearch?: (term: string) => void
-  searchList: Array<SearchItem>
+  searchList: Array<T>
   isFetching: boolean
-}
+} & TRestProps
 
-export const AutoCompleteScreen = ({
-  onSelectScreen = () => {},
+export const AutoCompleteScreen = <T extends TListItem>({
+  onSelectItem = () => {},
   setClearSearchHandler = () => {},
   onSearch = () => {},
   searchList,
   isFetching,
   ...rest
-}: TProps) => {
+}: TProps<T>) => {
   const [clearHandler, setClearHandler] = useState<() => void>(() => {})
   const [list, setList] = useState<Array<TListItem>>([])
   const [searchTerm, setSearchTerm] = useState<string>('')
@@ -31,8 +28,7 @@ export const AutoCompleteScreen = ({
 
     const match = searchList.find((entry) => entry.id === value.id)
     if (match) {
-      const screen = transformSearchData(match)
-      onSelectScreen(screen)
+      onSelectItem(match)
     }
   }
 

@@ -111,7 +111,7 @@ export const Screens = () => {
                     .filter((screen) => screen.visible)
                     .map((screen) => (
                       <ScreenPanel
-                        data-testid={`ScreenPanel-${screen.tag.diagonalSize}`}
+                        data-testid={`ScreenPanel-${screen.data.diagonalSize}`}
                         key={screen.id}
                         screen={screen}
                         highlighted={highlighted}

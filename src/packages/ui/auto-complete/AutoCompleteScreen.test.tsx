@@ -13,7 +13,7 @@ type Props = {
 const TestComponent = ({ onSelectScreenSpy, setClearSearchHandlerSpy, onSearchSpy }: Props) => {
   return (
     <AutoCompleteScreen
-      onSelectScreen={onSelectScreenSpy}
+      onSelectItem={onSelectScreenSpy}
       setClearSearchHandler={setClearSearchHandlerSpy}
       isFetching={false}
       searchList={getGetSearchMock().list}
