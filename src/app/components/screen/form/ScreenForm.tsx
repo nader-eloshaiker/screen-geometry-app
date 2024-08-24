@@ -150,7 +150,7 @@ export const ScreenForm = ({ defaultValues = null, editId = undefined, isLoading
         <label htmlFor='autoCompleteScreen' className='label label-text'>
           <span className='text-sm'>Auto fill the form from list of Monitors</span>
         </label>
-        <AutoCompleteScreen
+        <AutoCompleteScreen<SearchItem>
           id='autoCompleteScreen'
           onSelectItem={searchListSelectHandler}
           setClearSearchHandler={setClearSearchHandler}

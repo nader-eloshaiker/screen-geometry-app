@@ -1,4 +1,4 @@
-import { getGetSearchMock } from '@packages/openapi/generated'
+import { getGetSearchMock, SearchItem } from '@packages/openapi/generated'
 import { renderWithUserEvents } from '@packages/test/utils/RenderWithUserEvents'
 import { useElementSizeMock } from '@packages/ui/hooks/useElementSize.mock'
 import { act, waitFor } from '@testing-library/react'
@@ -12,7 +12,7 @@ type Props = {
 }
 const TestComponent = ({ onSelectScreenSpy, setClearSearchHandlerSpy, onSearchSpy }: Props) => {
   return (
-    <AutoCompleteScreen
+    <AutoCompleteScreen<SearchItem>
       onSelectItem={onSelectScreenSpy}
       setClearSearchHandler={setClearSearchHandlerSpy}
       isFetching={false}

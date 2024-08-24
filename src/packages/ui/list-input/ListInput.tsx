@@ -16,19 +16,23 @@ const loadingOverlay: InputOverlay = {
   location: 'left',
 }
 
-export type TListItem = { id: string; label: string }
-type TProps = TRestProps & {
-  items: Array<TListItem>
+export interface TListItem {
+  id: string
+  label: string
+}
+
+type TProps<T extends TListItem> = {
+  items: Array<T>
   className?: string
   placeholder?: string
   isLoading?: boolean
   disableOnLoading?: boolean
   onChange?: (val: string) => void
-  onSelect?: (item: TListItem) => void
+  onSelect?: (item: T) => void
   setClearHandler?: (func: () => void) => void
-}
+} & TRestProps
 
-const ListInputField = ({
+const ListInputField = <T extends TListItem>({
   items = [],
   className,
   placeholder,
@@ -38,7 +42,7 @@ const ListInputField = ({
   onSelect = () => {},
   setClearHandler = () => {},
   ...rest
-}: TProps) => {
+}: TProps<T>) => {
   const [inputValue, setInputValue] = useState('')
   const [overlays, setOverlays] = useState<Array<InputOverlay>>([])
   const [open, setOpen] = useState(false)
@@ -55,7 +59,7 @@ const ListInputField = ({
     setInputValue(target.value)
   }
 
-  const handleSelect = (item: TListItem) => {
+  const handleSelect = (item: T) => {
     setInputValue(item.label)
     onChange(item.label)
     onSelect(item)
@@ -66,7 +70,7 @@ const ListInputField = ({
     }
   }
 
-  const handleKeyDown = (event: KeyboardEvent<HTMLLIElement>, item: TListItem) => {
+  const handleKeyDown = (event: KeyboardEvent<HTMLLIElement>, item: T) => {
     if (event.code === 'Enter') {
       handleSelect(item)
     }
@@ -152,4 +156,4 @@ const ListInputField = ({
   )
 }
 
-export const ListInput = memo(ListInputField)
+export const ListInput = memo(ListInputField) as typeof ListInputField
