@@ -1,7 +1,7 @@
-import { SearchStore } from './SearchStore'
+import { SearchDocuments } from './SearchDocuments'
 
 describe('#search', () => {
   it('search should return a list of screens', async () => {
-    expect(SearchStore.length).toBe(34)
+    expect(SearchDocuments.length).toBe(34)
   })
 })

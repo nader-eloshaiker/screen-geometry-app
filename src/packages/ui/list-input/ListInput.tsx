@@ -3,6 +3,7 @@ import MagnifyGlassIcon from '@app/assets/icons/MagnifyGlass'
 import { useDebounce } from '@packages/ui/hooks/useDebounce'
 import { useElementSize } from '@packages/ui/hooks/useElementSize'
 import { clsx } from 'clsx'
+import parse from 'html-react-parser'
 import { ChangeEvent, KeyboardEvent, memo, useCallback, useEffect, useRef, useState } from 'react'
 import { InputOverlay, OverlayInputField } from '../overlay-input-field/OverlayInputField'
 
@@ -134,19 +135,19 @@ const ListInputField = <T extends TListItem>({
             // use ref to calculate the width of parent
             style={{ width: width }}
           >
-            {items.map((item, index) => {
-              return (
-                <li
-                  key={item.id}
-                  tabIndex={index + 1}
-                  onClick={() => handleSelect(item)}
-                  onKeyDown={(event) => handleKeyDown(event, item)}
-                  className='w-full border-b border-b-base-content/10'
-                >
-                  <a>{item.label}</a>
-                </li>
-              )
-            })}
+            {items.map((item, index) => (
+              <li
+                key={item.id}
+                tabIndex={index + 1}
+                onClick={() => handleSelect(item)}
+                onKeyDown={(event) => handleKeyDown(event, item)}
+                className='w-full border-b border-b-base-content/10'
+              >
+                <a>
+                  <span>{parse(item.label)}</span>
+                </a>
+              </li>
+            ))}
           </ul>
         </div>
       )}

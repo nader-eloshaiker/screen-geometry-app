@@ -2,9 +2,13 @@ import { GetSearchParams, SearchListResponse, useGetSearch } from '@packages/ope
 import { keepPreviousData } from '@tanstack/react-query'
 import { useApiEffectHandler } from '../useApiEffectHandler'
 
-export const useSearchApi = (params?: GetSearchParams) => {
+export const useSearchApi = (params?: GetSearchParams, options?: Parameters<typeof useGetSearch>[1]) => {
   const request = useGetSearch<SearchListResponse>(params, {
-    query: { queryKey: ['useGetSearchList', ...Object.values(params ?? {})], placeholderData: keepPreviousData },
+    ...options,
+    query: {
+      queryKey: ['useGetSearchList', ...Object.values(params ?? {})],
+      placeholderData: keepPreviousData,
+    },
   })
 
   useApiEffectHandler<SearchListResponse>({

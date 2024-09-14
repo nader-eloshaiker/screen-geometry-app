@@ -5,7 +5,7 @@ type TProps<T> = {
   onSelectItem: (item: T) => void
   setClearSearchHandler?: (func: () => void) => void
   onSearch?: (term: string) => void
-  searchList: Array<T>
+  searchList: Array<T> | undefined
   isFetching: boolean
 } & TRestProps
 
@@ -13,7 +13,7 @@ export const AutoCompleteScreen = <T extends TListItem>({
   onSelectItem = () => {},
   setClearSearchHandler = () => {},
   onSearch = () => {},
-  searchList,
+  searchList = [],
   isFetching,
   ...rest
 }: TProps<T>) => {

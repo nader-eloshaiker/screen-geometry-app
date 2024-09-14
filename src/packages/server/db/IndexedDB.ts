@@ -1,5 +1,7 @@
 import { ScreenColor, ScreenItem } from '@packages/openapi/generated'
+import fuzzysort from 'fuzzysort'
 import { ulid } from 'ulid'
+import { SearchDocuments } from './SearchDocuments'
 
 export const dbVersionDefault = 3
 export const dbNameDefault = 'localforage'
@@ -10,6 +12,7 @@ export interface KeyedObject {
 
 export enum Stores {
   Screens = 'screens',
+  Search = 'search',
   DeprecatedLocalForageTable = 'keyvaluepairs',
   DeprecatedLocalForageBlob = 'local-forage-detect-blob-support',
 }
@@ -74,6 +77,32 @@ const openDatabaseTable = ({
   return { db, tx, store }
 }
 
+const seedSearchDocuments = (openReq: IDBOpenDBRequest) =>
+  new Promise((resolve) => {
+    const db = openReq.result
+
+    const searchStore = db.createObjectStore(Stores.Search, { keyPath: 'id' })
+    searchStore.createIndex('name', 'name', { unique: false })
+    searchStore.createIndex('aspectRatio', 'aspectRatio', { unique: false })
+    searchStore.createIndex('diagonalSize', 'diagonalSize', { unique: false })
+    searchStore.createIndex('vRes', 'vRes', { unique: false })
+    searchStore.createIndex('hRes', 'hRes', { unique: false })
+
+    const tx = openReq.transaction
+    if (!tx) {
+      throw new Error('Unable to create transaction')
+    }
+
+    const searchTx = tx.objectStore(Stores.Search)
+    SearchDocuments.forEach((item) => {
+      searchTx.add(item)
+    })
+
+    tx.oncomplete = () => {
+      resolve(true)
+    }
+  })
+
 export const initDB = (options?: dbProps): Promise<boolean> => {
   const { dbName, dbVersion } = { ...dbPropsDefault, ...options }
   console.log('initDB', dbName, dbVersion)
@@ -89,6 +118,10 @@ export const initDB = (options?: dbProps): Promise<boolean> => {
         db.createObjectStore(Stores.Screens, { keyPath: 'id' })
       }
 
+      if (!db.objectStoreNames.contains(Stores.Search)) {
+        seedSearchDocuments(openReq)
+      }
+
       switch (event.oldVersion) {
         case 2: {
           if (!db.objectStoreNames.contains(Stores.DeprecatedLocalForageTable)) {
@@ -100,7 +133,7 @@ export const initDB = (options?: dbProps): Promise<boolean> => {
           // get old table data\
           const tx = openReq.transaction
           if (!tx) {
-            break
+            throw new Error('Unable to create transaction')
           }
 
           const newStore = tx.objectStore(Stores.Screens)
@@ -286,6 +319,44 @@ export const deleteData = (storeName: string, key: string, options?: dbProps): P
       // add listeners that will resolve the Promise
       storeReq.onsuccess = () => {
         resolve(key)
+      }
+    }
+  })
+}
+
+export const searchData = <T extends object>(
+  storeName: Stores,
+  query: string,
+  key: string,
+  options?: dbProps,
+): Promise<Array<T>> => {
+  const { dbName, dbVersion } = { ...dbPropsDefault, ...options }
+
+  return new Promise((resolve, reject) => {
+    const openReq = openDatabase(dbName, dbVersion)
+    handleRequestError(openReq, reject)
+
+    openReq.onsuccess = () => {
+      const { db, store } = openDatabaseTable({ openReq, storeName, mode: 'readonly' })
+      const storeReq = store.getAll()
+      handleRequestError(storeReq, reject)
+
+      storeReq.onsuccess = () => {
+        db.close()
+        const data = storeReq.result as Array<T>
+
+        if (!query) {
+          return resolve(data)
+        }
+
+        const results = fuzzysort.go<T>(query, data, { key })
+        const sorted = results.toSorted((a, b) => b.score - a.score)
+        const response = sorted.map((result) => ({
+          ...result.obj,
+          [key]: result.highlight('<strong>', '</strong>'),
+        }))
+
+        resolve(response)
       }
     }
   })

@@ -1,10 +1,8 @@
 import { ScreenInput, ScreenInputList, ScreenItem, SearchItem } from '@packages/openapi/generated'
-import { search } from '@packages/server/api/SearchService'
 import { transformScreenInput } from '@packages/utils/DataTransformation'
 import to from '@packages/utils/await-to-js'
-import { SearchResult } from 'minisearch'
 import { DatabaseError } from '../db/DatabaseError'
-import { Stores, addAllData, addData, deleteData, getAllData, getData, updateData } from '../db/IndexedDB'
+import { Stores, addAllData, addData, deleteData, getAllData, getData, searchData, updateData } from '../db/IndexedDB'
 import { ApiError } from './ApiError'
 
 export type ScreenListResponse = {
@@ -12,7 +10,7 @@ export type ScreenListResponse = {
 }
 
 export type SearchScreenListResponse = {
-  list: Array<SearchResult & SearchItem>
+  list: Array<SearchItem>
 }
 
 export type ScreenResponse = {
@@ -25,9 +23,14 @@ export type IdResponse = {
 
 export const getSearchList = async (params: URLSearchParams) => {
   const term = params.get('term')?.toLowerCase().trim() ?? ''
-  const list = search(term)
 
-  return Promise.resolve<SearchScreenListResponse>({ list })
+  const [err, list] = await to<Array<SearchItem>>(searchData<SearchItem>(Stores.Search, term, 'label'))
+
+  if (err) {
+    throw new DatabaseError('Database error', 500, err)
+  }
+
+  return Promise.resolve<SearchScreenListResponse>({ list: list ?? [] })
 }
 
 export const getScreenList = async () => {
