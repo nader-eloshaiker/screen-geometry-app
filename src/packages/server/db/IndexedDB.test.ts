@@ -47,6 +47,7 @@ describe('#indexDB', () => {
     })
 
     describe('#getItemList', () => {
+      // test requires seeded data, covered in data migration tests
       it.skip('getItemList should return a list of screens', async () => {
         const result = await getAllData(Stores.Screens)
 

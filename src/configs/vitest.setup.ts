@@ -2,6 +2,9 @@ import MatchMediaMock from '@packages/test/mocks/mockMatchMedia'
 import '@testing-library/jest-dom'
 import '../index.css'
 
+import { MotionGlobalConfig } from 'framer-motion'
+MotionGlobalConfig.skipAnimations = true
+
 const getRandomString = (length = 10) => {
   const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789_'
   let result = ''
@@ -17,31 +20,31 @@ global.ResizeObserver = vi.fn().mockImplementation(() => ({
   disconnect: vi.fn(),
 }))
 
-export const mockedUseRouter = {
-  back: vi.fn(),
-  forward: vi.fn(),
-  push: vi.fn(),
-  replace: vi.fn(),
-  refresh: vi.fn(),
-  prefetch: vi.fn(),
-}
+// export const mockedUseRouter = {
+//   back: vi.fn(),
+//   forward: vi.fn(),
+//   push: vi.fn(),
+//   replace: vi.fn(),
+//   refresh: vi.fn(),
+//   prefetch: vi.fn(),
+// }
 
-export const mockedSearchParams = {
-  get: vi.fn(),
-}
+// export const mockedSearchParams = {
+//   get: vi.fn(),
+// }
 
-export const mockedUseLocation = vi.fn()
+// export const mockedUseLocation = vi.fn()
 
-vi.mock('next/navigation', async () => {
-  const actual = await vi.importActual('next/navigation')
-  return {
-    ...actual,
-    useRouter: vi.fn(() => mockedUseRouter),
-    useSearchParams: vi.fn(() => mockedSearchParams),
-    usePathname: vi.fn(),
-    useLocation: mockedUseLocation,
-  }
-})
+// vi.mock('react-router-dom', async () => {
+//   const actual = await vi.importActual('react-router-dom')
+//   return {
+//     ...actual,
+//     useRouter: vi.fn(() => mockedUseRouter),
+//     useSearchParams: vi.fn(() => mockedSearchParams),
+//     usePathname: vi.fn(),
+//     useLocation: mockedUseLocation,
+//   }
+// })
 
 global.window = Object.create(window)
 
