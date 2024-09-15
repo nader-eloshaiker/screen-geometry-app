@@ -12,7 +12,7 @@ import { addData, Stores } from './db/IndexedDB'
 import { setupDB } from './db/IndexedDB.test'
 import { screenInput55Fixture } from './test/fixtures/ScreenFixtures'
 
-describe.only('#server', () => {
+describe('#server', () => {
   const baseUrl = 'http://fakeapi.com'
 
   const mswRequestEventSpy = mswWithSpy([
