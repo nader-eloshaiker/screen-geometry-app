@@ -11,25 +11,39 @@ import {
   getAllData,
   getData,
   initDB,
+  seedSearchDocuments,
   Stores,
   updateData,
 } from './IndexedDB'
 
-export const setupDB = () => {
+export const setupDB = ({
+  includeSearch = false,
+  includeData = false,
+}: {
+  includeSearch?: boolean
+  includeData?: boolean
+}) => {
   const openReq = indexedDB.open(dbNameDefault, dbVersionDefault)
   openReq.onupgradeneeded = () => {
     const db = openReq.result
-    if (!db.objectStoreNames.contains(Stores.Screens)) {
+    if (includeData && !db.objectStoreNames.contains(Stores.Screens)) {
       db.createObjectStore(Stores.Screens, { keyPath: 'id' })
+    }
+
+    if (includeSearch && !db.objectStoreNames.contains(Stores.Search)) {
+      seedSearchDocuments(openReq)
     }
   }
 }
 
 describe('#indexDB', () => {
+  beforeEach(() => {
+    globalThis.indexedDB = new IDBFactory()
+  })
+
   describe('#CRUD', () => {
-    beforeEach(async () => {
-      globalThis.indexedDB = new IDBFactory()
-      setupDB()
+    beforeEach(() => {
+      setupDB({ includeData: true })
     })
 
     describe('#getItemList', () => {

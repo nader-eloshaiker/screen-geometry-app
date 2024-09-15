@@ -77,7 +77,7 @@ const openDatabaseTable = ({
   return { db, tx, store }
 }
 
-const seedSearchDocuments = (openReq: IDBOpenDBRequest) =>
+export const seedSearchDocuments = (openReq: IDBOpenDBRequest) =>
   new Promise((resolve) => {
     const db = openReq.result
 
@@ -141,8 +141,6 @@ export const initDB = (options?: dbProps): Promise<boolean> => {
           const oldResponse = oldStore.get('screens')
 
           oldResponse.onsuccess = () => {
-            console.log('result', oldResponse.result)
-
             for (const oldItem of oldResponse.result ?? []) {
               const newItem: ScreenItem = {
                 id: ulid(),

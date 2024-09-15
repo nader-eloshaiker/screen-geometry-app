@@ -1,22 +1,24 @@
-import { ScreenItem } from '@packages/openapi/generated'
+import {
+  getScreenListServiceMock,
+  getScreenServiceMock,
+  getSearchServiceMock,
+  ScreenItem,
+} from '@packages/openapi/generated'
 import { apiRoutes } from '@packages/openapi/meta'
 import { mswWithSpy, startMSW, stopMSW } from '@packages/serviceworker/NodeServiceWorker'
 import { screenItemFixture } from '@packages/test/fixtures/ScreenFixtures'
 import { IDBFactory } from 'fake-indexeddb'
-import { Stores, addData } from './db/IndexedDB'
+import { addData, Stores } from './db/IndexedDB'
 import { setupDB } from './db/IndexedDB.test'
-import { generateStub } from './server'
 import { screenInput55Fixture } from './test/fixtures/ScreenFixtures'
 
-describe('#server', () => {
+describe.only('#server', () => {
   const baseUrl = 'http://fakeapi.com'
-  const { searchMocks, screenListMocks, screenMocks, passthroughMocks } = generateStub(baseUrl, 1)
 
   const mswRequestEventSpy = mswWithSpy([
-    ...searchMocks(),
-    ...screenListMocks(),
-    ...screenMocks(),
-    ...passthroughMocks(),
+    ...getSearchServiceMock(),
+    ...getScreenListServiceMock(),
+    ...getScreenServiceMock(),
   ])
 
   beforeAll(async () => {
@@ -29,7 +31,7 @@ describe('#server', () => {
 
   beforeEach(async () => {
     globalThis.indexedDB = new IDBFactory()
-    setupDB()
+    setupDB({ includeData: true, includeSearch: true })
   })
 
   it('should call the GET screens api', async () => {

@@ -1,7 +1,12 @@
 import { QueryProvider } from '@app/contexts/Query/QueryProvider'
 
 import { ScreenItemRender } from '@app/models/screenItemRender'
-import { getGetScreenListMock, getScreenListServiceMock, getScreenServiceMock } from '@packages/openapi/generated'
+import {
+  getGetScreenListMock,
+  getScreenListServiceMock,
+  getScreenServiceMock,
+  getSearchServiceMock,
+} from '@packages/openapi/generated'
 import { mswWithSpy, resetMSW, startMSW, stopMSW } from '@packages/serviceworker/NodeServiceWorker'
 import { renderWithUserEvents } from '@packages/test/utils/RenderWithUserEvents'
 import { useElementSizeMock } from '@packages/ui/hooks/useElementSize.mock'
@@ -30,14 +35,18 @@ const TestComponent = ({
 }
 
 describe('#ScreenTable', () => {
-  const mswRequestEventSpy = mswWithSpy([...getScreenServiceMock(), ...getScreenListServiceMock()])
+  const mswRequestEventSpy = mswWithSpy([
+    ...getSearchServiceMock(),
+    ...getScreenListServiceMock(),
+    ...getScreenServiceMock(),
+  ])
 
   beforeAll(async () => {
-    startMSW()
+    await startMSW()
   })
 
   afterAll(async () => {
-    stopMSW()
+    await stopMSW()
   })
 
   beforeEach(() => {

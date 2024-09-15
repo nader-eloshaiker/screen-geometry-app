@@ -141,6 +141,7 @@ export const generateStub = (baseUrl: string, responseTime?: number): TReturn =>
 
   const searchMocks = () => [
     http.get(`${baseUrl}${apiRoutes.search}`, async (resolver) => {
+      console.log('search intercepted')
       await delay(delayResponse)
 
       const url = new URL(resolver.request.url)
