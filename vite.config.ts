@@ -68,9 +68,4 @@ export default defineConfig({
     }),
   ],
   test: VitestUserConfig.test,
-  server: {
-    watch: {
-      ignored: ['**/coverage/**'],
-    },
-  },
 })
