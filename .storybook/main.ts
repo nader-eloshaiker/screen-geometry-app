@@ -1,5 +1,6 @@
 import type { AddonOptionsVite } from '@storybook/addon-coverage'
 import type { StorybookConfig } from '@storybook/react-vite'
+import { InlineConfig, mergeConfig } from 'vite'
 // import type { AddonOptionsWebpack } from '@storybook/addon-coverage'
 
 const coverageConfig: AddonOptionsVite = {
@@ -39,5 +40,11 @@ const config: StorybookConfig = {
   core: {
     disableTelemetry: true, // 👈 Disables telemetry
   },
+  viteFinal: (config: InlineConfig) =>
+    mergeConfig(config, {
+      server: {
+        watch: { ignored: ['**/coverage/**'] },
+      },
+    }),
 }
 export default config
