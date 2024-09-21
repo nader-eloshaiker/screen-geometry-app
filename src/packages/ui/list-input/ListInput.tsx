@@ -69,7 +69,7 @@ const ListInputField = <T extends TListItem>({
     }
   }
 
-  const handleKeyDown = (event: KeyboardEvent<HTMLLIElement>, item: T) => {
+  const handleKeyDown = (event: KeyboardEvent<HTMLButtonElement>, item: T) => {
     if (event.code === 'Enter') {
       handleSelect(item)
     }
@@ -136,16 +136,14 @@ const ListInputField = <T extends TListItem>({
             style={{ width: width }}
           >
             {items.map((item, index) => (
-              <li
-                key={item.id}
-                tabIndex={index + 1}
-                onClick={() => handleSelect(item)}
-                onKeyDown={(event) => handleKeyDown(event, item)}
-                className='w-full border-b border-b-base-content/10'
-              >
-                <a>
+              <li key={item.id} tabIndex={index + 1} className='w-full border-b border-b-base-content/10'>
+                <button
+                  className='w-full'
+                  onClick={() => handleSelect(item)}
+                  onKeyDown={(event) => handleKeyDown(event, item)}
+                >
                   <span>{parse(item.label)}</span>
-                </a>
+                </button>
               </li>
             ))}
           </ul>

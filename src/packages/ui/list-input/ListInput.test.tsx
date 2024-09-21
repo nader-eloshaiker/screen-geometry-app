@@ -55,7 +55,7 @@ describe('#ListInput', () => {
   })
 
   test('renders the ListInput dropdown and make a selectin', async () => {
-    const { user, container, getByPlaceholderText } = await renderWithUserEvents(
+    const { user, getByPlaceholderText, getByRole } = await renderWithUserEvents(
       <ListInput
         items={searchList}
         value=''
@@ -66,11 +66,36 @@ describe('#ListInput', () => {
         setClearHandler={() => {}}
       />,
     )
-    const listElements = container.querySelectorAll('li')
-    await act(async () => {
-      await user.click(listElements[0]!)
-    })
 
-    expect(getByPlaceholderText('Type to filter list...')).toHaveValue(searchList[0]!.label)
+    const input = getByPlaceholderText('Type to filter list...')
+    await act(async () => await user.click(input))
+
+    const listElement = getByRole('button', { name: /BBBB/i })
+    await act(async () => await user.click(listElement))
+
+    expect(input).toHaveValue(searchList[1].label)
+  })
+
+  test('renders the ListInput dropdown and make a selectin using keys', async () => {
+    const { user, getByRole, getByPlaceholderText } = await renderWithUserEvents(
+      <ListInput
+        items={searchList}
+        value=''
+        isLoading={false}
+        placeholder='Type to filter list...'
+        onChange={() => {}}
+        onSelect={() => {}}
+        setClearHandler={() => {}}
+      />,
+    )
+    const input = getByPlaceholderText('Type to filter list...')
+    await act(async () => await user.click(input))
+
+    const listElement = getByRole('button', { name: /BBBB/i })
+    await act(async () => await user.click(listElement))
+    listElement.focus()
+    await act(async () => await user.keyboard('{enter}'))
+
+    expect(input).toHaveValue(searchList[1].label)
   })
 })
