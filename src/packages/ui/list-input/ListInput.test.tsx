@@ -84,7 +84,7 @@ describe('#ListInput', () => {
   })
 
   test('renders the ListInput dropdown and make a selection', async () => {
-    const { user, getByPlaceholderText, getByRole, getByTestId } = await renderWithUserEvents(
+    const { user, getByPlaceholderText, getByRole } = await renderWithUserEvents(
       <TestComponent
         onSelectScreenSpy={spies.onSelectScreenSpy}
         setClearSearchHandlerSpy={spies.setClearSearchHandlerSpy}
@@ -98,15 +98,7 @@ describe('#ListInput', () => {
     const listElement = getByRole('button', { name: /WQHD 34" 3440x1440 21:9/i })
     await act(async () => await user.click(listElement))
 
-    expect(spies.onSelectScreenSpy).toHaveBeenCalledWith({
-      aspectRatio: '21:9',
-      diagonalSize: 34,
-      hRes: 3440,
-      id: 'WQHD3421:9',
-      label: 'WQHD 34" 3440x1440 21:9',
-      name: 'WQHD',
-      vRes: 1440,
-    })
+    expect(spies.onSelectScreenSpy).toHaveBeenCalledWith(getGetSearchMock().list[0])
   })
 
   test('calls backend search api a limited time as the user enters a search term', async () => {
