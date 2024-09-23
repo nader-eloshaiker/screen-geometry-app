@@ -83,17 +83,31 @@ describe('#ListInput', () => {
     expect(getByPlaceholderText('Loading...')).toBeInTheDocument()
   })
 
-  // test('renders the ListInput dropdown and make a selection', async () => {
-  //   const { user, getByPlaceholderText, getByRole, getByTestId } = await renderWithUserEvents(<TestHarness />)
+  test('renders the ListInput dropdown and make a selection', async () => {
+    const { user, getByPlaceholderText, getByRole, getByTestId } = await renderWithUserEvents(
+      <TestComponent
+        onSelectScreenSpy={spies.onSelectScreenSpy}
+        setClearSearchHandlerSpy={spies.setClearSearchHandlerSpy}
+        onSearchSpy={spies.onSearchSpy}
+      />,
+    )
 
-  //   const input = getByPlaceholderText('Type to filter list...')
-  //   await act(async () => await user.click(input))
+    const input = getByPlaceholderText('Type to filter list...')
+    await act(async () => await user.click(input))
 
-  //   const listElement = getByRole('button', { name: /BBBB/i })
-  //   await act(async () => await user.click(listElement))
+    const listElement = getByRole('button', { name: /WQHD 34" 3440x1440 21:9/i })
+    await act(async () => await user.click(listElement))
 
-  //   expect(getByTestId('selected-value')).toHaveTextContent(searchList[1].label)
-  // })
+    expect(spies.onSelectScreenSpy).toHaveBeenCalledWith({
+      aspectRatio: '21:9',
+      diagonalSize: 34,
+      hRes: 3440,
+      id: 'WQHD3421:9',
+      label: 'WQHD 34" 3440x1440 21:9',
+      name: 'WQHD',
+      vRes: 1440,
+    })
+  })
 
   test('calls backend search api a limited time as the user enters a search term', async () => {
     const test = await renderWithUserEvents(
