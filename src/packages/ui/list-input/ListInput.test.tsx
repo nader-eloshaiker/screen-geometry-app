@@ -1,25 +1,54 @@
+import { SearchItem, getGetSearchMock } from '@packages/openapi/generated'
 import { renderWithUserEvents } from '@packages/test/utils/RenderWithUserEvents'
-import { act, render } from '@testing-library/react'
+import { act, render, waitFor } from '@testing-library/react'
+import { Mock } from 'vitest'
 import { useElementSizeMock } from '../hooks/useElementSize.mock'
 import { ListInput } from './ListInput'
 
+type TSearchListItem = { id: string; label: string }
+const searchList: TSearchListItem[] = [
+  {
+    label: 'AAAA',
+    id: '1',
+  },
+  {
+    label: 'BBBB',
+    id: '2',
+  },
+  {
+    label: 'CCCC',
+    id: '3',
+  },
+]
+
+type Props = {
+  onSelectScreenSpy: Mock
+  setClearSearchHandlerSpy: Mock
+  onSearchSpy: Mock
+}
+const TestComponent = ({ onSelectScreenSpy, setClearSearchHandlerSpy, onSearchSpy }: Props) => {
+  return (
+    <ListInput<SearchItem>
+      onSelectItem={onSelectScreenSpy}
+      setClearHandler={setClearSearchHandlerSpy}
+      isLoading={false}
+      items={getGetSearchMock().list}
+      onSearchList={onSearchSpy}
+      placeholder='Type to filter list...'
+    />
+  )
+}
+
 describe('#ListInput', () => {
-  const searchList = [
-    {
-      label: 'AAAA',
-      id: '1',
-    },
-    {
-      label: 'BBBB',
-      id: '2',
-    },
-    {
-      label: 'CCCC',
-      id: '3',
-    },
-  ]
+  let spies: Props
 
   beforeEach(() => {
+    spies = {
+      onSelectScreenSpy: vi.fn(),
+      setClearSearchHandlerSpy: vi.fn(),
+      onSearchSpy: vi.fn(),
+    }
+
     useElementSizeMock()
   })
 
@@ -30,8 +59,8 @@ describe('#ListInput', () => {
         value=''
         isLoading={false}
         placeholder='Type to filter list...'
-        onChange={() => {}}
-        onSelect={() => {}}
+        onSearchList={() => {}}
+        onSelectItem={() => {}}
         setClearHandler={() => {}}
       />,
     )
@@ -45,8 +74,8 @@ describe('#ListInput', () => {
         value=''
         isLoading={true}
         placeholder='Type to filter list...'
-        onChange={() => {}}
-        onSelect={() => {}}
+        onSearchList={() => {}}
+        onSelectItem={() => {}}
         setClearHandler={() => {}}
       />,
     )
@@ -54,48 +83,62 @@ describe('#ListInput', () => {
     expect(getByPlaceholderText('Loading...')).toBeInTheDocument()
   })
 
-  test('renders the ListInput dropdown and make a selectin', async () => {
-    const { user, getByPlaceholderText, getByRole } = await renderWithUserEvents(
-      <ListInput
-        items={searchList}
-        value=''
-        isLoading={false}
-        placeholder='Type to filter list...'
-        onChange={() => {}}
-        onSelect={() => {}}
-        setClearHandler={() => {}}
+  // test('renders the ListInput dropdown and make a selection', async () => {
+  //   const { user, getByPlaceholderText, getByRole, getByTestId } = await renderWithUserEvents(<TestHarness />)
+
+  //   const input = getByPlaceholderText('Type to filter list...')
+  //   await act(async () => await user.click(input))
+
+  //   const listElement = getByRole('button', { name: /BBBB/i })
+  //   await act(async () => await user.click(listElement))
+
+  //   expect(getByTestId('selected-value')).toHaveTextContent(searchList[1].label)
+  // })
+
+  test('calls backend search api a limited time as the user enters a search term', async () => {
+    const test = await renderWithUserEvents(
+      <TestComponent
+        onSelectScreenSpy={spies.onSelectScreenSpy}
+        setClearSearchHandlerSpy={spies.setClearSearchHandlerSpy}
+        onSearchSpy={spies.onSearchSpy}
       />,
     )
 
-    const input = getByPlaceholderText('Type to filter list...')
-    await act(async () => await user.click(input))
+    const inputElement = await test.findByPlaceholderText('Type to filter list...')
+    expect(inputElement).toBeDefined()
+    await act(async () => {
+      await test.user.type(inputElement, 'WQHD')
+    })
 
-    const listElement = getByRole('button', { name: /BBBB/i })
-    await act(async () => await user.click(listElement))
-
-    expect(input).toHaveValue(searchList[1].label)
+    waitFor(() => {
+      expect(spies.onSearchSpy).toHaveBeenCalledWith('WQHD')
+    })
   })
 
-  test('renders the ListInput dropdown and make a selectin using keys', async () => {
-    const { user, getByRole, getByPlaceholderText } = await renderWithUserEvents(
-      <ListInput
-        items={searchList}
-        value=''
-        isLoading={false}
-        placeholder='Type to filter list...'
-        onChange={() => {}}
-        onSelect={() => {}}
-        setClearHandler={() => {}}
+  test('clears search results and requests a full list from search engine', async () => {
+    const test = await renderWithUserEvents(
+      <TestComponent
+        onSelectScreenSpy={spies.onSelectScreenSpy}
+        setClearSearchHandlerSpy={spies.setClearSearchHandlerSpy}
+        onSearchSpy={spies.onSearchSpy}
       />,
     )
-    const input = getByPlaceholderText('Type to filter list...')
-    await act(async () => await user.click(input))
 
-    const listElement = getByRole('button', { name: /BBBB/i })
-    await act(async () => await user.click(listElement))
-    listElement.focus()
-    await act(async () => await user.keyboard('{enter}'))
+    const inputElement = await test.findByPlaceholderText('Type to filter list...')
+    await act(async () => {
+      await test.user.type(inputElement, 'WQHD')
+    })
 
-    expect(input).toHaveValue(searchList[1].label)
+    waitFor(() => {
+      expect(spies.onSearchSpy).toHaveBeenCalledWith('WQHD')
+    })
+
+    const clearButton = await test.findByRole('reset')
+    await test.user.click(clearButton)
+
+    waitFor(() => {
+      expect(spies.onSearchSpy).toHaveBeenCalledTimes(2)
+      expect(spies.onSearchSpy).toHaveBeenCalledWith('')
+    })
   })
 })

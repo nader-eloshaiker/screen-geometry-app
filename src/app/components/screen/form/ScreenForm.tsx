@@ -6,7 +6,7 @@ import { useUpdateScreenApi } from '@app/hooks/api/helpers/useUpdateScreenApi'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { ScreenInput, SearchItem } from '@packages/openapi/generated'
 import { ScreenDataEnum } from '@packages/openapi/models'
-import { AutoCompleteScreen } from '@packages/ui/auto-complete'
+import { ListInput } from '@packages/ui/list-input'
 import { createCSSColor } from '@packages/utils/ScreenCalc'
 import { clsx } from 'clsx'
 import { useCallback, useEffect, useState } from 'react'
@@ -53,7 +53,7 @@ export const ScreenForm = ({ defaultValues = null, editId = undefined, isLoading
   } = methods
   const { isPending: isCreateLoading, mutate: createAction } = useCreateScreenApi()
   const { isPending: isUpdateLoading, mutate: updateAction } = useUpdateScreenApi()
-  const [clearSearchHandler, setClearSearchHandler] = useState<() => void>(() => {})
+  const [clearHandler, setClearHandler] = useState<() => void>(() => {})
 
   const [searchTerm, setSearchTerm] = useState<string>('')
   const { isFetching: isSearchListLoading, data: searchListResponse } = useSearchApi({ term: searchTerm })
@@ -62,7 +62,7 @@ export const ScreenForm = ({ defaultValues = null, editId = undefined, isLoading
 
   // NOTE: this is a hack to get around the fact that the form is not re-rendering when the defaultValues prop changes
   // Address this at the top level of te form
-  const searchListSelectHandler = (item: SearchItem) => {
+  const selectItemHandler = (item: SearchItem) => {
     setValue(ScreenDataEnum.aspectRatio, item.aspectRatio, {
       shouldValidate: true,
       shouldDirty: true,
@@ -111,14 +111,14 @@ export const ScreenForm = ({ defaultValues = null, editId = undefined, isLoading
   }
 
   const resetHandler = () => {
-    clearSearchHandler()
+    clearHandler()
     reset()
   }
 
   const closeHandler = useCallback(() => {
-    clearSearchHandler()
+    clearHandler()
     onClose()
-  }, [clearSearchHandler, onClose])
+  }, [clearHandler, onClose])
 
   const submitHandler: SubmitHandler<ScreenInput> = (form: ScreenInput) => {
     ReactGA.event({
@@ -132,7 +132,7 @@ export const ScreenForm = ({ defaultValues = null, editId = undefined, isLoading
     } else {
       createAction({ data: form })
     }
-    clearSearchHandler()
+    clearHandler()
     generateColorHandler()
   }
 
@@ -147,16 +147,17 @@ export const ScreenForm = ({ defaultValues = null, editId = undefined, isLoading
         <span className='pb-2 text-xl'>{!editId ? 'Add' : 'Edit'} Screen</span>
       </div>
       <div className='form-control flex w-full flex-col pb-10'>
-        <label htmlFor='autoCompleteScreen' className='label label-text'>
+        <label htmlFor='searchList' className='label label-text'>
           <span className='text-sm'>Auto fill the form from list of Monitors</span>
         </label>
-        <AutoCompleteScreen<SearchItem>
-          id='autoCompleteScreen'
-          onSelectItem={searchListSelectHandler}
-          setClearSearchHandler={setClearSearchHandler}
-          isFetching={isSearchListLoading}
-          searchList={searchListResponse?.list ?? []}
-          onSearch={setSearchTerm}
+        <ListInput<SearchItem>
+          id='searchList'
+          onSelectItem={selectItemHandler}
+          setClearHandler={setClearHandler}
+          isLoading={isSearchListLoading}
+          items={searchListResponse?.list}
+          onSearchList={setSearchTerm}
+          placeholder='Type to filter list...'
         />
       </div>
 

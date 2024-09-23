@@ -48,12 +48,12 @@ const meta = {
       table: { category: 'content', type: { summary: 'string' } },
       control: { type: 'text' },
     },
-    onChange: {
+    onSearchList: {
       description: 'Input field change handler.',
       table: { category: 'event', type: { summary: 'function' }, defaultValue: { summary: '() => {}' } },
       action: 'onChange',
     },
-    onSelect: {
+    onSelectItem: {
       description: 'List selection handler.',
       table: { category: 'event', type: { summary: 'function' }, defaultValue: { summary: '() => {}' } },
       action: 'onSelect',
@@ -87,8 +87,8 @@ export const Default: Story = {
     value: '',
     isLoading: false,
     placeholder: 'Type to filter list...',
-    onChange: () => {},
-    onSelect: () => {},
+    onSearchList: () => {},
+    onSelectItem: () => {},
     setClearHandler: () => {},
   },
   play: async ({ canvasElement }) => {
