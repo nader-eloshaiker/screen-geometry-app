@@ -5,16 +5,14 @@ import AppRouterProvider from '@app/routes/AppRouterProvider'
 import { NotificationProvider } from '@packages/ui/notification'
 import '../index.css'
 
-export const App = () => {
-  return (
-    <QueryProvider>
-      <ThemeModeProvider>
-        <NotificationProvider>
-          <ScreenProvider>
-            <AppRouterProvider />
-          </ScreenProvider>
-        </NotificationProvider>
-      </ThemeModeProvider>
-    </QueryProvider>
-  )
-}
+export const App = () => (
+  <QueryProvider>
+    <ThemeModeProvider>
+      <NotificationProvider>
+        <ScreenProvider>
+          <AppRouterProvider />
+        </ScreenProvider>
+      </NotificationProvider>
+    </ThemeModeProvider>
+  </QueryProvider>
+)

@@ -6,9 +6,9 @@ import { useFormDrawerContext } from '@app/contexts/FormDrawer/useFormDrawerCont
 import { useThemeModeContext } from '@app/contexts/theme/useThemeModeContext'
 import { useDeleteScreenApi } from '@app/hooks/api/helpers/useDeleteScreenApi'
 import { useShowScreenApi } from '@app/hooks/api/helpers/useShowScreenApi'
-import { ScreenColor, ScreenItem } from '@packages/openapi/generated'
+import { ScreenItemRender } from '@app/models/screenItemRender'
+import { ScreenColor } from '@packages/openapi/generated'
 import { SkeletonRect } from '@packages/ui/skeleton/SkeletonRect'
-import { getRandomString } from '@packages/utils/RandomGenerator'
 import { Dispatch, SetStateAction } from 'react'
 import ReactGA from 'react-ga4'
 import styled from 'styled-components'
@@ -37,20 +37,17 @@ type TTableProps = { cols: number; rows: number }
 const TableSkeleton = ({ cols, rows }: TTableProps) => {
   const tableCols = []
   for (let i = 0; i < cols; i++) {
-    const key = getRandomString(4)
     tableCols.push(
-      <td key={key}>
-        <SkeletonRect key={key} className='h-6 w-full' />
+      <td key={`table-col-${i}`}>
+        <SkeletonRect key={`table-skeleton-${i}`} className='h-6 w-full' />
       </td>,
     )
   }
 
   const tableRows = []
   for (let i = 0; i < rows; i++) {
-    const key = getRandomString(4)
-
     tableRows.push(
-      <tr data-testid='SkeletonTableRow' key={key}>
+      <tr data-testid='SkeletonTableRow' key={`table-row-${i}`}>
         {tableCols}
       </tr>,
     )
@@ -60,11 +57,11 @@ const TableSkeleton = ({ cols, rows }: TTableProps) => {
 }
 
 type Props = {
-  screens: ScreenItem[]
+  screens: ScreenItemRender[]
   isScreenListLoading?: boolean
   className?: string
-  highlighted?: ScreenItem
-  setHighLighted?: Dispatch<SetStateAction<ScreenItem | undefined>>
+  highlighted?: ScreenItemRender
+  setHighLighted?: Dispatch<SetStateAction<ScreenItemRender | undefined>>
 }
 
 export const ScreenTable = ({
@@ -79,7 +76,7 @@ export const ScreenTable = ({
   const { dispatchFormDrawer } = useFormDrawerContext()
   const [themeMode] = useThemeModeContext()
 
-  const onShow = (screen: ScreenItem) => {
+  const onShow = (screen: ScreenItemRender) => {
     ReactGA.event({
       category: 'Checkbox Click',
       action: 'Clicked show',
@@ -88,7 +85,7 @@ export const ScreenTable = ({
     showAction({ id: screen.id })
   }
 
-  const handleDelete = (screen: ScreenItem) => {
+  const handleDelete = (screen: ScreenItemRender) => {
     ReactGA.event({
       category: 'Button Click',
       action: 'Clicked delete',
@@ -97,7 +94,7 @@ export const ScreenTable = ({
     deleteAction({ id: screen.id })
   }
 
-  const handleEdit = (screen: ScreenItem) => {
+  const handleEdit = (screen: ScreenItemRender) => {
     ReactGA.event({
       category: 'Button Click',
       action: 'Clicked edit',
@@ -156,16 +153,14 @@ export const ScreenTable = ({
                   )}
                 </div>
               </td>
-              <td className='text-center'>{screen.tag.diagonalSize}&quot;</td>
-              <td className='text-center'>{screen.tag.aspectRatio}</td>
+              <td className='text-center'>{screen.data.diagonalSize}&quot;</td>
+              <td className='text-center'>{screen.data.aspectRatio}</td>
               <td className='hidden text-center sm:table-cell'>
-                {Math.round((screen.data.hSize * 100) / 100)}&quot; x {Math.round((screen.data.vSize * 100) / 100)}
+                {Math.round((screen.specs.hSize * 100) / 100)}&quot; x {Math.round((screen.specs.vSize * 100) / 100)}
                 &quot;
               </td>
-              <td className='hidden text-center md:table-cell'>
-                {screen.spec && `${screen.spec.hRes} x ${screen.spec.vRes}`}
-              </td>
-              <td className='text-center'>{screen.spec && `${Math.round((screen.spec.ppi * 100) / 100)}`}</td>
+              <td className='hidden text-center md:table-cell'>{`${screen.data.hRes} x ${screen.data.vRes}`}</td>
+              <td className='text-center'>{`${Math.round((screen.specs.ppi * 100) / 100)}`}</td>
               <td>
                 <div className='flex flex-row items-center justify-center gap-3'>
                   <button aria-label='edit button' onClick={() => handleEdit(screen)}>

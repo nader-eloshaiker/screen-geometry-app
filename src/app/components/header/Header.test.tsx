@@ -1,6 +1,5 @@
 import { fireEvent, render, renderHook, waitFor } from '@testing-library/react'
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
-import { mockedUseLocation } from 'src/configs/vitest.setup'
 import { useWindowSize } from '../../../packages/test/mocks/useWindowsSize'
 import { ThemeModeProvider } from '../../contexts/theme/ThemeModeProvider'
 import Header from './Header'
@@ -23,10 +22,6 @@ describe('#Header', () => {
         element: <Header />,
       },
     ])
-  })
-
-  beforeEach(() => {
-    mockedUseLocation.mockImplementation(() => ({ pathname: '/' }))
   })
 
   // cannot be tested due to tailwindcss not getting parsed

@@ -8,8 +8,8 @@ import { useEffect, useState } from 'react'
 import { ScreenForm } from './form/ScreenForm'
 
 const variants = {
-  opened: { translateX: '0' },
-  closed: { translateX: '-100%', transition: { ease: 'easeInOut' } },
+  opened: { translateX: '0', transition: { ease: 'easeInOut' } },
+  closed: { translateX: '-110%', transition: { ease: 'easeInOut' } },
 }
 
 type Props = TReactChildren

@@ -43,22 +43,17 @@ const meta = {
       table: { category: 'format', type: { summary: 'boolean' }, defaultValue: { summary: 'false' } },
       control: { type: 'boolean' },
     },
-    disableOnLoading: {
-      description: 'Prevent user interaction while in loading state.',
-      table: { category: 'format', type: { summary: 'boolean' }, defaultValue: { summary: 'true' } },
-      control: { type: 'boolean' },
-    },
     placeholder: {
       description: 'The placeholder text when the input is empty.',
       table: { category: 'content', type: { summary: 'string' } },
       control: { type: 'text' },
     },
-    onChange: {
+    onSearchList: {
       description: 'Input field change handler.',
       table: { category: 'event', type: { summary: 'function' }, defaultValue: { summary: '() => {}' } },
       action: 'onChange',
     },
-    onSelect: {
+    onSelectItem: {
       description: 'List selection handler.',
       table: { category: 'event', type: { summary: 'function' }, defaultValue: { summary: '() => {}' } },
       action: 'onSelect',
@@ -92,8 +87,8 @@ export const Default: Story = {
     value: '',
     isLoading: false,
     placeholder: 'Type to filter list...',
-    onChange: () => {},
-    onSelect: () => {},
+    onSearchList: () => {},
+    onSelectItem: () => {},
     setClearHandler: () => {},
   },
   play: async ({ canvasElement }) => {

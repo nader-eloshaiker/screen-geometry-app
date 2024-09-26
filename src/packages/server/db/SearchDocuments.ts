@@ -1,6 +1,6 @@
 import { SearchItem } from '@packages/openapi/generated'
 
-export const SearchDB: Array<SearchItem> = [
+export const SearchDocuments: Array<SearchItem> = [
   {
     id: 'CGA4:3',
     name: 'CGA',

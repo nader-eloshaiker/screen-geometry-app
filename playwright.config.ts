@@ -36,7 +36,23 @@ export default defineConfig({
         // - if you're testing the demo app of a component library and want to exclude the demo sources
         // - or part of the code is generated
         // - or if you're running into any of the other many reasons people have for excluding files
-        exclude: ['path/to/ignored/code/**'],
+        exclude: [
+          'src/app/assets/**/*',
+          'src/configs/**/*',
+          'src/constants/**/*',
+          'src/packages/test/**/*',
+          'src/packages/serviceworker/**/*',
+          'src/packages/openapi/generated/**/*',
+          'src/**/*.mock.{ts,tsx}',
+          'src/**/*.stories.tsx',
+          'src/**/*.d.ts',
+          '@react-refresh',
+          // 'virtual:@vite-plugin-checker-runtime',
+          'virtual:*',
+          'hmr.ts',
+          'msw.js*',
+          'client.ts',
+        ],
         // Directory in which to write coverage reports
         resultDir: path.join(__dirname, 'coverage/playwright'),
         // Configure the reports to generate.

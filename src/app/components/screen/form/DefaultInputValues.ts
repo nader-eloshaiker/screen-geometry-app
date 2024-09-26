@@ -3,11 +3,11 @@ import { createCSSColor } from '@packages/utils/ScreenCalc'
 
 export const DefaultInputValues = () => {
   const color = createCSSColor()
-  const value: ScreenInput = {
-    aspectRatio: null,
-    diagonalSize: null,
-    hRes: null,
-    vRes: null,
+  const value: UndefinableObj<ScreenInput> = {
+    aspectRatio: undefined,
+    diagonalSize: undefined,
+    hRes: undefined,
+    vRes: undefined,
     lightColor: color.lightColor,
     darkColor: color.darkColor,
   }

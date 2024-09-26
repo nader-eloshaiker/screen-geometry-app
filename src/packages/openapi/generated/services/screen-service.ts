@@ -290,48 +290,68 @@ export const useDeleteScreen = <TError = ErrorResponse, TContext = unknown>(opti
 export const getCreateScreenMock = () => ({
   item: {
     id: 'ttUL6ooF',
-    tag: { diagonalSize: 49, aspectRatio: '32:9' },
-    data: { hSize: 47.169896067541046, vSize: 13.26653326899592, hAspectRatio: 32, vAspectRatio: 9 },
-    spec: { hRes: 5120, vRes: 1440, ppi: 108.54380498674065 },
+    specs: {
+      hSize: 47.169896067541046,
+      vSize: 13.26653326899592,
+      hAspectRatio: 32,
+      vAspectRatio: 9,
+      ppi: 108.54380498674065,
+    },
+    data: { diagonalSize: 49, aspectRatio: '32:9', hRes: 5120, vRes: 1440 },
     color: { lightColor: '#64E8DD', darkColor: '#14857B' },
+    signature: 'dSize=49&aRatio=32:9&hRes=5120&vRes=1440',
     visible: true,
-    render: { width: 1, height: 0.6293053673644803 },
   },
 })
 
 export const getShowScreenMock = () => ({
   item: {
     id: '5HjERJbH',
-    tag: { diagonalSize: 38, aspectRatio: '21:9' },
-    data: { hSize: 34.9275111406862, vSize: 14.968933346008372, hAspectRatio: 21, vAspectRatio: 9 },
-    spec: { hRes: 3840, vRes: 1600, ppi: 109.47368421052632 },
+    specs: {
+      hSize: 34.9275111406862,
+      vSize: 14.968933346008372,
+      hAspectRatio: 21,
+      vAspectRatio: 9,
+      ppi: 109.47368421052632,
+    },
+    data: { diagonalSize: 38, aspectRatio: '21:9', hRes: 3840, vRes: 1600 },
     color: { lightColor: '#F6693C', darkColor: '#C33609' },
+    signature: 'dSize=38&aRatio=21:9&hRes=3840&vRes=1600',
     visible: false,
-    render: { width: 0.7404619058450888, height: 0.7100596596986617 },
   },
 })
 
 export const getGetScreenMock = () => ({
   item: {
     id: '5HjERJbH',
-    tag: { diagonalSize: 38, aspectRatio: '21:9' },
-    data: { hSize: 34.9275111406862, vSize: 14.968933346008372, hAspectRatio: 21, vAspectRatio: 9 },
-    spec: { hRes: 3840, vRes: 1600, ppi: 109.47368421052632 },
+    specs: {
+      hSize: 34.9275111406862,
+      vSize: 14.968933346008372,
+      hAspectRatio: 21,
+      vAspectRatio: 9,
+      ppi: 109.47368421052632,
+    },
+    data: { diagonalSize: 38, aspectRatio: '21:9', hRes: 3840, vRes: 1600 },
     color: { lightColor: '#F6693C', darkColor: '#C33609' },
+    signature: 'dSize=38&aRatio=21:9&hRes=3840&vRes=1600',
     visible: true,
-    render: { width: 0.7404619058450888, height: 0.7100596596986617 },
   },
 })
 
 export const getUpdateScreenMock = () => ({
   item: {
     id: '5HjERJbH',
-    tag: { diagonalSize: 38, aspectRatio: '21:9' },
-    data: { hSize: 34.9275111406862, vSize: 14.968933346008372, hAspectRatio: 21, vAspectRatio: 9 },
-    spec: { hRes: 3840, vRes: 1600, ppi: 109.47368421052632 },
+    specs: {
+      hSize: 34.9275111406862,
+      vSize: 14.968933346008372,
+      hAspectRatio: 21,
+      vAspectRatio: 9,
+      ppi: 109.47368421052632,
+    },
+    data: { diagonalSize: 38, aspectRatio: '21:9', hRes: 3840, vRes: 1600 },
     color: { lightColor: '#F6693C', darkColor: '#C33609' },
+    signature: 'dSize=38&aRatio=21:9&hRes=3840&vRes=1600',
     visible: true,
-    render: { width: 0.7404619058450888, height: 0.7100596596986617 },
   },
 })
 

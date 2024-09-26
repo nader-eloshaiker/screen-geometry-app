@@ -1,8 +1,9 @@
+import { ScreenItemRender } from '@app/models/screenItemRender'
 import { ScreenItem } from '@packages/openapi/generated'
 import { normaliseScreenRender } from '@packages/utils/ScreenCalc'
 
 export const initialScreenState = {
-  screens: [] as ScreenItem[],
+  screens: [] as ScreenItemRender[],
   query: '',
 }
 

@@ -1,19 +1,24 @@
-import { getGetScreenListMock } from '@packages/openapi/generated'
+import {
+  getScreenListServiceMock,
+  getScreenServiceMock,
+  getSearchServiceMock,
+  ScreenItem,
+} from '@packages/openapi/generated'
 import { apiRoutes } from '@packages/openapi/meta'
-import { spyOnLocalForage } from '@packages/server/test/mocks/mockLocalForage'
 import { mswWithSpy, startMSW, stopMSW } from '@packages/serviceworker/NodeServiceWorker'
-import { generateStub } from './server'
+import { screenItemFixture } from '@packages/test/fixtures/ScreenFixtures'
+import { IDBFactory } from 'fake-indexeddb'
+import { addData, Stores } from './db/IndexedDB'
+import { setupDB } from './db/IndexedDB.test'
 import { screenInput55Fixture } from './test/fixtures/ScreenFixtures'
 
 describe('#server', () => {
   const baseUrl = 'http://fakeapi.com'
-  const { searchMocks, screenListMocks, screenMocks, passthroughMocks } = generateStub(baseUrl, 1)
 
   const mswRequestEventSpy = mswWithSpy([
-    ...searchMocks(),
-    ...screenListMocks(),
-    ...screenMocks(),
-    ...passthroughMocks(),
+    ...getSearchServiceMock(),
+    ...getScreenListServiceMock(),
+    ...getScreenServiceMock(),
   ])
 
   beforeAll(async () => {
@@ -24,8 +29,9 @@ describe('#server', () => {
     await stopMSW()
   })
 
-  beforeEach(() => {
-    spyOnLocalForage(getGetScreenListMock().list)
+  beforeEach(async () => {
+    globalThis.indexedDB = new IDBFactory()
+    setupDB({ includeData: true, includeSearch: true })
   })
 
   it('should call the GET screens api', async () => {
@@ -53,16 +59,22 @@ describe('#server', () => {
   })
 
   it('should call the GET screen api', async () => {
-    const response = await fetch(`${baseUrl}${apiRoutes.screen}/pVesw1Iu`)
+    const created = await addData<ScreenItem>(Stores.Screens, screenItemFixture)
+    expect(created).toBeDefined()
+
+    const response = await fetch(`${baseUrl}${apiRoutes.screen}/${created.id}`)
     expect(response.status).toBe(200)
     expect(response.statusText).toBe('OK')
     expect(mswRequestEventSpy[mswRequestEventSpy.length - 1]).toEqual(
-      expect.stringContaining('method:GET|url:http://fakeapi.com/v1/screen/pVesw1Iu'),
+      expect.stringContaining(`method:GET|url:http://fakeapi.com/v1/screen/${created.id}`),
     )
   })
 
   it('should call the DELETE screens api', async () => {
-    const response = await fetch(`${baseUrl}${apiRoutes.screen}/pVesw1Iu`, {
+    const created = await addData<ScreenItem>(Stores.Screens, screenItemFixture)
+    expect(created).toBeDefined()
+
+    const response = await fetch(`${baseUrl}${apiRoutes.screen}/${created.id}`, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
@@ -71,12 +83,15 @@ describe('#server', () => {
     expect(response.status).toBe(200)
     expect(response.statusText).toBe('OK')
     expect(mswRequestEventSpy[mswRequestEventSpy.length - 1]).toEqual(
-      expect.stringContaining('method:DELETE|url:http://fakeapi.com/v1/screen/pVesw1Iu'),
+      expect.stringContaining(`method:DELETE|url:http://fakeapi.com/v1/screen/${created.id}`),
     )
   })
 
   it('should call the PUT screens api', async () => {
-    const response = await fetch(`${baseUrl}${apiRoutes.screen}/pVesw1Iu`, {
+    const created = await addData<ScreenItem>(Stores.Screens, screenItemFixture)
+    expect(created).toBeDefined()
+
+    const response = await fetch(`${baseUrl}${apiRoutes.screen}/${created.id}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
@@ -86,12 +101,15 @@ describe('#server', () => {
     expect(response.status).toBe(200)
     expect(response.statusText).toBe('OK')
     expect(mswRequestEventSpy[mswRequestEventSpy.length - 1]).toEqual(
-      expect.stringContaining('method:PUT|url:http://fakeapi.com/v1/screen/pVesw1Iu'),
+      expect.stringContaining(`method:PUT|url:http://fakeapi.com/v1/screen/${created.id}`),
     )
   })
 
   it('should call the PATCH screens api', async () => {
-    const response = await fetch(`${baseUrl}${apiRoutes.screen}/pVesw1Iu/show`, {
+    const created = await addData<ScreenItem>(Stores.Screens, screenItemFixture)
+    expect(created).toBeDefined()
+
+    const response = await fetch(`${baseUrl}${apiRoutes.screen}/${created.id}/show`, {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',
@@ -101,7 +119,7 @@ describe('#server', () => {
     expect(response.status).toBe(200)
     expect(response.statusText).toBe('OK')
     expect(mswRequestEventSpy[mswRequestEventSpy.length - 1]).toEqual(
-      expect.stringContaining('method:PATCH|url:http://fakeapi.com/v1/screen/pVesw1Iu/show'),
+      expect.stringContaining(`method:PATCH|url:http://fakeapi.com/v1/screen/${created.id}/show`),
     )
   })
 
