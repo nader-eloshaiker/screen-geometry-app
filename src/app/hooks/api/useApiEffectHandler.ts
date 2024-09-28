@@ -1,7 +1,7 @@
 import { ErrorResponse } from '@packages/openapi/generated'
 import {
   GeneralNotificationItem,
-  NotificationActionTypes,
+  NotificationEventTypes,
   NotificationType,
   useNotificationContext,
 } from '@packages/ui/notification'
@@ -29,7 +29,7 @@ export const useApiEffectHandler = <TData>({
     if (successNotification) {
       const { title, message } = successNotification
       dispatch({
-        type: NotificationActionTypes.ADD_NOTIFICATION,
+        type: NotificationEventTypes.ADD_NOTIFICATION,
         payload: {
           value: { title, message } as GeneralNotificationItem,
           type: NotificationType.SUCCESS,
@@ -41,7 +41,7 @@ export const useApiEffectHandler = <TData>({
   useEffect(() => {
     if (error) {
       dispatch({
-        type: NotificationActionTypes.ADD_NOTIFICATION,
+        type: NotificationEventTypes.ADD_NOTIFICATION,
         payload: { value: error, type: NotificationType.ERROR },
       })
     }

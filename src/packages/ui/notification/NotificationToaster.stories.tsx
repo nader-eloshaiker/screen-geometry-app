@@ -1,7 +1,7 @@
 import type { Meta, StoryFn, StoryObj } from '@storybook/react'
 import { useEffect } from 'react'
 import {
-  NotificationActionTypes,
+  NotificationEventTypes,
   NotificationItem,
   NotificationProvider,
   NotificationToaster,
@@ -22,7 +22,7 @@ const NotificationToasterStory = ({ notification }: StoryProps) => {
   useEffect(() => {
     if (state.notifications.length === 0) {
       setTimeout(() => {
-        dispatch({ type: NotificationActionTypes.ADD_NOTIFICATION, payload: notification })
+        dispatch({ type: NotificationEventTypes.ADD_NOTIFICATION, payload: notification })
       }, 1000)
     }
   }, [dispatch, notification, state.notifications.length])

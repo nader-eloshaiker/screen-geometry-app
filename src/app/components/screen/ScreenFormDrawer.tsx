@@ -1,4 +1,4 @@
-import { FormDrawerActionTypes, FormDrawerMode } from '@app/contexts/FormDrawer/FormDrawerManager'
+import { FormDrawerEventTypes, FormDrawerMode } from '@app/contexts/FormDrawer/FormDrawerManager'
 import { useFormDrawerContext } from '@app/contexts/FormDrawer/useFormDrawerContext'
 import { useGetScreenApi } from '@app/hooks/api/helpers/useGetScreenApi'
 import { ScreenInput } from '@packages/openapi/generated'
@@ -8,8 +8,8 @@ import { useEffect, useState } from 'react'
 import { ScreenForm } from './form/ScreenForm'
 
 const variants = {
-  opened: { translateX: '0' },
-  closed: { translateX: '-100%', transition: { ease: 'easeInOut' } },
+  opened: { translateX: '0', transition: { ease: 'easeInOut' } },
+  closed: { translateX: '-110%', transition: { ease: 'easeInOut' } },
 }
 
 type Props = TReactChildren
@@ -24,7 +24,7 @@ export const ScreenFormDrawer = ({ children }: Props) => {
     formDrawerState.mode === FormDrawerMode.Edit && !!formDrawerState.id,
   )
   const closeHandler = () => {
-    dispatchFormDrawer({ type: FormDrawerActionTypes.Close })
+    dispatchFormDrawer({ type: FormDrawerEventTypes.Close })
     setDefaultValues(null)
   }
 

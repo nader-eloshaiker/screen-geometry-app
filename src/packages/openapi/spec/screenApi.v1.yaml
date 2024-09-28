@@ -172,72 +172,72 @@ paths:
                   value:
                     list:
                       - id: pVesw1Iu
-                        tag:
-                          diagonalSize: 34
-                          aspectRatio: '21:9'
-                        data:
+                        specs:
                           hSize: 31.25093102061397
                           vSize: 13.3932561516917
                           hAspectRatio: 21
                           vAspectRatio: 9
-                        spec:
+                          ppi: 109.68340725465096
+                        data:
+                          diagonalSize: 34
+                          aspectRatio: '21:9'
                           hRes: 3440
                           vRes: 1440
-                          ppi: 109.68340725465096
                         color:
                           lightColor: '#FCDF50'
                           darkColor: '#967E03'
+                        signature: 'dSize=34&aRatio=21:9&hRes=3440&vRes=1440'
                         visible: true
                       - id: 5HjERJbH
-                        tag:
-                          diagonalSize: 38
-                          aspectRatio: '21:9'
-                        data:
+                        specs:
                           hSize: 34.9275111406862
                           vSize: 14.968933346008372
                           hAspectRatio: 21
                           vAspectRatio: 9
-                        spec:
+                          ppi: 109.47368421052632
+                        data:
+                          diagonalSize: 38
+                          aspectRatio: '21:9'
                           hRes: 3840
                           vRes: 1600
-                          ppi: 109.47368421052632
                         color:
                           lightColor: '#F6693C'
                           darkColor: '#C33609'
+                        signature: 'dSize=38&aRatio=21:9&hRes=3840&vRes=1600'
                         visible: true
                       - id: LnAg4nPQ
-                        tag:
-                          diagonalSize: 27
-                          aspectRatio: '16:9'
-                        data:
+                        specs:
                           hSize: 23.53253950236283
                           vSize: 13.237053470079092
                           hAspectRatio: 16
                           vAspectRatio: 9
-                        spec:
+                          ppi: 163.17830889498507
+                        data:
+                          diagonalSize: 27
+                          aspectRatio: '16:9'
                           hRes: 3840
                           vRes: 2160
-                          ppi: 163.17830889498507
                         color:
                           lightColor: '#67E5AA'
                           darkColor: '#168350'
+                        signature: 'dSize=27&aRatio=16:9&hRes=3840&vRes=2160'
                         visible: true
                       - id: oxrH4rCU
-                        tag:
-                          diagonalSize: 49
-                          aspectRatio: '32:9'
-                        data:
+                        specs:
                           hSize: 47.169896067541046
                           vSize: 13.26653326899592
                           hAspectRatio: 32
                           vAspectRatio: 9
-                        spec:
+                          ppi: 108.54380498674065
+                        data:
+                          diagonalSize: 49
+                          aspectRatio: '32:9'
                           hRes: 5120
                           vRes: 1440
-                          ppi: 108.54380498674065
                         color:
                           lightColor: '#64E8DD'
                           darkColor: '#14857B'
+                        signature: 'dSize=49&aRatio=32:9&hRes=5120&vRes=1440'
                         visible: true
                 empty:
                   value:
@@ -308,72 +308,72 @@ paths:
               example:
                 list:
                   - id: pVesw1Iu
-                    tag:
-                      diagonalSize: 34
-                      aspectRatio: '21:9'
-                    data:
+                    specs:
                       hSize: 31.25093102061397
                       vSize: 13.3932561516917
                       hAspectRatio: 21
                       vAspectRatio: 9
-                    spec:
+                      ppi: 109.68340725465096
+                    data:
+                      diagonalSize: 34
+                      aspectRatio: '21:9'
                       hRes: 3440
                       vRes: 1440
-                      ppi: 109.68340725465096
                     color:
                       lightColor: '#FCDF50'
                       darkColor: '#967E03'
+                    signature: 'dSize=34&aRatio=21:9&hRes=3440&vRes=1440'
                     visible: true
                   - id: 5HjERJbH
-                    tag:
-                      diagonalSize: 38
-                      aspectRatio: '21:9'
-                    data:
+                    specs:
                       hSize: 34.9275111406862
                       vSize: 14.968933346008372
                       hAspectRatio: 21
                       vAspectRatio: 9
-                    spec:
+                      ppi: 109.47368421052632
+                    data:
+                      diagonalSize: 38
+                      aspectRatio: '21:9'
                       hRes: 3840
                       vRes: 1600
-                      ppi: 109.47368421052632
                     color:
                       lightColor: '#F6693C'
                       darkColor: '#C33609'
+                    signature: 'dSize=38&aRatio=21:9&hRes=3840&vRes=1600'
                     visible: true
                   - id: LnAg4nPQ
-                    tag:
-                      diagonalSize: 27
-                      aspectRatio: '16:9'
-                    data:
+                    specs:
                       hSize: 23.53253950236283
                       vSize: 13.237053470079092
                       hAspectRatio: 16
                       vAspectRatio: 9
-                    spec:
+                      ppi: 163.17830889498507
+                    data:
+                      diagonalSize: 27
+                      aspectRatio: '16:9'
                       hRes: 3840
                       vRes: 2160
-                      ppi: 163.17830889498507
                     color:
                       lightColor: '#67E5AA'
                       darkColor: '#168350'
+                    signature: 'dSize=27&aRatio=16:9&hRes=3840&vRes=2160'
                     visible: true
                   - id: oxrH4rCU
-                    tag:
-                      diagonalSize: 49
-                      aspectRatio: '32:9'
-                    data:
+                    specs:
                       hSize: 47.169896067541046
                       vSize: 13.26653326899592
                       hAspectRatio: 32
                       vAspectRatio: 9
-                    spec:
+                      ppi: 108.54380498674065
+                    data:
+                      diagonalSize: 49
+                      aspectRatio: '32:9'
                       hRes: 5120
                       vRes: 1440
-                      ppi: 108.54380498674065
                     color:
                       lightColor: '#64E8DD'
                       darkColor: '#14857B'
+                    signature: 'dSize=49&aRatio=32:9&hRes=5120&vRes=1440'
                     visible: true
         '400':
           description: '400 response'
@@ -460,25 +460,22 @@ paths:
               example:
                 item:
                   id: ttUL6ooF
-                  tag:
-                    diagonalSize: 49
-                    aspectRatio: '32:9'
-                  data:
+                  specs:
                     hSize: 47.169896067541046
                     vSize: 13.26653326899592
                     hAspectRatio: 32
                     vAspectRatio: 9
-                  spec:
+                    ppi: 108.54380498674065
+                  data:
+                    diagonalSize: 49
+                    aspectRatio: '32:9'
                     hRes: 5120
                     vRes: 1440
-                    ppi: 108.54380498674065
                   color:
                     lightColor: '#64E8DD'
                     darkColor: '#14857B'
+                  signature: 'dSize=49&aRatio=32:9&hRes=5120&vRes=1440'
                   visible: true
-                  render:
-                    width: 1
-                    height: 0.6293053673644803
         '400':
           description: '400 response'
           content:
@@ -563,25 +560,22 @@ paths:
               example:
                 item:
                   id: 5HjERJbH
-                  tag:
-                    diagonalSize: 38
-                    aspectRatio: '21:9'
-                  data:
+                  specs:
                     hSize: 34.9275111406862
                     vSize: 14.968933346008372
                     hAspectRatio: 21
                     vAspectRatio: 9
-                  spec:
+                    ppi: 109.47368421052632
+                  data:
+                    diagonalSize: 38
+                    aspectRatio: '21:9'
                     hRes: 3840
                     vRes: 1600
-                    ppi: 109.47368421052632
                   color:
                     lightColor: '#F6693C'
                     darkColor: '#C33609'
+                  signature: 'dSize=38&aRatio=21:9&hRes=3840&vRes=1600'
                   visible: false
-                  render:
-                    width: 0.7404619058450888
-                    height: 0.7100596596986617
         '400':
           description: '400 response'
           content:
@@ -672,25 +666,22 @@ paths:
               example:
                 item:
                   id: 5HjERJbH
-                  tag:
-                    diagonalSize: 38
-                    aspectRatio: '21:9'
-                  data:
+                  specs:
                     hSize: 34.9275111406862
                     vSize: 14.968933346008372
                     hAspectRatio: 21
                     vAspectRatio: 9
-                  spec:
+                    ppi: 109.47368421052632
+                  data:
+                    diagonalSize: 38
+                    aspectRatio: '21:9'
                     hRes: 3840
                     vRes: 1600
-                    ppi: 109.47368421052632
                   color:
                     lightColor: '#F6693C'
                     darkColor: '#C33609'
+                  signature: 'dSize=38&aRatio=21:9&hRes=3840&vRes=1600'
                   visible: true
-                  render:
-                    width: 0.7404619058450888
-                    height: 0.7100596596986617
         '400':
           description: '400 response'
           content:
@@ -763,25 +754,22 @@ paths:
               example:
                 item:
                   id: 5HjERJbH
-                  tag:
-                    diagonalSize: 38
-                    aspectRatio: '21:9'
-                  data:
+                  specs:
                     hSize: 34.9275111406862
                     vSize: 14.968933346008372
                     hAspectRatio: 21
                     vAspectRatio: 9
-                  spec:
+                    ppi: 109.47368421052632
+                  data:
+                    diagonalSize: 38
+                    aspectRatio: '21:9'
                     hRes: 3840
                     vRes: 1600
-                    ppi: 109.47368421052632
                   color:
                     lightColor: '#F6693C'
                     darkColor: '#C33609'
+                  signature: 'dSize=38&aRatio=21:9&hRes=3840&vRes=1600'
                   visible: true
-                  render:
-                    width: 0.7404619058450888
-                    height: 0.7100596596986617
         '400':
           description: '400 response'
           content:
@@ -920,7 +908,7 @@ components:
   schemas:
     SearchListResponse:
       required:
-        - 'list'
+        - list
       type: object
       properties:
         list:
@@ -929,12 +917,12 @@ components:
             $ref: '#/components/schemas/SearchItem'
     SearchItem:
       required:
-        - 'id'
-        - 'name'
-        - 'label'
-        - 'aspectRatio'
-        - 'hRes'
-        - 'vRes'
+        - id
+        - name
+        - label
+        - aspectRatio
+        - hRes
+        - vRes
       type: object
       properties:
         id:
@@ -964,7 +952,7 @@ components:
       description: 'Complete search object'
     ScreenListResponse:
       required:
-        - 'list'
+        - list
       type: object
       properties:
         list:
@@ -973,25 +961,26 @@ components:
             $ref: '#/components/schemas/ScreenItem'
     ScreenIdResponse:
       required:
-        - 'id'
+        - id
       type: object
       properties:
         id:
           type: string
     ScreenItemResponse:
       required:
-        - 'item'
+        - item
       type: object
       properties:
         item:
           $ref: '#/components/schemas/ScreenItem'
     ScreenItem:
       required:
-        - 'id'
-        - 'tag'
-        - 'data'
-        - 'color'
-        - 'visible'
+        - id
+        - data
+        - specs
+        - color
+        - signature
+        - visible
       type: object
       properties:
         id:
@@ -999,51 +988,35 @@ components:
           minLength: 1
         visible:
           type: boolean
-        tag:
-          $ref: '#/components/schemas/ScreenTag'
+        signature:
+          type: string
         data:
           $ref: '#/components/schemas/ScreenData'
+        specs:
+          $ref: '#/components/schemas/ScreenSpecs'
         color:
           $ref: '#/components/schemas/ScreenColor'
-        spec:
-          $ref: '#/components/schemas/ScreenSpec'
-        render:
-          $ref: '#/components/schemas/ScreenRender'
       description: 'Complete screen object'
     ScreenInputList:
       type: array
       items:
         $ref: '#/components/schemas/ScreenInput'
-    ScreenTag:
-      required:
-        - 'diagonalSize'
-        - 'aspectRatio'
-      type: object
-      properties:
-        diagonalSize:
-          type: number
-          minimum: 0
-          exclusiveMinimum: true
-        aspectRatio:
-          type: string
-          minLength: 3
-      description: 'Screen primitive data'
     ScreenInput:
       required:
-        - 'diagonalSize'
-        - 'aspectRatio'
-        - 'lightColor'
-        - 'darkColor'
+        - diagonalSize
+        - aspectRatio
+        - hRes
+        - vRes
+        - lightColor
+        - darkColor
       type: object
       properties:
         diagonalSize:
           type: number
-          nullable: true
           minimum: 0
           exclusiveMinimum: true
         aspectRatio:
           minLength: 3
-          nullable: true
           type: string
         lightColor:
           type: string
@@ -1057,19 +1030,18 @@ components:
           pattern: '#([a-f0-9]{6})\b'
         hRes:
           type: integer
-          nullable: true
           minimum: 0
           exclusiveMinimum: true
         vRes:
           type: number
-          nullable: true
       description: 'Screen primitive data'
-    ScreenData:
+    ScreenSpecs:
       required:
-        - 'hSize'
-        - 'vSize'
-        - 'hAspectRatio'
-        - 'vAspectRatio'
+        - hSize
+        - vSize
+        - hAspectRatio
+        - vAspectRatio
+        - ppi
       type: object
       properties:
         hSize:
@@ -1088,14 +1060,26 @@ components:
           type: integer
           minimum: 0
           exclusiveMinimum: true
+        ppi:
+          type: number
+          minimum: 0
+          exclusiveMinimum: true
       description: 'Screen physical characteristics'
-    ScreenSpec:
+    ScreenData:
       required:
-        - 'hRes'
-        - 'vRes'
-        - 'ppi'
+        - diagonalSize
+        - aspectRatio
+        - hRes
+        - vRes
       type: object
       properties:
+        diagonalSize:
+          type: number
+          minimum: 0
+          exclusiveMinimum: true
+        aspectRatio:
+          type: string
+          minLength: 3
         hRes:
           type: integer
           minimum: 0
@@ -1104,31 +1088,11 @@ components:
           type: integer
           minimum: 0
           exclusiveMinimum: true
-        ppi:
-          type: number
-          minimum: 0
-          exclusiveMinimum: true
       description: 'Screen resolution characteristics'
-    ScreenRender:
-      type: object
-      properties:
-        width:
-          type: integer
-          minimum: 0
-          exclusiveMinimum: true
-        height:
-          type: integer
-          minimum: 0
-          exclusiveMinimum: true
-        pixelSize:
-          type: integer
-          minimum: 0
-          exclusiveMinimum: true
-      description: 'Screen representation in UI'
     ScreenColor:
       required:
-        - 'lightColor'
-        - 'darkColor'
+        - lightColor
+        - darkColor
       type: object
       properties:
         lightColor:
@@ -1144,13 +1108,13 @@ components:
       description: 'Screen representation colors in hex format'
     ErrorResponse:
       required:
-        - 'error'
+        - error
       type: object
       properties:
         error:
           required:
-            - 'code'
-            - 'status'
+            - code
+            - status
           type: object
           properties:
             code:

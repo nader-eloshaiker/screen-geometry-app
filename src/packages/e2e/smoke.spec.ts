@@ -1,6 +1,9 @@
 import { expect, test } from '@bgotink/playwright-coverage'
+import { MotionGlobalConfig } from 'framer-motion'
 
 test('Smoke Test Screens Page', async ({ page }) => {
+  MotionGlobalConfig.skipAnimations = true
+
   // Load Page and Naviate to Screens
   await page.goto('/')
   await page.getByRole('link', { name: 'Screens' }).click()

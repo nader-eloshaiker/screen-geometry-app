@@ -13,7 +13,7 @@ import { FormDrawerProvider } from '@app/contexts/FormDrawer/FormDrawerProvider'
 import { useScreenContext } from '@app/contexts/Screen/useScreenContext'
 import { useCreateScreenListApi } from '@app/hooks/api/helpers/useCreateScreenListApi'
 import { useGetScreensListApi } from '@app/hooks/api/helpers/useGetScreenListApi'
-import { ScreenItem } from '@packages/openapi/generated'
+import { ScreenItemRender } from '@app/models/screenItemRender'
 import { Dimensions } from '@packages/openapi/models'
 import { useElementSize } from '@packages/ui/hooks/useElementSize'
 import { ImageIcon } from '@packages/ui/skeleton'
@@ -29,7 +29,7 @@ export const Screens = () => {
   const {
     state: { screens },
   } = useScreenContext()
-  const [highlighted, setHighlighted] = useState<ScreenItem | undefined>()
+  const [highlighted, setHighlighted] = useState<ScreenItemRender | undefined>()
   const [maxPanelSize, setMaxPanelSize] = useState<Dimensions>({ width, height: 0 })
   const [hAlignment, setHAlignment] = useState<Alignment>('center')
   const [vAlignment, setVAlignment] = useState<Alignment>('end')
@@ -111,7 +111,7 @@ export const Screens = () => {
                     .filter((screen) => screen.visible)
                     .map((screen) => (
                       <ScreenPanel
-                        data-testid={`ScreenPanel-${screen.tag.diagonalSize}`}
+                        data-testid={`ScreenPanel-${screen.data.diagonalSize}`}
                         key={screen.id}
                         screen={screen}
                         highlighted={highlighted}

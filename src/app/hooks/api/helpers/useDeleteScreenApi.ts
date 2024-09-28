@@ -1,4 +1,4 @@
-import { ScreenActionTypes } from '@app/contexts/Screen/ScreenManager'
+import { ScreenEventTypes } from '@app/contexts/Screen/ScreenManager'
 import { useScreenContext } from '@app/contexts/Screen/useScreenContext'
 import { ScreenIdResponse, useDeleteScreen } from '@packages/openapi/generated'
 import { useCallback } from 'react'
@@ -9,7 +9,7 @@ const successNotification = { title: 'Deleted', message: 'Screen configuration' 
 export const useDeleteScreenApi = () => {
   const { dispatch } = useScreenContext()
   const responseHandler = useCallback(
-    (data: ScreenIdResponse) => dispatch({ type: ScreenActionTypes.DELETE, payload: data.id }),
+    (data: ScreenIdResponse) => dispatch({ type: ScreenEventTypes.DELETE, payload: data.id }),
     [dispatch],
   )
   const request = useDeleteScreen()

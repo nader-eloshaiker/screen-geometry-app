@@ -1,6 +1,6 @@
 import { clsx } from 'clsx'
 import { useCallback, useEffect, useState } from 'react'
-import { NotificationActionTypes, NotificationImage, NotificationType, useNotificationContext } from '.'
+import { NotificationEventTypes, NotificationImage, NotificationType, useNotificationContext } from '.'
 
 export type NotificationProps = { title: string; message: string; tag: string; type: NotificationType }
 
@@ -9,7 +9,7 @@ export const NotificationAlert = ({ title, message, tag, type }: NotificationPro
   const [isClosing, setIsClosing] = useState(false)
 
   const onClose = useCallback(() => {
-    dispatch({ type: NotificationActionTypes.REMOVE_NOTIFICATION, payload: tag })
+    dispatch({ type: NotificationEventTypes.REMOVE_NOTIFICATION, payload: tag })
   }, [dispatch, tag])
 
   useEffect(() => {
