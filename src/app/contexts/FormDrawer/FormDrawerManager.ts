@@ -27,6 +27,7 @@ export type FormDrawerEvent =
 
 export const formDrawerReducer = (state: FormDrawerState, event: FormDrawerEvent): FormDrawerState =>
   match(event)
+    .returnType<FormDrawerState>()
     .with({ type: FormDrawerEventTypes.Close }, () => ({
       ...state,
       id: undefined,
