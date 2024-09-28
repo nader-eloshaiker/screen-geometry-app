@@ -12,6 +12,7 @@ export const NotificationImage = ({ type }: TProps) =>
         fill='none'
         viewBox='0 0 24 24'
       >
+        <title>Error</title>
         <path
           strokeLinecap='round'
           strokeLinejoin='round'
@@ -27,6 +28,7 @@ export const NotificationImage = ({ type }: TProps) =>
         fill='none'
         viewBox='0 0 24 24'
       >
+        <title>Warning</title>
         <path
           strokeLinecap='round'
           strokeLinejoin='round'
@@ -42,6 +44,7 @@ export const NotificationImage = ({ type }: TProps) =>
         fill='none'
         viewBox='0 0 24 24'
       >
+        <title>Success</title>
         <path
           strokeLinecap='round'
           strokeLinejoin='round'
