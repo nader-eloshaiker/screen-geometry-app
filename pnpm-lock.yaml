@@ -53,6 +53,9 @@ importers:
       simpler-color:
         specifier: ^1.0.1
         version: 1.0.1
+      ts-pattern:
+        specifier: ^5.4.0
+        version: 5.4.0
       ulid:
         specifier: ^2.3.0
         version: 2.3.0
@@ -5651,6 +5654,9 @@ packages:
 
   ts-interface-checker@0.1.13:
     resolution: {integrity: sha512-Y/arvbn+rrz3JCKl9C4kVNfTfSm2/mEp5FSz5EsZSANGPSlQrpRI5M4PKF+mJnE52jOO90PnPSc3Ur3bTQw0gA==}
+
+  ts-pattern@5.4.0:
+    resolution: {integrity: sha512-hgfOMfjlrARCnYtGD/xEAkFHDXuSyuqjzFSltyQCbN689uNvoQL20TVN2XFcLMjfNuwSsQGU+xtH6MrjIwhwUg==}
 
   tsconfck@2.1.2:
     resolution: {integrity: sha512-ghqN1b0puy3MhhviwO2kGF8SeMDNhEbnKxjK7h6+fvY9JAxqvXi8y5NAHSQv687OVboS2uZIByzGd45/YxrRHg==}
@@ -12838,6 +12844,8 @@ snapshots:
   ts-dedent@2.2.0: {}
 
   ts-interface-checker@0.1.13: {}
+
+  ts-pattern@5.4.0: {}
 
   tsconfck@2.1.2(typescript@5.3.3):
     optionalDependencies:

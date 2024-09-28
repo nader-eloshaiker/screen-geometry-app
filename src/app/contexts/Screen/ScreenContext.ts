@@ -1,7 +1,7 @@
 import { createContext, Dispatch } from 'react'
-import { initialScreenState, ScreenAction, ScreenState } from './ScreenManager'
+import { initialScreenState, ScreenEvent, ScreenState } from './ScreenManager'
 
-export const ScreenContext = createContext<{ state: ScreenState; dispatch: Dispatch<ScreenAction> }>({
+export const ScreenContext = createContext<{ state: ScreenState; dispatch: Dispatch<ScreenEvent> }>({
   state: initialScreenState,
   dispatch: () => {},
 })
