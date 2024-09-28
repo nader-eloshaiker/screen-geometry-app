@@ -1,9 +1,9 @@
 import { createContext, Dispatch } from 'react'
-import { FormDrawerAction, FormDrawerState, initialFormDrawerState } from './FormDrawerManager'
+import { FormDrawerEvent, FormDrawerState, initialFormDrawerState } from './FormDrawerManager'
 
 export const FormDrawerContext = createContext<{
   formDrawerState: FormDrawerState
-  dispatchFormDrawer: Dispatch<FormDrawerAction>
+  dispatchFormDrawer: Dispatch<FormDrawerEvent>
 }>({
   formDrawerState: initialFormDrawerState,
   dispatchFormDrawer: () => {},

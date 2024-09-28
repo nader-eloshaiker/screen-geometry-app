@@ -1,5 +1,7 @@
 import { FormDrawerMode } from '@app/contexts/FormDrawer/FormDrawerManager'
 import { FormDrawerProvider } from '@app/contexts/FormDrawer/FormDrawerProvider'
+import { getSearchServiceMock } from '@packages/openapi/generated'
+import { mswWithSpy, startMSW, stopMSW } from '@packages/serviceworker/NodeServiceWorker'
 import { renderWithUserEvents } from '@packages/test/utils/RenderWithUserEvents'
 import { act } from '@testing-library/react'
 import { CreateScreenButton } from './CreateButton'
@@ -12,15 +14,27 @@ const TestComponent = ({ formDrawerState = false }: { formDrawerState: boolean }
   )
 }
 
-test('renders screen table component with a table and rows', async () => {
-  const test = await renderWithUserEvents(<TestComponent formDrawerState={false} />)
+describe('CreateScreenButton', () => {
+  mswWithSpy([...getSearchServiceMock()])
 
-  const createButton = await test.findByText('Create Screen')
-  expect(createButton).toBeEnabled()
-
-  await act(async () => {
-    await test.user.click(createButton)
+  beforeAll(async () => {
+    await startMSW()
   })
 
-  expect(createButton).toBeDisabled()
+  afterAll(async () => {
+    await stopMSW()
+  })
+
+  test('renders screen table component with a table and rows', async () => {
+    const test = await renderWithUserEvents(<TestComponent formDrawerState={false} />)
+
+    const createButton = await test.findByText('Create Screen')
+    expect(createButton).toBeEnabled()
+
+    await act(async () => {
+      await test.user.click(createButton)
+    })
+
+    expect(createButton).toBeDisabled()
+  })
 })

@@ -1,15 +1,17 @@
 import { QueryProvider } from '@app/contexts/Query/QueryProvider'
 
+import { ScreenItemRender } from '@app/models/screenItemRender'
 import {
-  ScreenItem,
   getGetScreenListMock,
   getScreenListServiceMock,
   getScreenServiceMock,
+  getSearchServiceMock,
 } from '@packages/openapi/generated'
 import { mswWithSpy, resetMSW, startMSW, stopMSW } from '@packages/serviceworker/NodeServiceWorker'
 import { renderWithUserEvents } from '@packages/test/utils/RenderWithUserEvents'
 import { useElementSizeMock } from '@packages/ui/hooks/useElementSize.mock'
 import { NotificationProvider } from '@packages/ui/notification'
+import { normaliseScreenRender } from '@packages/utils'
 import { act, waitFor } from '@testing-library/react'
 import { ScreenTable } from './ScreenTable'
 
@@ -17,27 +19,34 @@ const TestComponent = ({
   screens,
   isScreenListLoading = false,
 }: {
-  screens?: Array<ScreenItem>
+  screens?: Array<ScreenItemRender>
   isScreenListLoading?: boolean
 }) => {
   return (
     <QueryProvider>
       <NotificationProvider>
-        <ScreenTable screens={screens ?? getGetScreenListMock().list} isScreenListLoading={isScreenListLoading} />
+        <ScreenTable
+          screens={screens ?? normaliseScreenRender(getGetScreenListMock().list)}
+          isScreenListLoading={isScreenListLoading}
+        />
       </NotificationProvider>
     </QueryProvider>
   )
 }
 
 describe('#ScreenTable', () => {
-  const mswRequestEventSpy = mswWithSpy([...getScreenServiceMock(), ...getScreenListServiceMock()])
+  const mswRequestEventSpy = mswWithSpy([
+    ...getSearchServiceMock(),
+    ...getScreenListServiceMock(),
+    ...getScreenServiceMock(),
+  ])
 
   beforeAll(async () => {
-    startMSW()
+    await startMSW()
   })
 
   afterAll(async () => {
-    stopMSW()
+    await stopMSW()
   })
 
   beforeEach(() => {
@@ -69,7 +78,7 @@ describe('#ScreenTable', () => {
     })
 
     expect(mswRequestEventSpy[mswRequestEventSpy.length - 1]).toEqual(
-      expect.stringContaining('method:DELETE|url:http://dev.api.screengeometry.com/v1/screen/pVesw1Iu'),
+      expect.stringContaining('method:DELETE|url:http://dev.api.screengeometry.com/v1/screen/'),
     )
 
     waitFor(() => expect(test.queryAllByRole('row').length).toBe(4))
@@ -85,8 +94,9 @@ describe('#ScreenTable', () => {
     })
 
     expect(mswRequestEventSpy[mswRequestEventSpy.length - 1]).toEqual(
-      expect.stringContaining('method:PATCH|url:http://dev.api.screengeometry.com/v1/screen/pVesw1Iu/show'),
+      expect.stringContaining('method:PATCH|url:http://dev.api.screengeometry.com/v1/screen/'),
     )
+    expect(mswRequestEventSpy[mswRequestEventSpy.length - 1]).toEqual(expect.stringContaining('/show'))
   })
 
   test('show skeleton table when screen list is loading', async () => {

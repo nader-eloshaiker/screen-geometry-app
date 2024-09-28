@@ -3,7 +3,19 @@ import MagnifyGlassIcon from '@app/assets/icons/MagnifyGlass'
 import { useDebounce } from '@packages/ui/hooks/useDebounce'
 import { useElementSize } from '@packages/ui/hooks/useElementSize'
 import { clsx } from 'clsx'
-import { ChangeEvent, KeyboardEvent, memo, useCallback, useEffect, useRef, useState } from 'react'
+import parse from 'html-react-parser'
+import {
+  ChangeEvent,
+  Dispatch,
+  InputHTMLAttributes,
+  memo,
+  SetStateAction,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from 'react'
+import { twMerge } from 'tailwind-merge'
 import { InputOverlay, OverlayInputField } from '../overlay-input-field/OverlayInputField'
 
 const activeOverlay: InputOverlay = {
@@ -16,29 +28,31 @@ const loadingOverlay: InputOverlay = {
   location: 'left',
 }
 
-export type TListItem = { id: string; label: string }
-type TProps = TRestProps & {
-  items: Array<TListItem>
+export interface TListItem {
+  id: string
+  label: string
+}
+
+type TProps<T extends TListItem> = {
+  items: Array<T> | undefined
   className?: string
   placeholder?: string
   isLoading?: boolean
-  disableOnLoading?: boolean
-  onChange?: (val: string) => void
-  onSelect?: (item: TListItem) => void
-  setClearHandler?: (func: () => void) => void
-}
+  onSearchList?: (val: string) => void
+  onSelectItem?: (item: T) => void
+  setClearHandler?: Dispatch<SetStateAction<() => void>>
+} & InputHTMLAttributes<HTMLInputElement>
 
-const ListInputField = ({
+const ListInputField = <T extends TListItem>({
   items = [],
   className,
   placeholder,
   isLoading = false,
-  disableOnLoading = true,
-  onChange = () => {},
-  onSelect = () => {},
+  onSearchList = () => {},
+  onSelectItem = () => {},
   setClearHandler = () => {},
   ...rest
-}: TProps) => {
+}: TProps<T>) => {
   const [inputValue, setInputValue] = useState('')
   const [overlays, setOverlays] = useState<Array<InputOverlay>>([])
   const [open, setOpen] = useState(false)
@@ -47,28 +61,22 @@ const ListInputField = ({
   const divRef = useRef<HTMLDivElement>(null)
   const { width } = useElementSize(divRef)
 
-  const handleClear = useCallback(() => {
+  const clearInput = useCallback(() => {
     setInputValue('')
   }, [])
 
-  const handleChange = ({ target }: ChangeEvent<HTMLInputElement>) => {
-    setInputValue(target.value)
+  const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
+    event.preventDefault()
+    setInputValue(event.target.value)
   }
 
-  const handleSelect = (item: TListItem) => {
-    setInputValue(item.label)
-    onChange(item.label)
-    onSelect(item)
+  const handleClickItem = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>, item: T) => {
+    event.preventDefault()
+    onSelectItem(item)
     setOpen(false)
     // force close of the dropdown
     if (document.activeElement instanceof HTMLElement) {
       document.activeElement.blur()
-    }
-  }
-
-  const handleKeyDown = (event: KeyboardEvent<HTMLLIElement>, item: TListItem) => {
-    if (event.code === 'Enter') {
-      handleSelect(item)
     }
   }
 
@@ -83,47 +91,46 @@ const ListInputField = ({
         {
           overlay: (
             <button key='3' className='btn btn-circle btn-xs hover:cursor-pointer' role='reset'>
-              <CloseIcon className='size-4' onClick={handleClear} />
+              <CloseIcon className='size-4' onClick={clearInput} />
             </button>
           ),
           location: 'right',
         },
       ])
     }
-  }, [inputValue, isLoading, handleClear])
+  }, [inputValue, isLoading, clearInput])
 
   useEffect(() => {
-    if (!setClearHandler || !handleClear) {
+    if (!setClearHandler || !clearInput) {
       return
     }
 
-    setClearHandler(() => handleClear)
-  }, [setClearHandler, handleClear])
+    setClearHandler(() => clearInput)
+  }, [setClearHandler, clearInput])
 
   useEffect(() => {
-    onChange(debouncedValue)
-  }, [debouncedValue, onChange])
+    onSearchList(debouncedValue)
+  }, [debouncedValue, onSearchList])
 
   return (
     <div
       // use classnames here to easily toggle dropdown open
-      className={clsx(className, {
+      className={clsx({
         'dropdown w-full': true,
         'dropdown-open': open,
       })}
       ref={divRef}
-      {...rest}
     >
       <OverlayInputField
         overlays={overlays}
         formKey='ListInputFieldInput'
         type='text'
-        className='input-bordered input-primary shadow-lg transition-all'
+        className={twMerge('input-bordered input-primary shadow-lg transition-all', className)}
         value={inputValue}
-        onChange={handleChange}
+        onChange={handleInputChange}
         placeholder={isLoading ? 'Loading...' : (placeholder ?? 'Type something...')}
         tabIndex={0}
-        disabled={isLoading && disableOnLoading}
+        {...rest}
       />
       {items.length > 0 && (
         <div className='dropdown-content top-14 z-[1] max-h-80 flex-col overflow-auto rounded-md bg-base-200'>
@@ -132,19 +139,11 @@ const ListInputField = ({
             // use ref to calculate the width of parent
             style={{ width: width }}
           >
-            {items.map((item, index) => {
-              return (
-                <li
-                  key={item.id}
-                  tabIndex={index + 1}
-                  onClick={() => handleSelect(item)}
-                  onKeyDown={(event) => handleKeyDown(event, item)}
-                  className='w-full border-b border-b-base-content/10'
-                >
-                  <a>{item.label}</a>
-                </li>
-              )
-            })}
+            {items.map((item) => (
+              <li key={item.id} className='w-full border-b border-b-base-content/10'>
+                <button onClick={(e) => handleClickItem(e, item)}>{parse(item.label)}</button>
+              </li>
+            ))}
           </ul>
         </div>
       )}
@@ -152,4 +151,4 @@ const ListInputField = ({
   )
 }
 
-export const ListInput = memo(ListInputField)
+export const ListInput = memo(ListInputField) as typeof ListInputField

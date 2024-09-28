@@ -4,7 +4,7 @@ import { AxiosError, InternalAxiosRequestConfig } from 'axios'
 import { useEffect } from 'react'
 import {
   GeneralNotificationItem,
-  NotificationActionTypes,
+  NotificationEventTypes,
   NotificationItem,
   NotificationProvider,
   NotificationToaster,
@@ -16,7 +16,7 @@ const TestComponent = ({ payload }: { payload: NotificationItem }) => {
   const { state, dispatch } = useNotificationContext()
 
   useEffect(() => {
-    dispatch({ type: NotificationActionTypes.ADD_NOTIFICATION, payload })
+    dispatch({ type: NotificationEventTypes.ADD_NOTIFICATION, payload })
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
