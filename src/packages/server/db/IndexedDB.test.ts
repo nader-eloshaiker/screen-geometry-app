@@ -2,17 +2,15 @@ import { getGetScreenMock, ScreenItem } from '@packages/openapi/generated'
 import { screenItemFixture } from '@packages/test/fixtures/ScreenFixtures'
 import { setupV2DB } from '@packages/test/stubs/IndexedDBMigration.stub'
 import { IDBFactory } from 'fake-indexeddb'
+import { dbNameDefault, dbVersionDefault, Stores } from './DbConstants'
 import {
   addAllData,
   addData,
-  dbNameDefault,
-  dbVersionDefault,
   deleteData,
   getAllData,
   getData,
   initDB,
   seedSearchDocuments,
-  Stores,
   updateData,
 } from './IndexedDB'
 
