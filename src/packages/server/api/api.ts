@@ -2,7 +2,8 @@ import { ScreenInput, ScreenInputList, ScreenItem, SearchItem } from '@packages/
 import { transformScreenInput } from '@packages/utils/DataTransformation'
 import to from '@packages/utils/await-to-js'
 import { DatabaseError } from '../db/DatabaseError'
-import { Stores, addAllData, addData, deleteData, getAllData, getData, searchData, updateData } from '../db/IndexedDB'
+import { Stores } from '../db/DbConstants'
+import { addAllData, addData, deleteData, getAllData, getData, searchData, updateData } from '../db/IndexedDB'
 import { ApiError } from './ApiError'
 
 export type ScreenListResponse = {

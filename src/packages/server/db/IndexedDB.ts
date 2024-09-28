@@ -1,21 +1,9 @@
-import { ScreenColor, ScreenItem } from '@packages/openapi/generated'
 import fuzzysort from 'fuzzysort'
+import { match } from 'ts-pattern'
 import { ulid } from 'ulid'
+import { KeyedObject, Stores, dbNameDefault, dbVersionDefault } from './DbConstants'
 import { SearchDocuments } from './SearchDocuments'
-
-export const dbVersionDefault = 3
-export const dbNameDefault = 'localforage'
-
-export interface KeyedObject {
-  id: string
-}
-
-export enum Stores {
-  Screens = 'screens',
-  Search = 'search',
-  DeprecatedLocalForageTable = 'keyvaluepairs',
-  DeprecatedLocalForageBlob = 'local-forage-detect-blob-support',
-}
+import { migrateV2toV3 } from './migration/v2-v3'
 
 const handleRequestError = (
   request: IDBRequest | IDBOpenDBRequest | IDBTransaction,
@@ -122,59 +110,11 @@ export const initDB = (options?: dbProps): Promise<boolean> => {
         seedSearchDocuments(openReq)
       }
 
-      switch (event.oldVersion) {
-        case 2: {
-          if (!db.objectStoreNames.contains(Stores.DeprecatedLocalForageTable)) {
-            break
-          }
-
-          console.log('Migrating screens store')
-
-          // get old table data\
-          const tx = openReq.transaction
-          if (!tx) {
-            throw new Error('Unable to create transaction')
-          }
-
-          const newStore = tx.objectStore(Stores.Screens)
-          const oldStore = tx.objectStore(Stores.DeprecatedLocalForageTable)
-          const oldResponse = oldStore.get('screens')
-
-          oldResponse.onsuccess = () => {
-            for (const oldItem of oldResponse.result ?? []) {
-              const newItem: ScreenItem = {
-                id: ulid(),
-                signature: `dSize=${oldItem.tag.diagonalSize}&aRatio=${oldItem.tag.aspectRatio}&hRes=${oldItem.spec.hRes}&vRes=${oldItem.spec.vRes}`,
-                visible: oldItem.visible as boolean,
-                data: {
-                  aspectRatio: oldItem.tag.aspectRatio as string,
-                  diagonalSize: oldItem.tag.diagonalSize as number,
-                  hRes: oldItem.spec.hRes as number,
-                  vRes: oldItem.spec.vRes as number,
-                },
-                specs: {
-                  hAspectRatio: oldItem.data.hAspectRatio as number,
-                  vAspectRatio: oldItem.data.vAspectRatio as number,
-                  ppi: oldItem.spec.ppi as number,
-                  hSize: oldItem.data.hSize as number,
-                  vSize: oldItem.data.vSize as number,
-                },
-                color: oldItem.color as ScreenColor,
-              }
-              newStore.add(newItem)
-            }
-
-            console.log('migration complete, removing old store')
-            db.deleteObjectStore(Stores.DeprecatedLocalForageTable)
-            db.deleteObjectStore(Stores.DeprecatedLocalForageBlob)
-          }
-          break
-        }
-
-        default: {
-          break
-        }
-      }
+      match(event)
+        .with({ oldVersion: 2 }, () => migrateV2toV3(db, openReq))
+        .otherwise(() => {
+          console.log('No migration needed')
+        })
     }
 
     openReq.onsuccess = () => {

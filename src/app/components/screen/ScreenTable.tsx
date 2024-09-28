@@ -1,7 +1,7 @@
 import CloseIcon from '@app/assets/icons/Close'
 import EditIcon from '@app/assets/icons/Edit'
 import { DarkMode, TThemeMode } from '@app/components/theme/ThemeManager'
-import { FormDrawerActionTypes } from '@app/contexts/FormDrawer/FormDrawerManager'
+import { FormDrawerEventTypes } from '@app/contexts/FormDrawer/FormDrawerManager'
 import { useFormDrawerContext } from '@app/contexts/FormDrawer/useFormDrawerContext'
 import { useThemeModeContext } from '@app/contexts/theme/useThemeModeContext'
 import { useDeleteScreenApi } from '@app/hooks/api/helpers/useDeleteScreenApi'
@@ -100,7 +100,7 @@ export const ScreenTable = ({
       action: 'Clicked edit',
       label: 'Screens Page',
     })
-    dispatchFormDrawer({ type: FormDrawerActionTypes.Edit, payload: { id: screen.id } })
+    dispatchFormDrawer({ type: FormDrawerEventTypes.Edit, payload: { id: screen.id } })
   }
 
   return (

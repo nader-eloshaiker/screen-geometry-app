@@ -1,3 +1,5 @@
+import { match } from 'ts-pattern'
+
 export enum FormDrawerMode {
   Create = 'create',
   Edit = 'edit',
@@ -12,36 +14,36 @@ export const initialFormDrawerState = {
 
 export type FormDrawerState = typeof initialFormDrawerState
 
-export enum FormDrawerActionTypes {
+export enum FormDrawerEventTypes {
   Create = 'create',
   Close = 'close',
   Edit = 'edit',
 }
 
-export type FormDrawerAction =
-  | { type: FormDrawerActionTypes.Edit; payload: { id: string } }
-  | { type: FormDrawerActionTypes.Create; payload?: undefined }
-  | { type: FormDrawerActionTypes.Close; payload?: undefined }
+export type FormDrawerEvent =
+  | { type: FormDrawerEventTypes.Edit; payload: { id: string } }
+  | { type: FormDrawerEventTypes.Create; payload?: undefined }
+  | { type: FormDrawerEventTypes.Close; payload?: undefined }
 
-export const formDrawerReducer = (state: FormDrawerState, { type, payload }: FormDrawerAction): FormDrawerState => {
-  switch (type) {
-    case FormDrawerActionTypes.Close:
-      return {
-        ...state,
-        id: undefined,
-        mode: FormDrawerMode.Close,
-        open: false,
-      }
-    case FormDrawerActionTypes.Create:
-      return {
-        ...state,
-        id: undefined,
-        mode: FormDrawerMode.Create,
-        open: true,
-      }
-    case FormDrawerActionTypes.Edit:
-      return { ...state, id: payload.id, mode: FormDrawerMode.Edit, open: true }
-    default:
-      return state
-  }
-}
+export const formDrawerReducer = (state: FormDrawerState, event: FormDrawerEvent): FormDrawerState =>
+  match(event)
+    .returnType<FormDrawerState>()
+    .with({ type: FormDrawerEventTypes.Close }, () => ({
+      ...state,
+      id: undefined,
+      mode: FormDrawerMode.Close,
+      open: false,
+    }))
+    .with({ type: FormDrawerEventTypes.Create }, () => ({
+      ...state,
+      id: undefined,
+      mode: FormDrawerMode.Create,
+      open: true,
+    }))
+    .with({ type: FormDrawerEventTypes.Edit }, ({ payload }) => ({
+      ...state,
+      id: payload.id,
+      mode: FormDrawerMode.Edit,
+      open: true,
+    }))
+    .exhaustive()

@@ -1,5 +1,5 @@
 import EditIcon from '@app/assets/icons/Edit'
-import { FormDrawerActionTypes } from '@app/contexts/FormDrawer/FormDrawerManager'
+import { FormDrawerEventTypes } from '@app/contexts/FormDrawer/FormDrawerManager'
 import { useFormDrawerContext } from '@app/contexts/FormDrawer/useFormDrawerContext'
 import { twMerge } from 'tailwind-merge'
 
@@ -11,7 +11,7 @@ export const CreateScreenButton = ({ className, ...rest }: TProps) => {
   return (
     <button
       className={twMerge('btn btn-primary btn-outline shadow-md', className)}
-      onClick={() => dispatchFormDrawer({ type: FormDrawerActionTypes.Create })}
+      onClick={() => dispatchFormDrawer({ type: FormDrawerEventTypes.Create })}
       disabled={formDrawerState.open}
       {...rest}
     >

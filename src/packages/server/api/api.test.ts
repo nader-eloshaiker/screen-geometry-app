@@ -1,7 +1,8 @@
 import { ScreenItem } from '@packages/openapi/generated'
 import { screenItemFixture } from '@packages/test/fixtures/ScreenFixtures'
 import { IDBFactory } from 'fake-indexeddb'
-import { addData, Stores } from '../db/IndexedDB'
+import { Stores } from '../db/DbConstants'
+import { addData } from '../db/IndexedDB'
 import { setupDB } from '../db/IndexedDB.test'
 import { screenInput55Fixture } from '../test/fixtures/ScreenFixtures'
 import {

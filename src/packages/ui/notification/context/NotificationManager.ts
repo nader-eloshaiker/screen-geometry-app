@@ -1,5 +1,6 @@
 import { ErrorResponse } from '@packages/openapi/generated'
 import axios, { AxiosError } from 'axios'
+import { match } from 'ts-pattern'
 import { ulid } from 'ulid'
 
 export enum NotificationType {
@@ -31,21 +32,19 @@ export const initialNotificationState = {
 
 export type NotificationState = typeof initialNotificationState
 
-export enum NotificationActionTypes {
+export enum NotificationEventTypes {
   ADD_NOTIFICATION = 'add_notification',
   REMOVE_NOTIFICATION = 'remove_notification',
 }
 
-export type NotificationAction =
-  | { type: NotificationActionTypes.ADD_NOTIFICATION; payload: NotificationItem }
-  | { type: NotificationActionTypes.REMOVE_NOTIFICATION; payload: string }
+export type NotificationEvent =
+  | { type: NotificationEventTypes.ADD_NOTIFICATION; payload: NotificationItem }
+  | { type: NotificationEventTypes.REMOVE_NOTIFICATION; payload: string }
 
-export const notificationReducer = (
-  state: NotificationState,
-  { type, payload }: NotificationAction,
-): NotificationState => {
-  switch (type) {
-    case NotificationActionTypes.ADD_NOTIFICATION: {
+export const notificationReducer = (state: NotificationState, event: NotificationEvent): NotificationState =>
+  match(event)
+    .returnType<NotificationState>()
+    .with({ type: NotificationEventTypes.ADD_NOTIFICATION }, ({ payload }) => {
       if (axios.isAxiosError(payload.value) && axios.isCancel(payload.value)) {
         return state
       }
@@ -56,11 +55,8 @@ export const notificationReducer = (
         ...state,
         notifications: [...state.notifications, loggedItem],
       }
-    }
-    case NotificationActionTypes.REMOVE_NOTIFICATION: {
+    })
+    .with({ type: NotificationEventTypes.REMOVE_NOTIFICATION }, ({ payload }) => {
       return { ...state, notifications: state.notifications.filter((error) => error.tag !== payload) }
-    }
-    default:
-      return state
-  }
-}
+    })
+    .exhaustive()
