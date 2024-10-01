@@ -118,7 +118,7 @@
     "prettier": "^3.3.3",
     "prettier-plugin-organize-imports": "^3.2.4",
     "react-helmet-async": "^2.0.4",
-    "storybook": "^8.3.0",
+    "storybook": "^8.3.4",
     "styled-components": "^6.1.11",
     "tailwind-merge": "^2.4.0",
     "tailwind-styled-components": "^2.2.0",
