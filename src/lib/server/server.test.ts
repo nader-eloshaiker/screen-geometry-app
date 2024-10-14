@@ -3,10 +3,10 @@ import {
   getScreenServiceMock,
   getSearchServiceMock,
   ScreenItem,
-} from '@packages/openapi/generated'
-import { apiRoutes } from '@packages/openapi/meta'
-import { mswWithSpy, startMSW, stopMSW } from '@packages/serviceworker/NodeServiceWorker'
-import { screenItemFixture } from '@packages/test/fixtures/ScreenFixtures'
+} from '@/lib/openapi/generated'
+import { apiRoutes } from '@/lib/openapi/meta'
+import { mswWithSpy, startMSW, stopMSW } from '@/lib/serviceworker/NodeServiceWorker'
+import { screenItemFixture } from '@/lib/test/fixtures/ScreenFixtures'
 import { IDBFactory } from 'fake-indexeddb'
 import { Stores } from './db/DbConstants'
 import { addData } from './db/IndexedDB'

@@ -1,7 +1,7 @@
-import CloseIcon from '@app/assets/icons/Close'
-import MagnifyGlassIcon from '@app/assets/icons/MagnifyGlass'
-import { useDebounce } from '@packages/ui/hooks/useDebounce'
-import { useElementSize } from '@packages/ui/hooks/useElementSize'
+import CloseIcon from '@/app/assets/icons/Close'
+import MagnifyGlassIcon from '@/app/assets/icons/MagnifyGlass'
+import { useDebounce } from '@/lib/ui/hooks/useDebounce'
+import { useElementSize } from '@/lib/ui/hooks/useElementSize'
 import { clsx } from 'clsx'
 import parse from 'html-react-parser'
 import {

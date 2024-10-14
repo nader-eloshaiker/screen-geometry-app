@@ -1,5 +1,5 @@
-import { ScreenInput } from '@packages/openapi/generated'
-import { createCSSColor } from '@packages/utils/ScreenCalc'
+import { ScreenInput } from '@/lib/openapi/generated'
+import { createCSSColor } from '@/lib/utils/ScreenCalc'
 
 export const DefaultInputValues = () => {
   const color = createCSSColor()

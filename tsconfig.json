@@ -8,8 +8,7 @@
     "jsx": "react-jsx",
     "baseUrl": ".",
     "paths": {
-      "@app/*": ["./src/app/*"],
-      "@packages/*": ["./src/lib/*"]
+      "@/*": ["./src/*"]
     }
   },
   "include": [

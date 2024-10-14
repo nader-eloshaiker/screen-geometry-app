@@ -1,4 +1,4 @@
-import { ErrorResponse } from '@packages/openapi/generated'
+import { ErrorResponse } from '@/lib/openapi/generated'
 import { act, fireEvent, render } from '@testing-library/react'
 import { AxiosError, InternalAxiosRequestConfig } from 'axios'
 import { useEffect } from 'react'

@@ -1,4 +1,4 @@
-import { SearchItem } from '@packages/openapi/generated'
+import { SearchItem } from '@/lib/openapi/generated'
 
 export const SearchDocuments: Array<SearchItem> = [
   {

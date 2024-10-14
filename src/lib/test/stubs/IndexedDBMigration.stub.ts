@@ -1,4 +1,4 @@
-import { Stores } from '@packages/server/db/DbConstants'
+import { Stores } from '@/lib/server/db/DbConstants'
 
 export const setupV2DB = () =>
   new Promise((resolve) => {

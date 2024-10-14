@@ -1,4 +1,4 @@
-import { ErrorResponse } from '@packages/openapi/generated'
+import { ErrorResponse } from '@/lib/openapi/generated'
 import axios, { AxiosError } from 'axios'
 import { match } from 'ts-pattern'
 import { ulid } from 'ulid'

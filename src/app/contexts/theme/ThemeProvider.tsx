@@ -1,4 +1,4 @@
-import useLocalStorage from '@app/hooks/useLocalStorage'
+import useLocalStorage from '@/app/hooks/useLocalStorage'
 import { useEffect, useMemo } from 'react'
 import { DarkMode, LightMode, TThemeMode, ThemeKey } from './Theme.types'
 import { ThemeContext } from './ThemeContext'

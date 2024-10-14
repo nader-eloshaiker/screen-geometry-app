@@ -1,8 +1,8 @@
-import { FormDrawerMode } from '@app/contexts/FormDrawer/FormDrawerManager'
-import { FormDrawerProvider } from '@app/contexts/FormDrawer/FormDrawerProvider'
-import { getSearchServiceMock } from '@packages/openapi/generated'
-import { mswWithSpy, startMSW, stopMSW } from '@packages/serviceworker/NodeServiceWorker'
-import { renderWithUserEvents } from '@packages/test/utils/RenderWithUserEvents'
+import { FormDrawerMode } from '@/app/contexts/FormDrawer/FormDrawerManager'
+import { FormDrawerProvider } from '@/app/contexts/FormDrawer/FormDrawerProvider'
+import { getSearchServiceMock } from '@/lib/openapi/generated'
+import { mswWithSpy, startMSW, stopMSW } from '@/lib/serviceworker/NodeServiceWorker'
+import { renderWithUserEvents } from '@/lib/test/utils/RenderWithUserEvents'
 import { act } from '@testing-library/react'
 import { CreateScreenButton } from './CreateButton'
 

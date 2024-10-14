@@ -1,4 +1,4 @@
-import { RouteSchema } from '@app/routes/RouteSchema'
+import { RouteSchema } from '@/app/routes/RouteSchema'
 import { Helmet } from 'react-helmet-async'
 import { useNavigate } from 'react-router-dom'
 

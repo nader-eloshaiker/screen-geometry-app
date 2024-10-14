@@ -1,4 +1,4 @@
-import { AppRoutes } from '@app/routes/AppRoutes'
+import { AppRoutes } from '@/app/routes/AppRoutes'
 import { render, waitFor } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { createMemoryRouter } from 'react-router-dom'

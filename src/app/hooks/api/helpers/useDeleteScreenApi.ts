@@ -1,6 +1,6 @@
-import { ScreenEventTypes } from '@app/contexts/Screen/ScreenManager'
-import { useScreenContext } from '@app/contexts/Screen/useScreenContext'
-import { ScreenIdResponse, useDeleteScreen } from '@packages/openapi/generated'
+import { ScreenEventTypes } from '@/app/contexts/Screen/ScreenManager'
+import { useScreenContext } from '@/app/contexts/Screen/useScreenContext'
+import { ScreenIdResponse, useDeleteScreen } from '@/lib/openapi/generated'
 import { useCallback } from 'react'
 import { useApiEffectHandler } from '../useApiEffectHandler'
 

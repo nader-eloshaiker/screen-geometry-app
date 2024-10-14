@@ -1,4 +1,4 @@
-import { RouteSchema } from '@app/routes/RouteSchema'
+import { RouteSchema } from '@/app/routes/RouteSchema'
 import { clsx } from 'clsx'
 import { motion, Variants } from 'framer-motion'
 import { useState } from 'react'

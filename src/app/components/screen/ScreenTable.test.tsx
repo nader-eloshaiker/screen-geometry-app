@@ -1,17 +1,17 @@
-import { QueryProvider } from '@app/contexts/Query/QueryProvider'
+import { QueryProvider } from '@/app/contexts/Query/QueryProvider'
 
-import { ScreenItemRender } from '@app/models/screenItemRender'
+import { ScreenItemRender } from '@/app/models/screenItemRender'
 import {
   getGetScreenListMock,
   getScreenListServiceMock,
   getScreenServiceMock,
   getSearchServiceMock,
-} from '@packages/openapi/generated'
-import { mswWithSpy, resetMSW, startMSW, stopMSW } from '@packages/serviceworker/NodeServiceWorker'
-import { renderWithUserEvents } from '@packages/test/utils/RenderWithUserEvents'
-import { useElementSizeMock } from '@packages/ui/hooks/useElementSize.mock'
-import { NotificationProvider } from '@packages/ui/notification'
-import { normaliseScreenRender } from '@packages/utils'
+} from '@/lib/openapi/generated'
+import { mswWithSpy, resetMSW, startMSW, stopMSW } from '@/lib/serviceworker/NodeServiceWorker'
+import { renderWithUserEvents } from '@/lib/test/utils/RenderWithUserEvents'
+import { useElementSizeMock } from '@/lib/ui/hooks/useElementSize.mock'
+import { NotificationProvider } from '@/lib/ui/notification'
+import { normaliseScreenRender } from '@/lib/utils'
 import { act, waitFor } from '@testing-library/react'
 import { ScreenTable } from './ScreenTable'
 

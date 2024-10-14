@@ -1,5 +1,5 @@
-import { ScreenItem } from '@packages/openapi/generated'
-import { screenItemFixture } from '@packages/test/fixtures/ScreenFixtures'
+import { ScreenItem } from '@/lib/openapi/generated'
+import { screenItemFixture } from '@/lib/test/fixtures/ScreenFixtures'
 import { IDBFactory } from 'fake-indexeddb'
 import { Stores } from '../db/DbConstants'
 import { addData } from '../db/IndexedDB'

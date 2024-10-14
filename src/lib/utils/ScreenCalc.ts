@@ -1,6 +1,6 @@
-import { ScreenItemRender } from '@app/models/screenItemRender'
-import { ScreenColor, ScreenItem } from '@packages/openapi/generated'
-import { Dimensions } from '@packages/openapi/models'
+import { ScreenItemRender } from '@/app/models/screenItemRender'
+import { ScreenColor, ScreenItem } from '@/lib/openapi/generated'
+import { Dimensions } from '@/lib/openapi/models'
 import { lightness } from 'simpler-color'
 
 const hslToHex = (hue: number, saturation: number, light: number) => {

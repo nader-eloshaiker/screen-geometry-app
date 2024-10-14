@@ -1,4 +1,4 @@
-import { ScreenInput, ScreenItem } from '@packages/openapi/generated'
+import { ScreenInput, ScreenItem } from '@/lib/openapi/generated'
 
 const getAspectRatio = (str: string | undefined | null) => {
   const [width, height] = str?.split(':') ?? []

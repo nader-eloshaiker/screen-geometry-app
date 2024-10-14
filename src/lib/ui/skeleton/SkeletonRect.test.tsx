@@ -1,4 +1,4 @@
-import { renderWithUserEvents } from '@packages/test/utils/RenderWithUserEvents'
+import { renderWithUserEvents } from '@/lib/test/utils/RenderWithUserEvents'
 import { SkeletonRect } from './SkeletonRect'
 
 describe('#SkeletonRect', () => {
