@@ -17,12 +17,12 @@ const TestComponent = ({ formDrawerState = false }: { formDrawerState: boolean }
 describe('CreateScreenButton', () => {
   mswWithSpy([...getSearchServiceMock()])
 
-  beforeAll(async () => {
-    await startMSW()
+  beforeAll(() => {
+    startMSW()
   })
 
-  afterAll(async () => {
-    await stopMSW()
+  afterAll(() => {
+    stopMSW()
   })
 
   test('renders screen table component with a table and rows', async () => {

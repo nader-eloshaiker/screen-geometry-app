@@ -41,12 +41,12 @@ describe('#ScreenTable', () => {
     ...getScreenServiceMock(),
   ])
 
-  beforeAll(async () => {
-    await startMSW()
+  beforeAll(() => {
+    startMSW()
   })
 
-  afterAll(async () => {
-    await stopMSW()
+  afterAll(() => {
+    stopMSW()
   })
 
   beforeEach(() => {
@@ -71,7 +71,7 @@ describe('#ScreenTable', () => {
     const test = await renderWithUserEvents(<TestComponent />)
 
     const deleteElements = await test.findAllByLabelText('delete button')
-    const deleteElement = deleteElements[0] as HTMLElement
+    const deleteElement = deleteElements[0]
 
     await act(async () => {
       await test.user.click(deleteElement)
@@ -87,7 +87,7 @@ describe('#ScreenTable', () => {
     const test = await renderWithUserEvents(<TestComponent />)
 
     const showElements = await test.findAllByLabelText('show checkbox')
-    const showElement = showElements[0] as HTMLElement
+    const showElement = showElements[0]
 
     await act(async () => {
       await test.user.click(showElement)

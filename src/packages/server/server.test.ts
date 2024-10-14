@@ -22,12 +22,12 @@ describe('#server', () => {
     ...getScreenServiceMock(),
   ])
 
-  beforeAll(async () => {
-    await startMSW()
+  beforeAll(() => {
+    startMSW()
   })
 
-  afterAll(async () => {
-    await stopMSW()
+  afterAll(() => {
+    stopMSW()
   })
 
   beforeEach(async () => {
