@@ -1,7 +1,7 @@
 import { fireEvent, render, renderHook, waitFor } from '@testing-library/react'
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 import { useWindowSize } from '../../../packages/test/mocks/useWindowsSize'
-import { ThemeModeProvider } from '../../contexts/theme/ThemeModeProvider'
+import { ThemeProvider } from '../../contexts/theme/ThemeProvider'
 import Header from './Header'
 
 const resizeWindow = async (x: number, y: number) => {
@@ -29,9 +29,9 @@ describe('#Header', () => {
     const { result } = renderHook(() => useWindowSize())
     console.log(result.current)
     const { getByTestId } = render(
-      <ThemeModeProvider>
+      <ThemeProvider>
         <RouterProvider router={browserRouter} />
-      </ThemeModeProvider>,
+      </ThemeProvider>,
     )
 
     await resizeWindow(1000, 1000)
@@ -44,9 +44,9 @@ describe('#Header', () => {
 
   it('should render the header with dropdown menu on a small window', async () => {
     const { getByTestId } = render(
-      <ThemeModeProvider>
+      <ThemeProvider>
         <RouterProvider router={browserRouter} />
-      </ThemeModeProvider>,
+      </ThemeProvider>,
     )
 
     resizeWindow(1000, 320)

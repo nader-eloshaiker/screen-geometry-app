@@ -1,13 +1,13 @@
 import MoonIcon from '@app/assets/icons/Moon'
 import SunIcon from '@app/assets/icons/Sun'
-import { useThemeModeContext } from '@app/contexts/theme/useThemeModeContext'
+import { DarkMode, LightMode } from '@app/contexts/theme/Theme.types'
+import { useTheme } from '@app/contexts/theme/useTheme'
 import { twMerge } from 'tailwind-merge'
-import { DarkMode, LightMode } from './ThemeManager'
 
 type TProps = TRestProps & { className?: string; id: string }
 
-export default function ThemeModeToggle({ className, id, ...rest }: TProps) {
-  const [themeState, setThemeState] = useThemeModeContext()
+export default function ThemeToggle({ className, id, ...rest }: TProps) {
+  const [themeState, setThemeState] = useTheme()
   const isDarkMode = themeState === DarkMode
 
   const handleChange = () => {

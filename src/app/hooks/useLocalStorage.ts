@@ -1,6 +1,6 @@
 import { Dispatch, SetStateAction, useEffect, useState } from 'react'
 
-const getLocalStorage = <T>(key: string, initialValue: T): T => {
+export const getLocalStorage = <T>(key: string, initialValue: T): T => {
   try {
     const value = window.localStorage.getItem(key)
     // Check if the local storage already has any values,

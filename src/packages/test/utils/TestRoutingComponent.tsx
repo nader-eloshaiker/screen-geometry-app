@@ -1,6 +1,6 @@
 import { QueryProvider } from '@app/contexts/Query/QueryProvider'
 import { ScreenProvider } from '@app/contexts/Screen/ScreenProvider'
-import { ThemeModeProvider } from '@app/contexts/theme/ThemeModeProvider'
+import { ThemeProvider } from '@app/contexts/theme/ThemeProvider'
 import { NotificationProvider } from '@packages/ui/notification'
 import { StrictMode } from 'react'
 import { HelmetProvider } from 'react-helmet-async'
@@ -11,13 +11,13 @@ export const TestRoutingComponent = ({ router }: { router: ReturnType<typeof cre
     <StrictMode>
       <HelmetProvider>
         <QueryProvider>
-          <ThemeModeProvider>
+          <ThemeProvider>
             <NotificationProvider>
               <ScreenProvider>
                 <RouterProvider router={router} />
               </ScreenProvider>
             </NotificationProvider>
-          </ThemeModeProvider>
+          </ThemeProvider>
         </QueryProvider>
       </HelmetProvider>
     </StrictMode>

@@ -1,5 +1,5 @@
 import RefreshIcon from '@app/assets/icons/Refresh'
-import { DarkMode, LightMode } from '@app/components/theme/ThemeManager'
+import { DarkMode, LightMode } from '@app/contexts/theme/Theme.types'
 import { useCreateScreenApi } from '@app/hooks/api/helpers/useCreateScreenApi'
 import { useSearchApi } from '@app/hooks/api/helpers/useSearchApi'
 import { useUpdateScreenApi } from '@app/hooks/api/helpers/useUpdateScreenApi'
