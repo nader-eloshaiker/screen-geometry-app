@@ -9,14 +9,14 @@
     "baseUrl": ".",
     "paths": {
       "@app/*": ["./src/app/*"],
-      "@packages/*": ["./src/packages/*"]
+      "@packages/*": ["./src/lib/*"]
     }
   },
   "include": [
     "src/**/*",
     "src/configs/vitest.setup.ts",
-    "src/packages/server/api/SearchService.ts",
-    "src/packages/server/server.test.ts"
+    "src/lib/server/api/SearchService.ts",
+    "src/lib/server/server.test.ts"
   ],
   "exclude": ["node_modules", "coverage", "dist", "build"]
 }
