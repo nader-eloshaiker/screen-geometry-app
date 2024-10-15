@@ -70,7 +70,7 @@ describe('#ScreenTable', () => {
   test('remove a screen row when delete button is clicked', async () => {
     const test = await renderWithUserEvents(<TestComponent />)
 
-    const deleteElements = await test.findAllByLabelText('delete button')
+    const deleteElements = await test.findAllByTitle('Delete')
     const deleteElement = deleteElements[0]
 
     await act(async () => {

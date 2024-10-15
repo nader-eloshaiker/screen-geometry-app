@@ -139,7 +139,7 @@ describe('#ListInput', () => {
       expect(spies.onSearchSpy).toHaveBeenCalledWith('WQHD')
     })
 
-    const clearButton = await test.findByRole('reset')
+    const clearButton = await test.findByTitle('Clear')
     await test.user.click(clearButton)
 
     waitFor(() => {
