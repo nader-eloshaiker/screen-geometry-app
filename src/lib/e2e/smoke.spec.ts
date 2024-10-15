@@ -29,7 +29,7 @@ test('Smoke Test Screens Page', async ({ page }) => {
   await expect(tableOriginal).toContainText('27"')
 
   // Delete row and check for count
-  await page.getByRole('row', { name: 'show checkbox 27" 16:9 24" x' }).getByLabel('delete button').click()
+  await page.getByRole('row', { name: 'show checkbox 27" 16:9 24" x' }).getByTitle('Delete').click()
 
   // Check for table data
   const tableDeletedRow = await page.getByTestId('ScreenTable')
