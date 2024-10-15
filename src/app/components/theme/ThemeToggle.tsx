@@ -1,7 +1,6 @@
-import MoonIcon from '@/app/assets/icons/Moon'
-import SunIcon from '@/app/assets/icons/Sun'
 import { DarkMode, LightMode } from '@/app/contexts/theme/Theme.types'
 import { useTheme } from '@/app/contexts/theme/useTheme'
+import { MoonStar, Sun } from 'lucide-react'
 import { twMerge } from 'tailwind-merge'
 
 type TProps = TRestProps & { className?: string; id: string }
@@ -17,8 +16,8 @@ export default function ThemeToggle({ className, id, ...rest }: TProps) {
   return (
     <label htmlFor={id} className={twMerge('swap cursor-pointer swap-rotate', className)} {...rest}>
       <input type='checkbox' id={id} checked={!isDarkMode} className='theme-controller' onChange={handleChange} />
-      <MoonIcon className='swap-off size-6 fill-current' />
-      <SunIcon className='swap-on size-6 fill-current' />
+      <MoonStar className='swap-off size-6' />
+      <Sun className='swap-on size-6' />
     </label>
   )
 }

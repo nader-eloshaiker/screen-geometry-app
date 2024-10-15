@@ -1,15 +1,14 @@
-import CloseIcon from '@/app/assets/icons/Close'
-import MagnifyGlassIcon from '@/app/assets/icons/MagnifyGlass'
 import { useDebounce } from '@/lib/ui/hooks/useDebounce'
 import { useElementSize } from '@/lib/ui/hooks/useElementSize'
 import { clsx } from 'clsx'
 import parse from 'html-react-parser'
+import { Search, X } from 'lucide-react'
 import {
   ChangeEvent,
   Dispatch,
   InputHTMLAttributes,
-  memo,
   SetStateAction,
+  memo,
   useCallback,
   useEffect,
   useRef,
@@ -19,7 +18,7 @@ import { twMerge } from 'tailwind-merge'
 import { InputOverlay, OverlayInputField } from '../overlay-input-field/OverlayInputField'
 
 const activeOverlay: InputOverlay = {
-  overlay: <MagnifyGlassIcon key='1' className='size-6' />,
+  overlay: <Search key='1' className='size-6 opacity-60' />,
   location: 'left',
 }
 
@@ -90,8 +89,8 @@ const ListInputField = <T extends TListItem>({
         stdOverlay,
         {
           overlay: (
-            <button key='3' className='btn btn-circle btn-xs hover:cursor-pointer'>
-              <CloseIcon className='size-4' onClick={clearInput} />
+            <button key='3' className='btn btn-circle btn-xs hover:cursor-pointer' title='Clear'>
+              <X className='size-4' onClick={clearInput} />
             </button>
           ),
           location: 'right',

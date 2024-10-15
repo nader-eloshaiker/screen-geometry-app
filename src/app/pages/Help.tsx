@@ -1,5 +1,3 @@
-import CloseIcon from '@/app/assets/icons/Close'
-import EditIcon from '@/app/assets/icons/Edit'
 import { CreateScreenButton } from '@/app/components/screen/CreateButton'
 import { ScreenPanel } from '@/app/components/screen/ScreenPanel'
 import { ScreenTable } from '@/app/components/screen/ScreenTable'
@@ -11,6 +9,7 @@ import { Dimensions } from '@/lib/openapi/models/Screen'
 import { useElementSize } from '@/lib/ui/hooks/useElementSize'
 import { transformScreenInput } from '@/lib/utils/DataTransformation'
 import { getMaxScreenSize, normaliseScreenRender } from '@/lib/utils/ScreenCalc'
+import { Pencil, X } from 'lucide-react'
 import { useMemo, useRef } from 'react'
 import { Helmet } from 'react-helmet-async'
 import tw from 'tailwind-styled-components'
@@ -143,7 +142,7 @@ export const Help = () => {
           <Heading className='mb-4 text-2xl font-bold'>Delete</Heading>
           <Paragraph>
             To delete an existing screen, click on the
-            <CloseIcon id='edit-icon' className='mx-4 inline size-8 shadow-lg' fill='currentColor' /> icon in the
+            <X id='edit-icon' className='mx-4 inline size-8 shadow-lg' /> icon in the
             <strong>action</strong> column of the Screen Specs table.
           </Paragraph>
         </Section>
@@ -171,9 +170,8 @@ export const Help = () => {
           <Heading className='mb-4 text-2xl font-bold'>Create / Update</Heading>
           <Paragraph>
             To edit an existing screen, click on the
-            <EditIcon id='edit-icon' className='mx-4 inline size-8 shadow-lg' fill='currentColor' /> icon in the{' '}
-            <strong>action</strong> column of the Screen Specs table. Then make your changes and click the{' '}
-            <strong>Update</strong> button.
+            <Pencil id='edit-icon' className='mx-4 inline size-8 shadow-lg' /> icon in the <strong>action</strong>{' '}
+            column of the Screen Specs table. Then make your changes and click the <strong>Update</strong> button.
           </Paragraph>
         </Section>
       </div>

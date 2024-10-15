@@ -1,5 +1,5 @@
-import MagnifyGlassIcon from '@/app/assets/icons/MagnifyGlass'
 import type { Meta, StoryObj } from '@storybook/react'
+import { Search } from 'lucide-react'
 import { OverlayInputField } from './OverlayInputField'
 
 const meta = {
@@ -80,7 +80,7 @@ export const ImageOverlay: Story = {
     disabled: false,
     overlays: [
       {
-        overlay: <MagnifyGlassIcon key='1' className='size-6' />,
+        overlay: <Search key='1' className='size-6' />,
         location: 'left',
       },
     ],
@@ -112,7 +112,7 @@ export const CombinationOverlay: Story = {
     disabled: false,
     overlays: [
       {
-        overlay: <MagnifyGlassIcon key='1' className='size-6' />,
+        overlay: <Search key='1' className='size-6' />,
         location: 'left',
       },
       {
