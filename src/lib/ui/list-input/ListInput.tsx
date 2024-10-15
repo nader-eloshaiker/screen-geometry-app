@@ -90,7 +90,7 @@ const ListInputField = <T extends TListItem>({
         stdOverlay,
         {
           overlay: (
-            <button key='3' className='btn btn-circle btn-xs hover:cursor-pointer' role='reset'>
+            <button key='3' className='btn btn-circle btn-xs hover:cursor-pointer'>
               <CloseIcon className='size-4' onClick={clearInput} />
             </button>
           ),
