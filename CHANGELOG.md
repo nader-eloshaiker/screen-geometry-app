@@ -1,5 +1,23 @@
 # Changelog
 
+## [2.0.0](https://github.com/nader-eloshaiker/screen-geometry-app/compare/v1.11.0...v2.0.0) (2024-10-16)
+
+
+### ⚠ BREAKING CHANGES
+
+* update deps ([#481](https://github.com/nader-eloshaiker/screen-geometry-app/issues/481))
+
+### Features
+
+* **aap:** implement ts pattern ([#467](https://github.com/nader-eloshaiker/screen-geometry-app/issues/467)) ([cd21be7](https://github.com/nader-eloshaiker/screen-geometry-app/commit/cd21be718cf0e37277923e68b28af41ca17d4f06))
+* **app:** add informational reports to PR from codecov ([#469](https://github.com/nader-eloshaiker/screen-geometry-app/issues/469)) ([f1ca9ed](https://github.com/nader-eloshaiker/screen-geometry-app/commit/f1ca9edf1570985f8d4ba575c2064e104f5e217f))
+* **app:** refactor UI theme management ([#479](https://github.com/nader-eloshaiker/screen-geometry-app/issues/479)) ([244daa7](https://github.com/nader-eloshaiker/screen-geometry-app/commit/244daa715c12718197eb69d381cd0818e8aa1f09))
+
+
+### Miscellaneous Chores
+
+* update deps ([#481](https://github.com/nader-eloshaiker/screen-geometry-app/issues/481)) ([d5c4a97](https://github.com/nader-eloshaiker/screen-geometry-app/commit/d5c4a97abb64b52777568ae15d44952d56e8f10c))
+
 ## [1.11.0](https://github.com/nader-eloshaiker/screen-geometry-app/compare/v1.10.0...v1.11.0) (2024-07-19)
 
 
