@@ -2,7 +2,7 @@ import { QueryProvider } from '@/app/contexts/Query/QueryProvider'
 
 import { ScreenItemRender } from '@/app/models/screenItemRender'
 import {
-  getGetScreenListMock,
+  getGetScreenListResponseMock,
   getScreenListServiceMock,
   getScreenServiceMock,
   getSearchServiceMock,
@@ -26,7 +26,7 @@ const TestComponent = ({
     <QueryProvider>
       <NotificationProvider>
         <ScreenTable
-          screens={screens ?? normaliseScreenRender(getGetScreenListMock().list)}
+          screens={screens ?? normaliseScreenRender(getGetScreenListResponseMock().list)}
           isScreenListLoading={isScreenListLoading}
         />
       </NotificationProvider>

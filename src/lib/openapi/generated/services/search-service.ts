@@ -3,22 +3,34 @@
  * Do not edit manually.
  * screen-geometry-app-backend-serverless-apis-v1
  */
-import type { QueryFunction, QueryKey, UseQueryOptions, UseQueryResult } from '@tanstack/react-query'
+import type {
+  DefinedInitialDataOptions,
+  DefinedUseQueryResult,
+  QueryFunction,
+  QueryKey,
+  UndefinedInitialDataOptions,
+  UseQueryOptions,
+  UseQueryResult,
+} from '@tanstack/react-query'
 import { useQuery } from '@tanstack/react-query'
 import { HttpResponse, delay, http } from 'msw'
+import { useCallback } from 'react'
 import { useApiAxios } from '../../axios/useApiAxios'
 import type { ErrorResponse, GetSearchParams, SearchListResponse } from '../models'
 
 export const useGetSearchHook = () => {
   const getSearch = useApiAxios<SearchListResponse>()
 
-  return (params?: GetSearchParams, signal?: AbortSignal) => {
-    return getSearch({ url: '/v1/search', method: 'GET', params, signal })
-  }
+  return useCallback(
+    (params?: GetSearchParams, signal?: AbortSignal) => {
+      return getSearch({ url: `/v1/search`, method: 'GET', params, signal })
+    },
+    [getSearch],
+  )
 }
 
 export const getGetSearchQueryKey = (params?: GetSearchParams) => {
-  return ['/v1/search', ...(params ? [params] : [])] as const
+  return [`/v1/search`, ...(params ? [params] : [])] as const
 }
 
 export const useGetSearchQueryOptions = <
@@ -49,12 +61,39 @@ export const useGetSearchQueryOptions = <
 export type GetSearchQueryResult = NonNullable<Awaited<ReturnType<ReturnType<typeof useGetSearchHook>>>>
 export type GetSearchQueryError = ErrorResponse
 
-export const useGetSearch = <TData = Awaited<ReturnType<ReturnType<typeof useGetSearchHook>>>, TError = ErrorResponse>(
+export function useGetSearch<TData = Awaited<ReturnType<ReturnType<typeof useGetSearchHook>>>, TError = ErrorResponse>(
+  params: undefined | GetSearchParams,
+  options: {
+    query: Partial<UseQueryOptions<Awaited<ReturnType<ReturnType<typeof useGetSearchHook>>>, TError, TData>> &
+      Pick<
+        DefinedInitialDataOptions<Awaited<ReturnType<ReturnType<typeof useGetSearchHook>>>, TError, TData>,
+        'initialData'
+      >
+  },
+): DefinedUseQueryResult<TData, TError> & { queryKey: QueryKey }
+export function useGetSearch<TData = Awaited<ReturnType<ReturnType<typeof useGetSearchHook>>>, TError = ErrorResponse>(
+  params?: GetSearchParams,
+  options?: {
+    query?: Partial<UseQueryOptions<Awaited<ReturnType<ReturnType<typeof useGetSearchHook>>>, TError, TData>> &
+      Pick<
+        UndefinedInitialDataOptions<Awaited<ReturnType<ReturnType<typeof useGetSearchHook>>>, TError, TData>,
+        'initialData'
+      >
+  },
+): UseQueryResult<TData, TError> & { queryKey: QueryKey }
+export function useGetSearch<TData = Awaited<ReturnType<ReturnType<typeof useGetSearchHook>>>, TError = ErrorResponse>(
   params?: GetSearchParams,
   options?: {
     query?: Partial<UseQueryOptions<Awaited<ReturnType<ReturnType<typeof useGetSearchHook>>>, TError, TData>>
   },
-): UseQueryResult<TData, TError> & { queryKey: QueryKey } => {
+): UseQueryResult<TData, TError> & { queryKey: QueryKey }
+
+export function useGetSearch<TData = Awaited<ReturnType<ReturnType<typeof useGetSearchHook>>>, TError = ErrorResponse>(
+  params?: GetSearchParams,
+  options?: {
+    query?: Partial<UseQueryOptions<Awaited<ReturnType<ReturnType<typeof useGetSearchHook>>>, TError, TData>>
+  },
+): UseQueryResult<TData, TError> & { queryKey: QueryKey } {
   const queryOptions = useGetSearchQueryOptions(params, options)
 
   const query = useQuery(queryOptions) as UseQueryResult<TData, TError> & { queryKey: QueryKey }
@@ -64,7 +103,7 @@ export const useGetSearch = <TData = Awaited<ReturnType<ReturnType<typeof useGet
   return query
 }
 
-export const getGetSearchMock = () => ({
+export const getGetSearchResponseMock = (): SearchListResponse => ({
   list: [
     {
       id: 'WQHD3421:9',
@@ -105,14 +144,24 @@ export const getGetSearchMock = () => ({
   ],
 })
 
-export const getSearchServiceMock = () => [
-  http.get('*/v1/search', async () => {
+export const getGetSearchMockHandler = (
+  overrideResponse?:
+    | SearchListResponse
+    | ((info: Parameters<Parameters<typeof http.get>[1]>[0]) => Promise<SearchListResponse> | SearchListResponse),
+) => {
+  return http.get('*/v1/search', async (info) => {
     await delay(10)
-    return new HttpResponse(JSON.stringify(getGetSearchMock()), {
-      status: 200,
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    })
-  }),
-]
+
+    return new HttpResponse(
+      JSON.stringify(
+        overrideResponse !== undefined
+          ? typeof overrideResponse === 'function'
+            ? await overrideResponse(info)
+            : overrideResponse
+          : getGetSearchResponseMock(),
+      ),
+      { status: 200, headers: { 'Content-Type': 'application/json' } },
+    )
+  })
+}
+export const getSearchServiceMock = () => [getGetSearchMockHandler()]

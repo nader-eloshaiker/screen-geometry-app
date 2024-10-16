@@ -8,11 +8,27 @@
  * Complete search object
  */
 export interface SearchItem {
+  /** @minLength 3 */
   aspectRatio: string
+  /**
+   * @minimum 0
+   * @exclusiveMinimum
+   */
   diagonalSize?: number
+  /**
+   * @minimum 0
+   * @exclusiveMinimum
+   */
   hRes: number
+  /** @minLength 1 */
   id: string
+  /** @minLength 1 */
   label: string
+  /** @minLength 1 */
   name: string
+  /**
+   * @minimum 0
+   * @exclusiveMinimum
+   */
   vRes: number
 }

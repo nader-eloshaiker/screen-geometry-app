@@ -6,7 +6,9 @@
 import type { ErrorResponseErrorDetailsMetadata } from './errorResponseErrorDetailsMetadata'
 
 export type ErrorResponseErrorDetails = {
+  /** @minLength 1 */
   domain?: string
   metadata?: ErrorResponseErrorDetailsMetadata
+  /** @minLength 1 */
   reason?: string
 }

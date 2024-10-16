@@ -8,6 +8,16 @@
  * Screen representation colors in hex format
  */
 export interface ScreenColor {
+  /**
+   * @minLength 7
+   * @maxLength 7
+   * @pattern #([a-f0-9]{6})\b
+   */
   darkColor: string
+  /**
+   * @minLength 7
+   * @maxLength 7
+   * @pattern #([a-f0-9]{6})\b
+   */
   lightColor: string
 }

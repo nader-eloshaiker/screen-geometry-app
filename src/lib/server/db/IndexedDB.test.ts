@@ -1,4 +1,4 @@
-import { getGetScreenMock, ScreenItem } from '@/lib/openapi/generated'
+import { getGetScreenResponseMock, ScreenItem } from '@/lib/openapi/generated'
 import { screenItemFixture } from '@/lib/test/fixtures/ScreenFixtures'
 import { setupV2DB } from '@/lib/test/stubs/IndexedDBMigration.stub'
 import { IDBFactory } from 'fake-indexeddb'
@@ -106,7 +106,7 @@ describe('#indexDB', () => {
       })
 
       it.fails('updateItem should throw an error if id is not found', async () => {
-        expect(await updateData<ScreenItem>(Stores.Screens, getGetScreenMock().item)).rejects.toThrowError(
+        expect(await updateData<ScreenItem>(Stores.Screens, getGetScreenResponseMock().item)).rejects.toThrowError(
           'No screen found for aaaaa',
         )
       })
