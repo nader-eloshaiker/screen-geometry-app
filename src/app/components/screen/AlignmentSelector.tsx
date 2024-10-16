@@ -1,5 +1,5 @@
 import useLocalStorage from '@/app/hooks/useLocalStorage'
-import clsx from 'clsx'
+import { cn } from '@/lib/utils/cn'
 import {
   AlignCenterHorizontal,
   AlignCenterVertical,
@@ -46,21 +46,21 @@ const AlignmentSelector = ({
     <div className='join'>
       <button
         title='Start Alignment'
-        className={clsx('btn btn-primary join-item ', { 'btn-outline': alignment !== 'start' })}
+        className={cn('btn btn-primary join-item ', { 'btn-outline': alignment !== 'start' })}
         onClick={() => setAlignment('start')}
       >
         <StartIcon className='size-5' />
       </button>
       <button
         title='Center Alignment'
-        className={clsx('btn btn-primary join-item', { 'btn-outline': alignment !== 'center' })}
+        className={cn('btn btn-primary join-item', { 'btn-outline': alignment !== 'center' })}
         onClick={() => setAlignment('center')}
       >
         <CenterIcon className='size-5' />
       </button>
       <button
         title='End Alignment'
-        className={clsx('btn btn-primary join-item', { 'btn-outline': alignment !== 'end' })}
+        className={cn('btn btn-primary join-item', { 'btn-outline': alignment !== 'end' })}
         onClick={() => setAlignment('end')}
       >
         <EndIcon className='size-5' />

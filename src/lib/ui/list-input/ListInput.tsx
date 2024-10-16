@@ -1,6 +1,6 @@
 import { useDebounce } from '@/lib/ui/hooks/useDebounce'
 import { useElementSize } from '@/lib/ui/hooks/useElementSize'
-import { clsx } from 'clsx'
+import { cn } from '@/lib/utils/cn'
 import parse from 'html-react-parser'
 import { Search, X } from 'lucide-react'
 import {
@@ -114,7 +114,7 @@ const ListInputField = <T extends TListItem>({
   return (
     <div
       // use classnames here to easily toggle dropdown open
-      className={clsx({
+      className={cn({
         'dropdown w-full': true,
         'dropdown-open': open,
       })}

@@ -1,5 +1,5 @@
 import { RouteSchema } from '@/app/routes/RouteSchema'
-import { clsx } from 'clsx'
+import { cn } from '@/lib/utils/cn'
 import { motion, Variants } from 'framer-motion'
 import { useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
@@ -45,7 +45,7 @@ const NavMenuItem = ({ pathname, route, title }: NavMenuItemProps) => {
   return (
     <motion.li variants={menuItemVariants}>
       <Link
-        className={clsx('text-base', {
+        className={cn('text-base', {
           active: pathname === route,
         })}
         to={route}
@@ -75,7 +75,7 @@ const ThemeToggleStyled = ({ id }: { id: string }) => (
 
 const Title = ({ size }: { size: 'sm' | 'lg' }) => (
   <div
-    className={clsx('flex-1 pt-2 text-center text-accent-content', {
+    className={cn('flex-1 pt-2 text-center text-accent-content', {
       'text-2xl': size === 'lg',
       'text-xl': size === 'sm',
     })}
@@ -94,7 +94,7 @@ export default function Header() {
       <div className='flex w-full justify-between p-4 py-2 md:hidden' data-testid='small-header'>
         <motion.details
           data-testid='nav-menu'
-          className={clsx('dropdown dropdown-bottom', { 'dropdown-open': menuOpened })}
+          className={cn('dropdown dropdown-bottom', { 'dropdown-open': menuOpened })}
         >
           <summary tabIndex={0} className='btn btn-ghost p-0' role='button'>
             <HamburgerMenu width={20} height={14} isOpen={menuOpened} onClick={() => setMenuOpened(!menuOpened)} />

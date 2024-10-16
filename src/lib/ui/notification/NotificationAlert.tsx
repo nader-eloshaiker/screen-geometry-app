@@ -1,4 +1,4 @@
-import { clsx } from 'clsx'
+import { cn } from '@/lib/utils/cn'
 import { useCallback, useEffect, useState } from 'react'
 import { NotificationEventTypes, NotificationImage, NotificationType, useNotificationContext } from '.'
 
@@ -28,7 +28,7 @@ export const NotificationAlert = ({ title, message, tag, type }: NotificationPro
   }, [onClose, type])
 
   return (
-    <div className={clsx(`alert ${type}`, { 'opacity-0 transition-opacity duration-1000': isClosing })}>
+    <div className={cn(`alert ${type}`, { 'opacity-0 transition-opacity duration-1000': isClosing })}>
       <NotificationImage type={type} />
       <div className='flex flex-col gap-2 sm:flex-row'>
         <div className='font-semibold'>{title}</div>

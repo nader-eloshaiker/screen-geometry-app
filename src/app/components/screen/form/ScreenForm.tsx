@@ -7,8 +7,8 @@ import { ScreenInput, SearchItem } from '@/lib/openapi/generated'
 import { ScreenDataEnum } from '@/lib/openapi/models'
 import { ListInput } from '@/lib/ui/list-input'
 import { createCSSColor } from '@/lib/utils/ScreenCalc'
+import { cn } from '@/lib/utils/cn'
 import { yupResolver } from '@hookform/resolvers/yup'
-import { clsx } from 'clsx'
 import { useCallback, useEffect, useState } from 'react'
 import ReactGA from 'react-ga4'
 import { FormProvider, SubmitHandler, useForm } from 'react-hook-form'
@@ -265,7 +265,7 @@ export const ScreenForm = ({ defaultValues = null, editId = undefined, isLoading
             </div>
             <button
               type='submit'
-              className={clsx('btn btn-primary shadow-md', {
+              className={cn('btn btn-primary shadow-md', {
                 'pointer-events-none': isCreateLoading || isUpdateLoading,
               })}
               disabled={!isDirty || !isValid}

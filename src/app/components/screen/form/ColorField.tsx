@@ -1,6 +1,6 @@
 import { DarkMode, LightMode, TThemeMode } from '@/app/contexts/theme/Theme.types'
 import { ScreenDataEnum } from '@/lib/openapi/models/Screen'
-import { clsx } from 'clsx'
+import { cn } from '@/lib/utils/cn'
 import { useFormContext } from 'react-hook-form'
 import { twMerge } from 'tailwind-merge'
 
@@ -15,7 +15,7 @@ export const ColorField = ({ formKey, title, mode, isLoading = false, className 
         {`${title} Color`}
       </label>
       <div
-        className={clsx('input input-md input-bordered input-primary flex items-center justify-center text-sm', {
+        className={cn('input input-md input-bordered input-primary flex items-center justify-center text-sm', {
           'text-black': mode === LightMode,
           'text-white': mode === DarkMode,
           'animate-pulse pointer-events-none': isLoading,

@@ -1,6 +1,6 @@
 import { ScreenDataEnum } from '@/lib/openapi/models/Screen'
 import { OverlayInputField } from '@/lib/ui/overlay-input-field/OverlayInputField'
-import { clsx } from 'clsx'
+import { cn } from '@/lib/utils/cn'
 import { useFormContext } from 'react-hook-form'
 
 type Props = TRestProps & {
@@ -22,7 +22,7 @@ export const InputField = ({ formKey, title, overlay, isLoading = false, ...rest
   //     <span className='label-text'>Screen Size</span>
   //   </label>
   //   <label
-  //     className={clsx(
+  //     className={cn(
   //       'input input-bordered input-secondary flex items-center gap-2 shadow-md transition-all',
   //       {
   //         'input-error': errors[ScreenDataEnum.diagonalSize],
@@ -62,7 +62,7 @@ export const InputField = ({ formKey, title, overlay, isLoading = false, ...rest
             ]
           : []
       }
-      className={clsx('input-bordered input-primary shadow-lg transition-all', {
+      className={cn('input-bordered input-primary shadow-lg transition-all', {
         'input-error': errors[formKey],
         'skeleton bg-neutral-300 dark:bg-neutral-700 pointer-events-none rounded-lg': isLoading,
       })}

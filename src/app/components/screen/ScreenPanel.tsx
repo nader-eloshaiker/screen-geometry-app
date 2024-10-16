@@ -1,7 +1,7 @@
 import { DarkMode } from '@/app/contexts/theme/Theme.types'
 import { useTheme } from '@/app/contexts/theme/useTheme'
 import { ScreenItemRender } from '@/app/models/screenItemRender'
-import { clsx } from 'clsx'
+import { cn } from '@/lib/utils/cn'
 import { Dispatch, SetStateAction, useEffect, useState } from 'react'
 import styled from 'styled-components'
 
@@ -55,7 +55,7 @@ export const ScreenPanel = ({ screen, highlighted = undefined, setHighLighted = 
 
   return (
     <Panel
-      className={clsx('rounded-md transition-[outline-width] duration-300 ease-out', {
+      className={cn('rounded-md transition-[outline-width] duration-300 ease-out', {
         'outline outline-4 sm:outline-8': selected,
         'outline outline-2': !selected,
       })}
