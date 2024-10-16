@@ -1,17 +1,17 @@
-import { QueryProvider } from '@app/contexts/Query/QueryProvider'
+import { QueryProvider } from '@/app/contexts/Query/QueryProvider'
 
-import { ScreenItemRender } from '@app/models/screenItemRender'
+import { ScreenItemRender } from '@/app/models/screenItemRender'
 import {
   getGetScreenListMock,
   getScreenListServiceMock,
   getScreenServiceMock,
   getSearchServiceMock,
-} from '@packages/openapi/generated'
-import { mswWithSpy, resetMSW, startMSW, stopMSW } from '@packages/serviceworker/NodeServiceWorker'
-import { renderWithUserEvents } from '@packages/test/utils/RenderWithUserEvents'
-import { useElementSizeMock } from '@packages/ui/hooks/useElementSize.mock'
-import { NotificationProvider } from '@packages/ui/notification'
-import { normaliseScreenRender } from '@packages/utils'
+} from '@/lib/openapi/generated'
+import { mswWithSpy, resetMSW, startMSW, stopMSW } from '@/lib/serviceworker/NodeServiceWorker'
+import { renderWithUserEvents } from '@/lib/test/utils/RenderWithUserEvents'
+import { useElementSizeMock } from '@/lib/ui/hooks/useElementSize.mock'
+import { NotificationProvider } from '@/lib/ui/notification'
+import { normaliseScreenRender } from '@/lib/utils'
 import { act, waitFor } from '@testing-library/react'
 import { ScreenTable } from './ScreenTable'
 
@@ -41,12 +41,12 @@ describe('#ScreenTable', () => {
     ...getScreenServiceMock(),
   ])
 
-  beforeAll(async () => {
-    await startMSW()
+  beforeAll(() => {
+    startMSW()
   })
 
-  afterAll(async () => {
-    await stopMSW()
+  afterAll(() => {
+    stopMSW()
   })
 
   beforeEach(() => {
@@ -70,8 +70,8 @@ describe('#ScreenTable', () => {
   test('remove a screen row when delete button is clicked', async () => {
     const test = await renderWithUserEvents(<TestComponent />)
 
-    const deleteElements = await test.findAllByLabelText('delete button')
-    const deleteElement = deleteElements[0] as HTMLElement
+    const deleteElements = await test.findAllByTitle('Delete')
+    const deleteElement = deleteElements[0]
 
     await act(async () => {
       await test.user.click(deleteElement)
@@ -87,7 +87,7 @@ describe('#ScreenTable', () => {
     const test = await renderWithUserEvents(<TestComponent />)
 
     const showElements = await test.findAllByLabelText('show checkbox')
-    const showElement = showElements[0] as HTMLElement
+    const showElement = showElements[0]
 
     await act(async () => {
       await test.user.click(showElement)

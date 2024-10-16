@@ -1,14 +1,13 @@
-import CloseIcon from '@app/assets/icons/Close'
-import EditIcon from '@app/assets/icons/Edit'
-import { DarkMode, TThemeMode } from '@app/components/theme/ThemeManager'
-import { FormDrawerEventTypes } from '@app/contexts/FormDrawer/FormDrawerManager'
-import { useFormDrawerContext } from '@app/contexts/FormDrawer/useFormDrawerContext'
-import { useThemeModeContext } from '@app/contexts/theme/useThemeModeContext'
-import { useDeleteScreenApi } from '@app/hooks/api/helpers/useDeleteScreenApi'
-import { useShowScreenApi } from '@app/hooks/api/helpers/useShowScreenApi'
-import { ScreenItemRender } from '@app/models/screenItemRender'
-import { ScreenColor } from '@packages/openapi/generated'
-import { SkeletonRect } from '@packages/ui/skeleton/SkeletonRect'
+import { FormDrawerEventTypes } from '@/app/contexts/FormDrawer/FormDrawerManager'
+import { useFormDrawerContext } from '@/app/contexts/FormDrawer/useFormDrawerContext'
+import { DarkMode, TThemeMode } from '@/app/contexts/theme/Theme.types'
+import { useTheme } from '@/app/contexts/theme/useTheme'
+import { useDeleteScreenApi } from '@/app/hooks/api/helpers/useDeleteScreenApi'
+import { useShowScreenApi } from '@/app/hooks/api/helpers/useShowScreenApi'
+import { ScreenItemRender } from '@/app/models/screenItemRender'
+import { ScreenColor } from '@/lib/openapi/generated'
+import { SkeletonRect } from '@/lib/ui/skeleton/SkeletonRect'
+import { Pencil, X } from 'lucide-react'
 import { Dispatch, SetStateAction } from 'react'
 import ReactGA from 'react-ga4'
 import styled from 'styled-components'
@@ -74,7 +73,7 @@ export const ScreenTable = ({
   const { isPending: isDeletePending, mutate: deleteAction, variables: deleteParams } = useDeleteScreenApi()
   const { isPending: isShowPending, mutate: showAction, variables: showParams } = useShowScreenApi()
   const { dispatchFormDrawer } = useFormDrawerContext()
-  const [themeMode] = useThemeModeContext()
+  const [themeMode] = useTheme()
 
   const onShow = (screen: ScreenItemRender) => {
     ReactGA.event({
@@ -163,14 +162,14 @@ export const ScreenTable = ({
               <td className='text-center'>{`${Math.round((screen.specs.ppi * 100) / 100)}`}</td>
               <td>
                 <div className='flex flex-row items-center justify-center gap-3'>
-                  <button aria-label='edit button' onClick={() => handleEdit(screen)}>
-                    <EditIcon id='edit-icon' className='size-4' fill='currentColor' />
+                  <button title='Edit' onClick={() => handleEdit(screen)}>
+                    <Pencil id='edit-icon' className='size-4' />
                   </button>
                   {isDeletePending && screen.id === deleteParams?.id ? (
                     <div className='loading loading-spinner loading-xs' />
                   ) : (
-                    <button aria-label='delete button' onClick={() => handleDelete(screen)}>
-                      <CloseIcon id='delete-icon' className='size-4' fill='currentColor' />
+                    <button title='Delete' onClick={() => handleDelete(screen)}>
+                      <X id='delete-icon' className='size-4' />
                     </button>
                   )}
                 </div>

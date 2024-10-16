@@ -1,7 +1,7 @@
 import { withThemeByClassName, withThemeByDataAttribute } from '@storybook/addon-themes'
 import type { Preview } from '@storybook/react'
 import React from 'react'
-import { ThemeModeProvider } from '../src/app/contexts/theme/ThemeModeProvider'
+import { ThemeProvider } from '../src/app/contexts/theme/ThemeProvider'
 import '../src/index.css'
 
 const preview: Preview = {
@@ -19,9 +19,9 @@ const preview: Preview = {
 export const decorators = [
   (Story: any): React.ReactNode => {
     return (
-      <ThemeModeProvider>
+      <ThemeProvider>
         <Story />
-      </ThemeModeProvider>
+      </ThemeProvider>
     )
   },
   withThemeByClassName({

@@ -1,20 +1,20 @@
-import { QueryProvider } from '@app/contexts/Query/QueryProvider'
-import { ScreenProvider } from '@app/contexts/Screen/ScreenProvider'
-import { useScreenContext } from '@app/contexts/Screen/useScreenContext'
-import { ScreenItemRender } from '@app/models/screenItemRender'
+import { QueryProvider } from '@/app/contexts/Query/QueryProvider'
+import { ScreenProvider } from '@/app/contexts/Screen/ScreenProvider'
+import { useScreenContext } from '@/app/contexts/Screen/useScreenContext'
+import { ScreenItemRender } from '@/app/models/screenItemRender'
 import {
   ScreenInput,
   getScreenListServiceMock,
   getScreenServiceMock,
   getSearchServiceMock,
-} from '@packages/openapi/generated'
-import { mswWithSpy, resetMSW, startMSW, stopMSW } from '@packages/serviceworker/NodeServiceWorker'
-import { screenInputFixture } from '@packages/test/fixtures/ScreenFixtures'
-import { renderWithUserEvents } from '@packages/test/utils/RenderWithUserEvents'
-import { useElementSizeMock } from '@packages/ui/hooks/useElementSize.mock'
-import { NotificationProvider } from '@packages/ui/notification'
-import { toScreenItemRender } from '@packages/utils'
-import { transformScreenInput } from '@packages/utils/DataTransformation'
+} from '@/lib/openapi/generated'
+import { mswWithSpy, resetMSW, startMSW, stopMSW } from '@/lib/serviceworker/NodeServiceWorker'
+import { screenInputFixture } from '@/lib/test/fixtures/ScreenFixtures'
+import { renderWithUserEvents } from '@/lib/test/utils/RenderWithUserEvents'
+import { useElementSizeMock } from '@/lib/ui/hooks/useElementSize.mock'
+import { NotificationProvider } from '@/lib/ui/notification'
+import { toScreenItemRender } from '@/lib/utils'
+import { transformScreenInput } from '@/lib/utils/DataTransformation'
 import { act, render, waitFor } from '@testing-library/react'
 import { ScreenForm } from './ScreenForm'
 

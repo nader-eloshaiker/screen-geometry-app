@@ -15,7 +15,7 @@ const __dirname = path.dirname(__filename)
  * See https://playwright.dev/docs/test-configuration.
  */
 export default defineConfig({
-  testDir: './src/packages/e2e',
+  testDir: './src/lib/e2e',
   /* Run tests in files in parallel */
   fullyParallel: true,
   /* Fail the build on CI if you accidentally left test.only in the source code. */
@@ -40,9 +40,9 @@ export default defineConfig({
           'src/app/assets/**/*',
           'src/configs/**/*',
           'src/constants/**/*',
-          'src/packages/test/**/*',
-          'src/packages/serviceworker/**/*',
-          'src/packages/openapi/generated/**/*',
+          'src/lib/test/**/*',
+          'src/lib/serviceworker/**/*',
+          'src/lib/openapi/generated/**/*',
           'src/**/*.mock.{ts,tsx}',
           'src/**/*.stories.tsx',
           'src/**/*.d.ts',

@@ -1,6 +1,6 @@
-import { getGetScreenMock } from '@packages/openapi/generated'
-import { renderWithUserEvents } from '@packages/test/utils/RenderWithUserEvents'
-import { toScreenItemRender } from '@packages/utils'
+import { getGetScreenMock } from '@/lib/openapi/generated'
+import { renderWithUserEvents } from '@/lib/test/utils/RenderWithUserEvents'
+import { toScreenItemRender } from '@/lib/utils'
 import { ScreenPanel } from './ScreenPanel'
 
 describe('#ScreenPanel', () => {

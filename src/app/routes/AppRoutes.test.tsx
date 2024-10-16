@@ -1,7 +1,7 @@
-import { getScreenListServiceMock, getScreenServiceMock, getSearchServiceMock } from '@packages/openapi/generated'
-import { mswWithSpy, resetMSW, startMSW, stopMSW } from '@packages/serviceworker/NodeServiceWorker'
-import { renderWithRouter } from '@packages/test/utils/RenderWithRouter'
-import { useElementSizeMock } from '@packages/ui/hooks/useElementSize.mock'
+import { getScreenListServiceMock, getScreenServiceMock, getSearchServiceMock } from '@/lib/openapi/generated'
+import { mswWithSpy, resetMSW, startMSW, stopMSW } from '@/lib/serviceworker/NodeServiceWorker'
+import { renderWithRouter } from '@/lib/test/utils/RenderWithRouter'
+import { useElementSizeMock } from '@/lib/ui/hooks/useElementSize.mock'
 import { act, waitFor } from '@testing-library/react'
 import { HttpResponse, delay, http } from 'msw'
 

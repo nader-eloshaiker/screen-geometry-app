@@ -1,9 +1,9 @@
-import { RouteSchema } from '@app/routes/RouteSchema'
+import { RouteSchema } from '@/app/routes/RouteSchema'
 import { clsx } from 'clsx'
 import { motion, Variants } from 'framer-motion'
 import { useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
-import ThemeModeToggle from '../theme/ThemeModeToggle'
+import ThemeToggle from '../theme/ThemeToggle'
 import { HamburgerMenu } from './HamburgerMenu'
 
 const menuVariants: Variants = {
@@ -69,8 +69,8 @@ const NavMenu = ({ pathname }: NavMenuProps) => {
   )
 }
 
-const ThemeToggle = ({ id }: { id: string }) => (
-  <ThemeModeToggle className='opacity-50 hover:opacity-100 md:mr-2' id={id} />
+const ThemeToggleStyled = ({ id }: { id: string }) => (
+  <ThemeToggle className='opacity-50 hover:opacity-100 md:mr-2' id={id} />
 )
 
 const Title = ({ size }: { size: 'sm' | 'lg' }) => (
@@ -112,7 +112,7 @@ export default function Header() {
           </motion.ul>
         </motion.details>
         <Title size='sm' />
-        <ThemeToggle id='themeToggleTiny' />
+        <ThemeToggleStyled id='themeToggleTiny' />
       </div>
       {/* large header */}
       <div className='hidden p-4 md:flex md:flex-col' data-testid='large-header'>
@@ -121,7 +121,7 @@ export default function Header() {
           <ul className=' menu menu-horizontal gap-4 bg-accent p-0'>
             <NavMenu pathname={pathname} />
           </ul>
-          <ThemeToggle id='themeToggle' />
+          <ThemeToggleStyled id='themeToggle' />
         </div>
       </div>
     </header>

@@ -1,5 +1,5 @@
-import { DarkMode, LightMode, TThemeMode } from '@app/components/theme/ThemeManager'
-import { ScreenDataEnum } from '@packages/openapi/models/Screen'
+import { DarkMode, LightMode, TThemeMode } from '@/app/contexts/theme/Theme.types'
+import { ScreenDataEnum } from '@/lib/openapi/models/Screen'
 import { clsx } from 'clsx'
 import { useFormContext } from 'react-hook-form'
 import { twMerge } from 'tailwind-merge'
