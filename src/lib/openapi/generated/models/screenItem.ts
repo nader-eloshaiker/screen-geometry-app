@@ -13,6 +13,7 @@ import type { ScreenSpecs } from './screenSpecs'
 export interface ScreenItem {
   color: ScreenColor
   data: ScreenData
+  /** @minLength 1 */
   id: string
   signature: string
   specs: ScreenSpecs

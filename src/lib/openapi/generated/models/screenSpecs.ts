@@ -8,9 +8,29 @@
  * Screen physical characteristics
  */
 export interface ScreenSpecs {
+  /**
+   * @minimum 0
+   * @exclusiveMinimum
+   */
   hAspectRatio: number
+  /**
+   * @minimum 0
+   * @exclusiveMinimum
+   */
   hSize: number
+  /**
+   * @minimum 0
+   * @exclusiveMinimum
+   */
   ppi: number
+  /**
+   * @minimum 0
+   * @exclusiveMinimum
+   */
   vAspectRatio: number
+  /**
+   * @minimum 0
+   * @exclusiveMinimum
+   */
   vSize: number
 }

@@ -1,10 +1,10 @@
-import { getGetScreenMock } from '@/lib/openapi/generated'
+import { getGetScreenResponseMock } from '@/lib/openapi/generated'
 import { renderWithUserEvents } from '@/lib/test/utils/RenderWithUserEvents'
 import { toScreenItemRender } from '@/lib/utils'
 import { ScreenPanel } from './ScreenPanel'
 
 describe('#ScreenPanel', () => {
-  const screenItem = toScreenItemRender(getGetScreenMock().item)
+  const screenItem = toScreenItemRender(getGetScreenResponseMock().item)
 
   test('render screen panel component with a table representing the pixel density when selected', async () => {
     const test = await renderWithUserEvents(<ScreenPanel screen={screenItem} highlighted={screenItem} />)

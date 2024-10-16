@@ -4,4 +4,4 @@
  * screen-geometry-app-backend-serverless-apis-v1
  */
 
-export type ErrorResponseErrorDetailsMetadata = { [key: string]: any }
+export type ErrorResponseErrorDetailsMetadata = { [key: string]: unknown }

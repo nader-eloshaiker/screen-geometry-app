@@ -1,4 +1,4 @@
-import { SearchItem, getGetSearchMock } from '@/lib/openapi/generated'
+import { SearchItem, getGetSearchResponseMock } from '@/lib/openapi/generated'
 import { renderWithUserEvents } from '@/lib/test/utils/RenderWithUserEvents'
 import { act, render, waitFor } from '@testing-library/react'
 import { Mock } from 'vitest'
@@ -32,7 +32,7 @@ const TestComponent = ({ onSelectScreenSpy, setClearSearchHandlerSpy, onSearchSp
       onSelectItem={onSelectScreenSpy}
       setClearHandler={setClearSearchHandlerSpy}
       isLoading={false}
-      items={getGetSearchMock().list}
+      items={getGetSearchResponseMock().list}
       onSearchList={onSearchSpy}
       placeholder='Type to filter list...'
     />
@@ -98,7 +98,7 @@ describe('#ListInput', () => {
     const listElement = getByRole('button', { name: /WQHD 34" 3440x1440 21:9/i })
     await act(async () => await user.click(listElement))
 
-    expect(spies.onSelectScreenSpy).toHaveBeenCalledWith(getGetSearchMock().list[0])
+    expect(spies.onSelectScreenSpy).toHaveBeenCalledWith(getGetSearchResponseMock().list[0])
   })
 
   test('calls backend search api a limited time as the user enters a search term', async () => {

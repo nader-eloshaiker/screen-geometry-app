@@ -4,29 +4,37 @@
  * screen-geometry-app-backend-serverless-apis-v1
  */
 import type {
+  DefinedInitialDataOptions,
+  DefinedUseQueryResult,
   MutationFunction,
   QueryFunction,
   QueryKey,
+  UndefinedInitialDataOptions,
   UseMutationOptions,
+  UseMutationResult,
   UseQueryOptions,
   UseQueryResult,
 } from '@tanstack/react-query'
 import { useMutation, useQuery } from '@tanstack/react-query'
 import { HttpResponse, delay, http } from 'msw'
+import { useCallback } from 'react'
 import { useApiAxios } from '../../axios/useApiAxios'
 import type { ErrorResponse, ScreenIdResponse, ScreenInput, ScreenItemResponse } from '../models'
 
 export const useCreateScreenHook = () => {
   const createScreen = useApiAxios<ScreenItemResponse>()
 
-  return (screenInput: ScreenInput) => {
-    return createScreen({
-      url: '/v1/screen',
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      data: screenInput,
-    })
-  }
+  return useCallback(
+    (screenInput: ScreenInput) => {
+      return createScreen({
+        url: `/v1/screen`,
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        data: screenInput,
+      })
+    },
+    [createScreen],
+  )
 }
 
 export const useCreateScreenMutationOptions = <TError = ErrorResponse, TContext = unknown>(options?: {
@@ -69,7 +77,12 @@ export const useCreateScreen = <TError = ErrorResponse, TContext = unknown>(opti
     { data: ScreenInput },
     TContext
   >
-}) => {
+}): UseMutationResult<
+  Awaited<ReturnType<ReturnType<typeof useCreateScreenHook>>>,
+  TError,
+  { data: ScreenInput },
+  TContext
+> => {
   const mutationOptions = useCreateScreenMutationOptions(options)
 
   return useMutation(mutationOptions)
@@ -77,9 +90,12 @@ export const useCreateScreen = <TError = ErrorResponse, TContext = unknown>(opti
 export const useShowScreenHook = () => {
   const showScreen = useApiAxios<ScreenItemResponse>()
 
-  return (id: string) => {
-    return showScreen({ url: `/v1/screen/${id}/show`, method: 'PATCH' })
-  }
+  return useCallback(
+    (id: string) => {
+      return showScreen({ url: `/v1/screen/${id}/show`, method: 'PATCH' })
+    },
+    [showScreen],
+  )
 }
 
 export const useShowScreenMutationOptions = <TError = ErrorResponse, TContext = unknown>(options?: {
@@ -116,7 +132,7 @@ export const useShowScreen = <TError = ErrorResponse, TContext = unknown>(option
     { id: string },
     TContext
   >
-}) => {
+}): UseMutationResult<Awaited<ReturnType<ReturnType<typeof useShowScreenHook>>>, TError, { id: string }, TContext> => {
   const mutationOptions = useShowScreenMutationOptions(options)
 
   return useMutation(mutationOptions)
@@ -124,9 +140,12 @@ export const useShowScreen = <TError = ErrorResponse, TContext = unknown>(option
 export const useGetScreenHook = () => {
   const getScreen = useApiAxios<ScreenItemResponse>()
 
-  return (id: string, signal?: AbortSignal) => {
-    return getScreen({ url: `/v1/screen/${id}`, method: 'GET', signal })
-  }
+  return useCallback(
+    (id: string, signal?: AbortSignal) => {
+      return getScreen({ url: `/v1/screen/${id}`, method: 'GET', signal })
+    },
+    [getScreen],
+  )
 }
 
 export const getGetScreenQueryKey = (id: string) => {
@@ -161,12 +180,39 @@ export const useGetScreenQueryOptions = <
 export type GetScreenQueryResult = NonNullable<Awaited<ReturnType<ReturnType<typeof useGetScreenHook>>>>
 export type GetScreenQueryError = ErrorResponse
 
-export const useGetScreen = <TData = Awaited<ReturnType<ReturnType<typeof useGetScreenHook>>>, TError = ErrorResponse>(
+export function useGetScreen<TData = Awaited<ReturnType<ReturnType<typeof useGetScreenHook>>>, TError = ErrorResponse>(
+  id: string,
+  options: {
+    query: Partial<UseQueryOptions<Awaited<ReturnType<ReturnType<typeof useGetScreenHook>>>, TError, TData>> &
+      Pick<
+        DefinedInitialDataOptions<Awaited<ReturnType<ReturnType<typeof useGetScreenHook>>>, TError, TData>,
+        'initialData'
+      >
+  },
+): DefinedUseQueryResult<TData, TError> & { queryKey: QueryKey }
+export function useGetScreen<TData = Awaited<ReturnType<ReturnType<typeof useGetScreenHook>>>, TError = ErrorResponse>(
+  id: string,
+  options?: {
+    query?: Partial<UseQueryOptions<Awaited<ReturnType<ReturnType<typeof useGetScreenHook>>>, TError, TData>> &
+      Pick<
+        UndefinedInitialDataOptions<Awaited<ReturnType<ReturnType<typeof useGetScreenHook>>>, TError, TData>,
+        'initialData'
+      >
+  },
+): UseQueryResult<TData, TError> & { queryKey: QueryKey }
+export function useGetScreen<TData = Awaited<ReturnType<ReturnType<typeof useGetScreenHook>>>, TError = ErrorResponse>(
   id: string,
   options?: {
     query?: Partial<UseQueryOptions<Awaited<ReturnType<ReturnType<typeof useGetScreenHook>>>, TError, TData>>
   },
-): UseQueryResult<TData, TError> & { queryKey: QueryKey } => {
+): UseQueryResult<TData, TError> & { queryKey: QueryKey }
+
+export function useGetScreen<TData = Awaited<ReturnType<ReturnType<typeof useGetScreenHook>>>, TError = ErrorResponse>(
+  id: string,
+  options?: {
+    query?: Partial<UseQueryOptions<Awaited<ReturnType<ReturnType<typeof useGetScreenHook>>>, TError, TData>>
+  },
+): UseQueryResult<TData, TError> & { queryKey: QueryKey } {
   const queryOptions = useGetScreenQueryOptions(id, options)
 
   const query = useQuery(queryOptions) as UseQueryResult<TData, TError> & { queryKey: QueryKey }
@@ -179,14 +225,17 @@ export const useGetScreen = <TData = Awaited<ReturnType<ReturnType<typeof useGet
 export const useUpdateScreenHook = () => {
   const updateScreen = useApiAxios<ScreenItemResponse>()
 
-  return (id: string, screenInput: ScreenInput) => {
-    return updateScreen({
-      url: `/v1/screen/${id}`,
-      method: 'PUT',
-      headers: { 'Content-Type': 'application/json' },
-      data: screenInput,
-    })
-  }
+  return useCallback(
+    (id: string, screenInput: ScreenInput) => {
+      return updateScreen({
+        url: `/v1/screen/${id}`,
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        data: screenInput,
+      })
+    },
+    [updateScreen],
+  )
 }
 
 export const useUpdateScreenMutationOptions = <TError = ErrorResponse, TContext = unknown>(options?: {
@@ -229,7 +278,12 @@ export const useUpdateScreen = <TError = ErrorResponse, TContext = unknown>(opti
     { id: string; data: ScreenInput },
     TContext
   >
-}) => {
+}): UseMutationResult<
+  Awaited<ReturnType<ReturnType<typeof useUpdateScreenHook>>>,
+  TError,
+  { id: string; data: ScreenInput },
+  TContext
+> => {
   const mutationOptions = useUpdateScreenMutationOptions(options)
 
   return useMutation(mutationOptions)
@@ -237,9 +291,12 @@ export const useUpdateScreen = <TError = ErrorResponse, TContext = unknown>(opti
 export const useDeleteScreenHook = () => {
   const deleteScreen = useApiAxios<ScreenIdResponse>()
 
-  return (id: string) => {
-    return deleteScreen({ url: `/v1/screen/${id}`, method: 'DELETE' })
-  }
+  return useCallback(
+    (id: string) => {
+      return deleteScreen({ url: `/v1/screen/${id}`, method: 'DELETE' })
+    },
+    [deleteScreen],
+  )
 }
 
 export const useDeleteScreenMutationOptions = <TError = ErrorResponse, TContext = unknown>(options?: {
@@ -281,13 +338,18 @@ export const useDeleteScreen = <TError = ErrorResponse, TContext = unknown>(opti
     { id: string },
     TContext
   >
-}) => {
+}): UseMutationResult<
+  Awaited<ReturnType<ReturnType<typeof useDeleteScreenHook>>>,
+  TError,
+  { id: string },
+  TContext
+> => {
   const mutationOptions = useDeleteScreenMutationOptions(options)
 
   return useMutation(mutationOptions)
 }
 
-export const getCreateScreenMock = () => ({
+export const getCreateScreenResponseMock = (): ScreenItemResponse => ({
   item: {
     id: 'ttUL6ooF',
     specs: {
@@ -304,7 +366,7 @@ export const getCreateScreenMock = () => ({
   },
 })
 
-export const getShowScreenMock = () => ({
+export const getShowScreenResponseMock = (): ScreenItemResponse => ({
   item: {
     id: '5HjERJbH',
     specs: {
@@ -321,7 +383,7 @@ export const getShowScreenMock = () => ({
   },
 })
 
-export const getGetScreenMock = () => ({
+export const getGetScreenResponseMock = (): ScreenItemResponse => ({
   item: {
     id: '5HjERJbH',
     specs: {
@@ -338,7 +400,7 @@ export const getGetScreenMock = () => ({
   },
 })
 
-export const getUpdateScreenMock = () => ({
+export const getUpdateScreenResponseMock = (): ScreenItemResponse => ({
   item: {
     id: '5HjERJbH',
     specs: {
@@ -355,52 +417,116 @@ export const getUpdateScreenMock = () => ({
   },
 })
 
-export const getDeleteScreenMock = () => ({ id: '5HjERJbH' })
+export const getDeleteScreenResponseMock = (): ScreenIdResponse => ({ id: '5HjERJbH' })
 
+export const getCreateScreenMockHandler = (
+  overrideResponse?:
+    | ScreenItemResponse
+    | ((info: Parameters<Parameters<typeof http.post>[1]>[0]) => Promise<ScreenItemResponse> | ScreenItemResponse),
+) => {
+  return http.post('*/v1/screen', async (info) => {
+    await delay(10)
+
+    return new HttpResponse(
+      JSON.stringify(
+        overrideResponse !== undefined
+          ? typeof overrideResponse === 'function'
+            ? await overrideResponse(info)
+            : overrideResponse
+          : getCreateScreenResponseMock(),
+      ),
+      { status: 200, headers: { 'Content-Type': 'application/json' } },
+    )
+  })
+}
+
+export const getShowScreenMockHandler = (
+  overrideResponse?:
+    | ScreenItemResponse
+    | ((info: Parameters<Parameters<typeof http.patch>[1]>[0]) => Promise<ScreenItemResponse> | ScreenItemResponse),
+) => {
+  return http.patch('*/v1/screen/:id/show', async (info) => {
+    await delay(10)
+
+    return new HttpResponse(
+      JSON.stringify(
+        overrideResponse !== undefined
+          ? typeof overrideResponse === 'function'
+            ? await overrideResponse(info)
+            : overrideResponse
+          : getShowScreenResponseMock(),
+      ),
+      { status: 200, headers: { 'Content-Type': 'application/json' } },
+    )
+  })
+}
+
+export const getGetScreenMockHandler = (
+  overrideResponse?:
+    | ScreenItemResponse
+    | ((info: Parameters<Parameters<typeof http.get>[1]>[0]) => Promise<ScreenItemResponse> | ScreenItemResponse),
+) => {
+  return http.get('*/v1/screen/:id', async (info) => {
+    await delay(10)
+
+    return new HttpResponse(
+      JSON.stringify(
+        overrideResponse !== undefined
+          ? typeof overrideResponse === 'function'
+            ? await overrideResponse(info)
+            : overrideResponse
+          : getGetScreenResponseMock(),
+      ),
+      { status: 200, headers: { 'Content-Type': 'application/json' } },
+    )
+  })
+}
+
+export const getUpdateScreenMockHandler = (
+  overrideResponse?:
+    | ScreenItemResponse
+    | ((info: Parameters<Parameters<typeof http.put>[1]>[0]) => Promise<ScreenItemResponse> | ScreenItemResponse),
+) => {
+  return http.put('*/v1/screen/:id', async (info) => {
+    await delay(10)
+
+    return new HttpResponse(
+      JSON.stringify(
+        overrideResponse !== undefined
+          ? typeof overrideResponse === 'function'
+            ? await overrideResponse(info)
+            : overrideResponse
+          : getUpdateScreenResponseMock(),
+      ),
+      { status: 200, headers: { 'Content-Type': 'application/json' } },
+    )
+  })
+}
+
+export const getDeleteScreenMockHandler = (
+  overrideResponse?:
+    | ScreenIdResponse
+    | ((info: Parameters<Parameters<typeof http.delete>[1]>[0]) => Promise<ScreenIdResponse> | ScreenIdResponse),
+) => {
+  return http.delete('*/v1/screen/:id', async (info) => {
+    await delay(10)
+
+    return new HttpResponse(
+      JSON.stringify(
+        overrideResponse !== undefined
+          ? typeof overrideResponse === 'function'
+            ? await overrideResponse(info)
+            : overrideResponse
+          : getDeleteScreenResponseMock(),
+      ),
+      { status: 200, headers: { 'Content-Type': 'application/json' } },
+    )
+  })
+}
 export const getScreenServiceMock = () => [
-  http.post('*/v1/screen', async () => {
-    await delay(10)
-    return new HttpResponse(JSON.stringify(getCreateScreenMock()), {
-      status: 200,
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    })
-  }),
-  http.patch('*/v1/screen/:id/show', async () => {
-    await delay(10)
-    return new HttpResponse(JSON.stringify(getShowScreenMock()), {
-      status: 200,
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    })
-  }),
-  http.get('*/v1/screen/:id', async () => {
-    await delay(10)
-    return new HttpResponse(JSON.stringify(getGetScreenMock()), {
-      status: 200,
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    })
-  }),
-  http.put('*/v1/screen/:id', async () => {
-    await delay(10)
-    return new HttpResponse(JSON.stringify(getUpdateScreenMock()), {
-      status: 200,
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    })
-  }),
-  http.delete('*/v1/screen/:id', async () => {
-    await delay(10)
-    return new HttpResponse(JSON.stringify(getDeleteScreenMock()), {
-      status: 200,
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    })
-  }),
+  getCreateScreenMockHandler(),
+  getShowScreenMockHandler(),
+  getGetScreenMockHandler(),
+  getUpdateScreenMockHandler(),
+  getDeleteScreenMockHandler(),
 ]
