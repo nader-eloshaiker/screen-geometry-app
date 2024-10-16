@@ -132,19 +132,18 @@ const ListInputField = <T extends TListItem>({
         {...rest}
       />
       {items.length > 0 && (
-        <div className='dropdown-content top-14 z-[1] max-h-80 flex-col overflow-auto rounded-md bg-base-200'>
-          <ul
-            className='menu'
-            // use ref to calculate the width of parent
-            style={{ width: width }}
-          >
-            {items.map((item) => (
-              <li key={item.id} className='w-full border-b border-b-base-content/10'>
-                <button onClick={(e) => handleClickItem(e, item)}>{parse(item.label)}</button>
-              </li>
-            ))}
-          </ul>
-        </div>
+        <ul
+          tabIndex={0}
+          className='menu dropdown-content top-14 z-[1] max-h-80 flex-col overflow-auto rounded-md bg-base-200'
+          // use ref to calculate the width of parent
+          style={{ width: width }}
+        >
+          {items.map((item) => (
+            <li key={item.id} className='w-full border-b border-b-base-content/10'>
+              <button onClick={(e) => handleClickItem(e, item)}>{parse(item.label)}</button>
+            </li>
+          ))}
+        </ul>
       )}
     </div>
   )

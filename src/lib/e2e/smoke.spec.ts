@@ -40,7 +40,7 @@ test('Smoke Test Screens Page', async ({ page }) => {
   await page.getByRole('button', { name: 'Create Screen' }).click()
   await page.getByPlaceholder('Type to filter list...').click()
   await page.getByPlaceholder('Type to filter list...').fill('27')
-  await page.getByText('4K UHD 27" 3840x2160 16:').click()
+  await page.getByText('4K UHD 27" 3840x2160 16:9').click()
   await page.getByRole('button', { name: 'Create', exact: true }).click()
   await page.getByRole('button', { name: 'Close' }).click()
 
@@ -49,7 +49,7 @@ test('Smoke Test Screens Page', async ({ page }) => {
   await expect(tableAddedRow.locator('tbody > tr')).toHaveCount(6)
 
   // Edit row and check for updated row
-  await page.getByRole('row', { name: 'show checkbox 32" 16:9 28" x' }).getByLabel('edit button').click()
+  await page.getByRole('row', { name: 'show checkbox 32" 16:9 28" x' }).getByTitle('Edit').click()
   await page.getByLabel('Screen Size').click()
   await page.getByLabel('Screen Size').dblclick()
   await page.getByLabel('Screen Size').click()
