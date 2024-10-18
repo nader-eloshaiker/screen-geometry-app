@@ -13,6 +13,14 @@ const TestButton = (props: ButtonProps) => {
   )
 }
 
+const TestIconButton = (props: ButtonProps) => {
+  return (
+    <Button className='flex gap-2' {...props}>
+      <ThumbsUp className='self-center' />
+    </Button>
+  )
+}
+
 const meta = {
   title: 'Elements/Buttons',
   component: TestButton,
@@ -62,7 +70,7 @@ export const Variant: Story = {
   args: {},
   render: () => (
     <table className='border border-dashed border-base-300'>
-      <caption className='p-5'>Button Color variants</caption>
+      <caption className='p-5'>Button Variants</caption>
       <thead>
         <tr className='border border-dashed border-base-300'>
           <th className='px-8 py-4' scope='col'></th>
@@ -85,13 +93,13 @@ export const Variant: Story = {
       </thead>
       <tbody>
         <TableRow
-          heading='primary'
+          heading='primary (default)'
           elements={{
-            normalDefault: <TestButton variant='default' />,
-            hoverDefault: <TestButton id='hoverDefault' variant='default' />,
-            focusDefault: <TestButton id='focusDefault' variant='default' />,
-            activeDefault: <TestButton id='activeDefault' variant='default' />,
-            disabledDefault: <TestButton disabled={true} id='disabledDefault' variant='default' />,
+            normalDefault: <TestButton variant='primary' />,
+            hoverDefault: <TestButton id='hoverDefault' variant='primary' />,
+            focusDefault: <TestButton id='focusDefault' variant='primary' />,
+            activeDefault: <TestButton id='activeDefault' variant='primary' />,
+            disabledDefault: <TestButton disabled={true} id='disabledDefault' variant='primary' />,
           }}
         />
 
@@ -147,6 +155,105 @@ export const Variant: Story = {
             focusLink: <TestButton id='focusLink' variant='link' />,
             activeLink: <TestButton id='activeLink' variant='link' />,
             disabledLink: <TestButton disabled={true} id='disabledLink' variant='link' />,
+          }}
+        />
+      </tbody>
+    </table>
+  ),
+  parameters: {
+    pseudo: {
+      hover: ['#hoverDefault', '#hoverGhost', '#hoverSecondary', '#hoverDestructive', '#hoverOutline', '#hoverLink'],
+      active: [
+        '#activeDefault',
+        '#activeGhost',
+        '#activeSecondary',
+        '#activeDestructive',
+        '#activeOutline',
+        '#activeLink',
+      ],
+      focusVisible: [
+        '#focusDefault',
+        '#focusGhost',
+        '#focusSecondary',
+        '#focusDestructive',
+        '#focusOutline',
+        '#focusLink',
+      ],
+    },
+    layout: 'centered',
+    // viewport: {
+    //   defaultViewport: 'FullScreen',
+    // },
+  },
+}
+
+export const Size: Story = {
+  args: {},
+  render: () => (
+    <table className='border border-dashed border-base-300'>
+      <caption className='p-5'>Button Sizes</caption>
+      <thead>
+        <tr className='border border-dashed border-base-300'>
+          <th className='px-8 py-4' scope='col'></th>
+          <th className='px-8 py-4' scope='col'>
+            normal
+          </th>
+          <th className='px-8 py-4' scope='col'>
+            hover
+          </th>
+          <th className='px-8 py-4' scope='col'>
+            focus
+          </th>
+          <th className='px-8 py-4' scope='col'>
+            active
+          </th>
+          <th className='px-8 py-4' scope='col'>
+            disabled
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <TableRow
+          heading='size:icon'
+          elements={{
+            normalDefault: <TestIconButton variant='primary' size='icon' />,
+            hoverDefault: <TestIconButton id='hoverDefault' variant='primary' size='icon' />,
+            focusDefault: <TestIconButton id='focusDefault' variant='primary' size='icon' />,
+            activeDefault: <TestIconButton id='activeDefault' variant='primary' size='icon' />,
+            disabledDefault: <TestIconButton disabled={true} id='disabledDefault' variant='primary' size='icon' />,
+          }}
+        />
+
+        <TableRow
+          heading='size:sm'
+          elements={{
+            normalDefault: <TestButton variant='primary' size='sm' />,
+            hoverDefault: <TestButton id='hoverDefault' variant='primary' size='sm' />,
+            focusDefault: <TestButton id='focusDefault' variant='primary' size='sm' />,
+            activeDefault: <TestButton id='activeDefault' variant='primary' size='sm' />,
+            disabledDefault: <TestButton disabled={true} id='disabledDefault' variant='primary' size='sm' />,
+          }}
+        />
+
+        <TableRow
+          heading='size:md (default)'
+          elements={{
+            normalDefault: <TestButton variant='primary' size='md' />,
+            hoverDefault: <TestButton id='hoverDefault' variant='primary' size='md' />,
+            focusDefault: <TestButton id='focusDefault' variant='primary' size='md' />,
+            activeDefault: <TestButton id='activeDefault' variant='primary' size='md' />,
+            disabledDefault: <TestButton disabled={true} id='disabledDefault' variant='primary' size='md' />,
+          }}
+        />
+
+        <TableRow
+          heading='size:lg'
+          elements={{
+            normalDefault: <TestButton variant='primary' size='lg' />,
+            hoverDefault: <TestButton id='hoverDefault' variant='primary' size='lg' />,
+            focusDefault: <TestButton id='focusDefault' variant='primary' size='lg' />,
+            activeDefault: <TestButton id='activeDefault' variant='primary' size='lg' />,
+            disabledDefault: <TestButton disabled={true} id='disabledDefault' variant='primary' size='lg' />,
           }}
         />
       </tbody>
