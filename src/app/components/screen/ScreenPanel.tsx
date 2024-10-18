@@ -1,7 +1,7 @@
 import { DarkMode } from '@/app/contexts/theme/Theme.types'
 import { useTheme } from '@/app/contexts/theme/useTheme'
 import { ScreenItemRender } from '@/app/models/screenItemRender'
-import { cn } from '@/lib/utils/cn'
+import { cn } from '@/lib/utils/class-name'
 import { Dispatch, SetStateAction, useEffect, useState } from 'react'
 import styled from 'styled-components'
 

@@ -1,5 +1,5 @@
 import useLocalStorage from '@/app/hooks/useLocalStorage'
-import { cn } from '@/lib/utils/cn'
+import { cn } from '@/lib/utils/class-name'
 import {
   AlignCenterHorizontal,
   AlignCenterVertical,

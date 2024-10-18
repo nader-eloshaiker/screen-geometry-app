@@ -1,5 +1,5 @@
 import { RouteSchema } from '@/app/routes/RouteSchema'
-import { cn } from '@/lib/utils/cn'
+import { cn } from '@/lib/utils/class-name'
 import { motion, Variants } from 'framer-motion'
 import { useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'

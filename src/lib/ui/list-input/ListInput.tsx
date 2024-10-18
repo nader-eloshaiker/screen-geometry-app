@@ -1,6 +1,6 @@
 import { useDebounce } from '@/lib/ui/hooks/useDebounce'
 import { useElementSize } from '@/lib/ui/hooks/useElementSize'
-import { cn } from '@/lib/utils/cn'
+import { cn } from '@/lib/utils/class-name'
 import parse from 'html-react-parser'
 import { Search, X } from 'lucide-react'
 import {

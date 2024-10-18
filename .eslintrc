@@ -15,6 +15,9 @@
     "plugin:storybook/recommended"
   ],
   "settings": {
+    "tailwindcss": {
+      "config": "./tailwind.config.js"
+    },
     "import/resolver": {
       "typescript": {}
     },
@@ -64,7 +67,7 @@
     "no-unused-vars": "off",
     "react-refresh/only-export-components": ["warn", { "allowConstantExport": true }],
     "tailwindcss/classnames-order": "warn",
-    "tailwindcss/no-custom-classname": "warn",
+    "tailwindcss/no-custom-classname": ["warn", {"callees": ["classnames", "clsx", "ctl", "cva", "tv", "cn", "twMerge", "tw"]}],
     "tailwindcss/no-contradicting-classname": "error"
   }
 }
