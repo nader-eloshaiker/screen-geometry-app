@@ -25,6 +25,7 @@ const config: StorybookConfig = {
     '@storybook/addon-onboarding',
     '@storybook/addon-interactions',
     '@storybook/addon-themes',
+    'storybook-addon-pseudo-states',
     {
       name: '@storybook/addon-coverage',
       options: coverageConfig,
