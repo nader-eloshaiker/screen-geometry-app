@@ -8,7 +8,9 @@ const preview: Preview = {
     (Story) => {
       return (
         <ThemeProvider>
-          <Story />
+          <div className='flex size-full items-center justify-center'>
+            <Story />
+          </div>
         </ThemeProvider>
       )
     },
