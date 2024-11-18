@@ -271,7 +271,7 @@ jobs:
         run: ls -R coverage/
 
       - name: Upload unit test coverage reports to Codecov
-        uses: codecov/codecov-action@v4
+        uses: codecov/codecov-action@v5
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
           slug: nader-eloshaiker/screen-geometry-app
@@ -279,7 +279,7 @@ jobs:
           flags: unit
 
       - name: Upload storybook test coverage reports to Codecov
-        uses: codecov/codecov-action@v4
+        uses: codecov/codecov-action@v5
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
           slug: nader-eloshaiker/screen-geometry-app
@@ -287,7 +287,7 @@ jobs:
           flags: storybook
 
       - name: Upload e2e test coverage reports to Codecov
-        uses: codecov/codecov-action@v4
+        uses: codecov/codecov-action@v5
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
           slug: nader-eloshaiker/screen-geometry-app
