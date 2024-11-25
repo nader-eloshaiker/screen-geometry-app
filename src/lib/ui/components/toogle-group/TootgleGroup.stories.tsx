@@ -4,7 +4,7 @@ import type { Meta, StoryObj } from '@storybook/react'
 import { fn } from '@storybook/test'
 import type { VariantProps } from 'class-variance-authority'
 import { UnderlineIcon } from 'lucide-react'
-import { StateTable } from '../storybook/StateTable'
+import { StateTable } from '../../storybook/StateTable'
 import { ToggleGroup, ToggleGroupItem } from './ToggleGroup'
 import { ToggleVariants } from './ToggleVariants'
 
