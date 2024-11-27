@@ -28,6 +28,7 @@
 }
 
 :root {
+  /* neutral*/
   --neutral-25: 0 0% 99%;
   --neutral-50: 0 0% 98%;
   --neutral-100: 0 0% 96%;
@@ -58,98 +59,126 @@
   --primary-950: 258 100% 15%;
 
   /* warning scale */
-  --warning-25: 10 100% 99%;
-  --warning-50: 18 100% 97%;
-  --warning-100: 17 100% 95%;
-  --warning-200: 20 100% 90%;
-  --warning-300: 20 100% 79%;
-  --warning-400: 19 100% 64%;
-  --warning-500: 19 100% 49%;
-  --warning-600: 19 100% 39%;
-  --warning-700: 19 100% 33%;
-  --warning-800: 19 100% 26%;
-  --warning-900: 19 100% 22%;
-  --warning-925: 19 100% 16%;
-  --warning-950: 20 100% 8%;
+  --warning-50: 48 100% 96%;
+  --warning-100: 48 96% 89%;
+  --warning-200: 48 97% 77%;
+  --warning-300: 46 97% 65%;
+  --warning-400: 43 96% 56%;
+  --warning-500: 38 92% 50%;
+  --warning-600: 32 95% 44%;
+  --warning-700: 26 90% 37%;
+  --warning-800: 23 83% 31%;
+  --warning-900: 22 78% 26%;
+  --warning-950: 21 92% 14%;
 
   /* success scale */
-  --success-25: 144 56% 98%;
-  --success-50: 148 60% 95%;
-  --success-100: 148 69% 90%;
-  --success-200: 149 66% 78%;
-  --success-300: 150 65% 63%;
-  --success-400: 149 64% 47%;
-  --success-500: 150 74% 36%;
-  --success-600: 149 90% 26%;
-  --success-700: 151 98% 21%;
-  --success-800: 150 96% 17%;
-  --success-900: 150 95% 14%;
-  --success-925: 151 96% 10%;
-  --success-950: 149 93% 5%;
+  --success-50: 78 92% 95%;
+  --success-100: 80 89% 89%;
+  --success-200: 81 88% 80%;
+  --success-300: 82 85% 67%;
+  --success-400: 83 78% 55%;
+  --success-500: 84 81% 44%;
+  --success-600: 85 85% 35%;
+  --success-700: 86 78% 27%;
+  --success-800: 86 69% 23%;
+  --success-900: 88 61% 20%;
+  --success-950: 89 80% 10%;
 
   /* danger scale */
-  --danger-25: 348 100% 99%;
-  --danger-50: 348 83% 98%;
-  --danger-100: 351 83% 95%;
-  --danger-200: 356 70% 91%;
-  --danger-300: 355 73% 84%;
-  --danger-400: 355 73% 73%;
-  --danger-500: 355 73% 64%;
-  --danger-600: 355 73% 51%;
-  --danger-700: 355 73% 42%;
-  --danger-800: 355 73% 34%;
-  --danger-900: 355 73% 26%;
-  --danger-925: 355 73% 19%;
-  --danger-950: 357 72% 11%;
+  --danger-50: 0 86% 97%;
+  --danger-100: 0 93% 94%;
+  --danger-200: 0 96% 89%;
+  --danger-300: 0 94% 82%;
+  --danger-400: 0 91% 71%;
+  --danger-500: 0 84% 60%;
+  --danger-600: 0 72% 51%;
+  --danger-700: 0 74% 42%;
+  --danger-800: 0 70% 35%;
+  --danger-900: 0 63% 31%;
+  --danger-950: 0 75% 15%;
 
   /* info scale */
-  --info-25: 225 67% 99%;
-  --info-50: 233 67% 98%;
-  --info-100: 229 67% 95%;
-  --info-200: 222 65% 90%;
-  --info-300: 220 65% 82%;
-  --info-400: 220 65% 71%;
-  --info-500: 220 65% 63%;
-  --info-600: 220 65% 52%;
-  --info-700: 220 65% 43%;
-  --info-800: 220 65% 36%;
-  --info-900: 220 66% 30%;
-  --info-925: 220 66% 21%;
-  --info-950: 220 64% 11%;
+  --info-50: 204 100% 97%;
+  --info-100: 204 94% 94%;
+  --info-200: 201 94% 86%;
+  --info-300: 199 95% 74%;
+  --info-400: 198 93% 60%;
+  --info-500: 199 89% 48%;
+  --info-600: 200 98% 39%;
+  --info-700: 201 96% 32%;
+  --info-800: 201 90% 27%;
+  --info-900: 202 80% 24%;
+  --info-950: 204 80% 16%;
 
-  --background: 60 5% 96%;
-  --foreground: 24 10% 10%;
+  --foreground: 262.1 50% 5%;
+  --background: 262.1 5% 90%;
+
   --card: var(--neutral-100);
+  --card-hover: var(--neutral-200);
+  --card-active: var(--neutral-200);
   --card-foreground: var(--neutral-900);
-  --popover: var(--neutral-100);
-  --popover-foreground: var(--neutral-900);
+  --card-foreground-hover: var(--neutral-800);
+  --card-foreground-active: var(--neutral-800);
 
-  --primary: var(--primary-700);
-  --primary-hover: var(--primary-800); 
-  --primary-focus: var(--primary-800);
-  --primary-active: var(--primary-900);
+  --popover: var(--neutral-100);
+  --popover-hover: var(--neutral-200);
+  --popover-active: var(--neutral-200);
+  --popover-foreground: var(--neutral-900);
+  --popover-foreground-hover: var(--neutral-800);
+  --popover-foreground-active: var(--neutral-800);
+
+  --primary: var(--primary-600);
+  --primary-hover: var(--primary-700);
+  --primary-active: var(--primary-925);
   --primary-foreground: var(--primary-50);
   --primary-foreground-hover: var(--primary-100);
-  --primary-foreground-focus: var(--primary-100);
-  --primary-foreground-active: var(--primary-100);
-  
+  --primary-foreground-active: var(--primary-200);
+
   --secondary: var(--primary-50);
   --secondary-hover: var(--primary-100);
-  --secondary-focus: var(--primary-100);
   --secondary-active: var(--primary-200);
-  --secondary-foreground: var(--primary-800);
-  --secondary-foreground-hover: var(--primary-900);
-  --secondary-foreground-focus: var(--primary-900);
-  --secondary-foreground-active: var(--primary-900);
+  --secondary-foreground: var(--primary-700);
+  --secondary-foreground-hover: var(--primary-800);
+  --secondary-foreground-active: var(--primary-925);
 
-  --destructive: var(--danger-700);
-  --destructive-hover: var(--danger-800);
-  --destructive-focus: var(--danger-800);
-  --destructive-active: var(--danger-900);
-  --destructive-foreground: var(--primary-50);
-  --destructive-foreground-hover: var(--danger-100);
-  --destructive-foreground-focus: var(--danger-100);
-  --destructive-foreground-active: var(--danger-100);
+  --neutral: var(--neutral-600);
+  --neutral-hover: var(--neutral-700);
+  --neutral-active: var(--neutral-925);
+  --neutral-foreground: var(--neutral-50);
+  --neutral-foreground-hover: var(--neutral-100);
+  --neutral-foreground-active: var(--neutral-200);
+
+  --danger: var(--danger-600);
+  --danger-hover: var(--danger-700);
+  --danger-active: var(--danger-800);
+  --danger-foreground: var(--primary-50);
+  --danger-foreground-hover: var(--danger-100);
+  --danger-foreground-active: var(--danger-200);
+  --danger-ring: var(--danger-500);
+
+  --success: var(--success-700);
+  --success-hover: var(--success-700);
+  --success-active: var(--success-800);
+  --success-foreground: var(--primary-50);
+  --success-foreground-hover: var(--success-100);
+  --success-foreground-active: var(--success-200);
+  --success-ring: var(--success-500);
+
+  --warning: var(--warning-600);
+  --warning-hover: var(--warning-700);
+  --warning-active: var(--warning-800);
+  --warning-foreground: var(--primary-50);
+  --warning-foreground-hover: var(--warning-100);
+  --warning-foreground-active: var(--warning-200);
+  --warning-ring: var(--warning-500);
+
+  --info: var(--info-700);
+  --info-hover: var(--info-800);
+  --info-active: var(--info-900);
+  --info-foreground: var(--primary-50);
+  --info-foreground-hover: var(--info-100);
+  --info-foreground-active: var(--info-200);
+  --info-ring: var(--info-500);
 
   --chart-1: var(--info-500);
   --chart-2: var(--info-600);
@@ -159,46 +188,81 @@
 
   --muted: var(--neutral-100);
   --muted-foreground: var(--neutral-600);
-  --border: var(--primary-300);
+  --border: var(--primary-400);
   --input: var(--primary-400);
-  --ring: var(--primary-700);
+  --ring: var(--primary-500);
   --radius: 0.5rem;
-
 }
 .dark {
-  --background: 14 10% 10%;
-  --foreground: 60 5% 96%%;
-  --card: var(--neutral-900);
-  --card-foreground: var(--neutral-100);
-  --popover: var(--neutral-900);
-  --popover-foreground: var(--neutral-100);
+  --background: 262.1 50% 5%;
+  --foreground: 262.1 5% 90%;
 
-  --primary: var(--primary-700);
-  --primary-hover: var(--primary-600); 
-  --primary-focus: var(--primary-600);
-  --primary-active: #var(--primary-500);
+  --card: var(--neutral-900);
+  --card-hover: var(--neutral-800);
+  --card-active: var(--neutral-800);
+  --card-foreground: var(--neutral-100);
+  --card-foreground-hover: var(--neutral-200);
+  --card-foreground-active: var(--neutral-200);
+
+  --popover: var(--neutral-900);
+  --popover-hover: var(--neutral-800);
+  --popover-active: var(--neutral-800);
+  --popover-foreground: var(--neutral-100);
+  --popover-foreground-hover: var(--neutral-200);
+  --popover-foreground-active: var(--neutral-200);
+
+  --primary: var(--primary-600);
+  --primary-hover: var(--primary-700);
+  --primary-active: var(--primary-800);
   --primary-foreground: var(--primary-50);
   --primary-foreground-hover: var(--primary-100);
-  --primary-foreground-focus: var(--primary-100);
-  --primary-foreground-active: var(--primary-100);
+  --primary-foreground-active: var(--primary-200);
 
-  --secondary: var(--primary-200);
-  --secondary-hover: var(--primary-100);
-  --secondary-focus: var(--primary-100);
-  --secondary-active: var(--primary-50);
-  --secondary-foreground: var(--primary-900);
+  --secondary: var(--primary-50);
+  --secondary-hover: var(--primary-200);
+  --secondary-active: var(--primary-300);
+  --secondary-foreground: var(--primary-700);
   --secondary-foreground-hover: var(--primary-800);
-  --secondary-foreground-focus: var(--primary-800);
-  --secondary-foreground-active: var(--primary-800);
-  
-  --destructive: var(--danger-700);
-  --destructive-hover: var(--danger-800);
-  --destructive-focus: var(--danger-800);
-  --destructive-active: var(--danger-900);
-  --destructive-foreground: var(--primary-50);
-  --destructive-foreground-hover: var(--danger-100);
-  --destructive-foreground-focus: var(--danger-100);
-  --destructive-foreground-active: var(--danger-100);
+  --secondary-foreground-active: var(--primary-925);
+
+  --neutral: var(--neutral-600);
+  --neutral-hover: var(--neutral-700);
+  --neutral-active: var(--neutral-800);
+  --neutral-foreground: var(--neutral-50);
+  --neutral-foreground-hover: var(--neutral-100);
+  --neutral-foreground-active: var(--neutral-200);
+
+  --danger: var(--danger-600);
+  --danger-hover: var(--danger-700);
+  --danger-active: var(--danger-800);
+  --danger-foreground: var(--primary-50);
+  --danger-foreground-hover: var(--danger-100);
+  --danger-foreground-active: var(--danger-200);
+  --danger-ring: var(--danger-500);
+
+  --success: var(--success-600);
+  --success-hover: var(--success-700);
+  --success-active: var(--success-800);
+  --success-foreground: var(--primary-50);
+  --success-foreground-hover: var(--success-100);
+  --success-foreground-active: var(--success-200);
+  --success-ring: var(--success-500);
+
+  --warning: var(--warning-600);
+  --warning-hover: var(--warning-700);
+  --warning-active: var(--warning-800);
+  --warning-foreground: var(--primary-50);
+  --warning-foreground-hover: var(--warning-100);
+  --warning-foreground-active: var(--warning-200);
+  --warning-ring: var(--warning-500);
+
+  --info: var(--info-600);
+  --info-hover: var(--info-700);
+  --info-active: var(--info-800);
+  --info-foreground: var(--primary-50);
+  --info-foreground-hover: var(--info-100);
+  --info-foreground-active: var(--info-200);
+  --info-ring: var(--info-500);
 
   --chart-1: var(--info-500);
   --chart-2: var(--info-600);
@@ -208,8 +272,8 @@
 
   --muted: var(--neutral-800);
   --muted-foreground: var(--neutral-500);
-  --border: var(--primary-300);
+  --border: var(--primary-400);
   --input: var(--primary-400);
-  --ring: var(--primary-700);
+  --ring: var(--primary-500);
   --radius: 0.5rem;
 }

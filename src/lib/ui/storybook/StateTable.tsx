@@ -13,8 +13,8 @@ export const StateTable = ({ caption, headerTitles, rows }: StateTableProps) => 
       <caption className='p-5'>{caption}</caption>
       <TableHeading colNames={headerTitles} />
       <tbody>
-        {rows.map(({ rowName, rows }) => (
-          <TableRow key={rowName} rowName={rowName} rows={rows} />
+        {rows.map(({ rowName, data }) => (
+          <TableRow key={rowName} rowName={rowName} data={data} />
         ))}
       </tbody>
     </table>

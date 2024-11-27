@@ -7,24 +7,25 @@ import { cn } from '@/lib/utils/class-name'
 import { ToggleVariants } from './ToggleVariants'
 
 const ToggleGroupContext = React.createContext<VariantProps<typeof ToggleVariants>>({
-  size: 'default',
-  variant: 'default',
+  palette: 'primary',
+  mode: 'button',
+  size: 'md',
 })
 
 const ToggleGroup = React.forwardRef<
   React.ElementRef<typeof ToggleGroupPrimitive.Root>,
   React.ComponentPropsWithoutRef<typeof ToggleGroupPrimitive.Root> & VariantProps<typeof ToggleVariants>
->(({ className, variant, size, children, ...props }, ref) => (
+>(({ className, mode, size, palette, children, ...props }, ref) => (
   <ToggleGroupPrimitive.Root
     ref={ref}
     className={cn(
       'flex items-center justify-center',
-      { 'gap-1': variant !== 'pill', 'gap-0': variant === 'pill' },
+      { 'gap-2': mode !== 'pill', 'gap-0': mode === 'pill' },
       className,
     )}
     {...props}
   >
-    <ToggleGroupContext.Provider value={{ variant, size }}>{children}</ToggleGroupContext.Provider>
+    <ToggleGroupContext.Provider value={{ mode, size, palette }}>{children}</ToggleGroupContext.Provider>
   </ToggleGroupPrimitive.Root>
 ))
 
@@ -33,7 +34,7 @@ ToggleGroup.displayName = ToggleGroupPrimitive.Root.displayName
 const ToggleGroupItem = React.forwardRef<
   React.ElementRef<typeof ToggleGroupPrimitive.Item>,
   React.ComponentPropsWithoutRef<typeof ToggleGroupPrimitive.Item> & VariantProps<typeof ToggleVariants>
->(({ className, children, variant, size, ...props }, ref) => {
+>(({ className, children, mode, size, palette, ...props }, ref) => {
   const context = React.useContext(ToggleGroupContext)
 
   return (
@@ -41,7 +42,8 @@ const ToggleGroupItem = React.forwardRef<
       ref={ref}
       className={cn(
         ToggleVariants({
-          variant: context.variant || variant,
+          palette: context.palette || palette,
+          mode: context.mode || mode,
           size: context.size || size,
         }),
         className,

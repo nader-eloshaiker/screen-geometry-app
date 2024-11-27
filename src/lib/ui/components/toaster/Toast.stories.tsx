@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react'
 import { VariantProps } from 'class-variance-authority'
-import { Button } from '../../button/Button'
+import { Button } from '../button/Button'
 import { Toast, ToastAction, ToastActionElement } from './Toast'
 import { ToastVariants } from './ToastVariants'
 import { Toaster } from './Toaster'
@@ -104,9 +104,7 @@ export const Default: Story = {
       const { toast } = useToast()
       return (
         <Body {...args}>
-          <Button intent='primary' onClick={() => toast({ ...args })}>
-            Show Toast
-          </Button>
+          <Button onClick={() => toast({ ...args })}>Show Toast</Button>
           <Toaster />
         </Body>
       )
@@ -131,9 +129,7 @@ export const Destructive: Story = {
       const { toast } = useToast()
       return (
         <Body {...args}>
-          <Button intent='primary' onClick={() => toast({ ...args })}>
-            Show Toast
-          </Button>
+          <Button onClick={() => toast({ ...args })}>Show Toast</Button>
           <Toaster />
         </Body>
       )
@@ -158,9 +154,7 @@ export const Waning: Story = {
       const { toast } = useToast()
       return (
         <Body {...args}>
-          <Button intent='primary' onClick={() => toast({ ...args })}>
-            Show Toast
-          </Button>
+          <Button onClick={() => toast({ ...args })}>Show Toast</Button>
           <Toaster />
         </Body>
       )
@@ -185,9 +179,7 @@ export const Success: Story = {
       const { toast } = useToast()
       return (
         <Body {...args}>
-          <Button intent='primary' onClick={() => toast({ ...args })}>
-            Show Toast
-          </Button>
+          <Button onClick={() => toast({ ...args })}>Show Toast</Button>
           <Toaster />
         </Body>
       )
@@ -212,9 +204,7 @@ export const Info: Story = {
       const { toast } = useToast()
       return (
         <Body {...args}>
-          <Button intent='primary' onClick={() => toast({ ...args })}>
-            Show Toast
-          </Button>
+          <Button onClick={() => toast({ ...args })}>Show Toast</Button>
           <Toaster />
         </Body>
       )

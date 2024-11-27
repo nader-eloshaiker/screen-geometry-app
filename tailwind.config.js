@@ -1,26 +1,28 @@
 /** @type {import('tailwindcss').Config} */
 import daisyui from 'daisyui'
+import tailwindAnimate from 'tailwindcss-animate'
 import defaultTheme from 'tailwindcss/defaultTheme'
+import plugin from 'tailwindcss/plugin'
 
 export default {
   mode: 'jit',
   content: ['./src/index.html', './src/**/*.{js,ts,jsx,tsx,html}'],
   theme: {
-    colors: {
-      ...defaultTheme.colors,
-      lightPrimary: 'rgb(from #0096d6 r g b / <alpha-value>)',
-      lightLightContent: 'rgb(from #d6f3ff r g b / <alpha-value>)',
-      LightSecondary: 'rgb(from #9933B3 r g b / <alpha-value>)',
-      lightSecondaryContent: 'rgb(from #FFE5FF r g b / <alpha-value>)',
-      lightAccent: 'rgb(from #7FD8FF r g b / <alpha-value>)',
-      lightAccentContent: 'rgb(from #005980 r g b / <alpha-value>)',
-      darkPrimary: 'rgb(from #7FD8FF r g b / <alpha-value>)',
-      darkPrimaryContent: 'rgb(from #005980 r g b / <alpha-value>)',
-      darkSecondary: 'rgb(from #CC66E6 r g b / <alpha-value>)',
-      darkSecondaryContent: 'rgb(from #660080 r g b / <alpha-value>)',
-      darkAccent: 'rgb(from #1A739A r g b / <alpha-value>)',
-      darkAccentContent: 'rgb(from #E5FFFF r g b / <alpha-value>)',
-    },
+    // colors: {
+    //   ...defaultTheme.colors,
+    //   lightPrimary: 'rgb(from #0096d6 r g b / <alpha-value>)',
+    //   lightLightContent: 'rgb(from #d6f3ff r g b / <alpha-value>)',
+    //   LightSecondary: 'rgb(from #9933B3 r g b / <alpha-value>)',
+    //   lightSecondaryContent: 'rgb(from #FFE5FF r g b / <alpha-value>)',
+    //   lightAccent: 'rgb(from #7FD8FF r g b / <alpha-value>)',
+    //   lightAccentContent: 'rgb(from #005980 r g b / <alpha-value>)',
+    //   darkPrimary: 'rgb(from #7FD8FF r g b / <alpha-value>)',
+    //   darkPrimaryContent: 'rgb(from #005980 r g b / <alpha-value>)',
+    //   darkSecondary: 'rgb(from #CC66E6 r g b / <alpha-value>)',
+    //   darkSecondaryContent: 'rgb(from #660080 r g b / <alpha-value>)',
+    //   darkAccent: 'rgb(from #1A739A r g b / <alpha-value>)',
+    //   darkAccentContent: 'rgb(from #E5FFFF r g b / <alpha-value>)',
+    // },
     extend: {
       screens: {
         xs: '425px',
@@ -29,55 +31,88 @@ export default {
         ...defaultTheme.screens,
         '3xl': '1600px',
       },
-      borderRadius: {
-        lg: 'var(--radius)',
-        md: 'calc(var(--radius) - 2px)',
-        sm: 'calc(var(--radius) - 4px)',
-      },
       colors: {
         background: 'hsl(var(--background) / <alpha-value>)',
         foreground: 'hsl(var(--foreground) / <alpha-value>)',
         card: {
           DEFAULT: 'hsl(var(--card) / <alpha-value>)',
+          hover: 'hsl(var(--card-hover) / <alpha-value>)',
+          active: 'hsl(var(--card-active) / <alpha-value>)',
           foreground: 'hsl(var(--card-foreground) / <alpha-value>)',
+          'foreground-hover': 'hsl(var(--card-foreground-hover) / <alpha-value>)',
+          'foreground-active': 'hsl(var(--card-foreground-active) / <alpha-value>)',
         },
         popover: {
           DEFAULT: 'hsl(var(--popover) / <alpha-value>)',
+          hover: 'hsl(var(--popover-hover) / <alpha-value>)',
+          active: 'hsl(var(--popover-active) / <alpha-value>)',
           foreground: 'hsl(var(--popover-foreground) / <alpha-value>)',
+          'foreground-hover': 'hsl(var(--popover-foreground-hover) / <alpha-value>)',
+          'foreground-active': 'hsl(var(--popover-foreground-active) / <alpha-value>)',
         },
         primary: {
           DEFAULT: 'hsl(var(--primary) / <alpha-value>)',
           hover: 'hsl(var(--primary-hover) / <alpha-value>)',
-          focus: 'hsl(var(--primary-focus) / <alpha-value>)',
           active: 'hsl(var(--primary-active) / <alpha-value>)',
           foreground: 'hsl(var(--primary-foreground) / <alpha-value>)',
           'foreground-hover': 'hsl(var(--primary-foreground-hover) / <alpha-value>)',
-          'foreground-focus': 'hsl(var(--primary-foreground-focus) / <alpha-value>)',
           'foreground-active': 'hsl(var(--primary-foreground-active) / <alpha-value>)',
         },
         secondary: {
           DEFAULT: 'hsl(var(--secondary) / <alpha-value>)',
           hover: 'hsl(var(--secondary-hover) / <alpha-value>)',
-          focus: 'hsl(var(--secondary-focus) / <alpha-value>)',
           active: 'hsl(var(--secondary-active) / <alpha-value>)',
           foreground: 'hsl(var(--secondary-foreground) / <alpha-value>)',
           'foreground-hover': 'hsl(var(--secondary-foreground-hover) / <alpha-value>)',
-          'foreground-focus': 'hsl(var(--secondary-foreground-focus) / <alpha-value>)',
           'foreground-active': 'hsl(var(--secondary-foreground-active) / <alpha-value>)',
+        },
+        neutral: {
+          DEFAULT: 'hsl(var(--neutral) / <alpha-value>)',
+          hover: 'hsl(var(--neutral-hover) / <alpha-value>)',
+          active: 'hsl(var(--neutral-active) / <alpha-value>)',
+          foreground: 'hsl(var(--neutral-foreground) / <alpha-value>)',
+          'foreground-hover': 'hsl(var(--neutral-foreground-hover) / <alpha-value>)',
+          'foreground-active': 'hsl(var(--neutral-foreground-active) / <alpha-value>)',
         },
         muted: {
           DEFAULT: 'hsl(var(--muted) / <alpha-value>)',
           foreground: 'hsl(var(--muted-foreground) / <alpha-value>)',
         },
-        destructive: {
-          DEFAULT: 'hsl(var(--destructive) / <alpha-value>)',
-          hover: 'hsl(var(--destructive-hover) / <alpha-value>)',
-          focus: 'hsl(var(--destructive-focus) / <alpha-value>)',
-          active: 'hsl(var(--destructive-active) / <alpha-value>)',
-          foreground: 'hsl(var(--destructive-foreground) / <alpha-value>)',
-          'foreground-hover': 'hsl(var(--destructive-foreground-hover) / <alpha-value>)',
-          'foreground-focus': 'hsl(var(--destructive-foreground-focus) / <alpha-value>)',
-          'foreground-active': 'hsl(var(--destructive-foreground-active) / <alpha-value>)',
+        danger: {
+          DEFAULT: 'hsl(var(--danger) / <alpha-value>)',
+          hover: 'hsl(var(--danger-hover) / <alpha-value>)',
+          active: 'hsl(var(--danger-active) / <alpha-value>)',
+          foreground: 'hsl(var(--danger-foreground) / <alpha-value>)',
+          'foreground-hover': 'hsl(var(--danger-foreground-hover) / <alpha-value>)',
+          'foreground-active': 'hsl(var(--danger-foreground-active) / <alpha-value>)',
+          ring: 'hsl(var(--danger-ring) / <alpha-value>)',
+        },
+        success: {
+          DEFAULT: 'hsl(var(--success) / <alpha-value>)',
+          hover: 'hsl(var(--success-hover) / <alpha-value>)',
+          active: 'hsl(var(--success-active) / <alpha-value>)',
+          foreground: 'hsl(var(--success-foreground) / <alpha-value>)',
+          'foreground-hover': 'hsl(var(--success-foreground-hover) / <alpha-value>)',
+          'foreground-active': 'hsl(var(--success-foreground-active) / <alpha-value>)',
+          ring: 'hsl(var(--success-ring) / <alpha-value>)',
+        },
+        warning: {
+          DEFAULT: 'hsl(var(--warning) / <alpha-value>)',
+          hover: 'hsl(var(--warning-hover) / <alpha-value>)',
+          active: 'hsl(var(--warning-active) / <alpha-value>)',
+          foreground: 'hsl(var(--warning-foreground) / <alpha-value>)',
+          'foreground-hover': 'hsl(var(--warning-foreground-hover) / <alpha-value>)',
+          'foreground-active': 'hsl(var(--warning-foreground-active) / <alpha-value>)',
+          ring: 'hsl(var(--warning-ring) / <alpha-value>)',
+        },
+        info: {
+          DEFAULT: 'hsl(var(--info) / <alpha-value>)',
+          hover: 'hsl(var(--info-hover) / <alpha-value>)',
+          active: 'hsl(var(--info-active) / <alpha-value>)',
+          foreground: 'hsl(var(--info-foreground) / <alpha-value>)',
+          'foreground-hover': 'hsl(var(--info-foreground-hover) / <alpha-value>)',
+          'foreground-active': 'hsl(var(--info-foreground-active) / <alpha-value>)',
+          ring: 'hsl(var(--info-ring) / <alpha-value>)',
         },
         border: 'hsl(var(--border) / <alpha-value>)',
         input: 'hsl(var(--input) / <alpha-value>)',
@@ -90,9 +125,35 @@ export default {
           5: 'hsl(var(--chart-5) / <alpha-value>)',
         },
       },
+      borderRadius: {
+        lg: 'var(--radius)',
+        md: 'calc(var(--radius) - 2px)',
+        sm: 'calc(var(--radius) - 4px)',
+      },
+      textShadow: {
+        'bold-sm': '0.02rem 0.02rem 0 currentColor',
+        'bold-md': '0.04rem 0.04rem 0 currentColor',
+        'bold-lg': '0.06rem 0.06rem 0 currentColor',
+      },
     },
   },
-  plugins: [daisyui, require('tailwindcss-animate')],
+  plugins: [
+    daisyui,
+    tailwindAnimate,
+    plugin(function ({ addVariant }) {
+      addVariant('hocus', ['&:hover', '&:focus-visible'])
+    }),
+    plugin(function ({ matchUtilities, theme }) {
+      matchUtilities(
+        {
+          'text-shadow': (value) => ({
+            textShadow: value,
+          }),
+        },
+        { values: theme('textShadow') },
+      )
+    }),
+  ],
   darkMode: ['class', '[data-theme="dark"]'],
   daisyui: {
     themes: [

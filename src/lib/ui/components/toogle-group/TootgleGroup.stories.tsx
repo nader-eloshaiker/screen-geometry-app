@@ -1,9 +1,7 @@
-import { FontBoldIcon, FontItalicIcon } from '@radix-ui/react-icons'
 import { ToggleGroupSingleProps } from '@radix-ui/react-toggle-group'
 import type { Meta, StoryObj } from '@storybook/react'
 import { fn } from '@storybook/test'
 import type { VariantProps } from 'class-variance-authority'
-import { UnderlineIcon } from 'lucide-react'
 import { StateTable } from '../../storybook/StateTable'
 import { ToggleGroup, ToggleGroupItem } from './ToggleGroup'
 import { ToggleVariants } from './ToggleVariants'
@@ -12,15 +10,15 @@ type ToggleGroupDefaultProps = { type: 'multiple' | 'single' } & VariantProps<ty
 
 const ToggleGroupDefault = ({ type, idRef, ...variants }: ToggleGroupDefaultProps) => {
   return (
-    <ToggleGroup type={type as ToggleGroupSingleProps['type']} {...variants} defaultValue='bold'>
+    <ToggleGroup type={type as ToggleGroupSingleProps['type']} {...variants}>
       <ToggleGroupItem value='bold' aria-label='Toggle bold' id={`${idRef}-bold`}>
-        <FontBoldIcon className='size-4' />
+        <div className='font-bold'>B</div>
       </ToggleGroupItem>
       <ToggleGroupItem value='italic' aria-label='Toggle italic' id={`${idRef}-italic`}>
-        <FontItalicIcon className='size-4' />
+        <div className='italic'>I</div>
       </ToggleGroupItem>
-      <ToggleGroupItem value='strikethrough' aria-label='Toggle strikethrough' id={`${idRef}-strikethrough`}>
-        <UnderlineIcon className='size-4' />
+      <ToggleGroupItem value='underline' aria-label='Toggle underline' id={`${idRef}-underline`}>
+        <div className='underline underline-offset-2'>U</div>
       </ToggleGroupItem>
     </ToggleGroup>
   )
@@ -29,7 +27,7 @@ const ToggleGroupDefault = ({ type, idRef, ...variants }: ToggleGroupDefaultProp
 const meta = {
   title: 'Elements/ToggleGroup',
   component: ToggleGroup,
-  tags: ['autodocs'],
+  // tags: ['autodocs'],
   args: { onClick: fn(), onMouseEnter: fn(), onMouseLeave: fn(), onFocus: fn(), type: 'single' },
   argTypes: {},
   parameters: {
@@ -46,20 +44,20 @@ export const SelectionMode: Story = {
   render: () => (
     <StateTable
       caption='Selection Mode'
-      headerTitles={['default', 'disabled']}
+      headerTitles={['normal', 'disabled']}
       rows={[
         {
           rowName: 'single',
-          rows: {
-            default: <ToggleGroupDefault type='single' />,
-            disabled: <ToggleGroupDefault type='single' disabled={true} />,
+          data: {
+            normal: <ToggleGroupDefault type='single' defaultValue='bold' />,
+            disabled: <ToggleGroupDefault type='single' defaultValue='bold' disabled={true} />,
           },
         },
         {
           rowName: 'multiple',
-          rows: {
-            default: <ToggleGroupDefault type='multiple' />,
-            disabled: <ToggleGroupDefault type='multiple' disabled={true} />,
+          data: {
+            normal: <ToggleGroupDefault type='multiple' defaultValue={['bold', 'underline']} />,
+            disabled: <ToggleGroupDefault type='multiple' defaultValue={['bold', 'underline']} disabled={true} />,
           },
         },
       ]}
@@ -67,43 +65,41 @@ export const SelectionMode: Story = {
   ),
 }
 
-export const Variant: Story = {
+export const Palette: Story = {
   args: {},
   render: () => (
     <StateTable
-      caption='Button Variants'
-      headerTitles={['default', 'hover', 'focus', 'active', 'disabled']}
+      caption='Toggle Group Palette'
+      headerTitles={['normal', 'hover', 'focus', 'active', 'disabled']}
       rows={[
         {
-          rowName: 'default',
-          rows: {
-            default: <ToggleGroupDefault type='multiple' idRef='defaultNormal' variant={'default'} />,
-            hover: <ToggleGroupDefault type='multiple' idRef='hoverNormal' variant={'default'} />,
-            focus: <ToggleGroupDefault type='multiple' idRef='focusNormal' variant={'default'} />,
-            active: <ToggleGroupDefault type='multiple' idRef='activeNormal' variant={'default'} />,
-            disabled: <ToggleGroupDefault type='multiple' idRef='disabledNormal' variant={'default'} disabled={true} />,
+          rowName: 'primary*',
+          data: {
+            1: <ToggleGroupDefault type='multiple' idRef='normal' palette={'primary'} />,
+            2: <ToggleGroupDefault type='multiple' idRef='hover' palette={'primary'} />,
+            3: <ToggleGroupDefault type='multiple' idRef='focus' palette={'primary'} />,
+            4: <ToggleGroupDefault type='multiple' idRef='active' palette={'primary'} defaultValue='underline' />,
+            5: <ToggleGroupDefault type='multiple' idRef='disabled' palette={'primary'} disabled={true} />,
           },
         },
         {
-          rowName: 'outline',
-          rows: {
-            default: <ToggleGroupDefault type='multiple' idRef='defaultOutline' variant={'outline'} />,
-            hover: <ToggleGroupDefault type='multiple' idRef='hoverOutline' variant={'outline'} />,
-            focus: <ToggleGroupDefault type='multiple' idRef='focusOutline' variant={'outline'} />,
-            active: <ToggleGroupDefault type='multiple' idRef='activeOutline' variant={'outline'} />,
-            disabled: (
-              <ToggleGroupDefault type='multiple' idRef='disabledOutline' variant={'outline'} disabled={true} />
-            ),
+          rowName: 'secondary',
+          data: {
+            1: <ToggleGroupDefault type='multiple' idRef='normal' palette='secondary' />,
+            2: <ToggleGroupDefault type='multiple' idRef='hover' palette='secondary' />,
+            3: <ToggleGroupDefault type='multiple' idRef='focus' palette='secondary' />,
+            4: <ToggleGroupDefault type='multiple' idRef='active' palette='secondary' defaultValue='underline' />,
+            5: <ToggleGroupDefault type='multiple' idRef='disabled' palette='secondary' disabled={true} />,
           },
         },
         {
-          rowName: 'pill',
-          rows: {
-            default: <ToggleGroupDefault type='multiple' idRef='defaultPill' variant={'pill'} />,
-            hover: <ToggleGroupDefault type='multiple' idRef='hoverPill' variant={'pill'} />,
-            focus: <ToggleGroupDefault type='multiple' idRef='focusPill' variant={'pill'} />,
-            active: <ToggleGroupDefault type='multiple' idRef='activePill' variant={'pill'} />,
-            disabled: <ToggleGroupDefault type='multiple' idRef='disabledPill' variant={'pill'} disabled={true} />,
+          rowName: 'neutral',
+          data: {
+            1: <ToggleGroupDefault type='multiple' idRef='normal' palette='neutral' />,
+            2: <ToggleGroupDefault type='multiple' idRef='hover' palette='neutral' />,
+            3: <ToggleGroupDefault type='multiple' idRef='focus' palette='neutral' />,
+            4: <ToggleGroupDefault type='multiple' idRef='active' palette='neutral' defaultValue='underline' />,
+            5: <ToggleGroupDefault type='multiple' idRef='disabled' palette='neutral' disabled={true} />,
           },
         },
       ]}
@@ -111,9 +107,58 @@ export const Variant: Story = {
   ),
   parameters: {
     pseudo: {
-      hover: ['#hoverNormal-bold', '#hoverOutline-bold', '#hoverPill-bold'],
-      active: ['#activeNormal-bold', '#activeOutline-bold', '#activePill-bold'],
-      focusVisible: ['#focusNormal-bold', '#focusOutline-bold', '#focusPill-bold'],
+      hover: ['#hover-underline'],
+      active: ['#active-underline'],
+      focusVisible: ['#focus-underline'],
+    },
+  },
+}
+
+export const Mode: Story = {
+  args: {},
+  render: () => (
+    <StateTable
+      caption='Toggle Group Modes'
+      headerTitles={['normal', 'hover', 'focus', 'active', 'disabled']}
+      rows={[
+        {
+          rowName: 'button *',
+          data: {
+            1: <ToggleGroupDefault type='multiple' idRef='normal' mode={'button'} />,
+            2: <ToggleGroupDefault type='multiple' idRef='hover' mode={'button'} />,
+            3: <ToggleGroupDefault type='multiple' idRef='focus' mode={'button'} />,
+            4: <ToggleGroupDefault type='multiple' idRef='active' mode={'button'} defaultValue='underline' />,
+            5: <ToggleGroupDefault type='multiple' idRef='disabled' mode={'button'} disabled={true} />,
+          },
+        },
+        {
+          rowName: 'outline',
+          data: {
+            1: <ToggleGroupDefault type='multiple' idRef='normal' mode={'outline'} />,
+            2: <ToggleGroupDefault type='multiple' idRef='hover' mode={'outline'} />,
+            3: <ToggleGroupDefault type='multiple' idRef='focus' mode={'outline'} />,
+            4: <ToggleGroupDefault type='multiple' idRef='active' mode={'outline'} defaultValue='underline' />,
+            5: <ToggleGroupDefault type='multiple' idRef='disabled' mode={'outline'} disabled={true} />,
+          },
+        },
+        {
+          rowName: 'pill',
+          data: {
+            1: <ToggleGroupDefault type='multiple' idRef='normal' mode={'pill'} />,
+            2: <ToggleGroupDefault type='multiple' idRef='hover' mode={'pill'} />,
+            3: <ToggleGroupDefault type='multiple' idRef='focus' mode={'pill'} />,
+            4: <ToggleGroupDefault type='multiple' idRef='active' mode={'pill'} defaultValue='underline' />,
+            5: <ToggleGroupDefault type='multiple' idRef='disabled' mode={'pill'} disabled={true} />,
+          },
+        },
+      ]}
+    />
+  ),
+  parameters: {
+    pseudo: {
+      hover: ['#hover-underline'],
+      active: ['#active-underline'],
+      focusVisible: ['#focus-underline'],
     },
   },
 }
@@ -122,31 +167,31 @@ export const Size: Story = {
   args: {},
   render: () => (
     <StateTable
-      caption='Button Sizes'
-      headerTitles={['default', 'outline', 'pill']}
+      caption=' Sizes'
+      headerTitles={['button *', 'outline', 'pill']}
       rows={[
         {
           rowName: 'sm',
-          rows: {
-            default: <ToggleGroupDefault type='single' size='sm' />,
-            outline: <ToggleGroupDefault type='single' variant={'outline'} size='sm' />,
-            pill: <ToggleGroupDefault type='single' variant={'pill'} size='sm' />,
+          data: {
+            1: <ToggleGroupDefault type='single' size='sm' />,
+            2: <ToggleGroupDefault type='single' mode={'outline'} size='sm' />,
+            3: <ToggleGroupDefault type='single' mode={'pill'} size='sm' />,
           },
         },
         {
-          rowName: 'default',
-          rows: {
-            default: <ToggleGroupDefault type='single' size='default' />,
-            outline: <ToggleGroupDefault type='single' variant={'outline'} size='default' />,
-            pill: <ToggleGroupDefault type='single' variant={'pill'} size='default' />,
+          rowName: 'md *',
+          data: {
+            1: <ToggleGroupDefault type='single' size='md' />,
+            2: <ToggleGroupDefault type='single' mode={'outline'} size='md' />,
+            3: <ToggleGroupDefault type='single' mode={'pill'} size='md' />,
           },
         },
         {
           rowName: 'lg',
-          rows: {
-            default: <ToggleGroupDefault type='single' size='lg' />,
-            outline: <ToggleGroupDefault type='single' variant={'outline'} size='lg' />,
-            pill: <ToggleGroupDefault type='single' variant={'pill'} size='lg' />,
+          data: {
+            1: <ToggleGroupDefault type='single' size='lg' />,
+            2: <ToggleGroupDefault type='single' mode={'outline'} size='lg' />,
+            3: <ToggleGroupDefault type='single' mode={'pill'} size='lg' />,
           },
         },
       ]}
