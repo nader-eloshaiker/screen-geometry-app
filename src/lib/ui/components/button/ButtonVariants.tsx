@@ -1,26 +1,31 @@
-import { cva } from 'class-variance-authority'
+import { cva, VariantProps } from 'class-variance-authority'
+
+export type TButtonVariants = VariantProps<typeof ButtonVariants>
+export type TButtonPalette = NonNullable<TButtonVariants['palette']>
+export type TButtonSize = NonNullable<TButtonVariants['size']>
+export type TButtonMode = NonNullable<TButtonVariants['mode']>
 
 export const ButtonVariants = cva(
-  'inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none  [&_svg]:size-4 [&_svg]:shrink-0',
+  'inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none  [&_svg]:size-4 [&_svg]:shrink-0',
   {
     variants: {
       palette: {
-        primary: '',
-        secondary: '',
-        neutral: '',
+        primary: ' focus-visible:ring-primary-ring',
+        secondary: ' focus-visible:ring-secondary-ring',
+        neutral: 'focus-visible:ring-neutral-ring',
         danger: 'focus-visible:ring-danger-ring',
         success: 'focus-visible:ring-success-ring',
         warning: 'focus-visible:ring-warning-ring',
       },
       mode: {
         button: 'shadow-md',
-        outline: 'border border-input shadow-md',
+        outline: 'border shadow-md',
         ghost: 'text-foreground',
         link: 'text-foreground underline-offset-4 active:text-shadow-bold-md hocus:underline hocus:text-shadow-bold-sm',
       },
       size: {
-        md: 'h-10 px-4 py-2',
         sm: 'h-9 rounded-md px-3',
+        md: 'h-10 px-4 py-2',
         lg: 'h-11 rounded-md px-8',
         icon: 'size-10',
       },
@@ -30,6 +35,11 @@ export const ButtonVariants = cva(
         palette: 'primary',
         mode: 'button',
         className: 'bg-primary text-primary-foreground',
+      },
+      {
+        palette: 'primary',
+        mode: 'outline',
+        className: 'border-primary-input',
       },
       {
         palette: 'primary',
@@ -44,6 +54,11 @@ export const ButtonVariants = cva(
       },
       {
         palette: 'secondary',
+        mode: 'outline',
+        className: 'border-secondary-input',
+      },
+      {
+        palette: 'secondary',
         mode: ['button', 'outline', 'ghost'],
         className:
           'active:bg-secondary-active active:text-secondary-foreground-active hocus:bg-secondary-hover hocus:text-secondary-foreground-hover',
@@ -52,6 +67,11 @@ export const ButtonVariants = cva(
         palette: 'neutral',
         mode: 'button',
         className: 'bg-neutral text-neutral-foreground',
+      },
+      {
+        palette: 'neutral',
+        mode: 'outline',
+        className: 'border-neutral-input',
       },
       {
         palette: 'neutral',
@@ -66,6 +86,11 @@ export const ButtonVariants = cva(
       },
       {
         palette: 'danger',
+        mode: 'outline',
+        className: 'border-danger-input',
+      },
+      {
+        palette: 'danger',
         mode: ['button', 'outline', 'ghost'],
         className:
           'active:bg-danger-active active:text-danger-foreground-active hocus:bg-danger-hover hocus:text-danger-foreground-hover',
@@ -77,6 +102,11 @@ export const ButtonVariants = cva(
       },
       {
         palette: 'success',
+        mode: 'outline',
+        className: 'border-success-input',
+      },
+      {
+        palette: 'success',
         mode: ['button', 'outline', 'ghost'],
         className:
           'active:bg-success-active active:text-success-foreground-active hocus:bg-success-hover hocus:text-success-foreground-hover',
@@ -85,6 +115,11 @@ export const ButtonVariants = cva(
         palette: 'warning',
         mode: 'button',
         className: 'bg-warning text-warning-foreground',
+      },
+      {
+        palette: 'warning',
+        mode: 'outline',
+        className: 'border-warning-input',
       },
       {
         palette: 'warning',

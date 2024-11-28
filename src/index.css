@@ -13,7 +13,7 @@
   }
 
   * {
-    @apply border-border;
+    @apply border-primary-border;
   }
   body {
     @apply bg-background text-foreground;
@@ -120,6 +120,9 @@
   --primary-foreground: var(--primary-50);
   --primary-foreground-hover: var(--primary-100);
   --primary-foreground-active: var(--primary-200);
+  --primary-border: var(--primary-400);
+  --primary-input: var(--primary-400);
+  --primary-ring: var(--primary-500);
 
   --secondary: var(--primary-50);
   --secondary-hover: var(--primary-100);
@@ -127,6 +130,9 @@
   --secondary-foreground: var(--primary-700);
   --secondary-foreground-hover: var(--primary-800);
   --secondary-foreground-active: var(--primary-925);
+  --secondary-border: var(--primary-500);
+  --secondary-input: var(--primary-500);
+  --secondary-ring: var(--primary-400);
 
   --neutral: var(--neutral-600);
   --neutral-hover: var(--neutral-700);
@@ -134,6 +140,9 @@
   --neutral-foreground: var(--neutral-50);
   --neutral-foreground-hover: var(--neutral-100);
   --neutral-foreground-active: var(--neutral-200);
+  --neutral-border: var(--neutral-400);
+  --neutral-input: var(--neutral-400);
+  --neutral-ring: var(--neutral-500);
 
   --danger: var(--danger-600);
   --danger-hover: var(--danger-700);
@@ -142,6 +151,7 @@
   --danger-foreground-hover: var(--danger-100);
   --danger-foreground-active: var(--danger-200);
   --danger-ring: var(--danger-500);
+  --danger-input: var(--danger-500);
   --danger-border: var(--danger-400);
 
   --success: var(--success-600);
@@ -151,6 +161,7 @@
   --success-foreground-hover: var(--success-100);
   --success-foreground-active: var(--success-200);
   --success-ring: var(--success-500);
+  --success-input: var(--success-500);
   --success-border: var(--success-400);
 
   --warning: var(--warning-600);
@@ -160,6 +171,7 @@
   --warning-foreground-hover: var(--warning-100);
   --warning-foreground-active: var(--warning-200);
   --warning-ring: var(--warning-500);
+  --warning-input: var(--warning-500);
   --warning-border: var(--warning-400);
 
   --chart-1: var(--info-500);
@@ -170,9 +182,7 @@
 
   --muted: var(--neutral-100);
   --muted-foreground: var(--neutral-600);
-  --border: var(--primary-400);
-  --input: var(--primary-400);
-  --ring: var(--primary-500);
+
   --radius: 0.5rem;
 }
 .dark {

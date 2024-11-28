@@ -20,17 +20,17 @@ const ToastVariants = cva(
 )
 
 const ToastActionVariants = cva(
-  'inline-flex h-8 shrink-0 items-center justify-center rounded-md border bg-transparent px-3 text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50',
+  'inline-flex h-8 shrink-0 items-center justify-center rounded-md border bg-transparent px-3 text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50',
   {
     variants: {
       palette: {
-        info: 'border-border bg-primary text-primary-foreground hocus:bg-primary-hover hocus:text-primary-foreground-hover',
+        info: 'border-primary-border bg-primary text-primary-foreground focus-visible:ring-primary-ring hocus:bg-primary-hover hocus:text-primary-foreground-hover',
         danger:
-          'border-danger-border bg-danger text-danger-foreground hocus:bg-danger-hover hocus:text-danger-foreground-hover hocus:ring-danger-ring',
+          'border-danger-border bg-danger text-danger-foreground focus-visible:ring-danger-ring hocus:bg-danger-hover hocus:text-danger-foreground-hover',
         success:
-          'border-success-border bg-success text-success-foreground hocus:bg-success-hover hocus:text-success-foreground-hover hocus:ring-success-ring',
+          'border-success-border bg-success text-success-foreground focus-visible:ring-success-ring hocus:bg-success-hover hocus:text-success-foreground-hover',
         warning:
-          'border-warning-border bg-warning text-warning-foreground hocus:bg-warning-hover hocus:text-warning-foreground-hover hocus:ring-warning-ring',
+          'border-warning-border bg-warning text-warning-foreground focus-visible:ring-warning-ring hocus:bg-warning-hover hocus:text-warning-foreground-hover',
       },
     },
     defaultVariants: {
