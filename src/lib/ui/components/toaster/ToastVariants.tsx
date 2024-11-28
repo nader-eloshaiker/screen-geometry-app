@@ -6,53 +6,53 @@ const ToastVariants = cva(
 
   {
     variants: {
-      intent: {
-        default: 'border bg-background text-foreground',
-        destructive: 'destructive group border-destructive bg-destructive text-destructive-foreground',
-        warning: 'warning text-warning-foreground group border-warning bg-warning',
-        success: 'success text-success-foreground group border-success bg-success',
-        info: 'info text-info-foreground group border-info bg-info',
+      palette: {
+        info: 'border bg-secondary text-secondary-foreground',
+        danger: 'danger group border-danger bg-danger-700 text-danger-foreground',
+        warning: 'warning group border-warning bg-warning-700 text-warning-foreground',
+        success: 'success group border-success bg-success-700 text-success-foreground',
       },
     },
     defaultVariants: {
-      intent: 'default',
+      palette: 'info',
     },
   },
 )
 
 const ToastActionVariants = cva(
-  'inline-flex h-8 shrink-0 items-center justify-center rounded-md border bg-transparent px-3 text-sm font-medium transition-colors hover:bg-secondary focus:outline-none focus:ring-1 focus:ring-ring disabled:pointer-events-none disabled:opacity-50',
+  'inline-flex h-8 shrink-0 items-center justify-center rounded-md border bg-transparent px-3 text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50',
   {
     variants: {
-      variant: {
-        default: 'border bg-background text-foreground',
-        destructive:
-          'border-muted/40 hover:border-muted/30 hover:bg-destructive-hover hover:text-destructive-foreground-hover focus:ring-destructive-focus',
+      palette: {
+        info: 'border-border bg-primary text-primary-foreground hocus:bg-primary-hover hocus:text-primary-foreground-hover',
+        danger:
+          'border-danger-border bg-danger text-danger-foreground hocus:bg-danger-hover hocus:text-danger-foreground-hover hocus:ring-danger-ring',
+        success:
+          'border-success-border bg-success text-success-foreground hocus:bg-success-hover hocus:text-success-foreground-hover hocus:ring-success-ring',
+        warning:
+          'border-warning-border bg-warning text-warning-foreground hocus:bg-warning-hover hocus:text-warning-foreground-hover hocus:ring-warning-ring',
       },
     },
     defaultVariants: {
-      variant: 'default',
+      palette: 'info',
     },
   },
 )
 
 // eslint-disable-next-line tailwindcss/no-custom-classname
 const ToastCloseVariants = cva(
-  'absolute right-1 top-1 rounded-md p-1 opacity-0 transition-opacity focus:opacity-100 focus:outline-none focus:ring-1 group-hover:opacity-100',
+  'absolute right-1 top-1 rounded-full p-1 opacity-0 transition-opacity focus-visible:opacity-100 focus-visible:outline-none focus-visible:ring-2 group-hover:opacity-100',
   {
     variants: {
-      variant: {
-        default: 'text-foreground/50 hover:text-foreground',
-        // destructive: 'text-red-300 hover:text-red-50 focus:ring-red-400 focus:ring-offset-red-600',
-        destructive:
-          'focus:bg-descructive-focus text-destructive-foreground hover:bg-destructive-hover hover:text-destructive-foreground-hover',
-        warning: 'text-warning-foreground hover:text-warning-foreground/60',
-        success: 'text-success-foreground hover:text-success-foreground/60',
-        info: 'text-info-foreground hover:text-info-foreground/60',
+      palette: {
+        info: 'text-secondary-foreground hocus:text-secondary-foreground-active',
+        danger: 'text-danger-foreground hocus:text-danger-foreground-active hocus:ring-danger-ring',
+        warning: 'text-warning-foreground hocus:text-warning-foreground-active hocus:ring-warning-ring',
+        success: 'text-success-foreground hocus:text-success-foreground-active hocus:ring-success-ring',
       },
     },
     defaultVariants: {
-      variant: 'default',
+      palette: 'info',
     },
   },
 )

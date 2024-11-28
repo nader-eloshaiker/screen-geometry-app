@@ -87,7 +87,7 @@ export const Palette: Story = {
           rowName: 'success',
           data: {
             1: <TestButton id='normal' palette='success' />,
-            2: <TestButton id='hovers' palette='success' />,
+            2: <TestButton id='hover' palette='success' />,
             3: <TestButton id='focus' palette='success' />,
             4: <TestButton id='active' palette='success' />,
             5: <TestButton disabled={true} id='disabled' palette='success' />,
@@ -101,16 +101,6 @@ export const Palette: Story = {
             3: <TestButton id='focus' palette='warning' />,
             4: <TestButton id='active' palette='warning' />,
             5: <TestButton disabled={true} id='disabled' palette='warning' />,
-          },
-        },
-        {
-          rowName: 'info',
-          data: {
-            1: <TestButton id='normal' palette='info' />,
-            2: <TestButton id='hover' palette='info' />,
-            3: <TestButton id='focus' palette='info' />,
-            4: <TestButton id='active' palette='info' />,
-            5: <TestButton disabled={true} id='disabled' palette='info' />,
           },
         },
       ]}

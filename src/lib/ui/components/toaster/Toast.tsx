@@ -28,27 +28,27 @@ ToastViewport.displayName = ToastPrimitives.Viewport.displayName
 const Toast = React.forwardRef<
   React.ElementRef<typeof ToastPrimitives.Root>,
   React.ComponentPropsWithoutRef<typeof ToastPrimitives.Root> & VariantProps<typeof ToastVariants>
->(({ className, intent: variant, ...props }, ref) => {
-  return <ToastPrimitives.Root ref={ref} className={cn(ToastVariants({ intent: variant }), className)} {...props} />
+>(({ className, palette, ...props }, ref) => {
+  return <ToastPrimitives.Root ref={ref} className={cn(ToastVariants({ palette }), className)} {...props} />
 })
 Toast.displayName = ToastPrimitives.Root.displayName
 
 const ToastAction = React.forwardRef<
   React.ElementRef<typeof ToastPrimitives.Action>,
   React.ComponentPropsWithoutRef<typeof ToastPrimitives.Action> & VariantProps<typeof ToastActionVariants>
->(({ className, variant, ...props }, ref) => (
-  <ToastPrimitives.Action ref={ref} className={cn(ToastActionVariants({ variant }), className)} {...props} {...props} />
+>(({ className, palette, ...props }, ref) => (
+  <ToastPrimitives.Action ref={ref} className={cn(ToastActionVariants({ palette }), className)} {...props} {...props} />
 ))
 ToastAction.displayName = ToastPrimitives.Action.displayName
 
 const ToastClose = React.forwardRef<
   React.ElementRef<typeof ToastPrimitives.Close>,
   React.ComponentPropsWithoutRef<typeof ToastPrimitives.Close> & VariantProps<typeof ToastCloseVariants>
->(({ className, variant, ...props }, ref) => (
+>(({ className, palette, ...props }, ref) => (
   <ToastPrimitives.Close
     ref={ref}
     // eslint-disable-next-line tailwindcss/no-custom-classname
-    className={cn(ToastCloseVariants({ variant }), className)}
+    className={cn(ToastCloseVariants({ palette }), className)}
     toast-close=''
     {...props}
   >

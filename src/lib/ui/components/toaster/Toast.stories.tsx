@@ -1,82 +1,43 @@
 import type { Meta, StoryObj } from '@storybook/react'
 import { VariantProps } from 'class-variance-authority'
-import { Button } from '../button/Button'
+import { useEffect } from 'react'
 import { Toast, ToastAction, ToastActionElement } from './Toast'
 import { ToastVariants } from './ToastVariants'
 import { Toaster } from './Toaster'
 import { useToast } from './useToast'
 
-type IntentType = VariantProps<typeof ToastVariants>['intent']
+type PaletteType = VariantProps<typeof ToastVariants>['palette']
 type ToastProps = {
   title?: string | undefined
   description?: string | undefined
   action?: ToastActionElement
-  intent?: IntentType
+  palette?: PaletteType
   duration?: number
-}
-
-const Body = ({ title, description, action, intent, children }: Readonly<ToastProps & TReactChildren>) => {
-  return (
-    <div>
-      <table>
-        <thead>
-          <tr>
-            <th colSpan={2}>
-              <h1>Toast</h1>
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td className='p-2 text-end font-bold'>variant:</td>
-            <td className='p-2'>{intent}</td>
-          </tr>
-          <tr>
-            <td className='p-2 text-end font-bold'>title:</td>
-            <td className='p-2'>{title}</td>
-          </tr>
-          <tr>
-            <td className='p-2 text-end font-bold'>description:</td>
-            <td className='p-2'>{description}</td>
-          </tr>
-          <tr>
-            <td className='p-2 text-end font-bold'>action:</td>
-            <td className='p-2'>{action}</td>
-          </tr>
-          <tr>
-            <td className='p-2' colSpan={2}>
-              {children}
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  )
 }
 
 const meta = {
   title: 'Elements/Toast',
   component: Toast,
-  // args: {
-  //   variant: 'default',
-  //   title: 'Toaster!',
-  //   description: 'This is a toaster.',
-  //   duration: 3000,
-  //   action: (
-  //     <ToastAction variant='default' altText='Try again'>
-  //       Cool
-  //     </ToastAction>
-  //   ),
-  // } as ToastProps,
-  tags: ['autodocs'],
+  // tags: ['autodocs'],
   argTypes: {},
   decorators: [
-    (Story) => (
-      <div>
-        <Story />
-        <Toaster />
-      </div>
-    ),
+    (_, { args }) => {
+      const { toast } = useToast()
+
+      useEffect(() => {
+        setTimeout(() => {
+          toast({ ...args })
+        })
+        const refreshIntervalId = setInterval(() => {
+          toast({ ...args })
+        }, 3000)
+
+        return () => clearInterval(refreshIntervalId)
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+      }, [])
+
+      return <Toaster />
+    },
   ],
   parameters: {
     // More on how to position stories at: https://storybook.js.org/docs/configure/story-layout
@@ -87,128 +48,58 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
-export const Default: Story = {
+export const Info: Story = {
   args: {
-    intent: 'default',
+    palette: 'info',
     title: 'Toaster!',
     description: 'This is a toaster.',
-    duration: 3000,
     action: (
-      <ToastAction variant='default' altText='Try again'>
+      <ToastAction palette='info' altText='Try again'>
         Cool
       </ToastAction>
     ),
   } as ToastProps,
-  decorators: [
-    (_, { args }) => {
-      const { toast } = useToast()
-      return (
-        <Body {...args}>
-          <Button onClick={() => toast({ ...args })}>Show Toast</Button>
-          <Toaster />
-        </Body>
-      )
-    },
-  ],
   parameters: {},
 }
 
-export const Destructive: Story = {
+export const Danger: Story = {
   args: {
-    intent: 'destructive',
+    palette: 'danger',
     title: 'Operation Failed!',
     description: 'There was a problem with your request.',
     action: (
-      <ToastAction variant='destructive' altText='Try again'>
+      <ToastAction palette='danger' altText='Try again'>
         Try again
       </ToastAction>
     ),
   } as ToastProps,
-  decorators: [
-    (_, { args }) => {
-      const { toast } = useToast()
-      return (
-        <Body {...args}>
-          <Button onClick={() => toast({ ...args })}>Show Toast</Button>
-          <Toaster />
-        </Body>
-      )
-    },
-  ],
   parameters: {},
 }
 
 export const Waning: Story = {
   args: {
-    intent: 'warning',
+    palette: 'warning',
     title: 'Something missing!',
     description: 'Could not find your account.',
     action: (
-      <ToastAction variant='default' altText='Try again'>
+      <ToastAction palette='warning' altText='Try again'>
         OK
       </ToastAction>
     ),
   } as ToastProps,
-  decorators: [
-    (_, { args }) => {
-      const { toast } = useToast()
-      return (
-        <Body {...args}>
-          <Button onClick={() => toast({ ...args })}>Show Toast</Button>
-          <Toaster />
-        </Body>
-      )
-    },
-  ],
   parameters: {},
 }
 
 export const Success: Story = {
   args: {
-    intent: 'success',
+    palette: 'success',
     title: 'Complete!',
     description: 'Request was completed successfully.',
     action: (
-      <ToastAction variant='default' altText='Try again'>
+      <ToastAction palette='success' altText='Try again'>
         Done
       </ToastAction>
     ),
   } as ToastProps,
-  decorators: [
-    (_, { args }) => {
-      const { toast } = useToast()
-      return (
-        <Body {...args}>
-          <Button onClick={() => toast({ ...args })}>Show Toast</Button>
-          <Toaster />
-        </Body>
-      )
-    },
-  ],
-  parameters: {},
-}
-
-export const Info: Story = {
-  args: {
-    intent: 'info',
-    title: 'Info!',
-    description: 'There will be an aoutage int he comming days.',
-    action: (
-      <ToastAction variant='default' altText='Try again'>
-        OK
-      </ToastAction>
-    ),
-  } as ToastProps,
-  decorators: [
-    (_, { args }) => {
-      const { toast } = useToast()
-      return (
-        <Body {...args}>
-          <Button onClick={() => toast({ ...args })}>Show Toast</Button>
-          <Toaster />
-        </Body>
-      )
-    },
-  ],
   parameters: {},
 }

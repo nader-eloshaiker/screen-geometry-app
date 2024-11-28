@@ -8,15 +8,15 @@ export function Toaster() {
 
   return (
     <ToastProvider>
-      {toasts.map(function ({ id, title, description, intent: variant, action, ...props }) {
+      {toasts.map(function ({ id, title, description, palette, action, ...props }) {
         return (
-          <Toast key={id} intent={variant} {...props}>
+          <Toast key={id} palette={palette} {...props}>
             <div className='grid gap-1'>
               {title && <ToastTitle>{title}</ToastTitle>}
               {description && <ToastDescription>{description}</ToastDescription>}
             </div>
             {action}
-            <ToastClose variant={variant} />
+            <ToastClose palette={palette} />
           </Toast>
         )
       })}

@@ -11,7 +11,6 @@ export const ButtonVariants = cva(
         danger: 'focus-visible:ring-danger-ring',
         success: 'focus-visible:ring-success-ring',
         warning: 'focus-visible:ring-warning-ring',
-        info: 'focus-visible:ring-info-ring',
       },
       mode: {
         button: 'shadow-md',
@@ -92,17 +91,6 @@ export const ButtonVariants = cva(
         mode: ['button', 'outline', 'ghost'],
         className:
           'active:bg-warning-active active:text-warning-foreground-active hocus:bg-warning-hover hocus:text-warning-foreground-hover',
-      },
-      {
-        palette: 'info',
-        mode: 'button',
-        className: 'bg-info text-info-foreground',
-      },
-      {
-        palette: 'info',
-        mode: ['button', 'outline', 'ghost'],
-        className:
-          'active:bg-info-active active:text-info-foreground-active hocus:bg-info-hover hocus:text-info-foreground-hover',
       },
     ],
     defaultVariants: {

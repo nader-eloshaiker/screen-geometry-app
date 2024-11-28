@@ -97,19 +97,6 @@
   --danger-900: 0 63% 31%;
   --danger-950: 0 75% 15%;
 
-  /* info scale */
-  --info-50: 204 100% 97%;
-  --info-100: 204 94% 94%;
-  --info-200: 201 94% 86%;
-  --info-300: 199 95% 74%;
-  --info-400: 198 93% 60%;
-  --info-500: 199 89% 48%;
-  --info-600: 200 98% 39%;
-  --info-700: 201 96% 32%;
-  --info-800: 201 90% 27%;
-  --info-900: 202 80% 24%;
-  --info-950: 204 80% 16%;
-
   --foreground: 262.1 50% 5%;
   --background: 262.1 5% 90%;
 
@@ -155,14 +142,16 @@
   --danger-foreground-hover: var(--danger-100);
   --danger-foreground-active: var(--danger-200);
   --danger-ring: var(--danger-500);
+  --danger-border: var(--danger-400);
 
-  --success: var(--success-700);
+  --success: var(--success-600);
   --success-hover: var(--success-700);
   --success-active: var(--success-800);
   --success-foreground: var(--primary-50);
   --success-foreground-hover: var(--success-100);
   --success-foreground-active: var(--success-200);
   --success-ring: var(--success-500);
+  --success-border: var(--success-400);
 
   --warning: var(--warning-600);
   --warning-hover: var(--warning-700);
@@ -171,14 +160,7 @@
   --warning-foreground-hover: var(--warning-100);
   --warning-foreground-active: var(--warning-200);
   --warning-ring: var(--warning-500);
-
-  --info: var(--info-700);
-  --info-hover: var(--info-800);
-  --info-active: var(--info-900);
-  --info-foreground: var(--primary-50);
-  --info-foreground-hover: var(--info-100);
-  --info-foreground-active: var(--info-200);
-  --info-ring: var(--info-500);
+  --warning-border: var(--warning-400);
 
   --chart-1: var(--info-500);
   --chart-2: var(--info-600);
@@ -255,14 +237,6 @@
   --warning-foreground-hover: var(--warning-100);
   --warning-foreground-active: var(--warning-200);
   --warning-ring: var(--warning-500);
-
-  --info: var(--info-600);
-  --info-hover: var(--info-700);
-  --info-active: var(--info-800);
-  --info-foreground: var(--primary-50);
-  --info-foreground-hover: var(--info-100);
-  --info-foreground-active: var(--info-200);
-  --info-ring: var(--info-500);
 
   --chart-1: var(--info-500);
   --chart-2: var(--info-600);
