@@ -1,8 +1,10 @@
+import { cn } from '@/lib/utils/class-name'
 import { ReactNode } from 'react'
 
 type StateTableProps<T> = {
   caption: string
   states?: Array<string>
+  defaultProps: T
   props: Array<NonNullable<T>>
   getComponent: (prop: T, state: string) => ReactNode
 }
@@ -10,6 +12,7 @@ type StateTableProps<T> = {
 export const StateTable = <T extends string>({
   caption,
   getComponent,
+  defaultProps,
   props,
   states = ['normal', 'hover', 'focus', 'active', 'disabled'],
 }: StateTableProps<T>) => {
@@ -18,9 +21,9 @@ export const StateTable = <T extends string>({
       <caption className='p-5'>{caption}</caption>
       <thead>
         <tr className='border border-dashed border-base-300'>
-          <th className='px-8 py-4' scope='col'></th>
+          <th className='px-8 py-4 font-normal' scope='col'></th>
           {states.map((title) => (
-            <th className='px-8 py-4' key={title} scope='col'>
+            <th className='px-8 py-4 font-normal' key={title} scope='col'>
               {title}
             </th>
           ))}
@@ -29,8 +32,8 @@ export const StateTable = <T extends string>({
       <tbody>
         {props.map((prop) => (
           <tr key={prop} className='border border-dashed border-base-300'>
-            <td className='px-8 py-4 text-right text-sm font-bold' scope='row'>
-              {prop}
+            <td className='px-8 py-4 text-right text-sm' scope='row'>
+              <span className={cn({ 'font-bold text-danger-active': defaultProps === prop })}>{prop}</span>
             </td>
             {states.map((state) => (
               <td key={`${prop}-${state}`} className='px-8 py-4'>

@@ -8,8 +8,8 @@ import { ToggleVariants } from './ToggleVariants'
 const Toggle = React.forwardRef<
   React.ElementRef<typeof TogglePrimitive.Root>,
   React.ComponentPropsWithoutRef<typeof TogglePrimitive.Root> & VariantProps<typeof ToggleVariants>
->(({ className, mode, size, ...props }, ref) => (
-  <TogglePrimitive.Root ref={ref} className={cn(ToggleVariants({ mode, size, className }))} {...props} />
+>(({ className, mode, dimension: size, ...props }, ref) => (
+  <TogglePrimitive.Root ref={ref} className={cn(ToggleVariants({ mode, dimension: size, className }))} {...props} />
 ))
 
 Toggle.displayName = TogglePrimitive.Root.displayName

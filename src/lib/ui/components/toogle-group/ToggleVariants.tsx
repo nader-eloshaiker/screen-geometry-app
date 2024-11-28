@@ -2,7 +2,7 @@ import { cva, VariantProps } from 'class-variance-authority'
 
 export type TToggleGroupVariants = VariantProps<typeof ToggleVariants>
 export type TTogglePalette = NonNullable<TToggleGroupVariants['palette']>
-export type TToggleSize = NonNullable<TToggleGroupVariants['size']>
+export type TToggleSize = NonNullable<TToggleGroupVariants['dimension']>
 export type TToggleMode = NonNullable<TToggleGroupVariants['mode']>
 
 export const ToggleVariants = cva(
@@ -22,7 +22,7 @@ export const ToggleVariants = cva(
         outline: 'rounded-md border bg-transparent',
         pill: 'rounded-none border-y first:rounded-l-md first:border-l last:rounded-r-md last:border-y last:border-r',
       },
-      size: {
+      dimension: {
         sm: 'h-9 min-w-9 px-2.5',
         md: 'h-10 min-w-10 px-3',
         lg: 'h-11 min-w-11 px-5',
@@ -48,7 +48,7 @@ export const ToggleVariants = cva(
     defaultVariants: {
       palette: 'primary',
       mode: 'button',
-      size: 'md',
+      dimension: 'md',
     },
   },
 )

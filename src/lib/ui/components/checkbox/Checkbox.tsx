@@ -10,8 +10,8 @@ export type CheckboxProps = ComponentProps<typeof CheckboxPrimitive.Root> & Vari
 const Checkbox = forwardRef<
   ElementRef<typeof CheckboxPrimitive.Root>,
   ComponentPropsWithoutRef<typeof CheckboxPrimitive.Root> & VariantProps<typeof CheckboxVariants>
->(({ className, size, palette, ...props }, ref) => (
-  <CheckboxPrimitive.Root ref={ref} className={cn(CheckboxVariants({ palette, size, className }))} {...props}>
+>(({ className, dimension, palette, ...props }, ref) => (
+  <CheckboxPrimitive.Root ref={ref} className={cn(CheckboxVariants({ palette, dimension, className }))} {...props}>
     <CheckboxPrimitive.Indicator className={cn('flex items-center justify-center text-current')}>
       <Check />
     </CheckboxPrimitive.Indicator>

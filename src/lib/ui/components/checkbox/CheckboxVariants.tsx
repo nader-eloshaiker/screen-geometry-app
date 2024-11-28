@@ -2,7 +2,7 @@ import { cva, VariantProps } from 'class-variance-authority'
 
 export type TCheckboxVariants = VariantProps<typeof CheckboxVariants>
 export type TCheckboxPalette = NonNullable<TCheckboxVariants['palette']>
-export type TCheckboxSize = NonNullable<TCheckboxVariants['size']>
+export type TCheckboxSize = NonNullable<TCheckboxVariants['dimension']>
 
 export const CheckboxVariants = cva(
   'peer size-4 shrink-0 rounded-sm border shadow-md ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50',
@@ -22,7 +22,7 @@ export const CheckboxVariants = cva(
         success:
           'border-success focus-visible:ring-success-ring data-[state=checked]:bg-success-active data-[state=checked]:text-success-foreground-active hocus:bg-success-hover hocus:text-success-foreground-hover',
       },
-      size: {
+      dimension: {
         sm: 'size-5 [&_svg]:size-4',
         md: 'size-6 [&_svg]:size-5',
         lg: 'size-7 [&_svg]:size-6',
@@ -30,7 +30,7 @@ export const CheckboxVariants = cva(
     },
     defaultVariants: {
       palette: 'primary',
-      size: 'md',
+      dimension: 'md',
     },
   },
 )

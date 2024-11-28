@@ -37,6 +37,7 @@ export const Palette: Story = {
     return (
       <StateTable<TButtonPalette>
         caption='Palettes'
+        defaultProps='primary'
         props={palettes}
         getComponent={(prop, state) => <TestButton id={state} palette={prop} disabled={state === 'disabled'} />}
       />
@@ -59,6 +60,7 @@ export const Mode: Story = {
     return (
       <StateTable<TButtonMode>
         caption='Modes'
+        defaultProps='button'
         props={modes}
         getComponent={(prop, state) => <TestButton id={state} mode={prop} disabled={state === 'disabled'} />}
       />
@@ -81,8 +83,9 @@ export const Size: Story = {
     return (
       <StateTable<TButtonSize>
         caption='Sizes'
+        defaultProps='md'
         props={sizes}
-        getComponent={(prop, state) => <TestButton id={state} size={prop} disabled={state === 'disabled'} />}
+        getComponent={(prop, state) => <TestButton id={state} dimension={prop} disabled={state === 'disabled'} />}
       />
     )
   },

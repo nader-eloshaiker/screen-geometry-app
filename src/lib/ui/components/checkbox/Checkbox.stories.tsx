@@ -9,7 +9,7 @@ const meta = {
   component: Checkbox,
   // tags: ['autodocs'],
   argTypes: {},
-  args: { id: 'terms1', onClick: fn(), onFocus: fn() },
+  args: { onClick: fn(), onFocus: fn(), onBlur: fn() },
   parameters: {
     // More on how to position stories at: https://storybook.js.org/docs/configure/story-layout
     layout: 'centered',
@@ -27,6 +27,7 @@ export const Palette: Story = {
     return (
       <StateTable<TCheckboxPalette>
         caption='Palettes'
+        defaultProps='primary'
         props={palettes}
         getComponent={(palette, state) => (
           <div className='flex gap-3'>
@@ -54,11 +55,12 @@ export const Size: Story = {
     return (
       <StateTable<TCheckboxSize>
         caption='Sizes'
+        defaultProps='md'
         props={sizes}
         getComponent={(size, state) => (
           <div className='flex gap-3'>
-            <Checkbox id={state} size={size} disabled={state === 'disabled'} />
-            <Checkbox id={state} size={size} checked disabled={state === 'disabled'} />
+            <Checkbox id={state} dimension={size} disabled={state === 'disabled'} />
+            <Checkbox id={state} dimension={size} checked disabled={state === 'disabled'} />
           </div>
         )}
       />

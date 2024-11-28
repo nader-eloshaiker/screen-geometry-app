@@ -2,7 +2,7 @@ import { cva, VariantProps } from 'class-variance-authority'
 
 export type TButtonVariants = VariantProps<typeof ButtonVariants>
 export type TButtonPalette = NonNullable<TButtonVariants['palette']>
-export type TButtonSize = NonNullable<TButtonVariants['size']>
+export type TButtonSize = NonNullable<TButtonVariants['dimension']>
 export type TButtonMode = NonNullable<TButtonVariants['mode']>
 
 export const ButtonVariants = cva(
@@ -23,7 +23,7 @@ export const ButtonVariants = cva(
         ghost: 'text-foreground',
         link: 'text-foreground underline-offset-4 active:text-shadow-bold-md hocus:underline hocus:text-shadow-bold-sm',
       },
-      size: {
+      dimension: {
         sm: 'h-9 rounded-md px-3',
         md: 'h-10 px-4 py-2',
         lg: 'h-11 rounded-md px-8',
@@ -131,7 +131,7 @@ export const ButtonVariants = cva(
     defaultVariants: {
       palette: 'primary',
       mode: 'button',
-      size: 'md',
+      dimension: 'md',
     },
   },
 )

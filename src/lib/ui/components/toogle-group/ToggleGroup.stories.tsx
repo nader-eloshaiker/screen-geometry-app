@@ -44,6 +44,7 @@ export const SelectionMode: Story = {
   render: () => (
     <StateTable<'single' | 'multiple'>
       caption='Selection Mode'
+      defaultProps='single'
       states={['normal', 'disabled']}
       props={['single', 'multiple']}
       getComponent={(prop, state) => (
@@ -62,6 +63,7 @@ export const Palette: Story = {
   render: () => (
     <StateTable<TTogglePalette>
       caption='Toggle Group Palette'
+      defaultProps='primary'
       props={['primary', 'secondary', 'neutral']}
       getComponent={(prop, state) => (
         <ToggleGroupDefault
@@ -88,6 +90,7 @@ export const Mode: Story = {
   render: () => (
     <StateTable<TToggleMode>
       caption='Toggle Group Modes'
+      defaultProps='button'
       props={['button', 'outline', 'pill']}
       getComponent={(prop, state) => (
         <ToggleGroupDefault
@@ -114,11 +117,12 @@ export const Size: Story = {
   render: () => (
     <StateTable<TToggleSize>
       caption=' Sizes'
+      defaultProps='md'
       props={['sm', 'md', 'lg']}
       getComponent={(prop, state) => (
         <ToggleGroupDefault
           type='multiple'
-          size={prop}
+          dimension={prop}
           idRef={state}
           disabled={state === 'disabled'}
           defaultValue={state === 'active' ? 'underline' : undefined}
