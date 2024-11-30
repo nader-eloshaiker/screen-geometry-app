@@ -21,23 +21,22 @@ type Story = StoryObj<typeof meta>
 
 export const Palette: Story = {
   args: {},
-  render: () => {
-    const palettes: Array<TCheckboxPalette> = ['primary', 'secondary', 'neutral', 'danger', 'warning', 'success']
-
-    return (
-      <StateTable<TCheckboxPalette>
-        caption='Palettes'
-        defaultProps='primary'
-        props={palettes}
-        getComponent={(palette, state) => (
-          <div className='flex gap-3'>
-            <Checkbox id={state} palette={palette} disabled={state === 'disabled'} />
-            <Checkbox id={state} palette={palette} checked disabled={state === 'disabled'} />
-          </div>
-        )}
-      />
-    )
-  },
+  render: () => (
+    <StateTable<TCheckboxPalette>
+      caption='Palettes'
+      defaultProps='primary'
+      props={['primary', 'secondary', 'neutral', 'danger', 'warning', 'success']}
+      getComponent={(palette, state) => (
+        <Checkbox
+          id={state}
+          palette={palette}
+          {...(state === 'active' && { checked: true })}
+          disabled={state === 'disabled'}
+        />
+      )}
+      getRowClassName={(prop) => (prop === 'secondary' ? 'bg-primary' : '')}
+    />
+  ),
   parameters: {
     pseudo: {
       hover: ['#hover'],
@@ -47,21 +46,21 @@ export const Palette: Story = {
   },
 }
 
-export const Size: Story = {
+export const Dimension: Story = {
   args: {},
   render: () => {
-    const sizes: Array<TCheckboxSize> = ['sm', 'md', 'lg']
-
     return (
       <StateTable<TCheckboxSize>
-        caption='Sizes'
+        caption='Dimensions'
         defaultProps='md'
-        props={sizes}
+        props={['sm', 'md', 'lg']}
         getComponent={(size, state) => (
-          <div className='flex gap-3'>
-            <Checkbox id={state} dimension={size} disabled={state === 'disabled'} />
-            <Checkbox id={state} dimension={size} checked disabled={state === 'disabled'} />
-          </div>
+          <Checkbox
+            id={state}
+            dimension={size}
+            {...(state === 'active' && { checked: true })}
+            disabled={state === 'disabled'}
+          />
         )}
       />
     )

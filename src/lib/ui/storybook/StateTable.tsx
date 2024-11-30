@@ -7,6 +7,7 @@ type StateTableProps<T> = {
   defaultProps: T
   props: Array<NonNullable<T>>
   getComponent: (prop: T, state: string) => ReactNode
+  getRowClassName?: (prop: T, state: string) => string
 }
 
 export const StateTable = <T extends string>({
@@ -15,6 +16,7 @@ export const StateTable = <T extends string>({
   defaultProps,
   props,
   states = ['normal', 'hover', 'focus', 'active', 'disabled'],
+  getRowClassName = () => '',
 }: StateTableProps<T>) => {
   return (
     <table className='border border-dashed border-base-300'>
@@ -36,8 +38,10 @@ export const StateTable = <T extends string>({
               <span className={cn({ 'font-bold text-danger-active': defaultProps === prop })}>{prop}</span>
             </td>
             {states.map((state) => (
-              <td key={`${prop}-${state}`} className='px-8 py-4'>
-                {getComponent(prop, state)}
+              <td key={`${prop}-${state}`} className='px-1 py-2' scope='row'>
+                <div className={cn('flex justify-center items-center p-3', getRowClassName(prop, state))}>
+                  {getComponent(prop, state)}
+                </div>
               </td>
             ))}
           </tr>

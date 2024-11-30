@@ -42,28 +42,26 @@ const palettes: Array<TInputVariantsPalette> = ['primary', 'secondary', 'neutral
 
 export const Palette: Story = {
   args: {},
-  render: () => {
-    return (
-      <StateTable<TInputVariantsPalette>
-        caption='Palettes'
-        defaultProps='primary'
-        props={palettes}
-        states={['normal', 'hover', 'focus', 'disabled']}
-        getComponent={(prop, state) => (
-          <div className='grid w-full max-w-sm items-center gap-1.5'>
-            <Label htmlFor={`${state}-${prop}`}>Email</Label>
-            <Input
-              type='email'
-              id={`${state}-${prop}`}
-              palette={prop}
-              disabled={state === 'disabled'}
-              placeholder='Email'
-            />
-          </div>
-        )}
-      />
-    )
-  },
+  render: () => (
+    <StateTable<TInputVariantsPalette>
+      caption='Palettes'
+      defaultProps='primary'
+      props={palettes}
+      states={['normal', 'hover', 'focus', 'disabled']}
+      getComponent={(prop, state) => (
+        <div className='grid w-full max-w-sm items-center gap-1.5'>
+          <Label htmlFor={`${state}-${prop}`}>Email</Label>
+          <Input
+            type='email'
+            id={`${state}-${prop}`}
+            palette={prop}
+            disabled={state === 'disabled'}
+            placeholder='Email'
+          />
+        </div>
+      )}
+    />
+  ),
   parameters: {
     pseudo: {
       hover: palettes.map((palette) => `#hover-${palette}`), //['#hover'],

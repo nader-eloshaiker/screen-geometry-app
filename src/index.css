@@ -114,33 +114,33 @@
   --popover-foreground-hover: var(--neutral-800);
   --popover-foreground-active: var(--neutral-800);
 
-  --primary: var(--primary-600);
-  --primary-hover: var(--primary-700);
-  --primary-active: var(--primary-925);
-  --primary-foreground: var(--primary-50);
-  --primary-foreground-hover: var(--primary-100);
-  --primary-foreground-active: var(--primary-200);
+  --primary: var(--primary-700);
+  --primary-active: var(--primary-600);
+  --primary-hover: var(--primary-800);
+  --primary-foreground: var(--primary-100);
+  --primary-foreground-active: var(--primary-50);
+  --primary-foreground-hover: var(--primary-200);
   --primary-border: var(--primary-400);
   --primary-input: var(--primary-500);
   --primary-ring: var(--primary-500);
   --primary-muted: var(--primary-400);
   --primary-muted-foreground: var(--primary-600);
 
-  --secondary: var(--primary-50);
-  --secondary-hover: var(--primary-100);
-  --secondary-active: var(--primary-200);
-  --secondary-foreground: var(--primary-700);
-  --secondary-foreground-hover: var(--primary-800);
-  --secondary-foreground-active: var(--primary-925);
+  --secondary: var(--primary-100);
+  --secondary-active: var(--primary-50);
+  --secondary-hover: var(--primary-200);
+  --secondary-foreground: var(--primary-900);
+  --secondary-foreground-active: var(--primary-800);
+  --secondary-foreground-hover: var(--primary-950);
   --secondary-border: var(--primary-400);
   --secondary-input: var(--primary-500);
-  --secondary-ring: var(--primary-400);
+  --secondary-ring: var(--primary-500);
   --secondary-muted: var(--primary-600);
   --secondary-muted-foreground: var(--primary-400);
 
   --neutral: var(--neutral-600);
+  --neutral-active: var(--neutral-500);
   --neutral-hover: var(--neutral-700);
-  --neutral-active: var(--neutral-925);
   --neutral-foreground: var(--neutral-50);
   --neutral-foreground-hover: var(--neutral-100);
   --neutral-foreground-active: var(--neutral-200);
@@ -150,36 +150,36 @@
   --neutral-muted: var(--neutral-400);
   --neutral-muted-foreground: var(--neutral-600);
 
-  --danger: var(--danger-600);
-  --danger-hover: var(--danger-700);
-  --danger-active: var(--danger-800);
-  --danger-foreground: var(--primary-50);
-  --danger-foreground-hover: var(--danger-100);
-  --danger-foreground-active: var(--danger-200);
+  --danger: var(--danger-700);
+  --danger-active: var(--danger-600);
+  --danger-hover: var(--danger-800);
+  --danger-foreground: var(--primary-100);
+  --danger-foreground-active: var(--danger-50);
+  --danger-foreground-hover: var(--danger-200);
   --danger-ring: var(--danger-500);
   --danger-input: var(--danger-500);
   --danger-border: var(--danger-400);
   --danger-muted: var(--danger-400);
   --danger-muted-foreground: var(--danger-600);
 
-  --success: var(--success-600);
-  --success-hover: var(--success-700);
-  --success-active: var(--success-800);
-  --success-foreground: var(--primary-50);
-  --success-foreground-hover: var(--success-100);
-  --success-foreground-active: var(--success-200);
+  --success: var(--success-700);
+  --success-active: var(--success-600);
+  --success-hover: var(--success-800);
+  --success-foreground: var(--primary-100);
+  --success-foreground-active: var(--success-50);
+  --success-foreground-hover: var(--success-200);
   --success-ring: var(--success-500);
   --success-input: var(--success-500);
   --success-border: var(--success-400);
   --success-muted: var(--success-400);
   --success-muted-foreground: var(--success-600);
 
-  --warning: var(--warning-600);
-  --warning-hover: var(--warning-700);
-  --warning-active: var(--warning-800);
-  --warning-foreground: var(--primary-50);
-  --warning-foreground-hover: var(--warning-100);
-  --warning-foreground-active: var(--warning-200);
+  --warning: var(--warning-700);
+  --warning-active: var(--warning-600);
+  --warning-hover: var(--warning-800);
+  --warning-foreground: var(--primary-100);
+  --warning-foreground-active: var(--warning-50);
+  --warning-foreground-hover: var(--warning-200);
   --warning-ring: var(--warning-500);
   --warning-input: var(--warning-500);
   --warning-border: var(--warning-400);
@@ -193,6 +193,7 @@
   --chart-5: var(--info-900);
 
   --radius: 0.5rem;
+  --ring-offset: 4px;
 }
 .dark {
   --background: 262.1 50% 5%;
@@ -212,72 +213,36 @@
   --popover-foreground-hover: var(--neutral-200);
   --popover-foreground-active: var(--neutral-200);
 
-  --primary: var(--primary-600);
-  --primary-hover: var(--primary-700);
-  --primary-active: var(--primary-800);
-  --primary-foreground: var(--primary-50);
-  --primary-foreground-hover: var(--primary-100);
-  --primary-foreground-active: var(--primary-200);
   --primary-border: var(--primary-400);
   --primary-input: var(--primary-500);
   --primary-ring: var(--primary-500);
   --primary-muted: var(--primary-600);
   --primary-muted-foreground: var(--primary-400);
 
-  --secondary: var(--primary-50);
-  --secondary-hover: var(--primary-200);
-  --secondary-active: var(--primary-300);
-  --secondary-foreground: var(--primary-700);
-  --secondary-foreground-hover: var(--primary-800);
-  --secondary-foreground-active: var(--primary-925);
   --secondary-border: var(--primary-400);
-  --secondary-input: var(--primary-500);
+  --secondary-input: var(--primary-400);
   --secondary-ring: var(--primary-400);
   --secondary-muted: var(--secondary-400);
   --secondary-muted-foreground: var(--secondary-600);
 
-  --neutral: var(--neutral-600);
-  --neutral-hover: var(--neutral-700);
-  --neutral-active: var(--neutral-800);
-  --neutral-foreground: var(--neutral-50);
-  --neutral-foreground-hover: var(--neutral-100);
-  --neutral-foreground-active: var(--neutral-200);
   --neutral-border: var(--neutral-400);
   --neutral-input: var(--neutral-500);
   --neutral-ring: var(--neutral-500);
   --neutral-muted: var(--neutral-600);
   --neutral-muted-foreground: var(--neutral-400);
 
-  --danger: var(--danger-600);
-  --danger-hover: var(--danger-700);
-  --danger-active: var(--danger-800);
-  --danger-foreground: var(--primary-50);
-  --danger-foreground-hover: var(--danger-100);
-  --danger-foreground-active: var(--danger-200);
   --danger-ring: var(--danger-500);
   --danger-input: var(--danger-500);
   --danger-border: var(--danger-400);
   --danger-muted: var(--danger-600);
   --danger-muted-foreground: var(--danger-400);
 
-  --success: var(--success-600);
-  --success-hover: var(--success-700);
-  --success-active: var(--success-800);
-  --success-foreground: var(--primary-50);
-  --success-foreground-hover: var(--success-100);
-  --success-foreground-active: var(--success-200);
   --success-ring: var(--success-500);
   --success-input: var(--success-500);
   --success-border: var(--success-400);
   --success-muted: var(--success-600);
   --success-muted-foreground: var(--success-400);
 
-  --warning: var(--warning-600);
-  --warning-hover: var(--warning-700);
-  --warning-active: var(--warning-800);
-  --warning-foreground: var(--primary-50);
-  --warning-foreground-hover: var(--warning-100);
-  --warning-foreground-active: var(--warning-200);
   --warning-ring: var(--warning-500);
   --warning-input: var(--warning-500);
   --warning-border: var(--warning-400);
@@ -290,5 +255,4 @@
   --chart-4: var(--info-800);
   --chart-5: var(--info-900);
 
-  --radius: 0.5rem;
 }

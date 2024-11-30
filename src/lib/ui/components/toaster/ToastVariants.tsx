@@ -20,17 +20,17 @@ const ToastVariants = cva(
 )
 
 const ToastActionVariants = cva(
-  'inline-flex h-8 shrink-0 items-center justify-center rounded-md border bg-transparent px-3 text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50',
+  'inline-flex h-8 shrink-0 items-center justify-center rounded-md border bg-transparent px-3 text-sm font-medium outline-none transition-colors focus-visible:outline-2 focus-visible:outline-offset-4 disabled:pointer-events-none disabled:opacity-50',
   {
     variants: {
       palette: {
-        info: 'border-primary-border bg-primary text-primary-foreground focus-visible:ring-primary-ring hocus:bg-primary-hover hocus:text-primary-foreground-hover',
+        info: 'border-primary-border bg-primary text-primary-foreground focus-visible:outline-primary-ring hocus:bg-primary-hover hocus:text-primary-foreground-hover',
         danger:
-          'border-danger-border bg-danger text-danger-foreground focus-visible:ring-danger-ring hocus:bg-danger-hover hocus:text-danger-foreground-hover',
+          'border-danger-border bg-danger text-danger-foreground focus-visible:outline-danger-ring hocus:bg-danger-hover hocus:text-danger-foreground-hover',
         success:
-          'border-success-border bg-success text-success-foreground focus-visible:ring-success-ring hocus:bg-success-hover hocus:text-success-foreground-hover',
+          'border-success-border bg-success text-success-foreground focus-visible:outline-success-ring hocus:bg-success-hover hocus:text-success-foreground-hover',
         warning:
-          'border-warning-border bg-warning text-warning-foreground focus-visible:ring-warning-ring hocus:bg-warning-hover hocus:text-warning-foreground-hover',
+          'border-warning-border bg-warning text-warning-foreground focus-visible:outline-warning-ring hocus:bg-warning-hover hocus:text-warning-foreground-hover',
       },
     },
     defaultVariants: {
@@ -41,14 +41,14 @@ const ToastActionVariants = cva(
 
 // eslint-disable-next-line tailwindcss/no-custom-classname
 const ToastCloseVariants = cva(
-  'absolute right-1 top-1 rounded-full p-1 opacity-0 transition-opacity focus-visible:opacity-100 focus-visible:outline-none focus-visible:ring-2 group-hover:opacity-100',
+  'absolute right-1 top-1 rounded-full p-1 opacity-0 outline-none transition-opacity focus-visible:opacity-100 focus-visible:outline-2 focus-visible:outline-offset-4 group-hover:opacity-100',
   {
     variants: {
       palette: {
-        info: 'text-secondary-foreground hocus:text-secondary-foreground-active',
-        danger: 'text-danger-foreground hocus:text-danger-foreground-active hocus:ring-danger-ring',
-        warning: 'text-warning-foreground hocus:text-warning-foreground-active hocus:ring-warning-ring',
-        success: 'text-success-foreground hocus:text-success-foreground-active hocus:ring-success-ring',
+        info: 'text-secondary-foreground focus-visible:outline-primary-ring hocus:text-secondary-foreground-active',
+        danger: 'text-danger-foreground focus-visible:outline-danger-ring hocus:text-danger-foreground-active',
+        warning: 'text-warning-foreground focus-visible:outline-warning-ring hocus:text-warning-foreground-active',
+        success: 'text-success-foreground focus-visible:outline-success-ring hocus:text-success-foreground-active',
       },
     },
     defaultVariants: {

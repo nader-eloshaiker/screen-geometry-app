@@ -6,16 +6,16 @@ export type TButtonSize = NonNullable<TButtonVariants['dimension']>
 export type TButtonMode = NonNullable<TButtonVariants['mode']>
 
 export const ButtonVariants = cva(
-  'inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none  [&_svg]:size-4 [&_svg]:shrink-0',
+  'inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium outline-none transition-colors focus-visible:outline-2 focus-visible:outline-offset-4 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none  [&_svg]:size-4 [&_svg]:shrink-0',
   {
     variants: {
       palette: {
-        primary: ' focus-visible:ring-primary-ring',
-        secondary: ' focus-visible:ring-secondary-ring',
-        neutral: 'focus-visible:ring-neutral-ring',
-        danger: 'focus-visible:ring-danger-ring',
-        success: 'focus-visible:ring-success-ring',
-        warning: 'focus-visible:ring-warning-ring',
+        primary: ' focus-visible:outline-primary-ring',
+        secondary: 'focus-visible:outline-secondary-ring',
+        neutral: 'focus-visible:outline-neutral-ring',
+        danger: 'focus-visible:outline-danger-ring',
+        success: 'focus-visible:outline-success-ring',
+        warning: 'focus-visible:outline-warning-ring',
       },
       mode: {
         button: 'shadow-md',

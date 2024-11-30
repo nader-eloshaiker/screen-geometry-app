@@ -31,18 +31,15 @@ export type Story = StoryObj<typeof meta>
 
 export const Palette: Story = {
   args: {},
-  render: () => {
-    const palettes: Array<TButtonPalette> = ['primary', 'secondary', 'neutral', 'danger', 'warning', 'success']
-
-    return (
-      <StateTable<TButtonPalette>
-        caption='Palettes'
-        defaultProps='primary'
-        props={palettes}
-        getComponent={(prop, state) => <TestButton id={state} palette={prop} disabled={state === 'disabled'} />}
-      />
-    )
-  },
+  render: () => (
+    <StateTable<TButtonPalette>
+      caption='Palettes'
+      defaultProps='primary'
+      props={['primary', 'secondary', 'neutral', 'danger', 'warning', 'success']}
+      getComponent={(prop, state) => <TestButton id={state} palette={prop} disabled={state === 'disabled'} />}
+      getRowClassName={(prop) => (prop === 'secondary' ? 'bg-primary' : '')}
+    />
+  ),
   parameters: {
     pseudo: {
       hover: ['#hover'],
@@ -54,18 +51,14 @@ export const Palette: Story = {
 
 export const Mode: Story = {
   args: {},
-  render: () => {
-    const modes: Array<TButtonMode> = ['button', 'outline', 'ghost', 'link']
-
-    return (
-      <StateTable<TButtonMode>
-        caption='Modes'
-        defaultProps='button'
-        props={modes}
-        getComponent={(prop, state) => <TestButton id={state} mode={prop} disabled={state === 'disabled'} />}
-      />
-    )
-  },
+  render: () => (
+    <StateTable<TButtonMode>
+      caption='Modes'
+      defaultProps='button'
+      props={['button', 'outline', 'ghost', 'link']}
+      getComponent={(prop, state) => <TestButton id={state} mode={prop} disabled={state === 'disabled'} />}
+    />
+  ),
   parameters: {
     pseudo: {
       hover: ['#hover'],
@@ -75,20 +68,16 @@ export const Mode: Story = {
   },
 }
 
-export const Size: Story = {
+export const Dimension: Story = {
   args: {},
-  render: () => {
-    const sizes: Array<TButtonSize> = ['sm', 'md', 'lg']
-
-    return (
-      <StateTable<TButtonSize>
-        caption='Sizes'
-        defaultProps='md'
-        props={sizes}
-        getComponent={(prop, state) => <TestButton id={state} dimension={prop} disabled={state === 'disabled'} />}
-      />
-    )
-  },
+  render: () => (
+    <StateTable<TButtonSize>
+      caption='Dimensions'
+      defaultProps='md'
+      props={['sm', 'md', 'lg']}
+      getComponent={(prop, state) => <TestButton id={state} dimension={prop} disabled={state === 'disabled'} />}
+    />
+  ),
   parameters: {
     pseudo: {
       hover: ['#hover'],

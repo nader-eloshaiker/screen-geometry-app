@@ -62,7 +62,7 @@ export const Palette: Story = {
   args: {},
   render: () => (
     <StateTable<TTogglePalette>
-      caption='Toggle Group Palette'
+      caption='Palettes'
       defaultProps='primary'
       props={['primary', 'secondary', 'neutral']}
       getComponent={(prop, state) => (
@@ -74,6 +74,7 @@ export const Palette: Story = {
           defaultValue={state === 'active' ? 'underline' : undefined}
         />
       )}
+      getRowClassName={(prop) => (prop === 'secondary' ? 'bg-primary' : '')}
     />
   ),
   parameters: {
@@ -89,9 +90,9 @@ export const Mode: Story = {
   args: {},
   render: () => (
     <StateTable<TToggleMode>
-      caption='Toggle Group Modes'
-      defaultProps='button'
-      props={['button', 'outline', 'pill']}
+      caption='Modes'
+      defaultProps='ghost'
+      props={['ghost', 'outline', 'pill']}
       getComponent={(prop, state) => (
         <ToggleGroupDefault
           type='multiple'
@@ -112,7 +113,7 @@ export const Mode: Story = {
   },
 }
 
-export const Size: Story = {
+export const Dimension: Story = {
   args: {},
   render: () => (
     <StateTable<TToggleSize>
