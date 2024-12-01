@@ -24,9 +24,6 @@
   }
 }
 
-@layer components {
-}
-
 :root {
   /* neutral*/
   --neutral-25: 0 0% 99%;

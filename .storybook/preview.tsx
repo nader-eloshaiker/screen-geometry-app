@@ -1,17 +1,14 @@
 import { withThemeByClassName, withThemeByDataAttribute } from '@storybook/addon-themes'
 import type { Preview } from '@storybook/react'
-import { ThemeProvider } from '../src/app/contexts/theme/ThemeProvider'
 import '../src/index.css'
 
 const preview: Preview = {
   decorators: [
     (Story) => {
       return (
-        <ThemeProvider>
-          <div className='flex size-full items-center justify-center'>
-            <Story />
-          </div>
-        </ThemeProvider>
+        <div className='flex size-full items-center justify-center'>
+          <Story />
+        </div>
       )
     },
     withThemeByClassName({
