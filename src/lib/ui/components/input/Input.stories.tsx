@@ -1,9 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/react'
 import { fn } from '@storybook/test'
-import { Label } from '../../label/Label'
 import { StateTable } from '../../storybook/StateTable'
+import { Label } from '../label/Label'
 import { Input } from './Input'
-import { TInputVariantsPalette } from './inputVariants'
+import { TInputVariantsPalette } from './InputVariants'
 
 const meta = {
   title: 'elements/Input',
@@ -29,10 +29,10 @@ export const Default: Story = {
   decorators: [
     (Story) => {
       return (
-        <div className='grid w-full max-w-sm items-center gap-1.5'>
-          <Label htmlFor='email'>Email</Label>
-          <Story />
-        </div>
+        <Label className='grid w-full max-w-sm items-center gap-1.5'>
+          <div>Email</div>
+          <Story id='email' />
+        </Label>
       )
     },
   ],
@@ -49,8 +49,8 @@ export const Palette: Story = {
       props={palettes}
       states={['normal', 'hover', 'focus', 'disabled']}
       getComponent={(prop, state) => (
-        <div className='grid w-full max-w-sm items-center gap-1.5'>
-          <Label htmlFor={`${state}-${prop}`}>Email</Label>
+        <Label palette={prop} className='grid w-full max-w-sm items-center gap-2.5'>
+          <div>Email</div>
           <Input
             type='email'
             id={`${state}-${prop}`}
@@ -58,8 +58,9 @@ export const Palette: Story = {
             disabled={state === 'disabled'}
             placeholder='Email'
           />
-        </div>
+        </Label>
       )}
+      getRowClassName={(prop) => (prop === 'secondary' ? 'bg-card text-card-foreground' : '')}
     />
   ),
   parameters: {

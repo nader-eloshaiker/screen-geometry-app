@@ -34,6 +34,9 @@ export default {
       colors: {
         background: 'hsl(var(--background) / <alpha-value>)',
         foreground: 'hsl(var(--foreground) / <alpha-value>)',
+        input: {
+          background: 'hsl(var(--input-background) / <alpha-value>)',
+        },
         card: {
           DEFAULT: 'hsl(var(--card) / <alpha-value>)',
           hover: 'hsl(var(--card-hover) / <alpha-value>)',
@@ -61,9 +64,18 @@ export default {
             active: 'hsl(var(--primary-foreground-active) / <alpha-value>)',
             muted: 'hsl(var(--primary-foreground-muted) / <alpha-value>)',
           },
-          border: 'hsl(var(--primary-border) / <alpha-value>)',
-          input: 'hsl(var(--primary-input) / <alpha-value>)',
-          ring: 'hsl(var(--primary-ring) / <alpha-value>)',
+          border: {
+            DEFAULT: 'hsl(var(--primary-border) / <alpha-value>)',
+            hover: 'hsl(var(--primary-border-hover) / <alpha-value>)',
+          },
+          input: {
+            DEFAULT: 'hsl(var(--primary-input) / <alpha-value>)',
+            hover: 'hsl(var(--primary-input-hover) / <alpha-value>)',
+            foreground: {
+              DEFAULT: 'hsl(var(--primary-input-foreground) / <alpha-value>)',
+              hover: 'hsl(var(--primary-input-foreground-hover) / <alpha-value>)',
+            },
+          },
           25: 'hsl(var(--primary-25) / <alpha-value>)',
           50: 'hsl(var(--primary-50) / <alpha-value>)',
           100: 'hsl(var(--primary-100) / <alpha-value>)',
@@ -89,9 +101,18 @@ export default {
             active: 'hsl(var(--secondary-foreground-active) / <alpha-value>)',
             muted: 'hsl(var(--secondary-foreground-muted) / <alpha-value>)',
           },
-          border: 'hsl(var(--secondary-border) / <alpha-value>)',
-          input: 'hsl(var(--secondary-input) / <alpha-value>)',
-          ring: 'hsl(var(--secondary-ring) / <alpha-value>)',
+          border: {
+            DEFAULT: 'hsl(var(--secondary-border) / <alpha-value>)',
+            hover: 'hsl(var(--secondary-border-hover) / <alpha-value>)',
+          },
+          input: {
+            DEFAULT: 'hsl(var(--secondary-input) / <alpha-value>)',
+            hover: 'hsl(var(--secondary-input-hover) / <alpha-value>)',
+            foreground: {
+              DEFAULT: 'hsl(var(--secondary-input-foreground) / <alpha-value>)',
+              hover: 'hsl(var(--secondary-input-foreground-hover) / <alpha-value>)',
+            },
+          },
         },
         neutral: {
           DEFAULT: 'hsl(var(--neutral) / <alpha-value>)',
@@ -104,9 +125,19 @@ export default {
             active: 'hsl(var(--neutral-foreground-active) / <alpha-value>)',
             muted: 'hsl(var(--neutral-foreground-muted) / <alpha-value>)',
           },
-          border: 'hsl(var(--neutral-border) / <alpha-value>)',
-          input: 'hsl(var(--neutral-input) / <alpha-value>)',
-          ring: 'hsl(var(--neutral-ring) / <alpha-value>)',
+          border: {
+            DEFAULT: 'hsl(var(--neutral-border) / <alpha-value>)',
+            hover: 'hsl(var(--neutral-border-hover) / <alpha-value>)',
+            active: 'hsl(var(--neutral-border-active) / <alpha-value>)',
+          },
+          input: {
+            DEFAULT: 'hsl(var(--neutral-input) / <alpha-value>)',
+            hover: 'hsl(var(--neutral-input-hover) / <alpha-value>)',
+            foreground: {
+              DEFAULT: 'hsl(var(--neutral-input-foreground) / <alpha-value>)',
+              hover: 'hsl(var(--neutral-input-foreground-hover) / <alpha-value>)',
+            },
+          },
           25: 'hsl(var(--neutral-25) / <alpha-value>)',
           50: 'hsl(var(--neutral-50) / <alpha-value>)',
           100: 'hsl(var(--neutral-100) / <alpha-value>)',
@@ -132,9 +163,18 @@ export default {
             active: 'hsl(var(--danger-foreground-active) / <alpha-value>)',
             muted: 'hsl(var(--danger-foreground-muted) / <alpha-value>)',
           },
-          ring: 'hsl(var(--danger-ring) / <alpha-value>)',
-          input: 'hsl(var(--danger-input) / <alpha-value>)',
-          border: 'hsl(var(--danger-border) / <alpha-value>)',
+          border: {
+            DEFAULT: 'hsl(var(--danger-border) / <alpha-value>)',
+            hover: 'hsl(var(--danger-border-hover) / <alpha-value>)',
+          },
+          input: {
+            DEFAULT: 'hsl(var(--danger-input) / <alpha-value>)',
+            hover: 'hsl(var(--danger-input-hover) / <alpha-value>)',
+            foreground: {
+              DEFAULT: 'hsl(var(--danger-input-foreground) / <alpha-value>)',
+              hover: 'hsl(var(--danger-input-foreground-hover) / <alpha-value>)',
+            },
+          },
           50: 'hsl(var(--danger-50) / <alpha-value>)',
           100: 'hsl(var(--danger-100) / <alpha-value>)',
           200: 'hsl(var(--danger-200) / <alpha-value>)',
@@ -158,9 +198,18 @@ export default {
             active: 'hsl(var(--success-foreground-active) / <alpha-value>)',
             muted: 'hsl(var(--success-foreground-muted) / <alpha-value>)',
           },
-          ring: 'hsl(var(--success-ring) / <alpha-value>)',
-          input: 'hsl(var(--success-input) / <alpha-value>)',
-          border: 'hsl(var(--success-border) / <alpha-value>)',
+          border: {
+            DEFAULT: 'hsl(var(--success-border) / <alpha-value>)',
+            hover: 'hsl(var(--success-border-hover) / <alpha-value>)',
+          },
+          input: {
+            DEFAULT: 'hsl(var(--success-input) / <alpha-value>)',
+            hover: 'hsl(var(--success-input-hover) / <alpha-value>)',
+            foreground: {
+              DEFAULT: 'hsl(var(--success-input-foreground) / <alpha-value>)',
+              hover: 'hsl(var(--success-input-foreground-hover) / <alpha-value>)',
+            },
+          },
           50: 'hsl(var(--success-50) / <alpha-value>)',
           100: 'hsl(var(--success-100) / <alpha-value>)',
           200: 'hsl(var(--success-200) / <alpha-value>)',
@@ -184,9 +233,18 @@ export default {
             active: 'hsl(var(--warning-foreground-active) / <alpha-value>)',
             muted: 'hsl(var(--warning-foreground-muted) / <alpha-value>)',
           },
-          ring: 'hsl(var(--warning-ring) / <alpha-value>)',
-          input: 'hsl(var(--warning-input) / <alpha-value>)',
-          border: 'hsl(var(--warning-border) / <alpha-value>)',
+          border: {
+            DEFAULT: 'hsl(var(--warning-border) / <alpha-value>)',
+            hover: 'hsl(var(--warning-border-hover) / <alpha-value>)',
+          },
+          input: {
+            DEFAULT: 'hsl(var(--warning-input) / <alpha-value>)',
+            hover: 'hsl(var(--warning-input-hover) / <alpha-value>)',
+            foreground: {
+              DEFAULT: 'hsl(var(--warning-input-foreground) / <alpha-value>)',
+              hover: 'hsl(var(--warning-input-foreground-hover) / <alpha-value>)',
+            },
+          },
           50: 'hsl(var(--warning-50) / <alpha-value>)',
           100: 'hsl(var(--warning-100) / <alpha-value>)',
           200: 'hsl(var(--warning-200) / <alpha-value>)',

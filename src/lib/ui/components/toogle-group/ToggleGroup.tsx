@@ -8,7 +8,7 @@ import { ToggleVariants } from './ToggleVariants'
 
 const ToggleGroupContext = React.createContext<VariantProps<typeof ToggleVariants>>({
   palette: 'primary',
-  mode: 'button',
+  mode: 'ghost',
   dimension: 'md',
 })
 

@@ -65,6 +65,7 @@ export const Palette: Story = {
       caption='Palettes'
       defaultProps='primary'
       props={['primary', 'secondary', 'neutral']}
+      states={['normal', 'hover', 'focus', 'active', 'disabled']}
       getComponent={(prop, state) => (
         <ToggleGroupDefault
           type='multiple'
@@ -74,7 +75,7 @@ export const Palette: Story = {
           defaultValue={state === 'active' ? 'underline' : undefined}
         />
       )}
-      getRowClassName={(prop) => (prop === 'secondary' ? 'bg-primary' : '')}
+      getRowClassName={(prop) => (prop === 'secondary' ? 'bg-card text-card-foreground' : '')}
     />
   ),
   parameters: {
@@ -93,6 +94,7 @@ export const Mode: Story = {
       caption='Modes'
       defaultProps='ghost'
       props={['ghost', 'outline', 'pill']}
+      states={['normal', 'hover', 'focus', 'active', 'disabled']}
       getComponent={(prop, state) => (
         <ToggleGroupDefault
           type='multiple'

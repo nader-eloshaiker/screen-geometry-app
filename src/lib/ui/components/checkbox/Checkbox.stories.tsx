@@ -26,6 +26,7 @@ export const Palette: Story = {
       caption='Palettes'
       defaultProps='primary'
       props={['primary', 'secondary', 'neutral', 'danger', 'warning', 'success']}
+      states={['normal', 'hover', 'focus', 'active', 'disabled']}
       getComponent={(palette, state) => (
         <Checkbox
           id={state}
@@ -34,7 +35,7 @@ export const Palette: Story = {
           disabled={state === 'disabled'}
         />
       )}
-      getRowClassName={(prop) => (prop === 'secondary' ? 'bg-primary' : '')}
+      getRowClassName={(prop) => (prop === 'secondary' ? 'bg-card text-card-foreground' : '')}
     />
   ),
   parameters: {

@@ -15,29 +15,33 @@ export const StateTable = <T extends string>({
   getComponent,
   defaultProps,
   props,
-  states = ['normal', 'hover', 'focus', 'active', 'disabled'],
+  states,
   getRowClassName = () => '',
 }: StateTableProps<T>) => {
+  const cols = states && states.length > 0 ? states : ['normal']
+
   return (
     <table className='border border-dashed border-base-300'>
       <caption className='p-5'>{caption}</caption>
-      <thead>
-        <tr className='border border-dashed border-base-300'>
-          <th className='px-8 py-4 font-normal' scope='col'></th>
-          {states.map((title) => (
-            <th className='px-8 py-4 font-normal' key={title} scope='col'>
-              {title}
-            </th>
-          ))}
-        </tr>
-      </thead>
+      {states && states.length > 0 && (
+        <thead>
+          <tr className='border border-dashed border-base-300'>
+            <th className='px-8 py-4 font-normal' scope='col'></th>
+            {cols.map((title) => (
+              <th className='px-8 py-4 font-normal' key={title} scope='col'>
+                {title}
+              </th>
+            ))}
+          </tr>
+        </thead>
+      )}
       <tbody>
         {props.map((prop) => (
           <tr key={prop} className='border border-dashed border-base-300'>
             <td className='px-8 py-4 text-right text-sm' scope='row'>
               <span className={cn({ 'font-bold text-danger-active': defaultProps === prop })}>{prop}</span>
             </td>
-            {states.map((state) => (
+            {cols.map((state) => (
               <td key={`${prop}-${state}`} className='px-1 py-2' scope='row'>
                 <div className={cn('flex justify-center items-center p-3', getRowClassName(prop, state))}>
                   {getComponent(prop, state)}

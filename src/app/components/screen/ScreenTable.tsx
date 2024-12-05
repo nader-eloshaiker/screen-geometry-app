@@ -6,7 +6,7 @@ import { useDeleteScreenApi } from '@/app/hooks/api/helpers/useDeleteScreenApi'
 import { useShowScreenApi } from '@/app/hooks/api/helpers/useShowScreenApi'
 import { ScreenItemRender } from '@/app/models/screenItemRender'
 import { ScreenColor } from '@/lib/openapi/generated'
-import { SkeletonRect } from '@/lib/ui/skeleton/SkeletonRect'
+import { Skeleton } from '@/lib/ui/components/skeleton/Skeleton'
 import { Pencil, X } from 'lucide-react'
 import { Dispatch, SetStateAction } from 'react'
 import ReactGA from 'react-ga4'
@@ -38,7 +38,7 @@ const TableSkeleton = ({ cols, rows }: TTableProps) => {
   for (let i = 0; i < cols; i++) {
     tableCols.push(
       <td key={`table-col-${i}`}>
-        <SkeletonRect key={`table-skeleton-${i}`} className='h-6 w-full' />
+        <Skeleton key={`table-skeleton-${i}`} className='h-6 w-full' />
       </td>,
     )
   }

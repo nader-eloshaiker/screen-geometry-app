@@ -36,8 +36,9 @@ export const Palette: Story = {
       caption='Palettes'
       defaultProps='primary'
       props={['primary', 'secondary', 'neutral', 'danger', 'warning', 'success']}
+      states={['normal', 'hover', 'focus', 'active', 'disabled']}
       getComponent={(prop, state) => <TestButton id={state} palette={prop} disabled={state === 'disabled'} />}
-      getRowClassName={(prop) => (prop === 'secondary' ? 'bg-primary' : '')}
+      getRowClassName={(prop) => (prop === 'secondary' ? 'bg-card text-card-foreground' : '')}
     />
   ),
   parameters: {
@@ -56,6 +57,7 @@ export const Mode: Story = {
       caption='Modes'
       defaultProps='button'
       props={['button', 'outline', 'ghost', 'link']}
+      states={['normal', 'hover', 'focus', 'active', 'disabled']}
       getComponent={(prop, state) => <TestButton id={state} mode={prop} disabled={state === 'disabled'} />}
     />
   ),
@@ -75,6 +77,7 @@ export const Dimension: Story = {
       caption='Dimensions'
       defaultProps='md'
       props={['sm', 'md', 'lg']}
+      states={['normal', 'hover', 'focus', 'active', 'disabled']}
       getComponent={(prop, state) => <TestButton id={state} dimension={prop} disabled={state === 'disabled'} />}
     />
   ),

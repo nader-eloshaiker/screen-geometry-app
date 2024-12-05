@@ -15,9 +15,8 @@ import { useCreateScreenListApi } from '@/app/hooks/api/helpers/useCreateScreenL
 import { useGetScreensListApi } from '@/app/hooks/api/helpers/useGetScreenListApi'
 import { ScreenItemRender } from '@/app/models/screenItemRender'
 import { Dimensions } from '@/lib/openapi/models'
+import { Skeleton } from '@/lib/ui/components/skeleton/Skeleton'
 import { useElementSize } from '@/lib/ui/hooks/useElementSize'
-import { ImageIcon } from '@/lib/ui/skeleton'
-import { SkeletonImage } from '@/lib/ui/skeleton/SkeletonImage'
 import { getMaxScreenSize } from '@/lib/utils/ScreenCalc'
 import { useEffect, useRef, useState } from 'react'
 import ReactGA from 'react-ga4'
@@ -64,6 +63,7 @@ export const Screens = () => {
             <div className='label text-xl'>Screen Specs</div>
             <CreateScreenButton />
           </div>
+
           <ScreenTable
             screens={screens}
             isScreenListLoading={isScreenListLoading}
@@ -101,11 +101,7 @@ export const Screens = () => {
               </div>
               <Stacked height={maxPanelSize.height} $hAlign={hAlignment} $vAlign={vAlignment}>
                 {screens.length === 0 && isScreenListLoading ? (
-                  <SkeletonImage
-                    data-testid='SkeletonImage'
-                    className='size-full'
-                    image={<ImageIcon fill='rgb(107 114 128)' className='size-1/4' />}
-                  />
+                  <Skeleton data-testid='SkeletonImage' mode='image' className='size-full' />
                 ) : (
                   screens
                     .filter((screen) => screen.visible)

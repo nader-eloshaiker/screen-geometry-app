@@ -24,13 +24,13 @@ const ToastActionVariants = cva(
   {
     variants: {
       palette: {
-        info: 'border-primary-border bg-primary text-primary-foreground focus-visible:outline-primary-ring hocus:bg-primary-hover hocus:text-primary-foreground-hover',
+        info: 'border-primary-border bg-primary text-primary-foreground focus-visible:outline-primary-border-hover hocus:bg-primary-hover hocus:text-primary-foreground-hover',
         danger:
-          'border-danger-border bg-danger text-danger-foreground focus-visible:outline-danger-ring hocus:bg-danger-hover hocus:text-danger-foreground-hover',
+          'border-danger-border bg-danger text-danger-foreground focus-visible:outline-danger-border-hover hocus:bg-danger-hover hocus:text-danger-foreground-hover',
         success:
-          'border-success-border bg-success text-success-foreground focus-visible:outline-success-ring hocus:bg-success-hover hocus:text-success-foreground-hover',
+          'border-success-border bg-success text-success-foreground focus-visible:outline-success-border-hover hocus:bg-success-hover hocus:text-success-foreground-hover',
         warning:
-          'border-warning-border bg-warning text-warning-foreground focus-visible:outline-warning-ring hocus:bg-warning-hover hocus:text-warning-foreground-hover',
+          'border-warning-border bg-warning text-warning-foreground focus-visible:outline-warning-border-hover hocus:bg-warning-hover hocus:text-warning-foreground-hover',
       },
     },
     defaultVariants: {
@@ -45,10 +45,12 @@ const ToastCloseVariants = cva(
   {
     variants: {
       palette: {
-        info: 'text-secondary-foreground focus-visible:outline-primary-ring hocus:text-secondary-foreground-active',
-        danger: 'text-danger-foreground focus-visible:outline-danger-ring hocus:text-danger-foreground-active',
-        warning: 'text-warning-foreground focus-visible:outline-warning-ring hocus:text-warning-foreground-active',
-        success: 'text-success-foreground focus-visible:outline-success-ring hocus:text-success-foreground-active',
+        info: 'text-secondary-foreground focus-visible:outline-primary-border-hover hocus:text-secondary-foreground-active',
+        danger: 'text-danger-foreground focus-visible:outline-danger-border-hover hocus:text-danger-foreground-active',
+        warning:
+          'text-warning-foreground focus-visible:outline-warning-border-hover hocus:text-warning-foreground-active',
+        success:
+          'text-success-foreground focus-visible:outline-success-border-hover hocus:text-success-foreground-active',
       },
     },
     defaultVariants: {

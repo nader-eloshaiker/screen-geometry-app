@@ -10,12 +10,12 @@ export const ButtonVariants = cva(
   {
     variants: {
       palette: {
-        primary: ' focus-visible:outline-primary-ring',
-        secondary: 'focus-visible:outline-secondary-ring',
-        neutral: 'focus-visible:outline-neutral-ring',
-        danger: 'focus-visible:outline-danger-ring',
-        success: 'focus-visible:outline-success-ring',
-        warning: 'focus-visible:outline-warning-ring',
+        primary: ' focus-visible:outline-primary-border-hover',
+        secondary: 'focus-visible:outline-secondary-border-hover',
+        neutral: 'focus-visible:outline-neutral-border-hover',
+        danger: 'focus-visible:outline-danger-border-hover',
+        success: 'focus-visible:outline-success-border-hover',
+        warning: 'focus-visible:outline-warning-border-hover',
       },
       mode: {
         button: 'shadow-md',
@@ -39,7 +39,7 @@ export const ButtonVariants = cva(
       {
         palette: 'primary',
         mode: 'outline',
-        className: 'border-primary-input',
+        className: 'border-primary-border',
       },
       {
         palette: 'primary',
