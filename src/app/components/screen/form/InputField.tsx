@@ -26,7 +26,7 @@ export const InputField = ({ formKey, title, overlay, isLoading = false, ...rest
   //       'input input-bordered input-secondary flex items-center gap-2 shadow-md transition-all',
   //       {
   //         'input-error': errors[ScreenDataEnum.diagonalSize],
-  //         'skeleton bg-neutral-300 dark:bg-neutral-700 pointer-events-none rounded-lg': isLoading,
+  //         'skeleton bg-mono-300 dark:bg-mono-700 pointer-events-none rounded-lg': isLoading,
   //       },
   //     )}
   //   >
@@ -64,7 +64,7 @@ export const InputField = ({ formKey, title, overlay, isLoading = false, ...rest
       }
       className={cn('input-bordered input-primary shadow-lg transition-all', {
         'input-error': errors[formKey],
-        'skeleton bg-neutral-300 dark:bg-neutral-700 pointer-events-none rounded-lg': isLoading,
+        'skeleton bg-mono-300 dark:bg-mono-700 pointer-events-none rounded-lg': isLoading,
       })}
       register={register(formKey)}
       {...rest}

@@ -4,19 +4,18 @@ export type TInputVariantsVariants = VariantProps<typeof InputVariants>
 export type TInputVariantsPalette = NonNullable<TInputVariantsVariants['palette']>
 export type TInputVariantsDimension = NonNullable<TInputVariantsVariants['dimension']>
 
-export const InputVariants = cva(
-  'flex h-10 w-full rounded-md border-2 px-3 py-2 text-sm shadow-md outline-none file:border-0 file:text-sm file:font-medium focus-visible:outline-2 focus-visible:outline-offset-4 disabled:cursor-not-allowed disabled:opacity-50',
+const InputVariants = cva(
+  'flex h-10 w-full rounded-md border-2 px-3 py-2 text-sm shadow-md outline-none file:border-0 file:text-sm file:font-medium focus-visible:outline-2 focus-visible:outline-offset-4 disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50',
   {
     variants: {
       palette: {
         primary:
-          'border-primary-border bg-primary-input text-primary-input-foreground file:text-primary-input-foreground placeholder:text-primary-foreground-muted focus-visible:outline-primary-border-hover hocus:border-primary-border-hover hocus:bg-primary-input-hover hocus:text-primary-input-foreground-hover',
+          'border-primary-border bg-primary-input text-primary-foreground-input file:text-primary-foreground-input placeholder:text-primary-foreground-muted focus-visible:outline-primary-ring hocus:border-primary-border-hover hocus:text-primary-foreground-input-hover',
         secondary:
-          'border-secondary-border bg-secondary-input text-secondary-input-foreground file:text-secondary-input-foreground placeholder:text-secondary-foreground-muted focus-visible:outline-secondary-border-hover hocus:border-secondary-border-hover hocus:bg-secondary-input-hover hocus:text-secondary-input-foreground-hover',
-        neutral:
-          'border-neutral-border bg-neutral-input text-neutral-input-foreground file:text-neutral-input-foreground placeholder:text-neutral-foreground-muted focus-visible:outline-neutral-border-hover hocus:border-neutral-border-hover hocus:bg-neutral-input-hover hocus:text-neutral-input-foreground-hover',
+          'border-secondary-border bg-secondary-input text-secondary-foreground-input file:text-secondary-foreground-input placeholder:text-secondary-foreground-muted focus-visible:outline-secondary-ring hocus:border-secondary-border-hover hocus:text-secondary-foreground-input-hover',
+        mono: 'border-mono-border bg-mono-input text-mono-foreground-input file:text-mono-foreground-input placeholder:text-mono-foreground-muted focus-visible:outline-mono-ring hocus:border-mono-border-hover hocus:text-mono-foreground-input-hover',
         danger:
-          'border-danger-border bg-danger-input text-danger-input-foreground file:text-danger-input-foreground placeholder:text-danger-foreground-muted focus-visible:outline-danger-border-hover hocus:border-danger-border-hover hocus:bg-danger-input-hover hocus:text-danger-input-foreground-hover',
+          'border-danger-border bg-danger-input text-danger-foreground-input file:text-danger-foreground-input placeholder:text-danger-foreground-muted focus-visible:outline-danger-ring hocus:border-danger-border-hover hocus:text-danger-foreground-input-hover',
       },
       dimension: {
         sm: 'p-4',
@@ -30,3 +29,29 @@ export const InputVariants = cva(
     },
   },
 )
+
+const InputAdornmentVariants = cva('pointer-events-none absolute flex h-10 items-center justify-center', {
+  variants: {
+    palette: {
+      primary: 'bg-primary-muted text-primary-foreground-muted',
+      secondary: 'bg-secondary-muted text-secondary-foreground-muted',
+      mono: 'bg-mono-muted text-mono-foreground-muted',
+      danger: 'bg-danger-muted text-danger-foreground-muted',
+    },
+    dimension: {
+      sm: 'p-2',
+      md: 'p-3',
+      lg: 'p-4',
+    },
+    position: {
+      start: 'left-[2px] rounded-l-sm',
+      end: 'right-[2px] rounded-r-sm',
+    },
+  },
+  defaultVariants: {
+    palette: 'primary',
+    dimension: 'md',
+  },
+})
+
+export { InputAdornmentVariants, InputVariants }

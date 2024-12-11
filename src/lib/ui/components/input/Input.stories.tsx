@@ -18,7 +18,7 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
-export const Default: Story = {
+export const Component: Story = {
   args: {
     type: 'email',
     id: 'email',
@@ -38,9 +38,35 @@ export const Default: Story = {
   ],
 }
 
-const palettes: Array<TInputVariantsPalette> = ['primary', 'secondary', 'neutral', 'danger']
+const palettes: Array<TInputVariantsPalette> = ['primary', 'secondary', 'mono', 'danger']
 
 export const Palette: Story = {
+  args: {},
+  render: () => (
+    <StateTable<TInputVariantsPalette>
+      caption='Palettes'
+      defaultProps='primary'
+      props={['primary', 'secondary', 'mono', 'danger']}
+      states={['normal', 'hover', 'focus', 'disabled']}
+      getComponent={(prop, state) => (
+        <Label palette={prop} className='grid w-full max-w-sm items-center gap-3'>
+          <div>Email</div>
+          <Input type='email' id={state} palette={prop} disabled={state === 'disabled'} placeholder='Email' />
+        </Label>
+      )}
+      getRowClassName={(prop) => (prop === 'secondary' ? 'bg-card text-card-foreground' : '')}
+    />
+  ),
+  parameters: {
+    pseudo: {
+      hover: ['#hover'],
+      active: ['#active'],
+      focusVisible: ['#focus'],
+    },
+  },
+}
+
+export const AdornmentStart: Story = {
   args: {},
   render: () => (
     <StateTable<TInputVariantsPalette>
@@ -49,14 +75,16 @@ export const Palette: Story = {
       props={palettes}
       states={['normal', 'hover', 'focus', 'disabled']}
       getComponent={(prop, state) => (
-        <Label palette={prop} className='grid w-full max-w-sm items-center gap-2.5'>
+        <Label palette={prop} className='grid w-full max-w-sm items-center gap-3'>
           <div>Email</div>
           <Input
             type='email'
-            id={`${state}-${prop}`}
+            id={state}
+            className='pl-12'
             palette={prop}
             disabled={state === 'disabled'}
             placeholder='Email'
+            startAdornment={<div>😀</div>}
           />
         </Label>
       )}
@@ -65,9 +93,43 @@ export const Palette: Story = {
   ),
   parameters: {
     pseudo: {
-      hover: palettes.map((palette) => `#hover-${palette}`), //['#hover'],
-      active: palettes.map((palette) => `#active-${palette}`), //['#active'],
-      focusVisible: palettes.map((palette) => `#focus-${palette}`), //['#focus'],
+      hover: ['#hover'],
+      active: ['#active'],
+      focusVisible: ['#focus'],
+    },
+  },
+}
+
+export const AdornmentEnd: Story = {
+  args: {},
+  render: () => (
+    <StateTable<TInputVariantsPalette>
+      caption='Palettes'
+      defaultProps='primary'
+      props={palettes}
+      states={['normal', 'hover', 'focus', 'disabled']}
+      getComponent={(prop, state) => (
+        <Label palette={prop} className='grid w-full max-w-sm items-center gap-3'>
+          <div>Email</div>
+          <Input
+            type='email'
+            id={state}
+            className='pr-12'
+            palette={prop}
+            disabled={state === 'disabled'}
+            placeholder='Email'
+            endAdornment='px'
+          />
+        </Label>
+      )}
+      getRowClassName={(prop) => (prop === 'secondary' ? 'bg-card text-card-foreground' : '')}
+    />
+  ),
+  parameters: {
+    pseudo: {
+      hover: ['#hover'],
+      active: ['#active'],
+      focusVisible: ['#focus'],
     },
   },
 }

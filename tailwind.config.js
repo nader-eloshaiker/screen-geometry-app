@@ -34,6 +34,10 @@ export default {
       colors: {
         background: 'hsl(var(--background) / <alpha-value>)',
         foreground: 'hsl(var(--foreground) / <alpha-value>)',
+        muted: {
+          DEFAULT: 'hsl(var(--muted) / <alpha-value>)',
+          foreground: 'hsl(var(--muted-foreground) / <alpha-value>)',
+        },
         input: {
           background: 'hsl(var(--input-background) / <alpha-value>)',
         },
@@ -58,11 +62,16 @@ export default {
           hover: 'hsl(var(--primary-hover) / <alpha-value>)',
           active: 'hsl(var(--primary-active) / <alpha-value>)',
           muted: 'hsl(var(--primary-muted) / <alpha-value>)',
+          ring: 'hsl(var(--primary-ring) / <alpha-value>)',
           foreground: {
             DEFAULT: 'hsl(var(--primary-foreground) / <alpha-value>)',
             hover: 'hsl(var(--primary-foreground-hover) / <alpha-value>)',
             active: 'hsl(var(--primary-foreground-active) / <alpha-value>)',
             muted: 'hsl(var(--primary-foreground-muted) / <alpha-value>)',
+            input: {
+              DEFAULT: 'hsl(var(--primary-foreground-input) / <alpha-value>)',
+              hover: 'hsl(var(--primary-foreground-input-hover) / <alpha-value>)',
+            },
           },
           border: {
             DEFAULT: 'hsl(var(--primary-border) / <alpha-value>)',
@@ -71,10 +80,6 @@ export default {
           input: {
             DEFAULT: 'hsl(var(--primary-input) / <alpha-value>)',
             hover: 'hsl(var(--primary-input-hover) / <alpha-value>)',
-            foreground: {
-              DEFAULT: 'hsl(var(--primary-input-foreground) / <alpha-value>)',
-              hover: 'hsl(var(--primary-input-foreground-hover) / <alpha-value>)',
-            },
           },
           25: 'hsl(var(--primary-25) / <alpha-value>)',
           50: 'hsl(var(--primary-50) / <alpha-value>)',
@@ -95,11 +100,16 @@ export default {
           hover: 'hsl(var(--secondary-hover) / <alpha-value>)',
           active: 'hsl(var(--secondary-active) / <alpha-value>)',
           muted: 'hsl(var(--secondary-muted) / <alpha-value>)',
+          ring: 'hsl(var(--secondary-ring) / <alpha-value>)',
           foreground: {
             DEFAULT: 'hsl(var(--secondary-foreground) / <alpha-value>)',
             hover: 'hsl(var(--secondary-foreground-hover) / <alpha-value>)',
             active: 'hsl(var(--secondary-foreground-active) / <alpha-value>)',
             muted: 'hsl(var(--secondary-foreground-muted) / <alpha-value>)',
+            input: {
+              DEFAULT: 'hsl(var(--secondary-foreground-input) / <alpha-value>)',
+              hover: 'hsl(var(--secondary-foreground-input-hover) / <alpha-value>)',
+            },
           },
           border: {
             DEFAULT: 'hsl(var(--secondary-border) / <alpha-value>)',
@@ -108,60 +118,62 @@ export default {
           input: {
             DEFAULT: 'hsl(var(--secondary-input) / <alpha-value>)',
             hover: 'hsl(var(--secondary-input-hover) / <alpha-value>)',
-            foreground: {
-              DEFAULT: 'hsl(var(--secondary-input-foreground) / <alpha-value>)',
-              hover: 'hsl(var(--secondary-input-foreground-hover) / <alpha-value>)',
-            },
           },
         },
-        neutral: {
-          DEFAULT: 'hsl(var(--neutral) / <alpha-value>)',
-          hover: 'hsl(var(--neutral-hover) / <alpha-value>)',
-          active: 'hsl(var(--neutral-active) / <alpha-value>)',
-          muted: 'hsl(var(--neutral-muted) / <alpha-value>)',
+        mono: {
+          DEFAULT: 'hsl(var(--mono) / <alpha-value>)',
+          hover: 'hsl(var(--mono-hover) / <alpha-value>)',
+          active: 'hsl(var(--mono-active) / <alpha-value>)',
+          muted: 'hsl(var(--mono-muted) / <alpha-value>)',
+          ring: 'hsl(var(--mono-ring) / <alpha-value>)',
           foreground: {
-            DEFAULT: 'hsl(var(--neutral-foreground) / <alpha-value>)',
-            hover: 'hsl(var(--neutral-foreground-hover) / <alpha-value>)',
-            active: 'hsl(var(--neutral-foreground-active) / <alpha-value>)',
-            muted: 'hsl(var(--neutral-foreground-muted) / <alpha-value>)',
-          },
-          border: {
-            DEFAULT: 'hsl(var(--neutral-border) / <alpha-value>)',
-            hover: 'hsl(var(--neutral-border-hover) / <alpha-value>)',
-            active: 'hsl(var(--neutral-border-active) / <alpha-value>)',
-          },
-          input: {
-            DEFAULT: 'hsl(var(--neutral-input) / <alpha-value>)',
-            hover: 'hsl(var(--neutral-input-hover) / <alpha-value>)',
-            foreground: {
-              DEFAULT: 'hsl(var(--neutral-input-foreground) / <alpha-value>)',
-              hover: 'hsl(var(--neutral-input-foreground-hover) / <alpha-value>)',
+            DEFAULT: 'hsl(var(--mono-foreground) / <alpha-value>)',
+            hover: 'hsl(var(--mono-foreground-hover) / <alpha-value>)',
+            active: 'hsl(var(--mono-foreground-active) / <alpha-value>)',
+            muted: 'hsl(var(--mono-foreground-muted) / <alpha-value>)',
+            input: {
+              DEFAULT: 'hsl(var(--mono-foreground-input) / <alpha-value>)',
+              hover: 'hsl(var(--mono-foreground-input-hover) / <alpha-value>)',
             },
           },
-          25: 'hsl(var(--neutral-25) / <alpha-value>)',
-          50: 'hsl(var(--neutral-50) / <alpha-value>)',
-          100: 'hsl(var(--neutral-100) / <alpha-value>)',
-          200: 'hsl(var(--neutral-200) / <alpha-value>)',
-          300: 'hsl(var(--neutral-300) / <alpha-value>)',
-          400: 'hsl(var(--neutral-400) / <alpha-value>)',
-          500: 'hsl(var(--neutral-500) / <alpha-value>)',
-          600: 'hsl(var(--neutral-600) / <alpha-value>)',
-          700: 'hsl(var(--neutral-700) / <alpha-value>)',
-          800: 'hsl(var(--neutral-800) / <alpha-value>)',
-          900: 'hsl(var(--neutral-900) / <alpha-value>)',
-          925: 'hsl(var(--neutral-925) / <alpha-value>)',
-          950: 'hsl(var(--neutral-950) / <alpha-value>)',
+          border: {
+            DEFAULT: 'hsl(var(--mono-border) / <alpha-value>)',
+            hover: 'hsl(var(--mono-border-hover) / <alpha-value>)',
+            active: 'hsl(var(--mono-border-active) / <alpha-value>)',
+          },
+          input: {
+            DEFAULT: 'hsl(var(--mono-input) / <alpha-value>)',
+            hover: 'hsl(var(--mono-input-hover) / <alpha-value>)',
+          },
+          25: 'hsl(var(--mono-25) / <alpha-value>)',
+          50: 'hsl(var(--mono-50) / <alpha-value>)',
+          100: 'hsl(var(--mono-100) / <alpha-value>)',
+          200: 'hsl(var(--mono-200) / <alpha-value>)',
+          300: 'hsl(var(--mono-300) / <alpha-value>)',
+          400: 'hsl(var(--mono-400) / <alpha-value>)',
+          500: 'hsl(var(--mono-500) / <alpha-value>)',
+          600: 'hsl(var(--mono-600) / <alpha-value>)',
+          700: 'hsl(var(--mono-700) / <alpha-value>)',
+          800: 'hsl(var(--mono-800) / <alpha-value>)',
+          900: 'hsl(var(--mono-900) / <alpha-value>)',
+          925: 'hsl(var(--mono-925) / <alpha-value>)',
+          950: 'hsl(var(--mono-950) / <alpha-value>)',
         },
         danger: {
           DEFAULT: 'hsl(var(--danger) / <alpha-value>)',
           hover: 'hsl(var(--danger-hover) / <alpha-value>)',
           active: 'hsl(var(--danger-active) / <alpha-value>)',
           muted: 'hsl(var(--danger-muted) / <alpha-value>)',
+          ring: 'hsl(var(--danger-ring) / <alpha-value>)',
           foreground: {
             DEFAULT: 'hsl(var(--danger-foreground) / <alpha-value>)',
             hover: 'hsl(var(--danger-foreground-hover) / <alpha-value>)',
             active: 'hsl(var(--danger-foreground-active) / <alpha-value>)',
             muted: 'hsl(var(--danger-foreground-muted) / <alpha-value>)',
+            input: {
+              DEFAULT: 'hsl(var(--danger-foreground-input) / <alpha-value>)',
+              hover: 'hsl(var(--danger-foreground-input-hover) / <alpha-value>)',
+            },
           },
           border: {
             DEFAULT: 'hsl(var(--danger-border) / <alpha-value>)',
@@ -170,10 +182,6 @@ export default {
           input: {
             DEFAULT: 'hsl(var(--danger-input) / <alpha-value>)',
             hover: 'hsl(var(--danger-input-hover) / <alpha-value>)',
-            foreground: {
-              DEFAULT: 'hsl(var(--danger-input-foreground) / <alpha-value>)',
-              hover: 'hsl(var(--danger-input-foreground-hover) / <alpha-value>)',
-            },
           },
           50: 'hsl(var(--danger-50) / <alpha-value>)',
           100: 'hsl(var(--danger-100) / <alpha-value>)',
@@ -192,11 +200,16 @@ export default {
           hover: 'hsl(var(--success-hover) / <alpha-value>)',
           active: 'hsl(var(--success-active) / <alpha-value>)',
           muted: 'hsl(var(--success-muted) / <alpha-value>)',
+          ring: 'hsl(var(--success-ring) / <alpha-value>)',
           foreground: {
             DEFAULT: 'hsl(var(--success-foreground) / <alpha-value>)',
             hover: 'hsl(var(--success-foreground-hover) / <alpha-value>)',
             active: 'hsl(var(--success-foreground-active) / <alpha-value>)',
             muted: 'hsl(var(--success-foreground-muted) / <alpha-value>)',
+            input: {
+              DEFAULT: 'hsl(var(--success-foreground-input) / <alpha-value>)',
+              hover: 'hsl(var(--success-foreground-input-hover) / <alpha-value>)',
+            },
           },
           border: {
             DEFAULT: 'hsl(var(--success-border) / <alpha-value>)',
@@ -205,10 +218,6 @@ export default {
           input: {
             DEFAULT: 'hsl(var(--success-input) / <alpha-value>)',
             hover: 'hsl(var(--success-input-hover) / <alpha-value>)',
-            foreground: {
-              DEFAULT: 'hsl(var(--success-input-foreground) / <alpha-value>)',
-              hover: 'hsl(var(--success-input-foreground-hover) / <alpha-value>)',
-            },
           },
           50: 'hsl(var(--success-50) / <alpha-value>)',
           100: 'hsl(var(--success-100) / <alpha-value>)',
@@ -227,11 +236,16 @@ export default {
           hover: 'hsl(var(--warning-hover) / <alpha-value>)',
           active: 'hsl(var(--warning-active) / <alpha-value>)',
           muted: 'hsl(var(--warning-muted) / <alpha-value>)',
+          ring: 'hsl(var(--warning-ring) / <alpha-value>)',
           foreground: {
             DEFAULT: 'hsl(var(--warning-foreground) / <alpha-value>)',
             hover: 'hsl(var(--warning-foreground-hover) / <alpha-value>)',
             active: 'hsl(var(--warning-foreground-active) / <alpha-value>)',
             muted: 'hsl(var(--warning-foreground-muted) / <alpha-value>)',
+            input: {
+              DEFAULT: 'hsl(var(--warning-foreground-input) / <alpha-value>)',
+              hover: 'hsl(var(--warning-foreground-input-hover) / <alpha-value>)',
+            },
           },
           border: {
             DEFAULT: 'hsl(var(--warning-border) / <alpha-value>)',
@@ -240,10 +254,6 @@ export default {
           input: {
             DEFAULT: 'hsl(var(--warning-input) / <alpha-value>)',
             hover: 'hsl(var(--warning-input-hover) / <alpha-value>)',
-            foreground: {
-              DEFAULT: 'hsl(var(--warning-input-foreground) / <alpha-value>)',
-              hover: 'hsl(var(--warning-input-foreground-hover) / <alpha-value>)',
-            },
           },
           50: 'hsl(var(--warning-50) / <alpha-value>)',
           100: 'hsl(var(--warning-100) / <alpha-value>)',
@@ -305,8 +315,8 @@ export default {
           'secondary-content': '#FFE5FF',
           accent: '#7FD8FF',
           'accent-content': '#005980',
-          neutral: '#44403c',
-          'neutral-content': '#e7e5e4',
+          mono: '#44403c',
+          'mono-content': '#e7e5e4',
           'base-100': '#f5f5f4',
           'base-200': '#d6d3d1',
           'base-300': '#a8a29e',
@@ -329,8 +339,8 @@ export default {
           'secondary-content': '#660080',
           accent: '#1A739A',
           'accent-content': '#E5FFFF',
-          neutral: '#363230',
-          'neutral-content': '#dddbd9',
+          mono: '#363230',
+          'mono-content': '#dddbd9',
           'base-100': '#292524',
           'base-200': '#44403c',
           'base-300': '#78716c',

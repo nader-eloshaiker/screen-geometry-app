@@ -35,7 +35,7 @@ export const Palette: Story = {
     <StateTable<TButtonPalette>
       caption='Palettes'
       defaultProps='primary'
-      props={['primary', 'secondary', 'neutral', 'danger', 'warning', 'success']}
+      props={['primary', 'secondary', 'mono', 'danger', 'warning', 'success']}
       states={['normal', 'hover', 'focus', 'active', 'disabled']}
       getComponent={(prop, state) => <TestButton id={state} palette={prop} disabled={state === 'disabled'} />}
       getRowClassName={(prop) => (prop === 'secondary' ? 'bg-card text-card-foreground' : '')}

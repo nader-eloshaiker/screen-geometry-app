@@ -9,10 +9,10 @@ export const LabelVariants = cva(
     variants: {
       palette: {
         none: '',
-        primary: 'text-primary-hover',
+        primary: 'text-primary',
         secondary: 'text-card-foreground',
-        neutral: 'text-neutral-hover',
-        danger: 'text-danger-hover',
+        mono: 'text-mono',
+        danger: 'text-danger',
       },
     },
     defaultVariants: {

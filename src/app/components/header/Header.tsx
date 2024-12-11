@@ -102,7 +102,7 @@ export default function Header() {
           <motion.ul
             tabIndex={0}
             // style={{ originX: 0, originY: 0 }}
-            className='menu dropdown-content z-[1] mt-4 w-40 gap-4 rounded-md bg-neutral text-neutral-content shadow'
+            className='menu dropdown-content z-[1] mt-4 w-40 gap-4 rounded-md bg-mono text-mono-content shadow'
             initial='closed'
             animate={menuOpened ? 'opened' : 'closed'}
             exit='closed'

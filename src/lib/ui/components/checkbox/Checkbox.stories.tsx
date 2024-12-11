@@ -25,7 +25,7 @@ export const Palette: Story = {
     <StateTable<TCheckboxPalette>
       caption='Palettes'
       defaultProps='primary'
-      props={['primary', 'secondary', 'neutral', 'danger', 'warning', 'success']}
+      props={['primary', 'secondary', 'mono', 'danger', 'warning', 'success']}
       states={['normal', 'hover', 'focus', 'active', 'disabled']}
       getComponent={(palette, state) => (
         <Checkbox

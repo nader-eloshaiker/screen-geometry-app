@@ -10,12 +10,12 @@ export const ButtonVariants = cva(
   {
     variants: {
       palette: {
-        primary: ' focus-visible:outline-primary-border-hover',
-        secondary: 'focus-visible:outline-secondary-border-hover',
-        neutral: 'focus-visible:outline-neutral-border-hover',
-        danger: 'focus-visible:outline-danger-border-hover',
-        success: 'focus-visible:outline-success-border-hover',
-        warning: 'focus-visible:outline-warning-border-hover',
+        primary: ' focus-visible:outline-primary-ring',
+        secondary: 'focus-visible:outline-secondary-ring',
+        mono: 'focus-visible:outline-mono-ring',
+        danger: 'focus-visible:outline-danger-ring',
+        success: 'focus-visible:outline-success-ring',
+        warning: 'focus-visible:outline-warning-ring',
       },
       mode: {
         button: 'shadow-md',
@@ -64,20 +64,20 @@ export const ButtonVariants = cva(
           'active:bg-secondary-active active:text-secondary-foreground-active hocus:bg-secondary-hover hocus:text-secondary-foreground-hover',
       },
       {
-        palette: 'neutral',
+        palette: 'mono',
         mode: 'button',
-        className: 'bg-neutral text-neutral-foreground',
+        className: 'bg-mono text-mono-foreground',
       },
       {
-        palette: 'neutral',
+        palette: 'mono',
         mode: 'outline',
-        className: 'border-neutral-input',
+        className: 'border-mono-input',
       },
       {
-        palette: 'neutral',
+        palette: 'mono',
         mode: ['button', 'outline', 'ghost'],
         className:
-          'active:bg-neutral-active active:text-neutral-foreground-active hocus:bg-neutral-hover hocus:text-neutral-foreground-hover',
+          'active:bg-mono-active active:text-mono-foreground-active hocus:bg-mono-hover hocus:text-mono-foreground-hover',
       },
       {
         palette: 'danger',

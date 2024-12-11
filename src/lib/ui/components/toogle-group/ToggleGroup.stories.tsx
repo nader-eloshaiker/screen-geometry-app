@@ -64,7 +64,7 @@ export const Palette: Story = {
     <StateTable<TTogglePalette>
       caption='Palettes'
       defaultProps='primary'
-      props={['primary', 'secondary', 'neutral']}
+      props={['primary', 'secondary', 'mono']}
       states={['normal', 'hover', 'focus', 'active', 'disabled']}
       getComponent={(prop, state) => (
         <ToggleGroupDefault
