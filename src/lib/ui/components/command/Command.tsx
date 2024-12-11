@@ -16,7 +16,7 @@ const Command = React.forwardRef<
   <CommandPrimitive
     ref={ref}
     className={cn(
-      'flex h-full w-full flex-col overflow-hidden rounded-md shadow-md bg-popover text-popover-foreground border border-mono-border',
+      'flex h-full w-full flex-col overflow-hidden rounded-md shadow-md bg-popover text-popover-foreground border border-primary-border',
       className,
     )}
     {...props}
@@ -41,8 +41,8 @@ const CommandInput = React.forwardRef<
   React.ComponentPropsWithoutRef<typeof CommandPrimitive.Input>
 >(({ className, ...props }, ref) => (
   // eslint-disable-next-line react/no-unknown-property
-  <div className='flex items-center border-b border-mono-border px-3' cmdk-input-wrapper=''>
-    <Search className='mr-2 size-4 shrink-0 opacity-50' />
+  <div className='flex items-center border-b border-primary-border px-3' cmdk-input-wrapper=''>
+    <Search className='mr-2 size-4 shrink-0 stroke-muted-foreground' />
     <CommandPrimitive.Input
       ref={ref}
       className={cn(
@@ -96,7 +96,7 @@ const CommandSeparator = React.forwardRef<
   React.ElementRef<typeof CommandPrimitive.Separator>,
   React.ComponentPropsWithoutRef<typeof CommandPrimitive.Separator>
 >(({ className, ...props }, ref) => (
-  <CommandPrimitive.Separator ref={ref} className={cn('-mx-1 h-px bg-mono-border', className)} {...props} />
+  <CommandPrimitive.Separator ref={ref} className={cn('-mx-1 h-px bg-primary-border', className)} {...props} />
 ))
 CommandSeparator.displayName = CommandPrimitive.Separator.displayName
 
