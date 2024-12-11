@@ -12,23 +12,19 @@
     appearance: textfield; /* Firefox */
   }
 
-  /* * {
-    @apply border-primary-border;
-  } */
-  body {
+  /* html {
     @apply bg-background text-foreground;
   }
 
   ::selection {
     @apply bg-primary text-primary-foreground;
-  }
+  } */
 }
 
 :root {
-
   /* Gun Smoke */
-  --mono-25:  0 0% 94%;
-  --mono-50:  0 0% 90%;
+  --mono-25: 0 0% 94%;
+  --mono-50: 0 0% 90%;
   --mono-100: 0 0% 86%;
   --mono-200: 0 0% 78%;
   --mono-300: 0 0% 70%;
@@ -40,7 +36,7 @@
   --mono-900: 0 0% 13%;
   --mono-925: 0 0% 10%;
   --mono-950: 0 0% 7%;
-  
+
   /* Medium Purple */
   --primary-25: 264 100% 99%;
   --primary-50: 264 100% 98%;
@@ -56,7 +52,7 @@
   --primary-925: 267 80% 27%;
   --primary-950: 267 91% 21%;
 
- /* California */
+  /* California */
   --warning-50: 48 100% 96%;
   --warning-100: 48 96% 89%;
   --warning-200: 48 97% 77%;
@@ -331,33 +327,12 @@
   --chart-5: var(--info-900);
 }
 
-/* ::selection {
+::selection {
   color: hsl(var(--primary-foreground));
   background: hsl(var(--primary));
-}*/
+}
 
 html {
-  scroll-behavior: smooth;
-  /* word-break: break-word; */
-}
-/* Firefox */
-* {
-  scrollbar-width: thin;
-  scrollbar-color: hsl(var(--primary-foreground)) hsl(var(--primary));
-}
-
-/* Chrome, Edge, and Safari */
-*::-webkit-scrollbar {
-  width: 15px;
-}
-
-*::-webkit-scrollbar-track {
-  background: hsl(var(--primary));
-  border-radius: 5px;
-}
-
-*::-webkit-scrollbar-thumb {
-  background-color: hsl(var(--primary-foreground));
-  border-radius: 14px;
-  border: 3px solid hsl(var(--primary));
+  background-color: hsl(var(--background));
+  color: hsl(var(--foreground));
 }
