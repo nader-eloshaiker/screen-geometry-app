@@ -107,8 +107,8 @@
 
   --background: var(--mono-50);
   --foreground: var(--mono-950);
-  --muted: var(--mono-800);
-  --muted-foreground: var(--mono-500);
+  --muted: var(--mono-200);
+  --foreground-muted: var(--mono-500);
 
   --card: var(--primary-300);
   --card-hover: var(--primary-400);
@@ -224,8 +224,8 @@
 .dark {
   --background: var(--mono-950);
   --foreground: var(--mono-50);
-  --muted: var(--mono-800);
-  --muted-foreground: var(--mono-300);
+  --muted: var(--mono-900);
+  --foreground-muted: var(--mono-300);
 
   --card: var(--primary-400);
   --card-hover: var(--primary-600);

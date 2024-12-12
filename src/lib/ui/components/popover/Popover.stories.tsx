@@ -31,7 +31,7 @@ export const Component: Story = {
           <div className='grid gap-4'>
             <div className='space-y-2'>
               <h4 className='font-medium leading-none'>Dimensions</h4>
-              <p className='text-sm text-muted-foreground'>Set the dimensions for the layer.</p>
+              <p className='text-sm text-foreground-muted'>Set the dimensions for the layer.</p>
             </div>
             <div className='grid gap-4'>
               <div className='grid grid-cols-3 items-center gap-4'>

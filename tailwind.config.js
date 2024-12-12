@@ -33,10 +33,10 @@ export default {
       },
       colors: {
         background: 'hsl(var(--background) / <alpha-value>)',
-        foreground: 'hsl(var(--foreground) / <alpha-value>)',
-        muted: {
-          DEFAULT: 'hsl(var(--muted) / <alpha-value>)',
-          foreground: 'hsl(var(--muted-foreground) / <alpha-value>)',
+        muted: 'hsl(var(--muted) / <alpha-value>)',
+        foreground: {
+          DEFAULT: 'hsl(var(--foreground) / <alpha-value>)',
+          muted: 'hsl(var(--foreground-muted) / <alpha-value>)',
         },
         input: {
           background: 'hsl(var(--input-background) / <alpha-value>)',
