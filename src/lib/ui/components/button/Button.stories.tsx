@@ -7,9 +7,9 @@ import { TButtonMode, TButtonPalette, TButtonSize } from './ButtonVariants'
 
 const TestButton = (props: ButtonProps) => {
   return (
-    <Button className='flex gap-2' {...props}>
-      <div className='self-center'>Button</div>
-      <ThumbsUp className='self-center' />
+    <Button {...props}>
+      <div>Button</div>
+      <ThumbsUp />
     </Button>
   )
 }

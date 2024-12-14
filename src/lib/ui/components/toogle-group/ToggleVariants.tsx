@@ -11,10 +11,10 @@ export const ToggleVariants = cva(
     variants: {
       palette: {
         primary:
-          'focus-visible:outline-primary-ring data-[state=on]:bg-primary-active data-[state=on]:text-primary-foreground-active hocus:bg-primary-hover hocus:text-primary-foreground-hover',
+          'focus-visible:outline-primary-ring data-[state=on]:bg-primary data-[state=on]:text-primary-foreground hocus:bg-primary-hover hocus:text-primary-foreground-hover',
         secondary:
-          'focus-visible:outline-secondary-ring data-[state=on]:bg-secondary-active data-[state=on]:text-secondary-foreground-active hocus:bg-secondary-hover hocus:text-secondary-foreground-hover',
-        mono: 'focus-visible:outline-mono-ring data-[state=on]:bg-mono-active data-[state=on]:text-mono-foreground-active hocus:bg-mono-hover hocus:text-mono-foreground-hover',
+          'focus-visible:outline-secondary-ring data-[state=on]:bg-secondary data-[state=on]:text-secondary-foreground hocus:bg-secondary-hover hocus:text-secondary-foreground-hover',
+        mono: 'focus-visible:outline-mono-ring data-[state=on]:bg-mono data-[state=on]:text-mono-foreground hocus:bg-mono-hover hocus:text-mono-foreground-hover',
       },
       mode: {
         ghost: 'rounded-md bg-transparent',
@@ -31,17 +31,17 @@ export const ToggleVariants = cva(
       {
         palette: 'primary',
         mode: ['outline', 'pill'],
-        className: 'border-primary-border',
+        className: 'border-primary',
       },
       {
         palette: 'secondary',
         mode: ['outline', 'pill'],
-        className: 'border-secondary-border',
+        className: 'border-secondary',
       },
       {
         palette: 'mono',
         mode: ['outline', 'pill'],
-        className: 'border-mono-border',
+        className: 'border-mono',
       },
     ],
     defaultVariants: {

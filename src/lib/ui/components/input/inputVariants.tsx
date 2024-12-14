@@ -16,6 +16,10 @@ const InputVariants = cva(
         mono: 'border-mono-border bg-mono-input text-mono-foreground-input file:text-mono-foreground-input placeholder:text-mono-foreground-muted focus-visible:outline-mono-ring hocus:border-mono-border-hover hocus:text-mono-foreground-input-hover',
         danger:
           'border-danger-border bg-danger-input text-danger-foreground-input file:text-danger-foreground-input placeholder:text-danger-foreground-muted focus-visible:outline-danger-ring hocus:border-danger-border-hover hocus:text-danger-foreground-input-hover',
+        success:
+          'border-success-border bg-success-input text-success-foreground-input file:text-success-foreground-input placeholder:text-success-foreground-muted focus-visible:outline-success-ring hocus:border-success-border-hover hocus:text-success-foreground-input-hover',
+        warning:
+          'border-warning-border bg-warning-input text-warning-foreground-input file:text-warning-foreground-input placeholder:text-warning-foreground-muted focus-visible:outline-warning-ring hocus:border-warning-border-hover hocus:text-warning-foreground-input-hover',
       },
       dimension: {
         sm: 'p-4',
@@ -37,6 +41,8 @@ const InputAdornmentVariants = cva('pointer-events-none absolute flex h-10 items
       secondary: 'bg-secondary-muted text-secondary-foreground-muted',
       mono: 'bg-mono-muted text-mono-foreground-muted',
       danger: 'bg-danger-muted text-danger-foreground-muted',
+      success: 'bg-success-muted text-success-foreground-muted',
+      warning: 'bg-warning-muted text-warning-foreground-muted',
     },
     dimension: {
       sm: 'p-2',

@@ -17,7 +17,7 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
-const palettes: Array<TLabelVariantsPalette> = ['none', 'primary', 'secondary', 'mono', 'danger']
+const palettes: Array<TLabelVariantsPalette> = ['none', 'primary', 'secondary', 'mono', 'danger', 'success', 'warning']
 
 export const Palette: Story = {
   args: {},

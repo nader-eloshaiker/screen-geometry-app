@@ -10,16 +10,16 @@ export const CheckboxVariants = cva(
     variants: {
       palette: {
         primary:
-          'border-primary-border text-primary-foreground-active focus-visible:outline-primary-ring data-[state=checked]:bg-primary-active hocus:bg-primary-hover hocus:text-primary-foreground-hover',
+          'border-primary text-primary-foreground focus-visible:outline-primary-ring data-[state=checked]:bg-primary hocus:border-primary-hover hocus:bg-primary-hover hocus:text-primary-foreground-hover',
         secondary:
-          'border-secondary-border text-secondary-foreground-active focus-visible:outline-secondary-ring data-[state=checked]:bg-secondary-active data-[state=checked]:hover:text-secondary-foreground hocus:bg-secondary-hover hocus:text-secondary-foreground-hover',
-        mono: 'border-mono-border text-mono-foreground-active focus-visible:outline-mono-ring data-[state=checked]:bg-mono-active hocus:bg-mono-hover hocus:text-mono-foreground-hover',
+          'border-secondary text-secondary-foreground focus-visible:outline-secondary-ring data-[state=checked]:bg-secondary hocus:border-secondary-hover hocus:bg-secondary-hover hocus:text-secondary-foreground-hover',
+        mono: 'border-mono text-mono-foreground focus-visible:outline-mono-ring data-[state=checked]:bg-mono hocus:border-mono-hover hocus:bg-mono-hover hocus:text-mono-foreground-hover',
         danger:
-          'border-danger-border text-danger-foreground-active focus-visible:outline-danger-ring data-[state=checked]:bg-danger-active hocus:bg-danger-hover hocus:text-danger-foreground-hover',
+          'border-danger text-danger-foreground focus-visible:outline-danger-ring data-[state=checked]:bg-danger hocus:border-danger-hover hocus:bg-danger-hover hocus:text-danger-foreground-hover',
         warning:
-          'border-warning-border text-warning-foreground-active focus-visible:outline-warning-ring data-[state=checked]:bg-warning-active hocus:bg-warning-hover hocus:text-warning-foreground-hover',
+          'border-warning text-warning-foreground focus-visible:outline-warning-ring data-[state=checked]:bg-warning hocus:border-warning-hover hocus:bg-warning-hover hocus:text-warning-foreground-hover',
         success:
-          'border-success-border text-success-foreground-active focus-visible:outline-success-ring data-[state=checked]:bg-success-active hocus:bg-success-hover hocus:text-success-foreground-hover',
+          'border-success text-success-foreground focus-visible:outline-success-ring data-[state=checked]:bg-success hocus:border-success-hover hocus:bg-success-hover hocus:text-success-foreground-hover',
       },
       dimension: {
         sm: 'size-5 [&_svg]:size-4',

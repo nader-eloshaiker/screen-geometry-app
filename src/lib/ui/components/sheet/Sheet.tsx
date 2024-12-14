@@ -6,7 +6,7 @@ import { X } from 'lucide-react'
 import * as React from 'react'
 
 import { cn } from '@/lib/utils/class-name'
-import { sheetVariants } from './Sheet.variants'
+import { SheetVariants } from './Sheet.variants'
 
 const Sheet = SheetPrimitive.Root
 
@@ -22,7 +22,7 @@ const SheetOverlay = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <SheetPrimitive.Overlay
     className={cn(
-      'fixed inset-0 z-50 bg-black/80  data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0',
+      'fixed inset-0 z-50 bg-black/80 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0',
       className,
     )}
     {...props}
@@ -33,13 +33,13 @@ SheetOverlay.displayName = SheetPrimitive.Overlay.displayName
 
 interface SheetContentProps
   extends React.ComponentPropsWithoutRef<typeof SheetPrimitive.Content>,
-    VariantProps<typeof sheetVariants> {}
+    VariantProps<typeof SheetVariants> {}
 
 const SheetContent = React.forwardRef<React.ElementRef<typeof SheetPrimitive.Content>, SheetContentProps>(
   ({ side = 'right', className, children, ...props }, ref) => (
     <SheetPortal>
       <SheetOverlay />
-      <SheetPrimitive.Content ref={ref} className={cn(sheetVariants({ side }), className)} {...props}>
+      <SheetPrimitive.Content ref={ref} className={cn(SheetVariants({ side }), className)} {...props}>
         <SheetPrimitive.Close className='absolute right-4 top-4 rounded-sm opacity-70 transition-opacity focus-visible:outline-4 focus-visible:outline-offset-4 focus-visible:outline-primary-ring disabled:pointer-events-none data-[state=open]:bg-secondary hocus:opacity-100'>
           <X className='size-4' />
           <span className='sr-only'>Close</span>

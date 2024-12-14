@@ -9,10 +9,12 @@ export const LabelVariants = cva(
     variants: {
       palette: {
         none: '',
-        primary: 'text-primary',
-        secondary: 'text-card-foreground',
-        mono: 'text-mono',
-        danger: 'text-danger',
+        primary: 'text-primary-label',
+        secondary: 'text-secondary-label',
+        mono: 'text-mono-label',
+        danger: 'text-danger-label',
+        success: 'text-success-label',
+        warning: 'text-warning-label',
       },
     },
     defaultVariants: {

@@ -38,7 +38,7 @@ export const Component: Story = {
   ],
 }
 
-const palettes: Array<TInputVariantsPalette> = ['primary', 'secondary', 'mono', 'danger']
+const palettes: Array<TInputVariantsPalette> = ['primary', 'secondary', 'mono', 'danger', 'success', 'warning']
 
 export const Palette: Story = {
   args: {},
@@ -46,7 +46,7 @@ export const Palette: Story = {
     <StateTable<TInputVariantsPalette>
       caption='Palettes'
       defaultProps='primary'
-      props={['primary', 'secondary', 'mono', 'danger']}
+      props={palettes}
       states={['normal', 'hover', 'focus', 'disabled']}
       getComponent={(prop, state) => (
         <Label palette={prop} className='grid w-full max-w-sm items-center gap-3'>

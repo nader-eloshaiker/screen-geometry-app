@@ -31,14 +31,13 @@ const frameworks = [
 
 const meta = {
   title: 'Elements/Combobox',
-  component: Command,
   // tags: ['autodocs'],
   argTypes: {},
   parameters: {
     // More on how to position stories at: https://storybook.js.org/docs/configure/story-layout
     layout: 'centered',
   },
-} satisfies Meta<typeof Command>
+} satisfies Meta
 
 export default meta
 type Story = StoryObj<typeof meta>

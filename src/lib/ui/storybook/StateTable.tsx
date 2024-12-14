@@ -39,7 +39,7 @@ export const StateTable = <T extends string>({
         {props.map((prop) => (
           <tr key={prop} className='border border-dashed border-base-300'>
             <td className='px-8 py-4 text-right text-sm' scope='row'>
-              <span className={cn({ 'font-bold text-danger-active': defaultProps === prop })}>{prop}</span>
+              <span className={cn({ 'font-bold text-danger-label': defaultProps === prop })}>{prop}</span>
             </td>
             {cols.map((state) => (
               <td key={`${prop}-${state}`} className='px-1 py-2' scope='row'>
