@@ -5,8 +5,8 @@ export default function Footer() {
   const longVer = import.meta.env.VITE_PACKAGE_VERSION
 
   return (
-    <footer className='container mx-auto rounded-t-md bg-accent px-8 py-6 text-accent-content shadow-md'>
-      <div className='flex w-full flex-col items-start justify-between gap-4 md:flex-row md:items-center'>
+    <footer className='bg-card px-8 py-6 text-card-foreground'>
+      <div className='container mx-auto flex w-full flex-col items-start justify-between gap-4 md:flex-row md:items-center'>
         <div className='flex items-center gap-2'>
           <Hash className='size-6 fill-current' />
           <span>© 2023 All right reserved</span>

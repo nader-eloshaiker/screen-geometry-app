@@ -38,7 +38,7 @@
   --mono-950: 200 4% 14%;
 
   /* Curious Blue */
-/* 
+  /* 
   --primary-50:  203 87% 97%;
   --primary-100: 205 75% 94%;
   --primary-200: 200 75% 86%;
@@ -52,7 +52,7 @@
   --primary-950: 204 65% 16%;
  */
   /* Medium Purple */
-  
+
   --primary-50: 264 100% 98%;
   --primary-100: 264 100% 98%;
   --primary-200: 262 100% 92%;
@@ -65,6 +65,9 @@
   --primary-900: 267 68% 32%;
   --primary-950: 267 91% 21%;
  
+ 
+
+
 
   /* California */
   --warning-50: 48 100% 96%;
@@ -113,12 +116,12 @@
   --muted: var(--mono-200);
   --foreground-muted: var(--mono-500);
 
-  --card: var(--primary-200);
+  --card: var(--primary-600);
   --card-hover: var(--primary-400);
   --card-active: var(--primary-400);
-  --card-foreground: var(--primary-800);
-  --card-foreground-hover: var(--primary-900);
-  --card-foreground-active: var(--primary-900);
+  --card-foreground: var(--primary-200);
+  --card-foreground-hover: var(--primary-100);
+  --card-foreground-active: var(--primary-100);
 
   --popover: var(--mono-100);
   --popover-hover: var(--mono-200);
@@ -143,13 +146,13 @@
   --primary-foreground-input: var(--primary-800);
   --primary-foreground-input-hover: var(--primary-900);
 
-  --secondary: var(--primary-500);
-  --secondary-active: var(--primary-300);
-  --secondary-hover: var(--primary-400);
+  --secondary: var(--primary-400);
+  --secondary-active: var(--primary-200);
+  --secondary-hover: var(--primary-500);
   --secondary-muted: var(--primary-200);
   --secondary-ring: var(--primary-400);
   --secondary-input: var(--primary-50);
-  --secondary-label: var(--primary-500);
+  --secondary-label: var(--primary-200);
   --secondary-border: var(--primary-300);
   --secondary-border-hover: var(--primary-500);
   --secondary-foreground: var(--primary-100);
@@ -235,12 +238,12 @@
   --muted: var(--mono-900);
   --foreground-muted: var(--mono-300);
 
-  --card: var(--primary-900);
-  --card-hover: var(--primary-700);
-  --card-active: var(--primary-700);
-  --card-foreground: var(--primary-100);
-  --card-foreground-hover: var(--primary-200);
-  --card-foreground-active: var(--primary-200);
+  /* --card: var(--primary-400);
+  --card-hover: var(--primary-600);
+  --card-active: var(--primary-600);
+  --card-foreground: var(--primary-900);
+  --card-foreground-hover: var(--primary-950);
+  --card-foreground-active: var(--primary-950); */
 
   --popover: var(--mono-900);
   --popover-hover: var(--mono-800);
@@ -251,7 +254,7 @@
 
   --primary-label: var(--primary-400);
 
-  --secondary-label: var(--primary-300);
+  --secondary-label: var(--primary-200);
 
   --mono-label: var(--mono-300);
 
