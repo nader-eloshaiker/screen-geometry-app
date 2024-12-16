@@ -31,7 +31,7 @@ const Title = ({ size }: { size: 'sm' | 'lg' }) => (
 export default function Header() {
   return (
     <header className='bg-card p-4 text-card-foreground shadow-md'>
-      <div className='flex items-center gap-6 lg:hidden'>
+      <div className='flex items-center gap-6 lg:hidden' data-testid='small-header'>
         <Sheet>
           <SheetTrigger asChild>
             <Button mode='ghost' dimension='none' className='p-0'>

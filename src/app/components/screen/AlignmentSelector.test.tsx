@@ -1,4 +1,4 @@
-import { renderWithUserEvents } from '@/lib/test/utils/RenderWithUserEvents'
+import { renderWithUserEvents } from '@/lib/support/test/utils/RenderWithUserEvents'
 import { act } from '@testing-library/react'
 import { HAlignKey, HorizontalAlignmentSelector, VAlignKey, VerticalAlignmentSelector } from './AlignmentSelector'
 

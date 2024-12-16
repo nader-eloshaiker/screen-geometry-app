@@ -9,8 +9,8 @@ import {
   getSearchServiceMock,
 } from '@/lib/openapi/generated'
 import { mswWithSpy, resetMSW, startMSW, stopMSW } from '@/lib/serviceworker/NodeServiceWorker'
-import { screenInputFixture } from '@/lib/test/fixtures/ScreenFixtures'
-import { renderWithUserEvents } from '@/lib/test/utils/RenderWithUserEvents'
+import { screenInputFixture } from '@/lib/support/test/fixtures/ScreenFixtures'
+import { renderWithUserEvents } from '@/lib/support/test/utils/RenderWithUserEvents'
 import { useElementSizeMock } from '@/lib/ui/hooks/useElementSize.mock'
 import { NotificationProvider } from '@/lib/ui/notification'
 import { toScreenItemRender } from '@/lib/utils'

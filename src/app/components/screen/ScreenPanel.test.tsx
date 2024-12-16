@@ -1,5 +1,5 @@
 import { getGetScreenResponseMock } from '@/lib/openapi/generated'
-import { renderWithUserEvents } from '@/lib/test/utils/RenderWithUserEvents'
+import { renderWithUserEvents } from '@/lib/support/test/utils/RenderWithUserEvents'
 import { toScreenItemRender } from '@/lib/utils'
 import { ScreenPanel } from './ScreenPanel'
 

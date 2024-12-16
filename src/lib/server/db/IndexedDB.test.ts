@@ -1,6 +1,6 @@
 import { getGetScreenResponseMock, ScreenItem } from '@/lib/openapi/generated'
-import { screenItemFixture } from '@/lib/test/fixtures/ScreenFixtures'
-import { setupV2DB } from '@/lib/test/stubs/IndexedDBMigration.stub'
+import { screenItemFixture } from '@/lib/support/test/fixtures/ScreenFixtures'
+import { setupV2DB } from '@/lib/support/test/stubs/IndexedDBMigration.stub'
 import { IDBFactory } from 'fake-indexeddb'
 import { dbNameDefault, dbVersionDefault, Stores } from './DbConstants'
 import {

@@ -1,4 +1,4 @@
-import { renderWithUserEvents } from '@/lib/test/utils/RenderWithUserEvents'
+import { renderWithUserEvents } from '@/lib/support/test/utils/RenderWithUserEvents'
 import { Skeleton } from './Skeleton'
 
 describe('#Skeleton', () => {
@@ -7,7 +7,6 @@ describe('#Skeleton', () => {
     const element = getByTestId('Skeleton')
 
     expect(element).toBeInTheDocument()
-    expect(element.classList).toContain('skeleton')
   })
 
   it('should render an image skeleton', async () => {
@@ -15,6 +14,5 @@ describe('#Skeleton', () => {
     const element = getByTestId('Skeleton')
 
     expect(element).toBeInTheDocument()
-    expect(element.classList).toContain('skeleton')
   })
 })

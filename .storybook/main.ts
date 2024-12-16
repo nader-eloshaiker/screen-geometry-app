@@ -8,7 +8,7 @@ const coverageConfig: AddonOptionsVite = {
       'src/app/assets/**',
       'src/configs/**',
       'src/constants/**',
-      'src/lib/test/**',
+      'src/lib/support/**',
       'src/lib/serviceworker/**',
       'src/lib/openapi/generated/**',
     ],

@@ -2,7 +2,7 @@ import { FormDrawerMode } from '@/app/contexts/FormDrawer/FormDrawerManager'
 import { FormDrawerProvider } from '@/app/contexts/FormDrawer/FormDrawerProvider'
 import { getSearchServiceMock } from '@/lib/openapi/generated'
 import { mswWithSpy, startMSW, stopMSW } from '@/lib/serviceworker/NodeServiceWorker'
-import { renderWithUserEvents } from '@/lib/test/utils/RenderWithUserEvents'
+import { renderWithUserEvents } from '@/lib/support/test/utils/RenderWithUserEvents'
 import { act } from '@testing-library/react'
 import { CreateScreenButton } from './CreateButton'
 

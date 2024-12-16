@@ -1,5 +1,5 @@
 import { SearchItem, getGetSearchResponseMock } from '@/lib/openapi/generated'
-import { renderWithUserEvents } from '@/lib/test/utils/RenderWithUserEvents'
+import { renderWithUserEvents } from '@/lib/support/test/utils/RenderWithUserEvents'
 import { act, render, waitFor } from '@testing-library/react'
 import { Mock } from 'vitest'
 import { useElementSizeMock } from '../hooks/useElementSize.mock'

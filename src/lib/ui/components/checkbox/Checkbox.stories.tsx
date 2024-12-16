@@ -1,6 +1,6 @@
+import { StateTable } from '@/lib/support/ui/storybook/StateTable'
 import type { Meta, StoryObj } from '@storybook/react'
 import { fn } from '@storybook/test'
-import { StateTable } from '../../storybook/StateTable'
 import { Checkbox } from './Checkbox'
 import { TCheckboxPalette, TCheckboxSize } from './CheckboxVariants'
 

@@ -1,8 +1,8 @@
+import { StateTable } from '@/lib/support/ui/storybook/StateTable'
 import { ToggleGroupSingleProps } from '@radix-ui/react-toggle-group'
 import type { Meta, StoryObj } from '@storybook/react'
 import { fn } from '@storybook/test'
 import type { VariantProps } from 'class-variance-authority'
-import { StateTable } from '../../storybook/StateTable'
 import { TToggleMode, TTogglePalette, TToggleSize, ToggleVariants } from '../toggle/ToggleVariants'
 import { ToggleGroup, ToggleGroupItem } from './ToggleGroup'
 
