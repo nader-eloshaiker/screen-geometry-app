@@ -1,5 +1,6 @@
 import useLocalStorage from '@/app/hooks/useLocalStorage'
-import { cn } from '@/lib/utils/class-name'
+import { ToggleGroup, ToggleGroupItem } from '@/lib/ui/components/tooglegroup/ToggleGroup'
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/lib/ui/components/tooltip/Tooltip'
 import {
   AlignCenterHorizontal,
   AlignCenterVertical,
@@ -24,48 +25,36 @@ type TProps = {
 type AlignmentSelectorProps = TProps & {
   storageKey: string
   defaultValue: Alignment
-  StartIcon: ComponentType<SVGProps<SVGSVGElement>>
-  CenterIcon: ComponentType<SVGProps<SVGSVGElement>>
-  EndIcon: ComponentType<SVGProps<SVGSVGElement>>
+  content: Array<{
+    Icon: ComponentType<SVGProps<SVGSVGElement>>
+    alignment: Alignment
+    label: string
+  }>
 }
-const AlignmentSelector = ({
-  onChange,
-  storageKey,
-  defaultValue,
-  StartIcon,
-  CenterIcon,
-  EndIcon,
-}: AlignmentSelectorProps) => {
-  const [alignment, setAlignment] = useLocalStorage<Alignment>(storageKey, defaultValue)
+const AlignmentSelector = ({ onChange, storageKey, defaultValue, content }: AlignmentSelectorProps) => {
+  const [alignment, setAlignment] = useLocalStorage<string>(storageKey, defaultValue)
 
   useEffect(() => {
-    onChange(alignment)
+    onChange(alignment as Alignment)
   }, [alignment, onChange])
 
   return (
-    <div className='join'>
-      <button
-        title='Start Alignment'
-        className={cn('btn btn-primary join-item ', { 'btn-outline': alignment !== 'start' })}
-        onClick={() => setAlignment('start')}
-      >
-        <StartIcon className='size-5' />
-      </button>
-      <button
-        title='Center Alignment'
-        className={cn('btn btn-primary join-item', { 'btn-outline': alignment !== 'center' })}
-        onClick={() => setAlignment('center')}
-      >
-        <CenterIcon className='size-5' />
-      </button>
-      <button
-        title='End Alignment'
-        className={cn('btn btn-primary join-item', { 'btn-outline': alignment !== 'end' })}
-        onClick={() => setAlignment('end')}
-      >
-        <EndIcon className='size-5' />
-      </button>
-    </div>
+    <TooltipProvider>
+      <ToggleGroup type='single' mode='pill' value={alignment} onValueChange={setAlignment}>
+        {content.map(({ Icon, alignment, label }) => (
+          <ToggleGroupItem key={label} value={alignment} aria-label={label}>
+            <Tooltip>
+              <TooltipTrigger>
+                <Icon className='size-5' />
+              </TooltipTrigger>
+              <TooltipContent className='m-3'>
+                <p>{label}</p>
+              </TooltipContent>
+            </Tooltip>
+          </ToggleGroupItem>
+        ))}
+      </ToggleGroup>
+    </TooltipProvider>
   )
 }
 
@@ -75,9 +64,11 @@ export const VerticalAlignmentSelector = ({ onChange }: TProps) => {
       storageKey={VAlignKey}
       defaultValue={VAlignDefault}
       onChange={onChange}
-      StartIcon={AlignStartHorizontal}
-      CenterIcon={AlignCenterHorizontal}
-      EndIcon={AlignEndHorizontal}
+      content={[
+        { Icon: AlignStartHorizontal, alignment: 'start', label: 'Align Top' },
+        { Icon: AlignCenterHorizontal, alignment: 'center', label: 'Align Center' },
+        { Icon: AlignEndHorizontal, alignment: 'end', label: 'Align Bottom' },
+      ]}
     />
   )
 }
@@ -88,9 +79,11 @@ export const HorizontalAlignmentSelector = ({ onChange }: TProps) => {
       storageKey={HAlignKey}
       defaultValue={HAlignDefault}
       onChange={onChange}
-      StartIcon={AlignStartVertical}
-      CenterIcon={AlignCenterVertical}
-      EndIcon={AlignEndVertical}
+      content={[
+        { Icon: AlignStartVertical, alignment: 'start', label: 'Align Left' },
+        { Icon: AlignCenterVertical, alignment: 'center', label: 'Align Center' },
+        { Icon: AlignEndVertical, alignment: 'end', label: 'Align Right' },
+      ]}
     />
   )
 }

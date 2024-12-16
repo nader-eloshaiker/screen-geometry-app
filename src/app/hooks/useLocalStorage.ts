@@ -13,7 +13,7 @@ export const getLocalStorage = <T>(key: string, initialValue: T): T => {
   }
 }
 
-const useLocalStorage = <T>(key: string, initialValue: T) => {
+const useLocalStorage = <T extends string>(key: string, initialValue: T) => {
   const [state, setState] = useState(() => getLocalStorage<T>(key, initialValue))
 
   useEffect(() => {
