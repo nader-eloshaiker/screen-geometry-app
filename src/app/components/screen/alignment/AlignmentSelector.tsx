@@ -1,4 +1,5 @@
 import useLocalStorage from '@/app/hooks/useLocalStorage'
+import { ToggleVariants } from '@/lib/ui/components/toggle/ToggleVariants'
 import { ToggleGroup, ToggleGroupItem } from '@/lib/ui/components/tooglegroup/ToggleGroup'
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/lib/ui/components/tooltip/Tooltip'
 import {
@@ -31,6 +32,9 @@ type AlignmentSelectorProps = TProps & {
     label: string
   }>
 }
+
+const ButtonSize = ToggleVariants({ dimension: 'md' })
+
 const AlignmentSelector = ({ onChange, storageKey, defaultValue, content }: AlignmentSelectorProps) => {
   const [alignment, setAlignment] = useLocalStorage<string>(storageKey, defaultValue)
 
@@ -42,9 +46,10 @@ const AlignmentSelector = ({ onChange, storageKey, defaultValue, content }: Alig
     <TooltipProvider>
       <ToggleGroup type='single' mode='pill' value={alignment} onValueChange={setAlignment}>
         {content.map(({ Icon, alignment, label }) => (
-          <ToggleGroupItem key={label} value={alignment} aria-label={label}>
+          /* Dimension is set to 'none' to ensure full tooltip activation area */
+          <ToggleGroupItem key={label} value={alignment} aria-label={label} dimension='none'>
             <Tooltip>
-              <TooltipTrigger>
+              <TooltipTrigger className={ButtonSize}>
                 <Icon className='size-5' />
               </TooltipTrigger>
               <TooltipContent className='m-3'>

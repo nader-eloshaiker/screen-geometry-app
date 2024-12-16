@@ -1,12 +1,12 @@
+import { ScreenFormDrawer } from '@/app/components/screen/ScreenFormDrawer'
 import {
   Alignment,
   HorizontalAlignmentSelector,
   VerticalAlignmentSelector,
-} from '@/app/components/screen/AlignmentSelector'
-import { CreateScreenButton } from '@/app/components/screen/CreateButton'
-import { ScreenFormDrawer } from '@/app/components/screen/ScreenFormDrawer'
-import { ScreenPanel } from '@/app/components/screen/ScreenPanel'
-import { ScreenTable } from '@/app/components/screen/ScreenTable'
+} from '@/app/components/screen/alignment/AlignmentSelector'
+import { CreateScreenButton } from '@/app/components/screen/createbutton/CreateButton'
+import { ScreenPanel } from '@/app/components/screen/panel/ScreenPanel'
+import { ScreenTable } from '@/app/components/screen/table/ScreenTable'
 import { Stacked } from '@/app/components/stacked/Stacked'
 import { defaultScreenInputList } from '@/app/constants/defaultScreenList'
 import { FormDrawerProvider } from '@/app/contexts/FormDrawer/FormDrawerProvider'
