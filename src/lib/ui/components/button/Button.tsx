@@ -9,12 +9,20 @@ export interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement>,
     VariantProps<typeof ButtonVariants> {
   asChild?: boolean
+  active?: boolean
 }
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, mode, palette, dimension, asChild = false, ...props }, ref) => {
+  ({ className, mode, palette, dimension, asChild = false, active = false, ...props }, ref) => {
     const Comp = asChild ? Slot : 'button'
-    return <Comp className={cn(ButtonVariants({ mode, palette, dimension, className }))} ref={ref} {...props} />
+    return (
+      <Comp
+        data-active={active}
+        className={cn(ButtonVariants({ mode, palette, dimension, className }), { active: true })}
+        ref={ref}
+        {...props}
+      />
+    )
   },
 )
 Button.displayName = 'Button'

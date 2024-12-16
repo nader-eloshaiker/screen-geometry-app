@@ -1,6 +1,7 @@
 import { cn } from '@/lib/utils/class-name'
 import { VariantProps } from 'class-variance-authority'
-import { NavLink, NavLinkProps } from 'react-router-dom'
+import { useEffect, useState } from 'react'
+import { NavLink, NavLinkProps, useLocation } from 'react-router-dom'
 import { ButtonVariants } from '../button/ButtonVariants'
 
 type Props = NavLinkProps &
@@ -8,8 +9,20 @@ type Props = NavLinkProps &
   React.AnchorHTMLAttributes<HTMLAnchorElement> &
   TReactChildren
 export const NavigationLink = ({ palette, dimension, mode, className, to, children, ...props }: Props) => {
+  const { pathname } = useLocation()
+  const [isActive, setActive] = useState(pathname === to)
+
+  useEffect(() => {
+    setActive(pathname === to)
+  }, [pathname, to])
+
   return (
-    <NavLink to={to} {...props} className={cn(ButtonVariants({ palette, dimension, mode, className }))}>
+    <NavLink
+      data-active={isActive}
+      to={to}
+      {...props}
+      className={cn(ButtonVariants({ palette, dimension, mode, className }))}
+    >
       {children}
     </NavLink>
   )

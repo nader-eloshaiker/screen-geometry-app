@@ -3,8 +3,8 @@ import type { Meta, StoryObj } from '@storybook/react'
 import { fn } from '@storybook/test'
 import type { VariantProps } from 'class-variance-authority'
 import { StateTable } from '../../storybook/StateTable'
+import { TToggleMode, TTogglePalette, TToggleSize, ToggleVariants } from '../toggle/ToggleVariants'
 import { ToggleGroup, ToggleGroupItem } from './ToggleGroup'
-import { TToggleMode, TTogglePalette, TToggleSize, ToggleVariants } from './ToggleVariants'
 
 type ToggleGroupDefaultProps = { type: 'multiple' | 'single' } & VariantProps<typeof ToggleVariants> & TRestProps
 
