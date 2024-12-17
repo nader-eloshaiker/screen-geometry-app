@@ -9,6 +9,7 @@ export const CheckboxVariants = cva(
   {
     variants: {
       palette: {
+        none: '',
         primary:
           'border-primary text-primary-foreground focus-visible:outline-primary-ring data-[state=checked]:bg-primary hocus:border-primary-hover hocus:bg-primary-hover hocus:text-primary-foreground-hover',
         secondary:

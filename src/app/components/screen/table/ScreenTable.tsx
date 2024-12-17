@@ -6,24 +6,42 @@ import { useDeleteScreenApi } from '@/app/hooks/api/helpers/useDeleteScreenApi'
 import { useShowScreenApi } from '@/app/hooks/api/helpers/useShowScreenApi'
 import { ScreenItemRender } from '@/app/models/screenItemRender'
 import { ScreenColor } from '@/lib/openapi/generated'
+import { Checkbox } from '@/lib/ui/components/checkbox/Checkbox'
 import { Skeleton } from '@/lib/ui/components/skeleton/Skeleton'
-import { Pencil, X } from 'lucide-react'
+import {
+  Table,
+  TableBody,
+  TableBodyCell,
+  TableBodyRow,
+  TableHeader,
+  TableHeaderCell,
+  TableHeaderRow,
+} from '@/lib/ui/components/table/Table'
+import { LoaderCircle, Pencil, X } from 'lucide-react'
 import { Dispatch, SetStateAction } from 'react'
 import ReactGA from 'react-ga4'
 import styled from 'styled-components'
-import { twMerge } from 'tailwind-merge'
 
-const StyledCheckbox = styled.input<{ $color: string }>`
-  border-color: ${(props) => props.$color};
+const StyledCheckbox = styled(Checkbox)<{ $fgColor: string; $bgColor: string }>`
+  border-color: ${(props) => props.$fgColor};
+  color: ${(props) => props.$fgColor};
 
-  &:checked {
-    --chkbg: ${(props) => props.$color};
+  [data-state='checked'] {
+    background-color: ${(props) => props.$bgColor};
+  }
+
+  &:hover,
+  &:focus {
+    opacity: 0.7;
   }
 `
 
-const StyledTableRow = styled.tr<{ $color: string; $isHighlighted: boolean }>`
-  background-color: ${(props) => (props.$isHighlighted ? props.$color : 'transparent')};
-  ${(props) => props.$isHighlighted && `border-color: ${props.$color};`}
+const StyledTableRow = styled(TableBodyRow)<{ $fgColor: string; $bgColor: string }>`
+  &:hover,
+  &:focus {
+    background-color: ${({ $bgColor }) => $bgColor};
+    border-color: ${({ $fgColor }) => $fgColor};
+  }
 `
 
 const bgColor = (themeMode: TThemeMode, color: ScreenColor) =>
@@ -37,22 +55,22 @@ const TableSkeleton = ({ cols, rows }: TTableProps) => {
   const tableCols = []
   for (let i = 0; i < cols; i++) {
     tableCols.push(
-      <td key={`table-col-${i}`}>
+      <TableBodyCell key={`table-col-${i}`}>
         <Skeleton key={`table-skeleton-${i}`} className='h-6 w-full' />
-      </td>,
+      </TableBodyCell>,
     )
   }
 
   const tableRows = []
   for (let i = 0; i < rows; i++) {
     tableRows.push(
-      <tr data-testid='SkeletonTableRow' key={`table-row-${i}`}>
+      <TableBodyRow data-testid='SkeletonTableRow' key={`table-row-${i}`}>
         {tableCols}
-      </tr>,
+      </TableBodyRow>,
     )
   }
 
-  return <tbody>{tableRows}</tbody>
+  return <TableBody>{tableRows}</TableBody>
 }
 
 type Props = {
@@ -103,64 +121,63 @@ export const ScreenTable = ({
   }
 
   return (
-    <table data-testid='ScreenTable' className={twMerge('table', className)}>
-      <thead>
-        <tr>
-          <th className='text-center'>Show</th>
-          <th className='text-center'>Size</th>
-          <th className='text-center'>Ratio</th>
-          <th className='hidden text-center sm:table-cell'>Dimensions</th>
-          <th className='hidden text-center md:table-cell'>Resolution</th>
-          <th className='flex justify-center'>
+    <Table data-testid='ScreenTable' className={className}>
+      <TableHeader>
+        <TableHeaderRow>
+          <TableHeaderCell className='text-center'>Show</TableHeaderCell>
+          <TableHeaderCell className='text-center'>Size</TableHeaderCell>
+          <TableHeaderCell className='text-center'>Ratio</TableHeaderCell>
+          <TableHeaderCell className='hidden text-center sm:table-cell'>Dimensions</TableHeaderCell>
+          <TableHeaderCell className='hidden text-center md:table-cell'>Resolution</TableHeaderCell>
+          <TableHeaderCell className='flex justify-center'>
             <span className='table-cell md:hidden'>PPI</span>
             <span className='hidden md:table-cell'>Pixels/Inch</span>
-          </th>
+          </TableHeaderCell>
           <th className='text-center'>Action</th>
-        </tr>
-      </thead>
+        </TableHeaderRow>
+      </TableHeader>
       {screens.length === 0 && isScreenListLoading ? (
         <TableSkeleton cols={7} rows={5} />
       ) : (
-        <tbody>
+        <TableBody>
           {screens.map((screen) => (
             <StyledTableRow
-              className='cursor-pointer transition-[background-color] duration-200 ease-out'
-              $isHighlighted={screen.id === highlighted?.id}
-              $color={bgColor(themeMode, screen.color)}
+              className='transition-colors duration-200 ease-out'
+              $fgColor={fgColor(themeMode, screen.color)}
+              $bgColor={bgColor(themeMode, screen.color)}
               key={screen.id}
               // onClick={() => setHighLighted(screen.id === highlighted?.id ? undefined : screen)}
               onMouseEnter={() => setHighLighted(screen.id === highlighted?.id ? undefined : screen)}
               onMouseLeave={() => setHighLighted(undefined)}
             >
-              <td>
+              <TableBodyCell>
                 <div className='flex items-center justify-center'>
                   {isShowPending && screen.id === showParams?.id ? (
-                    <div
-                      className='loading loading-spinner loading-xs'
+                    <LoaderCircle
+                      className='size-6 animate-spin'
                       style={{ color: themeMode === DarkMode ? screen.color.lightColor : screen.color.darkColor }}
                     />
                   ) : (
                     <StyledCheckbox
-                      type='checkbox'
-                      aria-label='show checkbox'
                       id={screen.id}
-                      $color={fgColor(themeMode, screen.color)}
+                      palette='none'
+                      $fgColor={fgColor(themeMode, screen.color)}
+                      $bgColor={bgColor(themeMode, screen.color)}
                       checked={screen.visible}
-                      className='checkbox checkbox-sm'
-                      onChange={() => onShow(screen)}
+                      onCheckedChange={() => onShow(screen)}
                     />
                   )}
                 </div>
-              </td>
-              <td className='text-center'>{screen.data.diagonalSize}&quot;</td>
-              <td className='text-center'>{screen.data.aspectRatio}</td>
-              <td className='hidden text-center sm:table-cell'>
+              </TableBodyCell>
+              <TableBodyCell className='text-center'>{screen.data.diagonalSize}&quot;</TableBodyCell>
+              <TableBodyCell className='text-center'>{screen.data.aspectRatio}</TableBodyCell>
+              <TableBodyCell className='hidden text-center sm:table-cell'>
                 {Math.round((screen.specs.hSize * 100) / 100)}&quot; x {Math.round((screen.specs.vSize * 100) / 100)}
                 &quot;
-              </td>
-              <td className='hidden text-center md:table-cell'>{`${screen.data.hRes} x ${screen.data.vRes}`}</td>
-              <td className='text-center'>{`${Math.round((screen.specs.ppi * 100) / 100)}`}</td>
-              <td>
+              </TableBodyCell>
+              <TableBodyCell className='hidden text-center md:table-cell'>{`${screen.data.hRes} x ${screen.data.vRes}`}</TableBodyCell>
+              <TableBodyCell className='text-center'>{`${Math.round((screen.specs.ppi * 100) / 100)}`}</TableBodyCell>
+              <TableBodyCell>
                 <div className='flex flex-row items-center justify-center gap-3'>
                   <button title='Edit' onClick={() => handleEdit(screen)}>
                     <Pencil id='edit-icon' className='size-4' />
@@ -173,11 +190,11 @@ export const ScreenTable = ({
                     </button>
                   )}
                 </div>
-              </td>
+              </TableBodyCell>
             </StyledTableRow>
           ))}
-        </tbody>
+        </TableBody>
       )}
-    </table>
+    </Table>
   )
 }
