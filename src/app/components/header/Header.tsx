@@ -11,6 +11,7 @@ import {
 } from '@/lib/ui/components/sheet/Sheet'
 import { cn } from '@/lib/utils/class-name'
 import { Menu } from 'lucide-react'
+import { useState } from 'react'
 import ThemeToggle from '../theme/ThemeToggle'
 
 const ThemeToggleStyled = ({ id }: { id: string }) => (
@@ -29,10 +30,12 @@ const Title = ({ size }: { size: 'sm' | 'lg' }) => (
 )
 
 export default function Header() {
+  const [open, setOpen] = useState(false)
+
   return (
     <header className='bg-card p-4 text-card-foreground shadow-md'>
       <div className='flex items-center gap-6 lg:hidden' data-testid='small-header'>
-        <Sheet>
+        <Sheet open={open} onOpenChange={setOpen}>
           <SheetTrigger asChild>
             <Button mode='ghost' dimension='none' className='p-0'>
               <Menu className='size-10' />
@@ -48,13 +51,19 @@ export default function Header() {
               </SheetDescription>
             </SheetHeader>
             <div className='grid gap-6 py-6'>
-              <NavigationLink to={RouteSchema.root.path} mode='ghost' className='justify-start text-lg font-semibold'>
+              <NavigationLink
+                to={RouteSchema.root.path}
+                mode='ghost'
+                className='justify-start text-lg font-semibold'
+                onClick={() => setOpen(false)}
+              >
                 Home
               </NavigationLink>
               <NavigationLink
                 to={RouteSchema.screens.path}
                 mode='ghost'
                 className='justify-start text-lg font-semibold'
+                onClick={() => setOpen(false)}
               >
                 Screens
               </NavigationLink>
@@ -62,10 +71,16 @@ export default function Header() {
                 to={RouteSchema.contact.path}
                 mode='ghost'
                 className='justify-start text-lg font-semibold'
+                onClick={() => setOpen(false)}
               >
                 Contact
               </NavigationLink>
-              <NavigationLink to={RouteSchema.help.path} mode='ghost' className='justify-start text-lg font-semibold'>
+              <NavigationLink
+                to={RouteSchema.help.path}
+                mode='ghost'
+                className='justify-start text-lg font-semibold'
+                onClick={() => setOpen(false)}
+              >
                 Help
               </NavigationLink>
             </div>
