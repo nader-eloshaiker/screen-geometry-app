@@ -1,6 +1,7 @@
-import { DarkMode } from '@/app/contexts/theme/Theme.types'
+import { DarkMode, TThemeMode } from '@/app/contexts/theme/Theme.types'
 import { useTheme } from '@/app/contexts/theme/useTheme'
 import { ScreenItemRender } from '@/app/models/screenItemRender'
+import { ScreenColor } from '@/lib/openapi/generated'
 import { cn } from '@/lib/utils/class-name'
 import { Dispatch, SetStateAction, useEffect, useState } from 'react'
 import styled from 'styled-components'
@@ -23,9 +24,17 @@ type TProps = TRestProps & {
 type PanelConfig = {
   width: number
   height: number
-  color: string
+  bgColor: string
   vPixelCount: number
   hPixelCount: number
+}
+
+const getBorderColor = (themeMode: TThemeMode, color: ScreenColor, selected: boolean) => {
+  const darkMode = themeMode === DarkMode
+  const colorDarkMode = darkMode && selected ? color.lightColor : `${color.lightColor}80`
+  const colorLightMode = !darkMode && !selected ? `${color.darkColor}80` : color.darkColor
+
+  return darkMode ? colorDarkMode : colorLightMode
 }
 
 export const ScreenPanel = ({ screen, highlighted = undefined, setHighLighted = () => {}, ...rest }: TProps) => {
@@ -33,7 +42,7 @@ export const ScreenPanel = ({ screen, highlighted = undefined, setHighLighted = 
   const [config, setConfig] = useState<PanelConfig>({
     width: 0,
     height: 0,
-    color: '',
+    bgColor: '',
     vPixelCount: 0,
     hPixelCount: 0,
   })
@@ -47,28 +56,29 @@ export const ScreenPanel = ({ screen, highlighted = undefined, setHighLighted = 
     setConfig({
       width: Math.round(100 * (screen.render?.width ?? 1)),
       height: Math.round(100 * (screen.render?.height ?? 1)),
-      color: themeMode === DarkMode ? `${screen.color.lightColor}35` : `${screen.color.darkColor}35`,
+      bgColor: themeMode === DarkMode ? `${screen.color.lightColor}45` : `${screen.color.darkColor}45`,
       vPixelCount: Math.round((screen.data.vRes ?? 1) / 100),
       hPixelCount: Math.round((screen.data.hRes ?? 1) / 100),
     })
-  }, [screen, themeMode])
+  }, [screen, selected, themeMode])
 
   return (
     <Panel
-      className={cn('rounded-md transition-[outline-width] duration-300 ease-out', {
-        'outline outline-[4px] sm:outline-[6px]': selected,
-        'outline outline-[2px]': !selected,
+      className={cn('rounded-md transition-[outline-width] duration-300 ease-out outline ', {
+        'outline-[6px]': selected,
+        'outline-[4px]': !selected,
       })}
       $width={config.width}
       $height={config.height}
-      $color={themeMode === DarkMode ? screen.color.lightColor : screen.color.darkColor}
+      $color={getBorderColor(themeMode, screen.color, selected)}
+      // $color={themeMode === DarkMode ? screen.color.lightColor : screen.color.darkColor}
       // onClick={() => setHighLighted(screen.id === highlighted?.id ? undefined : screen)}
       onMouseEnter={() => setHighLighted(selected ? undefined : screen)}
       onMouseLeave={() => setHighLighted(undefined)}
       {...rest}
     >
       {selected && (
-        <table className='size-full border-separate border-spacing-px md:border-spacing-0.5 lg:border-spacing-[0.28rem]'>
+        <table className='size-full border-separate border-spacing-px p-px md:border-spacing-[2px] md:p-px lg:border-spacing-[4px] lg:p-[2px]'>
           <tbody>
             {Array.from({ length: config.vPixelCount }, (_, i) => (
               <tr key={i}>
@@ -76,10 +86,9 @@ export const ScreenPanel = ({ screen, highlighted = undefined, setHighLighted = 
                   <td
                     key={j}
                     style={{
-                      backgroundColor: config.color,
-                      borderRadius: '50%',
+                      backgroundColor: config.bgColor,
+                      borderRadius: '20%',
                     }}
-                    className='transition-all duration-300 ease-out'
                   ></td>
                 ))}
               </tr>
