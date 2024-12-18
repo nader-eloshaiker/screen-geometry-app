@@ -17,6 +17,7 @@ import {
   TableHeaderCell,
   TableHeaderRow,
 } from '@/lib/ui/components/table/Table'
+import { cn } from '@/lib/utils/class-name'
 import { LoaderCircle, Pencil, X } from 'lucide-react'
 import { Dispatch, SetStateAction } from 'react'
 import ReactGA from 'react-ga4'
@@ -55,7 +56,13 @@ const TableSkeleton = ({ cols, rows }: TTableProps) => {
   const tableCols = []
   for (let i = 0; i < cols; i++) {
     tableCols.push(
-      <TableBodyCell key={`table-col-${i}`} className='px-6 py-2'>
+      <TableBodyCell
+        key={`table-col-${i}`}
+        className={cn({
+          'hidden sm:table-cell': i === 3,
+          'hidden md:table-cell': i === 4,
+        })}
+      >
         <Skeleton key={`table-skeleton-${i}`} className='h-6 w-full' />
       </TableBodyCell>,
     )

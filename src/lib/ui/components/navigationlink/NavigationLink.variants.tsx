@@ -14,8 +14,8 @@ export const NavigationLinkVariants = cva(
         mono: 'focus-visible:outline-mono-ring',
       },
       mode: {
-        button: 'shadow-md',
-        outline: 'border shadow-md',
+        button: '',
+        outline: 'border',
         ghost: 'text-foreground',
         link: 'text-foreground underline-offset-4 active:text-shadow-bold-md hocus:underline hocus:text-shadow-bold-sm',
       },

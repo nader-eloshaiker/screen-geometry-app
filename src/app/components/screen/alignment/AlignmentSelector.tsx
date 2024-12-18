@@ -44,7 +44,7 @@ const AlignmentSelector = ({ onChange, storageKey, defaultValue, description, co
     <TooltipProvider>
       <Tooltip>
         <TooltipTrigger asChild>
-          <ToggleGroup type='single' mode='pill' value={alignment} onValueChange={setAlignment}>
+          <ToggleGroup type='single' mode='pill' value={alignment} onValueChange={setAlignment} className='shadow-md'>
             {content.map(({ Icon, alignment, label }) => (
               <ToggleGroupItem key={label} value={alignment} aria-label={label}>
                 <Icon className='size-5' />

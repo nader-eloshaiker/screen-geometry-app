@@ -18,8 +18,8 @@ export const ButtonVariants = cva(
         warning: 'focus-visible:outline-warning-ring',
       },
       mode: {
-        button: 'shadow-md',
-        outline: 'border shadow-md',
+        button: '',
+        outline: 'border',
         ghost: 'text-foreground',
         link: 'text-foreground underline-offset-4 data-[active=true]:text-shadow-bold-md hocus:underline hocus:text-shadow-bold-sm',
       },

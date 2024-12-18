@@ -5,7 +5,7 @@ export type TCheckboxPalette = NonNullable<TCheckboxVariants['palette']>
 export type TCheckboxSize = NonNullable<TCheckboxVariants['dimension']>
 
 export const CheckboxVariants = cva(
-  'peer size-4 shrink-0 rounded-sm border-2 shadow-md outline-none focus-visible:outline-none focus-visible:outline-2 focus-visible:outline-offset-4 disabled:cursor-not-allowed disabled:opacity-50',
+  'peer size-4 shrink-0 rounded-sm border-2 outline-none focus-visible:outline-none focus-visible:outline-2 focus-visible:outline-offset-4 disabled:cursor-not-allowed disabled:opacity-50',
   {
     variants: {
       palette: {
