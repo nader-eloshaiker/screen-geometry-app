@@ -56,8 +56,8 @@ export const ScreenPanel = ({ screen, highlighted = undefined, setHighLighted = 
   return (
     <Panel
       className={cn('rounded-md transition-[outline-width] duration-300 ease-out', {
-        'outline outline-4 sm:outline-8': selected,
-        'outline outline-2': !selected,
+        'outline outline-[4px] sm:outline-[6px]': selected,
+        'outline outline-[2px]': !selected,
       })}
       $width={config.width}
       $height={config.height}

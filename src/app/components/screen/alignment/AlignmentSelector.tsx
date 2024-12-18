@@ -1,5 +1,4 @@
 import useLocalStorage from '@/app/hooks/useLocalStorage'
-import { ToggleVariants } from '@/lib/ui/components/toggle/ToggleVariants'
 import { ToggleGroup, ToggleGroupItem } from '@/lib/ui/components/tooglegroup/ToggleGroup'
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/lib/ui/components/tooltip/Tooltip'
 import {
@@ -26,6 +25,7 @@ type TProps = {
 type AlignmentSelectorProps = TProps & {
   storageKey: string
   defaultValue: Alignment
+  description: string
   content: Array<{
     Icon: ComponentType<SVGProps<SVGSVGElement>>
     alignment: Alignment
@@ -33,9 +33,7 @@ type AlignmentSelectorProps = TProps & {
   }>
 }
 
-const ButtonSize = ToggleVariants({ dimension: 'md' })
-
-const AlignmentSelector = ({ onChange, storageKey, defaultValue, content }: AlignmentSelectorProps) => {
+const AlignmentSelector = ({ onChange, storageKey, defaultValue, description, content }: AlignmentSelectorProps) => {
   const [alignment, setAlignment] = useLocalStorage<string>(storageKey, defaultValue)
 
   useEffect(() => {
@@ -44,21 +42,20 @@ const AlignmentSelector = ({ onChange, storageKey, defaultValue, content }: Alig
 
   return (
     <TooltipProvider>
-      <ToggleGroup type='single' mode='pill' value={alignment} onValueChange={setAlignment}>
-        {content.map(({ Icon, alignment, label }) => (
-          /* Dimension is set to 'none' to ensure full tooltip activation area */
-          <ToggleGroupItem key={label} value={alignment} aria-label={label} dimension='none'>
-            <Tooltip>
-              <TooltipTrigger className={ButtonSize}>
+      <Tooltip>
+        <TooltipTrigger asChild>
+          <ToggleGroup type='single' mode='pill' value={alignment} onValueChange={setAlignment}>
+            {content.map(({ Icon, alignment, label }) => (
+              <ToggleGroupItem key={label} value={alignment} aria-label={label}>
                 <Icon className='size-5' />
-              </TooltipTrigger>
-              <TooltipContent className='m-3'>
-                <p>{label}</p>
-              </TooltipContent>
-            </Tooltip>
-          </ToggleGroupItem>
-        ))}
-      </ToggleGroup>
+              </ToggleGroupItem>
+            ))}
+          </ToggleGroup>
+        </TooltipTrigger>
+        <TooltipContent>
+          <p>{description}</p>
+        </TooltipContent>
+      </Tooltip>
     </TooltipProvider>
   )
 }
@@ -69,6 +66,7 @@ export const VerticalAlignmentSelector = ({ onChange }: TProps) => {
       storageKey={VAlignKey}
       defaultValue={VAlignDefault}
       onChange={onChange}
+      description='Vertical Alignment'
       content={[
         { Icon: AlignStartHorizontal, alignment: 'start', label: 'Align Top' },
         { Icon: AlignCenterHorizontal, alignment: 'center', label: 'Align Center' },
@@ -84,6 +82,7 @@ export const HorizontalAlignmentSelector = ({ onChange }: TProps) => {
       storageKey={HAlignKey}
       defaultValue={HAlignDefault}
       onChange={onChange}
+      description='Horizontal Alignment'
       content={[
         { Icon: AlignStartVertical, alignment: 'start', label: 'Align Left' },
         { Icon: AlignCenterVertical, alignment: 'center', label: 'Align Center' },

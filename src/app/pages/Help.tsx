@@ -6,6 +6,7 @@ import { Stacked } from '@/app/components/stacked/Stacked'
 import { defaultScreenInputList } from '@/app/constants/defaultScreenList'
 import { ScreenItemRender } from '@/app/models/screenItemRender'
 import { Dimensions } from '@/lib/openapi/models/Screen'
+import { Label } from '@/lib/ui/components/label/Label'
 import { useElementSize } from '@/lib/ui/hooks/useElementSize'
 import { transformScreenInput } from '@/lib/utils/DataTransformation'
 import { getMaxScreenSize, normaliseScreenRender } from '@/lib/utils/ScreenCalc'
@@ -27,7 +28,7 @@ my-8 flex justify-center
 const Paragraph = tw.div`
   mb-6
 `
-const Heading = tw.div`
+const Heading = tw(Label)`
   mb-8 text-2xl font-bold
 `
 
@@ -62,7 +63,7 @@ export const Help = () => {
 
       <div className='h-full'>
         <Section>
-          <Heading>Getting started</Heading>
+          <Heading palette='primary'>Getting started</Heading>
           <Paragraph>
             When you navigate to the screens page for the first time, you will be greated with an empty table and the
             ability to import a default list of screens
@@ -119,7 +120,7 @@ export const Help = () => {
         </Section>
 
         <Section>
-          <Heading>Hide / Show</Heading>
+          <Heading palette='primary'>Hide / Show</Heading>
           <Paragraph>
             You can choose to exclude a screen from the the <strong>Physical Screen Comparison</strong> by unchecking
             the <strong>Show</strong> check box

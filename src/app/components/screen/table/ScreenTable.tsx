@@ -55,7 +55,7 @@ const TableSkeleton = ({ cols, rows }: TTableProps) => {
   const tableCols = []
   for (let i = 0; i < cols; i++) {
     tableCols.push(
-      <TableBodyCell key={`table-col-${i}`}>
+      <TableBodyCell key={`table-col-${i}`} className='px-6 py-2'>
         <Skeleton key={`table-skeleton-${i}`} className='h-6 w-full' />
       </TableBodyCell>,
     )
@@ -129,15 +129,15 @@ export const ScreenTable = ({
           <TableHeaderCell className='text-center'>Ratio</TableHeaderCell>
           <TableHeaderCell className='hidden text-center sm:table-cell'>Dimensions</TableHeaderCell>
           <TableHeaderCell className='hidden text-center md:table-cell'>Resolution</TableHeaderCell>
-          <TableHeaderCell className='flex justify-center'>
-            <span className='table-cell md:hidden'>PPI</span>
-            <span className='hidden md:table-cell'>Pixels/Inch</span>
+          <TableHeaderCell className='text-center'>
+            <span className='md:hidden'>PPI</span>
+            <span className='hidden text-nowrap md:block'>Pixels/Inch</span>
           </TableHeaderCell>
-          <th className='text-center'>Action</th>
+          <TableHeaderCell className='text-center'>Action</TableHeaderCell>
         </TableHeaderRow>
       </TableHeader>
       {screens.length === 0 && isScreenListLoading ? (
-        <TableSkeleton cols={7} rows={5} />
+        <TableSkeleton cols={7} rows={6} />
       ) : (
         <TableBody>
           {screens.map((screen) => (

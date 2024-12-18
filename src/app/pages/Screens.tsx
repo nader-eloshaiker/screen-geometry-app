@@ -15,6 +15,7 @@ import { useCreateScreenListApi } from '@/app/hooks/api/helpers/useCreateScreenL
 import { useGetScreensListApi } from '@/app/hooks/api/helpers/useGetScreenListApi'
 import { ScreenItemRender } from '@/app/models/screenItemRender'
 import { Dimensions } from '@/lib/openapi/models'
+import { Label } from '@/lib/ui/components/label/Label'
 import { Skeleton } from '@/lib/ui/components/skeleton/Skeleton'
 import { useElementSize } from '@/lib/ui/hooks/useElementSize'
 import { getMaxScreenSize } from '@/lib/utils/ScreenCalc'
@@ -60,7 +61,9 @@ export const Screens = () => {
 
         <div className='flex flex-1 flex-col gap-10'>
           <div className='flex flex-col items-center gap-4 md:flex-row md:justify-between' ref={divSizeRef}>
-            <div className='label text-xl'>Screen Specs</div>
+            <Label palette='primary' className='text-xl'>
+              Screen Specs
+            </Label>
             <CreateScreenButton />
           </div>
 
@@ -93,7 +96,9 @@ export const Screens = () => {
           {(screens.length > 0 || isScreenListLoading) && (
             <>
               <div className='flex flex-col items-center gap-4 md:flex-row md:justify-between'>
-                <div className='label text-xl'>Size and Pixel Density Comparison</div>
+                <Label palette='primary' className='text-xl'>
+                  Size and Pixel Density Comparison
+                </Label>
                 <div className='flex flex-wrap gap-4'>
                   <HorizontalAlignmentSelector onChange={setHAlignment} />
                   <VerticalAlignmentSelector onChange={setVAlignment} />
