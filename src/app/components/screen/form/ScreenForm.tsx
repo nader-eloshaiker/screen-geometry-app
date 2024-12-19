@@ -12,10 +12,10 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import { useCallback, useEffect, useState } from 'react'
 import ReactGA from 'react-ga4'
 import { FormProvider, SubmitHandler, useForm } from 'react-hook-form'
-import { ColorField } from './ColorField'
 import { DefaultInputValues } from './DefaultInputValues'
-import { InputField } from './InputField'
 import { ScreenFormSchema } from './ScreenFormSchema'
+import { ColorField } from './fields/ColorField'
+import { InputField } from './fields/InputField'
 
 type Props = {
   defaultValues?: ScreenInput | null

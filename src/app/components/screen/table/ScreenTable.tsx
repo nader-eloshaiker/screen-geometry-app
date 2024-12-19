@@ -1,11 +1,10 @@
-import { FormDrawerEventTypes } from '@/app/contexts/FormDrawer/FormDrawerManager'
-import { useFormDrawerContext } from '@/app/contexts/FormDrawer/useFormDrawerContext'
 import { DarkMode, TThemeMode } from '@/app/contexts/theme/Theme.types'
 import { useTheme } from '@/app/contexts/theme/useTheme'
 import { useDeleteScreenApi } from '@/app/hooks/api/helpers/useDeleteScreenApi'
 import { useShowScreenApi } from '@/app/hooks/api/helpers/useShowScreenApi'
 import { ScreenItemRender } from '@/app/models/screenItemRender'
 import { ScreenColor } from '@/lib/openapi/generated'
+import { Button } from '@/lib/ui/components/button/Button'
 import { Checkbox } from '@/lib/ui/components/checkbox/Checkbox'
 import { Skeleton } from '@/lib/ui/components/skeleton/Skeleton'
 import {
@@ -32,8 +31,12 @@ const StyledCheckbox = styled(Checkbox)<{ $fgColor: string; $bgColor: string }>`
   }
 
   &:hover,
-  &:focus {
+  &:focus-visible {
     opacity: 0.7;
+  }
+
+  &:focus-visible {
+    outline-color: ${(props) => props.$fgColor};
   }
 `
 
@@ -86,6 +89,7 @@ type Props = {
   className?: string
   highlighted?: ScreenItemRender
   setHighLighted?: Dispatch<SetStateAction<ScreenItemRender | undefined>>
+  onEdit?: (id: string) => void
 }
 
 export const ScreenTable = ({
@@ -94,10 +98,10 @@ export const ScreenTable = ({
   className,
   highlighted = undefined,
   setHighLighted = () => {},
+  onEdit = () => {},
 }: Props) => {
   const { isPending: isDeletePending, mutate: deleteAction, variables: deleteParams } = useDeleteScreenApi()
   const { isPending: isShowPending, mutate: showAction, variables: showParams } = useShowScreenApi()
-  const { dispatchFormDrawer } = useFormDrawerContext()
   const [themeMode] = useTheme()
 
   const onShow = (screen: ScreenItemRender) => {
@@ -116,15 +120,6 @@ export const ScreenTable = ({
       label: 'Screens Page',
     })
     deleteAction({ id: screen.id })
-  }
-
-  const handleEdit = (screen: ScreenItemRender) => {
-    ReactGA.event({
-      category: 'Button Click',
-      action: 'Clicked edit',
-      label: 'Screens Page',
-    })
-    dispatchFormDrawer({ type: FormDrawerEventTypes.Edit, payload: { id: screen.id } })
   }
 
   return (
@@ -161,13 +156,14 @@ export const ScreenTable = ({
                 <div className='flex items-center justify-center'>
                   {isShowPending && screen.id === showParams?.id ? (
                     <LoaderCircle
-                      className='size-6 animate-spin'
+                      className='ml-[5px] size-6 animate-spin'
                       style={{ color: themeMode === DarkMode ? screen.color.lightColor : screen.color.darkColor }}
                     />
                   ) : (
                     <StyledCheckbox
                       id={screen.id}
                       palette='none'
+                      dimension='sm'
                       $fgColor={fgColor(themeMode, screen.color)}
                       $bgColor={bgColor(themeMode, screen.color)}
                       checked={screen.visible}
@@ -186,9 +182,9 @@ export const ScreenTable = ({
               <TableBodyCell className='text-center'>{`${Math.round((screen.specs.ppi * 100) / 100)}`}</TableBodyCell>
               <TableBodyCell>
                 <div className='flex flex-row items-center justify-center gap-3'>
-                  <button title='Edit' onClick={() => handleEdit(screen)}>
-                    <Pencil id='edit-icon' className='size-4' />
-                  </button>
+                  <Button mode='ghost' dimension='sm' onClick={() => onEdit(screen.id)}>
+                    <Pencil id='edit-icon' />
+                  </Button>
                   {isDeletePending && screen.id === deleteParams?.id ? (
                     <div className='loading loading-spinner loading-xs' />
                   ) : (
