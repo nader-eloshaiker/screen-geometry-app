@@ -12,13 +12,13 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import { useCallback, useEffect, useState } from 'react'
 import ReactGA from 'react-ga4'
 import { FormProvider, SubmitHandler, useForm } from 'react-hook-form'
-import { DefaultInputValues } from './DefaultInputValues'
 import { ScreenFormSchema } from './ScreenFormSchema'
+import { EmptyInputValues } from './ScreenInputValues'
 import { ColorField } from './fields/ColorField'
 import { InputField } from './fields/InputField'
 
 type Props = {
-  defaultValues?: ScreenInput | null
+  defaultValues: ScreenInput | undefined
   editId?: string
   isLoading: boolean
   onClose?: () => void
@@ -38,10 +38,10 @@ const ErrorMessage = ({ message }: { message?: string }) => (
   </div>
 )
 
-export const ScreenForm = ({ defaultValues = null, editId = undefined, isLoading, onClose = () => {} }: Props) => {
-  const methods = useForm<ScreenInput>({
+export const ScreenForm = ({ defaultValues, editId, isLoading, onClose = () => {} }: Props) => {
+  const methods = useForm<NullableObj<ScreenInput>>({
     resolver: yupResolver(ScreenFormSchema),
-    defaultValues: DefaultInputValues(),
+    defaultValues: EmptyInputValues,
     mode: 'onSubmit',
   })
   const {
@@ -59,6 +59,18 @@ export const ScreenForm = ({ defaultValues = null, editId = undefined, isLoading
   const { isFetching: isSearchListLoading, data: searchListResponse } = useSearchApi({ term: searchTerm })
 
   const [toggleAnimation, setToggleAnimation] = useState<boolean>(false)
+
+  useEffect(() => {
+    if (defaultValues) {
+      const resetInputValues = defaultValues as NullableObj<ScreenInput>
+      reset(resetInputValues)
+    } else {
+      const color = createCSSColor()
+      const value = { ...EmptyInputValues, ...color }
+
+      reset(value)
+    }
+  }, [defaultValues, reset])
 
   // NOTE: this is a hack to get around the fact that the form is not re-rendering when the defaultValues prop changes
   // Address this at the top level of te form
@@ -120,26 +132,22 @@ export const ScreenForm = ({ defaultValues = null, editId = undefined, isLoading
     onClose()
   }, [clearHandler, onClose])
 
-  const submitHandler: SubmitHandler<ScreenInput> = (form: ScreenInput) => {
+  const submitHandler: SubmitHandler<NullableObj<ScreenInput>> = (form: NullableObj<ScreenInput>) => {
     ReactGA.event({
       category: 'Submit Button Click',
       action: `Submited ${editId ? 'Update' : 'Create'} Screen Button`,
       label: 'Screens Page',
     })
 
+    // type casting safe due to form validation
     if (editId) {
-      updateAction({ id: editId, data: form }, { onSuccess: onClose })
+      updateAction({ id: editId, data: form as ScreenInput }, { onSuccess: onClose })
     } else {
-      createAction({ data: form })
+      createAction({ data: form as ScreenInput }, { onSuccess: onClose })
     }
     clearHandler()
     generateColorHandler()
   }
-
-  // preset the form with the selected screen
-  useEffect(() => {
-    reset(defaultValues ?? DefaultInputValues())
-  }, [defaultValues, reset])
 
   return (
     <FormProvider {...methods}>

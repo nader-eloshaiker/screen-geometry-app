@@ -3,11 +3,12 @@ import { ScreenDataEnum } from '@/lib/openapi/models/Screen'
 import * as yup from 'yup'
 import { ObjectSchema } from 'yup'
 
-export const ScreenFormSchema: ObjectSchema<ScreenInput> = yup.object().shape(
+export const ScreenFormSchema: ObjectSchema<NullableObj<ScreenInput>> = yup.object().shape(
   {
     [ScreenDataEnum.diagonalSize]: yup
       .number()
-      .required('Diagonal size is required')
+      .nullable()
+      .notOneOf([null])
       // .transform((value, originalValue) => {
       //   if (typeof originalValue === 'string' && originalValue === '') {
       //     return undefined
@@ -18,10 +19,14 @@ export const ScreenFormSchema: ObjectSchema<ScreenInput> = yup.object().shape(
       .required('Diagonal size is required'),
     [ScreenDataEnum.aspectRatio]: yup
       .string()
+      .nullable()
+      .notOneOf([null])
       .matches(/^\d+:\d+$/, { excludeEmptyString: true, message: 'Aspect ratio must be in the form of 16:9' })
       .required('Aspect ratio is required'),
     [ScreenDataEnum.hRes]: yup
       .number()
+      .nullable()
+      .notOneOf([null])
       // .optional()
       // .transform((value, originalValue) => {
       //   if (typeof originalValue === 'string' && originalValue === '') {
@@ -38,6 +43,8 @@ export const ScreenFormSchema: ObjectSchema<ScreenInput> = yup.object().shape(
       .required('Horizontal resolution is required'),
     [ScreenDataEnum.vRes]: yup
       .number()
+      .nullable()
+      .notOneOf([null])
       // .optional()
       // .transform((value, originalValue) => {
       //   if (typeof originalValue === 'string' && originalValue === '') {
@@ -54,10 +61,14 @@ export const ScreenFormSchema: ObjectSchema<ScreenInput> = yup.object().shape(
       .required('Vertical resolution is required'),
     [ScreenDataEnum.lightColor]: yup
       .string()
+      .nullable()
+      .notOneOf([null])
       //.matches(/^#([a-f0-9]{6})\b$/, { excludeEmptyString: true, message: 'Light colour theme' })
       .required('Light color theme is required'),
     [ScreenDataEnum.darkColor]: yup
       .string()
+      .nullable()
+      .notOneOf([null])
       //.matches(/^#([a-f0-9]{6})\b$/, { excludeEmptyString: true, message: 'Dark colour theme' })
       .required('Dark color theme is required'),
   },

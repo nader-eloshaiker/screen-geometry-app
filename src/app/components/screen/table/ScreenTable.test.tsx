@@ -1,6 +1,7 @@
 import { QueryProvider } from '@/app/contexts/Query/QueryProvider'
 
 import { ScreenItemRender } from '@/app/models/screenItemRender'
+import { Screens } from '@/app/pages/Screens'
 import {
   getGetScreenListResponseMock,
   getScreenListServiceMock,
@@ -28,7 +29,20 @@ const TestComponent = ({
         <ScreenTable
           screens={screens ?? normaliseScreenRender(getGetScreenListResponseMock().list)}
           isScreenListLoading={isScreenListLoading}
+          editAction={{ handler: () => {} }}
+          deleteAction={{ handler: () => {}, isPending: false }}
+          showActon={{ handler: () => {}, isPending: false }}
         />
+      </NotificationProvider>
+    </QueryProvider>
+  )
+}
+
+const TestParentComponent = () => {
+  return (
+    <QueryProvider>
+      <NotificationProvider>
+        <Screens />
       </NotificationProvider>
     </QueryProvider>
   )
@@ -55,7 +69,7 @@ describe('#ScreenTable', () => {
   })
 
   test('renders screen table component with a table and rows', async () => {
-    const test = await renderWithUserEvents(<TestComponent />)
+    const test = await renderWithUserEvents(<TestParentComponent />)
 
     const tableElement = await test.findByRole('table')
     expect(tableElement).toBeDefined()
@@ -68,7 +82,7 @@ describe('#ScreenTable', () => {
   })
 
   test('remove a screen row when delete button is clicked', async () => {
-    const test = await renderWithUserEvents(<TestComponent />)
+    const test = await renderWithUserEvents(<TestParentComponent />)
 
     const deleteElements = await test.findAllByTitle('Delete')
     const deleteElement = deleteElements[0]

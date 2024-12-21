@@ -70,7 +70,13 @@ export const Help = () => {
           </Paragraph>
           <Diagram>
             <div className='w-96  overflow-hidden rounded-lg border-2 shadow-lg'>
-              <ScreenTable screens={[]} isScreenListLoading={false} />
+              <ScreenTable
+                screens={[]}
+                isScreenListLoading={false}
+                editAction={{ handler: () => {} }}
+                deleteAction={{ handler: () => {}, isPending: false }}
+                showActon={{ handler: () => {}, isPending: false }}
+              />
               <div className='flex h-full flex-col items-center'>
                 <div className='label py-4'>
                   <span className='text-xl'>No List Found</span>
@@ -93,7 +99,14 @@ export const Help = () => {
           <Paragraph>Loading the default list will populate the table with a list of screens.</Paragraph>
           <Diagram>
             <div className='rounded-lg border-2 p-6 shadow-lg'>
-              <ScreenTable className='pointer-events-none' screens={fullList} isScreenListLoading={false} />
+              <ScreenTable
+                className='pointer-events-none'
+                screens={fullList}
+                isScreenListLoading={false}
+                editAction={{ handler: () => {} }}
+                deleteAction={{ handler: () => {}, isPending: false }}
+                showActon={{ handler: () => {}, isPending: false }}
+              />
             </div>
           </Diagram>
           <Paragraph>
@@ -103,7 +116,14 @@ export const Help = () => {
           </Paragraph>
           <Diagram>
             <div ref={divSizeRef} className='flex flex-col gap-4 rounded-lg border-2 p-6 shadow-lg'>
-              <ScreenTable className='pointer-events-none' screens={smallList} highlighted={smallList[0]} />
+              <ScreenTable
+                className='pointer-events-none'
+                screens={smallList}
+                highlighted={smallList[0]}
+                editAction={{ handler: () => {} }}
+                deleteAction={{ handler: () => {}, isPending: false }}
+                showActon={{ handler: () => {}, isPending: false }}
+              />
               <Stacked height={maxPanelSize.height}>
                 {smallList
                   .filter((screen) => screen.visible)
@@ -127,7 +147,13 @@ export const Help = () => {
           </Paragraph>
           <Diagram>
             <div className='flex flex-col rounded-lg border-2 p-6 shadow-lg'>
-              <ScreenTable className='pointer-events-none' screens={invisibleList} />
+              <ScreenTable
+                className='pointer-events-none'
+                screens={invisibleList}
+                editAction={{ handler: () => {} }}
+                deleteAction={{ handler: () => {}, isPending: false }}
+                showActon={{ handler: () => {}, isPending: false }}
+              />
               <Stacked height={maxPanelSize.height}>
                 {invisibleList
                   .filter((screen) => screen.visible)
@@ -157,7 +183,7 @@ export const Help = () => {
           <DiagramPanel>
             <div className='mb-6 w-96 rounded-xl bg-accent p-2 text-accent-content'>
               <div className='pointer-events-none p-2'>
-                <ScreenForm isLoading={false} />
+                <ScreenForm isLoading={false} defaultValues={undefined} />
               </div>
             </div>
           </DiagramPanel>

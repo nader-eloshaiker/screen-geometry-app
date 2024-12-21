@@ -28,21 +28,23 @@ type Props = TReactChildren & {
 }
 
 const ScreenFormDrawer = ({ open, setOpen, mode, id = '', children }: Props) => {
-  const [defaultValues, setDefaultValues] = useState<ScreenInput | null>(null)
+  const [defaultValues, setDefaultValues] = useState<ScreenInput | undefined>()
   const isEdit = mode === FormModeTypes.Edit
 
   const { data: screenItemResponse, isFetching: isScreenItemLoading } = useGetScreenApi(id, isEdit && !!id)
   const closeHandler = () => {
     setOpen(false)
-    setDefaultValues(null)
+    setDefaultValues(undefined)
   }
 
   useEffect(() => {
-    if (screenItemResponse && isEdit && !isScreenItemLoading) {
+    if (screenItemResponse && id && !isScreenItemLoading) {
       const inputScreen = transformScreenItem(screenItemResponse.item)
       setDefaultValues(inputScreen)
+    } else if (!id && !isScreenItemLoading) {
+      setDefaultValues(undefined)
     }
-  }, [isScreenItemLoading, screenItemResponse, isEdit])
+  }, [isScreenItemLoading, screenItemResponse, isEdit, id])
 
   return (
     <Sheet open={open} onOpenChange={setOpen}>

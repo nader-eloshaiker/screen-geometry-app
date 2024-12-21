@@ -1,7 +1,5 @@
 import { DarkMode, TThemeMode } from '@/app/contexts/theme/Theme.types'
 import { useTheme } from '@/app/contexts/theme/useTheme'
-import { useDeleteScreenApi } from '@/app/hooks/api/helpers/useDeleteScreenApi'
-import { useShowScreenApi } from '@/app/hooks/api/helpers/useShowScreenApi'
 import { ScreenItemRender } from '@/app/models/screenItemRender'
 import { ScreenColor } from '@/lib/openapi/generated'
 import { Button } from '@/lib/ui/components/button/Button'
@@ -19,7 +17,6 @@ import {
 import { cn } from '@/lib/utils/class-name'
 import { LoaderCircle, Pencil, X } from 'lucide-react'
 import { Dispatch, SetStateAction } from 'react'
-import ReactGA from 'react-ga4'
 import styled from 'styled-components'
 
 const StyledCheckbox = styled(Checkbox)<{ $fgColor: string; $bgColor: string }>`
@@ -89,7 +86,19 @@ type Props = {
   className?: string
   highlighted?: ScreenItemRender
   setHighLighted?: Dispatch<SetStateAction<ScreenItemRender | undefined>>
-  onEdit?: (id: string) => void
+  editAction: {
+    handler: (id: string) => void
+  }
+  deleteAction: {
+    id?: string
+    isPending: boolean
+    handler: (id: string) => void
+  }
+  showActon: {
+    id?: string
+    isPending: boolean
+    handler: (id: string) => void
+  }
 }
 
 export const ScreenTable = ({
@@ -98,29 +107,11 @@ export const ScreenTable = ({
   className,
   highlighted = undefined,
   setHighLighted = () => {},
-  onEdit = () => {},
+  editAction,
+  deleteAction,
+  showActon,
 }: Props) => {
-  const { isPending: isDeletePending, mutate: deleteAction, variables: deleteParams } = useDeleteScreenApi()
-  const { isPending: isShowPending, mutate: showAction, variables: showParams } = useShowScreenApi()
   const [themeMode] = useTheme()
-
-  const onShow = (screen: ScreenItemRender) => {
-    ReactGA.event({
-      category: 'Checkbox Click',
-      action: 'Clicked show',
-      label: 'Screens Page',
-    })
-    showAction({ id: screen.id })
-  }
-
-  const handleDelete = (screen: ScreenItemRender) => {
-    ReactGA.event({
-      category: 'Button Click',
-      action: 'Clicked delete',
-      label: 'Screens Page',
-    })
-    deleteAction({ id: screen.id })
-  }
 
   return (
     <Table data-testid='ScreenTable' className={className}>
@@ -154,7 +145,7 @@ export const ScreenTable = ({
             >
               <TableBodyCell>
                 <div className='flex items-center justify-center'>
-                  {isShowPending && screen.id === showParams?.id ? (
+                  {showActon.isPending && screen.id === showActon.id ? (
                     <LoaderCircle
                       className='ml-[5px] size-6 animate-spin'
                       style={{ color: themeMode === DarkMode ? screen.color.lightColor : screen.color.darkColor }}
@@ -167,7 +158,7 @@ export const ScreenTable = ({
                       $fgColor={fgColor(themeMode, screen.color)}
                       $bgColor={bgColor(themeMode, screen.color)}
                       checked={screen.visible}
-                      onCheckedChange={() => onShow(screen)}
+                      onCheckedChange={() => showActon.handler(screen.id)}
                     />
                   )}
                 </div>
@@ -182,13 +173,13 @@ export const ScreenTable = ({
               <TableBodyCell className='text-center'>{`${Math.round((screen.specs.ppi * 100) / 100)}`}</TableBodyCell>
               <TableBodyCell>
                 <div className='flex flex-row items-center justify-center gap-3'>
-                  <Button mode='ghost' dimension='sm' onClick={() => onEdit(screen.id)}>
+                  <Button mode='ghost' dimension='sm' onClick={() => editAction.handler(screen.id)}>
                     <Pencil id='edit-icon' />
                   </Button>
-                  {isDeletePending && screen.id === deleteParams?.id ? (
+                  {deleteAction.isPending && screen.id === deleteAction.id ? (
                     <div className='loading loading-spinner loading-xs' />
                   ) : (
-                    <button title='Delete' onClick={() => handleDelete(screen)}>
+                    <button title='Delete' onClick={() => deleteAction.handler(screen.id)}>
                       <X id='delete-icon' className='size-4' />
                     </button>
                   )}

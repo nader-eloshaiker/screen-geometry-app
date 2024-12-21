@@ -21,6 +21,8 @@ import ReactGA from 'react-ga4'
 import { Helmet } from 'react-helmet-async'
 import { FormModeTypes, ScreenFormDrawer } from '../components/screen/ScreenFormDrawer'
 import { CreateScreenButton } from '../components/screen/createbutton/CreateButton'
+import { useDeleteScreenApi } from '../hooks/api/helpers/useDeleteScreenApi'
+import { useShowScreenApi } from '../hooks/api/helpers/useShowScreenApi'
 
 export const Screens = () => {
   const divSizeRef = useRef<HTMLDivElement>(null)
@@ -35,10 +37,12 @@ export const Screens = () => {
 
   const { isFetching: isScreenListLoading } = useGetScreensListApi()
   const { isPending: isCreateListLoading, mutate: createListAction } = useCreateScreenListApi()
+  const { isPending: isDeletePending, mutate: deleteAction, variables: deleteParams } = useDeleteScreenApi()
+  const { isPending: isShowPending, mutate: showAction, variables: showParams } = useShowScreenApi()
 
-  const [open, setOpen] = useState(false)
-  const [mode, setMode] = useState<FormModeTypes>(FormModeTypes.Create)
-  const [id, setId] = useState<string | undefined>()
+  const [isEditorOpen, setIsEditorOpen] = useState(false)
+  const [editMode, setEditMode] = useState<FormModeTypes>(FormModeTypes.Create)
+  const [editId, setEditId] = useState<string | undefined>()
 
   const onLoadDefault = () => {
     ReactGA.event({
@@ -55,10 +59,34 @@ export const Screens = () => {
       action: 'Clicked edit',
       label: 'Screens Page',
     })
-    setOpen(true)
-    setMode(FormModeTypes.Edit)
-    setId(id)
+    setIsEditorOpen(true)
+    setEditMode(FormModeTypes.Edit)
+    setEditId(id)
   }, [])
+
+  const onShow = useCallback(
+    (id: string) => {
+      ReactGA.event({
+        category: 'Checkbox Click',
+        action: 'Clicked show',
+        label: 'Screens Page',
+      })
+      showAction({ id })
+    },
+    [showAction],
+  )
+
+  const onDelete = useCallback(
+    (id: string) => {
+      ReactGA.event({
+        category: 'Button Click',
+        action: 'Clicked delete',
+        label: 'Screens Page',
+      })
+      deleteAction({ id })
+    },
+    [deleteAction],
+  )
 
   useEffect(() => {
     const widestScreen = screens.length > 0 ? getMaxScreenSize(screens) : { width: 47, height: 16 }
@@ -77,11 +105,11 @@ export const Screens = () => {
           <Label palette='primary' className='text-xl'>
             Screen Specs
           </Label>
-          <ScreenFormDrawer mode={mode} open={open} setOpen={setOpen} id={id}>
+          <ScreenFormDrawer mode={editMode} open={isEditorOpen} setOpen={setIsEditorOpen} id={editId}>
             <CreateScreenButton
               onClick={() => {
-                setId(undefined)
-                setMode(FormModeTypes.Create)
+                setEditId(undefined)
+                setEditMode(FormModeTypes.Create)
               }}
             />
           </ScreenFormDrawer>
@@ -92,7 +120,9 @@ export const Screens = () => {
           isScreenListLoading={isScreenListLoading}
           highlighted={highlighted}
           setHighLighted={setHighlighted}
-          onEdit={onEdit}
+          editAction={{ handler: onEdit }}
+          deleteAction={{ handler: onDelete, isPending: isDeletePending, id: deleteParams?.id }}
+          showActon={{ handler: onShow, isPending: isShowPending, id: showParams?.id }}
         />
 
         {screens.length === 0 && !isScreenListLoading && (
