@@ -5,7 +5,7 @@ import * as ToastPrimitives from '@radix-ui/react-toast'
 import { type VariantProps } from 'class-variance-authority'
 import * as React from 'react'
 
-import { cn } from '@/lib/utils/class-name'
+import { cn } from '@/lib/utils'
 import { ToastActionVariants, ToastCloseVariants, ToastVariants } from './ToastVariants'
 
 const ToastProvider = ToastPrimitives.Provider
@@ -45,13 +45,7 @@ const ToastClose = React.forwardRef<
   React.ElementRef<typeof ToastPrimitives.Close>,
   React.ComponentPropsWithoutRef<typeof ToastPrimitives.Close> & VariantProps<typeof ToastCloseVariants>
 >(({ className, palette, ...props }, ref) => (
-  <ToastPrimitives.Close
-    ref={ref}
-    // eslint-disable-next-line tailwindcss/no-custom-classname
-    className={cn(ToastCloseVariants({ palette }), className)}
-    toast-close=''
-    {...props}
-  >
+  <ToastPrimitives.Close ref={ref} className={cn(ToastCloseVariants({ palette }), className)} toast-close='' {...props}>
     <Cross2Icon className='size-4' />
   </ToastPrimitives.Close>
 ))

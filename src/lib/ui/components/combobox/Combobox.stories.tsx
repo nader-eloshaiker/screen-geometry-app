@@ -1,4 +1,4 @@
-import { cn } from '@/lib/utils/class-name'
+import { cn } from '@/lib/utils'
 import { Popover, PopoverContent, PopoverTrigger } from '@radix-ui/react-popover'
 import type { Meta, StoryObj } from '@storybook/react'
 import { Check, ChevronsUpDown } from 'lucide-react'

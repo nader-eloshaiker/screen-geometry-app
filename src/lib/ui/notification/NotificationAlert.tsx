@@ -1,4 +1,4 @@
-import { cn } from '@/lib/utils/class-name'
+import { cn } from '@/lib/utils'
 import { useCallback, useEffect, useState } from 'react'
 import { NotificationEventTypes, NotificationImage, NotificationType, useNotificationContext } from '.'
 

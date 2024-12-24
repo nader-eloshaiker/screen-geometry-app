@@ -1,6 +1,6 @@
 import { ScreenDataEnum } from '@/lib/openapi/models/Screen'
 import { OverlayInputField } from '@/lib/ui/overlay-input-field/OverlayInputField'
-import { cn } from '@/lib/utils/class-name'
+import { cn } from '@/lib/utils'
 import { useFormContext } from 'react-hook-form'
 
 type Props = TRestProps & {

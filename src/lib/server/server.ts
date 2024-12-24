@@ -1,6 +1,6 @@
 import { ScreenInput, ScreenInputList } from '@/lib/openapi/generated'
 import { apiRoutes } from '@/lib/openapi/meta'
-import to from '@/lib/utils/await-to-js'
+import { to } from '@/lib/utils'
 import { HttpHandler, HttpResponse, delay, http, passthrough } from 'msw'
 import {
   IdResponse,

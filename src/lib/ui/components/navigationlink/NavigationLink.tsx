@@ -1,4 +1,4 @@
-import { cn } from '@/lib/utils/class-name'
+import { cn } from '@/lib/utils'
 import { VariantProps } from 'class-variance-authority'
 import { useEffect, useState } from 'react'
 import { NavLink, NavLinkProps, useLocation } from 'react-router-dom'

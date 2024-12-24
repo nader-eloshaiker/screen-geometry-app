@@ -14,7 +14,7 @@ import {
   TableHeaderCell,
   TableHeaderRow,
 } from '@/lib/ui/components/table/Table'
-import { cn } from '@/lib/utils/class-name'
+import { cn } from '@/lib/utils'
 import { LoaderCircle, Pencil, X } from 'lucide-react'
 import { Dispatch, SetStateAction } from 'react'
 import styled from 'styled-components'

@@ -1,4 +1,4 @@
-import { cn } from '@/lib/utils/class-name'
+import { cn } from '@/lib/utils'
 import * as CheckboxPrimitive from '@radix-ui/react-checkbox'
 import { VariantProps } from 'class-variance-authority'
 import { Check } from 'lucide-react'

@@ -9,7 +9,7 @@ import {
   SheetTitle,
   SheetTrigger,
 } from '@/lib/ui/components/sheet/Sheet'
-import { cn } from '@/lib/utils/class-name'
+import { cn } from '@/lib/utils'
 import { Menu } from 'lucide-react'
 import { useState } from 'react'
 import ThemeToggle from '../theme/ThemeToggle'

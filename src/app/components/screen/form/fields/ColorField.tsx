@@ -1,6 +1,6 @@
 import { DarkMode, LightMode, TThemeMode } from '@/app/contexts/theme/Theme.types'
 import { ScreenDataEnum } from '@/lib/openapi/models/Screen'
-import { cn } from '@/lib/utils/class-name'
+import { cn } from '@/lib/utils'
 import { useFormContext } from 'react-hook-form'
 import { twMerge } from 'tailwind-merge'
 

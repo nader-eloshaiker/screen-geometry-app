@@ -1,5 +1,5 @@
 import { CreateScreenButton } from '@/app/components/screen/createbutton/CreateButton'
-import { ScreenForm } from '@/app/components/screen/form/ScreenForm'
+import { FormModeTypes, ScreenFormDrawer } from '@/app/components/screen/form/ScreenFormDrawer'
 import { ScreenPanel } from '@/app/components/screen/panel/ScreenPanel'
 import { ScreenTable } from '@/app/components/screen/table/ScreenTable'
 import { Stacked } from '@/app/components/stacked/Stacked'
@@ -8,8 +8,7 @@ import { ScreenItemRender } from '@/app/models/screenItemRender'
 import { Dimensions } from '@/lib/openapi/models/Screen'
 import { Label } from '@/lib/ui/components/label/Label'
 import { useElementSize } from '@/lib/ui/hooks/useElementSize'
-import { transformScreenInput } from '@/lib/utils/DataTransformation'
-import { getMaxScreenSize, normaliseScreenRender } from '@/lib/utils/ScreenCalc'
+import { getMaxScreenSize, normaliseScreenRender, transformScreenInput } from '@/lib/utils'
 import { Pencil, X } from 'lucide-react'
 import { useMemo, useRef } from 'react'
 import { Helmet } from 'react-helmet-async'
@@ -183,7 +182,7 @@ export const Help = () => {
           <DiagramPanel>
             <div className='mb-6 w-96 rounded-xl bg-accent p-2 text-accent-content'>
               <div className='pointer-events-none p-2'>
-                <ScreenForm isLoading={false} defaultValues={undefined} />
+                <ScreenFormDrawer open={true} setOpen={() => {}} mode={FormModeTypes.Create} />
               </div>
             </div>
           </DiagramPanel>

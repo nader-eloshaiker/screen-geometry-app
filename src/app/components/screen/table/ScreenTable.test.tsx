@@ -1,5 +1,6 @@
 import { QueryProvider } from '@/app/contexts/Query/QueryProvider'
 
+import { ScreenProvider } from '@/app/contexts/Screen/ScreenProvider'
 import { ScreenItemRender } from '@/app/models/screenItemRender'
 import { Screens } from '@/app/pages/Screens'
 import {
@@ -14,22 +15,30 @@ import { useElementSizeMock } from '@/lib/ui/hooks/useElementSize.mock'
 import { NotificationProvider } from '@/lib/ui/notification'
 import { normaliseScreenRender } from '@/lib/utils'
 import { act, waitFor } from '@testing-library/react'
+import { useState } from 'react'
+import { HelmetProvider } from 'react-helmet-async'
 import { ScreenTable } from './ScreenTable'
 
 const TestComponent = ({
   screens,
   isScreenListLoading = false,
+  editHandler = () => {},
 }: {
   screens?: Array<ScreenItemRender>
   isScreenListLoading?: boolean
+  editHandler?: (id: string) => void
 }) => {
+  const [highlighted, setHighlighted] = useState<ScreenItemRender | undefined>()
+
   return (
     <QueryProvider>
       <NotificationProvider>
         <ScreenTable
+          highlighted={highlighted}
+          setHighLighted={setHighlighted}
           screens={screens ?? normaliseScreenRender(getGetScreenListResponseMock().list)}
           isScreenListLoading={isScreenListLoading}
-          editAction={{ handler: () => {} }}
+          editAction={{ handler: editHandler }}
           deleteAction={{ handler: () => {}, isPending: false }}
           showActon={{ handler: () => {}, isPending: false }}
         />
@@ -38,13 +47,17 @@ const TestComponent = ({
   )
 }
 
-const TestParentComponent = () => {
+const TestParentComponent = ({ initialise }: { initialise?: Array<ScreenItemRender> }) => {
   return (
-    <QueryProvider>
-      <NotificationProvider>
-        <Screens />
-      </NotificationProvider>
-    </QueryProvider>
+    <HelmetProvider>
+      <QueryProvider>
+        <NotificationProvider>
+          <ScreenProvider initialise={{ screens: initialise ?? [], query: '' }}>
+            <Screens />
+          </ScreenProvider>
+        </NotificationProvider>
+      </QueryProvider>
+    </HelmetProvider>
   )
 }
 
@@ -75,7 +88,7 @@ describe('#ScreenTable', () => {
     expect(tableElement).toBeDefined()
 
     const rowElements = await test.findAllByRole('row')
-    expect(rowElements.length).toBe(5)
+    expect(rowElements.length).toBe(7)
 
     const colElements = await test.findAllByRole('columnheader')
     expect(colElements.length).toBe(7)
@@ -97,10 +110,12 @@ describe('#ScreenTable', () => {
 
     waitFor(() => expect(test.queryAllByRole('row').length).toBe(4))
   })
-  test('hide a screen row when show button is clicked', async () => {
-    const test = await renderWithUserEvents(<TestComponent />)
 
-    const showElements = await test.findAllByLabelText('show checkbox')
+  test('hide a screen row when show button is clicked', async () => {
+    const test = await renderWithUserEvents(<TestParentComponent />)
+
+    const showElements = await test.findAllByRole('checkbox')
+    expect(showElements.length).toBe(4)
     const showElement = showElements[0]
 
     await act(async () => {
@@ -120,7 +135,7 @@ describe('#ScreenTable', () => {
     expect(tableElement).toBeDefined()
 
     const rowElements = await test.findAllByTestId('SkeletonTableRow')
-    expect(rowElements.length).toBe(5)
+    expect(rowElements.length).toBe(6)
 
     const colElements = await test.findAllByRole('columnheader')
     expect(colElements.length).toBe(7)

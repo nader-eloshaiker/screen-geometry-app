@@ -5,7 +5,7 @@ import { type VariantProps } from 'class-variance-authority'
 import { X } from 'lucide-react'
 import * as React from 'react'
 
-import { cn } from '@/lib/utils/class-name'
+import { cn } from '@/lib/utils'
 import { SheetVariants } from './Sheet.variants'
 
 const Sheet = SheetPrimitive.Root
@@ -65,7 +65,11 @@ const SheetTitle = React.forwardRef<
   React.ElementRef<typeof SheetPrimitive.Title>,
   React.ComponentPropsWithoutRef<typeof SheetPrimitive.Title>
 >(({ className, ...props }, ref) => (
-  <SheetPrimitive.Title ref={ref} className={cn('text-lg font-semibold text-foreground-muted', className)} {...props} />
+  <SheetPrimitive.Title
+    ref={ref}
+    className={cn('text-lg font-semibold text-primary-foreground-muted', className)}
+    {...props}
+  />
 ))
 SheetTitle.displayName = SheetPrimitive.Title.displayName
 

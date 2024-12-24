@@ -5,41 +5,31 @@ import { useSearchApi } from '@/app/hooks/api/helpers/useSearchApi'
 import { useUpdateScreenApi } from '@/app/hooks/api/helpers/useUpdateScreenApi'
 import { ScreenInput, SearchItem } from '@/lib/openapi/generated'
 import { ScreenDataEnum } from '@/lib/openapi/models'
+import { Button } from '@/lib/ui/components/button/Button'
+import { SheetDescription, SheetFooter, SheetHeader, SheetTitle } from '@/lib/ui/components/sheet/Sheet'
 import { ListInput } from '@/lib/ui/list-input'
-import { createCSSColor } from '@/lib/utils/ScreenCalc'
-import { cn } from '@/lib/utils/class-name'
+import { cn, createCSSColor } from '@/lib/utils'
 import { yupResolver } from '@hookform/resolvers/yup'
-import { useCallback, useEffect, useState } from 'react'
+import { Dispatch, SetStateAction, useEffect, useState } from 'react'
 import ReactGA from 'react-ga4'
 import { FormProvider, SubmitHandler, useForm } from 'react-hook-form'
-import { ScreenFormSchema } from './ScreenFormSchema'
-import { EmptyInputValues } from './ScreenInputValues'
+import { ErrorMessage } from './ErrorMessage'
+import { EmptyInputValues, FormSubmitType, ScreenFormSchema } from './ScreenFormSchema'
 import { ColorField } from './fields/ColorField'
 import { InputField } from './fields/InputField'
 
-type Props = {
-  defaultValues: ScreenInput | undefined
+type Props = TReactChildren & {
+  setOpen: Dispatch<SetStateAction<boolean>>
+  isEditLoading?: boolean
   editId?: string
-  isLoading: boolean
-  onClose?: () => void
+  editScreen?: FormSubmitType
 }
 
-const ErrorMessage = ({ message }: { message?: string }) => (
-  <div role='alert' className='alert alert-error shadow-md'>
-    <svg xmlns='http://www.w3.org/2000/svg' className='size-6 shrink-0 stroke-current' fill='none' viewBox='0 0 24 24'>
-      <path
-        strokeLinecap='round'
-        strokeLinejoin='round'
-        strokeWidth='2'
-        d='M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z'
-      />
-    </svg>
-    <span>{message}</span>
-  </div>
-)
+export const ScreenForm = ({ setOpen, editId, isEditLoading, editScreen }: Props) => {
+  const { isPending: isCreateLoading, mutate: createAction } = useCreateScreenApi()
+  const { isPending: isUpdateLoading, mutate: updateAction } = useUpdateScreenApi()
 
-export const ScreenForm = ({ defaultValues, editId, isLoading, onClose = () => {} }: Props) => {
-  const methods = useForm<NullableObj<ScreenInput>>({
+  const methods = useForm<FormSubmitType>({
     resolver: yupResolver(ScreenFormSchema),
     defaultValues: EmptyInputValues,
     mode: 'onSubmit',
@@ -51,8 +41,6 @@ export const ScreenForm = ({ defaultValues, editId, isLoading, onClose = () => {
     reset,
     resetField,
   } = methods
-  const { isPending: isCreateLoading, mutate: createAction } = useCreateScreenApi()
-  const { isPending: isUpdateLoading, mutate: updateAction } = useUpdateScreenApi()
   const [clearHandler, setClearHandler] = useState<() => void>(() => {})
 
   const [searchTerm, setSearchTerm] = useState<string>('')
@@ -60,20 +48,10 @@ export const ScreenForm = ({ defaultValues, editId, isLoading, onClose = () => {
 
   const [toggleAnimation, setToggleAnimation] = useState<boolean>(false)
 
-  useEffect(() => {
-    if (defaultValues) {
-      const resetInputValues = defaultValues as NullableObj<ScreenInput>
-      reset(resetInputValues)
-    } else {
-      const color = createCSSColor()
-      const value = { ...EmptyInputValues, ...color }
+  const onClose = () => {
+    setOpen(false)
+  }
 
-      reset(value)
-    }
-  }, [defaultValues, reset])
-
-  // NOTE: this is a hack to get around the fact that the form is not re-rendering when the defaultValues prop changes
-  // Address this at the top level of te form
   const selectItemHandler = (item: SearchItem) => {
     setValue(ScreenDataEnum.aspectRatio, item.aspectRatio, {
       shouldValidate: true,
@@ -127,12 +105,7 @@ export const ScreenForm = ({ defaultValues, editId, isLoading, onClose = () => {
     reset()
   }
 
-  const closeHandler = useCallback(() => {
-    clearHandler()
-    onClose()
-  }, [clearHandler, onClose])
-
-  const submitHandler: SubmitHandler<NullableObj<ScreenInput>> = (form: NullableObj<ScreenInput>) => {
+  const submitHandler: SubmitHandler<FormSubmitType> = (form: FormSubmitType) => {
     ReactGA.event({
       category: 'Submit Button Click',
       action: `Submited ${editId ? 'Update' : 'Create'} Screen Button`,
@@ -145,31 +118,43 @@ export const ScreenForm = ({ defaultValues, editId, isLoading, onClose = () => {
     } else {
       createAction({ data: form as ScreenInput }, { onSuccess: onClose })
     }
-    clearHandler()
-    generateColorHandler()
   }
+
+  useEffect(() => {
+    if (editScreen) {
+      reset(editScreen)
+    } else {
+      const color = createCSSColor()
+      const value = { ...EmptyInputValues, ...color }
+
+      reset(value)
+    }
+  }, [editScreen, reset])
 
   return (
     <FormProvider {...methods}>
-      <div className='label label-text'>
-        <span className='pb-2 text-xl'>{!editId ? 'Add' : 'Edit'} Screen</span>
-      </div>
-      <div className='form-control flex w-full flex-col pb-10'>
-        <label htmlFor='searchList' className='label label-text'>
-          <span className='text-sm'>Auto fill the form from list of Monitors</span>
-        </label>
-        <ListInput<SearchItem>
-          id='searchList'
-          onSelectItem={selectItemHandler}
-          setClearHandler={setClearHandler}
-          isLoading={isSearchListLoading}
-          items={searchListResponse?.list}
-          onSearchList={setSearchTerm}
-          placeholder='Type to filter list...'
-        />
-      </div>
+      <form method='post' onSubmit={handleSubmit(submitHandler)} className='overflow-auto p-6'>
+        <SheetHeader>
+          <SheetTitle>{editId ? 'Edit' : 'Create'} Screen</SheetTitle>
+          <SheetDescription>
+            {editId ? 'Make changes to your Screen here.' : 'Create a new Screen by entering in the specs.'}
+          </SheetDescription>
+        </SheetHeader>
+        <div className='form-control flex w-full flex-col py-10'>
+          <label htmlFor='searchList' className='label label-text'>
+            <span className='text-sm'>Pre fill the form from list of Monitors</span>
+          </label>
+          <ListInput<SearchItem>
+            id='searchList'
+            onSelectItem={selectItemHandler}
+            setClearHandler={setClearHandler}
+            isLoading={isSearchListLoading}
+            items={searchListResponse?.list}
+            onSearchList={setSearchTerm}
+            placeholder='Type to filter list...'
+          />
+        </div>
 
-      <form method='post' onSubmit={handleSubmit(submitHandler)}>
         <div className='flex flex-col gap-10'>
           <div id='screenTag' className='grid grid-cols-2 gap-6'>
             <InputField
@@ -179,7 +164,7 @@ export const ScreenForm = ({ defaultValues, editId, isLoading, onClose = () => {
               overlay='in'
               autoComplete='off'
               placeholder='27'
-              isLoading={isLoading}
+              isLoading={isEditLoading}
             />
 
             <InputField
@@ -188,7 +173,7 @@ export const ScreenForm = ({ defaultValues, editId, isLoading, onClose = () => {
               type='text'
               autoComplete='off'
               placeholder='16:9'
-              isLoading={isLoading}
+              isLoading={isEditLoading}
             />
           </div>
 
@@ -205,7 +190,7 @@ export const ScreenForm = ({ defaultValues, editId, isLoading, onClose = () => {
               overlay='px'
               autoComplete='off'
               placeholder='3840'
-              isLoading={isLoading}
+              isLoading={isEditLoading}
             />
 
             <InputField
@@ -215,7 +200,7 @@ export const ScreenForm = ({ defaultValues, editId, isLoading, onClose = () => {
               overlay='px'
               autoComplete='off'
               placeholder='2160'
-              isLoading={isLoading}
+              isLoading={isEditLoading}
             />
           </div>
 
@@ -223,22 +208,20 @@ export const ScreenForm = ({ defaultValues, editId, isLoading, onClose = () => {
           {errors[ScreenDataEnum.vRes] && <ErrorMessage message={errors[ScreenDataEnum.vRes].message} />}
 
           <div className='flex items-end justify-between pb-8'>
-            <div className='flex gap-6'>
-              <ColorField
-                formKey={ScreenDataEnum.lightColor}
-                title='Light'
-                mode={LightMode}
-                isLoading={isLoading}
-                className='w-24'
-              />
-              <ColorField
-                formKey={ScreenDataEnum.darkColor}
-                title='Dark'
-                mode={DarkMode}
-                isLoading={isLoading}
-                className='w-24'
-              />
-            </div>
+            <ColorField
+              formKey={ScreenDataEnum.lightColor}
+              title='Light'
+              mode={LightMode}
+              isLoading={isEditLoading}
+              className='w-24'
+            />
+            <ColorField
+              formKey={ScreenDataEnum.darkColor}
+              title='Dark'
+              mode={DarkMode}
+              isLoading={isEditLoading}
+              className='w-24'
+            />
             <button
               type='button'
               title='Generate Colors'
@@ -246,34 +229,37 @@ export const ScreenForm = ({ defaultValues, editId, isLoading, onClose = () => {
               className='btn btn-primary shadow-md'
               onMouseDown={() => setToggleAnimation(!toggleAnimation)}
               onClick={generateColorHandler}
-              disabled={isLoading}
+              disabled={isEditLoading}
             >
               <RefreshIcon className='size-6 fill-current transition duration-500' toggleAnimation={toggleAnimation} />
             </button>
           </div>
-
-          <div className='flex justify-between'>
+        </div>
+        <SheetFooter>
+          <div className='flex w-full justify-between'>
             <div className='flex gap-6'>
-              <button
+              <Button
                 type='button'
-                className='btn btn-primary shadow-md'
-                disabled={isCreateLoading || isUpdateLoading || isLoading}
-                onClick={closeHandler}
+                className='shadow-lg'
+                mode='outline'
+                disabled={isCreateLoading || isUpdateLoading || isEditLoading}
+                onClick={onClose}
               >
                 Close
-              </button>
-              <button
+              </Button>
+              <Button
                 type='button'
-                className='btn btn-primary shadow-md'
-                disabled={isCreateLoading || isUpdateLoading || isLoading}
+                className='shadow-lg'
+                mode='outline'
+                disabled={isCreateLoading || isUpdateLoading || isEditLoading || !isDirty}
                 onClick={resetHandler}
               >
                 Reset
-              </button>
+              </Button>
             </div>
-            <button
+            <Button
               type='submit'
-              className={cn('btn btn-primary shadow-md', {
+              className={cn('shadow-lg', {
                 'pointer-events-none': isCreateLoading || isUpdateLoading,
               })}
               disabled={!isDirty || !isValid}
@@ -283,9 +269,12 @@ export const ScreenForm = ({ defaultValues, editId, isLoading, onClose = () => {
               ) : (
                 <>{!editId ? 'Create' : 'Update'}</>
               )}
-            </button>
+            </Button>
           </div>
-        </div>
+          {/* <SheetClose asChild>
+          <Button type='submit'>Save changes</Button>
+        </SheetClose> */}
+        </SheetFooter>
       </form>
     </FormProvider>
   )

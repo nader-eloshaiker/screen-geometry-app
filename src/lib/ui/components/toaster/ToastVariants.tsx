@@ -39,7 +39,6 @@ const ToastActionVariants = cva(
   },
 )
 
-// eslint-disable-next-line tailwindcss/no-custom-classname
 const ToastCloseVariants = cva(
   'absolute right-1 top-1 rounded-full p-1 opacity-0 outline-none transition-opacity focus-visible:opacity-100 focus-visible:outline-2 focus-visible:outline-offset-4 group-hover:opacity-100',
   {

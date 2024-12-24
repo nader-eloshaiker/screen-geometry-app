@@ -1,5 +1,5 @@
 import { Button, ButtonProps } from '@/lib/ui/components/button/Button'
-import { cn } from '@/lib/utils/class-name'
+import { cn } from '@/lib/utils'
 import { Pencil } from 'lucide-react'
 import { forwardRef } from 'react'
 

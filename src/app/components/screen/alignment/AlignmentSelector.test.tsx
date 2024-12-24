@@ -12,7 +12,7 @@ describe('#AlignmentSelector', () => {
   describe('VerticalAlignmentSelector', () => {
     it('should render', async () => {
       const { getAllByRole } = await renderWithUserEvents(<VerticalAlignmentSelector onChange={onChangeMock} />)
-      const elements = getAllByRole('button')
+      const elements = getAllByRole('radio')
 
       expect(elements).toHaveLength(3)
       expect(window.localStorage.getItem).toHaveBeenCalledWith(VAlignKey)
@@ -20,7 +20,7 @@ describe('#AlignmentSelector', () => {
 
     it('should align vertically when button clicked', async () => {
       const { getAllByRole, user } = await renderWithUserEvents(<VerticalAlignmentSelector onChange={onChangeMock} />)
-      const elements = getAllByRole('button')
+      const elements = getAllByRole('radio')
 
       await act(async () => {
         await user.click(elements[0])
@@ -48,7 +48,7 @@ describe('#AlignmentSelector', () => {
   describe('HorizontalAlignmentSelector', () => {
     it('should render', async () => {
       const { getAllByRole } = await renderWithUserEvents(<HorizontalAlignmentSelector onChange={onChangeMock} />)
-      const elements = getAllByRole('button')
+      const elements = getAllByRole('radio')
 
       expect(elements).toHaveLength(3)
       expect(window.localStorage.getItem).toHaveBeenCalledWith(HAlignKey)
@@ -56,7 +56,7 @@ describe('#AlignmentSelector', () => {
 
     it('should align horizontally when button clicked', async () => {
       const { getAllByRole, user } = await renderWithUserEvents(<HorizontalAlignmentSelector onChange={onChangeMock} />)
-      const elements = getAllByRole('button')
+      const elements = getAllByRole('radio')
 
       await act(async () => {
         await user.click(elements[0])

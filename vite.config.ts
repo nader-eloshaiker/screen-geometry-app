@@ -3,10 +3,10 @@ import { codecovVitePlugin } from '@codecov/vite-plugin'
 import react from '@vitejs/plugin-react'
 import { checker } from 'vite-plugin-checker'
 import tsconfigPaths from 'vite-tsconfig-paths'
-import { UserConfig as VitestUserConfigInterface, configDefaults, defineConfig } from 'vitest/config'
+import { ViteUserConfig, configDefaults, defineConfig } from 'vitest/config'
 import packageJson from './package.json'
 
-const VitestUserConfig: VitestUserConfigInterface = {
+const Config: ViteUserConfig = {
   test: {
     // Do not process css files (is slow)
     // css: {
@@ -67,5 +67,5 @@ export default defineConfig({
       uploadToken: process.env.CODECOV_TOKEN,
     }),
   ],
-  test: VitestUserConfig.test,
+  test: Config.test,
 })

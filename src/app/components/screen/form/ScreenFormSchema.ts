@@ -1,7 +1,7 @@
 import { ScreenInput } from '@/lib/openapi/generated'
 import { ScreenDataEnum } from '@/lib/openapi/models/Screen'
 import * as yup from 'yup'
-import { ObjectSchema } from 'yup'
+import { InferType, ObjectSchema } from 'yup'
 
 export const ScreenFormSchema: ObjectSchema<NullableObj<ScreenInput>> = yup.object().shape(
   {
@@ -74,3 +74,14 @@ export const ScreenFormSchema: ObjectSchema<NullableObj<ScreenInput>> = yup.obje
   },
   //[[ScreenDataEnum.hRes, ScreenDataEnum.vRes]],
 )
+
+export type FormSubmitType = InferType<typeof ScreenFormSchema>
+
+export const EmptyInputValues: NullableObj<ScreenInput> = {
+  aspectRatio: null,
+  diagonalSize: null,
+  hRes: null,
+  vRes: null,
+  lightColor: null,
+  darkColor: null,
+}

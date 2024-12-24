@@ -19,7 +19,7 @@ test('Smoke Test Screens Page', async ({ page }) => {
   await expect(page.locator('div').filter({ hasText: 'CreatedScreen list' }).nth(3)).toBeVisible()
 
   // Check for table data
-  const tableOriginal = await page.getByTestId('ScreenTable')
+  const tableOriginal = page.getByTestId('ScreenTable')
   await expect(tableOriginal.locator('tbody > tr')).toHaveCount(6)
   await expect(tableOriginal).toContainText('49"')
   await expect(tableOriginal).toContainText('40"')
@@ -32,7 +32,7 @@ test('Smoke Test Screens Page', async ({ page }) => {
   await page.getByRole('row', { name: 'show checkbox 27" 16:9 24" x' }).getByTitle('Delete').click()
 
   // Check for table data
-  const tableDeletedRow = await page.getByTestId('ScreenTable')
+  const tableDeletedRow = page.getByTestId('ScreenTable')
   await expect(tableDeletedRow.locator('tbody > tr')).toHaveCount(5)
   await expect(tableDeletedRow).not.toContainText('27"')
 
@@ -45,7 +45,7 @@ test('Smoke Test Screens Page', async ({ page }) => {
   await page.getByRole('button', { name: 'Close' }).click()
 
   // Check for table data
-  const tableAddedRow = await page.getByTestId('ScreenTable')
+  const tableAddedRow = page.getByTestId('ScreenTable')
   await expect(tableAddedRow.locator('tbody > tr')).toHaveCount(6)
 
   // Edit row and check for updated row
@@ -57,7 +57,7 @@ test('Smoke Test Screens Page', async ({ page }) => {
   await page.getByRole('button', { name: 'Update' }).click()
 
   // Check for table data
-  const tableUpdatedRow = await page.getByTestId('ScreenTable')
+  const tableUpdatedRow = page.getByTestId('ScreenTable')
   await expect(tableUpdatedRow.locator('tbody > tr')).toHaveCount(6)
   await expect(tableUpdatedRow).toContainText('31"')
   await expect(tableUpdatedRow).not.toContainText('32"')
@@ -66,7 +66,7 @@ test('Smoke Test Screens Page', async ({ page }) => {
    * Test for Screen Panel
    **/
 
-  const showCheckbox = await page.getByRole('row', { name: 'show checkbox 49" 32:9 47" x' }).getByLabel('show checkbox')
+  const showCheckbox = page.getByRole('row', { name: 'show checkbox 49" 32:9 47" x' }).getByLabel('show checkbox')
 
   // Check if panel is visible
   await expect(showCheckbox).toBeChecked()

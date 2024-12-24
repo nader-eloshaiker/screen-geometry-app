@@ -1,4 +1,4 @@
-import { cn } from '@/lib/utils/class-name'
+import { cn } from '@/lib/utils'
 import { VariantProps } from 'class-variance-authority'
 import { SkeletonVariants } from './SkeletonVariants'
 import { ImageIcon } from './assets/ImageIcon'
