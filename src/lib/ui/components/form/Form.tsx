@@ -7,8 +7,10 @@ import { Controller, ControllerProps, FieldPath, FieldValues, FormProvider } fro
 
 import { Label } from '@/lib/ui/components/label/Label'
 import { cn } from '@/lib/utils'
+import { VariantProps } from 'class-variance-authority'
+import { LabelVariants } from '../label/LabelVariants'
 import { FormFieldContext, FormItemContext } from './FormContext'
-import { useFormField } from './userFormField'
+import { useFormField } from './useFormField'
 
 const Form = FormProvider
 
@@ -40,13 +42,11 @@ FormItem.displayName = 'FormItem'
 
 const FormLabel = React.forwardRef<
   React.ElementRef<typeof LabelPrimitive.Root>,
-  React.ComponentPropsWithoutRef<typeof LabelPrimitive.Root>
->(({ className, ...props }, ref) => {
+  React.ComponentPropsWithoutRef<typeof LabelPrimitive.Root> & VariantProps<typeof LabelVariants>
+>(({ className, palette, ...props }, ref) => {
   const { error, formItemId } = useFormField()
 
-  return (
-    <Label ref={ref} palette={error ? 'danger' : undefined} className={className} htmlFor={formItemId} {...props} />
-  )
+  return <Label ref={ref} palette={error ? 'danger' : palette} className={className} htmlFor={formItemId} {...props} />
 })
 FormLabel.displayName = 'FormLabel'
 

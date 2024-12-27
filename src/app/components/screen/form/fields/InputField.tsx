@@ -1,73 +1,58 @@
 import { ScreenDataEnum } from '@/lib/openapi/models/Screen'
-import { OverlayInputField } from '@/lib/ui/overlay-input-field/OverlayInputField'
+import { FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/lib/ui/components/form/Form'
+import { AdornmentProps, Input } from '@/lib/ui/components/input/Input'
 import { cn } from '@/lib/utils'
-import { useFormContext } from 'react-hook-form'
+import { Control, useFormContext } from 'react-hook-form'
+import { FormSubmitType } from '../ScreenFormSchema'
 
-type Props = TRestProps & {
-  formKey: ScreenDataEnum
-  title: string
-  overlay?: string
-  isLoading?: boolean
-}
+type Props = React.InputHTMLAttributes<HTMLInputElement> &
+  AdornmentProps & {
+    formKey: ScreenDataEnum
+    title: string
+    overlay?: string
+    isLoading?: boolean
+    control: Control<FormSubmitType> | undefined
+    className?: string
+  }
 
-export const InputField = ({ formKey, title, overlay, isLoading = false, ...rest }: Props) => {
+export const InputField = ({
+  className,
+  control,
+  formKey,
+  title,
+  endAdornment,
+  startAdornment,
+  isLoading = false,
+  ...rest
+}: Props) => {
   const {
-    register,
     formState: { errors },
   } = useFormContext()
 
-  // return (
-  //   <div className='flex flex-col'>
-  //   <label htmlFor={ScreenDataEnum.diagonalSize} className='label'>
-  //     <span className='label-text'>Screen Size</span>
-  //   </label>
-  //   <label
-  //     className={cn(
-  //       'input input-bordered input-secondary flex items-center gap-2 shadow-md transition-all',
-  //       {
-  //         'input-error': errors[ScreenDataEnum.diagonalSize],
-  //         'skeleton bg-mono-300 dark:bg-mono-700 pointer-events-none rounded-lg': isLoading,
-  //       },
-  //     )}
-  //   >
-  //     <input
-  //       autoComplete='off'
-  //       placeholder='27'
-  //       type='number'
-  //       className='w-full'
-  //       id={ScreenDataEnum.diagonalSize}
-  //       {...register(ScreenDataEnum.diagonalSize)}
-  //     />
-  //     <span className='text-sm opacity-70'>in</span>
-  //   </label>
-  // </div>
-
-  // )
-
   return (
-    <OverlayInputField
-      formKey={formKey}
-      title={title}
-      overlays={
-        overlay
-          ? [
-              {
-                overlay: (
-                  <span key='1' className='fill-current text-sm opacity-70'>
-                    {overlay}
-                  </span>
-                ),
-                location: 'right',
-              },
-            ]
-          : []
-      }
-      className={cn('input-bordered input-primary shadow-lg transition-all', {
-        'input-error': errors[formKey],
-        'skeleton bg-mono-300 dark:bg-mono-700 pointer-events-none rounded-lg': isLoading,
-      })}
-      register={register(formKey)}
-      {...rest}
+    <FormField<FormSubmitType>
+      control={control}
+      name={formKey}
+      render={({ field }) => (
+        <FormItem>
+          <FormLabel palette='primary'>{title}</FormLabel>
+          <FormControl>
+            <Input
+              {...field}
+              palette={errors[formKey] ? 'danger' : 'primary'}
+              endAdornment={endAdornment}
+              startAdornment={startAdornment}
+              className={cn(className, {
+                'animate-pulse pointer-events-none': isLoading,
+              })}
+              value={field.value ?? ''} // Map null to an empty string
+              //onChange={(e) => field.onChange(e.target.value === '' ? null : Number(e.target.value))}
+              {...rest}
+            />
+          </FormControl>
+          <FormMessage />
+        </FormItem>
+      )}
     />
   )
 }

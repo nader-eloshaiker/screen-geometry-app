@@ -5,7 +5,7 @@ export type TInputVariantsPalette = NonNullable<TInputVariantsVariants['palette'
 export type TInputVariantsDimension = NonNullable<TInputVariantsVariants['dimension']>
 
 const InputVariants = cva(
-  'flex h-10 w-full rounded-md border-2 px-3 py-2 text-sm outline-none file:border-0 file:text-sm file:font-medium focus-visible:outline-2 focus-visible:outline-offset-4 disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50',
+  'flex h-10 w-full rounded-md border-2 text-sm outline-none file:border-0 file:text-sm file:font-medium focus-visible:outline-2 focus-visible:outline-offset-4 disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50',
   {
     variants: {
       palette: {
@@ -22,9 +22,9 @@ const InputVariants = cva(
           'border-warning-border bg-warning-input text-warning-foreground-input file:text-warning-foreground-input placeholder:text-warning-foreground-muted focus-visible:outline-warning-ring hocus:border-warning-border-hover hocus:text-warning-foreground-input-hover',
       },
       dimension: {
-        sm: 'p-4',
-        md: 'p-5',
-        lg: 'p-6',
+        sm: 'px-3 py-4',
+        md: 'px-4 py-5',
+        lg: 'px-5 py-6',
       },
     },
     defaultVariants: {

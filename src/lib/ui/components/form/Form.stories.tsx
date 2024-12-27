@@ -51,7 +51,7 @@ const ProfileForm = () => {
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className='space-y-8'>
-        <FormField
+        <FormField<{ username: string }>
           control={form.control}
           name='username'
           render={({ field }) => (

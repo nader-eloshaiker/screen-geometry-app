@@ -1,30 +1,50 @@
 import { DarkMode, LightMode, TThemeMode } from '@/app/contexts/theme/Theme.types'
 import { ScreenDataEnum } from '@/lib/openapi/models/Screen'
+import { FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/lib/ui/components/form/Form'
+import { Input } from '@/lib/ui/components/input/Input'
 import { cn } from '@/lib/utils'
-import { useFormContext } from 'react-hook-form'
-import { twMerge } from 'tailwind-merge'
+import { Control, useFormContext } from 'react-hook-form'
+import { FormSubmitType } from '../ScreenFormSchema'
 
-type Props = { formKey: ScreenDataEnum; title: string; mode: TThemeMode; isLoading?: boolean; className?: string }
+type Props = React.InputHTMLAttributes<HTMLInputElement> & {
+  control: Control<FormSubmitType> | undefined
+  formKey: ScreenDataEnum
+  title: string
+  mode: TThemeMode
+  isLoading?: boolean
+}
 
-export const ColorField = ({ formKey, title, mode, isLoading = false, className }: Props) => {
-  const { register, getValues } = useFormContext()
-  const color = getValues(formKey)
+export const ColorField = ({ className, control, formKey, title, mode, isLoading = false }: Props) => {
+  const {
+    watch,
+    formState: { errors },
+  } = useFormContext()
+  const color = watch(formKey)
   return (
-    <div className={twMerge('form-control flex flex-col shadow-md', className)}>
-      <label className='label label-text' htmlFor={formKey}>
-        {`${title} Color`}
-      </label>
-      <div
-        className={cn('input input-md input-bordered input-primary flex items-center justify-center text-sm', {
-          'text-black': mode === LightMode,
-          'text-white': mode === DarkMode,
-          'animate-pulse pointer-events-none': isLoading,
-        })}
-        style={{ backgroundColor: color }}
-      >
-        {color}
-      </div>
-      <input hidden {...register(formKey)} id={formKey} style={{ backgroundColor: color }} />
-    </div>
+    <FormField<FormSubmitType>
+      control={control}
+      name={formKey}
+      render={({ field }) => (
+        <FormItem className={className}>
+          <FormLabel palette='primary'>{`${title} Color`}</FormLabel>
+          <FormControl>
+            <Input
+              {...field}
+              palette={errors[formKey] ? 'danger' : 'primary'}
+              className={cn('shadow-lg', {
+                'text-foreground hocus:text-foreground': mode === LightMode,
+                'text-background hocus:text-background': mode === DarkMode,
+                'animate-pulse pointer-events-none': isLoading,
+              })}
+              style={{ backgroundColor: color }}
+              type='text'
+              value={field.value ?? ''} // Map null to an empty string
+              // onChange={(e) => field.onChange(e.target.value === '' ? null : Number(e.target.value))}
+            />
+          </FormControl>
+          <FormMessage />
+        </FormItem>
+      )}
+    />
   )
 }

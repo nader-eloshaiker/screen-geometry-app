@@ -9,75 +9,91 @@ export const ScreenFormSchema: ObjectSchema<NullableObj<ScreenInput>> = yup.obje
       .number()
       .nullable()
       .notOneOf([null])
-      // .transform((value, originalValue) => {
-      //   if (typeof originalValue === 'string' && originalValue === '') {
-      //     return undefined
-      //   }
-      //   return value
-      // })
-      .moreThan(0, 'Diagonal size must be greater than 0')
-      .required('Diagonal size is required'),
+      .transform((value, originalValue) => {
+        if (!originalValue) {
+          return null // force (undefined || '') to null
+        }
+        return value
+      })
+      .moreThan(0, 'Value must be greater than 0')
+      .required('Value is required'),
     [ScreenDataEnum.aspectRatio]: yup
       .string()
       .nullable()
       .notOneOf([null])
-      .matches(/^\d+:\d+$/, { excludeEmptyString: true, message: 'Aspect ratio must be in the form of 16:9' })
-      .required('Aspect ratio is required'),
+      .transform((value, originalValue) => {
+        if (!originalValue) {
+          return null // force (undefined || '') to null
+        }
+        return value
+      })
+      .matches(/^\d+:\d+$/, { excludeEmptyString: true, message: 'Must be formatted like 16:9' })
+      .required('Value is required'),
     [ScreenDataEnum.hRes]: yup
       .number()
       .nullable()
       .notOneOf([null])
-      // .optional()
-      // .transform((value, originalValue) => {
-      //   if (typeof originalValue === 'string' && originalValue === '') {
-      //     return undefined
-      //   }
-      //   return value
-      // })
+      .transform((value, originalValue) => {
+        if (!originalValue) {
+          return null // force (undefined || '') to null
+        }
+        return value
+      })
       // .when(ScreenDataEnum.vRes, {
       //   is: (v: number) => v && v > 0,
       //   then: (schema) =>
       //     schema.required('Horizontal required when vertical is provided').moreThan(0, 'Must be greater than 0'),
       // })
-      .moreThan(0, 'Horizontal resolution must be greater than 0')
-      .required('Horizontal resolution is required'),
+      .moreThan(0, 'Must be greater than 0')
+      .required('Value is required'),
     [ScreenDataEnum.vRes]: yup
       .number()
       .nullable()
       .notOneOf([null])
-      // .optional()
-      // .transform((value, originalValue) => {
-      //   if (typeof originalValue === 'string' && originalValue === '') {
-      //     return undefined
-      //   }
-      //   return value
-      // })
+      .transform((value, originalValue) => {
+        if (!originalValue) {
+          return null // force (undefined || '') to null
+        }
+        return value
+      })
       // .when(ScreenDataEnum.hRes, {
       //   is: (v: number) => v && v > 0,
       //   then: (schema) =>
       //     schema.required('Vertical required when vertical is provided').moreThan(0, 'Must be greater than 0'),
       // }),
-      .moreThan(0, 'Vertical resolution must be greater than 0')
-      .required('Vertical resolution is required'),
+      .moreThan(0, 'Must be greater than 0')
+      .required('Value is required'),
     [ScreenDataEnum.lightColor]: yup
       .string()
       .nullable()
       .notOneOf([null])
-      //.matches(/^#([a-f0-9]{6})\b$/, { excludeEmptyString: true, message: 'Light colour theme' })
-      .required('Light color theme is required'),
+      .transform((value, originalValue) => {
+        if (!originalValue) {
+          return null // force (undefined || '') to null
+        }
+        return value
+      })
+      .matches(/^#([a-fA-F0-9]{6})\b$/, { excludeEmptyString: true, message: 'Must be hex format' })
+      .required('Value is required'),
     [ScreenDataEnum.darkColor]: yup
       .string()
       .nullable()
       .notOneOf([null])
-      //.matches(/^#([a-f0-9]{6})\b$/, { excludeEmptyString: true, message: 'Dark colour theme' })
-      .required('Dark color theme is required'),
+      .transform((value, originalValue) => {
+        if (!originalValue) {
+          return null // force (undefined || '') to null
+        }
+        return value
+      })
+      .matches(/^#([a-fA-F0-9]{6})\b$/, { excludeEmptyString: true, message: 'Must be hex format' })
+      .required('Value is required'),
   },
   //[[ScreenDataEnum.hRes, ScreenDataEnum.vRes]],
 )
 
 export type FormSubmitType = InferType<typeof ScreenFormSchema>
 
-export const EmptyInputValues: NullableObj<ScreenInput> = {
+export const EmptyInputValues: FormSubmitType = {
   aspectRatio: null,
   diagonalSize: null,
   hRes: null,

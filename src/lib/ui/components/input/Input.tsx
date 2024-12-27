@@ -4,9 +4,16 @@ import { cn } from '@/lib/utils'
 import { VariantProps } from 'class-variance-authority'
 import { InputAdornmentVariants, InputVariants } from './InputVariants'
 
+type TAdornment = JSX.Element | string | number
+
+export interface AdornmentProps {
+  startAdornment?: TAdornment
+  endAdornment?: TAdornment
+}
+
 export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement>, VariantProps<typeof InputVariants> {
-  startAdornment?: JSX.Element | string | number
-  endAdornment?: JSX.Element | string | number
+  startAdornment?: TAdornment
+  endAdornment?: TAdornment
 }
 
 /*

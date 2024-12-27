@@ -6,13 +6,14 @@ import { useUpdateScreenApi } from '@/app/hooks/api/helpers/useUpdateScreenApi'
 import { ScreenInput, SearchItem } from '@/lib/openapi/generated'
 import { ScreenDataEnum } from '@/lib/openapi/models'
 import { Button } from '@/lib/ui/components/button/Button'
+import { Form } from '@/lib/ui/components/form/Form'
 import { SheetDescription, SheetFooter, SheetHeader, SheetTitle } from '@/lib/ui/components/sheet/Sheet'
 import { ListInput } from '@/lib/ui/list-input'
 import { cn, createCSSColor } from '@/lib/utils'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { Dispatch, SetStateAction, useEffect, useState } from 'react'
 import ReactGA from 'react-ga4'
-import { FormProvider, SubmitHandler, useForm } from 'react-hook-form'
+import { SubmitHandler, useForm } from 'react-hook-form'
 import { ErrorMessage } from './ErrorMessage'
 import { EmptyInputValues, FormSubmitType, ScreenFormSchema } from './ScreenFormSchema'
 import { ColorField } from './fields/ColorField'
@@ -29,18 +30,19 @@ export const ScreenForm = ({ setOpen, editId, isEditLoading, editScreen }: Props
   const { isPending: isCreateLoading, mutate: createAction } = useCreateScreenApi()
   const { isPending: isUpdateLoading, mutate: updateAction } = useUpdateScreenApi()
 
-  const methods = useForm<FormSubmitType>({
+  const form = useForm<FormSubmitType>({
     resolver: yupResolver(ScreenFormSchema),
     defaultValues: EmptyInputValues,
     mode: 'onSubmit',
   })
   const {
-    formState: { errors, isDirty, isValid },
+    formState: { errors, isDirty },
     setValue,
     handleSubmit,
     reset,
     resetField,
-  } = methods
+    control,
+  } = form
   const [clearHandler, setClearHandler] = useState<() => void>(() => {})
 
   const [searchTerm, setSearchTerm] = useState<string>('')
@@ -132,7 +134,7 @@ export const ScreenForm = ({ setOpen, editId, isEditLoading, editScreen }: Props
   }, [editScreen, reset])
 
   return (
-    <FormProvider {...methods}>
+    <Form {...form}>
       <form method='post' onSubmit={handleSubmit(submitHandler)} className='overflow-auto p-6'>
         <SheetHeader>
           <SheetTitle>{editId ? 'Edit' : 'Create'} Screen</SheetTitle>
@@ -155,84 +157,96 @@ export const ScreenForm = ({ setOpen, editId, isEditLoading, editScreen }: Props
           />
         </div>
 
+        {errors[ScreenDataEnum.hRes] && <ErrorMessage message={errors[ScreenDataEnum.hRes].message} />}
+        {errors[ScreenDataEnum.vRes] && <ErrorMessage message={errors[ScreenDataEnum.vRes].message} />}
+        {errors[ScreenDataEnum.diagonalSize] && <ErrorMessage message={errors[ScreenDataEnum.diagonalSize].message} />}
+        {errors[ScreenDataEnum.aspectRatio] && <ErrorMessage message={errors[ScreenDataEnum.aspectRatio].message} />}
+
         <div className='flex flex-col gap-10'>
           <div id='screenTag' className='grid grid-cols-2 gap-6'>
             <InputField
               formKey={ScreenDataEnum.diagonalSize}
+              control={control}
               title='Screen Size'
               type='number'
-              overlay='in'
+              endAdornment='in'
               autoComplete='off'
               placeholder='27'
               isLoading={isEditLoading}
+              className='shadow-lg'
             />
 
             <InputField
               formKey={ScreenDataEnum.aspectRatio}
+              control={control}
               title='Aspect Ratio'
               type='text'
               autoComplete='off'
               placeholder='16:9'
               isLoading={isEditLoading}
+              className='shadow-lg'
             />
           </div>
-
-          {errors[ScreenDataEnum.diagonalSize] && (
-            <ErrorMessage message={errors[ScreenDataEnum.diagonalSize].message} />
-          )}
-          {errors[ScreenDataEnum.aspectRatio] && <ErrorMessage message={errors[ScreenDataEnum.aspectRatio].message} />}
 
           <div id='screenData' className='grid grid-cols-2 gap-6'>
             <InputField
               formKey={ScreenDataEnum.hRes}
+              control={control}
               title='Horizontal Res'
               type='number'
-              overlay='px'
+              endAdornment='px'
               autoComplete='off'
               placeholder='3840'
               isLoading={isEditLoading}
+              className='shadow-lg'
             />
 
             <InputField
               formKey={ScreenDataEnum.vRes}
+              control={control}
               title='Vertical Res'
               type='number'
-              overlay='px'
+              endAdornment='px'
               autoComplete='off'
               placeholder='2160'
               isLoading={isEditLoading}
+              className='shadow-lg'
             />
           </div>
 
-          {errors[ScreenDataEnum.hRes] && <ErrorMessage message={errors[ScreenDataEnum.hRes].message} />}
-          {errors[ScreenDataEnum.vRes] && <ErrorMessage message={errors[ScreenDataEnum.vRes].message} />}
-
-          <div className='flex items-end justify-between pb-8'>
+          <div className='flex items-start justify-between pb-8'>
             <ColorField
               formKey={ScreenDataEnum.lightColor}
               title='Light'
               mode={LightMode}
               isLoading={isEditLoading}
-              className='w-24'
+              control={control}
+              className='w-[102px]'
             />
             <ColorField
               formKey={ScreenDataEnum.darkColor}
               title='Dark'
               mode={DarkMode}
               isLoading={isEditLoading}
-              className='w-24'
+              control={control}
+              className='w-[102px]'
             />
-            <button
+            <Button
               type='button'
+              className='mt-8 shadow-lg'
               title='Generate Colors'
+              dimension='icon-lg'
               data-testid='generate-color-btn'
-              className='btn btn-primary shadow-md'
+              mode='outline'
               onMouseDown={() => setToggleAnimation(!toggleAnimation)}
               onClick={generateColorHandler}
               disabled={isEditLoading}
             >
-              <RefreshIcon className='size-6 fill-current transition duration-500' toggleAnimation={toggleAnimation} />
-            </button>
+              <RefreshIcon
+                className='size-6 fill-current transition-transform duration-500'
+                toggleAnimation={toggleAnimation}
+              />
+            </Button>
           </div>
         </div>
         <SheetFooter>
@@ -262,7 +276,7 @@ export const ScreenForm = ({ setOpen, editId, isEditLoading, editScreen }: Props
               className={cn('shadow-lg', {
                 'pointer-events-none': isCreateLoading || isUpdateLoading,
               })}
-              disabled={!isDirty || !isValid}
+              disabled={!isDirty}
             >
               {isCreateLoading || isUpdateLoading ? (
                 <div data-testid='busySubmitButton' className='loading loading-spinner items-center justify-center' />
@@ -276,6 +290,6 @@ export const ScreenForm = ({ setOpen, editId, isEditLoading, editScreen }: Props
         </SheetClose> */}
         </SheetFooter>
       </form>
-    </FormProvider>
+    </Form>
   )
 }
