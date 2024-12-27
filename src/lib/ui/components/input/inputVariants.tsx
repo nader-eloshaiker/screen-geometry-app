@@ -34,7 +34,7 @@ const InputVariants = cva(
   },
 )
 
-const InputAdornmentVariants = cva('pointer-events-none absolute flex h-10 items-center justify-center', {
+const InputAdornmentVariants = cva('pointer-events-none absolute flex h-10 items-center justify-center text-sm', {
   variants: {
     palette: {
       primary: 'bg-primary-muted text-primary-foreground-muted',

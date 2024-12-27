@@ -1,4 +1,5 @@
 import RefreshIcon from '@/app/assets/icons/Refresh'
+import { ScreenSelector } from '@/app/components/screen/screenselector/ScreenSelector'
 import { DarkMode, LightMode } from '@/app/contexts/theme/Theme.types'
 import { useCreateScreenApi } from '@/app/hooks/api/helpers/useCreateScreenApi'
 import { useSearchApi } from '@/app/hooks/api/helpers/useSearchApi'
@@ -8,10 +9,9 @@ import { ScreenDataEnum } from '@/lib/openapi/models'
 import { Button } from '@/lib/ui/components/button/Button'
 import { Form } from '@/lib/ui/components/form/Form'
 import { SheetDescription, SheetFooter, SheetHeader, SheetTitle } from '@/lib/ui/components/sheet/Sheet'
-import { ListInput } from '@/lib/ui/list-input'
 import { cn, createCSSColor } from '@/lib/utils'
 import { yupResolver } from '@hookform/resolvers/yup'
-import { Dispatch, SetStateAction, useEffect, useState } from 'react'
+import { Dispatch, SetStateAction, useCallback, useEffect, useState } from 'react'
 import ReactGA from 'react-ga4'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { ErrorMessage } from './ErrorMessage'
@@ -43,7 +43,7 @@ export const ScreenForm = ({ setOpen, editId, isEditLoading, editScreen }: Props
     resetField,
     control,
   } = form
-  const [clearHandler, setClearHandler] = useState<() => void>(() => {})
+  const [selectId, setSelectId] = useState('')
 
   const [searchTerm, setSearchTerm] = useState<string>('')
   const { isFetching: isSearchListLoading, data: searchListResponse } = useSearchApi({ term: searchTerm })
@@ -54,40 +54,43 @@ export const ScreenForm = ({ setOpen, editId, isEditLoading, editScreen }: Props
     setOpen(false)
   }
 
-  const selectItemHandler = (item: SearchItem) => {
-    setValue(ScreenDataEnum.aspectRatio, item.aspectRatio, {
-      shouldValidate: true,
-      shouldDirty: true,
-      shouldTouch: true,
-    })
-    if (item.diagonalSize) {
-      setValue(ScreenDataEnum.diagonalSize, item.diagonalSize, {
+  const selectItemHandler = useCallback(
+    (item: SearchItem) => {
+      setValue(ScreenDataEnum.aspectRatio, item.aspectRatio, {
         shouldValidate: true,
         shouldDirty: true,
         shouldTouch: true,
       })
-    } else {
-      resetField(ScreenDataEnum.diagonalSize)
-    }
-    if (item.hRes) {
-      setValue(ScreenDataEnum.hRes, item.hRes, {
-        shouldValidate: true,
-        shouldDirty: true,
-        shouldTouch: true,
-      })
-    } else {
-      resetField(ScreenDataEnum.hRes)
-    }
-    if (item.vRes) {
-      setValue(ScreenDataEnum.vRes, item.vRes, {
-        shouldValidate: true,
-        shouldDirty: true,
-        shouldTouch: true,
-      })
-    } else {
-      resetField(ScreenDataEnum.vRes)
-    }
-  }
+      if (item.diagonalSize) {
+        setValue(ScreenDataEnum.diagonalSize, item.diagonalSize, {
+          shouldValidate: true,
+          shouldDirty: true,
+          shouldTouch: true,
+        })
+      } else {
+        resetField(ScreenDataEnum.diagonalSize)
+      }
+      if (item.hRes) {
+        setValue(ScreenDataEnum.hRes, item.hRes, {
+          shouldValidate: true,
+          shouldDirty: true,
+          shouldTouch: true,
+        })
+      } else {
+        resetField(ScreenDataEnum.hRes)
+      }
+      if (item.vRes) {
+        setValue(ScreenDataEnum.vRes, item.vRes, {
+          shouldValidate: true,
+          shouldDirty: true,
+          shouldTouch: true,
+        })
+      } else {
+        resetField(ScreenDataEnum.vRes)
+      }
+    },
+    [resetField, setValue],
+  )
 
   const generateColorHandler = () => {
     const color = createCSSColor()
@@ -103,7 +106,7 @@ export const ScreenForm = ({ setOpen, editId, isEditLoading, editScreen }: Props
   }
 
   const resetHandler = () => {
-    clearHandler()
+    setSelectId('')
     reset()
   }
 
@@ -134,162 +137,162 @@ export const ScreenForm = ({ setOpen, editId, isEditLoading, editScreen }: Props
   }, [editScreen, reset])
 
   return (
-    <Form {...form}>
-      <form method='post' onSubmit={handleSubmit(submitHandler)} className='overflow-auto p-6'>
-        <SheetHeader>
-          <SheetTitle>{editId ? 'Edit' : 'Create'} Screen</SheetTitle>
-          <SheetDescription>
-            {editId ? 'Make changes to your Screen here.' : 'Create a new Screen by entering in the specs.'}
-          </SheetDescription>
-        </SheetHeader>
-        <div className='form-control flex w-full flex-col py-10'>
-          <label htmlFor='searchList' className='label label-text'>
-            <span className='text-sm'>Pre fill the form from list of Monitors</span>
-          </label>
-          <ListInput<SearchItem>
-            id='searchList'
-            onSelectItem={selectItemHandler}
-            setClearHandler={setClearHandler}
-            isLoading={isSearchListLoading}
-            items={searchListResponse?.list}
-            onSearchList={setSearchTerm}
-            placeholder='Type to filter list...'
-          />
-        </div>
+    <div className='overflow-auto p-6'>
+      <SheetHeader>
+        <SheetTitle>{editId ? 'Edit' : 'Create'} Screen</SheetTitle>
+        <SheetDescription>
+          {editId ? 'Make changes to your Screen here.' : 'Create a new Screen by entering in the specs.'}
+        </SheetDescription>
+      </SheetHeader>
+      <ScreenSelector
+        onSelectItem={selectItemHandler}
+        isLoading={isSearchListLoading}
+        items={searchListResponse?.list}
+        placeholder='Search Screen list...'
+        label='Select Screen...'
+        selectId={selectId}
+        setSelectId={setSelectId}
+        onSearch={setSearchTerm}
+      />
 
-        {errors[ScreenDataEnum.hRes] && <ErrorMessage message={errors[ScreenDataEnum.hRes].message} />}
-        {errors[ScreenDataEnum.vRes] && <ErrorMessage message={errors[ScreenDataEnum.vRes].message} />}
-        {errors[ScreenDataEnum.diagonalSize] && <ErrorMessage message={errors[ScreenDataEnum.diagonalSize].message} />}
-        {errors[ScreenDataEnum.aspectRatio] && <ErrorMessage message={errors[ScreenDataEnum.aspectRatio].message} />}
+      <Form {...form}>
+        <form method='post' onSubmit={handleSubmit(submitHandler)}>
+          {errors[ScreenDataEnum.hRes] && <ErrorMessage message={errors[ScreenDataEnum.hRes].message} />}
+          {errors[ScreenDataEnum.vRes] && <ErrorMessage message={errors[ScreenDataEnum.vRes].message} />}
+          {errors[ScreenDataEnum.diagonalSize] && (
+            <ErrorMessage message={errors[ScreenDataEnum.diagonalSize].message} />
+          )}
+          {errors[ScreenDataEnum.aspectRatio] && <ErrorMessage message={errors[ScreenDataEnum.aspectRatio].message} />}
 
-        <div className='flex flex-col gap-10'>
-          <div id='screenTag' className='grid grid-cols-2 gap-6'>
-            <InputField
-              formKey={ScreenDataEnum.diagonalSize}
-              control={control}
-              title='Screen Size'
-              type='number'
-              endAdornment='in'
-              autoComplete='off'
-              placeholder='27'
-              isLoading={isEditLoading}
-              className='shadow-lg'
-            />
-
-            <InputField
-              formKey={ScreenDataEnum.aspectRatio}
-              control={control}
-              title='Aspect Ratio'
-              type='text'
-              autoComplete='off'
-              placeholder='16:9'
-              isLoading={isEditLoading}
-              className='shadow-lg'
-            />
-          </div>
-
-          <div id='screenData' className='grid grid-cols-2 gap-6'>
-            <InputField
-              formKey={ScreenDataEnum.hRes}
-              control={control}
-              title='Horizontal Res'
-              type='number'
-              endAdornment='px'
-              autoComplete='off'
-              placeholder='3840'
-              isLoading={isEditLoading}
-              className='shadow-lg'
-            />
-
-            <InputField
-              formKey={ScreenDataEnum.vRes}
-              control={control}
-              title='Vertical Res'
-              type='number'
-              endAdornment='px'
-              autoComplete='off'
-              placeholder='2160'
-              isLoading={isEditLoading}
-              className='shadow-lg'
-            />
-          </div>
-
-          <div className='flex items-start justify-between pb-8'>
-            <ColorField
-              formKey={ScreenDataEnum.lightColor}
-              title='Light'
-              mode={LightMode}
-              isLoading={isEditLoading}
-              control={control}
-              className='w-[102px]'
-            />
-            <ColorField
-              formKey={ScreenDataEnum.darkColor}
-              title='Dark'
-              mode={DarkMode}
-              isLoading={isEditLoading}
-              control={control}
-              className='w-[102px]'
-            />
-            <Button
-              type='button'
-              className='mt-8 shadow-lg'
-              title='Generate Colors'
-              dimension='icon-lg'
-              data-testid='generate-color-btn'
-              mode='outline'
-              onMouseDown={() => setToggleAnimation(!toggleAnimation)}
-              onClick={generateColorHandler}
-              disabled={isEditLoading}
-            >
-              <RefreshIcon
-                className='size-6 fill-current transition-transform duration-500'
-                toggleAnimation={toggleAnimation}
+          <div className='flex flex-col gap-10'>
+            <div id='screenTag' className='grid grid-cols-2 gap-6'>
+              <InputField
+                formKey={ScreenDataEnum.diagonalSize}
+                control={control}
+                title='Screen Size'
+                type='number'
+                endAdornment='in'
+                autoComplete='off'
+                placeholder='27'
+                isLoading={isEditLoading}
+                className='shadow-lg'
               />
-            </Button>
-          </div>
-        </div>
-        <SheetFooter>
-          <div className='flex w-full justify-between'>
-            <div className='flex gap-6'>
+
+              <InputField
+                formKey={ScreenDataEnum.aspectRatio}
+                control={control}
+                title='Aspect Ratio'
+                type='text'
+                autoComplete='off'
+                placeholder='16:9'
+                isLoading={isEditLoading}
+                className='shadow-lg'
+              />
+            </div>
+
+            <div id='screenData' className='grid grid-cols-2 gap-6'>
+              <InputField
+                formKey={ScreenDataEnum.hRes}
+                control={control}
+                title='Horizontal Res'
+                type='number'
+                endAdornment='px'
+                autoComplete='off'
+                placeholder='3840'
+                isLoading={isEditLoading}
+                className='shadow-lg'
+              />
+
+              <InputField
+                formKey={ScreenDataEnum.vRes}
+                control={control}
+                title='Vertical Res'
+                type='number'
+                endAdornment='px'
+                autoComplete='off'
+                placeholder='2160'
+                isLoading={isEditLoading}
+                className='shadow-lg'
+              />
+            </div>
+
+            <div className='flex items-start justify-between pb-8'>
+              <ColorField
+                formKey={ScreenDataEnum.lightColor}
+                title='Light'
+                mode={LightMode}
+                isLoading={isEditLoading}
+                control={control}
+                className='w-[102px]'
+              />
+              <ColorField
+                formKey={ScreenDataEnum.darkColor}
+                title='Dark'
+                mode={DarkMode}
+                isLoading={isEditLoading}
+                control={control}
+                className='w-[102px]'
+              />
               <Button
                 type='button'
-                className='shadow-lg'
+                className='mt-8 shadow-lg'
+                title='Generate Colors'
+                dimension='icon-lg'
+                data-testid='generate-color-btn'
                 mode='outline'
-                disabled={isCreateLoading || isUpdateLoading || isEditLoading}
-                onClick={onClose}
+                onMouseDown={() => setToggleAnimation(!toggleAnimation)}
+                onClick={generateColorHandler}
+                disabled={isEditLoading}
               >
-                Close
-              </Button>
-              <Button
-                type='button'
-                className='shadow-lg'
-                mode='outline'
-                disabled={isCreateLoading || isUpdateLoading || isEditLoading || !isDirty}
-                onClick={resetHandler}
-              >
-                Reset
+                <RefreshIcon
+                  className='size-6 fill-current transition-transform duration-500'
+                  toggleAnimation={toggleAnimation}
+                />
               </Button>
             </div>
-            <Button
-              type='submit'
-              className={cn('shadow-lg', {
-                'pointer-events-none': isCreateLoading || isUpdateLoading,
-              })}
-              disabled={!isDirty}
-            >
-              {isCreateLoading || isUpdateLoading ? (
-                <div data-testid='busySubmitButton' className='loading loading-spinner items-center justify-center' />
-              ) : (
-                <>{!editId ? 'Create' : 'Update'}</>
-              )}
-            </Button>
           </div>
-          {/* <SheetClose asChild>
+          <SheetFooter>
+            <div className='flex w-full justify-between'>
+              <div className='flex gap-6'>
+                <Button
+                  type='button'
+                  className='shadow-lg'
+                  mode='outline'
+                  disabled={isCreateLoading || isUpdateLoading || isEditLoading}
+                  onClick={onClose}
+                >
+                  Close
+                </Button>
+                <Button
+                  type='button'
+                  className='shadow-lg'
+                  mode='outline'
+                  disabled={isCreateLoading || isUpdateLoading || isEditLoading || !isDirty}
+                  onClick={resetHandler}
+                >
+                  Reset
+                </Button>
+              </div>
+              <Button
+                type='submit'
+                className={cn('shadow-lg', {
+                  'pointer-events-none': isCreateLoading || isUpdateLoading,
+                })}
+                disabled={!isDirty}
+              >
+                {isCreateLoading || isUpdateLoading ? (
+                  <div data-testid='busySubmitButton' className='loading loading-spinner items-center justify-center' />
+                ) : (
+                  <>{!editId ? 'Create' : 'Update'}</>
+                )}
+              </Button>
+            </div>
+            {/* <SheetClose asChild>
           <Button type='submit'>Save changes</Button>
         </SheetClose> */}
-        </SheetFooter>
-      </form>
-    </Form>
+          </SheetFooter>
+        </form>
+      </Form>
+    </div>
   )
 }
