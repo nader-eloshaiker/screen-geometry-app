@@ -25,6 +25,7 @@ const Config: ViteUserConfig = {
         'src/app/assets/**/*',
         'src/configs/**/*',
         'src/constants/**/*',
+        'src/lib/e2e/**/*',
         'src/lib/support/**/*',
         'src/lib/serviceworker/**/*',
         'src/lib/openapi/generated/**/*',
