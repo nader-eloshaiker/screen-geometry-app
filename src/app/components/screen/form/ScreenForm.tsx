@@ -14,7 +14,6 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import { Dispatch, SetStateAction, useCallback, useEffect, useState } from 'react'
 import ReactGA from 'react-ga4'
 import { SubmitHandler, useForm } from 'react-hook-form'
-import { ErrorMessage } from './ErrorMessage'
 import { EmptyInputValues, FormSubmitType, ScreenFormSchema } from './ScreenFormSchema'
 import { ColorField } from './fields/ColorField'
 import { InputField } from './fields/InputField'
@@ -36,7 +35,7 @@ export const ScreenForm = ({ setOpen, editId, isEditLoading, editScreen }: Props
     mode: 'onSubmit',
   })
   const {
-    formState: { errors, isDirty },
+    formState: { isDirty },
     setValue,
     handleSubmit,
     reset,
@@ -157,13 +156,6 @@ export const ScreenForm = ({ setOpen, editId, isEditLoading, editScreen }: Props
 
       <Form {...form}>
         <form method='post' onSubmit={handleSubmit(submitHandler)}>
-          {errors[ScreenDataEnum.hRes] && <ErrorMessage message={errors[ScreenDataEnum.hRes].message} />}
-          {errors[ScreenDataEnum.vRes] && <ErrorMessage message={errors[ScreenDataEnum.vRes].message} />}
-          {errors[ScreenDataEnum.diagonalSize] && (
-            <ErrorMessage message={errors[ScreenDataEnum.diagonalSize].message} />
-          )}
-          {errors[ScreenDataEnum.aspectRatio] && <ErrorMessage message={errors[ScreenDataEnum.aspectRatio].message} />}
-
           <div className='flex flex-col gap-10'>
             <div id='screenTag' className='grid grid-cols-2 gap-6'>
               <InputField

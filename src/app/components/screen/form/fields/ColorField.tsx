@@ -32,8 +32,8 @@ export const ColorField = ({ className, control, formKey, title, mode, isLoading
               {...field}
               palette={errors[formKey] ? 'danger' : 'primary'}
               className={cn('shadow-lg', {
-                'text-foreground hocus:text-foreground': mode === LightMode,
-                'text-background hocus:text-background': mode === DarkMode,
+                'text-black hocus:text-black': mode === LightMode,
+                'text-white hocus:text-white': mode === DarkMode,
                 'animate-pulse pointer-events-none': isLoading,
               })}
               style={{ backgroundColor: color }}
