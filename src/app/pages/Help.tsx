@@ -1,11 +1,11 @@
 import { CreateScreenButton } from '@/app/components/screen/createbutton/CreateButton'
-import { FormModeTypes, ScreenFormDrawer } from '@/app/components/screen/form/ScreenFormDrawer'
 import { ScreenPanel } from '@/app/components/screen/panel/ScreenPanel'
 import { ScreenTable } from '@/app/components/screen/table/ScreenTable'
 import { Stacked } from '@/app/components/stacked/Stacked'
 import { defaultScreenInputList } from '@/app/constants/defaultScreenList'
 import { ScreenItemRender } from '@/app/models/screenItemRender'
 import { Dimensions } from '@/lib/openapi/models/Screen'
+import { Button } from '@/lib/ui/components/button/Button'
 import { Label } from '@/lib/ui/components/label/Label'
 import { useElementSize } from '@/lib/ui/hooks/useElementSize'
 import { getMaxScreenSize, normaliseScreenRender, transformScreenInput } from '@/lib/utils'
@@ -14,6 +14,7 @@ import { useMemo, useRef } from 'react'
 import { Helmet } from 'react-helmet-async'
 import tw from 'tailwind-styled-components'
 import { ulid } from 'ulid'
+import { ScreenForm } from '../components/screen/form/ScreenForm'
 
 const Section = tw.div`
   mb-14
@@ -167,9 +168,15 @@ export const Help = () => {
         <Section>
           <Heading className='mb-4 text-2xl font-bold'>Delete</Heading>
           <Paragraph>
-            To delete an existing screen, click on the
-            <X id='edit-icon' className='mx-4 inline size-8 shadow-lg' /> icon in the
-            <strong>action</strong> column of the Screen Specs table.
+            <span>To delete an existing screen, click on the</span>
+            <span className='px-4'>
+              <Button mode='outline' dimension='icon-md' className='pointer-events-none shadow-lg'>
+                <X id='edit-icon' />
+              </Button>
+            </span>
+            <span>
+              icon in the <strong>action</strong> column of the Screen Specs table.
+            </span>
           </Paragraph>
         </Section>
 
@@ -180,9 +187,16 @@ export const Help = () => {
             button in the top right corner. This will open a form in the sidebar as show below.
           </Paragraph>
           <DiagramPanel>
-            <div className='mb-6 w-96 rounded-xl bg-accent p-2 text-accent-content'>
+            <div className='mb-6 w-96 border-l-2 border-primary-border bg-background p-2 text-foreground shadow-lg'>
               <div className='pointer-events-none p-2'>
-                <ScreenFormDrawer open={true} setOpen={() => {}} mode={FormModeTypes.Create} />
+                <ScreenForm
+                  setOpen={() => {}}
+                  isEditLoading={false}
+                  editId={''}
+                  editScreen={undefined}
+                  selectedItem={undefined}
+                  setSelectedItem={() => {}}
+                />
               </div>
             </div>
           </DiagramPanel>
@@ -195,9 +209,16 @@ export const Help = () => {
         <Section>
           <Heading className='mb-4 text-2xl font-bold'>Create / Update</Heading>
           <Paragraph>
-            To edit an existing screen, click on the
-            <Pencil id='edit-icon' className='mx-4 inline size-8 shadow-lg' /> icon in the <strong>action</strong>{' '}
-            column of the Screen Specs table. Then make your changes and click the <strong>Update</strong> button.
+            <span>To edit an existing screen, click on the</span>
+            <span className='px-4'>
+              <Button mode='outline' dimension='icon-md' className='pointer-events-none shadow-lg'>
+                <Pencil id='edit-icon' />
+              </Button>
+            </span>
+            <span>
+              icon in the <strong>action</strong> column of the Screen Specs table. Then make your changes and click the{' '}
+              <strong>Update</strong> button.
+            </span>
           </Paragraph>
         </Section>
       </div>

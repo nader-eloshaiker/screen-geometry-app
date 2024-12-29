@@ -128,40 +128,6 @@ export default function Header() {
           <ThemeToggleStyled id='theme-toggle' />
         </div>
       </div>
-      {/* small header */}
-      {/* <div className='flex w-full justify-between p-4 py-2 md:hidden' data-testid='small-header'>
-        <motion.details
-          data-testid='nav-menu'
-          className={cn('dropdown dropdown-bottom', { 'dropdown-open': menuOpened })}
-        >
-          <summary tabIndex={0} className='btn btn-ghost p-0' role='button'>
-            <HamburgerMenu width={20} height={14} isOpen={menuOpened} onClick={() => setMenuOpened(!menuOpened)} />
-          </summary>
-          <motion.ul
-            tabIndex={0}
-            // style={{ originX: 0, originY: 0 }}
-            className='menu dropdown-content z-[1] mt-4 w-40 gap-4 rounded-md bg-mono text-mono-content shadow'
-            initial='closed'
-            animate={menuOpened ? 'opened' : 'closed'}
-            exit='closed'
-            variants={menuVariants}
-          >
-            <NavMenu pathname={pathname} />
-          </motion.ul>
-        </motion.details>
-        <Title size='sm' />
-        <ThemeToggleStyled id='themeToggleTiny' />
-      </div> */}
-      {/* large header */}
-      {/* <div className='hidden p-4 md:flex data-testid='large-header'>
-        <Title size='lg' />
-        <div className='navbar min-h-0 justify-between p-0' data-testid='large-header-menu'>
-          <ul className=' menu menu-horizontal gap-4 bg-accent p-0'>
-            <NavMenu pathname={pathname} />
-          </ul>
-          <ThemeToggleStyled id='themeToggle' />
-        </div>
-      </div> */}
     </header>
   )
 }

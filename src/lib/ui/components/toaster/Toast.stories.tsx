@@ -8,8 +8,8 @@ import { useToast } from './useToast'
 
 type PaletteType = VariantProps<typeof ToastVariants>['palette']
 type ToastProps = {
-  title?: string | undefined
-  description?: string | undefined
+  title?: string
+  description?: string
   action?: ToastActionElement
   palette?: PaletteType
   duration?: number

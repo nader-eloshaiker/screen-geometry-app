@@ -2,7 +2,12 @@ import { QueryProvider } from '@/app/contexts/Query/QueryProvider'
 import { ScreenProvider } from '@/app/contexts/Screen/ScreenProvider'
 import { useScreenContext } from '@/app/contexts/Screen/useScreenContext'
 import { ScreenItemRender } from '@/app/models/screenItemRender'
-import { getScreenListServiceMock, getScreenServiceMock, getSearchServiceMock } from '@/lib/openapi/generated'
+import {
+  getScreenListServiceMock,
+  getScreenServiceMock,
+  getSearchServiceMock,
+  SearchItem,
+} from '@/lib/openapi/generated'
 import { mswWithSpy, resetMSW, startMSW, stopMSW } from '@/lib/serviceworker/NodeServiceWorker'
 import { screenInputFixture } from '@/lib/support/test/fixtures/ScreenFixtures'
 import { renderWithUserEvents } from '@/lib/support/test/utils/RenderWithUserEvents'
@@ -43,14 +48,23 @@ const ListComponent = () => {
   )
 }
 const ChildTestComponent = ({ isEditLoading, editId, editScreen, open, setOpen }: ChildProps) => {
+  const [selectedItem, setSelectedItem] = useState<SearchItem>()
+
   return (
     <Sheet open={open} onOpenChange={setOpen}>
       <SheetTrigger asChild>
-        <Button mode='outline'>Open</Button>
+        <Button mode='outline'>Create Screen</Button>
       </SheetTrigger>
-      <SheetContent side='right' className='flex flex-col p-1'>
+      <SheetContent side='right' showCloseButton={false} className='flex flex-col p-1'>
+        <ScreenForm
+          editScreen={editScreen}
+          editId={editId}
+          isEditLoading={isEditLoading}
+          setOpen={setOpen}
+          selectedItem={selectedItem}
+          setSelectedItem={setSelectedItem}
+        />
         <ListComponent />
-        <ScreenForm editScreen={editScreen} editId={editId} isEditLoading={isEditLoading} setOpen={setOpen} />
       </SheetContent>
     </Sheet>
   )
@@ -174,10 +188,8 @@ describe('#ScreenForm', () => {
 
       expect(test.getByRole('button', { name: 'Update' })).toBeDisabled()
       expect(test.getByRole('button', { name: 'Reset' })).toBeDisabled()
-      const closeButtons = test.getAllByRole('button', { name: 'Close' })
-      expect(closeButtons).toHaveLength(2)
-      expect(closeButtons[0]).toBeEnabled()
-      expect(closeButtons[1]).toBeEnabled()
+      const closeButton = test.getByRole('button', { name: 'Close' })
+      expect(closeButton).toBeEnabled()
     })
 
     test('reset screen form', async () => {
@@ -260,10 +272,8 @@ describe('#ScreenForm', () => {
 
       expect(test.getByRole('button', { name: 'Create' })).toBeDisabled()
       expect(test.getByRole('button', { name: 'Reset' })).toBeDisabled()
-      const closeButtons = test.getAllByRole('button', { name: 'Close' })
-      expect(closeButtons).toHaveLength(2)
-      expect(closeButtons[0]).toBeEnabled()
-      expect(closeButtons[1]).toBeEnabled()
+      const closeButton = test.getByRole('button', { name: 'Close' })
+      expect(closeButton).toBeEnabled()
     })
 
     test('select a screen from list and populate form', async () => {
@@ -285,10 +295,8 @@ describe('#ScreenForm', () => {
 
       expect(test.getByRole('button', { name: 'Create' })).toBeEnabled()
       expect(test.getByRole('button', { name: 'Reset' })).toBeEnabled()
-      const closeButtons = test.getAllByRole('button', { name: 'Close' })
-      expect(closeButtons).toHaveLength(2)
-      expect(closeButtons[0]).toBeEnabled()
-      expect(closeButtons[1]).toBeEnabled()
+      const closeButton = test.getByRole('button', { name: 'Close' })
+      expect(closeButton).toBeEnabled()
     })
 
     test('create a screen from list and populate form', async () => {

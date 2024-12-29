@@ -28,9 +28,9 @@ export const ButtonVariants = cva(
         sm: 'h-9 px-4 py-1 text-sm [&_svg]:size-4',
         md: 'h-10 px-6 py-2 text-sm [&_svg]:size-4',
         lg: 'h-11 px-8 py-3 text-base [&_svg]:size-5',
-        'icon-sm': 'h-9 p-1 [&_svg]:size-4',
-        'icon-md': 'h-10 p-2 [&_svg]:size-4',
-        'icon-lg': 'h-11 p-3 [&_svg]:size-5',
+        'icon-sm': 'size-9 [&_svg]:size-4',
+        'icon-md': 'size-10 [&_svg]:size-4',
+        'icon-lg': 'size-11 [&_svg]:size-5',
       },
     },
     compoundVariants: [

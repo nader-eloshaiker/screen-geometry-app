@@ -1,17 +1,15 @@
 import RefreshIcon from '@/app/assets/icons/Refresh'
-import { ScreenSelector } from '@/app/components/screen/screenselector/ScreenSelector'
 import { DarkMode, LightMode } from '@/app/contexts/theme/Theme.types'
 import { useCreateScreenApi } from '@/app/hooks/api/helpers/useCreateScreenApi'
-import { useSearchApi } from '@/app/hooks/api/helpers/useSearchApi'
 import { useUpdateScreenApi } from '@/app/hooks/api/helpers/useUpdateScreenApi'
 import { ScreenInput, SearchItem } from '@/lib/openapi/generated'
 import { ScreenDataEnum } from '@/lib/openapi/models'
 import { Button } from '@/lib/ui/components/button/Button'
 import { Form } from '@/lib/ui/components/form/Form'
-import { SheetDescription, SheetFooter, SheetHeader, SheetTitle } from '@/lib/ui/components/sheet/Sheet'
+import { Separator } from '@/lib/ui/components/separator/Separator'
 import { cn, createCSSColor } from '@/lib/utils'
 import { yupResolver } from '@hookform/resolvers/yup'
-import { Dispatch, SetStateAction, useCallback, useEffect, useState } from 'react'
+import { Dispatch, SetStateAction, useEffect, useState } from 'react'
 import ReactGA from 'react-ga4'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { EmptyInputValues, FormSubmitType, ScreenFormSchema } from './ScreenFormSchema'
@@ -23,9 +21,11 @@ type Props = TReactChildren & {
   isEditLoading?: boolean
   editId?: string
   editScreen?: FormSubmitType
+  selectedItem: SearchItem | undefined
+  setSelectedItem: Dispatch<SetStateAction<SearchItem | undefined>>
 }
 
-export const ScreenForm = ({ setOpen, editId, isEditLoading, editScreen }: Props) => {
+export const ScreenForm = ({ setOpen, editId, isEditLoading, editScreen, selectedItem, setSelectedItem }: Props) => {
   const { isPending: isCreateLoading, mutate: createAction } = useCreateScreenApi()
   const { isPending: isUpdateLoading, mutate: updateAction } = useUpdateScreenApi()
 
@@ -42,54 +42,54 @@ export const ScreenForm = ({ setOpen, editId, isEditLoading, editScreen }: Props
     resetField,
     control,
   } = form
-  const [selectId, setSelectId] = useState('')
-
-  const [searchTerm, setSearchTerm] = useState<string>('')
-  const { isFetching: isSearchListLoading, data: searchListResponse } = useSearchApi({ term: searchTerm })
-
   const [toggleAnimation, setToggleAnimation] = useState<boolean>(false)
 
   const onClose = () => {
     setOpen(false)
   }
 
-  const selectItemHandler = useCallback(
-    (item: SearchItem) => {
-      setValue(ScreenDataEnum.aspectRatio, item.aspectRatio, {
+  useEffect(() => {
+    // Gaurd Order is important
+    if (!selectedItem) {
+      reset()
+      return
+    }
+
+    setValue(ScreenDataEnum.aspectRatio, selectedItem.aspectRatio, {
+      shouldValidate: true,
+      shouldDirty: true,
+      shouldTouch: true,
+    })
+    if (selectedItem.diagonalSize) {
+      setValue(ScreenDataEnum.diagonalSize, selectedItem.diagonalSize, {
         shouldValidate: true,
         shouldDirty: true,
         shouldTouch: true,
       })
-      if (item.diagonalSize) {
-        setValue(ScreenDataEnum.diagonalSize, item.diagonalSize, {
-          shouldValidate: true,
-          shouldDirty: true,
-          shouldTouch: true,
-        })
-      } else {
-        resetField(ScreenDataEnum.diagonalSize)
-      }
-      if (item.hRes) {
-        setValue(ScreenDataEnum.hRes, item.hRes, {
-          shouldValidate: true,
-          shouldDirty: true,
-          shouldTouch: true,
-        })
-      } else {
-        resetField(ScreenDataEnum.hRes)
-      }
-      if (item.vRes) {
-        setValue(ScreenDataEnum.vRes, item.vRes, {
-          shouldValidate: true,
-          shouldDirty: true,
-          shouldTouch: true,
-        })
-      } else {
-        resetField(ScreenDataEnum.vRes)
-      }
-    },
-    [resetField, setValue],
-  )
+    } else {
+      resetField(ScreenDataEnum.diagonalSize)
+    }
+    if (selectedItem.hRes) {
+      setValue(ScreenDataEnum.hRes, selectedItem.hRes, {
+        shouldValidate: true,
+        shouldDirty: true,
+        shouldTouch: true,
+      })
+    } else {
+      resetField(ScreenDataEnum.hRes)
+    }
+    if (selectedItem.vRes) {
+      setValue(ScreenDataEnum.vRes, selectedItem.vRes, {
+        shouldValidate: true,
+        shouldDirty: true,
+        shouldTouch: true,
+      })
+    } else {
+      resetField(ScreenDataEnum.vRes)
+    }
+    // only effect on selection change
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selectedItem])
 
   const generateColorHandler = () => {
     const color = createCSSColor()
@@ -105,7 +105,7 @@ export const ScreenForm = ({ setOpen, editId, isEditLoading, editScreen }: Props
   }
 
   const resetHandler = () => {
-    setSelectId('')
+    setSelectedItem(undefined)
     reset()
   }
 
@@ -123,7 +123,7 @@ export const ScreenForm = ({ setOpen, editId, isEditLoading, editScreen }: Props
       createAction({ data: form as ScreenInput }, { onSuccess: onClose })
     }
 
-    setSelectId('')
+    setSelectedItem(undefined)
     reset(EmptyInputValues)
   }
 
@@ -139,155 +139,137 @@ export const ScreenForm = ({ setOpen, editId, isEditLoading, editScreen }: Props
   }, [editScreen, reset])
 
   return (
-    <>
-      <SheetHeader>
-        <SheetTitle>{editId ? 'Edit' : 'Create'} Screen</SheetTitle>
-        <SheetDescription>
-          {editId ? 'Make changes to your Screen here.' : 'Create a new Screen by entering in the specs.'}
-        </SheetDescription>
-      </SheetHeader>
-      <ScreenSelector
-        onSelectItem={selectItemHandler}
-        isLoading={isSearchListLoading}
-        items={searchListResponse?.list}
-        placeholder='Search Screen list...'
-        label='Select Screen...'
-        selectId={selectId}
-        setSelectId={setSelectId}
-        onSearch={setSearchTerm}
-      />
+    <Form {...form}>
+      <form method='post' onSubmit={handleSubmit(submitHandler)}>
+        <div className='flex flex-col gap-10'>
+          <div id='screenTag' className='grid grid-cols-2 gap-6'>
+            <InputField
+              formKey={ScreenDataEnum.diagonalSize}
+              control={control}
+              title='Screen Size'
+              type='number'
+              endAdornment='in'
+              autoComplete='off'
+              placeholder='27'
+              isLoading={isEditLoading}
+              className='shadow-lg'
+            />
 
-      <Form {...form}>
-        <form method='post' onSubmit={handleSubmit(submitHandler)}>
-          <div className='flex flex-col gap-10'>
-            <div id='screenTag' className='grid grid-cols-2 gap-6'>
-              <InputField
-                formKey={ScreenDataEnum.diagonalSize}
-                control={control}
-                title='Screen Size'
-                type='number'
-                endAdornment='in'
-                autoComplete='off'
-                placeholder='27'
-                isLoading={isEditLoading}
-                className='shadow-lg'
-              />
-
-              <InputField
-                formKey={ScreenDataEnum.aspectRatio}
-                control={control}
-                title='Aspect Ratio'
-                type='text'
-                autoComplete='off'
-                placeholder='16:9'
-                isLoading={isEditLoading}
-                className='shadow-lg'
-              />
-            </div>
-
-            <div id='screenData' className='grid grid-cols-2 gap-6'>
-              <InputField
-                formKey={ScreenDataEnum.hRes}
-                control={control}
-                title='Horizontal Res'
-                type='number'
-                endAdornment='px'
-                autoComplete='off'
-                placeholder='3840'
-                isLoading={isEditLoading}
-                className='shadow-lg'
-              />
-
-              <InputField
-                formKey={ScreenDataEnum.vRes}
-                control={control}
-                title='Vertical Res'
-                type='number'
-                endAdornment='px'
-                autoComplete='off'
-                placeholder='2160'
-                isLoading={isEditLoading}
-                className='shadow-lg'
-              />
-            </div>
-
-            <div className='flex items-start justify-between pb-8'>
-              <ColorField
-                formKey={ScreenDataEnum.lightColor}
-                title='Light'
-                mode={LightMode}
-                isLoading={isEditLoading}
-                control={control}
-                className='w-[102px]'
-              />
-              <ColorField
-                formKey={ScreenDataEnum.darkColor}
-                title='Dark'
-                mode={DarkMode}
-                isLoading={isEditLoading}
-                control={control}
-                className='w-[102px]'
-              />
-              <Button
-                type='button'
-                className='mt-8 shadow-lg'
-                title='Generate Colors'
-                dimension='icon-lg'
-                data-testid='generate-color-btn'
-                mode='outline'
-                onMouseDown={() => setToggleAnimation(!toggleAnimation)}
-                onClick={generateColorHandler}
-                disabled={isEditLoading}
-              >
-                <RefreshIcon
-                  className='size-6 fill-current transition-transform duration-500'
-                  toggleAnimation={toggleAnimation}
-                />
-              </Button>
-            </div>
+            <InputField
+              formKey={ScreenDataEnum.aspectRatio}
+              control={control}
+              title='Aspect Ratio'
+              type='text'
+              autoComplete='off'
+              placeholder='16:9'
+              isLoading={isEditLoading}
+              className='shadow-lg'
+            />
           </div>
-          <SheetFooter>
-            <div className='flex w-full justify-between'>
-              <div className='flex gap-6'>
-                <Button
-                  type='button'
-                  className='shadow-lg'
-                  mode='outline'
-                  disabled={isCreateLoading || isUpdateLoading || isEditLoading}
-                  onClick={onClose}
-                >
-                  Close
-                </Button>
-                <Button
-                  type='button'
-                  className='shadow-lg'
-                  mode='outline'
-                  disabled={isCreateLoading || isUpdateLoading || isEditLoading || !isDirty}
-                  onClick={resetHandler}
-                >
-                  Reset
-                </Button>
-              </div>
-              <Button
-                type='submit'
-                className={cn('shadow-lg', {
-                  'pointer-events-none': isCreateLoading || isUpdateLoading,
-                })}
-                disabled={!isDirty}
-              >
-                {isCreateLoading || isUpdateLoading ? (
-                  <div data-testid='busySubmitButton' className='loading loading-spinner items-center justify-center' />
-                ) : (
-                  <>{!editId ? 'Create' : 'Update'}</>
-                )}
-              </Button>
-            </div>
-            {/* <SheetClose asChild>
+
+          <div id='screenData' className='grid grid-cols-2 gap-6'>
+            <InputField
+              formKey={ScreenDataEnum.hRes}
+              control={control}
+              title='Horizontal Res'
+              type='number'
+              endAdornment='px'
+              autoComplete='off'
+              placeholder='3840'
+              isLoading={isEditLoading}
+              className='shadow-lg'
+            />
+
+            <InputField
+              formKey={ScreenDataEnum.vRes}
+              control={control}
+              title='Vertical Res'
+              type='number'
+              endAdornment='px'
+              autoComplete='off'
+              placeholder='2160'
+              isLoading={isEditLoading}
+              className='shadow-lg'
+            />
+          </div>
+
+          <div className='flex items-start justify-between pb-8'>
+            <ColorField
+              formKey={ScreenDataEnum.lightColor}
+              title='Light'
+              mode={LightMode}
+              isLoading={isEditLoading}
+              control={control}
+              className='w-[102px]'
+            />
+            <ColorField
+              formKey={ScreenDataEnum.darkColor}
+              title='Dark'
+              mode={DarkMode}
+              isLoading={isEditLoading}
+              control={control}
+              className='w-[102px]'
+            />
+            <Button
+              type='button'
+              className='mt-8 shadow-lg'
+              title='Generate Colors'
+              dimension='icon-lg'
+              data-testid='generate-color-btn'
+              mode='outline'
+              onMouseDown={() => setToggleAnimation(!toggleAnimation)}
+              onClick={generateColorHandler}
+              disabled={isEditLoading}
+            >
+              <RefreshIcon
+                className='size-6 fill-current transition-transform duration-500'
+                toggleAnimation={toggleAnimation}
+              />
+            </Button>
+          </div>
+        </div>
+
+        <Separator decorative={true} />
+
+        <div className='flex w-full justify-between pt-8'>
+          <div className='flex gap-6'>
+            <Button
+              type='button'
+              className='shadow-lg'
+              mode='outline'
+              disabled={isCreateLoading || isUpdateLoading || isEditLoading}
+              onClick={onClose}
+            >
+              Close
+            </Button>
+            <Button
+              type='button'
+              className='shadow-lg'
+              mode='outline'
+              disabled={isCreateLoading || isUpdateLoading || isEditLoading || !isDirty}
+              onClick={resetHandler}
+            >
+              Reset
+            </Button>
+          </div>
+          <Button
+            type='submit'
+            className={cn('shadow-lg', {
+              'pointer-events-none': isCreateLoading || isUpdateLoading,
+            })}
+            disabled={!isDirty}
+          >
+            {isCreateLoading || isUpdateLoading ? (
+              <div data-testid='busySubmitButton' className='loading loading-spinner items-center justify-center' />
+            ) : (
+              <>{!editId ? 'Create' : 'Update'}</>
+            )}
+          </Button>
+        </div>
+        {/* <SheetClose asChild>
           <Button type='submit'>Save changes</Button>
         </SheetClose> */}
-          </SheetFooter>
-        </form>
-      </Form>
-    </>
+      </form>
+    </Form>
   )
 }
