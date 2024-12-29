@@ -11,8 +11,8 @@ import {
 } from '@/lib/openapi/generated'
 import { mswWithSpy, resetMSW, startMSW, stopMSW } from '@/lib/serviceworker/NodeServiceWorker'
 import { renderWithUserEvents } from '@/lib/support/test/utils/RenderWithUserEvents'
+import { Toaster } from '@/lib/ui/components/toaster/Toaster'
 import { useElementSizeMock } from '@/lib/ui/hooks/useElementSize.mock'
-import { NotificationProvider } from '@/lib/ui/notification'
 import { normaliseScreenRender } from '@/lib/utils'
 import { act, waitFor } from '@testing-library/react'
 import { useState } from 'react'
@@ -32,17 +32,16 @@ const TestComponent = ({
 
   return (
     <QueryProvider>
-      <NotificationProvider>
-        <ScreenTable
-          highlighted={highlighted}
-          setHighLighted={setHighlighted}
-          screens={screens ?? normaliseScreenRender(getGetScreenListResponseMock().list)}
-          isScreenListLoading={isScreenListLoading}
-          editAction={{ handler: editHandler }}
-          deleteAction={{ handler: () => {}, isPending: false }}
-          showActon={{ handler: () => {}, isPending: false }}
-        />
-      </NotificationProvider>
+      <ScreenTable
+        highlighted={highlighted}
+        setHighLighted={setHighlighted}
+        screens={screens ?? normaliseScreenRender(getGetScreenListResponseMock().list)}
+        isScreenListLoading={isScreenListLoading}
+        editAction={{ handler: editHandler }}
+        deleteAction={{ handler: () => {}, isPending: false }}
+        showActon={{ handler: () => {}, isPending: false }}
+      />
+      <Toaster />
     </QueryProvider>
   )
 }
@@ -51,11 +50,10 @@ const TestParentComponent = ({ initialise }: { initialise?: Array<ScreenItemRend
   return (
     <HelmetProvider>
       <QueryProvider>
-        <NotificationProvider>
-          <ScreenProvider initialise={{ screens: initialise ?? [], query: '' }}>
-            <Screens />
-          </ScreenProvider>
-        </NotificationProvider>
+        <ScreenProvider initialise={{ screens: initialise ?? [], query: '' }}>
+          <Screens />
+        </ScreenProvider>
+        <Toaster />
       </QueryProvider>
     </HelmetProvider>
   )

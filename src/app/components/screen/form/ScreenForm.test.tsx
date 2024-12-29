@@ -8,8 +8,8 @@ import { screenInputFixture } from '@/lib/support/test/fixtures/ScreenFixtures'
 import { renderWithUserEvents } from '@/lib/support/test/utils/RenderWithUserEvents'
 import { Button } from '@/lib/ui/components/button/Button'
 import { Sheet, SheetContent, SheetTrigger } from '@/lib/ui/components/sheet/Sheet'
+import { Toaster } from '@/lib/ui/components/toaster/Toaster'
 import { useElementSizeMock } from '@/lib/ui/hooks/useElementSize.mock'
-import { NotificationProvider } from '@/lib/ui/notification'
 import { toScreenItemRender, transformScreenInput } from '@/lib/utils'
 import { act, render, waitFor } from '@testing-library/react'
 import { Dispatch, SetStateAction, useEffect, useState } from 'react'
@@ -72,19 +72,18 @@ const RootTestComponent = ({ initialise, isEditLoading, editId, editScreen }: Pa
 
   return (
     <QueryProvider>
-      <NotificationProvider>
-        <ScreenProvider initialise={{ screens: initialise ?? [], query: '' }}>
-          <h1>formState:{open ? 'open' : 'close'}</h1>
-          <ChildTestComponent
-            editScreen={editScreen}
-            editId={editId}
-            isEditLoading={!!isEditLoading}
-            open={open}
-            setOpen={setOpen}
-          />
-          {!open && <ListComponent />}
-        </ScreenProvider>
-      </NotificationProvider>
+      <ScreenProvider initialise={{ screens: initialise ?? [], query: '' }}>
+        <h1>formState:{open ? 'open' : 'close'}</h1>
+        <ChildTestComponent
+          editScreen={editScreen}
+          editId={editId}
+          isEditLoading={!!isEditLoading}
+          open={open}
+          setOpen={setOpen}
+        />
+        {!open && <ListComponent />}
+      </ScreenProvider>
+      <Toaster />
     </QueryProvider>
   )
 }

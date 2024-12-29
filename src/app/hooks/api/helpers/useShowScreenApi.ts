@@ -4,12 +4,14 @@ import { ScreenItemResponse, useShowScreen } from '@/lib/openapi/generated'
 import { useCallback } from 'react'
 import { useApiEffectHandler } from '../useApiEffectHandler'
 
-const successNotification = { title: 'Updated', message: 'Screen visibility' }
+const notification = { title: 'Updated', message: 'Screen visibility has been updated' }
 
 export const useShowScreenApi = () => {
   const { dispatch } = useScreenContext()
   const responseHandler = useCallback(
-    (data: ScreenItemResponse) => dispatch({ type: ScreenEventTypes.UPDATE, payload: data.item }),
+    (data: ScreenItemResponse) => {
+      dispatch({ type: ScreenEventTypes.UPDATE, payload: data.item })
+    },
     [dispatch],
   )
   const request = useShowScreen()
@@ -18,7 +20,7 @@ export const useShowScreenApi = () => {
     data: request.data,
     error: request.error,
     responseHandler,
-    successNotification,
+    successNotification: notification,
   })
 
   return request

@@ -37,7 +37,13 @@ const StyledCheckbox = styled(Checkbox)<{ $fgColor: string; $bgColor: string }>`
   }
 `
 
-const StyledTableRow = styled(TableBodyRow)<{ $fgColor: string; $bgColor: string }>`
+const StyledTableRow = styled(TableBodyRow)<{ $fgColor: string; $bgColor: string; $selected: boolean }>`
+  ${({ $selected, $bgColor, $fgColor }) =>
+    $selected &&
+    `
+    background-color: ${$bgColor};
+    border-color: ${$fgColor};
+  `}
   &:hover,
   &:focus {
     background-color: ${({ $bgColor }) => $bgColor};
@@ -138,6 +144,7 @@ export const ScreenTable = ({
               className='transition-colors duration-200 ease-out'
               $fgColor={fgColor(themeMode, screen.color)}
               $bgColor={bgColor(themeMode, screen.color)}
+              $selected={screen.id === highlighted?.id}
               key={screen.id}
               // onClick={() => setHighLighted(screen.id === highlighted?.id ? undefined : screen)}
               onMouseEnter={() => setHighLighted(screen.id === highlighted?.id ? undefined : screen)}

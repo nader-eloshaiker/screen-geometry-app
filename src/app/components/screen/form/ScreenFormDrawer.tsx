@@ -37,7 +37,7 @@ const ScreenFormDrawer = ({ open, setOpen, mode, id: editId = '', children }: Pr
   return (
     <Sheet open={open} onOpenChange={setOpen}>
       <SheetTrigger asChild>{children}</SheetTrigger>
-      <SheetContent side='right' className='flex flex-col p-1'>
+      <SheetContent side='right' className='flex flex-col overflow-auto'>
         <ScreenForm isEditLoading={isEditLoading} editId={editId} editScreen={editScreen} setOpen={setOpen} />
       </SheetContent>
     </Sheet>

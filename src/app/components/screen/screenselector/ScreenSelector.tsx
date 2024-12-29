@@ -41,9 +41,8 @@ export const ScreenSelector = ({
   const [open, setOpen] = useState(false)
   const [searchTerm, setSearchTerm] = useState('')
   const debouncedValue = useDebounce(searchTerm, 500)
-  const elementRef = useRef<HTMLLabelElement>(null)
+  const elementRef = useRef<HTMLDivElement>(null)
   const { width } = useElementSize(elementRef)
-  console.log('width', width)
 
   useEffect(() => {
     if (!items || !selectId || !onSelectItem) return
@@ -59,8 +58,8 @@ export const ScreenSelector = ({
   }, [debouncedValue, onSearch])
 
   return (
-    <div className='flex w-full flex-col gap-2 py-10'>
-      <Label palette='primary' htmlFor='searchList' ref={elementRef}>
+    <div className='flex w-full flex-col gap-2 py-8' ref={elementRef}>
+      <Label palette='primary' htmlFor='searchList'>
         Pre fill the form from list of Screens
       </Label>
       <Popover open={open} onOpenChange={setOpen} modal={true}>

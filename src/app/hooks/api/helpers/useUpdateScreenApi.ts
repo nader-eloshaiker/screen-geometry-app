@@ -4,7 +4,7 @@ import { ScreenItemResponse, useUpdateScreen } from '@/lib/openapi/generated'
 import { useCallback } from 'react'
 import { useApiEffectHandler } from '../useApiEffectHandler'
 
-const successNotification = { title: 'Updated', message: 'Screen configuration' }
+const successNotification = { title: 'Updated', message: 'Screen specifications have been updated' }
 
 export const useUpdateScreenApi = () => {
   const { dispatch } = useScreenContext()

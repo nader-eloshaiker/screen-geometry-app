@@ -27,7 +27,6 @@ describe('#Header', () => {
   // cannot be tested due to tailwindcss not getting parsed
   it.todo('should render the header without dropdown menu on a large window', async () => {
     const { result } = renderHook(() => useWindowSize())
-    console.log(result.current)
     const { getByTestId } = render(
       <ThemeProvider>
         <RouterProvider router={browserRouter} />

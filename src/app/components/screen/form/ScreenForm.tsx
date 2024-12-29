@@ -122,6 +122,9 @@ export const ScreenForm = ({ setOpen, editId, isEditLoading, editScreen }: Props
     } else {
       createAction({ data: form as ScreenInput }, { onSuccess: onClose })
     }
+
+    setSelectId('')
+    reset(EmptyInputValues)
   }
 
   useEffect(() => {
@@ -136,7 +139,7 @@ export const ScreenForm = ({ setOpen, editId, isEditLoading, editScreen }: Props
   }, [editScreen, reset])
 
   return (
-    <div className='overflow-auto p-6'>
+    <>
       <SheetHeader>
         <SheetTitle>{editId ? 'Edit' : 'Create'} Screen</SheetTitle>
         <SheetDescription>
@@ -285,6 +288,6 @@ export const ScreenForm = ({ setOpen, editId, isEditLoading, editScreen }: Props
           </SheetFooter>
         </form>
       </Form>
-    </div>
+    </>
   )
 }
