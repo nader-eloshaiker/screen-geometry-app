@@ -40,7 +40,7 @@ export const About = () => {
           <div className='my-6 flex flex-col items-center'>
             <label className='my-6 text-lg'>Demo</label>
             <img
-              className='h-auto max-w-full rounded-md border border-base-300 object-scale-down shadow-lg'
+              className='h-auto max-w-full rounded-md border border-mono-border object-scale-down shadow-lg'
               src='./media/demo.webp'
               width={384}
               height={431}
@@ -55,7 +55,7 @@ export const About = () => {
             P.S. Have questions or feedback? I&apos;m all ears. Feel free to reach out and let me know how I can make
             this experience even better for you. Go to the contact page for details on how to get in touch. Also, show
             your support by starring the project on{' '}
-            <a className='link' href='https://github.com/nader-eloshaiker/screen-geometry-app'>
+            <a className='underline' href='https://github.com/nader-eloshaiker/screen-geometry-app'>
               Github
             </a>
           </p>

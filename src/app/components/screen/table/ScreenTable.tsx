@@ -15,7 +15,7 @@ import {
   TableHeaderRow,
 } from '@/lib/ui/components/table/Table'
 import { cn } from '@/lib/utils'
-import { LoaderCircle, Pencil, X } from 'lucide-react'
+import { Loader2, LoaderCircle, Pencil, X } from 'lucide-react'
 import { Dispatch, SetStateAction } from 'react'
 import styled from 'styled-components'
 
@@ -184,7 +184,7 @@ export const ScreenTable = ({
                     <Pencil id='edit-icon' />
                   </Button>
                   {deleteAction.isPending && screen.id === deleteAction.id ? (
-                    <div className='loading loading-spinner loading-xs' />
+                    <Loader2 className='size-4 animate-spin' />
                   ) : (
                     <button title='Delete' onClick={() => deleteAction.handler(screen.id)}>
                       <X id='delete-icon' className='size-4' />

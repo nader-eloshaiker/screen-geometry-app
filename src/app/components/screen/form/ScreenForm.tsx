@@ -9,6 +9,7 @@ import { Form } from '@/lib/ui/components/form/Form'
 import { Separator } from '@/lib/ui/components/separator/Separator'
 import { cn, createCSSColor } from '@/lib/utils'
 import { yupResolver } from '@hookform/resolvers/yup'
+import { Loader2 } from 'lucide-react'
 import { Dispatch, SetStateAction, useEffect, useState } from 'react'
 import ReactGA from 'react-ga4'
 import { SubmitHandler, useForm } from 'react-hook-form'
@@ -260,7 +261,7 @@ export const ScreenForm = ({ setOpen, editId, isEditLoading, editScreen, selecte
             disabled={!isDirty}
           >
             {isCreateLoading || isUpdateLoading ? (
-              <div data-testid='busySubmitButton' className='loading loading-spinner items-center justify-center' />
+              <Loader2 data-testid='busySubmitButton' className='animate-spin' />
             ) : (
               <>{!editId ? 'Create' : 'Update'}</>
             )}

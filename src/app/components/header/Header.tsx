@@ -15,7 +15,7 @@ import { useState } from 'react'
 import ThemeToggle from '../theme/ThemeToggle'
 
 const ThemeToggleStyled = ({ id }: { id: string }) => (
-  <ThemeToggle className='opacity-50 hover:opacity-100 md:mr-2' id={id} />
+  <ThemeToggle className='self-center opacity-50 hover:opacity-100 md:mr-2' id={id} />
 )
 
 const Title = ({ size }: { size: 'sm' | 'lg' }) => (

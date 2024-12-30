@@ -69,7 +69,7 @@ export const Help = () => {
             ability to import a default list of screens
           </Paragraph>
           <Diagram>
-            <div className='w-96  overflow-hidden rounded-lg border-2 shadow-lg'>
+            <div className='w-96  overflow-hidden rounded-lg border-2 border-primary-border shadow-lg'>
               <ScreenTable
                 screens={[]}
                 isScreenListLoading={false}
@@ -78,14 +78,14 @@ export const Help = () => {
                 showActon={{ handler: () => {}, isPending: false }}
               />
               <div className='flex h-full flex-col items-center'>
-                <div className='label py-4'>
+                <div className='py-4 text-primary-label'>
                   <span className='text-xl'>No List Found</span>
                 </div>
                 <div className='flex flex-col items-center gap-2 py-6'>
                   <div>Click here to populate default list</div>
-                  <button className='btn btn-outline btn-primary w-40' disabled={false}>
+                  <Button className='w-40' mode='outline' disabled={false}>
                     Load Screens
-                  </button>
+                  </Button>
                 </div>
               </div>
             </div>
@@ -98,7 +98,7 @@ export const Help = () => {
           </Diagram>
           <Paragraph>Loading the default list will populate the table with a list of screens.</Paragraph>
           <Diagram>
-            <div className='rounded-lg border-2 p-6 shadow-lg'>
+            <div className='rounded-lg border-2 border-primary-border p-6 shadow-lg'>
               <ScreenTable
                 className='pointer-events-none'
                 screens={fullList}
@@ -115,7 +115,10 @@ export const Help = () => {
             corresponding panel and vice versa.
           </Paragraph>
           <Diagram>
-            <div ref={divSizeRef} className='flex flex-col gap-4 rounded-lg border-2 p-6 shadow-lg'>
+            <div
+              ref={divSizeRef}
+              className='flex flex-col gap-4 rounded-lg border-2 border-primary-border p-6 shadow-lg'
+            >
               <ScreenTable
                 className='pointer-events-none'
                 screens={smallList}
@@ -146,7 +149,7 @@ export const Help = () => {
             the <strong>Show</strong> check box
           </Paragraph>
           <Diagram>
-            <div className='flex flex-col rounded-lg border-2 p-6 shadow-lg'>
+            <div className='flex flex-col rounded-lg border-2 border-primary-border p-6 shadow-lg'>
               <ScreenTable
                 className='pointer-events-none'
                 screens={invisibleList}

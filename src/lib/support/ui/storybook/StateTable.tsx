@@ -21,11 +21,11 @@ export const StateTable = <T extends string>({
   const cols = states && states.length > 0 ? states : ['normal']
 
   return (
-    <table className='border border-dashed border-base-300'>
+    <table className='border border-dashed border-mono-border'>
       <caption className='p-5'>{caption}</caption>
       {states && states.length > 0 && (
         <thead>
-          <tr className='border border-dashed border-base-300'>
+          <tr className='border border-dashed border-mono-border'>
             <th className='px-8 py-4 font-normal' scope='col'></th>
             {cols.map((title) => (
               <th className='px-8 py-4 font-normal' key={title} scope='col'>
@@ -37,7 +37,7 @@ export const StateTable = <T extends string>({
       )}
       <tbody>
         {props.map((prop) => (
-          <tr key={prop} className='border border-dashed border-base-300'>
+          <tr key={prop} className='border border-dashed border-mono-border'>
             <td className='px-8 py-4 text-right text-sm' scope='row'>
               <span className={cn({ 'font-bold text-danger-label': defaultProps === prop })}>{prop}</span>
             </td>

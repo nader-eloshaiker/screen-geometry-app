@@ -1,5 +1,4 @@
 /** @type {import('tailwindcss').Config} */
-import daisyui from 'daisyui'
 import tailwindAnimate from 'tailwindcss-animate'
 import defaultTheme from 'tailwindcss/defaultTheme'
 import plugin from 'tailwindcss/plugin'
@@ -8,21 +7,6 @@ export default {
   mode: 'jit',
   content: ['./src/index.html', './src/**/*.{js,ts,jsx,tsx,html}'],
   theme: {
-    // colors: {
-    //   ...defaultTheme.colors,
-    //   lightPrimary: 'rgb(from #0096d6 r g b / <alpha-value>)',
-    //   lightLightContent: 'rgb(from #d6f3ff r g b / <alpha-value>)',
-    //   LightSecondary: 'rgb(from #9933B3 r g b / <alpha-value>)',
-    //   lightSecondaryContent: 'rgb(from #FFE5FF r g b / <alpha-value>)',
-    //   lightAccent: 'rgb(from #7FD8FF r g b / <alpha-value>)',
-    //   lightAccentContent: 'rgb(from #005980 r g b / <alpha-value>)',
-    //   darkPrimary: 'rgb(from #7FD8FF r g b / <alpha-value>)',
-    //   darkPrimaryContent: 'rgb(from #005980 r g b / <alpha-value>)',
-    //   darkSecondary: 'rgb(from #CC66E6 r g b / <alpha-value>)',
-    //   darkSecondaryContent: 'rgb(from #660080 r g b / <alpha-value>)',
-    //   darkAccent: 'rgb(from #1A739A r g b / <alpha-value>)',
-    //   darkAccentContent: 'rgb(from #E5FFFF r g b / <alpha-value>)',
-    // },
     extend: {
       screens: {
         xs: '425px',
@@ -275,7 +259,6 @@ export default {
     },
   },
   plugins: [
-    daisyui,
     tailwindAnimate,
     plugin(function ({ addVariant }) {
       addVariant('hocus', ['&:hover', '&:focus-visible'])
@@ -292,56 +275,4 @@ export default {
     }),
   ],
   darkMode: ['class', '[data-theme="dark"]'],
-  daisyui: {
-    themes: [
-      {
-        light: {
-          primary: '#0096d6',
-          'primary-content': '#d6f3ff',
-          secondary: '#9933B3',
-          'secondary-content': '#FFE5FF',
-          accent: '#7FD8FF',
-          'accent-content': '#005980',
-          mono: '#44403c',
-          'mono-content': '#e7e5e4',
-          'base-100': '#f5f6f6',
-          'base-200': '#d6d3d1',
-          'base-300': '#a8a29e',
-          'base-content': '#1c1917',
-          info: '#38bdf8',
-          'info-content': '#001116',
-          success: '#84cc16',
-          'success-content': '#000b06',
-          warning: '#facc15',
-          'warning-content': '#160400',
-          error: '#b81e1e',
-          'error-content': '#ffe4e6',
-        },
-      },
-      {
-        dark: {
-          primary: '#7FD8FF',
-          'primary-content': '#005980',
-          secondary: '#CC66E6',
-          'secondary-content': '#660080',
-          accent: '#1A739A',
-          'accent-content': '#E5FFFF',
-          mono: '#363230',
-          'mono-content': '#dddbd9',
-          'base-100': '#222425',
-          'base-200': '#44403c',
-          'base-300': '#78716c',
-          'base-content': '#cdcfd3',
-          info: '#38bdf8',
-          'info-content': '#001116',
-          success: '#84cc16',
-          'success-content': '#000b06',
-          warning: '#facc15',
-          'warning-content': '#160400',
-          error: '#b81e1e',
-          'error-content': '#ffe4e6',
-        },
-      },
-    ],
-  },
 }
