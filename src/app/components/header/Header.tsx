@@ -33,7 +33,7 @@ export default function Header() {
   const [open, setOpen] = useState(false)
 
   return (
-    <header className='bg-card p-4 text-card-foreground shadow-md'>
+    <header className='bg-header p-4 text-header-foreground shadow-md'>
       <div className='flex items-center gap-6 lg:hidden' data-testid='small-header'>
         <Sheet open={open} onOpenChange={setOpen}>
           <SheetTrigger asChild>

@@ -1,9 +1,8 @@
 import { RouteSchema } from '@/app/routes/RouteSchema'
+import { NavigationLink } from '@/lib/ui/components/navigationlink/NavigationLink'
 import { Helmet } from 'react-helmet-async'
-import { useNavigate } from 'react-router-dom'
 
 export const About = () => {
-  const navigate = useNavigate()
   return (
     <>
       <Helmet>
@@ -25,18 +24,18 @@ export const About = () => {
             design enthusiast in need of pixel-perfect clarity, this tool will help you find the right screen.
           </p>
           <p className='mb-4'>
-            Click{' '}
-            <button
-              id='cancelButton'
-              type='button'
-              className='btn btn-primary mx-2 w-24 shadow-lg'
-              onClick={() => {
-                navigate(RouteSchema.screens.path)
-              }}
-            >
-              Screens
-            </button>{' '}
-            to start your journey into finding the right screen.
+            <span>Click</span>
+            <span className='mx-2'>
+              <NavigationLink
+                id='home-screen-link'
+                className='w-24 text-base font-semibold'
+                // mode='ghost'
+                to={RouteSchema.screens.path}
+              >
+                Screens
+              </NavigationLink>
+            </span>
+            <span>to start your journey into finding the right screen.</span>
           </p>
           <div className='my-6 flex flex-col items-center'>
             <label className='my-6 text-lg'>Demo</label>

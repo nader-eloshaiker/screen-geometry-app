@@ -40,11 +40,17 @@ export default {
         },
         card: {
           DEFAULT: 'hsl(var(--card) / <alpha-value>)',
-          hover: 'hsl(var(--card-hover) / <alpha-value>)',
-          active: 'hsl(var(--card-active) / <alpha-value>)',
+          border: 'hsl(var(--card-border) / <alpha-value>)',
+          'border-hover': 'hsl(var(--card-border-hover) / <alpha-value>)',
           foreground: 'hsl(var(--card-foreground) / <alpha-value>)',
-          'foreground-hover': 'hsl(var(--card-foreground-hover) / <alpha-value>)',
-          'foreground-active': 'hsl(var(--card-foreground-active) / <alpha-value>)',
+        },
+        header: {
+          DEFAULT: 'hsl(var(--header) / <alpha-value>)',
+          hover: 'hsl(var(--header-hover) / <alpha-value>)',
+          active: 'hsl(var(--header-active) / <alpha-value>)',
+          foreground: 'hsl(var(--header-foreground) / <alpha-value>)',
+          'foreground-hover': 'hsl(var(--header-foreground-hover) / <alpha-value>)',
+          'foreground-active': 'hsl(var(--header-foreground-active) / <alpha-value>)',
         },
         popover: {
           DEFAULT: 'hsl(var(--popover) / <alpha-value>)',

@@ -54,7 +54,7 @@
   /* Medium Purple */
 
   --primary-50: 264 100% 98%;
-  --primary-100: 264 100% 98%;
+  --primary-100: 262 100% 97%;
   --primary-200: 262 100% 92%;
   --primary-300: 263 100% 85%;
   --primary-400: 263 100% 75%;
@@ -112,12 +112,17 @@
   --muted: var(--mono-200);
   --foreground-muted: var(--mono-500);
 
-  --card: var(--primary-600);
-  --card-hover: var(--primary-400);
-  --card-active: var(--primary-400);
-  --card-foreground: var(--primary-200);
-  --card-foreground-hover: var(--primary-100);
-  --card-foreground-active: var(--primary-100);
+  --card: var(--primary-50);
+  --card-border: var(--primary-200);
+  --card-border-hover: var(--primary-300);
+  --card-foreground: var(--primary-800);
+
+  --header: var(--primary-600);
+  --header-hover: var(--primary-400);
+  --header-active: var(--primary-400);
+  --header-foreground: var(--primary-200);
+  --header-foreground-hover: var(--primary-100);
+  --header-foreground-active: var(--primary-100);
 
   --popover: var(--mono-100);
   --popover-hover: var(--mono-200);
@@ -234,19 +239,10 @@
   --muted: var(--mono-900);
   --foreground-muted: var(--mono-300);
 
-  /* --card: var(--primary-400);
-  --card-hover: var(--primary-600);
-  --card-active: var(--primary-600);
-  --card-foreground: var(--primary-900);
-  --card-foreground-hover: var(--primary-950);
-  --card-foreground-active: var(--primary-950); */
-
-  --popover: var(--mono-900);
-  --popover-hover: var(--mono-800);
-  --popover-active: var(--mono-800);
-  --popover-foreground: var(--mono-200);
-  --popover-foreground-hover: var(--mono-100);
-  --popover-foreground-active: var(--mono-100);
+  --card: var(--mono-900);
+  --card-border: var(--mono-600);
+  --card-border-hover: var(--mono-500);
+  --card-foreground: var(--mono-200);
 
   --primary-label: var(--primary-400);
 
@@ -259,12 +255,6 @@
   --success-label: var(--success-400);
 
   --warning-label: var(--warning-400);
-
-  --chart-1: var(--info-500);
-  --chart-2: var(--info-600);
-  --chart-3: var(--info-700);
-  --chart-4: var(--info-800);
-  --chart-5: var(--info-900);
 }
 
 ::selection {

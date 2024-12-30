@@ -1,6 +1,7 @@
 import { Alert, AlertDescription, AlertTitle } from '@/lib/ui/components/alert/Alert'
 import { Button } from '@/lib/ui/components/button/Button'
 import { Card } from '@/lib/ui/components/card/Card'
+import { AlertCircle } from 'lucide-react'
 import { useEffect } from 'react'
 import { Helmet } from 'react-helmet-async'
 import { isRouteErrorResponse, useRouteError } from 'react-router-dom'
@@ -36,6 +37,7 @@ export const ErrorManager = () => {
         <Card className='w-full max-w-lg rounded-lg bg-white p-6 shadow-xl'>
           {/* Error Message */}
           <Alert palette='danger' className='mb-6'>
+            <AlertCircle className='size-6' />
             <AlertTitle className='text-xl font-bold'>Oops! Something went wrong.</AlertTitle>
             <AlertDescription className='text-lg'>
               It seems there was an issue while processing your request. Please try the following steps:

@@ -1,6 +1,7 @@
 import { Alert, AlertDescription, AlertTitle } from '@/lib/ui/components/alert/Alert'
 import { Button } from '@/lib/ui/components/button/Button'
 import { Card } from '@/lib/ui/components/card/Card'
+import { AlertCircle } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import { Helmet } from 'react-helmet-async'
 import { isRouteErrorResponse, useRouteError } from 'react-router-dom'
@@ -41,10 +42,11 @@ export const BoundyErrorManager = () => {
         <title>Service Error - Screen Geometry</title>
         <meta name='description' content='A service error has occured' />
       </Helmet>
-      <div className='flex min-h-screen items-center justify-center bg-gray-100'>
-        <Card className='w-full max-w-lg rounded-lg bg-white p-6 shadow-xl'>
+      <div className='flex min-h-screen items-center justify-center'>
+        <Card className='w-full max-w-lg p-6 shadow-xl'>
           {/* Error Message */}
           <Alert palette='danger' className='mb-6'>
+            <AlertCircle className='size-6' />
             <AlertTitle className='text-xl font-bold'>Oops! Something went wrong.</AlertTitle>
             <AlertDescription className='text-lg'>
               <RootBoundary />
@@ -52,7 +54,7 @@ export const BoundyErrorManager = () => {
           </Alert>
 
           {/* Troubleshooting Steps */}
-          <div className='space-y-4 text-left text-gray-700'>
+          <div className='space-y-4 text-left'>
             <h3 className='text-lg font-semibold'>Try the following:</h3>
             <ul className='list-inside list-disc'>
               <li>Check your internet connection.</li>
