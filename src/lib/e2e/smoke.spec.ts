@@ -4,7 +4,7 @@ import { MotionGlobalConfig } from 'framer-motion'
 test('Smoke Test Screens Page', async ({ page }) => {
   MotionGlobalConfig.skipAnimations = true
 
-  // Load Page and Naviate to Screens
+  // Load Page and navigate to Screens
   await page.goto('/')
   await page.getByRole('link', { name: 'Screens' }).click()
 

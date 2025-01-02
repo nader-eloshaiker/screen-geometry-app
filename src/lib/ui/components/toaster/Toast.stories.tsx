@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react'
 import { VariantProps } from 'class-variance-authority'
 import { useEffect } from 'react'
 import { Toast, ToastAction, ToastActionElement } from './Toast'
-import { ToastVariants } from './ToastVariants'
+import { ToastVariants } from './Toast.variants'
 import { Toaster } from './Toaster'
 import { useToast } from './useToast'
 

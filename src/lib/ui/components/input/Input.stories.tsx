@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react'
 import { fn } from '@storybook/test'
 import { Label } from '../label/Label'
 import { Input } from './Input'
-import { TInputVariantsPalette } from './InputVariants'
+import { TInputVariantsPalette } from './Input.variants'
 
 const meta = {
   title: 'elements/Input',

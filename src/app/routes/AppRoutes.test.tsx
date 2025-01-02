@@ -44,7 +44,7 @@ describe('#App', () => {
     expect(await test.findByText('Welcome to Screen Geometry')).toBeInTheDocument()
   })
 
-  it('should naviate to the screens page', async () => {
+  it('should navigate to the screens page', async () => {
     const test = await renderWithRouter()
     const element = await test.findAllByRole('link', { name: 'Screens' })
 
@@ -57,7 +57,7 @@ describe('#App', () => {
     })
   })
 
-  it('should naviate back home page', async () => {
+  it('should navigate back home page', async () => {
     const test = await renderWithRouter()
     const screenLink = await test.findAllByRole('link', { name: 'Screens' })
 
@@ -75,7 +75,7 @@ describe('#App', () => {
     await waitFor(() => expect(test.queryByText('Welcome to Screen Geometry')).toBeInTheDocument())
   })
 
-  it('should naviate to the contact page', async () => {
+  it('should navigate to the contact page', async () => {
     const test = await renderWithRouter()
     const element = await test.findAllByRole('link', { name: 'Contact' })
 
@@ -86,7 +86,7 @@ describe('#App', () => {
     await waitFor(() => expect(test.queryByText('How to engage with me or this app')).toBeInTheDocument())
   })
 
-  it('should naviate to the help page', async () => {
+  it('should navigate to the help page', async () => {
     const test = await renderWithRouter()
     const element = await test.findAllByRole('link', { name: 'Help' })
 

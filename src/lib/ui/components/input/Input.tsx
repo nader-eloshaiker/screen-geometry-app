@@ -2,7 +2,7 @@ import * as React from 'react'
 
 import { cn } from '@/lib/utils'
 import { VariantProps } from 'class-variance-authority'
-import { InputAdornmentVariants, InputVariants } from './InputVariants'
+import { InputAdornmentVariants, InputVariants } from './Input.variants'
 
 type TAdornment = JSX.Element | string | number
 
