@@ -9,7 +9,7 @@ import {
   getScreenServiceMock,
   getSearchServiceMock,
 } from '@/lib/openapi/generated'
-import { mswWithSpy, resetMSW, startMSW, stopMSW } from '@/lib/serviceworker/NodeServiceWorker'
+import { initMSW } from '@/lib/serviceworker/NodeServiceWorker'
 import { renderWithUserEvents } from '@/lib/support/test/utils/RenderWithUserEvents'
 import { Toaster } from '@/lib/ui/components/toaster/Toaster'
 import { useElementSizeMock } from '@/lib/ui/hooks/useElementSize.mock'
@@ -60,23 +60,19 @@ const TestParentComponent = ({ initialise }: { initialise?: Array<ScreenItemRend
 }
 
 describe('#ScreenTable', () => {
-  const mswRequestEventSpy = mswWithSpy([
-    ...getSearchServiceMock(),
-    ...getScreenListServiceMock(),
-    ...getScreenServiceMock(),
-  ])
+  const mswObj = initMSW([...getSearchServiceMock(), ...getScreenListServiceMock(), ...getScreenServiceMock()])
 
   beforeAll(() => {
-    startMSW()
+    mswObj.start()
   })
 
   afterAll(() => {
-    stopMSW()
+    mswObj.stop()
   })
 
   beforeEach(() => {
     useElementSizeMock()
-    resetMSW()
+    mswObj.reset()
   })
 
   test('renders screen table component with a table and rows', async () => {
@@ -96,13 +92,14 @@ describe('#ScreenTable', () => {
     const test = await renderWithUserEvents(<TestParentComponent />)
 
     const deleteElements = await test.findAllByTitle('Delete')
-    const deleteElement = deleteElements[0]
+    expect(deleteElements.length).toBe(4)
 
     await act(async () => {
-      await test.user.click(deleteElement)
+      await test.user.click(deleteElements[0])
     })
 
-    expect(mswRequestEventSpy[mswRequestEventSpy.length - 1]).toEqual(
+    expect(expect(mswObj.apiEventStack.length).toBe(2))
+    expect(mswObj.apiEventStack[mswObj.apiEventStack.length - 1]).toEqual(
       expect.stringContaining('method:DELETE|url:http://dev.api.screengeometry.com/v1/screen/'),
     )
 
@@ -120,10 +117,10 @@ describe('#ScreenTable', () => {
       await test.user.click(showElement)
     })
 
-    expect(mswRequestEventSpy[mswRequestEventSpy.length - 1]).toEqual(
+    expect(mswObj.apiEventStack[mswObj.apiEventStack.length - 1]).toEqual(
       expect.stringContaining('method:PATCH|url:http://dev.api.screengeometry.com/v1/screen/'),
     )
-    expect(mswRequestEventSpy[mswRequestEventSpy.length - 1]).toEqual(expect.stringContaining('/show'))
+    expect(mswObj.apiEventStack[mswObj.apiEventStack.length - 1]).toEqual(expect.stringContaining('/show'))
   })
 
   test('show skeleton table when screen list is loading', async () => {

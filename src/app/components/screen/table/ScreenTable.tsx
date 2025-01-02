@@ -180,7 +180,7 @@ export const ScreenTable = ({
               <TableBodyCell className='text-center'>{`${Math.round((screen.specs.ppi * 100) / 100)}`}</TableBodyCell>
               <TableBodyCell>
                 <div className='flex flex-row items-center justify-center gap-3'>
-                  <Button mode='ghost' dimension='sm' onClick={() => editAction.handler(screen.id)}>
+                  <Button title='Edit' mode='ghost' dimension='sm' onClick={() => editAction.handler(screen.id)}>
                     <Pencil id='edit-icon' />
                   </Button>
                   {deleteAction.isPending && screen.id === deleteAction.id ? (

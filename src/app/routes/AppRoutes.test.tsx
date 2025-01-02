@@ -1,12 +1,12 @@
 import { getScreenListServiceMock, getScreenServiceMock, getSearchServiceMock } from '@/lib/openapi/generated'
-import { mswWithSpy, resetMSW, startMSW, stopMSW } from '@/lib/serviceworker/NodeServiceWorker'
+import { initMSW } from '@/lib/serviceworker/NodeServiceWorker'
 import { renderWithRouter } from '@/lib/support/test/utils/RenderWithRouter'
 import { useElementSizeMock } from '@/lib/ui/hooks/useElementSize.mock'
 import { act, waitFor } from '@testing-library/react'
 import { HttpResponse, delay, http } from 'msw'
 
 describe('#App', () => {
-  mswWithSpy([
+  const mswObj = initMSW([
     http.get('*/v1/screens', async () => {
       await delay(10)
       return new HttpResponse(JSON.stringify({ list: [] }), {
@@ -26,16 +26,16 @@ describe('#App', () => {
   })
 
   beforeAll(async () => {
-    startMSW()
+    mswObj.start()
   })
 
   afterAll(async () => {
-    stopMSW()
+    mswObj.stop()
   })
 
   beforeEach(() => {
     useElementSizeMock()
-    resetMSW()
+    mswObj.reset()
   })
 
   it('should render', async () => {
