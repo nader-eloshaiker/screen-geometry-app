@@ -27,6 +27,7 @@ type PanelConfig = {
   bgColor: string
   vPixelCount: number
   hPixelCount: number
+  title: string
 }
 
 const getBorderColor = (themeMode: TThemeMode, color: ScreenColor, selected: boolean) => {
@@ -45,6 +46,7 @@ export const ScreenPanel = ({ screen, highlighted = undefined, setHighLighted = 
     bgColor: '',
     vPixelCount: 0,
     hPixelCount: 0,
+    title: '',
   })
   const [themeMode] = useTheme()
 
@@ -59,14 +61,16 @@ export const ScreenPanel = ({ screen, highlighted = undefined, setHighLighted = 
       bgColor: themeMode === DarkMode ? `${screen.color.lightColor}45` : `${screen.color.darkColor}45`,
       vPixelCount: Math.round((screen.data.vRes ?? 1) / 100),
       hPixelCount: Math.round((screen.data.hRes ?? 1) / 100),
+      title: `${screen.data.diagonalSize.toString()}" ${screen.data.aspectRatio} ${screen.data.hRes} x ${screen.data.vRes}`,
     })
   }, [screen, selected, themeMode])
 
   return (
     <Panel
-      className={cn('rounded-md transition-[outline-width] duration-300 ease-out outline ', {
+      className={cn('rounded-md transition-[outline-width] duration-300 ease-out outline relative ', {
         'outline-[6px]': selected,
         'outline-[4px]': !selected,
+        'opacity-65': !selected && highlighted,
       })}
       $width={config.width}
       $height={config.height}
@@ -78,18 +82,20 @@ export const ScreenPanel = ({ screen, highlighted = undefined, setHighLighted = 
       {...rest}
     >
       {selected && (
+        <div
+          className='absolute top-[-24px] text-xs font-bold sm:top-[-30px] sm:text-base'
+          style={{ color: screen.color.lightColor }}
+        >
+          {config.title}
+        </div>
+      )}
+      {selected && (
         <table className='size-full border-separate border-spacing-px p-px md:border-spacing-[2px] md:p-px lg:border-spacing-[4px] lg:p-[2px]'>
           <tbody>
-            {Array.from({ length: config.vPixelCount }, (_, i) => (
-              <tr key={i}>
-                {Array.from({ length: config.hPixelCount }, (_, j) => (
-                  <td
-                    key={j}
-                    style={{
-                      backgroundColor: config.bgColor,
-                      borderRadius: '20%',
-                    }}
-                  ></td>
+            {Array.from({ length: config.vPixelCount }, (_, v) => (
+              <tr key={v}>
+                {Array.from({ length: config.hPixelCount }, (_, h) => (
+                  <td key={`h-${h}-v-${v}`} style={{ backgroundColor: config.bgColor, borderRadius: '20%' }}></td>
                 ))}
               </tr>
             ))}
