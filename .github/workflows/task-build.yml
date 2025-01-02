@@ -1,10 +1,10 @@
-name: 'Lint Task'
+name: 'Build Task'
 
 on: workflow_call
 
 jobs:
-  lint:
-    name: Linting
+  build:
+    name: Building
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -39,5 +39,7 @@ jobs:
       - name: Run pnpm install
         run: pnpm install
 
-      - name: Run pnpm lint
-        run: pnpm lint
+      - name: Run pnpm build:dev # bundle analysis for codecov
+        env:
+          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+        run: pnpm build:dev

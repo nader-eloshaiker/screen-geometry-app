@@ -10,156 +10,29 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  unit-tests:
-    name: Unit Tests
-    runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      pull-requests: write
+  unit-test:
+    name: Run Unit Testing
+    uses: ./.github/workflows/task-test-unit.yml
+    secrets: inherit
 
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+  component-test:
+    name: Run Component Testing
+    uses: ./.github/workflows/task-test-component.yml
+    secrets: inherit
 
-      - name: Install Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version-file: '.nvmrc'
+  e2e-test:
+    name: E2E Testing
+    uses: ./.github/workflows/task-test-e2e.yml
+    secrets: inherit
 
-      - name: Install pnpm
-        uses: pnpm/action-setup@v4.0.0
-        with:
-          run_install: false
-
-      - name: Get pnpm store directory
-        shell: bash
-        run: echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
-
-      - name: Setup pnpm cache
-        uses: actions/cache@v4
-        with:
-          path: ${{ env.STORE_PATH }}
-          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
-          restore-keys: |
-            ${{ runner.os }}-pnpm-store-
-
-      - name: Run pnpm install
-        run: pnpm install
-
-      - name: Run pnpm test
-        run: pnpm test:ci
-
-      - name: Upload coverage reports to Codecov
-        uses: codecov/codecov-action@v4
-        with:
-          token: ${{ secrets.CODECOV_TOKEN }}
-          slug: nader-eloshaiker/screen-geometry-app
-          directory: coverage/vitest/
-          flags: unit
-
-  storybook-tests:
-    name: StoryBook Tests
-    runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      pull-requests: write
-
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Install Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version-file: '.nvmrc'
-
-      - name: Install pnpm
-        uses: pnpm/action-setup@v4.0.0
-        with:
-          run_install: false
-
-      - name: Get pnpm store directory
-        shell: bash
-        run: echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
-
-      - name: Setup pnpm cache
-        uses: actions/cache@v4
-        with:
-          path: ${{ env.STORE_PATH }}
-          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
-          restore-keys: |
-            ${{ runner.os }}-pnpm-store-
-
-      - name: Run pnpm install
-        run: pnpm install
-
-      - name: Install Playwright Browsers
-        run: pnpm e2e:install
-
-      - name: Run pnpm sb:ci
-        run: pnpm sb:ci
-
-      - name: Upload coverage reports to Codecov
-        uses: codecov/codecov-action@v4
-        with:
-          token: ${{ secrets.CODECOV_TOKEN }}
-          slug: nader-eloshaiker/screen-geometry-app
-          directory: coverage/storybook/
-          flags: storybook
-
-  e2e-tests:
-    name: E2E Tests
-    runs-on: ubuntu-latest
-    timeout-minutes: 20
-    permissions:
-      contents: read
-      pull-requests: write
-
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Install Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version-file: '.nvmrc'
-
-      - name: Install pnpm
-        uses: pnpm/action-setup@v4.0.0
-        with:
-          run_install: false
-
-      - name: Get pnpm store directory
-        shell: bash
-        run: echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
-
-      - name: Setup pnpm cache
-        uses: actions/cache@v4
-        with:
-          path: ${{ env.STORE_PATH }}
-          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
-          restore-keys: |
-            ${{ runner.os }}-pnpm-store-
-
-      - name: Run pnpm install
-        run: pnpm install
-
-      - name: Install Playwright Browsers
-        run: pnpm e2e:install
-
-      - name: Run Playwright tests
-        run: pnpm e2e
-
-      - name: Upload coverage reports to Codecov
-        uses: codecov/codecov-action@v4
-        with:
-          token: ${{ secrets.CODECOV_TOKEN }}
-          slug: nader-eloshaiker/screen-geometry-app
-          directory: coverage/playwright/
-          flags: e2e
+  deploy-coverage:
+    needs: [unit-test, component-test, e2e-test]
+    name: Deploying Coverage
+    uses: ./.github/workflows/task-deploy-coverage.yml
+    secrets: inherit
 
   manage-release:
-    needs: [unit-tests, storybook-tests, e2e-tests]
+    needs: [unit-test, component-test, e2e-test]
     name: Manage Release
     runs-on: ubuntu-latest
     permissions:

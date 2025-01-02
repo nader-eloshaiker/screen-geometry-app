@@ -1,21 +1,18 @@
-name: 'Lint Task'
+name: 'Design System Test Task'
 
 on: workflow_call
 
 jobs:
-  lint:
-    name: Linting
+  designsystem-test:
+    name: Design System Testing
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      pull-requests: write
-
     steps:
-      - name: Checkout
+      - name: Checkout code
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
-      - name: Install Node.js
-        uses: actions/setup-node@v4
+      - uses: actions/setup-node@v4
         with:
           node-version-file: '.nvmrc'
 
@@ -39,5 +36,9 @@ jobs:
       - name: Run pnpm install
         run: pnpm install
 
-      - name: Run pnpm lint
-        run: pnpm lint
+      - name: Run Chromatic
+        uses: chromaui/action@latest
+        with:
+          # ⚠️ Make sure to configure a `CHROMATIC_PROJECT_TOKEN` repository secret
+          projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
+          autoAcceptChanges: 'main'

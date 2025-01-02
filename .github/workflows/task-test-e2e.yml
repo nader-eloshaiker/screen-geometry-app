@@ -1,18 +1,22 @@
-name: 'Chromatic'
+name: 'E2E Test Task'
 
 on: workflow_call
 
 jobs:
-  chromatic:
-    name: Run Chromatic
+  e2e-test:
+    name: E2E Testing
     runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
+    timeout-minutes: 20
+    permissions:
+      contents: read
+      pull-requests: write
 
-      - uses: actions/setup-node@v4
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install Node.js
+        uses: actions/setup-node@v4
         with:
           node-version-file: '.nvmrc'
 
@@ -36,9 +40,14 @@ jobs:
       - name: Run pnpm install
         run: pnpm install
 
-      - name: Run Chromatic
-        uses: chromaui/action@latest
+      - name: Install Playwright Browsers
+        run: pnpm e2e:install
+
+      - name: Run Playwright tests
+        run: pnpm e2e
+
+      - name: Archive code coverage results
+        uses: actions/upload-artifact@v4
         with:
-          # ⚠️ Make sure to configure a `CHROMATIC_PROJECT_TOKEN` repository secret
-          projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
-          autoAcceptChanges: 'main'
+          name: e2e-code-coverage-report
+          path: coverage/playwright/
