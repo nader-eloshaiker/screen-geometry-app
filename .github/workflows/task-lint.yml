@@ -4,7 +4,7 @@ on: workflow_call
 
 jobs:
   lint:
-    name: Linting
+    name: Lint
     runs-on: ubuntu-latest
     permissions:
       contents: read

@@ -11,17 +11,17 @@ concurrency:
 
 jobs:
   unit-test:
-    name: Run Unit Testing
+    name: Unit Tests
     uses: ./.github/workflows/task-test-unit.yml
     secrets: inherit
 
   component-test:
-    name: Run Component Testing
+    name: Component Tests
     uses: ./.github/workflows/task-test-component.yml
     secrets: inherit
 
   e2e-test:
-    name: E2E Testing
+    name: E2E Tests
     uses: ./.github/workflows/task-test-e2e.yml
     secrets: inherit
 

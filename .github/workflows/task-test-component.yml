@@ -4,7 +4,7 @@ on: workflow_call
 
 jobs:
   component-test:
-    name: Component Testing
+    name: Component Tests
     runs-on: ubuntu-latest
     permissions:
       contents: read

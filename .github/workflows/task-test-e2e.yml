@@ -4,7 +4,7 @@ on: workflow_call
 
 jobs:
   e2e-test:
-    name: E2E Testing
+    name: E2E Tests
     runs-on: ubuntu-latest
     timeout-minutes: 20
     permissions:

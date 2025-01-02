@@ -4,7 +4,7 @@ on: workflow_call
 
 jobs:
   unit-test:
-    name: Unit Testing
+    name: Unit Tests
     runs-on: ubuntu-latest
     permissions:
       contents: read
