@@ -4,7 +4,7 @@ import { type VariantProps } from 'class-variance-authority'
 import * as React from 'react'
 
 import { cn } from '@/lib/utils'
-import { ToggleVariants } from '../toggle/ToggleVariants'
+import { ToggleVariants } from '../toggle/Toggle.variants'
 
 const ToggleGroupContext = React.createContext<VariantProps<typeof ToggleVariants>>({
   palette: 'primary',

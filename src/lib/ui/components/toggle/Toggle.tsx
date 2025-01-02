@@ -3,7 +3,7 @@ import { type VariantProps } from 'class-variance-authority'
 import * as React from 'react'
 
 import { cn } from '@/lib/utils'
-import { ToggleVariants } from './ToggleVariants'
+import { ToggleVariants } from './Toggle.variants'
 
 const Toggle = React.forwardRef<
   React.ElementRef<typeof TogglePrimitive.Root>,

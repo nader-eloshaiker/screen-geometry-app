@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react'
 import { fn } from '@storybook/test'
 import { Italic } from 'lucide-react'
 import { Toggle } from './Toggle'
-import { TToggleMode, TTogglePalette, TToggleSize } from './ToggleVariants'
+import { TToggleMode, TTogglePalette, TToggleSize } from './Toggle.variants'
 
 const meta = {
   title: 'Elements/Toggle',
