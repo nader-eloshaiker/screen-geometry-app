@@ -1,10 +1,6 @@
 import { ErrorResponse } from '@/lib/openapi/generated'
-import {
-  GeneralNotificationItem,
-  NotificationEventTypes,
-  NotificationType,
-  useNotificationContext,
-} from '@/lib/ui/notification'
+import { useToast } from '@/lib/ui/components/toaster/useToast'
+
 import { useEffect } from 'react'
 
 export const useApiEffectHandler = <TData>({
@@ -18,32 +14,32 @@ export const useApiEffectHandler = <TData>({
   responseHandler?(data: TData | undefined): void
   successNotification?: { title: string; message: string }
 }) => {
-  const { dispatch } = useNotificationContext()
+  const { toast } = useToast()
 
   useEffect(() => {
-    if (!responseHandler || !data) {
+    if (!responseHandler || !data || !toast) {
       return
     }
     responseHandler(data)
 
     if (successNotification) {
       const { title, message } = successNotification
-      dispatch({
-        type: NotificationEventTypes.ADD_NOTIFICATION,
-        payload: {
-          value: { title, message } as GeneralNotificationItem,
-          type: NotificationType.SUCCESS,
-        },
+      toast({
+        palette: 'success',
+        title,
+        description: message,
+        duration: 3000,
       })
     }
-  }, [responseHandler, data, dispatch, successNotification])
+  }, [data, responseHandler, successNotification, toast])
 
   useEffect(() => {
     if (error) {
-      dispatch({
-        type: NotificationEventTypes.ADD_NOTIFICATION,
-        payload: { value: error, type: NotificationType.ERROR },
+      toast({
+        title: 'Server Error',
+        description: error.error.details?.reason ?? error.error.message,
+        palette: 'danger',
       })
     }
-  }, [dispatch, error])
+  }, [error, toast])
 }

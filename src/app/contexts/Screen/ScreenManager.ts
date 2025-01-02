@@ -1,6 +1,6 @@
 import { ScreenItemRender } from '@/app/models/screenItemRender'
 import { ScreenItem } from '@/lib/openapi/generated'
-import { normaliseScreenRender } from '@/lib/utils/ScreenCalc'
+import { normaliseScreenRender } from '@/lib/utils'
 import { match } from 'ts-pattern'
 
 export const initialScreenState = {

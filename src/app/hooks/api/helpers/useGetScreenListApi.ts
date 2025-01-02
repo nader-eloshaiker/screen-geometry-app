@@ -16,7 +16,6 @@ export const useGetScreensListApi = () => {
     query: {
       refetchOnWindowFocus: false,
       placeholderData: keepPreviousData,
-      queryKey: ['useCreateScreenList'],
     },
   })
 

@@ -5,7 +5,6 @@ import { useApiEffectHandler } from '../useApiEffectHandler'
 export const useSearchApi = (params?: GetSearchParams) => {
   const request = useGetSearch<SearchListResponse>(params, {
     query: {
-      queryKey: ['useGetSearchList', ...Object.values(params ?? {})],
       staleTime: Infinity,
       placeholderData: keepPreviousData,
     },

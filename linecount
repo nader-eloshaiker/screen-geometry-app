@@ -1,0 +1,16 @@
+src//app/components/footer/Footer.test.tsx
+src//app/components/screen/createbutton/CreateButton.test.tsx
+src//app/components/screen/form/ScreenForm.test.tsx
+src//app/components/screen/panel/ScreenPanel.test.tsx
+src//app/components/screen/table/ScreenTable.test.tsx
+src//app/components/screen/alignment/AlignmentSelector.test.tsx
+src//app/components/stacked/Stacked.test.tsx
+src//app/components/header/Header.test.tsx
+src//app/routes/AppRoutes.test.tsx
+src//lib/ui/overlay-input-field/OverlayInputField.test.tsx
+src//lib/ui/notification/context/NotificationManager.test.tsx
+src//lib/ui/notification/NotificationToaster.test.tsx
+src//lib/ui/notification/NotificationImage.test.tsx
+src//lib/ui/list-input/ListInput.test.tsx
+src//lib/ui/components/input/input.test.tsx
+src//lib/ui/components/skeleton/Skeleton.test.tsx

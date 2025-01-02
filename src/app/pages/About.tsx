@@ -1,9 +1,8 @@
 import { RouteSchema } from '@/app/routes/RouteSchema'
+import { NavigationLink } from '@/lib/ui/components/navigationlink/NavigationLink'
 import { Helmet } from 'react-helmet-async'
-import { useNavigate } from 'react-router-dom'
 
 export const About = () => {
-  const navigate = useNavigate()
   return (
     <>
       <Helmet>
@@ -25,23 +24,23 @@ export const About = () => {
             design enthusiast in need of pixel-perfect clarity, this tool will help you find the right screen.
           </p>
           <p className='mb-4'>
-            Click{' '}
-            <button
-              id='cancelButton'
-              type='button'
-              className='btn btn-primary mx-2 w-24 shadow-lg'
-              onClick={() => {
-                navigate(RouteSchema.screens.path)
-              }}
-            >
-              Screens
-            </button>{' '}
-            to start your journey into finding the right screen.
+            <span>Click</span>
+            <span className='mx-2'>
+              <NavigationLink
+                id='home-screen-link'
+                className='w-24 text-base font-semibold'
+                // mode='ghost'
+                to={RouteSchema.screens.path}
+              >
+                Screens
+              </NavigationLink>
+            </span>
+            <span>to start your journey into finding the right screen.</span>
           </p>
           <div className='my-6 flex flex-col items-center'>
             <label className='my-6 text-lg'>Demo</label>
             <img
-              className='h-auto max-w-full rounded-md border border-base-300 object-scale-down shadow-lg'
+              className='h-auto max-w-full rounded-md border border-mono-border object-scale-down shadow-lg'
               src='./media/demo.webp'
               width={384}
               height={431}
@@ -56,7 +55,7 @@ export const About = () => {
             P.S. Have questions or feedback? I&apos;m all ears. Feel free to reach out and let me know how I can make
             this experience even better for you. Go to the contact page for details on how to get in touch. Also, show
             your support by starring the project on{' '}
-            <a className='link' href='https://github.com/nader-eloshaiker/screen-geometry-app'>
+            <a className='underline' href='https://github.com/nader-eloshaiker/screen-geometry-app'>
               Github
             </a>
           </p>

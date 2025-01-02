@@ -77,7 +77,7 @@ Although this tool was designed with the purpose of testing, it is also usefull 
 
 - Styled Components
 - TailwindCSS
-- DaisyUI
+- ShadCN
 - StoryBook
 
 ### API
