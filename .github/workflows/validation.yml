@@ -309,8 +309,8 @@ jobs:
         uses: tj-actions/changed-files@v45
         with:
           files: |
-            app/components/**
-            lib/ui/components/**
+            src/app/components/**
+            src/lib/ui/**
             .storybook/**
 
   chromatic:
