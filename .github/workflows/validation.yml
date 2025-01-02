@@ -39,13 +39,13 @@ jobs:
     secrets: inherit
 
   e2e-test:
-    name: E2E Testing
+    name: Run E2E Testing
     uses: ./.github/workflows/task-test-e2e.yml
     secrets: inherit
 
   deploy-coverage:
     needs: [unit-test, component-test, e2e-test]
-    name: Deploying Coverage
+    name: Run Coverage Deployment
     uses: ./.github/workflows/task-deploy-coverage.yml
     secrets: inherit
 
