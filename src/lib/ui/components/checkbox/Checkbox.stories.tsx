@@ -2,7 +2,7 @@ import { StateTable } from '@/lib/support/ui/storybook/StateTable'
 import type { Meta, StoryObj } from '@storybook/react'
 import { fn } from '@storybook/test'
 import { Checkbox } from './Checkbox'
-import { TCheckboxPalette, TCheckboxSize } from './CheckboxVariants'
+import { TCheckboxPalette, TCheckboxSize } from './Checkbox.variants'
 
 const meta = {
   title: 'Elements/Checkbox',

@@ -3,7 +3,7 @@ import * as CheckboxPrimitive from '@radix-ui/react-checkbox'
 import { VariantProps } from 'class-variance-authority'
 import { Check } from 'lucide-react'
 import { ComponentProps, ComponentPropsWithoutRef, ElementRef, forwardRef } from 'react'
-import { CheckboxVariants } from './CheckboxVariants'
+import { CheckboxVariants } from './Checkbox.variants'
 
 export type CheckboxProps = ComponentProps<typeof CheckboxPrimitive.Root> & VariantProps<typeof CheckboxVariants>
 
