@@ -2,7 +2,7 @@ import { cn } from '@/lib/utils'
 import { VariantProps } from 'class-variance-authority'
 import { useEffect, useState } from 'react'
 import { NavLink, NavLinkProps, useLocation } from 'react-router-dom'
-import { ButtonVariants } from '../button/ButtonVariants'
+import { ButtonVariants } from '../button/Button.variants'
 
 type Props = NavLinkProps &
   VariantProps<typeof ButtonVariants> &
