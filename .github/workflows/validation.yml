@@ -20,42 +20,8 @@ permissions:
 jobs:
   lint:
     name: Lint
-    runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      pull-requests: write
-
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Install Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version-file: '.nvmrc'
-
-      - name: Install pnpm
-        uses: pnpm/action-setup@v4.0.0
-        with:
-          run_install: false
-
-      - name: Get pnpm store directory
-        shell: bash
-        run: echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
-
-      - name: Setup pnpm cache
-        uses: actions/cache@v4
-        with:
-          path: ${{ env.STORE_PATH }}
-          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
-          restore-keys: |
-            ${{ runner.os }}-pnpm-store-
-
-      - name: Run pnpm install
-        run: pnpm install
-
-      - name: Run pnpm lint
-        run: pnpm lint
+    uses: ./.github/workflows/tasks/lint.yml
+    secrets: inherit
 
   build:
     name: Build
@@ -317,5 +283,5 @@ jobs:
     name: Run visual tests
     needs: [changed-files]
     if: ${{ needs.changed-files.outputs.any_changed == 'true' }}
-    uses: ./.github/workflows/chromatic.yml
+    uses: ./.github/workflows/tasks/chromatic.yml
     secrets: inherit
