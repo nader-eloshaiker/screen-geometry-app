@@ -50,7 +50,7 @@ export default function Header() {
                 <span>Theme Toggle</span>
               </SheetDescription>
             </SheetHeader>
-            <div className='grid gap-6 py-6'>
+            <nav aria-label='Main' className='grid gap-6 py-6'>
               <NavigationLink
                 to={RouteSchema.root.path}
                 mode='ghost'
@@ -83,7 +83,7 @@ export default function Header() {
               >
                 Help
               </NavigationLink>
-            </div>
+            </nav>
           </SheetContent>
         </Sheet>
         <Title size='lg' />
@@ -91,7 +91,7 @@ export default function Header() {
       <div className='container mx-auto hidden lg:flex lg:flex-col' data-testid='large-header'>
         <Title size='lg' />
         <div className='flex justify-between'>
-          <nav className='flex gap-6' data-testid='large-header-menu'>
+          <nav aria-label='Main' className='flex gap-6' data-testid='large-header-menu'>
             <NavigationLink
               mode='ghost'
               palette={'secondary'}

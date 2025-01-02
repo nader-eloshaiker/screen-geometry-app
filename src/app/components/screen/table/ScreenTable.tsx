@@ -166,6 +166,7 @@ export const ScreenTable = ({
                       $bgColor={bgColor(themeMode, screen.color)}
                       checked={screen.visible}
                       onCheckedChange={() => showActon.handler(screen.id)}
+                      title='Show'
                     />
                   )}
                 </div>
