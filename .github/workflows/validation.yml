@@ -20,7 +20,7 @@ permissions:
 jobs:
   lint:
     name: Lint
-    uses: ./.github/workflows/tasks/lint.yml
+    uses: ./.github/workflows/task-lint.yml
     secrets: inherit
 
   build:
@@ -283,5 +283,5 @@ jobs:
     name: Run visual tests
     needs: [changed-files]
     if: ${{ needs.changed-files.outputs.any_changed == 'true' }}
-    uses: ./.github/workflows/tasks/chromatic.yml
+    uses: ./.github/workflows/task-chromatic.yml
     secrets: inherit
