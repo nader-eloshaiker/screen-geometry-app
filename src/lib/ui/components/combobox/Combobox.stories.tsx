@@ -1,6 +1,7 @@
 import { cn } from '@/lib/utils'
 import { Popover, PopoverContent, PopoverTrigger } from '@radix-ui/react-popover'
 import type { Meta, StoryObj } from '@storybook/react'
+import { expect, userEvent, within } from '@storybook/test'
 import { Check, ChevronsUpDown } from 'lucide-react'
 import { useState } from 'react'
 import { Button } from '../button/Button'
@@ -8,24 +9,24 @@ import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, Command
 
 const frameworks = [
   {
-    value: 'next.js',
-    label: 'Next.js',
+    value: 'javascript',
+    label: 'JavaScript',
   },
   {
-    value: 'sveltekit',
-    label: 'SvelteKit',
+    value: 'typescript',
+    label: 'TypeScript',
   },
   {
-    value: 'nuxt.js',
-    label: 'Nuxt.js',
+    value: 'go',
+    label: 'Go Lang',
   },
   {
-    value: 'remix',
-    label: 'Remix',
+    value: 'java',
+    label: 'Java',
   },
   {
-    value: 'astro',
-    label: 'Astro',
+    value: 'python',
+    label: 'Python',
   },
 ]
 
@@ -49,9 +50,14 @@ const ComboboxDemo = () => {
   return (
     <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger asChild>
-        <Button mode='outline' role='combobox' aria-expanded={open} className='w-[200px] justify-between'>
-          {value ? frameworks.find((framework) => framework.value === value)?.label : 'Select framework...'}
-          <ChevronsUpDown className='opacity-50' />
+        <Button
+          mode='outline'
+          role='combobox'
+          aria-expanded={open}
+          className='w-[200px] justify-between shadow-lg [&_svg]:text-primary-foreground-muted [&_svg]:hocus:text-primary-foreground-hover'
+        >
+          <div>{value ? frameworks.find((framework) => framework.value === value)?.label : 'Select framework...'}</div>
+          <ChevronsUpDown />
         </Button>
       </PopoverTrigger>
       <PopoverContent className='w-[200px] pt-2'>
@@ -86,5 +92,19 @@ export const Component: Story = {
   parameters: {},
   render: () => {
     return <ComboboxDemo />
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement)
+    const trigger = canvas.getByRole('combobox')
+    await userEvent.click(trigger)
+
+    const inputElement = canvas.getByPlaceholderText(/Search framework/i)
+    await expect(inputElement).toBeInTheDocument()
+
+    expect(canvas.getAllByRole('option')).toHaveLength(5)
+
+    await userEvent.type(inputElement, 'java')
+
+    expect(canvas.getAllByRole('option')).toHaveLength(2)
   },
 }

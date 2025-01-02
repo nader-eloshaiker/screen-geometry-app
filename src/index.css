@@ -117,19 +117,19 @@
   --card-border-hover: var(--primary-300);
   --card-foreground: var(--primary-800);
 
+  --popover: var(--mono-100);
+  --popover-hover: var(--mono-500);
+  --popover-active: var(--mono-500);
+  --popover-foreground: var(--mono-900);
+  --popover-foreground-hover: var(--mono-100);
+  --popover-foreground-active: var(--mono-100);
+
   --header: var(--primary-600);
   --header-hover: var(--primary-400);
   --header-active: var(--primary-400);
   --header-foreground: var(--primary-200);
   --header-foreground-hover: var(--primary-100);
   --header-foreground-active: var(--primary-100);
-
-  --popover: var(--mono-100);
-  --popover-hover: var(--mono-200);
-  --popover-active: var(--mono-200);
-  --popover-foreground: var(--mono-800);
-  --popover-foreground-hover: var(--mono-900);
-  --popover-foreground-active: var(--mono-900);
 
   --primary: var(--primary-600);
   --primary-active: var(--primary-300);
@@ -243,6 +243,13 @@
   --card-border: var(--mono-600);
   --card-border-hover: var(--mono-500);
   --card-foreground: var(--mono-200);
+
+  --popover: var(--mono-900);
+  --popover-hover: var(--mono-500);
+  --popover-active: var(--mono-500);
+  --popover-foreground: var(--mono-100);
+  --popover-foreground-hover: var(--mono-50);
+  --popover-foreground-active: var(--mono-50);
 
   --primary-label: var(--primary-400);
 
