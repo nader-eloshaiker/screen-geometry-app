@@ -43,8 +43,8 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
-const ComboboxDemo = () => {
-  const [open, setOpen] = useState(false)
+const ComboboxDemo = ({ defaultValue = false }: { defaultValue?: boolean }) => {
+  const [open, setOpen] = useState(defaultValue)
   const [value, setValue] = useState('')
 
   return (
@@ -87,7 +87,7 @@ const ComboboxDemo = () => {
   )
 }
 
-export const Component: Story = {
+export const Test: Story = {
   args: {},
   parameters: {},
   render: () => {
@@ -106,5 +106,21 @@ export const Component: Story = {
     await userEvent.type(inputElement, 'java')
 
     expect(canvas.getAllByRole('option')).toHaveLength(2)
+  },
+}
+
+export const Component: Story = {
+  args: {},
+  parameters: {},
+  render: () => {
+    return <ComboboxDemo />
+  },
+}
+
+export const ComponentOpenedState: Story = {
+  args: {},
+  parameters: {},
+  render: () => {
+    return <ComboboxDemo defaultValue={true} />
   },
 }

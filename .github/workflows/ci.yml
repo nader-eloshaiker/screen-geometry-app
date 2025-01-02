@@ -230,7 +230,7 @@ jobs:
         run: pnpm install
 
       - name: Run pnpm report
-        run: pnpm sb:build
+        run: pnpm build-storybook
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
