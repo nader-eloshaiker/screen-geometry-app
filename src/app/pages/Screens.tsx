@@ -98,8 +98,11 @@ export const Screens = () => {
   return (
     <>
       <Helmet>
-        <title>Screens - Screen Geometry</title>
-        <meta name='description' content='Visually compare screen sizes and resolutions' />
+        <title>Screen Geometry: Screens</title>
+        <meta
+          name='description'
+          content='Compare multiple monitor sizes and resolutions simultaneously. Get clear insights into size, resolution, and aspect ratio differences. Perfect for tech enthusiasts and professionals!'
+        />
       </Helmet>
 
       <div className='flex flex-1 flex-col gap-10'>

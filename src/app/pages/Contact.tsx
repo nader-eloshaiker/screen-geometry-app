@@ -24,8 +24,8 @@ export const Contact = () => {
   return (
     <>
       <Helmet>
-        <title>Contact - Screen Geometry</title>
-        <meta name='description' content='How to engage with me or this app' />
+        <title>Screen Geometry: Contact</title>
+        <meta name='description' content='How to engage with me or this screen comparison tool' />
       </Helmet>
 
       <div className='h-full'>

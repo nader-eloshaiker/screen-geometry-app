@@ -46,7 +46,15 @@ const FormLabel = React.forwardRef<
 >(({ className, palette, ...props }, ref) => {
   const { error, formItemId } = useFormField()
 
-  return <Label ref={ref} palette={error ? 'danger' : palette} className={className} htmlFor={formItemId} {...props} />
+  return (
+    <Label
+      ref={ref}
+      palette={error ? 'danger' : palette}
+      className={cn(className, 'pointer-events-none')}
+      htmlFor={formItemId}
+      {...props}
+    />
+  )
 })
 FormLabel.displayName = 'FormLabel'
 

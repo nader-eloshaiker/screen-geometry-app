@@ -30,7 +30,7 @@ export const ErrorManager = () => {
   return (
     <>
       <Helmet>
-        <title>Service Error - Screen Geometry</title>
+        <title>Screen Geometry: Service Error</title>
         <meta name='description' content='A service error has occured' />
       </Helmet>
       <div className='flex min-h-screen items-center justify-center bg-gray-100'>

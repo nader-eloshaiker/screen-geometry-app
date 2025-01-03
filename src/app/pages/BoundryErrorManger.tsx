@@ -39,7 +39,7 @@ export const BoundyErrorManager = () => {
   return (
     <>
       <Helmet>
-        <title>Service Error - Screen Geometry</title>
+        <title>Screen Geometry: Error</title>
         <meta name='description' content='A service error has occured' />
       </Helmet>
       <div className='flex min-h-screen items-center justify-center'>

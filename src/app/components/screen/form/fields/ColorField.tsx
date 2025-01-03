@@ -26,7 +26,7 @@ export const ColorField = ({ className, control, formKey, title, mode, isLoading
       name={formKey}
       render={({ field }) => (
         <FormItem className={className}>
-          <FormLabel palette='primary'>{`${title} Color`}</FormLabel>
+          <FormLabel palette='mono'>{`${title} Color`}</FormLabel>
           <FormControl>
             <Input
               {...field}

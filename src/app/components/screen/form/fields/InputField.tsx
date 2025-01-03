@@ -35,7 +35,7 @@ export const InputField = ({
       name={formKey}
       render={({ field }) => (
         <FormItem>
-          <FormLabel palette='primary'>{title}</FormLabel>
+          <FormLabel palette='mono'>{title}</FormLabel>
           <FormControl>
             <Input
               {...field}
