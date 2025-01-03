@@ -57,8 +57,8 @@ export const Help = () => {
   return (
     <>
       <Helmet>
-        <title>Help - Screen Geometry</title>
-        <meta name='description' content='How to get started and use this app' />
+        <title>Screen Geometry: Help</title>
+        <meta name='description' content='How to get started and use this screeen comparison tool' />
       </Helmet>
 
       <div className='h-full'>

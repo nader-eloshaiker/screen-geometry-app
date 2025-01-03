@@ -2,12 +2,15 @@ import { RouteSchema } from '@/app/routes/RouteSchema'
 import { NavigationLink } from '@/lib/ui/components/navigationlink/NavigationLink'
 import { Helmet } from 'react-helmet-async'
 
-export const About = () => {
+export const Home = () => {
   return (
     <>
       <Helmet>
-        <title>About - Screen Geometry</title>
-        <meta name='description' content='About this app and where to get started' />
+        <title>Screen Geometry: Home</title>
+        <meta
+          name='description'
+          content='Introduction into this tool. Compare multiple monitor sizes and resolutions simultaneously. Get clear insights into size, resolution, and aspect ratio differences. Perfect for tech enthusiasts and professionals!'
+        />
       </Helmet>
 
       <div className='flex h-full flex-col justify-between'>

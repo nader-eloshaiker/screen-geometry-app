@@ -16,7 +16,7 @@ export const AppRoutes: RouteObject[] = [
           {
             index: true,
             async lazy() {
-              const { About } = await import('@/app/pages/About')
+              const { Home: About } = await import('@/app/pages/Home')
               return { Component: About }
             },
           },
