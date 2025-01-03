@@ -33,7 +33,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
       >
         <input
           type={type}
-          className={cn(InputVariants({ palette, dimension, className }), 'peer', className)}
+          className={cn(InputVariants({ palette, dimension, className }), className)}
           ref={ref}
           {...props}
         />

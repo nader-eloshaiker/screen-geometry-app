@@ -5,7 +5,7 @@ export type TInputVariantsPalette = NonNullable<TInputVariantsVariants['palette'
 export type TInputVariantsDimension = NonNullable<TInputVariantsVariants['dimension']>
 
 const InputVariants = cva(
-  'flex h-10 w-full rounded-md border-2 text-sm outline-none file:border-0 file:text-sm file:font-medium focus-visible:outline-2 focus-visible:outline-offset-4 disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50',
+  'peer flex h-10 w-full rounded-md border-2 text-sm outline-none file:border-0 file:text-sm file:font-medium focus-visible:outline-2 focus-visible:outline-offset-4 disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50',
   {
     variants: {
       palette: {
@@ -37,12 +37,17 @@ const InputVariants = cva(
 const InputAdornmentVariants = cva('pointer-events-none absolute flex h-10 items-center justify-center text-sm', {
   variants: {
     palette: {
-      primary: 'bg-primary-muted text-primary-foreground-muted',
-      secondary: 'bg-secondary-muted text-secondary-foreground-muted',
-      mono: 'bg-mono-muted text-mono-foreground-muted',
-      danger: 'bg-danger-muted text-danger-foreground-muted',
-      success: 'bg-success-muted text-success-foreground-muted',
-      warning: 'bg-warning-muted text-warning-foreground-muted',
+      primary:
+        'bg-primary-muted text-primary-foreground-muted peer-hover:bg-primary-hover peer-hover:text-primary-foreground-hover peer-focus:bg-primary-hover peer-focus:text-primary-foreground-hover',
+      secondary:
+        'bg-secondary-muted text-secondary-foreground-muted peer-hover:bg-secondary-hover peer-hover:text-secondary-foreground-hover peer-focus:bg-secondary-hover peer-focus:text-secondary-foreground-hover',
+      mono: 'bg-mono-muted text-mono-foreground-muted peer-hover:bg-mono-hover peer-hover:text-mono-foreground-hover peer-focus:bg-mono-hover peer-focus:text-mono-foreground-hover',
+      danger:
+        'bg-danger-muted text-danger-foreground-muted peer-hover:bg-danger-hover peer-hover:text-danger-foreground-hover peer-focus:bg-danger-hover peer-focus:text-danger-foreground-hover',
+      success:
+        'bg-success-muted text-success-foreground-muted peer-hover:bg-success-hover peer-hover:text-success-foreground-hover peer-focus:bg-success-hover peer-focus:text-success-foreground-hover',
+      warning:
+        'bg-warning-muted text-warning-foreground-muted peer-hover:bg-warning-hover peer-hover:text-warning-foreground-hover peer-focus:bg-warning-hover peer-focus:text-warning-foreground-hover',
     },
     dimension: {
       sm: 'p-2',

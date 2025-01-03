@@ -194,23 +194,25 @@ export const ScreenForm = ({ setOpen, editId, isEditLoading, editScreen, selecte
             />
           </div>
 
-          <div className='flex items-start justify-between pb-8'>
-            <ColorField
-              formKey={ScreenDataEnum.lightColor}
-              title='Light'
-              mode={LightMode}
-              isLoading={isEditLoading}
-              control={control}
-              className='w-[102px]'
-            />
-            <ColorField
-              formKey={ScreenDataEnum.darkColor}
-              title='Dark'
-              mode={DarkMode}
-              isLoading={isEditLoading}
-              control={control}
-              className='w-[102px]'
-            />
+          <div className='flex items-start justify-between'>
+            <div className='grid grid-cols-2 gap-6'>
+              <ColorField
+                formKey={ScreenDataEnum.lightColor}
+                title='Light'
+                mode={LightMode}
+                isLoading={isEditLoading}
+                control={control}
+                className='w-[102px]'
+              />
+              <ColorField
+                formKey={ScreenDataEnum.darkColor}
+                title='Dark'
+                mode={DarkMode}
+                isLoading={isEditLoading}
+                control={control}
+                className='w-[102px]'
+              />
+            </div>
             <Button
               type='button'
               className='mt-8 shadow-lg'
@@ -228,44 +230,44 @@ export const ScreenForm = ({ setOpen, editId, isEditLoading, editScreen, selecte
               />
             </Button>
           </div>
-        </div>
 
-        <Separator decorative={true} />
+          <Separator decorative={true} />
 
-        <div className='flex w-full justify-between pt-8'>
-          <div className='flex gap-6'>
+          <div className='flex w-full justify-between'>
+            <div className='flex gap-6'>
+              <Button
+                type='button'
+                className='shadow-lg'
+                mode='outline'
+                disabled={isCreateLoading || isUpdateLoading || isEditLoading}
+                onClick={onClose}
+              >
+                Close
+              </Button>
+              <Button
+                type='button'
+                className='shadow-lg'
+                mode='outline'
+                disabled={isCreateLoading || isUpdateLoading || isEditLoading || !isDirty}
+                onClick={resetHandler}
+              >
+                Reset
+              </Button>
+            </div>
             <Button
-              type='button'
-              className='shadow-lg'
-              mode='outline'
-              disabled={isCreateLoading || isUpdateLoading || isEditLoading}
-              onClick={onClose}
+              type='submit'
+              className={cn('shadow-lg', {
+                'pointer-events-none': isCreateLoading || isUpdateLoading,
+              })}
+              disabled={!isDirty}
             >
-              Close
-            </Button>
-            <Button
-              type='button'
-              className='shadow-lg'
-              mode='outline'
-              disabled={isCreateLoading || isUpdateLoading || isEditLoading || !isDirty}
-              onClick={resetHandler}
-            >
-              Reset
+              {isCreateLoading || isUpdateLoading ? (
+                <Loader2 data-testid='busySubmitButton' className='animate-spin' />
+              ) : (
+                <>{!editId ? 'Create' : 'Update'}</>
+              )}
             </Button>
           </div>
-          <Button
-            type='submit'
-            className={cn('shadow-lg', {
-              'pointer-events-none': isCreateLoading || isUpdateLoading,
-            })}
-            disabled={!isDirty}
-          >
-            {isCreateLoading || isUpdateLoading ? (
-              <Loader2 data-testid='busySubmitButton' className='animate-spin' />
-            ) : (
-              <>{!editId ? 'Create' : 'Update'}</>
-            )}
-          </Button>
         </div>
         {/* <SheetClose asChild>
           <Button type='submit'>Save changes</Button>

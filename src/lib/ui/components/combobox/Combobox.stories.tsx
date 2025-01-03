@@ -54,13 +54,13 @@ const ComboboxDemo = ({ defaultValue = false }: { defaultValue?: boolean }) => {
           mode='outline'
           role='combobox'
           aria-expanded={open}
-          className='w-[200px] justify-between shadow-lg [&_svg]:text-primary-foreground-muted [&_svg]:hocus:text-primary-foreground-hover'
+          className='w-[260px] justify-between shadow-lg [&_svg]:text-primary-foreground-muted [&_svg]:hocus:text-primary-foreground-hover'
         >
           <div>{value ? frameworks.find((framework) => framework.value === value)?.label : 'Select framework...'}</div>
           <ChevronsUpDown />
         </Button>
       </PopoverTrigger>
-      <PopoverContent className='w-[200px] pt-2'>
+      <PopoverContent className='w-[260px] pt-2'>
         <Command>
           <CommandInput placeholder='Search framework...' className='h-9' />
           <CommandList>

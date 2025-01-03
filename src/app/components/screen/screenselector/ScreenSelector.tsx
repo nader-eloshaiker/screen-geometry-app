@@ -59,7 +59,7 @@ export const ScreenSelector = ({
 
   return (
     <div className='flex w-full flex-col gap-2 py-8' ref={elementRef}>
-      <Label palette='primary' htmlFor='searchList'>
+      <Label palette='mono' htmlFor='searchList'>
         Pre fill the form from list of Screens
       </Label>
       <Popover open={open} onOpenChange={setOpen} modal={true}>
@@ -86,7 +86,7 @@ export const ScreenSelector = ({
           <Command shouldFilter={false}>
             <CommandInput placeholder={placeholder} className='h-9' onValueChange={setSearchTerm} />
             <CommandList>
-              <CommandEmpty>No Screens found</CommandEmpty>
+              <CommandEmpty style={{ width: width }}>No Matching Screens found</CommandEmpty>
               <CommandGroup>
                 {items.map((item) => (
                   <CommandItem
