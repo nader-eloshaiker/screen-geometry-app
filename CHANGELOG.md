@@ -1,5 +1,19 @@
 # Changelog
 
+## [3.0.0](https://github.com/nader-eloshaiker/screen-geometry-app/compare/v2.0.0...v3.0.0) (2025-01-03)
+
+
+### ⚠ BREAKING CHANGES
+
+* UI uplift to use shadcn-ui with design guide ([#483](https://github.com/nader-eloshaiker/screen-geometry-app/issues/483))
+
+### Features
+
+* add labels to panels ([#497](https://github.com/nader-eloshaiker/screen-geometry-app/issues/497)) ([5a52d38](https://github.com/nader-eloshaiker/screen-geometry-app/commit/5a52d3860770aafc18b37c67d521cc3a922f7cc6))
+* **app:** add labels to panels ([5a52d38](https://github.com/nader-eloshaiker/screen-geometry-app/commit/5a52d3860770aafc18b37c67d521cc3a922f7cc6))
+* seo improvements and UI tweeks ([#498](https://github.com/nader-eloshaiker/screen-geometry-app/issues/498)) ([53eaa7c](https://github.com/nader-eloshaiker/screen-geometry-app/commit/53eaa7ceb76466c4a4e3a19d5aa9ee2427faee1a))
+* UI uplift to use shadcn-ui with design guide ([#483](https://github.com/nader-eloshaiker/screen-geometry-app/issues/483)) ([b3b1254](https://github.com/nader-eloshaiker/screen-geometry-app/commit/b3b125478b44e5f6838f27de19436b62899bf39f))
+
 ## [2.0.0](https://github.com/nader-eloshaiker/screen-geometry-app/compare/v1.11.0...v2.0.0) (2024-10-16)
 
 
