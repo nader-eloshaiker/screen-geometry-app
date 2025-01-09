@@ -84,7 +84,7 @@ export const ScreenPanel = ({ screen, highlighted = undefined, setHighLighted = 
       {selected && (
         <div
           className='absolute top-[-24px] text-xs font-bold sm:top-[-30px] sm:text-base'
-          style={{ color: screen.color.lightColor }}
+          style={{ color: themeMode === DarkMode ? screen.color.lightColor : screen.color.darkColor }}
         >
           {config.title}
         </div>
