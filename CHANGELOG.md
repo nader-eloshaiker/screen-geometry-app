@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.0.1](https://github.com/nader-eloshaiker/screen-geometry-app/compare/v3.0.0...v3.0.1) (2025-01-09)
+
+
+### Bug Fixes
+
+* **style:** switch panel label based on dark/light theme ([#500](https://github.com/nader-eloshaiker/screen-geometry-app/issues/500)) ([016bc8e](https://github.com/nader-eloshaiker/screen-geometry-app/commit/016bc8ea9a94f46b40f4104e3114b0d432b5f51b))
+
 ## [3.0.0](https://github.com/nader-eloshaiker/screen-geometry-app/compare/v2.0.0...v3.0.0) (2025-01-03)
 
 
