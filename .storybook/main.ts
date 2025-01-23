@@ -5,12 +5,13 @@ import type { StorybookConfig } from '@storybook/react-vite'
 const coverageConfig: AddonOptionsVite = {
   istanbul: {
     exclude: [
-      'src/app/assets/**',
-      'src/configs/**',
-      'src/constants/**',
-      'src/lib/test/**',
-      'src/lib/serviceworker/**',
-      'src/lib/openapi/generated/**',
+      'src/app/assets/**/*',
+      'src/configs/**/*',
+      'src/constants/**/*',
+      'src/lib/e2e/**/*',
+      'src/lib/support/**/*',
+      'src/lib/serviceworker/**/*',
+      'src/lib/openapi/generated/**/*',
     ],
   },
 }
@@ -25,6 +26,7 @@ const config: StorybookConfig = {
     '@storybook/addon-onboarding',
     '@storybook/addon-interactions',
     '@storybook/addon-themes',
+    'storybook-addon-pseudo-states',
     {
       name: '@storybook/addon-coverage',
       options: coverageConfig,
@@ -37,7 +39,7 @@ const config: StorybookConfig = {
   features: {},
   docs: {},
   core: {
-    disableTelemetry: true, // 👈 Disables telemetry
+    disableTelemetry: true,
   },
 }
 export default config

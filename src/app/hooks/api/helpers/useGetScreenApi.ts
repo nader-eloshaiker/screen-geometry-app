@@ -8,7 +8,6 @@ import { useApiEffectHandler } from '../useApiEffectHandler'
 export const useGetScreenApi = (params: string, enabled: boolean) => {
   const request = useGetScreen<ScreenItemResponse, ErrorResponse>(params, {
     query: {
-      queryKey: ['useFindScreen'],
       enabled,
       placeholderData: keepPreviousData,
     },

@@ -28,7 +28,8 @@ a manual deploy to develop workflow action that can be used for feature branches
 The reports are hosted in Github Pages and are deployed on every merge to the main branch.
 
 - [Coverage](https://app.codecov.io/gh/nader-eloshaiker/screen-geometry-app/?search=&displayType=list)
-- [StoryBook](https://nader-eloshaiker.github.io/screen-geometry-app/storybook)
+- [StoryBook Component Library](https://nader-eloshaiker.github.io/screen-geometry-app/storybook)
+- [Chromatic Visual Testing](https://www.chromatic.com/library?appId=67764022c3d2470364c49de2)
 
 ## App Demo
 

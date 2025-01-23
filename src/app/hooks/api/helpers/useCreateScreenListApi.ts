@@ -4,7 +4,7 @@ import { ScreenListResponse, useCreateScreenList } from '@/lib/openapi/generated
 import { useCallback } from 'react'
 import { useApiEffectHandler } from '../useApiEffectHandler'
 
-const successNotification = { title: 'Created', message: 'Screen list' }
+const successNotification = { title: 'Created', message: 'A list of common Screen specifications has been generated' }
 
 export const useCreateScreenListApi = () => {
   const { dispatch } = useScreenContext()

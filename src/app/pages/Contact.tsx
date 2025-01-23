@@ -13,7 +13,7 @@ type ListItemProps = TRestProps & {
 
 const ListItem = ({ href, icon, text }: ListItemProps) => {
   return (
-    <a className='link-hover link flex gap-4' target='_blank' href={href} rel='noreferrer'>
+    <a className='flex gap-4 underline' target='_blank' href={href} rel='noreferrer'>
       {icon}
       <span>{text}</span>
     </a>
@@ -24,8 +24,8 @@ export const Contact = () => {
   return (
     <>
       <Helmet>
-        <title>Contact - Screen Geometry</title>
-        <meta name='description' content='How to engage with me or this app' />
+        <title>Screen Geometry: Contact</title>
+        <meta name='description' content='How to engage with me or this screen comparison tool' />
       </Helmet>
 
       <div className='h-full'>

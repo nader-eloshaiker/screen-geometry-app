@@ -24,6 +24,7 @@ createRoot(document.getElementById('root') as HTMLElement).render(
     <HelmetProvider>
       <Helmet>
         <title>Screen Geometry</title>
+        <meta name='description' content='Visually compare screen sizes and resolutions' />
       </Helmet>
       <App />
     </HelmetProvider>

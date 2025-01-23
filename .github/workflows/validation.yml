@@ -20,276 +20,57 @@ permissions:
 jobs:
   lint:
     name: Lint
-    runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      pull-requests: write
-
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Install Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version-file: '.nvmrc'
-
-      - name: Install pnpm
-        uses: pnpm/action-setup@v4.0.0
-        with:
-          run_install: false
-
-      - name: Get pnpm store directory
-        shell: bash
-        run: echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
-
-      - name: Setup pnpm cache
-        uses: actions/cache@v4
-        with:
-          path: ${{ env.STORE_PATH }}
-          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
-          restore-keys: |
-            ${{ runner.os }}-pnpm-store-
-
-      - name: Run pnpm install
-        run: pnpm install
-
-      - name: Run pnpm lint
-        run: pnpm lint
+    uses: ./.github/workflows/task-lint.yml
+    secrets: inherit
 
   build:
     name: Build
-    runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      pull-requests: write
-
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Install Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version-file: '.nvmrc'
-
-      - name: Install pnpm
-        uses: pnpm/action-setup@v4.0.0
-        with:
-          run_install: false
-
-      - name: Get pnpm store directory
-        shell: bash
-        run: echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
-
-      - name: Setup pnpm cache
-        uses: actions/cache@v4
-        with:
-          path: ${{ env.STORE_PATH }}
-          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
-          restore-keys: |
-            ${{ runner.os }}-pnpm-store-
-
-      - name: Run pnpm install
-        run: pnpm install
-
-      - name: Run pnpm build:dev # bundle analysis for codecov
-        env:
-          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
-        run: pnpm build:dev
+    uses: ./.github/workflows/task-build.yml
+    secrets: inherit
 
   unit-test:
     name: Unit Tests
-    runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      pull-requests: write
+    uses: ./.github/workflows/task-test-unit.yml
+    secrets: inherit
 
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Install Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version-file: '.nvmrc'
-
-      - name: Install pnpm
-        uses: pnpm/action-setup@v4.0.0
-        with:
-          run_install: false
-
-      - name: Get pnpm store directory
-        shell: bash
-        run: echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
-
-      - name: Setup pnpm cache
-        uses: actions/cache@v4
-        with:
-          path: ${{ env.STORE_PATH }}
-          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
-          restore-keys: |
-            ${{ runner.os }}-pnpm-store-
-
-      - name: Run pnpm install
-        run: pnpm install
-
-      - name: Run pnpm test
-        run: pnpm test:ci
-
-      - name: Archive code coverage results
-        uses: actions/upload-artifact@v4
-        with:
-          name: vitest-code-coverage-report
-          path: coverage/vitest/
-
-  storybook-test:
-    name: StoryBook Tests
-    runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      pull-requests: write
-
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Install Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version-file: '.nvmrc'
-
-      - name: Install pnpm
-        uses: pnpm/action-setup@v4.0.0
-        with:
-          run_install: false
-
-      - name: Get pnpm store directory
-        shell: bash
-        run: echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
-
-      - name: Setup pnpm cache
-        uses: actions/cache@v4
-        with:
-          path: ${{ env.STORE_PATH }}
-          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
-          restore-keys: |
-            ${{ runner.os }}-pnpm-store-
-
-      - name: Run pnpm install
-        run: pnpm install
-
-      - name: Install Playwright Browsers
-        run: pnpm e2e:install
-
-      - name: Run pnpm sb:ci
-        run: pnpm sb:ci
-
-      - name: Archive code coverage results
-        uses: actions/upload-artifact@v4
-        with:
-          name: storybook-code-coverage-report
-          path: coverage/storybook/
+  component-test:
+    name: Component Tests
+    uses: ./.github/workflows/task-test-component.yml
+    secrets: inherit
 
   e2e-test:
     name: E2E Tests
+    uses: ./.github/workflows/task-test-e2e.yml
+    secrets: inherit
+
+  deploy-coverage:
+    needs: [unit-test, component-test, e2e-test]
+    name: Run Coverage Deployment
+    uses: ./.github/workflows/task-deploy-coverage.yml
+    secrets: inherit
+
+  changed-files:
     runs-on: ubuntu-latest
-    timeout-minutes: 20
-    permissions:
-      contents: read
-      pull-requests: write
-
+    name: changed-files
+    outputs:
+      all_changed_files: ${{ steps.changed-files.outputs.all_changed_files }}
+      any_changed: ${{ steps.changed-files.outputs.any_changed }}
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Install Node.js
-        uses: actions/setup-node@v4
+      - uses: actions/checkout@v4
         with:
-          node-version-file: '.nvmrc'
-
-      - name: Install pnpm
-        uses: pnpm/action-setup@v4.0.0
+          fetch-depth: 0
+      - name: Get changed files
+        id: changed-files
+        uses: tj-actions/changed-files@v45
         with:
-          run_install: false
+          files: |
+            src/app/components/**
+            src/lib/ui/**
+            .storybook/**
 
-      - name: Get pnpm store directory
-        shell: bash
-        run: echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
-
-      - name: Setup pnpm cache
-        uses: actions/cache@v4
-        with:
-          path: ${{ env.STORE_PATH }}
-          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
-          restore-keys: |
-            ${{ runner.os }}-pnpm-store-
-
-      - name: Run pnpm install
-        run: pnpm install
-
-      - name: Install Playwright Browsers
-        run: pnpm e2e:install
-
-      - name: Run Playwright tests
-        run: pnpm e2e
-
-      - name: Archive code coverage results
-        uses: actions/upload-artifact@v4
-        with:
-          name: e2e-code-coverage-report
-          path: coverage/playwright/
-
-  upload-coverage:
-    needs: [unit-test, storybook-test, e2e-test]
-    name: Upload Coverage
-    runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      pull-requests: write
-
-    steps:
-      - name: Download unit test workflow run artifacts
-        uses: actions/download-artifact@v4
-        with:
-          name: vitest-code-coverage-report
-          path: coverage/vitest/
-
-      - name: Download storybook test workflow run artifacts
-        uses: actions/download-artifact@v4
-        with:
-          name: storybook-code-coverage-report
-          path: coverage/storybook/
-
-      - name: Download e2e test workflow run artifacts
-        uses: actions/download-artifact@v4
-        with:
-          name: e2e-code-coverage-report
-          path: coverage/playwright/
-
-      - name: Display structure of downloaded files
-        run: ls -R coverage/
-
-      - name: Upload unit test coverage reports to Codecov
-        uses: codecov/codecov-action@v4
-        with:
-          token: ${{ secrets.CODECOV_TOKEN }}
-          slug: nader-eloshaiker/screen-geometry-app
-          directory: coverage/vitest/
-          flags: unit
-
-      - name: Upload storybook test coverage reports to Codecov
-        uses: codecov/codecov-action@v4
-        with:
-          token: ${{ secrets.CODECOV_TOKEN }}
-          slug: nader-eloshaiker/screen-geometry-app
-          directory: coverage/storybook/
-          flags: storybook
-
-      - name: Upload e2e test coverage reports to Codecov
-        uses: codecov/codecov-action@v4
-        with:
-          token: ${{ secrets.CODECOV_TOKEN }}
-          slug: nader-eloshaiker/screen-geometry-app
-          directory: coverage/playwright/
-          flags: e2e
+  designsystem-test:
+    name: Run Design System Testing
+    needs: [changed-files]
+    if: ${{ needs.changed-files.outputs.any_changed == 'true' }}
+    uses: ./.github/workflows/task-test-designsystem.yml
+    secrets: inherit

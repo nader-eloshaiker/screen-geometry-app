@@ -1,60 +1,75 @@
-import Footer from '@/app/components/footer/Footer'
-import Header from '@/app/components/header/Header'
+import { Alert, AlertDescription, AlertTitle } from '@/lib/ui/components/alert/Alert'
+import { Button } from '@/lib/ui/components/button/Button'
+import { Card } from '@/lib/ui/components/card/Card'
+import { AlertCircle } from 'lucide-react'
+import { useEffect, useState } from 'react'
 import { Helmet } from 'react-helmet-async'
 import { isRouteErrorResponse, useRouteError } from 'react-router-dom'
 
 const RootBoundary = () => {
   const error = useRouteError()
+  const [errorMessage, setErrorMessage] = useState('')
 
-  if (isRouteErrorResponse(error)) {
-    if (error.status === 404) {
-      return <span>This page does not exist!</span>
+  useEffect(() => {
+    if (isRouteErrorResponse(error)) {
+      if (error.status === 404) {
+        setErrorMessage('This page does not exist 🤮')
+      }
+
+      if (error.status === 401) {
+        setErrorMessage('You are nor authorized to see this 😤')
+      }
+
+      if (error.status === 503) {
+        setErrorMessage('Looks like our API is down 🥺')
+      }
+
+      if (error.status === 418) {
+        setErrorMessage('The universe is broken 🫖')
+      }
+    } else {
+      setErrorMessage('Unknown error has occured 🤔')
     }
+  }, [error])
 
-    if (error.status === 401) {
-      return <span>You are nor authorized to see this</span>
-    }
-
-    if (error.status === 503) {
-      return <span>Looks like our API is down</span>
-    }
-
-    if (error.status === 418) {
-      return <span>🫖</span>
-    }
-  }
-
-  return <div>Something went wrong</div>
+  return <span>{errorMessage}</span>
 }
 
 export const BoundyErrorManager = () => {
   return (
     <>
       <Helmet>
-        <title>Error - Screen Geometry</title>
-        <meta name='description' content='An error has occured' />
+        <title>Screen Geometry: Error</title>
+        <meta name='description' content='A service error has occured' />
       </Helmet>
+      <div className='flex min-h-screen items-center justify-center'>
+        <Card className='w-full max-w-lg p-6 shadow-xl'>
+          {/* Error Message */}
+          <Alert palette='danger' className='mb-6'>
+            <AlertCircle className='size-6' />
+            <AlertTitle className='text-xl font-bold'>Oops! Something went wrong.</AlertTitle>
+            <AlertDescription className='text-lg'>
+              <RootBoundary />
+            </AlertDescription>
+          </Alert>
 
-      <div id='app-root' className='container mx-auto flex size-full min-h-screen flex-col justify-between'>
-        <Header />
-        <main role='main' className='my-6 flex h-full flex-col justify-center px-2 md:px-6 xl:px-2'>
-          <div className='flex h-full flex-row justify-center px-2 md:px-6 xl:px-2'>
-            <div className='mockup-code w-96'>
-              <pre data-prefix='1'>
-                <code>Dang it! An Error has occured 😵‍💫</code>
-              </pre>
-              <pre data-prefix='2'>
-                <code></code>
-              </pre>
-              <pre data-prefix='3' className='bg-warning text-warning-content'>
-                <code>
-                  <RootBoundary />
-                </code>
-              </pre>
-            </div>
+          {/* Troubleshooting Steps */}
+          <div className='space-y-4 text-left'>
+            <h3 className='text-lg font-semibold'>Try the following:</h3>
+            <ul className='list-inside list-disc'>
+              <li>Check your internet connection.</li>
+              <li>Refresh the page.</li>
+              <li>If the problem persists, please try using a Mac.</li>
+            </ul>
           </div>
-        </main>
-        <Footer />
+
+          {/* Call to Action Button */}
+          <div className='mt-8'>
+            <Button palette='danger' mode='outline' className='shadow-lg' onClick={() => (window.location.href = '/')}>
+              Go to Homepage
+            </Button>
+          </div>
+        </Card>
       </div>
     </>
   )

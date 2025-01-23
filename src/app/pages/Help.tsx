@@ -1,19 +1,20 @@
-import { CreateScreenButton } from '@/app/components/screen/CreateButton'
-import { ScreenPanel } from '@/app/components/screen/ScreenPanel'
-import { ScreenTable } from '@/app/components/screen/ScreenTable'
-import { ScreenForm } from '@/app/components/screen/form/ScreenForm'
+import { CreateScreenButton } from '@/app/components/screen/createbutton/CreateButton'
+import { ScreenPanel } from '@/app/components/screen/panel/ScreenPanel'
+import { ScreenTable } from '@/app/components/screen/table/ScreenTable'
 import { Stacked } from '@/app/components/stacked/Stacked'
 import { defaultScreenInputList } from '@/app/constants/defaultScreenList'
 import { ScreenItemRender } from '@/app/models/screenItemRender'
 import { Dimensions } from '@/lib/openapi/models/Screen'
+import { Button } from '@/lib/ui/components/button/Button'
+import { Label } from '@/lib/ui/components/label/Label'
 import { useElementSize } from '@/lib/ui/hooks/useElementSize'
-import { transformScreenInput } from '@/lib/utils/DataTransformation'
-import { getMaxScreenSize, normaliseScreenRender } from '@/lib/utils/ScreenCalc'
+import { getMaxScreenSize, normaliseScreenRender, transformScreenInput } from '@/lib/utils'
 import { Pencil, X } from 'lucide-react'
 import { useMemo, useRef } from 'react'
 import { Helmet } from 'react-helmet-async'
 import tw from 'tailwind-styled-components'
 import { ulid } from 'ulid'
+import { ScreenForm } from '../components/screen/form/ScreenForm'
 
 const Section = tw.div`
   mb-14
@@ -27,7 +28,7 @@ my-8 flex justify-center
 const Paragraph = tw.div`
   mb-6
 `
-const Heading = tw.div`
+const Heading = tw(Label)`
   mb-8 text-2xl font-bold
 `
 
@@ -56,29 +57,35 @@ export const Help = () => {
   return (
     <>
       <Helmet>
-        <title>Help - Screen Geometry</title>
-        <meta name='description' content='How to get started and use this app' />
+        <title>Screen Geometry: Help</title>
+        <meta name='description' content='How to get started and use this screeen comparison tool' />
       </Helmet>
 
       <div className='h-full'>
         <Section>
-          <Heading>Getting started</Heading>
+          <Heading palette='primary'>Getting started</Heading>
           <Paragraph>
             When you navigate to the screens page for the first time, you will be greated with an empty table and the
             ability to import a default list of screens
           </Paragraph>
           <Diagram>
-            <div className='w-96  overflow-hidden rounded-lg border-2 shadow-lg'>
-              <ScreenTable screens={[]} isScreenListLoading={false} />
+            <div className='w-96  overflow-hidden rounded-lg border-2 border-primary-border shadow-lg'>
+              <ScreenTable
+                screens={[]}
+                isScreenListLoading={false}
+                editAction={{ handler: () => {} }}
+                deleteAction={{ handler: () => {}, isPending: false }}
+                showActon={{ handler: () => {}, isPending: false }}
+              />
               <div className='flex h-full flex-col items-center'>
-                <div className='label py-4'>
+                <div className='py-4 text-primary-label'>
                   <span className='text-xl'>No List Found</span>
                 </div>
                 <div className='flex flex-col items-center gap-2 py-6'>
                   <div>Click here to populate default list</div>
-                  <button className='btn btn-outline btn-primary w-40' disabled={false}>
+                  <Button className='w-40' mode='outline' disabled={false}>
                     Load Screens
-                  </button>
+                  </Button>
                 </div>
               </div>
             </div>
@@ -91,8 +98,15 @@ export const Help = () => {
           </Diagram>
           <Paragraph>Loading the default list will populate the table with a list of screens.</Paragraph>
           <Diagram>
-            <div className='rounded-lg border-2 p-6 shadow-lg'>
-              <ScreenTable className='pointer-events-none' screens={fullList} isScreenListLoading={false} />
+            <div className='rounded-lg border-2 border-primary-border p-6 shadow-lg'>
+              <ScreenTable
+                className='pointer-events-none'
+                screens={fullList}
+                isScreenListLoading={false}
+                editAction={{ handler: () => {} }}
+                deleteAction={{ handler: () => {}, isPending: false }}
+                showActon={{ handler: () => {}, isPending: false }}
+              />
             </div>
           </Diagram>
           <Paragraph>
@@ -101,8 +115,18 @@ export const Help = () => {
             corresponding panel and vice versa.
           </Paragraph>
           <Diagram>
-            <div ref={divSizeRef} className='flex flex-col gap-4 rounded-lg border-2 p-6 shadow-lg'>
-              <ScreenTable className='pointer-events-none' screens={smallList} highlighted={smallList[0]} />
+            <div
+              ref={divSizeRef}
+              className='flex flex-col gap-4 rounded-lg border-2 border-primary-border p-6 shadow-lg'
+            >
+              <ScreenTable
+                className='pointer-events-none'
+                screens={smallList}
+                highlighted={smallList[0]}
+                editAction={{ handler: () => {} }}
+                deleteAction={{ handler: () => {}, isPending: false }}
+                showActon={{ handler: () => {}, isPending: false }}
+              />
               <Stacked height={maxPanelSize.height}>
                 {smallList
                   .filter((screen) => screen.visible)
@@ -119,14 +143,20 @@ export const Help = () => {
         </Section>
 
         <Section>
-          <Heading>Hide / Show</Heading>
+          <Heading palette='primary'>Hide / Show</Heading>
           <Paragraph>
             You can choose to exclude a screen from the the <strong>Physical Screen Comparison</strong> by unchecking
             the <strong>Show</strong> check box
           </Paragraph>
           <Diagram>
-            <div className='flex flex-col rounded-lg border-2 p-6 shadow-lg'>
-              <ScreenTable className='pointer-events-none' screens={invisibleList} />
+            <div className='flex flex-col rounded-lg border-2 border-primary-border p-6 shadow-lg'>
+              <ScreenTable
+                className='pointer-events-none'
+                screens={invisibleList}
+                editAction={{ handler: () => {} }}
+                deleteAction={{ handler: () => {}, isPending: false }}
+                showActon={{ handler: () => {}, isPending: false }}
+              />
               <Stacked height={maxPanelSize.height}>
                 {invisibleList
                   .filter((screen) => screen.visible)
@@ -141,9 +171,15 @@ export const Help = () => {
         <Section>
           <Heading className='mb-4 text-2xl font-bold'>Delete</Heading>
           <Paragraph>
-            To delete an existing screen, click on the
-            <X id='edit-icon' className='mx-4 inline size-8 shadow-lg' /> icon in the
-            <strong>action</strong> column of the Screen Specs table.
+            <span>To delete an existing screen, click on the</span>
+            <span className='px-4'>
+              <Button mode='outline' dimension='icon-md' className='pointer-events-none shadow-lg'>
+                <X id='edit-icon' />
+              </Button>
+            </span>
+            <span>
+              icon in the <strong>action</strong> column of the Screen Specs table.
+            </span>
           </Paragraph>
         </Section>
 
@@ -154,9 +190,16 @@ export const Help = () => {
             button in the top right corner. This will open a form in the sidebar as show below.
           </Paragraph>
           <DiagramPanel>
-            <div className='mb-6 w-96 rounded-xl bg-accent p-2 text-accent-content'>
+            <div className='mb-6 w-96 border-l-2 border-primary-border bg-background p-2 text-foreground shadow-lg'>
               <div className='pointer-events-none p-2'>
-                <ScreenForm isLoading={false} />
+                <ScreenForm
+                  setOpen={() => {}}
+                  isEditLoading={false}
+                  editId={''}
+                  editScreen={undefined}
+                  selectedItem={undefined}
+                  setSelectedItem={() => {}}
+                />
               </div>
             </div>
           </DiagramPanel>
@@ -169,9 +212,16 @@ export const Help = () => {
         <Section>
           <Heading className='mb-4 text-2xl font-bold'>Create / Update</Heading>
           <Paragraph>
-            To edit an existing screen, click on the
-            <Pencil id='edit-icon' className='mx-4 inline size-8 shadow-lg' /> icon in the <strong>action</strong>{' '}
-            column of the Screen Specs table. Then make your changes and click the <strong>Update</strong> button.
+            <span>To edit an existing screen, click on the</span>
+            <span className='px-4'>
+              <Button mode='outline' dimension='icon-md' className='pointer-events-none shadow-lg'>
+                <Pencil id='edit-icon' />
+              </Button>
+            </span>
+            <span>
+              icon in the <strong>action</strong> column of the Screen Specs table. Then make your changes and click the{' '}
+              <strong>Update</strong> button.
+            </span>
           </Paragraph>
         </Section>
       </div>

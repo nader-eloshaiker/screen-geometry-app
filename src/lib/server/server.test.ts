@@ -5,8 +5,8 @@ import {
   ScreenItem,
 } from '@/lib/openapi/generated'
 import { apiRoutes } from '@/lib/openapi/meta'
-import { mswWithSpy, startMSW, stopMSW } from '@/lib/serviceworker/NodeServiceWorker'
-import { screenItemFixture } from '@/lib/test/fixtures/ScreenFixtures'
+import { initMSW } from '@/lib/serviceworker/NodeServiceWorker'
+import { screenItemFixture } from '@/lib/support/test/fixtures/ScreenFixtures'
 import { IDBFactory } from 'fake-indexeddb'
 import { Stores } from './db/DbConstants'
 import { addData } from './db/IndexedDB'
@@ -16,21 +16,18 @@ import { screenInput55Fixture } from './test/fixtures/ScreenFixtures'
 describe('#server', () => {
   const baseUrl = 'http://fakeapi.com'
 
-  const mswRequestEventSpy = mswWithSpy([
-    ...getSearchServiceMock(),
-    ...getScreenListServiceMock(),
-    ...getScreenServiceMock(),
-  ])
+  const mswObj = initMSW([...getSearchServiceMock(), ...getScreenListServiceMock(), ...getScreenServiceMock()])
 
   beforeAll(() => {
-    startMSW()
+    mswObj.start()
   })
 
   afterAll(() => {
-    stopMSW()
+    mswObj.stop()
   })
 
   beforeEach(async () => {
+    mswObj.reset()
     globalThis.indexedDB = new IDBFactory()
     setupDB({ includeData: true, includeSearch: true })
   })
@@ -39,7 +36,7 @@ describe('#server', () => {
     const response = await fetch(`${baseUrl}${apiRoutes.screens}`)
     expect(response.status).toBe(200)
     expect(response.statusText).toBe('OK')
-    expect(mswRequestEventSpy[mswRequestEventSpy.length - 1]).toEqual(
+    expect(mswObj.apiEventStack[mswObj.apiEventStack.length - 1]).toEqual(
       expect.stringContaining('method:GET|url:http://fakeapi.com/v1/screens'),
     )
   })
@@ -54,7 +51,7 @@ describe('#server', () => {
     })
     expect(response.status).toBe(200)
     expect(response.statusText).toBe('OK')
-    expect(mswRequestEventSpy[mswRequestEventSpy.length - 1]).toEqual(
+    expect(mswObj.apiEventStack[mswObj.apiEventStack.length - 1]).toEqual(
       expect.stringContaining('method:POST|url:http://fakeapi.com/v1/screens'),
     )
   })
@@ -66,7 +63,7 @@ describe('#server', () => {
     const response = await fetch(`${baseUrl}${apiRoutes.screen}/${created.id}`)
     expect(response.status).toBe(200)
     expect(response.statusText).toBe('OK')
-    expect(mswRequestEventSpy[mswRequestEventSpy.length - 1]).toEqual(
+    expect(mswObj.apiEventStack[mswObj.apiEventStack.length - 1]).toEqual(
       expect.stringContaining(`method:GET|url:http://fakeapi.com/v1/screen/${created.id}`),
     )
   })
@@ -83,7 +80,7 @@ describe('#server', () => {
     })
     expect(response.status).toBe(200)
     expect(response.statusText).toBe('OK')
-    expect(mswRequestEventSpy[mswRequestEventSpy.length - 1]).toEqual(
+    expect(mswObj.apiEventStack[mswObj.apiEventStack.length - 1]).toEqual(
       expect.stringContaining(`method:DELETE|url:http://fakeapi.com/v1/screen/${created.id}`),
     )
   })
@@ -101,7 +98,7 @@ describe('#server', () => {
     })
     expect(response.status).toBe(200)
     expect(response.statusText).toBe('OK')
-    expect(mswRequestEventSpy[mswRequestEventSpy.length - 1]).toEqual(
+    expect(mswObj.apiEventStack[mswObj.apiEventStack.length - 1]).toEqual(
       expect.stringContaining(`method:PUT|url:http://fakeapi.com/v1/screen/${created.id}`),
     )
   })
@@ -119,7 +116,7 @@ describe('#server', () => {
     })
     expect(response.status).toBe(200)
     expect(response.statusText).toBe('OK')
-    expect(mswRequestEventSpy[mswRequestEventSpy.length - 1]).toEqual(
+    expect(mswObj.apiEventStack[mswObj.apiEventStack.length - 1]).toEqual(
       expect.stringContaining(`method:PATCH|url:http://fakeapi.com/v1/screen/${created.id}/show`),
     )
   })
@@ -134,7 +131,7 @@ describe('#server', () => {
     })
     expect(response.status).toBe(200)
     expect(response.statusText).toBe('OK')
-    expect(mswRequestEventSpy[mswRequestEventSpy.length - 1]).toEqual(
+    expect(mswObj.apiEventStack[mswObj.apiEventStack.length - 1]).toEqual(
       expect.stringContaining('method:POST|url:http://fakeapi.com/v1/screen'),
     )
   })
@@ -143,7 +140,7 @@ describe('#server', () => {
     const response = await fetch(`${baseUrl}${apiRoutes.search}`)
     expect(response.status).toBe(200)
     expect(response.statusText).toBe('OK')
-    expect(mswRequestEventSpy[mswRequestEventSpy.length - 1]).toEqual(
+    expect(mswObj.apiEventStack[mswObj.apiEventStack.length - 1]).toEqual(
       expect.stringContaining('method:GET|url:http://fakeapi.com/v1/search'),
     )
   })

@@ -4,7 +4,7 @@ import { ScreenIdResponse, useDeleteScreen } from '@/lib/openapi/generated'
 import { useCallback } from 'react'
 import { useApiEffectHandler } from '../useApiEffectHandler'
 
-const successNotification = { title: 'Deleted', message: 'Screen configuration' }
+const successNotification = { title: 'Deleted', message: 'Screen specifications have been deleted' }
 
 export const useDeleteScreenApi = () => {
   const { dispatch } = useScreenContext()

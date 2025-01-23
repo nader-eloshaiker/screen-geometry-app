@@ -1,81 +1,26 @@
 import { RouteSchema } from '@/app/routes/RouteSchema'
-import { clsx } from 'clsx'
-import { motion, Variants } from 'framer-motion'
+import { Button } from '@/lib/ui/components/button/Button'
+import { NavigationLink } from '@/lib/ui/components/navigationlink/NavigationLink'
+import {
+  Sheet,
+  SheetContent,
+  SheetDescription,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from '@/lib/ui/components/sheet/Sheet'
+import { cn } from '@/lib/utils'
+import { Menu } from 'lucide-react'
 import { useState } from 'react'
-import { Link, useLocation } from 'react-router-dom'
 import ThemeToggle from '../theme/ThemeToggle'
-import { HamburgerMenu } from './HamburgerMenu'
-
-const menuVariants: Variants = {
-  opened: {
-    scaleY: 1,
-    x: 0,
-    transition: {
-      when: 'beforeChildren',
-    },
-  },
-  closed: {
-    scaleY: 0,
-    x: 0,
-    transition: {
-      when: 'afterChildren',
-    },
-  },
-}
-
-const menuItemVariants: Variants = {
-  opened: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: 0.2,
-    },
-  },
-  closed: {
-    opacity: 0,
-    y: -15,
-    transition: {
-      duration: 0.2,
-    },
-  },
-}
-
-type NavMenuItemProps = { pathname: string; route: string; title: string }
-const NavMenuItem = ({ pathname, route, title }: NavMenuItemProps) => {
-  return (
-    <motion.li variants={menuItemVariants}>
-      <Link
-        className={clsx('text-base', {
-          active: pathname === route,
-        })}
-        to={route}
-        data-testid={`link-${title}`}
-      >
-        {title}
-      </Link>
-    </motion.li>
-  )
-}
-
-type NavMenuProps = { pathname: string }
-const NavMenu = ({ pathname }: NavMenuProps) => {
-  return (
-    <>
-      <NavMenuItem pathname={pathname} route={RouteSchema.root.path} title='Home' />
-      <NavMenuItem pathname={pathname} route={RouteSchema.screens.path} title='Screens' />
-      <NavMenuItem pathname={pathname} route={RouteSchema.contact.path} title='Contact' />
-      <NavMenuItem pathname={pathname} route={RouteSchema.help.path} title='Help' />
-    </>
-  )
-}
 
 const ThemeToggleStyled = ({ id }: { id: string }) => (
-  <ThemeToggle className='opacity-50 hover:opacity-100 md:mr-2' id={id} />
+  <ThemeToggle className='self-center opacity-50 hover:opacity-100 md:mr-2' id={id} />
 )
 
 const Title = ({ size }: { size: 'sm' | 'lg' }) => (
   <div
-    className={clsx('flex-1 pt-2 text-center text-accent-content', {
+    className={cn('flex-1 text-center', {
       'text-2xl': size === 'lg',
       'text-xl': size === 'sm',
     })}
@@ -85,43 +30,102 @@ const Title = ({ size }: { size: 'sm' | 'lg' }) => (
 )
 
 export default function Header() {
-  const { pathname } = useLocation()
-  const [menuOpened, setMenuOpened] = useState(false)
+  const [open, setOpen] = useState(false)
 
   return (
-    <header className='container mx-auto rounded-b-md bg-accent text-accent-content shadow-md'>
-      {/* small header */}
-      <div className='flex w-full justify-between p-4 py-2 md:hidden' data-testid='small-header'>
-        <motion.details
-          data-testid='nav-menu'
-          className={clsx('dropdown dropdown-bottom', { 'dropdown-open': menuOpened })}
-        >
-          <summary tabIndex={0} className='btn btn-ghost p-0' role='button'>
-            <HamburgerMenu width={20} height={14} isOpen={menuOpened} onClick={() => setMenuOpened(!menuOpened)} />
-          </summary>
-          <motion.ul
-            tabIndex={0}
-            // style={{ originX: 0, originY: 0 }}
-            className='menu dropdown-content z-[1] mt-4 w-40 gap-4 rounded-md bg-neutral text-neutral-content shadow'
-            initial='closed'
-            animate={menuOpened ? 'opened' : 'closed'}
-            exit='closed'
-            variants={menuVariants}
-          >
-            <NavMenu pathname={pathname} />
-          </motion.ul>
-        </motion.details>
-        <Title size='sm' />
-        <ThemeToggleStyled id='themeToggleTiny' />
-      </div>
-      {/* large header */}
-      <div className='hidden p-4 md:flex md:flex-col' data-testid='large-header'>
+    <header className='bg-header p-4 text-header-foreground shadow-md'>
+      <div className='flex items-center gap-6 lg:hidden' data-testid='small-header'>
+        <Sheet open={open} onOpenChange={setOpen}>
+          <SheetTrigger asChild>
+            <Button mode='ghost' dimension='none' className='p-0'>
+              <Menu className='size-10' />
+              <span className='sr-only'>Toggle navigation menu</span>
+            </Button>
+          </SheetTrigger>
+          <SheetContent side='left'>
+            <SheetHeader>
+              <SheetTitle className='text-left'>Navigation</SheetTitle>
+              <SheetDescription className='flex items-center gap-2 pt-4 text-left'>
+                <ThemeToggleStyled id='theme-toggle' />
+                <span>Theme Toggle</span>
+              </SheetDescription>
+            </SheetHeader>
+            <nav aria-label='Main' className='grid gap-6 py-6'>
+              <NavigationLink
+                to={RouteSchema.root.path}
+                mode='ghost'
+                className='justify-start text-lg font-semibold'
+                onClick={() => setOpen(false)}
+              >
+                Home
+              </NavigationLink>
+              <NavigationLink
+                to={RouteSchema.screens.path}
+                mode='ghost'
+                className='justify-start text-lg font-semibold'
+                onClick={() => setOpen(false)}
+              >
+                Screens
+              </NavigationLink>
+              <NavigationLink
+                to={RouteSchema.contact.path}
+                mode='ghost'
+                className='justify-start text-lg font-semibold'
+                onClick={() => setOpen(false)}
+              >
+                Contact
+              </NavigationLink>
+              <NavigationLink
+                to={RouteSchema.help.path}
+                mode='ghost'
+                className='justify-start text-lg font-semibold'
+                onClick={() => setOpen(false)}
+              >
+                Help
+              </NavigationLink>
+            </nav>
+          </SheetContent>
+        </Sheet>
         <Title size='lg' />
-        <div className='navbar min-h-0 justify-between p-0' data-testid='large-header-menu'>
-          <ul className=' menu menu-horizontal gap-4 bg-accent p-0'>
-            <NavMenu pathname={pathname} />
-          </ul>
-          <ThemeToggleStyled id='themeToggle' />
+      </div>
+      <div className='container mx-auto hidden lg:flex lg:flex-col' data-testid='large-header'>
+        <Title size='lg' />
+        <div className='flex justify-between'>
+          <nav aria-label='Main' className='flex gap-6' data-testid='large-header-menu'>
+            <NavigationLink
+              mode='ghost'
+              palette={'secondary'}
+              to={RouteSchema.root.path}
+              className='group w-24 text-base font-semibold'
+            >
+              Home
+            </NavigationLink>
+            <NavigationLink
+              mode='ghost'
+              palette={'secondary'}
+              to={RouteSchema.screens.path}
+              className='group w-24 text-base font-semibold'
+            >
+              Screens
+            </NavigationLink>
+            <NavigationLink
+              mode='ghost'
+              palette={'secondary'}
+              to={RouteSchema.contact.path}
+              className='group w-24 text-base font-semibold'
+            >
+              Contact
+            </NavigationLink>
+            <NavigationLink
+              mode='ghost'
+              palette={'secondary'}
+              to={RouteSchema.help.path}
+              className='group w-24 text-base font-semibold'
+            >
+              Help
+            </NavigationLink>
+          </nav>
+          <ThemeToggleStyled id='theme-toggle' />
         </div>
       </div>
     </header>

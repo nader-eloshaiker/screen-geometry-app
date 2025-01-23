@@ -1,6 +1,6 @@
 import Footer from '@/app/components/footer/Footer'
 import Header from '@/app/components/header/Header'
-import { NotificationToaster } from '@/lib/ui/notification'
+import { Toaster } from '@/lib/ui/components/toaster/Toaster'
 import { useEffect } from 'react'
 import ReactGA from 'react-ga4'
 import { Outlet, useLocation } from 'react-router-dom'
@@ -13,11 +13,11 @@ export const Root = () => {
   return (
     <div className='flex min-h-dvh flex-col'>
       <Header />
-      <main id='app-root' className='container mx-auto my-6 flex-auto px-1 2xs:px-2 md:px-4 lg:px-0'>
+      <main id='app-root' className='container mx-auto my-6 flex-auto px-1 2xs:px-2 md:px-4'>
         <Outlet />
       </main>
       <Footer />
-      <NotificationToaster />
+      <Toaster />
     </div>
   )
 }
