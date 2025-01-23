@@ -126,6 +126,8 @@
     "eslint-plugin-react": "^7.35.0",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.5",
+    "eslint-plugin-storybook": "^0.11.1",
+    "eslint-plugin-tailwindcss": "^3.17.4",
     "eslint-plugin-storybook": "^0.8.0",
     "eslint-plugin-tailwindcss": "^3.17.5",
     "fake-indexeddb": "^6.0.0",
