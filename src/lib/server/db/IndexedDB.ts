@@ -7,7 +7,7 @@ import { migrateV2toV3 } from './migration/v2-v3'
 
 const handleRequestError = (
   request: IDBRequest | IDBOpenDBRequest | IDBTransaction,
-  reject: (reason: string) => void,
+  reject: (reason: string) => void
 ) => {
   request.onerror = () => {
     const error = request.error?.message
@@ -153,7 +153,7 @@ export const getAllData = <T extends KeyedObject>(storeName: Stores, options?: d
 export const getData = <T extends KeyedObject>(
   storeName: Stores,
   key: string,
-  options?: dbProps,
+  options?: dbProps
 ): Promise<T | undefined> => {
   const { dbName, dbVersion } = { ...dbPropsDefault, ...options }
 
@@ -176,7 +176,7 @@ export const getData = <T extends KeyedObject>(
 export const addData = <T extends KeyedObject>(
   storeName: string,
   data: Omit<T, keyof KeyedObject>,
-  options?: dbProps,
+  options?: dbProps
 ): Promise<T> => {
   const { dbName, dbVersion } = { ...dbPropsDefault, ...options }
 
@@ -200,7 +200,7 @@ export const addData = <T extends KeyedObject>(
 export const addAllData = <T extends KeyedObject>(
   storeName: string,
   data: Array<Omit<T, keyof KeyedObject>>,
-  options?: dbProps,
+  options?: dbProps
 ): Promise<Array<T>> => {
   const { dbName, dbVersion } = { ...dbPropsDefault, ...options }
 
@@ -266,7 +266,7 @@ export const searchData = <T extends object>(
   storeName: Stores,
   query: string,
   key: string,
-  options?: dbProps,
+  options?: dbProps
 ): Promise<Array<T>> => {
   const { dbName, dbVersion } = { ...dbPropsDefault, ...options }
 

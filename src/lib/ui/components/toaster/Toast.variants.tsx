@@ -16,7 +16,7 @@ const ToastVariants = cva(
     defaultVariants: {
       palette: 'info',
     },
-  },
+  }
 )
 
 const ToastActionVariants = cva(
@@ -36,7 +36,7 @@ const ToastActionVariants = cva(
     defaultVariants: {
       palette: 'info',
     },
-  },
+  }
 )
 
 const ToastCloseVariants = cva(
@@ -53,7 +53,7 @@ const ToastCloseVariants = cva(
     defaultVariants: {
       palette: 'info',
     },
-  },
+  }
 )
 
 export { ToastActionVariants, ToastCloseVariants, ToastVariants }

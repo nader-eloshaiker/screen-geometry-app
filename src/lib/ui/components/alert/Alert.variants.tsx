@@ -12,5 +12,5 @@ export const AlertVariants = cva(
     defaultVariants: {
       palette: 'default',
     },
-  },
+  }
 )

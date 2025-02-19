@@ -17,7 +17,7 @@ describe('#Stacked', () => {
     const { getByText } = await renderWithUserEvents(
       <Stacked $vAlign='start' height={10}>
         Test
-      </Stacked>,
+      </Stacked>
     )
     const element = getByText('Test')
 
@@ -29,7 +29,7 @@ describe('#Stacked', () => {
     const { getByText } = await renderWithUserEvents(
       <Stacked $vAlign='center' height={10}>
         Test
-      </Stacked>,
+      </Stacked>
     )
     const element = getByText('Test')
 

@@ -21,7 +21,7 @@ const ToggleGroup = React.forwardRef<
     className={cn(
       'flex items-center justify-center',
       { 'gap-2': mode !== 'pill', 'gap-0': mode === 'pill' },
-      className,
+      className
     )}
     {...props}
   >
@@ -46,7 +46,7 @@ const ToggleGroupItem = React.forwardRef<
           mode: context.mode || mode,
           dimension: context.dimension || size,
         }),
-        className,
+        className
       )}
       {...props}
     >

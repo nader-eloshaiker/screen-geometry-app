@@ -33,7 +33,7 @@ export const useCreateScreenHook = () => {
         data: screenInput,
       })
     },
-    [createScreen],
+    [createScreen]
   )
 }
 
@@ -94,7 +94,7 @@ export const useShowScreenHook = () => {
     (id: string) => {
       return showScreen({ url: `/v1/screen/${id}/show`, method: 'PATCH' })
     },
-    [showScreen],
+    [showScreen]
   )
 }
 
@@ -111,7 +111,7 @@ export const useShowScreenMutationOptions = <TError = ErrorResponse, TContext = 
   const showScreen = useShowScreenHook()
 
   const mutationFn: MutationFunction<Awaited<ReturnType<ReturnType<typeof useShowScreenHook>>>, { id: string }> = (
-    props,
+    props
   ) => {
     const { id } = props ?? {}
 
@@ -144,7 +144,7 @@ export const useGetScreenHook = () => {
     (id: string, signal?: AbortSignal) => {
       return getScreen({ url: `/v1/screen/${id}`, method: 'GET', signal })
     },
-    [getScreen],
+    [getScreen]
   )
 }
 
@@ -159,7 +159,7 @@ export const useGetScreenQueryOptions = <
   id: string,
   options?: {
     query?: Partial<UseQueryOptions<Awaited<ReturnType<ReturnType<typeof useGetScreenHook>>>, TError, TData>>
-  },
+  }
 ) => {
   const { query: queryOptions } = options ?? {}
 
@@ -188,7 +188,7 @@ export function useGetScreen<TData = Awaited<ReturnType<ReturnType<typeof useGet
         DefinedInitialDataOptions<Awaited<ReturnType<ReturnType<typeof useGetScreenHook>>>, TError, TData>,
         'initialData'
       >
-  },
+  }
 ): DefinedUseQueryResult<TData, TError> & { queryKey: QueryKey }
 export function useGetScreen<TData = Awaited<ReturnType<ReturnType<typeof useGetScreenHook>>>, TError = ErrorResponse>(
   id: string,
@@ -198,20 +198,20 @@ export function useGetScreen<TData = Awaited<ReturnType<ReturnType<typeof useGet
         UndefinedInitialDataOptions<Awaited<ReturnType<ReturnType<typeof useGetScreenHook>>>, TError, TData>,
         'initialData'
       >
-  },
+  }
 ): UseQueryResult<TData, TError> & { queryKey: QueryKey }
 export function useGetScreen<TData = Awaited<ReturnType<ReturnType<typeof useGetScreenHook>>>, TError = ErrorResponse>(
   id: string,
   options?: {
     query?: Partial<UseQueryOptions<Awaited<ReturnType<ReturnType<typeof useGetScreenHook>>>, TError, TData>>
-  },
+  }
 ): UseQueryResult<TData, TError> & { queryKey: QueryKey }
 
 export function useGetScreen<TData = Awaited<ReturnType<ReturnType<typeof useGetScreenHook>>>, TError = ErrorResponse>(
   id: string,
   options?: {
     query?: Partial<UseQueryOptions<Awaited<ReturnType<ReturnType<typeof useGetScreenHook>>>, TError, TData>>
-  },
+  }
 ): UseQueryResult<TData, TError> & { queryKey: QueryKey } {
   const queryOptions = useGetScreenQueryOptions(id, options)
 
@@ -234,7 +234,7 @@ export const useUpdateScreenHook = () => {
         data: screenInput,
       })
     },
-    [updateScreen],
+    [updateScreen]
   )
 }
 
@@ -295,7 +295,7 @@ export const useDeleteScreenHook = () => {
     (id: string) => {
       return deleteScreen({ url: `/v1/screen/${id}`, method: 'DELETE' })
     },
-    [deleteScreen],
+    [deleteScreen]
   )
 }
 
@@ -317,7 +317,7 @@ export const useDeleteScreenMutationOptions = <TError = ErrorResponse, TContext 
   const deleteScreen = useDeleteScreenHook()
 
   const mutationFn: MutationFunction<Awaited<ReturnType<ReturnType<typeof useDeleteScreenHook>>>, { id: string }> = (
-    props,
+    props
   ) => {
     const { id } = props ?? {}
 
@@ -422,7 +422,7 @@ export const getDeleteScreenResponseMock = (): ScreenIdResponse => ({ id: '5HjER
 export const getCreateScreenMockHandler = (
   overrideResponse?:
     | ScreenItemResponse
-    | ((info: Parameters<Parameters<typeof http.post>[1]>[0]) => Promise<ScreenItemResponse> | ScreenItemResponse),
+    | ((info: Parameters<Parameters<typeof http.post>[1]>[0]) => Promise<ScreenItemResponse> | ScreenItemResponse)
 ) => {
   return http.post('*/v1/screen', async (info) => {
     await delay(10)
@@ -433,9 +433,9 @@ export const getCreateScreenMockHandler = (
           ? typeof overrideResponse === 'function'
             ? await overrideResponse(info)
             : overrideResponse
-          : getCreateScreenResponseMock(),
+          : getCreateScreenResponseMock()
       ),
-      { status: 200, headers: { 'Content-Type': 'application/json' } },
+      { status: 200, headers: { 'Content-Type': 'application/json' } }
     )
   })
 }
@@ -443,7 +443,7 @@ export const getCreateScreenMockHandler = (
 export const getShowScreenMockHandler = (
   overrideResponse?:
     | ScreenItemResponse
-    | ((info: Parameters<Parameters<typeof http.patch>[1]>[0]) => Promise<ScreenItemResponse> | ScreenItemResponse),
+    | ((info: Parameters<Parameters<typeof http.patch>[1]>[0]) => Promise<ScreenItemResponse> | ScreenItemResponse)
 ) => {
   return http.patch('*/v1/screen/:id/show', async (info) => {
     await delay(10)
@@ -454,9 +454,9 @@ export const getShowScreenMockHandler = (
           ? typeof overrideResponse === 'function'
             ? await overrideResponse(info)
             : overrideResponse
-          : getShowScreenResponseMock(),
+          : getShowScreenResponseMock()
       ),
-      { status: 200, headers: { 'Content-Type': 'application/json' } },
+      { status: 200, headers: { 'Content-Type': 'application/json' } }
     )
   })
 }
@@ -464,7 +464,7 @@ export const getShowScreenMockHandler = (
 export const getGetScreenMockHandler = (
   overrideResponse?:
     | ScreenItemResponse
-    | ((info: Parameters<Parameters<typeof http.get>[1]>[0]) => Promise<ScreenItemResponse> | ScreenItemResponse),
+    | ((info: Parameters<Parameters<typeof http.get>[1]>[0]) => Promise<ScreenItemResponse> | ScreenItemResponse)
 ) => {
   return http.get('*/v1/screen/:id', async (info) => {
     await delay(10)
@@ -475,9 +475,9 @@ export const getGetScreenMockHandler = (
           ? typeof overrideResponse === 'function'
             ? await overrideResponse(info)
             : overrideResponse
-          : getGetScreenResponseMock(),
+          : getGetScreenResponseMock()
       ),
-      { status: 200, headers: { 'Content-Type': 'application/json' } },
+      { status: 200, headers: { 'Content-Type': 'application/json' } }
     )
   })
 }
@@ -485,7 +485,7 @@ export const getGetScreenMockHandler = (
 export const getUpdateScreenMockHandler = (
   overrideResponse?:
     | ScreenItemResponse
-    | ((info: Parameters<Parameters<typeof http.put>[1]>[0]) => Promise<ScreenItemResponse> | ScreenItemResponse),
+    | ((info: Parameters<Parameters<typeof http.put>[1]>[0]) => Promise<ScreenItemResponse> | ScreenItemResponse)
 ) => {
   return http.put('*/v1/screen/:id', async (info) => {
     await delay(10)
@@ -496,9 +496,9 @@ export const getUpdateScreenMockHandler = (
           ? typeof overrideResponse === 'function'
             ? await overrideResponse(info)
             : overrideResponse
-          : getUpdateScreenResponseMock(),
+          : getUpdateScreenResponseMock()
       ),
-      { status: 200, headers: { 'Content-Type': 'application/json' } },
+      { status: 200, headers: { 'Content-Type': 'application/json' } }
     )
   })
 }
@@ -506,7 +506,7 @@ export const getUpdateScreenMockHandler = (
 export const getDeleteScreenMockHandler = (
   overrideResponse?:
     | ScreenIdResponse
-    | ((info: Parameters<Parameters<typeof http.delete>[1]>[0]) => Promise<ScreenIdResponse> | ScreenIdResponse),
+    | ((info: Parameters<Parameters<typeof http.delete>[1]>[0]) => Promise<ScreenIdResponse> | ScreenIdResponse)
 ) => {
   return http.delete('*/v1/screen/:id', async (info) => {
     await delay(10)
@@ -517,9 +517,9 @@ export const getDeleteScreenMockHandler = (
           ? typeof overrideResponse === 'function'
             ? await overrideResponse(info)
             : overrideResponse
-          : getDeleteScreenResponseMock(),
+          : getDeleteScreenResponseMock()
       ),
-      { status: 200, headers: { 'Content-Type': 'application/json' } },
+      { status: 200, headers: { 'Content-Type': 'application/json' } }
     )
   })
 }

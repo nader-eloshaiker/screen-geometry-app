@@ -1,5 +1,5 @@
-import { ScreenEventTypes } from '@/app/contexts/Screen/ScreenManager'
-import { useScreenContext } from '@/app/contexts/Screen/useScreenContext'
+import { ScreenEventTypes } from '@/app/contexts/screen/ScreenManager'
+import { useScreenContext } from '@/app/contexts/screen/useScreenContext'
 import { ScreenListResponse, useCreateScreenList } from '@/lib/openapi/generated'
 import { useCallback } from 'react'
 import { useApiEffectHandler } from '../useApiEffectHandler'
@@ -10,7 +10,7 @@ export const useCreateScreenListApi = () => {
   const { dispatch } = useScreenContext()
   const responseHandler = useCallback(
     (data: ScreenListResponse) => dispatch({ type: ScreenEventTypes.ADD_LIST, payload: data.list }),
-    [dispatch],
+    [dispatch]
   )
   const request = useCreateScreenList()
 

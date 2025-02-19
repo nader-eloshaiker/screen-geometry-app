@@ -1,4 +1,4 @@
-import { baseUrl } from '@/app/contexts/Query/QueryClient'
+import { baseUrl } from '@/app/contexts/query/QueryClient'
 import { createBrowserServiceWorker } from '@/lib/serviceworker/BrowserServiceWorker'
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
@@ -28,7 +28,7 @@ createRoot(document.getElementById('root') as HTMLElement).render(
       </Helmet>
       <App />
     </HelmetProvider>
-  </StrictMode>,
+  </StrictMode>
 )
 
 onCLS(sendToGoogleAnalytics)

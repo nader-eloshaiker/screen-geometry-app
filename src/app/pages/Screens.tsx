@@ -7,7 +7,7 @@ import { ScreenPanel } from '@/app/components/screen/panel/ScreenPanel'
 import { ScreenTable } from '@/app/components/screen/table/ScreenTable'
 import { Stacked } from '@/app/components/stacked/Stacked'
 import { defaultScreenInputList } from '@/app/constants/defaultScreenList'
-import { useScreenContext } from '@/app/contexts/Screen/useScreenContext'
+import { useScreenContext } from '@/app/contexts/screen/useScreenContext'
 import { useCreateScreenListApi } from '@/app/hooks/api/helpers/useCreateScreenListApi'
 import { useGetScreensListApi } from '@/app/hooks/api/helpers/useGetScreenListApi'
 import { ScreenItemRender } from '@/app/models/screenItemRender'
@@ -75,7 +75,7 @@ export const Screens = () => {
       })
       showAction({ id })
     },
-    [showAction],
+    [showAction]
   )
 
   const onDelete = useCallback(
@@ -87,7 +87,7 @@ export const Screens = () => {
       })
       deleteAction({ id })
     },
-    [deleteAction],
+    [deleteAction]
   )
 
   useEffect(() => {

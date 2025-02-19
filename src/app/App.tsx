@@ -1,10 +1,14 @@
-import { QueryProvider } from '@/app/contexts/Query/QueryProvider'
-import { ScreenProvider } from '@/app/contexts/Screen/ScreenProvider'
+import { QueryProvider } from '@/app/contexts/query/QueryProvider'
+import { AppRouterProvider } from '@/app/contexts/router/AppRouterProvider'
+import { ScreenProvider } from '@/app/contexts/screen/ScreenProvider'
 import { ThemeProvider } from '@/app/contexts/theme/ThemeProvider'
-import AppRouterProvider from '@/app/routes/AppRouterProvider'
 import '../index.css'
 
 export const App = () => (
+  // <ErrorBoundary
+  //   FallbackComponent={ErrorFallback}
+  //   onError={(error: Error, info: ErrorInfo) => console.error(error.message, info.componentStack)}
+  // >
   <QueryProvider>
     <ThemeProvider>
       <ScreenProvider>
@@ -12,4 +16,5 @@ export const App = () => (
       </ScreenProvider>
     </ThemeProvider>
   </QueryProvider>
+  // </ErrorBoundary>
 )

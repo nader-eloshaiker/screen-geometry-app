@@ -20,5 +20,5 @@ export const LabelVariants = cva(
     defaultVariants: {
       palette: 'none',
     },
-  },
+  }
 )

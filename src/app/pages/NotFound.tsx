@@ -2,44 +2,13 @@ import { Alert, AlertDescription, AlertTitle } from '@/lib/ui/components/alert/A
 import { Button } from '@/lib/ui/components/button/Button'
 import { Card } from '@/lib/ui/components/card/Card'
 import { AlertCircle } from 'lucide-react'
-import { useEffect, useState } from 'react'
 import { Helmet } from 'react-helmet-async'
-import { isRouteErrorResponse, useRouteError } from 'react-router-dom'
 
-const RootBoundary = () => {
-  const error = useRouteError()
-  const [errorMessage, setErrorMessage] = useState('')
-
-  useEffect(() => {
-    if (isRouteErrorResponse(error)) {
-      if (error.status === 404) {
-        setErrorMessage('This page does not exist 🤮')
-      }
-
-      if (error.status === 401) {
-        setErrorMessage('You are nor authorized to see this 😤')
-      }
-
-      if (error.status === 503) {
-        setErrorMessage('Looks like our API is down 🥺')
-      }
-
-      if (error.status === 418) {
-        setErrorMessage('The universe is broken 🫖')
-      }
-    } else {
-      setErrorMessage('Unknown error has occured 🤔')
-    }
-  }, [error])
-
-  return <span>{errorMessage}</span>
-}
-
-export const BoundyErrorManager = () => {
+export const NotFound = () => {
   return (
     <>
       <Helmet>
-        <title>Screen Geometry: Error</title>
+        <title>Screen Geometry: Page Not Found</title>
         <meta name='description' content='A service error has occured' />
       </Helmet>
       <div className='flex min-h-screen items-center justify-center'>
@@ -48,9 +17,7 @@ export const BoundyErrorManager = () => {
           <Alert palette='danger' className='mb-6'>
             <AlertCircle className='size-6' />
             <AlertTitle className='text-xl font-bold'>Oops! Something went wrong.</AlertTitle>
-            <AlertDescription className='text-lg'>
-              <RootBoundary />
-            </AlertDescription>
+            <AlertDescription className='text-lg'>This page does not exist 🤮</AlertDescription>
           </Alert>
 
           {/* Troubleshooting Steps */}

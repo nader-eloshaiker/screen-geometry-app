@@ -28,7 +28,7 @@ const formSchema: ObjectSchema<{ username: string }> = yup.object().shape(
       .min(2, 'Username must be at least 2 characters')
       .max(50, 'Username must be at most 50 characters')
       .required('User name is required'),
-  },
+  }
   //[[ScreenDataEnum.hRes, ScreenDataEnum.vRes]],
 )
 

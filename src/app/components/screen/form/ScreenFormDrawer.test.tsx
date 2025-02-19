@@ -1,6 +1,6 @@
-import { QueryProvider } from '@/app/contexts/Query/QueryProvider'
-import { ScreenProvider } from '@/app/contexts/Screen/ScreenProvider'
-import { useScreenContext } from '@/app/contexts/Screen/useScreenContext'
+import { QueryProvider } from '@/app/contexts/query/QueryProvider'
+import { ScreenProvider } from '@/app/contexts/screen/ScreenProvider'
+import { useScreenContext } from '@/app/contexts/screen/useScreenContext'
 import { ScreenItemRender } from '@/app/models/screenItemRender'
 import { getScreenListServiceMock, getScreenServiceMock, getSearchServiceMock } from '@/lib/openapi/generated'
 import { initMSW } from '@/lib/serviceworker/NodeServiceWorker'
@@ -193,7 +193,7 @@ describe('#ScreenFormDrawer', () => {
       ]
 
       const test = await renderWithUserEvents(
-        <RootTestComponent mode={FormModeTypes.Edit} id={editId} initialise={initialise} />,
+        <RootTestComponent mode={FormModeTypes.Edit} id={editId} initialise={initialise} />
       )
 
       const inputScreenSize = test.getByLabelText('Screen Size')

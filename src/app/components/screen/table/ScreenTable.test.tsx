@@ -1,6 +1,6 @@
-import { QueryProvider } from '@/app/contexts/Query/QueryProvider'
+import { QueryProvider } from '@/app/contexts/query/QueryProvider'
 
-import { ScreenProvider } from '@/app/contexts/Screen/ScreenProvider'
+import { ScreenProvider } from '@/app/contexts/screen/ScreenProvider'
 import { ScreenItemRender } from '@/app/models/screenItemRender'
 import { Screens } from '@/app/pages/Screens'
 import {
@@ -100,7 +100,7 @@ describe('#ScreenTable', () => {
 
     expect(expect(mswObj.apiEventStack.length).toBe(2))
     expect(mswObj.apiEventStack[mswObj.apiEventStack.length - 1]).toEqual(
-      expect.stringContaining('method:DELETE|url:http://dev.api.screengeometry.com/v1/screen/'),
+      expect.stringContaining('method:DELETE|url:http://dev.api.screengeometry.com/v1/screen/')
     )
 
     waitFor(() => expect(test.queryAllByRole('row').length).toBe(4))
@@ -118,7 +118,7 @@ describe('#ScreenTable', () => {
     })
 
     expect(mswObj.apiEventStack[mswObj.apiEventStack.length - 1]).toEqual(
-      expect.stringContaining('method:PATCH|url:http://dev.api.screengeometry.com/v1/screen/'),
+      expect.stringContaining('method:PATCH|url:http://dev.api.screengeometry.com/v1/screen/')
     )
     expect(mswObj.apiEventStack[mswObj.apiEventStack.length - 1]).toEqual(expect.stringContaining('/show'))
   })

@@ -21,7 +21,7 @@ test('Smoke Test Screens Page', async ({ page }) => {
 
   await expect(page.getByTestId('ButtonSpinner')).toBeVisible()
   await expect(
-    page.locator('div').filter({ hasText: 'A list of common Screen specifications has been generated' }).nth(1),
+    page.locator('div').filter({ hasText: 'A list of common Screen specifications has been generated' }).nth(1)
   ).toBeVisible()
 
   // Check for table data

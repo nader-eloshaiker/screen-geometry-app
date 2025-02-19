@@ -70,7 +70,7 @@ const TableSkeleton = ({ cols, rows }: TTableProps) => {
         })}
       >
         <Skeleton key={`table-skeleton-${i}`} className='h-6 w-full' />
-      </TableBodyCell>,
+      </TableBodyCell>
     )
   }
 
@@ -79,7 +79,7 @@ const TableSkeleton = ({ cols, rows }: TTableProps) => {
     tableRows.push(
       <TableBodyRow data-testid='SkeletonTableRow' key={`table-row-${i}`}>
         {tableCols}
-      </TableBodyRow>,
+      </TableBodyRow>
     )
   }
 
