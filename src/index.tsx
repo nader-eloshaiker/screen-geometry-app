@@ -1,4 +1,4 @@
-import { baseUrl } from '@/app/contexts/query/QueryClient'
+import { baseUrl } from '@/app/contexts/Query/QueryClient'
 import { createBrowserServiceWorker } from '@/lib/serviceworker/BrowserServiceWorker'
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'

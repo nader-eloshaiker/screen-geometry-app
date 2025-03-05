@@ -1,6 +1,6 @@
-import { QueryProvider } from '@/app/contexts/query/QueryProvider'
+import { QueryProvider } from '@/app/contexts/Query/QueryProvider'
 
-import { ScreenProvider } from '@/app/contexts/screen/ScreenProvider'
+import { ScreenProvider } from '@/app/contexts/Screen/ScreenProvider'
 import { ScreenItemRender } from '@/app/models/screenItemRender'
 import { Screens } from '@/app/pages/Screens'
 import {

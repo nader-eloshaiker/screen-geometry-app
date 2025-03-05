@@ -1,5 +1,5 @@
-import { ScreenEventTypes } from '@/app/contexts/screen/ScreenManager'
-import { useScreenContext } from '@/app/contexts/screen/useScreenContext'
+import { ScreenEventTypes } from '@/app/contexts/Screen/ScreenManager'
+import { useScreenContext } from '@/app/contexts/Screen/useScreenContext'
 import { ScreenListResponse, useGetScreenList } from '@/lib/openapi/generated'
 import { keepPreviousData } from '@tanstack/react-query'
 import { useCallback } from 'react'

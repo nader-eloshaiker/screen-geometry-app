@@ -1,6 +1,6 @@
-import { QueryProvider } from '@/app/contexts/query/QueryProvider'
+import { QueryProvider } from '@/app/contexts/Query/QueryProvider'
 import { AppRouterProvider } from '@/app/contexts/router/AppRouterProvider'
-import { ScreenProvider } from '@/app/contexts/screen/ScreenProvider'
+import { ScreenProvider } from '@/app/contexts/Screen/ScreenProvider'
 import { ThemeProvider } from '@/app/contexts/theme/ThemeProvider'
 import { Toaster } from '@/lib/ui/components/toaster/Toaster'
 import { StrictMode } from 'react'
