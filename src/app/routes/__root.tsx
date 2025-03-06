@@ -2,9 +2,17 @@ import Footer from '@/app/components/footer/Footer'
 import Header from '@/app/components/header/Header'
 import { Toaster } from '@/lib/ui/components/toaster/Toaster'
 import { createRootRoute, Outlet, useLocation } from '@tanstack/react-router'
-import { TanStackRouterDevtools } from '@tanstack/router-devtools'
-import { useEffect } from 'react'
+import { lazy, Suspense, useEffect } from 'react'
 import ReactGA from 'react-ga4'
+
+const TanStackRouterDevtools = import.meta.env.PROD // MODE === 'production'
+  ? () => null // Render nothing in production
+  : lazy(() =>
+      // Lazy load in development
+      import('@tanstack/router-devtools').then((res) => ({
+        default: res.TanStackRouterDevtools,
+      }))
+    )
 
 const Root = () => {
   const location = useLocation()
@@ -19,7 +27,10 @@ const Root = () => {
       </main>
       <Footer />
       <Toaster />
-      <TanStackRouterDevtools />
+      <TanStackRouterDevtools />{' '}
+      <Suspense>
+        <TanStackRouterDevtools />
+      </Suspense>
     </div>
   )
 }
