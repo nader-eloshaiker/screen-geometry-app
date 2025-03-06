@@ -1,6 +1,4 @@
-import { routeTree } from '@/lib/routes/routeTree.gen'
 import { Button } from '@/lib/ui/components/button/Button'
-import { NavigationLink } from '@/lib/ui/components/navigationlink/NavigationLink'
 import {
   Sheet,
   SheetContent,
@@ -13,6 +11,8 @@ import { cn } from '@/lib/utils'
 import { Menu } from 'lucide-react'
 import { useState } from 'react'
 import ThemeToggle from '../theme/ThemeToggle'
+import { HeaderNavDesktop } from './HeaderNavDesktop'
+import { HeaderNavMobile } from './HeaderNavMobile'
 
 const ThemeToggleStyled = ({ id }: { id: string }) => (
   <ThemeToggle className='self-center opacity-50 hover:opacity-100 md:mr-2' id={id} />
@@ -50,40 +50,7 @@ export default function Header() {
                 <span>Theme Toggle</span>
               </SheetDescription>
             </SheetHeader>
-            <nav aria-label='Main' className='grid gap-6 py-6'>
-              <NavigationLink
-                to={routeTree.children?.IndexLazyRoute.path}
-                mode='ghost'
-                className='justify-start text-lg font-semibold'
-                onClick={() => setOpen(false)}
-              >
-                Home
-              </NavigationLink>
-              <NavigationLink
-                to={routeTree.children?.ScreensLazyRoute.path}
-                mode='ghost'
-                className='justify-start text-lg font-semibold'
-                onClick={() => setOpen(false)}
-              >
-                Screens
-              </NavigationLink>
-              <NavigationLink
-                to={routeTree.children?.ContactLazyRoute.path}
-                mode='ghost'
-                className='justify-start text-lg font-semibold'
-                onClick={() => setOpen(false)}
-              >
-                Contact
-              </NavigationLink>
-              <NavigationLink
-                to={routeTree.children?.HelpLazyRoute.path}
-                mode='ghost'
-                className='justify-start text-lg font-semibold'
-                onClick={() => setOpen(false)}
-              >
-                Help
-              </NavigationLink>
-            </nav>
+            <HeaderNavDesktop setOpen={setOpen} />
           </SheetContent>
         </Sheet>
         <Title size='lg' />
@@ -91,40 +58,7 @@ export default function Header() {
       <div className='container mx-auto hidden lg:flex lg:flex-col' data-testid='large-header'>
         <Title size='lg' />
         <div className='flex justify-between'>
-          <nav aria-label='Main' className='flex gap-6' data-testid='large-header-menu'>
-            <NavigationLink
-              mode='ghost'
-              palette={'secondary'}
-              to={routeTree.children?.IndexLazyRoute.path}
-              className='group w-24 text-base font-semibold'
-            >
-              Home
-            </NavigationLink>
-            <NavigationLink
-              mode='ghost'
-              palette={'secondary'}
-              to={routeTree.children?.ScreensLazyRoute.path}
-              className='group w-24 text-base font-semibold'
-            >
-              Screens
-            </NavigationLink>
-            <NavigationLink
-              mode='ghost'
-              palette={'secondary'}
-              to={routeTree.children?.ContactLazyRoute.path}
-              className='group w-24 text-base font-semibold'
-            >
-              Contact
-            </NavigationLink>
-            <NavigationLink
-              mode='ghost'
-              palette={'secondary'}
-              to={routeTree.children?.HelpLazyRoute.path}
-              className='group w-24 text-base font-semibold'
-            >
-              Help
-            </NavigationLink>
-          </nav>
+          <HeaderNavMobile />
           <ThemeToggleStyled id='theme-toggle' />
         </div>
       </div>

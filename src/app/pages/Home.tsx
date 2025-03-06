@@ -1,4 +1,3 @@
-import { routeTree } from '@/lib/routes/routeTree.gen'
 import { NavigationLink } from '@/lib/ui/components/navigationlink/NavigationLink'
 import { Helmet } from 'react-helmet-async'
 
@@ -33,7 +32,7 @@ export const Home = () => {
                 id='home-screen-link'
                 className='w-24 text-base font-semibold'
                 // mode='ghost'
-                to={routeTree.children?.ScreensLazyRoute.path}
+                to='/screens'
               >
                 Screens
               </NavigationLink>
