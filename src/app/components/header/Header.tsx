@@ -11,8 +11,8 @@ import { cn } from '@/lib/utils'
 import { Menu } from 'lucide-react'
 import { useState } from 'react'
 import ThemeToggle from '../theme/ThemeToggle'
-import { HeaderNavDesktop } from './HeaderNavDesktop'
-import { HeaderNavMobile } from './HeaderNavMobile'
+import { HeaderNavLarge } from './HeaderNavLarge'
+import { HeaderNavSmall } from './HeaderNavSmall'
 
 const ThemeToggleStyled = ({ id }: { id: string }) => (
   <ThemeToggle className='self-center opacity-50 hover:opacity-100 md:mr-2' id={id} />
@@ -50,7 +50,7 @@ export default function Header() {
                 <span>Theme Toggle</span>
               </SheetDescription>
             </SheetHeader>
-            <HeaderNavDesktop setOpen={setOpen} />
+            <HeaderNavSmall setOpen={setOpen} />
           </SheetContent>
         </Sheet>
         <Title size='lg' />
@@ -58,7 +58,7 @@ export default function Header() {
       <div className='container mx-auto hidden lg:flex lg:flex-col' data-testid='large-header'>
         <Title size='lg' />
         <div className='flex justify-between'>
-          <HeaderNavMobile />
+          <HeaderNavLarge />
           <ThemeToggleStyled id='theme-toggle' />
         </div>
       </div>

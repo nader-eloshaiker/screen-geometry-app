@@ -47,7 +47,6 @@ export default defineConfig({
           'src/**/*.stories.tsx',
           'src/**/*.d.ts',
           '@react-refresh',
-          // 'virtual:@vite-plugin-checker-runtime',
           'virtual:*',
           'hmr.ts',
           'msw.js*',

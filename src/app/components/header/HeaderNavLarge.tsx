@@ -1,6 +1,6 @@
 import { NavigationLink } from '@/lib/ui/components/navigationlink/NavigationLink'
 
-export const HeaderNavMobile = () => (
+export const HeaderNavLarge = () => (
   <nav aria-label='Main' className='flex gap-6' data-testid='large-header-menu'>
     <NavigationLink mode='ghost' palette={'secondary'} to='/' className='group w-24 text-base font-semibold'>
       Home

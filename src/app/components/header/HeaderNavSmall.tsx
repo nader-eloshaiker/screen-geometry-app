@@ -5,7 +5,7 @@ type Props = {
   setOpen: Dispatch<SetStateAction<boolean>>
 }
 
-export const HeaderNavDesktop = ({ setOpen }: Props) => (
+export const HeaderNavSmall = ({ setOpen }: Props) => (
   <nav aria-label='Main' className='grid gap-6 py-6'>
     <NavigationLink to='/' mode='ghost' className='justify-start text-lg font-semibold' onClick={() => setOpen(false)}>
       Home

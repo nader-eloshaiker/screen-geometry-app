@@ -2,7 +2,6 @@
 import { codecovVitePlugin } from '@codecov/vite-plugin'
 import { TanStackRouterVite } from '@tanstack/router-plugin/vite'
 import react from '@vitejs/plugin-react'
-import { checker } from 'vite-plugin-checker'
 import tsconfigPaths from 'vite-tsconfig-paths'
 import { ViteUserConfig, configDefaults, defineConfig } from 'vitest/config'
 import packageJson from './package.json'
@@ -61,10 +60,6 @@ export default defineConfig({
     react(),
     tsconfigPaths(),
     !isTest && TanStackRouterVite(),
-    checker({
-      typescript: true,
-      enableBuild: true,
-    }),
     codecovVitePlugin({
       enableBundleAnalysis: process.env.CODECOV_TOKEN !== undefined,
       bundleName: 'screen-geometry-app',

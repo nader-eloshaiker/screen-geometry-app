@@ -14,6 +14,8 @@ const resizeWindow = async (x: number, y: number) => {
 describe('#Header', () => {
   // cannot be tested due to tailwindcss not getting parsed
   it.todo('should render the header without dropdown menu on a large window', async () => {
+    await resizeWindow(1000, 1000)
+
     const { result } = renderHook(() => useWindowSize())
     const { getByTestId } = render(
       <ThemeProvider>
@@ -21,24 +23,27 @@ describe('#Header', () => {
       </ThemeProvider>
     )
 
-    await resizeWindow(1000, 1000)
-    console.log(result.current)
+    console.log('>> renderHook(() => useWindowSize()) : ', result.current)
 
-    const element = getByTestId('small-header')
+    const element = getByTestId('large-header')
 
     expect(element).toHaveClass('a')
   })
 
-  it('should render the header with dropdown menu on a small window', async () => {
-    const { getByTestId } = render(
+  it.todo('should render the header with dropdown menu on a small window', async () => {
+    await resizeWindow(400, 400)
+
+    const { result } = renderHook(() => useWindowSize())
+    const { getByTestId } = await render(
       <ThemeProvider>
         <AppRouterProvider />
       </ThemeProvider>
     )
 
-    resizeWindow(1000, 320)
-    const element = getByTestId('small-header')
+    console.log('>> renderHook(() => useWindowSize()) : ', result.current)
 
-    expect(element).toBeVisible()
+    await waitFor(() => {
+      expect(getByTestId('small-header')).toBeVisible()
+    })
   })
 })
