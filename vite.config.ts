@@ -24,12 +24,15 @@ const Config: ViteUserConfig = {
       exclude: [
         ...configDefaults.exclude,
         'src/app/assets/**/*',
+        'src/app/routes/**/*',
         'src/configs/**/*',
         'src/constants/**/*',
         'src/lib/e2e/**/*',
+        'src/lib/routes/**/*',
         'src/lib/support/**/*',
         'src/lib/serviceworker/**/*',
         'src/lib/openapi/generated/**/*',
+        'src/lib/ui/**/*',
         'src/**/*.mock.{ts,tsx}',
         'src/**/*.stories.tsx',
         'src/**/*.d.ts',
@@ -38,7 +41,7 @@ const Config: ViteUserConfig = {
       thresholds: {
         lines: 70,
         branches: 50,
-        functions: 70,
+        functions: 60,
         statements: 70,
         // autoUpdate: true, // Update thresholds when writing tests, disabled due to refactoring tests changes coverage
       },

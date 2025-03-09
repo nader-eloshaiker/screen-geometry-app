@@ -1,5 +1,5 @@
 import { DarkMode, LightMode } from '@/app/contexts/theme/Theme.types'
-import { describe, expect, it, vi } from 'vitest'
+import { vi } from 'vitest'
 import ThemeToggle from './ThemeToggle'
 
 // Mock the theme context hook

@@ -7,8 +7,8 @@ import {
   createRoute,
   createRouter,
 } from '@tanstack/react-router'
-import { screen } from '@testing-library/react'
-import { describe, expect, it, vi } from 'vitest'
+import { screen, waitFor } from '@testing-library/react'
+import { vi } from 'vitest'
 import Header from './Header'
 
 // Mock the imported components
@@ -109,31 +109,27 @@ describe('#Header', () => {
     const test = await renderWithRouter()
 
     // Get the menu button and click it
-    const menuButton = test.getByText('Toggle navigation menu').closest('button')
+    const menuButton = test.getByRole('button', { name: 'Toggle navigation menu' })
     expect(menuButton).toBeInTheDocument()
 
-    if (menuButton) {
-      await test.user.click(menuButton)
-    }
+    await waitFor(async () => test.user.click(menuButton))
 
     // The sheet should now be open, check if sheet content is visible
     expect(test.getByText('Navigation')).toBeInTheDocument()
     expect(test.getByTestId('mocked-header-nav-small')).toBeInTheDocument()
-    expect(test.getByText('Theme Toggle Button')).toBeInTheDocument()
+    expect(test.getAllByText('Theme Toggle Button')).toHaveLength(2)
   })
 
   it('closes the sheet when a navigation link is clicked', async () => {
     const test = await renderWithRouter()
 
     // Open the sheet
-    const menuButton = test.getByText('Toggle navigation menu').closest('button')
-    if (menuButton) {
-      await test.user.click(menuButton)
-    }
+    const menuButton = test.getByText('Toggle navigation menu')
+    await waitFor(async () => test.user.click(menuButton))
 
     // Click on the navigation (our mock will call setOpen(false))
     const navSmall = test.getByTestId('mocked-header-nav-small')
-    await test.user.click(navSmall)
+    await waitFor(async () => test.user.click(navSmall))
 
     // Now the sheet header should not be visible anymore
     // This depends on SheetContent behaviors, which might be harder to test directly
