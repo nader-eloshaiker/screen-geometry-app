@@ -19,7 +19,7 @@ const Config: ViteUserConfig = {
     coverage: {
       provider: 'istanbul', //'v8',
       reporter: ['text', 'json-summary', 'json', 'clover', 'html'],
-      reportsDirectory: 'coverage/vitest',
+      reportsDirectory: 'coverage/unit',
       include: ['src/**/*.{ts,tsx}'],
       exclude: [
         ...configDefaults.exclude,

@@ -37,7 +37,7 @@ jobs:
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
           slug: nader-eloshaiker/screen-geometry-app
-          directory: coverage/vitest/
+          directory: coverage/unit/
           flags: unit
 
       - name: Upload storybook test coverage reports to Codecov
@@ -47,11 +47,3 @@ jobs:
           slug: nader-eloshaiker/screen-geometry-app
           directory: coverage/storybook/
           flags: storybook
-
-      - name: Upload e2e test coverage reports to Codecov
-        uses: codecov/codecov-action@v4
-        with:
-          token: ${{ secrets.CODECOV_TOKEN }}
-          slug: nader-eloshaiker/screen-geometry-app
-          directory: coverage/playwright/
-          flags: e2e
