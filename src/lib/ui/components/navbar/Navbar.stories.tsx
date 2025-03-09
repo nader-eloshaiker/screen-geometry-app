@@ -1,4 +1,5 @@
 import { AppRouterProvider } from '@/app/contexts/router/AppRouterProvider'
+import { ThemeProvider } from '@/app/contexts/theme/ThemeProvider'
 import type { Meta, StoryObj } from '@storybook/react'
 import { Navbar } from './Navbar'
 
@@ -21,10 +22,9 @@ export const Component: Story = {
   parameters: {},
   decorators: [
     (Story) => (
-      <>
-        <AppRouterProvider />
-        <Story />
-      </>
+      <ThemeProvider>
+        <AppRouterProvider defaultComponent={Story} />
+      </ThemeProvider>
     ),
   ],
 }

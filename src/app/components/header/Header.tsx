@@ -1,3 +1,4 @@
+import ThemeToggle from '@/app/components/theme/ThemeToggle'
 import { Button } from '@/lib/ui/components/button/Button'
 import {
   Sheet,
@@ -10,7 +11,6 @@ import {
 import { cn } from '@/lib/utils'
 import { Menu } from 'lucide-react'
 import { useState } from 'react'
-import ThemeToggle from '../theme/ThemeToggle'
 import { HeaderNavLarge } from './HeaderNavLarge'
 import { HeaderNavSmall } from './HeaderNavSmall'
 

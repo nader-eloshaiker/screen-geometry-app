@@ -1,19 +1,21 @@
-import { createRouter, RouterProvider } from '@tanstack/react-router'
+import { createRouter, RouteComponent, RouterProvider } from '@tanstack/react-router'
 
 import { ErrorFallback } from '@/app/pages/ErrorFallback'
 import { NotFound } from '@/app/pages/NotFound'
 import { routeTree } from '@/lib/routes/routeTree.gen'
 
-const router = createRouter({
+const appRouter = createRouter({
   routeTree,
   defaultNotFoundComponent: NotFound,
   defaultErrorComponent: ErrorFallback,
 })
 
-declare module '@tanstack/react-router' {
-  interface Register {
-    router: typeof router
-  }
+type AppRouter = typeof appRouter
+
+type Props = {
+  defaultComponent?: RouteComponent
 }
 
-export const AppRouterProvider = () => <RouterProvider router={router} />
+export const AppRouterProvider = ({ defaultComponent }: Props) => (
+  <RouterProvider<AppRouter> router={appRouter} defaultComponent={defaultComponent} />
+)
