@@ -7,7 +7,7 @@ test('Smoke Test Screens Page', async ({ page }) => {
   // Load Page and navigate to Screens
   await page.goto('/')
 
-  const screensLink = await page.getByRole('link', { name: 'Screens' })
+  const screensLink = await page.getByTestId('large-header-menu').getByRole('link', { name: 'Screens' })
   await screensLink.click()
 
   // Does the skeleton loader show up?

@@ -88,9 +88,9 @@
     "zod": "^3.24.1"
   },
   "devDependencies": {
-    "@bgotink/playwright-coverage": "^0.2.2",
+    "@bgotink/playwright-coverage": "^0.3.1",
     "@codecov/vite-plugin": "1.9.0",
-    "@playwright/test": "^1.47.1",
+    "@playwright/test": "^1.5.0",
     "@storybook/addon-coverage": "^1.0.5",
     "@storybook/addon-essentials": "^8.6.4",
     "@storybook/addon-interactions": "^8.6.4",
