@@ -62,6 +62,7 @@ describe('ThemeToggle', () => {
   it('applies additional className when provided', async () => {
     vi.mocked(useTheme).mockReturnValue([LightMode, mockSetTheme])
 
+    // eslint-disable-next-line tailwindcss/no-custom-classname
     const test = await renderWithUserEvents(<ThemeToggle id='test-toggle' className='extra-class' />)
 
     const button = test.getByRole('button')
