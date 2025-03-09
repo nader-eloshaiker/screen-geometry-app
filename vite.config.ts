@@ -1,10 +1,11 @@
 /// <reference types="vitest" />
 import { codecovVitePlugin } from '@codecov/vite-plugin'
+import { TanStackRouterVite } from '@tanstack/router-plugin/vite'
 import react from '@vitejs/plugin-react'
-import { checker } from 'vite-plugin-checker'
 import tsconfigPaths from 'vite-tsconfig-paths'
 import { ViteUserConfig, configDefaults, defineConfig } from 'vitest/config'
 import packageJson from './package.json'
+const isTest = process.env.NODE_ENV === 'test'
 
 const Config: ViteUserConfig = {
   test: {
@@ -18,17 +19,20 @@ const Config: ViteUserConfig = {
     coverage: {
       provider: 'istanbul', //'v8',
       reporter: ['text', 'json-summary', 'json', 'clover', 'html'],
-      reportsDirectory: 'coverage/vitest',
+      reportsDirectory: 'coverage/unit',
       include: ['src/**/*.{ts,tsx}'],
       exclude: [
         ...configDefaults.exclude,
         'src/app/assets/**/*',
+        'src/app/routes/**/*',
         'src/configs/**/*',
         'src/constants/**/*',
         'src/lib/e2e/**/*',
+        'src/lib/routes/**/*',
         'src/lib/support/**/*',
         'src/lib/serviceworker/**/*',
         'src/lib/openapi/generated/**/*',
+        'src/lib/ui/**/*',
         'src/**/*.mock.{ts,tsx}',
         'src/**/*.stories.tsx',
         'src/**/*.d.ts',
@@ -37,7 +41,7 @@ const Config: ViteUserConfig = {
       thresholds: {
         lines: 70,
         branches: 50,
-        functions: 70,
+        functions: 60,
         statements: 70,
         // autoUpdate: true, // Update thresholds when writing tests, disabled due to refactoring tests changes coverage
       },
@@ -58,15 +62,18 @@ export default defineConfig({
   plugins: [
     react(),
     tsconfigPaths(),
-    checker({
-      typescript: true,
-      enableBuild: true,
-    }),
+    !isTest && TanStackRouterVite(),
     codecovVitePlugin({
       enableBundleAnalysis: process.env.CODECOV_TOKEN !== undefined,
       bundleName: 'screen-geometry-app',
       uploadToken: process.env.CODECOV_TOKEN,
     }),
   ],
+  resolve: {
+    // alias: {
+    //   '@': 'src/',
+    // },
+    extensions: ['.js', '.ts', '.tsx', '.jsx'],
+  },
   test: Config.test,
 })

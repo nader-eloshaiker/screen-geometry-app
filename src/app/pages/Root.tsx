@@ -1,9 +1,10 @@
 import Footer from '@/app/components/footer/Footer'
 import Header from '@/app/components/header/Header'
 import { Toaster } from '@/lib/ui/components/toaster/Toaster'
+import { Outlet, useLocation } from '@tanstack/react-router'
+import { TanStackRouterDevtools } from '@tanstack/router-devtools'
 import { useEffect } from 'react'
 import ReactGA from 'react-ga4'
-import { Outlet, useLocation } from 'react-router-dom'
 
 export const Root = () => {
   const location = useLocation()
@@ -18,6 +19,7 @@ export const Root = () => {
       </main>
       <Footer />
       <Toaster />
+      <TanStackRouterDevtools />
     </div>
   )
 }

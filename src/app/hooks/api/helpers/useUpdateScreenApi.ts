@@ -10,7 +10,7 @@ export const useUpdateScreenApi = () => {
   const { dispatch } = useScreenContext()
   const responseHandler = useCallback(
     (data: ScreenItemResponse) => dispatch({ type: ScreenEventTypes.UPDATE, payload: data.item }),
-    [dispatch],
+    [dispatch]
   )
   const request = useUpdateScreen()
 

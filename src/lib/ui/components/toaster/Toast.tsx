@@ -1,5 +1,3 @@
-'use client'
-
 import { Cross2Icon } from '@radix-ui/react-icons'
 import * as ToastPrimitives from '@radix-ui/react-toast'
 import { type VariantProps } from 'class-variance-authority'
@@ -18,7 +16,7 @@ const ToastViewport = React.forwardRef<
     ref={ref}
     className={cn(
       'fixed top-0 z-[100] flex max-h-screen w-full flex-col-reverse p-4 sm:bottom-0 sm:right-0 sm:top-auto sm:flex-col md:max-w-[420px] gap-2',
-      className,
+      className
     )}
     {...props}
   />

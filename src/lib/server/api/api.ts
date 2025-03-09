@@ -139,7 +139,7 @@ export const showScreen = async (id: string) => {
     updateData<ScreenItem>(Stores.Screens, {
       ...data,
       visible: !data.visible,
-    }),
+    })
   )
 
   if (err2) {

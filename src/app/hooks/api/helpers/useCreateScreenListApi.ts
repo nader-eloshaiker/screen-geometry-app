@@ -10,7 +10,7 @@ export const useCreateScreenListApi = () => {
   const { dispatch } = useScreenContext()
   const responseHandler = useCallback(
     (data: ScreenListResponse) => dispatch({ type: ScreenEventTypes.ADD_LIST, payload: data.list }),
-    [dispatch],
+    [dispatch]
   )
   const request = useCreateScreenList()
 
