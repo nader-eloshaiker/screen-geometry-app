@@ -7,9 +7,8 @@ test('Smoke Test Screens Page', async ({ page }) => {
   // Load Page and navigate to Screens
   await page.goto('/')
 
-  const screensLink = await page.getByRole('link', { name: 'Screens' }).all()
-  expect(screensLink).toHaveLength(2)
-  await screensLink[0].click()
+  const screensLink = await page.getByRole('link', { name: 'Screens' })
+  await screensLink.click()
 
   // Does the skeleton loader show up?
   // await expect(page.getByTestId('SkeletonTableRow')).toHaveCount(5)
