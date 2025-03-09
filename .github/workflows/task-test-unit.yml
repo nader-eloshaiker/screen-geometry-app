@@ -45,5 +45,5 @@ jobs:
       - name: Archive code coverage results
         uses: actions/upload-artifact@v4
         with:
-          name: vitest-code-coverage-report
+          name: unit-code-coverage-report
           path: coverage/unit/
