@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.1.0](https://github.com/nader-eloshaiker/screen-geometry-app/compare/v3.0.1...v3.1.0) (2025-03-09)
+
+
+### Features
+
+* **app:** implement TanStack Router and auto gen routes ([#508](https://github.com/nader-eloshaiker/screen-geometry-app/issues/508)) ([ba1b42b](https://github.com/nader-eloshaiker/screen-geometry-app/commit/ba1b42b57027d63e43b134929dbd41ee191dc798))
+
 ## [3.0.1](https://github.com/nader-eloshaiker/screen-geometry-app/compare/v3.0.0...v3.0.1) (2025-01-09)
 
 
