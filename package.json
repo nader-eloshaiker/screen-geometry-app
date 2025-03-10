@@ -24,7 +24,7 @@
     "test": "pnpm recursive run test",
     "test:specs": "pnpm recursive run test:specs",
     "e2e": "pnpm recursive run e2e",
-    " e2e:install": "pnpm recursive run e2e:install",
+    "e2e:install": "pnpm recursive run e2e:install",
     "build-storybook": "pnpm recursive run build-storybook"
   },
   "devDependencies": {
