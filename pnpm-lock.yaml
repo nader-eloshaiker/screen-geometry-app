@@ -327,6 +327,9 @@ importers:
       vitest-localstorage-mock:
         specifier: ^0.1.2
         version: 0.1.2(vitest@3.0.7)
+      wait-on:
+        specifier: ^7.2.0
+        version: 7.2.0
 
 packages:
 

@@ -65,6 +65,7 @@ jobs:
         with:
           files: |
             apps/web/src/lib/ui/components/**
+            apps/web/src/apps/components/**
 
   designsystem-test:
     name: Run Design System Testing
