@@ -5,8 +5,8 @@ on:
     branches:
       # - '*' # matches every branch that doesn't contain a '/'
       # - '*/*' # matches every branch containing a single '/'
-      - '**' # matches every branch
-      - '!main' # excludes main as it is called by another workflow
+      - "**" # matches every branch
+      - "!main" # excludes main as it is called by another workflow
   workflow_call:
 
 concurrency:
@@ -64,9 +64,7 @@ jobs:
         uses: tj-actions/changed-files@v45
         with:
           files: |
-            src/app/components/**
-            src/lib/ui/**
-            .storybook/**
+            apps/web/src/lib/ui/components/**
 
   designsystem-test:
     name: Run Design System Testing

@@ -50,11 +50,11 @@ jobs:
           token: ${{ secrets.ACTION_GITHUB_TOKEN }}
           # example, `main` or `1.x`
           target-branch: ${{ github.ref_name }}
-          release-type: 'node'
+          release-type: "node"
           # ensure all committed files are considered for release
-          path: '.'
+          path: "."
 
-      - name: 'Output Step'
+      - name: "Output Step"
         env:
           NEW_TAG: ${{ steps.generate_release.outputs.tag_name }}
         run: echo "new tag [$NEW_TAG] created for $REPO_NAME"
@@ -79,7 +79,7 @@ jobs:
       - name: Install Node.js
         uses: actions/setup-node@v4
         with:
-          node-version-file: '.nvmrc'
+          node-version-file: ".nvmrc"
 
       - name: Install pnpm
         uses: pnpm/action-setup@v4.0.0
@@ -103,7 +103,7 @@ jobs:
         run: pnpm install
 
       - name: Run pnpm report
-        run: pnpm build-storybook
+        run: pnpm sb:build
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
@@ -111,7 +111,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: './storybook-static'
+          path: "./apps/web/storybook-static"
 
       - name: Deploy to reports to GitHub Pages
         id: deployment
@@ -135,7 +135,7 @@ jobs:
       - name: Install Node.js
         uses: actions/setup-node@v4
         with:
-          node-version-file: '.nvmrc'
+          node-version-file: ".nvmrc"
 
       - name: Install pnpm
         uses: pnpm/action-setup@v4.0.0
@@ -172,5 +172,5 @@ jobs:
           directory: ./dist
           branch: develop
           environmentName: cloudflare-preview
-          wranglerVersion: '3'
+          wranglerVersion: "3"
           gitHubToken: ${{ secrets.ACTION_GITHUB_TOKEN }}
