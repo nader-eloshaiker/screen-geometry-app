@@ -8,14 +8,14 @@
     "jsx": "react-jsx",
     "baseUrl": ".",
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["src/*"]
     }
   },
   "include": [
-    "src/",
+    "src",
     "src/configs/vitest.setup.ts",
     "src/lib/server/api/SearchService.ts",
     "src/lib/server/server.test.ts"
   ],
-  "exclude": ["node_modules", "coverage", "dist", "build"]
+  "exclude": ["node_modules", "coverage", "dist", "build", "storybook-static"]
 }

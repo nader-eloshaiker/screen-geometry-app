@@ -1,6 +1,12 @@
 import { defineConfig, devices } from '@playwright/test'
 
-const __dirname = import.meta.dirname
+declare const process: {
+  env: {
+    CI?: string
+  }
+}
+
+console.log('>> process.env.CI:', process.env.CI)
 
 /**
  * Read environment variables from file.
