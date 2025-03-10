@@ -1,5 +1,5 @@
-import { DarkMode, LightMode } from '@/app/contexts/theme/Theme.types'
-import { useTheme } from '@/app/contexts/theme/useTheme'
+import { DarkMode, LightMode } from '@/app/hooks/theme/Theme.types'
+import { useTheme } from '@/app/hooks/theme/useTheme'
 import { Button } from '@/lib/ui/components/button/Button'
 import { cn } from '@/lib/utils'
 import { MoonStar, Sun } from 'lucide-react'

@@ -1,0 +1,822 @@
+openapi: "3.1.0"
+info:
+  version: "3.0.0"
+  title: "screen-geometry-app-backend-serverless-apis-v1"
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+  x-logo:
+    url: "/images/sga.png"
+    altText: App Logo
+  description: |
+    Environment configuration for endpoints
+
+# https://redocly.com/docs-legacy/api-reference-docs/specification-extensions/x-tag-groups
+x-tagGroups:
+  - name: Configuration
+    tags:
+      - Config
+
+servers:
+  - description: dev
+    url: https://develop.screengeometry.pages.dev
+
+  - description: prd
+    url: https://screengeometry.com
+
+tags:
+  - name: search service
+    description: Search screen service api
+  - name: screen list service
+    description: screen lists service api
+  - name: screen service
+    description: screen service api
+
+paths:
+  /v1/search:
+    get:
+      summary: "Search for screens"
+      tags:
+        - "search service"
+      parameters:
+        - name: "limit"
+          in: "query"
+          required: false
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+            default: 10
+        - name: "offset"
+          in: "query"
+          required: false
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+        - name: "sort"
+          in: "query"
+          required: false
+          schema:
+            type: string
+            enum:
+              - "name"
+              - "size"
+            default: "name"
+        - name: "order"
+          in: "query"
+          required: false
+          schema:
+            type: string
+            enum:
+              - "asc"
+              - "desc"
+            default: "asc"
+        - name: term
+          in: query
+          required: false
+          schema:
+            type: string
+            example: "WQHD"
+      responses:
+        "200":
+          description: "200 response"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SearchListResponse"
+              examples:
+                defaultResponseExample:
+                  $ref: "#/components/examples/SearchListResponseExample"
+        "400":
+          description: "400 response"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "401":
+          description: "401 response"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+              examples:
+                defaultResponseExample:
+                  $ref: "#/components/examples/Error401ResponseExample"
+        "403":
+          description: "403 response"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "408":
+          description: "408 response"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "415":
+          description: "415 response"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "429":
+          description: "429 response"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "503":
+          description: "503 response"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+      security:
+        - authorizer-api-v2: []
+        - api_key: []
+      operationId: "getSearch"
+    options:
+      tags:
+        - "search service"
+      summary: "Search for screens preflight"
+      responses:
+        "200":
+          description: "200 response"
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+          content: {}
+        "401":
+          description: "401 response"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+      operationId: "optionsSearch"
+      security:
+        - authorizer-api-v2: []
+        - api_key: []
+  /v1/screens:
+    get:
+      summary: "Get a list of ScreenItem objects"
+      tags:
+        - "screen list service"
+      responses:
+        "200":
+          description: "200 response"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ScreenListResponse"
+              examples:
+                defaultResponseExample:
+                  $ref: "#/components/examples/ScreenListResponseExample"
+                emptyResponseExample:
+                  $ref: "#/components/examples/ScreenListResponseEmptyExample"
+        "400":
+          description: "400 response"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "401":
+          description: "401 response"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+              examples:
+                defaultResponseExample:
+                  $ref: "#/components/examples/Error401ResponseExample"
+        "403":
+          description: "403 response"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "408":
+          description: "408 response"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "415":
+          description: "415 response"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "429":
+          description: "429 response"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "503":
+          description: "503 response"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+      security:
+        - authorizer-api-v2: []
+        - api_key: []
+      operationId: "getScreenList"
+    post:
+      summary: "Create a list of ScreenItem objects"
+      tags:
+        - "screen list service"
+      requestBody:
+        description: Generating a list of ScreenItem objects
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ScreenInputList"
+      responses:
+        "200":
+          description: "200 response"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ScreenListResponse"
+              examples:
+                defaultResponseExample:
+                  $ref: "#/components/examples/ScreenListResponseExample"
+        "400":
+          description: "400 response"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "401":
+          description: "401 response"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+              examples:
+                defaultResponseExample:
+                  $ref: "#/components/examples/Error401ResponseExample"
+        "403":
+          description: "403 response"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "408":
+          description: "408 response"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "415":
+          description: "415 response"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "429":
+          description: "429 response"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "503":
+          description: "503 response"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+      security:
+        - authorizer-api-v2: []
+        - api_key: []
+      operationId: "createScreenList"
+    options:
+      summary: "Screen list preflight"
+      tags:
+        - "screen list service"
+      responses:
+        "200":
+          description: "200 response"
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+          content: {}
+        "401":
+          description: "401 response"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+      operationId: "optionsScreenList"
+      security:
+        - authorizer-api-v2: []
+        - api_key: []
+
+  /v1/screen:
+    post:
+      summary: "Create a ScreenItem object"
+      tags:
+        - "screen service"
+      requestBody:
+        description: Primitive for generating a ScreenItem object
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ScreenInput"
+      responses:
+        "200":
+          description: "200 response"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ScreenItemResponse"
+              examples:
+                defaultResponseExample:
+                  $ref: "#/components/examples/ScreenItemResponseExample"
+        "400":
+          description: "400 response"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "401":
+          description: "401 response"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+              examples:
+                defaultResponseExample:
+                  $ref: "#/components/examples/Error401ResponseExample"
+        "403":
+          description: "403 response"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "408":
+          description: "408 response"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "415":
+          description: "415 response"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "429":
+          description: "429 response"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "503":
+          description: "503 response"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+      security:
+        - authorizer-api-v2: []
+        - api_key: []
+      operationId: "createScreen"
+    options:
+      summary: "Screen preflight"
+      tags:
+        - "screen list service"
+      responses:
+        "200":
+          description: "200 response"
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+          content: {}
+        "401":
+          description: "401 response"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+      operationId: "optionsCreateScreen"
+      security:
+        - authorizer-api-v2: []
+        - api_key: []
+
+  /v1/screen/{id}/show:
+    patch:
+      summary: "Show a screen"
+      tags:
+        - "screen service"
+      parameters:
+        - name: "id"
+          in: "path"
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: "200 response"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ScreenItemResponse"
+              examples:
+                defaultResponseExample:
+                  $ref: "#/components/examples/ScreenItemResponseUpdatedExample"
+        "400":
+          description: "400 response"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "401":
+          description: "401 response"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+              examples:
+                defaultResponseExample:
+                  $ref: "#/components/examples/Error401ResponseExample"
+        "403":
+          description: "403 response"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "408":
+          description: "408 response"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "415":
+          description: "415 response"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "429":
+          description: "429 response"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "503":
+          description: "503 response"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+      security:
+        - authorizer-api-v2: []
+        - api_key: []
+      operationId: "showScreen"
+    options:
+      summary: "Screen show preflight"
+      tags:
+        - "screen service"
+      parameters:
+        - name: "id"
+          in: "path"
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: "200 response"
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+          content: {}
+        "401":
+          description: "401 response"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+      operationId: "optionsShowScreen"
+      security:
+        - authorizer-api-v2: []
+        - api_key: []
+
+  /v1/screen/{id}:
+    get:
+      summary: "Get a screen by id"
+      tags:
+        - "screen service"
+      parameters:
+        - name: "id"
+          in: "path"
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: "200 response"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ScreenItemResponse"
+              examples:
+                defaultResponseExample:
+                  $ref: "#/components/examples/ScreenItemResponseExample"
+        "400":
+          description: "400 response"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "401":
+          description: "401 response"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+              examples:
+                defaultResponseExample:
+                  $ref: "#/components/examples/Error401ResponseExample"
+        "403":
+          description: "403 response"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "408":
+          description: "408 response"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "415":
+          description: "415 response"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "429":
+          description: "429 response"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "503":
+          description: "503 response"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+      security:
+        - authorizer-api-v2: []
+        - api_key: []
+      operationId: "getScreen"
+    put:
+      summary: "Update a screen"
+      tags:
+        - "screen service"
+      parameters:
+        - name: "id"
+          in: "path"
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: Update an existent screen in list
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ScreenInput"
+      responses:
+        "200":
+          description: "200 response"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ScreenItemResponse"
+              examples:
+                defaultResponseExample:
+                  $ref: "#/components/examples/ScreenItemResponseExample"
+        "400":
+          description: "400 response"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "401":
+          description: "401 response"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+              examples:
+                defaultResponseExample:
+                  $ref: "#/components/examples/Error401ResponseExample"
+        "403":
+          description: "403 response"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "408":
+          description: "408 response"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "415":
+          description: "415 response"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "429":
+          description: "429 response"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "503":
+          description: "503 response"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+      security:
+        - authorizer-api-v2: []
+        - api_key: []
+      operationId: "updateScreen"
+    delete:
+      summary: "Delete a screen"
+      tags:
+        - "screen service"
+      parameters:
+        - name: "id"
+          in: "path"
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: "200 response"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ScreenIdResponse"
+              example:
+                id: 5HjERJbH
+        "400":
+          description: "400 response"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "401":
+          description: "401 response"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+              examples:
+                defaultResponseExample:
+                  $ref: "#/components/examples/Error401ResponseExample"
+        "403":
+          description: "403 response"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "408":
+          description: "408 response"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "415":
+          description: "415 response"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "429":
+          description: "429 response"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "503":
+          description: "503 response"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+      security:
+        - authorizer-api-v2: []
+        - api_key: []
+      operationId: "deleteScreen"
+    options:
+      summary: "Screen preflight"
+      tags:
+        - "screen service"
+      parameters:
+        - name: "id"
+          in: "path"
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: "200 response"
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+          content: {}
+        "401":
+          description: "401 response"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+      operationId: "optionsScreen"
+      security:
+        - authorizer-api-v2: []
+        - api_key: []
+
+components:
+  schemas:
+    $ref: "./schemas/_index.yml"
+  examples:
+    Error401ResponseExample:
+      $ref: "./examples/Error401ResponseExample.yml"
+    ScreenItemResponseExample:
+      $ref: "./examples/ScreenItemResponseExample.yml"
+    ScreenItemResponseUpdatedExample:
+      $ref: "./examples/ScreenItemResponseUpdatedExample.yml"
+    ScreenListResponseExample:
+      $ref: "./examples/ScreenListResponseExample.yml"
+    ScreenListResponseEmptyExample:
+      $ref: "./examples/ScreenListResponseEmptyExample.yml"
+    SearchListResponseExample:
+      $ref: "./examples/SearchListResponseExample.yml"
+  securitySchemes:
+    UniversalLogin:
+      type: http
+      scheme: basic
+    api_key:
+      type: "apiKey"
+      name: "x-api-key"
+      in: "header"
+    authorizer-api-v2:
+      type: "apiKey"
+      name: "Authorization"
+      in: "header"
+      x-amazon-apigateway-authtype: "custom"
+x-amazon-apigateway-policy:
+  Version: "1.0.0"
+  Statement:
+    - Effect: "Allow"
+      Principal: "*"
+      Action: "execute-api:Invoke"
+      Resource: "arn:aws:execute-api:ap-southeast-1:123456789012:abcdefabcd/*/*/*"

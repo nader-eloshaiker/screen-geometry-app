@@ -4,7 +4,7 @@ export default defineConfig({
   screenApi: {
     output: {
       workspace: 'src/lib/openapi/generated',
-      mode: 'tags',
+      mode: 'tags-split',
       target: './services',
       schemas: './models',
       indexFiles: true,
@@ -35,7 +35,7 @@ export default defineConfig({
       },
     },
     input: {
-      target: './src/lib/openapi/spec/screenApi.v1.yaml',
+      target: '../../packages/server-spec/dist/server-api.json',
     },
   },
 })

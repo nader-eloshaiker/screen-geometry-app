@@ -1,4 +1,4 @@
-import { DarkMode, LightMode, TThemeMode } from '@/app/contexts/theme/Theme.types'
+import { DarkMode, LightMode, TThemeMode } from '@/app/hooks/theme/Theme.types'
 import { ScreenDataEnum } from '@/lib/openapi/models/Screen'
 import { FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/lib/ui/components/form/Form'
 import { Input } from '@/lib/ui/components/input/Input'

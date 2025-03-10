@@ -1,7 +1,7 @@
 import RefreshIcon from '@/app/assets/icons/Refresh'
-import { DarkMode, LightMode } from '@/app/contexts/theme/Theme.types'
 import { useCreateScreenApi } from '@/app/hooks/api/helpers/useCreateScreenApi'
 import { useUpdateScreenApi } from '@/app/hooks/api/helpers/useUpdateScreenApi'
+import { DarkMode, LightMode } from '@/app/hooks/theme/Theme.types'
 import { ScreenInput, SearchItem } from '@/lib/openapi/generated'
 import { ScreenDataEnum } from '@/lib/openapi/models'
 import { Button } from '@/lib/ui/components/button/Button'

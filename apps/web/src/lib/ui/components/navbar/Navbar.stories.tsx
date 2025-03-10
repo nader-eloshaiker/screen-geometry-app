@@ -1,5 +1,5 @@
-import { AppRouterProvider } from '@/app/contexts/router/AppRouterProvider'
-import { ThemeProvider } from '@/app/contexts/theme/ThemeProvider'
+import { AppRouterProvider } from '@/app/hooks/router/AppRouterProvider'
+import { ThemeProvider } from '@/app/hooks/theme/ThemeProvider'
 import type { Meta, StoryObj } from '@storybook/react'
 import { Navbar } from './Navbar'
 

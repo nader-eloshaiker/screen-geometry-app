@@ -1,5 +1,5 @@
-import { DarkMode, TThemeMode } from '@/app/contexts/theme/Theme.types'
-import { useTheme } from '@/app/contexts/theme/useTheme'
+import { DarkMode, TThemeMode } from '@/app/hooks/theme/Theme.types'
+import { useTheme } from '@/app/hooks/theme/useTheme'
 import { ScreenItemRender } from '@/app/models/screenItemRender'
 import { ScreenColor } from '@/lib/openapi/generated'
 import { cn } from '@/lib/utils'

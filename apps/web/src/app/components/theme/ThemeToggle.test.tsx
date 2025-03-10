@@ -1,14 +1,14 @@
-import { DarkMode, LightMode } from '@/app/contexts/theme/Theme.types'
+import { DarkMode, LightMode } from '@/app/hooks/theme/Theme.types'
 import { vi } from 'vitest'
 import ThemeToggle from './ThemeToggle'
 
 // Mock the theme context hook
-vi.mock('@/app/contexts/theme/useTheme', () => ({
+vi.mock('@/app/hooks/theme/useTheme', () => ({
   useTheme: vi.fn(),
 }))
 
 // Import the mocked hook
-import { useTheme } from '@/app/contexts/theme/useTheme'
+import { useTheme } from '@/app/hooks/theme/useTheme'
 import { renderWithUserEvents } from '@/lib/support/test/utils/RenderWithUserEvents'
 
 describe('ThemeToggle', () => {

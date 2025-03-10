@@ -1,7 +1,7 @@
-import { QueryProvider } from '@/app/contexts/Query/QueryProvider'
-import { ScreenProvider } from '@/app/contexts/Screen/ScreenProvider'
-import { AppRouterProvider } from '@/app/contexts/router/AppRouterProvider'
-import { ThemeProvider } from '@/app/contexts/theme/ThemeProvider'
+import { QueryProvider } from '@/app/hooks/query/QueryProvider'
+import { AppRouterProvider } from '@/app/hooks/router/AppRouterProvider'
+import { ScreenProvider } from '@/app/hooks/screen/ScreenProvider'
+import { ThemeProvider } from '@/app/hooks/theme/ThemeProvider'
 import '../index.css'
 
 export const App = () => (

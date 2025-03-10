@@ -1,13 +1,8 @@
-import {
-  getScreenListServiceMock,
-  getScreenServiceMock,
-  getSearchServiceMock,
-  ScreenItem,
-} from '@/lib/openapi/generated'
 import { apiRoutes } from '@/lib/openapi/meta'
 import { initMSW } from '@/lib/serviceworker/NodeServiceWorker'
 import { screenItemFixture } from '@/lib/support/test/fixtures/ScreenFixtures'
 import { IDBFactory } from 'fake-indexeddb'
+import { ScreenItem, getScreenListServiceMock, getScreenServiceMock, getSearchServiceMock } from '../openapi/generated'
 import { Stores } from './db/DbConstants'
 import { addData } from './db/IndexedDB'
 import { setupDB } from './db/IndexedDB.test'

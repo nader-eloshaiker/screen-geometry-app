@@ -5,7 +5,13 @@ import { HeaderNavLarge } from './HeaderNavLarge'
 // Mock the NavigationLink component
 vi.mock('@/lib/ui/components/navigationlink/NavigationLink', () => ({
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  NavigationLink: ({ children, to, mode, palette, className }: any) => (
+  NavigationLink: ({
+    children,
+    to,
+    mode,
+    palette,
+    className,
+  }: TReactChildren & { to: string; mode: string; className: string; palette: string; onClick: () => void }) => (
     <a
       href={to}
       data-testid={`nav-link-${to.replace('/', '')}`}

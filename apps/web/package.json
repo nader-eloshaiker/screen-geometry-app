@@ -14,7 +14,7 @@
     "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "lint:fix": "eslint src --fix --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "format": "prettier --write .",
-    "gen:spec": "orval --config ./orval.config.ts",
+    "gen:spec": "pnpm --filter=@screen-geometry-app/server-spec build && orval --config ./orval.config.ts",
     "gen:routes": "tsr generate",
     "gen:testbadges": "vitest --run --coverage && node ./tools/createCoverageBadges.cjs",
     "test": "vitest --coverage",
@@ -137,6 +137,7 @@
     "vite-tsconfig-paths": "^5.1.4",
     "vitest": "^3.0.7",
     "vitest-localstorage-mock": "^0.1.2",
+    "vitest-location-mock": "^1.0.4",
     "wait-on": "^7.2.0"
   },
   "browserslist": [

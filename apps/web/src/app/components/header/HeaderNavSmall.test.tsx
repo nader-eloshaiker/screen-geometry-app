@@ -1,3 +1,4 @@
+import { renderWithUserEvents } from '@/lib/support/test/utils/RenderWithUserEvents'
 import { fireEvent, render, screen } from '@testing-library/react'
 import { vi } from 'vitest'
 import { HeaderNavSmall } from './HeaderNavSmall'
@@ -5,7 +6,13 @@ import { HeaderNavSmall } from './HeaderNavSmall'
 // Mock the NavigationLink component
 vi.mock('@/lib/ui/components/navigationlink/NavigationLink', () => ({
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  NavigationLink: ({ children, to, mode, className, onClick }: any) => (
+  NavigationLink: ({
+    children,
+    to,
+    mode,
+    className,
+    onClick,
+  }: TReactChildren & { to: string; mode: string; className: string; onClick: () => void }) => (
     <a
       href={to}
       data-testid={`nav-link-${to.replace('/', '')}`}
@@ -77,24 +84,26 @@ describe('HeaderNavSmall', () => {
     })
   })
 
-  it('calls setOpen(false) when any link is clicked', () => {
+  it('calls setOpen(false) when any link is clicked', async () => {
     const mockSetOpen = vi.fn()
-    render(<HeaderNavSmall setOpen={mockSetOpen} />)
+    const test = await renderWithUserEvents(<HeaderNavSmall setOpen={mockSetOpen} />)
+
+    test.debug()
 
     // Click each link and verify setOpen was called with false
     const links = [
-      screen.getByTestId('nav-link-'),
-      screen.getByTestId('nav-link-screens'),
-      screen.getByTestId('nav-link-contact'),
-      screen.getByTestId('nav-link-help'),
+      test.getByTestId('nav-link-'),
+      test.getByTestId('nav-link-screens'),
+      test.getByTestId('nav-link-contact'),
+      test.getByTestId('nav-link-help'),
     ]
 
-    links.forEach((link) => {
+    for await (const link of links) {
       mockSetOpen.mockClear()
-      fireEvent.click(link)
+      await test.user.click(link)
       expect(mockSetOpen).toHaveBeenCalledTimes(1)
       expect(mockSetOpen).toHaveBeenCalledWith(false)
-    })
+    }
   })
 
   it('requires setOpen prop to be provided', () => {

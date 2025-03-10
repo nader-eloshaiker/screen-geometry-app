@@ -62,15 +62,16 @@ export default defineConfig({
   plugins: [
     react(),
     tsconfigPaths(),
-    TanStackRouterVite({
-      target: 'react',
-      autoCodeSplitting: true,
-      routesDirectory: './src/app/routes',
-      generatedRouteTree: './src/lib/routes/routeTree.gen.ts',
-      routeFileIgnorePattern: '\\.(test|spec)\\.[jt]sx?$',
-      quoteStyle: 'single',
-      routeFileIgnorePrefix: '-',
-    }),
+    isTest &&
+      TanStackRouterVite({
+        target: 'react',
+        autoCodeSplitting: true,
+        routesDirectory: './src/app/routes',
+        generatedRouteTree: './src/lib/routes/routeTree.gen.ts',
+        routeFileIgnorePattern: '\\.(test|spec)\\.[jt]sx?$',
+        quoteStyle: 'single',
+        routeFileIgnorePrefix: '-',
+      }),
     codecovVitePlugin({
       enableBundleAnalysis: process.env.CODECOV_TOKEN !== undefined,
       bundleName: 'screen-geometry-app',

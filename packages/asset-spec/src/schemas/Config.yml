@@ -1,0 +1,12 @@
+type: object
+required:
+  - server
+properties:
+  server:
+    type: object
+    required:
+      - API_URL
+    properties:
+      API_URL:
+        type: string
+        description: Profile API URL

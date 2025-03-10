@@ -1,5 +1,6 @@
 import MatchMediaMock from '@/lib/support/test/mocks/mockMatchMedia'
 import '@testing-library/jest-dom'
+import 'vitest-location-mock'
 import '../index.css'
 
 import { MotionGlobalConfig } from 'framer-motion'
@@ -46,17 +47,17 @@ global.ResizeObserver = vi.fn().mockImplementation(() => ({
 //   }
 // })
 
-global.window = Object.create(window)
+// global.window = Object.create(window)
 
-Object.defineProperty(window, 'location', {
-  value: {
-    href: 'https://www.example.com',
-    assign: vi.fn(),
-    replace: vi.fn(),
-    reload: vi.fn(),
-  },
-  writable: true,
-})
+// Object.defineProperty(window, 'location', {
+//   value: {
+//     href: 'https://www.example.com',
+//     assign: vi.fn(),
+//     replace: vi.fn(),
+//     reload: vi.fn(),
+//   },
+//   writable: true,
+// })
 
 vi.mock('ulid', () => ({ ulid: () => getRandomString(26) }))
 

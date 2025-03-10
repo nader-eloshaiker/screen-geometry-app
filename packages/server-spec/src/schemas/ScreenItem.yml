@@ -1,0 +1,23 @@
+type: object
+required:
+  - id
+  - data
+  - specs
+  - color
+  - signature
+  - visible
+properties:
+  id:
+    type: string
+    minLength: 1
+  visible:
+    type: boolean
+  signature:
+    type: string
+  data:
+    $ref: "./ScreenData.yml"
+  specs:
+    $ref: "./ScreenSpecs.yml"
+  color:
+    $ref: "./ScreenColor.yml"
+description: "Complete screen object"
