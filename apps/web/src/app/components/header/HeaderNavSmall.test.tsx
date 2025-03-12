@@ -5,7 +5,6 @@ import { HeaderNavSmall } from './HeaderNavSmall'
 
 // Mock the NavigationLink component
 vi.mock('@/lib/ui/components/navigationlink/NavigationLink', () => ({
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   NavigationLink: ({
     children,
     to,
