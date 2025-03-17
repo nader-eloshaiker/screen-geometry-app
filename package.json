@@ -15,24 +15,20 @@
     "prepare": "husky",
     "start:ui": "pnpm --filter '@screen-geometry-app/web' dev",
     "start": "pnpm run start:ui",
-    "build": "pnpm recursive run build",
+    "build": "pnpm run --recursive build",
     "build:prod": "pnpm build",
-    "build:dev": "pnpm recursive run build:dev",
-    "lint:fix": "pnpm recursive run lint:fix",
-    "lint": "pnpm recursive run lint",
-    "format": "pnpm recursive run format",
-    "test": "pnpm recursive run test",
-    "test:specs": "pnpm recursive run test:specs",
-    "e2e": "pnpm recursive run e2e",
-    "e2e:install": "pnpm recursive run e2e:install",
-    "build-storybook": "pnpm recursive run build-storybook"
+    "build:dev": "pnpm run --recursive build:dev",
+    "lint:fix": "pnpm run --recursive lint:fix",
+    "lint": "pnpm run --recursive lint",
+    "format": "pnpm run --recursive format",
+    "test": "pnpm run --recursive test",
+    "test:specs": "pnpm run --recursive test:specs",
+    "e2e": "pnpm run --recursive e2e",
+    "e2e:install": "pnpm run --recursive e2e:install",
+    "build-storybook": "pnpm run --recursive build-storybook"
   },
   "devDependencies": {
-    "husky": "^9.1.1",
+    "husky": "^9.1.7",
     "lint-staged": "^15.2.10"
-  },
-  "lint-staged": {
-    "**/*.{ts,tsx,js,json,yaml,yml} !(src/openapi/generated/**/*)": "npm run lint:fix",
-    "*.{ts,tsx,js,csss,json,yaml,yml,md*}": "npm run format"
   }
 }
