@@ -13,7 +13,7 @@
   "scripts": {
     "preinstall": "npx only-allow pnpm",
     "prepare": "husky",
-    "pre-push": "pnpm run --recursive pnpm pre-push",
+    "pre-push": "pnpm run --recursive pre-push",
     "start:ui": "pnpm --filter '@screen-geometry-app/web' dev",
     "start": "pnpm run start:ui",
     "build": "pnpm run --recursive build",
