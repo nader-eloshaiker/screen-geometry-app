@@ -1,4 +1,0 @@
-{
-  "**/*.{ts,tsx,js,json,yaml,yml} !(generated/**/*)": "pnpm lint:fix",
-  "*.{ts,tsx,js,css,json,yaml,yml,md*}": "pnpm format"
-}

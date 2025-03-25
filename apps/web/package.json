@@ -12,9 +12,11 @@
     "build": "tsc && vite build",
     "build:prod": "pnpm build",
     "build:dev": "tsc && vite build --mode development",
-    "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-    "lint:fix": "eslint src --fix --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
+    "lint": "eslint",
+    "lint:fix": "eslint --fix",
+    "lint:staged": "pnpm exec lint-staged",
     "format": "prettier --write .",
+    "prepush": "prepush-if-changed",
     "gen:spec": "pnpm --filter=@screen-geometry-app/server-spec build && orval --config ./orval.config.ts",
     "gen:routes": "tsr generate",
     "gen:testbadges": "vitest --run --coverage && node ./tools/createCoverageBadges.cjs",
@@ -64,7 +66,7 @@
     "react-dom": "^18.2.0",
     "react-ga4": "^1.4.1",
     "react-hook-form": "^7.54.2",
-    "simpler-color": "^1.0.1",
+    "simpler-color": "^1.0.2",
     "tailwindcss": "^3.4.17",
     "tailwindcss-animate": "^1.0.7",
     "ts-pattern": "^5.4.0",
@@ -128,6 +130,7 @@
     "orval": "^7.1.1",
     "postcss": "^8.5.3",
     "postcss-import": "^16.1.0",
+    "prepush-if-changed": "^1.0.8",
     "prettier": "^3.3.3",
     "prettier-plugin-organize-imports": "^3.2.4",
     "react-helmet-async": "^2.0.4",
@@ -136,6 +139,7 @@
     "styled-components": "^6.1.11",
     "tailwind-merge": "^2.4.0",
     "tailwind-styled-components": "^2.2.0",
+    "tsc-files": "^1.1.4",
     "typescript": "~5.6.2",
     "typescript-eslint": "^8.26.1",
     "vite": "^6.2.0",
@@ -154,7 +158,10 @@
     ]
   },
   "lint-staged": {
-    "**/*.{ts,tsx,js,json,yaml,yml} !(generated/**/*)": "pnpm lint:fix",
-    "*.{ts,tsx,js,css,json,yaml,yml,md*}": "pnpm format"
+    "**/*.{js,mjs,ts,tsx,jsx}": "pnpm lint",
+    "*.{ts,tsx,js,css,json,yaml,yml,md}": "pnpm format"
+  },
+  "prepush-if-changed": {
+    "src/**/*.+(ts|tsx)": "echo 'Files changed on frontend. Launching tests.' && pnpm run test -- --watchAll=false"
   }
 }
