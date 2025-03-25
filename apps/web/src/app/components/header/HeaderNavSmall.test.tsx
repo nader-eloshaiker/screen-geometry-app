@@ -1,5 +1,5 @@
 import { renderWithUserEvents } from '@/lib/support/test/utils/RenderWithUserEvents'
-import { fireEvent, render, screen } from '@testing-library/react'
+import { render, screen } from '@testing-library/react'
 import { vi } from 'vitest'
 import { HeaderNavSmall } from './HeaderNavSmall'
 
@@ -17,7 +17,10 @@ vi.mock('@/lib/ui/components/navigationlink/NavigationLink', () => ({
       data-testid={`nav-link-${to.replace('/', '')}`}
       data-mode={mode}
       className={className}
-      onClick={onClick}
+      onClick={(e) => {
+        e.preventDefault()
+        onClick()
+      }}
     >
       {children}
     </a>
@@ -87,8 +90,6 @@ describe('HeaderNavSmall', () => {
     const mockSetOpen = vi.fn()
     const test = await renderWithUserEvents(<HeaderNavSmall setOpen={mockSetOpen} />)
 
-    test.debug()
-
     // Click each link and verify setOpen was called with false
     const links = [
       test.getByTestId('nav-link-'),
@@ -99,23 +100,25 @@ describe('HeaderNavSmall', () => {
 
     for await (const link of links) {
       mockSetOpen.mockClear()
+
       await test.user.click(link)
+
       expect(mockSetOpen).toHaveBeenCalledTimes(1)
       expect(mockSetOpen).toHaveBeenCalledWith(false)
     }
   })
 
-  it('requires setOpen prop to be provided', () => {
+  it('requires setOpen prop to be provided', async () => {
     // TypeScript would catch this at compile time, but testing for prop requirements is still good
     const mockSetOpen = vi.fn()
-    render(<HeaderNavSmall setOpen={mockSetOpen} />)
+    const test = await renderWithUserEvents(<HeaderNavSmall setOpen={mockSetOpen} />)
 
     // Check that it renders with the prop
-    expect(screen.getByRole('navigation')).toBeInTheDocument()
+    expect(test.getByRole('navigation')).toBeInTheDocument()
 
     // Test that the component uses the provided prop
-    const homeLink = screen.getByTestId('nav-link-')
-    fireEvent.click(homeLink)
+    const homeLink = test.getByTestId('nav-link-')
+    await test.user.click(homeLink)
     expect(mockSetOpen).toHaveBeenCalledWith(false)
   })
 })

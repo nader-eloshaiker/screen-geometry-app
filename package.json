@@ -13,22 +13,17 @@
   "scripts": {
     "preinstall": "npx only-allow pnpm",
     "prepare": "husky",
-    "pre-push": "pnpm run --recursive pre-push",
+    "pre-push:ui": "pnpm run --filter @screen-geometry-app/web pre-push",
+    "pre-push": "concurrently  -n \"web,server\" -c \"magenta,blue\" \"pnpm run pre-push:ui\"",
     "start:ui": "pnpm --filter '@screen-geometry-app/web' dev",
-    "start": "pnpm run start:ui",
+    "start": "concurrently  -n \"web,server\" -c \"magenta,blue\" \"pnpm start:ui\"",
     "build": "pnpm run --recursive build",
-    "build:prod": "pnpm build",
+    "build:prod": "pnpm run --recursive build:prod",
     "build:dev": "pnpm run --recursive build:dev",
-    "lint:fix": "pnpm run --recursive lint:fix",
     "lint:staged:ui": "pnpm run --filter @screen-geometry-app/web lint:staged",
     "lint:staged": "concurrently  -n \"web,server\" -c \"magenta,blue\" \"pnpm run lint:staged:ui\"",
-    "lint": "pnpm run --recursive lint",
-    "format": "pnpm run --recursive format",
-    "test": "pnpm run --recursive test",
-    "test:specs": "pnpm run --recursive test:specs",
     "e2e": "pnpm run --recursive e2e",
-    "e2e:install": "pnpm run --recursive e2e:install",
-    "build-storybook": "pnpm run --recursive build-storybook"
+    "e2e:install": "pnpm run --recursive e2e:install"
   },
   "devDependencies": {
     "concurrently": "^8.2.2",
