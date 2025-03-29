@@ -1,0 +1,21 @@
+type: object
+required:
+  - diagonalSize
+  - aspectRatio
+  - hRes
+  - vRes
+properties:
+  diagonalSize:
+    type: number
+    minimum: 0
+    exclusiveMinimum: 1
+  aspectRatio:
+    type: string
+    minLength: 3
+  hRes:
+    type: integer
+    minimum: 1
+  vRes:
+    type: integer
+    minimum: 1
+description: "Screen resolution characteristics"
