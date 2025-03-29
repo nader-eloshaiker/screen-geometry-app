@@ -103,7 +103,7 @@ jobs:
         run: pnpm install
 
       - name: Run pnpm report
-        run: pnpm sb:build
+        run: pnpm run --filter @screen-geometry-app/web  sb:build
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
@@ -169,7 +169,7 @@ jobs:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           projectName: screengeometry
-          directory: ./dist
+          directory: "./apps/web/.dist"
           branch: develop
           environmentName: cloudflare-preview
           wranglerVersion: "3"

@@ -22,8 +22,10 @@
     "build:dev": "pnpm run --recursive build:dev",
     "lint:staged:ui": "pnpm run --filter @screen-geometry-app/web lint:staged",
     "lint:staged": "concurrently  -n \"web,server\" -c \"magenta,blue\" \"pnpm run lint:staged:ui\"",
-    "e2e": "pnpm run --recursive e2e",
-    "e2e:install": "pnpm run --recursive e2e:install"
+    "test:ui": "pnpm --filter '@screen-geometry-app/web' test",
+    "test": "concurrently  -n \"web,server\" -c \"magenta,blue\" \"pnpm run test:ui\"",
+    "e2e": "pnpm run --filter '@screen-geometry-app/web' e2e",
+    "e2e:install": "pnpm run --filter '@screen-geometry-app/web' e2e:install"
   },
   "devDependencies": {
     "concurrently": "^8.2.2",
