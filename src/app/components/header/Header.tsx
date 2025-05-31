@@ -1,4 +1,3 @@
-import { routeTree } from '@/lib/routes/routeTree.gen'
 import { Button } from '@/lib/ui/components/button/Button'
 import { NavigationLink } from '@/lib/ui/components/navigationlink/NavigationLink'
 import {
@@ -52,7 +51,7 @@ export default function Header() {
             </SheetHeader>
             <nav aria-label='Main' className='grid gap-6 py-6'>
               <NavigationLink
-                to={routeTree.children?.IndexLazyRoute.path}
+                to='/'
                 mode='ghost'
                 className='justify-start text-lg font-semibold'
                 onClick={() => setOpen(false)}
@@ -60,7 +59,7 @@ export default function Header() {
                 Home
               </NavigationLink>
               <NavigationLink
-                to={routeTree.children?.ScreensLazyRoute.path}
+                to='/screens'
                 mode='ghost'
                 className='justify-start text-lg font-semibold'
                 onClick={() => setOpen(false)}
@@ -68,7 +67,7 @@ export default function Header() {
                 Screens
               </NavigationLink>
               <NavigationLink
-                to={routeTree.children?.ContactLazyRoute.path}
+                to='/contact'
                 mode='ghost'
                 className='justify-start text-lg font-semibold'
                 onClick={() => setOpen(false)}
@@ -76,7 +75,7 @@ export default function Header() {
                 Contact
               </NavigationLink>
               <NavigationLink
-                to={routeTree.children?.HelpLazyRoute.path}
+                to='/help'
                 mode='ghost'
                 className='justify-start text-lg font-semibold'
                 onClick={() => setOpen(false)}
@@ -92,18 +91,13 @@ export default function Header() {
         <Title size='lg' />
         <div className='flex justify-between'>
           <nav aria-label='Main' className='flex gap-6' data-testid='large-header-menu'>
-            <NavigationLink
-              mode='ghost'
-              palette={'secondary'}
-              to={routeTree.children?.IndexLazyRoute.path}
-              className='group w-24 text-base font-semibold'
-            >
+            <NavigationLink mode='ghost' palette={'secondary'} to='/' className='group w-24 text-base font-semibold'>
               Home
             </NavigationLink>
             <NavigationLink
               mode='ghost'
               palette={'secondary'}
-              to={routeTree.children?.ScreensLazyRoute.path}
+              to='/screens'
               className='group w-24 text-base font-semibold'
             >
               Screens
@@ -111,7 +105,7 @@ export default function Header() {
             <NavigationLink
               mode='ghost'
               palette={'secondary'}
-              to={routeTree.children?.ContactLazyRoute.path}
+              to='/contact'
               className='group w-24 text-base font-semibold'
             >
               Contact
@@ -119,7 +113,7 @@ export default function Header() {
             <NavigationLink
               mode='ghost'
               palette={'secondary'}
-              to={routeTree.children?.HelpLazyRoute.path}
+              to='/help'
               className='group w-24 text-base font-semibold'
             >
               Help
