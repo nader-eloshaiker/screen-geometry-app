@@ -107,7 +107,7 @@ describe('#indexDB', () => {
 
       it.fails('updateItem should throw an error if id is not found', async () => {
         expect(await updateData<ScreenItem>(Stores.Screens, getGetScreenResponseMock().item)).rejects.toThrowError(
-          'No screen found for aaaaa',
+          'No screen found for aaaaa'
         )
       })
     })

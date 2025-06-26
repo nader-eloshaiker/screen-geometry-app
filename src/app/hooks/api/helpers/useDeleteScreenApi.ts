@@ -10,7 +10,7 @@ export const useDeleteScreenApi = () => {
   const { dispatch } = useScreenContext()
   const responseHandler = useCallback(
     (data: ScreenIdResponse) => dispatch({ type: ScreenEventTypes.DELETE, payload: data.id }),
-    [dispatch],
+    [dispatch]
   )
   const request = useDeleteScreen()
 

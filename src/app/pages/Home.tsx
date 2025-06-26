@@ -1,4 +1,3 @@
-import { RouteSchema } from '@/app/routes/RouteSchema'
 import { NavigationLink } from '@/lib/ui/components/navigationlink/NavigationLink'
 import { Helmet } from 'react-helmet-async'
 
@@ -33,7 +32,7 @@ export const Home = () => {
                 id='home-screen-link'
                 className='w-24 text-base font-semibold'
                 // mode='ghost'
-                to={RouteSchema.screens.path}
+                to='/screens'
               >
                 Screens
               </NavigationLink>

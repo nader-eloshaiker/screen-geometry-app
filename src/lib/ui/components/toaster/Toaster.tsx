@@ -1,5 +1,3 @@
-'use client'
-
 import { Toast, ToastClose, ToastDescription, ToastProvider, ToastTitle, ToastViewport } from './Toast'
 import { useToast } from './useToast'
 

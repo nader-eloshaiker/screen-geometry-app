@@ -50,5 +50,5 @@ export const ToggleVariants = cva(
       mode: 'ghost',
       dimension: 'md',
     },
-  },
+  }
 )

@@ -14,20 +14,14 @@ jobs:
       - name: Download unit test workflow run artifacts
         uses: actions/download-artifact@v4
         with:
-          name: vitest-code-coverage-report
-          path: coverage/vitest/
+          name: unit-code-coverage-report
+          path: coverage/unit/
 
       - name: Download storybook test workflow run artifacts
         uses: actions/download-artifact@v4
         with:
           name: storybook-code-coverage-report
           path: coverage/storybook/
-
-      - name: Download e2e test workflow run artifacts
-        uses: actions/download-artifact@v4
-        with:
-          name: e2e-code-coverage-report
-          path: coverage/playwright/
 
       - name: Display structure of downloaded files
         run: ls -R coverage/
@@ -37,7 +31,7 @@ jobs:
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
           slug: nader-eloshaiker/screen-geometry-app
-          directory: coverage/vitest/
+          directory: coverage/unit/
           flags: unit
 
       - name: Upload storybook test coverage reports to Codecov
@@ -47,11 +41,3 @@ jobs:
           slug: nader-eloshaiker/screen-geometry-app
           directory: coverage/storybook/
           flags: storybook
-
-      - name: Upload e2e test coverage reports to Codecov
-        uses: codecov/codecov-action@v4
-        with:
-          token: ${{ secrets.CODECOV_TOKEN }}
-          slug: nader-eloshaiker/screen-geometry-app
-          directory: coverage/playwright/
-          flags: e2e

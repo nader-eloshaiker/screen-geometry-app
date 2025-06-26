@@ -168,5 +168,5 @@ export const ButtonVariants = cva(
       mode: 'button',
       dimension: 'md',
     },
-  },
+  }
 )

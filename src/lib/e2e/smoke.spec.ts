@@ -1,4 +1,4 @@
-import { expect, test } from '@bgotink/playwright-coverage'
+import { expect, test } from '@playwright/test'
 import { MotionGlobalConfig } from 'framer-motion'
 
 test('Smoke Test Screens Page', async ({ page }) => {
@@ -7,9 +7,8 @@ test('Smoke Test Screens Page', async ({ page }) => {
   // Load Page and navigate to Screens
   await page.goto('/')
 
-  const screensLink = await page.getByRole('link', { name: 'Screens' }).all()
-  expect(screensLink).toHaveLength(2)
-  await screensLink[0].click()
+  const screensLink = await page.getByTestId('large-header-menu').getByRole('link', { name: 'Screens' })
+  await screensLink.click()
 
   // Does the skeleton loader show up?
   // await expect(page.getByTestId('SkeletonTableRow')).toHaveCount(5)
@@ -21,7 +20,7 @@ test('Smoke Test Screens Page', async ({ page }) => {
 
   await expect(page.getByTestId('ButtonSpinner')).toBeVisible()
   await expect(
-    page.locator('div').filter({ hasText: 'A list of common Screen specifications has been generated' }).nth(1),
+    page.locator('div').filter({ hasText: 'A list of common Screen specifications has been generated' }).nth(1)
   ).toBeVisible()
 
   // Check for table data

@@ -25,7 +25,7 @@ const getBadgeObject = (label, message) => ({
 
 const getBadgeUrl = (badgeObj) =>
   `https://img.shields.io/badge/${encodeURI(badgeObj.label)}-${encodeURI(badgeObj.message)}-${encodeURI(
-    badgeObj.color,
+    badgeObj.color
   )}.svg?logo=${encodeURI(badgeObj.namedLogo)}`
 
 const downloadBadge = (url, filename) =>
@@ -57,7 +57,7 @@ jsonfile
   .then((data) =>
     mkdirp(outputPath)
       .then(() => Promise.resolve(data))
-      .catch((err) => Promise.reject(err)),
+      .catch((err) => Promise.reject(err))
   )
   .then(({ Coverage, Lines, Statements, Functions, Branches }) => {
     const coverage = getBadgeObject('Coverage', Coverage)
