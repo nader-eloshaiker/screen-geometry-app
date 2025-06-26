@@ -1,61 +1,49 @@
 import { renderWithUserEvents } from '@/lib/support/test/utils/RenderWithUserEvents'
-import {
-  Outlet,
-  RouterProvider,
-  createMemoryHistory,
-  createRootRoute,
-  createRoute,
-  createRouter,
-} from '@tanstack/react-router'
+import { RouterProvider, createMemoryHistory, createRootRoute, createRoute, createRouter } from '@tanstack/react-router'
 import { screen, waitFor } from '@testing-library/react'
 import { useMemo } from 'react'
 import { vi } from 'vitest'
 import Header from './Header'
 
 // Mock the imported components
-// Setup TanStack Router for testing
-const SetupRouter = () => {
-  const rootRoute = useMemo(
+const TestRouter = (props: React.PropsWithChildren) => {
+  const memoryHistory = useMemo(
     () =>
-      createRootRoute({
-        component: () => (
-          <div>
-            <Header />
-            <Outlet />
-          </div>
-        ),
+      createMemoryHistory({
+        initialEntries: ['/'],
+        initialIndex: 0,
       }),
     []
   )
-
-  const homeRoute = useMemo(
+  const rootRoute = useMemo(
     () =>
-      createRoute({
-        getParentRoute: () => rootRoute,
-        path: '*',
-        component: () => <div>Home Page</div>,
+      createRootRoute({
+        component: () => props.children,
       }),
-    [rootRoute]
+    [props.children]
   )
-
   const router = useMemo(
     () =>
       createRouter({
-        routeTree: rootRoute.addChildren([homeRoute]),
-        history: createMemoryHistory(),
+        history: memoryHistory,
+        defaultPendingMinMs: 0,
+        routeTree: rootRoute.addChildren([
+          createRoute({
+            path: '*',
+            component: () => props.children,
+            getParentRoute: () => rootRoute,
+          }),
+        ]),
       }),
-    [homeRoute, rootRoute]
+    [memoryHistory, props.children, rootRoute]
   )
 
-  return router
+  return <RouterProvider<typeof router> router={router} />
 }
-
-type TestRouter = ReturnType<typeof SetupRouter>
 
 // Helper function to render with TanStack Router
 const renderWithRouter = async () => {
-  const router = SetupRouter()
-  return renderWithUserEvents(<RouterProvider<TestRouter> router={router} />)
+  return renderWithUserEvents(<Header />, { wrapper: TestRouter })
 }
 
 describe('#Header', () => {
