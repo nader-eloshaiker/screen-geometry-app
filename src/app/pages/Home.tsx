@@ -40,7 +40,7 @@ export const Home = () => {
             <span>to start your journey into finding the right screen.</span>
           </p>
           <div className='my-6 flex flex-col items-center'>
-            <label className='my-6 text-lg'>Demo</label>
+            <div className='my-6 text-lg'>Demo</div>
             <img
               className='h-auto max-w-full rounded-md border border-mono-border object-scale-down shadow-lg'
               src='./media/demo.webp'

@@ -101,7 +101,6 @@
     "@storybook/test-runner": "^0.19.1",
     "@tanstack/react-query-devtools": "^5.59.15",
     "@tanstack/router-cli": "^1.97.14",
-    "@tanstack/router-devtools": "^1.97.14",
     "@tanstack/router-plugin": "^1.97.14",
     "@testing-library/jest-dom": "^6.5.0",
     "@testing-library/react": "^14.2.2",
