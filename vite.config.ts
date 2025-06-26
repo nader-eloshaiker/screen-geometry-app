@@ -5,7 +5,6 @@ import react from '@vitejs/plugin-react'
 import tsconfigPaths from 'vite-tsconfig-paths'
 import { ViteUserConfig, configDefaults, defineConfig } from 'vitest/config'
 import packageJson from './package.json'
-const isTest = process.env.NODE_ENV === 'test'
 
 const Config: ViteUserConfig = {
   test: {
@@ -62,7 +61,7 @@ export default defineConfig({
   plugins: [
     react(),
     tsconfigPaths(),
-    !isTest && TanStackRouterVite(),
+    TanStackRouterVite(),
     codecovVitePlugin({
       enableBundleAnalysis: process.env.CODECOV_TOKEN !== undefined,
       bundleName: 'screen-geometry-app',
