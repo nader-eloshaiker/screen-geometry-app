@@ -27,7 +27,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
       <div
         className={cn(
           /* InputAdornmentVariants({ palette, dimension, className }) */
-          'flex h-10 items-center justify-center relative',
+          'flex h-10 items-center justify-center relative'
         )}
         data-disabled={props.disabled}
       >
@@ -47,7 +47,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
     ) : (
       <input type={type} className={cn(InputVariants({ palette, dimension, className }))} ref={ref} {...props} />
     )
-  },
+  }
 )
 Input.displayName = 'Input'
 

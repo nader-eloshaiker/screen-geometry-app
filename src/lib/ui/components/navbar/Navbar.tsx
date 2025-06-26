@@ -27,10 +27,10 @@ export const Navbar = () => {
             <NavigationLink to='/' mode='link' className='justify-start text-lg font-semibold'>
               Home
             </NavigationLink>
-            <NavigationLink to='/about' mode='link' className='justify-start text-lg font-semibold'>
+            <NavigationLink to='/' mode='link' className='justify-start text-lg font-semibold'>
               About
             </NavigationLink>
-            <NavigationLink to='/services' mode='link' className='justify-start text-lg font-semibold'>
+            <NavigationLink to='/help' mode='link' className='justify-start text-lg font-semibold'>
               Services
             </NavigationLink>
             <NavigationLink to='/contact' mode='link' className='justify-start text-lg font-semibold'>
@@ -47,10 +47,10 @@ export const Navbar = () => {
         >
           Home
         </NavigationLink>
-        <NavigationLink to='/about' className='group w-24'>
+        <NavigationLink to='/' className='group w-24'>
           About
         </NavigationLink>
-        <NavigationLink to='/services' className='group w-24'>
+        <NavigationLink to='/help' className='group w-24'>
           Services
         </NavigationLink>
         <NavigationLink to='/contact' className='group w-24'>

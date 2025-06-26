@@ -25,7 +25,7 @@ export const useGetSearchHook = () => {
     (params?: GetSearchParams, signal?: AbortSignal) => {
       return getSearch({ url: `/v1/search`, method: 'GET', params, signal })
     },
-    [getSearch],
+    [getSearch]
   )
 }
 
@@ -40,7 +40,7 @@ export const useGetSearchQueryOptions = <
   params?: GetSearchParams,
   options?: {
     query?: Partial<UseQueryOptions<Awaited<ReturnType<ReturnType<typeof useGetSearchHook>>>, TError, TData>>
-  },
+  }
 ) => {
   const { query: queryOptions } = options ?? {}
 
@@ -69,7 +69,7 @@ export function useGetSearch<TData = Awaited<ReturnType<ReturnType<typeof useGet
         DefinedInitialDataOptions<Awaited<ReturnType<ReturnType<typeof useGetSearchHook>>>, TError, TData>,
         'initialData'
       >
-  },
+  }
 ): DefinedUseQueryResult<TData, TError> & { queryKey: QueryKey }
 export function useGetSearch<TData = Awaited<ReturnType<ReturnType<typeof useGetSearchHook>>>, TError = ErrorResponse>(
   params?: GetSearchParams,
@@ -79,20 +79,20 @@ export function useGetSearch<TData = Awaited<ReturnType<ReturnType<typeof useGet
         UndefinedInitialDataOptions<Awaited<ReturnType<ReturnType<typeof useGetSearchHook>>>, TError, TData>,
         'initialData'
       >
-  },
+  }
 ): UseQueryResult<TData, TError> & { queryKey: QueryKey }
 export function useGetSearch<TData = Awaited<ReturnType<ReturnType<typeof useGetSearchHook>>>, TError = ErrorResponse>(
   params?: GetSearchParams,
   options?: {
     query?: Partial<UseQueryOptions<Awaited<ReturnType<ReturnType<typeof useGetSearchHook>>>, TError, TData>>
-  },
+  }
 ): UseQueryResult<TData, TError> & { queryKey: QueryKey }
 
 export function useGetSearch<TData = Awaited<ReturnType<ReturnType<typeof useGetSearchHook>>>, TError = ErrorResponse>(
   params?: GetSearchParams,
   options?: {
     query?: Partial<UseQueryOptions<Awaited<ReturnType<ReturnType<typeof useGetSearchHook>>>, TError, TData>>
-  },
+  }
 ): UseQueryResult<TData, TError> & { queryKey: QueryKey } {
   const queryOptions = useGetSearchQueryOptions(params, options)
 
@@ -147,7 +147,7 @@ export const getGetSearchResponseMock = (): SearchListResponse => ({
 export const getGetSearchMockHandler = (
   overrideResponse?:
     | SearchListResponse
-    | ((info: Parameters<Parameters<typeof http.get>[1]>[0]) => Promise<SearchListResponse> | SearchListResponse),
+    | ((info: Parameters<Parameters<typeof http.get>[1]>[0]) => Promise<SearchListResponse> | SearchListResponse)
 ) => {
   return http.get('*/v1/search', async (info) => {
     await delay(10)
@@ -158,9 +158,9 @@ export const getGetSearchMockHandler = (
           ? typeof overrideResponse === 'function'
             ? await overrideResponse(info)
             : overrideResponse
-          : getGetSearchResponseMock(),
+          : getGetSearchResponseMock()
       ),
-      { status: 200, headers: { 'Content-Type': 'application/json' } },
+      { status: 200, headers: { 'Content-Type': 'application/json' } }
     )
   })
 }

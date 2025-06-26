@@ -87,7 +87,7 @@ export const ScreenFormSchema: ObjectSchema<NullableObj<ScreenInput>> = yup.obje
       })
       .matches(/^#([a-fA-F0-9]{6})\b$/, { excludeEmptyString: true, message: 'Must be hex format' })
       .required('Value is required'),
-  },
+  }
   //[[ScreenDataEnum.hRes, ScreenDataEnum.vRes]],
 )
 

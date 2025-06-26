@@ -193,7 +193,7 @@ describe('#ScreenFormDrawer', () => {
       ]
 
       const test = await renderWithUserEvents(
-        <RootTestComponent mode={FormModeTypes.Edit} id={editId} initialise={initialise} />,
+        <RootTestComponent mode={FormModeTypes.Edit} id={editId} initialise={initialise} />
       )
 
       const inputScreenSize = test.getByLabelText('Screen Size')

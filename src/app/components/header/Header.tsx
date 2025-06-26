@@ -1,6 +1,5 @@
-import { RouteSchema } from '@/app/routes/RouteSchema'
+import ThemeToggle from '@/app/components/theme/ThemeToggle'
 import { Button } from '@/lib/ui/components/button/Button'
-import { NavigationLink } from '@/lib/ui/components/navigationlink/NavigationLink'
 import {
   Sheet,
   SheetContent,
@@ -12,7 +11,8 @@ import {
 import { cn } from '@/lib/utils'
 import { Menu } from 'lucide-react'
 import { useState } from 'react'
-import ThemeToggle from '../theme/ThemeToggle'
+import { HeaderNavLarge } from './HeaderNavLarge'
+import { HeaderNavSmall } from './HeaderNavSmall'
 
 const ThemeToggleStyled = ({ id }: { id: string }) => (
   <ThemeToggle className='self-center opacity-50 hover:opacity-100 md:mr-2' id={id} />
@@ -50,40 +50,7 @@ export default function Header() {
                 <span>Theme Toggle</span>
               </SheetDescription>
             </SheetHeader>
-            <nav aria-label='Main' className='grid gap-6 py-6'>
-              <NavigationLink
-                to={RouteSchema.root.path}
-                mode='ghost'
-                className='justify-start text-lg font-semibold'
-                onClick={() => setOpen(false)}
-              >
-                Home
-              </NavigationLink>
-              <NavigationLink
-                to={RouteSchema.screens.path}
-                mode='ghost'
-                className='justify-start text-lg font-semibold'
-                onClick={() => setOpen(false)}
-              >
-                Screens
-              </NavigationLink>
-              <NavigationLink
-                to={RouteSchema.contact.path}
-                mode='ghost'
-                className='justify-start text-lg font-semibold'
-                onClick={() => setOpen(false)}
-              >
-                Contact
-              </NavigationLink>
-              <NavigationLink
-                to={RouteSchema.help.path}
-                mode='ghost'
-                className='justify-start text-lg font-semibold'
-                onClick={() => setOpen(false)}
-              >
-                Help
-              </NavigationLink>
-            </nav>
+            <HeaderNavSmall setOpen={setOpen} />
           </SheetContent>
         </Sheet>
         <Title size='lg' />
@@ -91,40 +58,7 @@ export default function Header() {
       <div className='container mx-auto hidden lg:flex lg:flex-col' data-testid='large-header'>
         <Title size='lg' />
         <div className='flex justify-between'>
-          <nav aria-label='Main' className='flex gap-6' data-testid='large-header-menu'>
-            <NavigationLink
-              mode='ghost'
-              palette={'secondary'}
-              to={RouteSchema.root.path}
-              className='group w-24 text-base font-semibold'
-            >
-              Home
-            </NavigationLink>
-            <NavigationLink
-              mode='ghost'
-              palette={'secondary'}
-              to={RouteSchema.screens.path}
-              className='group w-24 text-base font-semibold'
-            >
-              Screens
-            </NavigationLink>
-            <NavigationLink
-              mode='ghost'
-              palette={'secondary'}
-              to={RouteSchema.contact.path}
-              className='group w-24 text-base font-semibold'
-            >
-              Contact
-            </NavigationLink>
-            <NavigationLink
-              mode='ghost'
-              palette={'secondary'}
-              to={RouteSchema.help.path}
-              className='group w-24 text-base font-semibold'
-            >
-              Help
-            </NavigationLink>
-          </nav>
+          <HeaderNavLarge />
           <ThemeToggleStyled id='theme-toggle' />
         </div>
       </div>

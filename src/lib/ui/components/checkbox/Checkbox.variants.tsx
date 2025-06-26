@@ -32,5 +32,5 @@ export const CheckboxVariants = cva(
       palette: 'primary',
       dimension: 'md',
     },
-  },
+  }
 )

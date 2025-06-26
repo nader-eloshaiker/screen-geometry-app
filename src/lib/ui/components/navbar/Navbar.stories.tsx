@@ -1,5 +1,6 @@
+import { AppRouterProvider } from '@/app/contexts/router/AppRouterProvider'
+import { ThemeProvider } from '@/app/contexts/theme/ThemeProvider'
 import type { Meta, StoryObj } from '@storybook/react'
-import { MemoryRouter } from 'react-router-dom'
 import { Navbar } from './Navbar'
 
 const meta = {
@@ -21,9 +22,9 @@ export const Component: Story = {
   parameters: {},
   decorators: [
     (Story) => (
-      <MemoryRouter initialEntries={['/', '/about', '/services', '/contact']}>
-        <Story />
-      </MemoryRouter>
+      <ThemeProvider>
+        <AppRouterProvider defaultComponent={Story} />
+      </ThemeProvider>
     ),
   ],
 }

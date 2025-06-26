@@ -5,7 +5,7 @@ export class DatabaseError extends Error implements ErrorObject {
   constructor(
     message: string,
     public readonly code: number,
-    caughtError?: Error,
+    caughtError?: Error
   ) {
     super(message, { cause: caughtError?.cause })
   }

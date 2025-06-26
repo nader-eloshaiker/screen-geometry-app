@@ -29,7 +29,7 @@ export const setupV2DB = () =>
             visible: true,
           },
         ],
-        'screens',
+        'screens'
       )
     }
     openReq.onsuccess = () => {

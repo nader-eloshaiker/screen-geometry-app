@@ -31,7 +31,7 @@ const InputVariants = cva(
       palette: 'primary',
       dimension: 'md',
     },
-  },
+  }
 )
 
 const InputAdornmentVariants = cva('pointer-events-none absolute flex h-10 items-center justify-center text-sm', {
