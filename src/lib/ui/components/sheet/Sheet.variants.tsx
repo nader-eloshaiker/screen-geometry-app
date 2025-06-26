@@ -16,5 +16,5 @@ export const SheetVariants = cva(
     defaultVariants: {
       side: 'right',
     },
-  },
+  }
 )

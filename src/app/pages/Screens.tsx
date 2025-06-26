@@ -75,7 +75,7 @@ export const Screens = () => {
       })
       showAction({ id })
     },
-    [showAction],
+    [showAction]
   )
 
   const onDelete = useCallback(
@@ -87,7 +87,7 @@ export const Screens = () => {
       })
       deleteAction({ id })
     },
-    [deleteAction],
+    [deleteAction]
   )
 
   useEffect(() => {

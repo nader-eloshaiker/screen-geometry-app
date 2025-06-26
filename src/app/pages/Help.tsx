@@ -38,7 +38,7 @@ export const Help = () => {
 
   const { fullList, smallList, invisibleList, maxPanelSize } = useMemo(() => {
     const fullList = normaliseScreenRender(
-      defaultScreenInputList.map((item) => ({ ...transformScreenInput(item), id: ulid() })),
+      defaultScreenInputList.map((item) => ({ ...transformScreenInput(item), id: ulid() }))
     )
     const smallList = fullList.filter((_, index) => index < 2)
     const invisibleList = smallList.map((item, index) => (index !== 1 ? item : { ...item, visible: false }))

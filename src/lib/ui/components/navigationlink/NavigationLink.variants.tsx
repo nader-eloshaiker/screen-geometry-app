@@ -81,5 +81,5 @@ export const NavigationLinkVariants = cva(
       mode: 'button',
       dimension: 'md',
     },
-  },
+  }
 )

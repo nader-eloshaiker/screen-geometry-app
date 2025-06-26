@@ -12,7 +12,7 @@ export const useShowScreenApi = () => {
     (data: ScreenItemResponse) => {
       dispatch({ type: ScreenEventTypes.UPDATE, payload: data.item })
     },
-    [dispatch],
+    [dispatch]
   )
   const request = useShowScreen()
 

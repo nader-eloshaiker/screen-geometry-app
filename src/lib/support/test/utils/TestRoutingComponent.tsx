@@ -1,19 +1,19 @@
 import { QueryProvider } from '@/app/contexts/Query/QueryProvider'
+import { AppRouterProvider } from '@/app/contexts/router/AppRouterProvider'
 import { ScreenProvider } from '@/app/contexts/Screen/ScreenProvider'
 import { ThemeProvider } from '@/app/contexts/theme/ThemeProvider'
 import { Toaster } from '@/lib/ui/components/toaster/Toaster'
 import { StrictMode } from 'react'
 import { HelmetProvider } from 'react-helmet-async'
-import { createMemoryRouter, RouterProvider } from 'react-router-dom'
 
-export const TestRoutingComponent = ({ router }: { router: ReturnType<typeof createMemoryRouter> }) => {
+export const TestRoutingComponent = () => {
   return (
     <StrictMode>
       <HelmetProvider>
         <QueryProvider>
           <ThemeProvider>
             <ScreenProvider>
-              <RouterProvider router={router} />
+              <AppRouterProvider />
             </ScreenProvider>
             <Toaster />
           </ThemeProvider>

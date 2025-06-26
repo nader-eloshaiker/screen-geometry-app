@@ -28,7 +28,7 @@ export const useGetScreenListHook = () => {
     (signal?: AbortSignal) => {
       return getScreenList({ url: `/v1/screens`, method: 'GET', signal })
     },
-    [getScreenList],
+    [getScreenList]
   )
 }
 
@@ -115,7 +115,7 @@ export const useCreateScreenListHook = () => {
         data: screenInputList,
       })
     },
-    [createScreenList],
+    [createScreenList]
   )
 }
 
@@ -297,7 +297,7 @@ export const getCreateScreenListResponseMock = (): ScreenListResponse => ({
 export const getGetScreenListMockHandler = (
   overrideResponse?:
     | ScreenListResponse
-    | ((info: Parameters<Parameters<typeof http.get>[1]>[0]) => Promise<ScreenListResponse> | ScreenListResponse),
+    | ((info: Parameters<Parameters<typeof http.get>[1]>[0]) => Promise<ScreenListResponse> | ScreenListResponse)
 ) => {
   return http.get('*/v1/screens', async (info) => {
     await delay(10)
@@ -308,9 +308,9 @@ export const getGetScreenListMockHandler = (
           ? typeof overrideResponse === 'function'
             ? await overrideResponse(info)
             : overrideResponse
-          : getGetScreenListResponseMock(),
+          : getGetScreenListResponseMock()
       ),
-      { status: 200, headers: { 'Content-Type': 'application/json' } },
+      { status: 200, headers: { 'Content-Type': 'application/json' } }
     )
   })
 }
@@ -318,7 +318,7 @@ export const getGetScreenListMockHandler = (
 export const getCreateScreenListMockHandler = (
   overrideResponse?:
     | ScreenListResponse
-    | ((info: Parameters<Parameters<typeof http.post>[1]>[0]) => Promise<ScreenListResponse> | ScreenListResponse),
+    | ((info: Parameters<Parameters<typeof http.post>[1]>[0]) => Promise<ScreenListResponse> | ScreenListResponse)
 ) => {
   return http.post('*/v1/screens', async (info) => {
     await delay(10)
@@ -329,9 +329,9 @@ export const getCreateScreenListMockHandler = (
           ? typeof overrideResponse === 'function'
             ? await overrideResponse(info)
             : overrideResponse
-          : getCreateScreenListResponseMock(),
+          : getCreateScreenListResponseMock()
       ),
-      { status: 200, headers: { 'Content-Type': 'application/json' } },
+      { status: 200, headers: { 'Content-Type': 'application/json' } }
     )
   })
 }

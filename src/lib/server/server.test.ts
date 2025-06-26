@@ -37,7 +37,7 @@ describe('#server', () => {
     expect(response.status).toBe(200)
     expect(response.statusText).toBe('OK')
     expect(mswObj.apiEventStack[mswObj.apiEventStack.length - 1]).toEqual(
-      expect.stringContaining('method:GET|url:http://fakeapi.com/v1/screens'),
+      expect.stringContaining('method:GET|url:http://fakeapi.com/v1/screens')
     )
   })
 
@@ -52,7 +52,7 @@ describe('#server', () => {
     expect(response.status).toBe(200)
     expect(response.statusText).toBe('OK')
     expect(mswObj.apiEventStack[mswObj.apiEventStack.length - 1]).toEqual(
-      expect.stringContaining('method:POST|url:http://fakeapi.com/v1/screens'),
+      expect.stringContaining('method:POST|url:http://fakeapi.com/v1/screens')
     )
   })
 
@@ -64,7 +64,7 @@ describe('#server', () => {
     expect(response.status).toBe(200)
     expect(response.statusText).toBe('OK')
     expect(mswObj.apiEventStack[mswObj.apiEventStack.length - 1]).toEqual(
-      expect.stringContaining(`method:GET|url:http://fakeapi.com/v1/screen/${created.id}`),
+      expect.stringContaining(`method:GET|url:http://fakeapi.com/v1/screen/${created.id}`)
     )
   })
 
@@ -81,7 +81,7 @@ describe('#server', () => {
     expect(response.status).toBe(200)
     expect(response.statusText).toBe('OK')
     expect(mswObj.apiEventStack[mswObj.apiEventStack.length - 1]).toEqual(
-      expect.stringContaining(`method:DELETE|url:http://fakeapi.com/v1/screen/${created.id}`),
+      expect.stringContaining(`method:DELETE|url:http://fakeapi.com/v1/screen/${created.id}`)
     )
   })
 
@@ -99,7 +99,7 @@ describe('#server', () => {
     expect(response.status).toBe(200)
     expect(response.statusText).toBe('OK')
     expect(mswObj.apiEventStack[mswObj.apiEventStack.length - 1]).toEqual(
-      expect.stringContaining(`method:PUT|url:http://fakeapi.com/v1/screen/${created.id}`),
+      expect.stringContaining(`method:PUT|url:http://fakeapi.com/v1/screen/${created.id}`)
     )
   })
 
@@ -117,7 +117,7 @@ describe('#server', () => {
     expect(response.status).toBe(200)
     expect(response.statusText).toBe('OK')
     expect(mswObj.apiEventStack[mswObj.apiEventStack.length - 1]).toEqual(
-      expect.stringContaining(`method:PATCH|url:http://fakeapi.com/v1/screen/${created.id}/show`),
+      expect.stringContaining(`method:PATCH|url:http://fakeapi.com/v1/screen/${created.id}/show`)
     )
   })
 
@@ -132,7 +132,7 @@ describe('#server', () => {
     expect(response.status).toBe(200)
     expect(response.statusText).toBe('OK')
     expect(mswObj.apiEventStack[mswObj.apiEventStack.length - 1]).toEqual(
-      expect.stringContaining('method:POST|url:http://fakeapi.com/v1/screen'),
+      expect.stringContaining('method:POST|url:http://fakeapi.com/v1/screen')
     )
   })
 
@@ -141,7 +141,7 @@ describe('#server', () => {
     expect(response.status).toBe(200)
     expect(response.statusText).toBe('OK')
     expect(mswObj.apiEventStack[mswObj.apiEventStack.length - 1]).toEqual(
-      expect.stringContaining('method:GET|url:http://fakeapi.com/v1/search'),
+      expect.stringContaining('method:GET|url:http://fakeapi.com/v1/search')
     )
   })
 })

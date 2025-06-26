@@ -75,7 +75,7 @@ export const ScreenSelector = ({
                 'animate-pulse pointer-events-none': isLoading,
                 'text-primary-foreground-input': !!selectId,
                 'text-primary-foreground-muted': !selectId,
-              },
+              }
             )}
           >
             {selectId ? items.find((item) => item.id === selectId)?.label : label}

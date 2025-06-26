@@ -11,7 +11,7 @@ export const ScreenProvider = ({ children, initialise }: Props) => {
       state,
       dispatch,
     }),
-    [state],
+    [state]
   )
 
   return <ScreenContext.Provider value={contextValue}>{children}</ScreenContext.Provider>
