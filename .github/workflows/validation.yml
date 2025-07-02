@@ -61,12 +61,10 @@ jobs:
           fetch-depth: 0
       - name: Get changed files
         id: changed-files
-        uses: tj-actions/changed-files@v45
+        uses: tj-actions/changed-files@v46
         with:
           files: |
             apps/web/src/lib/ui/components/**
-            apps/web/src/apps/components/**
-
   designsystem-test:
     name: Run Design System Testing
     needs: [changed-files]

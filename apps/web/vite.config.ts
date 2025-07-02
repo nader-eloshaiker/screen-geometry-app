@@ -4,8 +4,7 @@ import { TanStackRouterVite } from '@tanstack/router-plugin/vite'
 import react from '@vitejs/plugin-react'
 import tsconfigPaths from 'vite-tsconfig-paths'
 import { ViteUserConfig, configDefaults, defineConfig } from 'vitest/config'
-import packageJson from '../../package.json'
-const isTest = process.env.NODE_ENV === 'test'
+import packageJson from './package.json'
 
 const Config: ViteUserConfig = {
   test: {
@@ -62,16 +61,15 @@ export default defineConfig({
   plugins: [
     react(),
     tsconfigPaths(),
-    isTest &&
-      TanStackRouterVite({
-        target: 'react',
-        autoCodeSplitting: true,
-        routesDirectory: './src/app/routes',
-        generatedRouteTree: './src/lib/routes/routeTree.gen.ts',
-        routeFileIgnorePattern: '\\.(test|spec)\\.[jt]sx?$',
-        quoteStyle: 'single',
-        routeFileIgnorePrefix: '-',
-      }),
+    TanStackRouterVite({
+      target: 'react',
+      autoCodeSplitting: true,
+      routesDirectory: './src/app/routes',
+      generatedRouteTree: './src/lib/routes/routeTree.gen.ts',
+      routeFileIgnorePattern: '\\.(test|spec)\\.[jt]sx?$',
+      quoteStyle: 'single',
+      routeFileIgnorePrefix: '-',
+    }),
     codecovVitePlugin({
       enableBundleAnalysis: process.env.CODECOV_TOKEN !== undefined,
       bundleName: 'screen-geometry-app',
