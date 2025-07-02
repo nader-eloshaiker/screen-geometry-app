@@ -126,6 +126,7 @@
     "globals": "^16.0.0",
     "jsdom": "^23.0.1",
     "jsonfile": "^6.1.0",
+    "lint-staged": "^15.2.10",
     "mkdirp": "^3.0.1",
     "orval": "^7.1.1",
     "postcss": "^8.5.3",

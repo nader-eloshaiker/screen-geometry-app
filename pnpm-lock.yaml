@@ -4,6 +4,12 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
+catalogs:
+  default:
+    '@redocly/cli':
+      specifier: ^1.28.5
+      version: 1.33.0
+
 importers:
 
   .:
@@ -236,7 +242,7 @@ importers:
         version: 4.3.4(vite@6.2.0(@types/node@20.14.9)(jiti@1.21.6)(tsx@4.19.2)(yaml@2.6.0))
       '@vitest/coverage-istanbul':
         specifier: ^3.0.7
-        version: 3.0.7(vitest@3.0.7)
+        version: 3.0.7(vitest@3.0.7(@types/node@20.14.9)(@vitest/ui@3.0.7)(jiti@1.21.6)(jsdom@23.0.1)(msw@2.7.0(@types/node@20.14.9)(typescript@5.6.3))(tsx@4.19.2)(yaml@2.6.0))
       '@vitest/ui':
         specifier: ^3.0.7
         version: 3.0.7(vitest@3.0.7)
@@ -288,6 +294,9 @@ importers:
       jsonfile:
         specifier: ^6.1.0
         version: 6.1.0
+      lint-staged:
+        specifier: ^15.2.10
+        version: 15.2.10
       mkdirp:
         specifier: ^3.0.1
         version: 3.0.1
@@ -344,7 +353,7 @@ importers:
         version: 3.0.7(@types/node@20.14.9)(@vitest/ui@3.0.7)(jiti@1.21.6)(jsdom@23.0.1)(msw@2.7.0(@types/node@20.14.9)(typescript@5.6.3))(tsx@4.19.2)(yaml@2.6.0)
       vitest-localstorage-mock:
         specifier: ^0.1.2
-        version: 0.1.2(vitest@3.0.7)
+        version: 0.1.2(vitest@3.0.7(@types/node@20.14.9)(@vitest/ui@3.0.7)(jiti@1.21.6)(jsdom@23.0.1)(msw@2.7.0(@types/node@20.14.9)(typescript@5.6.3))(tsx@4.19.2)(yaml@2.6.0))
       vitest-location-mock:
         specifier: ^1.0.4
         version: 1.0.4
@@ -9779,7 +9788,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@vitest/coverage-istanbul@3.0.7(vitest@3.0.7)':
+  '@vitest/coverage-istanbul@3.0.7(vitest@3.0.7(@types/node@20.14.9)(@vitest/ui@3.0.7)(jiti@1.21.6)(jsdom@23.0.1)(msw@2.7.0(@types/node@20.14.9)(typescript@5.6.3))(tsx@4.19.2)(yaml@2.6.0))':
     dependencies:
       '@istanbuljs/schema': 0.1.3
       debug: 4.4.0
@@ -11229,7 +11238,7 @@ snapshots:
 
   execa@8.0.1:
     dependencies:
-      cross-spawn: 7.0.3
+      cross-spawn: 7.0.6
       get-stream: 8.0.1
       human-signals: 5.0.0
       is-stream: 3.0.0
@@ -14406,7 +14415,7 @@ snapshots:
       tsx: 4.19.2
       yaml: 2.6.0
 
-  vitest-localstorage-mock@0.1.2(vitest@3.0.7):
+  vitest-localstorage-mock@0.1.2(vitest@3.0.7(@types/node@20.14.9)(@vitest/ui@3.0.7)(jiti@1.21.6)(jsdom@23.0.1)(msw@2.7.0(@types/node@20.14.9)(typescript@5.6.3))(tsx@4.19.2)(yaml@2.6.0)):
     dependencies:
       vitest: 3.0.7(@types/node@20.14.9)(@vitest/ui@3.0.7)(jiti@1.21.6)(jsdom@23.0.1)(msw@2.7.0(@types/node@20.14.9)(typescript@5.6.3))(tsx@4.19.2)(yaml@2.6.0)
 
