@@ -28,7 +28,8 @@ export default defineConfig([
     ignores: [
       'node_modules/',
       'dist/',
-      'src/lib/openapi/generated/**/*',
+      'src/lib/openapi/generated/',
+      'src/lib/routes/',
       'coverage/',
       'storybook-static/',
       'public/mockServiceWorker.js',

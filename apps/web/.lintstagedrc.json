@@ -1,4 +1,4 @@
 {
-  "**/*.{ts,tsx,js,json,yaml,yml} !(src/openapi/generated/**/*)": "pnpm lint:fix",
-  "*.{ts,tsx,js,csss,json,yaml,yml,md*}": "pnpm format"
+  "*.{ts,tsx,js,json,yaml,yml}": ["pnpm format", "pnpm lint:fix"],
+  "*.{css,md*}": "pnpm format"
 }

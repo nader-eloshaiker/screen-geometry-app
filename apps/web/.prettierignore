@@ -5,3 +5,5 @@ dist
 coverage
 storybook-static
 .eslintrc
+src/lib/openapi/generated/
+src/lib/routes/
