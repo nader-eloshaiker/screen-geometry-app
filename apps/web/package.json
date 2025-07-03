@@ -67,8 +67,8 @@
     "react-ga4": "^1.4.1",
     "react-hook-form": "^7.54.2",
     "simpler-color": "^1.0.2",
-    "tailwindcss": "^3.4.17",
-    "tailwindcss-animate": "^1.0.7",
+    "tailwindcss": "catalog:tailwindcss3",
+    "tailwindcss-animate": "catalog:tailwindcss3",
     "ts-pattern": "^5.4.0",
     "ulid": "^2.3.0",
     "vaul": "^1.1.2",
@@ -82,6 +82,7 @@
     "@eslint/eslintrc": "^3.3.0",
     "@eslint/js": "^9.22.0",
     "@playwright/test": "^1.51.0",
+    "@screen-geometry-app/tailwind": "workspace:*",
     "@storybook/addon-coverage": "^1.0.5",
     "@storybook/addon-essentials": "^8.6.4",
     "@storybook/addon-interactions": "^8.6.4",
@@ -110,7 +111,7 @@
     "@vitejs/plugin-react": "^4.3.4",
     "@vitest/coverage-istanbul": "^3.0.7",
     "@vitest/ui": "^3.0.7",
-    "autoprefixer": "^10.4.17",
+    "autoprefixer": "catalog:tailwindcss3",
     "chromatic": "^11.20.2",
     "concurrently": "^8.2.2",
     "eslint": "^9.22.0",
@@ -129,8 +130,8 @@
     "lint-staged": "^15.2.10",
     "mkdirp": "^3.0.1",
     "orval": "^7.1.1",
-    "postcss": "^8.5.3",
-    "postcss-import": "^16.1.0",
+    "postcss": "catalog:tailwindcss3",
+    "postcss-import": "catalog:tailwindcss3",
     "prettier": "^3.3.3",
     "prettier-plugin-organize-imports": "^3.2.4",
     "react-helmet-async": "^2.0.4",
@@ -156,9 +157,5 @@
     "workerDirectory": [
       "public"
     ]
-  },
-  "lint-staged": {
-    "**/*.{js,mjs,ts,tsx,jsx}": "pnpm lint",
-    "*.{ts,tsx,js,css,json,yaml,yml,md}": "pnpm format"
   }
 }

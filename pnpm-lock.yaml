@@ -9,6 +9,22 @@ catalogs:
     '@redocly/cli':
       specifier: ^1.34.4
       version: 1.34.4
+  tailwindcss3:
+    autoprefixer:
+      specifier: ^10.4.20
+      version: 10.4.21
+    postcss:
+      specifier: ^8.4.49
+      version: 8.5.3
+    postcss-import:
+      specifier: ^16.1.0
+      version: 16.1.0
+    tailwindcss:
+      specifier: ^3.4.17
+      version: 3.4.17
+    tailwindcss-animate:
+      specifier: ^1.0.7
+      version: 1.0.7
 
 importers:
 
@@ -123,10 +139,10 @@ importers:
         specifier: ^1.0.2
         version: 1.0.2
       tailwindcss:
-        specifier: ^3.4.17
+        specifier: catalog:tailwindcss3
         version: 3.4.17
       tailwindcss-animate:
-        specifier: ^1.0.7
+        specifier: catalog:tailwindcss3
         version: 1.0.7(tailwindcss@3.4.17)
       ts-pattern:
         specifier: ^5.4.0
@@ -162,6 +178,9 @@ importers:
       '@playwright/test':
         specifier: ^1.51.0
         version: 1.51.0
+      '@screen-geometry-app/tailwind':
+        specifier: workspace:^
+        version: link:../../packages/tailwind
       '@storybook/addon-coverage':
         specifier: ^1.0.5
         version: 1.0.5
@@ -247,8 +266,8 @@ importers:
         specifier: ^3.0.7
         version: 3.0.7(vitest@3.0.7)
       autoprefixer:
-        specifier: ^10.4.17
-        version: 10.4.17(postcss@8.5.3)
+        specifier: catalog:tailwindcss3
+        version: 10.4.21(postcss@8.5.3)
       chromatic:
         specifier: ^11.20.2
         version: 11.20.2
@@ -304,10 +323,10 @@ importers:
         specifier: ^7.1.1
         version: 7.1.1(openapi-types@12.1.3)(typescript@5.6.3)
       postcss:
-        specifier: ^8.5.3
+        specifier: catalog:tailwindcss3
         version: 8.5.3
       postcss-import:
-        specifier: ^16.1.0
+        specifier: catalog:tailwindcss3
         version: 16.1.0(postcss@8.5.3)
       prettier:
         specifier: ^3.3.3
@@ -372,6 +391,25 @@ importers:
       '@redocly/cli':
         specifier: 'catalog:'
         version: 1.34.4(ajv@8.17.1)
+
+  packages/tailwind:
+    dependencies:
+      tailwindcss:
+        specifier: catalog:tailwindcss3
+        version: 3.4.17
+      tailwindcss-animate:
+        specifier: catalog:tailwindcss3
+        version: 1.0.7(tailwindcss@3.4.17)
+    devDependencies:
+      autoprefixer:
+        specifier: catalog:tailwindcss3
+        version: 10.4.21(postcss@8.5.3)
+      postcss:
+        specifier: catalog:tailwindcss3
+        version: 8.5.3
+      postcss-import:
+        specifier: catalog:tailwindcss3
+        version: 16.1.0(postcss@8.5.3)
 
 packages:
 
@@ -3178,8 +3216,8 @@ packages:
   asynckit@0.4.0:
     resolution: {integrity: sha512-Oei9OH4tRh0YqU3GxhX79dM/mwVgvbZJaSNaRk+bshkj0S5cfHcgYakreBjrHwatXKbz+IoIdYLxrKim2MjW0Q==}
 
-  autoprefixer@10.4.17:
-    resolution: {integrity: sha512-/cpVNRLSfhOtcGflT13P2794gVSgmPgTR+erw5ifnMLZb0UnSlkK4tquLmkd3BhA+nLo5tX8Cu0upUsGKvKbmg==}
+  autoprefixer@10.4.21:
+    resolution: {integrity: sha512-O+A6LWV5LDHSJD3LjHYoNi4VLsj/Whi7k6zG12xTYaU4cQ8oxQGckXNX8cRHK5yOZ/ppVHe0ZBXGzSV9jXdVbQ==}
     engines: {node: ^10 || ^12 || >=14}
     hasBin: true
     peerDependencies:
@@ -3255,11 +3293,6 @@ packages:
 
   browser-assert@1.2.1:
     resolution: {integrity: sha512-nfulgvOR6S4gt9UKCeGJOuSGBPGiFT6oQ/2UBnvTY/5aQ1PnksW72fhZkM30DzoRRv2WpwZf1vHHEr3mtuXIWQ==}
-
-  browserslist@4.22.2:
-    resolution: {integrity: sha512-0UgcrvQmBDvZHFGdYUehrCNIazki7/lUP3kkoi/r3YB2amZbFM9J43ZRkJTXBUZK4gmx56+Sqk9+Vs9mwZx9+A==}
-    engines: {node: ^6 || ^7 || ^8 || ^9 || ^10 || ^11 || ^12 || >=13.7}
-    hasBin: true
 
   browserslist@4.24.4:
     resolution: {integrity: sha512-KDi1Ny1gSePi1vm0q4oxSF8b4DR44GF4BbmS2YdhPLOEqd8pDviZOGH/GsmRwoWJ2+5Lr085X7naowMwKHDG1A==}
@@ -3757,9 +3790,6 @@ packages:
 
   eastasianwidth@0.2.0:
     resolution: {integrity: sha512-I88TYZWc9XiYHRQ4/3c5rjjfgkjhLyW2luGIheGERbNQ6OY7yTybanSpDXZa8y7VUP9YmDcYa+eyq4ca7iLqWA==}
-
-  electron-to-chromium@1.4.616:
-    resolution: {integrity: sha512-1n7zWYh8eS0L9Uy+GskE0lkBUNK83cXTVJI0pU3mGprFsbfSdAc15VTFbo+A+Bq4pwstmL30AVcEU3Fo463lNg==}
 
   electron-to-chromium@1.5.85:
     resolution: {integrity: sha512-UgTI7ZHxtSjOUwV0vZLpqT604U1Z8L3bq8mAtAKtuRPlMZ/6dLFMYgYnLdXSi/urbVTP2ykDb9EDDUrdIzw4Qg==}
@@ -5463,9 +5493,6 @@ packages:
   node-readfiles@0.2.0:
     resolution: {integrity: sha512-SU00ZarexNlE4Rjdm83vglt5Y9yiQ+XI1XpflWlb7q7UTN1JUItm69xMeiQCTxtTfnzt+83T8Cx+vI2ED++VDA==}
 
-  node-releases@2.0.14:
-    resolution: {integrity: sha512-y10wOWt8yZpqXmOgRo77WaHEmhYQYGNA6y421PKsKYWEK8aW+cqAphborZDhqfyKrbZEN92CN1X2KbafY2s7Yw==}
-
   node-releases@2.0.19:
     resolution: {integrity: sha512-xxOWJsBKtzAq7DY0J+DTzuz58K8e7sJbdgwkbMWQe8UYB6ekmsQ45q0M/tJDsGaZmbC+l7n57UV8Hl5tHxO9uw==}
 
@@ -5695,9 +5722,6 @@ packages:
 
   perfect-scrollbar@1.5.6:
     resolution: {integrity: sha512-rixgxw3SxyJbCaSpo1n35A/fwI1r2rdwMKOTCg/AcG+xOEyZcE8UHVjpZMFCVImzsFoCZeJTT+M/rdEIQYO2nw==}
-
-  picocolors@1.0.0:
-    resolution: {integrity: sha512-1fygroTLlHu66zi26VoTDv8yRgm0Fccecssto+MhsZ0D/DGW2sm8E8AjW7NU5VVTRt5GxbeZ5qBuJr+HyLYkjQ==}
 
   picocolors@1.1.1:
     resolution: {integrity: sha512-xceH2snhtb5M9liqDsmEw56le376mTZkEX/jEb/RxNFyegNul7eNslCXP9FDj/Lcu0X8KEyMceP2ntpaHrDEVA==}
@@ -6845,12 +6869,6 @@ packages:
   unplugin@2.2.0:
     resolution: {integrity: sha512-m1ekpSwuOT5hxkJeZGRxO7gXbXT3gF26NjQ7GdVHoLoF8/nopLcd/QfPigpCy7i51oFHiRJg/CyHhj4vs2+KGw==}
     engines: {node: '>=18.12.0'}
-
-  update-browserslist-db@1.0.13:
-    resolution: {integrity: sha512-xebP81SNcPuNpPP3uzeW1NYXxI3rxyJzF3pD6sH4jE7o/IX+WtSpwnVU+qIsDPyk0d3hmFQ7mjqc6AtV604hbg==}
-    hasBin: true
-    peerDependencies:
-      browserslist: '>= 4.21.0'
 
   update-browserslist-db@1.1.2:
     resolution: {integrity: sha512-PPypAm5qvlD7XMZC3BujecnaOxwhrtoFR+Dqkk5Aa/6DssiH0ibKoketaj9w8LP7Bont1rYeoV5plxD7RTEPRg==}
@@ -10398,13 +10416,13 @@ snapshots:
 
   asynckit@0.4.0: {}
 
-  autoprefixer@10.4.17(postcss@8.5.3):
+  autoprefixer@10.4.21(postcss@8.5.3):
     dependencies:
-      browserslist: 4.22.2
+      browserslist: 4.24.4
       caniuse-lite: 1.0.30001702
       fraction.js: 4.3.7
       normalize-range: 0.1.2
-      picocolors: 1.0.0
+      picocolors: 1.1.1
       postcss: 8.5.3
       postcss-value-parser: 4.2.0
 
@@ -10516,13 +10534,6 @@ snapshots:
       fill-range: 7.1.1
 
   browser-assert@1.2.1: {}
-
-  browserslist@4.22.2:
-    dependencies:
-      caniuse-lite: 1.0.30001702
-      electron-to-chromium: 1.4.616
-      node-releases: 2.0.14
-      update-browserslist-db: 1.0.13(browserslist@4.22.2)
 
   browserslist@4.24.4:
     dependencies:
@@ -11015,8 +11026,6 @@ snapshots:
       gopd: 1.2.0
 
   eastasianwidth@0.2.0: {}
-
-  electron-to-chromium@1.4.616: {}
 
   electron-to-chromium@1.5.85: {}
 
@@ -13199,8 +13208,6 @@ snapshots:
     dependencies:
       es6-promise: 3.3.1
 
-  node-releases@2.0.14: {}
-
   node-releases@2.0.19: {}
 
   normalize-path@3.0.0: {}
@@ -13501,8 +13508,6 @@ snapshots:
   pathval@2.0.0: {}
 
   perfect-scrollbar@1.5.6: {}
-
-  picocolors@1.0.0: {}
 
   picocolors@1.1.1: {}
 
@@ -14797,12 +14802,6 @@ snapshots:
     dependencies:
       acorn: 8.14.0
       webpack-virtual-modules: 0.6.2
-
-  update-browserslist-db@1.0.13(browserslist@4.22.2):
-    dependencies:
-      browserslist: 4.22.2
-      escalade: 3.1.2
-      picocolors: 1.1.1
 
   update-browserslist-db@1.1.2(browserslist@4.24.4):
     dependencies:
