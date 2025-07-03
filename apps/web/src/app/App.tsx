@@ -2,7 +2,6 @@ import { QueryProvider } from '@/app/hooks/query/QueryProvider'
 import { AppRouterProvider } from '@/app/hooks/router/AppRouterProvider'
 import { ScreenProvider } from '@/app/hooks/screen/ScreenProvider'
 import { ThemeProvider } from '@/app/hooks/theme/ThemeProvider'
-import '../index.css'
 
 export const App = () => (
   // <ErrorBoundary
