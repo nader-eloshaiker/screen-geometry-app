@@ -1,1 +1,1 @@
-export * from '@screen-geometry-app/tailwind/postcss.config.js'
+export * from '@screen-geometry-app/style-guide/postcss.config'

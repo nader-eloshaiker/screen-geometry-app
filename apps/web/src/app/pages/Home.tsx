@@ -39,15 +39,18 @@ export const Home = () => {
             </span>
             <span>to start your journey into finding the right screen.</span>
           </p>
-          <div className='my-6 flex flex-col items-center'>
-            <label className='my-6 text-lg'>Demo</label>
+          <div className='float-right ml-6 flex flex-col items-center'>
             <img
-              className='h-auto max-w-full rounded-md border border-mono-border object-scale-down shadow-lg'
+              id='demo-image'
+              className='border-mono-border h-auto max-w-full rounded-md border object-scale-down shadow-lg'
               src='./media/demo.webp'
               width={384}
               height={431}
               alt='Demo Screen Capture'
             />
+            <label className='my-2 text-lg' htmlFor='demo-image'>
+              Demo
+            </label>
           </div>
           <p className='mb-4'>
             No corporate marketing here! I show you the differences and focus on what matters - finding the ideal
@@ -61,10 +64,12 @@ export const Home = () => {
               Github
             </a>
           </p>
-        </div>
-        <div>
-          <p className='mb-1 mt-10 text-right'>The choice is yours</p>
-          <p className='mb-4 text-right italic'>Happy Shopping</p>
+          <div>
+            <div className='mb-4 mt-10 flex flex-col items-end'>
+              <p>The choice is yours</p>
+              <p className='italic'>Happy Shopping</p>
+            </div>
+          </div>
         </div>
       </div>
     </>
