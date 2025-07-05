@@ -1,0 +1,10 @@
+summary: 401 Unauthorised Error Response
+value:
+  error:
+    code: 401
+    status: "Unauthorized"
+    message: "The request has not been applied because it lacks valid authentication credentials for the target resource."
+    details:
+      reason: "unauthorized"
+      domain: "global"
+      metadata: {}
