@@ -13,19 +13,19 @@
   "scripts": {
     "preinstall": "npx only-allow pnpm",
     "prepare": "husky",
-    "pre-push:ui": "pnpm run --filter @screen-geometry-app/web pre-push",
+    "pre-push:ui": "pnpm run --filter @screengeometry/web pre-push",
     "pre-push": "concurrently  -n \"web,server\" -c \"magenta,blue\" \"pnpm run pre-push:ui\"",
-    "start:ui": "pnpm --filter '@screen-geometry-app/web' dev",
+    "start:ui": "pnpm --filter '@screengeometry/web' dev",
     "start": "concurrently  -n \"web,server\" -c \"magenta,blue\" \"pnpm start:ui\"",
     "build": "pnpm run --recursive build",
     "build:prod": "pnpm run --recursive build:prod",
     "build:dev": "pnpm run --recursive build:dev",
-    "lint:staged:ui": "pnpm run --filter @screen-geometry-app/web lint:staged",
+    "lint:staged:ui": "pnpm run --filter @screengeometry/web lint:staged",
     "lint:staged": "concurrently  -n \"web,server\" -c \"magenta,blue\" \"pnpm run lint:staged:ui\"",
-    "test:ui": "pnpm --filter '@screen-geometry-app/web' test",
+    "test:ui": "pnpm --filter '@screengeometry/web' test",
     "test": "concurrently  -n \"web,server\" -c \"magenta,blue\" \"pnpm run test:ui\"",
-    "e2e": "pnpm run --filter '@screen-geometry-app/web' e2e",
-    "e2e:install": "pnpm run --filter '@screen-geometry-app/web' e2e:install"
+    "e2e": "pnpm run --filter '@screengeometry/web' e2e",
+    "e2e:install": "pnpm run --filter '@screengeometry/web' e2e:install"
   },
   "devDependencies": {
     "concurrently": "^8.2.2",

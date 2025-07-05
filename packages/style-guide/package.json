@@ -1,5 +1,5 @@
 {
-  "name": "@screen-geometry-app/style-guide",
+  "name": "@screengeometry/style-guide",
   "version": "1.0.0",
   "private": true,
   "type": "module",

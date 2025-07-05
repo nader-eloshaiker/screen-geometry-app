@@ -8,7 +8,7 @@ import { onCLS, onINP, onLCP } from 'web-vitals/attribution'
 import { App } from './app/App'
 import { sendToGoogleAnalytics } from './configs/reportWebVitals'
 
-// import '@screen-geometry-app/style-guide/theme.css'
+// import '@screengeometry/style-guide/theme.css'
 import './index.css'
 
 const testMode = !import.meta.env.DEV

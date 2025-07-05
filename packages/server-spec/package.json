@@ -1,5 +1,5 @@
 {
-  "name": "@screen-geometry-app/server-spec",
+  "name": "@screengeometry/server-spec",
   "version": "1.0.0",
   "private": true,
   "description": "Server API. Screen management.",

@@ -1,5 +1,5 @@
 {
-  "name": "@screen-geometry-app/asset-spec",
+  "name": "@screengeometry/asset-spec",
   "version": "1.0.0",
   "private": true,
   "description": "Asset API. Fetching assets deployed with frontends.",

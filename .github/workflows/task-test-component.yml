@@ -40,10 +40,10 @@ jobs:
         run: pnpm install
 
       - name: Install Playwright Browsers
-        run: pnpm --filter=@screen-geometry-app/web e2e:install
+        run: pnpm --filter=@screengeometry/web e2e:install
 
-      - name: Run pnpm --filter=@screen-geometry-app/web sb:ci
-        run: pnpm --filter=@screen-geometry-app/web sb:ci
+      - name: Run pnpm --filter=@screengeometry/web sb:ci
+        run: pnpm --filter=@screengeometry/web sb:ci
 
       - name: Archive code coverage results
         uses: actions/upload-artifact@v4

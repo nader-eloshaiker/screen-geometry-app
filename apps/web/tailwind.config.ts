@@ -1,4 +1,4 @@
-import shareConfig from '@screen-geometry-app/style-guide/tailwind.config'
+import shareConfig from '@screengeometry/style-guide/tailwind.config'
 import type { Config } from 'tailwindcss'
 
 const config: Config = {

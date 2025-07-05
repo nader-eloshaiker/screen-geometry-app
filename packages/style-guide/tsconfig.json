@@ -4,7 +4,7 @@
     "composite": false,
     "baseUrl": ".",
     "paths": {
-      "@screen-geometry-app/style-guide/*": ["./src/*"]
+      "@screengeometry/style-guide/*": ["./src/*"]
     },
     "jsx": "react-jsx",
     "declaration": true,
