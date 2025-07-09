@@ -1,19 +1,31 @@
 {
   "name": "@screengeometry/lib-ui",
-  "private": true,
   "version": "1.0.0",
+  "private": true,
   "type": "module",
-  "main": "dist/main.js",
-  "types": "dist/main.d.ts",
-  "files": [
-    "dist",
-    "lib",
-    "README.md"
-  ],
-  "sideEffects": [
-    "**/*.css",
-    "**/*.svg"
-  ],
+  "exports": {
+    "./alert": "./src/components/alert/index.ts",
+    "./button": "./src/components/button/index.ts",
+    "./card": "./src/components/card/index.ts",
+    "./checkbox": "./src/components/checkbox/index.ts",
+    "./command": "./src/components/command/index.ts",
+    "./dialog": "./src/components/dialog/index.ts",
+    "./drawer": "./src/components/drawer/index.ts",
+    "./form": "./src/components/form/index.ts",
+    "./input": "./src/components/input/index.ts",
+    "./label": "./src/components/label/index.ts",
+    "./navigationlink": "./src/components/navigationlink/index.ts",
+    "./popover": "./src/components/popover/index.ts",
+    "./separator": "./src/components/separator/index.ts",
+    "./sheet": "./src/components/sheet/index.ts",
+    "./skeleton": "./src/components/skeleton/index.ts",
+    "./table": "./src/components/table/index.ts",
+    "./toaster": "./src/components/toaster/index.ts",
+    "./toggle": "./src/components/toggle/index.ts",
+    "./togglegroup": "./src/components/togglegroup/index.ts",
+    "./tooltip": "./src/components/tooltip/index.ts",
+    "./lib": "./src/index.ts"
+  },
   "scripts": {
     "dev": "vite",
     "prepublishOnly": "pnpm run build",
@@ -25,7 +37,12 @@
     "format:check": "prettier . --check",
     "test": "vitest run --coverage.enabled=true",
     "test:watch": "vitest watch --coverage.enabled=true",
-    "test:ui": "vitest watch --ui --coverage.enabled=true"
+    "test:ui": "vitest watch --ui --coverage.enabled=true",
+    "sb": "storybook dev -p 6006",
+    "sb:test": "test-storybook --coverage",
+    "sb:ci": "concurrently -k -s first -n \"Storybook,Test\" -c \"magenta,blue\" \"pnpm sb\" \"wait-on tcp:6006 && pnpm sb:test\"",
+    "sb:build": "storybook build",
+    "build-storybook": "storybook build"
   },
   "dependencies": {
     "@radix-ui/react-checkbox": "^1.1.2",
@@ -40,7 +57,6 @@
     "@radix-ui/react-toggle": "^1.1.0",
     "@radix-ui/react-toggle-group": "^1.1.0",
     "@radix-ui/react-tooltip": "^1.1.4",
-    "@react-hook/resize-observer": "^1.2.6",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "cmdk": "^1.0.4",
@@ -85,7 +101,6 @@
     "eslint-plugin-jsx-a11y": "^6.10.2",
     "eslint-plugin-react": "^7.37.2",
     "eslint-plugin-tailwindcss": "catalog:tailwindcss3",
-    "glob": "^11.0.1",
     "globals": "^15.14.0",
     "jsdom": "^25.0.1",
     "postcss": "catalog:tailwindcss3",

@@ -1,6 +1,7 @@
 import { useGetScreenApi } from '@/app/hooks/api/helpers/useGetScreenApi'
 import { useSearchApi } from '@/app/hooks/api/helpers/useSearchApi'
 import { SearchItem } from '@/lib/openapi/generated'
+import { transformScreenItem } from '@/lib/utils'
 import {
   Sheet,
   SheetContent,
@@ -8,8 +9,7 @@ import {
   SheetHeader,
   SheetTitle,
   SheetTrigger,
-} from '@/lib/ui/components/sheet/Sheet'
-import { transformScreenItem } from '@/lib/utils'
+} from '@screengeometry/lib-ui/sheet'
 import { Dispatch, useEffect, useState } from 'react'
 import { ScreenSelector } from '../screenselector/ScreenSelector'
 import { ScreenForm } from './ScreenForm'

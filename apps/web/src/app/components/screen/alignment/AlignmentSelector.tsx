@@ -1,6 +1,6 @@
 import useLocalStorage from '@/app/hooks/useLocalStorage'
-import { ToggleGroup, ToggleGroupItem } from '@/lib/ui/components/tooglegroup/ToggleGroup'
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/lib/ui/components/tooltip/Tooltip'
+import { ToggleGroup, ToggleGroupItem } from '@screengeometry/lib-ui/togglegroup'
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@screengeometry/lib-ui/tooltip'
 import {
   AlignCenterHorizontal,
   AlignCenterVertical,

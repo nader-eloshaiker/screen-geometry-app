@@ -10,8 +10,8 @@ import { sendToGoogleAnalytics } from './configs/reportWebVitals'
 
 import './index.css'
 
-const testMode = !import.meta.env.DEV
-const trackingId = process.env.GA_TRACKING_ID ?? import.meta.env.VITE_GA_TRACKING_ID
+const testMode = !!import.meta.env.DEV
+const trackingId = import.meta.env.VITE_GA_TRACKING_ID ?? 'G-1111111111'
 ReactGA.initialize(trackingId, { testMode })
 
 const renderApp = () => {

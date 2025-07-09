@@ -4,7 +4,7 @@ import { vi } from 'vitest'
 import { HeaderNavSmall } from './HeaderNavSmall'
 
 // Mock the NavigationLink component
-vi.mock('@/lib/ui/components/navigationlink/NavigationLink', () => ({
+vi.mock('@screengeometry/lib-ui/navigationlink', () => ({
   NavigationLink: ({
     children,
     to,

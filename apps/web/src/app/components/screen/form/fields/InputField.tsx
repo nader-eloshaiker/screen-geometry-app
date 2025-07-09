@@ -1,7 +1,7 @@
 import { ScreenDataEnum } from '@/lib/openapi/models/Screen'
-import { FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/lib/ui/components/form/Form'
-import { AdornmentProps, Input } from '@/lib/ui/components/input/Input'
 import { cn } from '@/lib/utils'
+import { FormControl, FormField, FormItem, FormLabel, FormMessage } from '@screengeometry/lib-ui/form'
+import { AdornmentProps, Input } from '@screengeometry/lib-ui/input'
 import { Control, useFormContext } from 'react-hook-form'
 import { FormSubmitType } from '../ScreenFormSchema'
 

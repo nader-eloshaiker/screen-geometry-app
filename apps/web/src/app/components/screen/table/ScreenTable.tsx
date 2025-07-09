@@ -2,9 +2,10 @@ import { DarkMode, TThemeMode } from '@/app/hooks/theme/Theme.types'
 import { useTheme } from '@/app/hooks/theme/useTheme'
 import { ScreenItemRender } from '@/app/models/screenItemRender'
 import { ScreenColor } from '@/lib/openapi/generated'
-import { Button } from '@/lib/ui/components/button/Button'
-import { Checkbox } from '@/lib/ui/components/checkbox/Checkbox'
-import { Skeleton } from '@/lib/ui/components/skeleton/Skeleton'
+import { cn } from '@/lib/utils'
+import { Button } from '@screengeometry/lib-ui/button'
+import { Checkbox } from '@screengeometry/lib-ui/checkbox'
+import { Skeleton } from '@screengeometry/lib-ui/skeleton'
 import {
   Table,
   TableBody,
@@ -13,8 +14,7 @@ import {
   TableHeader,
   TableHeaderCell,
   TableHeaderRow,
-} from '@/lib/ui/components/table/Table'
-import { cn } from '@/lib/utils'
+} from '@screengeometry/lib-ui/table'
 import { Loader2, LoaderCircle, Pencil, X } from 'lucide-react'
 import { Dispatch, SetStateAction } from 'react'
 import styled from 'styled-components'

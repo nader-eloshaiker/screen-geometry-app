@@ -1,5 +1,6 @@
 import ThemeToggle from '@/app/components/theme/ThemeToggle'
-import { Button } from '@/lib/ui/components/button/Button'
+import { cn } from '@/lib/utils'
+import { Button } from '@screengeometry/lib-ui/button'
 import {
   Sheet,
   SheetContent,
@@ -7,8 +8,7 @@ import {
   SheetHeader,
   SheetTitle,
   SheetTrigger,
-} from '@/lib/ui/components/sheet/Sheet'
-import { cn } from '@/lib/utils'
+} from '@screengeometry/lib-ui/sheet'
 import { Menu } from 'lucide-react'
 import { useState } from 'react'
 import { HeaderNavLarge } from './HeaderNavLarge'
@@ -33,7 +33,7 @@ export default function Header() {
   const [open, setOpen] = useState(false)
 
   return (
-    <header className='bg-header p-4 text-header-foreground shadow-md'>
+    <header className='bg-header text-header-foreground p-4 shadow-md'>
       <div className='flex items-center gap-6 lg:hidden' data-testid='small-header'>
         <Sheet open={open} onOpenChange={setOpen}>
           <SheetTrigger asChild>

@@ -1,4 +1,4 @@
-import { NavigationLink } from '@/lib/ui/components/navigationlink/NavigationLink'
+import { NavigationLink } from '@screengeometry/lib-ui/navigationlink'
 import { Helmet } from 'react-helmet-async'
 
 export const Home = () => {

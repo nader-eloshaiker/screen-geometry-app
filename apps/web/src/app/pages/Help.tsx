@@ -5,10 +5,10 @@ import { Stacked } from '@/app/components/stacked/Stacked'
 import { defaultScreenInputList } from '@/app/constants/defaultScreenList'
 import { ScreenItemRender } from '@/app/models/screenItemRender'
 import { Dimensions } from '@/lib/openapi/models/Screen'
-import { Button } from '@/lib/ui/components/button/Button'
-import { Label } from '@/lib/ui/components/label/Label'
 import { useElementSize } from '@/lib/ui/hooks/useElementSize'
 import { getMaxScreenSize, normaliseScreenRender, transformScreenInput } from '@/lib/utils'
+import { Button } from '@screengeometry/lib-ui/button'
+import { Label } from '@screengeometry/lib-ui/label'
 import { Pencil, X } from 'lucide-react'
 import { useMemo, useRef } from 'react'
 import { Helmet } from 'react-helmet-async'
@@ -69,7 +69,7 @@ export const Help = () => {
             ability to import a default list of screens
           </Paragraph>
           <Diagram>
-            <div className='w-96  overflow-hidden rounded-lg border-2 border-primary-border shadow-lg'>
+            <div className='border-primary-border  w-96 overflow-hidden rounded-lg border-2 shadow-lg'>
               <ScreenTable
                 screens={[]}
                 isScreenListLoading={false}
@@ -78,7 +78,7 @@ export const Help = () => {
                 showActon={{ handler: () => {}, isPending: false }}
               />
               <div className='flex h-full flex-col items-center'>
-                <div className='py-4 text-primary-label'>
+                <div className='text-primary-label py-4'>
                   <span className='text-xl'>No List Found</span>
                 </div>
                 <div className='flex flex-col items-center gap-2 py-6'>
@@ -98,7 +98,7 @@ export const Help = () => {
           </Diagram>
           <Paragraph>Loading the default list will populate the table with a list of screens.</Paragraph>
           <Diagram>
-            <div className='rounded-lg border-2 border-primary-border p-6 shadow-lg'>
+            <div className='border-primary-border rounded-lg border-2 p-6 shadow-lg'>
               <ScreenTable
                 className='pointer-events-none'
                 screens={fullList}
@@ -117,7 +117,7 @@ export const Help = () => {
           <Diagram>
             <div
               ref={divSizeRef}
-              className='flex flex-col gap-4 rounded-lg border-2 border-primary-border p-6 shadow-lg'
+              className='border-primary-border flex flex-col gap-4 rounded-lg border-2 p-6 shadow-lg'
             >
               <ScreenTable
                 className='pointer-events-none'
@@ -149,7 +149,7 @@ export const Help = () => {
             the <strong>Show</strong> check box
           </Paragraph>
           <Diagram>
-            <div className='flex flex-col rounded-lg border-2 border-primary-border p-6 shadow-lg'>
+            <div className='border-primary-border flex flex-col rounded-lg border-2 p-6 shadow-lg'>
               <ScreenTable
                 className='pointer-events-none'
                 screens={invisibleList}
@@ -190,7 +190,7 @@ export const Help = () => {
             button in the top right corner. This will open a form in the sidebar as show below.
           </Paragraph>
           <DiagramPanel>
-            <div className='mb-6 w-96 border-l-2 border-primary-border bg-background p-2 text-foreground shadow-lg'>
+            <div className='border-primary-border bg-background text-foreground mb-6 w-96 border-l-2 p-2 shadow-lg'>
               <div className='pointer-events-none p-2'>
                 <ScreenForm
                   setOpen={() => {}}

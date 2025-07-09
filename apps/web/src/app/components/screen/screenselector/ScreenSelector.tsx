@@ -1,12 +1,8 @@
 import { SearchItem } from '@/lib/openapi/generated'
-import { Label } from '@/lib/ui/components/label/Label'
 import { useDebounce } from '@/lib/ui/hooks/useDebounce'
 import { useElementSize } from '@/lib/ui/hooks/useElementSize'
 import { cn } from '@/lib/utils'
-import parse from 'html-react-parser'
-import { Check, ChevronsUpDown } from 'lucide-react'
-import { Dispatch, SetStateAction, useEffect, useRef, useState } from 'react'
-import { Button } from '../../../../lib/ui/components/button/Button'
+import { Button } from '@screengeometry/lib-ui/button'
 import {
   Command,
   CommandEmpty,
@@ -14,8 +10,12 @@ import {
   CommandInput,
   CommandItem,
   CommandList,
-} from '../../../../lib/ui/components/command/Command'
-import { Popover, PopoverContent, PopoverTrigger } from '../../../../lib/ui/components/popover/Popover'
+} from '@screengeometry/lib-ui/command'
+import { Label } from '@screengeometry/lib-ui/label'
+import { Popover, PopoverContent, PopoverTrigger } from '@screengeometry/lib-ui/popover'
+import parse from 'html-react-parser'
+import { Check, ChevronsUpDown } from 'lucide-react'
+import { Dispatch, SetStateAction, useEffect, useRef, useState } from 'react'
 
 type TProps = {
   items: Array<SearchItem> | undefined

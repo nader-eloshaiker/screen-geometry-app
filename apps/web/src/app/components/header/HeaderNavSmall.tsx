@@ -1,4 +1,4 @@
-import { NavigationLink } from '@/lib/ui/components/navigationlink/NavigationLink'
+import { NavigationLink } from '@screengeometry/lib-ui/navigationlink'
 import { Dispatch, SetStateAction } from 'react'
 
 type Props = {

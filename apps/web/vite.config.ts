@@ -1,6 +1,6 @@
 /// <reference types="vitest" />
 import { codecovVitePlugin } from '@codecov/vite-plugin'
-import { TanStackRouterVite } from '@tanstack/router-plugin/vite'
+import { tanstackRouter } from '@tanstack/router-plugin/vite'
 import react from '@vitejs/plugin-react'
 import tailwindcss from 'tailwindcss'
 import tsconfigPaths from 'vite-tsconfig-paths'
@@ -56,13 +56,12 @@ export default defineConfig({
   base: process.env.BASE_URL,
   define: {
     'import.meta.env.VITE_PACKAGE_VERSION': JSON.stringify(packageJson.version),
-    'process.env': process.env,
+    'import.meta.env.VITE_GA_TRACKING_ID': process.env.GA_TRACKING_ID,
   },
   assetsInclude: ['./sb-preview/runtime.js'],
   plugins: [
-    react(),
     tsconfigPaths(),
-    TanStackRouterVite({
+    tanstackRouter({
       target: 'react',
       autoCodeSplitting: true,
       routesDirectory: './src/app/routes',
@@ -76,6 +75,7 @@ export default defineConfig({
       bundleName: 'screen-geometry-app',
       uploadToken: process.env.CODECOV_TOKEN,
     }),
+    react(),
   ],
   css: {
     postcss: {

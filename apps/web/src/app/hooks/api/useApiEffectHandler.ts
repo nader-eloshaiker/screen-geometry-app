@@ -1,5 +1,5 @@
 import { ErrorResponse } from '@/lib/openapi/generated'
-import { useToast } from '@/lib/ui/components/toaster/useToast'
+import { useToast } from '@screengeometry/lib-ui/toaster'
 
 import { useEffect } from 'react'
 

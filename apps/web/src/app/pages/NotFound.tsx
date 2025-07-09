@@ -1,6 +1,6 @@
-import { Alert, AlertDescription, AlertTitle } from '@/lib/ui/components/alert/Alert'
-import { Button } from '@/lib/ui/components/button/Button'
-import { Card } from '@/lib/ui/components/card/Card'
+import { Alert, AlertDescription, AlertTitle } from '@screengeometry/lib-ui/alert'
+import { Button } from '@screengeometry/lib-ui/button'
+import { Card } from '@screengeometry/lib-ui/card'
 import { AlertCircle } from 'lucide-react'
 import { Helmet } from 'react-helmet-async'
 

@@ -36,6 +36,7 @@
   },
   "dependencies": {
     "@hookform/resolvers": "catalog:",
+    "@react-hook/resize-observer": "^1.2.6",
     "@tanstack/react-query": "catalog:",
     "@tanstack/react-router": "catalog:",
     "axios": "^1.7.7",

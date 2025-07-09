@@ -1,4 +1,4 @@
-import { NavigationLink } from '@/lib/ui/components/navigationlink/NavigationLink'
+import { NavigationLink } from '@screengeometry/lib-ui/navigationlink'
 
 export const HeaderNavLarge = () => (
   <nav aria-label='Main' className='flex gap-6' data-testid='large-header-menu'>
