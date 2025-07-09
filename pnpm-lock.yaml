@@ -567,6 +567,9 @@ importers:
       jsdom:
         specifier: ^25.0.1
         version: 25.0.1
+      lint-staged:
+        specifier: ^15.2.10
+        version: 15.5.2
       postcss:
         specifier: catalog:tailwindcss3
         version: 8.5.6
