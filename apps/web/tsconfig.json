@@ -4,7 +4,6 @@
   "extends": "./tsconfig.node.json",
   "compilerOptions": {
     "useDefineForClassFields": true,
-    "types": ["vitest/globals"],
     "jsx": "react-jsx",
     "baseUrl": ".",
     "paths": {

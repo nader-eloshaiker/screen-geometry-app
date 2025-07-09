@@ -18,7 +18,8 @@
     "pretty": true,
     "skipLibCheck": true,
     "strict": true,
-    "target": "ESNext"
+    "target": "ESNext",
+    "types": ["vitest/globals", "node"]
   },
   "include": ["vite.config.ts", "package.json"]
 }

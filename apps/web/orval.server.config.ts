@@ -34,7 +34,7 @@ export default defineConfig({
       },
     },
     input: {
-      target: '../../packages/server-spec/dist/server-api.json',
+      target: '../../packages/spec-server/dist/server-api.json',
     },
   },
 })

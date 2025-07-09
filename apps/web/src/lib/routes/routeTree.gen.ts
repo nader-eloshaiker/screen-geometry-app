@@ -10,79 +10,41 @@
 
 import { createFileRoute } from '@tanstack/react-router'
 
-// Import Routes
+import { Route as rootRouteImport } from './../../app/routes/__root'
 
-import { Route as rootRoute } from './../../app/routes/__root'
+const ScreensLazyRouteImport = createFileRoute('/screens')()
+const HelpLazyRouteImport = createFileRoute('/help')()
+const ContactLazyRouteImport = createFileRoute('/contact')()
+const IndexLazyRouteImport = createFileRoute('/')()
 
-// Create Virtual Routes
-
-const ScreensLazyImport = createFileRoute('/screens')()
-const HelpLazyImport = createFileRoute('/help')()
-const ContactLazyImport = createFileRoute('/contact')()
-const IndexLazyImport = createFileRoute('/')()
-
-// Create/Update Routes
-
-const ScreensLazyRoute = ScreensLazyImport.update({
+const ScreensLazyRoute = ScreensLazyRouteImport.update({
   id: '/screens',
   path: '/screens',
-  getParentRoute: () => rootRoute,
-} as any).lazy(() => import('./../../app/routes/screens.lazy').then((d) => d.Route))
-
-const HelpLazyRoute = HelpLazyImport.update({
+  getParentRoute: () => rootRouteImport,
+} as any).lazy(() =>
+  import('./../../app/routes/screens.lazy').then((d) => d.Route),
+)
+const HelpLazyRoute = HelpLazyRouteImport.update({
   id: '/help',
   path: '/help',
-  getParentRoute: () => rootRoute,
-} as any).lazy(() => import('./../../app/routes/help.lazy').then((d) => d.Route))
-
-const ContactLazyRoute = ContactLazyImport.update({
+  getParentRoute: () => rootRouteImport,
+} as any).lazy(() =>
+  import('./../../app/routes/help.lazy').then((d) => d.Route),
+)
+const ContactLazyRoute = ContactLazyRouteImport.update({
   id: '/contact',
   path: '/contact',
-  getParentRoute: () => rootRoute,
-} as any).lazy(() => import('./../../app/routes/contact.lazy').then((d) => d.Route))
-
-const IndexLazyRoute = IndexLazyImport.update({
+  getParentRoute: () => rootRouteImport,
+} as any).lazy(() =>
+  import('./../../app/routes/contact.lazy').then((d) => d.Route),
+)
+const IndexLazyRoute = IndexLazyRouteImport.update({
   id: '/',
   path: '/',
-  getParentRoute: () => rootRoute,
-} as any).lazy(() => import('./../../app/routes/index.lazy').then((d) => d.Route))
-
-// Populate the FileRoutesByPath interface
-
-declare module '@tanstack/react-router' {
-  interface FileRoutesByPath {
-    '/': {
-      id: '/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof IndexLazyImport
-      parentRoute: typeof rootRoute
-    }
-    '/contact': {
-      id: '/contact'
-      path: '/contact'
-      fullPath: '/contact'
-      preLoaderRoute: typeof ContactLazyImport
-      parentRoute: typeof rootRoute
-    }
-    '/help': {
-      id: '/help'
-      path: '/help'
-      fullPath: '/help'
-      preLoaderRoute: typeof HelpLazyImport
-      parentRoute: typeof rootRoute
-    }
-    '/screens': {
-      id: '/screens'
-      path: '/screens'
-      fullPath: '/screens'
-      preLoaderRoute: typeof ScreensLazyImport
-      parentRoute: typeof rootRoute
-    }
-  }
-}
-
-// Create and export the route tree
+  getParentRoute: () => rootRouteImport,
+} as any).lazy(() =>
+  import('./../../app/routes/index.lazy').then((d) => d.Route),
+)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexLazyRoute
@@ -90,22 +52,19 @@ export interface FileRoutesByFullPath {
   '/help': typeof HelpLazyRoute
   '/screens': typeof ScreensLazyRoute
 }
-
 export interface FileRoutesByTo {
   '/': typeof IndexLazyRoute
   '/contact': typeof ContactLazyRoute
   '/help': typeof HelpLazyRoute
   '/screens': typeof ScreensLazyRoute
 }
-
 export interface FileRoutesById {
-  __root__: typeof rootRoute
+  __root__: typeof rootRouteImport
   '/': typeof IndexLazyRoute
   '/contact': typeof ContactLazyRoute
   '/help': typeof HelpLazyRoute
   '/screens': typeof ScreensLazyRoute
 }
-
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths: '/' | '/contact' | '/help' | '/screens'
@@ -114,12 +73,44 @@ export interface FileRouteTypes {
   id: '__root__' | '/' | '/contact' | '/help' | '/screens'
   fileRoutesById: FileRoutesById
 }
-
 export interface RootRouteChildren {
   IndexLazyRoute: typeof IndexLazyRoute
   ContactLazyRoute: typeof ContactLazyRoute
   HelpLazyRoute: typeof HelpLazyRoute
   ScreensLazyRoute: typeof ScreensLazyRoute
+}
+
+declare module '@tanstack/react-router' {
+  interface FileRoutesByPath {
+    '/screens': {
+      id: '/screens'
+      path: '/screens'
+      fullPath: '/screens'
+      preLoaderRoute: typeof ScreensLazyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/help': {
+      id: '/help'
+      path: '/help'
+      fullPath: '/help'
+      preLoaderRoute: typeof HelpLazyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/contact': {
+      id: '/contact'
+      path: '/contact'
+      fullPath: '/contact'
+      preLoaderRoute: typeof ContactLazyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/': {
+      id: '/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof IndexLazyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+  }
 }
 
 const rootRouteChildren: RootRouteChildren = {
@@ -128,33 +119,6 @@ const rootRouteChildren: RootRouteChildren = {
   HelpLazyRoute: HelpLazyRoute,
   ScreensLazyRoute: ScreensLazyRoute,
 }
-
-export const routeTree = rootRoute._addFileChildren(rootRouteChildren)._addFileTypes<FileRouteTypes>()
-
-/* ROUTE_MANIFEST_START
-{
-  "routes": {
-    "__root__": {
-      "filePath": "__root.tsx",
-      "children": [
-        "/",
-        "/contact",
-        "/help",
-        "/screens"
-      ]
-    },
-    "/": {
-      "filePath": "index.lazy.tsx"
-    },
-    "/contact": {
-      "filePath": "contact.lazy.tsx"
-    },
-    "/help": {
-      "filePath": "help.lazy.tsx"
-    },
-    "/screens": {
-      "filePath": "screens.lazy.tsx"
-    }
-  }
-}
-ROUTE_MANIFEST_END */
+export const routeTree = rootRouteImport
+  ._addFileChildren(rootRouteChildren)
+  ._addFileTypes<FileRouteTypes>()

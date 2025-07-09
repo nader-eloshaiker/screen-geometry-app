@@ -1,1 +1,1 @@
-export * from '@screengeometry/style-guide/postcss.config'
+export * from '@screengeometry/lib-style/postcss.config'

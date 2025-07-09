@@ -9,5 +9,7 @@ export const createBrowserServiceWorker = async (baseUrl: string) => {
   const { searchMocks, screenListMocks, screenMocks, passthroughMocks } = generateStub(baseUrl)
 
   const webServer = setupWorker(...searchMocks(), ...screenListMocks(), ...screenMocks(), ...passthroughMocks())
-  return await webServer.start({ onUnhandledRequest: 'bypass' })
+  const worker = await webServer.start({ onUnhandledRequest: 'bypass' })
+
+  return worker
 }
