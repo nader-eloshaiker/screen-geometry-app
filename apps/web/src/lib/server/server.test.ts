@@ -1,7 +1,12 @@
 import { initMSW } from '@/lib/serviceworker/NodeServiceWorker'
 import { screenItemFixture } from '@/lib/support/test/fixtures/ScreenFixtures'
+import {
+  ScreenItem,
+  getScreenListServiceMock,
+  getScreenServiceMock,
+  getSearchServiceMock,
+} from '@screengeometry/lib-api/spec'
 import { IDBFactory } from 'fake-indexeddb'
-import { ScreenItem, getScreenListServiceMock, getScreenServiceMock, getSearchServiceMock } from '../openapi/generated'
 import { apiRoutes } from './ApiRouteSchema'
 import { Stores } from './db/DbConstants'
 import { addData } from './db/IndexedDB'
