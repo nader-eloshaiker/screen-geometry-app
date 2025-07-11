@@ -1,5 +1,5 @@
-import { initDB } from '@/lib/server/db/IndexedDB'
-import { generateStub } from '@/lib/server/server'
+import { generateStub } from '@screengeometry/server'
+import { initDB } from '@screengeometry/server/indexedDB'
 import { setupWorker } from 'msw/browser'
 
 export const createBrowserServiceWorker = async (baseUrl: string) => {

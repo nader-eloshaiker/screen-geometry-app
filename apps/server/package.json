@@ -1,11 +1,11 @@
 {
-  "name": "@screengeometry/lib-api",
+  "name": "@screengeometry/server",
   "version": "1.0.0",
   "private": true,
   "type": "module",
   "exports": {
-    "./spec": "./src/generated/index.ts",
-    "./internal": "./src/models/index.ts"
+    ".": "./src/server.ts",
+    "./indexedDB": "./src/db/IndexedDB.ts"
   },
   "scripts": {
     "dev": "vite",
@@ -17,16 +17,15 @@
     "lint:staged": "pnpm exec lint-staged",
     "format": "prettier . --write",
     "format:check": "prettier . --check",
-    "gen:spec": "orval --config ./orval.server.config.ts",
     "test": "vitest run --coverage.enabled=true",
     "test:watch": "vitest watch --coverage.enabled=true",
     "test:ui": "vitest watch --ui --coverage.enabled=true"
   },
   "dependencies": {
-    "@tanstack/react-query": "catalog:",
-    "axios": "^1.7.7",
-    "fuzzysort": "^3.0.2",
-    "msw": "^2.10.2"
+    "@screengeometry/lib-api": "workspace:*",
+    "ts-pattern": "^5.6.2",
+    "msw": "^2.10.2",
+    "ulid": "^2.3.0"
   },
   "peerDependencies": {
     "react": "catalog:react18",
@@ -34,7 +33,6 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.19.0",
-    "@tanstack/eslint-plugin-query": "catalog:",
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^16.1.0",
     "@testing-library/user-event": "^14.6.1",
@@ -53,10 +51,10 @@
     "eslint-plugin-react": "^7.37.4",
     "eslint-plugin-react-hooks": "^5.2.0",
     "eslint-plugin-react-refresh": "^0.4.19",
+    "fake-indexeddb": "^6.0.0",
     "globals": "^15.14.0",
     "jsdom": "^25.0.1",
     "lint-staged": "^15.2.10",
-    "orval": "^7.1.1",
     "prettier": "catalog:",
     "prettier-plugin-organize-imports": "^4.1.0",
     "react": "catalog:react18",
