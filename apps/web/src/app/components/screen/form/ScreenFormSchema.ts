@@ -1,5 +1,5 @@
-import { ScreenInput } from '@/lib/openapi/generated'
-import { ScreenDataEnum } from '@/lib/openapi/models/Screen'
+import { ScreenDataEnum } from '@screengeometry/lib-api/internal'
+import { ScreenInput } from '@screengeometry/lib-api/spec'
 import * as yup from 'yup'
 import { InferType, ObjectSchema } from 'yup'
 

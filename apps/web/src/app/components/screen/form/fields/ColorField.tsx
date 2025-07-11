@@ -1,6 +1,6 @@
 import { DarkMode, LightMode, TThemeMode } from '@/app/hooks/theme/Theme.types'
-import { ScreenDataEnum } from '@/lib/openapi/models/Screen'
 import { cn } from '@/lib/utils'
+import { ScreenDataEnum } from '@screengeometry/lib-api/internal/Screen'
 import { FormControl, FormField, FormItem, FormLabel, FormMessage } from '@screengeometry/lib-ui/form'
 import { Input } from '@screengeometry/lib-ui/input'
 import { Control, useFormContext } from 'react-hook-form'

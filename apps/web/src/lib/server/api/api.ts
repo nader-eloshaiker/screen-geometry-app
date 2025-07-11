@@ -1,5 +1,5 @@
-import { ScreenInput, ScreenInputList, ScreenItem, SearchItem } from '@/lib/openapi/generated'
 import { to, transformScreenInput } from '@/lib/utils'
+import { ScreenInput, ScreenInputList, ScreenItem, SearchItem } from '@screengeometry/lib-api/spec'
 import { DatabaseError } from '../db/DatabaseError'
 import { Stores } from '../db/DbConstants'
 import { addAllData, addData, deleteData, getAllData, getData, searchData, updateData } from '../db/IndexedDB'

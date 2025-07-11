@@ -1,4 +1,4 @@
-import { ScreenItem } from '@/lib/openapi/generated'
+import { ScreenItem } from '@screengeometry/lib-api/spec'
 
 /**
  * Screen representation in UI

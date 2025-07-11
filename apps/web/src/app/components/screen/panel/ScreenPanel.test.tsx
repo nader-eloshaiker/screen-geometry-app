@@ -1,6 +1,6 @@
-import { getGetScreenResponseMock } from '@/lib/openapi/generated'
 import { renderWithUserEvents } from '@/lib/support/test/utils/RenderWithUserEvents'
 import { toScreenItemRender } from '@/lib/utils'
+import { getGetScreenResponseMock } from '@screengeometry/lib-api/spec'
 import { ScreenPanel } from './ScreenPanel'
 
 describe('#ScreenPanel', () => {

@@ -1,4 +1,4 @@
-import { SearchItem } from '@/lib/openapi/generated'
+import { SearchItem } from '@screengeometry/lib-api/spec'
 
 export const SearchDocuments: Array<SearchItem> = [
   {

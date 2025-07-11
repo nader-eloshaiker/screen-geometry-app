@@ -1,4 +1,4 @@
-import { ScreenColor, ScreenItem } from '@/lib/openapi/generated'
+import { ScreenColor, ScreenItem } from '@screengeometry/lib-api/spec'
 import { ulid } from 'ulid'
 import { Stores } from '../DbConstants'
 

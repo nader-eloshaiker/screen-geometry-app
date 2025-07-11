@@ -1,5 +1,5 @@
-import { ScreenInput, ScreenInputList } from '@/lib/openapi/generated'
 import { to } from '@/lib/utils'
+import { ScreenInput, ScreenInputList } from '@screengeometry/lib-api/spec'
 import { HttpHandler, HttpResponse, delay, http, passthrough } from 'msw'
 import { apiRoutes } from './ApiRouteSchema'
 import {

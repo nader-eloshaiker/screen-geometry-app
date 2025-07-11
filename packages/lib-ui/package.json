@@ -23,8 +23,7 @@
     "./toaster": "./src/components/toaster/index.ts",
     "./toggle": "./src/components/toggle/index.ts",
     "./togglegroup": "./src/components/togglegroup/index.ts",
-    "./tooltip": "./src/components/tooltip/index.ts",
-    "./lib": "./src/index.ts"
+    "./tooltip": "./src/components/tooltip/index.ts"
   },
   "scripts": {
     "dev": "vite",
@@ -96,11 +95,15 @@
     "@vitest/coverage-istanbul": "catalog:",
     "@vitest/ui": "catalog:",
     "autoprefixer": "catalog:tailwindcss3",
+    "concurrently": "catalog:",
     "eslint": "catalog:",
-    "eslint-config-prettier": "^9.1.0",
+    "eslint-config-prettier": "^10.1.1",
     "eslint-plugin-import": "^2.31.0",
-    "eslint-plugin-jsx-a11y": "^6.10.2",
-    "eslint-plugin-react": "^7.37.2",
+    "eslint-plugin-prettier": "^5.2.3",
+    "eslint-plugin-react": "^7.37.4",
+    "eslint-plugin-react-hooks": "^5.2.0",
+    "eslint-plugin-react-refresh": "^0.4.19",
+    "eslint-plugin-storybook": "^0.11.4",
     "eslint-plugin-tailwindcss": "catalog:tailwindcss3",
     "globals": "^15.14.0",
     "jsdom": "^25.0.1",

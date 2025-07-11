@@ -3,16 +3,16 @@ import { QueryProvider } from '@/app/hooks/query/QueryProvider'
 import { ScreenProvider } from '@/app/hooks/screen/ScreenProvider'
 import { ScreenItemRender } from '@/app/models/screenItemRender'
 import { Screens } from '@/app/pages/Screens'
+import { initMSW } from '@/lib/serviceworker/NodeServiceWorker'
+import { renderWithUserEvents } from '@/lib/support/test/utils/RenderWithUserEvents'
+import { useElementSizeMock } from '@/lib/ui/hooks/useElementSize.mock'
+import { normaliseScreenRender } from '@/lib/utils'
 import {
   getGetScreenListResponseMock,
   getScreenListServiceMock,
   getScreenServiceMock,
   getSearchServiceMock,
-} from '@/lib/openapi/generated'
-import { initMSW } from '@/lib/serviceworker/NodeServiceWorker'
-import { renderWithUserEvents } from '@/lib/support/test/utils/RenderWithUserEvents'
-import { useElementSizeMock } from '@/lib/ui/hooks/useElementSize.mock'
-import { normaliseScreenRender } from '@/lib/utils'
+} from '@screengeometry/lib-api/spec'
 import { Toaster } from '@screengeometry/lib-ui/toaster'
 import { act, waitFor } from '@testing-library/react'
 import { useState } from 'react'

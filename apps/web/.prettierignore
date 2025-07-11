@@ -1,9 +1,6 @@
-pnpm-lock.yaml
 CHANGELOG.md
 build
 dist
 coverage
-storybook-static
-.eslintrc
-src/lib/openapi/generated/
 src/lib/routes/
+src/public/mockServiceWorker.js

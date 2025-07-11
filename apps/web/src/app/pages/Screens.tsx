@@ -11,9 +11,9 @@ import { useCreateScreenListApi } from '@/app/hooks/api/helpers/useCreateScreenL
 import { useGetScreensListApi } from '@/app/hooks/api/helpers/useGetScreenListApi'
 import { useScreenContext } from '@/app/hooks/screen/useScreenContext'
 import { ScreenItemRender } from '@/app/models/screenItemRender'
-import { Dimensions } from '@/lib/openapi/models'
 import { useElementSize } from '@/lib/ui/hooks/useElementSize'
 import { getMaxScreenSize } from '@/lib/utils'
+import { Dimensions } from '@screengeometry/lib-api/internal'
 import { Button } from '@screengeometry/lib-ui/button'
 import { Label } from '@screengeometry/lib-ui/label'
 import { Skeleton } from '@screengeometry/lib-ui/skeleton'
@@ -132,7 +132,7 @@ export const Screens = () => {
 
         {screens.length === 0 && !isScreenListLoading && (
           <div className='flex h-full flex-col items-center'>
-            <div className='text-primary-label py-4 text-xl'>No List Found</div>
+            <div className='py-4 text-xl text-primary-label'>No List Found</div>
             <div className='flex flex-col items-center gap-2 py-6'>
               <div>Click here to populate default list</div>
               <Button className='w-40' mode='outline' onClick={onLoadDefault} disabled={isCreateListLoading}>

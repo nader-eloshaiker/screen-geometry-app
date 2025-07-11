@@ -1,5 +1,6 @@
 // import { FlatCompat } from '@eslint/eslintrc'
 import jsEslint from '@eslint/js'
+import pluginQuery from '@tanstack/eslint-plugin-query'
 import tsEslintPlugin from '@typescript-eslint/eslint-plugin'
 import typescriptParser from '@typescript-eslint/parser'
 import eslintPluginImport from 'eslint-plugin-import'
@@ -21,6 +22,7 @@ export default defineConfig([
   eslintPluginPrettierRecommended,
   reactHooks.configs['recommended-latest'],
   reactRefresh.configs.recommended,
+  ...pluginQuery.configs['flat/recommended'],
   ...storybook.configs['flat/recommended'],
   ...tailwindcss.configs['flat/recommended'],
   eslintConfigPrettier, // Must go last
@@ -28,11 +30,10 @@ export default defineConfig([
     ignores: [
       'node_modules/',
       'dist/',
-      'src/lib/openapi/generated/',
-      'src/lib/routes/',
       'coverage/',
       'storybook-static/',
-      'public/mockServiceWorker.js',
+      'src/public/mockServiceWorker.js',
+      'src/lib/routes/',
     ],
   },
   {
@@ -66,7 +67,7 @@ export default defineConfig([
 
     settings: {
       tailwindcss: {
-        config: './tailwind.config.js',
+        config: './tailwind.config.ts',
       },
 
       'import/resolver': {

@@ -20,16 +20,17 @@
     "build": "pnpm run --recursive build",
     "build:prod": "pnpm run --recursive build:prod",
     "build:dev": "pnpm run --recursive build:dev",
+    "lint:staged:api": "pnpm run --filter @screengeometry/lib-api lint:staged",
     "lint:staged:ui": "pnpm run --filter @screengeometry/lib-ui lint:staged",
     "lint:staged:web": "pnpm run --filter @screengeometry/web lint:staged",
-    "lint:staged": "concurrently  -n 'web,ui' -c 'magenta,blue' 'pnpm run lint:staged:web' 'pnpm run lint:staged:ui'",
+    "lint:staged": "pnpm lint:staged:web && pnpm lint:staged:ui && pnpm lint:staged:api",
     "test:ui": "pnpm --filter '@screengeometry/web' test",
     "test": "concurrently  -n 'web,server' -c 'magenta,blue' 'pnpm run test:ui'",
     "e2e": "pnpm run --filter '@screengeometry/web' e2e",
     "e2e:install": "pnpm run --filter '@screengeometry/web' e2e:install"
   },
   "devDependencies": {
-    "concurrently": "^8.2.2",
+    "concurrently": "catalog:",
     "husky": "^9.1.7",
     "lint-staged": "^15.2.10"
   }

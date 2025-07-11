@@ -1,5 +1,5 @@
-import { ScreenDataEnum } from '@/lib/openapi/models/Screen'
 import { cn } from '@/lib/utils'
+import { ScreenDataEnum } from '@screengeometry/lib-api/internal/Screen'
 import { FormControl, FormField, FormItem, FormLabel, FormMessage } from '@screengeometry/lib-ui/form'
 import { AdornmentProps, Input } from '@screengeometry/lib-ui/input'
 import { Control, useFormContext } from 'react-hook-form'

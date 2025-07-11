@@ -1,4 +1,4 @@
-import { ErrorResponse } from '@/lib/openapi/generated'
+import { ErrorResponse } from '@screengeometry/lib-api/spec'
 import { useToast } from '@screengeometry/lib-ui/toaster'
 
 import { useEffect } from 'react'

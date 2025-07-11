@@ -1,7 +1,7 @@
-import { SearchItem } from '@/lib/openapi/generated'
 import { useDebounce } from '@/lib/ui/hooks/useDebounce'
 import { useElementSize } from '@/lib/ui/hooks/useElementSize'
 import { cn } from '@/lib/utils'
+import { SearchItem } from '@screengeometry/lib-api/spec'
 import { Button } from '@screengeometry/lib-ui/button'
 import {
   Command,

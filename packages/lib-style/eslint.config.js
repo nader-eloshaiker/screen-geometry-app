@@ -4,9 +4,11 @@ import typescriptParser from '@typescript-eslint/parser'
 import importPlugin from 'eslint-plugin-import'
 import react from 'eslint-plugin-react'
 import tailwindcss from 'eslint-plugin-tailwindcss'
+import tsEslint from 'typescript-eslint'
 
 export default [
   js.configs.recommended, // Applying the recommended ESLint configuration for JavaScript
+  ...tsEslint.configs.recommended,
   ...tailwindcss.configs['flat/recommended'],
   {
     ignores: ['node_modules/', 'dist/'], // Ignore these directories

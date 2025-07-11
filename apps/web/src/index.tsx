@@ -8,7 +8,7 @@ import { onCLS, onINP, onLCP } from 'web-vitals/attribution'
 import { App } from './app/App'
 import { sendToGoogleAnalytics } from './configs/reportWebVitals'
 
-import './index.css'
+import '@screengeometry/lib-style/theme.css'
 
 const testMode = !!import.meta.env.DEV
 const trackingId = import.meta.env.VITE_GA_TRACKING_ID ?? 'G-1111111111'

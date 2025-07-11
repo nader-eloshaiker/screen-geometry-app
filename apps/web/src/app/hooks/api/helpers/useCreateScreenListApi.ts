@@ -1,6 +1,6 @@
 import { ScreenEventTypes } from '@/app/hooks/screen/ScreenManager'
 import { useScreenContext } from '@/app/hooks/screen/useScreenContext'
-import { ScreenListResponse, useCreateScreenList } from '@/lib/openapi/generated'
+import { ScreenListResponse, useCreateScreenList } from '@screengeometry/lib-api/spec'
 import { useCallback } from 'react'
 import { useApiEffectHandler } from '../useApiEffectHandler'
 

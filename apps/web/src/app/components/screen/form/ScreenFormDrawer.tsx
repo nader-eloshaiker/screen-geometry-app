@@ -1,7 +1,7 @@
 import { useGetScreenApi } from '@/app/hooks/api/helpers/useGetScreenApi'
 import { useSearchApi } from '@/app/hooks/api/helpers/useSearchApi'
-import { SearchItem } from '@/lib/openapi/generated'
 import { transformScreenItem } from '@/lib/utils'
+import { SearchItem } from '@screengeometry/lib-api/spec'
 import {
   Sheet,
   SheetContent,

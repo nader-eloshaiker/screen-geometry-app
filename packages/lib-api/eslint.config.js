@@ -1,11 +1,11 @@
 // import { FlatCompat } from '@eslint/eslintrc'
 import jsEslint from '@eslint/js'
+import pluginQuery from '@tanstack/eslint-plugin-query'
 import tsEslintPlugin from '@typescript-eslint/eslint-plugin'
 import typescriptParser from '@typescript-eslint/parser'
 import eslintPluginImport from 'eslint-plugin-import'
 import eslintPluginPrettierRecommended from 'eslint-plugin-prettier/recommended'
 import react from 'eslint-plugin-react'
-import storybook from 'eslint-plugin-storybook'
 import { defineConfig } from 'eslint/config'
 import globals from 'globals/index.js'
 import tsEslint from 'typescript-eslint'
@@ -13,7 +13,6 @@ import tsEslint from 'typescript-eslint'
 import eslintConfigPrettier from 'eslint-config-prettier/flat'
 import reactHooks from 'eslint-plugin-react-hooks'
 import reactRefresh from 'eslint-plugin-react-refresh'
-import tailwindcss from 'eslint-plugin-tailwindcss'
 
 export default defineConfig([
   jsEslint.configs.recommended,
@@ -21,19 +20,10 @@ export default defineConfig([
   eslintPluginPrettierRecommended,
   reactHooks.configs['recommended-latest'],
   reactRefresh.configs.recommended,
-  ...storybook.configs['flat/recommended'],
-  ...tailwindcss.configs['flat/recommended'],
+  ...pluginQuery.configs['flat/recommended'],
   eslintConfigPrettier, // Must go last
   {
-    ignores: [
-      'node_modules/',
-      'dist/',
-      'src/lib/openapi/generated/',
-      'src/lib/routes/',
-      'coverage/',
-      'storybook-static/',
-      'public/mockServiceWorker.js',
-    ],
+    ignores: ['node_modules/', 'dist/', 'src/generated/', 'coverage/'],
   },
   {
     files: ['**/*.{js,mjs,ts,tsx,jsx}'],
@@ -65,10 +55,6 @@ export default defineConfig([
     },
 
     settings: {
-      tailwindcss: {
-        config: './tailwind.config.ts',
-      },
-
       'import/resolver': {
         typescript: {},
       },
@@ -123,17 +109,6 @@ export default defineConfig([
           allowConstantExport: true,
         },
       ],
-
-      'tailwindcss/classnames-order': 'warn',
-
-      'tailwindcss/no-custom-classname': [
-        'warn',
-        {
-          callees: ['classnames', 'clsx', 'ctl', 'cva', 'tv', 'cn', 'twMerge', 'tw'],
-        },
-      ],
-
-      'tailwindcss/no-contradicting-classname': 'error',
     },
   },
 ])

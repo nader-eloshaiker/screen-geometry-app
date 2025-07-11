@@ -1,4 +1,4 @@
-import { ScreenItem, ScreenItemResponse } from '@/lib/openapi/generated'
+import { ScreenItem, ScreenItemResponse } from '@screengeometry/lib-api/spec'
 
 export const screenInputFixture = {
   aspectRatio: '32:9',

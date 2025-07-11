@@ -6,12 +6,14 @@ packages:
 catalog:
   "@hookform/resolvers": "^3.9.1"
   "@redocly/cli": ^1.34.4
-  "@tanstack/react-query": "^5.67.1"
+  "@tanstack/react-query": "^5.67.3"
+  "@tanstack/eslint-plugin-query": "^5.67.3"
   "@tanstack/react-router": "^1.114.3"
   "@vitest/coverage-istanbul": "^3.0.7"
   "@vitest/ui": "^3.0.7"
   "@vitejs/plugin-react": "^4.3.4"
   eslint: "^9.17.0"
+  "concurrently": "^9.1.2"
   "lucide-react": "^0.469.0"
   prettier: "^3.4.2"
   orval: "^7.5.0"
@@ -37,8 +39,3 @@ catalogs:
     tailwindcss: ^3.4.17
     "tailwindcss-animate": "^1.0.7"
     "tailwind-merge": "^2.6.0"
-  tailwindcss4:
-    "@tailwindcss/postcss": "^4.0.6"
-    "@tailwindcss/typography": "^0.5.16"
-    "@tailwindcss/vite": "^4.0.6"
-    tailwindcss: "^4.0.6"

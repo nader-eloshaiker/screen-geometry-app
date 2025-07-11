@@ -1,4 +1,4 @@
-import { GetSearchParams, SearchListResponse, useGetSearch } from '@/lib/openapi/generated'
+import { GetSearchParams, SearchListResponse, useGetSearch } from '@screengeometry/lib-api/spec'
 import { keepPreviousData } from '@tanstack/react-query'
 import { useApiEffectHandler } from '../useApiEffectHandler'
 

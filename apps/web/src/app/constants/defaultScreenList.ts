@@ -1,4 +1,4 @@
-import { ScreenInputList } from '@/lib/openapi/generated'
+import { ScreenInputList } from '@screengeometry/lib-api/spec'
 
 export const defaultScreenInputList: ScreenInputList = [
   {
