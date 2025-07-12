@@ -1,0 +1,8 @@
+type: object
+required:
+  - list
+properties:
+  list:
+    type: array
+    items:
+      $ref: "./SearchItem.yml"

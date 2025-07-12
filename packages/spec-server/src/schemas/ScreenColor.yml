@@ -1,0 +1,16 @@
+type: object
+required:
+  - lightColor
+  - darkColor
+properties:
+  lightColor:
+    type: string
+    minLength: 7
+    maxLength: 7
+    pattern: '#([a-fA-F0-9]{6})\b'
+  darkColor:
+    type: string
+    minLength: 7
+    maxLength: 7
+    pattern: '#([a-fA-F0-9]{6})\b'
+description: "Screen representation colors in hex format"
