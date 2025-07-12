@@ -6,6 +6,7 @@
 
  */
 import { HttpResponse, delay, http } from 'msw'
+
 import type { ScreenListResponse } from '../../models'
 
 export const getGetScreenListResponseMock = (): ScreenListResponse => ({

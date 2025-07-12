@@ -38,7 +38,7 @@
     "@screengeometry/lib-style": "workspace:*",
     "@screengeometry/lib-ui": "workspace:*",
     "@screengeometry/server": "workspace:*",
-    "axios": "^1.7.7",
+    "axios": "^1.7.9",
     "clsx": "^2.1.0",
     "framer-motion": "^11.2.10",
     "fuzzysort": "^3.0.2",

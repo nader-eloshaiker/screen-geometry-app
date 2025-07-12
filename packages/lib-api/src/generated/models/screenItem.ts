@@ -13,11 +13,11 @@ import type { ScreenSpecs } from './screenSpecs'
  * Complete screen object
  */
 export interface ScreenItem {
-  color: ScreenColor
-  data: ScreenData
   /** @minLength 1 */
   id: string
-  signature: string
-  specs: ScreenSpecs
   visible: boolean
+  signature: string
+  data: ScreenData
+  specs: ScreenSpecs
+  color: ScreenColor
 }

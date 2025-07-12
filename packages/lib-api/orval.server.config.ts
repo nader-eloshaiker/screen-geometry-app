@@ -25,8 +25,8 @@ export default defineConfig({
           ...(info.description ? [info.description] : []),
         ],
         mutator: {
-          path: '../axios/useApiAxios.ts',
-          name: 'useApiAxios',
+          path: '../axios/apiClient.ts',
+          name: 'serverApiClient',
         },
         query: {
           useQuery: true,

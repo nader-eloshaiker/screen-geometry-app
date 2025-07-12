@@ -10,12 +10,12 @@
  * Screen resolution characteristics
  */
 export interface ScreenData {
-  /** @minLength 3 */
-  aspectRatio: string
   /**
    * @minimum 0
    */
   diagonalSize: number
+  /** @minLength 3 */
+  aspectRatio: string
   /** @minimum 1 */
   hRes: number
   /** @minimum 1 */

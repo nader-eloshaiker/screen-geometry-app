@@ -4,7 +4,7 @@ import { IDBFactory } from 'fake-indexeddb'
 import { Stores } from '../db/DbConstants'
 import { addData } from '../db/IndexedDB'
 import { setupDB } from '../db/IndexedDB.test'
-import { screenInput55Fixture } from '../test/fixtures/ScreenFixtures'
+import { screenInput55Fixture } from '../lib/test/fixtures/ScreenFixtures'
 import {
   createScreen,
   createScreenList,

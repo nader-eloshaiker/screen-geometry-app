@@ -22,17 +22,23 @@
     "build:dev": "pnpm run --recursive build:dev",
     "lint:staged:api": "pnpm run --filter @screengeometry/lib-api lint:staged",
     "lint:staged:server": "pnpm run --filter @screengeometry/server lint:staged",
+    "lint:staged:style": "pnpm run --filter @screengeometry/lib-style lint:staged",
     "lint:staged:ui": "pnpm run --filter @screengeometry/lib-ui lint:staged",
     "lint:staged:web": "pnpm run --filter @screengeometry/web lint:staged",
-    "lint:staged": "pnpm lint:staged:web && pnpm lint:staged:ui && pnpm lint:staged:api",
-    "test:ui": "pnpm --filter '@screengeometry/web' test",
-    "test": "concurrently  -n 'web,server' -c 'magenta,blue' 'pnpm run test:ui'",
+    "lint:staged": "pnpm lint:staged:web && pnpm lint:staged:ui && pnpm lint:staged:style && pnpm lint:staged:api && pnpm lint:staged:server",
+    "test:api": "pnpm --filter '@screengeometry/lib-api' test",
+    "test:server": "pnpm --filter '@screengeometry/server' test",
+    "test:style": "pnpm --filter '@screengeometry/lib-style' test",
+    "test:ui": "pnpm --filter '@screengeometry/lib-ui' test",
+    "test:web": "pnpm --filter '@screengeometry/web' test",
+    "test": "concurrently  -n 'web,ui,style,api,server' -c 'magenta,green,yellow,blue,orange' 'pnpm test:web' 'pnpm test:ui' 'pnpm test:style' 'pnpm test:api' 'pnpm test:server'",
     "e2e": "pnpm run --filter '@screengeometry/web' e2e",
     "e2e:install": "pnpm run --filter '@screengeometry/web' e2e:install"
   },
   "devDependencies": {
     "concurrently": "catalog:",
     "husky": "^9.1.7",
-    "lint-staged": "^15.2.10"
+    "lint-staged": "^15.2.10",
+    "vitest": "catalog:"
   }
 }

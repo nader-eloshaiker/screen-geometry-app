@@ -124,6 +124,7 @@
     "vite-plugin-lib-inject-css": "catalog:",
     "vite-tsconfig-paths": "^5.1.4",
     "vitest": "catalog:",
+    "vitest-location-mock": "^1.0.4",
     "yup": "catalog:"
   }
 }

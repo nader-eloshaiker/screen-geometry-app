@@ -6,6 +6,7 @@
 
  */
 import { HttpResponse, delay, http } from 'msw'
+
 import type { SearchListResponse } from '../../models'
 
 export const getGetSearchResponseMock = (): SearchListResponse => ({

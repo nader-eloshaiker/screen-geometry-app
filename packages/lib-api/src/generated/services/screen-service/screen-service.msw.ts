@@ -6,6 +6,7 @@
 
  */
 import { HttpResponse, delay, http } from 'msw'
+
 import type { ScreenIdResponse, ScreenItemResponse } from '../../models'
 
 export const getCreateScreenResponseMock = (): ScreenItemResponse => ({

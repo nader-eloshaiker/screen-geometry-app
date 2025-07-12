@@ -9,7 +9,14 @@ import type { GetSearchOrder } from './getSearchOrder'
 import type { GetSearchSort } from './getSearchSort'
 
 export type GetSearchParams = {
+  /**
+   * @minimum 1
+   * @maximum 100
+   */
   limit?: number
+  /**
+   * @minimum 0
+   */
   offset?: number
   sort?: GetSearchSort
   order?: GetSearchOrder

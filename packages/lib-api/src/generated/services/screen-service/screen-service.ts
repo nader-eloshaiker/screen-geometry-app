@@ -6,9 +6,11 @@
 
  */
 import type {
+  DataTag,
   DefinedInitialDataOptions,
   DefinedUseQueryResult,
   MutationFunction,
+  QueryClient,
   QueryFunction,
   QueryKey,
   UndefinedInitialDataOptions,
@@ -18,50 +20,35 @@ import type {
   UseQueryResult,
 } from '@tanstack/react-query'
 import { useMutation, useQuery } from '@tanstack/react-query'
-import { useCallback } from 'react'
-import { useApiAxios } from '../../../axios/useApiAxios'
+
 import type { ErrorResponse, ScreenIdResponse, ScreenInput, ScreenItemResponse } from '../../models'
+
+import { serverApiClient } from '../../../axios/apiClient'
 
 /**
  * @summary Create a ScreenItem object
  */
-export const useCreateScreenHook = () => {
-  const createScreen = useApiAxios<ScreenItemResponse>()
-
-  return useCallback(
-    (screenInput: ScreenInput) => {
-      return createScreen({
-        url: `/v1/screen`,
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        data: screenInput,
-      })
-    },
-    [createScreen]
-  )
+export const createScreen = (screenInput: ScreenInput, signal?: AbortSignal) => {
+  return serverApiClient<ScreenItemResponse>({
+    url: `/v1/screen`,
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    data: screenInput,
+    signal,
+  })
 }
 
-export const useCreateScreenMutationOptions = <TError = ErrorResponse, TContext = unknown>(options?: {
-  mutation?: UseMutationOptions<
-    Awaited<ReturnType<ReturnType<typeof useCreateScreenHook>>>,
-    TError,
-    { data: ScreenInput },
-    TContext
-  >
-}): UseMutationOptions<
-  Awaited<ReturnType<ReturnType<typeof useCreateScreenHook>>>,
-  TError,
-  { data: ScreenInput },
-  TContext
-> => {
-  const { mutation: mutationOptions } = options ?? {}
+export const getCreateScreenMutationOptions = <TError = ErrorResponse, TContext = unknown>(options?: {
+  mutation?: UseMutationOptions<Awaited<ReturnType<typeof createScreen>>, TError, { data: ScreenInput }, TContext>
+}): UseMutationOptions<Awaited<ReturnType<typeof createScreen>>, TError, { data: ScreenInput }, TContext> => {
+  const mutationKey = ['createScreen']
+  const { mutation: mutationOptions } = options
+    ? options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey
+      ? options
+      : { ...options, mutation: { ...options.mutation, mutationKey } }
+    : { mutation: { mutationKey } }
 
-  const createScreen = useCreateScreenHook()
-
-  const mutationFn: MutationFunction<
-    Awaited<ReturnType<ReturnType<typeof useCreateScreenHook>>>,
-    { data: ScreenInput }
-  > = (props) => {
+  const mutationFn: MutationFunction<Awaited<ReturnType<typeof createScreen>>, { data: ScreenInput }> = (props) => {
     const { data } = props ?? {}
 
     return createScreen(data)
@@ -70,59 +57,41 @@ export const useCreateScreenMutationOptions = <TError = ErrorResponse, TContext 
   return { mutationFn, ...mutationOptions }
 }
 
-export type CreateScreenMutationResult = NonNullable<Awaited<ReturnType<ReturnType<typeof useCreateScreenHook>>>>
+export type CreateScreenMutationResult = NonNullable<Awaited<ReturnType<typeof createScreen>>>
 export type CreateScreenMutationBody = ScreenInput
 export type CreateScreenMutationError = ErrorResponse
 
 /**
  * @summary Create a ScreenItem object
  */
-export const useCreateScreen = <TError = ErrorResponse, TContext = unknown>(options?: {
-  mutation?: UseMutationOptions<
-    Awaited<ReturnType<ReturnType<typeof useCreateScreenHook>>>,
-    TError,
-    { data: ScreenInput },
-    TContext
-  >
-}): UseMutationResult<
-  Awaited<ReturnType<ReturnType<typeof useCreateScreenHook>>>,
-  TError,
-  { data: ScreenInput },
-  TContext
-> => {
-  const mutationOptions = useCreateScreenMutationOptions(options)
+export const useCreateScreen = <TError = ErrorResponse, TContext = unknown>(
+  options?: {
+    mutation?: UseMutationOptions<Awaited<ReturnType<typeof createScreen>>, TError, { data: ScreenInput }, TContext>
+  },
+  queryClient?: QueryClient
+): UseMutationResult<Awaited<ReturnType<typeof createScreen>>, TError, { data: ScreenInput }, TContext> => {
+  const mutationOptions = getCreateScreenMutationOptions(options)
 
-  return useMutation(mutationOptions)
+  return useMutation(mutationOptions, queryClient)
 }
 /**
  * @summary Show a screen
  */
-export const useShowScreenHook = () => {
-  const showScreen = useApiAxios<ScreenItemResponse>()
-
-  return useCallback(
-    (id: string) => {
-      return showScreen({ url: `/v1/screen/${id}/show`, method: 'PATCH' })
-    },
-    [showScreen]
-  )
+export const showScreen = (id: string) => {
+  return serverApiClient<ScreenItemResponse>({ url: `/v1/screen/${id}/show`, method: 'PATCH' })
 }
 
-export const useShowScreenMutationOptions = <TError = ErrorResponse, TContext = unknown>(options?: {
-  mutation?: UseMutationOptions<
-    Awaited<ReturnType<ReturnType<typeof useShowScreenHook>>>,
-    TError,
-    { id: string },
-    TContext
-  >
-}): UseMutationOptions<Awaited<ReturnType<ReturnType<typeof useShowScreenHook>>>, TError, { id: string }, TContext> => {
-  const { mutation: mutationOptions } = options ?? {}
+export const getShowScreenMutationOptions = <TError = ErrorResponse, TContext = unknown>(options?: {
+  mutation?: UseMutationOptions<Awaited<ReturnType<typeof showScreen>>, TError, { id: string }, TContext>
+}): UseMutationOptions<Awaited<ReturnType<typeof showScreen>>, TError, { id: string }, TContext> => {
+  const mutationKey = ['showScreen']
+  const { mutation: mutationOptions } = options
+    ? options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey
+      ? options
+      : { ...options, mutation: { ...options.mutation, mutationKey } }
+    : { mutation: { mutationKey } }
 
-  const showScreen = useShowScreenHook()
-
-  const mutationFn: MutationFunction<Awaited<ReturnType<ReturnType<typeof useShowScreenHook>>>, { id: string }> = (
-    props
-  ) => {
+  const mutationFn: MutationFunction<Awaited<ReturnType<typeof showScreen>>, { id: string }> = (props) => {
     const { id } = props ?? {}
 
     return showScreen(id)
@@ -131,110 +100,97 @@ export const useShowScreenMutationOptions = <TError = ErrorResponse, TContext = 
   return { mutationFn, ...mutationOptions }
 }
 
-export type ShowScreenMutationResult = NonNullable<Awaited<ReturnType<ReturnType<typeof useShowScreenHook>>>>
+export type ShowScreenMutationResult = NonNullable<Awaited<ReturnType<typeof showScreen>>>
 
 export type ShowScreenMutationError = ErrorResponse
 
 /**
  * @summary Show a screen
  */
-export const useShowScreen = <TError = ErrorResponse, TContext = unknown>(options?: {
-  mutation?: UseMutationOptions<
-    Awaited<ReturnType<ReturnType<typeof useShowScreenHook>>>,
-    TError,
-    { id: string },
-    TContext
-  >
-}): UseMutationResult<Awaited<ReturnType<ReturnType<typeof useShowScreenHook>>>, TError, { id: string }, TContext> => {
-  const mutationOptions = useShowScreenMutationOptions(options)
+export const useShowScreen = <TError = ErrorResponse, TContext = unknown>(
+  options?: { mutation?: UseMutationOptions<Awaited<ReturnType<typeof showScreen>>, TError, { id: string }, TContext> },
+  queryClient?: QueryClient
+): UseMutationResult<Awaited<ReturnType<typeof showScreen>>, TError, { id: string }, TContext> => {
+  const mutationOptions = getShowScreenMutationOptions(options)
 
-  return useMutation(mutationOptions)
+  return useMutation(mutationOptions, queryClient)
 }
 /**
  * @summary Get a screen by id
  */
-export const useGetScreenHook = () => {
-  const getScreen = useApiAxios<ScreenItemResponse>()
-
-  return useCallback(
-    (id: string, signal?: AbortSignal) => {
-      return getScreen({ url: `/v1/screen/${id}`, method: 'GET', signal })
-    },
-    [getScreen]
-  )
+export const getScreen = (id: string, signal?: AbortSignal) => {
+  return serverApiClient<ScreenItemResponse>({ url: `/v1/screen/${id}`, method: 'GET', signal })
 }
 
 export const getGetScreenQueryKey = (id: string) => {
   return [`/v1/screen/${id}`] as const
 }
 
-export const useGetScreenQueryOptions = <
-  TData = Awaited<ReturnType<ReturnType<typeof useGetScreenHook>>>,
-  TError = ErrorResponse,
->(
+export const getGetScreenQueryOptions = <TData = Awaited<ReturnType<typeof getScreen>>, TError = ErrorResponse>(
   id: string,
-  options?: {
-    query?: Partial<UseQueryOptions<Awaited<ReturnType<ReturnType<typeof useGetScreenHook>>>, TError, TData>>
-  }
+  options?: { query?: Partial<UseQueryOptions<Awaited<ReturnType<typeof getScreen>>, TError, TData>> }
 ) => {
   const { query: queryOptions } = options ?? {}
 
   const queryKey = queryOptions?.queryKey ?? getGetScreenQueryKey(id)
 
-  const getScreen = useGetScreenHook()
-
-  const queryFn: QueryFunction<Awaited<ReturnType<ReturnType<typeof useGetScreenHook>>>> = ({ signal }) =>
-    getScreen(id, signal)
+  const queryFn: QueryFunction<Awaited<ReturnType<typeof getScreen>>> = ({ signal }) => getScreen(id, signal)
 
   return { queryKey, queryFn, enabled: !!id, ...queryOptions } as UseQueryOptions<
-    Awaited<ReturnType<ReturnType<typeof useGetScreenHook>>>,
+    Awaited<ReturnType<typeof getScreen>>,
     TError,
     TData
-  > & { queryKey: QueryKey }
+  > & { queryKey: DataTag<QueryKey, TData, TError> }
 }
 
-export type GetScreenQueryResult = NonNullable<Awaited<ReturnType<ReturnType<typeof useGetScreenHook>>>>
+export type GetScreenQueryResult = NonNullable<Awaited<ReturnType<typeof getScreen>>>
 export type GetScreenQueryError = ErrorResponse
 
-export function useGetScreen<TData = Awaited<ReturnType<ReturnType<typeof useGetScreenHook>>>, TError = ErrorResponse>(
+export function useGetScreen<TData = Awaited<ReturnType<typeof getScreen>>, TError = ErrorResponse>(
   id: string,
   options: {
-    query: Partial<UseQueryOptions<Awaited<ReturnType<ReturnType<typeof useGetScreenHook>>>, TError, TData>> &
+    query: Partial<UseQueryOptions<Awaited<ReturnType<typeof getScreen>>, TError, TData>> &
       Pick<
-        DefinedInitialDataOptions<Awaited<ReturnType<ReturnType<typeof useGetScreenHook>>>, TError, TData>,
+        DefinedInitialDataOptions<Awaited<ReturnType<typeof getScreen>>, TError, Awaited<ReturnType<typeof getScreen>>>,
         'initialData'
       >
-  }
-): DefinedUseQueryResult<TData, TError> & { queryKey: QueryKey }
-export function useGetScreen<TData = Awaited<ReturnType<ReturnType<typeof useGetScreenHook>>>, TError = ErrorResponse>(
+  },
+  queryClient?: QueryClient
+): DefinedUseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+export function useGetScreen<TData = Awaited<ReturnType<typeof getScreen>>, TError = ErrorResponse>(
   id: string,
   options?: {
-    query?: Partial<UseQueryOptions<Awaited<ReturnType<ReturnType<typeof useGetScreenHook>>>, TError, TData>> &
+    query?: Partial<UseQueryOptions<Awaited<ReturnType<typeof getScreen>>, TError, TData>> &
       Pick<
-        UndefinedInitialDataOptions<Awaited<ReturnType<ReturnType<typeof useGetScreenHook>>>, TError, TData>,
+        UndefinedInitialDataOptions<
+          Awaited<ReturnType<typeof getScreen>>,
+          TError,
+          Awaited<ReturnType<typeof getScreen>>
+        >,
         'initialData'
       >
-  }
-): UseQueryResult<TData, TError> & { queryKey: QueryKey }
-export function useGetScreen<TData = Awaited<ReturnType<ReturnType<typeof useGetScreenHook>>>, TError = ErrorResponse>(
+  },
+  queryClient?: QueryClient
+): UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+export function useGetScreen<TData = Awaited<ReturnType<typeof getScreen>>, TError = ErrorResponse>(
   id: string,
-  options?: {
-    query?: Partial<UseQueryOptions<Awaited<ReturnType<ReturnType<typeof useGetScreenHook>>>, TError, TData>>
-  }
-): UseQueryResult<TData, TError> & { queryKey: QueryKey }
+  options?: { query?: Partial<UseQueryOptions<Awaited<ReturnType<typeof getScreen>>, TError, TData>> },
+  queryClient?: QueryClient
+): UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
 /**
  * @summary Get a screen by id
  */
 
-export function useGetScreen<TData = Awaited<ReturnType<ReturnType<typeof useGetScreenHook>>>, TError = ErrorResponse>(
+export function useGetScreen<TData = Awaited<ReturnType<typeof getScreen>>, TError = ErrorResponse>(
   id: string,
-  options?: {
-    query?: Partial<UseQueryOptions<Awaited<ReturnType<ReturnType<typeof useGetScreenHook>>>, TError, TData>>
-  }
-): UseQueryResult<TData, TError> & { queryKey: QueryKey } {
-  const queryOptions = useGetScreenQueryOptions(id, options)
+  options?: { query?: Partial<UseQueryOptions<Awaited<ReturnType<typeof getScreen>>, TError, TData>> },
+  queryClient?: QueryClient
+): UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
+  const queryOptions = getGetScreenQueryOptions(id, options)
 
-  const query = useQuery(queryOptions) as UseQueryResult<TData, TError> & { queryKey: QueryKey }
+  const query = useQuery(queryOptions, queryClient) as UseQueryResult<TData, TError> & {
+    queryKey: DataTag<QueryKey, TData, TError>
+  }
 
   query.queryKey = queryOptions.queryKey
 
@@ -244,43 +200,38 @@ export function useGetScreen<TData = Awaited<ReturnType<ReturnType<typeof useGet
 /**
  * @summary Update a screen
  */
-export const useUpdateScreenHook = () => {
-  const updateScreen = useApiAxios<ScreenItemResponse>()
-
-  return useCallback(
-    (id: string, screenInput: ScreenInput) => {
-      return updateScreen({
-        url: `/v1/screen/${id}`,
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
-        data: screenInput,
-      })
-    },
-    [updateScreen]
-  )
+export const updateScreen = (id: string, screenInput: ScreenInput) => {
+  return serverApiClient<ScreenItemResponse>({
+    url: `/v1/screen/${id}`,
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json' },
+    data: screenInput,
+  })
 }
 
-export const useUpdateScreenMutationOptions = <TError = ErrorResponse, TContext = unknown>(options?: {
+export const getUpdateScreenMutationOptions = <TError = ErrorResponse, TContext = unknown>(options?: {
   mutation?: UseMutationOptions<
-    Awaited<ReturnType<ReturnType<typeof useUpdateScreenHook>>>,
+    Awaited<ReturnType<typeof updateScreen>>,
     TError,
     { id: string; data: ScreenInput },
     TContext
   >
 }): UseMutationOptions<
-  Awaited<ReturnType<ReturnType<typeof useUpdateScreenHook>>>,
+  Awaited<ReturnType<typeof updateScreen>>,
   TError,
   { id: string; data: ScreenInput },
   TContext
 > => {
-  const { mutation: mutationOptions } = options ?? {}
+  const mutationKey = ['updateScreen']
+  const { mutation: mutationOptions } = options
+    ? options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey
+      ? options
+      : { ...options, mutation: { ...options.mutation, mutationKey } }
+    : { mutation: { mutationKey } }
 
-  const updateScreen = useUpdateScreenHook()
-
-  const mutationFn: MutationFunction<
-    Awaited<ReturnType<ReturnType<typeof useUpdateScreenHook>>>,
-    { id: string; data: ScreenInput }
-  > = (props) => {
+  const mutationFn: MutationFunction<Awaited<ReturnType<typeof updateScreen>>, { id: string; data: ScreenInput }> = (
+    props
+  ) => {
     const { id, data } = props ?? {}
 
     return updateScreen(id, data)
@@ -289,64 +240,46 @@ export const useUpdateScreenMutationOptions = <TError = ErrorResponse, TContext 
   return { mutationFn, ...mutationOptions }
 }
 
-export type UpdateScreenMutationResult = NonNullable<Awaited<ReturnType<ReturnType<typeof useUpdateScreenHook>>>>
+export type UpdateScreenMutationResult = NonNullable<Awaited<ReturnType<typeof updateScreen>>>
 export type UpdateScreenMutationBody = ScreenInput
 export type UpdateScreenMutationError = ErrorResponse
 
 /**
  * @summary Update a screen
  */
-export const useUpdateScreen = <TError = ErrorResponse, TContext = unknown>(options?: {
-  mutation?: UseMutationOptions<
-    Awaited<ReturnType<ReturnType<typeof useUpdateScreenHook>>>,
-    TError,
-    { id: string; data: ScreenInput },
-    TContext
-  >
-}): UseMutationResult<
-  Awaited<ReturnType<ReturnType<typeof useUpdateScreenHook>>>,
-  TError,
-  { id: string; data: ScreenInput },
-  TContext
-> => {
-  const mutationOptions = useUpdateScreenMutationOptions(options)
+export const useUpdateScreen = <TError = ErrorResponse, TContext = unknown>(
+  options?: {
+    mutation?: UseMutationOptions<
+      Awaited<ReturnType<typeof updateScreen>>,
+      TError,
+      { id: string; data: ScreenInput },
+      TContext
+    >
+  },
+  queryClient?: QueryClient
+): UseMutationResult<Awaited<ReturnType<typeof updateScreen>>, TError, { id: string; data: ScreenInput }, TContext> => {
+  const mutationOptions = getUpdateScreenMutationOptions(options)
 
-  return useMutation(mutationOptions)
+  return useMutation(mutationOptions, queryClient)
 }
 /**
  * @summary Delete a screen
  */
-export const useDeleteScreenHook = () => {
-  const deleteScreen = useApiAxios<ScreenIdResponse>()
-
-  return useCallback(
-    (id: string) => {
-      return deleteScreen({ url: `/v1/screen/${id}`, method: 'DELETE' })
-    },
-    [deleteScreen]
-  )
+export const deleteScreen = (id: string) => {
+  return serverApiClient<ScreenIdResponse>({ url: `/v1/screen/${id}`, method: 'DELETE' })
 }
 
-export const useDeleteScreenMutationOptions = <TError = ErrorResponse, TContext = unknown>(options?: {
-  mutation?: UseMutationOptions<
-    Awaited<ReturnType<ReturnType<typeof useDeleteScreenHook>>>,
-    TError,
-    { id: string },
-    TContext
-  >
-}): UseMutationOptions<
-  Awaited<ReturnType<ReturnType<typeof useDeleteScreenHook>>>,
-  TError,
-  { id: string },
-  TContext
-> => {
-  const { mutation: mutationOptions } = options ?? {}
+export const getDeleteScreenMutationOptions = <TError = ErrorResponse, TContext = unknown>(options?: {
+  mutation?: UseMutationOptions<Awaited<ReturnType<typeof deleteScreen>>, TError, { id: string }, TContext>
+}): UseMutationOptions<Awaited<ReturnType<typeof deleteScreen>>, TError, { id: string }, TContext> => {
+  const mutationKey = ['deleteScreen']
+  const { mutation: mutationOptions } = options
+    ? options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey
+      ? options
+      : { ...options, mutation: { ...options.mutation, mutationKey } }
+    : { mutation: { mutationKey } }
 
-  const deleteScreen = useDeleteScreenHook()
-
-  const mutationFn: MutationFunction<Awaited<ReturnType<ReturnType<typeof useDeleteScreenHook>>>, { id: string }> = (
-    props
-  ) => {
+  const mutationFn: MutationFunction<Awaited<ReturnType<typeof deleteScreen>>, { id: string }> = (props) => {
     const { id } = props ?? {}
 
     return deleteScreen(id)
@@ -355,27 +288,20 @@ export const useDeleteScreenMutationOptions = <TError = ErrorResponse, TContext 
   return { mutationFn, ...mutationOptions }
 }
 
-export type DeleteScreenMutationResult = NonNullable<Awaited<ReturnType<ReturnType<typeof useDeleteScreenHook>>>>
+export type DeleteScreenMutationResult = NonNullable<Awaited<ReturnType<typeof deleteScreen>>>
 
 export type DeleteScreenMutationError = ErrorResponse
 
 /**
  * @summary Delete a screen
  */
-export const useDeleteScreen = <TError = ErrorResponse, TContext = unknown>(options?: {
-  mutation?: UseMutationOptions<
-    Awaited<ReturnType<ReturnType<typeof useDeleteScreenHook>>>,
-    TError,
-    { id: string },
-    TContext
-  >
-}): UseMutationResult<
-  Awaited<ReturnType<ReturnType<typeof useDeleteScreenHook>>>,
-  TError,
-  { id: string },
-  TContext
-> => {
-  const mutationOptions = useDeleteScreenMutationOptions(options)
+export const useDeleteScreen = <TError = ErrorResponse, TContext = unknown>(
+  options?: {
+    mutation?: UseMutationOptions<Awaited<ReturnType<typeof deleteScreen>>, TError, { id: string }, TContext>
+  },
+  queryClient?: QueryClient
+): UseMutationResult<Awaited<ReturnType<typeof deleteScreen>>, TError, { id: string }, TContext> => {
+  const mutationOptions = getDeleteScreenMutationOptions(options)
 
-  return useMutation(mutationOptions)
+  return useMutation(mutationOptions, queryClient)
 }

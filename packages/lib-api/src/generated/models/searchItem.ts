@@ -10,6 +10,12 @@
  * Complete search object
  */
 export interface SearchItem {
+  /** @minLength 1 */
+  id: string
+  /** @minLength 1 */
+  name: string
+  /** @minLength 1 */
+  label: string
   /** @minLength 3 */
   aspectRatio: string
   /**
@@ -20,12 +26,6 @@ export interface SearchItem {
    * @minimum 0
    */
   hRes: number
-  /** @minLength 1 */
-  id: string
-  /** @minLength 1 */
-  label: string
-  /** @minLength 1 */
-  name: string
   /**
    * @minimum 0
    */

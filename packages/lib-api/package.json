@@ -17,16 +17,17 @@
     "lint:staged": "pnpm exec lint-staged",
     "format": "prettier . --write",
     "format:check": "prettier . --check",
-    "gen:spec": "orval --config ./orval.server.config.ts",
+    "gen:spec": "pnpm --filter=@screengeometry/spec-server build && orval --config ./orval.server.config.ts",
     "test": "vitest run --coverage.enabled=true",
     "test:watch": "vitest watch --coverage.enabled=true",
     "test:ui": "vitest watch --ui --coverage.enabled=true"
   },
   "dependencies": {
     "@tanstack/react-query": "catalog:",
-    "axios": "^1.7.7",
+    "axios": "^1.7.9",
     "fuzzysort": "^3.0.2",
-    "msw": "^2.10.2"
+    "msw": "^2.10.2",
+    "uuid": "^11.1.0"
   },
   "peerDependencies": {
     "react": "catalog:react18",
@@ -56,13 +57,14 @@
     "globals": "^15.14.0",
     "jsdom": "^25.0.1",
     "lint-staged": "^15.2.10",
-    "orval": "^7.1.1",
+    "orval": "^7.5.0",
     "prettier": "catalog:",
     "prettier-plugin-organize-imports": "^4.1.0",
     "react": "catalog:react18",
     "react-dom": "catalog:react18",
     "typescript": "~5.6.2",
     "vite": "catalog:",
-    "vitest": "catalog:"
+    "vitest": "catalog:",
+    "vitest-mock-axios": "^0.1.0"
   }
 }

@@ -9,9 +9,9 @@ import type { ErrorResponseErrorDetails } from './errorResponseErrorDetails'
 
 export type ErrorResponseError = {
   code: number
-  details?: ErrorResponseErrorDetails
   /** @minLength 1 */
   message?: string
   /** @minLength 1 */
   status: string
+  details?: ErrorResponseErrorDetails
 }
