@@ -5,11 +5,10 @@
   "type": "module",
   "exports": {
     "./spec": "./src/generated/index.ts",
-    "./internal": "./src/models/index.ts"
+    "./internal": "./src/internal/index.ts"
   },
   "scripts": {
     "dev": "vite",
-    "prepublishOnly": "pnpm run build",
     "build": "tsc --project ./tsconfig-build.json && vite build",
     "preview": "vite preview",
     "lint": "eslint .",
@@ -25,7 +24,6 @@
   "dependencies": {
     "@tanstack/react-query": "catalog:",
     "axios": "^1.7.9",
-    "fuzzysort": "^3.0.2",
     "msw": "^2.10.2",
     "uuid": "^11.1.0"
   },

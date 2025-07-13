@@ -4,6 +4,7 @@
   "private": false,
   "type": "module",
   "scripts": {
+    "pre-push": "pnpm exec vitest run --changed origin/main",
     "prepare": "pnpx msw init",
     "dev": "vite",
     "dev:e2e": "vite --mode development --port 3000",
@@ -15,7 +16,6 @@
     "lint:fix": "eslint --fix",
     "lint:staged": "pnpm exec lint-staged",
     "format": "prettier --write .",
-    "pre-push": "pnpm exec vitest run --changed origin/main",
     "gen:routes": "tsr generate",
     "gen:testbadges": "vitest --run --coverage && node ./tools/createCoverageBadges.cjs",
     "test": "vitest run --coverage.enabled=true",
@@ -41,7 +41,6 @@
     "axios": "^1.7.9",
     "clsx": "^2.1.0",
     "framer-motion": "^11.2.10",
-    "fuzzysort": "^3.0.2",
     "html-react-parser": "^5.2.2",
     "lucide-react": "catalog:",
     "msw": "^2.10.2",

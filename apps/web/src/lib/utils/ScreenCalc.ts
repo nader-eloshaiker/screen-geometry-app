@@ -1,7 +1,7 @@
 import { ScreenItemRender } from '@/app/models/screenItemRender'
-import { Dimensions } from '@screengeometry/lib-api/internal'
 import { ScreenColor, ScreenItem } from '@screengeometry/lib-api/spec'
 import { lightness } from 'simpler-color'
+import { Dimensions } from '../../../../../packages/lib-api/src/internal'
 
 const hslToHex = (hue: number, saturation: number, light: number) => {
   const lightPercentage = light / 100
