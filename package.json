@@ -13,8 +13,9 @@
   "scripts": {
     "preinstall": "npx only-allow pnpm",
     "prepare": "husky",
+    "pre-push:server": "pnpm --filter @screengeometry/server pre-push",
     "pre-push:ui": "pnpm --filter @screengeometry/web pre-push",
-    "pre-push": "concurrently  -n 'web,server' -c 'magenta,blue' 'pnpm pre-push:ui'",
+    "pre-push": "concurrently  -n 'web,server' -c 'magenta,blue' 'pnpm pre-push:ui' 'pnpm pre-push:server'",
     "start:ui": "pnpm --filter '@screengeometry/web' dev",
     "start": "concurrently  -n 'web,server' -c 'magenta,blue' 'pnpm start:ui'",
     "build": "pnpm --filter @screengeometry/web build",
