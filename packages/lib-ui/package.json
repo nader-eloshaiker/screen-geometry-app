@@ -26,8 +26,8 @@
     "./tooltip": "./src/components/tooltip/index.ts"
   },
   "scripts": {
+    "pre-push": "pnpm exec vitest run --changed origin/main",
     "dev": "vite",
-    "prepublishOnly": "pnpm run build",
     "build": "tsc --project ./tsconfig-build.json && vite build",
     "preview": "vite preview",
     "lint": "eslint .",
