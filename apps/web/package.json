@@ -19,7 +19,7 @@
     "gen:routes": "tsr generate",
     "gen:testbadges": "vitest --run --coverage && node ./tools/createCoverageBadges.cjs",
     "test": "vitest run --coverage.enabled=true",
-    "test:ci": "vitest run --coverage.enabled=true",
+    "test:ci": "vitest run --coverage.enabled=false",
     "test:watch": "vitest watch --coverage.enabled=true",
     "test:ui": "vitest watch --ui --coverage.enabled=true",
     "e2e": "pnpm exec playwright test",

@@ -36,7 +36,7 @@
     "format": "prettier . --write",
     "format:check": "prettier . --check",
     "test": "vitest run --coverage.enabled=true",
-    "test:ci": "vitest run --coverage.enabled=true",
+    "test:ci": "vitest run --coverage.enabled=false",
     "test:watch": "vitest watch --coverage.enabled=true",
     "test:ui": "vitest watch --ui --coverage.enabled=true",
     "sb": "storybook dev -p 6006",
