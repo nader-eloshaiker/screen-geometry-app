@@ -64,7 +64,7 @@ jobs:
         uses: tj-actions/changed-files@v46
         with:
           files: |
-            apps/web/src/lib/ui/components/**
+            packages/lib-ui/src/components/**
   designsystem-test:
     name: Run Design System Testing
     needs: [changed-files]

@@ -47,7 +47,4 @@ jobs:
         with:
           name: unit-code-coverage-report
           path: |
-            ./apps/server/coverage/unit/
-            ./apps/web/coverage/unit/
-            ./packages/lib-api/coverage/unit/
-            ./packages/lib-ui/coverage/unit/
+            ./coverage/unit/

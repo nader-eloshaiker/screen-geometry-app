@@ -1,4 +1,4 @@
-name: 'Design System Test Task'
+name: "Design System Test Task"
 
 on: workflow_call
 
@@ -14,7 +14,7 @@ jobs:
 
       - uses: actions/setup-node@v4
         with:
-          node-version-file: '.nvmrc'
+          node-version-file: ".nvmrc"
 
       - name: Install pnpm
         uses: pnpm/action-setup@v4.1.0
@@ -41,4 +41,5 @@ jobs:
         with:
           # ⚠️ Make sure to configure a `CHROMATIC_PROJECT_TOKEN` repository secret
           projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
-          autoAcceptChanges: 'main'
+          autoAcceptChanges: "main"
+          workingDir: packages/lib-ui
