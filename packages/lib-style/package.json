@@ -47,6 +47,7 @@
     "react-hook-form": "catalog:react18",
     "tailwind-merge": "catalog:tailwindcss3",
     "tailwindcss": "catalog:tailwindcss3",
+    "tailwindcss-animate": "catalog:tailwindcss3",
     "typescript": "~5.6.2",
     "vite": "catalog:",
     "vite-plugin-dts": "^4.5.3",

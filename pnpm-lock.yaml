@@ -688,6 +688,9 @@ importers:
       tailwindcss:
         specifier: catalog:tailwindcss3
         version: 3.4.17
+      tailwindcss-animate:
+        specifier: catalog:tailwindcss3
+        version: 1.0.7(tailwindcss@3.4.17)
       typescript:
         specifier: ~5.6.2
         version: 5.6.3
