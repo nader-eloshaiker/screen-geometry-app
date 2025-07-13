@@ -10,7 +10,7 @@ import { toScreenItemRender, transformScreenInput } from '@/lib/utils'
 import { getScreenListServiceMock, getScreenServiceMock, getSearchServiceMock } from '@screengeometry/lib-api/spec'
 import { Toaster } from '@screengeometry/lib-ui/toaster'
 import { render, waitFor } from '@testing-library/react'
-import { act, useState } from 'react'
+import { useState } from 'react'
 import { FormModeTypes, ScreenFormDrawer } from './ScreenFormDrawer'
 
 const ListComponent = () => {
@@ -75,7 +75,7 @@ describe('#ScreenFormDrawer', () => {
 
       expect(test.getByText('formState:open')).toBeTruthy()
 
-      await act(async () => await test.user.keyboard('{Escape}'))
+      await waitFor(async () => await test.user.keyboard('{Escape}'))
 
       expect(await test.findByText('formState:close')).toBeTruthy()
     })
@@ -91,12 +91,12 @@ describe('#ScreenFormDrawer', () => {
       await waitFor(() => expect(inputScreenSize).toHaveValue(38))
 
       // const inputScreenSize = test.getByLabelText('Screen Size')
-      await act(async () => await test.user.clear(inputScreenSize))
+      await waitFor(async () => await test.user.clear(inputScreenSize))
 
-      await act(async () => await test.user.type(inputScreenSize, '27'))
+      await waitFor(async () => await test.user.type(inputScreenSize, '27'))
 
       const submitButton = test.getByText('Update')
-      await act(async () => await test.user.click(submitButton))
+      await waitFor(async () => await test.user.click(submitButton))
 
       expect(test.getByTestId('busySubmitButton')).toBeInTheDocument()
     })
@@ -105,19 +105,19 @@ describe('#ScreenFormDrawer', () => {
       const test = await renderWithUserEvents(<RootTestComponent />)
 
       const inputScreenSize = test.getByLabelText('Screen Size')
-      await act(async () => await test.user.type(inputScreenSize, '27'))
+      await waitFor(async () => await test.user.type(inputScreenSize, '27'))
 
       const ratioElement = test.getByLabelText('Aspect Ratio')
-      await act(async () => await test.user.type(ratioElement, '32:9'))
+      await waitFor(async () => await test.user.type(ratioElement, '32:9'))
 
       const hResElement = test.getByLabelText('Horizontal Res')
-      await act(async () => await test.user.type(hResElement, '5120'))
+      await waitFor(async () => await test.user.type(hResElement, '5120'))
 
       const vResElement = test.getByLabelText('Vertical Res')
-      await act(async () => await test.user.type(vResElement, '1440'))
+      await waitFor(async () => await test.user.type(vResElement, '1440'))
 
       const submitButton = test.getByText('Create')
-      await act(async () => await test.user.click(submitButton))
+      await waitFor(async () => await test.user.click(submitButton))
 
       expect(test.getByTestId('busySubmitButton')).toBeInTheDocument()
     })
@@ -156,12 +156,12 @@ describe('#ScreenFormDrawer', () => {
 
       const resetButton = test.getByText('Reset')
 
-      await act(async () => await test.user.clear(inputScreenSize))
-      await act(async () => await test.user.type(inputScreenSize, '27'))
+      await waitFor(async () => await test.user.clear(inputScreenSize))
+      await waitFor(async () => await test.user.type(inputScreenSize, '27'))
 
       expect(inputScreenSize).toHaveValue(27)
 
-      await act(async () => await test.user.click(resetButton))
+      await waitFor(async () => await test.user.click(resetButton))
       expect(inputScreenSize).toHaveValue(38)
     })
 
@@ -180,7 +180,7 @@ describe('#ScreenFormDrawer', () => {
       expect(lightColor).toHaveValue('#F6693C')
       expect(darkColor).toHaveValue('#C33609')
 
-      await act(async () => await test.user.click(changeButton))
+      await waitFor(async () => await test.user.click(changeButton))
 
       expect(lightColor).not.toHaveValue('#F6693C')
       expect(darkColor).not.toHaveValue('#C33609')
@@ -199,12 +199,12 @@ describe('#ScreenFormDrawer', () => {
       const inputScreenSize = test.getByLabelText('Screen Size')
       await waitFor(() => expect(inputScreenSize).toHaveValue(38))
 
-      await act(async () => await test.user.clear(inputScreenSize))
-      await act(async () => await test.user.type(inputScreenSize, '34'))
+      await waitFor(async () => await test.user.clear(inputScreenSize))
+      await waitFor(async () => await test.user.type(inputScreenSize, '34'))
 
       const updateButton = test.getByText('Update')
       expect(updateButton).toBeEnabled()
-      await act(async () => await test.user.click(updateButton))
+      await waitFor(async () => await test.user.click(updateButton))
 
       await waitFor(() => expect(updateButton).not.toBeEnabled())
     })
@@ -234,10 +234,10 @@ describe('#ScreenFormDrawer', () => {
       window.HTMLElement.prototype.scrollIntoView = function () {}
 
       const searchButton = test.getByText(/Select Screen/i)
-      await act(async () => await test.user.click(searchButton))
+      await waitFor(async () => await test.user.click(searchButton))
 
       const listElement = test.getByText(/WQHD 34" 3440x1440 21:9/i)
-      await act(async () => await test.user.click(listElement))
+      await waitFor(async () => await test.user.click(listElement))
 
       expect(test.getByLabelText('Screen Size')).toHaveValue(34)
       expect(test.getByLabelText('Aspect Ratio')).toHaveValue('21:9')
@@ -257,21 +257,21 @@ describe('#ScreenFormDrawer', () => {
       window.HTMLElement.prototype.scrollIntoView = function () {}
 
       const searchButton = test.getByText(/Select Screen/i)
-      await act(async () => await test.user.click(searchButton))
+      await waitFor(async () => await test.user.click(searchButton))
 
       const inputElement = test.getByPlaceholderText(/Search Screen list/i)
-      await act(async () => await test.user.type(inputElement, 'WQHD+'))
+      await waitFor(async () => await test.user.type(inputElement, 'WQHD+'))
 
       await waitFor(() => expect(mswObj.apiEventStack.length).toBe(1))
       expect(mswObj.apiEventStack[0]).toContain('http://dev.api.screengeometry.com/v1/search?term=')
 
       const listElement = test.getByText(/WQHD 34" 3440x1440 21:9/i)
-      await act(async () => await test.user.click(listElement))
+      await waitFor(async () => await test.user.click(listElement))
 
       const createButton = test.getByText('Create')
       await waitFor(() => expect(createButton).toBeEnabled())
 
-      await act(async () => await test.user.click(createButton))
+      await waitFor(async () => await test.user.click(createButton))
 
       await waitFor(() => expect(createButton).not.toBeEnabled())
     })

@@ -8,7 +8,7 @@
     "./indexedDB": "./src/db/IndexedDB.ts"
   },
   "scripts": {
-    "pre-push": "pnpm exec vitest run --changed origin/main",
+    "pre-push": "pnpm test:ci",
     "dev": "vite",
     "build": "tsc --project ./tsconfig-build.json && vite build",
     "preview": "vite preview",
@@ -18,6 +18,7 @@
     "format": "prettier . --write",
     "format:check": "prettier . --check",
     "test": "vitest run --coverage.enabled=true",
+    "test:ci": "vitest run --coverage.enabled=true",
     "test:watch": "vitest watch --coverage.enabled=true",
     "test:ui": "vitest watch --ui --coverage.enabled=true"
   },

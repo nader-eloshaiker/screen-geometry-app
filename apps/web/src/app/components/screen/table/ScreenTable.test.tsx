@@ -14,7 +14,7 @@ import {
 } from '@screengeometry/lib-api/spec'
 import { Toaster } from '@screengeometry/lib-ui/toaster'
 import { waitFor } from '@testing-library/react'
-import { act, useState } from 'react'
+import { useState } from 'react'
 import { HelmetProvider } from 'react-helmet-async'
 import { ScreenTable } from './ScreenTable'
 
@@ -93,7 +93,7 @@ describe('#ScreenTable', () => {
     const deleteElements = await test.findAllByTitle('Delete')
     expect(deleteElements.length).toBe(4)
 
-    await act(async () => {
+    await waitFor(async () => {
       await test.user.click(deleteElements[0])
     })
 
@@ -112,7 +112,7 @@ describe('#ScreenTable', () => {
     expect(showElements.length).toBe(4)
     const showElement = showElements[0]
 
-    await act(async () => {
+    await waitFor(async () => {
       await test.user.click(showElement)
     })
 

@@ -1,5 +1,5 @@
 import { renderWithUserEvents } from '@/lib/support/test/utils/RenderWithUserEvents'
-import { act } from 'react'
+import { waitFor } from '@testing-library/react'
 import { HAlignKey, HorizontalAlignmentSelector, VAlignKey, VerticalAlignmentSelector } from './AlignmentSelector'
 
 describe('#AlignmentSelector', () => {
@@ -22,21 +22,21 @@ describe('#AlignmentSelector', () => {
       const { getAllByRole, user } = await renderWithUserEvents(<VerticalAlignmentSelector onChange={onChangeMock} />)
       const elements = getAllByRole('radio')
 
-      await act(async () => {
+      await waitFor(async () => {
         await user.click(elements[0])
       })
 
       expect(onChangeMock).toHaveBeenCalledWith('start')
       expect(window.localStorage.setItem).toHaveBeenCalledWith(VAlignKey, '"start"')
 
-      await act(async () => {
+      await waitFor(async () => {
         await user.click(elements[1])
       })
 
       expect(onChangeMock).toHaveBeenCalledWith('center')
       expect(window.localStorage.setItem).toHaveBeenCalledWith(VAlignKey, '"center"')
 
-      await act(async () => {
+      await waitFor(async () => {
         await user.click(elements[2])
       })
 
@@ -58,21 +58,21 @@ describe('#AlignmentSelector', () => {
       const { getAllByRole, user } = await renderWithUserEvents(<HorizontalAlignmentSelector onChange={onChangeMock} />)
       const elements = getAllByRole('radio')
 
-      await act(async () => {
+      await waitFor(async () => {
         await user.click(elements[0])
       })
 
       expect(onChangeMock).toHaveBeenCalledWith('start')
       expect(window.localStorage.setItem).toHaveBeenCalledWith(HAlignKey, '"start"')
 
-      await act(async () => {
+      await waitFor(async () => {
         await user.click(elements[1])
       })
 
       expect(onChangeMock).toHaveBeenCalledWith('center')
       expect(window.localStorage.setItem).toHaveBeenCalledWith(HAlignKey, '"center"')
 
-      await act(async () => {
+      await waitFor(async () => {
         await user.click(elements[2])
       })
 

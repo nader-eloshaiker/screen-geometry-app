@@ -4,7 +4,7 @@
   "private": false,
   "type": "module",
   "scripts": {
-    "pre-push": "pnpm exec vitest run --changed origin/main",
+    "pre-push": "pnpm test:ci",
     "prepare": "pnpx msw init",
     "dev": "vite",
     "dev:e2e": "vite --mode development --port 3000",
@@ -19,6 +19,7 @@
     "gen:routes": "tsr generate",
     "gen:testbadges": "vitest --run --coverage && node ./tools/createCoverageBadges.cjs",
     "test": "vitest run --coverage.enabled=true",
+    "test:ci": "vitest run --coverage.enabled=true",
     "test:watch": "vitest watch --coverage.enabled=true",
     "test:ui": "vitest watch --ui --coverage.enabled=true",
     "e2e": "pnpm exec playwright test",

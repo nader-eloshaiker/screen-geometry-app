@@ -23,9 +23,9 @@ const Config: ViteUserConfig = {
       include: ['src/**/*.{ts,tsx}'],
       exclude: [
         ...configDefaults.exclude,
-        '**assets/**/*',
-        'src/app/routes/**/*',
-        'src/lib/**/*',
+        '**/assets',
+        'src/app/routes',
+        'src/lib',
         'src/**/*.mock.{ts,tsx}',
         'src/**/*.stories.tsx',
         'src/**/*.d.ts',
