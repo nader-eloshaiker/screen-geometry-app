@@ -1,8 +1,9 @@
-import { Input, TInputVariantsPalette } from '@/components/input'
-import { Label } from '@/components/label'
 import { StateTable } from '@/storybook/StateTable'
 import type { Meta, StoryObj } from '@storybook/react'
 import { fn } from '@storybook/test'
+import { Label } from '../label'
+import { Input } from './Input'
+import { TInputVariantsPalette } from './Input.variants'
 
 const meta = {
   title: 'elements/Input',

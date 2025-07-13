@@ -1,4 +1,6 @@
-import { Button } from '@/components/button'
+import type { Meta, StoryObj } from '@storybook/react'
+import { useState } from 'react'
+import { Button } from '../button'
 import {
   Drawer,
   DrawerClose,
@@ -8,11 +10,9 @@ import {
   DrawerHeader,
   DrawerTitle,
   DrawerTrigger,
-} from '@/components/drawer'
-import { Input } from '@/components/input'
-import { Label } from '@/components/label'
-import type { Meta, StoryObj } from '@storybook/react'
-import { useState } from 'react'
+} from '../drawer'
+import { Input } from '../input'
+import { Label } from '../label'
 
 const meta = {
   title: 'Elements/Drawer',

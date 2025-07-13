@@ -1,4 +1,4 @@
-import { renderWithUserEvents } from '@/lib/support/test/utils/RenderWithUserEvents'
+import { renderWithUserEvents } from '../../lib/support/test/utils/RenderWithUserEvents'
 import { Input } from './Input'
 
 describe('#OverlayInputField', () => {

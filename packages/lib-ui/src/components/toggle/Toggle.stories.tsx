@@ -1,8 +1,9 @@
-import { Toggle, TToggleMode, TTogglePalette, TToggleSize } from '@/components/toggle'
 import { StateTable } from '@/storybook/StateTable'
 import type { Meta, StoryObj } from '@storybook/react'
 import { fn } from '@storybook/test'
 import { Italic } from 'lucide-react'
+import { Toggle } from './Toggle'
+import { TToggleMode, TTogglePalette, TToggleSize } from './Toggle.variants'
 
 const meta = {
   title: 'Elements/Toggle',

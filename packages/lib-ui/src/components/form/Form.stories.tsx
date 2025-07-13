@@ -1,11 +1,11 @@
-import { Button } from '@/components/button'
-import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from '@/components/form'
-import { Input } from '@/components/input'
 import { yupResolver } from '@hookform/resolvers/yup'
 import type { Meta, StoryObj } from '@storybook/react'
 import { useForm } from 'react-hook-form'
 import * as yup from 'yup'
 import { ObjectSchema } from 'yup'
+import { Button } from '../button'
+import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from '../form'
+import { Input } from '../input'
 
 const meta = {
   title: 'Elements/Form',

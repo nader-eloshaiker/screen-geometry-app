@@ -1,18 +1,11 @@
-import { Button } from '@/components/button'
-import {
-  Command,
-  CommandEmpty,
-  CommandGroup,
-  CommandInput,
-  CommandItem,
-  CommandList,
-} from '@/components/command/Command'
 import { cn } from '@/lib/utils'
 import { Popover, PopoverContent, PopoverTrigger } from '@radix-ui/react-popover'
 import type { Meta, StoryObj } from '@storybook/react'
 import { expect, userEvent, within } from '@storybook/test'
 import { Check, ChevronsUpDown } from 'lucide-react'
 import { useState } from 'react'
+import { Button } from '../button'
+import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from '../command'
 
 const frameworks = [
   {

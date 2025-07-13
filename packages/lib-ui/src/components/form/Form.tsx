@@ -3,11 +3,10 @@ import { Slot } from '@radix-ui/react-slot'
 import * as React from 'react'
 import { Controller, ControllerProps, FieldPath, FieldValues, FormProvider } from 'react-hook-form'
 
-import { Label } from '@/components/label/Label'
 import { VariantProps } from 'class-variance-authority'
 import { useId, useMemo } from 'react'
 import { cn } from '../../lib/utils'
-import { LabelVariants } from '../label/Label.variants'
+import { Label, LabelVariants } from '../label'
 import { FormFieldContext, FormItemContext } from './FormContext'
 import { useFormField } from './useFormField'
 

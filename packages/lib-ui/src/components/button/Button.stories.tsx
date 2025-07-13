@@ -1,8 +1,9 @@
-import { Button, TButtonMode, TButtonPalette, TButtonSize } from '@/components/button'
 import { StateTable } from '@/storybook/StateTable'
 import type { Meta, StoryObj } from '@storybook/react'
 import { fn } from '@storybook/test'
 import { ThumbsUp } from 'lucide-react'
+import { Button } from './Button'
+import { TButtonMode, TButtonPalette, TButtonSize } from './Button.variants'
 
 const meta = {
   title: 'Elements/Buttons',

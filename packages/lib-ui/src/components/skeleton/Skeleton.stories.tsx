@@ -1,6 +1,7 @@
-import { Skeleton, TSkeletonDimension, TSkeletonMode } from '@/components/skeleton'
 import { StateTable } from '@/storybook/StateTable'
 import type { Meta, StoryObj } from '@storybook/react'
+import { Skeleton } from './Skeleton'
+import { TSkeletonDimension, TSkeletonMode } from './Skeleton.variants'
 
 const meta = {
   title: 'elements/Skeleton',

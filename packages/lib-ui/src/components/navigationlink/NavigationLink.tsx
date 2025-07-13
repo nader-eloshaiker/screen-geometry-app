@@ -3,7 +3,7 @@ import { Link, LinkProps, useLocation } from '@tanstack/react-router'
 import { VariantProps } from 'class-variance-authority'
 import { useEffect, useState } from 'react'
 import { cn } from '../../lib/utils'
-import { ButtonVariants } from '../button/Button.variants'
+import { ButtonVariants } from '../button'
 
 type Props = LinkProps &
   VariantProps<typeof ButtonVariants> &

@@ -1,8 +1,8 @@
-import { Button } from '@/components/button/Button'
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/card'
-import { Input } from '@/components/input'
-import { Label } from '@/components/label'
 import type { Meta, StoryObj } from '@storybook/react'
+import { Button } from '../button'
+import { Input } from '../input'
+import { Label } from '../label'
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from './Card'
 
 const meta = {
   title: 'elements/Card',

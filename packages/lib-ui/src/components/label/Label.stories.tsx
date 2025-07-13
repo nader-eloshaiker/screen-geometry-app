@@ -1,7 +1,8 @@
-import { Label, TLabelVariantsPalette } from '@/components/label'
 import { StateTable } from '@/storybook/StateTable'
 import type { Meta, StoryObj } from '@storybook/react'
 import { fn } from '@storybook/test'
+import { Label } from './Label'
+import { TLabelVariantsPalette } from './Label.variants'
 
 const meta = {
   title: 'elements/Label',

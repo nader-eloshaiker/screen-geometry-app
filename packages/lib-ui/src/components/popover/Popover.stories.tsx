@@ -1,9 +1,9 @@
-import { Button } from '@/components/button'
-import { Input } from '@/components/input'
-import { Label } from '@/components/label'
-import { Popover, PopoverContent, PopoverTrigger } from '@/components/popover'
 import type { Meta, StoryObj } from '@storybook/react'
 import { useState } from 'react'
+import { Button } from '../button'
+import { Input } from '../input'
+import { Label } from '../label'
+import { Popover, PopoverContent, PopoverTrigger } from './Popover'
 
 const PopoverDemo = ({ defaultValue = false }: { defaultValue?: boolean }) => {
   const [open, setOpen] = useState(defaultValue)

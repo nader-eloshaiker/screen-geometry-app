@@ -1,7 +1,8 @@
-import { Checkbox, TCheckboxPalette, TCheckboxSize } from '@/components/checkbox'
 import { StateTable } from '@/storybook/StateTable'
 import type { Meta, StoryObj } from '@storybook/react'
 import { fn } from '@storybook/test'
+import { Checkbox } from './Checkbox'
+import { TCheckboxPalette, TCheckboxSize } from './Checkbox.variants'
 
 const meta = {
   title: 'Elements/Checkbox',

@@ -1,4 +1,5 @@
-import { Checkbox } from '@/components/checkbox'
+import type { Meta, StoryObj } from '@storybook/react'
+import { Checkbox } from '../checkbox'
 import {
   Table,
   TableBody,
@@ -11,8 +12,7 @@ import {
   TableHeader,
   TableHeaderCell,
   TableHeaderRow,
-} from '@/components/table'
-import type { Meta, StoryObj } from '@storybook/react'
+} from './Table'
 
 const meta = {
   title: 'Elements/Table',

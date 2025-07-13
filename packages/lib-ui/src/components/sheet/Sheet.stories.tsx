@@ -1,6 +1,7 @@
-import { Button } from '@/components/button'
-import { Input } from '@/components/input'
-import { Label } from '@/components/label'
+import type { Meta, StoryObj } from '@storybook/react'
+import { Button } from '../button'
+import { Input } from '../input'
+import { Label } from '../label'
 import {
   Sheet,
   SheetClose,
@@ -10,8 +11,7 @@ import {
   SheetHeader,
   SheetTitle,
   SheetTrigger,
-} from '@/components/sheet'
-import type { Meta, StoryObj } from '@storybook/react'
+} from './Sheet'
 
 const SHEET_SIDES = ['top', 'right', 'bottom', 'left'] as const
 
