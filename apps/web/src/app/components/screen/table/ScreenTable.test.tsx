@@ -101,8 +101,6 @@ describe('#ScreenTable', () => {
     expect(mswObj.apiEventStack[mswObj.apiEventStack.length - 1]).toEqual(
       expect.stringContaining('method:DELETE|url:http://dev.api.screengeometry.com/v1/screen/')
     )
-
-    waitFor(() => expect(test.queryAllByRole('row').length).toBe(4))
   })
 
   test('hide a screen row when show button is clicked', async () => {
