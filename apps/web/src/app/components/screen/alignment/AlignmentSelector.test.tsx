@@ -1,5 +1,5 @@
 import { renderWithUserEvents } from '@/lib/support/test/utils/RenderWithUserEvents'
-import { act } from '@testing-library/react'
+import { act } from 'react'
 import { HAlignKey, HorizontalAlignmentSelector, VAlignKey, VerticalAlignmentSelector } from './AlignmentSelector'
 
 describe('#AlignmentSelector', () => {
