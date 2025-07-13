@@ -477,9 +477,6 @@ importers:
       vitest-location-mock:
         specifier: ^1.0.4
         version: 1.0.4
-      wait-on:
-        specifier: ^7.2.0
-        version: 7.2.0
 
   packages/lib-api:
     dependencies:
@@ -950,6 +947,9 @@ importers:
       vitest-location-mock:
         specifier: ^1.0.4
         version: 1.0.4
+      wait-on:
+        specifier: ^7.2.0
+        version: 7.2.0
       yup:
         specifier: 'catalog:'
         version: 1.6.1

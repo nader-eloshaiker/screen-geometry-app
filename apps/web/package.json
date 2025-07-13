@@ -114,8 +114,7 @@
     "vite-tsconfig-paths": "^5.1.4",
     "vitest": "^3.0.7",
     "vitest-localstorage-mock": "^0.1.2",
-    "vitest-location-mock": "^1.0.4",
-    "wait-on": "^7.2.0"
+    "vitest-location-mock": "^1.0.4"
   },
   "browserslist": [
     "defaults"

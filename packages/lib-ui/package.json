@@ -127,6 +127,7 @@
     "vite-tsconfig-paths": "^5.1.4",
     "vitest": "catalog:",
     "vitest-location-mock": "^1.0.4",
+    "wait-on": "^7.2.0",
     "yup": "catalog:"
   }
 }
