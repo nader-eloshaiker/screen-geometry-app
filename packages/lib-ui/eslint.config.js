@@ -25,15 +25,7 @@ export default defineConfig([
   ...tailwindcss.configs['flat/recommended'],
   eslintConfigPrettier, // Must go last
   {
-    ignores: [
-      'node_modules/',
-      'dist/',
-      'src/lib/openapi/generated/',
-      'src/lib/routes/',
-      'coverage/',
-      'storybook-static/',
-      'public/mockServiceWorker.js',
-    ],
+    ignores: ['node_modules/', 'dist/', 'coverage/', 'storybook-static/'],
   },
   {
     files: ['**/*.{js,mjs,ts,tsx,jsx}'],

@@ -1,38 +1,80 @@
-import js from '@eslint/js'
-import typescriptEslint from '@typescript-eslint/eslint-plugin'
+// import { FlatCompat } from '@eslint/eslintrc'
+import jsEslint from '@eslint/js'
+import tsEslintPlugin from '@typescript-eslint/eslint-plugin'
 import typescriptParser from '@typescript-eslint/parser'
-import importPlugin from 'eslint-plugin-import'
+import eslintPluginImport from 'eslint-plugin-import'
+import eslintPluginPrettierRecommended from 'eslint-plugin-prettier/recommended'
 import react from 'eslint-plugin-react'
-import tailwindcss from 'eslint-plugin-tailwindcss'
+import { defineConfig } from 'eslint/config'
+import globals from 'globals/index.js'
 import tsEslint from 'typescript-eslint'
 
-export default [
-  js.configs.recommended, // Applying the recommended ESLint configuration for JavaScript
+import eslintConfigPrettier from 'eslint-config-prettier/flat'
+import reactHooks from 'eslint-plugin-react-hooks'
+import reactRefresh from 'eslint-plugin-react-refresh'
+import tailwindcss from 'eslint-plugin-tailwindcss'
+
+export default defineConfig([
+  jsEslint.configs.recommended,
   ...tsEslint.configs.recommended,
+  eslintPluginPrettierRecommended,
+  reactHooks.configs['recommended-latest'],
+  reactRefresh.configs.recommended,
   ...tailwindcss.configs['flat/recommended'],
+  eslintConfigPrettier, // Must go last
   {
-    ignores: ['node_modules/', 'dist/'], // Ignore these directories
+    ignores: ['node_modules/', 'dist/', 'coverage/'],
   },
   {
-    files: ['**/*.ts', '**/*.tsx'],
+    files: ['**/*.{js,mjs,ts,tsx,jsx}'],
+
+    plugins: {
+      react,
+      import: eslintPluginImport,
+      '@typescript-eslint': tsEslintPlugin,
+    },
+
     languageOptions: {
+      globals: {
+        ...globals.browser,
+        ...globals.vitest,
+        ...globals.node,
+        window: true,
+        module: true,
+      },
+
       parser: typescriptParser,
+      ecmaVersion: 'latest',
+      sourceType: 'module',
+
       parserOptions: {
-        ecmaVersion: 'latest',
-        sourceType: 'module',
         ecmaFeatures: {
           jsx: true,
         },
       },
     },
-    plugins: {
-      react,
-      import: importPlugin,
-      'jsx-a11y': jsxA11y,
-      '@typescript-eslint': typescriptEslint,
-      tailwindcss,
+
+    settings: {
+      tailwindcss: {
+        config: './tailwind.config.ts',
+      },
+
+      'import/resolver': {
+        typescript: {},
+      },
+
+      react: {
+        createClass: 'createReactClass',
+        pragma: 'React',
+        fragment: 'Fragment',
+        version: 'detect',
+        flowVersion: '0.53',
+      },
     },
+
     rules: {
+      '@typescript-eslint/explicit-module-boundary-types': 'off',
+
       'no-unused-vars': 'off',
       '@typescript-eslint/no-unused-vars': [
         'error',
@@ -44,23 +86,44 @@ export default [
           caughtErrorsIgnorePattern: '^_',
         },
       ],
-    },
-    settings: {
-      tailwindcss: {
-        config: './tailwind.config.ts',
-      },
-      react: {
-        version: 'detect',
-      },
-      'import/resolver': {
-        node: {
-          paths: ['src'],
-          extensions: ['.js', '.jsx', '.ts', '.tsx'],
+
+      '@typescript-eslint/no-non-null-assertion': 'off',
+      '@typescript-eslint/no-empty-function': 'off',
+
+      'prettier/prettier': [
+        'error',
+        {
+          semi: false,
+          endOfLine: 'auto',
         },
-      },
-      rules: {
-        'react/react-in-jsx-scope': 'off', // Disable requiring React in scope for JSX files
-      },
+      ],
+
+      'no-empty-function': 'off',
+      'react/react-in-jsx-scope': 'off',
+      'react-hooks/rules-of-hooks': 'error',
+      'react-hooks/exhaustive-deps': 'warn',
+      'react/prop-types': 'off',
+      camelcase: 'error',
+      quotes: ['error', 'single'],
+      'no-duplicate-imports': 'error',
+
+      'react-refresh/only-export-components': [
+        'warn',
+        {
+          allowConstantExport: true,
+        },
+      ],
+
+      'tailwindcss/classnames-order': 'warn',
+
+      'tailwindcss/no-custom-classname': [
+        'warn',
+        {
+          callees: ['classnames', 'clsx', 'ctl', 'cva', 'tv', 'cn', 'twMerge', 'tw'],
+        },
+      ],
+
+      'tailwindcss/no-contradicting-classname': 'error',
     },
   },
-]
+])
