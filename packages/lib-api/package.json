@@ -63,6 +63,7 @@
     "react": "catalog:react18",
     "react-dom": "catalog:react18",
     "typescript": "~5.6.2",
+    "typescript-eslint": "^8.26.1",
     "vite": "catalog:",
     "vitest": "catalog:",
     "vitest-mock-axios": "^0.1.0"

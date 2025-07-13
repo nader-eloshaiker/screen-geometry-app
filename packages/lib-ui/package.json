@@ -119,6 +119,7 @@
     "tailwind-merge": "catalog:tailwindcss3",
     "tailwindcss": "catalog:tailwindcss3",
     "typescript": "~5.6.2",
+    "typescript-eslint": "^8.26.1",
     "vite": "catalog:",
     "vite-plugin-dts": "^4.5.3",
     "vite-plugin-lib-inject-css": "catalog:",
