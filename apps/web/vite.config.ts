@@ -58,7 +58,7 @@ export default defineConfig({
       target: 'react',
       autoCodeSplitting: true,
       routesDirectory: './src/app/routes',
-      generatedRouteTree: './src/lib/routes/routeTree.gen.ts',
+      generatedRouteTree: 'src/app/routes/routeTree.gen.ts',
       routeFileIgnorePattern: '\\.(test|spec)\\.[jt]sx?$',
       quoteStyle: 'single',
       routeFileIgnorePrefix: '-',
