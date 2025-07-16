@@ -84,7 +84,6 @@
     "@vitest/ui": "catalog:",
     "autoprefixer": "catalog:tailwindcss3",
     "chromatic": "^11.20.2",
-    "concurrently": "^8.2.2",
     "eslint": "^9.22.0",
     "eslint-config-prettier": "^10.1.1",
     "eslint-plugin-import": "^2.31.0",
