@@ -38,7 +38,7 @@
     "test:style": "pnpm --filter '@screengeometry/lib-style' test",
     "test:ui": "pnpm --filter '@screengeometry/lib-ui' test",
     "test:web": "pnpm --filter '@screengeometry/web' test",
-    "test": "pnpm test:web && pnpm test:ui && pnpm test:style && pnpm test:api && pnpm test:server",
+    "test": "concurrently --kill-others-on-fail first -n 'web,ui,style,api,server' -c 'magenta,green,yellow,blue,red' 'pnpm test:web' 'pnpm test:ui' 'pnpm test:style' 'pnpm test:api' 'pnpm test:server'",
     "e2e": "pnpm --filter '@screengeometry/web' e2e",
     "e2e:install": "pnpm --filter '@screengeometry/web' e2e:install"
   },

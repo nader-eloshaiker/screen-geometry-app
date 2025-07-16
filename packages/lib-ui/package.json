@@ -41,7 +41,7 @@
     "test:ui": "vitest watch --ui --coverage.enabled=true",
     "sb": "storybook dev -p 6006",
     "sb:test": "test-storybook --coverage",
-    "sb:ci": "concurrently -k -s first -n \"Storybook,Test\" -c \"magenta,blue\" \"pnpm sb\" \"wait-on tcp:6006 && pnpm sb:test\"",
+    "sb:ci": "concurrently --kill-others-on-fail --success first -n \"Storybook,Test\" -c \"magenta,blue\" \"pnpm sb\" \"wait-on tcp:6006 && pnpm sb:test\"",
     "sb:build": "storybook build",
     "build-storybook": "storybook build"
   },
