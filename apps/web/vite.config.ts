@@ -7,6 +7,8 @@ import tsconfigPaths from 'vite-tsconfig-paths'
 import { ViteUserConfig, configDefaults, defineConfig } from 'vitest/config'
 import packageJson from './package.json'
 
+const isTest = process.env.NODE_ENV === 'test'
+
 const Config: ViteUserConfig = {
   test: {
     // Do not process css files (is slow)
@@ -54,15 +56,16 @@ export default defineConfig({
   assetsInclude: ['./sb-preview/runtime.js'],
   plugins: [
     tsconfigPaths(),
-    tanstackRouter({
-      target: 'react',
-      autoCodeSplitting: true,
-      routesDirectory: './src/app/routes',
-      generatedRouteTree: 'src/app/routes/routeTree.gen.ts',
-      routeFileIgnorePattern: '\\.(test|spec)\\.[jt]sx?$',
-      quoteStyle: 'single',
-      routeFileIgnorePrefix: '-',
-    }),
+    !isTest &&
+      tanstackRouter({
+        target: 'react',
+        autoCodeSplitting: true,
+        routesDirectory: './src/app/routes',
+        generatedRouteTree: 'src/app/routes/routeTree.gen.ts',
+        routeFileIgnorePattern: '\\.(test|spec)\\.[jt]sx?$',
+        quoteStyle: 'single',
+        routeFileIgnorePrefix: '-',
+      }),
     codecovVitePlugin({
       enableBundleAnalysis: process.env.CODECOV_TOKEN !== undefined,
       bundleName: 'screen-geometry-app',

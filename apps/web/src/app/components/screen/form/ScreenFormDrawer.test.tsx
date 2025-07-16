@@ -10,7 +10,7 @@ import { toScreenItemRender, transformScreenInput } from '@/lib/utils'
 import { getScreenListServiceMock, getScreenServiceMock, getSearchServiceMock } from '@screengeometry/lib-api/spec'
 import { Toaster } from '@screengeometry/lib-ui/toaster'
 import { render, waitFor } from '@testing-library/react'
-import { useState } from 'react'
+import { act, useState } from 'react'
 import { FormModeTypes, ScreenFormDrawer } from './ScreenFormDrawer'
 
 const ListComponent = () => {
@@ -234,10 +234,10 @@ describe('#ScreenFormDrawer', () => {
       window.HTMLElement.prototype.scrollIntoView = function () {}
 
       const searchButton = test.getByText(/Select Screen/i)
-      await waitFor(async () => await test.user.click(searchButton))
+      await act(async () => await test.user.click(searchButton))
 
       const listElement = test.getByText(/WQHD 34" 3440x1440 21:9/i)
-      await waitFor(async () => await test.user.click(listElement))
+      await act(async () => await test.user.click(listElement))
 
       expect(test.getByLabelText('Screen Size')).toHaveValue(34)
       expect(test.getByLabelText('Aspect Ratio')).toHaveValue('21:9')
@@ -257,23 +257,23 @@ describe('#ScreenFormDrawer', () => {
       window.HTMLElement.prototype.scrollIntoView = function () {}
 
       const searchButton = test.getByText(/Select Screen/i)
-      await waitFor(async () => await test.user.click(searchButton))
+      await act(async () => await test.user.click(searchButton))
 
       const inputElement = test.getByPlaceholderText(/Search Screen list/i)
-      await waitFor(async () => await test.user.type(inputElement, 'WQHD+'))
+      await act(async () => await test.user.type(inputElement, 'WQHD+'))
 
       await waitFor(() => expect(mswObj.apiEventStack.length).toBe(1))
       expect(mswObj.apiEventStack[0]).toContain('http://dev.api.screengeometry.com/v1/search?term=')
 
       const listElement = test.getByText(/WQHD 34" 3440x1440 21:9/i)
-      await waitFor(async () => await test.user.click(listElement))
+      await act(async () => await test.user.click(listElement))
 
       const createButton = test.getByText('Create')
-      await waitFor(() => expect(createButton).toBeEnabled())
+      expect(createButton).toBeEnabled()
 
-      await waitFor(async () => await test.user.click(createButton))
+      await act(async () => await test.user.click(createButton))
 
-      await waitFor(() => expect(createButton).not.toBeEnabled())
+      waitFor(() => expect(createButton).not.toBeEnabled())
     })
   })
 })
