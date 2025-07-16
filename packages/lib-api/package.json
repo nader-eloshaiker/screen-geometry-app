@@ -25,7 +25,7 @@
   "dependencies": {
     "@tanstack/react-query": "catalog:",
     "axios": "^1.7.9",
-    "msw": "^2.10.2",
+    "msw": "^2.10.4",
     "uuid": "^11.1.0"
   },
   "peerDependencies": {
@@ -61,7 +61,7 @@
     "prettier-plugin-organize-imports": "^4.1.0",
     "react": "catalog:react18",
     "react-dom": "catalog:react18",
-    "typescript": "~5.6.2",
+    "typescript": "catalog:",
     "typescript-eslint": "^8.26.1",
     "vite": "catalog:",
     "vite-tsconfig-paths": "^5.1.4",
