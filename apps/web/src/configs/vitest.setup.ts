@@ -16,7 +16,7 @@ const getRandomString = (length = 10) => {
 }
 
 process.on('unhandledRejection', (reason) => {
-  console.log('FAILED TO HANDLE PROMISE REJECTION')
+  console.log('FAILED TO HANDLE PROMISE REJECTION : ', JSON.stringify(reason))
   throw reason
 })
 
