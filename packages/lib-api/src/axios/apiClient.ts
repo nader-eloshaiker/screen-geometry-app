@@ -28,7 +28,7 @@ const makeCorrelationIdHeader = () => ({
   'x-correlation-id': v4(),
 })
 
-const serverAxiosInstance = Axios.create({
+export const serverAxiosInstance = Axios.create({
   // baseURL: `${apiRoutes.apiUrl}${apiRoutes.apiPathVer}`, set in QueryClient.ts
   timeout: 2000,
   headers: { ...makeBaseHeaders() },

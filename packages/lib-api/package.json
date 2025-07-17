@@ -4,6 +4,7 @@
   "private": true,
   "type": "module",
   "exports": {
+    "./apiClient": "./src/axios/apiClient.ts",
     "./spec": "./src/generated/index.ts",
     "./internal": "./src/internal/index.ts"
   },

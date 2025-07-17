@@ -1,4 +1,3 @@
-import { QueryProvider } from '@/app/hooks/query/QueryProvider'
 import { ScreenProvider } from '@/app/hooks/screen/ScreenProvider'
 import { useScreenContext } from '@/app/hooks/screen/useScreenContext'
 import { ScreenItemRender } from '@/app/models/screenItemRender'
@@ -9,10 +8,10 @@ import { useElementSizeMock } from '@/lib/ui/hooks/useElementSize.mock'
 import { toScreenItemRender, transformScreenInput } from '@/lib/utils'
 import { getScreenListServiceMock, getScreenServiceMock, getSearchServiceMock } from '@screengeometry/lib-api/spec'
 import { Toaster } from '@screengeometry/lib-ui/toaster'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { render, waitFor } from '@testing-library/react'
 import { act, useState } from 'react'
 import { FormModeTypes, ScreenFormDrawer } from './ScreenFormDrawer'
-
 const ListComponent = () => {
   const {
     state: { screens },
@@ -38,18 +37,26 @@ type ParentProps = {
   id?: string
 }
 
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      retry: false,
+    },
+  },
+})
+
 const RootTestComponent = ({ initialise, mode = FormModeTypes.Create, id }: ParentProps) => {
   const [open, setOpen] = useState(true)
 
   return (
-    <QueryProvider>
+    <QueryClientProvider client={queryClient}>
       <ScreenProvider initialise={{ screens: initialise ?? [], query: '' }}>
         <h1>formState:{open ? 'open' : 'close'}</h1>
         <ListComponent />
         <ScreenFormDrawer id={id} mode={mode} open={open} setOpen={setOpen} />
       </ScreenProvider>
       <Toaster />
-    </QueryProvider>
+    </QueryClientProvider>
   )
 }
 
@@ -87,11 +94,13 @@ describe('#ScreenFormDrawer', () => {
       const editId = '5HjERJbH'
       const test = await renderWithUserEvents(<RootTestComponent id={editId} mode={FormModeTypes.Edit} />)
 
+      test.debug()
+
       const inputScreenSize = test.getByLabelText('Screen Size')
       await waitFor(() => expect(inputScreenSize).toHaveValue(38))
 
       // const inputScreenSize = test.getByLabelText('Screen Size')
-      await waitFor(async () => await test.user.clear(inputScreenSize))
+      await act(async () => await test.user.clear(inputScreenSize))
 
       await waitFor(async () => await test.user.type(inputScreenSize, '27'))
 
@@ -263,7 +272,7 @@ describe('#ScreenFormDrawer', () => {
       await act(async () => await test.user.type(inputElement, 'WQHD+'))
 
       await waitFor(() => expect(mswObj.apiEventStack.length).toBe(1))
-      expect(mswObj.apiEventStack[0]).toContain('http://dev.api.screengeometry.com/v1/search?term=')
+      expect(mswObj.apiEventStack[0]).toContain('/v1/search?term=WQHD')
 
       const listElement = test.getByText(/WQHD 34" 3440x1440 21:9/i)
       await act(async () => await test.user.click(listElement))
