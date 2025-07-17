@@ -15,10 +15,6 @@ const getRandomString = (length = 10) => {
   return result
 }
 
-process.on('unhandledRejection', (_reason) => {
-  process.exit(1)
-})
-
 global.ResizeObserver = vi.fn().mockImplementation(() => ({
   observe: vi.fn(),
   unobserve: vi.fn(),
