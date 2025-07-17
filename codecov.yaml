@@ -3,48 +3,6 @@ coverage:
     project:
       default:
         informational: true
-      web:
-        informational: true
-        flags:
-          - web
-      server:
-        informational: true
-        flags:
-          - server
-      lib-api:
-        informational: true
-        flags:
-          - lib-api
-      lib-ui:
-        informational: true
-        flags:
-          - lib-ui
     patch:
       default:
         informational: true
-
-comment:
-  layout: "diff, flags, files"
-  behavior: default
-  require_changes: false
-  require_base: yes
-  require_head: yes
-  branches: []
-
-flags:
-  web:
-    paths: #note, accepts globs, not regexes
-      - apps/web/src/**/*.{ts,tsx}
-    carryforward: false
-  server:
-    paths: #note, accepts globs, not regexes
-      - apps/server/src/**/*.{ts,tsx}
-    carryforward: true
-  lib-api:
-    paths: #note, accepts globs, not regexes
-      - packages/lib-api/src/**/*.{ts,tsx}
-    carryforward: true
-  lib-ui:
-    paths: #note, accepts globs, not regexes
-      - packages/lib-ui/src/**/*.{ts,tsx}
-    carryforward: true
