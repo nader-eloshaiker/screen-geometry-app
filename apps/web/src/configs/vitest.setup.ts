@@ -15,6 +15,11 @@ const getRandomString = (length = 10) => {
   return result
 }
 
+process.on('unhandledRejection', (reason) => {
+  console.log('FAILED TO HANDLE PROMISE REJECTION')
+  throw reason
+})
+
 global.ResizeObserver = vi.fn().mockImplementation(() => ({
   observe: vi.fn(),
   unobserve: vi.fn(),

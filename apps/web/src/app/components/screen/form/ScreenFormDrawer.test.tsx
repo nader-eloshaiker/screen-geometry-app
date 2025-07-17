@@ -94,8 +94,6 @@ describe('#ScreenFormDrawer', () => {
       const editId = '5HjERJbH'
       const test = await renderWithUserEvents(<RootTestComponent id={editId} mode={FormModeTypes.Edit} />)
 
-      test.debug()
-
       const inputScreenSize = test.getByLabelText('Screen Size')
       await waitFor(() => expect(inputScreenSize).toHaveValue(38))
 
