@@ -21,7 +21,7 @@ jobs:
       #   uses: actions/download-artifact@v4
       #   with:
       #     name: storybook-code-coverage-report
-      #     path: coverage/storybook/
+      #     path: ./coverage/storybook/
 
       - name: Display structure of downloaded files
         run: ls -Rl
@@ -32,7 +32,7 @@ jobs:
           token: ${{ secrets.CODECOV_TOKEN }}
           name: apps/web
           verbose: true
-          files: ./unit/web/coverage-final.json
+          directory: ./apps/web/coverage/
           flags: web
 
       # NOTE: remove for testing
@@ -67,5 +67,5 @@ jobs:
       #   with:
       #     token: ${{ secrets.CODECOV_TOKEN }}
       #     slug: nader-eloshaiker/screen-geometry-app
-      #     directory: coverage/storybook/
+      #     directory: ./packages/lib-ui/coverage/storybook/
       #     flags: storybook

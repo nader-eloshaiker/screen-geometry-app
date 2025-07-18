@@ -13,9 +13,10 @@
   "scripts": {
     "preinstall": "npx only-allow pnpm",
     "prepare": "husky",
+    "pre-push:api": "pnpm --filter @screengeometry/lib-api pre-push",
     "pre-push:server": "pnpm --filter @screengeometry/server pre-push",
     "pre-push:web": "pnpm --filter @screengeometry/web pre-push",
-    "pre-push": "pnpm pre-push:web && pnpm pre-push:server",
+    "pre-push": "pnpm pre-push:web && pnpm pre-push:server && pnpm pre-push:api",
     "start:ui": "pnpm --filter '@screengeometry/web' dev",
     "start": "concurrently --group -n 'web,server' -c 'magenta,blue' 'pnpm start:ui'",
     "build": "pnpm --filter @screengeometry/web build",
@@ -33,10 +34,9 @@
     "lint:staged:ui": "pnpm run --filter @screengeometry/lib-ui lint:staged",
     "lint:staged:web": "pnpm run --filter @screengeometry/web lint:staged",
     "lint:staged": "pnpm lint:staged:web && pnpm lint:staged:ui && pnpm lint:staged:style && pnpm lint:staged:api && pnpm lint:staged:server",
-    "test:api": "pnpm --filter '@screengeometry/lib-api' test",
     "test:server": "pnpm --filter '@screengeometry/server' test",
     "test:web": "pnpm --filter '@screengeometry/web' test",
-    "test": "concurrently --group -n 'web,api,server' -c 'magenta,blue,red' 'pnpm test:web' 'pnpm test:api' 'pnpm test:server'",
+    "test": "concurrently --group -n 'web,server' -c 'magenta,red' 'pnpm test:web' 'pnpm test:server'",
     "e2e": "pnpm --filter '@screengeometry/web' e2e",
     "e2e:install": "pnpm --filter '@screengeometry/web' e2e:install"
   },

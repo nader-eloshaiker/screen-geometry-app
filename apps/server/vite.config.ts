@@ -14,7 +14,7 @@ const Config: ViteUserConfig = {
     coverage: {
       provider: 'istanbul', //'v8',
       reporter: ['text', 'json-summary', 'json', 'html'],
-      reportsDirectory: './coverage',
+      reportsDirectory: './coverage/unit',
       include: ['src/**/*.{ts,tsx}'],
       exclude: [
         ...configDefaults.exclude,

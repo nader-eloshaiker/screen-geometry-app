@@ -20,6 +20,7 @@
     "format:check": "prettier . --check",
     "gen:spec": "pnpm --filter=@screengeometry/spec-server build && orval --config ./orval.server.config.ts",
     "test": "vitest run --coverage.enabled=true",
+    "test:ci": "vitest run --coverage.enabled=false",
     "test:watch": "vitest watch --coverage.enabled=true",
     "test:ui": "vitest watch --ui --coverage.enabled=true"
   },
