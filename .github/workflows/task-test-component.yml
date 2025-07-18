@@ -6,6 +6,9 @@ jobs:
   component-test:
     name: Component Tests
     runs-on: ubuntu-latest
+    container:
+      image: mcr.microsoft.com/playwright:v1.54.1-noble
+      options: --user 1001
     permissions:
       contents: read
       pull-requests: write
@@ -28,8 +31,5 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
-      - name: Install Playwright Browsers
-        run: pnpm --filter=@screengeometry/web e2e:install
-
-      - name: Run pnpm --filter=@screengeometry/web sb:ci
+      - name: 🚀 Run StoryBook tests
         run: pnpm --filter=@screengeometry/web sb:ci
