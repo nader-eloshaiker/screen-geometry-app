@@ -76,34 +76,19 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Install Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version-file: ".nvmrc"
-
       - name: Install pnpm
         uses: pnpm/action-setup@v4.1.0
         with:
           run_install: false
 
-      - name: Get pnpm store directory
-        id: pnpm-cache
-        shell: bash
-        run: echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
-
-      - name: Setup pnpm cache
-        uses: actions/cache@v4
+      - name: Install Node.js
+        uses: actions/setup-node@v4
         with:
-          path: ${{ env.STORE_PATH }}
-          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
-          restore-keys: |
-            ${{ runner.os }}-pnpm-store-
-
-      - name: Run pnpm install
-        run: pnpm install
+          node-version-file: ".nvmrc"
+          cache: "pnpm"
 
       - name: Run pnpm report
-        run: pnpm run --filter @screengeometry/web  sb:build
+        run: pnpm run --filter @screengeometry/lib-ui  sb:build
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
@@ -111,7 +96,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: "./apps/web/storybook-static"
+          path: "./packages/lib-ui/storybook-static"
 
       - name: Deploy to reports to GitHub Pages
         id: deployment
@@ -132,31 +117,16 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Install Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version-file: ".nvmrc"
-
       - name: Install pnpm
         uses: pnpm/action-setup@v4.1.0
         with:
           run_install: false
 
-      - name: Get pnpm store directory
-        id: pnpm-cache
-        shell: bash
-        run: echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
-
-      - name: Setup pnpm cache
-        uses: actions/cache@v4
+      - name: Install Node.js
+        uses: actions/setup-node@v4
         with:
-          path: ${{ env.STORE_PATH }}
-          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
-          restore-keys: |
-            ${{ runner.os }}-pnpm-store-
-
-      - name: Run pnpm install
-        run: pnpm install
+          node-version-file: ".nvmrc"
+          cache: "pnpm"
 
       - name: Run pnpm build:dev
         env:
