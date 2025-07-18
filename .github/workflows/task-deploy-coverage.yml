@@ -30,7 +30,7 @@ jobs:
         uses: codecov/codecov-action@v4
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
-          slug: nader-eloshaiker/screen-geometry-appapps/web
+          verbose: true
           directory: ./apps/web/coverage/unit/
           flags: web
 
