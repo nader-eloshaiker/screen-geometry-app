@@ -1,0 +1,15 @@
+{
+  "name": "@screengeometry/asset-spec",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Asset API. Fetching assets deployed with frontends.",
+  "devDependencies": {
+    "@redocly/cli": "catalog:"
+  },
+  "scripts": {
+    "docs": "redocly build-docs src/index.yml",
+    "build": "mkdir -p dist && redocly bundle --ext json -o dist/asset-api.json src/index.yml",
+    "serve": "redocly preview-docs src/index.yml",
+    "test:specs": "redocly lint src/index.yml"
+  }
+}

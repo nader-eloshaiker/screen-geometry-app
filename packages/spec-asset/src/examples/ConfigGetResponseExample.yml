@@ -1,0 +1,4 @@
+summary: Config GET 200 Response
+value:
+  server:
+    API_URL: http://localhost:5173

@@ -1,0 +1,27 @@
+type: object
+required:
+  - hSize
+  - vSize
+  - hAspectRatio
+  - vAspectRatio
+  - ppi
+properties:
+  hSize:
+    type: number
+    minimum: 0
+    exclusiveMinimum: 1
+  vSize:
+    type: number
+    minimum: 0
+    exclusiveMinimum: 1
+  hAspectRatio:
+    type: integer
+    minimum: 1
+  vAspectRatio:
+    type: integer
+    minimum: 1
+  ppi:
+    type: number
+    minimum: 0
+    exclusiveMinimum: 1
+description: "Screen physical characteristics"

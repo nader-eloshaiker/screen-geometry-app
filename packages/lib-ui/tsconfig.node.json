@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "display": "Default",
+  "compilerOptions": {
+    "allowImportingTsExtensions": true,
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "isolatedModules": true,
+    "lib": ["ESNext", "DOM", "DOM.Iterable"],
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "noEmit": true,
+    "noFallthroughCasesInSwitch": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "resolveJsonModule": true,
+    "pretty": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "target": "ESNext",
+    "types": ["vitest/globals", "node"]
+  },
+  "include": ["vite.config.ts", "package.json"]
+}

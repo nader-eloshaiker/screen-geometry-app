@@ -1,0 +1,29 @@
+type: object
+required:
+  - error
+properties:
+  error:
+    required:
+      - code
+      - status
+    type: object
+    properties:
+      code:
+        type: number
+      message:
+        minLength: 1
+        type: string
+      status:
+        minLength: 1
+        type: string
+      details:
+        type: object
+        properties:
+          reason:
+            minLength: 1
+            type: string
+          domain:
+            minLength: 1
+            type: string
+          metadata:
+            type: object

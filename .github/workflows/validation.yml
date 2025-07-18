@@ -5,8 +5,8 @@ on:
     branches:
       # - '*' # matches every branch that doesn't contain a '/'
       # - '*/*' # matches every branch containing a single '/'
-      - '**' # matches every branch
-      - '!main' # excludes main as it is called by another workflow
+      - "**" # matches every branch
+      - "!main" # excludes main as it is called by another workflow
   workflow_call:
 
 concurrency:
@@ -43,12 +43,6 @@ jobs:
     uses: ./.github/workflows/task-test-e2e.yml
     secrets: inherit
 
-  deploy-coverage:
-    needs: [unit-test, component-test, e2e-test]
-    name: Run Coverage Deployment
-    uses: ./.github/workflows/task-deploy-coverage.yml
-    secrets: inherit
-
   changed-files:
     runs-on: ubuntu-latest
     name: changed-files
@@ -64,8 +58,7 @@ jobs:
         uses: tj-actions/changed-files@v46
         with:
           files: |
-            src/lib/ui/**
-            .storybook/**
+            packages/lib-ui/src/components/**
 
   designsystem-test:
     name: Run Design System Testing

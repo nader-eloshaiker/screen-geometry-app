@@ -1,0 +1,24 @@
+ErrorResponse:
+  $ref: "./ErrorResponse.yml"
+ScreenColor:
+  $ref: "./ScreenColor.yml"
+ScreenData:
+  $ref: "./ScreenData.yml"
+ScreenIdResponse:
+  $ref: "./ScreenIdResponse.yml"
+ScreenInput:
+  $ref: "./ScreenInput.yml"
+ScreenInputList:
+  $ref: "./ScreenInputList.yml"
+ScreenItem:
+  $ref: "./ScreenItem.yml"
+ScreenItemResponse:
+  $ref: "./ScreenItemResponse.yml"
+ScreenListResponse:
+  $ref: "./ScreenListResponse.yml"
+ScreenSpecs:
+  $ref: "./ScreenSpecs.yml"
+SearchItem:
+  $ref: "./SearchItem.yml"
+SearchListResponse:
+  $ref: "./SearchListResponse.yml"

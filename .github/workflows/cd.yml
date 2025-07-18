@@ -6,9 +6,9 @@ on:
   workflow_dispatch:
     inputs:
       tag:
-        description: 'Tag to release'
+        description: "Tag to release"
         required: true
-        default: 'v1.0.0'
+        default: "v1.0.0"
   # Auto deploy on new release from release please PR
   release:
     types: [published]
@@ -16,7 +16,7 @@ on:
 # Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
 # However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
 concurrency:
-  group: 'deploy_production'
+  group: "deploy_production"
   cancel-in-progress: false
 
 jobs:
@@ -36,30 +36,18 @@ jobs:
         with:
           ref: ${{ github.event.inputs.tag || github.ref }}
 
-      - name: Install Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version-file: '.nvmrc'
-
       - name: Install pnpm
         uses: pnpm/action-setup@v4.1.0
         with:
           run_install: false
 
-      - name: Get pnpm store directory
-        id: pnpm-cache
-        shell: bash
-        run: echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
-
-      - name: Setup pnpm cache
-        uses: actions/cache@v4
+      - name: Install Node.js
+        uses: actions/setup-node@v4
         with:
-          path: ${{ env.STORE_PATH }}
-          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
-          restore-keys: |
-            ${{ runner.os }}-pnpm-store-
+          node-version-file: ".nvmrc"
+          cache: "pnpm"
 
-      - name: Run pnpm install
+      - name: Install dependencies
         run: pnpm install
 
       - name: Run pnpm build:prod
@@ -74,9 +62,9 @@ jobs:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           projectName: screengeometry
-          directory: ./dist
+          directory: ./apps/web/dist
           branch: main
           environmentName: cloudflare-production
-          wranglerVersion: '3'
+          wranglerVersion: "3"
           # Optional: Enable this if you want to have GitHub Deployments triggered
           gitHubToken: ${{ secrets.GITHUB_TOKEN }}

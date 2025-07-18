@@ -1,0 +1,61 @@
+openapi: "3.1.0"
+info:
+  version: 1.0.0
+  title: Static Files Fetcher
+  license:
+    name: Proprietary
+    identifier: UNLICENSED
+  x-logo:
+    url: "/images/sga.png"
+    altText: App Logo
+  description: |
+    Environment configuration for endpoints
+
+# https://redocly.com/docs-legacy/api-reference-docs/specification-extensions/x-tag-groups
+x-tagGroups:
+  - name: Configuration
+    tags:
+      - Config
+
+servers:
+  - description: dev
+    url: https://develop.screengeometry.pages.dev/
+
+  - description: prd
+    url: https://screengeometry.com
+
+tags:
+  - name: Configuration
+    description: Configuration api call
+
+paths:
+  "/env/config.json":
+    get:
+      operationId: getConfig
+      summary: Get Environment Configuration
+      description: Returns the environment configuration
+      security:
+        - PepperstoneUniversalLogin: []
+      tags:
+        - Configuration
+      responses:
+        "200":
+          description: 200 Ok
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Config"
+              examples:
+                defaultResponseExample:
+                  "$ref": "#/components/examples/ConfigExample"
+
+components:
+  schemas:
+    $ref: "./schemas/_index.yml"
+  examples:
+    ConfigExample:
+      $ref: "./examples/ConfigGetResponseExample.yml"
+  securitySchemes:
+    PepperstoneUniversalLogin:
+      type: http
+      scheme: basic

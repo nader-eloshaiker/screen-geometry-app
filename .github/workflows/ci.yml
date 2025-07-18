@@ -25,12 +25,6 @@ jobs:
     uses: ./.github/workflows/task-test-e2e.yml
     secrets: inherit
 
-  deploy-coverage:
-    needs: [unit-test, component-test, e2e-test]
-    name: Deploying Coverage
-    uses: ./.github/workflows/task-deploy-coverage.yml
-    secrets: inherit
-
   manage-release:
     needs: [unit-test, component-test, e2e-test]
     name: Manage Release
@@ -50,11 +44,11 @@ jobs:
           token: ${{ secrets.ACTION_GITHUB_TOKEN }}
           # example, `main` or `1.x`
           target-branch: ${{ github.ref_name }}
-          release-type: 'node'
+          release-type: "node"
           # ensure all committed files are considered for release
-          path: '.'
+          path: "."
 
-      - name: 'Output Step'
+      - name: "Output Step"
         env:
           NEW_TAG: ${{ steps.generate_release.outputs.tag_name }}
         run: echo "new tag [$NEW_TAG] created for $REPO_NAME"
@@ -76,34 +70,22 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Install Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version-file: '.nvmrc'
-
       - name: Install pnpm
         uses: pnpm/action-setup@v4.1.0
         with:
           run_install: false
 
-      - name: Get pnpm store directory
-        id: pnpm-cache
-        shell: bash
-        run: echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
-
-      - name: Setup pnpm cache
-        uses: actions/cache@v4
+      - name: Install Node.js
+        uses: actions/setup-node@v4
         with:
-          path: ${{ env.STORE_PATH }}
-          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
-          restore-keys: |
-            ${{ runner.os }}-pnpm-store-
+          node-version-file: ".nvmrc"
+          cache: "pnpm"
 
-      - name: Run pnpm install
+      - name: Install dependencies
         run: pnpm install
 
       - name: Run pnpm report
-        run: pnpm build-storybook
+        run: pnpm run --filter @screengeometry/lib-ui  sb:build
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
@@ -111,7 +93,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: './storybook-static'
+          path: "./packages/lib-ui/storybook-static"
 
       - name: Deploy to reports to GitHub Pages
         id: deployment
@@ -132,30 +114,18 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Install Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version-file: '.nvmrc'
-
       - name: Install pnpm
         uses: pnpm/action-setup@v4.1.0
         with:
           run_install: false
 
-      - name: Get pnpm store directory
-        id: pnpm-cache
-        shell: bash
-        run: echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
-
-      - name: Setup pnpm cache
-        uses: actions/cache@v4
+      - name: Install Node.js
+        uses: actions/setup-node@v4
         with:
-          path: ${{ env.STORE_PATH }}
-          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
-          restore-keys: |
-            ${{ runner.os }}-pnpm-store-
+          node-version-file: ".nvmrc"
+          cache: "pnpm"
 
-      - name: Run pnpm install
+      - name: Install dependencies
         run: pnpm install
 
       - name: Run pnpm build:dev
@@ -169,8 +139,8 @@ jobs:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           projectName: screengeometry
-          directory: ./dist
+          directory: "./apps/web/.dist"
           branch: develop
           environmentName: cloudflare-preview
-          wranglerVersion: '3'
+          wranglerVersion: "3"
           gitHubToken: ${{ secrets.ACTION_GITHUB_TOKEN }}

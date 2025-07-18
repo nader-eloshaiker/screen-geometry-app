@@ -1,0 +1,11 @@
+extends:
+  - recommended
+
+theme:
+  openapi:
+    schemaExpansionLevel: 2
+    schemaDefinitionsTagName: Schemas
+    # Enterprise only feature
+    generateCodeSamples:
+      languages:
+        - lang: curl
