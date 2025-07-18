@@ -13,8 +13,8 @@ const Config: ViteUserConfig = {
     reporters: process.env.GITHUB_ACTIONS ? ['verbose', 'github-actions'] : ['verbose'],
     coverage: {
       provider: 'istanbul', //'v8',
-      reporter: ['text', 'json-summary', 'json', 'clover', 'html'],
-      reportsDirectory: 'coverage/unit',
+      reporter: ['text', 'json-summary', 'json', 'html'],
+      reportsDirectory: './coverage',
       include: ['src/**/*.{ts,tsx}'],
       exclude: [
         ...configDefaults.exclude,
