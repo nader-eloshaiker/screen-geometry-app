@@ -27,7 +27,7 @@ jobs:
         run: ls -Rl
 
       - name: Upload web unit test coverage reports to Codecov
-        uses: codecov/codecov-action@v4
+        uses: codecov/codecov-action@v5
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
           name: apps/web
@@ -36,7 +36,7 @@ jobs:
           flags: web
 
       - name: Upload server unit test coverage reports to Codecov
-        uses: codecov/codecov-action@v4
+        uses: codecov/codecov-action@v5
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
           slug: nader-eloshaiker/screen-geometry-app/apps/server
@@ -44,7 +44,7 @@ jobs:
           flags: server
 
       - name: Upload lib-api unit test coverage reports to Codecov
-        uses: codecov/codecov-action@v4
+        uses: codecov/codecov-action@v5
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
           slug: nader-eloshaiker/screen-geometry-app/apps/lib-api
@@ -52,7 +52,7 @@ jobs:
           flags: lib-api
 
       - name: Upload lib-ui unit test coverage reports to Codecov
-        uses: codecov/codecov-action@v4
+        uses: codecov/codecov-action@v5
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
           slug: nader-eloshaiker/screen-geometry-app/apps/lib-ui
