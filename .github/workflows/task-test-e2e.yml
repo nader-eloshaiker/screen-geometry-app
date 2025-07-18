@@ -49,4 +49,5 @@ jobs:
         run: pnpm e2e:install
 
       - name: Run Playwright tests
+        working-directory: ./apps/web
         run: pnpm e2e
