@@ -1,4 +1,4 @@
-name: "Component Test Task"
+name: "Run Component Test"
 
 on: workflow_call
 

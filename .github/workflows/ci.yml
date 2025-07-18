@@ -25,12 +25,6 @@ jobs:
     uses: ./.github/workflows/task-test-e2e.yml
     secrets: inherit
 
-  deploy-coverage:
-    needs: [unit-test, component-test, e2e-test]
-    name: Deploying Coverage
-    uses: ./.github/workflows/task-deploy-coverage.yml
-    secrets: inherit
-
   manage-release:
     needs: [unit-test, component-test, e2e-test]
     name: Manage Release
@@ -86,6 +80,9 @@ jobs:
         with:
           node-version-file: ".nvmrc"
           cache: "pnpm"
+
+      - name: Install dependencies
+        run: pnpm install
 
       - name: Run pnpm report
         run: pnpm run --filter @screengeometry/lib-ui  sb:build

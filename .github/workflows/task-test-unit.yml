@@ -1,4 +1,4 @@
-name: "Unit Test Task"
+name: "Run Unit Tests"
 
 on: workflow_call
 

@@ -1,4 +1,4 @@
-name: "Design System Test Task"
+name: "Run DesignSystem Test"
 
 on: workflow_call
 
