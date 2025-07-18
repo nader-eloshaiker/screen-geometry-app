@@ -26,7 +26,7 @@
     "e2e:ui": "pnpm exec playwright test --ui",
     "e2e:codegen": "pnpm exec playwright codegen localhost:3000",
     "e2e:install": "pnpm exec playwright install --with-deps",
-    "e2e:install:deps": "pnpm exec playwright playwright install-deps",
+    "e2e:install:deps": "pnpm exec playwright install-deps",
     "e2e:report": "pnpm exec playwright show-report",
     "typecheck": "tsc --project tsconfig.json --noEmit"
   },
