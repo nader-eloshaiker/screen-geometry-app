@@ -49,16 +49,11 @@ jobs:
           name: unit-testing
           verbose: true
           flags: unit
-      # NOTE: remove for testing
+
+      # NOTE: leaving for reference
       # - name: Archive code coverage results
       #   uses: actions/upload-artifact@v4
       #   with:
       #     name: unit-code-coverage-report
       #     path: |
       #       ./coverage
-      #     # NOTE: remove for testing
-      #     # path: |
-      #     #   ./coverage/unit/
-      #     #   ./apps/server/coverage/unit/
-      #     #   ./packages/lib-api/coverage/unit/
-      #     #   ./packages/lib-ui/coverage/unit/

@@ -1,3 +1,4 @@
+# NOTE: leaving for reference
 name: "Deploy Coverage Task"
 
 on: workflow_call
