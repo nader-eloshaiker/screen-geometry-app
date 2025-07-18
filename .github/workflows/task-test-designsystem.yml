@@ -21,6 +21,9 @@ jobs:
           node-version-file: ".nvmrc"
           cache: "pnpm"
 
+      - name: Install dependencies
+        run: pnpm install
+
       - name: Run Chromatic
         uses: chromaui/action@latest
         with:

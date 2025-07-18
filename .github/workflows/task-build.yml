@@ -25,6 +25,9 @@ jobs:
           node-version-file: ".nvmrc"
           cache: "pnpm"
 
+      - name: Install dependencies
+        run: pnpm install
+
       - name: Run pnpm build:dev # bundle analysis for codecov
         env:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}

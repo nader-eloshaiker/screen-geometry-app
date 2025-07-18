@@ -25,6 +25,9 @@ jobs:
           node-version-file: ".nvmrc"
           cache: "pnpm"
 
+      - name: Install dependencies
+        run: pnpm install
+
       - name: Install Playwright Browsers
         run: pnpm --filter=@screengeometry/web e2e:install
 

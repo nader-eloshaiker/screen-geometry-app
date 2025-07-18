@@ -25,5 +25,8 @@ jobs:
           node-version-file: ".nvmrc"
           cache: "pnpm"
 
+      - name: Install dependencies
+        run: pnpm install
+
       - name: Run pnpm lint
         run: pnpm lint
