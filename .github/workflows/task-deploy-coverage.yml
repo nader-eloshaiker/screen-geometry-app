@@ -32,7 +32,7 @@ jobs:
           token: ${{ secrets.CODECOV_TOKEN }}
           name: apps/web
           verbose: true
-          files: ./coverage/unit/web/coverage-final.json
+          files: ./unit/web/coverage-final.json
           flags: web
 
       - name: Upload server unit test coverage reports to Codecov
