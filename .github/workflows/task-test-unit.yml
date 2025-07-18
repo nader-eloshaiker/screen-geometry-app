@@ -38,11 +38,3 @@ jobs:
           name: unit-testing
           verbose: true
           flags: unit
-
-      # NOTE: leaving for reference
-      # - name: Archive code coverage results
-      #   uses: actions/upload-artifact@v4
-      #   with:
-      #     name: unit-code-coverage-report
-      #     path: |
-      #       ./coverage
