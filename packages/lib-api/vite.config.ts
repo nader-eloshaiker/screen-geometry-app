@@ -19,6 +19,7 @@ const Config: ViteUserConfig = {
       exclude: [
         ...configDefaults.exclude,
         'src/generated/**/*',
+        'src/internal/**/*',
         'src/configs/**/*',
         'src/lib/**/*',
         'src/**/*.mock.{ts,tsx}',
