@@ -11,22 +11,22 @@ jobs:
       pull-requests: write
 
     steps:
-      # - name: Checkout
-      #   uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v4
 
-      # - name: Install pnpm
-      #   uses: pnpm/action-setup@v4.1.0
-      #   with:
-      #     run_install: false
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4.1.0
+        with:
+          run_install: false
 
-      # - name: Install Node.js
-      #   uses: actions/setup-node@v4
-      #   with:
-      #     node-version-file: ".nvmrc"
-      #     cache: "pnpm"
+      - name: Install Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: ".nvmrc"
+          cache: "pnpm"
 
-      # - name: Install dependencies
-      #   run: pnpm install
+      - name: Install dependencies
+        run: pnpm install
 
       - name: Install Playwright Browsers
         run: pnpm --filter=@screengeometry/web e2e:install

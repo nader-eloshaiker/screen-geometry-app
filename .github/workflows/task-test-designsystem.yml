@@ -7,22 +7,22 @@ jobs:
     name: Design System Testing
     runs-on: ubuntu-latest
     steps:
-      # - name: Checkout
-      #   uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v4
 
-      # - name: Install pnpm
-      #   uses: pnpm/action-setup@v4.1.0
-      #   with:
-      #     run_install: false
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4.1.0
+        with:
+          run_install: false
 
-      # - name: Install Node.js
-      #   uses: actions/setup-node@v4
-      #   with:
-      #     node-version-file: ".nvmrc"
-      #     cache: "pnpm"
+      - name: Install Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: ".nvmrc"
+          cache: "pnpm"
 
-      # - name: Install dependencies
-      #   run: pnpm install
+      - name: Install dependencies
+        run: pnpm install
 
       - name: Run Chromatic
         uses: chromaui/action@latest
@@ -30,4 +30,4 @@ jobs:
           # ⚠️ Make sure to configure a `CHROMATIC_PROJECT_TOKEN` repository secret
           projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
           autoAcceptChanges: "main"
-          workingDir: ./packages/lib-ui
+          workingDir: packages/lib-ui
