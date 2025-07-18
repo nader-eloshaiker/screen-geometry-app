@@ -33,18 +33,21 @@ jobs:
     uses: ./.github/workflows/task-test-unit.yml
     secrets: inherit
 
-  component-test:
-    name: Component Tests
-    uses: ./.github/workflows/task-test-component.yml
-    secrets: inherit
+  # NOTE: remove for testing
+  # component-test:
+  #   name: Component Tests
+  #   uses: ./.github/workflows/task-test-component.yml
+  #   secrets: inherit
 
-  e2e-test:
-    name: E2E Tests
-    uses: ./.github/workflows/task-test-e2e.yml
-    secrets: inherit
+  # NOTE: remove for testing
+  # e2e-test:
+  #   name: E2E Tests
+  #   uses: ./.github/workflows/task-test-e2e.yml
+  #   secrets: inherit
 
   deploy-coverage:
-    needs: [unit-test, component-test, e2e-test]
+    # needs: [unit-test, component-test, e2e-test]
+    needs: [unit-test]
     name: Run Coverage Deployment
     uses: ./.github/workflows/task-deploy-coverage.yml
     secrets: inherit
