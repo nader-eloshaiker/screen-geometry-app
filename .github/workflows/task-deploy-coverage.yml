@@ -32,7 +32,7 @@ jobs:
           token: ${{ secrets.CODECOV_TOKEN }}
           name: nader-eloshaiker/screen-geometry-app/apps/web
           verbose: true
-          files: ./apps/web/coverage/unit/coverage-final.json
+          files: ./coverage/unit/web/coverage-final.json
           flags: web
 
       - name: Upload server unit test coverage reports to Codecov
