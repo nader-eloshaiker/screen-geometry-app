@@ -42,15 +42,23 @@ jobs:
       - name: Run pnpm test
         run: pnpm test
 
-      - name: Archive code coverage results
-        uses: actions/upload-artifact@v4
+      - name: Upload web unit test coverage reports to Codecov
+        uses: codecov/codecov-action@v5
         with:
-          name: unit-code-coverage-report
-          path: |
-            ./coverage
-          # NOTE: remove for testing
-          # path: |
-          #   ./coverage/unit/
-          #   ./apps/server/coverage/unit/
-          #   ./packages/lib-api/coverage/unit/
-          #   ./packages/lib-ui/coverage/unit/
+          token: ${{ secrets.CODECOV_TOKEN }}
+          name: apps/web
+          verbose: true
+          flags: web
+      # NOTE: remove for testing
+      # - name: Archive code coverage results
+      #   uses: actions/upload-artifact@v4
+      #   with:
+      #     name: unit-code-coverage-report
+      #     path: |
+      #       ./coverage
+      #     # NOTE: remove for testing
+      #     # path: |
+      #     #   ./coverage/unit/
+      #     #   ./apps/server/coverage/unit/
+      #     #   ./packages/lib-api/coverage/unit/
+      #     #   ./packages/lib-ui/coverage/unit/

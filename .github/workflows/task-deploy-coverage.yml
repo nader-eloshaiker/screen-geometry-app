@@ -35,29 +35,32 @@ jobs:
           files: ./unit/web/coverage-final.json
           flags: web
 
-      - name: Upload server unit test coverage reports to Codecov
-        uses: codecov/codecov-action@v5
-        with:
-          token: ${{ secrets.CODECOV_TOKEN }}
-          slug: nader-eloshaiker/screen-geometry-app/apps/server
-          directory: ./apps/server/coverage/unit/
-          flags: server
+      # NOTE: remove for testing
+      # - name: Upload server unit test coverage reports to Codecov
+      #   uses: codecov/codecov-action@v5
+      #   with:
+      #     token: ${{ secrets.CODECOV_TOKEN }}
+      #     slug: nader-eloshaiker/screen-geometry-app/apps/server
+      #     directory: ./apps/server/coverage/unit/
+      #     flags: server
 
-      - name: Upload lib-api unit test coverage reports to Codecov
-        uses: codecov/codecov-action@v5
-        with:
-          token: ${{ secrets.CODECOV_TOKEN }}
-          slug: nader-eloshaiker/screen-geometry-app/apps/lib-api
-          directory: ./packages/lib-api/coverage/unit/
-          flags: lib-api
+      # NOTE: remove for testing
+      # - name: Upload lib-api unit test coverage reports to Codecov
+      #   uses: codecov/codecov-action@v5
+      #   with:
+      #     token: ${{ secrets.CODECOV_TOKEN }}
+      #     slug: nader-eloshaiker/screen-geometry-app/apps/lib-api
+      #     directory: ./packages/lib-api/coverage/unit/
+      #     flags: lib-api
 
-      - name: Upload lib-ui unit test coverage reports to Codecov
-        uses: codecov/codecov-action@v5
-        with:
-          token: ${{ secrets.CODECOV_TOKEN }}
-          slug: nader-eloshaiker/screen-geometry-app/apps/lib-ui
-          directory: ./packages/lib-ui/coverage/unit/
-          flags: lib-ui
+      # NOTE: remove for testing
+      # - name: Upload lib-ui unit test coverage reports to Codecov
+      #   uses: codecov/codecov-action@v5
+      #   with:
+      #     token: ${{ secrets.CODECOV_TOKEN }}
+      #     slug: nader-eloshaiker/screen-geometry-app/apps/lib-ui
+      #     directory: ./packages/lib-ui/coverage/unit/
+      #     flags: lib-ui
 
       # - name: Upload storybook test coverage reports to Codecov
       #   uses: codecov/codecov-action@v4
