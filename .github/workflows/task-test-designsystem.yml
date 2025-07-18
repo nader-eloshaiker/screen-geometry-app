@@ -24,7 +24,7 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
-      - name: Run Chromatic
+      - name: 🚀 Run Chromatic
         uses: chromaui/action@latest
         with:
           # ⚠️ Make sure to configure a `CHROMATIC_PROJECT_TOKEN` repository secret
