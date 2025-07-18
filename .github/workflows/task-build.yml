@@ -38,5 +38,7 @@ jobs:
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          packageManager: pnpm
+          environment: loudflare-preview
           command: pages deploy ./apps/web/.dist --project-name=screengeometry --env=cloudflare-preview
           gitHubToken: ${{ secrets.GITHUB_TOKEN }}
