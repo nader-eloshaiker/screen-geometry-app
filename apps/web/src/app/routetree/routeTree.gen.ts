@@ -10,7 +10,7 @@
 
 import { createFileRoute } from '@tanstack/react-router'
 
-import { Route as rootRouteImport } from './../__root'
+import { Route as rootRouteImport } from './../routes/__root'
 
 const ScreensLazyRouteImport = createFileRoute('/screens')()
 const HelpLazyRouteImport = createFileRoute('/help')()
@@ -21,22 +21,22 @@ const ScreensLazyRoute = ScreensLazyRouteImport.update({
   id: '/screens',
   path: '/screens',
   getParentRoute: () => rootRouteImport,
-} as any).lazy(() => import('./../screens.lazy').then((d) => d.Route))
+} as any).lazy(() => import('./../routes/screens.lazy').then((d) => d.Route))
 const HelpLazyRoute = HelpLazyRouteImport.update({
   id: '/help',
   path: '/help',
   getParentRoute: () => rootRouteImport,
-} as any).lazy(() => import('./../help.lazy').then((d) => d.Route))
+} as any).lazy(() => import('./../routes/help.lazy').then((d) => d.Route))
 const ContactLazyRoute = ContactLazyRouteImport.update({
   id: '/contact',
   path: '/contact',
   getParentRoute: () => rootRouteImport,
-} as any).lazy(() => import('./../contact.lazy').then((d) => d.Route))
+} as any).lazy(() => import('./../routes/contact.lazy').then((d) => d.Route))
 const IndexLazyRoute = IndexLazyRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
-} as any).lazy(() => import('./../index.lazy').then((d) => d.Route))
+} as any).lazy(() => import('./../routes/index.lazy').then((d) => d.Route))
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexLazyRoute
