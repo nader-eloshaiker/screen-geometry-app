@@ -40,15 +40,6 @@ The reports are hosted in Github Pages and are deployed on every merge to the ma
 This app is more for show casing some **Dev Tooling**, **Web Dev Frame Works**, **Testing Practices** and **Automated Deployments**. However, as a bonus, it is a useful tool for _comparing different monitor screen configurations_.
 I have been considering what my next monitor purchase will be and it has been difficult to conceptualise the different monitor sizes and aspect ratios when I only own a 27" - 16:9 monitor. So this app also has some utility outside of being a reference for frontend tech.
 
-## How the user interacts with the App
-
-1. Search > User has a search bar a list of preconfigured monitors that can be filtered by user text.
-2. Creating a monitor configuration > User must enter at least, a monitor size and an aspect ratio to create a monitor entry.
-3. Screen Configuration Table > User data is rendered onto a table. Table allows the user to "_Show/Hide_" a particular screen in the Physical Screen Comparison panel. Moving the mouse over or clinking each column will temporarily highlight the GUI panel and table row.
-4. Screen GUI Panel > As user adds a screen configuration it will be displayed with a relative size to the others, allowing to compare screen realestate. Moving mouse over each screen panel, will temporarily highlight the screen outline and the respective table row. Screens that have been hidden, will not be visible in the Screen Comparison Panel.
-
-[Read here](./docs/UserGuide.md) for a more detailed explaination
-
 ## Dev'ing the App
 
 ### Detailed Reading
@@ -61,22 +52,22 @@ I have been considering what my next monitor purchase will be and it has been di
 
 Installing dependencies
 
-    npm install -g pnpm
-    pnpm i
+    `npm install -g pnpm`
+    `pnpm i`
 
-Run in development (using vite)
+Run in development
 
-    pnpm run dev
+    `pnpm start`
 
-Linting
+Build
 
-    pnpm run lint:fix
+    `pnpm build`
 
-Build (using vite)
+## How the user interacts with the App
 
-    pnpm run build
+1. Search > User has a search bar a list of preconfigured monitors that can be filtered by user text.
+2. Creating a monitor configuration > User must enter at least, a monitor size and an aspect ratio to create a monitor entry.
+3. Screen Configuration Table > User data is rendered onto a table. Table allows the user to "_Show/Hide_" a particular screen in the Physical Screen Comparison panel. Moving the mouse over or clinking each column will temporarily highlight the GUI panel and table row.
+4. Screen GUI Panel > As user adds a screen configuration it will be displayed with a relative size to the others, allowing to compare screen realestate. Moving mouse over each screen panel, will temporarily highlight the screen outline and the respective table row. Screens that have been hidden, will not be visible in the Screen Comparison Panel.
 
-Generate API Client\*\* (using orval)
-Code is checked in for review ease. This can also help when working on a 'work in progress' published spec, as it allows the developer to control which spec the client is generated from in other feature branches and in main branches.
-
-    pnpm run gen:spec
+[Read here](./docs/UserGuide.md) for a more detailed explaination
