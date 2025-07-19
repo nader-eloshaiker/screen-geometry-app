@@ -41,5 +41,5 @@ jobs:
           workingDirectory: ./apps/web
           packageManager: pnpm
           wranglerVersion: latest
-          command: pages deploy ./apps/web/.dist --project-name=screengeometry --branch=cloudflare-preview
+          command: pages deploy ./dist --project-name=screengeometry --branch=cloudflare-preview
           gitHubToken: ${{ secrets.GITHUB_TOKEN }}
