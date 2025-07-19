@@ -2,7 +2,7 @@ import { createRouter, RouteComponent, RouterProvider } from '@tanstack/react-ro
 
 import { ErrorFallback } from '@/app/pages/ErrorFallback'
 import { NotFound } from '@/app/pages/NotFound'
-import { routeTree } from '@/app/routes/routeTree.gen'
+import { routeTree } from '@/app/routetree/routeTree.gen'
 
 const appRouter = createRouter({
   routeTree,

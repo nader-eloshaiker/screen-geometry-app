@@ -1,7 +1,6 @@
 // import { FlatCompat } from '@eslint/eslintrc'
 import jsEslint from '@eslint/js'
 import pluginQuery from '@tanstack/eslint-plugin-query'
-import tsEslintPlugin from '@typescript-eslint/eslint-plugin'
 import typescriptParser from '@typescript-eslint/parser'
 import eslintPluginImport from 'eslint-plugin-import'
 import eslintPluginPrettierRecommended from 'eslint-plugin-prettier/recommended'
@@ -33,7 +32,7 @@ export default defineConfig([
       'coverage/',
       'storybook-static/',
       'src/public/mockServiceWorker.js',
-      'src/app/routes/routeTree.gen.ts',
+      'src/app/routetree/routeTree.gen.ts',
     ],
   },
   {
@@ -42,7 +41,7 @@ export default defineConfig([
     plugins: {
       react,
       import: eslintPluginImport,
-      '@typescript-eslint': tsEslintPlugin,
+      '@typescript-eslint': tsEslint.plugin,
     },
 
     languageOptions: {

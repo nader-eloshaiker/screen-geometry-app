@@ -142,7 +142,7 @@ jobs:
           workingDirectory: ./apps/web
           packageManager: pnpm
           wranglerVersion: latest
-          command: pages deploy ./dist --project-name=screengeometry --branch=preview
+          command: pages deploy ./dist --project-name=screengeometry --branch=develop
           gitHubToken: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Print Deployment URL
