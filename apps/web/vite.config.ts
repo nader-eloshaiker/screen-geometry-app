@@ -26,6 +26,7 @@ const Config: ViteUserConfig = {
         ...configDefaults.exclude,
         '**/assets',
         'src/app/routes',
+        'src/app/routetree',
         'src/lib',
         'src/**/*.mock.{ts,tsx}',
         'src/**/*.stories.tsx',
