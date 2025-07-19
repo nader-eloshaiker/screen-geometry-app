@@ -13,12 +13,29 @@
 This is a tool to help visually compare different screen sizes to help you choose which monitor, phone, or tablet to buy. It does this by overlaying different screen sizes ontop of each other for
 easy comparison as well as tabulate the specs.
 
+## Purpose
+
+This app is well over engineered and is more for showcasing:
+
+- **Architecture**
+- **Tooling**
+- **Web Development Frame Works**
+- **Design Systems and Style Guides**
+- **Testing Frameworks and Practices**
+- **Automated code generation**.
+- **CI/CD**
+
 ## Links
 
-### Official App urls
+### Deployed Environments
 
-The app is hosted in Cloudflare and is deployed from the main branch. Develop is deployed on every merge to the main branch while production is deployed on a release event. There is also
-a manual deploy to develop workflow action that can be used for feature branches.
+Hosted in [Cloudflare](https://www.cloudflare.com) and is deployed from the main branch.
+
+- Deployment to **Development** environment on every merge to the main branch.
+- Deployment to **Production** environment is deployed on a release event.
+- Manual deployment to development can be used for feature branches.
+
+### Official App urls
 
 - Production [screengeometry.com](https://screengeometry.com)
 - Develop [develop.screengeometry.com](https://develop.screengeometry.com)
@@ -35,10 +52,7 @@ The reports are hosted in Github Pages and are deployed on every merge to the ma
 
 ![Demo video](./docs/media/demo-anim.webp)
 
-## Purpose
-
-This app is more for show casing some **Dev Tooling**, **Web Dev Frame Works**, **Testing Practices** and **Automated Deployments**. However, as a bonus, it is a useful tool for _comparing different monitor screen configurations_.
-I have been considering what my next monitor purchase will be and it has been difficult to conceptualise the different monitor sizes and aspect ratios when I only own a 27" - 16:9 monitor. So this app also has some utility outside of being a reference for frontend tech.
+[Read here](./docs/UserGuide.md) for a more detailed explaination
 
 ## Dev'ing the App
 
@@ -52,22 +66,13 @@ I have been considering what my next monitor purchase will be and it has been di
 
 Installing dependencies
 
-    `npm install -g pnpm`
-    `pnpm i`
+    npm install -g pnpm
+    pnpm i
 
 Run in development
 
-    `pnpm start`
+    pnpm start
 
 Build
 
-    `pnpm build`
-
-## How the user interacts with the App
-
-1. Search > User has a search bar a list of preconfigured monitors that can be filtered by user text.
-2. Creating a monitor configuration > User must enter at least, a monitor size and an aspect ratio to create a monitor entry.
-3. Screen Configuration Table > User data is rendered onto a table. Table allows the user to "_Show/Hide_" a particular screen in the Physical Screen Comparison panel. Moving the mouse over or clinking each column will temporarily highlight the GUI panel and table row.
-4. Screen GUI Panel > As user adds a screen configuration it will be displayed with a relative size to the others, allowing to compare screen realestate. Moving mouse over each screen panel, will temporarily highlight the screen outline and the respective table row. Screens that have been hidden, will not be visible in the Screen Comparison Panel.
-
-[Read here](./docs/UserGuide.md) for a more detailed explaination
+    pnpm build
