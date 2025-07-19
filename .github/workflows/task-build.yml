@@ -40,5 +40,6 @@ jobs:
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           workingDirectory: ./apps/web
           packageManager: pnpm
+          wranglerVersion: latest
           command: pages deploy ./apps/web/.dist --project-name=screengeometry --branch=cloudflare-preview
           gitHubToken: ${{ secrets.GITHUB_TOKEN }}
