@@ -56,15 +56,22 @@ jobs:
           GA_TRACKING_ID: ${{ vars.GA_TRACKING_ID }}
         run: pnpm build:prod
 
-      - name: Deploy app
-        uses: nader-eloshaiker/cloudlfare-pages-action@v1.2.0
+      - name: Deploy App
+        id: deploy
+        uses: cloudflare/wrangler-action@v3
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          projectName: screengeometry
-          directory: ./apps/web/dist
-          branch: main
-          environmentName: cloudflare-production
-          wranglerVersion: "3"
-          # Optional: Enable this if you want to have GitHub Deployments triggered
+          workingDirectory: ./apps/web
+          packageManager: pnpm
+          wranglerVersion: latest
+          command: pages deploy ./dist --project-name=screengeometry
           gitHubToken: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Print Deployment URL
+        env:
+          DEPLOYMENT_URL: ${{ steps.deploy.outputs.deployment-url }}
+          DEPLOYMENT_ALIAS_URL: ${{ steps.deploy.outputs.pages-deployment-alias-url }}
+        run: |
+          echo $DEPLOYMENT_URL
+          echo $DEPLOYMENT_ALIAS_URL

@@ -133,14 +133,22 @@ jobs:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
         run: pnpm build:dev
 
-      - name: Deploy app
-        uses: nader-eloshaiker/cloudlfare-pages-action@v1.2.0
+      - name: Deploy App
+        id: deploy
+        uses: cloudflare/wrangler-action@v3
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          projectName: screengeometry
-          directory: "./apps/web/.dist"
-          branch: develop
-          environmentName: cloudflare-preview
-          wranglerVersion: "3"
-          gitHubToken: ${{ secrets.ACTION_GITHUB_TOKEN }}
+          workingDirectory: ./apps/web
+          packageManager: pnpm
+          wranglerVersion: latest
+          command: pages deploy ./dist --project-name=screengeometry --branch=preview
+          gitHubToken: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Print Deployment URL
+        env:
+          DEPLOYMENT_URL: ${{ steps.deploy.outputs.deployment-url }}
+          DEPLOYMENT_ALIAS_URL: ${{ steps.deploy.outputs.pages-deployment-alias-url }}
+        run: |
+          echo $DEPLOYMENT_URL
+          echo $DEPLOYMENT_ALIAS_URL
