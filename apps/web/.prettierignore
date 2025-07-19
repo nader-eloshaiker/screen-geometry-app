@@ -2,5 +2,5 @@ CHANGELOG.md
 build
 dist
 coverage
-src/app/routes/routeTree.gen.ts
+src/app/routes/generated/routeTree.gen.ts
 src/public/mockServiceWorker.js

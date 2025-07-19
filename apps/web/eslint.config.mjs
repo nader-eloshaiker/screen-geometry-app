@@ -33,7 +33,7 @@ export default defineConfig([
       'coverage/',
       'storybook-static/',
       'src/public/mockServiceWorker.js',
-      'src/app/routes/routeTree.gen.ts',
+      'src/app/routes/generated/routeTree.gen.ts',
     ],
   },
   {
