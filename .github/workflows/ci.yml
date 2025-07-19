@@ -138,17 +138,8 @@ jobs:
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          command: pages deploy ./apps/web/.dist --project-name=screengeometry --env=cloudflare-preview
+          workingDirectory: ./apps/web
+          packageManager: pnpm
+          wranglerVersion: latest
+          command: pages deploy ./dist --project-name=screengeometry --branch=preview
           gitHubToken: ${{ secrets.GITHUB_TOKEN }}
-
-      # - name: Deploy app
-      #   uses: nader-eloshaiker/cloudlfare-pages-action@v1.2.0
-      #   with:
-      #     apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-      #     accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-      #     projectName: screengeometry
-      #     directory: "./apps/web/.dist"
-      #     branch: develop
-      #     environmentName: cloudflare-preview
-      #     wranglerVersion: "3"
-      #     gitHubToken: ${{ secrets.ACTION_GITHUB_TOKEN }}

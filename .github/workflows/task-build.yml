@@ -32,14 +32,3 @@ jobs:
         env:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
         run: pnpm build:dev
-
-      - name: Deploy App
-        uses: cloudflare/wrangler-action@v3
-        with:
-          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          workingDirectory: ./apps/web
-          packageManager: pnpm
-          wranglerVersion: latest
-          command: pages deploy ./dist --project-name=screengeometry --branch=cloudflare-preview
-          gitHubToken: ${{ secrets.GITHUB_TOKEN }}
