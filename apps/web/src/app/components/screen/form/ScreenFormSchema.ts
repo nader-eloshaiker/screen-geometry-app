@@ -1,7 +1,7 @@
+import { ScreenDataEnum } from '@screengeometry/lib-api/internal'
 import { ScreenInput } from '@screengeometry/lib-api/spec'
 import * as yup from 'yup'
 import { InferType, ObjectSchema } from 'yup'
-import { ScreenDataEnum } from '../../../../../../../packages/lib-api/src/internal'
 
 export const ScreenFormSchema: ObjectSchema<NullableObj<ScreenInput>> = yup.object().shape(
   {
