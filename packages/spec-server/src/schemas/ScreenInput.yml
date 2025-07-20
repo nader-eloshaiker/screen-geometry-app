@@ -1,0 +1,29 @@
+type: object
+required:
+  - diagonalSize
+  - aspectRatio
+  - hRes
+  - vRes
+  - lightColor
+  - darkColor
+properties:
+  diagonalSize:
+    type: number
+    format: float
+    minimum: 1
+  aspectRatio:
+    type: string
+    pattern: "/^\\d+:\\d+$/"
+  lightColor:
+    type: string
+    pattern: "/^#([a-fA-F0-9]{6})\\b$/"
+  darkColor:
+    type: string
+    pattern: "/^#([a-fA-F0-9]{6})\\b$/"
+  hRes:
+    type: integer
+    minimum: 1
+  vRes:
+    type: integer
+    minimum: 1
+description: "Screen primitive data"

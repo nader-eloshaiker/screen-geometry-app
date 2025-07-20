@@ -1,0 +1,70 @@
+{
+  "name": "@screengeometry/server",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/server.ts",
+    "./indexedDB": "./src/db/IndexedDB.ts"
+  },
+  "scripts": {
+    "pre-push": "pnpm test:ci",
+    "dev": "vite",
+    "build": "tsc --project ./tsconfig-build.json && vite build",
+    "preview": "vite preview",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "lint:staged": "pnpm exec lint-staged",
+    "format": "prettier . --write",
+    "format:check": "prettier . --check",
+    "test": "vitest run --coverage.enabled=true",
+    "test:ci": "vitest run --coverage.enabled=false",
+    "test:watch": "vitest watch --coverage.enabled=true",
+    "test:ui": "vitest watch --ui --coverage.enabled=true"
+  },
+  "dependencies": {
+    "@screengeometry/lib-api": "workspace:*",
+    "fuzzysort": "^3.0.2",
+    "ts-pattern": "^5.7.1",
+    "msw": "^2.10.4",
+    "ulid": "^2.3.0"
+  },
+  "peerDependencies": {
+    "react": "catalog:react18",
+    "react-dom": "catalog:react18"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.19.0",
+    "@testing-library/jest-dom": "^6.6.3",
+    "@testing-library/react": "^16.1.0",
+    "@testing-library/user-event": "^14.6.1",
+    "@types/node": "^20.14.9",
+    "@types/react": "catalog:react18",
+    "@types/react-dom": "catalog:react18",
+    "@typescript-eslint/eslint-plugin": "^8.26.1",
+    "@typescript-eslint/parser": "^8.26.1",
+    "@vitejs/plugin-react": "catalog:",
+    "@vitest/coverage-istanbul": "catalog:",
+    "@vitest/ui": "catalog:",
+    "eslint": "catalog:",
+    "eslint-config-prettier": "^10.1.1",
+    "eslint-plugin-import": "^2.31.0",
+    "eslint-plugin-prettier": "^5.2.3",
+    "eslint-plugin-react": "^7.37.4",
+    "eslint-plugin-react-hooks": "^5.2.0",
+    "eslint-plugin-react-refresh": "^0.4.19",
+    "fake-indexeddb": "^6.0.0",
+    "globals": "^15.14.0",
+    "jsdom": "^25.0.1",
+    "lint-staged": "catalog:",
+    "prettier": "catalog:",
+    "prettier-plugin-organize-imports": "^4.1.0",
+    "react": "catalog:react18",
+    "react-dom": "catalog:react18",
+    "typescript": "catalog:",
+    "typescript-eslint": "^8.26.1",
+    "vite": "catalog:",
+    "vite-tsconfig-paths": "^5.1.4",
+    "vitest": "catalog:"
+  }
+}

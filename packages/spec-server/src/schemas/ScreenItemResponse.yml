@@ -1,0 +1,6 @@
+type: object
+required:
+  - item
+properties:
+  item:
+    $ref: "./ScreenItem.yml"

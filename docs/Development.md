@@ -69,7 +69,7 @@ Although this tool was designed with the purpose of testing, it is also usefull 
   - `<StrictMode>` :-(
   - Hooks
   - Functional Components
-- React-Router-Dom
+- TanStack Router
 - React-Hook-Form
 - YUP (Form Resolver)
 

@@ -1,0 +1,6 @@
+CHANGELOG.md
+build
+dist
+coverage
+src/app/routetree/routeTree.gen.ts
+src/public/mockServiceWorker.js
