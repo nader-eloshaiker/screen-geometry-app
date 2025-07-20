@@ -1,4 +1,4 @@
-name: Validation
+name: Validation App
 
 on:
   push:
