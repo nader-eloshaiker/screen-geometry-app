@@ -10,23 +10,13 @@
  * Screen primitive data
  */
 export interface ScreenInput {
-  /**
-   * @minimum 0
-   */
+  /** @minimum 1 */
   diagonalSize: number
-  /** @minLength 3 */
+  /** @pattern /^\d+:\d+$/ */
   aspectRatio: string
-  /**
-   * @minLength 7
-   * @maxLength 7
-   * @pattern #([a-f0-9]{6})\b
-   */
+  /** @pattern /^#([a-fA-F0-9]{6})\b$/ */
   lightColor: string
-  /**
-   * @minLength 7
-   * @maxLength 7
-   * @pattern #([a-f0-9]{6})\b
-   */
+  /** @pattern /^#([a-fA-F0-9]{6})\b$/ */
   darkColor: string
   /** @minimum 1 */
   hRes: number

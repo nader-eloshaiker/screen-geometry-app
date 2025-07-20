@@ -9,25 +9,21 @@ required:
 properties:
   diagonalSize:
     type: number
-    minimum: 0
-    exclusiveMinimum: 1
+    format: float
+    minimum: 1
   aspectRatio:
-    minLength: 3
     type: string
+    pattern: "/^\\d+:\\d+$/"
   lightColor:
     type: string
-    minLength: 7
-    maxLength: 7
-    pattern: '#([a-f0-9]{6})\b'
+    pattern: "/^#([a-fA-F0-9]{6})\\b$/"
   darkColor:
     type: string
-    minLength: 7
-    maxLength: 7
-    pattern: '#([a-f0-9]{6})\b'
+    pattern: "/^#([a-fA-F0-9]{6})\\b$/"
   hRes:
     type: integer
     minimum: 1
   vRes:
-    type: number
+    type: integer
     minimum: 1
 description: "Screen primitive data"
