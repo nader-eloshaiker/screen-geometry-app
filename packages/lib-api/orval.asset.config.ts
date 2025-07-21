@@ -5,8 +5,8 @@ export default defineConfig({
     output: {
       workspace: 'src/generated',
       mode: 'tags-split',
-      target: './server/services',
-      schemas: './server/models',
+      target: './asset/services',
+      schemas: './asset/models',
       indexFiles: true,
       client: 'react-query',
       mock: {
@@ -26,7 +26,7 @@ export default defineConfig({
         ],
         mutator: {
           path: '../axios/apiClient.ts',
-          name: 'serverApiClient',
+          name: 'assetApiClient',
         },
         query: {
           useQuery: true,
@@ -34,7 +34,7 @@ export default defineConfig({
       },
     },
     input: {
-      target: '../spec-server/dist/server-api.json',
+      target: '../spec-asset/dist/asset-api.json',
     },
   },
 })

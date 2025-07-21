@@ -34,6 +34,12 @@ export const serverAxiosInstance = Axios.create({
   headers: { ...makeBaseHeaders() },
 })
 
+export const assetAxiosInstance = Axios.create({
+  // baseURL: `${apiRoutes.apiUrl}${apiRoutes.apiPathVer}`, set in QueryClient.ts
+  timeout: 2000,
+  headers: { ...makeBaseHeaders() },
+})
+
 const baseApiClient = async <T>({
   requestConfig,
   instance,
@@ -61,3 +67,6 @@ const baseApiClient = async <T>({
 
 export const serverApiClient = <T>(requestConfig: AxiosRequestConfig): Promise<T> =>
   baseApiClient({ requestConfig, instance: serverAxiosInstance, getAccessToken: _accessTokenResolver })
+
+export const assetApiClient = <T>(requestConfig: AxiosRequestConfig): Promise<T> =>
+  baseApiClient({ requestConfig, instance: serverAxiosInstance })

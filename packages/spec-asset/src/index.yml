@@ -35,7 +35,7 @@ paths:
       summary: Get Environment Configuration
       description: Returns the environment configuration
       security:
-        - PepperstoneUniversalLogin: []
+        - UniversalLogin: []
       tags:
         - Configuration
       responses:
@@ -56,6 +56,6 @@ components:
     ConfigExample:
       $ref: "./examples/ConfigGetResponseExample.yml"
   securitySchemes:
-    PepperstoneUniversalLogin:
+    UniversalLogin:
       type: http
       scheme: basic

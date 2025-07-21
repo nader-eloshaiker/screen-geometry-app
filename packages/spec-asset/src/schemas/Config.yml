@@ -2,6 +2,14 @@ type: object
 required:
   - server
 properties:
+  host:
+    type: object
+    required:
+      - ENV_TYPE
+    properties:
+      ENV_TYPE:
+        type: string
+        description: deployment environment type
   server:
     type: object
     required:
@@ -9,4 +17,12 @@ properties:
     properties:
       API_URL:
         type: string
-        description: Profile API URL
+        description: server API URL
+  google_analytics:
+    type: object
+    required:
+      - GA_TRACKING_ID
+    properties:
+      GA_TRACKING_ID:
+        type: string
+        description: Google Analytics Tracking ID

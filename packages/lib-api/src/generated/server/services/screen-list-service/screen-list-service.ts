@@ -23,7 +23,7 @@ import { useMutation, useQuery } from '@tanstack/react-query'
 
 import type { ErrorResponse, ScreenInputList, ScreenListResponse } from '../../models'
 
-import { serverApiClient } from '../../../axios/apiClient'
+import { serverApiClient } from '../../../../axios/apiClient'
 
 /**
  * @summary Get a list of ScreenItem objects

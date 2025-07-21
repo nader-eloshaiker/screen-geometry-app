@@ -1,0 +1,11 @@
+{
+  "host": {
+    "ENV_TYPE": "local"
+  },
+  "server": {
+    "API_URL": "https://dev.api.screengeometry.com"
+  },
+  "google_analytics": {
+    "GA_TRACKING_ID": "G-1111111111"
+  }
+}

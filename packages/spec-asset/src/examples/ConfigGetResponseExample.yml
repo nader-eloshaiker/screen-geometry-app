@@ -1,4 +1,8 @@
 summary: Config GET 200 Response
 value:
+  host:
+    ENV_TYPE: dev
   server:
-    API_URL: http://localhost:5173
+    API_URL: https://develop.screengeometry.pages.dev/
+  google_analytics:
+    GA_TRACKING_ID: G-111111111
