@@ -1,5 +1,24 @@
 # Changelog
 
+## [3.1.0](https://github.com/nader-eloshaiker/screen-geometry-app/compare/v3.0.1...v3.1.0) (2025-07-21)
+
+
+### Features
+
+* **app:** implement pnpm workspaces ([#510](https://github.com/nader-eloshaiker/screen-geometry-app/issues/510)) ([a3dbd58](https://github.com/nader-eloshaiker/screen-geometry-app/commit/a3dbd58abdb5bea219815abae90f00eeeb9b237d))
+* **app:** implement TanStack Router and auto gen routes ([#508](https://github.com/nader-eloshaiker/screen-geometry-app/issues/508)) ([ba1b42b](https://github.com/nader-eloshaiker/screen-geometry-app/commit/ba1b42b57027d63e43b134929dbd41ee191dc798))
+* **app:** update spec ([#522](https://github.com/nader-eloshaiker/screen-geometry-app/issues/522)) ([dc9b3f8](https://github.com/nader-eloshaiker/screen-geometry-app/commit/dc9b3f8dc7a94628360b9c71e58e93b8216ccd87))
+* **cicd:** add pr linting ([#523](https://github.com/nader-eloshaiker/screen-geometry-app/issues/523)) ([faee088](https://github.com/nader-eloshaiker/screen-geometry-app/commit/faee088b3288a061209774687be657a30d322790))
+* **cicd:** deploy all pushes on branch ([#524](https://github.com/nader-eloshaiker/screen-geometry-app/issues/524)) ([59cf13e](https://github.com/nader-eloshaiker/screen-geometry-app/commit/59cf13ed7b9110395a8a224922ef5447a604eb2a))
+* **devops:** migrate to cloudflare wrangler and test in build task ([#520](https://github.com/nader-eloshaiker/screen-geometry-app/issues/520)) ([e4949c6](https://github.com/nader-eloshaiker/screen-geometry-app/commit/e4949c680bd47997126df511fc2bb59cf6d26fdb))
+* remove TanStack DevTools ([#514](https://github.com/nader-eloshaiker/screen-geometry-app/issues/514)) ([730d601](https://github.com/nader-eloshaiker/screen-geometry-app/commit/730d6011348b30024b7a3c5535860cec41145ec4))
+
+
+### Bug Fixes
+
+* **app:** tanstack router generator location ([#521](https://github.com/nader-eloshaiker/screen-geometry-app/issues/521)) ([abfbe0f](https://github.com/nader-eloshaiker/screen-geometry-app/commit/abfbe0f1094de8df87af85da23311059ff3f5943))
+* **web:** fix test inconsistent failing ([#525](https://github.com/nader-eloshaiker/screen-geometry-app/issues/525)) ([92343e1](https://github.com/nader-eloshaiker/screen-geometry-app/commit/92343e186b59b7446a0e5e7518d8aa7cd1f95243))
+
 ## [3.0.1](https://github.com/nader-eloshaiker/screen-geometry-app/compare/v3.0.0...v3.0.1) (2025-01-09)
 
 
