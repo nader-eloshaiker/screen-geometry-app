@@ -52,6 +52,7 @@ global.ResizeObserver = vi.fn().mockImplementation(() => ({
 Object.defineProperty(window, 'location', {
   value: {
     href: 'https://www.example.com',
+    origin: 'https://www.example.com',
     assign: vi.fn(),
     replace: vi.fn(),
     reload: vi.fn(),

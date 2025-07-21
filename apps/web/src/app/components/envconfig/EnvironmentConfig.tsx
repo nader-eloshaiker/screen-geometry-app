@@ -32,29 +32,29 @@ export const EnvironmentConfig = ({ children }: Props) => {
   }, [error])
 
   useEffect(() => {
-    if (data === undefined && isFetched) {
-      throw new Error('Could not render. Error fetching config data.')
-    }
-
     if (isFetched) {
       // was already initialised in App.tsx to 'loading'
       setPageLoading({ action: 'idle', componentId: EnvironmentConfigLoaderKey })
     }
 
-    if (data) {
+    if (isFetched && !data) {
+      throw new Error('Could not render. Error fetching config data.')
+    }
+
+    if (isFetched && data) {
       setConfig(data)
       serverAxiosInstance.defaults.baseURL = data.SERVER_API_URL
       ReactGA.initialize(data.GA_TRACKING_ID, { testMode: !!import.meta.env.DEV })
 
-      setPageLoading({ action: 'idle', componentId: EnvironmentConfigLoaderKey })
-    }
+      if (import.meta.env.NODE_ENV !== 'test') {
+        createBrowserServiceWorker(data.SERVER_API_URL).then(() => {
+          setIsServerReady(true)
 
-    if (data && import.meta.env.NODE_ENV !== 'test') {
-      createBrowserServiceWorker(data.SERVER_API_URL).then(() => {
-        setIsServerReady(true)
-
+          setPageLoading({ action: 'idle', componentId: MockServerReadyKey })
+        })
+      } else {
         setPageLoading({ action: 'idle', componentId: MockServerReadyKey })
-      })
+      }
     }
   }, [data, isFetched, setPageLoading])
 

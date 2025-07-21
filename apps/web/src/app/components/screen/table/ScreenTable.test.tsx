@@ -7,15 +7,19 @@ import { renderWithUserEvents } from '@/lib/support/test/utils/RenderWithUserEve
 import { useElementSizeMock } from '@/lib/ui/hooks/useElementSize.mock'
 import { normaliseScreenRender } from '@/lib/utils'
 import {
+  getConfigurationMock,
   getGetScreenListResponseMock,
   getScreenListServiceMock,
   getScreenServiceMock,
   getSearchServiceMock,
 } from '@screengeometry/lib-api/spec'
+import { PageLoaderProvider } from '@screengeometry/lib-ui/pageloader'
 import { Toaster } from '@screengeometry/lib-ui/toaster'
 import { waitFor } from '@testing-library/react'
 import { useState } from 'react'
 import { HelmetProvider } from 'react-helmet-async'
+import { EnvironmentConfig, EnvironmentConfigLoaderKey, MockServerReadyKey } from '../../envconfig/EnvironmentConfig'
+import { EnvironmentSessionLoaderKey } from '../../envsession/EnvironmentSession'
 import { ScreenTable } from './ScreenTable'
 
 const TestComponent = ({
@@ -49,17 +53,28 @@ const TestParentComponent = ({ initialise }: { initialise?: Array<ScreenItemRend
   return (
     <HelmetProvider>
       <QueryProvider>
-        <ScreenProvider initialise={{ screens: initialise ?? [], query: '' }}>
-          <Screens />
-        </ScreenProvider>
-        <Toaster />
+        <PageLoaderProvider
+          onAppMountComponents={[EnvironmentConfigLoaderKey, MockServerReadyKey, EnvironmentSessionLoaderKey]}
+        >
+          <EnvironmentConfig>
+            <ScreenProvider initialise={{ screens: initialise ?? [], query: '' }}>
+              <Screens />
+            </ScreenProvider>
+            <Toaster />
+          </EnvironmentConfig>
+        </PageLoaderProvider>
       </QueryProvider>
     </HelmetProvider>
   )
 }
 
 describe('#ScreenTable', () => {
-  const mswObj = initMSW([...getSearchServiceMock(), ...getScreenListServiceMock(), ...getScreenServiceMock()])
+  const mswObj = initMSW([
+    ...getSearchServiceMock(),
+    ...getScreenListServiceMock(),
+    ...getScreenServiceMock(),
+    ...getConfigurationMock(),
+  ])
 
   beforeAll(() => {
     mswObj.start()
