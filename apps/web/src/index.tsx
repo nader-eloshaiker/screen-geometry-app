@@ -12,6 +12,9 @@ import '@screengeometry/lib-style/theme.css'
 
 const testMode = !!import.meta.env.DEV
 const trackingId = import.meta.env.VITE_GA_TRACKING_ID ?? 'G-1111111111'
+const packageVersion = import.meta.env.VITE_PACKAGE_VERSION
+const buildDate = import.meta.env.VITE_BUILD_DATE
+
 ReactGA.initialize(trackingId, { testMode })
 
 const renderApp = () => {
@@ -20,7 +23,9 @@ const renderApp = () => {
       <HelmetProvider>
         <Helmet>
           <title>Screen Geometry</title>
-          <meta name='description' content='Visually compare screen sizes and resolutions' />
+          <meta name='description' content='Visually compare multiple monitor sizes and resolutions simultaneously' />
+          <meta name='package-version' content={packageVersion} />
+          <meta name='build-date' content={buildDate} />
         </Helmet>
         <App />
       </HelmetProvider>
