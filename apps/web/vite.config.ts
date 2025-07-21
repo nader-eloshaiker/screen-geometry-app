@@ -11,9 +11,6 @@ const isTest = process.env.NODE_ENV === 'test'
 
 const Config: ViteUserConfig = {
   test: {
-    // Do not error on unhandled rejections
-    dangerouslyIgnoreUnhandledErrors: true,
-
     globals: true,
     clearMocks: true,
     reporters: process.env.GITHUB_ACTIONS ? ['verbose', 'github-actions'] : ['verbose'],
