@@ -2,6 +2,13 @@ import { QueryProvider } from '@/app/hooks/query/QueryProvider'
 import { AppRouterProvider } from '@/app/hooks/router/AppRouterProvider'
 import { ScreenProvider } from '@/app/hooks/screen/ScreenProvider'
 import { ThemeProvider } from '@/app/hooks/theme/ThemeProvider'
+import { PageLoaderProvider } from '@screengeometry/lib-ui/pageloader'
+import {
+  EnvironmentConfig,
+  EnvironmentConfigLoaderKey,
+  MockServerReadyKey,
+} from './components/envconfig/EnvironmentConfig'
+import { EnvironmentSessionLoaderKey } from './components/envsession/EnvironmentSession'
 
 export const App = () => (
   // <ErrorBoundary
@@ -9,11 +16,17 @@ export const App = () => (
   //   onError={(error: Error, info: ErrorInfo) => console.error(error.message, info.componentStack)}
   // >
   <QueryProvider>
-    <ThemeProvider>
-      <ScreenProvider>
-        <AppRouterProvider />
-      </ScreenProvider>
-    </ThemeProvider>
+    <PageLoaderProvider
+      onAppMountComponents={[EnvironmentConfigLoaderKey, MockServerReadyKey, EnvironmentSessionLoaderKey]}
+    >
+      <EnvironmentConfig>
+        <ThemeProvider>
+          <ScreenProvider>
+            <AppRouterProvider />
+          </ScreenProvider>
+        </ThemeProvider>
+      </EnvironmentConfig>
+    </PageLoaderProvider>
   </QueryProvider>
   // </ErrorBoundary>
 )

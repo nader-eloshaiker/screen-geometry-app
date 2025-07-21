@@ -15,6 +15,7 @@
     "./input": "./src/components/input/index.ts",
     "./label": "./src/components/label/index.ts",
     "./navigationlink": "./src/components/navigationlink/index.ts",
+    "./pageloader": "./src/components/pageloader/index.ts",
     "./popover": "./src/components/popover/index.ts",
     "./separator": "./src/components/separator/index.ts",
     "./sheet": "./src/components/sheet/index.ts",
@@ -64,6 +65,7 @@
     "cmdk": "^1.0.4",
     "date-fns": "^4.1.0",
     "lucide-react": "catalog:",
+    "ts-pattern": "catalog:",
     "vaul": "^1.1.2"
   },
   "peerDependencies": {

@@ -7,6 +7,3 @@
  */
 
 export * from './config'
-export * from './configGoogleAnalytics'
-export * from './configHost'
-export * from './configServer'

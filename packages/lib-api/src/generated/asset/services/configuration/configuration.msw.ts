@@ -10,9 +10,9 @@ import { HttpResponse, delay, http } from 'msw'
 import type { Config } from '../../models'
 
 export const getGetConfigResponseMock = (): Config => ({
-  host: { ENV_TYPE: 'dev' },
-  server: { API_URL: 'https://develop.screengeometry.pages.dev/' },
-  google_analytics: { GA_TRACKING_ID: 'G-111111111' },
+  ENV_TYPE: 'dev',
+  SERVER_API_URL: 'https://develop.screengeometry.pages.dev/',
+  GA_TRACKING_ID: 'G-111111111',
 })
 
 export const getGetConfigMockHandler = (

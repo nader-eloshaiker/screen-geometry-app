@@ -5,12 +5,12 @@
  * Environment configuration for endpoints
 
  */
-import type { ConfigGoogleAnalytics } from './configGoogleAnalytics'
-import type { ConfigHost } from './configHost'
-import type { ConfigServer } from './configServer'
 
 export interface Config {
-  host?: ConfigHost
-  server: ConfigServer
-  google_analytics?: ConfigGoogleAnalytics
+  /** deployment environment type */
+  ENV_TYPE: string
+  /** server API URL */
+  SERVER_API_URL: string
+  /** Google Analytics Tracking ID */
+  GA_TRACKING_ID: string
 }

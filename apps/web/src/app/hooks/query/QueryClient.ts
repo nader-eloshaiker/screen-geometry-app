@@ -1,5 +1,5 @@
 import { QueryClient, QueryClientConfig } from '@tanstack/react-query'
-import axios, { isAxiosError } from 'axios'
+import { isAxiosError } from 'axios'
 
 const MAX_RETRIES = 3
 
@@ -32,5 +32,3 @@ const finalOptions: QueryClientConfig = {
   },
 }
 export const queryClient = new QueryClient(finalOptions)
-export const baseUrl = import.meta.env.VITE_API_URL ?? 'http://dev.api.screengeometry.com'
-axios.defaults.baseURL = baseUrl

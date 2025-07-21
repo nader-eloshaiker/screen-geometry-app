@@ -2,23 +2,11 @@ import { default as Axios, AxiosInstance, AxiosRequestConfig } from 'axios'
 import { v4 } from 'uuid'
 
 // Generate a random jwt token just to make the api calls look legit
-const getRandomString = (length = 10) => {
-  const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789_'
-  let result = ''
-  for (let i = 0; i < length; i++) {
-    result += chars.charAt(Math.floor(Math.random() * chars.length))
-  }
-  return result
-}
-
 let _accessTokenResolver: (() => Promise<string>) | undefined
 
 export const setAccessTokenResolver = (fn: (() => Promise<string>) | undefined) => {
   _accessTokenResolver = fn
 }
-
-// TODO: real token resolver should be set from identity service
-setAccessTokenResolver(() => Promise.resolve(`${getRandomString(36)}.${getRandomString(303)}.${getRandomString(43)}`))
 
 const makeBaseHeaders = () => ({
   accept: 'application/json',

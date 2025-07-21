@@ -53,7 +53,7 @@
     "simpler-color": "^1.0.2",
     "tailwindcss": "catalog:tailwindcss3",
     "tailwindcss-animate": "catalog:tailwindcss3",
-    "ts-pattern": "^5.6.2",
+    "ts-pattern": "catalog:",
     "ulid": "^2.3.0",
     "web-vitals": "^4.2.3",
     "yup": "catalog:"
