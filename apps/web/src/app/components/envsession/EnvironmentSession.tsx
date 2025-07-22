@@ -36,6 +36,7 @@ export const EnvironmentSession = ({ children }: Props) => {
 
   useEffect(() => {
     if (mockAccessTokenResolver && setPageLoading) {
+      setPageLoading({ action: 'loading', componentId: EnvironmentSessionLoaderKey })
       setAccessTokenResolver(mockAccessTokenResolver)
       mockAccessTokenResolver().then((data) => {
         const claims = parseJwt(data)

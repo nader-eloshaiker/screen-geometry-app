@@ -11,7 +11,7 @@ import type { Config } from '../../models'
 
 export const getGetConfigResponseMock = (): Config => ({
   ENV_TYPE: 'dev',
-  SERVER_API_URL: 'https://develop.screengeometry.pages.dev/',
+  SERVER_API_URL: 'https://dev.api.screengeometry.com',
   GA_TRACKING_ID: 'G-111111111',
 })
 

@@ -1,3 +1,9 @@
+import {
+  EnvironmentConfig,
+  EnvironmentConfigLoaderKey,
+  MockServerReadyKey,
+} from '@/app/components/envconfig/EnvironmentConfig'
+import { EnvironmentSession } from '@/app/components/envsession/EnvironmentSession'
 import { QueryProvider } from '@/app/hooks/query/QueryProvider'
 import { ScreenProvider } from '@/app/hooks/screen/ScreenProvider'
 import { ScreenItemRender } from '@/app/models/screenItemRender'
@@ -18,8 +24,6 @@ import { Toaster } from '@screengeometry/lib-ui/toaster'
 import { waitFor } from '@testing-library/react'
 import { useState } from 'react'
 import { HelmetProvider } from 'react-helmet-async'
-import { EnvironmentConfig, EnvironmentConfigLoaderKey, MockServerReadyKey } from '../../envconfig/EnvironmentConfig'
-import { EnvironmentSessionLoaderKey } from '../../envsession/EnvironmentSession'
 import { ScreenTable } from './ScreenTable'
 
 const TestComponent = ({
@@ -53,14 +57,14 @@ const TestParentComponent = ({ initialise }: { initialise?: Array<ScreenItemRend
   return (
     <HelmetProvider>
       <QueryProvider>
-        <PageLoaderProvider
-          onAppMountComponents={[EnvironmentConfigLoaderKey, MockServerReadyKey, EnvironmentSessionLoaderKey]}
-        >
+        <PageLoaderProvider onAppMountComponents={[EnvironmentConfigLoaderKey, MockServerReadyKey]}>
           <EnvironmentConfig>
-            <ScreenProvider initialise={{ screens: initialise ?? [], query: '' }}>
-              <Screens />
-            </ScreenProvider>
-            <Toaster />
+            <EnvironmentSession>
+              <ScreenProvider initialise={{ screens: initialise ?? [], query: '' }}>
+                <Screens />
+              </ScreenProvider>
+              <Toaster />
+            </EnvironmentSession>
           </EnvironmentConfig>
         </PageLoaderProvider>
       </QueryProvider>
@@ -112,9 +116,9 @@ describe('#ScreenTable', () => {
       await test.user.click(deleteElements[0])
     })
 
-    expect(expect(mswObj.apiEventStack.length).toBe(2))
+    expect(expect(mswObj.apiEventStack.length).toBe(3))
     expect(mswObj.apiEventStack[mswObj.apiEventStack.length - 1]).toEqual(
-      expect.stringContaining('method:DELETE|url:http://dev.api.screengeometry.com/v1/screen/')
+      expect.stringContaining('method:DELETE|url:https://dev.api.screengeometry.com/v1/screen/')
     )
   })
 
@@ -130,7 +134,7 @@ describe('#ScreenTable', () => {
     })
 
     expect(mswObj.apiEventStack[mswObj.apiEventStack.length - 1]).toEqual(
-      expect.stringContaining('method:PATCH|url:http://dev.api.screengeometry.com/v1/screen/')
+      expect.stringContaining('method:PATCH|url:https://dev.api.screengeometry.com/v1/screen/')
     )
     expect(mswObj.apiEventStack[mswObj.apiEventStack.length - 1]).toEqual(expect.stringContaining('/show'))
   })

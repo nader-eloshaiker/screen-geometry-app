@@ -4,7 +4,6 @@ import * as configuration from '@screengeometry/lib-api/spec'
 import * as designsystem from '@screengeometry/lib-ui/pageloader'
 import { render, waitFor } from '@testing-library/react'
 import { vi } from 'vitest'
-import { EnvironmentSessionLoaderKey } from '../envsession/EnvironmentSession'
 import { EnvironmentConfig, EnvironmentConfigLoaderKey, MockServerReadyKey } from './EnvironmentConfig'
 
 vi.mock('@screengeometry/lib-api/apiClient', () => ({
@@ -51,9 +50,7 @@ describe('#ConfiguredEnvironment', () => {
     } as ReturnType<typeof configuration.useGetConfig>)
 
     const { getByTestId, queryByText } = render(
-      <designsystem.PageLoaderProvider
-        onAppMountComponents={[EnvironmentConfigLoaderKey, MockServerReadyKey, EnvironmentSessionLoaderKey]}
-      >
+      <designsystem.PageLoaderProvider onAppMountComponents={[EnvironmentConfigLoaderKey, MockServerReadyKey]}>
         <EnvironmentConfig>
           <div>Test Child</div>
         </EnvironmentConfig>
@@ -75,9 +72,7 @@ describe('#ConfiguredEnvironment', () => {
 
     expect(() => {
       render(
-        <designsystem.PageLoaderProvider
-          onAppMountComponents={[EnvironmentConfigLoaderKey, MockServerReadyKey, EnvironmentSessionLoaderKey]}
-        >
+        <designsystem.PageLoaderProvider onAppMountComponents={[EnvironmentConfigLoaderKey, MockServerReadyKey]}>
           <EnvironmentConfig>
             <div>Test Child</div>
           </EnvironmentConfig>
@@ -95,9 +90,7 @@ describe('#ConfiguredEnvironment', () => {
 
     expect(() => {
       render(
-        <designsystem.PageLoaderProvider
-          onAppMountComponents={[EnvironmentConfigLoaderKey, MockServerReadyKey, EnvironmentSessionLoaderKey]}
-        >
+        <designsystem.PageLoaderProvider onAppMountComponents={[EnvironmentConfigLoaderKey, MockServerReadyKey]}>
           <EnvironmentConfig>
             <div data-testid='test-child'>Test Child</div>
           </EnvironmentConfig>
@@ -118,9 +111,7 @@ describe('#ConfiguredEnvironment', () => {
     useGetConfigSpy.mockReturnValue(mockQuery)
 
     const { getByTestId, queryByTestId } = render(
-      <designsystem.PageLoaderProvider
-        onAppMountComponents={[EnvironmentConfigLoaderKey, MockServerReadyKey, EnvironmentSessionLoaderKey]}
-      >
+      <designsystem.PageLoaderProvider onAppMountComponents={[EnvironmentConfigLoaderKey, MockServerReadyKey]}>
         <EnvironmentConfig>
           <div data-testid='test-child'>Test Child</div>
         </EnvironmentConfig>
@@ -147,9 +138,7 @@ describe('#ConfiguredEnvironment', () => {
     useGetConfigSpy.mockReturnValue(initialMockReturn)
 
     const { rerender, getByTestId, getByText, queryByTestId } = await renderWithUserEvents(
-      <designsystem.PageLoaderProvider
-        onAppMountComponents={[EnvironmentConfigLoaderKey, MockServerReadyKey, EnvironmentSessionLoaderKey]}
-      >
+      <designsystem.PageLoaderProvider onAppMountComponents={[EnvironmentConfigLoaderKey, MockServerReadyKey]}>
         <EnvironmentConfig>
           <div>Test Child</div>
         </EnvironmentConfig>
@@ -174,9 +163,7 @@ describe('#ConfiguredEnvironment', () => {
 
     // Rerender the component with the new mock return value
     rerender(
-      <designsystem.PageLoaderProvider
-        onAppMountComponents={[EnvironmentConfigLoaderKey, MockServerReadyKey, EnvironmentSessionLoaderKey]}
-      >
+      <designsystem.PageLoaderProvider onAppMountComponents={[EnvironmentConfigLoaderKey, MockServerReadyKey]}>
         <EnvironmentConfig>
           <div>Test Child</div>
         </EnvironmentConfig>

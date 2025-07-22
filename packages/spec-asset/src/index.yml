@@ -19,10 +19,10 @@ x-tagGroups:
 
 servers:
   - description: dev
-    url: https://develop.screengeometry.pages.dev/
+    url: https://dev.api.screengeometry.com
 
   - description: prd
-    url: https://screengeometry.com
+    url: https://api.screengeometry.com
 
 tags:
   - name: Configuration

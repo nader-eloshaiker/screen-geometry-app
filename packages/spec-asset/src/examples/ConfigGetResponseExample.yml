@@ -1,5 +1,5 @@
 summary: Config GET 200 Response
 value:
   ENV_TYPE: dev
-  SERVER_API_URL: http://dev.api.screengeometry.com
+  SERVER_API_URL: https://dev.api.screengeometry.com
   GA_TRACKING_ID: G-111111111
