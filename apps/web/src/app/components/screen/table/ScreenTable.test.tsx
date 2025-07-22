@@ -19,7 +19,7 @@ import {
   getScreenServiceMock,
   getSearchServiceMock,
 } from '@screengeometry/lib-api/spec'
-import { PageLoaderProvider } from '@screengeometry/lib-ui/pageloader'
+import { PageLoaderProvider } from '@screengeometry/lib-ui/hooks/pageloader'
 import { Toaster } from '@screengeometry/lib-ui/toaster'
 import { waitFor } from '@testing-library/react'
 import { useState } from 'react'

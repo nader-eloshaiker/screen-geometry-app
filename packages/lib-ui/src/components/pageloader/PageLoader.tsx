@@ -7,7 +7,6 @@ interface Props {
 
 export const PageLoader = ({ message }: Props) => {
   return (
-    // <div>
     <div
       data-testid='page-loader'
       className='flex h-full flex-col justify-between bg-white md:mx-auto md:justify-normal md:rounded-3xl lg:w-[780px] lg:bg-transparent'
@@ -25,6 +24,5 @@ export const PageLoader = ({ message }: Props) => {
         </>
       </div>
     </div>
-    // </div>
   )
 }

@@ -1,4 +1,4 @@
-import { PageLoaderProvider } from '@screengeometry/lib-ui/pageloader'
+import { PageLoaderProvider } from '@screengeometry/lib-ui/hooks/pageloader'
 import { createLazyFileRoute, Outlet } from '@tanstack/react-router'
 import { EnvironmentSession, EnvironmentSessionLoaderKey } from '../components/envsession/EnvironmentSession'
 

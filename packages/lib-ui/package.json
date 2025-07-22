@@ -24,7 +24,8 @@
     "./toaster": "./src/components/toaster/index.ts",
     "./toggle": "./src/components/toggle/index.ts",
     "./togglegroup": "./src/components/togglegroup/index.ts",
-    "./tooltip": "./src/components/tooltip/index.ts"
+    "./tooltip": "./src/components/tooltip/index.ts",
+    "./hooks/pageloader": "./src/hooks/pageloader/index.ts"
   },
   "scripts": {
     "pre-push": "pnpm test:ci",
