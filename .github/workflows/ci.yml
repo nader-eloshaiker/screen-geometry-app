@@ -133,13 +133,9 @@ jobs:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
         run: pnpm build:dev
 
-      - uses: schdck/create-env-json@v2
-        id: create-env
-        with:
-          file-name: "env/config.json"
-          ENV_TYPE: dev
-          SERVER_API_URL: ${{ secrets.SERVER_API_URL }}
-          GA_TRACKING_ID: ${{ secrets.GA_TRACKING_ID }}
+      - run: echo "$VARS_CONTEXT" > env/config.json
+        env:
+          VARS_CONTEXT: ${{ toJson(vars) }}
 
       - name: Deploy App
         id: deploy
