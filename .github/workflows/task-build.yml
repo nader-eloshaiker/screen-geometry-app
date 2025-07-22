@@ -33,6 +33,14 @@ jobs:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
         run: pnpm build:dev
 
+      - uses: schdck/create-env-json@v2
+        id: create-env
+        with:
+          file-name: "env/config.json"
+          ENV_TYPE: feat
+          SERVER_API_URL: ${{ secrets.SERVER_API_URL }}
+          GA_TRACKING_ID: ${{ secrets.GA_TRACKING_ID }}
+
       - name: Deploy App
         id: deploy
         uses: cloudflare/wrangler-action@v3

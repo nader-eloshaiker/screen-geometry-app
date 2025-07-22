@@ -9,7 +9,7 @@
     "dev": "vite",
     "dev:e2e": "vite --mode development --port 3000",
     "preview": "vite build --watch & vite preview",
-    "build": "tsc && vite build",
+    "build": "tsc && vite build && rm dist/env/config.json",
     "build:prod": "pnpm build",
     "build:dev": "tsc && vite build --mode development",
     "lint": "eslint",
