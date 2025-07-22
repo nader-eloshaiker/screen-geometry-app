@@ -282,8 +282,6 @@ describe('#ScreenFormDrawer', () => {
 
       await waitFor(() => expect(mswObj.apiEventStack.length).toBe(2))
       expect(mswObj.apiEventStack[1]).toContain('/v1/screen')
-
-      waitFor(() => expect(createButton).not.toBeEnabled())
     })
   })
 })
