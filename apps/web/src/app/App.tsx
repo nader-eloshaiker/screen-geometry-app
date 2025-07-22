@@ -8,7 +8,6 @@ import {
   EnvironmentConfigLoaderKey,
   MockServerReadyKey,
 } from './components/envconfig/EnvironmentConfig'
-import { EnvironmentSessionLoaderKey } from './components/envsession/EnvironmentSession'
 
 export const App = () => (
   // <ErrorBoundary
@@ -16,9 +15,7 @@ export const App = () => (
   //   onError={(error: Error, info: ErrorInfo) => console.error(error.message, info.componentStack)}
   // >
   <QueryProvider>
-    <PageLoaderProvider
-      onAppMountComponents={[EnvironmentConfigLoaderKey, MockServerReadyKey, EnvironmentSessionLoaderKey]}
-    >
+    <PageLoaderProvider onAppMountComponents={[EnvironmentConfigLoaderKey, MockServerReadyKey]}>
       <EnvironmentConfig>
         <ThemeProvider>
           <ScreenProvider>

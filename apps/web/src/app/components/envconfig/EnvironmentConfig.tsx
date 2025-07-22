@@ -6,7 +6,6 @@ import { useGetConfig } from '@screengeometry/lib-api/spec'
 import { PageLoader, usePageLoader } from '@screengeometry/lib-ui/pageloader'
 import { ReactNode, useEffect, useState } from 'react'
 import ReactGA from 'react-ga4'
-import { EnvironmentSession } from '../envsession/EnvironmentSession'
 
 export const EnvironmentConfigLoaderKey = 'EnvironmentConfigLoader'
 export const MockServerReadyKey = 'MockServerReady'
@@ -60,9 +59,7 @@ export const EnvironmentConfig = ({ children }: Props) => {
 
   return (
     <EnvConfigProvider config={config}>
-      <EnvironmentSession>
-        {isPageLoading && isServerReady ? <PageLoader message='Loading Config ...' /> : children}
-      </EnvironmentSession>
+      {isPageLoading && isServerReady ? <PageLoader message='Loading Config ...' /> : children}
     </EnvConfigProvider>
   )
 }
