@@ -50,7 +50,7 @@ The reports are hosted in Github Pages and are deployed on every merge to the ma
 
 ## App Demo
 
-[![Demo video](https://raw.githubusercontent.com/nader-eloshaiker/screen-geometry-app/main/docs/media/demo-anim.thumbnail.png)](https://raw.githubusercontent.com/nader-eloshaiker/screen-geometry-app/main/docs/media/demo-anim.webm)
+![Demo video](./docs/media/demo-anim.webp)
 
 [Read here](./docs/UserGuide.md) for a more detailed explaination
 
