@@ -50,7 +50,7 @@ The reports are hosted in Github Pages and are deployed on every merge to the ma
 
 ## App Demo
 
-![Demo video](./docs/media/demo-anim.webp)
+![Demo video](./docs/media/demo-anim.webm)
 
 [Read here](./docs/UserGuide.md) for a more detailed explaination
 
