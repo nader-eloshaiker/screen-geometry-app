@@ -59,6 +59,7 @@ const ScreenFormDrawer = ({ open, setOpen, mode, id: editId = '', children }: Pr
           </SheetDescription>
         </SheetHeader>
         <ScreenSelector
+          selectedItem={selectedItem}
           onSelectItem={setSelectedItem}
           isLoading={isSearchListLoading}
           items={searchListResponse?.list}

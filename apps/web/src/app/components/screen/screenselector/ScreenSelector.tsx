@@ -21,9 +21,10 @@ type TProps = {
   items: Array<SearchItem> | undefined
   commandPlaceholder?: string
   selectPlaceholder?: string
-  isLoading?: boolean
-  onSelectItem?: (item: SearchItem) => void
-  onSearch?: Dispatch<SetStateAction<string>>
+  isLoading: boolean
+  onSelectItem: (item: SearchItem | undefined) => void
+  selectedItem?: SearchItem | undefined
+  onSearch: Dispatch<SetStateAction<string>>
 }
 
 export const ScreenSelector = ({
@@ -32,6 +33,7 @@ export const ScreenSelector = ({
   selectPlaceholder,
   isLoading = false,
   onSelectItem = () => {},
+  selectedItem,
   onSearch = () => {},
 }: TProps) => {
   const [open, setOpen] = useState(false)
@@ -39,16 +41,6 @@ export const ScreenSelector = ({
   const debouncedValue = useDebounce(searchTerm, 500)
   const elementRef = useRef<HTMLDivElement>(null)
   const { width } = useElementSize(elementRef)
-  const [selectId, setSelectId] = useState('')
-
-  useEffect(() => {
-    if (!items || !selectId || !onSelectItem) return
-
-    const item = items.find((item) => item.id === selectId)
-    if (item) {
-      onSelectItem(item)
-    }
-  }, [items, onSelectItem, selectId])
 
   useEffect(() => {
     onSearch(debouncedValue)
@@ -70,12 +62,12 @@ export const ScreenSelector = ({
               'w-full justify-between shadow-lg border-primary-border bg-primary-input [&_svg]:text-primary-foreground-muted [&_svg]:hocus:text-primary-foreground-hover border-2',
               {
                 'animate-pulse pointer-events-none': isLoading,
-                'text-primary-foreground-input': !!selectId,
-                'text-primary-foreground-muted': !selectId,
+                'text-primary-foreground-input': !!selectedItem,
+                'text-primary-foreground-muted': !selectedItem,
               }
             )}
           >
-            {selectId ? items.find((item) => item.id === selectId)?.label : selectPlaceholder}
+            <span>{selectedItem?.label ?? selectPlaceholder}</span>
             <ChevronsUpDown />
           </Button>
         </PopoverTrigger>
@@ -91,12 +83,12 @@ export const ScreenSelector = ({
                     value={item.id}
                     style={{ width: width }}
                     onSelect={(value) => {
-                      setSelectId(value === selectId ? '' : value)
-                      setOpen(false)
+                      onSelectItem(selectedItem && value === selectedItem.id ? undefined : item)
+                      setOpen(!!selectedItem && value === selectedItem.id)
                     }}
                   >
                     <span>{item.decoratedLabel ? parse(item.decoratedLabel) : item.label}</span>
-                    <Check className={cn('ml-auto', selectId === item.id ? 'opacity-100' : 'opacity-0')} />
+                    <Check className={cn('ml-auto', selectedItem?.id === item.id ? 'opacity-100' : 'opacity-0')} />
                   </CommandItem>
                 ))}
               </CommandGroup>
