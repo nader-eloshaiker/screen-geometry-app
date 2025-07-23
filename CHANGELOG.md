@@ -1,5 +1,13 @@
 # Changelog
 
+## [3.2.1](https://github.com/nader-eloshaiker/screen-geometry-app/compare/v3.2.0...v3.2.1) (2025-07-23)
+
+
+### Bug Fixes
+
+* **cicd:** attach branch param to wrangler ([eb7c82a](https://github.com/nader-eloshaiker/screen-geometry-app/commit/eb7c82ae854d57076dbd50594b4c453c60443fa3))
+* **web:** show version from root package.json ([#533](https://github.com/nader-eloshaiker/screen-geometry-app/issues/533)) ([7931285](https://github.com/nader-eloshaiker/screen-geometry-app/commit/7931285a8b182dd7ccd0a07f426e5b1ad78ea5a4))
+
 ## [3.2.0](https://github.com/nader-eloshaiker/screen-geometry-app/compare/v3.1.0...v3.2.0) (2025-07-23)
 
 
