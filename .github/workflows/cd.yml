@@ -23,7 +23,7 @@ jobs:
   deploy-app:
     name: Deploy to Production
     runs-on: ubuntu-latest
-    environment: cloudflare-production
+    environment: prod
     permissions:
       contents: read
       pages: write
