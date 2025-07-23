@@ -54,10 +54,6 @@ jobs:
         run: |
           cat apps/web/dist/env/config.json
 
-      - name: List build files
-        run: |
-          ls -la dist/
-
       - name: Deploy App
         id: deploy
         uses: cloudflare/wrangler-action@v3
