@@ -1,5 +1,17 @@
 # Changelog
 
+## [3.2.2](https://github.com/nader-eloshaiker/screen-geometry-app/compare/v3.2.1...v3.2.2) (2025-07-23)
+
+
+### Bug Fixes
+
+* **cicd:** deployments to cloudflare missing config.json ([#539](https://github.com/nader-eloshaiker/screen-geometry-app/issues/539)) ([f9bf220](https://github.com/nader-eloshaiker/screen-geometry-app/commit/f9bf2206cdefb0795e86b12d7acf59cd008d14ae))
+* **cicd:** migrate release please ([#541](https://github.com/nader-eloshaiker/screen-geometry-app/issues/541)) ([f4ffdda](https://github.com/nader-eloshaiker/screen-geometry-app/commit/f4ffddac1abcea91ad605a701a505d031690948e))
+* **docs:** bad link to anim ([#537](https://github.com/nader-eloshaiker/screen-geometry-app/issues/537)) ([0b380bf](https://github.com/nader-eloshaiker/screen-geometry-app/commit/0b380bf43ea006f7b4a1f4d4bb77b96b4b1a4680))
+* **docs:** update image assets ([#536](https://github.com/nader-eloshaiker/screen-geometry-app/issues/536)) ([d0792a8](https://github.com/nader-eloshaiker/screen-geometry-app/commit/d0792a85feac1f9ebecb03d4fa33abea1114f05b))
+* **docs:** update links and assets ([#534](https://github.com/nader-eloshaiker/screen-geometry-app/issues/534)) ([e55f813](https://github.com/nader-eloshaiker/screen-geometry-app/commit/e55f813b0136bc03a7b28da04b27a9f26e98e503))
+* **web:** screen selector search result selection ([#538](https://github.com/nader-eloshaiker/screen-geometry-app/issues/538)) ([2f97f7f](https://github.com/nader-eloshaiker/screen-geometry-app/commit/2f97f7fa918d80e1c9a2d7d62aa80ee4b5ce4182))
+
 ## [3.2.1](https://github.com/nader-eloshaiker/screen-geometry-app/compare/v3.2.0...v3.2.1) (2025-07-23)
 
 
