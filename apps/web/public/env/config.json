@@ -1,5 +1,5 @@
 {
-  "ENV_TYPE": "local",
+  "ENV_TYPE": "prod",
   "SERVER_API_URL": "https://dev.api.screengeometry.com",
   "GA_TRACKING_ID": "G-1111111111"
 }
