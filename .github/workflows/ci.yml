@@ -38,7 +38,7 @@ jobs:
 
       - name: Prep Release
         id: generate_release
-        uses: google-github-actions/release-please-action@v4
+        uses: googleapis/release-please-action@v4
         with:
           # This is so that actions can run on the release PR
           token: ${{ secrets.ACTION_GITHUB_TOKEN }}
