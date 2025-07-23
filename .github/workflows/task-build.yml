@@ -34,13 +34,17 @@ jobs:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
         run: pnpm build:dev
 
-      - name: create-json
-        id: create-json-2 # Second ID
+      - name: Create env folder
+        run: |
+          mkdir -p dist/env
+
+      - name: Create config.json
+        id: env-create-json
         uses: jsdaniell/create-json@v1.2.3
         with:
           name: "config.json"
           json: '{"ENV_TYPE":"${{ vars.ENV_TYPE }}", "SERVER_API_URL":"${{ vars.SERVER_API_URL }}", "GA_TRACKING_ID":"${{ vars.GA_TRACKING_ID }}"}'
-          dir: "env/"
+          dir: "dist/env/"
 
       - name: Deploy App
         id: deploy
