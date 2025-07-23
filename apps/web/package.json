@@ -11,7 +11,7 @@
     "preview": "vite build --watch & vite preview",
     "build": "tsc && vite build && rm dist/env/config.json",
     "build:prod": "pnpm build",
-    "build:dev": "tsc && vite build --mode development",
+    "build:dev": "tsc && vite build --mode development && rm dist/env/config.json",
     "lint": "eslint",
     "lint:fix": "eslint --fix",
     "lint:staged": "pnpm exec lint-staged",
