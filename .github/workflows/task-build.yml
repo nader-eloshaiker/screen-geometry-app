@@ -34,6 +34,10 @@ jobs:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
         run: pnpm build:dev
 
+      - name: List build files
+        run: |
+          ls -laR apps/web/dist/
+
       - name: Create env folder
         run: |
           mkdir -p apps/web/env
@@ -46,9 +50,9 @@ jobs:
           json: '{"ENV_TYPE":"${{ vars.ENV_TYPE }}", "SERVER_API_URL":"${{ vars.SERVER_API_URL }}", "GA_TRACKING_ID":"${{ vars.GA_TRACKING_ID }}"}'
           dir: "apps/web/dist/env/"
 
-      - name: List build files
+      - name: Show config.json
         run: |
-          ls -laR apps/web/dist/
+          cat apps/web/dist/env/config.json
 
       - name: Deploy App
         id: deploy
