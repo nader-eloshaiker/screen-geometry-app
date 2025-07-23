@@ -28,7 +28,6 @@ export const useApiEffectHandler = <TData>({
         palette: 'success',
         title,
         description: message,
-        duration: 3000,
       })
     }
   }, [data, responseHandler, successNotification, toast])

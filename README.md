@@ -45,12 +45,12 @@ Hosted in [Cloudflare](https://www.cloudflare.com) and is deployed from the main
 The reports are hosted in Github Pages and are deployed on every merge to the main branch.
 
 - [Coverage](https://app.codecov.io/gh/nader-eloshaiker/screen-geometry-app/?search=&displayType=list)
-- [StoryBook Component Library](https://nader-eloshaiker.github.io/screen-geometry-app/storybook)
+- [StoryBook Component Library](https://nader-eloshaiker.github.io/screen-geometry-app)
 - [Chromatic Visual Testing](https://www.chromatic.com/library?appId=67764022c3d2470364c49de2)
 
 ## App Demo
 
-![Demo video](./docs/media/demo-anim.webp)
+[![Demo video](https://raw.githubusercontent.com/nader-eloshaiker/screen-geometry-app/main/docs/media/demo-anim.thumbnail.png)](https://raw.githubusercontent.com/nader-eloshaiker/screen-geometry-app/main/docs/media/demo-anim.webm)
 
 [Read here](./docs/UserGuide.md) for a more detailed explaination
 

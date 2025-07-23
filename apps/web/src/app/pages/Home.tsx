@@ -43,7 +43,7 @@ export const Home = () => {
             <img
               id='demo-image'
               className='h-auto max-w-full rounded-md border border-mono-border object-scale-down shadow-lg'
-              src='./media/demo.webp'
+              src='./media/demo.png'
               width={384}
               height={431}
               alt='Demo Screen Capture'
