@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.2.0](https://github.com/nader-eloshaiker/screen-geometry-app/compare/v3.1.0...v3.2.0) (2025-07-23)
+
+
+### Features
+
+* **api:** resolve env params from deployed asset ([#526](https://github.com/nader-eloshaiker/screen-geometry-app/issues/526)) ([8cc0360](https://github.com/nader-eloshaiker/screen-geometry-app/commit/8cc0360092cda3cd802a8519e87b9ab06148e9ea))
+
 ## [3.1.0](https://github.com/nader-eloshaiker/screen-geometry-app/compare/v3.0.1...v3.1.0) (2025-07-21)
 
 
