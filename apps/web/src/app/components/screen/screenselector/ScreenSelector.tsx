@@ -19,22 +19,18 @@ import { Dispatch, SetStateAction, useEffect, useRef, useState } from 'react'
 
 type TProps = {
   items: Array<SearchItem> | undefined
-  placeholder?: string
-  label?: string
+  commandPlaceholder?: string
+  selectPlaceholder?: string
   isLoading?: boolean
-  selectId: string
-  setSelectId: Dispatch<SetStateAction<string>>
   onSelectItem?: (item: SearchItem) => void
   onSearch?: Dispatch<SetStateAction<string>>
 }
 
 export const ScreenSelector = ({
   items = [],
-  placeholder,
-  label,
+  commandPlaceholder,
+  selectPlaceholder,
   isLoading = false,
-  selectId = '',
-  setSelectId = () => {},
   onSelectItem = () => {},
   onSearch = () => {},
 }: TProps) => {
@@ -43,6 +39,7 @@ export const ScreenSelector = ({
   const debouncedValue = useDebounce(searchTerm, 500)
   const elementRef = useRef<HTMLDivElement>(null)
   const { width } = useElementSize(elementRef)
+  const [selectId, setSelectId] = useState('')
 
   useEffect(() => {
     if (!items || !selectId || !onSelectItem) return
@@ -78,13 +75,13 @@ export const ScreenSelector = ({
               }
             )}
           >
-            {selectId ? items.find((item) => item.id === selectId)?.label : label}
+            {selectId ? items.find((item) => item.id === selectId)?.label : selectPlaceholder}
             <ChevronsUpDown />
           </Button>
         </PopoverTrigger>
         <PopoverContent className='mt-2 w-full border-none p-0'>
           <Command shouldFilter={false}>
-            <CommandInput placeholder={placeholder} className='h-9' onValueChange={setSearchTerm} />
+            <CommandInput placeholder={commandPlaceholder} className='h-9' onValueChange={setSearchTerm} />
             <CommandList>
               <CommandEmpty style={{ width: width }}>No Matching Screens found</CommandEmpty>
               <CommandGroup>
@@ -93,12 +90,12 @@ export const ScreenSelector = ({
                     key={item.id}
                     value={item.id}
                     style={{ width: width }}
-                    onSelect={(selectValue) => {
-                      setSelectId(selectValue === selectId ? '' : selectValue)
+                    onSelect={(value) => {
+                      setSelectId(value === selectId ? '' : value)
                       setOpen(false)
                     }}
                   >
-                    <span>{parse(item.label)}</span>
+                    <span>{item.decoratedLabel ? parse(item.decoratedLabel) : item.label}</span>
                     <Check className={cn('ml-auto', selectId === item.id ? 'opacity-100' : 'opacity-0')} />
                   </CommandItem>
                 ))}

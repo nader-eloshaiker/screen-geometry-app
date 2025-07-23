@@ -36,7 +36,6 @@ const ScreenFormDrawer = ({ open, setOpen, mode, id: editId = '', children }: Pr
 
   const isEditLoading = isEdit && isScreenItemLoading
   const [editScreen, setEditScreen] = useState<FormSubmitType | undefined>()
-  const [selectId, setSelectId] = useState('')
   const [selectedItem, setSelectedItem] = useState<SearchItem>()
 
   useEffect(() => {
@@ -63,10 +62,8 @@ const ScreenFormDrawer = ({ open, setOpen, mode, id: editId = '', children }: Pr
           onSelectItem={setSelectedItem}
           isLoading={isSearchListLoading}
           items={searchListResponse?.list}
-          placeholder='Search Screen list...'
-          label='Select Screen...'
-          selectId={selectId}
-          setSelectId={setSelectId}
+          commandPlaceholder='Search Screen list...'
+          selectPlaceholder='Select Screen...'
           onSearch={setSearchTerm}
         />
 

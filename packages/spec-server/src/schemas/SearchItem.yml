@@ -16,6 +16,8 @@ properties:
   label:
     type: string
     minLength: 1
+  decoratedLabel:
+    type: string
   aspectRatio:
     type: string
     minLength: 3

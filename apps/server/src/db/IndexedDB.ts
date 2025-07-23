@@ -291,7 +291,7 @@ export const searchData = <T extends object>(
         const sorted = results.toSorted((a, b) => b.score - a.score)
         const response = sorted.map((result) => ({
           ...result.obj,
-          [key]: result.highlight('<strong>', '</strong>'),
+          decoratedLabel: result.highlight('<strong>', '</strong>'),
         }))
 
         resolve(response)
