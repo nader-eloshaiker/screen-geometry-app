@@ -149,10 +149,6 @@ jobs:
           json: '{"ENV_TYPE":"${{ vars.ENV_TYPE }}", "SERVER_API_URL":"${{ vars.SERVER_API_URL }}", "GA_TRACKING_ID":"${{ vars.GA_TRACKING_ID }}"}'
           dir: "apps/web/dist/env/"
 
-      - name: List build files
-        run: |
-          ls -laR apps/web/dist/
-
       - name: Deploy App
         id: deploy
         uses: cloudflare/wrangler-action@v3
