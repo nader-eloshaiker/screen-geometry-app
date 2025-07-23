@@ -1,4 +1,5 @@
 import ThemeToggle from '@/app/components/theme/ThemeToggle'
+import { useEnvConfig } from '@/app/hooks/envconfig/useEnvConfig'
 import { cn } from '@/lib/utils'
 import { Button } from '@screengeometry/lib-ui/button'
 import {
@@ -10,7 +11,7 @@ import {
   SheetTrigger,
 } from '@screengeometry/lib-ui/sheet'
 import { Menu } from 'lucide-react'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { HeaderNavLarge } from './HeaderNavLarge'
 import { HeaderNavSmall } from './HeaderNavSmall'
 
@@ -18,19 +19,27 @@ const ThemeToggleStyled = ({ id }: { id: string }) => (
   <ThemeToggle className='self-center opacity-50 hover:opacity-100 md:mr-2' id={id} />
 )
 
-const Title = ({ size }: { size: 'sm' | 'lg' }) => (
+const Title = ({ size, appTitle }: { size: 'sm' | 'lg'; appTitle: string }) => (
   <div
     className={cn('flex-1 text-center', {
       'text-2xl': size === 'lg',
       'text-xl': size === 'sm',
     })}
   >
-    {import.meta.env.VITE_APP_TITLE}
+    {appTitle}
   </div>
 )
 
 export default function Header() {
   const [open, setOpen] = useState(false)
+  const { ENV_TYPE } = useEnvConfig()
+  const [appTitle, setAppTitle] = useState('Screen Geometry')
+
+  useEffect(() => {
+    if (ENV_TYPE !== 'prod') {
+      setAppTitle(`Screen Geo.[${ENV_TYPE}]`)
+    }
+  }, [ENV_TYPE])
 
   return (
     <header className='bg-header p-4 text-header-foreground shadow-md'>
@@ -53,10 +62,10 @@ export default function Header() {
             <HeaderNavSmall setOpen={setOpen} />
           </SheetContent>
         </Sheet>
-        <Title size='lg' />
+        <Title size='lg' appTitle={appTitle} />
       </div>
       <div className='container mx-auto hidden lg:flex lg:flex-col' data-testid='large-header'>
-        <Title size='lg' />
+        <Title size='lg' appTitle={appTitle} />
         <div className='flex justify-between'>
           <HeaderNavLarge />
           <ThemeToggleStyled id='theme-toggle' />

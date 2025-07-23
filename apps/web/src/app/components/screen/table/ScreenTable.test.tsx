@@ -1,3 +1,9 @@
+import {
+  EnvironmentConfig,
+  EnvironmentConfigLoaderKey,
+  MockServerReadyKey,
+} from '@/app/components/envconfig/EnvironmentConfig'
+import { EnvironmentSession } from '@/app/components/envsession/EnvironmentSession'
 import { QueryProvider } from '@/app/hooks/query/QueryProvider'
 import { ScreenProvider } from '@/app/hooks/screen/ScreenProvider'
 import { ScreenItemRender } from '@/app/models/screenItemRender'
@@ -7,11 +13,13 @@ import { renderWithUserEvents } from '@/lib/support/test/utils/RenderWithUserEve
 import { useElementSizeMock } from '@/lib/ui/hooks/useElementSize.mock'
 import { normaliseScreenRender } from '@/lib/utils'
 import {
+  getConfigurationMock,
   getGetScreenListResponseMock,
   getScreenListServiceMock,
   getScreenServiceMock,
   getSearchServiceMock,
 } from '@screengeometry/lib-api/spec'
+import { PageLoaderProvider } from '@screengeometry/lib-ui/hooks/pageloader'
 import { Toaster } from '@screengeometry/lib-ui/toaster'
 import { waitFor } from '@testing-library/react'
 import { useState } from 'react'
@@ -49,17 +57,28 @@ const TestParentComponent = ({ initialise }: { initialise?: Array<ScreenItemRend
   return (
     <HelmetProvider>
       <QueryProvider>
-        <ScreenProvider initialise={{ screens: initialise ?? [], query: '' }}>
-          <Screens />
-        </ScreenProvider>
-        <Toaster />
+        <PageLoaderProvider onAppMountComponents={[EnvironmentConfigLoaderKey, MockServerReadyKey]}>
+          <EnvironmentConfig>
+            <EnvironmentSession>
+              <ScreenProvider initialise={{ screens: initialise ?? [], query: '' }}>
+                <Screens />
+              </ScreenProvider>
+              <Toaster />
+            </EnvironmentSession>
+          </EnvironmentConfig>
+        </PageLoaderProvider>
       </QueryProvider>
     </HelmetProvider>
   )
 }
 
 describe('#ScreenTable', () => {
-  const mswObj = initMSW([...getSearchServiceMock(), ...getScreenListServiceMock(), ...getScreenServiceMock()])
+  const mswObj = initMSW([
+    ...getSearchServiceMock(),
+    ...getScreenListServiceMock(),
+    ...getScreenServiceMock(),
+    ...getConfigurationMock(),
+  ])
 
   beforeAll(() => {
     mswObj.start()
@@ -97,9 +116,9 @@ describe('#ScreenTable', () => {
       await test.user.click(deleteElements[0])
     })
 
-    expect(expect(mswObj.apiEventStack.length).toBe(2))
+    expect(expect(mswObj.apiEventStack.length).toBe(3))
     expect(mswObj.apiEventStack[mswObj.apiEventStack.length - 1]).toEqual(
-      expect.stringContaining('method:DELETE|url:http://dev.api.screengeometry.com/v1/screen/')
+      expect.stringContaining('method:DELETE|url:https://dev.api.screengeometry.com/v1/screen/')
     )
   })
 
@@ -115,7 +134,7 @@ describe('#ScreenTable', () => {
     })
 
     expect(mswObj.apiEventStack[mswObj.apiEventStack.length - 1]).toEqual(
-      expect.stringContaining('method:PATCH|url:http://dev.api.screengeometry.com/v1/screen/')
+      expect.stringContaining('method:PATCH|url:https://dev.api.screengeometry.com/v1/screen/')
     )
     expect(mswObj.apiEventStack[mswObj.apiEventStack.length - 1]).toEqual(expect.stringContaining('/show'))
   })

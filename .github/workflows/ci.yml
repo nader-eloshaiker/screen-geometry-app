@@ -103,7 +103,7 @@ jobs:
     needs: [manage-release]
     name: Deploy to Develop
     runs-on: ubuntu-latest
-    environment: cloudflare-preview
+    environment: stage
     permissions:
       contents: read
       pages: write
@@ -132,6 +132,18 @@ jobs:
         env:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
         run: pnpm build:dev
+
+      - name: Create env folder
+        run: |
+          mkdir -p dist/env
+
+      - name: Create config.json
+        id: env-create-json
+        uses: jsdaniell/create-json@v1.2.3
+        with:
+          name: "config.json"
+          json: '{"ENV_TYPE":"${{ vars.ENV_TYPE }}", "SERVER_API_URL":"${{ vars.SERVER_API_URL }}", "GA_TRACKING_ID":"${{ vars.GA_TRACKING_ID }}"}'
+          dir: "dist/env/"
 
       - name: Deploy App
         id: deploy

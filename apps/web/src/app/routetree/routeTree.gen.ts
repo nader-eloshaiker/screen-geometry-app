@@ -16,6 +16,7 @@ const ScreensLazyRouteImport = createFileRoute('/screens')()
 const HelpLazyRouteImport = createFileRoute('/help')()
 const ContactLazyRouteImport = createFileRoute('/contact')()
 const IndexLazyRouteImport = createFileRoute('/')()
+const ScreensIndexLazyRouteImport = createFileRoute('/screens/')()
 
 const ScreensLazyRoute = ScreensLazyRouteImport.update({
   id: '/screens',
@@ -37,39 +38,48 @@ const IndexLazyRoute = IndexLazyRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any).lazy(() => import('./../routes/index.lazy').then((d) => d.Route))
+const ScreensIndexLazyRoute = ScreensIndexLazyRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => ScreensLazyRoute,
+} as any).lazy(() =>
+  import('./../routes/screens/index.lazy').then((d) => d.Route),
+)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexLazyRoute
   '/contact': typeof ContactLazyRoute
   '/help': typeof HelpLazyRoute
-  '/screens': typeof ScreensLazyRoute
+  '/screens': typeof ScreensLazyRouteWithChildren
+  '/screens/': typeof ScreensIndexLazyRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexLazyRoute
   '/contact': typeof ContactLazyRoute
   '/help': typeof HelpLazyRoute
-  '/screens': typeof ScreensLazyRoute
+  '/screens': typeof ScreensIndexLazyRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexLazyRoute
   '/contact': typeof ContactLazyRoute
   '/help': typeof HelpLazyRoute
-  '/screens': typeof ScreensLazyRoute
+  '/screens': typeof ScreensLazyRouteWithChildren
+  '/screens/': typeof ScreensIndexLazyRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/contact' | '/help' | '/screens'
+  fullPaths: '/' | '/contact' | '/help' | '/screens' | '/screens/'
   fileRoutesByTo: FileRoutesByTo
   to: '/' | '/contact' | '/help' | '/screens'
-  id: '__root__' | '/' | '/contact' | '/help' | '/screens'
+  id: '__root__' | '/' | '/contact' | '/help' | '/screens' | '/screens/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexLazyRoute: typeof IndexLazyRoute
   ContactLazyRoute: typeof ContactLazyRoute
   HelpLazyRoute: typeof HelpLazyRoute
-  ScreensLazyRoute: typeof ScreensLazyRoute
+  ScreensLazyRoute: typeof ScreensLazyRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
@@ -102,14 +112,33 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexLazyRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/screens/': {
+      id: '/screens/'
+      path: '/'
+      fullPath: '/screens/'
+      preLoaderRoute: typeof ScreensIndexLazyRouteImport
+      parentRoute: typeof ScreensLazyRoute
+    }
   }
 }
+
+interface ScreensLazyRouteChildren {
+  ScreensIndexLazyRoute: typeof ScreensIndexLazyRoute
+}
+
+const ScreensLazyRouteChildren: ScreensLazyRouteChildren = {
+  ScreensIndexLazyRoute: ScreensIndexLazyRoute,
+}
+
+const ScreensLazyRouteWithChildren = ScreensLazyRoute._addFileChildren(
+  ScreensLazyRouteChildren,
+)
 
 const rootRouteChildren: RootRouteChildren = {
   IndexLazyRoute: IndexLazyRoute,
   ContactLazyRoute: ContactLazyRoute,
   HelpLazyRoute: HelpLazyRoute,
-  ScreensLazyRoute: ScreensLazyRoute,
+  ScreensLazyRoute: ScreensLazyRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

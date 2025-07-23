@@ -25,7 +25,7 @@
   "dependencies": {
     "@screengeometry/lib-api": "workspace:*",
     "fuzzysort": "^3.0.2",
-    "ts-pattern": "^5.7.1",
+    "ts-pattern": "catalog:",
     "msw": "^2.10.4",
     "ulid": "^2.3.0"
   },

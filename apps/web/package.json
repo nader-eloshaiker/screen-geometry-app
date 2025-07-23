@@ -9,7 +9,7 @@
     "dev": "vite",
     "dev:e2e": "vite --mode development --port 3000",
     "preview": "vite build --watch & vite preview",
-    "build": "tsc && vite build",
+    "build": "tsc && vite build && rm dist/env/config.json",
     "build:prod": "pnpm build",
     "build:dev": "tsc && vite build --mode development",
     "lint": "eslint",
@@ -53,7 +53,7 @@
     "simpler-color": "^1.0.2",
     "tailwindcss": "catalog:tailwindcss3",
     "tailwindcss-animate": "catalog:tailwindcss3",
-    "ts-pattern": "^5.6.2",
+    "ts-pattern": "catalog:",
     "ulid": "^2.3.0",
     "web-vitals": "^4.2.3",
     "yup": "catalog:"

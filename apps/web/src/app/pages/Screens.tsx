@@ -14,6 +14,7 @@ import { ScreenItemRender } from '@/app/models/screenItemRender'
 import { useElementSize } from '@/lib/ui/hooks/useElementSize'
 import { getMaxScreenSize } from '@/lib/utils'
 import { Button } from '@screengeometry/lib-ui/button'
+import { usePageLoader } from '@screengeometry/lib-ui/hooks/pageloader'
 import { Label } from '@screengeometry/lib-ui/label'
 import { Skeleton } from '@screengeometry/lib-ui/skeleton'
 import { Loader2 } from 'lucide-react'
@@ -37,10 +38,13 @@ export const Screens = () => {
   const [hAlignment, setHAlignment] = useState<Alignment>('center')
   const [vAlignment, setVAlignment] = useState<Alignment>('end')
 
+  const { isPageLoading } = usePageLoader()
   const { isFetching: isScreenListLoading } = useGetScreensListApi()
   const { isPending: isCreateListLoading, mutate: createListAction } = useCreateScreenListApi()
   const { isPending: isDeletePending, mutate: deleteAction, variables: deleteParams } = useDeleteScreenApi()
   const { isPending: isShowPending, mutate: showAction, variables: showParams } = useShowScreenApi()
+
+  const isLoading = isScreenListLoading || isPageLoading
 
   const [isEditorOpen, setIsEditorOpen] = useState(false)
   const [editMode, setEditMode] = useState<FormModeTypes>(FormModeTypes.Create)
@@ -122,7 +126,7 @@ export const Screens = () => {
 
         <ScreenTable
           screens={screens}
-          isScreenListLoading={isScreenListLoading}
+          isScreenListLoading={isLoading}
           highlighted={highlighted}
           setHighLighted={setHighlighted}
           editAction={{ handler: onEdit }}
@@ -130,7 +134,7 @@ export const Screens = () => {
           showActon={{ handler: onShow, isPending: isShowPending, id: showParams?.id }}
         />
 
-        {screens.length === 0 && !isScreenListLoading && (
+        {screens.length === 0 && !isLoading && (
           <div className='flex h-full flex-col items-center'>
             <div className='py-4 text-xl text-primary-label'>No List Found</div>
             <div className='flex flex-col items-center gap-2 py-6'>
@@ -145,7 +149,7 @@ export const Screens = () => {
             </div>
           </div>
         )}
-        {(screens.length > 0 || isScreenListLoading) && (
+        {(screens.length > 0 || isLoading) && (
           <>
             <div className='flex flex-col items-center gap-4 md:flex-row md:justify-between'>
               <Label palette='primary' className='text-xl'>

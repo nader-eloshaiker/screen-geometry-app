@@ -5,8 +5,8 @@ export default defineConfig({
     output: {
       workspace: 'src/generated',
       mode: 'tags-split',
-      target: './services',
-      schemas: './models',
+      target: './server/services',
+      schemas: './server/models',
       indexFiles: true,
       client: 'react-query',
       mock: {

@@ -1,4 +1,5 @@
 summary: Config GET 200 Response
 value:
-  server:
-    API_URL: http://localhost:5173
+  ENV_TYPE: dev
+  SERVER_API_URL: https://dev.api.screengeometry.com
+  GA_TRACKING_ID: G-111111111

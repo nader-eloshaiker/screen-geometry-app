@@ -44,11 +44,12 @@ const Config: ViteUserConfig = {
   },
 }
 
+const now = new Date().toString()
 export default defineConfig({
-  base: process.env.BASE_URL,
+  base: '',
   define: {
     'import.meta.env.VITE_PACKAGE_VERSION': JSON.stringify(packageJson.version),
-    'import.meta.env.VITE_GA_TRACKING_ID': process.env.GA_TRACKING_ID,
+    'import.meta.env.VITE_BUILD_DATE': JSON.stringify(now),
   },
   assetsInclude: ['./sb-preview/runtime.js'],
   plugins: [

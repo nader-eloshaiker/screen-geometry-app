@@ -20,7 +20,7 @@ import { useQuery } from '@tanstack/react-query'
 
 import type { ErrorResponse, GetSearchParams, SearchListResponse } from '../../models'
 
-import { serverApiClient } from '../../../axios/apiClient'
+import { serverApiClient } from '../../../../axios/apiClient'
 
 /**
  * @summary Search for screens

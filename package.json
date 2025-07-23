@@ -46,5 +46,8 @@
     "husky": "^9.1.7",
     "lint-staged": "catalog:",
     "vitest": "catalog:"
+  },
+  "dependencies": {
+    "jwt-decode": "^4.0.0"
   }
 }
