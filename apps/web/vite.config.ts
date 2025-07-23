@@ -5,7 +5,7 @@ import react from '@vitejs/plugin-react'
 import tailwindcss from 'tailwindcss'
 import tsconfigPaths from 'vite-tsconfig-paths'
 import { ViteUserConfig, configDefaults, defineConfig } from 'vitest/config'
-import packageJson from './package.json'
+import packageJson from '../../package.json'
 
 const isTest = process.env.NODE_ENV === 'test'
 
