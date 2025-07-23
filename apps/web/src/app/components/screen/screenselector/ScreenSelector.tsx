@@ -46,6 +46,12 @@ export const ScreenSelector = ({
     onSearch(debouncedValue)
   }, [debouncedValue, onSearch])
 
+  useEffect(() => {
+    if (!open) {
+      setSearchTerm('')
+    }
+  }, [open])
+
   return (
     <div className='flex w-full flex-col gap-2 py-8' ref={elementRef}>
       <Label palette='mono' htmlFor='searchList'>
