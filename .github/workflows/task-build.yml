@@ -34,9 +34,13 @@ jobs:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
         run: pnpm build:dev
 
+      - name: List build files
+        run: |
+          ls -laR apps/web/dist/
+
       - name: Create env folder
         run: |
-          mkdir -p dist/env
+          mkdir -p apps/web/env
 
       - name: Create config.json
         id: env-create-json
@@ -44,7 +48,11 @@ jobs:
         with:
           name: "config.json"
           json: '{"ENV_TYPE":"${{ vars.ENV_TYPE }}", "SERVER_API_URL":"${{ vars.SERVER_API_URL }}", "GA_TRACKING_ID":"${{ vars.GA_TRACKING_ID }}"}'
-          dir: "dist/env/"
+          dir: "apps/web/dist/env/"
+
+      - name: Show config.json
+        run: |
+          cat apps/web/dist/env/config.json
 
       - name: Deploy App
         id: deploy
@@ -52,10 +60,10 @@ jobs:
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          workingDirectory: ./apps/web
+          workingDirectory: apps/web
           packageManager: pnpm
           wranglerVersion: latest
-          command: pages deploy ./dist --project-name=screengeometry
+          command: pages deploy dist --project-name=screengeometry
           gitHubToken: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Print Deployment URL

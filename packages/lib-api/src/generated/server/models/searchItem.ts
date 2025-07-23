@@ -16,6 +16,7 @@ export interface SearchItem {
   name: string
   /** @minLength 1 */
   label: string
+  decoratedLabel?: string
   /** @minLength 3 */
   aspectRatio: string
   /**

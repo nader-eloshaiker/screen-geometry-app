@@ -19,23 +19,21 @@ import { Dispatch, SetStateAction, useEffect, useRef, useState } from 'react'
 
 type TProps = {
   items: Array<SearchItem> | undefined
-  placeholder?: string
-  label?: string
-  isLoading?: boolean
-  selectId: string
-  setSelectId: Dispatch<SetStateAction<string>>
-  onSelectItem?: (item: SearchItem) => void
-  onSearch?: Dispatch<SetStateAction<string>>
+  commandPlaceholder?: string
+  selectPlaceholder?: string
+  isLoading: boolean
+  onSelectItem: (item: SearchItem | undefined) => void
+  selectedItem?: SearchItem | undefined
+  onSearch: Dispatch<SetStateAction<string>>
 }
 
 export const ScreenSelector = ({
   items = [],
-  placeholder,
-  label,
+  commandPlaceholder,
+  selectPlaceholder,
   isLoading = false,
-  selectId = '',
-  setSelectId = () => {},
   onSelectItem = () => {},
+  selectedItem,
   onSearch = () => {},
 }: TProps) => {
   const [open, setOpen] = useState(false)
@@ -45,17 +43,14 @@ export const ScreenSelector = ({
   const { width } = useElementSize(elementRef)
 
   useEffect(() => {
-    if (!items || !selectId || !onSelectItem) return
-
-    const item = items.find((item) => item.id === selectId)
-    if (item) {
-      onSelectItem(item)
-    }
-  }, [items, onSelectItem, selectId])
-
-  useEffect(() => {
     onSearch(debouncedValue)
   }, [debouncedValue, onSearch])
+
+  useEffect(() => {
+    if (!open) {
+      setSearchTerm('')
+    }
+  }, [open])
 
   return (
     <div className='flex w-full flex-col gap-2 py-8' ref={elementRef}>
@@ -73,18 +68,18 @@ export const ScreenSelector = ({
               'w-full justify-between shadow-lg border-primary-border bg-primary-input [&_svg]:text-primary-foreground-muted [&_svg]:hocus:text-primary-foreground-hover border-2',
               {
                 'animate-pulse pointer-events-none': isLoading,
-                'text-primary-foreground-input': !!selectId,
-                'text-primary-foreground-muted': !selectId,
+                'text-primary-foreground-input': !!selectedItem,
+                'text-primary-foreground-muted': !selectedItem,
               }
             )}
           >
-            {selectId ? items.find((item) => item.id === selectId)?.label : label}
+            <span>{selectedItem?.label ?? selectPlaceholder}</span>
             <ChevronsUpDown />
           </Button>
         </PopoverTrigger>
         <PopoverContent className='mt-2 w-full border-none p-0'>
           <Command shouldFilter={false}>
-            <CommandInput placeholder={placeholder} className='h-9' onValueChange={setSearchTerm} />
+            <CommandInput placeholder={commandPlaceholder} className='h-9' onValueChange={setSearchTerm} />
             <CommandList>
               <CommandEmpty style={{ width: width }}>No Matching Screens found</CommandEmpty>
               <CommandGroup>
@@ -93,13 +88,13 @@ export const ScreenSelector = ({
                     key={item.id}
                     value={item.id}
                     style={{ width: width }}
-                    onSelect={(selectValue) => {
-                      setSelectId(selectValue === selectId ? '' : selectValue)
-                      setOpen(false)
+                    onSelect={(value) => {
+                      onSelectItem(selectedItem && value === selectedItem.id ? undefined : item)
+                      setOpen(!!selectedItem && value === selectedItem.id)
                     }}
                   >
-                    <span>{parse(item.label)}</span>
-                    <Check className={cn('ml-auto', selectId === item.id ? 'opacity-100' : 'opacity-0')} />
+                    <span>{item.decoratedLabel ? parse(item.decoratedLabel) : item.label}</span>
+                    <Check className={cn('ml-auto', selectedItem?.id === item.id ? 'opacity-100' : 'opacity-0')} />
                   </CommandItem>
                 ))}
               </CommandGroup>
