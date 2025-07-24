@@ -36,7 +36,7 @@
     "eslint-plugin-storybook": "^0.11.4",
     "eslint-plugin-tailwindcss": "catalog:tailwindcss3",
     "globals": "^15.14.0",
-    "jsdom": "^25.0.1",
+    "jsdom": "^26.1.0",
     "lint-staged": "catalog:",
     "postcss": "catalog:tailwindcss3",
     "postcss-import": "^16.1.0",
