@@ -12,6 +12,7 @@
     "build": "tsc && vite build && rm dist/env/config.json",
     "build:prod": "pnpm build",
     "build:dev": "tsc && vite build --mode development && rm dist/env/config.json",
+    "intl:extract": "formatjs extract 'src/app/**/*.ts*' --ignore='**/*.d.ts' --out-file app/components/envtranslations/keys.json",
     "lint": "eslint",
     "lint:fix": "eslint --fix",
     "lint:staged": "pnpm exec lint-staged",
@@ -31,6 +32,7 @@
     "typecheck": "tsc --project tsconfig.json --noEmit"
   },
   "dependencies": {
+    "@formatjs/intl-localematcher": "^0.6.1",
     "@hookform/resolvers": "catalog:",
     "@react-hook/resize-observer": "^1.2.6",
     "@screengeometry/lib-api": "workspace:*",
@@ -50,6 +52,7 @@
     "react-dom": "catalog:react18",
     "react-ga4": "^1.4.1",
     "react-hook-form": "catalog:react18",
+    "react-intl": "^7.1.11",
     "simpler-color": "^1.0.2",
     "tailwindcss": "catalog:tailwindcss3",
     "tailwindcss-animate": "catalog:tailwindcss3",
@@ -63,6 +66,7 @@
     "@eslint/compat": "^1.2.7",
     "@eslint/eslintrc": "^3.3.0",
     "@eslint/js": "^9.22.0",
+    "@formatjs/cli": "^6.7.2",
     "@playwright/test": "^1.54.1",
     "@tanstack/router-plugin": "catalog:",
     "@testing-library/jest-dom": "^6.6.3",

@@ -4,7 +4,7 @@ import * as configuration from '@screengeometry/lib-api/spec'
 import { PageLoaderProvider } from '@screengeometry/lib-ui/hooks/pageloader'
 import { render, waitFor } from '@testing-library/react'
 import { vi } from 'vitest'
-import { EnvironmentConfig, EnvironmentConfigLoaderKey, MockServerReadyKey } from './EnvironmentConfig'
+import { EnvironmentConfig } from './EnvironmentConfig'
 
 vi.mock('@screengeometry/lib-api/apiClient', () => ({
   serverAxiosInstance: {
