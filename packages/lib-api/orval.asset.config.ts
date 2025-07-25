@@ -1,7 +1,7 @@
 import { defineConfig } from 'orval'
 
 export default defineConfig({
-  screenApi: {
+  assetApi: {
     output: {
       workspace: 'src/generated',
       mode: 'tags-split',

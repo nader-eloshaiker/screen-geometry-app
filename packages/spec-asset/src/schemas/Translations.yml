@@ -1,0 +1,53 @@
+type: object
+required:
+  - home.content.callToAction
+  - home.content.heading
+  - home.content.p1
+  - home.content.p2
+  - home.content.p3
+  - home.content.p4
+  - home.content.solutation
+  - home.demo-image.caption
+  - home.sign-off.l1
+  - home.sign-off.l2
+properties:
+  home.content.callToAction:
+    type: string
+    example: "Click <cta>button</cta> to start your journey into finding the right screen."
+    description: "Home content CTA"
+  home.content.heading:
+    type: string
+    example: "Welcome to Screen Geometry"
+    description: "Home content heading"
+  home.content.p1:
+    type: string
+    example: "I know choosing a monitor, phone or even a tablet, based on the LCD screen information can be a real head-scratcher because we have so much choice. Well I've cooked up a handy tool that lets you compare screen sizes and resolutions to help you decide."
+    description: "home content paragraph 1"
+  home.content.p2:
+    type: string
+    example: "Whether you're a gamer on the hunt for the perfect screen to level up your gaming experience or a design enthusiast in need of pixel-perfect clarity, this tool will help you find the right screen."
+    description: "Home content paragraph 2"
+  home.content.p3:
+    type: string
+    example: "No corporate marketing here! I show you the differences and focus on what matters - finding the ideal monitor for you. Say goodbye to endless scrolling and hello to informed choices."
+    description: "Home content paragraph 3"
+  home.content.p4:
+    type: string
+    example: "P.S. Have questions or feedback? I'm all ears. Feel free to reach out and let me know how I can make this experience even better for you. Go to the contact page for details on how to get in touch. Also, show your support by starring the project on"
+    description: "Home content paragraph 4"
+  home.content.solutation:
+    type: string
+    example: "Hey there, I'm Nader!"
+    description: "Home content solutation"
+  home.demo-image.caption:
+    type: string
+    example: "Screens Page"
+    description: "Home demo-image caption"
+  home.sign-off.l1:
+    type: string
+    example: "The choice is yours"
+    description: "Home sign-off line 1"
+  home.sign-off.l2:
+    type: string
+    example: "Happy Shopping"
+    description: "Home sign-off line 2"

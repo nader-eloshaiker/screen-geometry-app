@@ -6,10 +6,13 @@ required:
 properties:
   ENV_TYPE:
     type: string
+    example: dev
     description: deployment environment type
   SERVER_API_URL:
     type: string
+    example: https://dev.api.screengeometry.com
     description: server API URL
   GA_TRACKING_ID:
     type: string
+    example: GA-111111111
     description: Google Analytics Tracking ID

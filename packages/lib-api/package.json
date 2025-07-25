@@ -27,6 +27,7 @@
     "test:ui": "vitest watch --ui --coverage.enabled=true"
   },
   "dependencies": {
+    "@faker-js/faker": "^9.9.0",
     "@tanstack/react-query": "catalog:",
     "axios": "^1.7.9",
     "msw": "^2.10.4",
