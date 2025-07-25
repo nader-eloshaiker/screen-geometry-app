@@ -9,7 +9,6 @@ import { TranslationsEnvironment } from './components/envtranslations/Environmen
 
 const configReadyKey = 'configReadyKey'
 const translationsReadyKey = 'translationsReadyKey'
-const mockReadyKey = 'mockReadyKey'
 
 const Application = () => {
   const { isPageLoading } = usePageLoader()
@@ -22,8 +21,8 @@ export const App = () => (
   //   onError={(error: Error, info: ErrorInfo) => console.error(error.message, info.componentStack)}
   // >
   <QueryProvider>
-    <PageLoaderProvider onAppMountComponents={[configReadyKey, mockReadyKey, translationsReadyKey]}>
-      <EnvironmentConfig configReadyKey={configReadyKey} mockReadyKey={mockReadyKey}>
+    <PageLoaderProvider onAppMountComponents={[configReadyKey, translationsReadyKey]}>
+      <EnvironmentConfig configReadyKey={configReadyKey}>
         <TranslationsEnvironment translationsReadyKey={translationsReadyKey}>
           <ThemeProvider>
             <ScreenProvider>

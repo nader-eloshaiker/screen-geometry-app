@@ -7,8 +7,6 @@ import { getBrowserLocales } from './BrowserLocales'
 
 const defaultLocale = 'en'
 const supportedlocales: Array<string> = ['en', 'de', 'es']
-console.log('supportedlocales', getBrowserLocales())
-console.log('match', match(getBrowserLocales(), supportedlocales, defaultLocale))
 
 export const TranslationsEnvironment = ({
   children,

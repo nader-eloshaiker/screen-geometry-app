@@ -12,17 +12,16 @@ assetAxiosInstance.defaults.baseURL = window.location.origin
 type Props = {
   children: ReactNode
   configReadyKey: string
-  mockReadyKey: string
 }
 
-export const EnvironmentConfig = ({ children, configReadyKey, mockReadyKey }: Props) => {
+export const EnvironmentConfig = ({ children, configReadyKey }: Props) => {
   const { data, error, isFetched } = useGetConfig()
   const { setPageLoading } = usePageLoader()
 
-  // Browser MSW is disabled when unit testing and so server is ready
-  const [config, setConfig] = useState(DefaultEnvConfig.config)
+  // Node MSW already running in unit tests
   const [mockReady, setMockReady] = useState(import.meta.env.NODE_ENV === 'test')
   const [configReady, setConfigReady] = useState(false)
+  const [config, setConfig] = useState(DefaultEnvConfig.config)
 
   useEffect(() => {
     if (error) {
@@ -31,14 +30,13 @@ export const EnvironmentConfig = ({ children, configReadyKey, mockReadyKey }: Pr
   }, [error])
 
   useEffect(() => {
-    if (mockReady && configReady) {
+    if (mockReady && configReady && setPageLoading && configReadyKey) {
       setPageLoading({ action: 'idle', componentId: configReadyKey })
     }
-  })
+  }, [configReady, configReadyKey, mockReady, setPageLoading])
 
   useEffect(() => {
     if (isFetched) {
-      // was already initialised in App.tsx to 'loading'
       setConfigReady(true)
     }
 
@@ -51,13 +49,14 @@ export const EnvironmentConfig = ({ children, configReadyKey, mockReadyKey }: Pr
       serverAxiosInstance.defaults.baseURL = data.SERVER_API_URL
       ReactGA.initialize(data.GA_TRACKING_ID, { testMode: !!import.meta.env.DEV })
 
-      if (!configReady) {
+      if (import.meta.env.NODE_ENV !== 'test') {
+        // Start the Browser Service Worker
         createBrowserServiceWorker(data.SERVER_API_URL).then(() => {
           setMockReady(true)
         })
       }
     }
-  }, [configReadyKey, data, isFetched, mockReadyKey, setPageLoading])
+  }, [data, isFetched, setPageLoading])
 
   return <EnvConfigProvider config={config}>{children}</EnvConfigProvider>
 }
