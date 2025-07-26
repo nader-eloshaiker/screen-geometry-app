@@ -53,7 +53,7 @@ describe('#ConfiguredEnvironment', () => {
     } as ReturnType<typeof configuration.useGetConfig>)
 
     const { getByTestId, queryByText } = render(
-      <PageLoaderProvider onAppMountComponents={['aaa']}>
+      <PageLoaderProvider initialLoadingKeys={['aaa']}>
         <EnvironmentConfig configReadyKey='aaa'>
           <TestLoadingComponent />
         </EnvironmentConfig>
@@ -74,7 +74,7 @@ describe('#ConfiguredEnvironment', () => {
 
     expect(() => {
       render(
-        <PageLoaderProvider onAppMountComponents={['aaa']}>
+        <PageLoaderProvider initialLoadingKeys={['aaa']}>
           <EnvironmentConfig configReadyKey='aaa'>
             <TestLoadingComponent />
           </EnvironmentConfig>
@@ -92,7 +92,7 @@ describe('#ConfiguredEnvironment', () => {
 
     expect(() => {
       render(
-        <PageLoaderProvider onAppMountComponents={['aaa']}>
+        <PageLoaderProvider initialLoadingKeys={['aaa']}>
           <EnvironmentConfig configReadyKey='aaa'>
             <TestLoadingComponent />
           </EnvironmentConfig>
@@ -113,7 +113,7 @@ describe('#ConfiguredEnvironment', () => {
     useGetConfigSpy.mockReturnValue(mockQuery)
 
     const { getByTestId, queryByTestId } = render(
-      <PageLoaderProvider onAppMountComponents={['aaa']}>
+      <PageLoaderProvider initialLoadingKeys={['aaa']}>
         <EnvironmentConfig configReadyKey='aaa'>
           <TestLoadingComponent />
         </EnvironmentConfig>
@@ -140,7 +140,7 @@ describe('#ConfiguredEnvironment', () => {
     useGetConfigSpy.mockReturnValue(initialMockReturn)
 
     const { rerender, getByTestId, getByText, queryByTestId } = await renderWithUserEvents(
-      <PageLoaderProvider onAppMountComponents={['aaa']}>
+      <PageLoaderProvider initialLoadingKeys={['aaa']}>
         <EnvironmentConfig configReadyKey='aaa'>
           <TestLoadingComponent />
         </EnvironmentConfig>
@@ -165,7 +165,7 @@ describe('#ConfiguredEnvironment', () => {
 
     // Rerender the component with the new mock return value
     rerender(
-      <PageLoaderProvider onAppMountComponents={['aaa']}>
+      <PageLoaderProvider initialLoadingKeys={['aaa']}>
         <EnvironmentConfig configReadyKey='aaa'>
           <TestLoadingComponent />
         </EnvironmentConfig>

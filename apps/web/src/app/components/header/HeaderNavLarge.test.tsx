@@ -1,3 +1,4 @@
+import { TestTranslationsEnvironment } from '@/lib/support/test/utils/TestTranslationsEnvironment'
 import { render, screen } from '@testing-library/react'
 import { vi } from 'vitest'
 import { HeaderNavLarge } from './HeaderNavLarge'
@@ -25,7 +26,7 @@ vi.mock('@screengeometry/lib-ui/navigationlink', () => ({
 
 describe('#HeaderNavLarge', () => {
   it('renders navigation with correct aria-label', () => {
-    render(<HeaderNavLarge />)
+    render(<HeaderNavLarge />, { wrapper: TestTranslationsEnvironment })
 
     const nav = screen.getByRole('navigation')
     expect(nav).toBeInTheDocument()
@@ -33,7 +34,7 @@ describe('#HeaderNavLarge', () => {
   })
 
   it('renders with the correct CSS class', () => {
-    render(<HeaderNavLarge />)
+    render(<HeaderNavLarge />, { wrapper: TestTranslationsEnvironment })
 
     const nav = screen.getByRole('navigation')
     expect(nav).toHaveClass('flex', 'gap-6')
@@ -41,7 +42,7 @@ describe('#HeaderNavLarge', () => {
   })
 
   it('contains all navigation links with correct text', () => {
-    render(<HeaderNavLarge />)
+    render(<HeaderNavLarge />, { wrapper: TestTranslationsEnvironment })
 
     expect(screen.getByText('Home')).toBeInTheDocument()
     expect(screen.getByText('Screens')).toBeInTheDocument()
@@ -50,7 +51,7 @@ describe('#HeaderNavLarge', () => {
   })
 
   it('has links pointing to the correct routes', () => {
-    render(<HeaderNavLarge />)
+    render(<HeaderNavLarge />, { wrapper: TestTranslationsEnvironment })
 
     // Home link
     const homeLink = screen.getByTestId('nav-link-')
@@ -70,7 +71,7 @@ describe('#HeaderNavLarge', () => {
   })
 
   it('passes correct props to each NavigationLink', () => {
-    render(<HeaderNavLarge />)
+    render(<HeaderNavLarge />, { wrapper: TestTranslationsEnvironment })
 
     // Check all links for common props
     const links = [

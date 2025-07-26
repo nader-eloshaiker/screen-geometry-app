@@ -1,8 +1,3 @@
-import {
-  EnvironmentConfig,
-  EnvironmentConfigLoaderKey,
-  MockServerReadyKey,
-} from '@/app/components/envconfig/EnvironmentConfig'
 import { EnvironmentSession } from '@/app/components/envsession/EnvironmentSession'
 import { QueryProvider } from '@/app/hooks/query/QueryProvider'
 import { ScreenProvider } from '@/app/hooks/screen/ScreenProvider'
@@ -10,6 +5,7 @@ import { ScreenItemRender } from '@/app/models/screenItemRender'
 import { Screens } from '@/app/pages/Screens'
 import { initMSW } from '@/lib/serviceworker/NodeServiceWorker'
 import { renderWithUserEvents } from '@/lib/support/test/utils/RenderWithUserEvents'
+import { TestEnvironment } from '@/lib/support/test/utils/TestEnvironment'
 import { useElementSizeMock } from '@/lib/ui/hooks/useElementSize.mock'
 import { normaliseScreenRender } from '@/lib/utils'
 import {
@@ -19,7 +15,6 @@ import {
   getScreenServiceMock,
   getSearchServiceMock,
 } from '@screengeometry/lib-api/spec'
-import { PageLoaderProvider } from '@screengeometry/lib-ui/hooks/pageloader'
 import { Toaster } from '@screengeometry/lib-ui/toaster'
 import { waitFor } from '@testing-library/react'
 import { useState } from 'react'
@@ -39,16 +34,18 @@ const TestComponent = ({
 
   return (
     <QueryProvider>
-      <ScreenTable
-        highlighted={highlighted}
-        setHighLighted={setHighlighted}
-        screens={screens ?? normaliseScreenRender(getGetScreenListResponseMock().list)}
-        isScreenListLoading={isScreenListLoading}
-        editAction={{ handler: editHandler }}
-        deleteAction={{ handler: () => {}, isPending: false }}
-        showActon={{ handler: () => {}, isPending: false }}
-      />
-      <Toaster />
+      <TestEnvironment>
+        <ScreenTable
+          highlighted={highlighted}
+          setHighLighted={setHighlighted}
+          screens={screens ?? normaliseScreenRender(getGetScreenListResponseMock().list)}
+          isScreenListLoading={isScreenListLoading}
+          editAction={{ handler: editHandler }}
+          deleteAction={{ handler: () => {}, isPending: false }}
+          showActon={{ handler: () => {}, isPending: false }}
+        />
+        <Toaster />
+      </TestEnvironment>
     </QueryProvider>
   )
 }
@@ -57,16 +54,14 @@ const TestParentComponent = ({ initialise }: { initialise?: Array<ScreenItemRend
   return (
     <HelmetProvider>
       <QueryProvider>
-        <PageLoaderProvider onAppMountComponents={[EnvironmentConfigLoaderKey, MockServerReadyKey]}>
-          <EnvironmentConfig>
-            <EnvironmentSession>
-              <ScreenProvider initialise={{ screens: initialise ?? [], query: '' }}>
-                <Screens />
-              </ScreenProvider>
-              <Toaster />
-            </EnvironmentSession>
-          </EnvironmentConfig>
-        </PageLoaderProvider>
+        <TestEnvironment>
+          <EnvironmentSession>
+            <ScreenProvider initialise={{ screens: initialise ?? [], query: '' }}>
+              <Screens />
+            </ScreenProvider>
+            <Toaster />
+          </EnvironmentSession>
+        </TestEnvironment>
       </QueryProvider>
     </HelmetProvider>
   )
@@ -116,7 +111,7 @@ describe('#ScreenTable', () => {
       await test.user.click(deleteElements[0])
     })
 
-    expect(expect(mswObj.apiEventStack.length).toBe(3))
+    expect(expect(mswObj.apiEventStack.length).toBe(2))
     expect(mswObj.apiEventStack[mswObj.apiEventStack.length - 1]).toEqual(
       expect.stringContaining('method:DELETE|url:https://dev.api.screengeometry.com/v1/screen/')
     )
@@ -133,10 +128,11 @@ describe('#ScreenTable', () => {
       await test.user.click(showElement)
     })
 
-    expect(mswObj.apiEventStack[mswObj.apiEventStack.length - 1]).toEqual(
+    const apiEventStack = mswObj.apiEventStack[mswObj.apiEventStack.length - 1]
+    expect(apiEventStack).toEqual(
       expect.stringContaining('method:PATCH|url:https://dev.api.screengeometry.com/v1/screen/')
     )
-    expect(mswObj.apiEventStack[mswObj.apiEventStack.length - 1]).toEqual(expect.stringContaining('/show'))
+    expect(apiEventStack).toEqual(expect.stringContaining('/show'))
   })
 
   test('show skeleton table when screen list is loading', async () => {

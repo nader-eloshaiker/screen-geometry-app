@@ -25,7 +25,7 @@ const TestContentComponent = () => {
 
 const TestComponent = () => {
   return (
-    <PageLoaderProvider onAppMountComponents={['key1']}>
+    <PageLoaderProvider initialLoadingKeys={['key1']}>
       <TestContentComponent />
     </PageLoaderProvider>
   )

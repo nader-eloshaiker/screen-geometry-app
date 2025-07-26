@@ -1,3 +1,4 @@
+import { TestEnvironment } from '@/lib/support/test/utils/TestEnvironment'
 import { render } from '@testing-library/react'
 import Footer from './Footer'
 
@@ -7,7 +8,7 @@ describe('#Footer', () => {
   })
 
   it('should render the version in the footer', async () => {
-    const { getByText } = render(<Footer />)
+    const { getByText } = render(<Footer />, { wrapper: TestEnvironment })
 
     const element = getByText('Version 1.2.3')
 
