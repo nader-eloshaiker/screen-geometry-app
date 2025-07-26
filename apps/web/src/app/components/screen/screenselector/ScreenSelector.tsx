@@ -16,6 +16,7 @@ import { Popover, PopoverContent, PopoverTrigger } from '@screengeometry/lib-ui/
 import parse from 'html-react-parser'
 import { Check, ChevronsUpDown } from 'lucide-react'
 import { Dispatch, SetStateAction, useEffect, useRef, useState } from 'react'
+import { FormattedMessage } from 'react-intl'
 
 type TProps = {
   items: Array<SearchItem> | undefined
@@ -55,7 +56,7 @@ export const ScreenSelector = ({
   return (
     <div className='flex w-full flex-col gap-2 py-8' ref={elementRef}>
       <Label palette='mono' htmlFor='searchList'>
-        Pre fill the form from list of Screens
+        <FormattedMessage id='screens.selector.description' defaultMessage='Pre fill the form from list of Screens' />
       </Label>
       <Popover open={open} onOpenChange={setOpen} modal={true}>
         <PopoverTrigger asChild>
@@ -81,7 +82,9 @@ export const ScreenSelector = ({
           <Command shouldFilter={false}>
             <CommandInput placeholder={commandPlaceholder} className='h-9' onValueChange={setSearchTerm} />
             <CommandList>
-              <CommandEmpty style={{ width: width }}>No Matching Screens found</CommandEmpty>
+              <CommandEmpty style={{ width: width }}>
+                <FormattedMessage id='screens.selector.nomatching' defaultMessage='No Matching Screens found' />
+              </CommandEmpty>
               <CommandGroup>
                 {items.map((item) => (
                   <CommandItem

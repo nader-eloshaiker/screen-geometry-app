@@ -3,6 +3,7 @@ import { Button } from '@screengeometry/lib-ui/button'
 import { Card } from '@screengeometry/lib-ui/card'
 import { AlertCircle } from 'lucide-react'
 import { Helmet } from 'react-helmet-async'
+import { FormattedMessage } from 'react-intl'
 
 export const ErrorFallback = ({ error }: { error: Error | { message: string } }) => {
   return (
@@ -16,13 +17,15 @@ export const ErrorFallback = ({ error }: { error: Error | { message: string } })
           {/* Error Message */}
           <Alert palette='danger' className='mb-6'>
             <AlertCircle className='size-6' />
-            <AlertTitle className='text-xl font-bold'>Oops! Something went wrong.</AlertTitle>
+            <AlertTitle className='text-xl font-bold'>
+              <FormattedMessage id='errorfallback.alert.title' defaultMessage='Oops! Something went wrong.' />
+            </AlertTitle>
             <AlertDescription className='text-lg'>{error.message}</AlertDescription>
           </Alert>
           {/* Call to Action Button */}
           <div className='mt-8'>
             <Button palette='danger' mode='outline' className='shadow-lg' onClick={() => (window.location.href = '/')}>
-              Go to Homepage
+              <FormattedMessage id='errorfallback.button.homepage' defaultMessage='Go to Homepage' />
             </Button>
           </div>
         </Card>

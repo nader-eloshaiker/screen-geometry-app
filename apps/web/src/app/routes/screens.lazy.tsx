@@ -8,7 +8,7 @@ export const Route = createLazyFileRoute('/screens')({
 
 function RouteComponent() {
   return (
-    <PageLoaderProvider onAppMountComponents={[EnvironmentSessionLoaderKey]}>
+    <PageLoaderProvider initialLoadingKeys={[EnvironmentSessionLoaderKey]}>
       <EnvironmentSession>
         <Outlet />
       </EnvironmentSession>

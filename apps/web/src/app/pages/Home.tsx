@@ -16,18 +16,10 @@ export const Home = () => {
       <div className='flex h-full flex-col justify-between'>
         <div>
           <h1 className='mb-4 text-3xl font-bold'>
-            <FormattedMessage
-              id='home.content.heading'
-              defaultMessage='Welcome to Screen Geometry'
-              description='Home content heading'
-            />
+            <FormattedMessage id='home.content.heading' defaultMessage='Welcome to Screen Geometry' />
           </h1>
           <p className='mb-4'>
-            <FormattedMessage
-              id='home.content.solutation'
-              defaultMessage="Hey there, I'm Nader!"
-              description='Home content solutation'
-            />
+            <FormattedMessage id='home.content.solutation' defaultMessage="Hey there, I'm Nader!" />
           </p>
           <p className='mb-4'>
             <FormattedMessage
@@ -35,7 +27,6 @@ export const Home = () => {
               defaultMessage=" I know choosing a monitor, phone or even a tablet, based on the LCD screen information can be a real
             head-scratcher because we have so much choice. Well I've cooked up a handy tool that lets you compare
             screen sizes and resolutions to help you decide."
-              description='home content paragraph 1'
             />
           </p>
           <p className='mb-4'>
@@ -43,14 +34,12 @@ export const Home = () => {
               id='home.content.p2'
               defaultMessage="Whether you're a gamer on the hunt for the perfect screen to level up your gaming experience or a
             design enthusiast in need of pixel-perfect clarity, this tool will help you find the right screen."
-              description='Home content paragraph 2'
             />
           </p>
           <p className='mb-4'>
             <FormattedMessage
               id='home.content.callToAction'
               defaultMessage='Click <cta>button</cta> to start your journey into finding the right screen.'
-              description='Home content CTA'
               values={{
                 cta: (children) => (
                   <span className='mx-2'>
@@ -77,11 +66,7 @@ export const Home = () => {
               alt='Demo Screen Capture'
             />
             <label className='my-2 text-xs' htmlFor='demo-image'>
-              <FormattedMessage
-                id='home.demo-image.caption'
-                defaultMessage='Screens Page'
-                description='Home demo-image caption'
-              />
+              <FormattedMessage id='home.demo-image.caption' defaultMessage='Screens Page' />
             </label>
           </div>
           <p className='mb-4'>
@@ -89,7 +74,6 @@ export const Home = () => {
               id='home.content.p3'
               defaultMessage='No corporate marketing here! I show you the differences and focus on what matters - finding the ideal
             monitor for you. Say goodbye to endless scrolling and hello to informed choices.'
-              description='Home content paragraph 3'
             />
           </p>
           <p className='mb-4'>
@@ -98,27 +82,20 @@ export const Home = () => {
               defaultMessage=" P.S. Have questions or feedback? I'm all ears. Feel free to reach out and let me know how I can make
             this experience even better for you. Go to the contact page for details on how to get in touch. Also, show
             your support by starring the project on"
-              description='Home content paragraph 4'
             />
-            <a className='underline' href='https://github.com/nader-eloshaiker/screen-geometry-app'>
-              Github
-            </a>
+            <span className='mx-2'>
+              <a className='underline' href='https://github.com/nader-eloshaiker/screen-geometry-app'>
+                Github
+              </a>
+            </span>
           </p>
           <div>
             <div className='mb-4 mt-10 flex flex-col items-end'>
               <p>
-                <FormattedMessage
-                  id='home.sign-off.l1'
-                  defaultMessage='The choice is yours'
-                  description='Home sign-off line 1'
-                />
+                <FormattedMessage id='home.sign-off.l1' defaultMessage='The choice is yours' />
               </p>
               <p className='italic'>
-                <FormattedMessage
-                  id='home.sign-off.l2'
-                  defaultMessage='Happy Shopping'
-                  description='Home sign-off line 2'
-                />
+                <FormattedMessage id='home.sign-off.l2' defaultMessage='Happy Shopping' />
               </p>
             </div>
           </div>

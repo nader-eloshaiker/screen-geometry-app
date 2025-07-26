@@ -17,6 +17,7 @@ import {
 } from '@screengeometry/lib-ui/table'
 import { Loader2, LoaderCircle, Pencil, X } from 'lucide-react'
 import { Dispatch, SetStateAction } from 'react'
+import { FormattedMessage } from 'react-intl'
 import styled from 'styled-components'
 
 const StyledCheckbox = styled(Checkbox)<{ $fgColor: string; $bgColor: string }>`
@@ -123,16 +124,32 @@ export const ScreenTable = ({
     <Table data-testid='ScreenTable' className={className}>
       <TableHeader>
         <TableHeaderRow>
-          <TableHeaderCell className='text-center'>Show</TableHeaderCell>
-          <TableHeaderCell className='text-center'>Size</TableHeaderCell>
-          <TableHeaderCell className='text-center'>Ratio</TableHeaderCell>
-          <TableHeaderCell className='hidden text-center sm:table-cell'>Dimensions</TableHeaderCell>
-          <TableHeaderCell className='hidden text-center md:table-cell'>Resolution</TableHeaderCell>
           <TableHeaderCell className='text-center'>
-            <span className='md:hidden'>PPI</span>
-            <span className='hidden text-nowrap md:block'>Pixels/Inch</span>
+            <FormattedMessage id='screens.table.show' defaultMessage='Show' />
           </TableHeaderCell>
-          <TableHeaderCell className='text-center'>Action</TableHeaderCell>
+          <TableHeaderCell className='text-center'>
+            <FormattedMessage id='screens.table.size' defaultMessage='Size' />
+          </TableHeaderCell>
+          <TableHeaderCell className='text-center'>
+            <FormattedMessage id='screens.table.ratio' defaultMessage='Ratio' />
+          </TableHeaderCell>
+          <TableHeaderCell className='hidden text-center sm:table-cell'>
+            <FormattedMessage id='screens.table.dimension' defaultMessage='Dimension' />
+          </TableHeaderCell>
+          <TableHeaderCell className='hidden text-center md:table-cell'>
+            <FormattedMessage id='screens.table.resolution' defaultMessage='Resolution' />
+          </TableHeaderCell>
+          <TableHeaderCell className='text-center'>
+            <span className='md:hidden'>
+              <FormattedMessage id='screens.table.ppi' defaultMessage='PPI' />
+            </span>
+            <span className='hidden text-nowrap md:block'>
+              <FormattedMessage id='screens.table.pixelsInch' defaultMessage='Pixels/Inch' />
+            </span>
+          </TableHeaderCell>
+          <TableHeaderCell className='text-center'>
+            <FormattedMessage id='screens.table.action' defaultMessage='Action' />
+          </TableHeaderCell>
         </TableHeaderRow>
       </TableHeader>
       {screens.length === 0 && isScreenListLoading ? (

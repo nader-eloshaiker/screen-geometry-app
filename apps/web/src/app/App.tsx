@@ -7,9 +7,6 @@ import { PageLoader } from '@screengeometry/lib-ui/pageloader'
 import { EnvironmentConfig } from './components/envconfig/EnvironmentConfig'
 import { TranslationsEnvironment } from './components/envtranslations/EnvironmentTranslations'
 
-const configReadyKey = 'configReadyKey'
-const translationsReadyKey = 'translationsReadyKey'
-
 const Application = () => {
   const { isPageLoading } = usePageLoader()
   return isPageLoading ? <PageLoader message='Loading Config ...' /> : <AppRouterProvider />
@@ -21,9 +18,9 @@ export const App = () => (
   //   onError={(error: Error, info: ErrorInfo) => console.error(error.message, info.componentStack)}
   // >
   <QueryProvider>
-    <PageLoaderProvider onAppMountComponents={[configReadyKey, translationsReadyKey]}>
-      <EnvironmentConfig configReadyKey={configReadyKey}>
-        <TranslationsEnvironment translationsReadyKey={translationsReadyKey}>
+    <PageLoaderProvider initialLoadingKeys={['config', 'translations']}>
+      <EnvironmentConfig configReadyKey={'config'}>
+        <TranslationsEnvironment translationsReadyKey={'translations'}>
           <ThemeProvider>
             <ScreenProvider>
               <Application />

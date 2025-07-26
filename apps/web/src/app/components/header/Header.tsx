@@ -12,6 +12,7 @@ import {
 } from '@screengeometry/lib-ui/sheet'
 import { Menu } from 'lucide-react'
 import { useEffect, useState } from 'react'
+import { FormattedMessage } from 'react-intl'
 import { HeaderNavLarge } from './HeaderNavLarge'
 import { HeaderNavSmall } from './HeaderNavSmall'
 
@@ -48,15 +49,21 @@ export default function Header() {
           <SheetTrigger asChild>
             <Button mode='ghost' dimension='none' className='p-0'>
               <Menu className='size-10' />
-              <span className='sr-only'>Toggle navigation menu</span>
+              <span className='sr-only'>
+                <FormattedMessage id='header.small.title' defaultMessage='Toggle navigation menu' />
+              </span>
             </Button>
           </SheetTrigger>
           <SheetContent side='left'>
             <SheetHeader>
-              <SheetTitle className='text-left'>Navigation</SheetTitle>
+              <SheetTitle className='text-left'>
+                <FormattedMessage id='header.navigation.title' defaultMessage='Navigation' />
+              </SheetTitle>
               <SheetDescription className='flex items-center gap-2 pt-4 text-left'>
                 <ThemeToggleStyled id='theme-toggle' />
-                <span>Theme Toggle</span>
+                <span>
+                  <FormattedMessage id='header.large.title' defaultMessage='Theme Toggle' />
+                </span>
               </SheetDescription>
             </SheetHeader>
             <HeaderNavSmall setOpen={setOpen} />

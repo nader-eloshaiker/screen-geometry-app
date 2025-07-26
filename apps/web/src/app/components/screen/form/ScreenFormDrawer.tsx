@@ -11,6 +11,7 @@ import {
   SheetTrigger,
 } from '@screengeometry/lib-ui/sheet'
 import { Dispatch, useEffect, useState } from 'react'
+import { FormattedMessage, useIntl } from 'react-intl'
 import { ScreenSelector } from '../screenselector/ScreenSelector'
 import { ScreenForm } from './ScreenForm'
 import { FormSubmitType } from './ScreenFormSchema'
@@ -38,6 +39,8 @@ const ScreenFormDrawer = ({ open, setOpen, mode, id: editId = '', children }: Pr
   const [editScreen, setEditScreen] = useState<FormSubmitType | undefined>()
   const [selectedItem, setSelectedItem] = useState<SearchItem>()
 
+  const { formatMessage } = useIntl()
+
   useEffect(() => {
     if (screenItemResponse && editId && !isScreenItemLoading) {
       const inputScreen = transformScreenItem(screenItemResponse.item)
@@ -53,9 +56,22 @@ const ScreenFormDrawer = ({ open, setOpen, mode, id: editId = '', children }: Pr
       <SheetTrigger asChild>{children}</SheetTrigger>
       <SheetContent side='right' showCloseButton={false} className='flex flex-col overflow-auto'>
         <SheetHeader>
-          <SheetTitle>{editId ? 'Edit' : 'Create'} Screen</SheetTitle>
+          <SheetTitle>
+            {editId ? (
+              <FormattedMessage id='screens.form.titleEdit' defaultMessage='Edit Screen' />
+            ) : (
+              <FormattedMessage id='screens.form.titleCreate' defaultMessage='Create Screen' />
+            )}
+          </SheetTitle>
           <SheetDescription>
-            {editId ? 'Make changes to your Screen here.' : 'Create a new Screen by entering in the specs.'}
+            {editId ? (
+              <FormattedMessage id='screens.form.updateDescripton' defaultMessage='Make changes to your Screen here.' />
+            ) : (
+              <FormattedMessage
+                id='screens.form.createDescripton'
+                defaultMessage='Create a new Screen by entering in the specs.'
+              />
+            )}
           </SheetDescription>
         </SheetHeader>
         <ScreenSelector
@@ -63,8 +79,14 @@ const ScreenFormDrawer = ({ open, setOpen, mode, id: editId = '', children }: Pr
           onSelectItem={setSelectedItem}
           isLoading={isSearchListLoading}
           items={searchListResponse?.list}
-          commandPlaceholder='Search Screen list...'
-          selectPlaceholder='Select Screen...'
+          commandPlaceholder={formatMessage({
+            id: 'screens.form.searchPlaceholder',
+            defaultMessage: 'Search Screen list...',
+          })}
+          selectPlaceholder={formatMessage({
+            id: 'screens.form.selectPlaceholder',
+            defaultMessage: 'Select Screen...',
+          })}
           onSearch={setSearchTerm}
         />
 
