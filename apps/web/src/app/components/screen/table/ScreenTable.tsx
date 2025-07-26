@@ -140,9 +140,7 @@ export const ScreenTable = ({
             <FormattedMessage id='screens.table.resolution' defaultMessage='Resolution' />
           </TableHeaderCell>
           <TableHeaderCell className='text-center'>
-            <span className='md:hidden'>
-              <FormattedMessage id='screens.table.ppi' defaultMessage='PPI' />
-            </span>
+            <span className='md:hidden'>PPI</span>
             <span className='hidden text-nowrap md:block'>
               <FormattedMessage id='screens.table.pixelsInch' defaultMessage='Pixels/Inch' />
             </span>
