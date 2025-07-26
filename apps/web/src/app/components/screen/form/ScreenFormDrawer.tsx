@@ -21,7 +21,7 @@ enum FormModeTypes {
   Edit = 'edit',
 }
 
-type Props = TReactChildren & {
+type Props = React.PropsWithChildren & {
   open?: boolean
   setOpen: Dispatch<React.SetStateAction<boolean>>
   mode: FormModeTypes

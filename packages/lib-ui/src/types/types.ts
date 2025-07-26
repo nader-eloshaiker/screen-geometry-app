@@ -1,11 +1,5 @@
-import { ReactNode } from 'react'
-
 export type ElementType<T extends ReadonlyArray<unknown>> =
   T extends ReadonlyArray<infer ElementType> ? ElementType : never
-
-export type TReactChildren = {
-  children: ReactNode
-}
 
 export type AsyncReturnType<T extends (...args: Array<unknown>) => Promise<unknown>> = T extends (
   ...args: Array<unknown>

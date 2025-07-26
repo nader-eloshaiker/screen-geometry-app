@@ -1,9 +1,8 @@
 import { useMemo, useReducer } from 'react'
-import { TReactChildren } from '../../types/types'
 import { PageLoaderContext } from './PageLoaderContext'
 import { LoaderState, initialLoaderState, loaderReducer } from './PageLoaderReducer'
 
-type Props = TReactChildren & { initialLoadingKeys?: Array<string> }
+type Props = React.PropsWithChildren & { initialLoadingKeys?: Array<string> }
 
 /*
   Description:

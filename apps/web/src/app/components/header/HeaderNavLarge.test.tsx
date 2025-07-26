@@ -11,7 +11,13 @@ vi.mock('@screengeometry/lib-ui/navigationlink', () => ({
     mode,
     palette,
     className,
-  }: TReactChildren & { to: string; mode: string; className: string; palette: string; onClick: () => void }) => (
+  }: React.PropsWithChildren & {
+    to: string
+    mode: string
+    className: string
+    palette: string
+    onClick: () => void
+  }) => (
     <a
       href={to}
       data-testid={`nav-link-${to.replace('/', '')}`}

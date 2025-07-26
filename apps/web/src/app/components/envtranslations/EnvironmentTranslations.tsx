@@ -1,21 +1,20 @@
+import { EnvTranslateContext } from '@/app/hooks/envtranslate/EnvTranslateContext'
 import { match } from '@formatjs/intl-localematcher'
 import { Translations, useGetTranslations } from '@screengeometry/lib-api/spec'
 import { usePageLoader } from '@screengeometry/lib-ui/hooks/pageloader'
 import { useEffect, useState } from 'react'
 import { IntlProvider } from 'react-intl'
-import { getBrowserLocales } from './BrowserLocales'
-
-const defaultLocale = 'en'
-const supportedlocales: Array<string> = ['en', 'de', 'es']
+import { defaultLocale, getBrowserLocales, supportedlocalesArray } from './LocaleHelper'
 
 export const TranslationsEnvironment = ({
   children,
   translationsReadyKey,
-}: TReactChildren & { translationsReadyKey: string; override?: boolean }) => {
-  const [supportedLocale] = useState(match(getBrowserLocales(), supportedlocales, defaultLocale))
+}: React.PropsWithChildren & { translationsReadyKey: string; override?: boolean }) => {
+  const [supportedLocale] = useState(match(getBrowserLocales(), supportedlocalesArray, defaultLocale))
   const { setPageLoading } = usePageLoader()
 
-  const { data, error, isFetched } = useGetTranslations(supportedLocale)
+  const [locale, setLocale] = useState(supportedLocale)
+  const { data, error, isFetched } = useGetTranslations(locale)
   const [messages, setMessages] = useState<Partial<Translations>>()
 
   useEffect(() => {
@@ -42,8 +41,10 @@ export const TranslationsEnvironment = ({
   }, [data, isFetched])
 
   return (
-    <IntlProvider locale={supportedLocale} messages={messages} defaultLocale={defaultLocale}>
-      {children}
-    </IntlProvider>
+    <EnvTranslateContext.Provider value={{ locale, setLocale }}>
+      <IntlProvider locale={locale} messages={messages} defaultLocale={defaultLocale}>
+        {children}
+      </IntlProvider>
+    </EnvTranslateContext.Provider>
   )
 }

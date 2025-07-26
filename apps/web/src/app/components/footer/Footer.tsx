@@ -1,4 +1,5 @@
 import GithubIcon from '@/app/assets/icons/Github'
+import { LanguageSwitcher } from '@/app/components/language/LanguageSwitcher'
 import { Copyright } from 'lucide-react'
 import { FormattedMessage } from 'react-intl'
 
@@ -11,6 +12,9 @@ export default function Footer() {
         <div className='flex items-center gap-2'>
           <Copyright className='size-6' />
           <FormattedMessage id='footer.copyright.title' defaultMessage='2023 All right reserved' />
+        </div>
+        <div>
+          <LanguageSwitcher />
         </div>
         <div className='flex flex-row-reverse items-center gap-2 md:flex-row'>
           <span>

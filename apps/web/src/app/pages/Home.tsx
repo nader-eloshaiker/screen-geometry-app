@@ -39,7 +39,7 @@ export const Home = () => {
           <p className='mb-4'>
             <FormattedMessage
               id='home.content.callToAction'
-              defaultMessage='Click <cta>button</cta> to start your journey into finding the right screen.'
+              defaultMessage='Click <cta></cta> to start your journey into finding the right screen.'
               values={{
                 cta: (children) => (
                   <span className='mx-2'>

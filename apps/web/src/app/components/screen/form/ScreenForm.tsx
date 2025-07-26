@@ -18,7 +18,7 @@ import { EmptyInputValues, FormSubmitType, ScreenFormSchema } from './ScreenForm
 import { ColorField } from './fields/ColorField'
 import { InputField } from './fields/InputField'
 
-type Props = TReactChildren & {
+type Props = React.PropsWithChildren & {
   setOpen: Dispatch<SetStateAction<boolean>>
   isEditLoading?: boolean
   editId?: string

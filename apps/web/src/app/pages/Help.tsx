@@ -111,7 +111,7 @@ export const Help = () => {
           </Diagram>
           <Paragraph>
             <FormattedMessage
-              id='help.emptytable.sidenote'
+              id='help.emptytable.loadDefaultList'
               defaultMessage='Loading the default list will populate the table with a list of screens.'
             />
           </Paragraph>
@@ -129,10 +129,8 @@ export const Help = () => {
           </Diagram>
           <Paragraph>
             <FormattedMessage
-              id='help.emptytable.sidenote'
-              defaultMessage='Once the screens you are interested in are present in your table, you will notice a panel underneath which
-            overlays their physically sizes you easy comparison. Moving your mouse over the table will highlight the
-            corresponding panel and vice versa.'
+              id='help.fulltable.comparison'
+              defaultMessage='Once the screens you are interested in are present in your table, you will notice a panel underneath which overlays their  physically sizes you easy comparison. Moving your mouse over the table will highlight the corresponding panel and vice versa.'
             />
           </Paragraph>
           <Diagram>
@@ -170,8 +168,7 @@ export const Help = () => {
           <Paragraph>
             <FormattedMessage
               id='help.hideshow.p1'
-              defaultMessage='You can choose to exclude a screen from the the <strong>Physical Screen Comparison</strong> by unchecking
-            the <strong>Show</strong> check box'
+              defaultMessage='You can choose to exclude a screen from the the <strong>Physical Screen Comparison</strong> by unchecking the <strong>Show</strong> check box'
               values={{ strong: (text) => <strong>{text}</strong> }}
             />
           </Paragraph>
@@ -202,7 +199,7 @@ export const Help = () => {
           <Paragraph>
             <FormattedMessage
               id='help.delete.p1'
-              defaultMessage='To delete an existing screen, click on the <button></button> icon in the <strong>action</strong> column of the Screen Specs table.'
+              defaultMessage='To delete an existing screen, click on the <button></button> icon in the <strong>action</strong> column of the Screen  Specs table.'
               values={{
                 button: () => (
                   <span className='px-2'>
@@ -247,8 +244,7 @@ export const Help = () => {
           <Paragraph>
             <FormattedMessage
               id='help.create.p2'
-              defaultMessage='You can then either use the search feature to populate the details or enter the details of the screen you
-            want to create. Once you are happy with the details, click Create.'
+              defaultMessage='You can then either use the search feature to populate the details or enter the details of the screen you want to create. Once you are happy with the details, click Create.'
             />
           </Paragraph>
         </Section>
