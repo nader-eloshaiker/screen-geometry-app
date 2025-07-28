@@ -11,18 +11,19 @@ export default function Footer() {
       <div className='container mx-auto flex w-full flex-col items-start justify-between gap-4 md:flex-row md:items-center'>
         <div className='flex items-center gap-2'>
           <Copyright className='size-6' />
-          <FormattedMessage id='footer.copyright.title' defaultMessage='2023 All right reserved' />
-        </div>
-        <div>
-          <LanguageSwitcher />
-        </div>
-        <div className='flex flex-row-reverse items-center gap-2 md:flex-row'>
           <span>
-            <FormattedMessage id='footer.version.title' defaultMessage='Version' /> {longVer}
+            <FormattedMessage id='footer.copyright.title' defaultMessage='2023 All right reserved' />
           </span>
+          <span> | </span>
           <a href='https://github.com/nader-eloshaiker/screen-geometry-app'>
             <GithubIcon className='size-6 fill-current' />
           </a>
+          <span>
+            <FormattedMessage id='footer.version.title' defaultMessage='Version' /> {longVer}
+          </span>
+        </div>
+        <div className='flex flex-row-reverse items-center gap-2 md:flex-row'>
+          <LanguageSwitcher />
         </div>
       </div>
     </footer>

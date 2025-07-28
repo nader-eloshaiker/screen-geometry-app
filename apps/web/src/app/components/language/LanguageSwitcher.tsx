@@ -1,26 +1,25 @@
 import { useEnvTranslate } from '@/app/hooks/envtranslate/useEnvTranslate'
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@screengeometry/lib-ui/select'
+import { useState } from 'react'
 import { supportedlocales } from '../envtranslations/LocaleHelper'
 
 export const LanguageSwitcher = () => {
   // Pull in the top-level locale and its setter.
   const { locale, setLocale } = useEnvTranslate()
+  const [open, setOpen] = useState(false)
 
   return (
-    <div>
-      <select
-        value={locale}
-        // Whenever the user selects a locale, update the
-        // top-level active locale.
-        onChange={(e) => setLocale(e.target.value)}
-      >
-        {/* The keys of the `locales` config object
-            are the locale codes: "en-US", "ar-EG". */}
+    <Select value={locale} onValueChange={setLocale} open={open} onOpenChange={setOpen}>
+      <SelectTrigger palette={'secondary'} className='w-[70px] rounded-full'>
+        <SelectValue placeholder='Language'>{locale.toUpperCase()}</SelectValue>
+      </SelectTrigger>
+      <SelectContent palette={'secondary'}>
         {Object.entries(supportedlocales).map(([key, label]) => (
-          <option value={key} key={key}>
+          <SelectItem palette={'secondary'} value={key} key={key}>
             {label}
-          </option>
+          </SelectItem>
         ))}
-      </select>
-    </div>
+      </SelectContent>
+    </Select>
   )
 }
