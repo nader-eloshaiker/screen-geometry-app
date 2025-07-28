@@ -1,4 +1,5 @@
 import { EnvTranslateContext } from '@/app/hooks/envtranslate/EnvTranslateContext'
+import useLocalStorage from '@/app/hooks/useLocalStorage'
 import { match } from '@formatjs/intl-localematcher'
 import { Translations, useGetTranslations } from '@screengeometry/lib-api/spec'
 import { usePageLoader } from '@screengeometry/lib-ui/hooks/pageloader'
@@ -6,11 +7,15 @@ import { useEffect, useState } from 'react'
 import { IntlProvider } from 'react-intl'
 import { defaultLocale, getBrowserLocales, supportedlocalesArray } from './LocaleHelper'
 
+export const LocaleStorageKey = 'locale-override'
+const matchedLocale = match(getBrowserLocales(), supportedlocalesArray, defaultLocale)
+
 export const TranslationsEnvironment = ({
   children,
   translationsReadyKey,
 }: React.PropsWithChildren & { translationsReadyKey: string; override?: boolean }) => {
-  const [supportedLocale] = useState(match(getBrowserLocales(), supportedlocalesArray, defaultLocale))
+  const [overrideLocale, setOverrideLocale] = useLocalStorage<string>(LocaleStorageKey, matchedLocale)
+  const [supportedLocale] = useState(overrideLocale)
   const { setPageLoading } = usePageLoader()
 
   const [locale, setLocale] = useState(supportedLocale)
@@ -37,8 +42,9 @@ export const TranslationsEnvironment = ({
 
     if (isFetched && data) {
       setMessages(data)
+      setOverrideLocale(locale)
     }
-  }, [data, isFetched])
+  }, [data, isFetched, locale, setOverrideLocale])
 
   return (
     <EnvTranslateContext.Provider value={{ locale, setLocale }}>
