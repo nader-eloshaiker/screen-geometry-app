@@ -1,10 +1,9 @@
 import { ScreenEventTypes } from '@/app/hooks/screen/ScreenManager'
 import { useScreenContext } from '@/app/hooks/screen/useScreenContext'
 import { ScreenIdResponse, useDeleteScreen } from '@screengeometry/lib-api/spec'
-import { useCallback } from 'react'
+import { useCallback, useMemo } from 'react'
+import { useIntl } from 'react-intl'
 import { useApiEffectHandler } from '../useApiEffectHandler'
-
-const successNotification = { title: 'Deleted', message: 'Screen specifications have been deleted' }
 
 export const useDeleteScreenApi = () => {
   const { dispatch } = useScreenContext()
@@ -13,6 +12,18 @@ export const useDeleteScreenApi = () => {
     [dispatch]
   )
   const request = useDeleteScreen()
+
+  const { formatMessage } = useIntl()
+  const successNotification = useMemo(
+    () => ({
+      title: formatMessage({ id: 'api.deleted.title', defaultMessage: 'Deleted' }),
+      message: formatMessage({
+        id: 'api.deleteScreen.successNotification.message',
+        defaultMessage: 'Screen specifications have been deleted',
+      }),
+    }),
+    [formatMessage]
+  )
 
   useApiEffectHandler<ScreenIdResponse>({
     data: request.data,

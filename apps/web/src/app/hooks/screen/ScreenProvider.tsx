@@ -2,7 +2,7 @@ import { useMemo, useReducer } from 'react'
 import { ScreenContext } from './ScreenContext'
 import { ScreenState, initialScreenState, screenReducer } from './ScreenManager'
 
-type Props = TReactChildren & { initialise?: ScreenState }
+type Props = React.PropsWithChildren & { initialise?: ScreenState }
 
 export const ScreenProvider = ({ children, initialise }: Props) => {
   const [state, dispatch] = useReducer(screenReducer, initialise ?? initialScreenState)

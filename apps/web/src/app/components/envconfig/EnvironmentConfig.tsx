@@ -1,66 +1,66 @@
-import { DefaultEnvConfig } from '@/app/hooks/envconfig/EnvConfigContext'
 import { EnvConfigProvider } from '@/app/hooks/envconfig/EnvConfigProvider'
 import { createBrowserServiceWorker } from '@/lib/serviceworker/BrowserServiceWorker'
 import { assetAxiosInstance, serverAxiosInstance } from '@screengeometry/lib-api/apiClient'
-import { useGetConfig } from '@screengeometry/lib-api/spec'
+import { Config, getGetConfigResponseMock, useGetConfig } from '@screengeometry/lib-api/spec'
 import { usePageLoader } from '@screengeometry/lib-ui/hooks/pageloader'
-import { PageLoader } from '@screengeometry/lib-ui/pageloader'
 import { ReactNode, useEffect, useState } from 'react'
 import ReactGA from 'react-ga4'
-
-export const EnvironmentConfigLoaderKey = 'EnvironmentConfigLoader'
-export const MockServerReadyKey = 'MockServerReady'
 
 assetAxiosInstance.defaults.baseURL = window.location.origin
 
 type Props = {
   children: ReactNode
+  configReadyKey: string
 }
 
-export const EnvironmentConfig = ({ children }: Props) => {
-  const { data, error, isFetched } = useGetConfig()
-  const { isPageLoading, setPageLoading } = usePageLoader()
+const isDevEnv = !!import.meta.env.DEV
+const isTesting = import.meta.env.NODE_ENV === 'test'
 
-  // Browser MSW is disabled when unit testing and so server is ready
-  const [isServerReady, setIsServerReady] = useState(import.meta.env.NODE_ENV === 'test')
-  const [config, setConfig] = useState(DefaultEnvConfig.config)
+export const EnvironmentConfig = ({ children, configReadyKey }: Props) => {
+  const { data, error, isFetched } = useGetConfig()
+  const { setPageLoading } = usePageLoader()
+
+  // Node MSW already running in unit tests
+  const [mockReady, setMockReady] = useState(isTesting)
+  const [config, setConfig] = useState<Config>()
 
   useEffect(() => {
     if (error) {
+      setConfig(getGetConfigResponseMock())
       throw new Error('Could not render. Error fetching config data.')
     }
   }, [error])
 
   useEffect(() => {
-    if (isFetched) {
-      // was already initialised in App.tsx to 'loading'
-      setPageLoading({ action: 'idle', componentId: EnvironmentConfigLoaderKey })
+    if (mockReady && config) {
+      setPageLoading({ action: 'idle', componentId: configReadyKey })
     }
+  }, [config, configReadyKey, mockReady, setPageLoading])
 
+  useEffect(() => {
     if (isFetched && !data) {
+      setConfig(getGetConfigResponseMock())
       throw new Error('Could not render. Error fetching config data.')
     }
 
     if (isFetched && data) {
       setConfig(data)
-      serverAxiosInstance.defaults.baseURL = data.SERVER_API_URL
-      ReactGA.initialize(data.GA_TRACKING_ID, { testMode: !!import.meta.env.DEV })
-
-      if (import.meta.env.NODE_ENV !== 'test') {
-        createBrowserServiceWorker(data.SERVER_API_URL).then(() => {
-          setIsServerReady(true)
-
-          setPageLoading({ action: 'idle', componentId: MockServerReadyKey })
-        })
-      } else {
-        setPageLoading({ action: 'idle', componentId: MockServerReadyKey })
-      }
     }
-  }, [data, isFetched, setPageLoading])
+  }, [data, isFetched])
 
-  return (
-    <EnvConfigProvider config={config}>
-      {isPageLoading && isServerReady ? <PageLoader message='Loading Config ...' /> : children}
-    </EnvConfigProvider>
-  )
+  useEffect(() => {
+    if (!config) return
+
+    serverAxiosInstance.defaults.baseURL = config.SERVER_API_URL
+    ReactGA.initialize(config.GA_TRACKING_ID, { testMode: isDevEnv })
+
+    if (!isTesting) {
+      // Start the Browser Service Worker
+      createBrowserServiceWorker(config.SERVER_API_URL).then(() => {
+        setMockReady(true)
+      })
+    }
+  }, [config])
+
+  return <EnvConfigProvider config={config}>{children}</EnvConfigProvider>
 }

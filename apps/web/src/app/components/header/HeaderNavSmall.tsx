@@ -1,5 +1,6 @@
 import { NavigationLink } from '@screengeometry/lib-ui/navigationlink'
 import { Dispatch, SetStateAction } from 'react'
+import { FormattedMessage } from 'react-intl'
 
 type Props = {
   setOpen: Dispatch<SetStateAction<boolean>>
@@ -8,7 +9,7 @@ type Props = {
 export const HeaderNavSmall = ({ setOpen }: Props) => (
   <nav aria-label='Main' className='grid gap-6 py-6'>
     <NavigationLink to='/' mode='ghost' className='justify-start text-lg font-semibold' onClick={() => setOpen(false)}>
-      Home
+      <FormattedMessage id='header.small.home' defaultMessage='Home' description='Header small home link' />
     </NavigationLink>
     <NavigationLink
       to='/screens'
@@ -16,7 +17,7 @@ export const HeaderNavSmall = ({ setOpen }: Props) => (
       className='justify-start text-lg font-semibold'
       onClick={() => setOpen(false)}
     >
-      Screens
+      <FormattedMessage id='header.small.screens' defaultMessage='Screens' />
     </NavigationLink>
     <NavigationLink
       to='/contact'
@@ -24,7 +25,7 @@ export const HeaderNavSmall = ({ setOpen }: Props) => (
       className='justify-start text-lg font-semibold'
       onClick={() => setOpen(false)}
     >
-      Contact
+      <FormattedMessage id='header.small.contact' defaultMessage='Contact' />
     </NavigationLink>
     <NavigationLink
       to='/help'
@@ -32,7 +33,7 @@ export const HeaderNavSmall = ({ setOpen }: Props) => (
       className='justify-start text-lg font-semibold'
       onClick={() => setOpen(false)}
     >
-      Help
+      <FormattedMessage id='header.small.help' defaultMessage='Help' />
     </NavigationLink>
   </nav>
 )

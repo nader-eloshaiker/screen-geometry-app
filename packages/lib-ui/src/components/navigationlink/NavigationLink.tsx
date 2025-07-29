@@ -2,13 +2,12 @@ import { Link, LinkProps, useLocation } from '@tanstack/react-router'
 import { VariantProps } from 'class-variance-authority'
 import { useEffect, useState } from 'react'
 import { cn } from '../../lib/utils'
-import { TReactChildren } from '../../types/types'
 import { ButtonVariants } from '../button'
 
 type Props = LinkProps &
   VariantProps<typeof ButtonVariants> &
   React.AnchorHTMLAttributes<HTMLAnchorElement> &
-  TReactChildren
+  React.PropsWithChildren
 export const NavigationLink = ({ palette, dimension, mode, className, to, children, ...props }: Props) => {
   const { pathname } = useLocation()
   const [isActive, setActive] = useState(pathname === to)

@@ -4,6 +4,7 @@ import { ScreenItemRender } from '@/app/models/screenItemRender'
 import { initMSW } from '@/lib/serviceworker/NodeServiceWorker'
 import { screenInputFixture } from '@/lib/support/test/fixtures/ScreenFixtures'
 import { renderWithUserEvents } from '@/lib/support/test/utils/RenderWithUserEvents'
+import { TestEnvironment } from '@/lib/support/test/utils/TestEnvironment'
 import { useElementSizeMock } from '@/lib/ui/hooks/useElementSize.mock'
 import { toScreenItemRender, transformScreenInput } from '@/lib/utils'
 import { getScreenListServiceMock, getScreenServiceMock, getSearchServiceMock } from '@screengeometry/lib-api/spec'
@@ -50,12 +51,14 @@ const RootTestComponent = ({ initialise, mode = FormModeTypes.Create, id }: Pare
 
   return (
     <QueryClientProvider client={queryClient}>
-      <ScreenProvider initialise={{ screens: initialise ?? [], query: '' }}>
-        <h1>formState:{open ? 'open' : 'close'}</h1>
-        <ListComponent />
-        <ScreenFormDrawer id={id} mode={mode} open={open} setOpen={setOpen} />
-      </ScreenProvider>
-      <Toaster />
+      <TestEnvironment>
+        <ScreenProvider initialise={{ screens: initialise ?? [], query: '' }}>
+          <h1>formState:{open ? 'open' : 'close'}</h1>
+          <ListComponent />
+          <ScreenFormDrawer id={id} mode={mode} open={open} setOpen={setOpen} />
+        </ScreenProvider>
+        <Toaster />
+      </TestEnvironment>
     </QueryClientProvider>
   )
 }

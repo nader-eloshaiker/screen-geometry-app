@@ -1,9 +1,8 @@
 import { useMemo, useReducer } from 'react'
-import { TReactChildren } from '../../types/types'
 import { PageLoaderContext } from './PageLoaderContext'
 import { LoaderState, initialLoaderState, loaderReducer } from './PageLoaderReducer'
 
-type Props = TReactChildren & { onAppMountComponents?: Array<string> }
+type Props = React.PropsWithChildren & { initialLoadingKeys?: Array<string> }
 
 /*
   Description:
@@ -15,11 +14,11 @@ type Props = TReactChildren & { onAppMountComponents?: Array<string> }
   - children: React nodes that will be wrapped by the provider.
   - onAppMountComponents: Optional array of component identifiers that are initially loading when the app mounts.
   */
-export const PageLoaderProvider = ({ children, onAppMountComponents }: Props) => {
-  const init: LoaderState = onAppMountComponents
+export const PageLoaderProvider = ({ children, initialLoadingKeys }: Props) => {
+  const init: LoaderState = initialLoadingKeys
     ? {
-        components: onAppMountComponents,
-        isLoading: onAppMountComponents.length > 0,
+        components: initialLoadingKeys,
+        isLoading: initialLoadingKeys.length > 0,
       }
     : initialLoaderState
 

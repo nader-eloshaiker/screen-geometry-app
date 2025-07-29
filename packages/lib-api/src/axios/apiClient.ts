@@ -57,4 +57,4 @@ export const serverApiClient = <T>(requestConfig: AxiosRequestConfig): Promise<T
   baseApiClient({ requestConfig, instance: serverAxiosInstance, getAccessToken: _accessTokenResolver })
 
 export const assetApiClient = <T>(requestConfig: AxiosRequestConfig): Promise<T> =>
-  baseApiClient({ requestConfig, instance: serverAxiosInstance })
+  baseApiClient({ requestConfig, instance: assetAxiosInstance })

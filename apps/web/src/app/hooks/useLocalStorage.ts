@@ -22,7 +22,7 @@ const useLocalStorage = <T extends string>(key: string, initialValue: T) => {
     } catch (error) {
       console.log(error)
     }
-  }, [key, state])
+  }, [initialValue, key, state])
 
   return [state, setState] as [T, Dispatch<SetStateAction<T>>]
 }

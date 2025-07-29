@@ -1,2 +1,5 @@
 Config:
   $ref: "./Config.yml"
+
+Translations:
+  $ref: "./Translations.yml"

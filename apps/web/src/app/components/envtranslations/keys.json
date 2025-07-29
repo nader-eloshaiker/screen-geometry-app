@@ -1,0 +1,309 @@
+{
+  "contact.content.heading": {
+    "defaultMessage": "How to engage with me or this app"
+  },
+  "contact.content.p1": {
+    "defaultMessage": "Hey there! I'm always happy to hear from you. Whether you've got a question, feedback, or just want to say hi, I'm all ears."
+  },
+  "contact.content.p2": {
+    "defaultMessage": "I built this web app as a project to experience the full productionisation of an idea, from API design, to development, to continous integration / conitnous deployment and finally, hosting."
+  },
+  "contact.feedback.l1": {
+    "defaultMessage": "Github Issues"
+  },
+  "contact.feedback.l2": {
+    "defaultMessage": "Contributing"
+  },
+  "contact.feedback.p1": {
+    "defaultMessage": "If you have any ideas for new features or find any bugs, please let me know. I'll do my best to get back to you."
+  },
+  "contact.opensource.l1": {
+    "defaultMessage": "Github Code Repository"
+  },
+  "contact.opensource.p1": {
+    "defaultMessage": "This app is open source and you can find the code on Github."
+  },
+  "contact.platform.l1": {
+    "defaultMessage": "Github Discussions"
+  },
+  "contact.platform.p1": {
+    "defaultMessage": "I'm active on a few communities. Feel free to reach out to me on any of these platforms:"
+  },
+  "contact.socials.l1": {
+    "defaultMessage": "Twitter / X"
+  },
+  "contact.socials.l2": {
+    "defaultMessage": "LinkedIn"
+  },
+  "contact.socials.p1": {
+    "defaultMessage": "You can reach me on any of the socials below. I'll get back to you as soon as I can. Looking forward to hearing from you!"
+  },
+  "errorfallback.alert.title": {
+    "defaultMessage": "Oops! Something went wrong."
+  },
+  "errorfallback.button.homepage": {
+    "defaultMessage": "Go to Homepage"
+  },
+  "footer.copyright.title": {
+    "defaultMessage": "2023 All right reserved"
+  },
+  "footer.version.title": {
+    "defaultMessage": "Version"
+  },
+  "header.large.contact": {
+    "defaultMessage": "Contact"
+  },
+  "header.large.help": {
+    "defaultMessage": "Help"
+  },
+  "header.large.home": {
+    "defaultMessage": "Home"
+  },
+  "header.large.screens": {
+    "defaultMessage": "Screens"
+  },
+  "header.large.title": {
+    "defaultMessage": "Theme Toggle"
+  },
+  "header.navigation.title": {
+    "defaultMessage": "Navigation"
+  },
+  "header.small.contact": {
+    "defaultMessage": "Contact"
+  },
+  "header.small.help": {
+    "defaultMessage": "Help"
+  },
+  "header.small.home": {
+    "defaultMessage": "Home",
+    "description": "Header small home link"
+  },
+  "header.small.screens": {
+    "defaultMessage": "Screens"
+  },
+  "header.small.title": {
+    "defaultMessage": "Toggle navigation menu"
+  },
+  "help.create.heading": {
+    "defaultMessage": "Create"
+  },
+  "help.create.p1": {
+    "defaultMessage": "To create a new screen, click the <button></button> button in the top right corner. This will open a form in the sidebar as show below."
+  },
+  "help.create.p2": {
+    "defaultMessage": "You can then either use the search feature to populate the details or enter the details of the screen you want to create. Once you are happy with the details, click Create."
+  },
+  "help.delete.heading": {
+    "defaultMessage": "Delete"
+  },
+  "help.delete.p1": {
+    "defaultMessage": "To delete an existing screen, click on the <button></button> icon in the <strong>action</strong> column of the Screen Specs table."
+  },
+  "help.emptytable.loadDefaultList": {
+    "defaultMessage": "Loading the default list will populate the table with a list of screens."
+  },
+  "help.emptytable.loadbutton": {
+    "defaultMessage": "Load Screens"
+  },
+  "help.emptytable.nolistfound": {
+    "defaultMessage": "No List Found"
+  },
+  "help.emptytable.p1": {
+    "defaultMessage": "When you navigate to the screens page for the first time, you will be greated with an empty table and the ability to import a default list of screens"
+  },
+  "screens.emptytable.populatelist": {
+    "defaultMessage": "Click here to populate default list"
+  },
+  "help.emptytable.sidenote": {
+    "defaultMessage": "Side Note: You can also create a new screen by clicking the button in the top right corner"
+  },
+  "help.fulltable.comparison": {
+    "defaultMessage": "Once the screens you are interested in are present in your table, you will notice a panel underneath which overlays their physically sizes you easy comparison. Moving your mouse over the table will highlight the corresponding panel and vice versa."
+  },
+  "help.gettingstarted.heading": {
+    "defaultMessage": "Getting started"
+  },
+  "help.hideshow.heading": {
+    "defaultMessage": "Hide / Show"
+  },
+  "help.hideshow.p1": {
+    "defaultMessage": "You can choose to exclude a screen from the the <strong>Physical Screen Comparison</strong> by unchecking the <strong>Show</strong> check box"
+  },
+  "help.update.heading": {
+    "defaultMessage": "Create / Update"
+  },
+  "help.update.p1": {
+    "defaultMessage": "To edit an existing screen, click on the <button></button> icon in the <strong>action</strong> column of the Screen Specs table. Then make your changes and click the <strong>Update</strong> button."
+  },
+  "home.content.callToAction": {
+    "defaultMessage": "Click <cta></cta> to start your journey into finding the right screen."
+  },
+  "home.content.heading": {
+    "defaultMessage": "Welcome to Screen Geometry"
+  },
+  "home.content.p1": {
+    "defaultMessage": "I know choosing a monitor, phone or even a tablet, based on the LCD screen information can be a real head-scratcher because we have so much choice. Well I've cooked up a handy tool that lets you compare screen sizes and resolutions to help you decide."
+  },
+  "home.content.p2": {
+    "defaultMessage": "Whether you're a gamer on the hunt for the perfect screen to level up your gaming experience or a design enthusiast in need of pixel-perfect clarity, this tool will help you find the right screen."
+  },
+  "home.content.p3": {
+    "defaultMessage": "No corporate marketing here! I show you the differences and focus on what matters - finding the ideal monitor for you. Say goodbye to endless scrolling and hello to informed choices."
+  },
+  "home.content.p4": {
+    "defaultMessage": "P.S. Have questions or feedback? I'm all ears. Feel free to reach out and let me know how I can make this experience even better for you. Go to the contact page for details on how to get in touch. Also, show your support by starring the project on"
+  },
+  "home.content.solutation": {
+    "defaultMessage": "Hey there, I'm Nader!"
+  },
+  "home.demo-image.caption": {
+    "defaultMessage": "Screens Page"
+  },
+  "home.sign-off.l1": {
+    "defaultMessage": "The choice is yours"
+  },
+  "home.sign-off.l2": {
+    "defaultMessage": "Happy Shopping"
+  },
+  "notfound.alert.message": {
+    "defaultMessage": "This page does not exist 🤮"
+  },
+  "notfound.alert.title": {
+    "defaultMessage": "Oops! Something went wrong."
+  },
+  "notfound.button.homepage": {
+    "defaultMessage": "Go to Homepage"
+  },
+  "notfound.content.heading": {
+    "defaultMessage": "Try the following:"
+  },
+  "notfound.content.l1": {
+    "defaultMessage": "Check your internet connection."
+  },
+  "notfound.content.l2": {
+    "defaultMessage": "Refresh the page."
+  },
+  "notfound.content.l3": {
+    "defaultMessage": "If the problem persists, please try using a Mac."
+  },
+  "screen.form.aspect": {
+    "defaultMessage": "Aspect Ratio"
+  },
+  "screen.form.colors": {
+    "defaultMessage": "Generate Colors"
+  },
+  "screen.form.dark": {
+    "defaultMessage": "Dark"
+  },
+  "screen.form.horizontal": {
+    "defaultMessage": "Horizontal Res"
+  },
+  "screen.form.light": {
+    "defaultMessage": "Light"
+  },
+  "screen.form.size": {
+    "defaultMessage": "Screen Size"
+  },
+  "screen.form.vertical": {
+    "defaultMessage": "Vertical Res"
+  },
+  "screens.content.createButton": {
+    "defaultMessage": "Create Screen"
+  },
+  "screens.form.close": {
+    "defaultMessage": "Close"
+  },
+  "screens.form.createButton": {
+    "defaultMessage": "Create"
+  },
+  "screens.form.createDescripton": {
+    "defaultMessage": "Create a new Screen by entering in the specs."
+  },
+  "screens.form.reset": {
+    "defaultMessage": "Reset"
+  },
+  "screens.form.searchPlaceholder": {
+    "defaultMessage": "Search Screen list..."
+  },
+  "screens.form.selectPlaceholder": {
+    "defaultMessage": "Select Screen..."
+  },
+  "screens.form.titleCreate": {
+    "defaultMessage": "Create Screen"
+  },
+  "screens.form.titleEdit": {
+    "defaultMessage": "Edit Screen"
+  },
+  "screens.form.updateButton": {
+    "defaultMessage": "Update"
+  },
+  "screens.form.updateDescripton": {
+    "defaultMessage": "Make changes to your Screen here."
+  },
+  "screens.panel.horizontal": {
+    "defaultMessage": "Horizontal Alignment"
+  },
+  "screens.panel.horizontalCenter": {
+    "defaultMessage": "Align Center"
+  },
+  "screens.panel.horizontalLeft": {
+    "defaultMessage": "Align Left"
+  },
+  "screens.panel.horizontalRight": {
+    "defaultMessage": "Align Right"
+  },
+  "screens.panel.vertical": {
+    "defaultMessage": "Vertical Alignment"
+  },
+  "screens.panel.verticalBottom": {
+    "defaultMessage": "Align Bottom"
+  },
+  "screens.panel.verticalCenter": {
+    "defaultMessage": "Align Center"
+  },
+  "screens.panel.verticalTop": {
+    "defaultMessage": "Align Top"
+  },
+  "screens.selector.description": {
+    "defaultMessage": "Pre fill the form from list of Screens"
+  },
+  "screens.selector.nomatching": {
+    "defaultMessage": "No Matching Screens found"
+  },
+  "screens.size.title": {
+    "defaultMessage": "Size and Pixel Density Comparison"
+  },
+  "screens.specs.loadscreens": {
+    "defaultMessage": "Load Screens"
+  },
+  "screens.specs.title": {
+    "defaultMessage": "Screen Specs"
+  },
+  "screens.table.action": {
+    "defaultMessage": "Action"
+  },
+  "screens.table.dimension": {
+    "defaultMessage": "Dimension"
+  },
+  "screens.table.pixelsInch": {
+    "defaultMessage": "Pixels/Inch"
+  },
+  "screens.table.ratio": {
+    "defaultMessage": "Ratio"
+  },
+  "screens.table.resolution": {
+    "defaultMessage": "Resolution"
+  },
+  "screens.table.show": {
+    "defaultMessage": "Show"
+  },
+  "screens.table.size": {
+    "defaultMessage": "Size"
+  },
+  "screens.theme.darkLabel": {
+    "defaultMessage": "Dark Mode"
+  },
+  "screens.theme.lightLabel": {
+    "defaultMessage": "Light Mode"
+  }
+}

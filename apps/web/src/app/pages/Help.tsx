@@ -12,6 +12,7 @@ import { Label } from '@screengeometry/lib-ui/label'
 import { Pencil, X } from 'lucide-react'
 import { useMemo, useRef } from 'react'
 import { Helmet } from 'react-helmet-async'
+import { FormattedMessage } from 'react-intl'
 import tw from 'tailwind-styled-components'
 import { ulid } from 'ulid'
 import { ScreenForm } from '../components/screen/form/ScreenForm'
@@ -63,10 +64,15 @@ export const Help = () => {
 
       <div className='h-full'>
         <Section>
-          <Heading palette='primary'>Getting started</Heading>
+          <Heading palette='primary'>
+            <FormattedMessage id='help.gettingstarted.heading' defaultMessage='Getting started' />
+          </Heading>
           <Paragraph>
-            When you navigate to the screens page for the first time, you will be greated with an empty table and the
-            ability to import a default list of screens
+            <FormattedMessage
+              id='help.emptytable.p1'
+              defaultMessage='When you navigate to the screens page for the first time, you will be greated with an empty table and the
+            ability to import a default list of screens'
+            />
           </Paragraph>
           <Diagram>
             <div className='w-96  overflow-hidden rounded-lg border-2 border-primary-border shadow-lg'>
@@ -78,25 +84,36 @@ export const Help = () => {
                 showActon={{ handler: () => {}, isPending: false }}
               />
               <div className='flex h-full flex-col items-center'>
-                <div className='py-4 text-primary-label'>
-                  <span className='text-xl'>No List Found</span>
+                <div className='py-4 text-xl text-primary-label'>
+                  <FormattedMessage id='help.emptytable.nolistfound' defaultMessage='No List Found' />
                 </div>
                 <div className='flex flex-col items-center gap-2 py-6'>
-                  <div>Click here to populate default list</div>
+                  <FormattedMessage
+                    id='screens.emptytable.populatelist'
+                    defaultMessage='Click here to populate default list'
+                  />
                   <Button className='w-40' mode='outline' disabled={false}>
-                    Load Screens
+                    <FormattedMessage id='help.emptytable.loadbutton' defaultMessage='Load Screens' />
                   </Button>
                 </div>
               </div>
             </div>
           </Diagram>
           <Paragraph>
-            Side Note: You can also create a new screen by clicking the button in the top right corner
+            <FormattedMessage
+              id='help.emptytable.sidenote'
+              defaultMessage='Side Note: You can also create a new screen by clicking the button in the top right corner'
+            />
           </Paragraph>
           <Diagram>
             <CreateScreenButton className='pointer-events-none' />
           </Diagram>
-          <Paragraph>Loading the default list will populate the table with a list of screens.</Paragraph>
+          <Paragraph>
+            <FormattedMessage
+              id='help.emptytable.loadDefaultList'
+              defaultMessage='Loading the default list will populate the table with a list of screens.'
+            />
+          </Paragraph>
           <Diagram>
             <div className='rounded-lg border-2 border-primary-border p-6 shadow-lg'>
               <ScreenTable
@@ -110,9 +127,10 @@ export const Help = () => {
             </div>
           </Diagram>
           <Paragraph>
-            Once the screens you are interested in are present in your table, you will notice a panel underneath which
-            overlays their physically sizes you easy comparison. Moving your mouse over the table will highlight the
-            corresponding panel and vice versa.
+            <FormattedMessage
+              id='help.fulltable.comparison'
+              defaultMessage='Once the screens you are interested in are present in your table, you will notice a panel underneath which overlays their  physically sizes you easy comparison. Moving your mouse over the table will highlight the corresponding panel and vice versa.'
+            />
           </Paragraph>
           <Diagram>
             <div
@@ -143,10 +161,15 @@ export const Help = () => {
         </Section>
 
         <Section>
-          <Heading palette='primary'>Hide / Show</Heading>
+          <Heading palette='primary'>
+            <FormattedMessage id='help.hideshow.heading' defaultMessage='Hide / Show' />
+          </Heading>
           <Paragraph>
-            You can choose to exclude a screen from the the <strong>Physical Screen Comparison</strong> by unchecking
-            the <strong>Show</strong> check box
+            <FormattedMessage
+              id='help.hideshow.p1'
+              defaultMessage='You can choose to exclude a screen from the the <strong>Physical Screen Comparison</strong> by unchecking the <strong>Show</strong> check box'
+              values={{ strong: (text) => <strong>{text}</strong> }}
+            />
           </Paragraph>
           <Diagram>
             <div className='flex flex-col rounded-lg border-2 border-primary-border p-6 shadow-lg'>
@@ -169,25 +192,39 @@ export const Help = () => {
         </Section>
 
         <Section>
-          <Heading className='mb-4 text-2xl font-bold'>Delete</Heading>
+          <Heading className='mb-4 text-2xl font-bold'>
+            <FormattedMessage id='help.delete.heading' defaultMessage='Delete' />
+          </Heading>
           <Paragraph>
-            <span>To delete an existing screen, click on the</span>
-            <span className='px-4'>
-              <Button mode='outline' dimension='icon-md' className='pointer-events-none shadow-lg'>
-                <X id='edit-icon' />
-              </Button>
-            </span>
-            <span>
-              icon in the <strong>action</strong> column of the Screen Specs table.
-            </span>
+            <FormattedMessage
+              id='help.delete.p1'
+              defaultMessage='To delete an existing screen, click on the <button></button> icon in the <strong>action</strong> column of the Screen  Specs table.'
+              values={{
+                button: () => (
+                  <span className='px-2'>
+                    <Button mode='outline' dimension='icon-md' className='pointer-events-none shadow-lg'>
+                      <X id='edit-icon' />
+                    </Button>
+                  </span>
+                ),
+                strong: (text) => <strong>{text}</strong>,
+              }}
+            />
           </Paragraph>
         </Section>
 
         <Section>
-          <Heading className='mb-4 text-2xl font-bold'>Create</Heading>
+          <Heading className='mb-4 text-2xl font-bold'>
+            <FormattedMessage id='help.create.heading' defaultMessage='Create' />
+          </Heading>
           <Paragraph>
-            To create a new screen, click the <CreateScreenButton className='pointer-events-none mx-4 shadow-lg' />{' '}
-            button in the top right corner. This will open a form in the sidebar as show below.
+            <FormattedMessage
+              id='help.create.p1'
+              defaultMessage='To create a new screen, click the <button></button> button in the top right corner. This will open a form in the sidebar as show below.'
+              values={{
+                button: () => <CreateScreenButton className='pointer-events-none mx-4 shadow-lg' />,
+              }}
+            />
           </Paragraph>
           <DiagramPanel>
             <div className='mb-6 w-96 border-l-2 border-primary-border bg-background p-2 text-foreground shadow-lg'>
@@ -204,24 +241,32 @@ export const Help = () => {
             </div>
           </DiagramPanel>
           <Paragraph>
-            You can then either use the search feature to populate the details or enter the details of the screen you
-            want to create. Once you are happy with the details, click Create.
+            <FormattedMessage
+              id='help.create.p2'
+              defaultMessage='You can then either use the search feature to populate the details or enter the details of the screen you want to create. Once you are happy with the details, click Create.'
+            />
           </Paragraph>
         </Section>
 
         <Section>
-          <Heading className='mb-4 text-2xl font-bold'>Create / Update</Heading>
+          <Heading className='mb-4 text-2xl font-bold'>
+            <FormattedMessage id='help.update.heading' defaultMessage='Create / Update' />
+          </Heading>
           <Paragraph>
-            <span>To edit an existing screen, click on the</span>
-            <span className='px-4'>
-              <Button mode='outline' dimension='icon-md' className='pointer-events-none shadow-lg'>
-                <Pencil id='edit-icon' />
-              </Button>
-            </span>
-            <span>
-              icon in the <strong>action</strong> column of the Screen Specs table. Then make your changes and click the{' '}
-              <strong>Update</strong> button.
-            </span>
+            <FormattedMessage
+              id='help.update.p1'
+              defaultMessage='To edit an existing screen, click on the <button></button> icon in the <strong>action</strong> column of the Screen Specs table. Then make your changes and click the <strong>Update</strong> button.'
+              values={{
+                button: () => (
+                  <span className='px-2'>
+                    <Button mode='outline' dimension='icon-md' className='pointer-events-none shadow-lg'>
+                      <Pencil id='edit-icon' />
+                    </Button>
+                  </span>
+                ),
+                strong: (text) => <strong>{text}</strong>,
+              }}
+            />
           </Paragraph>
         </Section>
       </div>

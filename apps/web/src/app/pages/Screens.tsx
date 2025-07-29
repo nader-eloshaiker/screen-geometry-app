@@ -21,6 +21,7 @@ import { Loader2 } from 'lucide-react'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import ReactGA from 'react-ga4'
 import { Helmet } from 'react-helmet-async'
+import { FormattedMessage } from 'react-intl'
 import { Dimensions } from '../../../../../packages/lib-api/src/internal'
 import { CreateScreenButton } from '../components/screen/createbutton/CreateButton'
 import { FormModeTypes, ScreenFormDrawer } from '../components/screen/form/ScreenFormDrawer'
@@ -112,7 +113,7 @@ export const Screens = () => {
       <div className='flex flex-1 flex-col gap-10'>
         <div className='flex flex-col items-center gap-4 md:flex-row md:justify-between' ref={divSizeRef}>
           <Label palette='primary' className='text-xl'>
-            Screen Specs
+            <FormattedMessage id='screens.specs.title' defaultMessage='Screen Specs' />
           </Label>
           <ScreenFormDrawer mode={editMode} open={isEditorOpen} setOpen={setIsEditorOpen} id={editId}>
             <CreateScreenButton
@@ -138,12 +139,17 @@ export const Screens = () => {
           <div className='flex h-full flex-col items-center'>
             <div className='py-4 text-xl text-primary-label'>No List Found</div>
             <div className='flex flex-col items-center gap-2 py-6'>
-              <div>Click here to populate default list</div>
+              <div>
+                <FormattedMessage
+                  id='screens.emptytable.populatelist'
+                  defaultMessage='Click here to populate default list'
+                />
+              </div>
               <Button className='w-40' mode='outline' onClick={onLoadDefault} disabled={isCreateListLoading}>
                 {isCreateListLoading ? (
                   <Loader2 data-testid='ButtonSpinner' className='animate-spin' />
                 ) : (
-                  'Load Screens'
+                  <FormattedMessage id='screens.specs.loadscreens' defaultMessage='Load Screens' />
                 )}
               </Button>
             </div>
@@ -153,7 +159,7 @@ export const Screens = () => {
           <>
             <div className='flex flex-col items-center gap-4 md:flex-row md:justify-between'>
               <Label palette='primary' className='text-xl'>
-                Size and Pixel Density Comparison
+                <FormattedMessage id='screens.size.title' defaultMessage='Size and Pixel Density Comparison' />
               </Label>
               <div className='flex flex-wrap gap-4'>
                 <HorizontalAlignmentSelector onChange={setHAlignment} />

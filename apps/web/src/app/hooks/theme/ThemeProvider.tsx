@@ -9,7 +9,7 @@ export const ThemeProvider = ({
   children,
   initialise,
   ...rest
-}: TReactChildren & TRestProps & { initialise?: TThemeMode }) => {
+}: React.PropsWithChildren & TRestProps & { initialise?: TThemeMode }) => {
   const [theme, setTheme] = useLocalStorage<TThemeMode>(ThemeKey, initialise ?? getSystemTheme())
 
   useEffect(() => {

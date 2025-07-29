@@ -10,6 +10,7 @@ import {
   AlignStartVertical,
 } from 'lucide-react'
 import { ComponentType, SVGProps, useEffect } from 'react'
+import { useIntl } from 'react-intl'
 
 export type Alignment = 'start' | 'center' | 'end'
 
@@ -61,32 +62,83 @@ const AlignmentSelector = ({ onChange, storageKey, defaultValue, description, co
 }
 
 export const VerticalAlignmentSelector = ({ onChange }: TProps) => {
+  const { formatMessage } = useIntl()
   return (
     <AlignmentSelector
       storageKey={VAlignKey}
       defaultValue={VAlignDefault}
       onChange={onChange}
-      description='Vertical Alignment'
+      description={formatMessage({
+        id: 'screens.panel.vertical',
+        defaultMessage: 'Vertical Alignment',
+      })}
       content={[
-        { Icon: AlignStartHorizontal, alignment: 'start', label: 'Align Top' },
-        { Icon: AlignCenterHorizontal, alignment: 'center', label: 'Align Center' },
-        { Icon: AlignEndHorizontal, alignment: 'end', label: 'Align Bottom' },
+        {
+          Icon: AlignStartHorizontal,
+          alignment: 'start',
+          label: formatMessage({
+            id: 'screens.panel.verticalTop',
+            defaultMessage: 'Align Top',
+          }),
+        },
+        {
+          Icon: AlignCenterHorizontal,
+          alignment: 'center',
+          label: formatMessage({
+            id: 'screens.panel.verticalCenter',
+            defaultMessage: 'Align Center',
+          }),
+        },
+        {
+          Icon: AlignEndHorizontal,
+          alignment: 'end',
+          label: formatMessage({
+            id: 'screens.panel.verticalBottom',
+            defaultMessage: 'Align Bottom',
+          }),
+        },
       ]}
     />
   )
 }
 
 export const HorizontalAlignmentSelector = ({ onChange }: TProps) => {
+  const { formatMessage } = useIntl()
+
   return (
     <AlignmentSelector
       storageKey={HAlignKey}
       defaultValue={HAlignDefault}
       onChange={onChange}
-      description='Horizontal Alignment'
+      description={formatMessage({
+        id: 'screens.panel.horizontal',
+        defaultMessage: 'Horizontal Alignment',
+      })}
       content={[
-        { Icon: AlignStartVertical, alignment: 'start', label: 'Align Left' },
-        { Icon: AlignCenterVertical, alignment: 'center', label: 'Align Center' },
-        { Icon: AlignEndVertical, alignment: 'end', label: 'Align Right' },
+        {
+          Icon: AlignStartVertical,
+          alignment: 'start',
+          label: formatMessage({
+            id: 'screens.panel.horizontalLeft',
+            defaultMessage: 'Align Left',
+          }),
+        },
+        {
+          Icon: AlignCenterVertical,
+          alignment: 'center',
+          label: formatMessage({
+            id: 'screens.panel.horizontalCenter',
+            defaultMessage: 'Align Center',
+          }),
+        },
+        {
+          Icon: AlignEndVertical,
+          alignment: 'end',
+          label: formatMessage({
+            id: 'screens.panel.horizontalRight',
+            defaultMessage: 'Align Right',
+          }),
+        },
       ]}
     />
   )

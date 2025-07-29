@@ -3,6 +3,7 @@ import { useTheme } from '@/app/hooks/theme/useTheme'
 import { cn } from '@/lib/utils'
 import { Button } from '@screengeometry/lib-ui/button'
 import { MoonStar, Sun } from 'lucide-react'
+import { useIntl } from 'react-intl'
 
 type TProps = TRestProps & { className?: string; id: string }
 
@@ -14,10 +15,22 @@ export default function ThemeToggle({ className, id, ...rest }: TProps) {
     setThemeState(isDarkMode ? LightMode : DarkMode)
   }
 
+  const { formatMessage } = useIntl()
+
   return (
     <Button
       id={id}
-      aria-label={`switch theme to ${isDarkMode ? 'Light Mode' : 'Dark Mode'}`}
+      aria-label={`switch theme to ${
+        isDarkMode
+          ? formatMessage({
+              id: 'screens.theme.lightLabel',
+              defaultMessage: 'Light Mode',
+            })
+          : formatMessage({
+              id: 'screens.theme.darkLabel',
+              defaultMessage: 'Dark Mode',
+            })
+      }`}
       onClick={handleChange}
       mode='ghost'
       dimension='none'

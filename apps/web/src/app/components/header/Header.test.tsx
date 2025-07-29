@@ -1,4 +1,5 @@
 import { renderWithUserEvents } from '@/lib/support/test/utils/RenderWithUserEvents'
+import { TestEnvironment } from '@/lib/support/test/utils/TestEnvironment'
 import { RouterProvider, createMemoryHistory, createRootRoute, createRoute, createRouter } from '@tanstack/react-router'
 import { screen, waitFor } from '@testing-library/react'
 import { useMemo } from 'react'
@@ -6,7 +7,7 @@ import { vi } from 'vitest'
 import Header from './Header'
 
 // Mock the imported components
-const TestRouter = (props: React.PropsWithChildren) => {
+const TestRouter = ({ children }: React.PropsWithChildren) => {
   const memoryHistory = useMemo(
     () =>
       createMemoryHistory({
@@ -18,9 +19,9 @@ const TestRouter = (props: React.PropsWithChildren) => {
   const rootRoute = useMemo(
     () =>
       createRootRoute({
-        component: () => props.children,
+        component: () => children,
       }),
-    [props.children]
+    [children]
   )
   const router = useMemo(
     () =>
@@ -30,22 +31,22 @@ const TestRouter = (props: React.PropsWithChildren) => {
         routeTree: rootRoute.addChildren([
           createRoute({
             path: '*',
-            component: () => props.children,
+            component: () => children,
             getParentRoute: () => rootRoute,
           }),
         ]),
       }),
-    [memoryHistory, props.children, rootRoute]
+    [memoryHistory, children, rootRoute]
   )
 
-  return <RouterProvider<typeof router> router={router} />
+  return (
+    <TestEnvironment>
+      <RouterProvider<typeof router> router={router} />{' '}
+    </TestEnvironment>
+  )
 }
 
 // Helper function to render with TanStack Router
-const renderWithRouter = async () => {
-  return renderWithUserEvents(<Header />, { wrapper: TestRouter })
-}
-
 describe('#Header', () => {
   vi.mock('./HeaderNavLarge', () => ({
     HeaderNavLarge: () => <div data-testid='mocked-header-nav-large'>HeaderNavLarge</div>,
@@ -67,23 +68,23 @@ describe('#Header', () => {
     ),
   }))
 
-  beforeAll(() => {
-    vi.stubEnv('VITE_APP_TITLE', 'Screen Geometry App')
-  })
+  // beforeAll(() => {
+  //   vi.stubEnv('VITE_APP_TITLE', 'Screen Geometry App')
+  // })
 
-  afterAll(() => {
-    vi.unstubAllEnvs()
-  })
+  // afterAll(() => {
+  //   vi.unstubAllEnvs()
+  // })
 
   it('renders correctly with app title', async () => {
-    const test = await renderWithRouter()
+    const test = await renderWithUserEvents(<Header />, { wrapper: TestRouter })
 
     // Check if the app title is rendered
-    expect(test.getAllByText('Screen Geo.[]')).toHaveLength(2)
+    expect(test.getAllByText('Screen Geometry [dev]')).toHaveLength(2)
   })
 
   it('renders small header on mobile view', async () => {
-    const test = await renderWithRouter()
+    const test = await renderWithUserEvents(<Header />, { wrapper: TestRouter })
 
     // Check if the small header is present
     const smallHeader = test.getByTestId('small-header')
@@ -94,7 +95,7 @@ describe('#Header', () => {
   })
 
   it('renders large header on desktop view', async () => {
-    const test = await renderWithRouter()
+    const test = await renderWithUserEvents(<Header />, { wrapper: TestRouter })
 
     // Check if the large header is present (even though it's hidden by CSS)
     const largeHeader = test.getByTestId('large-header')
@@ -105,7 +106,7 @@ describe('#Header', () => {
   })
 
   it('opens the sheet when menu button is clicked', async () => {
-    const test = await renderWithRouter()
+    const test = await renderWithUserEvents(<Header />, { wrapper: TestRouter })
 
     // Get the menu button and click it
     const menuButton = test.getByRole('button', { name: 'Toggle navigation menu' })
@@ -120,7 +121,7 @@ describe('#Header', () => {
   })
 
   it('closes the sheet when a navigation link is clicked', async () => {
-    const test = await renderWithRouter()
+    const test = await renderWithUserEvents(<Header />, { wrapper: TestRouter })
 
     // Open the sheet
     const menuButton = test.getByText('Toggle navigation menu')
@@ -135,17 +136,17 @@ describe('#Header', () => {
   })
 
   it('renders theme toggle in both layouts', async () => {
-    const test = await renderWithRouter()
+    const test = await renderWithUserEvents(<Header />, { wrapper: TestRouter })
 
     // Check theme toggle in both layouts
     expect(test.getByTestId('mocked-theme-toggle-theme-toggle')).toBeInTheDocument()
   })
 
   it('renders Title component with correct size', async () => {
-    const test = await renderWithRouter()
+    const test = await renderWithUserEvents(<Header />, { wrapper: TestRouter })
 
     // Both instances of Title should have large size
-    const titleElements = test.getAllByText('Screen Geo.[]')
+    const titleElements = test.getAllByText('Screen Geometry [dev]')
     expect(titleElements.length).toBe(2)
 
     // Verify the Title component has the correct classes for large size

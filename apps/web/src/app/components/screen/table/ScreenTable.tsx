@@ -17,6 +17,7 @@ import {
 } from '@screengeometry/lib-ui/table'
 import { Loader2, LoaderCircle, Pencil, X } from 'lucide-react'
 import { Dispatch, SetStateAction } from 'react'
+import { FormattedMessage, FormattedNumber } from 'react-intl'
 import styled from 'styled-components'
 
 const StyledCheckbox = styled(Checkbox)<{ $fgColor: string; $bgColor: string }>`
@@ -123,16 +124,30 @@ export const ScreenTable = ({
     <Table data-testid='ScreenTable' className={className}>
       <TableHeader>
         <TableHeaderRow>
-          <TableHeaderCell className='text-center'>Show</TableHeaderCell>
-          <TableHeaderCell className='text-center'>Size</TableHeaderCell>
-          <TableHeaderCell className='text-center'>Ratio</TableHeaderCell>
-          <TableHeaderCell className='hidden text-center sm:table-cell'>Dimensions</TableHeaderCell>
-          <TableHeaderCell className='hidden text-center md:table-cell'>Resolution</TableHeaderCell>
+          <TableHeaderCell className='text-center'>
+            <FormattedMessage id='screens.table.show' defaultMessage='Show' />
+          </TableHeaderCell>
+          <TableHeaderCell className='text-center'>
+            <FormattedMessage id='screens.table.size' defaultMessage='Size' />
+          </TableHeaderCell>
+          <TableHeaderCell className='text-center'>
+            <FormattedMessage id='screens.table.ratio' defaultMessage='Ratio' />
+          </TableHeaderCell>
+          <TableHeaderCell className='hidden text-center sm:table-cell'>
+            <FormattedMessage id='screens.table.dimension' defaultMessage='Dimension' />
+          </TableHeaderCell>
+          <TableHeaderCell className='hidden text-center md:table-cell'>
+            <FormattedMessage id='screens.table.resolution' defaultMessage='Resolution' />
+          </TableHeaderCell>
           <TableHeaderCell className='text-center'>
             <span className='md:hidden'>PPI</span>
-            <span className='hidden text-nowrap md:block'>Pixels/Inch</span>
+            <span className='hidden text-nowrap md:block'>
+              <FormattedMessage id='screens.table.pixelsInch' defaultMessage='Pixels/Inch' />
+            </span>
           </TableHeaderCell>
-          <TableHeaderCell className='text-center'>Action</TableHeaderCell>
+          <TableHeaderCell className='text-center'>
+            <FormattedMessage id='screens.table.action' defaultMessage='Action' />
+          </TableHeaderCell>
         </TableHeaderRow>
       </TableHeader>
       {screens.length === 0 && isScreenListLoading ? (
@@ -171,14 +186,25 @@ export const ScreenTable = ({
                   )}
                 </div>
               </TableBodyCell>
-              <TableBodyCell className='text-center'>{screen.data.diagonalSize}&quot;</TableBodyCell>
-              <TableBodyCell className='text-center'>{screen.data.aspectRatio}</TableBodyCell>
-              <TableBodyCell className='hidden text-center sm:table-cell'>
-                {Math.round((screen.specs.hSize * 100) / 100)}&quot; x {Math.round((screen.specs.vSize * 100) / 100)}
+              <TableBodyCell className='text-center'>
+                <FormattedNumber value={screen.data.diagonalSize} />
                 &quot;
               </TableBodyCell>
-              <TableBodyCell className='hidden text-center md:table-cell'>{`${screen.data.hRes} x ${screen.data.vRes}`}</TableBodyCell>
-              <TableBodyCell className='text-center'>{`${Math.round((screen.specs.ppi * 100) / 100)}`}</TableBodyCell>
+              <TableBodyCell className='text-center'>
+                <FormattedNumber value={screen.specs.hAspectRatio} />:
+                <FormattedNumber value={screen.specs.vAspectRatio} />
+              </TableBodyCell>
+              <TableBodyCell className='hidden text-center sm:table-cell'>
+                <FormattedNumber value={Math.round((screen.specs.hSize * 100) / 100)} />
+                &quot; x <FormattedNumber value={Math.round((screen.specs.vSize * 100) / 100)} />
+                &quot;
+              </TableBodyCell>
+              <TableBodyCell className='hidden text-center md:table-cell'>
+                <FormattedNumber value={screen.data.hRes} /> x <FormattedNumber value={screen.data.vRes} />
+              </TableBodyCell>
+              <TableBodyCell className='text-center'>
+                <FormattedNumber value={Math.round((screen.specs.ppi * 100) / 100)} />
+              </TableBodyCell>
               <TableBodyCell>
                 <div className='flex flex-row items-center justify-center gap-3'>
                   <Button title='Edit' mode='ghost' dimension='sm' onClick={() => editAction.handler(screen.id)}>

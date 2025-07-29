@@ -10,6 +10,7 @@ vi.mock('@/app/hooks/theme/useTheme', () => ({
 // Import the mocked hook
 import { useTheme } from '@/app/hooks/theme/useTheme'
 import { renderWithUserEvents } from '@/lib/support/test/utils/RenderWithUserEvents'
+import { TestTranslationsEnvironment } from '@/lib/support/test/utils/TestTranslationsEnvironment'
 
 describe('ThemeToggle', () => {
   const mockSetTheme = vi.fn()
@@ -17,7 +18,7 @@ describe('ThemeToggle', () => {
   it('renders correctly in light mode', async () => {
     vi.mocked(useTheme).mockReturnValue([LightMode, mockSetTheme])
 
-    const test = await renderWithUserEvents(<ThemeToggle id='test-toggle' />)
+    const test = await renderWithUserEvents(<ThemeToggle id='test-toggle' />, { wrapper: TestTranslationsEnvironment })
 
     const button = test.getByRole('button')
     expect(button).toBeInTheDocument()
@@ -32,7 +33,7 @@ describe('ThemeToggle', () => {
   it('renders correctly in dark mode', async () => {
     vi.mocked(useTheme).mockReturnValue([DarkMode, mockSetTheme])
 
-    const test = await renderWithUserEvents(<ThemeToggle id='test-toggle' />)
+    const test = await renderWithUserEvents(<ThemeToggle id='test-toggle' />, { wrapper: TestTranslationsEnvironment })
 
     const button = test.getByRole('button')
     expect(button).toBeInTheDocument()
@@ -42,7 +43,7 @@ describe('ThemeToggle', () => {
   it('toggles from light mode to dark mode when clicked', async () => {
     vi.mocked(useTheme).mockReturnValue([LightMode, mockSetTheme])
 
-    const test = await renderWithUserEvents(<ThemeToggle id='test-toggle' />)
+    const test = await renderWithUserEvents(<ThemeToggle id='test-toggle' />, { wrapper: TestTranslationsEnvironment })
 
     await test.user.click(test.getByRole('button'))
 
@@ -52,7 +53,7 @@ describe('ThemeToggle', () => {
   it('toggles from dark mode to light mode when clicked', async () => {
     vi.mocked(useTheme).mockReturnValue([DarkMode, mockSetTheme])
 
-    const test = await renderWithUserEvents(<ThemeToggle id='test-toggle' />)
+    const test = await renderWithUserEvents(<ThemeToggle id='test-toggle' />, { wrapper: TestTranslationsEnvironment })
 
     await test.user.click(test.getByRole('button'))
 
@@ -63,7 +64,9 @@ describe('ThemeToggle', () => {
     vi.mocked(useTheme).mockReturnValue([LightMode, mockSetTheme])
 
     // eslint-disable-next-line tailwindcss/no-custom-classname
-    const test = await renderWithUserEvents(<ThemeToggle id='test-toggle' className='extra-class' />)
+    const test = await renderWithUserEvents(<ThemeToggle id='test-toggle' className='extra-class' />, {
+      wrapper: TestTranslationsEnvironment,
+    })
 
     const button = test.getByRole('button')
     expect(button).toHaveClass('extra-class')
@@ -72,7 +75,9 @@ describe('ThemeToggle', () => {
   it('passes additional props to the button', async () => {
     vi.mocked(useTheme).mockReturnValue([LightMode, mockSetTheme])
 
-    const test = await renderWithUserEvents(<ThemeToggle id='test-toggle' data-testid='theme-toggle-test' />)
+    const test = await renderWithUserEvents(<ThemeToggle id='test-toggle' data-testid='theme-toggle-test' />, {
+      wrapper: TestTranslationsEnvironment,
+    })
 
     expect(test.getByTestId('theme-toggle-test')).toBeInTheDocument()
   })

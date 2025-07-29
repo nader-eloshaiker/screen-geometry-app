@@ -1,4 +1,5 @@
 import { renderWithUserEvents } from '@/lib/support/test/utils/RenderWithUserEvents'
+import { TestTranslationsEnvironment } from '@/lib/support/test/utils/TestTranslationsEnvironment'
 import { render, screen } from '@testing-library/react'
 import { vi } from 'vitest'
 import { HeaderNavSmall } from './HeaderNavSmall'
@@ -11,7 +12,7 @@ vi.mock('@screengeometry/lib-ui/navigationlink', () => ({
     mode,
     className,
     onClick,
-  }: TReactChildren & { to: string; mode: string; className: string; onClick: () => void }) => (
+  }: React.PropsWithChildren & { to: string; mode: string; className: string; onClick: () => void }) => (
     <a
       href={to}
       data-testid={`nav-link-${to.replace('/', '')}`}
@@ -30,7 +31,7 @@ vi.mock('@screengeometry/lib-ui/navigationlink', () => ({
 describe('HeaderNavSmall', () => {
   it('renders navigation with correct aria-label and classes', () => {
     const mockSetOpen = vi.fn()
-    render(<HeaderNavSmall setOpen={mockSetOpen} />)
+    render(<HeaderNavSmall setOpen={mockSetOpen} />, { wrapper: TestTranslationsEnvironment })
 
     const nav = screen.getByRole('navigation')
     expect(nav).toBeInTheDocument()
@@ -40,7 +41,7 @@ describe('HeaderNavSmall', () => {
 
   it('renders all navigation links with correct text', () => {
     const mockSetOpen = vi.fn()
-    render(<HeaderNavSmall setOpen={mockSetOpen} />)
+    render(<HeaderNavSmall setOpen={mockSetOpen} />, { wrapper: TestTranslationsEnvironment })
 
     expect(screen.getByText('Home')).toBeInTheDocument()
     expect(screen.getByText('Screens')).toBeInTheDocument()
@@ -50,7 +51,7 @@ describe('HeaderNavSmall', () => {
 
   it('has links pointing to the correct routes', () => {
     const mockSetOpen = vi.fn()
-    render(<HeaderNavSmall setOpen={mockSetOpen} />)
+    render(<HeaderNavSmall setOpen={mockSetOpen} />, { wrapper: TestTranslationsEnvironment })
 
     // Home link
     const homeLink = screen.getByTestId('nav-link-')
@@ -71,7 +72,7 @@ describe('HeaderNavSmall', () => {
 
   it('passes correct props to each NavigationLink', () => {
     const mockSetOpen = vi.fn()
-    render(<HeaderNavSmall setOpen={mockSetOpen} />)
+    render(<HeaderNavSmall setOpen={mockSetOpen} />, { wrapper: TestTranslationsEnvironment })
 
     const links = [
       screen.getByTestId('nav-link-'),
@@ -88,7 +89,9 @@ describe('HeaderNavSmall', () => {
 
   it('calls setOpen(false) when any link is clicked', async () => {
     const mockSetOpen = vi.fn()
-    const test = await renderWithUserEvents(<HeaderNavSmall setOpen={mockSetOpen} />)
+    const test = await renderWithUserEvents(<HeaderNavSmall setOpen={mockSetOpen} />, {
+      wrapper: TestTranslationsEnvironment,
+    })
 
     // Click each link and verify setOpen was called with false
     const links = [
@@ -111,7 +114,9 @@ describe('HeaderNavSmall', () => {
   it('requires setOpen prop to be provided', async () => {
     // TypeScript would catch this at compile time, but testing for prop requirements is still good
     const mockSetOpen = vi.fn()
-    const test = await renderWithUserEvents(<HeaderNavSmall setOpen={mockSetOpen} />)
+    const test = await renderWithUserEvents(<HeaderNavSmall setOpen={mockSetOpen} />, {
+      wrapper: TestTranslationsEnvironment,
+    })
 
     // Check that it renders with the prop
     expect(test.getByRole('navigation')).toBeInTheDocument()

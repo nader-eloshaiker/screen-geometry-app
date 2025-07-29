@@ -19,17 +19,42 @@ x-tagGroups:
 
 servers:
   - description: dev
-    url: https://dev.api.screengeometry.com
+    url: https://develop.screengeometry.com
 
   - description: prd
-    url: https://api.screengeometry.com
+    url: https://screengeometry.com
 
 tags:
   - name: Configuration
     description: Configuration api call
+  - name: Translations
+    description: Translations api call
 
 paths:
-  "/env/config.json":
+  /locales/{locale}.json:
+    get:
+      operationId: getTranslations
+      summary: Get Translations
+      description: Returns the translations
+      security:
+        - UniversalLogin: []
+      tags:
+        - Translations
+      parameters:
+        - name: locale
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: 200 Ok
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Translations"
+
+  /env/config.json:
     get:
       operationId: getConfig
       summary: Get Environment Configuration

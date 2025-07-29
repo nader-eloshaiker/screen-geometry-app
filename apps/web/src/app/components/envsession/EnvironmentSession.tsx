@@ -1,12 +1,10 @@
 import { DefaultSession, JWTPayload, Session } from '@/app/hooks/envsession/EnvSessionContext'
 import { EnvSessionProvider } from '@/app/hooks/envsession/EnvSessionProvider'
 import { mockAccessTokenResolver } from '@/app/hooks/envsession/EnvSessionTokenMock'
-import { assetAxiosInstance, setAccessTokenResolver } from '@screengeometry/lib-api/apiClient'
+import { setAccessTokenResolver } from '@screengeometry/lib-api/apiClient'
 import { usePageLoader } from '@screengeometry/lib-ui/hooks/pageloader'
 import { jwtDecode } from 'jwt-decode'
 import { ReactNode, useEffect, useState } from 'react'
-
-assetAxiosInstance.defaults.baseURL = window.location.origin
 
 const parseJwt = (jwtToken: string) => {
   try {

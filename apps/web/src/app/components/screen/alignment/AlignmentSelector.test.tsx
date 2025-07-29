@@ -1,4 +1,5 @@
 import { renderWithUserEvents } from '@/lib/support/test/utils/RenderWithUserEvents'
+import { TestTranslationsEnvironment } from '@/lib/support/test/utils/TestTranslationsEnvironment'
 import { waitFor } from '@testing-library/react'
 import { HAlignKey, HorizontalAlignmentSelector, VAlignKey, VerticalAlignmentSelector } from './AlignmentSelector'
 
@@ -11,7 +12,9 @@ describe('#AlignmentSelector', () => {
 
   describe('VerticalAlignmentSelector', () => {
     it('should render', async () => {
-      const { getAllByRole } = await renderWithUserEvents(<VerticalAlignmentSelector onChange={onChangeMock} />)
+      const { getAllByRole } = await renderWithUserEvents(<VerticalAlignmentSelector onChange={onChangeMock} />, {
+        wrapper: TestTranslationsEnvironment,
+      })
       const elements = getAllByRole('radio')
 
       expect(elements).toHaveLength(3)
@@ -19,7 +22,9 @@ describe('#AlignmentSelector', () => {
     })
 
     it('should align vertically when button clicked', async () => {
-      const { getAllByRole, user } = await renderWithUserEvents(<VerticalAlignmentSelector onChange={onChangeMock} />)
+      const { getAllByRole, user } = await renderWithUserEvents(<VerticalAlignmentSelector onChange={onChangeMock} />, {
+        wrapper: TestTranslationsEnvironment,
+      })
       const elements = getAllByRole('radio')
 
       await waitFor(async () => {
@@ -47,7 +52,9 @@ describe('#AlignmentSelector', () => {
 
   describe('HorizontalAlignmentSelector', () => {
     it('should render', async () => {
-      const { getAllByRole } = await renderWithUserEvents(<HorizontalAlignmentSelector onChange={onChangeMock} />)
+      const { getAllByRole } = await renderWithUserEvents(<HorizontalAlignmentSelector onChange={onChangeMock} />, {
+        wrapper: TestTranslationsEnvironment,
+      })
       const elements = getAllByRole('radio')
 
       expect(elements).toHaveLength(3)
@@ -55,7 +62,12 @@ describe('#AlignmentSelector', () => {
     })
 
     it('should align horizontally when button clicked', async () => {
-      const { getAllByRole, user } = await renderWithUserEvents(<HorizontalAlignmentSelector onChange={onChangeMock} />)
+      const { getAllByRole, user } = await renderWithUserEvents(
+        <HorizontalAlignmentSelector onChange={onChangeMock} />,
+        {
+          wrapper: TestTranslationsEnvironment,
+        }
+      )
       const elements = getAllByRole('radio')
 
       await waitFor(async () => {

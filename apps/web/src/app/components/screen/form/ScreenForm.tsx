@@ -13,11 +13,12 @@ import { Loader2 } from 'lucide-react'
 import { Dispatch, SetStateAction, useEffect, useState } from 'react'
 import ReactGA from 'react-ga4'
 import { SubmitHandler, useForm } from 'react-hook-form'
+import { FormattedMessage, useIntl } from 'react-intl'
 import { EmptyInputValues, FormSubmitType, ScreenFormSchema } from './ScreenFormSchema'
 import { ColorField } from './fields/ColorField'
 import { InputField } from './fields/InputField'
 
-type Props = TReactChildren & {
+type Props = React.PropsWithChildren & {
   setOpen: Dispatch<SetStateAction<boolean>>
   isEditLoading?: boolean
   editId?: string
@@ -29,6 +30,7 @@ type Props = TReactChildren & {
 export const ScreenForm = ({ setOpen, editId, isEditLoading, editScreen, selectedItem, setSelectedItem }: Props) => {
   const { isPending: isCreateLoading, mutate: createAction } = useCreateScreenApi()
   const { isPending: isUpdateLoading, mutate: updateAction } = useUpdateScreenApi()
+  const { formatMessage } = useIntl()
 
   const form = useForm<FormSubmitType>({
     resolver: yupResolver(ScreenFormSchema),
@@ -147,8 +149,9 @@ export const ScreenForm = ({ setOpen, editId, isEditLoading, editScreen, selecte
             <InputField
               formKey={ScreenDataEnum.diagonalSize}
               control={control}
-              title='Screen Size'
+              title={formatMessage({ id: 'screen.form.size', defaultMessage: 'Screen Size' })}
               type='number'
+              dir='auto'
               endAdornment='in'
               autoComplete='off'
               placeholder='27'
@@ -159,8 +162,9 @@ export const ScreenForm = ({ setOpen, editId, isEditLoading, editScreen, selecte
             <InputField
               formKey={ScreenDataEnum.aspectRatio}
               control={control}
-              title='Aspect Ratio'
+              title={formatMessage({ id: 'screen.form.aspect', defaultMessage: 'Aspect Ratio' })}
               type='text'
+              dir='auto'
               autoComplete='off'
               placeholder='16:9'
               isLoading={isEditLoading}
@@ -172,8 +176,9 @@ export const ScreenForm = ({ setOpen, editId, isEditLoading, editScreen, selecte
             <InputField
               formKey={ScreenDataEnum.hRes}
               control={control}
-              title='Horizontal Res'
+              title={formatMessage({ id: 'screen.form.horizontal', defaultMessage: 'Horizontal Res' })}
               type='number'
+              dir='auto'
               endAdornment='px'
               autoComplete='off'
               placeholder='3840'
@@ -184,8 +189,9 @@ export const ScreenForm = ({ setOpen, editId, isEditLoading, editScreen, selecte
             <InputField
               formKey={ScreenDataEnum.vRes}
               control={control}
-              title='Vertical Res'
+              title={formatMessage({ id: 'screen.form.vertical', defaultMessage: 'Vertical Res' })}
               type='number'
+              dir='auto'
               endAdornment='px'
               autoComplete='off'
               placeholder='2160'
@@ -198,7 +204,7 @@ export const ScreenForm = ({ setOpen, editId, isEditLoading, editScreen, selecte
             <div className='grid grid-cols-2 gap-6'>
               <ColorField
                 formKey={ScreenDataEnum.lightColor}
-                title='Light'
+                title={formatMessage({ id: 'screen.form.light', defaultMessage: 'Light Color' })}
                 mode={LightMode}
                 isLoading={isEditLoading}
                 control={control}
@@ -206,7 +212,7 @@ export const ScreenForm = ({ setOpen, editId, isEditLoading, editScreen, selecte
               />
               <ColorField
                 formKey={ScreenDataEnum.darkColor}
-                title='Dark'
+                title={formatMessage({ id: 'screen.form.dark', defaultMessage: 'Dark Color' })}
                 mode={DarkMode}
                 isLoading={isEditLoading}
                 control={control}
@@ -216,7 +222,7 @@ export const ScreenForm = ({ setOpen, editId, isEditLoading, editScreen, selecte
             <Button
               type='button'
               className='mt-8 shadow-lg'
-              title='Generate Colors'
+              title={formatMessage({ id: 'screen.form.colors', defaultMessage: 'Generate Colors' })}
               dimension='icon-lg'
               data-testid='generate-color-btn'
               mode='outline'
@@ -242,7 +248,7 @@ export const ScreenForm = ({ setOpen, editId, isEditLoading, editScreen, selecte
                 disabled={isCreateLoading || isUpdateLoading || isEditLoading}
                 onClick={onClose}
               >
-                Close
+                <FormattedMessage id='screens.form.close' defaultMessage='Close' />
               </Button>
               <Button
                 type='button'
@@ -251,7 +257,7 @@ export const ScreenForm = ({ setOpen, editId, isEditLoading, editScreen, selecte
                 disabled={isCreateLoading || isUpdateLoading || isEditLoading || !isDirty}
                 onClick={resetHandler}
               >
-                Reset
+                <FormattedMessage id='screens.form.reset' defaultMessage='Reset' />
               </Button>
             </div>
             <Button
@@ -263,8 +269,10 @@ export const ScreenForm = ({ setOpen, editId, isEditLoading, editScreen, selecte
             >
               {isCreateLoading || isUpdateLoading ? (
                 <Loader2 data-testid='busySubmitButton' className='animate-spin' />
+              ) : !editId ? (
+                <FormattedMessage id='screens.form.createButton' defaultMessage='Create' />
               ) : (
-                <>{!editId ? 'Create' : 'Update'}</>
+                <FormattedMessage id='screens.form.updateButton' defaultMessage='Update' />
               )}
             </Button>
           </div>
