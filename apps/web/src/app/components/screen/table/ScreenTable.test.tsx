@@ -1,4 +1,4 @@
-import { EnvironmentSession } from '@/app/components/envsession/EnvironmentSession'
+import { EnvSession } from '@/app/hooks/envSession/EnvSession'
 import { QueryProvider } from '@/app/hooks/query/QueryProvider'
 import { ScreenProvider } from '@/app/hooks/screen/ScreenProvider'
 import { ScreenItemRender } from '@/app/models/screenItemRender'
@@ -55,12 +55,12 @@ const TestParentComponent = ({ initialise }: { initialise?: Array<ScreenItemRend
     <HelmetProvider>
       <QueryProvider>
         <TestEnvironment>
-          <EnvironmentSession>
+          <EnvSession>
             <ScreenProvider initialise={{ screens: initialise ?? [], query: '' }}>
               <Screens />
             </ScreenProvider>
             <Toaster />
-          </EnvironmentSession>
+          </EnvSession>
         </TestEnvironment>
       </QueryProvider>
     </HelmetProvider>

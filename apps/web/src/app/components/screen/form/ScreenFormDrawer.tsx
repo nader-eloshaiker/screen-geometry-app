@@ -1,7 +1,14 @@
-import { useGetScreenApi } from '@/app/hooks/api/helpers/useGetScreenApi'
-import { useSearchApi } from '@/app/hooks/api/helpers/useSearchApi'
+import { ScreenSelector } from '@/app/components/screen/screenselector/ScreenSelector'
+import { useApiEffect } from '@/app/hooks/apiEffects/useApiEffect'
+import { getTextDirection } from '@/app/hooks/envTranslate/LocaleHelper'
 import { transformScreenItem } from '@/lib/utils'
-import { SearchItem } from '@screengeometry/lib-api/spec'
+import {
+  ScreenItemResponse,
+  SearchItem,
+  SearchListResponse,
+  useGetScreen,
+  useGetSearch,
+} from '@screengeometry/lib-api/spec'
 import {
   Sheet,
   SheetContent,
@@ -10,10 +17,9 @@ import {
   SheetTitle,
   SheetTrigger,
 } from '@screengeometry/lib-ui/sheet'
+import { keepPreviousData } from '@tanstack/react-query'
 import { Dispatch, useEffect, useState } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
-import { getTextDirection } from '../../envtranslations/EnvironmentTranslations'
-import { ScreenSelector } from '../screenselector/ScreenSelector'
 import { ScreenForm } from './ScreenForm'
 import { FormSubmitType } from './ScreenFormSchema'
 
@@ -31,12 +37,41 @@ type Props = React.PropsWithChildren & {
 
 const ScreenFormDrawer = ({ open, setOpen, mode, id: editId = '', children }: Props) => {
   const isEdit = mode === FormModeTypes.Edit
-  const { data: screenItemResponse, isFetching: isScreenItemLoading } = useGetScreenApi(editId, isEdit && !!editId)
+  const {
+    data: screenData,
+    isFetching: isScreenLoading,
+    error: screenError,
+  } = useGetScreen(editId, {
+    query: {
+      enabled: isEdit && !!editId,
+      placeholderData: keepPreviousData,
+    },
+  })
+  useApiEffect<ScreenItemResponse>({
+    data: screenData,
+    error: screenError,
+  })
 
   const [searchTerm, setSearchTerm] = useState<string>('')
-  const { isFetching: isSearchListLoading, data: searchListResponse } = useSearchApi({ term: searchTerm })
+  const {
+    isFetching: isSearchLoading,
+    data: searchData,
+    error: searchError,
+  } = useGetSearch(
+    { term: searchTerm },
+    {
+      query: {
+        staleTime: Infinity,
+        placeholderData: keepPreviousData,
+      },
+    }
+  )
+  useApiEffect<SearchListResponse>({
+    data: searchData,
+    error: searchError,
+  })
 
-  const isEditLoading = isEdit && isScreenItemLoading
+  const isEditLoading = isEdit && isScreenLoading
   const [editScreen, setEditScreen] = useState<FormSubmitType | undefined>()
   const [selectedItem, setSelectedItem] = useState<SearchItem>()
 
@@ -44,14 +79,14 @@ const ScreenFormDrawer = ({ open, setOpen, mode, id: editId = '', children }: Pr
   const sheetDir = getTextDirection() === 'ltr' ? 'right' : 'left'
 
   useEffect(() => {
-    if (screenItemResponse && editId && !isScreenItemLoading) {
-      const inputScreen = transformScreenItem(screenItemResponse.item)
+    if (screenData && editId && !isScreenLoading) {
+      const inputScreen = transformScreenItem(screenData.item)
       const resetInputValues = inputScreen as FormSubmitType
       setEditScreen(resetInputValues)
-    } else if (!editId && !isScreenItemLoading) {
+    } else if (!editId && !isScreenLoading) {
       setEditScreen(undefined)
     }
-  }, [editId, isScreenItemLoading, screenItemResponse])
+  }, [editId, isScreenLoading, screenData])
 
   return (
     <Sheet open={open} onOpenChange={setOpen}>
@@ -79,8 +114,8 @@ const ScreenFormDrawer = ({ open, setOpen, mode, id: editId = '', children }: Pr
         <ScreenSelector
           selectedItem={selectedItem}
           onSelectItem={setSelectedItem}
-          isLoading={isSearchListLoading}
-          items={searchListResponse?.list}
+          isLoading={isSearchLoading}
+          items={searchData?.list}
           commandPlaceholder={formatMessage({
             id: 'screens.form.searchPlaceholder',
             defaultMessage: 'Search Screen list...',

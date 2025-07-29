@@ -1,19 +1,22 @@
-import { EnvTranslateContext } from '@/app/hooks/envtranslate/EnvTranslateContext'
+import { EnvTranslateContext } from '@/app/hooks/envTranslate/EnvTranslateContext'
 import useLocalStorage from '@/app/hooks/useLocalStorage'
 import { match } from '@formatjs/intl-localematcher'
 import { Translations, useGetTranslations } from '@screengeometry/lib-api/spec'
 import { usePageLoader } from '@screengeometry/lib-ui/hooks/pageloader'
 import { useEffect, useState } from 'react'
 import { IntlProvider } from 'react-intl'
-import { defaultLocale, getBrowserLocales, supportedlocales, supportedlocalesArray } from './LocaleHelper'
+import {
+  defaultLocale,
+  getBrowserLocales,
+  setTextDirection,
+  supportedlocales,
+  supportedlocalesArray,
+} from './LocaleHelper'
 
 const LocaleStorageKey = 'locale-override'
 const matchedLocale = match(getBrowserLocales(), supportedlocalesArray, defaultLocale)
 
-const getTextDirection = () => document.dir ?? 'ltr'
-const setTextDirection = (dir: 'ltr' | 'rtl') => (document.dir = dir)
-
-const TranslationsEnvironment = ({
+export const EnvTranslations = ({
   children,
   translationsReadyKey,
 }: React.PropsWithChildren & { translationsReadyKey: string; override?: boolean }) => {
@@ -58,5 +61,3 @@ const TranslationsEnvironment = ({
     </EnvTranslateContext.Provider>
   )
 }
-
-export { getTextDirection, setTextDirection, TranslationsEnvironment }

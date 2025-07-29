@@ -7,16 +7,18 @@ import { ScreenPanel } from '@/app/components/screen/panel/ScreenPanel'
 import { ScreenTable } from '@/app/components/screen/table/ScreenTable'
 import { Stacked } from '@/app/components/stacked/Stacked'
 import { defaultScreenInputList } from '@/app/constants/defaultScreenList'
-import { useCreateScreenListApi } from '@/app/hooks/api/helpers/useCreateScreenListApi'
-import { useGetScreensListApi } from '@/app/hooks/api/helpers/useGetScreenListApi'
+import { useCreateScreenListEffect } from '@/app/hooks/apiEffects/useCreateScreenListEffect'
+import { useGetScreensListEffect } from '@/app/hooks/apiEffects/useGetScreensListEffect'
 import { useScreenContext } from '@/app/hooks/screen/useScreenContext'
 import { ScreenItemRender } from '@/app/models/screenItemRender'
 import { useElementSize } from '@/lib/ui/hooks/useElementSize'
 import { getMaxScreenSize } from '@/lib/utils'
+import { useCreateScreenList, useDeleteScreen, useGetScreenList, useShowScreen } from '@screengeometry/lib-api/spec'
 import { Button } from '@screengeometry/lib-ui/button'
 import { usePageLoader } from '@screengeometry/lib-ui/hooks/pageloader'
 import { Label } from '@screengeometry/lib-ui/label'
 import { Skeleton } from '@screengeometry/lib-ui/skeleton'
+import { keepPreviousData } from '@tanstack/react-query'
 import { Loader2 } from 'lucide-react'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import ReactGA from 'react-ga4'
@@ -25,8 +27,8 @@ import { FormattedMessage } from 'react-intl'
 import { Dimensions } from '../../../../../packages/lib-api/src/internal'
 import { CreateScreenButton } from '../components/screen/createbutton/CreateButton'
 import { FormModeTypes, ScreenFormDrawer } from '../components/screen/form/ScreenFormDrawer'
-import { useDeleteScreenApi } from '../hooks/api/helpers/useDeleteScreenApi'
-import { useShowScreenApi } from '../hooks/api/helpers/useShowScreenApi'
+import { useDeleteScreenEffect } from '../hooks/apiEffects/useDeleteScreenEffect'
+import { useShowScreenEffect } from '../hooks/apiEffects/useShowScreenEffect'
 
 export const Screens = () => {
   const divSizeRef = useRef<HTMLDivElement>(null)
@@ -39,13 +41,46 @@ export const Screens = () => {
   const [hAlignment, setHAlignment] = useState<Alignment>('center')
   const [vAlignment, setVAlignment] = useState<Alignment>('end')
 
-  const { isPageLoading } = usePageLoader()
-  const { isFetching: isScreenListLoading } = useGetScreensListApi()
-  const { isPending: isCreateListLoading, mutate: createListAction } = useCreateScreenListApi()
-  const { isPending: isDeletePending, mutate: deleteAction, variables: deleteParams } = useDeleteScreenApi()
-  const { isPending: isShowPending, mutate: showAction, variables: showParams } = useShowScreenApi()
+  const {
+    isFetching: isListLoading,
+    data: listData,
+    error: listError,
+  } = useGetScreenList({
+    query: {
+      refetchOnWindowFocus: false,
+      placeholderData: keepPreviousData,
+    },
+  })
+  useGetScreensListEffect(listData, listError)
 
-  const isLoading = isScreenListLoading || isPageLoading
+  const {
+    isPending: isCreateLoading,
+    mutate: createAction,
+    data: createData,
+    error: createError,
+  } = useCreateScreenList()
+  useCreateScreenListEffect(createData, createError)
+
+  const {
+    isPending: isDeletePending,
+    mutate: deleteAction,
+    variables: deleteParams,
+    data: deleteData,
+    error: deleteError,
+  } = useDeleteScreen()
+  useDeleteScreenEffect(deleteData, deleteError)
+
+  const {
+    isPending: isShowPending,
+    mutate: showAction,
+    variables: showParams,
+    data: showData,
+    error: showError,
+  } = useShowScreen()
+  useShowScreenEffect(showData, showError)
+
+  const { isPageLoading } = usePageLoader()
+  const isLoading = isListLoading || isPageLoading
 
   const [isEditorOpen, setIsEditorOpen] = useState(false)
   const [editMode, setEditMode] = useState<FormModeTypes>(FormModeTypes.Create)
@@ -57,7 +92,7 @@ export const Screens = () => {
       action: 'Clicked load default list',
       label: 'Screens Page',
     })
-    createListAction({ data: defaultScreenInputList })
+    createAction({ data: defaultScreenInputList })
   }
 
   const onEdit = useCallback((id: string) => {
@@ -145,8 +180,8 @@ export const Screens = () => {
                   defaultMessage='Click here to populate default list'
                 />
               </div>
-              <Button className='w-40' mode='outline' onClick={onLoadDefault} disabled={isCreateListLoading}>
-                {isCreateListLoading ? (
+              <Button className='w-40' mode='outline' onClick={onLoadDefault} disabled={isCreateLoading}>
+                {isCreateLoading ? (
                   <Loader2 data-testid='ButtonSpinner' className='animate-spin' />
                 ) : (
                   <FormattedMessage id='screens.specs.loadscreens' defaultMessage='Load Screens' />
@@ -167,7 +202,7 @@ export const Screens = () => {
               </div>
             </div>
             <Stacked height={maxPanelSize.height} $hAlign={hAlignment} $vAlign={vAlignment}>
-              {screens.length === 0 && isScreenListLoading ? (
+              {screens.length === 0 && isListLoading ? (
                 <Skeleton data-testid='SkeletonImage' mode='image' className='size-full' />
               ) : (
                 screens

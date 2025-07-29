@@ -1,6 +1,6 @@
-import { useEnvTranslate } from '@/app/hooks/envtranslate/useEnvTranslate'
+import { useEnvTranslate } from '@/app/hooks/envTranslate/useEnvTranslate'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@screengeometry/lib-ui/select'
-import { supportedlocales } from '../envtranslations/LocaleHelper'
+import { supportedlocales } from '../../hooks/envTranslate/LocaleHelper'
 
 export const LanguageSwitcher = () => {
   // Pull in the top-level locale and its setter.

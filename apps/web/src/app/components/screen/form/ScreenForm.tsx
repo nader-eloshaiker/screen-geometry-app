@@ -1,11 +1,11 @@
 import RefreshIcon from '@/app/assets/icons/Refresh'
-import { useCreateScreenApi } from '@/app/hooks/api/helpers/useCreateScreenApi'
-import { useUpdateScreenApi } from '@/app/hooks/api/helpers/useUpdateScreenApi'
+import { useCreateScreenEffect } from '@/app/hooks/apiEffects/useCreateScreenEffect'
+import { useUpdateScreenEffect } from '@/app/hooks/apiEffects/useUpdateScreenEffect'
 import { DarkMode, LightMode } from '@/app/hooks/theme/Theme.types'
 import { cn, createCSSColor } from '@/lib/utils'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { ScreenDataEnum } from '@screengeometry/lib-api/internal'
-import { ScreenInput, SearchItem } from '@screengeometry/lib-api/spec'
+import { ScreenInput, SearchItem, useCreateScreen, useUpdateScreen } from '@screengeometry/lib-api/spec'
 import { Button } from '@screengeometry/lib-ui/button'
 import { Form } from '@screengeometry/lib-ui/form'
 import { Separator } from '@screengeometry/lib-ui/separator'
@@ -28,8 +28,12 @@ type Props = React.PropsWithChildren & {
 }
 
 export const ScreenForm = ({ setOpen, editId, isEditLoading, editScreen, selectedItem, setSelectedItem }: Props) => {
-  const { isPending: isCreateLoading, mutate: createAction } = useCreateScreenApi()
-  const { isPending: isUpdateLoading, mutate: updateAction } = useUpdateScreenApi()
+  const { isPending: isCreateLoading, mutate: createAction, data: createData, error: createError } = useCreateScreen()
+  useCreateScreenEffect(createData, createError)
+
+  const { isPending: isUpdateLoading, mutate: updateAction, data: updateData, error: updateError } = useUpdateScreen()
+  useUpdateScreenEffect(updateData, updateError)
+
   const { formatMessage } = useIntl()
 
   const form = useForm<FormSubmitType>({
