@@ -1,6 +1,6 @@
 import { PageLoaderProvider } from '@screengeometry/lib-ui/hooks/pageloader'
 import { createLazyFileRoute, Outlet } from '@tanstack/react-router'
-import { EnvironmentSession, EnvironmentSessionLoaderKey } from '../components/envsession/EnvironmentSession'
+import { EnvironmentSessionLoaderKey, EnvSession } from '../hooks/session/EnvSession'
 
 export const Route = createLazyFileRoute('/screens')({
   component: RouteComponent,
@@ -9,9 +9,9 @@ export const Route = createLazyFileRoute('/screens')({
 function RouteComponent() {
   return (
     <PageLoaderProvider initialLoadingKeys={[EnvironmentSessionLoaderKey]}>
-      <EnvironmentSession>
+      <EnvSession>
         <Outlet />
-      </EnvironmentSession>
+      </EnvSession>
     </PageLoaderProvider>
   )
 }

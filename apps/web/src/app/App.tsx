@@ -4,8 +4,8 @@ import { ScreenProvider } from '@/app/hooks/screen/ScreenProvider'
 import { ThemeProvider } from '@/app/hooks/theme/ThemeProvider'
 import { PageLoaderProvider, usePageLoader } from '@screengeometry/lib-ui/hooks/pageloader'
 import { PageLoader } from '@screengeometry/lib-ui/pageloader'
-import { EnvironmentConfig } from './components/envconfig/EnvironmentConfig'
-import { TranslationsEnvironment } from './components/envtranslations/EnvironmentTranslations'
+import { EnvConfig } from './hooks/config/EnvConfig'
+import { EnvTranslation } from './hooks/translation/EnvTranslation'
 
 const Application = () => {
   const { isPageLoading } = usePageLoader()
@@ -19,15 +19,15 @@ export const App = () => (
   // >
   <QueryProvider>
     <PageLoaderProvider initialLoadingKeys={['config', 'translations']}>
-      <EnvironmentConfig configReadyKey={'config'}>
-        <TranslationsEnvironment translationsReadyKey={'translations'}>
+      <EnvConfig configReadyKey={'config'}>
+        <EnvTranslation translationsReadyKey={'translations'}>
           <ThemeProvider>
             <ScreenProvider>
               <Application />
             </ScreenProvider>
           </ThemeProvider>
-        </TranslationsEnvironment>
-      </EnvironmentConfig>
+        </EnvTranslation>
+      </EnvConfig>
     </PageLoaderProvider>
   </QueryProvider>
   // </ErrorBoundary>
