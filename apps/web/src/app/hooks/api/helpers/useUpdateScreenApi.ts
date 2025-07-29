@@ -1,10 +1,9 @@
 import { ScreenEventTypes } from '@/app/hooks/screen/ScreenManager'
 import { useScreenContext } from '@/app/hooks/screen/useScreenContext'
 import { ScreenItemResponse, useUpdateScreen } from '@screengeometry/lib-api/spec'
-import { useCallback } from 'react'
+import { useCallback, useMemo } from 'react'
+import { useIntl } from 'react-intl'
 import { useApiEffectHandler } from '../useApiEffectHandler'
-
-const successNotification = { title: 'Updated', message: 'Screen specifications have been updated' }
 
 export const useUpdateScreenApi = () => {
   const { dispatch } = useScreenContext()
@@ -13,6 +12,18 @@ export const useUpdateScreenApi = () => {
     [dispatch]
   )
   const request = useUpdateScreen()
+
+  const { formatMessage } = useIntl()
+  const successNotification = useMemo(
+    () => ({
+      title: formatMessage({ id: 'api.updated.title', defaultMessage: 'Updated' }),
+      message: formatMessage({
+        id: 'api.updateScreen.successNotification.message',
+        defaultMessage: 'Screen specifications have been updated',
+      }),
+    }),
+    [formatMessage]
+  )
 
   useApiEffectHandler<ScreenItemResponse>({
     data: request.data,

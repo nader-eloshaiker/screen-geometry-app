@@ -1,4 +1,12 @@
 {
+  "api.created.title": "Created",
+  "api.deleted.title": "Deleted",
+  "api.updated.title": "Updated",
+  "api.createScreen.successNotification.message": "Screen specifications has been added to list",
+  "api.createScreenList.successNotification.message": "A list of common Screen specifications has been generated",
+  "api.deleteScreen.successNotification.message": "Screen specifications have been deleted",
+  "api.showScreen.successNotification.message": "Screen visibility has been updated",
+  "api.updateScreen.successNotification.message": "Screen specifications have been updated",
   "contact.content.heading": "How to engage with me or this app",
   "contact.content.p1": "Hey there! I'm always happy to hear from you. Whether you've got a question, feedback, or just want to say hi, I'm all ears.",
   "contact.content.p2": "I built this web app as a project to experience the full productionisation of an idea, from API design, to development, to continous integration / conitnous deployment and finally, hosting.",

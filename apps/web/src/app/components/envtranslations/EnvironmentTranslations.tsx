@@ -10,13 +10,8 @@ import { defaultLocale, getBrowserLocales, supportedlocales, supportedlocalesArr
 const LocaleStorageKey = 'locale-override'
 const matchedLocale = match(getBrowserLocales(), supportedlocalesArray, defaultLocale)
 
-const getTextDirection = () => {
-  return document.dir ?? 'ltr'
-}
-
-const setTextDirection = (dir: 'ltr' | 'rtl') => {
-  document.dir = dir
-}
+const getTextDirection = () => document.dir ?? 'ltr'
+const setTextDirection = (dir: 'ltr' | 'rtl') => (document.dir = dir)
 
 const TranslationsEnvironment = ({
   children,
