@@ -1,18 +1,16 @@
 import { ScreenEventTypes } from '@/app/hooks/screen/ScreenManager'
 import { useScreenContext } from '@/app/hooks/screen/useScreenContext'
-import { ScreenIdResponse, useDeleteScreen } from '@screengeometry/lib-api/spec'
+import { ErrorResponse, ScreenIdResponse } from '@screengeometry/lib-api/spec'
 import { useCallback, useMemo } from 'react'
 import { useIntl } from 'react-intl'
-import { useApiEffectHandler } from '../useApiEffectHandler'
+import { useApiEffect } from './useApiEffect'
 
-export const useDeleteScreenApi = () => {
+export const useDeleteScreenEffect = (data: ScreenIdResponse | undefined, error: ErrorResponse | null) => {
   const { dispatch } = useScreenContext()
   const responseHandler = useCallback(
     (data: ScreenIdResponse) => dispatch({ type: ScreenEventTypes.DELETE, payload: data.id }),
     [dispatch]
   )
-  const request = useDeleteScreen()
-
   const { formatMessage } = useIntl()
   const successNotification = useMemo(
     () => ({
@@ -25,12 +23,10 @@ export const useDeleteScreenApi = () => {
     [formatMessage]
   )
 
-  useApiEffectHandler<ScreenIdResponse>({
-    data: request.data,
-    error: request.error,
+  useApiEffect<ScreenIdResponse>({
+    data,
+    error,
     responseHandler,
     successNotification,
   })
-
-  return request
 }

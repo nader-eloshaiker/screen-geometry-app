@@ -36,4 +36,7 @@ const supportedlocales: Record<string, { dir: 'ltr' | 'rtl'; label: string }> = 
 const supportedlocalesArray = Object.keys(supportedlocales)
 const defaultLocale = 'en-US'
 
-export { defaultLocale, getBrowserLocales, supportedlocales, supportedlocalesArray }
+const getTextDirection = () => document.dir ?? 'ltr'
+const setTextDirection = (dir: 'ltr' | 'rtl') => (document.dir = dir)
+
+export { defaultLocale, getBrowserLocales, getTextDirection, setTextDirection, supportedlocales, supportedlocalesArray }

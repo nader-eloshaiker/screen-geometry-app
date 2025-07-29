@@ -1,17 +1,16 @@
 import { ScreenEventTypes } from '@/app/hooks/screen/ScreenManager'
 import { useScreenContext } from '@/app/hooks/screen/useScreenContext'
-import { ScreenListResponse, useCreateScreenList } from '@screengeometry/lib-api/spec'
+import { ErrorResponse, ScreenListResponse } from '@screengeometry/lib-api/spec'
 import { useCallback, useMemo } from 'react'
 import { useIntl } from 'react-intl'
-import { useApiEffectHandler } from '../useApiEffectHandler'
+import { useApiEffect } from './useApiEffect'
 
-export const useCreateScreenListApi = () => {
+export const useCreateScreenListEffect = (data: ScreenListResponse | undefined, error: ErrorResponse | null) => {
   const { dispatch } = useScreenContext()
   const responseHandler = useCallback(
     (data: ScreenListResponse) => dispatch({ type: ScreenEventTypes.ADD_LIST, payload: data.list }),
     [dispatch]
   )
-  const request = useCreateScreenList()
 
   const { formatMessage } = useIntl()
   const successNotification = useMemo(
@@ -25,12 +24,10 @@ export const useCreateScreenListApi = () => {
     [formatMessage]
   )
 
-  useApiEffectHandler<ScreenListResponse>({
-    data: request.data,
-    error: request.error,
+  useApiEffect<ScreenListResponse>({
+    data,
+    error,
     responseHandler,
     successNotification,
   })
-
-  return request
 }

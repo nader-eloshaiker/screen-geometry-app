@@ -1,6 +1,6 @@
-import { DefaultSession, JWTPayload, Session } from '@/app/hooks/envsession/EnvSessionContext'
-import { EnvSessionProvider } from '@/app/hooks/envsession/EnvSessionProvider'
-import { mockAccessTokenResolver } from '@/app/hooks/envsession/EnvSessionTokenMock'
+import { DefaultSession, JWTPayload, Session } from '@/app/hooks/session/EnvSessionContext'
+import { EnvSessionProvider } from '@/app/hooks/session/EnvSessionProvider'
+import { mockAccessTokenResolver } from '@/app/hooks/session/EnvSessionTokenMock'
 import { setAccessTokenResolver } from '@screengeometry/lib-api/apiClient'
 import { usePageLoader } from '@screengeometry/lib-ui/hooks/pageloader'
 import { jwtDecode } from 'jwt-decode'
@@ -28,7 +28,7 @@ type Props = {
 
 export const EnvironmentSessionLoaderKey = 'EnvironmentSessionLoader'
 
-export const EnvironmentSession = ({ children }: Props) => {
+export const EnvSession = ({ children }: Props) => {
   const { setPageLoading } = usePageLoader()
   const [session, setSession] = useState<Session>(DefaultSession.session)
 

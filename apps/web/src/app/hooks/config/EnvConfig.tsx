@@ -1,4 +1,4 @@
-import { EnvConfigProvider } from '@/app/hooks/envconfig/EnvConfigProvider'
+import { EnvConfigProvider } from '@/app/hooks/config/EnvConfigProvider'
 import { createBrowserServiceWorker } from '@/lib/serviceworker/BrowserServiceWorker'
 import { assetAxiosInstance, serverAxiosInstance } from '@screengeometry/lib-api/apiClient'
 import { Config, getGetConfigResponseMock, useGetConfig } from '@screengeometry/lib-api/spec'
@@ -16,7 +16,7 @@ type Props = {
 const isDevEnv = !!import.meta.env.DEV
 const isTesting = import.meta.env.NODE_ENV === 'test'
 
-export const EnvironmentConfig = ({ children, configReadyKey }: Props) => {
+export const EnvConfig = ({ children, configReadyKey }: Props) => {
   const { data, error, isFetched } = useGetConfig()
   const { setPageLoading } = usePageLoader()
 

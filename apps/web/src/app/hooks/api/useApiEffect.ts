@@ -3,7 +3,7 @@ import { useToast } from '@screengeometry/lib-ui/toaster'
 
 import { useEffect } from 'react'
 
-export const useApiEffectHandler = <TData>({
+export const useApiEffect = <TData>({
   data,
   error,
   responseHandler,
