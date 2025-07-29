@@ -1,4 +1,4 @@
-import { EnvTranslateContext } from '@/app/hooks/envTranslate/EnvTranslateContext'
+import { EnvTranslationContext } from '@/app/hooks/envTranslation/EnvTranslationContext'
 import useLocalStorage from '@/app/hooks/useLocalStorage'
 import { match } from '@formatjs/intl-localematcher'
 import { Translations, useGetTranslations } from '@screengeometry/lib-api/spec'
@@ -16,7 +16,7 @@ import {
 const LocaleStorageKey = 'locale-override'
 const matchedLocale = match(getBrowserLocales(), supportedlocalesArray, defaultLocale)
 
-export const EnvTranslations = ({
+export const EnvTranslation = ({
   children,
   translationsReadyKey,
 }: React.PropsWithChildren & { translationsReadyKey: string; override?: boolean }) => {
@@ -54,10 +54,10 @@ export const EnvTranslations = ({
   }, [data, isFetched, locale, setOverrideLocale])
 
   return (
-    <EnvTranslateContext.Provider value={{ locale, setLocale }}>
+    <EnvTranslationContext.Provider value={{ locale, setLocale }}>
       <IntlProvider locale={locale} messages={messages} defaultLocale={defaultLocale}>
         {children}
       </IntlProvider>
-    </EnvTranslateContext.Provider>
+    </EnvTranslationContext.Provider>
   )
 }

@@ -1,6 +1,6 @@
 import { ScreenSelector } from '@/app/components/screen/screenselector/ScreenSelector'
 import { useApiEffect } from '@/app/hooks/apiEffects/useApiEffect'
-import { getTextDirection } from '@/app/hooks/envTranslate/LocaleHelper'
+import { getTextDirection } from '@/app/hooks/envTranslation/LocaleHelper'
 import { transformScreenItem } from '@/lib/utils'
 import {
   ScreenItemResponse,

@@ -1,8 +1,8 @@
 import { useContext } from 'react'
-import { EnvTranslateContext } from './EnvTranslateContext'
+import { EnvTranslationContext } from './EnvTranslationContext'
 
 export const useEnvTranslate = () => {
-  const context = useContext(EnvTranslateContext)
+  const context = useContext(EnvTranslationContext)
   if (context === undefined) throw new Error('useEnvTranslate must be used within a EnvTranslateProvider')
 
   return context
