@@ -18,15 +18,15 @@ const getBrowserLocales = () => {
   return result
 }
 
-const supportedlocales = {
-  en: 'English',
-  de: 'Deutsch',
-  es: 'Español',
-  fr: 'Français',
-  it: 'Italiano',
-  ar: 'العربية',
-  ja: '日本語',
-  zh: '中文',
+const supportedlocales: Record<string, { dir: 'ltr' | 'rtl'; label: string }> = {
+  en: { dir: 'ltr', label: 'English' },
+  de: { dir: 'ltr', label: 'Deutsch' },
+  es: { dir: 'ltr', label: 'Español' },
+  fr: { dir: 'ltr', label: 'Français' },
+  it: { dir: 'ltr', label: 'Italiano' },
+  ar: { dir: 'rtl', label: 'العربية' },
+  ja: { dir: 'ltr', label: '日本語' },
+  zh: { dir: 'ltr', label: '中文' },
 }
 const supportedlocalesArray = Object.keys(supportedlocales)
 const defaultLocale = 'en'

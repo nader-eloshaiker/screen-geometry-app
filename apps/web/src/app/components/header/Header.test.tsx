@@ -80,7 +80,7 @@ describe('#Header', () => {
     const test = await renderWithUserEvents(<Header />, { wrapper: TestRouter })
 
     // Check if the app title is rendered
-    expect(test.getAllByText('Screen Geo.[dev]')).toHaveLength(2)
+    expect(test.getAllByText('Screen Geometry [dev]')).toHaveLength(2)
   })
 
   it('renders small header on mobile view', async () => {
@@ -146,7 +146,7 @@ describe('#Header', () => {
     const test = await renderWithUserEvents(<Header />, { wrapper: TestRouter })
 
     // Both instances of Title should have large size
-    const titleElements = test.getAllByText('Screen Geo.[dev]')
+    const titleElements = test.getAllByText('Screen Geometry [dev]')
     expect(titleElements.length).toBe(2)
 
     // Verify the Title component has the correct classes for large size

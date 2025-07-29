@@ -37,7 +37,7 @@
   "help.emptytable.loadbutton": "画面を読み込む",
   "help.emptytable.nolistfound": "リストが見つかりません",
   "help.emptytable.p1": "初めて画面ページに移動すると、空のテーブルとデフォルトの画面リストをインポートする機能が表示されます",
-  "help.emptytable.populatelist": "ここをクリックしてデフォルトリストを埋める",
+  "screens.emptytable.populatelist": "ここをクリックしてデフォルトリストを埋める",
   "help.emptytable.sidenote": "サイドノート：右上隅のボタンをクリックして新しい画面を作成することもできます",
   "help.fulltable.comparison": "興味のある画面がテーブルに表示されたら、その下に物理的なサイズを重ねて比較しやすくするパネルが表示されます。テーブル上でマウスを動かすと、対応するパネルがハイライトされ、その逆も同様です。",
   "help.gettingstarted.heading": "はじめに",

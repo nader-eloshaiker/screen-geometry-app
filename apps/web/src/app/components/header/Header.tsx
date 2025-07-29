@@ -11,8 +11,8 @@ import {
   SheetTrigger,
 } from '@screengeometry/lib-ui/sheet'
 import { Menu } from 'lucide-react'
-import { useEffect, useState } from 'react'
-import { FormattedMessage } from 'react-intl'
+import { useMemo, useState } from 'react'
+import { FormattedMessage, useIntl } from 'react-intl'
 import { HeaderNavLarge } from './HeaderNavLarge'
 import { HeaderNavSmall } from './HeaderNavSmall'
 
@@ -34,13 +34,12 @@ const Title = ({ size, appTitle }: { size: 'sm' | 'lg'; appTitle: string }) => (
 export default function Header() {
   const [open, setOpen] = useState(false)
   const { ENV_TYPE } = useEnvConfig()
-  const [appTitle, setAppTitle] = useState('Screen Geometry')
+  const { formatMessage } = useIntl()
 
-  useEffect(() => {
-    if (ENV_TYPE !== 'prod') {
-      setAppTitle(`Screen Geo.[${ENV_TYPE}]`)
-    }
-  }, [ENV_TYPE])
+  const appTitle = useMemo(
+    () => `${formatMessage({ id: 'header.title', defaultMessage: 'Screen Geometry' })} [${ENV_TYPE}]`,
+    [ENV_TYPE, formatMessage]
+  )
 
   return (
     <header className='bg-header p-4 text-header-foreground shadow-md'>

@@ -12,9 +12,9 @@ export const LanguageSwitcher = () => {
         <SelectValue placeholder='Language'>{locale.toUpperCase()}</SelectValue>
       </SelectTrigger>
       <SelectContent palette={'secondary'}>
-        {Object.entries(supportedlocales).map(([key, label]) => (
+        {Object.entries(supportedlocales).map(([key, value]) => (
           <SelectItem palette={'secondary'} value={key} key={key}>
-            {label}
+            {value.label}
           </SelectItem>
         ))}
       </SelectContent>

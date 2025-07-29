@@ -89,10 +89,9 @@ export const Help = () => {
                 </div>
                 <div className='flex flex-col items-center gap-2 py-6'>
                   <FormattedMessage
-                    id='help.emptytable.populatelist'
+                    id='screens.emptytable.populatelist'
                     defaultMessage='Click here to populate default list'
                   />
-                  <div>Click here to populate default list</div>
                   <Button className='w-40' mode='outline' disabled={false}>
                     <FormattedMessage id='help.emptytable.loadbutton' defaultMessage='Load Screens' />
                   </Button>

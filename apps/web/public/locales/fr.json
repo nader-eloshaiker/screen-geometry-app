@@ -37,7 +37,7 @@
   "help.emptytable.loadbutton": "Charger les écrans",
   "help.emptytable.nolistfound": "Aucune liste trouvée",
   "help.emptytable.p1": "Lorsque vous accédez à la page des écrans pour la première fois, vous serez accueilli par un tableau vide et la possibilité d'importer une liste d'écrans par défaut",
-  "help.emptytable.populatelist": "Cliquez ici pour remplir la liste par défaut",
+  "screens.emptytable.populatelist": "Cliquez ici pour remplir la liste par défaut",
   "help.emptytable.sidenote": "Remarque : Vous pouvez également créer un nouvel écran en cliquant sur le bouton dans le coin supérieur droit",
   "help.fulltable.comparison": "Une fois que les écrans qui vous intéressent sont présents dans votre tableau, vous remarquerez un panneau en dessous qui superpose leurs tailles physiques pour une comparaison facile. Déplacer votre souris sur le tableau mettra en évidence le panneau correspondant et vice versa.",
   "help.gettingstarted.heading": "Premiers pas",

@@ -41,7 +41,7 @@ export const Home = () => {
               id='home.content.callToAction'
               defaultMessage='Click <cta></cta> to start your journey into finding the right screen.'
               values={{
-                cta: (children) => (
+                cta: (_children) => (
                   <span className='mx-2'>
                     <NavigationLink
                       id='home-screen-link'
@@ -49,7 +49,7 @@ export const Home = () => {
                       // mode='ghost'
                       to='/screens'
                     >
-                      {children}
+                      <FormattedMessage id='header.large.screens' defaultMessage='Screens' />
                     </NavigationLink>
                   </span>
                 ),

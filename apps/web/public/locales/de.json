@@ -37,7 +37,7 @@
   "help.emptytable.loadbutton": "Bildschirme laden",
   "help.emptytable.nolistfound": "Keine Liste gefunden",
   "help.emptytable.p1": "Wenn Sie zum ersten Mal zur Bildschirmseite navigieren, werden Sie mit einer leeren Tabelle und der Möglichkeit begrüßt, eine Standardliste von Bildschirmen zu importieren",
-  "help.emptytable.populatelist": "Klicken Sie hier, um die Standardliste zu füllen",
+  "screens.emptytable.populatelist": "Klicken Sie hier, um die Standardliste zu füllen",
   "help.emptytable.sidenote": "Randnotiz: Sie können auch einen neuen Bildschirm erstellen, indem Sie auf die Schaltfläche in der oberen rechten Ecke klicken",
   "help.fulltable.comparison": "Sobald die Bildschirme, an denen Sie interessiert sind, in Ihrer Tabelle vorhanden sind, werden Sie ein Bedienfeld darunter bemerken, das ihre physischen Größen zur einfachen Vergleich überlagert. Wenn Sie Ihre Maus über die Tabelle bewegen, wird das entsprechende Bedienfeld hervorgehoben und umgekehrt.",
   "help.gettingstarted.heading": "Erste Schritte",

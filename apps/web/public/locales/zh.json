@@ -37,7 +37,7 @@
   "help.emptytable.loadbutton": "加载屏幕",
   "help.emptytable.nolistfound": "未找到列表",
   "help.emptytable.p1": "首次导航到屏幕页面时，你将看到一个空表，并可以选择导入默认屏幕列表",
-  "help.emptytable.populatelist": "点击此处填充默认列表",
+  "screens.emptytable.populatelist": "点击此处填充默认列表",
   "help.emptytable.sidenote": "旁注：你还可以通过单击右上角的按钮来创建新屏幕",
   "help.fulltable.comparison": "一旦你感兴趣的屏幕出现在表格中，你会注意到下方有一个面板，它会覆盖它们的物理尺寸以便于比较。将鼠标移到表格上会突出显示相应的面板，反之亦然。",
   "help.gettingstarted.heading": "入门",

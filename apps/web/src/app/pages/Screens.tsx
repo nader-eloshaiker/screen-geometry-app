@@ -139,7 +139,12 @@ export const Screens = () => {
           <div className='flex h-full flex-col items-center'>
             <div className='py-4 text-xl text-primary-label'>No List Found</div>
             <div className='flex flex-col items-center gap-2 py-6'>
-              <div>Click here to populate default list</div>
+              <div>
+                <FormattedMessage
+                  id='screens.emptytable.populatelist'
+                  defaultMessage='Click here to populate default list'
+                />
+              </div>
               <Button className='w-40' mode='outline' onClick={onLoadDefault} disabled={isCreateListLoading}>
                 {isCreateListLoading ? (
                   <Loader2 data-testid='ButtonSpinner' className='animate-spin' />

@@ -151,6 +151,7 @@ export const ScreenForm = ({ setOpen, editId, isEditLoading, editScreen, selecte
               control={control}
               title={formatMessage({ id: 'screen.form.size', defaultMessage: 'Screen Size' })}
               type='number'
+              dir='auto'
               endAdornment='in'
               autoComplete='off'
               placeholder='27'
@@ -163,6 +164,7 @@ export const ScreenForm = ({ setOpen, editId, isEditLoading, editScreen, selecte
               control={control}
               title={formatMessage({ id: 'screen.form.aspect', defaultMessage: 'Aspect Ratio' })}
               type='text'
+              dir='auto'
               autoComplete='off'
               placeholder='16:9'
               isLoading={isEditLoading}
@@ -176,6 +178,7 @@ export const ScreenForm = ({ setOpen, editId, isEditLoading, editScreen, selecte
               control={control}
               title={formatMessage({ id: 'screen.form.horizontal', defaultMessage: 'Horizontal Res' })}
               type='number'
+              dir='auto'
               endAdornment='px'
               autoComplete='off'
               placeholder='3840'
@@ -188,6 +191,7 @@ export const ScreenForm = ({ setOpen, editId, isEditLoading, editScreen, selecte
               control={control}
               title={formatMessage({ id: 'screen.form.vertical', defaultMessage: 'Vertical Res' })}
               type='number'
+              dir='auto'
               endAdornment='px'
               autoComplete='off'
               placeholder='2160'
@@ -200,7 +204,7 @@ export const ScreenForm = ({ setOpen, editId, isEditLoading, editScreen, selecte
             <div className='grid grid-cols-2 gap-6'>
               <ColorField
                 formKey={ScreenDataEnum.lightColor}
-                title={formatMessage({ id: 'screen.form.light', defaultMessage: 'Light' })}
+                title={formatMessage({ id: 'screen.form.light', defaultMessage: 'Light Color' })}
                 mode={LightMode}
                 isLoading={isEditLoading}
                 control={control}
@@ -208,7 +212,7 @@ export const ScreenForm = ({ setOpen, editId, isEditLoading, editScreen, selecte
               />
               <ColorField
                 formKey={ScreenDataEnum.darkColor}
-                title={formatMessage({ id: 'screen.form.dark', defaultMessage: 'Dark' })}
+                title={formatMessage({ id: 'screen.form.dark', defaultMessage: 'Dark Color' })}
                 mode={DarkMode}
                 isLoading={isEditLoading}
                 control={control}
@@ -244,7 +248,6 @@ export const ScreenForm = ({ setOpen, editId, isEditLoading, editScreen, selecte
                 disabled={isCreateLoading || isUpdateLoading || isEditLoading}
                 onClick={onClose}
               >
-                {' '}
                 <FormattedMessage id='screens.form.close' defaultMessage='Close' />
               </Button>
               <Button

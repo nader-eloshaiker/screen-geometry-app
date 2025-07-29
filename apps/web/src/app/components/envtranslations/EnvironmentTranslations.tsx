@@ -5,12 +5,20 @@ import { Translations, useGetTranslations } from '@screengeometry/lib-api/spec'
 import { usePageLoader } from '@screengeometry/lib-ui/hooks/pageloader'
 import { useEffect, useState } from 'react'
 import { IntlProvider } from 'react-intl'
-import { defaultLocale, getBrowserLocales, supportedlocalesArray } from './LocaleHelper'
+import { defaultLocale, getBrowserLocales, supportedlocales, supportedlocalesArray } from './LocaleHelper'
 
-export const LocaleStorageKey = 'locale-override'
+const LocaleStorageKey = 'locale-override'
 const matchedLocale = match(getBrowserLocales(), supportedlocalesArray, defaultLocale)
 
-export const TranslationsEnvironment = ({
+const getTextDirection = () => {
+  return document.dir ?? 'ltr'
+}
+
+const setTextDirection = (dir: 'ltr' | 'rtl') => {
+  document.dir = dir
+}
+
+const TranslationsEnvironment = ({
   children,
   translationsReadyKey,
 }: React.PropsWithChildren & { translationsReadyKey: string; override?: boolean }) => {
@@ -43,6 +51,7 @@ export const TranslationsEnvironment = ({
     if (isFetched && data) {
       setMessages(data)
       setOverrideLocale(locale)
+      setTextDirection(supportedlocales[locale].dir)
     }
   }, [data, isFetched, locale, setOverrideLocale])
 
@@ -54,3 +63,5 @@ export const TranslationsEnvironment = ({
     </EnvTranslateContext.Provider>
   )
 }
+
+export { getTextDirection, setTextDirection, TranslationsEnvironment }

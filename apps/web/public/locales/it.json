@@ -37,7 +37,7 @@
   "help.emptytable.loadbutton": "Carica schermi",
   "help.emptytable.nolistfound": "Nessuna lista trovata",
   "help.emptytable.p1": "Quando navighi per la prima volta alla pagina degli schermi, sarai accolto da una tabella vuota e dalla possibilità di importare un elenco predefinito di schermi",
-  "help.emptytable.populatelist": "Clicca qui per popolare l'elenco predefinito",
+  "screens.emptytable.populatelist": "Clicca qui per popolare l'elenco predefinito",
   "help.emptytable.sidenote": "Nota a margine: Puoi anche creare una nuova schermata cliccando sul pulsante nell'angolo in alto a destra",
   "help.fulltable.comparison": "Una volta che gli schermi che ti interessano sono presenti nella tua tabella, noterai un pannello sottostante che sovrappone le loro dimensioni fisiche per un facile confronto. Spostando il mouse sulla tabella evidenzierà il pannello corrispondente e viceversa.",
   "help.gettingstarted.heading": "Iniziare",

@@ -37,7 +37,7 @@
   "help.emptytable.loadbutton": "Cargar pantallas",
   "help.emptytable.nolistfound": "No se encontró ninguna lista",
   "help.emptytable.p1": "Cuando navegues a la página de pantallas por primera vez, te encontrarás con una tabla vacía y la posibilidad de importar una lista predeterminada de pantallas",
-  "help.emptytable.populatelist": "Haz clic aquí para poblar la lista predeterminada",
+  "screens.emptytable.populatelist": "Haz clic aquí para poblar la lista predeterminada",
   "help.emptytable.sidenote": "Nota al margen: También puedes crear una nueva pantalla haciendo clic en el botón en la esquina superior derecha",
   "help.fulltable.comparison": "Una vez que las pantallas que te interesan estén presentes en tu tabla, notarás un panel debajo que superpone sus tamaños físicos para facilitar la comparación. Mover el ratón sobre la tabla resaltará el panel correspondiente y viceversa.",
   "help.gettingstarted.heading": "Primeros pasos",

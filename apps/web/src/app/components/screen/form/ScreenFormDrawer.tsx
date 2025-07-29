@@ -12,6 +12,7 @@ import {
 } from '@screengeometry/lib-ui/sheet'
 import { Dispatch, useEffect, useState } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
+import { getTextDirection } from '../../envtranslations/EnvironmentTranslations'
 import { ScreenSelector } from '../screenselector/ScreenSelector'
 import { ScreenForm } from './ScreenForm'
 import { FormSubmitType } from './ScreenFormSchema'
@@ -40,6 +41,7 @@ const ScreenFormDrawer = ({ open, setOpen, mode, id: editId = '', children }: Pr
   const [selectedItem, setSelectedItem] = useState<SearchItem>()
 
   const { formatMessage } = useIntl()
+  const sheetDir = getTextDirection() === 'ltr' ? 'right' : 'left'
 
   useEffect(() => {
     if (screenItemResponse && editId && !isScreenItemLoading) {
@@ -54,16 +56,16 @@ const ScreenFormDrawer = ({ open, setOpen, mode, id: editId = '', children }: Pr
   return (
     <Sheet open={open} onOpenChange={setOpen}>
       <SheetTrigger asChild>{children}</SheetTrigger>
-      <SheetContent side='right' showCloseButton={false} className='flex flex-col overflow-auto'>
+      <SheetContent side={sheetDir} showCloseButton={false} className='flex flex-col overflow-auto'>
         <SheetHeader>
-          <SheetTitle>
+          <SheetTitle className='text-start'>
             {editId ? (
               <FormattedMessage id='screens.form.titleEdit' defaultMessage='Edit Screen' />
             ) : (
               <FormattedMessage id='screens.form.titleCreate' defaultMessage='Create Screen' />
             )}
           </SheetTitle>
-          <SheetDescription>
+          <SheetDescription className='text-start'>
             {editId ? (
               <FormattedMessage id='screens.form.updateDescripton' defaultMessage='Make changes to your Screen here.' />
             ) : (

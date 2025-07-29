@@ -111,7 +111,7 @@
   "help.emptytable.p1": {
     "defaultMessage": "When you navigate to the screens page for the first time, you will be greated with an empty table and the ability to import a default list of screens"
   },
-  "help.emptytable.populatelist": {
+  "screens.emptytable.populatelist": {
     "defaultMessage": "Click here to populate default list"
   },
   "help.emptytable.sidenote": {
