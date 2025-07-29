@@ -1,5 +1,16 @@
 # Changelog
 
+## [4.0.0](https://github.com/nader-eloshaiker/screen-geometry-app/compare/v3.2.2...v4.0.0) (2025-07-29)
+
+
+### ⚠ BREAKING CHANGES
+
+* **web:** add translations support ([#542](https://github.com/nader-eloshaiker/screen-geometry-app/issues/542))
+
+### Features
+
+* **web:** add translations support ([#542](https://github.com/nader-eloshaiker/screen-geometry-app/issues/542)) ([7371c24](https://github.com/nader-eloshaiker/screen-geometry-app/commit/7371c24295307825c8a81f2dd0c0aba4d2ae3a0b))
+
 ## [3.2.2](https://github.com/nader-eloshaiker/screen-geometry-app/compare/v3.2.1...v3.2.2) (2025-07-23)
 
 
