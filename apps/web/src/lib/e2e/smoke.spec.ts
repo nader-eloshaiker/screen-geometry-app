@@ -34,7 +34,9 @@ test('Smoke Test Screens Page', async ({ page }) => {
   await expect(tableOriginal).toContainText('27"')
 
   // Delete row and check for count
-  await page.getByRole('row', { name: '27" 16:9 24" x 13" 3840 x 2160' }).getByTitle('Delete').click()
+  const deleteButton = page.getByRole('row', { name: '27" 16:9 24" x 13" 3,840 x 2,160' }).getByRole('button').nth(1)
+  await deleteButton.click()
+
   // Check for table data
   const tableDeletedRow = page.getByTestId('ScreenTable')
   await expect(tableDeletedRow.locator('tbody > tr')).toHaveCount(5)
@@ -52,7 +54,8 @@ test('Smoke Test Screens Page', async ({ page }) => {
   await expect(tableAddedRow.locator('tbody > tr')).toHaveCount(6)
 
   // Edit row and check for updated row
-  await page.getByRole('row', { name: '32" 16:9 28" x 16" 3840 x 2160' }).getByTitle('Edit').click()
+  const editButton = page.getByRole('row', { name: '32" 16:9 28" x 16" 3,840 x 2,160' }).getByRole('button').first()
+  await editButton.click()
   await page.getByLabel('Screen Size').click()
   await page.getByLabel('Screen Size').dblclick()
   await page.getByLabel('Screen Size').click()
@@ -69,7 +72,7 @@ test('Smoke Test Screens Page', async ({ page }) => {
    * Test for Screen Panel
    **/
 
-  const showCheckbox = page.getByRole('row', { name: '49" 32:9 47" x 13" 5120 x 1440' }).getByTitle('Show')
+  const showCheckbox = page.getByRole('row', { name: '49" 32:9 47" x 13" 5,120 x 1,440' }).getByRole('checkbox')
 
   // Check if panel is visible
   await expect(showCheckbox).toBeChecked()
