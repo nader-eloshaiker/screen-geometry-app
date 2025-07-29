@@ -1,4 +1,5 @@
 import { renderWithUserEvents } from '@/lib/support/test/utils/RenderWithUserEvents'
+import { TestEnvironment } from '@/lib/support/test/utils/TestEnvironment'
 import { toScreenItemRender } from '@/lib/utils'
 import { getGetScreenResponseMock } from '@screengeometry/lib-api/spec'
 import { ScreenPanel } from './ScreenPanel'
@@ -7,7 +8,9 @@ describe('#ScreenPanel', () => {
   const screenItem = toScreenItemRender(getGetScreenResponseMock().item)
 
   test('render screen panel component with a table representing the pixel density when selected', async () => {
-    const test = await renderWithUserEvents(<ScreenPanel screen={screenItem} highlighted={screenItem} />)
+    const test = await renderWithUserEvents(<ScreenPanel screen={screenItem} highlighted={screenItem} />, {
+      wrapper: TestEnvironment,
+    })
 
     const tableElement = test.getByRole('table')
     expect(tableElement).toBeInTheDocument()
@@ -20,7 +23,9 @@ describe('#ScreenPanel', () => {
   })
 
   test('render screen panel component with NO table representing the pixel density when NOT selected', async () => {
-    const test = await renderWithUserEvents(<ScreenPanel screen={screenItem} highlighted={undefined} />)
+    const test = await renderWithUserEvents(<ScreenPanel screen={screenItem} highlighted={undefined} />, {
+      wrapper: TestEnvironment,
+    })
 
     const tableElement = test.container.querySelector('table')
     expect(tableElement).not.toBeInTheDocument()

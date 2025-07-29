@@ -50,7 +50,7 @@ describe('#EnvironmentTranslations', () => {
       )
 
       expect(test.getByText('Child Component')).toBeInTheDocument()
-      expect(useGetTranslationSpy).toHaveBeenCalledWith('en')
+      expect(useGetTranslationSpy).toHaveBeenCalledWith('en-US')
     })
 
     it('throws an error if there is an error fetching translation data', () => {
