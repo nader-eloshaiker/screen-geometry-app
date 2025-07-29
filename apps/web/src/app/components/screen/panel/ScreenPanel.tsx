@@ -4,6 +4,7 @@ import { ScreenItemRender } from '@/app/models/screenItemRender'
 import { cn } from '@/lib/utils'
 import { ScreenColor } from '@screengeometry/lib-api/spec'
 import { Dispatch, SetStateAction, useEffect, useState } from 'react'
+import { useIntl } from 'react-intl'
 import styled from 'styled-components'
 
 const Panel = styled.div<{ $width: number; $height: number; $color?: string }>`
@@ -49,6 +50,7 @@ export const ScreenPanel = ({ screen, highlighted = undefined, setHighLighted = 
     title: '',
   })
   const [themeMode] = useTheme()
+  const { formatNumber } = useIntl()
 
   useEffect(() => {
     setSelected(screen.id === highlighted?.id)
@@ -61,9 +63,9 @@ export const ScreenPanel = ({ screen, highlighted = undefined, setHighLighted = 
       bgColor: themeMode === DarkMode ? `${screen.color.lightColor}45` : `${screen.color.darkColor}45`,
       vPixelCount: Math.round((screen.data.vRes ?? 1) / 100),
       hPixelCount: Math.round((screen.data.hRes ?? 1) / 100),
-      title: `${screen.data.diagonalSize.toString()}" ${screen.data.aspectRatio} ${screen.data.hRes} x ${screen.data.vRes}`,
+      title: `${formatNumber(screen.data.diagonalSize)}" ${formatNumber(screen.specs.hAspectRatio)}:${formatNumber(screen.specs.vAspectRatio)} ${formatNumber(screen.data.hRes)} x ${formatNumber(screen.data.vRes)}`,
     })
-  }, [screen, selected, themeMode])
+  }, [formatNumber, screen, selected, themeMode])
 
   return (
     <Panel
