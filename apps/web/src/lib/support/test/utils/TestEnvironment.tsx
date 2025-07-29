@@ -1,4 +1,4 @@
-import { EnvConfigProvider } from '@/app/hooks/envConfig/EnvConfigProvider'
+import { EnvConfigProvider } from '@/app/hooks/config/EnvConfigProvider'
 import { QueryProvider } from '@/app/hooks/query/QueryProvider'
 import { serverAxiosInstance } from '@screengeometry/lib-api/apiClient'
 import { getGetConfigResponseMock } from '@screengeometry/lib-api/spec'

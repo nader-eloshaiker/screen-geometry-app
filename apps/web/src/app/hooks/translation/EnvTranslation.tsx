@@ -1,4 +1,4 @@
-import { EnvTranslationContext } from '@/app/hooks/envTranslation/EnvTranslationContext'
+import { EnvTranslationContext } from '@/app/hooks/translation/EnvTranslationContext'
 import useLocalStorage from '@/app/hooks/useLocalStorage'
 import { match } from '@formatjs/intl-localematcher'
 import { Translations, useGetTranslations } from '@screengeometry/lib-api/spec'

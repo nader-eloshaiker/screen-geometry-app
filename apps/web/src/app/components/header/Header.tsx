@@ -1,5 +1,5 @@
 import ThemeToggle from '@/app/components/theme/ThemeToggle'
-import { useEnvConfig } from '@/app/hooks/envConfig/useEnvConfig'
+import { useEnvConfig } from '@/app/hooks/config/useEnvConfig'
 import { cn } from '@/lib/utils'
 import { Button } from '@screengeometry/lib-ui/button'
 import {
