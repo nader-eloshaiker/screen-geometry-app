@@ -41,33 +41,43 @@ const TestRouter = ({ children }: React.PropsWithChildren) => {
 
   return (
     <TestEnvironment>
-      <RouterProvider<typeof router> router={router} />{' '}
+      <RouterProvider<typeof router> router={router} />
     </TestEnvironment>
   )
 }
 
-// Helper function to render with TanStack Router
+const configMock = vi.hoisted(() => ({
+  ENV_TYPE: 'dev',
+  SERVER_API_URL: 'https://dev.api.screengeometry.com',
+  GA_TRACKING_ID: 'G-111111111',
+}))
+
 describe('#Header', () => {
-  vi.mock('./HeaderNavLarge', () => ({
-    HeaderNavLarge: () => <div data-testid='mocked-header-nav-large'>HeaderNavLarge</div>,
-  }))
+  beforeEach(() => {
+    vi.mock('@/app/hooks/config/useEnvConfig', () => ({
+      useEnvConfig: vi.fn().mockReturnValue(configMock),
+    }))
 
-  vi.mock('./HeaderNavSmall', () => ({
-    HeaderNavSmall: ({ setOpen }: { setOpen: (open: boolean) => void }) => (
-      <div data-testid='mocked-header-nav-small' onClick={() => setOpen(false)}>
-        HeaderNavSmall
-      </div>
-    ),
-  }))
+    vi.mock('./HeaderNavLarge', () => ({
+      HeaderNavLarge: () => <div data-testid='mocked-header-nav-large'>HeaderNavLarge</div>,
+    }))
 
-  vi.mock('@/app/components/theme/ThemeToggle', () => ({
-    default: ({ id, className }: { id: string; className?: string }) => (
-      <button data-testid={`mocked-theme-toggle-${id}`} className={className}>
-        Theme Toggle Button
-      </button>
-    ),
-  }))
+    vi.mock('./HeaderNavSmall', () => ({
+      HeaderNavSmall: ({ setOpen }: { setOpen: (open: boolean) => void }) => (
+        <div data-testid='mocked-header-nav-small' onClick={() => setOpen(false)}>
+          HeaderNavSmall
+        </div>
+      ),
+    }))
 
+    vi.mock('@/app/components/theme/ThemeToggle', () => ({
+      default: ({ id, className }: { id: string; className?: string }) => (
+        <button data-testid={`mocked-theme-toggle-${id}`} className={className}>
+          Theme Toggle Button
+        </button>
+      ),
+    }))
+  })
   // beforeAll(() => {
   //   vi.stubEnv('VITE_APP_TITLE', 'Screen Geometry App')
   // })
@@ -76,11 +86,20 @@ describe('#Header', () => {
   //   vi.unstubAllEnvs()
   // })
 
-  it('renders correctly with app title', async () => {
+  it('renders correctly with DEV app title', async () => {
     const test = await renderWithUserEvents(<Header />, { wrapper: TestRouter })
 
     // Check if the app title is rendered
     expect(test.getAllByText('Screen Geometry [dev]')).toHaveLength(2)
+  })
+
+  it('renders correctly with PROD app title', async () => {
+    configMock.ENV_TYPE = 'prod'
+    const test = await renderWithUserEvents(<Header />, { wrapper: TestRouter })
+
+    // Check if the app title is rendered
+    expect(test.getAllByText('Screen Geometry')).toHaveLength(2)
+    configMock.ENV_TYPE = 'dev'
   })
 
   it('renders small header on mobile view', async () => {
