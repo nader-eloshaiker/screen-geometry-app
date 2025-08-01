@@ -38,7 +38,7 @@ export default function Header() {
 
   const appTitle = useMemo(
     () =>
-      `${formatMessage({ id: 'header.title', defaultMessage: 'Screen Geometry' })}${ENV_TYPE === 'prod' ? '' : ` (${ENV_TYPE})`}`,
+      `${formatMessage({ id: 'header.title', defaultMessage: 'Screen Geometry' })}${ENV_TYPE === 'prod' ? '' : ` [${ENV_TYPE}]`}`,
     [ENV_TYPE, formatMessage]
   )
 
