@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.0.1](https://github.com/nader-eloshaiker/screen-geometry-app/compare/v4.0.0...v4.0.1) (2025-08-01)
+
+
+### Bug Fixes
+
+* **web:** prod heading ([#545](https://github.com/nader-eloshaiker/screen-geometry-app/issues/545)) ([8a21bf0](https://github.com/nader-eloshaiker/screen-geometry-app/commit/8a21bf0fd0b786a8c0868edbfe4dd96d755f06b9))
+
 ## [4.0.0](https://github.com/nader-eloshaiker/screen-geometry-app/compare/v3.2.2...v4.0.0) (2025-07-29)
 
 
