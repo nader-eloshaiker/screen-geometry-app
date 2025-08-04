@@ -93,7 +93,7 @@
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^16.1.0",
     "@testing-library/user-event": "^14.6.1",
-    "@types/node": "^20.14.9",
+    "@types/node": "^24.2.0",
     "@types/react": "catalog:react18",
     "@types/react-dom": "catalog:react18",
     "@typescript-eslint/eslint-plugin": "^8.26.1",
