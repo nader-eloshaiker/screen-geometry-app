@@ -286,7 +286,10 @@ describe('#ScreenFormDrawer', () => {
       await waitFor(() => expect(mswObj.apiEventStack.length).toBe(2))
       expect(mswObj.apiEventStack[1]).toContain('/v1/screen')
 
-      waitFor(() => expect(test.queryByText('Create')).not.toBeEnabled())
+      await waitFor(() => {
+        expect(test.queryByText('Create')).not.toBeInTheDocument()
+        expect(test.queryByText('Screen specifications has been added to list')).toBeInTheDocument()
+      })
     })
   })
 })
