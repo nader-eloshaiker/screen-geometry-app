@@ -1,7 +1,7 @@
 import { StateTable } from '@/storybook/StateTable'
-import type { Meta, StoryObj } from '@storybook/react'
-import { fn } from '@storybook/test'
+import type { Meta, StoryObj } from '@storybook/react-vite'
 import { ThumbsUp } from 'lucide-react'
+import { fn } from 'storybook/test'
 import { Button } from './Button'
 import { TButtonMode, TButtonPalette, TButtonSize } from './Button.variants'
 

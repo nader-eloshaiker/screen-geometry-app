@@ -1,9 +1,9 @@
 import { StateTable } from '@/storybook/StateTable'
 import { TRestProps } from '@/types/types'
 import { ToggleGroupSingleProps } from '@radix-ui/react-toggle-group'
-import type { Meta, StoryObj } from '@storybook/react'
-import { fn } from '@storybook/test'
+import type { Meta, StoryObj } from '@storybook/react-vite'
 import type { VariantProps } from 'class-variance-authority'
+import { fn } from 'storybook/test'
 import { TToggleMode, TTogglePalette, TToggleSize, ToggleVariants } from '../toggle'
 import { ToggleGroup, ToggleGroupItem } from './ToggleGroup'
 
