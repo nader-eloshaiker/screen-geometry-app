@@ -1,6 +1,6 @@
 import { StateTable } from '@/storybook/StateTable'
-import type { Meta, StoryObj } from '@storybook/react'
-import { fn } from '@storybook/test'
+import type { Meta, StoryObj } from '@storybook/react-vite'
+import { fn } from 'storybook/test'
 import { Label } from '../label'
 import { Input } from './Input'
 import { TInputVariantsPalette } from './Input.variants'

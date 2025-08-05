@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react'
+import type { Meta, StoryObj } from '@storybook/react-vite'
 import { VariantProps } from 'class-variance-authority'
 import { useEffect } from 'react'
 import { Toast, ToastAction, ToastActionElement } from './Toast'

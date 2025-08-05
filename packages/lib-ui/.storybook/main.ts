@@ -13,14 +13,13 @@ const coverageConfig: AddonOptionsVite = {
 const config: StorybookConfig = {
   stories: ['../src/**/*.stories.@(js|jsx|mjs|ts|tsx)'],
   addons: [
-    '@storybook/addon-essentials',
-    '@storybook/addon-interactions',
     '@storybook/addon-themes',
     'storybook-addon-pseudo-states',
     {
       name: '@storybook/addon-coverage',
       options: coverageConfig,
     },
+    '@storybook/addon-docs',
   ],
   framework: {
     name: '@storybook/react-vite',

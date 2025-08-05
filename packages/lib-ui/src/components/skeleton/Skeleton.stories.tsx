@@ -1,5 +1,5 @@
 import { StateTable } from '@/storybook/StateTable'
-import type { Meta, StoryObj } from '@storybook/react'
+import type { Meta, StoryObj } from '@storybook/react-vite'
 import { Skeleton } from './Skeleton'
 import { TSkeletonDimension, TSkeletonMode } from './Skeleton.variants'
 

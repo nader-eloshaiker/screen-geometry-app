@@ -1,7 +1,7 @@
 import { StateTable } from '@/storybook/StateTable'
-import type { Meta, StoryObj } from '@storybook/react'
-import { fn } from '@storybook/test'
+import type { Meta, StoryObj } from '@storybook/react-vite'
 import { Italic } from 'lucide-react'
+import { fn } from 'storybook/test'
 import { Toggle } from './Toggle'
 import { TToggleMode, TTogglePalette, TToggleSize } from './Toggle.variants'
 
