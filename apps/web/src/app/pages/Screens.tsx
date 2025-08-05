@@ -20,7 +20,7 @@ import { Label } from '@screengeometry/lib-ui/label'
 import { Skeleton } from '@screengeometry/lib-ui/skeleton'
 import { keepPreviousData } from '@tanstack/react-query'
 import { Loader2 } from 'lucide-react'
-import { useCallback, useEffect, useRef, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import ReactGA from 'react-ga4'
 import { Helmet } from 'react-helmet-async'
 import { FormattedMessage } from 'react-intl'
@@ -31,8 +31,7 @@ import { useDeleteScreenEffect } from '../hooks/api/useDeleteScreenEffect'
 import { useShowScreenEffect } from '../hooks/api/useShowScreenEffect'
 
 export const Screens = () => {
-  const divSizeRef = useRef<HTMLDivElement>(null)
-  const { width } = useElementSize(divSizeRef)
+  const [setRef, { width }] = useElementSize()
   const {
     state: { screens },
   } = useScreenContext()
@@ -146,7 +145,7 @@ export const Screens = () => {
       </Helmet>
 
       <div className='flex flex-1 flex-col gap-10'>
-        <div className='flex flex-col items-center gap-4 md:flex-row md:justify-between' ref={divSizeRef}>
+        <div className='flex flex-col items-center gap-4 md:flex-row md:justify-between' ref={setRef}>
           <Label palette='primary' className='text-xl'>
             <FormattedMessage id='screens.specs.title' defaultMessage='Screen Specs' />
           </Label>

@@ -5,7 +5,6 @@ import { initMSW } from '@/lib/serviceworker/NodeServiceWorker'
 import { screenInputFixture } from '@/lib/support/test/fixtures/ScreenFixtures'
 import { renderWithUserEvents } from '@/lib/support/test/utils/RenderWithUserEvents'
 import { TestEnvironment } from '@/lib/support/test/utils/TestEnvironment'
-import { useElementSizeMock } from '@/lib/ui/hooks/useElementSize.mock'
 import { toScreenItemRender, transformScreenInput } from '@/lib/utils'
 import { getScreenListServiceMock, getScreenServiceMock, getSearchServiceMock } from '@screengeometry/lib-api/spec'
 import { Toaster } from '@screengeometry/lib-ui/toaster'
@@ -13,6 +12,12 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { render, waitFor } from '@testing-library/react'
 import { act, useState } from 'react'
 import { FormModeTypes, ScreenFormDrawer } from './ScreenFormDrawer'
+
+vi.mock('@/lib/ui/hooks/useElementSize', () => ({
+  __esModule: true,
+  useElementSize: () => [() => {}, { width: 1024, height: 1024 }],
+}))
+
 const ListComponent = () => {
   const {
     state: { screens },
@@ -75,7 +80,6 @@ describe('#ScreenFormDrawer', () => {
   })
 
   beforeEach(() => {
-    useElementSizeMock()
     mswObj.reset()
   })
 

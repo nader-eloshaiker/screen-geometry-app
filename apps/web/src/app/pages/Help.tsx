@@ -10,7 +10,7 @@ import { Dimensions } from '@screengeometry/lib-api/internal'
 import { Button } from '@screengeometry/lib-ui/button'
 import { Label } from '@screengeometry/lib-ui/label'
 import { Pencil, X } from 'lucide-react'
-import { useMemo, useRef } from 'react'
+import { useMemo } from 'react'
 import { Helmet } from 'react-helmet-async'
 import { FormattedMessage } from 'react-intl'
 import tw from 'tailwind-styled-components'
@@ -34,8 +34,7 @@ const Heading = tw(Label)`
 `
 
 export const Help = () => {
-  const divSizeRef = useRef<HTMLDivElement>(null)
-  const { width } = useElementSize(divSizeRef)
+  const [setRef, { width }] = useElementSize()
 
   const { fullList, smallList, invisibleList, maxPanelSize } = useMemo(() => {
     const fullList = normaliseScreenRender(
@@ -133,10 +132,7 @@ export const Help = () => {
             />
           </Paragraph>
           <Diagram>
-            <div
-              ref={divSizeRef}
-              className='flex flex-col gap-4 rounded-lg border-2 border-primary-border p-6 shadow-lg'
-            >
+            <div ref={setRef} className='flex flex-col gap-4 rounded-lg border-2 border-primary-border p-6 shadow-lg'>
               <ScreenTable
                 className='pointer-events-none'
                 screens={smallList}

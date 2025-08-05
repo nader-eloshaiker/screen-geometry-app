@@ -15,7 +15,7 @@ import { Label } from '@screengeometry/lib-ui/label'
 import { Popover, PopoverContent, PopoverTrigger } from '@screengeometry/lib-ui/popover'
 import parse from 'html-react-parser'
 import { Check, ChevronsUpDown } from 'lucide-react'
-import { Dispatch, SetStateAction, useEffect, useRef, useState } from 'react'
+import { Dispatch, SetStateAction, useEffect, useState } from 'react'
 import { FormattedMessage } from 'react-intl'
 
 type TProps = {
@@ -40,8 +40,7 @@ export const ScreenSelector = ({
   const [open, setOpen] = useState(false)
   const [searchTerm, setSearchTerm] = useState('')
   const debouncedValue = useDebounce(searchTerm, 500)
-  const elementRef = useRef<HTMLDivElement>(null)
-  const { width } = useElementSize(elementRef)
+  const [setRef, { width }] = useElementSize()
 
   useEffect(() => {
     onSearch(debouncedValue)
@@ -54,7 +53,7 @@ export const ScreenSelector = ({
   }, [open])
 
   return (
-    <div className='flex w-full flex-col gap-2 py-8' ref={elementRef}>
+    <div className='flex w-full flex-col gap-2 py-8' ref={setRef}>
       <Label palette='mono' htmlFor='searchList'>
         <FormattedMessage id='screens.selector.description' defaultMessage='Pre fill the form from list of Screens' />
       </Label>

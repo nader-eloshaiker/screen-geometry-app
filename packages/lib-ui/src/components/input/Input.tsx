@@ -1,19 +1,20 @@
 import * as React from 'react'
 
 import { VariantProps } from 'class-variance-authority'
+import { ReactNode } from 'react'
 import { cn } from '../../lib/utils'
 import { InputAdornmentVariants, InputVariants } from './Input.variants'
 
-type TAdornment = JSX.Element | string | number
+// type TAdornment = JSX.Element | string | number
 
 export interface AdornmentProps {
-  startAdornment?: TAdornment
-  endAdornment?: TAdornment
+  startAdornment?: ReactNode
+  endAdornment?: ReactNode
 }
 
 export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement>, VariantProps<typeof InputVariants> {
-  startAdornment?: TAdornment
-  endAdornment?: TAdornment
+  startAdornment?: ReactNode
+  endAdornment?: ReactNode
 }
 
 /*

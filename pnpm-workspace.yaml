@@ -10,7 +10,7 @@ catalog:
   "@tanstack/react-query": ^5.67.3
   "@tanstack/react-router": ^1.128.4
   "@tanstack/router-plugin": ^1.128.4
-  "@vitejs/plugin-react": ^4.3.4
+  "@vitejs/plugin-react": ^4.7.0
   "@vitest/coverage-istanbul": ^3.0.7
   "@vitest/ui": ^3.0.7
   concurrently: ^9.2.0
@@ -33,6 +33,17 @@ catalogs:
     react: ^18.3.1
     react-dom: ^18.3.1
     react-hook-form: ^7.54.2
+  react19:
+    "@types/react": ^19.1.9
+    "@types/react-dom": ^19.1.7
+    react: ^19.1.1
+    react-dom: ^19.1.1
+    react-hook-form: ^7.62.0
+  testing-library:
+    "@testing-library/react": ^16.3.0
+    "@testing-library/jest-dom": "^6.6.4"
+    "@testing-library/user-event": "^14.6.1"
+
   tailwindcss3:
     "@tailwindcss/typography": ^0.5.16
     autoprefixer: ^10.4.20

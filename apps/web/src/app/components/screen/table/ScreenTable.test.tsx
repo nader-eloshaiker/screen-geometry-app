@@ -6,7 +6,6 @@ import { Screens } from '@/app/pages/Screens'
 import { initMSW } from '@/lib/serviceworker/NodeServiceWorker'
 import { renderWithUserEvents } from '@/lib/support/test/utils/RenderWithUserEvents'
 import { TestEnvironment } from '@/lib/support/test/utils/TestEnvironment'
-import { useElementSizeMock } from '@/lib/ui/hooks/useElementSize.mock'
 import { normaliseScreenRender } from '@/lib/utils'
 import {
   getConfigurationMock,
@@ -20,6 +19,11 @@ import { waitFor } from '@testing-library/react'
 import { useState } from 'react'
 import { HelmetProvider } from 'react-helmet-async'
 import { ScreenTable } from './ScreenTable'
+
+vi.mock('@/lib/ui/hooks/useElementSize', () => ({
+  __esModule: true,
+  useElementSize: () => [() => {}, { width: 1024, height: 1024 }],
+}))
 
 const TestComponent = ({
   screens,
@@ -84,7 +88,6 @@ describe('#ScreenTable', () => {
   })
 
   beforeEach(() => {
-    useElementSizeMock()
     mswObj.reset()
   })
 
