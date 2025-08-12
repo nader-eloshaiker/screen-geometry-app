@@ -2,14 +2,13 @@
 import jsEslint from '@eslint/js'
 import pluginQuery from '@tanstack/eslint-plugin-query'
 import typescriptParser from '@typescript-eslint/parser'
-import eslintPluginImport from 'eslint-plugin-import'
+import eslintConfigPrettier from 'eslint-config-prettier/flat'
 import eslintPluginPrettierRecommended from 'eslint-plugin-prettier/recommended'
 import react from 'eslint-plugin-react'
 import { defineConfig } from 'eslint/config'
 import globals from 'globals/index.js'
 import tsEslint from 'typescript-eslint'
 
-import eslintConfigPrettier from 'eslint-config-prettier/flat'
 import reactHooks from 'eslint-plugin-react-hooks'
 import reactRefresh from 'eslint-plugin-react-refresh'
 
@@ -20,7 +19,6 @@ export default defineConfig([
   reactHooks.configs['recommended-latest'],
   reactRefresh.configs.recommended,
   ...pluginQuery.configs['flat/recommended'],
-  eslintConfigPrettier, // Must go last
   {
     ignores: ['node_modules/', 'dist/', 'src/generated/', 'coverage/'],
   },
@@ -29,7 +27,6 @@ export default defineConfig([
 
     plugins: {
       react,
-      import: eslintPluginImport,
       '@typescript-eslint': tsEslint.plugin,
     },
 
@@ -54,10 +51,6 @@ export default defineConfig([
     },
 
     settings: {
-      'import/resolver': {
-        typescript: {},
-      },
-
       react: {
         createClass: 'createReactClass',
         pragma: 'React',
@@ -110,4 +103,5 @@ export default defineConfig([
       ],
     },
   },
+  eslintConfigPrettier, // Must go last
 ])

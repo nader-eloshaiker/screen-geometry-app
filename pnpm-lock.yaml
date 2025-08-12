@@ -197,13 +197,13 @@ importers:
         specifier: ^10.1.1
         version: 10.1.5(eslint@9.30.1(jiti@1.21.7))
       eslint-plugin-import:
-        specifier: ^2.31.0
+        specifier: ^2.32.0
         version: 2.32.0(@typescript-eslint/parser@8.36.0(eslint@9.30.1(jiti@1.21.7))(typescript@5.6.3))(eslint@9.30.1(jiti@1.21.7))
       eslint-plugin-prettier:
         specifier: ^5.2.3
         version: 5.5.1(@types/eslint@9.6.1)(eslint-config-prettier@10.1.5(eslint@9.30.1(jiti@1.21.7)))(eslint@9.30.1(jiti@1.21.7))(prettier@3.6.2)
       eslint-plugin-react:
-        specifier: ^7.37.4
+        specifier: ^7.37.5
         version: 7.37.5(eslint@9.30.1(jiti@1.21.7))
       eslint-plugin-react-hooks:
         specifier: ^5.2.0
@@ -420,13 +420,13 @@ importers:
         specifier: ^10.1.1
         version: 10.1.5(eslint@9.30.1(jiti@1.21.7))
       eslint-plugin-import:
-        specifier: ^2.31.0
+        specifier: ^2.32.0
         version: 2.32.0(@typescript-eslint/parser@8.36.0(eslint@9.30.1(jiti@1.21.7))(typescript@5.6.3))(eslint@9.30.1(jiti@1.21.7))
       eslint-plugin-prettier:
         specifier: ^5.2.3
         version: 5.5.1(@types/eslint@9.6.1)(eslint-config-prettier@10.1.5(eslint@9.30.1(jiti@1.21.7)))(eslint@9.30.1(jiti@1.21.7))(prettier@3.6.2)
       eslint-plugin-react:
-        specifier: ^7.37.4
+        specifier: ^7.37.5
         version: 7.37.5(eslint@9.30.1(jiti@1.21.7))
       eslint-plugin-react-hooks:
         specifier: ^5.2.0
@@ -568,13 +568,13 @@ importers:
         specifier: ^10.1.1
         version: 10.1.5(eslint@9.30.1(jiti@1.21.7))
       eslint-plugin-import:
-        specifier: ^2.31.0
+        specifier: ^2.32.0
         version: 2.32.0(@typescript-eslint/parser@8.36.0(eslint@9.30.1(jiti@1.21.7))(typescript@5.6.3))(eslint@9.30.1(jiti@1.21.7))
       eslint-plugin-prettier:
         specifier: ^5.2.3
         version: 5.5.1(@types/eslint@9.6.1)(eslint-config-prettier@10.1.5(eslint@9.30.1(jiti@1.21.7)))(eslint@9.30.1(jiti@1.21.7))(prettier@3.6.2)
       eslint-plugin-react:
-        specifier: ^7.37.4
+        specifier: ^7.37.5
         version: 7.37.5(eslint@9.30.1(jiti@1.21.7))
       eslint-plugin-react-hooks:
         specifier: ^5.2.0
@@ -664,13 +664,13 @@ importers:
         specifier: ^10.1.1
         version: 10.1.5(eslint@9.30.1(jiti@1.21.7))
       eslint-plugin-import:
-        specifier: ^2.31.0
+        specifier: ^2.32.0
         version: 2.32.0(@typescript-eslint/parser@8.36.0(eslint@9.30.1(jiti@1.21.7))(typescript@5.6.3))(eslint@9.30.1(jiti@1.21.7))
       eslint-plugin-prettier:
         specifier: ^5.2.3
         version: 5.5.1(@types/eslint@9.6.1)(eslint-config-prettier@10.1.5(eslint@9.30.1(jiti@1.21.7)))(eslint@9.30.1(jiti@1.21.7))(prettier@3.6.2)
       eslint-plugin-react:
-        specifier: ^7.37.4
+        specifier: ^7.37.5
         version: 7.37.5(eslint@9.30.1(jiti@1.21.7))
       eslint-plugin-react-hooks:
         specifier: ^5.2.0
@@ -884,13 +884,13 @@ importers:
         specifier: ^10.1.1
         version: 10.1.5(eslint@9.30.1(jiti@1.21.7))
       eslint-plugin-import:
-        specifier: ^2.31.0
+        specifier: ^2.32.0
         version: 2.32.0(@typescript-eslint/parser@8.36.0(eslint@9.30.1(jiti@1.21.7))(typescript@5.6.3))(eslint@9.30.1(jiti@1.21.7))
       eslint-plugin-prettier:
         specifier: ^5.2.3
         version: 5.5.1(@types/eslint@9.6.1)(eslint-config-prettier@10.1.5(eslint@9.30.1(jiti@1.21.7)))(eslint@9.30.1(jiti@1.21.7))(prettier@3.6.2)
       eslint-plugin-react:
-        specifier: ^7.37.4
+        specifier: ^7.37.5
         version: 7.37.5(eslint@9.30.1(jiti@1.21.7))
       eslint-plugin-react-hooks:
         specifier: ^5.2.0

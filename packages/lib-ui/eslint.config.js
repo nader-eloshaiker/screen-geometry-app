@@ -1,7 +1,7 @@
 // import { FlatCompat } from '@eslint/eslintrc'
 import jsEslint from '@eslint/js'
 import typescriptParser from '@typescript-eslint/parser'
-import eslintPluginImport from 'eslint-plugin-import'
+import eslintConfigPrettier from 'eslint-config-prettier/flat'
 import eslintPluginPrettierRecommended from 'eslint-plugin-prettier/recommended'
 import react from 'eslint-plugin-react'
 import storybook from 'eslint-plugin-storybook'
@@ -9,7 +9,6 @@ import { defineConfig } from 'eslint/config'
 import globals from 'globals/index.js'
 import tsEslint from 'typescript-eslint'
 
-import eslintConfigPrettier from 'eslint-config-prettier/flat'
 import reactHooks from 'eslint-plugin-react-hooks'
 import reactRefresh from 'eslint-plugin-react-refresh'
 import tailwindcss from 'eslint-plugin-tailwindcss'
@@ -22,7 +21,6 @@ export default defineConfig([
   reactRefresh.configs.recommended,
   ...storybook.configs['flat/recommended'],
   ...tailwindcss.configs['flat/recommended'],
-  eslintConfigPrettier, // Must go last
   {
     ignores: ['node_modules/', 'dist/', 'coverage/', 'storybook-static/'],
   },
@@ -31,7 +29,6 @@ export default defineConfig([
 
     plugins: {
       react,
-      import: eslintPluginImport,
       '@typescript-eslint': tsEslint.plugin,
     },
 
@@ -58,10 +55,6 @@ export default defineConfig([
     settings: {
       tailwindcss: {
         config: './tailwind.config.ts',
-      },
-
-      'import/resolver': {
-        typescript: {},
       },
 
       react: {
@@ -127,4 +120,5 @@ export default defineConfig([
       'tailwindcss/no-contradicting-classname': 'error',
     },
   },
+  eslintConfigPrettier, // Must go last
 ])
