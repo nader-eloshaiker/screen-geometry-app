@@ -6,7 +6,7 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "packageManager": "pnpm@10.13.1",
+  "packageManager": "pnpm@10.14.0",
   "engines": {
     "node": ">=22.11.0"
   },
@@ -44,10 +44,8 @@
   "devDependencies": {
     "concurrently": "catalog:",
     "husky": "^9.1.7",
+    "jsonfile": "^6.2.0",
     "lint-staged": "catalog:",
-    "vitest": "catalog:"
-  },
-  "dependencies": {
-    "jwt-decode": "^4.0.0"
+    "vitest": "catalog:vite"
   }
 }

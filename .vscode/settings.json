@@ -36,5 +36,9 @@
       "mode": "auto"
     }
   ],
-  "search.useIgnoreFiles": true
+  "search.useIgnoreFiles": true,
+  // enable ESLint to fix tailwind classes on save
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit"
+  }
 }
