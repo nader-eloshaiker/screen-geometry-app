@@ -109,21 +109,12 @@ catalogs:
       specifier: ^19.1.1
       version: 19.1.1
   tailwindcss3:
-    autoprefixer:
-      specifier: ^10.4.20
-      version: 10.4.21
-    postcss:
-      specifier: ^8.5.6
-      version: 8.5.6
     postcss-import:
       specifier: ^16.1.0
       version: 16.1.1
     tailwind-merge:
       specifier: ^2.6.0
       version: 2.6.0
-    tailwindcss:
-      specifier: ^3.4.17
-      version: 3.4.17
     tailwindcss-animate:
       specifier: ^1.0.7
       version: 1.0.7
@@ -373,7 +364,7 @@ importers:
         specifier: ^1.0.2
         version: 1.0.2
       tailwindcss:
-        specifier: catalog:tailwindcss3
+        specifier: ^3.4.17
         version: 3.4.17
       tailwindcss-animate:
         specifier: catalog:tailwindcss3
@@ -449,8 +440,8 @@ importers:
         specifier: catalog:vite
         version: 3.2.4(vitest@3.2.4)
       autoprefixer:
-        specifier: catalog:tailwindcss3
-        version: 10.4.21(postcss@8.5.6)
+        specifier: 10.4.20
+        version: 10.4.20(postcss@8.5.6)
       chromatic:
         specifier: ^11.20.2
         version: 11.29.0
@@ -491,7 +482,7 @@ importers:
         specifier: ^3.0.1
         version: 3.0.1
       postcss:
-        specifier: catalog:tailwindcss3
+        specifier: ^8.5.6
         version: 8.5.6
       postcss-import:
         specifier: catalog:tailwindcss3
@@ -684,8 +675,8 @@ importers:
         specifier: catalog:vite
         version: 3.2.4(vitest@3.2.4)
       autoprefixer:
-        specifier: catalog:tailwindcss3
-        version: 10.4.21(postcss@8.5.6)
+        specifier: 10.4.20
+        version: 10.4.20(postcss@8.5.6)
       eslint:
         specifier: catalog:eslint
         version: 9.33.0(jiti@1.21.7)
@@ -720,7 +711,7 @@ importers:
         specifier: 'catalog:'
         version: 16.1.5
       postcss:
-        specifier: catalog:tailwindcss3
+        specifier: ^8.5.6
         version: 8.5.6
       postcss-import:
         specifier: ^16.1.0
@@ -741,7 +732,7 @@ importers:
         specifier: catalog:tailwindcss3
         version: 2.6.0
       tailwindcss:
-        specifier: catalog:tailwindcss3
+        specifier: ^3.4.17
         version: 3.4.17
       tailwindcss-animate:
         specifier: catalog:tailwindcss3
@@ -889,8 +880,8 @@ importers:
         specifier: catalog:vite
         version: 3.2.4(vitest@3.2.4)
       autoprefixer:
-        specifier: catalog:tailwindcss3
-        version: 10.4.21(postcss@8.5.6)
+        specifier: 10.4.20
+        version: 10.4.20(postcss@8.5.6)
       concurrently:
         specifier: 'catalog:'
         version: 9.2.0
@@ -928,7 +919,7 @@ importers:
         specifier: 'catalog:'
         version: 16.1.5
       postcss:
-        specifier: catalog:tailwindcss3
+        specifier: ^8.5.6
         version: 8.5.6
       postcss-import:
         specifier: ^16.1.0
@@ -961,7 +952,7 @@ importers:
         specifier: catalog:tailwindcss3
         version: 2.6.0
       tailwindcss:
-        specifier: catalog:tailwindcss3
+        specifier: ^3.4.17
         version: 3.4.17
       typescript:
         specifier: 'catalog:'
@@ -3587,8 +3578,8 @@ packages:
   asynckit@0.4.0:
     resolution: {integrity: sha512-Oei9OH4tRh0YqU3GxhX79dM/mwVgvbZJaSNaRk+bshkj0S5cfHcgYakreBjrHwatXKbz+IoIdYLxrKim2MjW0Q==}
 
-  autoprefixer@10.4.21:
-    resolution: {integrity: sha512-O+A6LWV5LDHSJD3LjHYoNi4VLsj/Whi7k6zG12xTYaU4cQ8oxQGckXNX8cRHK5yOZ/ppVHe0ZBXGzSV9jXdVbQ==}
+  autoprefixer@10.4.20:
+    resolution: {integrity: sha512-XY25y5xSv/wEoqzDyXXME4AFfkZI0P23z6Fs3YgymDnKJkCGOnkL0iTxCa85UTqaSgfcqyf3UA6+c7wUvx/16g==}
     engines: {node: ^10 || ^12 || >=14}
     hasBin: true
     peerDependencies:
@@ -10710,7 +10701,7 @@ snapshots:
 
   asynckit@0.4.0: {}
 
-  autoprefixer@10.4.21(postcss@8.5.6):
+  autoprefixer@10.4.20(postcss@8.5.6):
     dependencies:
       browserslist: 4.25.2
       caniuse-lite: 1.0.30001734
