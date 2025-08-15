@@ -1,6 +1,6 @@
 import { useMemo, useReducer } from 'react'
 import { PageLoaderContext } from './PageLoaderContext'
-import { LoaderState, initialLoaderState, loaderReducer } from './PageLoaderReducer'
+import { type LoaderState, initialLoaderState, loaderReducer } from './PageLoaderReducer'
 
 type Props = React.PropsWithChildren & { initialLoadingKeys?: Array<string> }
 

@@ -63,13 +63,12 @@ describe('ThemeToggle', () => {
   it('applies additional className when provided', async () => {
     vi.mocked(useTheme).mockReturnValue([LightMode, mockSetTheme])
 
-    // eslint-disable-next-line tailwindcss/no-custom-classname
-    const test = await renderWithUserEvents(<ThemeToggle id='test-toggle' className='extra-class' />, {
+    const test = await renderWithUserEvents(<ThemeToggle id='test-toggle' className='p-1' />, {
       wrapper: TestTranslationsEnvironment,
     })
 
     const button = test.getByRole('button')
-    expect(button).toHaveClass('extra-class')
+    expect(button).toHaveClass('p-1')
   })
 
   it('passes additional props to the button', async () => {

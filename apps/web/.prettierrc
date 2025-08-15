@@ -6,5 +6,8 @@
   "trailingComma": "es5",
   "jsxSingleQuote": true,
   "bracketSpacing": true,
-  "plugins": ["prettier-plugin-organize-imports"]
+  "plugins": ["prettier-plugin-organize-imports", "prettier-plugin-tailwindcss"],
+  "tailwindStylesheet": "./src/tailwind.css",
+  "tailwindFunctions": ["clsx", "cn", "tw", "cva", "twMerge"],
+  "$schema": "https://json.schemastore.org/prettierrc"
 }

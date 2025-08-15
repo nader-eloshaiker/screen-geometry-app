@@ -1,4 +1,4 @@
-import { QueryClient, QueryClientConfig } from '@tanstack/react-query'
+import { QueryClient, type QueryClientConfig } from '@tanstack/react-query'
 import { isAxiosError } from 'axios'
 
 const MAX_RETRIES = 3

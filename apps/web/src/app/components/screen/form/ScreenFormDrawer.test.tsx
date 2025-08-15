@@ -1,6 +1,6 @@
 import { ScreenProvider } from '@/app/hooks/screen/ScreenProvider'
 import { useScreenContext } from '@/app/hooks/screen/useScreenContext'
-import { ScreenItemRender } from '@/app/models/screenItemRender'
+import { type ScreenItemRender } from '@/app/models/screenItemRender'
 import { initMSW } from '@/lib/serviceworker/NodeServiceWorker'
 import { screenInputFixture } from '@/lib/support/test/fixtures/ScreenFixtures'
 import { renderWithUserEvents } from '@/lib/support/test/utils/RenderWithUserEvents'
@@ -11,7 +11,8 @@ import { Toaster } from '@screengeometry/lib-ui/toaster'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { render, waitFor } from '@testing-library/react'
 import { act, useState } from 'react'
-import { FormModeTypes, ScreenFormDrawer } from './ScreenFormDrawer'
+import { FormModeTypes } from './FormMode'
+import { ScreenFormDrawer } from './ScreenFormDrawer'
 
 vi.mock('@/lib/ui/hooks/useElementSize', () => ({
   __esModule: true,
@@ -51,7 +52,7 @@ const queryClient = new QueryClient({
   },
 })
 
-const RootTestComponent = ({ initialise, mode = FormModeTypes.Create, id }: ParentProps) => {
+const RootTestComponent = ({ initialise, mode = FormModeTypes.create, id }: ParentProps) => {
   const [open, setOpen] = useState(true)
 
   return (
@@ -99,7 +100,7 @@ describe('#ScreenFormDrawer', () => {
   describe('#LoadingMode', () => {
     test('show loading when updating a screen', async () => {
       const editId = '5HjERJbH'
-      const test = await renderWithUserEvents(<RootTestComponent id={editId} mode={FormModeTypes.Edit} />)
+      const test = await renderWithUserEvents(<RootTestComponent id={editId} mode={FormModeTypes.edit} />)
 
       const inputScreenSize = test.getByLabelText('Screen Size')
       await waitFor(() => expect(inputScreenSize).toHaveValue(38))
@@ -141,7 +142,7 @@ describe('#ScreenFormDrawer', () => {
     test('renders the screen form', async () => {
       const editId = '5HjERJbH'
 
-      const test = render(<RootTestComponent mode={FormModeTypes.Edit} id={editId} />)
+      const test = render(<RootTestComponent mode={FormModeTypes.edit} id={editId} />)
 
       const inputScreenSize = test.getByLabelText('Screen Size')
       await waitFor(() => expect(inputScreenSize).toHaveValue(38))
@@ -163,7 +164,7 @@ describe('#ScreenFormDrawer', () => {
     test('reset screen form', async () => {
       const editId = '5HjERJbH'
 
-      const test = await renderWithUserEvents(<RootTestComponent id={editId} mode={FormModeTypes.Edit} />)
+      const test = await renderWithUserEvents(<RootTestComponent id={editId} mode={FormModeTypes.edit} />)
 
       const inputScreenSize = test.getByLabelText('Screen Size')
       await waitFor(() => expect(inputScreenSize).toHaveValue(38))
@@ -182,7 +183,7 @@ describe('#ScreenFormDrawer', () => {
     test('change screen theme colors', async () => {
       const editId = '5HjERJbH'
 
-      const test = await renderWithUserEvents(<RootTestComponent mode={FormModeTypes.Edit} id={editId} />)
+      const test = await renderWithUserEvents(<RootTestComponent mode={FormModeTypes.edit} id={editId} />)
 
       const inputScreenSize = test.getByLabelText('Screen Size')
       await waitFor(() => expect(inputScreenSize).toHaveValue(38))
@@ -207,7 +208,7 @@ describe('#ScreenFormDrawer', () => {
       ]
 
       const test = await renderWithUserEvents(
-        <RootTestComponent mode={FormModeTypes.Edit} id={editId} initialise={initialise} />
+        <RootTestComponent mode={FormModeTypes.edit} id={editId} initialise={initialise} />
       )
 
       const inputScreenSize = test.getByLabelText('Screen Size')

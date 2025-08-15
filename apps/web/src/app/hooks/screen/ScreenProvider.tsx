@@ -1,6 +1,6 @@
 import { useMemo, useReducer } from 'react'
 import { ScreenContext } from './ScreenContext'
-import { ScreenState, initialScreenState, screenReducer } from './ScreenManager'
+import { type ScreenState, initialScreenState, screenReducer } from './ScreenManager'
 
 type Props = React.PropsWithChildren & { initialise?: ScreenState }
 

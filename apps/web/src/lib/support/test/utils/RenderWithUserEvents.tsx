@@ -1,6 +1,6 @@
-import { render, RenderOptions, RenderResult, waitFor } from '@testing-library/react'
-import userEvent, { UserEvent } from '@testing-library/user-event'
-import { ReactElement } from 'react'
+import { render, type RenderOptions, type RenderResult, waitFor } from '@testing-library/react'
+import userEvent, { type UserEvent } from '@testing-library/user-event'
+import type { ReactElement } from 'react'
 
 export type InteractComponent = RenderResult & { user: UserEvent }
 

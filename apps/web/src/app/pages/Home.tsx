@@ -59,7 +59,7 @@ export const Home = () => {
           <div className='float-right ml-6 flex flex-col items-center'>
             <img
               id='demo-image'
-              className='h-auto max-w-full rounded-md border border-mono-border object-scale-down shadow-lg'
+              className='border-mono-border h-auto max-w-full rounded-md border object-scale-down shadow-lg'
               src='./media/demo.png'
               width={384}
               height={431}

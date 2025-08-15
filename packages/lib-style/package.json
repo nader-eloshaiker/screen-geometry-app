@@ -4,9 +4,7 @@
   "private": true,
   "type": "module",
   "exports": {
-    "./tailwind.config": "./tailwind.config.ts",
-    "./theme.css": "./src/theme.css",
-    "./postcss.config": "./postcss.config.js"
+    "./theme.css": "./src/theme.css"
   },
   "scripts": {
     "lint": "eslint",
@@ -17,13 +15,8 @@
   },
   "devDependencies": {
     "@eslint/js": "catalog:eslint",
+    "@tailwindcss/vite": "catalog:tailwindcss",
     "@types/node": "^24.2.0",
-    "@types/react": "catalog:react19",
-    "@types/react-dom": "catalog:react19",
-    "@vitejs/plugin-react": "catalog:vite",
-    "@vitest/coverage-istanbul": "catalog:vite",
-    "@vitest/ui": "catalog:vite",
-    "autoprefixer": "10.4.20",
     "eslint": "catalog:eslint",
     "eslint-config-prettier": "catalog:eslint",
     "eslint-plugin-import": "catalog:eslint",
@@ -35,21 +28,13 @@
     "globals": "catalog:eslint",
     "jsdom": "^26.1.0",
     "lint-staged": "catalog:",
-    "postcss": "^8.5.6",
-    "postcss-import": "^16.1.0",
-    "prettier": "catalog:",
-    "prettier-plugin-organize-imports": "^4.1.0",
-    "react": "catalog:react19",
-    "react-dom": "catalog:react19",
-    "tailwind-merge": "catalog:tailwindcss3",
-    "tailwindcss": "^3.4.17",
-    "tailwindcss-animate": "catalog:tailwindcss3",
+    "prettier": "catalog:prettier",
+    "prettier-plugin-organize-imports": "catalog:prettier",
+    "prettier-plugin-tailwindcss": "catalog:prettier",
+    "tailwind-merge": "catalog:tailwindcss",
+    "tailwindcss": "catalog:tailwindcss",
+    "tw-animate-css": "catalog:tailwindcss",
     "typescript": "catalog:",
-    "typescript-eslint": "catalog:eslint",
-    "vite": "catalog:vite",
-    "vite-plugin-dts": "catalog:vite",
-    "vite-plugin-lib-inject-css": "catalog:vite",
-    "vite-tsconfig-paths": "catalog:vite",
-    "vitest": "catalog:vite"
+    "typescript-eslint": "catalog:eslint"
   }
 }

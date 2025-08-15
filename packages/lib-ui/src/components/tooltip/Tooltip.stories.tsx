@@ -3,14 +3,14 @@ import { Button } from '../button'
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from './Tooltip'
 
 const meta = {
-  title: 'Elements/Tooltip',
-  component: Tooltip,
   // tags: ['autodocs'],
   argTypes: {},
+  component: Tooltip,
   parameters: {
     // More on how to position stories at: https://storybook.js.org/docs/configure/story-layout
     layout: 'centered',
   },
+  title: 'Elements/Tooltip',
 } satisfies Meta<typeof Tooltip>
 
 export default meta

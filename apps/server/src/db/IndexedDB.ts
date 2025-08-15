@@ -1,7 +1,7 @@
 import fuzzysort from 'fuzzysort'
 import { match } from 'ts-pattern'
 import { ulid } from 'ulid'
-import { KeyedObject, Stores, dbNameDefault, dbVersionDefault } from './DbConstants'
+import { type KeyedObject, StoresEnum, dbNameDefault, dbVersionDefault } from './DbConstants'
 import { SearchDocuments } from './SearchDocuments'
 import { migrateV2toV3 } from './migration/v2-v3'
 
@@ -69,7 +69,7 @@ export const seedSearchDocuments = (openReq: IDBOpenDBRequest) =>
   new Promise((resolve) => {
     const db = openReq.result
 
-    const searchStore = db.createObjectStore(Stores.Search, { keyPath: 'id' })
+    const searchStore = db.createObjectStore(StoresEnum.Search, { keyPath: 'id' })
     searchStore.createIndex('name', 'name', { unique: false })
     searchStore.createIndex('aspectRatio', 'aspectRatio', { unique: false })
     searchStore.createIndex('diagonalSize', 'diagonalSize', { unique: false })
@@ -81,7 +81,7 @@ export const seedSearchDocuments = (openReq: IDBOpenDBRequest) =>
       throw new Error('Unable to create transaction')
     }
 
-    const searchTx = tx.objectStore(Stores.Search)
+    const searchTx = tx.objectStore(StoresEnum.Search)
     SearchDocuments.forEach((item) => {
       searchTx.add(item)
     })
@@ -102,11 +102,11 @@ export const initDB = (options?: dbProps): Promise<boolean> => {
 
       console.log('current version:', event.oldVersion)
 
-      if (!db.objectStoreNames.contains(Stores.Screens)) {
-        db.createObjectStore(Stores.Screens, { keyPath: 'id' })
+      if (!db.objectStoreNames.contains(StoresEnum.Screens)) {
+        db.createObjectStore(StoresEnum.Screens, { keyPath: 'id' })
       }
 
-      if (!db.objectStoreNames.contains(Stores.Search)) {
+      if (!db.objectStoreNames.contains(StoresEnum.Search)) {
         seedSearchDocuments(openReq)
       }
 
@@ -130,7 +130,7 @@ export const initDB = (options?: dbProps): Promise<boolean> => {
   })
 }
 
-export const getAllData = <T extends KeyedObject>(storeName: Stores, options?: dbProps): Promise<Array<T>> => {
+export const getAllData = <T extends KeyedObject>(storeName: StoresEnum, options?: dbProps): Promise<Array<T>> => {
   const { dbName, dbVersion } = { ...dbPropsDefault, ...options }
 
   return new Promise((resolve, reject) => {
@@ -151,7 +151,7 @@ export const getAllData = <T extends KeyedObject>(storeName: Stores, options?: d
 }
 
 export const getData = <T extends KeyedObject>(
-  storeName: Stores,
+  storeName: StoresEnum,
   key: string,
   options?: dbProps
 ): Promise<T | undefined> => {
@@ -263,7 +263,7 @@ export const deleteData = (storeName: string, key: string, options?: dbProps): P
 }
 
 export const searchData = <T extends object>(
-  storeName: Stores,
+  storeName: StoresEnum,
   query: string,
   key: string,
   options?: dbProps
@@ -288,8 +288,7 @@ export const searchData = <T extends object>(
         }
 
         const results = fuzzysort.go<T>(query, data, { key })
-        const sorted = results.toSorted((a, b) => b.score - a.score)
-        const response = sorted.map((result) => ({
+        const response = results.map((result) => ({
           ...result.obj,
           decoratedLabel: result.highlight('<strong>', '</strong>'),
         }))

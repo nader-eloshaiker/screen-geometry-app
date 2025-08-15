@@ -1,4 +1,4 @@
-import { Config } from '@screengeometry/lib-api/spec'
+import { type Config } from '@screengeometry/lib-api/spec'
 import { createContext } from 'react'
 
 export type EnvConfig = { config: Config | undefined }

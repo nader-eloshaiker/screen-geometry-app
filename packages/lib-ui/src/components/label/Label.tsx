@@ -3,16 +3,12 @@ import { type VariantProps } from 'class-variance-authority'
 import * as React from 'react'
 
 import { cn } from '../../lib/utils'
-import { LabelVariants } from './Label.variants'
+import { LabelVariants } from './LabelVariants'
 
-export interface LabelProps extends React.InputHTMLAttributes<HTMLLabelElement>, VariantProps<typeof LabelVariants> {}
-
-const Label = React.forwardRef<
-  React.ElementRef<typeof LabelPrimitive.Root>,
-  React.ComponentPropsWithoutRef<typeof LabelPrimitive.Root> & VariantProps<typeof LabelVariants>
->(({ className, palette, ...props }, ref) => (
-  <LabelPrimitive.Root ref={ref} className={cn(LabelVariants({ palette, className }))} {...props} />
-))
-Label.displayName = LabelPrimitive.Root.displayName
-
-export { Label }
+export function Label({
+  className,
+  palette,
+  ...props
+}: React.ComponentProps<typeof LabelPrimitive.Root> & VariantProps<typeof LabelVariants>) {
+  return <LabelPrimitive.Root data-slot='label' className={cn(LabelVariants({ className, palette }))} {...props} />
+}

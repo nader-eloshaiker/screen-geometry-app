@@ -1,40 +1,40 @@
 import { StateTable } from '@/storybook/StateTable'
-import { TRestProps } from '@/types/types'
-import { ToggleGroupSingleProps } from '@radix-ui/react-toggle-group'
+import type { ToggleGroupSingleProps } from '@radix-ui/react-toggle-group'
 import type { Meta, StoryObj } from '@storybook/react-vite'
 import type { VariantProps } from 'class-variance-authority'
 import { fn } from 'storybook/test'
-import { TToggleMode, TTogglePalette, TToggleSize, ToggleVariants } from '../toggle'
+import type { ToggleVariants, TToggleMode, TTogglePalette, TToggleSize } from '../toggle'
 import { ToggleGroup, ToggleGroupItem } from './ToggleGroup'
 
-type ToggleGroupDefaultProps = { type: 'multiple' | 'single' } & VariantProps<typeof ToggleVariants> & TRestProps
+type ToggleGroupDefaultProps = { type: 'multiple' | 'single' } & VariantProps<typeof ToggleVariants> &
+  Record<string, unknown>
 
-const ToggleGroupDefault = ({ type, idRef, ...variants }: ToggleGroupDefaultProps) => {
+const ToggleGroupDefault = ({ idRef, type, ...variants }: ToggleGroupDefaultProps) => {
   return (
     <ToggleGroup type={type as ToggleGroupSingleProps['type']} {...variants}>
       <ToggleGroupItem value='bold' aria-label='Toggle bold' id={`${idRef}-bold`}>
-        <div className='font-bold'>B</div>
+        <div className='w-2 font-bold'>B</div>
       </ToggleGroupItem>
       <ToggleGroupItem value='italic' aria-label='Toggle italic' id={`${idRef}-italic`}>
-        <div className='italic'>I</div>
+        <div className='w-2 italic'>I</div>
       </ToggleGroupItem>
       <ToggleGroupItem value='underline' aria-label='Toggle underline' id={`${idRef}-underline`}>
-        <div className='underline underline-offset-2'>U</div>
+        <div className='w-2 underline underline-offset-2'>U</div>
       </ToggleGroupItem>
     </ToggleGroup>
   )
 }
 
 const meta = {
-  title: 'Elements/ToggleGroup',
-  component: ToggleGroup,
   // tags: ['autodocs'],
-  args: { onClick: fn(), onMouseEnter: fn(), onMouseLeave: fn(), onFocus: fn(), type: 'single' },
+  args: { onClick: fn(), onFocus: fn(), onMouseEnter: fn(), onMouseLeave: fn(), type: 'single' },
   argTypes: {},
+  component: ToggleGroup,
   parameters: {
     // More on how to position stories at: https://storybook.js.org/docs/configure/story-layout
     layout: 'centered',
   },
+  title: 'Elements/ToggleGroup',
 } satisfies Meta<typeof ToggleGroup>
 
 export default meta
@@ -61,6 +61,13 @@ export const SelectionMode: Story = {
 
 export const Palette: Story = {
   args: {},
+  parameters: {
+    pseudo: {
+      active: ['#active-underline'],
+      focusVisible: ['#focus-underline'],
+      hover: ['#hover-underline'],
+    },
+  },
   render: () => (
     <StateTable<TTogglePalette>
       caption='Palettes'
@@ -79,17 +86,17 @@ export const Palette: Story = {
       getRowClassName={(prop) => (prop === 'secondary' ? 'bg-card text-card-foreground' : '')}
     />
   ),
-  parameters: {
-    pseudo: {
-      hover: ['#hover-underline'],
-      active: ['#active-underline'],
-      focusVisible: ['#focus-underline'],
-    },
-  },
 }
 
 export const Mode: Story = {
   args: {},
+  parameters: {
+    pseudo: {
+      active: ['#active-underline'],
+      focusVisible: ['#focus-underline'],
+      hover: ['#hover-underline'],
+    },
+  },
   render: () => (
     <StateTable<TToggleMode>
       caption='Modes'
@@ -107,17 +114,17 @@ export const Mode: Story = {
       )}
     />
   ),
-  parameters: {
-    pseudo: {
-      hover: ['#hover-underline'],
-      active: ['#active-underline'],
-      focusVisible: ['#focus-underline'],
-    },
-  },
 }
 
 export const Dimension: Story = {
   args: {},
+  parameters: {
+    pseudo: {
+      active: ['#active-underline'],
+      focusVisible: ['#focus-underline'],
+      hover: ['#hover-underline'],
+    },
+  },
   render: () => (
     <StateTable<TToggleSize>
       caption=' Sizes'
@@ -134,11 +141,4 @@ export const Dimension: Story = {
       )}
     />
   ),
-  parameters: {
-    pseudo: {
-      hover: ['#hover-underline'],
-      active: ['#active-underline'],
-      focusVisible: ['#focus-underline'],
-    },
-  },
 }

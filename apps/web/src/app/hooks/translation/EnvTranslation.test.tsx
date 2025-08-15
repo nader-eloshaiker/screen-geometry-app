@@ -1,6 +1,6 @@
 import * as translations from '@screengeometry/lib-api/spec'
 import { getGetTranslationsResponseMock, useGetTranslations } from '@screengeometry/lib-api/spec'
-import { PageLoaderProvider } from '@screengeometry/lib-ui/hooks/pageloader'
+import { PageLoaderProvider } from '@screengeometry/lib-ui/pageloader'
 import { render } from '@testing-library/react'
 import { vi } from 'vitest'
 import { EnvTranslation } from './EnvTranslation'

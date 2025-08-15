@@ -1,6 +1,6 @@
 import useLocalStorage from '@/app/hooks/useLocalStorage'
 import { useEffect, useMemo } from 'react'
-import { DarkMode, LightMode, TThemeMode, ThemeKey } from './Theme.types'
+import { DarkMode, LightMode, type TThemeMode, ThemeKey } from './Theme.types'
 import { ThemeContext } from './ThemeContext'
 
 const getSystemTheme = () => (window.matchMedia('(prefers-color-scheme: dark)').matches ? DarkMode : LightMode)

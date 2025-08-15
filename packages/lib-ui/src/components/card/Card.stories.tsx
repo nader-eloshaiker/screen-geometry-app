@@ -1,17 +1,17 @@
+import { Label } from '@radix-ui/react-label'
 import type { Meta, StoryObj } from '@storybook/react-vite'
 import { Button } from '../button'
 import { Input } from '../input'
-import { Label } from '../label'
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from './Card'
+import { Card, CardAction, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from './Card'
 
 const meta = {
-  title: 'elements/Card',
-  component: Card,
   // tags: ['autodocs'],
   args: {},
+  component: Card,
   parameters: {
     layout: 'centered',
   },
+  title: 'elements/Card',
 } satisfies Meta<typeof Card>
 
 export default meta
@@ -19,31 +19,43 @@ type Story = StoryObj<typeof meta>
 
 export const Component: Story = {
   args: {},
+  parameters: {},
   render: () => (
-    <Card className='w-[350px]'>
+    <Card className='w-[400px]'>
       <CardHeader>
-        <CardTitle>Create project</CardTitle>
-        <CardDescription>Deploy your new project in one-click.</CardDescription>
+        <CardTitle>Login to your account</CardTitle>
+        <CardDescription>Enter your email below to login to your account</CardDescription>
+        <CardAction>
+          <Button mode='link'>Sign Up</Button>
+        </CardAction>
       </CardHeader>
       <CardContent>
         <form>
-          <div className='grid w-full items-center gap-4'>
-            <div className='flex flex-col space-y-1.5'>
-              <Label htmlFor='name'>Name</Label>
-              <Input id='name' placeholder='Name of your project' />
+          <div className='flex flex-col gap-6'>
+            <div className='grid gap-2'>
+              <Label htmlFor='email'>Email</Label>
+              <Input id='email' type='email' placeholder='m@example.com' required />
             </div>
-            <div className='flex flex-col space-y-1.5'>
-              <Label htmlFor='framework'>Framework</Label>
-              <Input id='framework' placeholder='Name of your framework' />
+            <div className='grid gap-2'>
+              <div className='flex items-center'>
+                <Label htmlFor='password'>Password</Label>
+                <a href='#' className='ml-auto inline-block text-sm underline-offset-4 hover:underline'>
+                  Forgot your password?
+                </a>
+              </div>
+              <Input id='password' type='password' required />
             </div>
           </div>
         </form>
       </CardContent>
-      <CardFooter className='flex justify-between'>
-        <Button mode='outline'>Cancel</Button>
-        <Button>Deploy</Button>
+      <CardFooter className='flex-col gap-2'>
+        <Button type='submit' className='w-full'>
+          Login
+        </Button>
+        <Button mode='outline' className='w-full'>
+          Login with Google
+        </Button>
       </CardFooter>
     </Card>
   ),
-  parameters: {},
 }

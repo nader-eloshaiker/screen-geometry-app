@@ -1,11 +1,10 @@
-import { ScreenDataEnum } from '@screengeometry/lib-api/internal'
-import { ScreenInput } from '@screengeometry/lib-api/spec'
+import { type ScreenInput } from '@screengeometry/lib-api/spec'
 import * as yup from 'yup'
-import { InferType, ObjectSchema } from 'yup'
+import { type InferType, ObjectSchema } from 'yup'
 
 export const ScreenFormSchema: ObjectSchema<NullableObj<ScreenInput>> = yup.object().shape(
   {
-    [ScreenDataEnum.diagonalSize]: yup
+    diagonalSize: yup
       .number()
       .nullable()
       .notOneOf([null])
@@ -17,7 +16,7 @@ export const ScreenFormSchema: ObjectSchema<NullableObj<ScreenInput>> = yup.obje
       })
       .moreThan(0, 'Value must be greater than 0')
       .required('Value is required'),
-    [ScreenDataEnum.aspectRatio]: yup
+    aspectRatio: yup
       .string()
       .nullable()
       .notOneOf([null])
@@ -29,7 +28,7 @@ export const ScreenFormSchema: ObjectSchema<NullableObj<ScreenInput>> = yup.obje
       })
       .matches(/^\d+:\d+$/, { excludeEmptyString: true, message: 'Must be formatted like 16:9' })
       .required('Value is required'),
-    [ScreenDataEnum.hRes]: yup
+    hRes: yup
       .number()
       .nullable()
       .notOneOf([null])
@@ -46,7 +45,7 @@ export const ScreenFormSchema: ObjectSchema<NullableObj<ScreenInput>> = yup.obje
       // })
       .moreThan(0, 'Must be greater than 0')
       .required('Value is required'),
-    [ScreenDataEnum.vRes]: yup
+    vRes: yup
       .number()
       .nullable()
       .notOneOf([null])
@@ -63,7 +62,7 @@ export const ScreenFormSchema: ObjectSchema<NullableObj<ScreenInput>> = yup.obje
       // }),
       .moreThan(0, 'Must be greater than 0')
       .required('Value is required'),
-    [ScreenDataEnum.lightColor]: yup
+    lightColor: yup
       .string()
       .nullable()
       .notOneOf([null])
@@ -75,7 +74,7 @@ export const ScreenFormSchema: ObjectSchema<NullableObj<ScreenInput>> = yup.obje
       })
       .matches(/^#([a-fA-F0-9]{6})\b$/, { excludeEmptyString: true, message: 'Must be hex format' })
       .required('Value is required'),
-    [ScreenDataEnum.darkColor]: yup
+    darkColor: yup
       .string()
       .nullable()
       .notOneOf([null])

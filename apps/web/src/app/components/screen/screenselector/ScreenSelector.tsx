@@ -1,7 +1,7 @@
 import { useDebounce } from '@/lib/ui/hooks/useDebounce'
 import { useElementSize } from '@/lib/ui/hooks/useElementSize'
 import { cn } from '@/lib/utils'
-import { SearchItem } from '@screengeometry/lib-api/spec'
+import { type SearchItem } from '@screengeometry/lib-api/spec'
 import { Button } from '@screengeometry/lib-ui/button'
 import {
   Command,
@@ -11,11 +11,12 @@ import {
   CommandItem,
   CommandList,
 } from '@screengeometry/lib-ui/command'
+import { InputVariants } from '@screengeometry/lib-ui/input'
 import { Label } from '@screengeometry/lib-ui/label'
 import { Popover, PopoverContent, PopoverTrigger } from '@screengeometry/lib-ui/popover'
 import parse from 'html-react-parser'
 import { Check, ChevronsUpDown } from 'lucide-react'
-import { Dispatch, SetStateAction, useEffect, useState } from 'react'
+import { type Dispatch, type SetStateAction, useEffect, useState } from 'react'
 import { FormattedMessage } from 'react-intl'
 
 type TProps = {
@@ -64,14 +65,11 @@ export const ScreenSelector = ({
             mode='outline'
             role='combobox'
             aria-expanded={open}
-            className={cn(
-              'w-full justify-between shadow-lg border-primary-border bg-primary-input [&_svg]:text-primary-foreground-muted [&_svg]:hocus:text-primary-foreground-hover border-2',
-              {
-                'animate-pulse pointer-events-none': isLoading,
-                'text-primary-foreground-input': !!selectedItem,
-                'text-primary-foreground-muted': !selectedItem,
-              }
-            )}
+            className={cn('flex w-full justify-between border-2 shadow-lg', InputVariants({ palette: 'primary' }), {
+              'pointer-events-none animate-pulse': isLoading,
+              'text-primary-foreground-input': !!selectedItem,
+              'text-primary-foreground-muted': !selectedItem,
+            })}
           >
             <span>{selectedItem?.label ?? selectPlaceholder}</span>
             <ChevronsUpDown />

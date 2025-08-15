@@ -9,17 +9,17 @@ import {
   CommandList,
   CommandSeparator,
   CommandShortcut,
-} from '../command'
+} from '.'
 
 const meta = {
-  title: 'Elements/Command',
-  component: Command,
   // tags: ['autodocs'],
   argTypes: {},
+  component: Command,
   parameters: {
     // More on how to position stories at: https://storybook.js.org/docs/configure/story-layout
     layout: 'centered',
   },
+  title: 'Elements/Command',
 } satisfies Meta<typeof Command>
 
 export default meta
@@ -30,7 +30,7 @@ export const Component: Story = {
   parameters: {},
   render: () => {
     return (
-      <Command className='md:min-w-[450px]'>
+      <Command className='rounded-lg shadow-md md:min-w-[450px]'>
         <CommandInput placeholder='Type a command or search...' />
         <CommandList>
           <CommandEmpty>No results found.</CommandEmpty>

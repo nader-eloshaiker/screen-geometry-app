@@ -2,16 +2,16 @@ import { StateTable } from '@/storybook/StateTable'
 import type { Meta, StoryObj } from '@storybook/react-vite'
 import { fn } from 'storybook/test'
 import { Label } from './Label'
-import { TLabelVariantsPalette } from './Label.variants'
+import type { TLabelVariantsPalette } from './LabelVariants'
 
 const meta = {
-  title: 'elements/Label',
-  component: Label,
   // tags: ['autodocs'],
-  args: { onClick: fn(), onFocus: fn(), onBlur: fn() },
+  args: { onBlur: fn(), onClick: fn(), onFocus: fn() },
+  component: Label,
   parameters: {
     layout: 'centered',
   },
+  title: 'elements/Label',
 } satisfies Meta<typeof Label>
 
 export default meta
@@ -21,6 +21,12 @@ const palettes: Array<TLabelVariantsPalette> = ['none', 'primary', 'secondary', 
 
 export const Palette: Story = {
   args: {},
+  parameters: {
+    pseudo: {
+      focusVisible: ['#focus'],
+      hover: ['#hover'],
+    },
+  },
   render: () => (
     <StateTable<TLabelVariantsPalette>
       caption='Palettes'
@@ -32,13 +38,7 @@ export const Palette: Story = {
           Email
         </Label>
       )}
-      getRowClassName={(prop) => (prop === 'secondary' ? 'bg-card text-card-foreground' : '')}
+      getRowClassName={(prop) => (prop === 'secondary' ? 'bg-primary text-primary-foreground' : '')}
     />
   ),
-  parameters: {
-    pseudo: {
-      hover: ['#hover'],
-      focusVisible: ['#focus'],
-    },
-  },
 }

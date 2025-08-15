@@ -1,55 +1,60 @@
 import * as React from 'react'
 
-import { VariantProps } from 'class-variance-authority'
-import { ReactNode } from 'react'
+import { type VariantProps } from 'class-variance-authority'
+import type { ReactNode } from 'react'
 import { cn } from '../../lib/utils'
-import { InputAdornmentVariants, InputVariants } from './Input.variants'
+import { InputAdornmentVariants, InputVariants } from './InputVariants'
 
 // type TAdornment = JSX.Element | string | number
 
 export interface AdornmentProps {
-  startAdornment?: ReactNode
   endAdornment?: ReactNode
+  startAdornment?: ReactNode
 }
 
-export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement>, VariantProps<typeof InputVariants> {
-  startAdornment?: ReactNode
-  endAdornment?: ReactNode
-}
+export type InputProps = React.ComponentProps<'input'> &
+  VariantProps<typeof InputVariants> & {
+    endAdornment?: ReactNode
+    startAdornment?: ReactNode
+  }
 
 /*
  * Note: Ensure the necessary input padding is provided in the ClassName when providing adornments
  */
-const Input = React.forwardRef<HTMLInputElement, InputProps>(
-  ({ palette, dimension, className, type, startAdornment, endAdornment, ...props }, ref) => {
-    const hasAdornment = !!startAdornment || !!endAdornment
+export function Input({ className, dimension, endAdornment, palette, startAdornment, type, ...props }: InputProps) {
+  const hasAdornment = !!startAdornment || !!endAdornment
 
-    return hasAdornment ? (
-      <div
-        className={cn(
-          /* InputAdornmentVariants({ palette, dimension, className }) */
-          'flex h-10 items-center justify-center relative'
-        )}
-        data-disabled={props.disabled}
-      >
-        <input
-          type={type}
-          className={cn(InputVariants({ palette, dimension, className }), className)}
-          ref={ref}
-          {...props}
-        />
-        {startAdornment && (
-          <div className={cn(InputAdornmentVariants({ palette, dimension, position: 'start' }))}>{startAdornment}</div>
-        )}
-        {endAdornment && (
-          <div className={cn(InputAdornmentVariants({ palette, dimension, position: 'end' }))}>{endAdornment}</div>
-        )}
-      </div>
-    ) : (
-      <input type={type} className={cn(InputVariants({ palette, dimension, className }))} ref={ref} {...props} />
-    )
-  }
-)
-Input.displayName = 'Input'
-
-export { Input }
+  return hasAdornment ? (
+    <div
+      className={cn('relative flex h-10 items-center justify-center', { 'pointer-events-none': props.disabled })}
+      data-disabled={props.disabled}
+    >
+      <input
+        type={type}
+        className={cn(InputVariants({ className, dimension, palette }))}
+        data-slot='input'
+        {...props}
+      />
+      {startAdornment && (
+        <div
+          data-slot='input-adornment-start'
+          data-disabled={props.disabled}
+          className={cn(InputAdornmentVariants({ dimension, palette, position: 'start' }))}
+        >
+          {startAdornment}
+        </div>
+      )}
+      {endAdornment && (
+        <div
+          data-slot='input-adornment-end'
+          data-disabled={props.disabled}
+          className={cn(InputAdornmentVariants({ dimension, palette, position: 'end' }))}
+        >
+          {endAdornment}
+        </div>
+      )}
+    </div>
+  ) : (
+    <input type={type} data-slot='input' className={cn(InputVariants({ className, dimension, palette }))} {...props} />
+  )
+}

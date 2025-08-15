@@ -5,7 +5,7 @@ import { onCLS, onINP, onLCP } from 'web-vitals/attribution'
 import { App } from './app/App'
 import { sendToGoogleAnalytics } from './configs/reportWebVitals'
 
-import '@screengeometry/lib-style/theme.css'
+import './index.css'
 
 const packageVersion = import.meta.env.VITE_PACKAGE_VERSION
 const buildDate = import.meta.env.VITE_BUILD_DATE

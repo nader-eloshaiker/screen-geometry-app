@@ -1,9 +1,9 @@
-import { DarkMode, TThemeMode } from '@/app/hooks/theme/Theme.types'
+import { DarkMode, type TThemeMode } from '@/app/hooks/theme/Theme.types'
 import { useTheme } from '@/app/hooks/theme/useTheme'
-import { ScreenItemRender } from '@/app/models/screenItemRender'
+import { type ScreenItemRender } from '@/app/models/screenItemRender'
 import { cn } from '@/lib/utils'
-import { ScreenColor } from '@screengeometry/lib-api/spec'
-import { Dispatch, SetStateAction, useEffect, useState } from 'react'
+import { type ScreenColor } from '@screengeometry/lib-api/spec'
+import { type Dispatch, type SetStateAction, useEffect, useState } from 'react'
 import { useIntl } from 'react-intl'
 import styled from 'styled-components'
 
@@ -69,9 +69,9 @@ export const ScreenPanel = ({ screen, highlighted = undefined, setHighLighted = 
 
   return (
     <Panel
-      className={cn('rounded-md transition-[outline-width] duration-300 ease-out outline relative ', {
+      className={cn('outline-solid relative rounded-md transition-[outline-width] duration-300 ease-out', {
         'outline-[6px]': selected,
-        'outline-[4px]': !selected,
+        'outline-4': !selected,
         'opacity-65': !selected && highlighted,
       })}
       $width={config.width}

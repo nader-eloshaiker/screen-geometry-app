@@ -1,6 +1,10 @@
 /* eslint-disable camelcase */
 import ReactGA from 'react-ga4'
-import { CLSMetricWithAttribution, INPMetricWithAttribution, LCPMetricWithAttribution } from 'web-vitals/attribution'
+import type {
+  CLSMetricWithAttribution,
+  INPMetricWithAttribution,
+  LCPMetricWithAttribution,
+} from 'web-vitals/attribution'
 
 type EventParams = {
   value: number

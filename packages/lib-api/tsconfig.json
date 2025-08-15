@@ -1,15 +1,4 @@
 {
-  "$schema": "https://json.schemastore.org/tsconfig",
-  "display": "React",
-  "extends": "./tsconfig.node.json",
-  "compilerOptions": {
-    "useDefineForClassFields": true,
-    "jsx": "react-jsx",
-    "baseUrl": ".",
-    "paths": {
-      "@/*": ["./src/*"]
-    }
-  },
-  "include": ["src"],
-  "exclude": ["node_modules", "coverage", "dist", "build"]
+  "files": [],
+  "references": [{ "path": "./tsconfig.app.json" }, { "path": "./tsconfig.node.json" }]
 }

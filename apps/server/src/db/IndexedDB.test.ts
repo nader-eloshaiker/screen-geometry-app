@@ -1,8 +1,8 @@
 import { screenItemFixture } from '@/lib/support/test/fixtures/ScreenFixtures'
 import { setupV2DB } from '@/lib/support/test/stubs/IndexedDBMigration.stub'
-import { getGetScreenResponseMock, ScreenItem } from '@screengeometry/lib-api/spec'
+import { getGetScreenResponseMock, type ScreenItem } from '@screengeometry/lib-api/spec'
 import { IDBFactory } from 'fake-indexeddb'
-import { dbNameDefault, dbVersionDefault, Stores } from './DbConstants'
+import { dbNameDefault, dbVersionDefault, StoresEnum } from './DbConstants'
 import {
   addAllData,
   addData,
@@ -24,11 +24,11 @@ export const setupDB = ({
   const openReq = indexedDB.open(dbNameDefault, dbVersionDefault)
   openReq.onupgradeneeded = () => {
     const db = openReq.result
-    if (includeData && !db.objectStoreNames.contains(Stores.Screens)) {
-      db.createObjectStore(Stores.Screens, { keyPath: 'id' })
+    if (includeData && !db.objectStoreNames.contains(StoresEnum.Screens)) {
+      db.createObjectStore(StoresEnum.Screens, { keyPath: 'id' })
     }
 
-    if (includeSearch && !db.objectStoreNames.contains(Stores.Search)) {
+    if (includeSearch && !db.objectStoreNames.contains(StoresEnum.Search)) {
       seedSearchDocuments(openReq)
     }
   }
@@ -47,7 +47,7 @@ describe('#indexDB', () => {
     describe('#getItemList', () => {
       // test requires seeded data, covered in data migration tests
       it.skip('getItemList should return a list of screens', async () => {
-        const result = await getAllData(Stores.Screens)
+        const result = await getAllData(StoresEnum.Screens)
 
         expect(result?.length).toBe(4)
       })
@@ -55,7 +55,7 @@ describe('#indexDB', () => {
       it('getItemList should return an empty list if no screens are found', async () => {
         // await localforage.clear()
 
-        const result = await getAllData(Stores.Screens)
+        const result = await getAllData(StoresEnum.Screens)
 
         expect(result?.length).toBe(0)
       })
@@ -63,14 +63,14 @@ describe('#indexDB', () => {
 
     describe('#createItem', () => {
       it('createItem should return a screen', async () => {
-        const created = await addData<ScreenItem>(Stores.Screens, screenItemFixture)
+        const created = await addData<ScreenItem>(StoresEnum.Screens, screenItemFixture)
 
         expect(created?.data.diagonalSize).toBe(38)
       })
 
       it('createItemList should return a list of screens', async () => {
         // await localforage.clear()
-        const result = await addAllData<ScreenItem>(Stores.Screens, [screenItemFixture])
+        const result = await addAllData<ScreenItem>(StoresEnum.Screens, [screenItemFixture])
 
         expect(result[0].data.diagonalSize).toBe(38)
         expect(result.length).toBe(1)
@@ -79,25 +79,25 @@ describe('#indexDB', () => {
 
     describe('#getItem', () => {
       it('should return a screens', async () => {
-        const created = await addData<ScreenItem>(Stores.Screens, screenItemFixture)
+        const created = await addData<ScreenItem>(StoresEnum.Screens, screenItemFixture)
         expect(created).toBeDefined()
 
-        const result = await getData<ScreenItem>(Stores.Screens, created.id)
+        const result = await getData<ScreenItem>(StoresEnum.Screens, created.id)
 
         expect(result).toBeDefined()
       })
 
       it.fails('should throw an error if id is not found', async () => {
-        expect(await getData<ScreenItem>(Stores.Screens, 'aaaaa')).rejects.toThrowError('No screen found for aaaaa')
+        expect(await getData<ScreenItem>(StoresEnum.Screens, 'aaaaa')).rejects.toThrowError('No screen found for aaaaa')
       })
     })
 
     describe('#updateItem', () => {
       it('updateItem should return an updated screen', async () => {
-        const created = await addData<ScreenItem>(Stores.Screens, screenItemFixture)
+        const created = await addData<ScreenItem>(StoresEnum.Screens, screenItemFixture)
         expect(created).toBeDefined()
 
-        const updated = await updateData<ScreenItem>(Stores.Screens, {
+        const updated = await updateData<ScreenItem>(StoresEnum.Screens, {
           ...created,
           data: { ...created.data, aspectRatio: '4:3', diagonalSize: 21 },
         })
@@ -106,7 +106,7 @@ describe('#indexDB', () => {
       })
 
       it.fails('updateItem should throw an error if id is not found', async () => {
-        expect(await updateData<ScreenItem>(Stores.Screens, getGetScreenResponseMock().item)).rejects.toThrowError(
+        expect(await updateData<ScreenItem>(StoresEnum.Screens, getGetScreenResponseMock().item)).rejects.toThrowError(
           'No screen found for aaaaa'
         )
       })
@@ -114,21 +114,21 @@ describe('#indexDB', () => {
 
     describe('#deleteItem', () => {
       it('deleteItem should return true if id is found', async () => {
-        const originalList = await getAllData<ScreenItem>(Stores.Screens)
+        const originalList = await getAllData<ScreenItem>(StoresEnum.Screens)
 
-        const created = await addData<ScreenItem>(Stores.Screens, screenItemFixture)
+        const created = await addData<ScreenItem>(StoresEnum.Screens, screenItemFixture)
         expect(created).toBeDefined()
 
-        expect(await getAllData<ScreenItem>(Stores.Screens)).toHaveLength(originalList.length + 1)
+        expect(await getAllData<ScreenItem>(StoresEnum.Screens)).toHaveLength(originalList.length + 1)
 
-        const deleted = await deleteData(Stores.Screens, created.id)
+        const deleted = await deleteData(StoresEnum.Screens, created.id)
 
         expect(deleted).toBe(created.id)
-        expect(await getAllData<ScreenItem>(Stores.Screens)).toHaveLength(originalList.length)
+        expect(await getAllData<ScreenItem>(StoresEnum.Screens)).toHaveLength(originalList.length)
       })
 
       it.fails('deleteItem should return false if id is not found', async () => {
-        expect(await deleteData(Stores.Screens, 'aaaaa')).rejects.toThrowError('No screen found for aaaaa')
+        expect(await deleteData(StoresEnum.Screens, 'aaaaa')).rejects.toThrowError('No screen found for aaaaa')
       })
     })
   })
@@ -145,7 +145,7 @@ describe('#indexDB', () => {
         dbVersion: 3,
       })
 
-      const result = await getAllData<ScreenItem>(Stores.Screens, { dbName: 'Testv2Tov3', dbVersion: 3 })
+      const result = await getAllData<ScreenItem>(StoresEnum.Screens, { dbName: 'Testv2Tov3', dbVersion: 3 })
 
       expect(result?.length).toBe(2)
       expect(result.find((item) => item.data.diagonalSize === 38)).toEqual({

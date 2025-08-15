@@ -11,12 +11,12 @@ catalog:
   "@tanstack/router-plugin": ^1.131.8
   concurrently: ^9.2.0
   lint-staged: ^16.1.5
-  lucide-react: ^0.469.0
+  lucide-react: ^0.536.0
   orval: ^7.11.2
   prettier: ^3.6.2
   react-hook-form: ^7.62.0
   ts-pattern: ^5.8.0
-  typescript: ~5.6.3
+  typescript: ~5.8.3
   yup: ^1.4.0
 
 catalogs:
@@ -47,13 +47,11 @@ catalogs:
     "@types/react-dom": ^19.1.7
     react: ^19.1.1
     react-dom: ^19.1.1
-  tailwindcss3:
-    autoprefixer: ^10.4.20
-    postcss: ^8.5.6
-    postcss-import: ^16.1.0
-    tailwind-merge: ^2.6.0
-    tailwindcss: ^3.4.17
-    tailwindcss-animate: ^1.0.7
+  tailwindcss:
+    "@tailwindcss/vite": ^4.1.11
+    tailwind-merge: ^3.3.1
+    tailwindcss: ^4.1.11
+    tw-animate-css: ^1.3.6
   unittesting:
     "@testing-library/jest-dom": ^6.7.0
     "@testing-library/react": ^16.3.0
@@ -67,7 +65,6 @@ catalogs:
     "@vitest/ui": ^3.2.4
     vite: ^7.1.2
     vite-plugin-dts: ^4.5.3
-    vite-plugin-lib-inject-css: ^2.2.1
     vite-tsconfig-paths: ^5.1.4
     vitest: ^3.2.4
 

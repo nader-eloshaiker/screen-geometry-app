@@ -1,1 +1,3 @@
 @import '@screengeometry/lib-style/theme.css';
+
+@source './components/**/*.{ts,tsx,js,jsx}';

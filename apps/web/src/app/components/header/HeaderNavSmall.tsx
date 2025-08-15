@@ -1,5 +1,5 @@
 import { NavigationLink } from '@screengeometry/lib-ui/navigationlink'
-import { Dispatch, SetStateAction } from 'react'
+import type { Dispatch, SetStateAction } from 'react'
 import { FormattedMessage } from 'react-intl'
 
 type Props = {

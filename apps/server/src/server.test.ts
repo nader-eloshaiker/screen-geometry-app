@@ -1,14 +1,14 @@
 import { initMSW } from '@/lib/serviceworker/NodeServiceWorker'
 import { screenItemFixture } from '@/lib/support/test/fixtures/ScreenFixtures'
 import {
-  ScreenItem,
+  type ScreenItem,
   getScreenListServiceMock,
   getScreenServiceMock,
   getSearchServiceMock,
 } from '@screengeometry/lib-api/spec'
 import { IDBFactory } from 'fake-indexeddb'
 import { apiRoutes } from './ApiRouteSchema'
-import { Stores } from './db/DbConstants'
+import { StoresEnum } from './db/DbConstants'
 import { addData } from './db/IndexedDB'
 import { setupDB } from './db/IndexedDB.test'
 import { screenInput55Fixture } from './lib/test/fixtures/ScreenFixtures'
@@ -57,7 +57,7 @@ describe('#server', () => {
   })
 
   it('should call the GET screen api', async () => {
-    const created = await addData<ScreenItem>(Stores.Screens, screenItemFixture)
+    const created = await addData<ScreenItem>(StoresEnum.Screens, screenItemFixture)
     expect(created).toBeDefined()
 
     const response = await fetch(`${baseUrl}${apiRoutes.screen}/${created.id}`)
@@ -69,7 +69,7 @@ describe('#server', () => {
   })
 
   it('should call the DELETE screens api', async () => {
-    const created = await addData<ScreenItem>(Stores.Screens, screenItemFixture)
+    const created = await addData<ScreenItem>(StoresEnum.Screens, screenItemFixture)
     expect(created).toBeDefined()
 
     const response = await fetch(`${baseUrl}${apiRoutes.screen}/${created.id}`, {
@@ -86,7 +86,7 @@ describe('#server', () => {
   })
 
   it('should call the PUT screens api', async () => {
-    const created = await addData<ScreenItem>(Stores.Screens, screenItemFixture)
+    const created = await addData<ScreenItem>(StoresEnum.Screens, screenItemFixture)
     expect(created).toBeDefined()
 
     const response = await fetch(`${baseUrl}${apiRoutes.screen}/${created.id}`, {
@@ -104,7 +104,7 @@ describe('#server', () => {
   })
 
   it('should call the PATCH screens api', async () => {
-    const created = await addData<ScreenItem>(Stores.Screens, screenItemFixture)
+    const created = await addData<ScreenItem>(StoresEnum.Screens, screenItemFixture)
     expect(created).toBeDefined()
 
     const response = await fetch(`${baseUrl}${apiRoutes.screen}/${created.id}/show`, {

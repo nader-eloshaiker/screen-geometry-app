@@ -1,4 +1,4 @@
-import { createRouter, RouteComponent, RouterProvider } from '@tanstack/react-router'
+import { createRouter, type RouteComponent, RouterProvider } from '@tanstack/react-router'
 
 import { ErrorFallback } from '@/app/pages/ErrorFallback'
 import { NotFound } from '@/app/pages/NotFound'

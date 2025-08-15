@@ -3,18 +3,18 @@ import type { Meta, StoryObj } from '@storybook/react-vite'
 import { ThumbsUp } from 'lucide-react'
 import { fn } from 'storybook/test'
 import { Button } from './Button'
-import { TButtonMode, TButtonPalette, TButtonSize } from './Button.variants'
+import type { TButtonMode, TButtonPalette, TButtonSize } from './ButtonVariants'
 
 const meta = {
-  title: 'Elements/Buttons',
-  component: Button,
+  args: { onClick: fn(), onFocus: fn(), onMouseEnter: fn(), onMouseLeave: fn() },
   // tags: ['autodocs'],
   argTypes: {},
-  args: { onClick: fn(), onMouseEnter: fn(), onMouseLeave: fn(), onFocus: fn() },
+  component: Button,
   parameters: {
     // More on how to position stories at: https://storybook.js.org/docs/configure/story-layout
     layout: 'centered',
   },
+  title: 'Elements/Buttons',
 } satisfies Meta<typeof Button>
 
 export default meta
@@ -22,6 +22,12 @@ export type Story = StoryObj<typeof meta>
 
 export const Palette: Story = {
   args: {},
+  parameters: {
+    pseudo: {
+      focusVisible: ['#focus'],
+      hover: ['#hover'],
+    },
+  },
   render: () => (
     <StateTable<TButtonPalette>
       caption='Palettes'
@@ -34,19 +40,20 @@ export const Palette: Story = {
           <ThumbsUp />
         </Button>
       )}
-      getRowClassName={(prop) => (prop === 'secondary' ? 'bg-card text-card-foreground' : '')}
+      getRowClassName={(prop) => (prop === 'secondary' ? 'bg-primary text-primary-foreground' : '')}
     />
   ),
-  parameters: {
-    pseudo: {
-      hover: ['#hover'],
-      focusVisible: ['#focus'],
-    },
-  },
 }
 
 export const Mode: Story = {
   args: {},
+  parameters: {
+    pseudo: {
+      active: ['#active'],
+      focusVisible: ['#focus'],
+      hover: ['#hover'],
+    },
+  },
   render: () => (
     <StateTable<TButtonMode>
       caption='Modes'
@@ -61,17 +68,17 @@ export const Mode: Story = {
       )}
     />
   ),
-  parameters: {
-    pseudo: {
-      hover: ['#hover'],
-      active: ['#active'],
-      focusVisible: ['#focus'],
-    },
-  },
 }
 
 export const Dimension: Story = {
   args: {},
+  parameters: {
+    pseudo: {
+      active: ['#active'],
+      focusVisible: ['#focus'],
+      hover: ['#hover'],
+    },
+  },
   render: () => (
     <StateTable<TButtonSize>
       caption='Dimensions'
@@ -86,11 +93,4 @@ export const Dimension: Story = {
       )}
     />
   ),
-  parameters: {
-    pseudo: {
-      hover: ['#hover'],
-      active: ['#active'],
-      focusVisible: ['#focus'],
-    },
-  },
 }

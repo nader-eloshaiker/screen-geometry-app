@@ -2,18 +2,18 @@ import { StateTable } from '@/storybook/StateTable'
 import type { Meta, StoryObj } from '@storybook/react-vite'
 import { fn } from 'storybook/test'
 import { Checkbox } from './Checkbox'
-import { TCheckboxPalette, TCheckboxSize } from './Checkbox.variants'
+import type { TCheckboxPalette, TCheckboxSize } from './CheckboxVariants'
 
 const meta = {
-  title: 'Elements/Checkbox',
-  component: Checkbox,
+  args: { onBlur: fn(), onClick: fn(), onFocus: fn() },
   // tags: ['autodocs'],
   argTypes: {},
-  args: { onClick: fn(), onFocus: fn(), onBlur: fn() },
+  component: Checkbox,
   parameters: {
     // More on how to position stories at: https://storybook.js.org/docs/configure/story-layout
     layout: 'centered',
   },
+  title: 'Elements/Checkbox',
 } satisfies Meta<typeof Checkbox>
 
 export default meta
@@ -21,6 +21,13 @@ type Story = StoryObj<typeof meta>
 
 export const Palette: Story = {
   args: {},
+  parameters: {
+    pseudo: {
+      active: ['#active'],
+      focusVisible: ['#focus'],
+      hover: ['#hover'],
+    },
+  },
   render: () => (
     <StateTable<TCheckboxPalette>
       caption='Palettes'
@@ -35,20 +42,20 @@ export const Palette: Story = {
           disabled={state === 'disabled'}
         />
       )}
-      getRowClassName={(prop) => (prop === 'secondary' ? 'bg-card text-card-foreground' : '')}
+      getRowClassName={(prop) => (prop === 'secondary' ? 'bg-primary text-primary-foreground' : '')}
     />
   ),
-  parameters: {
-    pseudo: {
-      hover: ['#hover'],
-      active: ['#active'],
-      focusVisible: ['#focus'],
-    },
-  },
 }
 
 export const Dimension: Story = {
   args: {},
+  parameters: {
+    pseudo: {
+      active: ['#active'],
+      focusVisible: ['#focus'],
+      hover: ['#hover'],
+    },
+  },
   render: () => {
     return (
       <StateTable<TCheckboxSize>
@@ -65,12 +72,5 @@ export const Dimension: Story = {
         )}
       />
     )
-  },
-  parameters: {
-    pseudo: {
-      hover: ['#hover'],
-      active: ['#active'],
-      focusVisible: ['#focus'],
-    },
   },
 }

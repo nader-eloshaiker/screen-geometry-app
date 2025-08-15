@@ -38,15 +38,15 @@ export default function ThemeToggle({ className, id, ...rest }: TProps) {
       {...rest}
     >
       <MoonStar
-        className={cn('size-6 absolute', {
-          'rotate-90 opacity-0 animate-out fade-in spin-0 duration-500': !isDarkMode,
+        className={cn('absolute size-6', {
+          'animate-out fade-in spin-0 rotate-90 opacity-0 duration-500': !isDarkMode,
           'rotate-0opacity-100 animate-out fade-out spin-90 duration-500': isDarkMode,
         })}
       />
       <Sun
-        className={cn('size-6 absolute', {
-          'rotate-0 opacity-0 animate-out fade-in spin-90 duration-500': isDarkMode,
-          'rotate-90 opacity-100 animate-out fade-out spin-0 duration-500': !isDarkMode,
+        className={cn('absolute size-6', {
+          'animate-out fade-in spin-90 rotate-0 opacity-0 duration-500': isDarkMode,
+          'animate-out fade-out spin-0 rotate-90 opacity-100 duration-500': !isDarkMode,
         })}
       />
     </Button>

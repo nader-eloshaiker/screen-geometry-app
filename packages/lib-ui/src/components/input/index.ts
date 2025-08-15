@@ -1,2 +1,2 @@
 export * from './Input'
-export * from './Input.variants'
+export * from './InputVariants'

@@ -9,35 +9,35 @@ import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, Command
 
 const frameworks = [
   {
-    value: 'javascript',
     label: 'JavaScript',
+    value: 'javascript',
   },
   {
-    value: 'typescript',
     label: 'TypeScript',
+    value: 'typescript',
   },
   {
-    value: 'go',
     label: 'Go Lang',
+    value: 'go',
   },
   {
-    value: 'java',
     label: 'Java',
+    value: 'java',
   },
   {
-    value: 'python',
     label: 'Python',
+    value: 'python',
   },
 ]
 
 const meta = {
-  title: 'Elements/Combobox',
   // tags: ['autodocs'],
   argTypes: {},
   parameters: {
     // More on how to position stories at: https://storybook.js.org/docs/configure/story-layout
     layout: 'centered',
   },
+  title: 'Elements/Combobox',
 } satisfies Meta
 
 export default meta
@@ -54,7 +54,7 @@ const ComboboxDemo = ({ defaultValue = false }: { defaultValue?: boolean }) => {
           mode='outline'
           role='combobox'
           aria-expanded={open}
-          className='w-[260px] justify-between shadow-lg [&_svg]:text-primary-foreground-muted [&_svg]:hocus:text-primary-foreground-hover'
+          className='[&_svg]:text-primary-foreground-muted hocus:[&_svg]:text-primary-foreground-hover w-[260px] justify-between shadow-lg'
         >
           <div>{value ? frameworks.find((framework) => framework.value === value)?.label : 'Select framework...'}</div>
           <ChevronsUpDown />
@@ -90,9 +90,6 @@ const ComboboxDemo = ({ defaultValue = false }: { defaultValue?: boolean }) => {
 export const Test: Story = {
   args: {},
   parameters: {},
-  render: () => {
-    return <ComboboxDemo />
-  },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement)
     const trigger = canvas.getByRole('combobox')
@@ -106,6 +103,9 @@ export const Test: Story = {
     await userEvent.type(inputElement, 'java')
 
     expect(canvas.getAllByRole('option')).toHaveLength(2)
+  },
+  render: () => {
+    return <ComboboxDemo />
   },
 }
 

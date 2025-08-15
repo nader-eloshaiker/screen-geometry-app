@@ -1,4 +1,4 @@
-import { default as Axios, AxiosInstance, AxiosRequestConfig } from 'axios'
+import { default as Axios, type AxiosInstance, type AxiosRequestConfig } from 'axios'
 import { v4 } from 'uuid'
 
 // Generate a random jwt token just to make the api calls look legit

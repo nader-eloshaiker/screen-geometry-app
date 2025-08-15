@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { Alignment, HAlignDefault } from '../screen/alignment/AlignmentSelector'
+import { type Alignment, HAlignDefault } from '../screen/alignment/AlignmentSelector'
 
 export const Stacked = styled.div<{ height: number; $hAlign?: Alignment; $vAlign?: Alignment }>`
   padding: 0.5rem;

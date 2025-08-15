@@ -3,17 +3,17 @@ import type { Meta, StoryObj } from '@storybook/react-vite'
 import { Italic } from 'lucide-react'
 import { fn } from 'storybook/test'
 import { Toggle } from './Toggle'
-import { TToggleMode, TTogglePalette, TToggleSize } from './Toggle.variants'
+import type { TToggleMode, TTogglePalette, TToggleSize } from './Toggle.variants'
 
 const meta = {
-  title: 'Elements/Toggle',
   // tags: ['autodocs'],
-  args: { onClick: fn(), onMouseEnter: fn(), onMouseLeave: fn(), onFocus: fn(), type: 'single' },
+  args: { onClick: fn(), onFocus: fn(), onMouseEnter: fn(), onMouseLeave: fn(), type: 'single' },
   argTypes: {},
   parameters: {
     // More on how to position stories at: https://storybook.js.org/docs/configure/story-layout
     layout: 'centered',
   },
+  title: 'Elements/Toggle',
 } satisfies Meta
 
 export default meta
@@ -21,6 +21,13 @@ type Story = StoryObj<typeof meta>
 
 export const Palette: Story = {
   args: {},
+  parameters: {
+    pseudo: {
+      active: ['#active'],
+      focusVisible: ['#focus'],
+      hover: ['#hover'],
+    },
+  },
   render: () => (
     <StateTable<TTogglePalette>
       caption='Palettes'
@@ -41,17 +48,17 @@ export const Palette: Story = {
       getRowClassName={(prop) => (prop === 'secondary' ? 'bg-card text-card-foreground' : '')}
     />
   ),
-  parameters: {
-    pseudo: {
-      hover: ['#hover'],
-      active: ['#active'],
-      focusVisible: ['#focus'],
-    },
-  },
 }
 
 export const Mode: Story = {
   args: {},
+  parameters: {
+    pseudo: {
+      active: ['#active'],
+      focusVisible: ['#focus'],
+      hover: ['#hover'],
+    },
+  },
   render: () => (
     <StateTable<TToggleMode>
       caption='Modes'
@@ -66,17 +73,17 @@ export const Mode: Story = {
       )}
     />
   ),
-  parameters: {
-    pseudo: {
-      hover: ['#hover'],
-      active: ['#active'],
-      focusVisible: ['#focus'],
-    },
-  },
 }
 
 export const Dimension: Story = {
   args: {},
+  parameters: {
+    pseudo: {
+      active: ['#active-underline'],
+      focusVisible: ['#focus-underline'],
+      hover: ['#hover-underline'],
+    },
+  },
   render: () => (
     <StateTable<TToggleSize>
       caption=' Sizes'
@@ -90,11 +97,4 @@ export const Dimension: Story = {
       )}
     />
   ),
-  parameters: {
-    pseudo: {
-      hover: ['#hover-underline'],
-      active: ['#active-underline'],
-      focusVisible: ['#focus-underline'],
-    },
-  },
 }

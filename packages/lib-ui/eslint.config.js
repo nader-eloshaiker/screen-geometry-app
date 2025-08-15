@@ -1,9 +1,8 @@
-// import { FlatCompat } from '@eslint/eslintrc'
 import eslint from '@eslint/js'
 import configPrettier from 'eslint-config-prettier/flat'
 import importPlugin from 'eslint-plugin-import'
 import prettierPlugin from 'eslint-plugin-prettier/recommended'
-import react from 'eslint-plugin-react'
+import reactPlugin from 'eslint-plugin-react'
 import reactHooks from 'eslint-plugin-react-hooks'
 import reactRefresh from 'eslint-plugin-react-refresh'
 import storybook from 'eslint-plugin-storybook'
@@ -22,10 +21,10 @@ export default tseslint.config(
     ignores: ['node_modules/', 'dist/', 'coverage/', 'storybook-static/'],
   },
   {
-    files: ['**/*.{js,mjs,ts,tsx,jsx}'],
-
+    files: ['**/*.{js,mjs,cjs,jsx,mjsx,ts,tsx,mtsx}'],
+    ...reactPlugin.configs.flat.recommended,
     languageOptions: {
-      ecmaVersion: 'latest',
+      ...reactPlugin.configs.flat.recommended.languageOptions,
       globals: {
         ...globals.browser,
         ...globals.vitest,
@@ -33,20 +32,11 @@ export default tseslint.config(
         module: true,
         window: true,
       },
-
-      parserOptions: {
-        ecmaFeatures: {
-          jsx: true,
-        },
-      },
-      sourceType: 'module',
     },
-
     plugins: {
+      ...reactPlugin.configs.flat.recommended.plugins,
       importPlugin,
-      react,
     },
-
     rules: {
       '@typescript-eslint/explicit-module-boundary-types': 'off',
       '@typescript-eslint/no-empty-function': 'off',
@@ -101,19 +91,6 @@ export default tseslint.config(
       // ],
 
       // 'tailwindcss/no-contradicting-classname': 'error',
-    },
-
-    settings: {
-      react: {
-        createClass: 'createReactClass',
-        flowVersion: '0.53',
-        fragment: 'Fragment',
-        pragma: 'React',
-        version: 'detect',
-      },
-      tailwindcss: {
-        config: './tailwind.config.ts',
-      },
     },
   },
   configPrettier, // Must go second last

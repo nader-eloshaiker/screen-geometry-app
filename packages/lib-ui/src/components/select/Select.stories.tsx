@@ -1,8 +1,8 @@
 import { StateTable } from '@/storybook/StateTable'
 import type { Meta, StoryObj } from '@storybook/react-vite'
-import { VariantProps } from 'class-variance-authority'
+import type { VariantProps } from 'class-variance-authority'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from './Select'
-import { SelectTriggerVariants, TSelectTriggerPalette } from './Select.variants'
+import type { SelectTriggerVariants, TSelectTriggerPalette } from './SelectVariants'
 
 const meta = {
   title: 'elements/Select',

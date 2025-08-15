@@ -1,14 +1,13 @@
+import tailwindcss from '@tailwindcss/vite'
 import react from '@vitejs/plugin-react'
-import tailwindcss from 'tailwindcss'
+import { defineConfig } from 'vite'
 import tsconfigPaths from 'vite-tsconfig-paths'
-import { configDefaults, defineConfig, ViteUserConfig } from 'vitest/config'
+import { configDefaults } from 'vitest/config'
 
-const Config: ViteUserConfig = {
+export default defineConfig({
+  assetsInclude: ['./sb-preview/runtime.js'],
+  plugins: [react(), tailwindcss(), tsconfigPaths()],
   test: {
-    // Do not process css files (is slow)
-    // css: {
-    //   include: /.+/,
-    // },
     globals: true,
     clearMocks: true,
     reporters: process.env.GITHUB_ACTIONS ? ['verbose', 'github-actions'] : ['verbose'],
@@ -32,15 +31,4 @@ const Config: ViteUserConfig = {
     setupFiles: ['src/configs/vitest.setup.ts'],
     include: ['src/**/*.test.{ts,tsx}'],
   },
-}
-/// <reference types="vitest" />
-export default defineConfig({
-  assetsInclude: ['./sb-preview/runtime.js'],
-  plugins: [tsconfigPaths(), react()],
-  css: {
-    postcss: {
-      plugins: [tailwindcss()],
-    },
-  },
-  test: Config.test,
 })

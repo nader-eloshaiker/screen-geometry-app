@@ -1,13 +1,13 @@
 import { cn } from '@/lib/utils'
-import { ScreenDataEnum } from '@screengeometry/lib-api/internal'
+import { type ScreenDataType } from '@screengeometry/lib-api/internal'
 import { FormControl, FormField, FormItem, FormLabel, FormMessage } from '@screengeometry/lib-ui/form'
-import { AdornmentProps, Input } from '@screengeometry/lib-ui/input'
-import { Control, useFormContext } from 'react-hook-form'
-import { FormSubmitType } from '../ScreenFormSchema'
+import { type AdornmentProps, Input } from '@screengeometry/lib-ui/input'
+import { type Control, useFormContext } from 'react-hook-form'
+import { type FormSubmitType } from '../ScreenFormSchema'
 
 type Props = React.InputHTMLAttributes<HTMLInputElement> &
   AdornmentProps & {
-    formKey: ScreenDataEnum
+    formKey: ScreenDataType
     title: string
     overlay?: string
     isLoading?: boolean
@@ -43,7 +43,7 @@ export const InputField = ({
               endAdornment={endAdornment}
               startAdornment={startAdornment}
               className={cn(className, {
-                'animate-pulse pointer-events-none': isLoading,
+                'pointer-events-none animate-pulse': isLoading,
               })}
               value={field.value ?? ''} // Map null to an empty string
               //onChange={(e) => field.onChange(e.target.value === '' ? null : Number(e.target.value))}

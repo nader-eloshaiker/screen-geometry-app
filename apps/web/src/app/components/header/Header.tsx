@@ -17,7 +17,7 @@ import { HeaderNavLarge } from './HeaderNavLarge'
 import { HeaderNavSmall } from './HeaderNavSmall'
 
 const ThemeToggleStyled = ({ id }: { id: string }) => (
-  <ThemeToggle className='self-center opacity-50 hover:opacity-100 md:mr-2' id={id} />
+  <ThemeToggle className='self-center p-4 opacity-85 hover:opacity-100' id={id} />
 )
 
 const Title = ({ size, appTitle }: { size: 'sm' | 'lg'; appTitle: string }) => (
@@ -43,7 +43,7 @@ export default function Header() {
   )
 
   return (
-    <header className='bg-header p-4 text-header-foreground shadow-md'>
+    <header className='bg-header text-header-foreground p-4 shadow-md'>
       <div className='flex items-center gap-6 lg:hidden' data-testid='small-header'>
         <Sheet open={open} onOpenChange={setOpen}>
           <SheetTrigger asChild>
