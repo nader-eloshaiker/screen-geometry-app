@@ -4,9 +4,9 @@
 [![CI](https://github.com/nader-eloshaiker/screen-geometry-app/actions/workflows/ci.yml/badge.svg)](https://github.com/nader-eloshaiker/screen-geometry-app/actions/workflows/ci.yml)
 [![CD](https://github.com/nader-eloshaiker/screen-geometry-app/actions/workflows/cd.yml/badge.svg)](https://github.com/nader-eloshaiker/screen-geometry-app/actions/workflows/cd.yml)
 
-[![codecov](https://codecov.io/gh/nader-eloshaiker/screen-geometry-app/graph/badge.svg?token=FD9467PICM)](https://app.codecov.io/gh/nader-eloshaiker/screen-geometry-app?search=&displayType=list)
+[![CodeCov](https://codecov.io/gh/nader-eloshaiker/screen-geometry-app/graph/badge.svg?token=FD9467PICM)](https://codecov.io/gh/nader-eloshaiker/screen-geometry-app)
 
-[![CodeCov](https://codecov.io/gh/nader-eloshaiker/screen-geometry-app/graphs/icicle.svg?token=FD9467PICM)](https://app.codecov.io/gh/nader-eloshaiker/screen-geometry-app?search=&displayType=list)
+[![CodeCov](https://codecov.io/gh/nader-eloshaiker/screen-geometry-app/graphs/icicle.svg?token=FD9467PICM)](https://codecov.io/gh/nader-eloshaiker/screen-geometry-app)
 
 ## Description
 
