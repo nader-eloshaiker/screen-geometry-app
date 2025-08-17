@@ -23,8 +23,9 @@ export function NavigationLink({
     <Link
       data-active={isActive}
       to={to}
+      {...(isActive && { tabindex: -1 })}
       {...props}
-      className={cn(ButtonVariants({ className, dimension, mode, palette }))}
+      className={cn(ButtonVariants({ className, dimension, mode, palette }), { 'pointer-events-none': isActive })}
     />
   )
 }
