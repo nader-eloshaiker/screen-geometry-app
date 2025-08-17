@@ -8,11 +8,6 @@ const InputVariants = cva(
   'shadow-xs aria-invalid:border-danger aria-invalid:ring-danger/20 dark:aria-invalid:ring-danger/40 peer flex h-9 w-full min-w-0 rounded-md border-2 bg-transparent px-3 py-1 text-base outline-none transition-[color,box-shadow] file:inline-flex file:h-7 file:border-0 file:bg-transparent file:text-sm file:font-medium focus-visible:ring-2 disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-60 md:text-sm',
   {
     variants: {
-      dimension: {
-        lg: 'px-5 py-6',
-        md: 'px-4 py-5',
-        sm: 'px-3 py-4',
-      },
       palette: {
         primary:
           'border-primary-border bg-primary-input text-primary-foreground-input selection:bg-primary-foreground-input selection:text-primary-input file:text-primary-foreground-input placeholder:text-primary-foreground-input/50 hocus:border-primary-border-hover hocus:text-primary-foreground-input-hover focus-visible:ring-primary-ring',
@@ -25,6 +20,11 @@ const InputVariants = cva(
           'border-success-border bg-success-input text-success-foreground-input selection:bg-success-foreground-input selection:text-success-input file:text-success-foreground-input placeholder:text-success-foreground-input-muted focus-visible:ring-success-ring hocus:border-success-border-hover hocus:text-success-foreground-input-hover',
         warning:
           'border-warning-border bg-warning-input text-warning-foreground-input selection:bg-warning-foreground-input selection:text-warning-input file:text-warning-foreground-input placeholder:text-warning-foreground-input-muted focus-visible:ring-warning-ring hocus:border-warning-border-hover hocus:text-warning-foreground-input-hover',
+      },
+      dimension: {
+        lg: 'px-5 py-6',
+        md: 'px-4 py-5',
+        sm: 'px-3 py-4',
       },
       defaultVariants: {
         dimension: 'md',

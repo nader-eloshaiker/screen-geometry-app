@@ -8,20 +8,26 @@ const SelectTriggerVariants = cva(
     variants: {
       palette: {
         primary:
-          "border-primary-border bg-primary-input text-primary-foreground-input focus-visible:outline-primary-ring data-[placeholder]:text-primary-foreground-muted hocus:border-primary-border-hover hocus:text-primary-foreground-input-hover [&_svg:not([class*='text-'])]:text-primary-foreground-input",
+          'border-primary-border bg-primary-input text-primary-foreground-input selection:bg-primary-foreground-input selection:text-primary-input placeholder:text-primary-foreground-input/50 hocus:border-primary-border-hover hocus:text-primary-foreground-input-hover focus-visible:ring-primary-ring',
         secondary:
-          "border-secondary-border bg-secondary-input text-secondary-foreground-input focus-visible:outline-secondary-ring data-[placeholder]:text-secondary-foreground-muted hocus:border-secondary-border-hover hocus:text-secondary-foreground-input-hover [&_svg:not([class*='text-'])]:text-secondary-foreground-input",
-        mono: "border-mono-border bg-mono-input text-mono-foreground-input focus-visible:outline-mono-ring data-[placeholder]:text-mono-foreground-muted hocus:border-mono-border-hover hocus:text-mono-foreground-input-hover [&_svg:not([class*='text-'])]:text-mono-foreground-input",
+          'border-secondary-border bg-secondary-input text-secondary-foreground-input selection:bg-secondary-foreground-input selection:text-secondary-input placeholder:text-secondary-foreground-input-muted focus-visible:ring-secondary-ring hocus:border-secondary-border-hover hocus:text-secondary-foreground-input-hover',
+        mono: 'border-mono-border bg-mono-input text-mono-foreground-input selection:bg-mono-foreground-input selection:text-mono-input file:text-mono-foreground-input placeholder:text-mono-foreground-input-muted focus-visible:ring-mono-ring hocus:border-mono-border-hover hocus:text-mono-foreground-input-hover',
+        danger:
+          'border-danger-border bg-danger-input text-danger-foreground-input selection:bg-danger-foreground-input selection:text-danger-input placeholder:text-danger-foreground-input-muted focus-visible:ring-danger-ring hocus:border-danger-border-hover hocus:text-danger-foreground-input-hover',
+        success:
+          'border-success-border bg-success-input text-success-foreground-input selection:bg-success-foreground-input selection:text-success-input placeholder:text-success-foreground-input-muted focus-visible:ring-success-ring hocus:border-success-border-hover hocus:text-success-foreground-input-hover',
+        warning:
+          'border-warning-border bg-warning-input text-warning-foreground-input selection:bg-warning-foreground-input selection:text-warning-input placeholder:text-warning-foreground-input-muted focus-visible:ring-warning-ring hocus:border-warning-border-hover hocus:text-warning-foreground-input-hover',
       },
-      size: {
-        sm: 'h-8 text-xs',
-        md: 'h-9 text-sm',
-        lg: 'h-10 text-base',
+      dimension: {
+        lg: 'px-5 py-6',
+        md: 'px-4 py-5',
+        sm: 'px-3 py-4',
       },
-    },
-    defaultVariants: {
-      palette: 'primary',
-      size: 'md',
+      defaultVariants: {
+        dimension: 'md',
+        palette: 'primary',
+      },
     },
   }
 )

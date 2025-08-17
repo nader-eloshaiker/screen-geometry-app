@@ -8,7 +8,7 @@ export const LanguageSwitcher = () => {
 
   return (
     <Select value={locale} onValueChange={setLocale}>
-      <SelectTrigger palette={'secondary'} className='w-[110px] rounded-lg'>
+      <SelectTrigger palette='primary' className='w-[110px] rounded-lg'>
         <SelectValue placeholder='Language' />
       </SelectTrigger>
       <SelectContent palette={'secondary'}>
