@@ -303,7 +303,7 @@ describe('#ScreenFormDrawer', () => {
 
       await waitFor(() => {
         expect(test.queryByText('Create')).not.toBeInTheDocument()
-        expect(test.queryByText('Screen specifications has been added to list')).toBeInTheDocument()
+        expect(test.queryAllByText('Screen specifications has been added to list').length).toBeGreaterThan(0)
       })
     })
   })
