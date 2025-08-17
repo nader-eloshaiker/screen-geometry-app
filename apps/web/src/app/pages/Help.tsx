@@ -3,39 +3,30 @@ import { ScreenPanel } from '@/app/components/screen/panel/ScreenPanel'
 import { ScreenTable } from '@/app/components/screen/table/ScreenTable'
 import { Stacked } from '@/app/components/stacked/Stacked'
 import { defaultScreenInputList } from '@/app/constants/defaultScreenList'
-import { ScreenItemRender } from '@/app/models/screenItemRender'
+import type { ScreenItemRender } from '@/app/models/screenItemRender'
 import { useElementSize } from '@/lib/ui/hooks/useElementSize'
 import { getMaxScreenSize, normaliseScreenRender, transformScreenInput } from '@/lib/utils'
-import { Dimensions } from '@screengeometry/lib-api/internal'
+import type { Dimensions } from '@screengeometry/lib-api/internal'
 import { Button } from '@screengeometry/lib-ui/button'
 import { Label } from '@screengeometry/lib-ui/label'
 import { Pencil, X } from 'lucide-react'
-import { useMemo, useRef } from 'react'
+import { useMemo } from 'react'
 import { Helmet } from 'react-helmet-async'
 import { FormattedMessage } from 'react-intl'
 import tw from 'tailwind-styled-components'
 import { ulid } from 'ulid'
 import { ScreenForm } from '../components/screen/form/ScreenForm'
 
-const Section = tw.div`
-  mb-14
-`
-const Diagram = tw.div`
-  my-8 flex w-full justify-center
-`
-const DiagramPanel = tw.div`
-my-8 flex justify-center
-`
-const Paragraph = tw.div`
-  mb-6
-`
+const Section = tw.div`mb-14`
+const Diagram = tw.div`my-8 flex w-full justify-center`
+const DiagramPanel = tw.div`my-8 flex justify-center`
+const Paragraph = tw.div`mb-6`
 const Heading = tw(Label)`
   mb-8 text-2xl font-bold
 `
 
 export const Help = () => {
-  const divSizeRef = useRef<HTMLDivElement>(null)
-  const { width } = useElementSize(divSizeRef)
+  const [setRef, { width }] = useElementSize()
 
   const { fullList, smallList, invisibleList, maxPanelSize } = useMemo(() => {
     const fullList = normaliseScreenRender(
@@ -75,7 +66,7 @@ export const Help = () => {
             />
           </Paragraph>
           <Diagram>
-            <div className='w-96  overflow-hidden rounded-lg border-2 border-primary-border shadow-lg'>
+            <div className='border-primary-border w-96 overflow-hidden rounded-lg border-2 shadow-lg'>
               <ScreenTable
                 screens={[]}
                 isScreenListLoading={false}
@@ -84,7 +75,7 @@ export const Help = () => {
                 showActon={{ handler: () => {}, isPending: false }}
               />
               <div className='flex h-full flex-col items-center'>
-                <div className='py-4 text-xl text-primary-label'>
+                <div className='text-primary-label py-4 text-xl'>
                   <FormattedMessage id='help.emptytable.nolistfound' defaultMessage='No List Found' />
                 </div>
                 <div className='flex flex-col items-center gap-2 py-6'>
@@ -115,7 +106,7 @@ export const Help = () => {
             />
           </Paragraph>
           <Diagram>
-            <div className='rounded-lg border-2 border-primary-border p-6 shadow-lg'>
+            <div className='border-primary-border rounded-lg border-2 p-6 shadow-lg'>
               <ScreenTable
                 className='pointer-events-none'
                 screens={fullList}
@@ -133,10 +124,7 @@ export const Help = () => {
             />
           </Paragraph>
           <Diagram>
-            <div
-              ref={divSizeRef}
-              className='flex flex-col gap-4 rounded-lg border-2 border-primary-border p-6 shadow-lg'
-            >
+            <div ref={setRef} className='border-primary-border flex flex-col gap-4 rounded-lg border-2 p-6 shadow-lg'>
               <ScreenTable
                 className='pointer-events-none'
                 screens={smallList}
@@ -172,7 +160,7 @@ export const Help = () => {
             />
           </Paragraph>
           <Diagram>
-            <div className='flex flex-col rounded-lg border-2 border-primary-border p-6 shadow-lg'>
+            <div className='border-primary-border flex flex-col rounded-lg border-2 p-6 shadow-lg'>
               <ScreenTable
                 className='pointer-events-none'
                 screens={invisibleList}
@@ -227,7 +215,7 @@ export const Help = () => {
             />
           </Paragraph>
           <DiagramPanel>
-            <div className='mb-6 w-96 border-l-2 border-primary-border bg-background p-2 text-foreground shadow-lg'>
+            <div className='border-primary-border bg-background text-foreground mb-6 w-96 border-l-2 p-2 shadow-lg'>
               <div className='pointer-events-none p-2'>
                 <ScreenForm
                   setOpen={() => {}}

@@ -1,14 +1,14 @@
-import { ScreenEventTypes } from '@/app/hooks/screen/ScreenManager'
 import { useScreenContext } from '@/app/hooks/screen/useScreenContext'
-import { ErrorResponse, ScreenItemResponse } from '@screengeometry/lib-api/spec'
+import type { ErrorResponse, ScreenItemResponse } from '@screengeometry/lib-api/spec'
 import { useCallback, useMemo } from 'react'
 import { useIntl } from 'react-intl'
+import { ScreenEvent } from '../screen/ScreenManager'
 import { useApiEffect } from './useApiEffect'
 
 export const useUpdateScreenEffect = (data: ScreenItemResponse | undefined, error: ErrorResponse | null) => {
   const { dispatch } = useScreenContext()
   const responseHandler = useCallback(
-    (data: ScreenItemResponse) => dispatch({ type: ScreenEventTypes.UPDATE, payload: data.item }),
+    (data: ScreenItemResponse) => dispatch({ type: ScreenEvent.update, payload: data.item }),
     [dispatch]
   )
   const { formatMessage } = useIntl()

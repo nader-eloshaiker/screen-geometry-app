@@ -1,7 +1,7 @@
 import { screenItemFixture } from '@/lib/support/test/fixtures/ScreenFixtures'
-import { ScreenItem } from '@screengeometry/lib-api/spec'
+import { type ScreenItem } from '@screengeometry/lib-api/spec'
 import { IDBFactory } from 'fake-indexeddb'
-import { Stores } from '../db/DbConstants'
+import { StoresEnum } from '../db/DbConstants'
 import { addData } from '../db/IndexedDB'
 import { setupDB } from '../db/IndexedDB.test'
 import { screenInput55Fixture } from '../lib/test/fixtures/ScreenFixtures'
@@ -45,7 +45,7 @@ describe('#api', () => {
     })
 
     it('#getScreenList should return a list of screens', async () => {
-      const created = await addData<ScreenItem>(Stores.Screens, screenItemFixture)
+      const created = await addData<ScreenItem>(StoresEnum.Screens, screenItemFixture)
       expect(created).toBeDefined()
 
       const result = await getScreenList()
@@ -54,7 +54,7 @@ describe('#api', () => {
     })
 
     it('#getScreen should return a screen', async () => {
-      const created = await addData<ScreenItem>(Stores.Screens, screenItemFixture)
+      const created = await addData<ScreenItem>(StoresEnum.Screens, screenItemFixture)
       expect(created).toBeDefined()
 
       const result = await getScreen(created.id)
@@ -62,7 +62,7 @@ describe('#api', () => {
     })
 
     it('#updateScreen should return a screens', async () => {
-      const created = await addData<ScreenItem>(Stores.Screens, screenItemFixture)
+      const created = await addData<ScreenItem>(StoresEnum.Screens, screenItemFixture)
       expect(created).toBeDefined()
 
       const result = await getScreen(created.id)
@@ -90,7 +90,7 @@ describe('#api', () => {
     })
 
     it('#deleteScreen should return true if id is found', async () => {
-      const created = await addData<ScreenItem>(Stores.Screens, screenItemFixture)
+      const created = await addData<ScreenItem>(StoresEnum.Screens, screenItemFixture)
       expect(created).toBeDefined()
 
       const deleted = await deleteScreen(created.id)
@@ -99,7 +99,7 @@ describe('#api', () => {
     })
 
     it('#showScreen should return a screen', async () => {
-      const created = await addData<ScreenItem>(Stores.Screens, screenItemFixture)
+      const created = await addData<ScreenItem>(StoresEnum.Screens, screenItemFixture)
       expect(created).toBeDefined()
 
       const updated = await showScreen(created.id)

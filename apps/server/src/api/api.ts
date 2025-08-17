@@ -1,7 +1,7 @@
 import { to, transformScreenInput } from '@/lib/utils'
-import { ScreenInput, ScreenInputList, ScreenItem, SearchItem } from '@screengeometry/lib-api/spec'
+import type { ScreenInput, ScreenInputList, ScreenItem, SearchItem } from '@screengeometry/lib-api/spec'
 import { DatabaseError } from '../db/DatabaseError'
-import { Stores } from '../db/DbConstants'
+import { StoresEnum } from '../db/DbConstants'
 import { addAllData, addData, deleteData, getAllData, getData, searchData, updateData } from '../db/IndexedDB'
 import { ApiError } from './ApiError'
 
@@ -24,7 +24,7 @@ export type IdResponse = {
 export const getSearchList = async (params: URLSearchParams) => {
   const term = params.get('term')?.toLowerCase().trim() ?? ''
 
-  const [err, list] = await to<Array<SearchItem>>(searchData<SearchItem>(Stores.Search, term, 'label'))
+  const [err, list] = await to<Array<SearchItem>>(searchData<SearchItem>(StoresEnum.Search, term, 'label'))
 
   if (err) {
     throw new DatabaseError('Database error', 500, err)
@@ -34,7 +34,7 @@ export const getSearchList = async (params: URLSearchParams) => {
 }
 
 export const getScreenList = async () => {
-  const [err, list = []] = await to<Array<ScreenItem>>(getAllData<ScreenItem>(Stores.Screens))
+  const [err, list = []] = await to<Array<ScreenItem>>(getAllData<ScreenItem>(StoresEnum.Screens))
 
   if (err) {
     throw new DatabaseError('Database error', 500, err)
@@ -48,7 +48,7 @@ export const getScreen = async (id: string) => {
     throw new ApiError('No parameters provided', 400)
   }
 
-  const [err, item] = await to<Nullable<ScreenItem>>(getData<ScreenItem>(Stores.Screens, id))
+  const [err, item] = await to<Nullable<ScreenItem>>(getData<ScreenItem>(StoresEnum.Screens, id))
 
   if (err) {
     throw new DatabaseError('Database error', 500, err)
@@ -65,7 +65,7 @@ export const updateScreen = async (id: string, data: ScreenInput) => {
   }
 
   const screenItem = { ...transformScreenInput(data), id }
-  const [err, item] = await to<ScreenItem>(updateData<ScreenItem>(Stores.Screens, screenItem))
+  const [err, item] = await to<ScreenItem>(updateData<ScreenItem>(StoresEnum.Screens, screenItem))
 
   if (err) {
     throw new DatabaseError('Database error', 500, err)
@@ -82,7 +82,7 @@ export const createScreen = async (data: ScreenInput) => {
   }
 
   const keylessData = transformScreenInput(data)
-  const [err, item] = await to<ScreenItem>(addData<ScreenItem>(Stores.Screens, keylessData))
+  const [err, item] = await to<ScreenItem>(addData<ScreenItem>(StoresEnum.Screens, keylessData))
 
   if (err) {
     throw new DatabaseError('Database error', 500, err)
@@ -97,7 +97,7 @@ export const createScreenList = async (data: ScreenInputList) => {
   }
 
   const keylessList = data.map((item) => transformScreenInput(item))
-  const [err, list] = await to<Array<ScreenItem>>(addAllData<ScreenItem>(Stores.Screens, keylessList))
+  const [err, list] = await to<Array<ScreenItem>>(addAllData<ScreenItem>(StoresEnum.Screens, keylessList))
 
   if (err) {
     throw new DatabaseError('Database error', 500, err)
@@ -111,7 +111,7 @@ export const deleteScreen = async (id: string) => {
     throw new ApiError('No parameters provided', 400)
   }
 
-  const [err, data] = await to<string>(deleteData(Stores.Screens, id))
+  const [err, data] = await to<string>(deleteData(StoresEnum.Screens, id))
 
   if (err) {
     throw new DatabaseError('Database error', 500, err)
@@ -127,7 +127,7 @@ export const showScreen = async (id: string) => {
     throw new ApiError('No parameters provided', 400)
   }
 
-  const [err, data] = await to<Undefinable<ScreenItem>>(getData<ScreenItem>(Stores.Screens, id))
+  const [err, data] = await to<Undefinable<ScreenItem>>(getData<ScreenItem>(StoresEnum.Screens, id))
 
   if (err) {
     throw new DatabaseError('Database error', 500, err)
@@ -136,7 +136,7 @@ export const showScreen = async (id: string) => {
   }
 
   const [err2, item] = await to<ScreenItem>(
-    updateData<ScreenItem>(Stores.Screens, {
+    updateData<ScreenItem>(StoresEnum.Screens, {
       ...data,
       visible: !data.visible,
     })

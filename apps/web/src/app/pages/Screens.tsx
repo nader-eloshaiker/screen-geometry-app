@@ -1,5 +1,5 @@
 import {
-  Alignment,
+  type Alignment,
   HorizontalAlignmentSelector,
   VerticalAlignmentSelector,
 } from '@/app/components/screen/alignment/AlignmentSelector'
@@ -10,29 +10,29 @@ import { defaultScreenInputList } from '@/app/constants/defaultScreenList'
 import { useCreateScreenListEffect } from '@/app/hooks/api/useCreateScreenListEffect'
 import { useGetScreensListEffect } from '@/app/hooks/api/useGetScreensListEffect'
 import { useScreenContext } from '@/app/hooks/screen/useScreenContext'
-import { ScreenItemRender } from '@/app/models/screenItemRender'
+import type { ScreenItemRender } from '@/app/models/screenItemRender'
 import { useElementSize } from '@/lib/ui/hooks/useElementSize'
 import { getMaxScreenSize } from '@/lib/utils'
 import { useCreateScreenList, useDeleteScreen, useGetScreenList, useShowScreen } from '@screengeometry/lib-api/spec'
 import { Button } from '@screengeometry/lib-ui/button'
-import { usePageLoader } from '@screengeometry/lib-ui/hooks/pageloader'
 import { Label } from '@screengeometry/lib-ui/label'
+import { usePageLoader } from '@screengeometry/lib-ui/pageloader'
 import { Skeleton } from '@screengeometry/lib-ui/skeleton'
 import { keepPreviousData } from '@tanstack/react-query'
 import { Loader2 } from 'lucide-react'
-import { useCallback, useEffect, useRef, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import ReactGA from 'react-ga4'
 import { Helmet } from 'react-helmet-async'
 import { FormattedMessage } from 'react-intl'
-import { Dimensions } from '../../../../../packages/lib-api/src/internal'
+import type { Dimensions } from '../../../../../packages/lib-api/src/internal'
 import { CreateScreenButton } from '../components/screen/createbutton/CreateButton'
-import { FormModeTypes, ScreenFormDrawer } from '../components/screen/form/ScreenFormDrawer'
+import { FormModeTypes } from '../components/screen/form/FormMode'
+import { ScreenFormDrawer } from '../components/screen/form/ScreenFormDrawer'
 import { useDeleteScreenEffect } from '../hooks/api/useDeleteScreenEffect'
 import { useShowScreenEffect } from '../hooks/api/useShowScreenEffect'
 
 export const Screens = () => {
-  const divSizeRef = useRef<HTMLDivElement>(null)
-  const { width } = useElementSize(divSizeRef)
+  const [setRef, { width }] = useElementSize()
   const {
     state: { screens },
   } = useScreenContext()
@@ -83,7 +83,7 @@ export const Screens = () => {
   const isLoading = isListLoading || isPageLoading
 
   const [isEditorOpen, setIsEditorOpen] = useState(false)
-  const [editMode, setEditMode] = useState<FormModeTypes>(FormModeTypes.Create)
+  const [editMode, setEditMode] = useState<FormModeTypes>(FormModeTypes.create)
   const [editId, setEditId] = useState<string | undefined>()
 
   const onLoadDefault = () => {
@@ -102,7 +102,7 @@ export const Screens = () => {
       label: 'Screens Page',
     })
     setIsEditorOpen(true)
-    setEditMode(FormModeTypes.Edit)
+    setEditMode(FormModeTypes.edit)
     setEditId(id)
   }, [])
 
@@ -146,7 +146,7 @@ export const Screens = () => {
       </Helmet>
 
       <div className='flex flex-1 flex-col gap-10'>
-        <div className='flex flex-col items-center gap-4 md:flex-row md:justify-between' ref={divSizeRef}>
+        <div className='flex flex-col items-center gap-4 md:flex-row md:justify-between' ref={setRef}>
           <Label palette='primary' className='text-xl'>
             <FormattedMessage id='screens.specs.title' defaultMessage='Screen Specs' />
           </Label>
@@ -154,7 +154,7 @@ export const Screens = () => {
             <CreateScreenButton
               onClick={() => {
                 setEditId(undefined)
-                setEditMode(FormModeTypes.Create)
+                setEditMode(FormModeTypes.create)
               }}
             />
           </ScreenFormDrawer>
@@ -172,7 +172,7 @@ export const Screens = () => {
 
         {screens.length === 0 && !isLoading && (
           <div className='flex h-full flex-col items-center'>
-            <div className='py-4 text-xl text-primary-label'>No List Found</div>
+            <div className='text-primary-label py-4 text-xl'>No List Found</div>
             <div className='flex flex-col items-center gap-2 py-6'>
               <div>
                 <FormattedMessage

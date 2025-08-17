@@ -1,10 +1,10 @@
 import { EnvConfig } from '@/app/hooks/config/EnvConfig'
 import { QueryProvider } from '@/app/hooks/query/QueryProvider'
 import { EnvTranslation } from '@/app/hooks/translation/EnvTranslation'
-import { PageLoaderProvider } from '@screengeometry/lib-ui/hooks/pageloader'
-import { render, RenderOptions, RenderResult } from '@testing-library/react'
-import { UserEvent } from '@testing-library/user-event'
-import { ReactElement } from 'react'
+import { PageLoaderProvider } from '@screengeometry/lib-ui/pageloader'
+import { render, type RenderOptions, type RenderResult } from '@testing-library/react'
+import type { UserEvent } from '@testing-library/user-event'
+import type { ReactElement } from 'react'
 
 export type InteractComponent = RenderResult & { user: UserEvent }
 

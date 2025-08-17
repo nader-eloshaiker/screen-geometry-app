@@ -10,7 +10,7 @@ export default function Footer() {
   const patchVer = parseInt(longVer.split('.')[2])
 
   return (
-    <footer className='bg-header px-8 py-6 text-header-foreground'>
+    <footer className='bg-header text-header-foreground px-8 py-6'>
       <div className='container mx-auto flex w-full flex-col items-start justify-between gap-4 md:flex-row md:items-center'>
         <div className='flex items-center gap-6'>
           <div className='flex items-center gap-2'>

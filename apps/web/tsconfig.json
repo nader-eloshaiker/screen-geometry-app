@@ -1,20 +1,4 @@
 {
-  "$schema": "https://json.schemastore.org/tsconfig",
-  "display": "React",
-  "extends": "./tsconfig.node.json",
-  "compilerOptions": {
-    "useDefineForClassFields": true,
-    "jsx": "react-jsx",
-    "baseUrl": ".",
-    "paths": {
-      "@/*": ["./src/*"]
-    }
-  },
-  "include": [
-    "src",
-    "src/configs/vitest.setup.ts",
-    "src/lib/server/api/SearchService.ts",
-    "src/lib/server/server.test.ts"
-  ],
-  "exclude": ["node_modules", "coverage", "dist", "build", "storybook-static"]
+  "files": [],
+  "references": [{ "path": "./tsconfig.app.json" }, { "path": "./tsconfig.node.json" }]
 }

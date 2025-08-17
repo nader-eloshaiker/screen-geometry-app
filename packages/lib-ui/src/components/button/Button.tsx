@@ -3,28 +3,28 @@ import { type VariantProps } from 'class-variance-authority'
 import * as React from 'react'
 
 import { cn } from '../../lib/utils'
-import { ButtonVariants } from './Button.variants'
+import { ButtonVariants } from './ButtonVariants'
 
-export interface ButtonProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement>,
-    VariantProps<typeof ButtonVariants> {
-  asChild?: boolean
-  active?: boolean
+export function Button({
+  active = false,
+  asChild = false,
+  className,
+  dimension,
+  mode,
+  palette,
+  ...props
+}: React.ComponentProps<'button'> &
+  VariantProps<typeof ButtonVariants> & {
+    active?: boolean
+    asChild?: boolean
+  }) {
+  const Comp = asChild ? Slot : 'button'
+  return (
+    <Comp
+      data-slot='button'
+      data-active={active}
+      className={cn(ButtonVariants({ className, dimension, mode, palette }), { active: true })}
+      {...props}
+    />
+  )
 }
-
-const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, mode, palette, dimension, asChild = false, active = false, ...props }, ref) => {
-    const Comp = asChild ? Slot : 'button'
-    return (
-      <Comp
-        data-active={active}
-        className={cn(ButtonVariants({ mode, palette, dimension, className }), { active: true })}
-        ref={ref}
-        {...props}
-      />
-    )
-  }
-)
-Button.displayName = 'Button'
-
-export { Button, ButtonVariants }

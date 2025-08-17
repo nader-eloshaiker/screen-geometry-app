@@ -1,112 +1,78 @@
-// import { FlatCompat } from '@eslint/eslintrc'
-import jsEslint from '@eslint/js'
-import typescriptParser from '@typescript-eslint/parser'
-import eslintPluginImport from 'eslint-plugin-import'
-import eslintPluginPrettierRecommended from 'eslint-plugin-prettier/recommended'
-import react from 'eslint-plugin-react'
-import storybook from 'eslint-plugin-storybook'
-import { defineConfig } from 'eslint/config'
-import globals from 'globals/index.js'
-import tsEslint from 'typescript-eslint'
-
-import eslintConfigPrettier from 'eslint-config-prettier/flat'
+import eslint from '@eslint/js'
+import configPrettier from 'eslint-config-prettier/flat'
+import importPlugin from 'eslint-plugin-import'
+import prettierPlugin from 'eslint-plugin-prettier/recommended'
+import reactPlugin from 'eslint-plugin-react'
 import reactHooks from 'eslint-plugin-react-hooks'
 import reactRefresh from 'eslint-plugin-react-refresh'
-import tailwindcss from 'eslint-plugin-tailwindcss'
+import storybook from 'eslint-plugin-storybook'
+import { globalIgnores } from 'eslint/config'
+import globals from 'globals'
+import tseslint from 'typescript-eslint'
 
-export default defineConfig([
-  jsEslint.configs.recommended,
-  ...tsEslint.configs.recommended,
-  eslintPluginPrettierRecommended,
+export default tseslint.config(
+  globalIgnores(['dist/**/*'], 'Ignore Build Directory'),
+  eslint.configs.recommended,
   reactHooks.configs['recommended-latest'],
-  reactRefresh.configs.recommended,
-  ...storybook.configs['flat/recommended'],
-  ...tailwindcss.configs['flat/recommended'],
-  eslintConfigPrettier, // Must go last
+  reactRefresh.configs.vite,
+  storybook.configs['flat/recommended'],
+  tseslint.configs.recommended,
   {
     ignores: ['node_modules/', 'dist/', 'coverage/', 'storybook-static/'],
   },
   {
-    files: ['**/*.{js,mjs,ts,tsx,jsx}'],
-
-    plugins: {
-      react,
-      import: eslintPluginImport,
-      '@typescript-eslint': tsEslint.plugin,
-    },
-
+    files: ['**/*.{js,mjs,cjs,jsx,mjsx,ts,tsx,mtsx}'],
+    ...reactPlugin.configs.flat.recommended,
     languageOptions: {
+      ...reactPlugin.configs.flat.recommended.languageOptions,
       globals: {
         ...globals.browser,
         ...globals.vitest,
         ...globals.node,
-        window: true,
         module: true,
+        window: true,
       },
-
-      parser: typescriptParser,
-      ecmaVersion: 'latest',
-      sourceType: 'module',
-
       parserOptions: {
-        ecmaFeatures: {
-          jsx: true,
-        },
+        tsconfigRootDir: import.meta.dirname,
+        // project: './tsconfig.json',
       },
     },
-
-    settings: {
-      tailwindcss: {
-        config: './tailwind.config.ts',
-      },
-
-      'import/resolver': {
-        typescript: {},
-      },
-
-      react: {
-        createClass: 'createReactClass',
-        pragma: 'React',
-        fragment: 'Fragment',
-        version: 'detect',
-        flowVersion: '0.53',
-      },
+    plugins: {
+      ...reactPlugin.configs.flat.recommended.plugins,
+      import: importPlugin,
     },
-
     rules: {
       '@typescript-eslint/explicit-module-boundary-types': 'off',
+      '@typescript-eslint/no-empty-function': 'off',
 
-      'no-unused-vars': 'off',
+      '@typescript-eslint/no-non-null-assertion': 'off',
       '@typescript-eslint/no-unused-vars': [
         'error',
         {
-          vars: 'all', // Check all variables for usage
-          ignoreRestSiblings: true,
           argsIgnorePattern: '^_',
-          varsIgnorePattern: '^_',
           caughtErrorsIgnorePattern: '^_',
+          ignoreRestSiblings: true,
+          vars: 'all', // Check all variables for usage
+          varsIgnorePattern: '^_',
         },
       ],
+      camelcase: 'error',
+      'no-duplicate-imports': 'error',
 
-      '@typescript-eslint/no-non-null-assertion': 'off',
-      '@typescript-eslint/no-empty-function': 'off',
+      'no-empty-function': 'off',
+
+      'no-unused-vars': 'off',
 
       'prettier/prettier': [
         'error',
         {
-          semi: false,
           endOfLine: 'auto',
+          semi: false,
         },
       ],
-
-      'no-empty-function': 'off',
-      'react/react-in-jsx-scope': 'off',
-      'react-hooks/rules-of-hooks': 'error',
-      'react-hooks/exhaustive-deps': 'warn',
-      'react/prop-types': 'off',
-      camelcase: 'error',
       quotes: ['error', 'single'],
-      'no-duplicate-imports': 'error',
+      'react-hooks/exhaustive-deps': 'warn',
+      'react-hooks/rules-of-hooks': 'error',
 
       'react-refresh/only-export-components': [
         'warn',
@@ -114,17 +80,23 @@ export default defineConfig([
           allowConstantExport: true,
         },
       ],
+      'react/prop-types': 'off',
+      'react/react-in-jsx-scope': 'off',
 
-      'tailwindcss/classnames-order': 'warn',
+      'sort-keys-custom-order/import-object-keys': 'off', // handled by prettier
 
-      'tailwindcss/no-custom-classname': [
-        'warn',
-        {
-          callees: ['classnames', 'clsx', 'ctl', 'cva', 'tv', 'cn', 'twMerge', 'tw'],
-        },
-      ],
+      // 'tailwindcss/classnames-order': 'warn',
 
-      'tailwindcss/no-contradicting-classname': 'error',
+      // 'tailwindcss/no-custom-classname': [
+      //   'warn',
+      //   {
+      //     callees: ['classnames', 'clsx', 'ctl', 'cva', 'tv', 'cn', 'twMerge', 'tw'],
+      //   },
+      // ],
+
+      // 'tailwindcss/no-contradicting-classname': 'error',
     },
   },
-])
+  configPrettier, // Must go second last
+  prettierPlugin // Must go last
+)

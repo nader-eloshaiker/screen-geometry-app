@@ -2,7 +2,7 @@ import GithubIcon from '@/app/assets/icons/Github'
 import LinkedInIcon from '@/app/assets/icons/LinkedIn'
 import TwitterIcon from '@/app/assets/icons/Twitter'
 import XIcon from '@/app/assets/icons/X'
-import { ReactNode } from 'react'
+import { type ReactNode } from 'react'
 import { Helmet } from 'react-helmet-async'
 import { FormattedMessage } from 'react-intl'
 

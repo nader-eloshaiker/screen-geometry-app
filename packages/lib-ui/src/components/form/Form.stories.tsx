@@ -3,19 +3,19 @@ import type { Meta, StoryObj } from '@storybook/react-vite'
 import { useForm } from 'react-hook-form'
 import * as yup from 'yup'
 import { ObjectSchema } from 'yup'
+import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from '.'
 import { Button } from '../button'
-import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from '../form'
 import { Input } from '../input'
 
 const meta = {
-  title: 'Elements/Form',
-  component: Form,
   // tags: ['autodocs'],
   argTypes: {},
+  component: Form,
   parameters: {
     // More on how to position stories at: https://storybook.js.org/docs/configure/story-layout
     layout: 'centered',
   },
+  title: 'Elements/Form',
 } satisfies Meta<typeof Form>
 
 export default meta
@@ -35,10 +35,10 @@ const formSchema: ObjectSchema<{ username: string }> = yup.object().shape(
 const ProfileForm = () => {
   // 1. Define your form.
   const form = useForm<yup.InferType<typeof formSchema>>({
-    resolver: yupResolver(formSchema),
     defaultValues: {
       username: '',
     },
+    resolver: yupResolver(formSchema),
   })
 
   // 2. Define a submit handler.

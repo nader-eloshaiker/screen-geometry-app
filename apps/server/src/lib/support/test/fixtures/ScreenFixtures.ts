@@ -1,4 +1,4 @@
-import { ScreenItem } from '@screengeometry/lib-api/spec'
+import { type ScreenItem } from '@screengeometry/lib-api/spec'
 
 export const screenItemFixture: ScreenItem = {
   id: '5HjERJbH',

@@ -4,19 +4,19 @@ import { useUpdateScreenEffect } from '@/app/hooks/api/useUpdateScreenEffect'
 import { DarkMode, LightMode } from '@/app/hooks/theme/Theme.types'
 import { cn, createCSSColor } from '@/lib/utils'
 import { yupResolver } from '@hookform/resolvers/yup'
-import { ScreenDataEnum } from '@screengeometry/lib-api/internal'
-import { ScreenInput, SearchItem, useCreateScreen, useUpdateScreen } from '@screengeometry/lib-api/spec'
+import { type ScreenInput, type SearchItem, useCreateScreen, useUpdateScreen } from '@screengeometry/lib-api/spec'
 import { Button } from '@screengeometry/lib-ui/button'
 import { Form } from '@screengeometry/lib-ui/form'
 import { Separator } from '@screengeometry/lib-ui/separator'
 import { Loader2 } from 'lucide-react'
-import { Dispatch, SetStateAction, useEffect, useState } from 'react'
+import { type Dispatch, type SetStateAction, useEffect, useState } from 'react'
 import ReactGA from 'react-ga4'
-import { SubmitHandler, useForm } from 'react-hook-form'
+import { type SubmitHandler, useForm } from 'react-hook-form'
 import { FormattedMessage, useIntl } from 'react-intl'
-import { EmptyInputValues, FormSubmitType, ScreenFormSchema } from './ScreenFormSchema'
 import { ColorField } from './fields/ColorField'
 import { InputField } from './fields/InputField'
+import { FormModeTypes } from './FormMode'
+import { EmptyInputValues, type FormSubmitType, ScreenFormSchema } from './ScreenFormSchema'
 
 type Props = React.PropsWithChildren & {
   setOpen: Dispatch<SetStateAction<boolean>>
@@ -62,37 +62,37 @@ export const ScreenForm = ({ setOpen, editId, isEditLoading, editScreen, selecte
       return
     }
 
-    setValue(ScreenDataEnum.aspectRatio, selectedItem.aspectRatio, {
+    setValue('aspectRatio', selectedItem.aspectRatio, {
       shouldValidate: true,
       shouldDirty: true,
       shouldTouch: true,
     })
     if (selectedItem.diagonalSize) {
-      setValue(ScreenDataEnum.diagonalSize, selectedItem.diagonalSize, {
+      setValue('diagonalSize', selectedItem.diagonalSize, {
         shouldValidate: true,
         shouldDirty: true,
         shouldTouch: true,
       })
     } else {
-      resetField(ScreenDataEnum.diagonalSize)
+      resetField('diagonalSize')
     }
     if (selectedItem.hRes) {
-      setValue(ScreenDataEnum.hRes, selectedItem.hRes, {
+      setValue('hRes', selectedItem.hRes, {
         shouldValidate: true,
         shouldDirty: true,
         shouldTouch: true,
       })
     } else {
-      resetField(ScreenDataEnum.hRes)
+      resetField('hRes')
     }
     if (selectedItem.vRes) {
-      setValue(ScreenDataEnum.vRes, selectedItem.vRes, {
+      setValue('vRes', selectedItem.vRes, {
         shouldValidate: true,
         shouldDirty: true,
         shouldTouch: true,
       })
     } else {
-      resetField(ScreenDataEnum.vRes)
+      resetField('vRes')
     }
     // only effect on selection change
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -101,11 +101,11 @@ export const ScreenForm = ({ setOpen, editId, isEditLoading, editScreen, selecte
   const generateColorHandler = () => {
     const color = createCSSColor()
 
-    setValue(ScreenDataEnum.darkColor, color.darkColor, {
+    setValue('darkColor', color.darkColor, {
       shouldValidate: true,
       shouldDirty: true,
     })
-    setValue(ScreenDataEnum.lightColor, color.lightColor, {
+    setValue('lightColor', color.lightColor, {
       shouldValidate: true,
       shouldDirty: true,
     })
@@ -119,7 +119,7 @@ export const ScreenForm = ({ setOpen, editId, isEditLoading, editScreen, selecte
   const submitHandler: SubmitHandler<FormSubmitType> = (form: FormSubmitType) => {
     ReactGA.event({
       category: 'Submit Button Click',
-      action: `Submited ${editId ? 'Update' : 'Create'} Screen Button`,
+      action: `Submited ${editId ? FormModeTypes.edit : FormModeTypes.create} Screen Button`,
       label: 'Screens Page',
     })
 
@@ -151,7 +151,7 @@ export const ScreenForm = ({ setOpen, editId, isEditLoading, editScreen, selecte
         <div className='flex flex-col gap-10'>
           <div id='screenTag' className='grid grid-cols-2 gap-6'>
             <InputField
-              formKey={ScreenDataEnum.diagonalSize}
+              formKey={'diagonalSize'}
               control={control}
               title={formatMessage({ id: 'screen.form.size', defaultMessage: 'Screen Size' })}
               type='number'
@@ -164,7 +164,7 @@ export const ScreenForm = ({ setOpen, editId, isEditLoading, editScreen, selecte
             />
 
             <InputField
-              formKey={ScreenDataEnum.aspectRatio}
+              formKey={'aspectRatio'}
               control={control}
               title={formatMessage({ id: 'screen.form.aspect', defaultMessage: 'Aspect Ratio' })}
               type='text'
@@ -178,7 +178,7 @@ export const ScreenForm = ({ setOpen, editId, isEditLoading, editScreen, selecte
 
           <div id='screenData' className='grid grid-cols-2 gap-6'>
             <InputField
-              formKey={ScreenDataEnum.hRes}
+              formKey={'hRes'}
               control={control}
               title={formatMessage({ id: 'screen.form.horizontal', defaultMessage: 'Horizontal Res' })}
               type='number'
@@ -191,7 +191,7 @@ export const ScreenForm = ({ setOpen, editId, isEditLoading, editScreen, selecte
             />
 
             <InputField
-              formKey={ScreenDataEnum.vRes}
+              formKey={'vRes'}
               control={control}
               title={formatMessage({ id: 'screen.form.vertical', defaultMessage: 'Vertical Res' })}
               type='number'
@@ -204,32 +204,30 @@ export const ScreenForm = ({ setOpen, editId, isEditLoading, editScreen, selecte
             />
           </div>
 
-          <div className='flex items-start justify-between'>
-            <div className='grid grid-cols-2 gap-6'>
-              <ColorField
-                formKey={ScreenDataEnum.lightColor}
-                title={formatMessage({ id: 'screen.form.light', defaultMessage: 'Light Color' })}
-                mode={LightMode}
-                isLoading={isEditLoading}
-                control={control}
-                className='w-[102px]'
-              />
-              <ColorField
-                formKey={ScreenDataEnum.darkColor}
-                title={formatMessage({ id: 'screen.form.dark', defaultMessage: 'Dark Color' })}
-                mode={DarkMode}
-                isLoading={isEditLoading}
-                control={control}
-                className='w-[102px]'
-              />
-            </div>
+          <div className='flex items-end justify-between gap-6'>
+            <ColorField
+              formKey={'lightColor'}
+              title={formatMessage({ id: 'screen.form.light', defaultMessage: 'Light Color' })}
+              mode={LightMode}
+              isLoading={isEditLoading}
+              control={control}
+              className='w-full'
+            />
+            <ColorField
+              formKey={'darkColor'}
+              title={formatMessage({ id: 'screen.form.dark', defaultMessage: 'Dark Color' })}
+              mode={DarkMode}
+              isLoading={isEditLoading}
+              control={control}
+              className='w-full'
+            />
             <Button
               type='button'
-              className='mt-8 shadow-lg'
+              className='size-9'
               title={formatMessage({ id: 'screen.form.colors', defaultMessage: 'Generate Colors' })}
               dimension='icon-lg'
               data-testid='generate-color-btn'
-              mode='outline'
+              mode='ghost'
               onMouseDown={() => setToggleAnimation(!toggleAnimation)}
               onClick={generateColorHandler}
               disabled={isEditLoading}
@@ -281,9 +279,6 @@ export const ScreenForm = ({ setOpen, editId, isEditLoading, editScreen, selecte
             </Button>
           </div>
         </div>
-        {/* <SheetClose asChild>
-          <Button type='submit'>Save changes</Button>
-        </SheetClose> */}
       </form>
     </Form>
   )

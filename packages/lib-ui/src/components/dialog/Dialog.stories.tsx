@@ -1,26 +1,18 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
+import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '.'
 import { Button } from '../button'
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from '../dialog'
 import { Input } from '../input'
 import { Label } from '../label'
 
 const meta = {
-  title: 'Elements/Dialog',
-  component: Dialog,
   // tags: ['autodocs'],
   argTypes: {},
+  component: Dialog,
   parameters: {
     // More on how to position stories at: https://storybook.js.org/docs/configure/story-layout
     layout: 'centered',
   },
+  title: 'Elements/Dialog',
 } satisfies Meta<typeof Dialog>
 
 export default meta
@@ -35,7 +27,7 @@ export const Component: Story = {
         <DialogTrigger asChild>
           <Button mode='outline'>Edit Profile</Button>
         </DialogTrigger>
-        <DialogContent className='sm:max-w-screen-xs'>
+        <DialogContent className='sm:max-[450px]-(--breakpoint-xs)'>
           <DialogHeader>
             <DialogTitle>Edit profile</DialogTitle>
             <DialogDescription>Make changes to your profile here. Click save when you&lsquo;re done.</DialogDescription>

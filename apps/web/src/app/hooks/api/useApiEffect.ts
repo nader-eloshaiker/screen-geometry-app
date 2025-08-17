@@ -1,4 +1,4 @@
-import { ErrorResponse } from '@screengeometry/lib-api/spec'
+import { type ErrorResponse } from '@screengeometry/lib-api/spec'
 import { useToast } from '@screengeometry/lib-ui/toaster'
 
 import { useEffect } from 'react'

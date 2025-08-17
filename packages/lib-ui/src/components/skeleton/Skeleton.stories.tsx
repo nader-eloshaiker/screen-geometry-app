@@ -1,15 +1,15 @@
 import { StateTable } from '@/storybook/StateTable'
 import type { Meta, StoryObj } from '@storybook/react-vite'
 import { Skeleton } from './Skeleton'
-import { TSkeletonDimension, TSkeletonMode } from './Skeleton.variants'
+import type { TSkeletonDimension, TSkeletonMode } from './SkeletonVariants'
 
 const meta = {
-  title: 'elements/Skeleton',
   component: Skeleton,
   // tags: ['autodocs'],
   parameters: {
     layout: 'centered',
   },
+  title: 'elements/Skeleton',
 } satisfies Meta<typeof Skeleton>
 
 export default meta

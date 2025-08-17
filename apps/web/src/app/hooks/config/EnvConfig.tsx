@@ -1,9 +1,9 @@
 import { EnvConfigProvider } from '@/app/hooks/config/EnvConfigProvider'
 import { createBrowserServiceWorker } from '@/lib/serviceworker/BrowserServiceWorker'
 import { assetAxiosInstance, serverAxiosInstance } from '@screengeometry/lib-api/apiClient'
-import { Config, getGetConfigResponseMock, useGetConfig } from '@screengeometry/lib-api/spec'
-import { usePageLoader } from '@screengeometry/lib-ui/hooks/pageloader'
-import { ReactNode, useEffect, useState } from 'react'
+import { type Config, getGetConfigResponseMock, useGetConfig } from '@screengeometry/lib-api/spec'
+import { usePageLoader } from '@screengeometry/lib-ui/pageloader'
+import { type ReactNode, useEffect, useState } from 'react'
 import ReactGA from 'react-ga4'
 
 assetAxiosInstance.defaults.baseURL = window.location.origin

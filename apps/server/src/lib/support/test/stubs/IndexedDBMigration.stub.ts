@@ -1,15 +1,15 @@
-import { Stores } from '@/db/DbConstants'
+import { StoresEnum } from '@/db/DbConstants'
 
 export const setupV2DB = () =>
   new Promise((resolve) => {
     const openReq = indexedDB.open('Testv2Tov3', 2)
     openReq.onupgradeneeded = () => {
       const db = openReq.result
-      db.createObjectStore(Stores.DeprecatedLocalForageBlob)
-      db.createObjectStore(Stores.DeprecatedLocalForageTable)
+      db.createObjectStore(StoresEnum.DeprecatedLocalForageBlob)
+      db.createObjectStore(StoresEnum.DeprecatedLocalForageTable)
 
       const tx = openReq.transaction
-      const oldStore = tx!.objectStore(Stores.DeprecatedLocalForageTable)
+      const oldStore = tx!.objectStore(StoresEnum.DeprecatedLocalForageTable)
       oldStore.add(
         [
           {

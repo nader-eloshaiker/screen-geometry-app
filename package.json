@@ -6,7 +6,7 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "packageManager": "pnpm@10.13.1",
+  "packageManager": "pnpm@10.14.0",
   "engines": {
     "node": ">=22.11.0"
   },
@@ -28,6 +28,7 @@
     "lint:ui": "pnpm run --filter @screengeometry/lib-ui lint",
     "lint:web": "pnpm run --filter @screengeometry/web lint",
     "lint": "concurrently --group -n 'web,ui,style,api,server' -c 'magenta,green,yellow,blue,red' 'pnpm lint:web' 'pnpm lint:ui' 'pnpm lint:style' 'pnpm lint:api' 'pnpm lint:server'",
+    "lint:commit": "commitlint --edit",
     "lint:staged:api": "pnpm run --filter @screengeometry/lib-api lint:staged",
     "lint:staged:server": "pnpm run --filter @screengeometry/server lint:staged",
     "lint:staged:style": "pnpm run --filter @screengeometry/lib-style lint:staged",
@@ -42,12 +43,15 @@
     "e2e:install": "pnpm --filter '@screengeometry/web' e2e:install"
   },
   "devDependencies": {
+    "@commitlint/cli": "^19.8.1",
+    "@commitlint/config-conventional": "^19.8.1",
+    "@commitlint/format": "^19.8.1",
+    "@commitlint/types": "^19.8.1",
     "concurrently": "catalog:",
+    "conventional-changelog-atom": "^5.0.0",
     "husky": "^9.1.7",
+    "jsonfile": "^6.2.0",
     "lint-staged": "catalog:",
-    "vitest": "catalog:"
-  },
-  "dependencies": {
-    "jwt-decode": "^4.0.0"
+    "vitest": "catalog:vite"
   }
 }

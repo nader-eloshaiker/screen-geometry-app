@@ -17,7 +17,7 @@ const PopoverDemo = ({ defaultValue = false }: { defaultValue?: boolean }) => {
         <div className='grid gap-4'>
           <div className='space-y-2'>
             <h4 className='font-medium leading-none'>Dimensions</h4>
-            <p className='text-sm text-foreground-muted'>Set the dimensions for the layer.</p>
+            <p className='text-foreground-muted text-sm'>Set the dimensions for the layer.</p>
           </div>
           <div className='grid gap-4'>
             <div className='grid grid-cols-3 items-center gap-4'>
@@ -44,14 +44,14 @@ const PopoverDemo = ({ defaultValue = false }: { defaultValue?: boolean }) => {
 }
 
 const meta = {
-  title: 'Elements/Popover',
-  component: Popover,
   // tags: ['autodocs'],
   argTypes: {},
+  component: Popover,
   parameters: {
     // More on how to position stories at: https://storybook.js.org/docs/configure/story-layout
     layout: 'centered',
   },
+  title: 'Elements/Popover',
 } satisfies Meta<typeof Popover>
 
 export default meta

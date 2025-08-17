@@ -1,10 +1,10 @@
-import { DefaultSession, JWTPayload, Session } from '@/app/hooks/session/EnvSessionContext'
+import { DefaultSession, type JWTPayload, type Session } from '@/app/hooks/session/EnvSessionContext'
 import { EnvSessionProvider } from '@/app/hooks/session/EnvSessionProvider'
 import { mockAccessTokenResolver } from '@/app/hooks/session/EnvSessionTokenMock'
 import { setAccessTokenResolver } from '@screengeometry/lib-api/apiClient'
-import { usePageLoader } from '@screengeometry/lib-ui/hooks/pageloader'
+import { usePageLoader } from '@screengeometry/lib-ui/pageloader'
 import { jwtDecode } from 'jwt-decode'
-import { ReactNode, useEffect, useState } from 'react'
+import { type ReactNode, useEffect, useState } from 'react'
 
 const parseJwt = (jwtToken: string) => {
   try {

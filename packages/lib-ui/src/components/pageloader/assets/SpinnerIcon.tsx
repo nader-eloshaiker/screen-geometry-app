@@ -1,4 +1,4 @@
-import { ReactElement, SVGProps } from 'react'
+import type { ReactElement, SVGProps } from 'react'
 type TSVGElementProps = SVGProps<SVGSVGElement>
 
 export const SpinnerIcon = (props: TSVGElementProps): ReactElement => (

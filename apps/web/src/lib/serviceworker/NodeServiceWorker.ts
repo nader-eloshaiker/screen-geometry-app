@@ -1,5 +1,5 @@
 import { HttpHandler } from 'msw'
-import { SetupServer, setupServer } from 'msw/node'
+import { type SetupServer, setupServer } from 'msw/node'
 
 export type MswObject = {
   server: SetupServer

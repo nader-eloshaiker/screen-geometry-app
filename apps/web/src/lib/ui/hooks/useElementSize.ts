@@ -1,29 +1,38 @@
-import useResizeObserver from '@react-hook/resize-observer'
-import { RefObject, useLayoutEffect, useState } from 'react'
+import { useCallback, useEffect, useLayoutEffect, useState } from 'react'
 
-const initRect = {
-  height: 0,
-  width: 0,
-  x: 0,
-  y: 0,
+// Reference
+// https://github.com/djkepa/custom-react-hooks/blob/main/packages/use-element-size/src/index.tsx
+
+export interface Size {
+  width: number
+  height: number
 }
-export type ElementSize = typeof initRect
-type Options = { px?: number; py?: number }
 
-export const useElementSize = (target: RefObject<HTMLElement>, options?: Options) => {
-  const { px = 0, py = 0 } = options ?? {}
-  const [size, setSize] = useState<ElementSize>(initRect)
+export const useElementSize = <T extends HTMLElement = HTMLDivElement>(): [(node: T | null) => void, Size] => {
+  const [ref, setRef] = useState<T | null>(null)
+  const [size, setSize] = useState<Size>({ width: 0, height: 0 })
 
-  useLayoutEffect(() => {
-    const { height, width, x, y } = target.current?.getBoundingClientRect() ?? initRect
-    setSize({ height: height + 2 * py, width: width + 2 * px, x: x - px, y: y - py })
-  }, [px, py, target])
+  const handleSize = useCallback(() => {
+    if (ref) {
+      setSize({
+        width: ref.offsetWidth,
+        height: ref.offsetHeight,
+      })
+    }
+  }, [ref])
 
-  // where the magic really happens
-  useResizeObserver(target, (entry) => {
-    const { height, width, x, y } = entry.contentRect
-    setSize({ height: height + 2 * py, width: width + 2 * px, x: x - px, y: y - py })
-  })
+  const useEnviromentEffect = typeof window !== 'undefined' ? useLayoutEffect : useEffect
 
-  return size
+  useEnviromentEffect(() => {
+    if (!ref) return
+
+    handleSize()
+
+    const resizeObserver = new ResizeObserver(handleSize)
+    resizeObserver.observe(ref)
+
+    return () => resizeObserver.disconnect()
+  }, [ref, handleSize])
+
+  return [setRef, size]
 }

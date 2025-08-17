@@ -3,9 +3,9 @@ import { useApiEffect } from '@/app/hooks/api/useApiEffect'
 import { getTextDirection } from '@/app/hooks/translation/LocaleHelper'
 import { transformScreenItem } from '@/lib/utils'
 import {
-  ScreenItemResponse,
-  SearchItem,
-  SearchListResponse,
+  type ScreenItemResponse,
+  type SearchItem,
+  type SearchListResponse,
   useGetScreen,
   useGetSearch,
 } from '@screengeometry/lib-api/spec'
@@ -18,15 +18,11 @@ import {
   SheetTrigger,
 } from '@screengeometry/lib-ui/sheet'
 import { keepPreviousData } from '@tanstack/react-query'
-import { Dispatch, useEffect, useState } from 'react'
+import { type Dispatch, useEffect, useState } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
+import { FormModeTypes } from './FormMode'
 import { ScreenForm } from './ScreenForm'
-import { FormSubmitType } from './ScreenFormSchema'
-
-enum FormModeTypes {
-  Create = 'create',
-  Edit = 'edit',
-}
+import { type FormSubmitType } from './ScreenFormSchema'
 
 type Props = React.PropsWithChildren & {
   open?: boolean
@@ -35,8 +31,8 @@ type Props = React.PropsWithChildren & {
   id?: string
 }
 
-const ScreenFormDrawer = ({ open, setOpen, mode, id: editId = '', children }: Props) => {
-  const isEdit = mode === FormModeTypes.Edit
+export const ScreenFormDrawer = ({ open, setOpen, mode, id: editId = '', children }: Props) => {
+  const isEdit = mode === FormModeTypes.edit
   const {
     data: screenData,
     isFetching: isScreenLoading,
@@ -91,7 +87,7 @@ const ScreenFormDrawer = ({ open, setOpen, mode, id: editId = '', children }: Pr
   return (
     <Sheet open={open} onOpenChange={setOpen}>
       <SheetTrigger asChild>{children}</SheetTrigger>
-      <SheetContent side={sheetDir} showCloseButton={false} className='flex flex-col overflow-auto'>
+      <SheetContent side={sheetDir} className='flex flex-col overflow-auto p-6'>
         <SheetHeader>
           <SheetTitle className='text-start'>
             {editId ? (
@@ -139,5 +135,3 @@ const ScreenFormDrawer = ({ open, setOpen, mode, id: editId = '', children }: Pr
     </Sheet>
   )
 }
-
-export { FormModeTypes, ScreenFormDrawer }

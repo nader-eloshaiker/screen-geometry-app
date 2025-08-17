@@ -1,4 +1,4 @@
-import { ScreenInputList } from '@screengeometry/lib-api/spec'
+import { type ScreenInputList } from '@screengeometry/lib-api/spec'
 
 export const defaultScreenInputList: ScreenInputList = [
   {

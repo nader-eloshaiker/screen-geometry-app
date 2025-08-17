@@ -1,135 +1,205 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss';
+@import 'tw-animate-css';
+
+@import './palette.css';
+
+@custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
+@custom-variant dark (&:is(.dark *));
+
+@custom-variant hocus (&:hover, &:focus-visible);
+
+@theme inline {
+  /* ShadCN */
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-muted: var(--muted);
+  --color-foreground-muted: var(--foreground-muted);
+
+  --color-card: var(--card);
+  --color-card-border: var(--card-border);
+  --color-card-border-hover: var(--card-border-hover);
+  --color-card-foreground: var(--card-foreground);
+
+  --color-popover: var(--popover);
+  --color-popover-hover: var(--popover-hover);
+  --color-popover-active: var(--popover-active);
+  --color-popover-border: var(--popover-border);
+  --color-popover-border-hover: var(--popover-border-hover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover-foreground-hover: var(--popover-foreground-hover);
+  --color-popover-foreground-active: var(--popover-foreground-active);
+
+  --color-header: var(--header);
+  --color-header-hover: var(--header-hover);
+  --color-header-active: var(--header-active);
+  --color-header-foreground: var(--header-foreground);
+  --color-header-foreground-hover: var(---header-foreground-hover);
+  --color-header-foreground-active: var(--header-foreground-active);
+
+  --color-primary: var(--primary);
+  --color-primary-active: var(--primary-active);
+  --color-primary-hover: var(--primary-hover);
+  --color-primary-muted: var(--primary-muted);
+  --color-primary-ring: var(--primary-ring);
+  --color-primary-input: var(--primary-input);
+  --color-primary-label: var(--primary-label);
+  --color-primary-border: var(--primary-border);
+  --color-primary-border-hover: var(--primary-border-hover);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary-foreground-active: var(--primary-foreground-active);
+  --color-primary-foreground-hover: var(--primary-foreground-hover);
+  --color-primary-foreground-muted: var(--primary-foreground-muted);
+  --color-primary-foreground-input: var(--primary-foreground-input);
+  --color-primary-foreground-input-hover: var(--primary-foreground-input-hover);
+  --color-primary-foreground-input-muted: var(--primary-foreground-input-muted);
+
+  --color-secondary: var(--secondary);
+  --color-secondary-active: var(--secondary-active);
+  --color-secondary-hover: var(--secondary-hover);
+  --color-secondary-muted: var(--secondary-muted);
+  --color-secondary-ring: var(--secondary-ring);
+  --color-secondary-input: var(--secondary-input);
+  --color-secondary-label: var(--secondary-label);
+  --color-secondary-border: var(--secondary-border);
+  --color-secondary-border-hover: var(--secondary-border-hover);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary-foreground-active: var(--secondary-foreground-active);
+  --color-secondary-foreground-hover: var(--secondary-foreground-hover);
+  --color-secondary-foreground-muted: var(--secondary-foreground-muted);
+  --color-secondary-foreground-input: var(--secondary-foreground-input);
+  --color-secondary-foreground-input-hover: var(--secondary-foreground-input-hover);
+  --color-secondary-foreground-input-muted: var(--secondary-foreground-input-muted);
+
+  --color-mono: var(--mono);
+  --color-mono-active: var(--mono-active);
+  --color-mono-hover: var(--mono-hover);
+  --color-mono-muted: var(--mono-muted);
+  --color-mono-ring: var(--mono-ring);
+  --color-mono-input: var(--mono-input);
+  --color-mono-label: var(--mono-label);
+  --color-mono-border: var(--mono-border);
+  --color-mono-border-hover: var(--mono-border-hover);
+  --color-mono-foreground: var(--mono-foreground);
+  --color-mono-foreground-active: var(--mono-foreground-active);
+  --color-mono-foreground-hover: var(--mono-foreground-hover);
+  --color-mono-foreground-muted: var(--mono-foreground-muted);
+  --color-mono-foreground-input: var(--mono-foreground-input);
+  --color-mono-foreground-input-hover: var(--mono-foreground-input-hover);
+  --color-mono-foreground-input-muted: var(--mono-foreground-input-muted);
+
+  --color-danger: var(--danger);
+  --color-danger-active: var(--danger-active);
+  --color-danger-hover: var(--danger-hover);
+  --color-danger-muted: var(--danger-muted);
+  --color-danger-ring: var(--danger-ring);
+  --color-danger-input: var(--danger-input);
+  --color-danger-label: var(--danger-label);
+  --color-danger-border: var(--danger-border);
+  --color-danger-border-hover: var(--danger-border-hover);
+  --color-danger-foreground: var(--danger-foreground);
+  --color-danger-foreground-active: var(--danger-foreground-active);
+  --color-danger-foreground-hover: var(--danger-foreground-hover);
+  --color-danger-foreground-muted: var(--danger-foreground-muted: );
+  --color-danger-foreground-input: var(--danger-foreground-input);
+  --color-danger-foreground-input-hover: var(--danger-foreground-input-hover);
+  --color-danger-foreground-input-muted: var(--danger-foreground-input-muted);
+
+  --color-info: var(--info);
+  --color-info-active: var(--info-active);
+  --color-info-hover: var(--info-hover);
+  --color-info-muted: var(--info-muted);
+  --color-info-ring: var(--info-ring);
+  --color-info-input: var(--info-input);
+  --color-info-label: var(--info-label);
+  --color-info-border: var(--info-border);
+  --color-info-border-hover: var(--info-border-hover);
+  --color-info-foreground: var(--info-foreground);
+  --color-info-foreground-active: var(--info-foreground-active);
+  --color-info-foreground-hover: var(--info-foreground-hover);
+  --color-info-foreground-muted: var(--info-foreground-muted);
+  --color-info-foreground-input: var(--info-foreground-input);
+  --color-info-foreground-input-hover: var(--info-foreground-input-hover);
+  --color-info-foreground-input-muted: var(--info-foreground-input-muted);
+
+  --color-success: var(--success);
+  --color-success-active: var(--success-active);
+  --color-success-hover: var(--success-hover);
+  --color-success-muted: var(--success-muted);
+  --color-success-ring: var(--success-ring);
+  --color-success-input: var(--success-input);
+  --color-success-label: var(--success-label);
+  --color-success-border: var(--success-border);
+  --color-success-border-hover: var(--success-border-hover);
+  --color-success-foreground: var(--success-foreground);
+  --color-success-foreground-active: var(--success-foreground-active);
+  --color-success-foreground-hover: var(--success-foreground-hover);
+  --color-success-foreground-muted: var(--success-foreground-muted);
+  --color-success-foreground-input: var(--success-foreground-input);
+  --color-success-foreground-input-hover: var(--success-foreground-input-hover);
+  --color-success-foreground-input-muted: var(--success-foreground-input-muted);
+
+  --color-warning: var(--warning);
+  --color-warning-active: var(--warning-active);
+  --color-warning-hover: var(--warning-hover);
+  --color-warning-muted: var(--warning-muted);
+  --color-warning-ring: var(--warning-ring);
+  --color-warning-input: var(--warning-input);
+  --color-warning-label: var(--warning-label);
+  --color-warning-border: var(--warning-border);
+  --color-warning-border-hover: var(--warning-border-hover);
+  --color-warning-foreground: var(--warning-foreground);
+  --color-warning-foreground-active: var(--warning-foreground-active);
+  --color-warning-foreground-hover: var(--warning-foreground-hover);
+  --color-warning-foreground-muted: var(--warning-foreground-muted);
+  --color-warning-foreground-input: var(--warning-foreground-input);
+  --color-warning-foreground-input-hover: var(--warning-foreground-input-hover);
+  --color-warning-foreground-input-muted: var(--warning-foreground-input-muted);
+
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+}
 
 @layer base {
   /* remove annoying up/down buttons in number inputs */
   input[type='number']::-webkit-inner-spin-button,
   input[type='number']::-webkit-outer-spin-button {
-    @apply appearance-none m-0;
+    @apply m-0 appearance-none;
   }
   input[type='number'] {
     appearance: textfield; /* Firefox */
   }
-
-  html {
-    @apply bg-background text-foreground;
-  }
-
   ::selection {
-    @apply bg-primary text-primary-foreground;
+    color: var(--primary-foreground);
+    background: var(--primary);
   }
 
-  /* ::selection {
-    color: hsl(var(--primary-foreground));
-    background: hsl(var(--primary));
-  } */
-
-  /* html {
-    background-color: hsl(var(--background));
-    color: hsl(var(--foreground));
-  } */
+  body {
+    background-color: var(--background);
+    color: var(--foreground);
+  }
 
   :root {
-    /* Shark */
-    --mono-50: 180 5% 96%;
-    --mono-100: 180 6% 90%;
-    --mono-200: 192 5% 82%;
-    --mono-300: 188 5% 69%;
-    --mono-400: 186 4% 53%;
-    --mono-500: 195 6% 43%;
-    --mono-600: 192 5% 36%;
-    --mono-700: 190 4% 31%;
-    --mono-800: 200 4% 27%;
-    --mono-900: 204 4% 24%;
-    --mono-950: 200 4% 14%;
-
-    /* Curious Blue */
-    /* 
-  --primary-50:  203 87% 97%;
-  --primary-100: 205 75% 94%;
-  --primary-200: 200 75% 86%;
-  --primary-300: 199 76% 74%;
-  --primary-400: 198 75% 60%;
-  --primary-500: 199 71% 45%;
-  --primary-600: 200 79% 39%;
-  --primary-700: 201 77% 32%;
-  --primary-800: 201 73% 27%;
-  --primary-900: 202 64% 24%;
-  --primary-950: 204 65% 16%;
- */
-    /* Medium Purple */
-
-    --primary-50: 264 100% 98%;
-    --primary-100: 262 100% 97%;
-    --primary-200: 262 100% 92%;
-    --primary-300: 263 100% 85%;
-    --primary-400: 263 100% 75%;
-    --primary-500: 264 95% 68%;
-    --primary-600: 265 85% 56%;
-    --primary-700: 265 75% 47%;
-    --primary-800: 266 70% 39%;
-    --primary-900: 267 68% 32%;
-    --primary-950: 267 91% 21%;
-
-    /* California */
-    --warning-50: 48 100% 96%;
-    --warning-100: 48 96% 89%;
-    --warning-200: 48 97% 77%;
-    --warning-300: 46 97% 65%;
-    --warning-400: 43 96% 56%;
-    --warning-500: 38 92% 50%;
-    --warning-600: 32 95% 44%;
-    --warning-700: 26 90% 37%;
-    --warning-800: 23 83% 31%;
-    --warning-900: 22 78% 26%;
-    --warning-950: 21 92% 14%;
-
-    /* Pastel Green */
-    --success-50: 104 65% 97%;
-    --success-100: 102 68% 93%;
-    --success-200: 103 63% 85%;
-    --success-300: 104 61% 66%;
-    --success-400: 104 55% 58%;
-    --success-500: 104 56% 45%;
-    --success-600: 104 61% 36%;
-    --success-700: 104 57% 29%;
-    --success-800: 105 51% 24%;
-    --success-900: 106 50% 20%;
-    --success-950: 107 65% 10%;
-
-    /* Coral Red */
-    --danger-50: 0 86% 97%;
-    --danger-100: 0 93% 94%;
-    --danger-200: 0 96% 89%;
-    --danger-300: 0 94% 82%;
-    --danger-400: 0 91% 71%;
-    --danger-500: 0 84% 60%;
-    --danger-600: 0 72% 51%;
-    --danger-700: 0 74% 42%;
-    --danger-800: 0 70% 35%;
-    --danger-900: 0 63% 31%;
-    --danger-950: 0 75% 15%;
-
-    --radius: 0.5rem;
-    --ring-offset: 4px;
-
     --background: var(--mono-50);
     --foreground: var(--mono-950);
     --muted: var(--mono-200);
     --foreground-muted: var(--mono-500);
 
-    --card: var(--primary-50);
-    --card-border: var(--primary-200);
-    --card-border-hover: var(--primary-300);
-    --card-foreground: var(--primary-800);
+    --card: var(--mono-100);
+    --card-border: var(--mono-200);
+    --card-border-hover: var(--mono-300);
+    --card-foreground: var(--mono-800);
 
     --popover: var(--mono-100);
     --popover-hover: var(--mono-500);
     --popover-active: var(--mono-500);
-    --popover-foreground: var(--mono-900);
-    --popover-foreground-hover: var(--mono-100);
-    --popover-foreground-active: var(--mono-100);
+    --popover-border: var(--primary-200);
+    --popover-border-hover: var(--primary-300);
+    --popover-foreground: var(--primary-900);
+    --popover-foreground-hover: var(--primary-100);
+    --popover-foreground-active: var(--primary-100);
 
     --header: var(--primary-600);
     --header-hover: var(--primary-400);
@@ -153,22 +223,24 @@
     --primary-foreground-muted: var(--primary-400);
     --primary-foreground-input: var(--primary-800);
     --primary-foreground-input-hover: var(--primary-900);
+    --primary-foreground-input-muted: var(--primary-500);
 
-    --secondary: var(--primary-400);
-    --secondary-active: var(--primary-200);
-    --secondary-hover: var(--primary-500);
-    --secondary-muted: var(--primary-200);
-    --secondary-ring: var(--primary-400);
-    --secondary-input: var(--primary-50);
-    --secondary-label: var(--primary-200);
+    --secondary: var(--primary-200);
+    --secondary-active: var(--primary-800);
+    --secondary-hover: var(--primary-100);
+    --secondary-muted: var(--primary-800);
+    --secondary-ring: var(--primary-300);
+    --secondary-input: var(--primary-950);
+    --secondary-label: var(--primary-300);
     --secondary-border: var(--primary-300);
-    --secondary-border-hover: var(--primary-500);
-    --secondary-foreground: var(--primary-100);
-    --secondary-foreground-active: var(--primary-950);
-    --secondary-foreground-hover: var(--primary-50);
+    --secondary-border-hover: var(--primary-200);
+    --secondary-foreground: var(--primary-950);
+    --secondary-foreground-active: var(--primary-50);
+    --secondary-foreground-hover: var(--primary-800);
     --secondary-foreground-muted: var(--primary-400);
-    --secondary-foreground-input: var(--primary-500);
-    --secondary-foreground-input-hover: var(--primary-600);
+    --secondary-foreground-input: var(--primary-200);
+    --secondary-foreground-input-hover: var(--primary-100);
+    --secondary-foreground-input-muted: var(--primary-400);
 
     --mono: var(--mono-600);
     --mono-active: var(--mono-300);
@@ -185,6 +257,7 @@
     --mono-foreground-muted: var(--mono-400);
     --mono-foreground-input: var(--mono-800);
     --mono-foreground-input-hover: var(--mono-900);
+    --mono-foreground-input-muted: var(--mono-500);
 
     --danger: var(--danger-600);
     --danger-active: var(--danger-300);
@@ -195,12 +268,30 @@
     --danger-label: var(--danger-600);
     --danger-border: var(--danger-400);
     --danger-border-hover: var(--danger-600);
-    --danger-foreground: var(--primary-100);
+    --danger-foreground: var(--danger-100);
     --danger-foreground-active: var(--danger-950);
     --danger-foreground-hover: var(--danger-50);
     --danger-foreground-muted: var(--danger-400);
     --danger-foreground-input: var(--danger-800);
     --danger-foreground-input-hover: var(--danger-900);
+    --danger-foreground-input-muted: var(--danger-500);
+
+    --info: var(--info-600);
+    --info-active: var(--info-300);
+    --info-hover: var(--info-500);
+    --info-muted: var(--info-200);
+    --info-ring: var(--info-400);
+    --info-input: var(--info-50);
+    --info-label: var(--info-600);
+    --info-border: var(--info-400);
+    --info-border-hover: var(--info-600);
+    --info-foreground: var(--info-100);
+    --info-foreground-active: var(--info-950);
+    --info-foreground-hover: var(--info-50);
+    --info-foreground-muted: var(--info-400);
+    --info-foreground-input: var(--info-800);
+    --info-foreground-input-hover: var(--info-900);
+    --info-foreground-input-muted: var(--info-500);
 
     --success: var(--success-600);
     --success-active: var(--success-300);
@@ -211,12 +302,13 @@
     --success-label: var(--success-600);
     --success-border: var(--success-400);
     --success-border-hover: var(--success-600);
-    --success-foreground: var(--primary-100);
+    --success-foreground: var(--success-100);
     --success-foreground-active: var(--success-950);
     --success-foreground-hover: var(--success-50);
     --success-foreground-muted: var(--success-400);
     --success-foreground-input: var(--success-800);
     --success-foreground-input-hover: var(--success-900);
+    --success-foreground-input-muted: var(--success-500);
 
     --warning: var(--warning-600);
     --warning-active: var(--warning-300);
@@ -227,42 +319,58 @@
     --warning-label: var(--warning-600);
     --warning-border: var(--warning-400);
     --warning-border-hover: var(--warning-600);
-    --warning-foreground: var(--primary-100);
+    --warning-foreground: var(--warning-100);
     --warning-foreground-active: var(--warning-950);
     --warning-foreground-hover: var(--warning-50);
     --warning-foreground-muted: var(--warning-400);
     --warning-foreground-input: var(--warning-800);
     --warning-foreground-input-hover: var(--warning-900);
+    --warning-foreground-input-muted: var(--warning-500);
 
     --chart-1: var(--info-500);
     --chart-2: var(--info-600);
     --chart-3: var(--info-700);
     --chart-4: var(--info-800);
     --chart-5: var(--info-900);
+
+    --radius: 0.5rem;
+    --ring-offset: 4px;
   }
+
   .dark {
     --background: var(--mono-950);
     --foreground: var(--mono-50);
-    --muted: var(--mono-900);
+    --muted: var(--mono-800);
     --foreground-muted: var(--mono-300);
 
-    --card: var(--mono-900);
-    --card-border: var(--mono-600);
-    --card-border-hover: var(--mono-500);
+    --card: var(--mono-800);
+    --card-border: var(--mono-700);
+    --card-border-hover: var(--mono-600);
     --card-foreground: var(--mono-200);
 
     --popover: var(--mono-900);
     --popover-hover: var(--mono-500);
+    --popover-border: var(--primary-700);
+    --popover-border-hover: var(--primary-600);
     --popover-active: var(--mono-500);
-    --popover-foreground: var(--mono-100);
-    --popover-foreground-hover: var(--mono-50);
-    --popover-foreground-active: var(--mono-50);
+    --popover-foreground: var(--primary-100);
+    --popover-foreground-hover: var(--primary-50);
+    --popover-foreground-active: var(--primary-50);
 
     --primary-label: var(--primary-400);
+    --primary-input: var(--primary-950);
+    --primary-foreground-input: var(--primary-200);
+    --primary-foreground-input-hover: var(--primary-100);
 
     --secondary-label: var(--primary-200);
+    --secondary-input: var(--primary-50);
+    --secondary-foreground-input: var(--primary-800);
+    --secondary-foreground-input-hover: var(--primary-900);
 
     --mono-label: var(--mono-300);
+    --mono-input: var(--mono-950);
+    --mono-foreground-input: var(--mono-200);
+    --mono-foreground-input-hover: var(--mono-100);
 
     --danger-label: var(--danger-400);
 

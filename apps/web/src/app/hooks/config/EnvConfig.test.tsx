@@ -1,8 +1,7 @@
 import { renderWithUserEvents } from '@/lib/support/test/utils/RenderWithUserEvents'
 import { assetAxiosInstance, serverAxiosInstance } from '@screengeometry/lib-api/apiClient'
 import * as configuration from '@screengeometry/lib-api/spec'
-import { PageLoaderProvider, usePageLoader } from '@screengeometry/lib-ui/hooks/pageloader'
-import { PageLoader } from '@screengeometry/lib-ui/pageloader'
+import { PageLoader, PageLoaderProvider, usePageLoader } from '@screengeometry/lib-ui/pageloader'
 import { render, waitFor } from '@testing-library/react'
 import { vi } from 'vitest'
 import { EnvConfig } from './EnvConfig'
@@ -52,7 +51,7 @@ describe('#ConfiguredEnvironment', () => {
       isFetched: false,
     } as ReturnType<typeof configuration.useGetConfig>)
 
-    const { getByTestId, queryByText } = render(
+    const { container, queryByText } = render(
       <PageLoaderProvider initialLoadingKeys={['aaa']}>
         <EnvConfig configReadyKey='aaa'>
           <TestLoadingComponent />
@@ -60,7 +59,7 @@ describe('#ConfiguredEnvironment', () => {
       </PageLoaderProvider>
     )
 
-    expect(getByTestId('page-loader')).toBeInTheDocument()
+    expect(container.querySelector('[data-slot="page-loader"]')).toBeInTheDocument()
 
     expect(queryByText('Test Child')).not.toBeInTheDocument()
   })
@@ -139,7 +138,7 @@ describe('#ConfiguredEnvironment', () => {
 
     useGetConfigSpy.mockReturnValue(initialMockReturn)
 
-    const { rerender, getByTestId, getByText, queryByTestId } = await renderWithUserEvents(
+    const { rerender, getByText, queryByTestId, container } = await renderWithUserEvents(
       <PageLoaderProvider initialLoadingKeys={['aaa']}>
         <EnvConfig configReadyKey='aaa'>
           <TestLoadingComponent />
@@ -148,7 +147,7 @@ describe('#ConfiguredEnvironment', () => {
     )
 
     // Initially should show PageLoader
-    expect(getByTestId('page-loader')).toBeInTheDocument()
+    expect(container.querySelector('[data-slot="page-loader"]')).toBeInTheDocument()
 
     // Then update with data
     const updatedMockData = {

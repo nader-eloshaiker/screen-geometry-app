@@ -2,14 +2,14 @@ import type { Meta, StoryObj } from '@storybook/react-vite'
 import { Separator } from './Separator'
 
 const meta = {
-  title: 'Elements/Separator',
-  component: Separator,
   // tags: ['autodocs'],
   argTypes: {},
+  component: Separator,
   parameters: {
     // More on how to position stories at: https://storybook.js.org/docs/configure/story-layout
     layout: 'centered',
   },
+  title: 'Elements/Separator',
 } satisfies Meta<typeof Separator>
 
 export default meta
@@ -23,7 +23,7 @@ export const Component: Story = {
       <div>
         <div className='space-y-1'>
           <h4 className='text-sm font-medium leading-none'>Radix Primitives</h4>
-          <p className='text-sm text-foreground-muted'>An open-source UI component library.</p>
+          <p className='text-foreground-muted text-sm'>An open-source UI component library.</p>
         </div>
         <Separator className='my-4' />
         <div className='flex h-5 items-center space-x-4 text-sm'>

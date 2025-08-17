@@ -16,14 +16,14 @@ import {
 const SHEET_SIDES = ['top', 'right', 'bottom', 'left'] as const
 
 const meta = {
-  title: 'Elements/Sheet',
-  component: Sheet,
   // tags: ['autodocs'],
   argTypes: {},
+  component: Sheet,
   parameters: {
     // More on how to position stories at: https://storybook.js.org/docs/configure/story-layout
     layout: 'centered',
   },
+  title: 'Elements/Sheet',
 } satisfies Meta<typeof Sheet>
 
 export default meta
@@ -40,7 +40,7 @@ export const Component: Story = {
             <SheetTrigger asChild>
               <Button mode='outline'>{side}</Button>
             </SheetTrigger>
-            <SheetContent side={side}>
+            <SheetContent side={side} className='p-6'>
               <SheetHeader>
                 <SheetTitle>Edit profile</SheetTitle>
                 <SheetDescription>

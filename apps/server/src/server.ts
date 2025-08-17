@@ -1,12 +1,12 @@
 import { to } from '@/lib/utils'
-import { ScreenInput, ScreenInputList } from '@screengeometry/lib-api/spec'
+import { type ScreenInput, type ScreenInputList } from '@screengeometry/lib-api/spec'
 import { HttpHandler, HttpResponse, delay, http, passthrough } from 'msw'
 import { apiRoutes } from './ApiRouteSchema'
 import {
-  IdResponse,
-  ScreenListResponse,
-  ScreenResponse,
-  SearchScreenListResponse,
+  type IdResponse,
+  type ScreenListResponse,
+  type ScreenResponse,
+  type SearchScreenListResponse,
   createScreen,
   createScreenList,
   deleteScreen,

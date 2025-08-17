@@ -1,8 +1,8 @@
 import { EnvTranslationContext } from '@/app/hooks/translation/EnvTranslationContext'
 import useLocalStorage from '@/app/hooks/useLocalStorage'
 import { match } from '@formatjs/intl-localematcher'
-import { Translations, useGetTranslations } from '@screengeometry/lib-api/spec'
-import { usePageLoader } from '@screengeometry/lib-ui/hooks/pageloader'
+import { type Translations, useGetTranslations } from '@screengeometry/lib-api/spec'
+import { usePageLoader } from '@screengeometry/lib-ui/pageloader'
 import { useEffect, useState } from 'react'
 import { IntlProvider } from 'react-intl'
 import {

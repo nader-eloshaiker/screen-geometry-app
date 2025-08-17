@@ -3,16 +3,16 @@ import type { Meta, StoryObj } from '@storybook/react-vite'
 import { fn } from 'storybook/test'
 import { Label } from '../label'
 import { Input } from './Input'
-import { TInputVariantsPalette } from './Input.variants'
+import type { TInputVariantsPalette } from './InputVariants'
 
 const meta = {
-  title: 'elements/Input',
-  component: Input,
   // tags: ['autodocs'],
-  args: { onClick: fn(), onFocus: fn(), onBlur: fn() },
+  args: { onBlur: fn(), onClick: fn(), onFocus: fn() },
+  component: Input,
   parameters: {
     layout: 'centered',
   },
+  title: 'elements/Input',
 } satisfies Meta<typeof Input>
 
 export default meta
@@ -20,11 +20,11 @@ type Story = StoryObj<typeof meta>
 
 export const Component: Story = {
   args: {
-    type: 'email',
     id: 'email',
-    placeholder: 'Email',
-    onClick: fn(),
     onBlur: fn(),
+    onClick: fn(),
+    placeholder: 'Email',
+    type: 'email',
   },
   decorators: [
     (Story) => {
@@ -42,6 +42,13 @@ const palettes: Array<TInputVariantsPalette> = ['primary', 'secondary', 'mono', 
 
 export const Palette: Story = {
   args: {},
+  parameters: {
+    pseudo: {
+      active: ['#active'],
+      focusVisible: ['#focus'],
+      hover: ['#hover'],
+    },
+  },
   render: () => (
     <StateTable<TInputVariantsPalette>
       caption='Palettes'
@@ -54,20 +61,20 @@ export const Palette: Story = {
           <Input type='email' id={state} palette={prop} disabled={state === 'disabled'} placeholder='Email' />
         </Label>
       )}
-      getRowClassName={(prop) => (prop === 'secondary' ? 'bg-card text-card-foreground' : '')}
+      getRowClassName={(prop) => (prop === 'secondary' ? 'bg-primary text-primary-foreground' : '')}
     />
   ),
-  parameters: {
-    pseudo: {
-      hover: ['#hover'],
-      active: ['#active'],
-      focusVisible: ['#focus'],
-    },
-  },
 }
 
 export const AdornmentStart: Story = {
   args: {},
+  parameters: {
+    pseudo: {
+      active: ['#active'],
+      focusVisible: ['#focus'],
+      hover: ['#hover'],
+    },
+  },
   render: () => (
     <StateTable<TInputVariantsPalette>
       caption='Palettes'
@@ -88,20 +95,20 @@ export const AdornmentStart: Story = {
           />
         </Label>
       )}
-      getRowClassName={(prop) => (prop === 'secondary' ? 'bg-card text-card-foreground' : '')}
+      getRowClassName={(prop) => (prop === 'secondary' ? 'bg-primary text-primary-foreground' : '')}
     />
   ),
-  parameters: {
-    pseudo: {
-      hover: ['#hover'],
-      active: ['#active'],
-      focusVisible: ['#focus'],
-    },
-  },
 }
 
 export const AdornmentEnd: Story = {
   args: {},
+  parameters: {
+    pseudo: {
+      active: ['#active'],
+      focusVisible: ['#focus'],
+      hover: ['#hover'],
+    },
+  },
   render: () => (
     <StateTable<TInputVariantsPalette>
       caption='Palettes'
@@ -122,14 +129,7 @@ export const AdornmentEnd: Story = {
           />
         </Label>
       )}
-      getRowClassName={(prop) => (prop === 'secondary' ? 'bg-card text-card-foreground' : '')}
+      getRowClassName={(prop) => (prop === 'secondary' ? 'bg-primary text-primary-foreground' : '')}
     />
   ),
-  parameters: {
-    pseudo: {
-      hover: ['#hover'],
-      active: ['#active'],
-      focusVisible: ['#focus'],
-    },
-  },
 }

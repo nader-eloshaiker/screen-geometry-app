@@ -1,9 +1,9 @@
-import { ScreenColor, ScreenItem } from '@screengeometry/lib-api/spec'
+import { type ScreenColor, type ScreenItem } from '@screengeometry/lib-api/spec'
 import { ulid } from 'ulid'
-import { Stores } from '../DbConstants'
+import { StoresEnum } from '../DbConstants'
 
 export const migrateV2toV3 = (db: IDBDatabase, openReq: IDBOpenDBRequest) => {
-  if (!db.objectStoreNames.contains(Stores.DeprecatedLocalForageTable)) {
+  if (!db.objectStoreNames.contains(StoresEnum.DeprecatedLocalForageTable)) {
     return
   }
 
@@ -15,8 +15,8 @@ export const migrateV2toV3 = (db: IDBDatabase, openReq: IDBOpenDBRequest) => {
     throw new Error('Unable to create transaction')
   }
 
-  const newStore = tx.objectStore(Stores.Screens)
-  const oldStore = tx.objectStore(Stores.DeprecatedLocalForageTable)
+  const newStore = tx.objectStore(StoresEnum.Screens)
+  const oldStore = tx.objectStore(StoresEnum.DeprecatedLocalForageTable)
   const oldResponse = oldStore.get('screens')
 
   oldResponse.onsuccess = () => {
@@ -44,7 +44,7 @@ export const migrateV2toV3 = (db: IDBDatabase, openReq: IDBOpenDBRequest) => {
     }
 
     console.log('migration complete, removing old store')
-    db.deleteObjectStore(Stores.DeprecatedLocalForageTable)
-    db.deleteObjectStore(Stores.DeprecatedLocalForageBlob)
+    db.deleteObjectStore(StoresEnum.DeprecatedLocalForageTable)
+    db.deleteObjectStore(StoresEnum.DeprecatedLocalForageBlob)
   }
 }

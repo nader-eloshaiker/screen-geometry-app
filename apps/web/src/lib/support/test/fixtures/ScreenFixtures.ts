@@ -1,4 +1,4 @@
-import { ScreenInput } from '@screengeometry/lib-api/spec'
+import type { ScreenInput } from '@screengeometry/lib-api/spec'
 
 export const screenInputFixture: ScreenInput = {
   aspectRatio: '32:9',

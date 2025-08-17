@@ -1,1 +1,6 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+
 @import '@screengeometry/lib-style/theme.css';
+
+@source '../../../packages/lib-ui/src/';

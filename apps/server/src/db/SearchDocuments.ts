@@ -1,4 +1,4 @@
-import { SearchItem } from '@screengeometry/lib-api/spec'
+import { type SearchItem } from '@screengeometry/lib-api/spec'
 
 export const SearchDocuments: Array<SearchItem> = [
   {

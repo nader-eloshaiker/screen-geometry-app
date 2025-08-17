@@ -1,29 +1,32 @@
 import { type VariantProps } from 'class-variance-authority'
 import * as React from 'react'
-
 import { cn } from '../../lib/utils'
-import { AlertVariants } from './Alert.variants'
+import { AlertVariants } from './AlertVariants'
 
-const Alert = React.forwardRef<
-  HTMLDivElement,
-  React.HTMLAttributes<HTMLDivElement> & VariantProps<typeof AlertVariants>
->(({ className, palette, ...props }, ref) => (
-  <div ref={ref} role='alert' className={cn(AlertVariants({ palette }), className)} {...props} />
-))
-Alert.displayName = 'Alert'
+export function Alert({
+  className,
+  palette,
+  ...props
+}: React.ComponentProps<'div'> & VariantProps<typeof AlertVariants>) {
+  return <div data-slot='alert' role='alert' className={cn(AlertVariants({ palette }), className)} {...props} />
+}
 
-const AlertTitle = React.forwardRef<HTMLParagraphElement, React.HTMLAttributes<HTMLHeadingElement>>(
-  ({ className, ...props }, ref) => (
-    <h5 ref={ref} className={cn('mb-1 font-medium leading-none tracking-tight', className)} {...props} />
+export function AlertTitle({ className, ...props }: React.ComponentProps<'div'>) {
+  return (
+    <div
+      data-slot='alert-title'
+      className={cn('col-start-2 line-clamp-1 min-h-4 font-medium tracking-tight', className)}
+      {...props}
+    />
   )
-)
-AlertTitle.displayName = 'AlertTitle'
+}
 
-const AlertDescription = React.forwardRef<HTMLParagraphElement, React.HTMLAttributes<HTMLParagraphElement>>(
-  ({ className, ...props }, ref) => (
-    <div ref={ref} className={cn('text-sm [&_p]:leading-relaxed', className)} {...props} />
+export function AlertDescription({ className, ...props }: React.ComponentProps<'div'>) {
+  return (
+    <div
+      data-slot='alert-description'
+      className={cn('col-start-2 line-clamp-1 min-h-4 font-medium tracking-tight', className)}
+      {...props}
+    />
   )
-)
-AlertDescription.displayName = 'AlertDescription'
-
-export { Alert, AlertDescription, AlertTitle }
+}

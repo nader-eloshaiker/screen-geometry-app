@@ -9,7 +9,7 @@ import {
   AlignStartHorizontal,
   AlignStartVertical,
 } from 'lucide-react'
-import { ComponentType, SVGProps, useEffect } from 'react'
+import { type ComponentType, type SVGProps, useEffect } from 'react'
 import { useIntl } from 'react-intl'
 
 export type Alignment = 'start' | 'center' | 'end'

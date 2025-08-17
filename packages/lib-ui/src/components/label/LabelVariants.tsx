@@ -1,24 +1,24 @@
-import { cva, VariantProps } from 'class-variance-authority'
+import { cva, type VariantProps } from 'class-variance-authority'
 
 export type TLabelVariantsVariants = VariantProps<typeof LabelVariants>
 export type TLabelVariantsPalette = NonNullable<TLabelVariantsVariants['palette']>
 
 export const LabelVariants = cva(
-  'text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-50 has-[:disabled]:cursor-not-allowed has-[:disabled]:opacity-50',
+  'flex select-none items-center gap-2 text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-50 group-data-[disabled=true]:pointer-events-none group-data-[disabled=true]:opacity-50',
   {
+    defaultVariants: {
+      palette: 'none',
+    },
     variants: {
       palette: {
+        danger: 'text-danger-label',
+        mono: 'text-mono-label',
         none: '',
         primary: 'text-primary-label',
         secondary: 'text-secondary-label',
-        mono: 'text-mono-label',
-        danger: 'text-danger-label',
         success: 'text-success-label',
         warning: 'text-warning-label',
       },
-    },
-    defaultVariants: {
-      palette: 'none',
     },
   }
 )

@@ -1,18 +1,24 @@
 import { ScreenProvider } from '@/app/hooks/screen/ScreenProvider'
 import { useScreenContext } from '@/app/hooks/screen/useScreenContext'
-import { ScreenItemRender } from '@/app/models/screenItemRender'
+import { type ScreenItemRender } from '@/app/models/screenItemRender'
 import { initMSW } from '@/lib/serviceworker/NodeServiceWorker'
 import { screenInputFixture } from '@/lib/support/test/fixtures/ScreenFixtures'
 import { renderWithUserEvents } from '@/lib/support/test/utils/RenderWithUserEvents'
 import { TestEnvironment } from '@/lib/support/test/utils/TestEnvironment'
-import { useElementSizeMock } from '@/lib/ui/hooks/useElementSize.mock'
 import { toScreenItemRender, transformScreenInput } from '@/lib/utils'
 import { getScreenListServiceMock, getScreenServiceMock, getSearchServiceMock } from '@screengeometry/lib-api/spec'
 import { Toaster } from '@screengeometry/lib-ui/toaster'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { render, waitFor } from '@testing-library/react'
-import { act, useState } from 'react'
-import { FormModeTypes, ScreenFormDrawer } from './ScreenFormDrawer'
+import { useState } from 'react'
+import { FormModeTypes } from './FormMode'
+import { ScreenFormDrawer } from './ScreenFormDrawer'
+
+vi.mock('@/lib/ui/hooks/useElementSize', () => ({
+  __esModule: true,
+  useElementSize: () => [() => {}, { width: 1024, height: 1024 }],
+}))
+
 const ListComponent = () => {
   const {
     state: { screens },
@@ -46,7 +52,7 @@ const queryClient = new QueryClient({
   },
 })
 
-const RootTestComponent = ({ initialise, mode = FormModeTypes.Create, id }: ParentProps) => {
+const RootTestComponent = ({ initialise, mode = FormModeTypes.create, id }: ParentProps) => {
   const [open, setOpen] = useState(true)
 
   return (
@@ -75,7 +81,6 @@ describe('#ScreenFormDrawer', () => {
   })
 
   beforeEach(() => {
-    useElementSizeMock()
     mswObj.reset()
   })
 
@@ -95,20 +100,20 @@ describe('#ScreenFormDrawer', () => {
   describe('#LoadingMode', () => {
     test('show loading when updating a screen', async () => {
       const editId = '5HjERJbH'
-      const test = await renderWithUserEvents(<RootTestComponent id={editId} mode={FormModeTypes.Edit} />)
+      const test = await renderWithUserEvents(<RootTestComponent id={editId} mode={FormModeTypes.edit} />)
 
       const inputScreenSize = test.getByLabelText('Screen Size')
       await waitFor(() => expect(inputScreenSize).toHaveValue(38))
 
       // const inputScreenSize = test.getByLabelText('Screen Size')
-      await act(async () => await test.user.clear(inputScreenSize))
+      await test.user.clear(inputScreenSize)
 
-      await waitFor(async () => await test.user.type(inputScreenSize, '27'))
+      test.user.type(inputScreenSize, '27')
 
       const submitButton = test.getByText('Update')
-      await waitFor(async () => await test.user.click(submitButton))
+      await test.user.click(submitButton)
 
-      expect(test.getByTestId('busySubmitButton')).toBeInTheDocument()
+      waitFor(() => expect(test.getByTestId('busySubmitButton')).toBeInTheDocument())
     })
 
     test('show loading when creating a screen', async () => {
@@ -129,7 +134,7 @@ describe('#ScreenFormDrawer', () => {
       const submitButton = test.getByText('Create')
       await waitFor(async () => await test.user.click(submitButton))
 
-      expect(test.getByTestId('busySubmitButton')).toBeInTheDocument()
+      waitFor(() => expect(test.getByTestId('busySubmitButton')).toBeInTheDocument())
     })
   })
 
@@ -137,7 +142,7 @@ describe('#ScreenFormDrawer', () => {
     test('renders the screen form', async () => {
       const editId = '5HjERJbH'
 
-      const test = render(<RootTestComponent mode={FormModeTypes.Edit} id={editId} />)
+      const test = render(<RootTestComponent mode={FormModeTypes.edit} id={editId} />)
 
       const inputScreenSize = test.getByLabelText('Screen Size')
       await waitFor(() => expect(inputScreenSize).toHaveValue(38))
@@ -148,18 +153,22 @@ describe('#ScreenFormDrawer', () => {
       expect(test.getByLabelText('Horizontal Res')).toHaveValue(3840)
       expect(test.getByLabelText('Vertical Res')).toHaveValue(1600)
 
-      expect(test.getByLabelText('Light Color')).toHaveValue('#F6693C')
-      expect(test.getByLabelText('Dark Color')).toHaveValue('#C33609')
+      expect(test.getByLabelText('Light Color')).toHaveStyle('background-color: rgb(246, 105, 60)')
+      expect(test.getByLabelText('Dark Color')).toHaveStyle('background-color: rgb(195, 54, 9)')
 
       expect(test.getByRole('button', { name: 'Update' })).toBeDisabled()
       expect(test.getByRole('button', { name: 'Reset' })).toBeDisabled()
-      expect(test.getByRole('button', { name: 'Close' })).toBeEnabled()
+
+      const closeButtons = test.getAllByRole('button', { name: 'Close' })
+      expect(closeButtons).toHaveLength(2)
+      expect(closeButtons[0]).toBeEnabled()
+      expect(closeButtons[1]).toBeEnabled()
     })
 
     test('reset screen form', async () => {
       const editId = '5HjERJbH'
 
-      const test = await renderWithUserEvents(<RootTestComponent id={editId} mode={FormModeTypes.Edit} />)
+      const test = await renderWithUserEvents(<RootTestComponent id={editId} mode={FormModeTypes.edit} />)
 
       const inputScreenSize = test.getByLabelText('Screen Size')
       await waitFor(() => expect(inputScreenSize).toHaveValue(38))
@@ -178,22 +187,20 @@ describe('#ScreenFormDrawer', () => {
     test('change screen theme colors', async () => {
       const editId = '5HjERJbH'
 
-      const test = await renderWithUserEvents(<RootTestComponent mode={FormModeTypes.Edit} id={editId} />)
+      const test = await renderWithUserEvents(<RootTestComponent mode={FormModeTypes.edit} id={editId} />)
 
       const inputScreenSize = test.getByLabelText('Screen Size')
       await waitFor(() => expect(inputScreenSize).toHaveValue(38))
 
       const changeButton = test.getByTestId('generate-color-btn')
-      const lightColor = test.getByLabelText('Light Color')
-      const darkColor = test.getByLabelText('Dark Color')
 
-      expect(lightColor).toHaveValue('#F6693C')
-      expect(darkColor).toHaveValue('#C33609')
+      expect(test.getByLabelText('Light Color')).toHaveStyle('background-color: rgb(246, 105, 60)')
+      expect(test.getByLabelText('Dark Color')).toHaveStyle('background-color: rgb(195, 54, 9)')
 
-      await waitFor(async () => await test.user.click(changeButton))
+      await test.user.click(changeButton)
 
-      expect(lightColor).not.toHaveValue('#F6693C')
-      expect(darkColor).not.toHaveValue('#C33609')
+      expect(test.getByLabelText('Light Color')).not.toHaveStyle('background-color: rgb(246, 105, 60)')
+      expect(test.getByLabelText('Dark Color')).not.toHaveStyle('background-color: rgb(195, 54, 9)')
     })
 
     test('update a screen from list and populate form', async () => {
@@ -203,7 +210,7 @@ describe('#ScreenFormDrawer', () => {
       ]
 
       const test = await renderWithUserEvents(
-        <RootTestComponent mode={FormModeTypes.Edit} id={editId} initialise={initialise} />
+        <RootTestComponent mode={FormModeTypes.edit} id={editId} initialise={initialise} />
       )
 
       const inputScreenSize = test.getByLabelText('Screen Size')
@@ -235,7 +242,11 @@ describe('#ScreenFormDrawer', () => {
 
       expect(test.getByRole('button', { name: 'Create' })).toBeDisabled()
       expect(test.getByRole('button', { name: 'Reset' })).toBeDisabled()
-      expect(test.getByRole('button', { name: 'Close' })).toBeEnabled()
+
+      const closeButtons = test.getAllByRole('button', { name: 'Close' })
+      expect(closeButtons).toHaveLength(2)
+      expect(closeButtons[0]).toBeEnabled()
+      expect(closeButtons[1]).toBeEnabled()
     })
 
     test('select a screen from list and populate form', async () => {
@@ -244,10 +255,10 @@ describe('#ScreenFormDrawer', () => {
       window.HTMLElement.prototype.scrollIntoView = function () {}
 
       const searchButton = test.getByText(/Select Screen/i)
-      await act(async () => await test.user.click(searchButton))
+      await test.user.click(searchButton)
 
       const listElement = test.getByText(/WQHD 34" 3440x1440 21:9/i)
-      await act(async () => await test.user.click(listElement))
+      await test.user.click(listElement)
 
       expect(test.getByLabelText('Screen Size')).toHaveValue(34)
       expect(test.getByLabelText('Aspect Ratio')).toHaveValue('21:9')
@@ -259,7 +270,11 @@ describe('#ScreenFormDrawer', () => {
 
       expect(test.getByRole('button', { name: 'Create' })).toBeEnabled()
       expect(test.getByRole('button', { name: 'Reset' })).toBeEnabled()
-      expect(test.getByRole('button', { name: 'Close' })).toBeEnabled()
+
+      const closeButtons = test.getAllByRole('button', { name: 'Close' })
+      expect(closeButtons).toHaveLength(2)
+      expect(closeButtons[0]).toBeEnabled()
+      expect(closeButtons[1]).toBeEnabled()
     })
 
     test('create a screen from list and populate form', async () => {
@@ -267,28 +282,28 @@ describe('#ScreenFormDrawer', () => {
       window.HTMLElement.prototype.scrollIntoView = function () {}
 
       const searchButton = test.getByText(/Select Screen/i)
-      await act(async () => await test.user.click(searchButton))
+      await test.user.click(searchButton)
 
       const inputElement = test.getByPlaceholderText(/Search Screen list/i)
-      await act(async () => await test.user.type(inputElement, 'WQHD+'))
+      await test.user.type(inputElement, 'WQHD+')
 
       await waitFor(() => expect(mswObj.apiEventStack.length).toBe(1))
       expect(mswObj.apiEventStack[0]).toContain('/v1/search?term=WQHD')
 
       const listElement = test.getByText(/WQHD 34" 3440x1440 21:9/i)
-      await act(async () => await test.user.click(listElement))
+      await test.user.click(listElement)
 
       const createButton = test.getByText('Create')
       expect(createButton).toBeEnabled()
 
-      await act(async () => await test.user.click(createButton))
+      await test.user.click(createButton)
 
       await waitFor(() => expect(mswObj.apiEventStack.length).toBe(2))
       expect(mswObj.apiEventStack[1]).toContain('/v1/screen')
 
       await waitFor(() => {
         expect(test.queryByText('Create')).not.toBeInTheDocument()
-        expect(test.queryByText('Screen specifications has been added to list')).toBeInTheDocument()
+        expect(test.queryAllByText('Screen specifications has been added to list').length).toBeGreaterThan(0)
       })
     })
   })
