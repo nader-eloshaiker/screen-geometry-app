@@ -51,7 +51,7 @@ describe('#ConfiguredEnvironment', () => {
       isFetched: false,
     } as ReturnType<typeof configuration.useGetConfig>)
 
-    const { getByTestId, queryByText } = render(
+    const { container, queryByText } = render(
       <PageLoaderProvider initialLoadingKeys={['aaa']}>
         <EnvConfig configReadyKey='aaa'>
           <TestLoadingComponent />
@@ -59,7 +59,7 @@ describe('#ConfiguredEnvironment', () => {
       </PageLoaderProvider>
     )
 
-    expect(getByTestId('page-loader')).toBeInTheDocument()
+    expect(container.querySelector('[data-slot="page-loader"]')).toBeInTheDocument()
 
     expect(queryByText('Test Child')).not.toBeInTheDocument()
   })
@@ -138,7 +138,7 @@ describe('#ConfiguredEnvironment', () => {
 
     useGetConfigSpy.mockReturnValue(initialMockReturn)
 
-    const { rerender, getByTestId, getByText, queryByTestId } = await renderWithUserEvents(
+    const { rerender, getByText, queryByTestId, container } = await renderWithUserEvents(
       <PageLoaderProvider initialLoadingKeys={['aaa']}>
         <EnvConfig configReadyKey='aaa'>
           <TestLoadingComponent />
@@ -147,7 +147,7 @@ describe('#ConfiguredEnvironment', () => {
     )
 
     // Initially should show PageLoader
-    expect(getByTestId('page-loader')).toBeInTheDocument()
+    expect(container.querySelector('[data-slot="page-loader"]')).toBeInTheDocument()
 
     // Then update with data
     const updatedMockData = {

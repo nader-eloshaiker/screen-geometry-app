@@ -41,10 +41,14 @@ export default tseslint.config(
         module: true,
         window: true,
       },
+      parserOptions: {
+        tsconfigRootDir: import.meta.dirname,
+        // project: './tsconfig.json',
+      },
     },
     plugins: {
       ...reactPlugin.configs.flat.recommended.plugins,
-      importPlugin,
+      import: importPlugin,
     },
     rules: {
       '@typescript-eslint/explicit-module-boundary-types': 'off',
