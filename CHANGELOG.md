@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.1.0](https://github.com/nader-eloshaiker/screen-geometry-app/compare/v4.0.1...v4.1.0) (2025-08-17)
+
+
+### Features
+
+* **web:** upgrade react:19 tailwind:4.1 shadcn:latest storybook:9.1 commitLint ([#551](https://github.com/nader-eloshaiker/screen-geometry-app/issues/551)) ([ba463bc](https://github.com/nader-eloshaiker/screen-geometry-app/commit/ba463bc43a896159f2660123d62a9715126802eb))
+
 ## [4.0.1](https://github.com/nader-eloshaiker/screen-geometry-app/compare/v4.0.0...v4.0.1) (2025-08-01)
 
 
