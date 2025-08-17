@@ -16,7 +16,7 @@ catalog:
   prettier: ^3.6.2
   react-hook-form: ^7.62.0
   ts-pattern: ^5.8.0
-  typescript: ~5.8.3
+  typescript: ~5.9.2
   yup: ^1.4.0
 
 catalogs:
