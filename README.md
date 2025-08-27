@@ -8,6 +8,12 @@
 
 [![CodeCov](https://codecov.io/gh/nader-eloshaiker/screen-geometry-app/graphs/icicle.svg?token=FD9467PICM)](https://codecov.io/gh/nader-eloshaiker/screen-geometry-app)
 
+## App Demo
+
+![Demo video](https://raw.githubusercontent.com/nader-eloshaiker/screen-geometry-app/main/docs/media/demo-anim.webp)
+
+[Read here](./docs/UserGuide.md) for a more detailed explaination
+
 ## Description
 
 This is a tool to help visually compare different screen sizes to help you choose which monitor, phone, or tablet to buy. It does this by overlaying different screen sizes ontop of each other for
@@ -47,12 +53,6 @@ The reports are hosted in Github Pages and are deployed on every merge to the ma
 - [Coverage](https://app.codecov.io/gh/nader-eloshaiker/screen-geometry-app/?search=&displayType=list)
 - [StoryBook Component Library](https://nader-eloshaiker.github.io/screen-geometry-app)
 - [Chromatic Visual Testing](https://www.chromatic.com/library?appId=67764022c3d2470364c49de2)
-
-## App Demo
-
-![Demo video](https://raw.githubusercontent.com/nader-eloshaiker/screen-geometry-app/main/docs/media/demo-anim.webp)
-
-[Read here](./docs/UserGuide.md) for a more detailed explaination
 
 ## Dev'ing the App
 
