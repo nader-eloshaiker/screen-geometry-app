@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.1.2](https://github.com/nader-eloshaiker/screen-geometry-app/compare/v4.1.1...v4.1.2) (2025-08-28)
+
+
+### Bug Fixes
+
+* **ui:** failing tests using wait for screen form drawer ([#569](https://github.com/nader-eloshaiker/screen-geometry-app/issues/569)) ([2febd52](https://github.com/nader-eloshaiker/screen-geometry-app/commit/2febd52e3eee8840425ebf47ba72339fc97b4303))
+
 ## [4.1.1](https://github.com/nader-eloshaiker/screen-geometry-app/compare/v4.1.0...v4.1.1) (2025-08-28)
 
 
