@@ -113,7 +113,7 @@ describe('#ScreenFormDrawer', () => {
       const submitButton = test.getByText('Update')
       await test.user.click(submitButton)
 
-      waitFor(() => expect(test.getByTestId('busySubmitButton')).toBeInTheDocument())
+      await waitFor(() => expect(test.getByTestId('busySubmitButton')).toBeInTheDocument())
     })
 
     test('show loading when creating a screen', async () => {
@@ -134,7 +134,7 @@ describe('#ScreenFormDrawer', () => {
       const submitButton = test.getByText('Create')
       await waitFor(async () => await test.user.click(submitButton))
 
-      waitFor(() => expect(test.getByTestId('busySubmitButton')).toBeInTheDocument())
+      await waitFor(() => expect(test.getByTestId('busySubmitButton')).toBeInTheDocument())
     })
   })
 
