@@ -116,7 +116,7 @@ describe('#ScreenFormDrawer', () => {
       await user.type(inputScreenSize, '27')
 
       expect(submitButton).toBeEnabled()
-      await act(() => user.click(submitButton))
+      await act(async () => user.click(submitButton))
 
       await waitFor(
         () => {
