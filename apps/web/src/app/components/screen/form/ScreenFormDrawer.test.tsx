@@ -91,7 +91,7 @@ describe('#ScreenFormDrawer', () => {
 
       expect(test.getByText('formState:open')).toBeTruthy()
 
-      await waitFor(async () => await user.keyboard('{Escape}'))
+      await user.keyboard('{Escape}')
 
       expect(await test.findByText('formState:close')).toBeTruthy()
     })
@@ -113,12 +113,12 @@ describe('#ScreenFormDrawer', () => {
 
       // const inputScreenSize = test.getByLabelText('Screen Size')
       await user.clear(inputScreenSize)
-      user.type(inputScreenSize, '27')
+      await user.type(inputScreenSize, '27')
 
       expect(submitButton).toBeEnabled()
       await user.click(submitButton)
 
-      waitFor(() => expect(test.getByTestId('busySubmitButton')).toBeInTheDocument())
+      expect(await test.findByTestId('busySubmitButton')).toBeInTheDocument()
     })
 
     test('show loading when creating a screen', async () => {
@@ -129,21 +129,21 @@ describe('#ScreenFormDrawer', () => {
       expect(submitButton).not.toBeEnabled()
 
       const inputScreenSize = test.getByLabelText('Screen Size')
-      await waitFor(async () => await user.type(inputScreenSize, '27'))
+      await user.type(inputScreenSize, '27')
 
       const ratioElement = test.getByLabelText('Aspect Ratio')
-      await waitFor(async () => await user.type(ratioElement, '32:9'))
+      await user.type(ratioElement, '32:9')
 
       const hResElement = test.getByLabelText('Horizontal Res')
-      await waitFor(async () => await user.type(hResElement, '5120'))
+      await user.type(hResElement, '5120')
 
       const vResElement = test.getByLabelText('Vertical Res')
-      await waitFor(async () => await user.type(vResElement, '1440'))
+      await user.type(vResElement, '1440')
 
       expect(submitButton).toBeEnabled()
-      await waitFor(async () => await user.click(submitButton))
+      await user.click(submitButton)
 
-      await waitFor(() => expect(test.getByTestId('busySubmitButton')).toBeInTheDocument())
+      expect(await test.findByTestId('busySubmitButton')).toBeInTheDocument()
     })
   })
 
@@ -185,13 +185,13 @@ describe('#ScreenFormDrawer', () => {
 
       const resetButton = test.getByText('Reset')
 
-      await waitFor(async () => await user.clear(inputScreenSize))
-      await waitFor(async () => await user.type(inputScreenSize, '27'))
+      await user.clear(inputScreenSize)
+      await user.type(inputScreenSize, '27')
 
       expect(inputScreenSize).toHaveValue(27)
 
-      await waitFor(async () => await user.click(resetButton))
-      expect(inputScreenSize).toHaveValue(38)
+      await user.click(resetButton)
+      await waitFor(() => expect(inputScreenSize).toHaveValue(38))
     })
 
     test('change screen theme colors', async () => {
@@ -226,8 +226,8 @@ describe('#ScreenFormDrawer', () => {
       const inputScreenSize = test.getByLabelText('Screen Size')
       await waitFor(() => expect(inputScreenSize).toHaveValue(38))
 
-      await waitFor(async () => await user.clear(inputScreenSize))
-      await waitFor(async () => await user.type(inputScreenSize, '34'))
+      await user.clear(inputScreenSize)
+      await user.type(inputScreenSize, '34')
 
       const updateButton = test.getByText('Update')
       expect(updateButton).toBeEnabled()
