@@ -118,12 +118,9 @@ describe('#ScreenFormDrawer', () => {
       expect(submitButton).toBeEnabled()
       await act(async () => user.click(submitButton))
 
-      await waitFor(
-        () => {
-          expect(test.getByTestId('busySubmitButton')).toBeInTheDocument()
-        },
-        { timeout: 5000 }
-      )
+      await waitFor(() => {
+        expect(test.getByTestId('busySubmitButton')).toBeInTheDocument()
+      })
     })
 
     test('show loading when creating a screen', async () => {
@@ -148,12 +145,9 @@ describe('#ScreenFormDrawer', () => {
       expect(submitButton).toBeEnabled()
       await act(async () => user.click(submitButton))
 
-      await waitFor(
-        () => {
-          expect(test.getByTestId('busySubmitButton')).toBeInTheDocument()
-        },
-        { timeout: 5000 }
-      )
+      await waitFor(() => {
+        expect(test.getByTestId('busySubmitButton')).toBeInTheDocument()
+      })
     })
   })
 
