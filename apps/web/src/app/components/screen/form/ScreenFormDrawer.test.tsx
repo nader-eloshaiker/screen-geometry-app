@@ -146,7 +146,7 @@ describe('#ScreenFormDrawer', () => {
       await user.type(vResElement, '1440')
 
       expect(submitButton).toBeEnabled()
-      await act(() => user.click(submitButton))
+      await act(async () => user.click(submitButton))
 
       await waitFor(
         () => {
