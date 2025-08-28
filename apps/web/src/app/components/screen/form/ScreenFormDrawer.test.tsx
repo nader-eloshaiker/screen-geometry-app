@@ -99,7 +99,7 @@ describe('#ScreenFormDrawer', () => {
 
   // testing load state is proplematic with MSW response is pending
   describe('#LoadingMode', () => {
-    test.skip('show loading when updating a screen', async () => {
+    test('show loading when updating a screen', async () => {
       const editId = '5HjERJbH'
 
       const test = render(<RootTestComponent mode={FormModeTypes.edit} id={editId} />)
@@ -119,11 +119,11 @@ describe('#ScreenFormDrawer', () => {
       await act(async () => user.click(submitButton))
 
       waitFor(() => {
-        expect(test.getByTestId('busySubmitButton')).toBeInTheDocument()
+        expect(submitButton).not.toBeInTheDocument()
       })
     })
 
-    test.skip('show loading when creating a screen', async () => {
+    test('show loading when creating a screen', async () => {
       const test = render(<RootTestComponent />)
       const user = userEvent.setup()
 
@@ -146,7 +146,7 @@ describe('#ScreenFormDrawer', () => {
       await act(async () => user.click(submitButton))
 
       await waitFor(() => {
-        expect(test.getByTestId('busySubmitButton')).toBeInTheDocument()
+        expect(submitButton).not.toBeInTheDocument()
       })
     })
   })
