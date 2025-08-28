@@ -51,7 +51,7 @@ export const ScreenForm = ({ setOpen, editId, isEditLoading, editScreen, selecte
   } = form
   const [toggleAnimation, setToggleAnimation] = useState<boolean>(false)
 
-  const onClose = () => {
+  const handleClose = () => {
     setOpen(false)
   }
 
@@ -111,12 +111,12 @@ export const ScreenForm = ({ setOpen, editId, isEditLoading, editScreen, selecte
     })
   }
 
-  const resetHandler = () => {
+  const handleReset = () => {
     setSelectedItem(undefined)
     reset()
   }
 
-  const submitHandler: SubmitHandler<FormSubmitType> = (form: FormSubmitType) => {
+  const actionSubmit: SubmitHandler<FormSubmitType> = (form: FormSubmitType) => {
     ReactGA.event({
       category: 'Submit Button Click',
       action: `Submited ${editId ? FormModeTypes.edit : FormModeTypes.create} Screen Button`,
@@ -125,9 +125,9 @@ export const ScreenForm = ({ setOpen, editId, isEditLoading, editScreen, selecte
 
     // type casting safe due to form validation
     if (editId) {
-      updateAction({ id: editId, data: form as ScreenInput }, { onSuccess: onClose })
+      updateAction({ id: editId, data: form as ScreenInput }, { onSuccess: handleClose })
     } else {
-      createAction({ data: form as ScreenInput }, { onSuccess: onClose })
+      createAction({ data: form as ScreenInput }, { onSuccess: handleClose })
     }
 
     setSelectedItem(undefined)
@@ -147,7 +147,7 @@ export const ScreenForm = ({ setOpen, editId, isEditLoading, editScreen, selecte
 
   return (
     <Form {...form}>
-      <form method='post' onSubmit={handleSubmit(submitHandler)}>
+      <form method='post' onSubmit={handleSubmit(actionSubmit)}>
         <div className='flex flex-col gap-10'>
           <div id='screenTag' className='grid grid-cols-2 gap-6'>
             <InputField
@@ -248,7 +248,7 @@ export const ScreenForm = ({ setOpen, editId, isEditLoading, editScreen, selecte
                 className='shadow-lg'
                 mode='outline'
                 disabled={isCreateLoading || isUpdateLoading || isEditLoading}
-                onClick={onClose}
+                onClick={handleClose}
               >
                 <FormattedMessage id='screens.form.close' defaultMessage='Close' />
               </Button>
@@ -257,7 +257,7 @@ export const ScreenForm = ({ setOpen, editId, isEditLoading, editScreen, selecte
                 className='shadow-lg'
                 mode='outline'
                 disabled={isCreateLoading || isUpdateLoading || isEditLoading || !isDirty}
-                onClick={resetHandler}
+                onClick={handleReset}
               >
                 <FormattedMessage id='screens.form.reset' defaultMessage='Reset' />
               </Button>
