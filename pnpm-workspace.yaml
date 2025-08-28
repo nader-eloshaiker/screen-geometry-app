@@ -51,7 +51,7 @@ catalogs:
     "@tailwindcss/vite": ^4.1.12
     tailwind-merge: ^3.3.1
     tailwindcss: ^4.1.12
-    tw-animate-css: ^1.3.6
+    tw-animate-css: ^1.3.7
   unittesting:
     "@testing-library/jest-dom": ^6.7.0
     "@testing-library/react": ^16.3.0
