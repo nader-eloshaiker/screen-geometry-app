@@ -118,7 +118,7 @@ describe('#ScreenFormDrawer', () => {
       expect(submitButton).toBeEnabled()
       await act(async () => user.click(submitButton))
 
-      await waitFor(() => {
+      waitFor(() => {
         expect(test.getByTestId('busySubmitButton')).toBeInTheDocument()
       })
     })
@@ -145,7 +145,7 @@ describe('#ScreenFormDrawer', () => {
       expect(submitButton).toBeEnabled()
       await act(async () => user.click(submitButton))
 
-      await waitFor(() => {
+      waitFor(() => {
         expect(test.getByTestId('busySubmitButton')).toBeInTheDocument()
       })
     })
