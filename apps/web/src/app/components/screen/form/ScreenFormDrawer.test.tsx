@@ -8,7 +8,7 @@ import { toScreenItemRender, transformScreenInput } from '@/lib/utils'
 import { getScreenListServiceMock, getScreenServiceMock, getSearchServiceMock } from '@screengeometry/lib-api/spec'
 import { Toaster } from '@screengeometry/lib-ui/toaster'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
-import { render, waitFor } from '@testing-library/react'
+import { act, render, waitFor } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { useState } from 'react'
 import { FormModeTypes } from './FormMode'
@@ -116,7 +116,7 @@ describe('#ScreenFormDrawer', () => {
       await user.type(inputScreenSize, '27')
 
       expect(submitButton).toBeEnabled()
-      await user.click(submitButton)
+      await act(() => user.click(submitButton))
 
       await waitFor(
         () => {
@@ -146,7 +146,7 @@ describe('#ScreenFormDrawer', () => {
       await user.type(vResElement, '1440')
 
       expect(submitButton).toBeEnabled()
-      await user.click(submitButton)
+      await act(() => user.click(submitButton))
 
       await waitFor(
         () => {
