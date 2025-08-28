@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.1.1](https://github.com/nader-eloshaiker/screen-geometry-app/compare/v4.1.0...v4.1.1) (2025-08-28)
+
+
+### Bug Fixes
+
+* **ops:** fix codecov badge urls ([#554](https://github.com/nader-eloshaiker/screen-geometry-app/issues/554)) ([88556c6](https://github.com/nader-eloshaiker/screen-geometry-app/commit/88556c679351883958a9ed86e40758af16a9bec9))
+
 ## [4.1.0](https://github.com/nader-eloshaiker/screen-geometry-app/compare/v4.0.1...v4.1.0) (2025-08-17)
 
 
