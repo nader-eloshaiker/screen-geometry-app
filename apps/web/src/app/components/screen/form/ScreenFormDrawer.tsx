@@ -1,7 +1,7 @@
 import { ScreenSelector } from '@/app/components/screen/screenselector/ScreenSelector'
 import { useApiEffect } from '@/app/hooks/api/useApiEffect'
 import { getTextDirection } from '@/app/hooks/translation/LocaleHelper'
-import { transformScreenItem } from '@/lib/utils'
+import { toScreenInput } from '@screengeometry/lib-api/extended'
 import {
   type ScreenItemResponse,
   type SearchItem,
@@ -76,7 +76,7 @@ export const ScreenFormDrawer = ({ open, setOpen, mode, id: editId = '', childre
 
   useEffect(() => {
     if (screenData && editId && !isScreenLoading) {
-      const inputScreen = transformScreenItem(screenData.item)
+      const inputScreen = toScreenInput(screenData.item)
       const resetInputValues = inputScreen as FormSubmitType
       setEditScreen(resetInputValues)
     } else if (!editId && !isScreenLoading) {

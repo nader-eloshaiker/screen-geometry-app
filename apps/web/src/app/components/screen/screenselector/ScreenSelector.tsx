@@ -1,6 +1,5 @@
-import { useDebounce } from '@/lib/ui/hooks/useDebounce'
-import { useElementSize } from '@/lib/ui/hooks/useElementSize'
-import { cn } from '@/lib/utils'
+import { useDebounce } from '@/app/hooks/useDebounce'
+import { useElementSize } from '@/app/hooks/useElementSize'
 import { type SearchItem } from '@screengeometry/lib-api/spec'
 import { Button } from '@screengeometry/lib-ui/button'
 import {
@@ -14,6 +13,7 @@ import {
 import { InputVariants } from '@screengeometry/lib-ui/input'
 import { Label } from '@screengeometry/lib-ui/label'
 import { Popover, PopoverContent, PopoverTrigger } from '@screengeometry/lib-ui/popover'
+import { cn } from '@screengeometry/lib-ui/utils'
 import parse from 'html-react-parser'
 import { Check, ChevronsUpDown } from 'lucide-react'
 import { type Dispatch, type SetStateAction, useEffect, useState } from 'react'

@@ -1,12 +1,12 @@
 import { QueryProvider } from '@/app/hooks/query/QueryProvider'
+import { normaliseScreenRender } from '@/app/hooks/screen/ScreenManager'
 import { ScreenProvider } from '@/app/hooks/screen/ScreenProvider'
 import { EnvSession } from '@/app/hooks/session/EnvSession'
-import { ScreenItemRender } from '@/app/models/screenItemRender'
+import type { ScreenItemRender } from '@/app/models/screenItemRender'
 import { Screens } from '@/app/pages/Screens'
 import { initMSW } from '@/lib/serviceworker/NodeServiceWorker'
 import { renderWithUserEvents } from '@/lib/support/test/utils/RenderWithUserEvents'
 import { TestEnvironment } from '@/lib/support/test/utils/TestEnvironment'
-import { normaliseScreenRender } from '@/lib/utils'
 import {
   getConfigurationMock,
   getGetScreenListResponseMock,

@@ -9,7 +9,6 @@
   "scripts": {
     "lint": "eslint",
     "lint:fix": "eslint --fix",
-    "lint:staged": "pnpm exec lint-staged",
     "format": "prettier . --write",
     "format:check": "prettier . --check"
   },
@@ -27,7 +26,6 @@
     "eslint-plugin-storybook": "catalog:eslint",
     "globals": "catalog:eslint",
     "jsdom": "^26.1.0",
-    "lint-staged": "catalog:",
     "prettier": "catalog:prettier",
     "prettier-plugin-organize-imports": "catalog:prettier",
     "prettier-plugin-tailwindcss": "catalog:prettier",

@@ -1,4 +1,4 @@
-import { to, transformScreenInput } from '@/lib/utils'
+import { to, toScreenItem } from '@screengeometry/lib-api/extended'
 import type { ScreenInput, ScreenInputList, ScreenItem, SearchItem } from '@screengeometry/lib-api/spec'
 import { DatabaseError } from '../db/DatabaseError'
 import { StoresEnum } from '../db/DbConstants'
@@ -64,7 +64,7 @@ export const updateScreen = async (id: string, data: ScreenInput) => {
     throw new ApiError('No parameters provided', 400)
   }
 
-  const screenItem = { ...transformScreenInput(data), id }
+  const screenItem = { ...toScreenItem(data), id } as ScreenItem
   const [err, item] = await to<ScreenItem>(updateData<ScreenItem>(StoresEnum.Screens, screenItem))
 
   if (err) {
@@ -81,7 +81,7 @@ export const createScreen = async (data: ScreenInput) => {
     throw new ApiError('No parameters provided', 400)
   }
 
-  const keylessData = transformScreenInput(data)
+  const keylessData = toScreenItem(data) as ScreenItem
   const [err, item] = await to<ScreenItem>(addData<ScreenItem>(StoresEnum.Screens, keylessData))
 
   if (err) {
@@ -96,7 +96,7 @@ export const createScreenList = async (data: ScreenInputList) => {
     throw new ApiError('No parameters provided', 400)
   }
 
-  const keylessList = data.map((item) => transformScreenInput(item))
+  const keylessList = data.map((item) => toScreenItem(item))
   const [err, list] = await to<Array<ScreenItem>>(addAllData<ScreenItem>(StoresEnum.Screens, keylessList))
 
   if (err) {

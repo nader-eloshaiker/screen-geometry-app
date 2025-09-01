@@ -2,12 +2,13 @@ import RefreshIcon from '@/app/assets/icons/Refresh'
 import { useCreateScreenEffect } from '@/app/hooks/api/useCreateScreenEffect'
 import { useUpdateScreenEffect } from '@/app/hooks/api/useUpdateScreenEffect'
 import { DarkMode, LightMode } from '@/app/hooks/theme/Theme.types'
-import { cn, createCSSColor } from '@/lib/utils'
+import { createScreenColors } from '@/app/utils'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { type ScreenInput, type SearchItem, useCreateScreen, useUpdateScreen } from '@screengeometry/lib-api/spec'
 import { Button } from '@screengeometry/lib-ui/button'
 import { Form } from '@screengeometry/lib-ui/form'
 import { Separator } from '@screengeometry/lib-ui/separator'
+import { cn } from '@screengeometry/lib-ui/utils'
 import { Loader2 } from 'lucide-react'
 import { type Dispatch, type SetStateAction, useEffect, useState } from 'react'
 import ReactGA from 'react-ga4'
@@ -99,7 +100,7 @@ export const ScreenForm = ({ setOpen, editId, isEditLoading, editScreen, selecte
   }, [selectedItem])
 
   const generateColorHandler = () => {
-    const color = createCSSColor()
+    const color = createScreenColors()
 
     setValue('darkColor', color.darkColor, {
       shouldValidate: true,
@@ -138,7 +139,7 @@ export const ScreenForm = ({ setOpen, editId, isEditLoading, editScreen, selecte
     if (editScreen) {
       reset(editScreen)
     } else {
-      const color = createCSSColor()
+      const color = createScreenColors()
       const value = { ...EmptyInputValues, ...color }
 
       reset(value)

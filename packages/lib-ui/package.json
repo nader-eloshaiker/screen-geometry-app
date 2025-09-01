@@ -26,7 +26,8 @@
     "./toaster": "./src/components/toaster/index.ts",
     "./toggle": "./src/components/toggle/index.ts",
     "./togglegroup": "./src/components/togglegroup/index.ts",
-    "./tooltip": "./src/components/tooltip/index.ts"
+    "./tooltip": "./src/components/tooltip/index.ts",
+    "./utils": "./src/lib/utils.ts"
   },
   "scripts": {
     "pre-push": "pnpm test:ci",
@@ -35,7 +36,6 @@
     "preview": "vite preview",
     "lint": "eslint",
     "lint:fix": "eslint --fix",
-    "lint:staged": "pnpm exec lint-staged",
     "format": "prettier . --write",
     "format:check": "prettier . --check",
     "test": "vitest run --coverage.enabled=true",
@@ -105,7 +105,6 @@
     "eslint-plugin-storybook": "^9.1.1",
     "globals": "catalog:eslint",
     "jsdom": "^26.1.0",
-    "lint-staged": "catalog:",
     "prettier": "catalog:prettier",
     "prettier-plugin-organize-imports": "catalog:prettier",
     "prettier-plugin-tailwindcss": "catalog:prettier",

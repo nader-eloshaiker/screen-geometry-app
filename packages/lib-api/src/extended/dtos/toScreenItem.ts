@@ -1,40 +1,11 @@
-import type { ScreenInput, ScreenItem } from '@screengeometry/lib-api/spec'
+import type { ScreenInput, ScreenItem } from '@/generated/server/models'
 
-const getAspectRatio = (str: string | undefined | null) => {
-  const [width, height] = str?.split(':') ?? []
+const getAspectRatio = (str: string) => {
+  const [width, height] = str.indexOf(':') === -1 ? [] : str.split(':')
   return [parseFloat(width ?? '1'), parseFloat(height ?? '1')] as const
 }
 
-// const generateLabel = (entry: SearchItem) => {
-//   let str = entry.name
-
-//   if (entry.diagonalSize && entry.diagonalSize !== 0) {
-//     str += ` ${entry.diagonalSize}"`
-//   }
-
-//   if (entry.hRes && entry.vRes !== 0) {
-//     str += ` ${entry.hRes}x${entry.vRes}`
-//   }
-
-//   str += ` ${entry.aspectRatio}`
-
-//   return str
-// }
-
-export const transformScreenItem = (screen: ScreenItem) => {
-  const item: ScreenInput = {
-    diagonalSize: screen.data.diagonalSize,
-    aspectRatio: screen.data.aspectRatio,
-    hRes: screen.data.hRes,
-    vRes: screen.data.vRes,
-    lightColor: screen.color.lightColor,
-    darkColor: screen.color.darkColor,
-  }
-
-  return item
-}
-
-export const transformScreenInput = ({
+export const toScreenItem = ({
   diagonalSize,
   aspectRatio,
   hRes,
