@@ -6,7 +6,7 @@
   "exports": {
     "./apiClient": "./src/axios/apiClient.ts",
     "./spec": "./src/generated/index.ts",
-    "./internal": "./src/internal/index.ts"
+    "./extended": "./src/extended/index.ts"
   },
   "scripts": {
     "pre-push": "pnpm test:ci",

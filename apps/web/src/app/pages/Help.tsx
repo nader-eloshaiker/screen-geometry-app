@@ -1,12 +1,14 @@
 import { CreateScreenButton } from '@/app/components/screen/createbutton/CreateButton'
+import { ScreenForm } from '@/app/components/screen/form/ScreenForm'
 import { ScreenPanel } from '@/app/components/screen/panel/ScreenPanel'
 import { ScreenTable } from '@/app/components/screen/table/ScreenTable'
 import { Stacked } from '@/app/components/stacked/Stacked'
 import { defaultScreenInputList } from '@/app/constants/defaultScreenList'
 import type { ScreenItemRender } from '@/app/models/screenItemRender'
 import { useElementSize } from '@/lib/ui/hooks/useElementSize'
-import { getMaxScreenSize, normaliseScreenRender, transformScreenInput } from '@/lib/utils'
-import type { Dimensions } from '@screengeometry/lib-api/internal'
+import { getMaxScreenSize, normaliseScreenRender } from '@/lib/utils'
+import { toScreenItem, type Dimensions } from '@screengeometry/lib-api/extended'
+import type { ScreenItem } from '@screengeometry/lib-api/spec'
 import { Button } from '@screengeometry/lib-ui/button'
 import { Label } from '@screengeometry/lib-ui/label'
 import { Pencil, X } from 'lucide-react'
@@ -15,7 +17,6 @@ import { Helmet } from 'react-helmet-async'
 import { FormattedMessage } from 'react-intl'
 import tw from 'tailwind-styled-components'
 import { ulid } from 'ulid'
-import { ScreenForm } from '../components/screen/form/ScreenForm'
 
 const Section = tw.div`mb-14`
 const Diagram = tw.div`my-8 flex w-full justify-center`
@@ -30,7 +31,7 @@ export const Help = () => {
 
   const { fullList, smallList, invisibleList, maxPanelSize } = useMemo(() => {
     const fullList = normaliseScreenRender(
-      defaultScreenInputList.map((item) => ({ ...transformScreenInput(item), id: ulid() }))
+      defaultScreenInputList.map((item) => ({ ...toScreenItem(item), id: ulid() }) as ScreenItem)
     )
     const smallList = fullList.filter((_, index) => index < 2)
     const invisibleList = smallList.map((item, index) => (index !== 1 ? item : { ...item, visible: false }))

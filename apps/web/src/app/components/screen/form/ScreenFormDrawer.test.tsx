@@ -4,8 +4,14 @@ import { type ScreenItemRender } from '@/app/models/screenItemRender'
 import { initMSW } from '@/lib/serviceworker/NodeServiceWorker'
 import { screenInputFixture } from '@/lib/support/test/fixtures/ScreenFixtures'
 import { TestEnvironment } from '@/lib/support/test/utils/TestEnvironment'
-import { toScreenItemRender, transformScreenInput } from '@/lib/utils'
-import { getScreenListServiceMock, getScreenServiceMock, getSearchServiceMock } from '@screengeometry/lib-api/spec'
+import { toScreenItemRender } from '@/lib/utils'
+import { toScreenItem } from '@screengeometry/lib-api/extended'
+import {
+  getScreenListServiceMock,
+  getScreenServiceMock,
+  getSearchServiceMock,
+  type ScreenItem,
+} from '@screengeometry/lib-api/spec'
 import { Toaster } from '@screengeometry/lib-ui/toaster'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { render, waitFor } from '@testing-library/react'
@@ -221,7 +227,7 @@ describe('#ScreenFormDrawer', () => {
     test('update a screen from list and populate form', async () => {
       const editId = '5HjERJbH'
       const initialise: Array<ScreenItemRender> = [
-        toScreenItemRender({ ...transformScreenInput(screenInputFixture), id: editId }),
+        toScreenItemRender({ ...toScreenItem(screenInputFixture), id: editId } as ScreenItem),
       ]
 
       const test = render(<RootTestComponent mode={FormModeTypes.edit} id={editId} initialise={initialise} />)

@@ -1,6 +1,6 @@
 import react from '@vitejs/plugin-react'
 import tsconfigPaths from 'vite-tsconfig-paths'
-import { configDefaults, defineConfig, ViteUserConfig } from 'vitest/config'
+import { configDefaults, defineConfig, type ViteUserConfig } from 'vitest/config'
 
 const Config: ViteUserConfig = {
   test: {
@@ -18,10 +18,10 @@ const Config: ViteUserConfig = {
       include: ['src/**/*.{ts,tsx}'],
       exclude: [
         ...configDefaults.exclude,
-        'src/generated/**/*',
-        'src/internal/**/*',
-        'src/configs/**/*',
-        'src/lib/**/*',
+        'src/generated',
+        'src/extended/models',
+        'src/configs',
+        'src/lib',
         'src/**/*.mock.{ts,tsx}',
         'src/**/*.d.ts',
       ],
