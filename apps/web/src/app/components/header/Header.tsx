@@ -1,6 +1,5 @@
 import ThemeToggle from '@/app/components/theme/ThemeToggle'
 import { useEnvConfig } from '@/app/hooks/config/useEnvConfig'
-import { cn } from '@/lib/utils'
 import { Button } from '@screengeometry/lib-ui/button'
 import {
   Sheet,
@@ -10,6 +9,7 @@ import {
   SheetTitle,
   SheetTrigger,
 } from '@screengeometry/lib-ui/sheet'
+import { cn } from '@screengeometry/lib-ui/utils'
 import { Menu } from 'lucide-react'
 import { useMemo, useState } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'

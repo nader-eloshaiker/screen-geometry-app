@@ -1,8 +1,8 @@
 import { DarkMode, LightMode, type TThemeMode } from '@/app/hooks/theme/Theme.types'
-import { cn } from '@/lib/utils'
 import type { ScreenDataType } from '@screengeometry/lib-api/extended'
 import { FormControl, FormField, FormItem, FormLabel, FormMessage } from '@screengeometry/lib-ui/form'
 import { Input } from '@screengeometry/lib-ui/input'
+import { cn } from '@screengeometry/lib-ui/utils'
 import { type Control, useFormContext } from 'react-hook-form'
 import { type FormSubmitType } from '../ScreenFormSchema'
 

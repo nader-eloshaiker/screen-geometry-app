@@ -19,13 +19,13 @@ const SelectTriggerVariants = cva(
         warning:
           'border-warning-border bg-warning-input text-warning-foreground-input selection:bg-warning-foreground-input selection:text-warning-input placeholder:text-warning-foreground-input-muted focus-visible:ring-warning-ring hocus:border-warning-border-hover hocus:text-warning-foreground-input-hover',
       },
-      dimension: {
+      size: {
         lg: 'px-5 py-6',
         md: 'px-4 py-5',
         sm: 'px-3 py-4',
       },
       defaultVariants: {
-        dimension: 'md',
+        size: 'md',
         palette: 'primary',
       },
     },
@@ -41,6 +41,9 @@ const SelectContentVariants = cva(
         primary: 'border-primary-border bg-mono text-mono-foreground',
         secondary: 'border-secondary-border bg-mono text-mono-foreground',
         mono: 'border-mono-border bg-mono text-mono-foreground',
+        danger: 'border-danger-border bg-mono text-mono-foreground',
+        success: 'border-success-border bg-mono text-mono-foreground',
+        warning: 'border-warning-border bg-mono text-mono-foreground',
       },
     },
     defaultVariants: {
@@ -59,6 +62,12 @@ const SelectItemVariants = cva(
         secondary:
           "hocus:bg-secondary-hover hocus:text-secondary-foreground-hover [&_svg:not([class*='text-'])]:text-secondary-foreground-muted",
         mono: "hocus:bg-mono-hover hocus:text-mono-foreground-hover [&_svg:not([class*='text-'])]:text-mono-foreground-muted",
+        danger:
+          "hocus:bg-danger-hover hocus:text-danger-foreground-hover [&_svg:not([class*='text-'])]:text-danger-foreground-muted",
+        success:
+          "hocus:bg-success-hover hocus:text-success-foreground-hover [&_svg:not([class*='text-'])]:text-success-foreground-muted",
+        warning:
+          "hocus:bg-warning-hover hocus:text-warning-foreground-hover [&_svg:not([class*='text-'])]:text-warning-foreground-muted",
       },
     },
     defaultVariants: {
@@ -73,6 +82,9 @@ const SelectSeparatorVariants = cva('-mx-1 my-1 h-px', {
       primary: 'bg-primary-muted',
       secondary: 'bg-secondary-muted',
       mono: 'bg-mono-muted',
+      danger: 'bg-danger-muted',
+      success: 'bg-success-muted',
+      warning: 'bg-warning-muted',
     },
   },
   defaultVariants: {

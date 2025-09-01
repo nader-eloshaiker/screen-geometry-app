@@ -1,5 +1,5 @@
-import { cn } from '@/lib/utils'
 import { Button } from '@screengeometry/lib-ui/button'
+import { cn } from '@screengeometry/lib-ui/utils'
 import { Pencil } from 'lucide-react'
 import { FormattedMessage } from 'react-intl'
 

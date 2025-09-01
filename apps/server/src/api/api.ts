@@ -1,5 +1,4 @@
-import { to } from '@/lib/utils'
-import { toScreenItem } from '@screengeometry/lib-api/extended'
+import { to, toScreenItem } from '@screengeometry/lib-api/extended'
 import type { ScreenInput, ScreenInputList, ScreenItem, SearchItem } from '@screengeometry/lib-api/spec'
 import { DatabaseError } from '../db/DatabaseError'
 import { StoresEnum } from '../db/DbConstants'

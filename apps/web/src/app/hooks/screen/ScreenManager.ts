@@ -1,7 +1,17 @@
 import type { ScreenItemRender } from '@/app/models/screenItemRender'
-import { normaliseScreenRender } from '@/lib/utils'
+import { getMaxScreenSize, toScreenItemRender } from '@/app/utils'
 import type { ScreenItem } from '@screengeometry/lib-api/spec'
 import { match } from 'ts-pattern'
+
+export const normaliseScreenRender = (list: ScreenItem[]) => {
+  const biggest = getMaxScreenSize(list)
+  // sort in reverse order to avoid using z-index when hovering over panel
+  const sorted = list
+    .map((item) => toScreenItemRender(item, biggest))
+    .sort((a, b) => b.data.diagonalSize - a.data.diagonalSize)
+
+  return sorted
+}
 
 export const initialScreenState = {
   screens: [] as ScreenItemRender[],

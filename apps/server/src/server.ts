@@ -1,4 +1,4 @@
-import { to } from '@/lib/utils'
+import { to } from '@screengeometry/lib-api/extended'
 import { type ScreenInput, type ScreenInputList } from '@screengeometry/lib-api/spec'
 import { HttpHandler, HttpResponse, delay, http, passthrough } from 'msw'
 import { apiRoutes } from './ApiRouteSchema'
