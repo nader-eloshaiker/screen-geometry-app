@@ -1,0 +1,14 @@
+query getCountries {
+  countries {
+    code
+    name
+    native
+    emoji
+    languages {
+      code
+      name
+      native
+      rtl
+    }
+  }
+}

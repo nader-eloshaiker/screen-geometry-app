@@ -17,6 +17,7 @@
     "lint:fix": "eslint --fix",
     "format": "prettier . --write",
     "format:check": "prettier . --check",
+    "gen:gql:countries": "pnpm graphql-codegen --config codegen.ts",
     "gen:spec:asset": "pnpm --filter=@screengeometry/spec-asset build && orval --config ./orval.asset.config.ts",
     "gen:spec:server": "pnpm --filter=@screengeometry/spec-server build && orval --config ./orval.server.config.ts",
     "gen:spec": "pnpm gen:spec:server && pnpm gen:spec:asset",
@@ -29,6 +30,7 @@
     "@faker-js/faker": "^9.9.0",
     "@tanstack/react-query": "catalog:",
     "axios": "^1.7.9",
+    "graphql": "^16.11.0",
     "msw": "^2.10.4",
     "uuid": "^11.1.0"
   },
@@ -37,7 +39,11 @@
     "react-dom": "catalog:react19"
   },
   "devDependencies": {
+    "@0no-co/graphqlsp": "^1.15.0",
     "@eslint/js": "catalog:eslint",
+    "@graphql-codegen/cli": "^5.0.7",
+    "@graphql-codegen/schema-ast": "^4.1.0",
+    "@graphql-codegen/typescript-react-query": "^6.1.1",
     "@tanstack/eslint-plugin-query": "catalog:eslint",
     "@testing-library/jest-dom": "catalog:unittesting",
     "@testing-library/react": "catalog:unittesting",

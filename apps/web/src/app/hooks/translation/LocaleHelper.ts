@@ -18,6 +18,23 @@ const getBrowserLocales = () => {
   return result
 }
 
+export const supportedLanguagesArray: Array<string> = [
+  'en', // English
+  'de', // German
+  'es', // Spanish
+  'fr', // French
+  'it', // Italian
+  'pt', // Portuguese
+  'ar', // Arabic
+  'fa', // Farsi
+  'hi', // Hindi
+  'ja', // Japanese
+  'ko', // Korean
+  'ta', // Tamil
+  'zh', // Chinese
+]
+export const defaultLLanguage = 'en'
+
 const supportedlocales: Record<string, { dir: 'ltr' | 'rtl'; label: string }> = {
   'en-US': { dir: 'ltr', label: 'English' },
   'de-DE': { dir: 'ltr', label: 'Deutsch' },
