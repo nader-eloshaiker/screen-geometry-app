@@ -6,9 +6,6 @@ query getCountries {
     emoji
     languages {
       code
-      name
-      native
-      rtl
     }
   }
 }

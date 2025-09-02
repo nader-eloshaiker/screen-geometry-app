@@ -3,7 +3,7 @@ import { getGetTranslationsResponseMock, useGetTranslations } from '@screengeome
 import { PageLoaderProvider } from '@screengeometry/lib-ui/pageloader'
 import { render } from '@testing-library/react'
 import { vi } from 'vitest'
-import { EnvTranslation } from './EnvTranslation'
+import { EnvTranslationProvider } from './EnvTranslationProvider'
 
 vi.mock('react-intl', () => ({
   IntlProvider: vi.fn(({ children }) => <div data-testid='Intl-provider'>{children}</div>),
@@ -11,7 +11,7 @@ vi.mock('react-intl', () => ({
 
 const TestHarness = ({ children }: { children: React.ReactNode }) => (
   <PageLoaderProvider initialLoadingKeys={['aaa']}>
-    <EnvTranslation translationsReadyKey={'aaa'}>{children}</EnvTranslation>
+    <EnvTranslationProvider translationsReadyKey={'aaa'}>{children}</EnvTranslationProvider>
   </PageLoaderProvider>
 )
 
@@ -43,14 +43,18 @@ describe('#EnvironmentTranslations', () => {
 
       const test = render(
         <PageLoaderProvider initialLoadingKeys={['aaa']}>
-          <EnvTranslation translationsReadyKey={'aaa'}>
+          <EnvTranslationProvider translationsReadyKey={'aaa'}>
             <div>Child Component</div>
-          </EnvTranslation>
+          </EnvTranslationProvider>
         </PageLoaderProvider>
       )
 
       expect(test.getByText('Child Component')).toBeInTheDocument()
-      expect(useGetTranslationSpy).toHaveBeenCalledWith('en-US')
+      expect(useGetTranslationSpy).toHaveBeenCalledWith('en', {
+        query: {
+          enabled: false,
+        },
+      })
     })
 
     it('throws an error if there is an error fetching translation data', () => {
@@ -80,12 +84,12 @@ describe('#EnvironmentTranslations', () => {
     it('throws an error if data is undefined and isFetched is true', () => {
       vi.mocked(useGetTranslations).mockReturnValue({
         data: undefined,
-        error: null,
+        error: new Error('Error fetching translation data'),
         isFetched: true,
       } as ReturnType<typeof useGetTranslations>)
 
       expect(() => render(<div>Child Component</div>, { wrapper: TestHarness })).toThrow(
-        'Could not render. Error translation data missing.'
+        'Could not render. Error fetching translation data.'
       )
     })
   })

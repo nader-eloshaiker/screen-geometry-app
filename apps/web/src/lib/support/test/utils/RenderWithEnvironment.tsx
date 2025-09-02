@@ -1,6 +1,6 @@
 import { EnvConfig } from '@/app/hooks/config/EnvConfig'
 import { QueryProvider } from '@/app/hooks/query/QueryProvider'
-import { EnvTranslation } from '@/app/hooks/translation/EnvTranslation'
+import { EnvTranslationProvider } from '@/app/hooks/translation/EnvTranslationProvider'
 import { PageLoaderProvider } from '@screengeometry/lib-ui/pageloader'
 import { render, type RenderOptions, type RenderResult } from '@testing-library/react'
 import type { UserEvent } from '@testing-library/user-event'
@@ -15,7 +15,7 @@ export const renderWithEnvironment = async (jsx: ReactElement, options?: RenderO
       <QueryProvider>
         <PageLoaderProvider initialLoadingKeys={['configReadyKey', 'translationsReadyKey']}>
           <EnvConfig configReadyKey={'configReadyKey'}>
-            <EnvTranslation translationsReadyKey={'translationsReadyKey'}>{children}</EnvTranslation>
+            <EnvTranslationProvider translationsReadyKey={'translationsReadyKey'}>{children}</EnvTranslationProvider>
           </EnvConfig>
         </PageLoaderProvider>
       </QueryProvider>

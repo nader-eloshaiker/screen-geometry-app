@@ -155,8 +155,15 @@ export type GetCountriesQuery = {
     name: string
     native: string
     emoji: string
-    languages: Array<{ __typename?: 'Language'; code: string; name: string; native: string; rtl: boolean }>
+    languages: Array<{ __typename?: 'Language'; code: string }>
   }>
+}
+
+export type GetLanguagesQueryVariables = Exact<{ [key: string]: never }>
+
+export type GetLanguagesQuery = {
+  __typename?: 'Query'
+  languages: Array<{ __typename?: 'Language'; code: string; name: string; native: string; rtl: boolean }>
 }
 
 export const GetCountriesDocument = /*#__PURE__*/ `
@@ -168,9 +175,6 @@ export const GetCountriesDocument = /*#__PURE__*/ `
     emoji
     languages {
       code
-      name
-      native
-      rtl
     }
   }
 }
@@ -194,3 +198,33 @@ useGetCountriesQuery.getKey = (variables?: GetCountriesQueryVariables) =>
 
 useGetCountriesQuery.fetcher = (variables?: GetCountriesQueryVariables) =>
   fetcher<GetCountriesQuery, GetCountriesQueryVariables>(GetCountriesDocument, variables)
+
+export const GetLanguagesDocument = /*#__PURE__*/ `
+    query getLanguages {
+  languages {
+    code
+    name
+    native
+    rtl
+  }
+}
+    `
+
+export const useGetLanguagesQuery = <TData = GetLanguagesQuery, TError = unknown>(
+  variables?: GetLanguagesQueryVariables,
+  options?: Omit<UseQueryOptions<GetLanguagesQuery, TError, TData>, 'queryKey'> & {
+    queryKey?: UseQueryOptions<GetLanguagesQuery, TError, TData>['queryKey']
+  }
+) => {
+  return useQuery<GetLanguagesQuery, TError, TData>({
+    queryKey: variables === undefined ? ['getLanguages'] : ['getLanguages', variables],
+    queryFn: fetcher<GetLanguagesQuery, GetLanguagesQueryVariables>(GetLanguagesDocument, variables),
+    ...options,
+  })
+}
+
+useGetLanguagesQuery.getKey = (variables?: GetLanguagesQueryVariables) =>
+  variables === undefined ? ['getLanguages'] : ['getLanguages', variables]
+
+useGetLanguagesQuery.fetcher = (variables?: GetLanguagesQueryVariables) =>
+  fetcher<GetLanguagesQuery, GetLanguagesQueryVariables>(GetLanguagesDocument, variables)
