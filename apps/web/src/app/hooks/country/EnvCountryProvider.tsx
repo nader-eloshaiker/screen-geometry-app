@@ -1,3 +1,4 @@
+import { ConfigLoaderKey } from '@/app/App'
 import { useGetCountriesQuery, useGetLanguagesQuery } from '@screengeometry/lib-api/spec'
 import { usePageLoader } from '@screengeometry/lib-ui/pageloader'
 import { useEffect, useState } from 'react'
@@ -8,13 +9,22 @@ export const EnvCountryProvider = ({
   children,
   countriesReadyKey,
 }: React.PropsWithChildren & { countriesReadyKey: string }) => {
-  const { setPageLoading } = usePageLoader()
+  const { setComponentLoading, isComponentLoading } = usePageLoader()
+  const configReady = !isComponentLoading(ConfigLoaderKey)
 
-  const { data: countries, error: countriesError, isFetched: isCountriesFetched } = useGetCountriesQuery()
+  const {
+    data: countries,
+    error: countriesError,
+    isFetched: isCountriesFetched,
+  } = useGetCountriesQuery(undefined, { enabled: configReady })
   const [countriesList, setCountriesList] = useState<CountryDictionary>()
   const [supportedLocaleCodes, setSupportedLocaleCodes] = useState<Array<string>>()
 
-  const { data: languages, error: languagesError, isFetched: isLanguagesFetched } = useGetLanguagesQuery()
+  const {
+    data: languages,
+    error: languagesError,
+    isFetched: isLanguagesFetched,
+  } = useGetLanguagesQuery(undefined, { enabled: configReady })
   const [languageList, setLanguageList] = useState<LanguageList>()
 
   useEffect(() => {
@@ -31,9 +41,9 @@ export const EnvCountryProvider = ({
 
   useEffect(() => {
     if (isCountriesFetched || isLanguagesFetched) {
-      setPageLoading({ action: 'idle', componentId: countriesReadyKey })
+      setComponentLoading({ action: 'idle', componentId: countriesReadyKey })
     }
-  }, [setPageLoading, isCountriesFetched, isLanguagesFetched, countriesReadyKey])
+  }, [setComponentLoading, isCountriesFetched, isLanguagesFetched, countriesReadyKey])
 
   useEffect(() => {
     if (countries) {

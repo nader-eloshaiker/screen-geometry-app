@@ -6,7 +6,8 @@
   "exports": {
     "./apiClient": "./src/axios/apiClient.ts",
     "./spec": "./src/generated/index.ts",
-    "./extended": "./src/extended/index.ts"
+    "./extended": "./src/extended/index.ts",
+    "./gql": "./src/gql/index.ts"
   },
   "scripts": {
     "pre-push": "pnpm test:ci",
@@ -31,7 +32,7 @@
     "@tanstack/react-query": "catalog:",
     "axios": "^1.7.9",
     "graphql": "^16.11.0",
-    "msw": "^2.10.4",
+    "msw": "catalog:",
     "uuid": "^11.1.0"
   },
   "peerDependencies": {
@@ -43,6 +44,7 @@
     "@eslint/js": "catalog:eslint",
     "@graphql-codegen/cli": "^5.0.7",
     "@graphql-codegen/schema-ast": "^4.1.0",
+    "@graphql-codegen/typescript-msw": "^3.0.1",
     "@graphql-codegen/typescript-react-query": "^6.1.1",
     "@tanstack/eslint-plugin-query": "catalog:eslint",
     "@testing-library/jest-dom": "catalog:unittesting",

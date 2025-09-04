@@ -1,7 +1,7 @@
 import { QueryProvider } from '@/app/hooks/query/QueryProvider'
 import { normaliseScreenRender } from '@/app/hooks/screen/ScreenManager'
 import { ScreenProvider } from '@/app/hooks/screen/ScreenProvider'
-import { EnvSession } from '@/app/hooks/session/EnvSession'
+import { EnvSessionProvider } from '@/app/hooks/session/EnvSessionProvider'
 import type { ScreenItemRender } from '@/app/models/screenItemRender'
 import { Screens } from '@/app/pages/Screens'
 import { initMSW } from '@/lib/serviceworker/NodeServiceWorker'
@@ -59,12 +59,12 @@ const TestParentComponent = ({ initialise }: { initialise?: Array<ScreenItemRend
     <HelmetProvider>
       <QueryProvider>
         <TestEnvironment>
-          <EnvSession>
+          <EnvSessionProvider>
             <ScreenProvider initialise={{ screens: initialise ?? [], query: '' }}>
               <Screens />
             </ScreenProvider>
             <Toaster />
-          </EnvSession>
+          </EnvSessionProvider>
         </TestEnvironment>
       </QueryProvider>
     </HelmetProvider>

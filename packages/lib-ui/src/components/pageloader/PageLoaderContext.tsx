@@ -3,8 +3,10 @@ import { initialLoaderState, type LoaderEvent } from './PageLoaderReducer'
 
 export const PageLoaderContext = createContext<{
   isPageLoading: boolean
-  setPageLoading: Dispatch<LoaderEvent>
+  setComponentLoading: Dispatch<LoaderEvent>
+  isComponentLoading: (key: string) => boolean
 }>({
   isPageLoading: initialLoaderState.isLoading,
-  setPageLoading: () => {},
+  setComponentLoading: () => {},
+  isComponentLoading: () => initialLoaderState.isLoading,
 })

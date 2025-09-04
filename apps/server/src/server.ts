@@ -1,6 +1,6 @@
 import { to } from '@screengeometry/lib-api/extended'
 import { type ScreenInput, type ScreenInputList } from '@screengeometry/lib-api/spec'
-import { HttpHandler, HttpResponse, delay, http, passthrough } from 'msw'
+import { HttpHandler, HttpResponse, delay, http } from 'msw'
 import { apiRoutes } from './ApiRouteSchema'
 import {
   type IdResponse,
@@ -22,7 +22,6 @@ type TReturn = {
   screenListMocks: () => HttpHandler[]
   screenMocks: () => HttpHandler[]
   searchMocks: () => HttpHandler[]
-  passthroughMocks: () => HttpHandler[]
 }
 
 // Stub out the API calls using axios-mock-adapter for indexAPI to store data in the browser's IndexedDB
@@ -141,7 +140,6 @@ export const generateStub = (baseUrl: string, responseTime?: number): TReturn =>
 
   const searchMocks = () => [
     http.get(`${baseUrl}${apiRoutes.search}`, async (resolver) => {
-      console.log('search intercepted')
       await delay(delayResponse)
 
       const url = new URL(resolver.request.url)
@@ -158,16 +156,9 @@ export const generateStub = (baseUrl: string, responseTime?: number): TReturn =>
     }),
   ]
 
-  const passthroughMocks = () => [
-    http.get('*', async () => {
-      return passthrough()
-    }),
-  ]
-
   return {
     screenListMocks,
     screenMocks,
     searchMocks,
-    passthroughMocks,
   }
 }

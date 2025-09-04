@@ -18,7 +18,7 @@ export const EnvTranslationProvider = ({
 }: React.PropsWithChildren & { translationsReadyKey: string; override?: boolean }) => {
   const { languageList, supportedLocaleCodes } = useEnvCountry()
   const [storedLocale, setStoredLocale] = useLocalStorage<string>(LocaleStorageKey)
-  const { setPageLoading } = usePageLoader()
+  const { setComponentLoading } = usePageLoader()
 
   const [language, setLanguage] = useState<string>()
   const {
@@ -35,9 +35,9 @@ export const EnvTranslationProvider = ({
 
   useEffect(() => {
     if (isTranslationsFetched) {
-      setPageLoading({ action: 'idle', componentId: translationsReadyKey })
+      setComponentLoading({ action: 'idle', componentId: translationsReadyKey })
     }
-  }, [setPageLoading, isTranslationsFetched, translationsReadyKey])
+  }, [setComponentLoading, isTranslationsFetched, translationsReadyKey])
 
   // handle no selelected locale -> initialize with browser locale
   useEffect(() => {

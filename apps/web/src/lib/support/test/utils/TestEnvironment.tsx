@@ -1,4 +1,4 @@
-import { EnvConfigProvider } from '@/app/hooks/config/EnvConfigProvider'
+import { EnvConfigContext } from '@/app/hooks/config/EnvConfigContext'
 import { QueryProvider } from '@/app/hooks/query/QueryProvider'
 import { serverAxiosInstance } from '@screengeometry/lib-api/apiClient'
 import { getGetConfigResponseMock } from '@screengeometry/lib-api/spec'
@@ -10,9 +10,9 @@ serverAxiosInstance.defaults.baseURL = config.SERVER_API_URL
 export const TestEnvironment = ({ children }: React.PropsWithChildren) => {
   return (
     <QueryProvider>
-      <EnvConfigProvider config={config}>
+      <EnvConfigContext.Provider value={config}>
         <TestTranslationsEnvironment>{children}</TestTranslationsEnvironment>
-      </EnvConfigProvider>
+      </EnvConfigContext.Provider>
     </QueryProvider>
   )
 }

@@ -38,8 +38,8 @@ export const LanguageSwitcher = () => {
         </SelectValue>
       </SelectTrigger>
       <SelectContent palette={'secondary'}>
-        {Object.entries(countriesList).map(([_langKey, countries]) => (
-          <SelectGroup>
+        {Object.entries(countriesList).map(([langKey, countries]) => (
+          <SelectGroup key={langKey}>
             {countries.map((country) => (
               <SelectItem palette={'secondary'} value={country.locale} key={country.locale}>
                 <span className='flex items-center gap-3'>

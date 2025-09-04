@@ -22,11 +22,12 @@ export const PageLoaderProvider = ({ children, initialLoadingKeys }: Props) => {
       }
     : initialLoaderState
 
-  const [state, setPageLoading] = useReducer(loaderReducer, init)
+  const [state, setComponentLoading] = useReducer(loaderReducer, init)
   const contextValue = useMemo(
     () => ({
       isPageLoading: state.isLoading,
-      setPageLoading,
+      setComponentLoading,
+      isComponentLoading: (key: string) => state.components.includes(key),
     }),
     [state]
   )
