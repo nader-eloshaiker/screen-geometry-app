@@ -1,16 +1,20 @@
 export const supportedLanguageCodes: Array<string> = [
   'en', // English
   'de', // German
+  'el', // Greek
+  'mk', // Macedonian
   'es', // Spanish
   'fr', // French
   'it', // Italian
   'pt', // Portuguese
+  'nl', // Dutch
   'ar', // Arabic
   'fa', // Farsi
   'hi', // Hindi
+  'ta', // Tamil
+  'si', // Sinhala
   'ja', // Japanese
   'ko', // Korean
-  'ta', // Tamil
   'zh', // Chinese
 ]
 

@@ -110,5 +110,7 @@
   "screens.table.show": "පෙන්වන්න",
   "screens.table.size": "ප්‍රමාණය",
   "screens.theme.darkLabel": "අඳුරු මාදිලිය",
-  "screens.theme.lightLabel": "ආලෝක මාදිලිය"
+  "screens.theme.lightLabel": "ආලෝක මාදිලිය",
+  "translations.selector.placeholder": "පරිවර්තනය සොයන්න...",
+  "translations.selector.nomatching": "ගැලපෙන පරිවර්තන හමු නොවීය"
 }

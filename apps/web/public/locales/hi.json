@@ -110,5 +110,7 @@
   "screens.table.show": "दिखाएँ",
   "screens.table.size": "आकार",
   "screens.theme.darkLabel": "डार्क मोड",
-  "screens.theme.lightLabel": "लाइट मोड"
+  "screens.theme.lightLabel": "लाइट मोड",
+  "translations.selector.placeholder": "अनुवाद खोजें...",
+  "translations.selector.nomatching": "कोई मेल खाने वाले अनुवाद नहीं मिले"
 }
