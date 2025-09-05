@@ -35,11 +35,13 @@ describe('CountryUtils', () => {
         code: 'US',
         name: 'United States',
         native: 'United States',
+        emoji: '🇺🇸',
         languages: [
           {
             code: 'en',
             name: 'English',
             native: 'English',
+            rtl: false,
           },
         ],
       }
