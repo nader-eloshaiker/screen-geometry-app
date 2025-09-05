@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.2.0](https://github.com/nader-eloshaiker/screen-geometry-app/compare/v4.1.2...v4.2.0) (2025-09-05)
+
+
+### Features
+
+* **web:** consume country graphql api ([#574](https://github.com/nader-eloshaiker/screen-geometry-app/issues/574)) ([31b11f6](https://github.com/nader-eloshaiker/screen-geometry-app/commit/31b11f67f8617bd112e12be359b1284b20b676e5))
+
 ## [4.1.2](https://github.com/nader-eloshaiker/screen-geometry-app/compare/v4.1.1...v4.1.2) (2025-08-28)
 
 
