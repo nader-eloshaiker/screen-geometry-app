@@ -11,6 +11,9 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'ca',
+          name: 'Catalan',
+          native: 'Català',
+          rtl: false,
         },
       ],
       name: 'Andorra',
@@ -22,6 +25,9 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'ar',
+          name: 'Arabic',
+          native: 'العربية',
+          rtl: true,
         },
       ],
       name: 'United Arab Emirates',
@@ -33,12 +39,21 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'ps',
+          name: 'Pashto',
+          native: 'پښتو',
+          rtl: true,
         },
         {
           code: 'uz',
+          name: 'Uzbek',
+          native: 'Ўзбек',
+          rtl: false,
         },
         {
           code: 'tk',
+          name: 'Turkmen',
+          native: 'Туркмен / تركمن',
+          rtl: false,
         },
       ],
       name: 'Afghanistan',
@@ -50,6 +65,9 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'en',
+          name: 'English',
+          native: 'English',
+          rtl: false,
         },
       ],
       name: 'Antigua and Barbuda',
@@ -61,6 +79,9 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'en',
+          name: 'English',
+          native: 'English',
+          rtl: false,
         },
       ],
       name: 'Anguilla',
@@ -72,6 +93,9 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'sq',
+          name: 'Albanian',
+          native: 'Shqip',
+          rtl: false,
         },
       ],
       name: 'Albania',
@@ -83,9 +107,15 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'hy',
+          name: 'Armenian',
+          native: 'Հայերեն',
+          rtl: false,
         },
         {
           code: 'ru',
+          name: 'Russian',
+          native: 'Русский',
+          rtl: false,
         },
       ],
       name: 'Armenia',
@@ -97,6 +127,9 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'pt',
+          name: 'Portuguese',
+          native: 'Português',
+          rtl: false,
         },
       ],
       name: 'Angola',
@@ -115,9 +148,15 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'es',
+          name: 'Spanish',
+          native: 'Español',
+          rtl: false,
         },
         {
           code: 'gn',
+          name: 'Guarani',
+          native: "Avañe'ẽ",
+          rtl: false,
         },
       ],
       name: 'Argentina',
@@ -129,9 +168,15 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'en',
+          name: 'English',
+          native: 'English',
+          rtl: false,
         },
         {
           code: 'sm',
+          name: 'Samoan',
+          native: 'Gagana Samoa',
+          rtl: false,
         },
       ],
       name: 'American Samoa',
@@ -143,6 +188,9 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'de',
+          name: 'German',
+          native: 'Deutsch',
+          rtl: false,
         },
       ],
       name: 'Austria',
@@ -154,6 +202,9 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'en',
+          name: 'English',
+          native: 'English',
+          rtl: false,
         },
       ],
       name: 'Australia',
@@ -165,9 +216,15 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'nl',
+          name: 'Dutch',
+          native: 'Nederlands',
+          rtl: false,
         },
         {
           code: 'pa',
+          name: 'Panjabi / Punjabi',
+          native: 'ਪੰਜਾਬੀ / पंजाबी / پنجابي',
+          rtl: false,
         },
       ],
       name: 'Aruba',
@@ -179,6 +236,9 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'sv',
+          name: 'Swedish',
+          native: 'Svenska',
+          rtl: false,
         },
       ],
       name: 'Åland',
@@ -190,6 +250,9 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'az',
+          name: 'Azerbaijani',
+          native: 'Azərbaycanca / آذربايجان',
+          rtl: false,
         },
       ],
       name: 'Azerbaijan',
@@ -201,12 +264,21 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'bs',
+          name: 'Bosnian',
+          native: 'Bosanski',
+          rtl: false,
         },
         {
           code: 'hr',
+          name: 'Croatian',
+          native: 'Hrvatski',
+          rtl: false,
         },
         {
           code: 'sr',
+          name: 'Serbian',
+          native: 'Српски',
+          rtl: false,
         },
       ],
       name: 'Bosnia and Herzegovina',
@@ -218,6 +290,9 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'en',
+          name: 'English',
+          native: 'English',
+          rtl: false,
         },
       ],
       name: 'Barbados',
@@ -229,6 +304,9 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'bn',
+          name: 'Bengali',
+          native: 'বাংলা',
+          rtl: false,
         },
       ],
       name: 'Bangladesh',
@@ -240,12 +318,21 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'nl',
+          name: 'Dutch',
+          native: 'Nederlands',
+          rtl: false,
         },
         {
           code: 'fr',
+          name: 'French',
+          native: 'Français',
+          rtl: false,
         },
         {
           code: 'de',
+          name: 'German',
+          native: 'Deutsch',
+          rtl: false,
         },
       ],
       name: 'Belgium',
@@ -257,9 +344,15 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'fr',
+          name: 'French',
+          native: 'Français',
+          rtl: false,
         },
         {
           code: 'ff',
+          name: 'Peul',
+          native: 'Fulfulde',
+          rtl: false,
         },
       ],
       name: 'Burkina Faso',
@@ -271,6 +364,9 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'bg',
+          name: 'Bulgarian',
+          native: 'Български',
+          rtl: false,
         },
       ],
       name: 'Bulgaria',
@@ -282,6 +378,9 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'ar',
+          name: 'Arabic',
+          native: 'العربية',
+          rtl: true,
         },
       ],
       name: 'Bahrain',
@@ -293,9 +392,15 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'fr',
+          name: 'French',
+          native: 'Français',
+          rtl: false,
         },
         {
           code: 'rn',
+          name: 'Kirundi',
+          native: 'Kirundi',
+          rtl: false,
         },
       ],
       name: 'Burundi',
@@ -307,6 +412,9 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'fr',
+          name: 'French',
+          native: 'Français',
+          rtl: false,
         },
       ],
       name: 'Benin',
@@ -318,6 +426,9 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'fr',
+          name: 'French',
+          native: 'Français',
+          rtl: false,
         },
       ],
       name: 'Saint Barthélemy',
@@ -329,6 +440,9 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'en',
+          name: 'English',
+          native: 'English',
+          rtl: false,
         },
       ],
       name: 'Bermuda',
@@ -340,6 +454,9 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'ms',
+          name: 'Malay',
+          native: 'Bahasa Melayu',
+          rtl: false,
         },
       ],
       name: 'Brunei',
@@ -351,12 +468,21 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'es',
+          name: 'Spanish',
+          native: 'Español',
+          rtl: false,
         },
         {
           code: 'ay',
+          name: 'Aymara',
+          native: 'Aymar',
+          rtl: false,
         },
         {
           code: 'qu',
+          name: 'Quechua',
+          native: 'Runa Simi',
+          rtl: false,
         },
       ],
       name: 'Bolivia',
@@ -368,6 +494,9 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'nl',
+          name: 'Dutch',
+          native: 'Nederlands',
+          rtl: false,
         },
       ],
       name: 'Bonaire',
@@ -379,6 +508,9 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'pt',
+          name: 'Portuguese',
+          native: 'Português',
+          rtl: false,
         },
       ],
       name: 'Brazil',
@@ -390,6 +522,9 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'en',
+          name: 'English',
+          native: 'English',
+          rtl: false,
         },
       ],
       name: 'Bahamas',
@@ -401,6 +536,9 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'dz',
+          name: 'Dzongkha',
+          native: 'ཇོང་ཁ',
+          rtl: false,
         },
       ],
       name: 'Bhutan',
@@ -412,12 +550,21 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'no',
+          name: 'Norwegian',
+          native: 'Norsk',
+          rtl: false,
         },
         {
           code: 'nb',
+          name: 'Norwegian Bokmål',
+          native: 'Norsk bokmål',
+          rtl: false,
         },
         {
           code: 'nn',
+          name: 'Norwegian Nynorsk',
+          native: 'Norsk nynorsk',
+          rtl: false,
         },
       ],
       name: 'Bouvet Island',
@@ -429,9 +576,15 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'en',
+          name: 'English',
+          native: 'English',
+          rtl: false,
         },
         {
           code: 'tn',
+          name: 'Tswana',
+          native: 'Setswana',
+          rtl: false,
         },
       ],
       name: 'Botswana',
@@ -443,9 +596,15 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'be',
+          name: 'Belarusian',
+          native: 'Беларуская',
+          rtl: false,
         },
         {
           code: 'ru',
+          name: 'Russian',
+          native: 'Русский',
+          rtl: false,
         },
       ],
       name: 'Belarus',
@@ -457,9 +616,15 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'en',
+          name: 'English',
+          native: 'English',
+          rtl: false,
         },
         {
           code: 'es',
+          name: 'Spanish',
+          native: 'Español',
+          rtl: false,
         },
       ],
       name: 'Belize',
@@ -471,9 +636,15 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'en',
+          name: 'English',
+          native: 'English',
+          rtl: false,
         },
         {
           code: 'fr',
+          name: 'French',
+          native: 'Français',
+          rtl: false,
         },
       ],
       name: 'Canada',
@@ -485,6 +656,9 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'en',
+          name: 'English',
+          native: 'English',
+          rtl: false,
         },
       ],
       name: 'Cocos [Keeling] Islands',
@@ -496,18 +670,33 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'fr',
+          name: 'French',
+          native: 'Français',
+          rtl: false,
         },
         {
           code: 'ln',
+          name: 'Lingala',
+          native: 'Lingála',
+          rtl: false,
         },
         {
           code: 'kg',
+          name: 'Kongo',
+          native: 'KiKongo',
+          rtl: false,
         },
         {
           code: 'sw',
+          name: 'Swahili',
+          native: 'Kiswahili',
+          rtl: false,
         },
         {
           code: 'lu',
+          name: 'Luba-Katanga',
+          native: 'Tshiluba',
+          rtl: false,
         },
       ],
       name: 'Democratic Republic of the Congo',
@@ -519,9 +708,15 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'fr',
+          name: 'French',
+          native: 'Français',
+          rtl: false,
         },
         {
           code: 'sg',
+          name: 'Sango',
+          native: 'Sängö',
+          rtl: false,
         },
       ],
       name: 'Central African Republic',
@@ -533,9 +728,15 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'fr',
+          name: 'French',
+          native: 'Français',
+          rtl: false,
         },
         {
           code: 'ln',
+          name: 'Lingala',
+          native: 'Lingála',
+          rtl: false,
         },
       ],
       name: 'Republic of the Congo',
@@ -547,12 +748,21 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'de',
+          name: 'German',
+          native: 'Deutsch',
+          rtl: false,
         },
         {
           code: 'fr',
+          name: 'French',
+          native: 'Français',
+          rtl: false,
         },
         {
           code: 'it',
+          name: 'Italian',
+          native: 'Italiano',
+          rtl: false,
         },
       ],
       name: 'Switzerland',
@@ -564,6 +774,9 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'fr',
+          name: 'French',
+          native: 'Français',
+          rtl: false,
         },
       ],
       name: 'Ivory Coast',
@@ -575,6 +788,9 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'en',
+          name: 'English',
+          native: 'English',
+          rtl: false,
         },
       ],
       name: 'Cook Islands',
@@ -586,6 +802,9 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'es',
+          name: 'Spanish',
+          native: 'Español',
+          rtl: false,
         },
       ],
       name: 'Chile',
@@ -597,9 +816,15 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'en',
+          name: 'English',
+          native: 'English',
+          rtl: false,
         },
         {
           code: 'fr',
+          name: 'French',
+          native: 'Français',
+          rtl: false,
         },
       ],
       name: 'Cameroon',
@@ -611,6 +836,9 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'zh',
+          name: 'Chinese',
+          native: '中文',
+          rtl: false,
         },
       ],
       name: 'China',
@@ -622,6 +850,9 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'es',
+          name: 'Spanish',
+          native: 'Español',
+          rtl: false,
         },
       ],
       name: 'Colombia',
@@ -633,6 +864,9 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'es',
+          name: 'Spanish',
+          native: 'Español',
+          rtl: false,
         },
       ],
       name: 'Costa Rica',
@@ -644,6 +878,9 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'es',
+          name: 'Spanish',
+          native: 'Español',
+          rtl: false,
         },
       ],
       name: 'Cuba',
@@ -655,6 +892,9 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'pt',
+          name: 'Portuguese',
+          native: 'Português',
+          rtl: false,
         },
       ],
       name: 'Cape Verde',
@@ -666,12 +906,21 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'nl',
+          name: 'Dutch',
+          native: 'Nederlands',
+          rtl: false,
         },
         {
           code: 'pa',
+          name: 'Panjabi / Punjabi',
+          native: 'ਪੰਜਾਬੀ / पंजाबी / پنجابي',
+          rtl: false,
         },
         {
           code: 'en',
+          name: 'English',
+          native: 'English',
+          rtl: false,
         },
       ],
       name: 'Curacao',
@@ -683,6 +932,9 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'en',
+          name: 'English',
+          native: 'English',
+          rtl: false,
         },
       ],
       name: 'Christmas Island',
@@ -694,12 +946,21 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'el',
+          name: 'Greek',
+          native: 'Ελληνικά',
+          rtl: false,
         },
         {
           code: 'tr',
+          name: 'Turkish',
+          native: 'Türkçe',
+          rtl: false,
         },
         {
           code: 'hy',
+          name: 'Armenian',
+          native: 'Հայերեն',
+          rtl: false,
         },
       ],
       name: 'Cyprus',
@@ -711,9 +972,15 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'cs',
+          name: 'Czech',
+          native: 'Čeština',
+          rtl: false,
         },
         {
           code: 'sk',
+          name: 'Slovak',
+          native: 'Slovenčina',
+          rtl: false,
         },
       ],
       name: 'Czech Republic',
@@ -725,6 +992,9 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'de',
+          name: 'German',
+          native: 'Deutsch',
+          rtl: false,
         },
       ],
       name: 'Germany',
@@ -736,9 +1006,15 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'fr',
+          name: 'French',
+          native: 'Français',
+          rtl: false,
         },
         {
           code: 'ar',
+          name: 'Arabic',
+          native: 'العربية',
+          rtl: true,
         },
       ],
       name: 'Djibouti',
@@ -750,6 +1026,9 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'da',
+          name: 'Danish',
+          native: 'Dansk',
+          rtl: false,
         },
       ],
       name: 'Denmark',
@@ -761,6 +1040,9 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'en',
+          name: 'English',
+          native: 'English',
+          rtl: false,
         },
       ],
       name: 'Dominica',
@@ -772,6 +1054,9 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'es',
+          name: 'Spanish',
+          native: 'Español',
+          rtl: false,
         },
       ],
       name: 'Dominican Republic',
@@ -783,6 +1068,9 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'ar',
+          name: 'Arabic',
+          native: 'العربية',
+          rtl: true,
         },
       ],
       name: 'Algeria',
@@ -794,6 +1082,9 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'es',
+          name: 'Spanish',
+          native: 'Español',
+          rtl: false,
         },
       ],
       name: 'Ecuador',
@@ -805,6 +1096,9 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'et',
+          name: 'Estonian',
+          native: 'Eesti',
+          rtl: false,
         },
       ],
       name: 'Estonia',
@@ -816,6 +1110,9 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'ar',
+          name: 'Arabic',
+          native: 'العربية',
+          rtl: true,
         },
       ],
       name: 'Egypt',
@@ -827,6 +1124,9 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'es',
+          name: 'Spanish',
+          native: 'Español',
+          rtl: false,
         },
       ],
       name: 'Western Sahara',
@@ -838,12 +1138,21 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'ti',
+          name: 'Tigrinya',
+          native: 'ትግርኛ',
+          rtl: false,
         },
         {
           code: 'ar',
+          name: 'Arabic',
+          native: 'العربية',
+          rtl: true,
         },
         {
           code: 'en',
+          name: 'English',
+          native: 'English',
+          rtl: false,
         },
       ],
       name: 'Eritrea',
@@ -855,18 +1164,33 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'es',
+          name: 'Spanish',
+          native: 'Español',
+          rtl: false,
         },
         {
           code: 'eu',
+          name: 'Basque',
+          native: 'Euskara',
+          rtl: false,
         },
         {
           code: 'ca',
+          name: 'Catalan',
+          native: 'Català',
+          rtl: false,
         },
         {
           code: 'gl',
+          name: 'Galician',
+          native: 'Galego',
+          rtl: false,
         },
         {
           code: 'oc',
+          name: 'Occitan',
+          native: 'Occitan',
+          rtl: false,
         },
       ],
       name: 'Spain',
@@ -878,6 +1202,9 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'am',
+          name: 'Amharic',
+          native: 'አማርኛ',
+          rtl: false,
         },
       ],
       name: 'Ethiopia',
@@ -889,9 +1216,15 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'fi',
+          name: 'Finnish',
+          native: 'Suomi',
+          rtl: false,
         },
         {
           code: 'sv',
+          name: 'Swedish',
+          native: 'Svenska',
+          rtl: false,
         },
       ],
       name: 'Finland',
@@ -903,15 +1236,27 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'en',
+          name: 'English',
+          native: 'English',
+          rtl: false,
         },
         {
           code: 'fj',
+          name: 'Fijian',
+          native: 'Na Vosa Vakaviti',
+          rtl: false,
         },
         {
           code: 'hi',
+          name: 'Hindi',
+          native: 'हिन्दी',
+          rtl: false,
         },
         {
           code: 'ur',
+          name: 'Urdu',
+          native: 'اردو',
+          rtl: true,
         },
       ],
       name: 'Fiji',
@@ -923,6 +1268,9 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'en',
+          name: 'English',
+          native: 'English',
+          rtl: false,
         },
       ],
       name: 'Falkland Islands',
@@ -934,6 +1282,9 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'en',
+          name: 'English',
+          native: 'English',
+          rtl: false,
         },
       ],
       name: 'Micronesia',
@@ -945,6 +1296,9 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'fo',
+          name: 'Faroese',
+          native: 'Føroyskt',
+          rtl: false,
         },
       ],
       name: 'Faroe Islands',
@@ -956,6 +1310,9 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'fr',
+          name: 'French',
+          native: 'Français',
+          rtl: false,
         },
       ],
       name: 'France',
@@ -967,6 +1324,9 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'fr',
+          name: 'French',
+          native: 'Français',
+          rtl: false,
         },
       ],
       name: 'Gabon',
@@ -978,6 +1338,9 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'en',
+          name: 'English',
+          native: 'English',
+          rtl: false,
         },
       ],
       name: 'United Kingdom',
@@ -989,6 +1352,9 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'en',
+          name: 'English',
+          native: 'English',
+          rtl: false,
         },
       ],
       name: 'Grenada',
@@ -1000,6 +1366,9 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'ka',
+          name: 'Georgian',
+          native: 'ქართული',
+          rtl: false,
         },
       ],
       name: 'Georgia',
@@ -1011,6 +1380,9 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'fr',
+          name: 'French',
+          native: 'Français',
+          rtl: false,
         },
       ],
       name: 'French Guiana',
@@ -1022,9 +1394,15 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'en',
+          name: 'English',
+          native: 'English',
+          rtl: false,
         },
         {
           code: 'fr',
+          name: 'French',
+          native: 'Français',
+          rtl: false,
         },
       ],
       name: 'Guernsey',
@@ -1036,6 +1414,9 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'en',
+          name: 'English',
+          native: 'English',
+          rtl: false,
         },
       ],
       name: 'Ghana',
@@ -1047,6 +1428,9 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'en',
+          name: 'English',
+          native: 'English',
+          rtl: false,
         },
       ],
       name: 'Gibraltar',
@@ -1058,6 +1442,9 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'kl',
+          name: 'Greenlandic',
+          native: 'Kalaallisut',
+          rtl: false,
         },
       ],
       name: 'Greenland',
@@ -1069,6 +1456,9 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'en',
+          name: 'English',
+          native: 'English',
+          rtl: false,
         },
       ],
       name: 'Gambia',
@@ -1080,9 +1470,15 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'fr',
+          name: 'French',
+          native: 'Français',
+          rtl: false,
         },
         {
           code: 'ff',
+          name: 'Peul',
+          native: 'Fulfulde',
+          rtl: false,
         },
       ],
       name: 'Guinea',
@@ -1094,6 +1490,9 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'fr',
+          name: 'French',
+          native: 'Français',
+          rtl: false,
         },
       ],
       name: 'Guadeloupe',
@@ -1105,9 +1504,15 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'es',
+          name: 'Spanish',
+          native: 'Español',
+          rtl: false,
         },
         {
           code: 'fr',
+          name: 'French',
+          native: 'Français',
+          rtl: false,
         },
       ],
       name: 'Equatorial Guinea',
@@ -1119,6 +1524,9 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'el',
+          name: 'Greek',
+          native: 'Ελληνικά',
+          rtl: false,
         },
       ],
       name: 'Greece',
@@ -1130,6 +1538,9 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'en',
+          name: 'English',
+          native: 'English',
+          rtl: false,
         },
       ],
       name: 'South Georgia and the South Sandwich Islands',
@@ -1141,6 +1552,9 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'es',
+          name: 'Spanish',
+          native: 'Español',
+          rtl: false,
         },
       ],
       name: 'Guatemala',
@@ -1152,12 +1566,21 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'en',
+          name: 'English',
+          native: 'English',
+          rtl: false,
         },
         {
           code: 'ch',
+          name: 'Chamorro',
+          native: 'Chamoru',
+          rtl: false,
         },
         {
           code: 'es',
+          name: 'Spanish',
+          native: 'Español',
+          rtl: false,
         },
       ],
       name: 'Guam',
@@ -1169,6 +1592,9 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'pt',
+          name: 'Portuguese',
+          native: 'Português',
+          rtl: false,
         },
       ],
       name: 'Guinea-Bissau',
@@ -1180,6 +1606,9 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'en',
+          name: 'English',
+          native: 'English',
+          rtl: false,
         },
       ],
       name: 'Guyana',
@@ -1191,9 +1620,15 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'zh',
+          name: 'Chinese',
+          native: '中文',
+          rtl: false,
         },
         {
           code: 'en',
+          name: 'English',
+          native: 'English',
+          rtl: false,
         },
       ],
       name: 'Hong Kong',
@@ -1205,6 +1640,9 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'en',
+          name: 'English',
+          native: 'English',
+          rtl: false,
         },
       ],
       name: 'Heard Island and McDonald Islands',
@@ -1216,6 +1654,9 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'es',
+          name: 'Spanish',
+          native: 'Español',
+          rtl: false,
         },
       ],
       name: 'Honduras',
@@ -1227,6 +1668,9 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'hr',
+          name: 'Croatian',
+          native: 'Hrvatski',
+          rtl: false,
         },
       ],
       name: 'Croatia',
@@ -1238,9 +1682,15 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'fr',
+          name: 'French',
+          native: 'Français',
+          rtl: false,
         },
         {
           code: 'ht',
+          name: 'Haitian',
+          native: 'Krèyol ayisyen',
+          rtl: false,
         },
       ],
       name: 'Haiti',
@@ -1252,6 +1702,9 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'hu',
+          name: 'Hungarian',
+          native: 'Magyar',
+          rtl: false,
         },
       ],
       name: 'Hungary',
@@ -1263,6 +1716,9 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'id',
+          name: 'Indonesian',
+          native: 'Bahasa Indonesia',
+          rtl: false,
         },
       ],
       name: 'Indonesia',
@@ -1274,9 +1730,15 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'ga',
+          name: 'Irish',
+          native: 'Gaeilge',
+          rtl: false,
         },
         {
           code: 'en',
+          name: 'English',
+          native: 'English',
+          rtl: false,
         },
       ],
       name: 'Ireland',
@@ -1288,9 +1750,15 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'he',
+          name: 'Hebrew',
+          native: 'עברית',
+          rtl: true,
         },
         {
           code: 'ar',
+          name: 'Arabic',
+          native: 'العربية',
+          rtl: true,
         },
       ],
       name: 'Israel',
@@ -1302,9 +1770,15 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'en',
+          name: 'English',
+          native: 'English',
+          rtl: false,
         },
         {
           code: 'gv',
+          name: 'Manx',
+          native: 'Gaelg',
+          rtl: false,
         },
       ],
       name: 'Isle of Man',
@@ -1316,9 +1790,15 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'hi',
+          name: 'Hindi',
+          native: 'हिन्दी',
+          rtl: false,
         },
         {
           code: 'en',
+          name: 'English',
+          native: 'English',
+          rtl: false,
         },
       ],
       name: 'India',
@@ -1330,6 +1810,9 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'en',
+          name: 'English',
+          native: 'English',
+          rtl: false,
         },
       ],
       name: 'British Indian Ocean Territory',
@@ -1341,9 +1824,15 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'ar',
+          name: 'Arabic',
+          native: 'العربية',
+          rtl: true,
         },
         {
           code: 'ku',
+          name: 'Kurdish',
+          native: 'Kurdî / كوردی',
+          rtl: true,
         },
       ],
       name: 'Iraq',
@@ -1355,6 +1844,9 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'fa',
+          name: 'Persian',
+          native: 'فارسی',
+          rtl: true,
         },
       ],
       name: 'Iran',
@@ -1366,6 +1858,9 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'is',
+          name: 'Icelandic',
+          native: 'Íslenska',
+          rtl: false,
         },
       ],
       name: 'Iceland',
@@ -1377,6 +1872,9 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'it',
+          name: 'Italian',
+          native: 'Italiano',
+          rtl: false,
         },
       ],
       name: 'Italy',
@@ -1388,9 +1886,15 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'en',
+          name: 'English',
+          native: 'English',
+          rtl: false,
         },
         {
           code: 'fr',
+          name: 'French',
+          native: 'Français',
+          rtl: false,
         },
       ],
       name: 'Jersey',
@@ -1402,6 +1906,9 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'en',
+          name: 'English',
+          native: 'English',
+          rtl: false,
         },
       ],
       name: 'Jamaica',
@@ -1413,6 +1920,9 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'ar',
+          name: 'Arabic',
+          native: 'العربية',
+          rtl: true,
         },
       ],
       name: 'Jordan',
@@ -1424,6 +1934,9 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'ja',
+          name: 'Japanese',
+          native: '日本語',
+          rtl: false,
         },
       ],
       name: 'Japan',
@@ -1435,9 +1948,15 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'en',
+          name: 'English',
+          native: 'English',
+          rtl: false,
         },
         {
           code: 'sw',
+          name: 'Swahili',
+          native: 'Kiswahili',
+          rtl: false,
         },
       ],
       name: 'Kenya',
@@ -1449,9 +1968,15 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'ky',
+          name: 'Kyrgyz',
+          native: 'Кыргызча',
+          rtl: false,
         },
         {
           code: 'ru',
+          name: 'Russian',
+          native: 'Русский',
+          rtl: false,
         },
       ],
       name: 'Kyrgyzstan',
@@ -1463,6 +1988,9 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'km',
+          name: 'Cambodian',
+          native: 'ភាសាខ្មែរ',
+          rtl: false,
         },
       ],
       name: 'Cambodia',
@@ -1474,6 +2002,9 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'en',
+          name: 'English',
+          native: 'English',
+          rtl: false,
         },
       ],
       name: 'Kiribati',
@@ -1485,9 +2016,15 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'ar',
+          name: 'Arabic',
+          native: 'العربية',
+          rtl: true,
         },
         {
           code: 'fr',
+          name: 'French',
+          native: 'Français',
+          rtl: false,
         },
       ],
       name: 'Comoros',
@@ -1499,6 +2036,9 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'en',
+          name: 'English',
+          native: 'English',
+          rtl: false,
         },
       ],
       name: 'Saint Kitts and Nevis',
@@ -1510,6 +2050,9 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'ko',
+          name: 'Korean',
+          native: '한국어',
+          rtl: false,
         },
       ],
       name: 'North Korea',
@@ -1521,6 +2064,9 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'ko',
+          name: 'Korean',
+          native: '한국어',
+          rtl: false,
         },
       ],
       name: 'South Korea',
@@ -1532,6 +2078,9 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'ar',
+          name: 'Arabic',
+          native: 'العربية',
+          rtl: true,
         },
       ],
       name: 'Kuwait',
@@ -1543,6 +2092,9 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'en',
+          name: 'English',
+          native: 'English',
+          rtl: false,
         },
       ],
       name: 'Cayman Islands',
@@ -1554,9 +2106,15 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'kk',
+          name: 'Kazakh',
+          native: 'Қазақша',
+          rtl: false,
         },
         {
           code: 'ru',
+          name: 'Russian',
+          native: 'Русский',
+          rtl: false,
         },
       ],
       name: 'Kazakhstan',
@@ -1568,6 +2126,9 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'lo',
+          name: 'Laotian',
+          native: 'ລາວ / Pha xa lao',
+          rtl: false,
         },
       ],
       name: 'Laos',
@@ -1579,9 +2140,15 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'ar',
+          name: 'Arabic',
+          native: 'العربية',
+          rtl: true,
         },
         {
           code: 'fr',
+          name: 'French',
+          native: 'Français',
+          rtl: false,
         },
       ],
       name: 'Lebanon',
@@ -1593,6 +2160,9 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'en',
+          name: 'English',
+          native: 'English',
+          rtl: false,
         },
       ],
       name: 'Saint Lucia',
@@ -1604,6 +2174,9 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'de',
+          name: 'German',
+          native: 'Deutsch',
+          rtl: false,
         },
       ],
       name: 'Liechtenstein',
@@ -1615,9 +2188,15 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'si',
+          name: 'Sinhalese',
+          native: 'සිංහල',
+          rtl: false,
         },
         {
           code: 'ta',
+          name: 'Tamil',
+          native: 'தமிழ்',
+          rtl: false,
         },
       ],
       name: 'Sri Lanka',
@@ -1629,6 +2208,9 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'en',
+          name: 'English',
+          native: 'English',
+          rtl: false,
         },
       ],
       name: 'Liberia',
@@ -1640,9 +2222,15 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'en',
+          name: 'English',
+          native: 'English',
+          rtl: false,
         },
         {
           code: 'st',
+          name: 'Southern Sotho',
+          native: 'Sesotho',
+          rtl: false,
         },
       ],
       name: 'Lesotho',
@@ -1654,6 +2242,9 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'lt',
+          name: 'Lithuanian',
+          native: 'Lietuvių',
+          rtl: false,
         },
       ],
       name: 'Lithuania',
@@ -1665,12 +2256,21 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'fr',
+          name: 'French',
+          native: 'Français',
+          rtl: false,
         },
         {
           code: 'de',
+          name: 'German',
+          native: 'Deutsch',
+          rtl: false,
         },
         {
           code: 'lb',
+          name: 'Luxembourgish',
+          native: 'Lëtzebuergesch',
+          rtl: false,
         },
       ],
       name: 'Luxembourg',
@@ -1682,6 +2282,9 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'lv',
+          name: 'Latvian',
+          native: 'Latviešu',
+          rtl: false,
         },
       ],
       name: 'Latvia',
@@ -1693,6 +2296,9 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'ar',
+          name: 'Arabic',
+          native: 'العربية',
+          rtl: true,
         },
       ],
       name: 'Libya',
@@ -1704,6 +2310,9 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'ar',
+          name: 'Arabic',
+          native: 'العربية',
+          rtl: true,
         },
       ],
       name: 'Morocco',
@@ -1715,6 +2324,9 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'fr',
+          name: 'French',
+          native: 'Français',
+          rtl: false,
         },
       ],
       name: 'Monaco',
@@ -1726,6 +2338,9 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'ro',
+          name: 'Romanian',
+          native: 'Română',
+          rtl: false,
         },
       ],
       name: 'Moldova',
@@ -1737,15 +2352,27 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'sr',
+          name: 'Serbian',
+          native: 'Српски',
+          rtl: false,
         },
         {
           code: 'bs',
+          name: 'Bosnian',
+          native: 'Bosanski',
+          rtl: false,
         },
         {
           code: 'sq',
+          name: 'Albanian',
+          native: 'Shqip',
+          rtl: false,
         },
         {
           code: 'hr',
+          name: 'Croatian',
+          native: 'Hrvatski',
+          rtl: false,
         },
       ],
       name: 'Montenegro',
@@ -1757,12 +2384,21 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'en',
+          name: 'English',
+          native: 'English',
+          rtl: false,
         },
         {
           code: 'fr',
+          name: 'French',
+          native: 'Français',
+          rtl: false,
         },
         {
           code: 'nl',
+          name: 'Dutch',
+          native: 'Nederlands',
+          rtl: false,
         },
       ],
       name: 'Saint Martin',
@@ -1774,9 +2410,15 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'fr',
+          name: 'French',
+          native: 'Français',
+          rtl: false,
         },
         {
           code: 'mg',
+          name: 'Malagasy',
+          native: 'Malagasy',
+          rtl: false,
         },
       ],
       name: 'Madagascar',
@@ -1788,9 +2430,15 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'en',
+          name: 'English',
+          native: 'English',
+          rtl: false,
         },
         {
           code: 'mh',
+          name: 'Marshallese',
+          native: 'Kajin Majel / Ebon',
+          rtl: false,
         },
       ],
       name: 'Marshall Islands',
@@ -1802,6 +2450,9 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'mk',
+          name: 'Macedonian',
+          native: 'Македонски',
+          rtl: false,
         },
       ],
       name: 'North Macedonia',
@@ -1813,6 +2464,9 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'fr',
+          name: 'French',
+          native: 'Français',
+          rtl: false,
         },
       ],
       name: 'Mali',
@@ -1824,6 +2478,9 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'my',
+          name: 'Burmese',
+          native: 'မြန်မာစာ',
+          rtl: false,
         },
       ],
       name: 'Myanmar [Burma]',
@@ -1835,6 +2492,9 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'mn',
+          name: 'Mongolian',
+          native: 'Монгол',
+          rtl: false,
         },
       ],
       name: 'Mongolia',
@@ -1846,9 +2506,15 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'zh',
+          name: 'Chinese',
+          native: '中文',
+          rtl: false,
         },
         {
           code: 'pt',
+          name: 'Portuguese',
+          native: 'Português',
+          rtl: false,
         },
       ],
       name: 'Macao',
@@ -1860,9 +2526,15 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'en',
+          name: 'English',
+          native: 'English',
+          rtl: false,
         },
         {
           code: 'ch',
+          name: 'Chamorro',
+          native: 'Chamoru',
+          rtl: false,
         },
       ],
       name: 'Northern Mariana Islands',
@@ -1874,6 +2546,9 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'fr',
+          name: 'French',
+          native: 'Français',
+          rtl: false,
         },
       ],
       name: 'Martinique',
@@ -1885,6 +2560,9 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'ar',
+          name: 'Arabic',
+          native: 'العربية',
+          rtl: true,
         },
       ],
       name: 'Mauritania',
@@ -1896,6 +2574,9 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'en',
+          name: 'English',
+          native: 'English',
+          rtl: false,
         },
       ],
       name: 'Montserrat',
@@ -1907,9 +2588,15 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'mt',
+          name: 'Maltese',
+          native: 'bil-Malti',
+          rtl: false,
         },
         {
           code: 'en',
+          name: 'English',
+          native: 'English',
+          rtl: false,
         },
       ],
       name: 'Malta',
@@ -1921,6 +2608,9 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'en',
+          name: 'English',
+          native: 'English',
+          rtl: false,
         },
       ],
       name: 'Mauritius',
@@ -1932,6 +2622,9 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'dv',
+          name: 'Divehi',
+          native: 'ދިވެހިބަސް',
+          rtl: true,
         },
       ],
       name: 'Maldives',
@@ -1943,9 +2636,15 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'en',
+          name: 'English',
+          native: 'English',
+          rtl: false,
         },
         {
           code: 'ny',
+          name: 'Chichewa',
+          native: 'Chi-Chewa',
+          rtl: false,
         },
       ],
       name: 'Malawi',
@@ -1957,6 +2656,9 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'es',
+          name: 'Spanish',
+          native: 'Español',
+          rtl: false,
         },
       ],
       name: 'Mexico',
@@ -1968,6 +2670,9 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'ms',
+          name: 'Malay',
+          native: 'Bahasa Melayu',
+          rtl: false,
         },
       ],
       name: 'Malaysia',
@@ -1979,6 +2684,9 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'pt',
+          name: 'Portuguese',
+          native: 'Português',
+          rtl: false,
         },
       ],
       name: 'Mozambique',
@@ -1990,9 +2698,15 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'en',
+          name: 'English',
+          native: 'English',
+          rtl: false,
         },
         {
           code: 'af',
+          name: 'Afrikaans',
+          native: 'Afrikaans',
+          rtl: false,
         },
       ],
       name: 'Namibia',
@@ -2004,6 +2718,9 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'fr',
+          name: 'French',
+          native: 'Français',
+          rtl: false,
         },
       ],
       name: 'New Caledonia',
@@ -2015,6 +2732,9 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'fr',
+          name: 'French',
+          native: 'Français',
+          rtl: false,
         },
       ],
       name: 'Niger',
@@ -2026,6 +2746,9 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'en',
+          name: 'English',
+          native: 'English',
+          rtl: false,
         },
       ],
       name: 'Norfolk Island',
@@ -2037,6 +2760,9 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'en',
+          name: 'English',
+          native: 'English',
+          rtl: false,
         },
       ],
       name: 'Nigeria',
@@ -2048,6 +2774,9 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'es',
+          name: 'Spanish',
+          native: 'Español',
+          rtl: false,
         },
       ],
       name: 'Nicaragua',
@@ -2059,6 +2788,9 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'nl',
+          name: 'Dutch',
+          native: 'Nederlands',
+          rtl: false,
         },
       ],
       name: 'Netherlands',
@@ -2070,12 +2802,21 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'no',
+          name: 'Norwegian',
+          native: 'Norsk',
+          rtl: false,
         },
         {
           code: 'nb',
+          name: 'Norwegian Bokmål',
+          native: 'Norsk bokmål',
+          rtl: false,
         },
         {
           code: 'nn',
+          name: 'Norwegian Nynorsk',
+          native: 'Norsk nynorsk',
+          rtl: false,
         },
       ],
       name: 'Norway',
@@ -2087,6 +2828,9 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'ne',
+          name: 'Nepali',
+          native: 'नेपाली',
+          rtl: false,
         },
       ],
       name: 'Nepal',
@@ -2098,9 +2842,15 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'en',
+          name: 'English',
+          native: 'English',
+          rtl: false,
         },
         {
           code: 'na',
+          name: 'Nauruan',
+          native: 'Dorerin Naoero',
+          rtl: false,
         },
       ],
       name: 'Nauru',
@@ -2112,6 +2862,9 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'en',
+          name: 'English',
+          native: 'English',
+          rtl: false,
         },
       ],
       name: 'Niue',
@@ -2123,9 +2876,15 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'en',
+          name: 'English',
+          native: 'English',
+          rtl: false,
         },
         {
           code: 'mi',
+          name: 'Maori',
+          native: 'Māori',
+          rtl: false,
         },
       ],
       name: 'New Zealand',
@@ -2137,6 +2896,9 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'ar',
+          name: 'Arabic',
+          native: 'العربية',
+          rtl: true,
         },
       ],
       name: 'Oman',
@@ -2148,6 +2910,9 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'es',
+          name: 'Spanish',
+          native: 'Español',
+          rtl: false,
         },
       ],
       name: 'Panama',
@@ -2159,6 +2924,9 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'es',
+          name: 'Spanish',
+          native: 'Español',
+          rtl: false,
         },
       ],
       name: 'Peru',
@@ -2170,6 +2938,9 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'fr',
+          name: 'French',
+          native: 'Français',
+          rtl: false,
         },
       ],
       name: 'French Polynesia',
@@ -2181,6 +2952,9 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'en',
+          name: 'English',
+          native: 'English',
+          rtl: false,
         },
       ],
       name: 'Papua New Guinea',
@@ -2192,6 +2966,9 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'en',
+          name: 'English',
+          native: 'English',
+          rtl: false,
         },
       ],
       name: 'Philippines',
@@ -2203,9 +2980,15 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'en',
+          name: 'English',
+          native: 'English',
+          rtl: false,
         },
         {
           code: 'ur',
+          name: 'Urdu',
+          native: 'اردو',
+          rtl: true,
         },
       ],
       name: 'Pakistan',
@@ -2217,6 +3000,9 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'pl',
+          name: 'Polish',
+          native: 'Polski',
+          rtl: false,
         },
       ],
       name: 'Poland',
@@ -2228,6 +3014,9 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'fr',
+          name: 'French',
+          native: 'Français',
+          rtl: false,
         },
       ],
       name: 'Saint Pierre and Miquelon',
@@ -2239,6 +3028,9 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'en',
+          name: 'English',
+          native: 'English',
+          rtl: false,
         },
       ],
       name: 'Pitcairn Islands',
@@ -2250,9 +3042,15 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'es',
+          name: 'Spanish',
+          native: 'Español',
+          rtl: false,
         },
         {
           code: 'en',
+          name: 'English',
+          native: 'English',
+          rtl: false,
         },
       ],
       name: 'Puerto Rico',
@@ -2264,6 +3062,9 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'ar',
+          name: 'Arabic',
+          native: 'العربية',
+          rtl: true,
         },
       ],
       name: 'Palestine',
@@ -2275,6 +3076,9 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'pt',
+          name: 'Portuguese',
+          native: 'Português',
+          rtl: false,
         },
       ],
       name: 'Portugal',
@@ -2286,6 +3090,9 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'en',
+          name: 'English',
+          native: 'English',
+          rtl: false,
         },
       ],
       name: 'Palau',
@@ -2297,9 +3104,15 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'es',
+          name: 'Spanish',
+          native: 'Español',
+          rtl: false,
         },
         {
           code: 'gn',
+          name: 'Guarani',
+          native: "Avañe'ẽ",
+          rtl: false,
         },
       ],
       name: 'Paraguay',
@@ -2311,6 +3124,9 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'ar',
+          name: 'Arabic',
+          native: 'العربية',
+          rtl: true,
         },
       ],
       name: 'Qatar',
@@ -2322,6 +3138,9 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'fr',
+          name: 'French',
+          native: 'Français',
+          rtl: false,
         },
       ],
       name: 'Réunion',
@@ -2333,6 +3152,9 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'ro',
+          name: 'Romanian',
+          native: 'Română',
+          rtl: false,
         },
       ],
       name: 'Romania',
@@ -2344,6 +3166,9 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'sr',
+          name: 'Serbian',
+          native: 'Српски',
+          rtl: false,
         },
       ],
       name: 'Serbia',
@@ -2355,6 +3180,9 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'ru',
+          name: 'Russian',
+          native: 'Русский',
+          rtl: false,
         },
       ],
       name: 'Russia',
@@ -2366,12 +3194,21 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'rw',
+          name: 'Rwandi',
+          native: 'Kinyarwandi',
+          rtl: false,
         },
         {
           code: 'en',
+          name: 'English',
+          native: 'English',
+          rtl: false,
         },
         {
           code: 'fr',
+          name: 'French',
+          native: 'Français',
+          rtl: false,
         },
       ],
       name: 'Rwanda',
@@ -2383,6 +3220,9 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'ar',
+          name: 'Arabic',
+          native: 'العربية',
+          rtl: true,
         },
       ],
       name: 'Saudi Arabia',
@@ -2394,6 +3234,9 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'en',
+          name: 'English',
+          native: 'English',
+          rtl: false,
         },
       ],
       name: 'Solomon Islands',
@@ -2405,9 +3248,15 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'fr',
+          name: 'French',
+          native: 'Français',
+          rtl: false,
         },
         {
           code: 'en',
+          name: 'English',
+          native: 'English',
+          rtl: false,
         },
       ],
       name: 'Seychelles',
@@ -2419,9 +3268,15 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'ar',
+          name: 'Arabic',
+          native: 'العربية',
+          rtl: true,
         },
         {
           code: 'en',
+          name: 'English',
+          native: 'English',
+          rtl: false,
         },
       ],
       name: 'Sudan',
@@ -2433,6 +3288,9 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'sv',
+          name: 'Swedish',
+          native: 'Svenska',
+          rtl: false,
         },
       ],
       name: 'Sweden',
@@ -2444,15 +3302,27 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'en',
+          name: 'English',
+          native: 'English',
+          rtl: false,
         },
         {
           code: 'ms',
+          name: 'Malay',
+          native: 'Bahasa Melayu',
+          rtl: false,
         },
         {
           code: 'ta',
+          name: 'Tamil',
+          native: 'தமிழ்',
+          rtl: false,
         },
         {
           code: 'zh',
+          name: 'Chinese',
+          native: '中文',
+          rtl: false,
         },
       ],
       name: 'Singapore',
@@ -2464,6 +3334,9 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'en',
+          name: 'English',
+          native: 'English',
+          rtl: false,
         },
       ],
       name: 'Saint Helena',
@@ -2475,6 +3348,9 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'sl',
+          name: 'Slovenian',
+          native: 'Slovenščina',
+          rtl: false,
         },
       ],
       name: 'Slovenia',
@@ -2486,6 +3362,9 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'no',
+          name: 'Norwegian',
+          native: 'Norsk',
+          rtl: false,
         },
       ],
       name: 'Svalbard and Jan Mayen',
@@ -2497,6 +3376,9 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'sk',
+          name: 'Slovak',
+          native: 'Slovenčina',
+          rtl: false,
         },
       ],
       name: 'Slovakia',
@@ -2508,6 +3390,9 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'en',
+          name: 'English',
+          native: 'English',
+          rtl: false,
         },
       ],
       name: 'Sierra Leone',
@@ -2519,6 +3404,9 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'it',
+          name: 'Italian',
+          native: 'Italiano',
+          rtl: false,
         },
       ],
       name: 'San Marino',
@@ -2530,6 +3418,9 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'fr',
+          name: 'French',
+          native: 'Français',
+          rtl: false,
         },
       ],
       name: 'Senegal',
@@ -2541,9 +3432,15 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'so',
+          name: 'Somalia',
+          native: 'Soomaaliga',
+          rtl: false,
         },
         {
           code: 'ar',
+          name: 'Arabic',
+          native: 'العربية',
+          rtl: true,
         },
       ],
       name: 'Somalia',
@@ -2555,6 +3452,9 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'nl',
+          name: 'Dutch',
+          native: 'Nederlands',
+          rtl: false,
         },
       ],
       name: 'Suriname',
@@ -2566,6 +3466,9 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'en',
+          name: 'English',
+          native: 'English',
+          rtl: false,
         },
       ],
       name: 'South Sudan',
@@ -2577,6 +3480,9 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'pt',
+          name: 'Portuguese',
+          native: 'Português',
+          rtl: false,
         },
       ],
       name: 'São Tomé and Príncipe',
@@ -2588,6 +3494,9 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'es',
+          name: 'Spanish',
+          native: 'Español',
+          rtl: false,
         },
       ],
       name: 'El Salvador',
@@ -2599,9 +3508,15 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'nl',
+          name: 'Dutch',
+          native: 'Nederlands',
+          rtl: false,
         },
         {
           code: 'en',
+          name: 'English',
+          native: 'English',
+          rtl: false,
         },
       ],
       name: 'Sint Maarten',
@@ -2613,6 +3528,9 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'ar',
+          name: 'Arabic',
+          native: 'العربية',
+          rtl: true,
         },
       ],
       name: 'Syria',
@@ -2624,9 +3542,15 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'en',
+          name: 'English',
+          native: 'English',
+          rtl: false,
         },
         {
           code: 'ss',
+          name: 'Swati',
+          native: 'SiSwati',
+          rtl: false,
         },
       ],
       name: 'Swaziland',
@@ -2638,6 +3562,9 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'en',
+          name: 'English',
+          native: 'English',
+          rtl: false,
         },
       ],
       name: 'Turks and Caicos Islands',
@@ -2649,9 +3576,15 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'fr',
+          name: 'French',
+          native: 'Français',
+          rtl: false,
         },
         {
           code: 'ar',
+          name: 'Arabic',
+          native: 'العربية',
+          rtl: true,
         },
       ],
       name: 'Chad',
@@ -2663,6 +3596,9 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'fr',
+          name: 'French',
+          native: 'Français',
+          rtl: false,
         },
       ],
       name: 'French Southern Territories',
@@ -2674,6 +3610,9 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'fr',
+          name: 'French',
+          native: 'Français',
+          rtl: false,
         },
       ],
       name: 'Togo',
@@ -2685,6 +3624,9 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'th',
+          name: 'Thai',
+          native: 'ไทย / Phasa Thai',
+          rtl: false,
         },
       ],
       name: 'Thailand',
@@ -2696,9 +3638,15 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'tg',
+          name: 'Tajik',
+          native: 'Тоҷикӣ',
+          rtl: false,
         },
         {
           code: 'ru',
+          name: 'Russian',
+          native: 'Русский',
+          rtl: false,
         },
       ],
       name: 'Tajikistan',
@@ -2710,6 +3658,9 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'en',
+          name: 'English',
+          native: 'English',
+          rtl: false,
         },
       ],
       name: 'Tokelau',
@@ -2721,6 +3672,9 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'pt',
+          name: 'Portuguese',
+          native: 'Português',
+          rtl: false,
         },
       ],
       name: 'East Timor',
@@ -2732,9 +3686,15 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'tk',
+          name: 'Turkmen',
+          native: 'Туркмен / تركمن',
+          rtl: false,
         },
         {
           code: 'ru',
+          name: 'Russian',
+          native: 'Русский',
+          rtl: false,
         },
       ],
       name: 'Turkmenistan',
@@ -2746,6 +3706,9 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'ar',
+          name: 'Arabic',
+          native: 'العربية',
+          rtl: true,
         },
       ],
       name: 'Tunisia',
@@ -2757,9 +3720,15 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'en',
+          name: 'English',
+          native: 'English',
+          rtl: false,
         },
         {
           code: 'to',
+          name: 'Tonga',
+          native: 'Lea Faka-Tonga',
+          rtl: false,
         },
       ],
       name: 'Tonga',
@@ -2771,6 +3740,9 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'tr',
+          name: 'Turkish',
+          native: 'Türkçe',
+          rtl: false,
         },
       ],
       name: 'Turkey',
@@ -2782,6 +3754,9 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'en',
+          name: 'English',
+          native: 'English',
+          rtl: false,
         },
       ],
       name: 'Trinidad and Tobago',
@@ -2793,6 +3768,9 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'en',
+          name: 'English',
+          native: 'English',
+          rtl: false,
         },
       ],
       name: 'Tuvalu',
@@ -2804,6 +3782,9 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'zh',
+          name: 'Chinese',
+          native: '中文',
+          rtl: false,
         },
       ],
       name: 'Taiwan',
@@ -2815,9 +3796,15 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'sw',
+          name: 'Swahili',
+          native: 'Kiswahili',
+          rtl: false,
         },
         {
           code: 'en',
+          name: 'English',
+          native: 'English',
+          rtl: false,
         },
       ],
       name: 'Tanzania',
@@ -2829,6 +3816,9 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'uk',
+          name: 'Ukrainian',
+          native: 'Українська',
+          rtl: false,
         },
       ],
       name: 'Ukraine',
@@ -2840,9 +3830,15 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'en',
+          name: 'English',
+          native: 'English',
+          rtl: false,
         },
         {
           code: 'sw',
+          name: 'Swahili',
+          native: 'Kiswahili',
+          rtl: false,
         },
       ],
       name: 'Uganda',
@@ -2854,6 +3850,9 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'en',
+          name: 'English',
+          native: 'English',
+          rtl: false,
         },
       ],
       name: 'U.S. Minor Outlying Islands',
@@ -2865,6 +3864,9 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'en',
+          name: 'English',
+          native: 'English',
+          rtl: false,
         },
       ],
       name: 'United States',
@@ -2876,6 +3878,9 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'es',
+          name: 'Spanish',
+          native: 'Español',
+          rtl: false,
         },
       ],
       name: 'Uruguay',
@@ -2887,9 +3892,15 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'uz',
+          name: 'Uzbek',
+          native: 'Ўзбек',
+          rtl: false,
         },
         {
           code: 'ru',
+          name: 'Russian',
+          native: 'Русский',
+          rtl: false,
         },
       ],
       name: 'Uzbekistan',
@@ -2901,9 +3912,15 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'it',
+          name: 'Italian',
+          native: 'Italiano',
+          rtl: false,
         },
         {
           code: 'la',
+          name: 'Latin',
+          native: 'Latina',
+          rtl: false,
         },
       ],
       name: 'Vatican City',
@@ -2915,6 +3932,9 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'en',
+          name: 'English',
+          native: 'English',
+          rtl: false,
         },
       ],
       name: 'Saint Vincent and the Grenadines',
@@ -2926,6 +3946,9 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'es',
+          name: 'Spanish',
+          native: 'Español',
+          rtl: false,
         },
       ],
       name: 'Venezuela',
@@ -2937,6 +3960,9 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'en',
+          name: 'English',
+          native: 'English',
+          rtl: false,
         },
       ],
       name: 'British Virgin Islands',
@@ -2948,6 +3974,9 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'en',
+          name: 'English',
+          native: 'English',
+          rtl: false,
         },
       ],
       name: 'U.S. Virgin Islands',
@@ -2959,6 +3988,9 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'vi',
+          name: 'Vietnamese',
+          native: 'Tiếng Việt',
+          rtl: false,
         },
       ],
       name: 'Vietnam',
@@ -2970,12 +4002,21 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'bi',
+          name: 'Bislama',
+          native: 'Bislama',
+          rtl: false,
         },
         {
           code: 'en',
+          name: 'English',
+          native: 'English',
+          rtl: false,
         },
         {
           code: 'fr',
+          name: 'French',
+          native: 'Français',
+          rtl: false,
         },
       ],
       name: 'Vanuatu',
@@ -2987,6 +4028,9 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'fr',
+          name: 'French',
+          native: 'Français',
+          rtl: false,
         },
       ],
       name: 'Wallis and Futuna',
@@ -2998,9 +4042,15 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'sm',
+          name: 'Samoan',
+          native: 'Gagana Samoa',
+          rtl: false,
         },
         {
           code: 'en',
+          name: 'English',
+          native: 'English',
+          rtl: false,
         },
       ],
       name: 'Samoa',
@@ -3012,9 +4062,15 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'sq',
+          name: 'Albanian',
+          native: 'Shqip',
+          rtl: false,
         },
         {
           code: 'sr',
+          name: 'Serbian',
+          native: 'Српски',
+          rtl: false,
         },
       ],
       name: 'Kosovo',
@@ -3026,6 +4082,9 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'ar',
+          name: 'Arabic',
+          native: 'العربية',
+          rtl: true,
         },
       ],
       name: 'Yemen',
@@ -3037,6 +4096,9 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'fr',
+          name: 'French',
+          native: 'Français',
+          rtl: false,
         },
       ],
       name: 'Mayotte',
@@ -3048,33 +4110,63 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'af',
+          name: 'Afrikaans',
+          native: 'Afrikaans',
+          rtl: false,
         },
         {
           code: 'en',
+          name: 'English',
+          native: 'English',
+          rtl: false,
         },
         {
           code: 'nr',
+          name: 'South Ndebele',
+          native: 'isiNdebele',
+          rtl: false,
         },
         {
           code: 'st',
+          name: 'Southern Sotho',
+          native: 'Sesotho',
+          rtl: false,
         },
         {
           code: 'ss',
+          name: 'Swati',
+          native: 'SiSwati',
+          rtl: false,
         },
         {
           code: 'tn',
+          name: 'Tswana',
+          native: 'Setswana',
+          rtl: false,
         },
         {
           code: 'ts',
+          name: 'Tsonga',
+          native: 'Xitsonga',
+          rtl: false,
         },
         {
           code: 've',
+          name: 'Venda',
+          native: 'Tshivenḓa',
+          rtl: false,
         },
         {
           code: 'xh',
+          name: 'Xhosa',
+          native: 'isiXhosa',
+          rtl: false,
         },
         {
           code: 'zu',
+          name: 'Zulu',
+          native: 'isiZulu',
+          rtl: false,
         },
       ],
       name: 'South Africa',
@@ -3086,6 +4178,9 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'en',
+          name: 'English',
+          native: 'English',
+          rtl: false,
         },
       ],
       name: 'Zambia',
@@ -3097,12 +4192,21 @@ export const getGetCountriesResponseMock = (): GetCountriesQuery => ({
       languages: [
         {
           code: 'en',
+          name: 'English',
+          native: 'English',
+          rtl: false,
         },
         {
           code: 'sn',
+          name: 'Shona',
+          native: 'chiShona',
+          rtl: false,
         },
         {
           code: 'nd',
+          name: 'North Ndebele',
+          native: 'Sindebele',
+          rtl: false,
         },
       ],
       name: 'Zimbabwe',
