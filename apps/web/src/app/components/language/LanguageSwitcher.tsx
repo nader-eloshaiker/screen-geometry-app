@@ -1,21 +1,55 @@
+import { Country, CountryDictionary } from '@/app/hooks/country/EnvCountryContext'
+import { useEnvCountry } from '@/app/hooks/country/useEnvCountry'
 import { useEnvTranslate } from '@/app/hooks/translation/useEnvTranslate'
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@screengeometry/lib-ui/select'
-import { supportedlocales } from '../../hooks/translation/LocaleHelper'
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectSeparator,
+  SelectTrigger,
+  SelectValue,
+} from '@screengeometry/lib-ui/select'
+import { useEffect, useState } from 'react'
+
+const findCountry = (locale: string | null, countryList: CountryDictionary) => {
+  if (!locale) {
+    return undefined
+  }
+  const list = Object.values(countryList).flat()
+  return list.find((country) => country.locale === locale)
+}
 
 export const LanguageSwitcher = () => {
   // Pull in the top-level locale and its setter.
   const { locale, setLocale } = useEnvTranslate()
+  const { countriesList = {} } = useEnvCountry()
+  const [selectedCountry, setSelectedCountry] = useState<Country | undefined>(() => findCountry(locale, countriesList))
+
+  useEffect(() => {
+    setSelectedCountry(findCountry(locale, countriesList))
+  }, [locale, countriesList])
 
   return (
-    <Select value={locale} onValueChange={setLocale}>
-      <SelectTrigger palette='primary' className='w-[110px] rounded-lg'>
-        <SelectValue placeholder='Language' />
+    <Select value={locale ?? ''} onValueChange={setLocale}>
+      <SelectTrigger palette='primary' className='w-20 rounded-lg'>
+        <SelectValue placeholder='Language' aria-label={locale ?? ''}>
+          <span className='text-2xl'>{selectedCountry?.emoji}</span>
+        </SelectValue>
       </SelectTrigger>
       <SelectContent palette={'secondary'}>
-        {Object.entries(supportedlocales).map(([key, value]) => (
-          <SelectItem palette={'secondary'} value={key} key={key}>
-            {value.label}
-          </SelectItem>
+        {Object.entries(countriesList).map(([langKey, countries]) => (
+          <SelectGroup key={langKey}>
+            {countries.map((country) => (
+              <SelectItem palette={'secondary'} value={country.locale} key={country.locale}>
+                <span className='flex items-center gap-3'>
+                  <span className='text-3xl'>{country.emoji}</span>
+                  <span>{country.native}</span>
+                </span>
+              </SelectItem>
+            ))}
+            <SelectSeparator />
+          </SelectGroup>
         ))}
       </SelectContent>
     </Select>

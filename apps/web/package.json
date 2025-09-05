@@ -46,7 +46,7 @@
     "html-react-parser": "^5.2.2",
     "jwt-decode": "^4.0.0",
     "lucide-react": "catalog:",
-    "msw": "^2.10.4",
+    "msw": "catalog:",
     "react": "catalog:react19",
     "react-dom": "catalog:react19",
     "react-ga4": "^1.4.1",

@@ -1,0 +1,8 @@
+query getLanguages {
+  languages {
+    code
+    name
+    native
+    rtl
+  }
+}

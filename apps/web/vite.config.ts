@@ -58,7 +58,7 @@ export default defineConfig({
     !isTest &&
       tanstackRouter({
         target: 'react',
-        autoCodeSplitting: true,
+        autoCodeSplitting: false,
         routesDirectory: './src/app/routes',
         generatedRouteTree: './src/app/routetree/routeTree.gen.ts',
         // routeFileIgnorePattern: '\\.(test|spec)\\.[jt]sx?$',

@@ -5,10 +5,10 @@ import { PageLoaderProvider } from './PageLoaderProvider'
 import { usePageLoader } from './usePageLoader'
 
 const TestContentComponent = () => {
-  const { isPageLoading, setPageLoading } = usePageLoader()
+  const { isPageLoading, setComponentLoading: setLoading } = usePageLoader()
 
-  const onClickClear = () => setPageLoading({ action: 'idle', componentId: 'key1' })
-  const onClickAdd = () => setPageLoading({ action: 'loading', componentId: 'key2' })
+  const onClickClear = () => setLoading({ action: 'idle', componentId: 'key1' })
+  const onClickAdd = () => setLoading({ action: 'loading', componentId: 'key2' })
 
   return (
     <div>

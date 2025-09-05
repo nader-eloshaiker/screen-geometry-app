@@ -1,30 +1,35 @@
-import { type Dispatch, type SetStateAction, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 
-export const getLocalStorage = <T>(key: string, initialValue: T): T => {
+export const getLocalStorage = <T = string>(key: string, initialValue?: T): T | null => {
   try {
     const value = window.localStorage.getItem(key)
-    // Check if the local storage already has any values,
-    // otherwise initialize it with the passed initialValue
-    return value ? (JSON.parse(value) as T) : initialValue
+
+    if (!value && initialValue) {
+      window.localStorage.setItem(key, JSON.stringify(initialValue))
+      return initialValue
+    }
+
+    return value ? (JSON.parse(value) as T) : null
   } catch (error) {
     console.log(error)
-    window.localStorage.setItem(key, JSON.stringify(initialValue))
-    return initialValue
+    return initialValue ?? null
   }
 }
 
-const useLocalStorage = <T extends string>(key: string, initialValue: T) => {
+const useLocalStorage = <T = string>(key: string, initialValue?: T) => {
   const [state, setState] = useState(() => getLocalStorage<T>(key, initialValue))
 
   useEffect(() => {
+    if (!state) return
+
     try {
       window.localStorage.setItem(key, JSON.stringify(state))
     } catch (error) {
       console.log(error)
     }
-  }, [initialValue, key, state])
+  }, [key, state])
 
-  return [state, setState] as [T, Dispatch<SetStateAction<T>>]
+  return [state, setState] as const
 }
 
 export default useLocalStorage

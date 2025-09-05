@@ -4,7 +4,7 @@ import * as configuration from '@screengeometry/lib-api/spec'
 import { PageLoader, PageLoaderProvider, usePageLoader } from '@screengeometry/lib-ui/pageloader'
 import { render, waitFor } from '@testing-library/react'
 import { vi } from 'vitest'
-import { EnvConfig } from './EnvConfig'
+import { EnvConfigProvider } from './EnvConfigProvider'
 
 vi.mock('@screengeometry/lib-api/apiClient', () => ({
   serverAxiosInstance: {
@@ -53,9 +53,9 @@ describe('#ConfiguredEnvironment', () => {
 
     const { container, queryByText } = render(
       <PageLoaderProvider initialLoadingKeys={['aaa']}>
-        <EnvConfig configReadyKey='aaa'>
+        <EnvConfigProvider configReadyKey='aaa'>
           <TestLoadingComponent />
-        </EnvConfig>
+        </EnvConfigProvider>
       </PageLoaderProvider>
     )
 
@@ -74,9 +74,9 @@ describe('#ConfiguredEnvironment', () => {
     expect(() => {
       render(
         <PageLoaderProvider initialLoadingKeys={['aaa']}>
-          <EnvConfig configReadyKey='aaa'>
+          <EnvConfigProvider configReadyKey='aaa'>
             <TestLoadingComponent />
-          </EnvConfig>
+          </EnvConfigProvider>
         </PageLoaderProvider>
       )
     }).toThrow('Could not render. Error fetching config data.')
@@ -92,9 +92,9 @@ describe('#ConfiguredEnvironment', () => {
     expect(() => {
       render(
         <PageLoaderProvider initialLoadingKeys={['aaa']}>
-          <EnvConfig configReadyKey='aaa'>
+          <EnvConfigProvider configReadyKey='aaa'>
             <TestLoadingComponent />
-          </EnvConfig>
+          </EnvConfigProvider>
         </PageLoaderProvider>
       )
     }).toThrow('Could not render. Error fetching config data.')
@@ -113,9 +113,9 @@ describe('#ConfiguredEnvironment', () => {
 
     const { getByTestId, queryByTestId } = render(
       <PageLoaderProvider initialLoadingKeys={['aaa']}>
-        <EnvConfig configReadyKey='aaa'>
+        <EnvConfigProvider configReadyKey='aaa'>
           <TestLoadingComponent />
-        </EnvConfig>
+        </EnvConfigProvider>
       </PageLoaderProvider>
     )
 
@@ -140,9 +140,9 @@ describe('#ConfiguredEnvironment', () => {
 
     const { rerender, getByText, queryByTestId, container } = await renderWithUserEvents(
       <PageLoaderProvider initialLoadingKeys={['aaa']}>
-        <EnvConfig configReadyKey='aaa'>
+        <EnvConfigProvider configReadyKey='aaa'>
           <TestLoadingComponent />
-        </EnvConfig>
+        </EnvConfigProvider>
       </PageLoaderProvider>
     )
 
@@ -165,9 +165,9 @@ describe('#ConfiguredEnvironment', () => {
     // Rerender the component with the new mock return value
     rerender(
       <PageLoaderProvider initialLoadingKeys={['aaa']}>
-        <EnvConfig configReadyKey='aaa'>
+        <EnvConfigProvider configReadyKey='aaa'>
           <TestLoadingComponent />
-        </EnvConfig>
+        </EnvConfigProvider>
       </PageLoaderProvider>
     )
 

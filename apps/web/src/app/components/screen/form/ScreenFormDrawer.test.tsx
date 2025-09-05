@@ -16,7 +16,7 @@ import { Toaster } from '@screengeometry/lib-ui/toaster'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { render, waitFor } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
-import { act, useState } from 'react'
+import { useState } from 'react'
 import { FormModeTypes } from './FormMode'
 import { ScreenFormDrawer } from './ScreenFormDrawer'
 
@@ -122,7 +122,7 @@ describe('#ScreenFormDrawer', () => {
       await user.type(inputScreenSize, '27')
 
       expect(submitButton).toBeEnabled()
-      await act(async () => user.click(submitButton))
+      await user.click(submitButton)
 
       waitFor(() => {
         expect(submitButton).not.toBeInTheDocument()
@@ -149,7 +149,7 @@ describe('#ScreenFormDrawer', () => {
       await user.type(vResElement, '1440')
 
       expect(submitButton).toBeEnabled()
-      await act(async () => user.click(submitButton))
+      await user.click(submitButton)
 
       await waitFor(() => {
         expect(submitButton).not.toBeInTheDocument()
