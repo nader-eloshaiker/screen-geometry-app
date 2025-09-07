@@ -1,6 +1,6 @@
-import { DarkMode, type TThemeMode } from '@/app/hooks/theme/Theme.types'
-import { useTheme } from '@/app/hooks/theme/useTheme'
 import { type ScreenItemRender } from '@/app/models/screenItemRender'
+import { DarkMode, type TThemeMode } from '@/app/stores/theme/Theme.types'
+import { useTheme } from '@/app/stores/theme/useTheme'
 import { type ScreenColor } from '@screengeometry/lib-api/spec'
 import { Button } from '@screengeometry/lib-ui/button'
 import { Checkbox } from '@screengeometry/lib-ui/checkbox'
@@ -179,17 +179,26 @@ export const ScreenTable = ({
                 </div>
               </TableCell>
               <TableCell className='text-center'>
-                <FormattedNumber value={screen.data.diagonalSize} />
-                &quot;
+                <FormattedNumber value={screen.data.diagonalSize} style='unit' unit='inch' unitDisplay='narrow' />
               </TableCell>
               <TableCell className='text-center'>
                 <FormattedNumber value={screen.specs.hAspectRatio} />:
                 <FormattedNumber value={screen.specs.vAspectRatio} />
               </TableCell>
               <TableCell className='hidden text-center sm:table-cell'>
-                <FormattedNumber value={Math.round((screen.specs.hSize * 100) / 100)} />
-                &quot; x <FormattedNumber value={Math.round((screen.specs.vSize * 100) / 100)} />
-                &quot;
+                <FormattedNumber
+                  value={Math.round((screen.specs.hSize * 100) / 100)}
+                  style='unit'
+                  unit='inch'
+                  unitDisplay='narrow'
+                />{' '}
+                x{' '}
+                <FormattedNumber
+                  value={Math.round((screen.specs.vSize * 100) / 100)}
+                  style='unit'
+                  unit='inch'
+                  unitDisplay='narrow'
+                />
               </TableCell>
               <TableCell className='hidden text-center md:table-cell'>
                 <FormattedNumber value={screen.data.hRes} /> x <FormattedNumber value={screen.data.vRes} />

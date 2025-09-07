@@ -1,4 +1,4 @@
-import { EnvironmentSessionLoaderKey, EnvSessionProvider } from '@/app/hooks/session/EnvSessionProvider'
+import { EnvironmentSessionLoaderKey, EnvSessionProvider } from '@/app/stores/session/EnvSessionProvider'
 import { PageLoaderProvider } from '@screengeometry/lib-ui/pageloader'
 import { createLazyFileRoute, Outlet } from '@tanstack/react-router'
 

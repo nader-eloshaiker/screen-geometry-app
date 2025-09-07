@@ -1,5 +1,10 @@
-import { DefaultSession, EnvSessionContext, type JWTPayload, type Session } from '@/app/hooks/session/EnvSessionContext'
-import { mockAccessTokenResolver } from '@/app/hooks/session/EnvSessionTokenMock'
+import {
+  DefaultSession,
+  EnvSessionContext,
+  type JWTPayload,
+  type Session,
+} from '@/app/stores/session/EnvSessionContext'
+import { mockAccessTokenResolver } from '@/app/stores/session/EnvSessionTokenMock'
 import { setAccessTokenResolver } from '@screengeometry/lib-api/apiClient'
 import { usePageLoader } from '@screengeometry/lib-ui/pageloader'
 import { jwtDecode } from 'jwt-decode'

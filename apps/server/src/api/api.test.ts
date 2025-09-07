@@ -1,10 +1,10 @@
-import { screenItemFixture } from '@/lib/support/test/fixtures/ScreenFixtures'
+import { screenItemFixture } from '@/test/fixtures/ScreenFixtures'
 import { type ScreenItem } from '@screengeometry/lib-api/spec'
 import { IDBFactory } from 'fake-indexeddb'
 import { StoresEnum } from '../db/DbConstants'
 import { addData } from '../db/IndexedDB'
 import { setupDB } from '../db/IndexedDB.test'
-import { screenInput55Fixture } from '../lib/test/fixtures/ScreenFixtures'
+import { screenInput55Fixture } from '../test/fixtures/ScreenInputFixtures'
 import {
   createScreen,
   createScreenList,

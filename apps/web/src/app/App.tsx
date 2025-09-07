@@ -1,11 +1,11 @@
-import { QueryProvider } from '@/app/hooks/query/QueryProvider'
-import { AppRouterProvider } from '@/app/hooks/router/AppRouterProvider'
-import { ScreenProvider } from '@/app/hooks/screen/ScreenProvider'
-import { ThemeProvider } from '@/app/hooks/theme/ThemeProvider'
+import { QueryProvider } from '@/app/stores/query/QueryProvider'
+import { AppRouterProvider } from '@/app/stores/router/AppRouterProvider'
+import { ScreenProvider } from '@/app/stores/screen/ScreenProvider'
+import { ThemeProvider } from '@/app/stores/theme/ThemeProvider'
 import { PageLoader, PageLoaderProvider, usePageLoader } from '@screengeometry/lib-ui/pageloader'
-import { EnvConfigProvider } from './hooks/config/EnvConfigProvider'
-import { EnvCountryProvider } from './hooks/country/EnvCountryProvider'
-import { EnvTranslationProvider } from './hooks/translation/EnvTranslationProvider'
+import { EnvConfigProvider } from './stores/config/EnvConfigProvider'
+import { EnvCountryProvider } from './stores/country/EnvCountryProvider'
+import { EnvTranslationProvider } from './stores/translation/EnvTranslationProvider'
 
 const Application = () => {
   const { isPageLoading } = usePageLoader()

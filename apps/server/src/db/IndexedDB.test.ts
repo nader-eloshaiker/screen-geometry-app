@@ -1,5 +1,5 @@
-import { screenItemFixture } from '@/lib/support/test/fixtures/ScreenFixtures'
-import { setupV2DB } from '@/lib/support/test/stubs/IndexedDBMigration.stub'
+import { screenItemFixture } from '@/test/fixtures/ScreenFixtures'
+import { setupV2DB } from '@/test/stubs/IndexedDBMigration.stub'
 import { getGetScreenResponseMock, type ScreenItem } from '@screengeometry/lib-api/spec'
 import { IDBFactory } from 'fake-indexeddb'
 import { dbNameDefault, dbVersionDefault, StoresEnum } from './DbConstants'

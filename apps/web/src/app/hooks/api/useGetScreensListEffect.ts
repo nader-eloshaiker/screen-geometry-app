@@ -1,7 +1,7 @@
-import { useScreenContext } from '@/app/hooks/screen/useScreenContext'
+import { ScreenEvent } from '@/app/stores/screen/ScreenManager'
+import { useScreenContext } from '@/app/stores/screen/useScreenContext'
 import type { ErrorResponse, ScreenListResponse } from '@screengeometry/lib-api/spec'
 import { useCallback } from 'react'
-import { ScreenEvent } from '../screen/ScreenManager'
 import { useApiEffect } from './useApiEffect'
 
 export const useGetScreensListEffect = (data: ScreenListResponse | undefined, error: ErrorResponse | null) => {

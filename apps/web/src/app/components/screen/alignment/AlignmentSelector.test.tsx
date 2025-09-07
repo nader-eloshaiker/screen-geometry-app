@@ -1,5 +1,5 @@
-import { renderWithUserEvents } from '@/lib/support/test/utils/RenderWithUserEvents'
-import { TestTranslationsEnvironment } from '@/lib/support/test/utils/TestTranslationsEnvironment'
+import { renderWithUserEvents } from '@/test/utils/RenderWithUserEvents'
+import { TestTranslationsEnvironment } from '@/test/utils/TestTranslationsEnvironment'
 import { waitFor } from '@testing-library/react'
 import { HAlignKey, HorizontalAlignmentSelector, VAlignKey, VerticalAlignmentSelector } from './AlignmentSelector'
 

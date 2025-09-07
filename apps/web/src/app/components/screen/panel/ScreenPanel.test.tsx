@@ -1,6 +1,6 @@
 import { toScreenItemRender } from '@/app/utils'
-import { renderWithUserEvents } from '@/lib/support/test/utils/RenderWithUserEvents'
-import { TestEnvironment } from '@/lib/support/test/utils/TestEnvironment'
+import { renderWithUserEvents } from '@/test/utils/RenderWithUserEvents'
+import { TestEnvironment } from '@/test/utils/TestEnvironment'
 import { getGetScreenResponseMock } from '@screengeometry/lib-api/spec'
 import { ScreenPanel } from './ScreenPanel'
 

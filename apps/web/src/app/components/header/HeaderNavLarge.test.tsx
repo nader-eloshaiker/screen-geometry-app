@@ -1,4 +1,4 @@
-import { TestTranslationsEnvironment } from '@/lib/support/test/utils/TestTranslationsEnvironment'
+import { TestTranslationsEnvironment } from '@/test/utils/TestTranslationsEnvironment'
 import { render, screen } from '@testing-library/react'
 import { vi } from 'vitest'
 import { HeaderNavLarge } from './HeaderNavLarge'

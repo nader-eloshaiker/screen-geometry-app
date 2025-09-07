@@ -1,5 +1,5 @@
-import { renderWithUserEvents } from '@/lib/support/test/utils/RenderWithUserEvents'
-import { TestEnvironment } from '@/lib/support/test/utils/TestEnvironment'
+import { renderWithUserEvents } from '@/test/utils/RenderWithUserEvents'
+import { TestEnvironment } from '@/test/utils/TestEnvironment'
 import { RouterProvider, createMemoryHistory, createRootRoute, createRoute, createRouter } from '@tanstack/react-router'
 import { screen, waitFor } from '@testing-library/react'
 import { useMemo } from 'react'
@@ -54,7 +54,7 @@ const configMock = vi.hoisted(() => ({
 
 describe('#Header', () => {
   beforeEach(() => {
-    vi.mock('@/app/hooks/config/useEnvConfig', () => ({
+    vi.mock('@/app/stores/config/useEnvConfig', () => ({
       useEnvConfig: vi.fn().mockReturnValue(configMock),
     }))
 

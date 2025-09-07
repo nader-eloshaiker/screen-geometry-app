@@ -1,6 +1,6 @@
-import { DarkMode, type TThemeMode } from '@/app/hooks/theme/Theme.types'
-import { useTheme } from '@/app/hooks/theme/useTheme'
 import { type ScreenItemRender } from '@/app/models/screenItemRender'
+import { DarkMode, type TThemeMode } from '@/app/stores/theme/Theme.types'
+import { useTheme } from '@/app/stores/theme/useTheme'
 import { type ScreenColor } from '@screengeometry/lib-api/spec'
 import { cn } from '@screengeometry/lib-ui/utils'
 import { type Dispatch, type SetStateAction, useEffect, useState } from 'react'

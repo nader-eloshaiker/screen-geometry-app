@@ -1,7 +1,7 @@
 import RefreshIcon from '@/app/assets/icons/Refresh'
 import { useCreateScreenEffect } from '@/app/hooks/api/useCreateScreenEffect'
 import { useUpdateScreenEffect } from '@/app/hooks/api/useUpdateScreenEffect'
-import { DarkMode, LightMode } from '@/app/hooks/theme/Theme.types'
+import { DarkMode, LightMode } from '@/app/stores/theme/Theme.types'
 import { createScreenColors } from '@/app/utils'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { type ScreenInput, type SearchItem, useCreateScreen, useUpdateScreen } from '@screengeometry/lib-api/spec'
