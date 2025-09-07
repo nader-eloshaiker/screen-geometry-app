@@ -36,9 +36,6 @@ catalogs:
     orval:
       specifier: ^7.11.2
       version: 7.11.2
-    prettier:
-      specifier: ^3.6.2
-      version: 3.6.2
     react-hook-form:
       specifier: ^7.62.0
       version: 7.62.0
@@ -639,7 +636,7 @@ importers:
         specifier: 'catalog:'
         version: 7.11.2(openapi-types@12.1.3)
       prettier:
-        specifier: 'catalog:'
+        specifier: catalog:prettier
         version: 3.6.2
       prettier-plugin-organize-imports:
         specifier: ^4.1.0

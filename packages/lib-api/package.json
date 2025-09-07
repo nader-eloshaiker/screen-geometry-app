@@ -67,7 +67,7 @@
     "globals": "catalog:eslint",
     "jsdom": "^26.1.0",
     "orval": "catalog:",
-    "prettier": "catalog:",
+    "prettier": "catalog:prettier",
     "prettier-plugin-organize-imports": "^4.1.0",
     "react": "catalog:react19",
     "react-dom": "catalog:react19",
