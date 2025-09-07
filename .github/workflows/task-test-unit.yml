@@ -25,8 +25,8 @@ jobs:
           node-version-file: ".nvmrc"
           cache: "pnpm"
 
-      - name: Run pnpm install
-        run: pnpm install
+      - name: Install dependencies
+        run: pnpm install --no-frozen-lockfile
 
       - name: 🚀 Run unit tests
         run: pnpm test
