@@ -3,7 +3,7 @@ import { vi } from 'vitest'
 import ThemeToggle from './ThemeToggle'
 
 // Mock the theme context hook
-vi.mock('@/app/hooks/theme/useTheme', () => ({
+vi.mock('@/app/stores/theme/useTheme', () => ({
   useTheme: vi.fn(),
 }))
 

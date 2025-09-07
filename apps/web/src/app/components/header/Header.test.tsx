@@ -54,7 +54,7 @@ const configMock = vi.hoisted(() => ({
 
 describe('#Header', () => {
   beforeEach(() => {
-    vi.mock('@/app/hooks/config/useEnvConfig', () => ({
+    vi.mock('@/app/stores/config/useEnvConfig', () => ({
       useEnvConfig: vi.fn().mockReturnValue(configMock),
     }))
 
