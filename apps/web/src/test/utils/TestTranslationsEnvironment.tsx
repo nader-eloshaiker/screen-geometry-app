@@ -1,5 +1,5 @@
-import { defaultLocale } from '@/app/hooks/country/CountryUtils'
-import { EnvTranslationContext } from '@/app/hooks/translation/EnvTranslationContext'
+import { defaultLocale } from '@/app/stores/country/CountryUtils'
+import { EnvTranslationContext } from '@/app/stores/translation/EnvTranslationContext'
 import { Translations } from '@screengeometry/lib-api/spec'
 import { useState } from 'react'
 import { IntlProvider } from 'react-intl'

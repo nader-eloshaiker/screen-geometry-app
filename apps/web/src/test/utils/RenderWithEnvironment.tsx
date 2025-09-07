@@ -1,6 +1,6 @@
 import { EnvConfig } from '@/app/hooks/config/EnvConfig'
-import { QueryProvider } from '@/app/hooks/query/QueryProvider'
-import { EnvTranslationProvider } from '@/app/hooks/translation/EnvTranslationProvider'
+import { QueryProvider } from '@/app/stores/query/QueryProvider'
+import { EnvTranslationProvider } from '@/app/stores/translation/EnvTranslationProvider'
 import { PageLoaderProvider } from '@screengeometry/lib-ui/pageloader'
 import { render, type RenderOptions, type RenderResult } from '@testing-library/react'
 import type { UserEvent } from '@testing-library/user-event'

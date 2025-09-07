@@ -1,6 +1,6 @@
-import { DarkMode, type TThemeMode } from '@/app/hooks/theme/Theme.types'
-import { useTheme } from '@/app/hooks/theme/useTheme'
 import { type ScreenItemRender } from '@/app/models/screenItemRender'
+import { DarkMode, type TThemeMode } from '@/app/stores/theme/Theme.types'
+import { useTheme } from '@/app/stores/theme/useTheme'
 import { type ScreenColor } from '@screengeometry/lib-api/spec'
 import { Button } from '@screengeometry/lib-ui/button'
 import { Checkbox } from '@screengeometry/lib-ui/checkbox'

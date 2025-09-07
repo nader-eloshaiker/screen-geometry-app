@@ -1,4 +1,4 @@
-import { defaultLocale } from '@/app/hooks/country/CountryUtils'
+import { defaultLocale } from '@/app/stores/country/CountryUtils'
 import { createContext, type Dispatch } from 'react'
 
 export type EnvTranslation = {

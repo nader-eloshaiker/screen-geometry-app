@@ -1,6 +1,6 @@
-import { ScreenProvider } from '@/app/hooks/screen/ScreenProvider'
-import { useScreenContext } from '@/app/hooks/screen/useScreenContext'
 import { type ScreenItemRender } from '@/app/models/screenItemRender'
+import { ScreenProvider } from '@/app/stores/screen/ScreenProvider'
+import { useScreenContext } from '@/app/stores/screen/useScreenContext'
 import { toScreenItemRender } from '@/app/utils'
 import { initMSW } from '@/serviceworker/NodeServiceWorker'
 import { screenInputFixture } from '@/test/fixtures/ScreenFixtures'
