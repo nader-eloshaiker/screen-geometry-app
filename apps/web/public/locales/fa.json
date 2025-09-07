@@ -110,5 +110,7 @@
   "screens.table.show": "نمایش",
   "screens.table.size": "اندازه",
   "screens.theme.darkLabel": "حالت تیره",
-  "screens.theme.lightLabel": "حالت روشن"
+  "screens.theme.lightLabel": "حالت روشن",
+  "translations.selector.placeholder": "جستجوی ترجمه...",
+  "translations.selector.nomatching": "ترجمهٔ منطبق پیدا نشد"
 }

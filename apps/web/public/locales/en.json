@@ -110,5 +110,7 @@
   "screens.table.show": "Show",
   "screens.table.size": "Size",
   "screens.theme.darkLabel": "Dark Mode",
-  "screens.theme.lightLabel": "Light Mode"
+  "screens.theme.lightLabel": "Light Mode",
+  "translations.selector.placeholder": "Search Translation...",
+  "translations.selector.nomatching": "No Matching Translations found"
 }
