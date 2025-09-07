@@ -26,21 +26,21 @@ test('Smoke Test Screens Page', async ({ page }) => {
   // Check for table data
   const tableOriginal = page.getByTestId('ScreenTable')
   await expect(tableOriginal.locator('tbody > tr')).toHaveCount(6)
-  await expect(tableOriginal).toContainText('49"')
-  await expect(tableOriginal).toContainText('40"')
-  await expect(tableOriginal).toContainText('38"')
-  await expect(tableOriginal).toContainText('34"')
-  await expect(tableOriginal).toContainText('32"')
-  await expect(tableOriginal).toContainText('27"')
+  await expect(tableOriginal).toContainText('49″')
+  await expect(tableOriginal).toContainText('40″')
+  await expect(tableOriginal).toContainText('38″')
+  await expect(tableOriginal).toContainText('34″')
+  await expect(tableOriginal).toContainText('32″')
+  await expect(tableOriginal).toContainText('27″')
 
   // Delete row and check for count
-  const deleteButton = page.getByRole('row', { name: '27" 16:9 24" x 13" 3,840 x 2,160' }).getByRole('button').nth(1)
+  const deleteButton = page.getByRole('row', { name: '27″ 16:9 24″ x 13″ 3,840 x 2,160' }).getByRole('button').nth(1)
   await deleteButton.click()
 
   // Check for table data
   const tableDeletedRow = page.getByTestId('ScreenTable')
   await expect(tableDeletedRow.locator('tbody > tr')).toHaveCount(5)
-  await expect(tableDeletedRow).not.toContainText('27"')
+  await expect(tableDeletedRow).not.toContainText('27″')
 
   // Create new row and check for count
   await page.getByRole('button', { name: 'Create Screen' }).click()
@@ -54,7 +54,7 @@ test('Smoke Test Screens Page', async ({ page }) => {
   await expect(tableAddedRow.locator('tbody > tr')).toHaveCount(6)
 
   // Edit row and check for updated row
-  const editButton = page.getByRole('row', { name: '32" 16:9 28" x 16" 3,840 x 2,160' }).getByRole('button').first()
+  const editButton = page.getByRole('row', { name: '32″ 16:9 28″ x 16″ 3,840 x 2,160' }).getByRole('button').first()
   await editButton.click()
   await page.getByLabel('Screen Size').click()
   await page.getByLabel('Screen Size').dblclick()
@@ -65,14 +65,14 @@ test('Smoke Test Screens Page', async ({ page }) => {
   // Check for table data
   const tableUpdatedRow = page.getByTestId('ScreenTable')
   await expect(tableUpdatedRow.locator('tbody > tr')).toHaveCount(6)
-  await expect(tableUpdatedRow).toContainText('31"')
-  await expect(tableUpdatedRow).not.toContainText('32"')
+  await expect(tableUpdatedRow).toContainText('31″')
+  await expect(tableUpdatedRow).not.toContainText('32″')
 
   /**
    * Test for Screen Panel
    **/
 
-  const showCheckbox = page.getByRole('row', { name: '49" 32:9 47" x 13" 5,120 x 1,440' }).getByRole('checkbox')
+  const showCheckbox = page.getByRole('row', { name: '49″ 32:9 47″ x 13″ 5,120 x 1,440' }).getByRole('checkbox')
 
   // Check if panel is visible
   await expect(showCheckbox).toBeChecked()
