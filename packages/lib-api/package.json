@@ -29,10 +29,10 @@
   },
   "dependencies": {
     "@faker-js/faker": "^9.9.0",
-    "@tanstack/react-query": "catalog:",
+    "@tanstack/react-query": "catalog:tanstack",
     "axios": "^1.7.9",
     "graphql": "^16.11.0",
-    "msw": "catalog:",
+    "msw": "catalog:utils",
     "uuid": "^11.1.0"
   },
   "peerDependencies": {
@@ -66,12 +66,12 @@
     "eslint-plugin-storybook": "catalog:eslint",
     "globals": "catalog:eslint",
     "jsdom": "^26.1.0",
-    "orval": "catalog:",
+    "orval": "catalog:utils",
     "prettier": "catalog:prettier",
     "prettier-plugin-organize-imports": "^4.1.0",
     "react": "catalog:react19",
     "react-dom": "catalog:react19",
-    "typescript": "catalog:",
+    "typescript": "catalog:typescript",
     "typescript-eslint": "catalog:eslint",
     "vite": "catalog:vite",
     "vite-tsconfig-paths": "catalog:vite",

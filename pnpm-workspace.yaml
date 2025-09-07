@@ -3,23 +3,20 @@ packages:
   - packages/*
   - docs/*
 
-catalog:
-  "@hookform/resolvers": ^3.9.1
-  "@redocly/cli": ^1.34.4
-  "@tanstack/react-query": ^5.67.3
-  "@tanstack/react-router": ^1.131.28
-  "@tanstack/router-plugin": ^1.131.28
-  concurrently: ^9.2.0
-  lint-staged: ^16.1.5
-  lucide-react: ^0.536.0
-  msw: ^2.11.1
-  orval: ^7.11.2
-  react-hook-form: ^7.62.0
-  ts-pattern: ^5.8.0
-  typescript: ~5.8.3
-  yup: ^1.4.0
-
 catalogs:
+  utils:
+    "@redocly/cli": ^1.34.4
+    concurrently: ^9.2.1
+    lint-staged: ^16.1.6
+    msw: ^2.11.1
+    orval: ^7.11.2
+  tanstack:
+    "@tanstack/react-query": ^5.67.3
+    "@tanstack/react-router": ^1.131.28
+    "@tanstack/router-plugin": ^1.131.28
+  typescript:
+    typescript: ~5.8.3
+    ts-pattern: ^5.8.0
   eslint:
     "@eslint/js": ^9.33.0
     "@tanstack/eslint-plugin-query": ^5.83.1
@@ -37,16 +34,15 @@ catalogs:
     prettier: ^3.6.2
     prettier-plugin-organize-imports: ^4.2.0
     prettier-plugin-tailwindcss: ^0.6.14
-  react18:
-    "@types/react": ^18.3.17
-    "@types/react-dom": ^18.3.5
-    react: ^18.3.1
-    react-dom: ^18.3.1
   react19:
+    "@hookform/resolvers": ^3.9.1
     "@types/react": ^19.1.10
     "@types/react-dom": ^19.1.7
+    lucide-react: ^0.536.0
     react: ^19.1.1
     react-dom: ^19.1.1
+    react-hook-form: ^7.62.0
+    yup: ^1.4.0
   tailwindcss:
     "@tailwindcss/vite": ^4.1.12
     tailwind-merge: ^3.3.1

@@ -68,17 +68,17 @@
     "clsx": "^2.1.1",
     "cmdk": "^1.1.1",
     "date-fns": "^4.1.0",
-    "lucide-react": "catalog:",
-    "ts-pattern": "catalog:"
+    "lucide-react": "catalog:react19",
+    "ts-pattern": "catalog:typescript"
   },
   "peerDependencies": {
-    "@tanstack/react-router": "catalog:",
+    "@tanstack/react-router": "catalog:tanstack",
     "react": "catalog:react19",
     "react-dom": "catalog:react19"
   },
   "devDependencies": {
     "@eslint/js": "catalog:eslint",
-    "@hookform/resolvers": "catalog:",
+    "@hookform/resolvers": "catalog:react19",
     "@storybook/addon-coverage": "^2.0.0",
     "@storybook/addon-docs": "^9.1.1",
     "@storybook/addon-themes": "^9.1.1",
@@ -94,7 +94,7 @@
     "@vitejs/plugin-react": "catalog:vite",
     "@vitest/coverage-istanbul": "catalog:vite",
     "@vitest/ui": "catalog:vite",
-    "concurrently": "catalog:",
+    "concurrently": "catalog:utils",
     "eslint": "catalog:eslint",
     "eslint-config-prettier": "catalog:eslint",
     "eslint-plugin-import": "catalog:eslint",
@@ -110,19 +110,19 @@
     "prettier-plugin-tailwindcss": "catalog:prettier",
     "react": "catalog:react19",
     "react-dom": "catalog:react19",
-    "react-hook-form": "catalog:",
+    "react-hook-form": "catalog:react19",
     "storybook": "^9.1.4",
     "storybook-addon-pseudo-states": "^9.1.1",
     "tailwind-merge": "catalog:tailwindcss",
     "tailwindcss": "catalog:tailwindcss",
     "tw-animate-css": "catalog:tailwindcss",
-    "typescript": "catalog:",
+    "typescript": "catalog:typescript",
     "typescript-eslint": "catalog:eslint",
     "vite": "catalog:vite",
     "vite-tsconfig-paths": "catalog:vite",
     "vitest": "catalog:vite",
     "vitest-location-mock": "catalog:unittesting",
     "wait-on": "^7.2.0",
-    "yup": "catalog:"
+    "yup": "catalog:react19"
   }
 }

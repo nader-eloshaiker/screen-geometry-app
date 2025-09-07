@@ -6,7 +6,7 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "packageManager": "pnpm@10.14.0",
+  "packageManager": "pnpm@10.15.1",
   "engines": {
     "node": ">=22.11.0"
   },
@@ -43,11 +43,11 @@
     "@commitlint/config-conventional": "^19.8.1",
     "@commitlint/format": "^19.8.1",
     "@commitlint/types": "^19.8.1",
-    "concurrently": "catalog:",
+    "concurrently": "catalog:utils",
     "conventional-changelog-atom": "^5.0.0",
     "husky": "^9.1.7",
     "jsonfile": "^6.2.0",
-    "lint-staged": "catalog:",
+    "lint-staged": "catalog:utils",
     "vitest": "catalog:vite"
   }
 }
