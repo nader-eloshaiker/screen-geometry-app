@@ -179,17 +179,26 @@ export const ScreenTable = ({
                 </div>
               </TableCell>
               <TableCell className='text-center'>
-                <FormattedNumber value={screen.data.diagonalSize} />
-                &quot;
+                <FormattedNumber value={screen.data.diagonalSize} style='unit' unit='inch' unitDisplay='narrow' />
               </TableCell>
               <TableCell className='text-center'>
                 <FormattedNumber value={screen.specs.hAspectRatio} />:
                 <FormattedNumber value={screen.specs.vAspectRatio} />
               </TableCell>
               <TableCell className='hidden text-center sm:table-cell'>
-                <FormattedNumber value={Math.round((screen.specs.hSize * 100) / 100)} />
-                &quot; x <FormattedNumber value={Math.round((screen.specs.vSize * 100) / 100)} />
-                &quot;
+                <FormattedNumber
+                  value={Math.round((screen.specs.hSize * 100) / 100)}
+                  style='unit'
+                  unit='inch'
+                  unitDisplay='narrow'
+                />{' '}
+                x{' '}
+                <FormattedNumber
+                  value={Math.round((screen.specs.vSize * 100) / 100)}
+                  style='unit'
+                  unit='inch'
+                  unitDisplay='narrow'
+                />
               </TableCell>
               <TableCell className='hidden text-center md:table-cell'>
                 <FormattedNumber value={screen.data.hRes} /> x <FormattedNumber value={screen.data.vRes} />
