@@ -102,7 +102,7 @@
     "eslint-plugin-react": "catalog:eslint",
     "eslint-plugin-react-hooks": "catalog:eslint",
     "eslint-plugin-react-refresh": "catalog:eslint",
-    "eslint-plugin-storybook": "^9.1.4",
+    "eslint-plugin-storybook": "catalog:eslint",
     "globals": "catalog:eslint",
     "jsdom": "^26.1.0",
     "prettier": "catalog:prettier",
