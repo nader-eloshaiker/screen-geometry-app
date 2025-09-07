@@ -110,5 +110,7 @@
   "screens.table.show": "إظهار",
   "screens.table.size": "الحجم",
   "screens.theme.darkLabel": "الوضع الداكن",
-  "screens.theme.lightLabel": "الوضع الفاتح"
+  "screens.theme.lightLabel": "الوضع الفاتح",
+  "translations.selector.placeholder": "البحث عن ترجمة...",
+  "translations.selector.nomatching": "لم يتم العثور على ترجمات مطابقة"
 }

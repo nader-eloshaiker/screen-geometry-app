@@ -1,9 +1,10 @@
 import { createContext } from 'react'
 
 export type Country = {
+  searchTags: string
   locale: string
-  countryCode: string
-  languageCode: string
+  code: string
+  language: Language
   name: string
   native: string
   emoji: string
@@ -19,13 +20,13 @@ export type Language = {
 export type LanguageList = Array<Language>
 
 export type EnvCountry = {
-  countriesList: CountryDictionary | undefined
+  countriesDict: CountryDictionary | undefined
   languageList: LanguageList | undefined
   supportedLocaleCodes: Array<string> | undefined
 }
 
 export const EnvCountryContext = createContext<EnvCountry>({
-  countriesList: undefined,
+  countriesDict: undefined,
   languageList: undefined,
   supportedLocaleCodes: undefined,
 })

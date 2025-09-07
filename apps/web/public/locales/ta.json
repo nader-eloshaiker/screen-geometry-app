@@ -110,5 +110,7 @@
   "screens.table.show": "காட்டு",
   "screens.table.size": "அளவு",
   "screens.theme.darkLabel": "அடர் முறை",
-  "screens.theme.lightLabel": "ஒளி முறை"
+  "screens.theme.lightLabel": "ஒளி முறை",
+  "translations.selector.placeholder": "மொழிபெயர்ப்பைத் தேடு...",
+  "translations.selector.nomatching": "பொருந்தும் மொழிபெயர்ப்புகள் எதுவும் காணப்படவில்லை"
 }

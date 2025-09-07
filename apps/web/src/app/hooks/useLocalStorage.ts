@@ -1,18 +1,18 @@
 import { useEffect, useState } from 'react'
 
-export const getLocalStorage = <T = string>(key: string, initialValue?: T): T | null => {
+export const getLocalStorage = <T = string>(key: string, initialValue?: T) => {
   try {
     const value = window.localStorage.getItem(key)
 
-    if (!value && initialValue) {
-      window.localStorage.setItem(key, JSON.stringify(initialValue))
-      return initialValue
-    }
+    // if (!value && initialValue) {
+    //   window.localStorage.setItem(key, JSON.stringify(initialValue))
+    //   return initialValue
+    // }
 
-    return value ? (JSON.parse(value) as T) : null
+    return value ? (JSON.parse(value) as T) : initialValue
   } catch (error) {
     console.log(error)
-    return initialValue ?? null
+    return initialValue
   }
 }
 

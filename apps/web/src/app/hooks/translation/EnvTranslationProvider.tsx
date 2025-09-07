@@ -36,6 +36,8 @@ export const EnvTranslationProvider = ({
   useEffect(() => {
     if (isTranslationsFetched) {
       setComponentLoading({ action: 'idle', componentId: translationsReadyKey })
+    } else {
+      setComponentLoading({ action: 'loading', componentId: translationsReadyKey })
     }
   }, [setComponentLoading, isTranslationsFetched, translationsReadyKey])
 

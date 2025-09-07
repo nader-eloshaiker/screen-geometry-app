@@ -111,5 +111,7 @@
   "screens.table.show": "表示",
   "screens.table.size": "サイズ",
   "screens.theme.darkLabel": "ダークモード",
-  "screens.theme.lightLabel": "ライトモード"
+  "screens.theme.lightLabel": "ライトモード",
+  "translations.selector.placeholder": "翻訳を検索...",
+  "translations.selector.nomatching": "一致する翻訳が見つかりませんでした"
 }
