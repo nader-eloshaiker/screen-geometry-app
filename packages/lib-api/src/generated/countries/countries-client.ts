@@ -155,7 +155,7 @@ export type GetCountriesQuery = {
     name: string
     native: string
     emoji: string
-    languages: Array<{ __typename?: 'Language'; code: string }>
+    languages: Array<{ __typename?: 'Language'; code: string; name: string; native: string; rtl: boolean }>
   }>
 }
 
@@ -175,6 +175,9 @@ export const GetCountriesDocument = /*#__PURE__*/ `
     emoji
     languages {
       code
+      name
+      native
+      rtl
     }
   }
 }

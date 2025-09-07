@@ -1,6 +1,6 @@
 {
   "name": "screen-geometry-app",
-  "version": "4.1.2",
+  "version": "4.2.0",
   "private": true,
   "description": "",
   "keywords": [],
@@ -20,6 +20,7 @@
     "start:ui": "pnpm --filter '@screengeometry/web' dev",
     "start": "concurrently --group -n 'web,server' -c 'magenta,blue' 'pnpm start:ui'",
     "build": "pnpm --filter @screengeometry/web build",
+    "build-storybook": "pnpm --filter @screengeometry/lib-ui build-storybook",
     "build:prod": "pnpm --filter @screengeometry/web build:prod",
     "build:dev": "pnpm --filter @screengeometry/web build:dev",
     "lint:api": "pnpm run --filter @screengeometry/lib-api lint",
