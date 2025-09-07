@@ -24,8 +24,8 @@
   "dependencies": {
     "@screengeometry/lib-api": "workspace:*",
     "fuzzysort": "^3.1.0",
-    "msw": "catalog:",
-    "ts-pattern": "catalog:",
+    "msw": "catalog:utils",
+    "ts-pattern": "catalog:typescript",
     "ulid": "^2.4.0"
   },
   "peerDependencies": {
@@ -58,7 +58,7 @@
     "prettier-plugin-organize-imports": "catalog:prettier",
     "react": "catalog:react19",
     "react-dom": "catalog:react19",
-    "typescript": "catalog:",
+    "typescript": "catalog:typescript",
     "typescript-eslint": "catalog:eslint",
     "vite": "catalog:vite",
     "vite-tsconfig-paths": "catalog:vite",

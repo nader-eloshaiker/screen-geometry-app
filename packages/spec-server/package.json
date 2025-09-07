@@ -4,7 +4,7 @@
   "private": true,
   "description": "Server API. Screen management.",
   "devDependencies": {
-    "@redocly/cli": "catalog:"
+    "@redocly/cli": "catalog:utils"
   },
   "scripts": {
     "docs": "redocly build-docs src/index.yml",
