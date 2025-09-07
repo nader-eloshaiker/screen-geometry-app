@@ -9,8 +9,8 @@ vi.mock('@/app/hooks/theme/useTheme', () => ({
 
 // Import the mocked hook
 import { useTheme } from '@/app/hooks/theme/useTheme'
-import { renderWithUserEvents } from '@/lib/support/test/utils/RenderWithUserEvents'
-import { TestTranslationsEnvironment } from '@/lib/support/test/utils/TestTranslationsEnvironment'
+import { renderWithUserEvents } from '@/test/utils/RenderWithUserEvents'
+import { TestTranslationsEnvironment } from '@/test/utils/TestTranslationsEnvironment'
 
 describe('ThemeToggle', () => {
   const mockSetTheme = vi.fn()

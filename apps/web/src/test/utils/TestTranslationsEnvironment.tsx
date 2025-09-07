@@ -3,7 +3,7 @@ import { EnvTranslationContext } from '@/app/hooks/translation/EnvTranslationCon
 import { Translations } from '@screengeometry/lib-api/spec'
 import { useState } from 'react'
 import { IntlProvider } from 'react-intl'
-import * as messages from '../../../../../public/locales/en.json'
+import * as messages from '../../../public/locales/en.json'
 
 // vi.mock('react-intl', () => ({
 //   IntlProvider: vi.fn(({ children }) => <div data-testid='Intl-provider'>{children}</div>),

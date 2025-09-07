@@ -1,4 +1,4 @@
-import { createBrowserServiceWorker } from '@/lib/serviceworker/BrowserServiceWorker'
+import { createBrowserServiceWorker } from '@/serviceworker/BrowserServiceWorker'
 import { assetAxiosInstance, serverAxiosInstance } from '@screengeometry/lib-api/apiClient'
 import { type Config, getGetConfigResponseMock, useGetConfig } from '@screengeometry/lib-api/spec'
 import { usePageLoader } from '@screengeometry/lib-ui/pageloader'

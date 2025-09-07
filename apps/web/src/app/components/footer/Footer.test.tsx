@@ -1,4 +1,4 @@
-import { TestEnvironment } from '@/lib/support/test/utils/TestEnvironment'
+import { TestEnvironment } from '@/test/utils/TestEnvironment'
 import { render } from '@testing-library/react'
 import Footer from './Footer'
 

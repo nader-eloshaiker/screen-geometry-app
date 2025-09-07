@@ -1,4 +1,4 @@
-import { renderWithUserEvents } from '@/lib/support/test/utils/RenderWithUserEvents'
+import { renderWithUserEvents } from '@/test/utils/RenderWithUserEvents'
 import { assetAxiosInstance, serverAxiosInstance } from '@screengeometry/lib-api/apiClient'
 import * as configuration from '@screengeometry/lib-api/spec'
 import { PageLoader, PageLoaderProvider, usePageLoader } from '@screengeometry/lib-ui/pageloader'

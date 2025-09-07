@@ -1,4 +1,4 @@
-import MatchMediaMock from '@/lib/support/test/mocks/mockMatchMedia'
+import MatchMediaMock from '@/test/mocks/mockMatchMedia'
 import '@testing-library/jest-dom'
 import 'vitest-location-mock'
 import '../index.css'

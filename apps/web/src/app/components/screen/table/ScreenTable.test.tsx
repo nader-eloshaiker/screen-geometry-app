@@ -4,9 +4,9 @@ import { ScreenProvider } from '@/app/hooks/screen/ScreenProvider'
 import { EnvSessionProvider } from '@/app/hooks/session/EnvSessionProvider'
 import type { ScreenItemRender } from '@/app/models/screenItemRender'
 import { Screens } from '@/app/pages/Screens'
-import { initMSW } from '@/lib/serviceworker/NodeServiceWorker'
-import { renderWithUserEvents } from '@/lib/support/test/utils/RenderWithUserEvents'
-import { TestEnvironment } from '@/lib/support/test/utils/TestEnvironment'
+import { initMSW } from '@/serviceworker/NodeServiceWorker'
+import { renderWithUserEvents } from '@/test/utils/RenderWithUserEvents'
+import { TestEnvironment } from '@/test/utils/TestEnvironment'
 import {
   getConfigurationMock,
   getGetScreenListResponseMock,

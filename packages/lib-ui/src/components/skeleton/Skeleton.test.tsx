@@ -1,4 +1,4 @@
-import { renderWithUserEvents } from '../../lib/support/test/utils/RenderWithUserEvents'
+import { renderWithUserEvents } from '../../test/utils/RenderWithUserEvents'
 import { Skeleton } from './Skeleton'
 
 describe('#Skeleton', () => {

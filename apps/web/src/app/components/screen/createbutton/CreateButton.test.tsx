@@ -1,4 +1,4 @@
-import { TestTranslationsEnvironment } from '@/lib/support/test/utils/TestTranslationsEnvironment'
+import { TestTranslationsEnvironment } from '@/test/utils/TestTranslationsEnvironment'
 import { render } from '@testing-library/react'
 import { CreateScreenButton } from './CreateButton'
 

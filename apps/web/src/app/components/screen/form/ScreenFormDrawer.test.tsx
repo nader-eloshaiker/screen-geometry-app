@@ -2,9 +2,9 @@ import { ScreenProvider } from '@/app/hooks/screen/ScreenProvider'
 import { useScreenContext } from '@/app/hooks/screen/useScreenContext'
 import { type ScreenItemRender } from '@/app/models/screenItemRender'
 import { toScreenItemRender } from '@/app/utils'
-import { initMSW } from '@/lib/serviceworker/NodeServiceWorker'
-import { screenInputFixture } from '@/lib/support/test/fixtures/ScreenFixtures'
-import { TestEnvironment } from '@/lib/support/test/utils/TestEnvironment'
+import { initMSW } from '@/serviceworker/NodeServiceWorker'
+import { screenInputFixture } from '@/test/fixtures/ScreenFixtures'
+import { TestEnvironment } from '@/test/utils/TestEnvironment'
 import { toScreenItem } from '@screengeometry/lib-api/extended'
 import {
   getScreenListServiceMock,

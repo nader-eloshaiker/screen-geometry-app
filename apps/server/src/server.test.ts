@@ -1,5 +1,5 @@
-import { initMSW } from '@/lib/serviceworker/NodeServiceWorker'
-import { screenItemFixture } from '@/lib/support/test/fixtures/ScreenFixtures'
+import { initMSW } from '@/serviceworker/NodeServiceWorker'
+import { screenItemFixture } from '@/test/fixtures/ScreenFixtures'
 import {
   type ScreenItem,
   getScreenListServiceMock,
@@ -11,7 +11,7 @@ import { apiRoutes } from './ApiRouteSchema'
 import { StoresEnum } from './db/DbConstants'
 import { addData } from './db/IndexedDB'
 import { setupDB } from './db/IndexedDB.test'
-import { screenInput55Fixture } from './lib/test/fixtures/ScreenFixtures'
+import { screenInput55Fixture } from './test/fixtures/ScreenInputFixtures'
 
 describe('#server', () => {
   const baseUrl = 'http://fakeapi.com'
