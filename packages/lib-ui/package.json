@@ -18,6 +18,7 @@
     "./navigationlink": "./src/components/navigationlink/index.ts",
     "./pageloader": "./src/components/pageloader/index.ts",
     "./popover": "./src/components/popover/index.ts",
+    "./pagination": "./src/components/pagination/index.ts",
     "./select": "./src/components/select/index.ts",
     "./separator": "./src/components/separator/index.ts",
     "./sheet": "./src/components/sheet/index.ts",
