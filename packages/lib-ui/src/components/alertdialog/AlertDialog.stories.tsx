@@ -43,7 +43,7 @@ const meta = {
     // More on how to position stories at: https://storybook.js.org/docs/configure/story-layout
     layout: 'centered',
   },
-  title: 'Elements/Alert Dialog',
+  title: 'Elements/AlertDialog',
 } satisfies Meta<typeof AlertDialogDemo>
 
 export default meta
