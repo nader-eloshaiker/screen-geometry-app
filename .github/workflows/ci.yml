@@ -85,7 +85,7 @@ jobs:
         run: pnpm install --frozen-lockfile
 
       - name: Run pnpm report
-        run: pnpm run --filter @screengeometry/lib-ui  sb:build
+        run: pnpm run --filter @screengeometry/lib-ui  build-storybook
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
