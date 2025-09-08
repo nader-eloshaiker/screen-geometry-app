@@ -31,5 +31,6 @@ jobs:
           projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
           autoAcceptChanges: "main"
           buildCommand: "build:sb"
-          storybookBuildDir: storybook-static
-          workingDir: ./packages/lib-ui
+          outputDir: "storybook-static"
+          storybookBuildDir: "storybook-static"
+          workingDir: "./packages/lib-ui"
