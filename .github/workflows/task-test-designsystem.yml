@@ -31,5 +31,9 @@ jobs:
         with:
           # ⚠️ Make sure to configure a `CHROMATIC_PROJECT_TOKEN` repository secret
           projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
-          autoAcceptChanges: "main"
+          token: ${{ secrets.GITHUB_TOKEN }}
           workingDir: "./packages/lib-ui"
+          autoAcceptChanges: "main" # 👈 Option to accept all changes on main
+          exitOnceUploaded: true
+          onlyChanged: true # 👈 Required option to enable TurboSnap
+

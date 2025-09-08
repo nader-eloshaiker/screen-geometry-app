@@ -81,7 +81,6 @@
     "@vitejs/plugin-react": "catalog:vite",
     "@vitest/coverage-istanbul": "catalog:vite",
     "@vitest/ui": "catalog:vite",
-    "chromatic": "^13.1.4",
     "eslint": "catalog:eslint",
     "eslint-config-prettier": "catalog:eslint",
     "eslint-plugin-import": "catalog:eslint",
