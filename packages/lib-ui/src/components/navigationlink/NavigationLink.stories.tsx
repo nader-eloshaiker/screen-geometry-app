@@ -9,7 +9,7 @@ const router = createRouter({
   routeTree: rootRoute,
 })
 
-export function NavigationDemo() {
+export function NavigationStory() {
   return (
     <RouterProvider
       router={router}
@@ -46,13 +46,13 @@ export function NavigationDemo() {
 const meta = {
   // tags: ['autodocs'],
   argTypes: {},
-  component: NavigationDemo,
+  component: NavigationStory,
   parameters: {
     // More on how to position stories at: https://storybook.js.org/docs/configure/story-layout
     layout: 'centered',
   },
   title: 'Elements/NavigationLink',
-} satisfies Meta<typeof NavigationDemo>
+} satisfies Meta<typeof NavigationStory>
 
 export default meta
 type Story = StoryObj<typeof meta>
@@ -60,5 +60,5 @@ type Story = StoryObj<typeof meta>
 export const Component: Story = {
   args: {},
   parameters: {},
-  render: () => <NavigationDemo />,
+  render: () => <NavigationStory />,
 }
