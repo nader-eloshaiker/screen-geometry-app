@@ -9,7 +9,7 @@ const router = createRouter({
   routeTree: rootRoute,
 })
 
-export function NavigationStory() {
+function NavigationStory() {
   return (
     <RouterProvider
       router={router}
@@ -60,5 +60,4 @@ type Story = StoryObj<typeof meta>
 export const Component: Story = {
   args: {},
   parameters: {},
-  render: () => <NavigationStory />,
 }

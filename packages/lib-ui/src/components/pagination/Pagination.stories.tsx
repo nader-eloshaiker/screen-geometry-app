@@ -9,7 +9,7 @@ import {
   PaginationPrevious,
 } from './Pagination'
 
-export function PaginationStory() {
+function PaginationStory() {
   return (
     <Pagination>
       <PaginationContent>
@@ -55,5 +55,4 @@ type Story = StoryObj<typeof meta>
 export const Component: Story = {
   args: {},
   parameters: {},
-  render: () => <PaginationStory />,
 }
