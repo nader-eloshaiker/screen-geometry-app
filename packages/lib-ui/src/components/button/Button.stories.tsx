@@ -32,7 +32,7 @@ export const Palette: Story = {
     <StateTable<TButtonPalette>
       caption='Palettes'
       defaultProps='primary'
-      props={['primary', 'secondary', 'mono', 'danger', 'warning', 'success']}
+      props={['primary', 'secondary', 'navigation', 'mono', 'danger', 'warning', 'success']}
       states={['normal', 'hover', 'focus', 'active', 'disabled']}
       getComponent={(prop, state) => (
         <Button id={state} palette={prop} active={state === 'active'} disabled={state === 'disabled'}>
@@ -40,7 +40,9 @@ export const Palette: Story = {
           <ThumbsUp />
         </Button>
       )}
-      getRowClassName={(prop) => (prop === 'secondary' ? 'bg-primary text-primary-foreground' : '')}
+      getRowClassName={(prop) =>
+        prop === 'secondary' || prop === 'navigation' ? 'bg-primary text-primary-foreground' : ''
+      }
     />
   ),
 }

@@ -16,7 +16,7 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
-const RenderComponent = ({
+const SelectStory = ({
   id,
   palette,
   disabled,
@@ -48,7 +48,7 @@ const RenderComponent = ({
 export const Component: Story = {
   args: {},
   render: () => {
-    return <RenderComponent />
+    return <SelectStory />
   },
 }
 
@@ -60,7 +60,7 @@ export const Palette: Story = {
       defaultProps='primary'
       props={['primary', 'secondary', 'mono']}
       states={['normal', 'hover', 'focus', 'active', 'disabled']}
-      getComponent={(prop, state) => <RenderComponent id={state} palette={prop} disabled={state === 'disabled'} />}
+      getComponent={(prop, state) => <SelectStory id={state} palette={prop} disabled={state === 'disabled'} />}
       getRowClassName={(prop) => (prop === 'secondary' ? 'bg-primary text-primary-foreground' : '')}
     />
   ),

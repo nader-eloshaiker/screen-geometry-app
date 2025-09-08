@@ -89,7 +89,7 @@ describe('#HeaderNavLarge', () => {
 
     links.forEach((link) => {
       expect(link).toHaveAttribute('data-mode', 'ghost')
-      expect(link).toHaveAttribute('data-palette', 'secondary')
+      expect(link).toHaveAttribute('data-palette', 'navigation')
       expect(link).toHaveClass('group', 'w-24', 'text-base', 'font-semibold')
     })
   })
