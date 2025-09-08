@@ -14,6 +14,7 @@ export const ButtonVariants = cva(
         mono: 'focus-visible:outline-mono-ring',
         primary: 'focus-visible:outline-primary-ring',
         secondary: 'focus-visible:outline-secondary-ring',
+        navigation: 'focus-visible:outline-navigation-ring',
         success: 'focus-visible:outline-success-ring',
         warning: 'focus-visible:outline-warning-ring',
       },
@@ -75,6 +76,27 @@ export const ButtonVariants = cva(
         className: 'text-secondary-label [&_svg]:text-secondary-label',
         mode: ['outline', 'ghost', 'link'],
         palette: 'secondary',
+      },
+      {
+        className: 'bg-navigation text-navigation-foreground [&_svg]:text-navigation-foreground',
+        mode: 'button',
+        palette: 'navigation',
+      },
+      {
+        className: 'border-navigation-input data-[active=true]:border-navigation-active hocus:border-navigation-hover',
+        mode: 'outline',
+        palette: 'navigation',
+      },
+      {
+        className:
+          'data-[active=true]:bg-navigation-active data-[active=true]:text-navigation-foreground-active hocus:bg-navigation-hover hocus:text-navigation-foreground-hover hocus:[&_svg]:text-navigation-foreground-hover data-[active=true]:[&_svg]:text-navigation-foreground-active',
+        mode: ['button', 'outline', 'ghost'],
+        palette: 'navigation',
+      },
+      {
+        className: 'text-navigation-label [&_svg]:text-navigation-label',
+        mode: ['outline', 'ghost', 'link'],
+        palette: 'navigation',
       },
       {
         className: 'bg-mono text-mono-foreground [&_svg]:text-primary-mono-foreground',
