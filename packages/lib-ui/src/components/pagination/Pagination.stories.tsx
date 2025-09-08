@@ -46,7 +46,7 @@ const meta = {
     // More on how to position stories at: https://storybook.js.org/docs/configure/story-layout
     layout: 'centered',
   },
-  title: 'Elements/Popover',
+  title: 'Elements/Pagination',
 } satisfies Meta<typeof PaginationDemo>
 
 export default meta
