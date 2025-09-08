@@ -96,6 +96,7 @@
     "@vitejs/plugin-react": "catalog:vite",
     "@vitest/coverage-istanbul": "catalog:vite",
     "@vitest/ui": "catalog:vite",
+    "chromatic": "catalog:utils",
     "concurrently": "catalog:utils",
     "eslint": "catalog:eslint",
     "eslint-config-prettier": "catalog:eslint",
