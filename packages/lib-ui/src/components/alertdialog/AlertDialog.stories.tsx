@@ -12,7 +12,7 @@ import {
   AlertDialogTrigger,
 } from './AlertDialog'
 
-export function AlertDialogDemo() {
+function AlertDialogDemo() {
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild>
