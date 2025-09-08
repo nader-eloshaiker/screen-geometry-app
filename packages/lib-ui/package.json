@@ -34,7 +34,7 @@
     "pre-push": "pnpm test:ci",
     "dev": "vite",
     "build": "tsc --project ./tsconfig-build.json && vite build",
-    "build:sb": "storybook build",
+    "build-storybook": "storybook build",
     "preview": "vite preview",
     "lint": "eslint",
     "lint:fix": "eslint --fix",

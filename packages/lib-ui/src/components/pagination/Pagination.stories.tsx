@@ -9,7 +9,7 @@ import {
   PaginationPrevious,
 } from './Pagination'
 
-export function PaginationDemo() {
+export function PaginationStory() {
   return (
     <Pagination>
       <PaginationContent>
@@ -41,13 +41,13 @@ export function PaginationDemo() {
 const meta = {
   // tags: ['autodocs'],
   argTypes: {},
-  component: PaginationDemo,
+  component: PaginationStory,
   parameters: {
     // More on how to position stories at: https://storybook.js.org/docs/configure/story-layout
     layout: 'centered',
   },
   title: 'Elements/Pagination',
-} satisfies Meta<typeof PaginationDemo>
+} satisfies Meta<typeof PaginationStory>
 
 export default meta
 type Story = StoryObj<typeof meta>
@@ -55,5 +55,5 @@ type Story = StoryObj<typeof meta>
 export const Component: Story = {
   args: {},
   parameters: {},
-  render: () => <PaginationDemo />,
+  render: () => <PaginationStory />,
 }
