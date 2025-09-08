@@ -1,5 +1,21 @@
 # Changelog
 
+## [4.3.0](https://github.com/nader-eloshaiker/screen-geometry-app/compare/v4.2.0...v4.3.0) (2025-09-08)
+
+
+### Features
+
+* **web:** uplift switch ([#576](https://github.com/nader-eloshaiker/screen-geometry-app/issues/576)) ([3b14a58](https://github.com/nader-eloshaiker/screen-geometry-app/commit/3b14a58f2d5820df952129d976bae759c601b7bc))
+
+
+### Bug Fixes
+
+* **app:** table translations ([#581](https://github.com/nader-eloshaiker/screen-geometry-app/issues/581)) ([a2fbb41](https://github.com/nader-eloshaiker/screen-geometry-app/commit/a2fbb4199ccd34e4cbfde071a77591516979434e))
+* **ops:** build command for chromatic ([#582](https://github.com/nader-eloshaiker/screen-geometry-app/issues/582)) ([faa74bd](https://github.com/nader-eloshaiker/screen-geometry-app/commit/faa74bd3e3874a6bcace0702e39b485e56629fad))
+* **ops:** use pnpm install  --no-frozen-lockfile ([9942ec7](https://github.com/nader-eloshaiker/screen-geometry-app/commit/9942ec74390edc412ff76c4d6f67de68f3e74d6c))
+* **ui:** small change in ui to trigger chromatic ([#584](https://github.com/nader-eloshaiker/screen-geometry-app/issues/584)) ([fb3291d](https://github.com/nader-eloshaiker/screen-geometry-app/commit/fb3291d8870c8bd6ef07fc04ac7099faa1c72c1c))
+* **ui:** validate chromatic by add more components to storybook ([#583](https://github.com/nader-eloshaiker/screen-geometry-app/issues/583)) ([e76c433](https://github.com/nader-eloshaiker/screen-geometry-app/commit/e76c4332670b686e6daba646fff5a28bdfdfec0b))
+
 ## [4.2.0](https://github.com/nader-eloshaiker/screen-geometry-app/compare/v4.1.2...v4.2.0) (2025-09-05)
 
 
