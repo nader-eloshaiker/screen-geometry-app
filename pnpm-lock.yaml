@@ -273,8 +273,8 @@ importers:
         specifier: catalog:eslint
         version: 0.4.20(eslint@9.33.0(jiti@2.5.1))
       fake-indexeddb:
-        specifier: ^6.1.0
-        version: 6.1.0
+        specifier: ^6.2.2
+        version: 6.2.2
       globals:
         specifier: catalog:eslint
         version: 16.3.0
@@ -5208,8 +5208,8 @@ packages:
     resolution: {integrity: sha512-2Zks0hf1VLFYI1kbh0I5jP3KHHyCHpkfyHBzsSXRFgl/Bg9mWYfMW8oD+PdMPlEwy5HNsR9JutYy6pMeOh61nw==}
     engines: {node: ^14.15.0 || ^16.10.0 || >=18.0.0}
 
-  fake-indexeddb@6.1.0:
-    resolution: {integrity: sha512-gOzajWIhEug/CQHUIxigKT9Zilh5/I6WvUBez6/UdUtT/YVEHM9r572Os8wfvhp7TkmgBtRNdqSM7YoCXWMzZg==}
+  fake-indexeddb@6.2.2:
+    resolution: {integrity: sha512-SGbf7fzjeHz3+12NO1dYigcYn4ivviaeULV5yY5rdGihBvvgwMds4r4UBbNIUMwkze57KTDm32rq3j1Az8mzEw==}
     engines: {node: '>=18'}
 
   fast-deep-equal@3.1.3:
@@ -13818,7 +13818,7 @@ snapshots:
       jest-message-util: 29.7.0
       jest-util: 29.7.0
 
-  fake-indexeddb@6.1.0: {}
+  fake-indexeddb@6.2.2: {}
 
   fast-deep-equal@3.1.3: {}
 
