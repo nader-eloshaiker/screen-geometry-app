@@ -34,7 +34,7 @@ const meta = {
     // More on how to position stories at: https://storybook.js.org/docs/configure/story-layout
     layout: 'centered',
   },
-  title: 'Elements/Toggle Group',
+  title: 'Elements/ToggleGroup',
 } satisfies Meta<typeof ToggleGroup>
 
 export default meta
