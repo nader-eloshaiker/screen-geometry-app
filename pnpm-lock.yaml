@@ -454,8 +454,8 @@ importers:
         specifier: catalog:vite
         version: 3.2.4(vitest@3.2.4)
       chromatic:
-        specifier: ^11.20.2
-        version: 11.29.0
+        specifier: ^13.1.4
+        version: 13.1.4
       eslint:
         specifier: catalog:eslint
         version: 9.33.0(jiti@2.5.1)
@@ -854,6 +854,9 @@ importers:
       '@vitest/ui':
         specifier: catalog:vite
         version: 3.2.4(vitest@3.2.4)
+      chromatic:
+        specifier: ^13.1.4
+        version: 13.1.4
       concurrently:
         specifier: catalog:utils
         version: 9.2.1
@@ -4306,8 +4309,8 @@ packages:
     resolution: {integrity: sha512-+IxzY9BZOQd/XuYPRmrvEVjF/nqj5kgT4kEq7VofrDoM1MxoRjEWkrCC3EtLi59TVawxTAn+orJwFQcrqEN1+g==}
     engines: {node: '>=18'}
 
-  chromatic@11.29.0:
-    resolution: {integrity: sha512-yisBlntp9hHVj19lIQdpTlcYIXuU9H/DbFuu6tyWHmj6hWT2EtukCCcxYXL78XdQt1vm2GfIrtgtKpj/Rzmo4A==}
+  chromatic@13.1.4:
+    resolution: {integrity: sha512-6Voxdy2OvSyoA7mJjyiFiWii7d8ng0jBcW97TqL+ptlAWrJhIf10jrJ78KLPDUNOBIPxvx9Vcpe/bUwoLFIG5g==}
     hasBin: true
     peerDependencies:
       '@chromatic-com/cypress': ^0.*.* || ^1.0.0
@@ -12852,7 +12855,7 @@ snapshots:
 
   chownr@3.0.0: {}
 
-  chromatic@11.29.0: {}
+  chromatic@13.1.4: {}
 
   ci-info@3.9.0: {}
 
