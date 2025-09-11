@@ -43,7 +43,7 @@
     "@0no-co/graphqlsp": "^1.15.0",
     "@eslint/js": "catalog:eslint",
     "@graphql-codegen/cli": "^5.0.7",
-    "@graphql-codegen/schema-ast": "^4.1.0",
+    "@graphql-codegen/schema-ast": "^5.0.0",
     "@graphql-codegen/typescript-msw": "^3.0.1",
     "@graphql-codegen/typescript-react-query": "^6.1.1",
     "@tanstack/eslint-plugin-query": "catalog:eslint",
