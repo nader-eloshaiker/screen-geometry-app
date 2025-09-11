@@ -1,5 +1,5 @@
+import { AppRouterProvider } from '@/app/router/AppRouterProvider'
 import { QueryProvider } from '@/app/stores/query/QueryProvider'
-import { AppRouterProvider } from '@/app/stores/router/AppRouterProvider'
 import { ScreenProvider } from '@/app/stores/screen/ScreenProvider'
 import { ThemeProvider } from '@/app/stores/theme/ThemeProvider'
 import { PageLoader, PageLoaderProvider, usePageLoader } from '@screengeometry/lib-ui/pageloader'
