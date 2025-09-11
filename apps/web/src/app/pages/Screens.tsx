@@ -28,7 +28,6 @@ import { keepPreviousData } from '@tanstack/react-query'
 import { Loader2 } from 'lucide-react'
 import { useCallback, useEffect, useState } from 'react'
 import ReactGA from 'react-ga4'
-import { Helmet } from 'react-helmet-async'
 import { FormattedMessage } from 'react-intl'
 
 export const Screens = () => {
@@ -137,14 +136,9 @@ export const Screens = () => {
 
   return (
     <>
-      <Helmet>
-        <title>Screen Geometry: Screens</title>
-        <meta
-          name='description'
-          content='Compare multiple monitor sizes and resolutions simultaneously. Get clear insights into size, resolution, and aspect ratio differences. Perfect for tech enthusiasts and professionals!'
-        />
-      </Helmet>
-
+      <h1 className='mb-4 text-3xl'>
+        <FormattedMessage id='screens.content.heading' defaultMessage='Screen Comparisons' />
+      </h1>
       <div className='flex flex-1 flex-col gap-10'>
         <div className='flex flex-col items-center gap-4 md:flex-row md:justify-between' ref={setRef}>
           <Label palette='primary' className='text-xl'>
