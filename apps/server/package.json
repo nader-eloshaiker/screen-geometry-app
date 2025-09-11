@@ -51,7 +51,7 @@
     "eslint-plugin-react": "catalog:eslint",
     "eslint-plugin-react-hooks": "catalog:eslint",
     "eslint-plugin-react-refresh": "catalog:eslint",
-    "fake-indexeddb": "^6.1.0",
+    "fake-indexeddb": "^6.2.2",
     "globals": "catalog:eslint",
     "jsdom": "^26.1.0",
     "prettier": "catalog:prettier",
