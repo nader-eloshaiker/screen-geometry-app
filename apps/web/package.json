@@ -40,7 +40,7 @@
     "@screengeometry/server": "workspace:*",
     "@tanstack/react-query": "catalog:tanstack",
     "@tanstack/react-router": "catalog:tanstack",
-    "axios": "^1.7.9",
+    "axios": "^1.12.0",
     "clsx": "^2.1.0",
     "framer-motion": "^11.2.10",
     "html-react-parser": "^5.2.2",
