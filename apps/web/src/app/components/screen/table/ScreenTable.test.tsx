@@ -17,7 +17,6 @@ import {
 import { Toaster } from '@screengeometry/lib-ui/toaster'
 import { waitFor } from '@testing-library/react'
 import { useState } from 'react'
-import { HelmetProvider } from 'react-helmet-async'
 import { ScreenTable } from './ScreenTable'
 
 vi.mock('@/lib/ui/hooks/useElementSize', () => ({
@@ -56,18 +55,16 @@ const TestComponent = ({
 
 const TestParentComponent = ({ initialise }: { initialise?: Array<ScreenItemRender> }) => {
   return (
-    <HelmetProvider>
-      <QueryProvider>
-        <TestEnvironment>
-          <EnvSessionProvider>
-            <ScreenProvider initialise={{ screens: initialise ?? [], query: '' }}>
-              <Screens />
-            </ScreenProvider>
-            <Toaster />
-          </EnvSessionProvider>
-        </TestEnvironment>
-      </QueryProvider>
-    </HelmetProvider>
+    <QueryProvider>
+      <TestEnvironment>
+        <EnvSessionProvider>
+          <ScreenProvider initialise={{ screens: initialise ?? [], query: '' }}>
+            <Screens />
+          </ScreenProvider>
+          <Toaster />
+        </EnvSessionProvider>
+      </TestEnvironment>
+    </QueryProvider>
   )
 }
 
