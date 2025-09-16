@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.4.0](https://github.com/nader-eloshaiker/screen-geometry-app/compare/v4.3.0...v4.4.0) (2025-09-11)
+
+
+### Features
+
+* **web:** improve seo ([#591](https://github.com/nader-eloshaiker/screen-geometry-app/issues/591)) ([baef59b](https://github.com/nader-eloshaiker/screen-geometry-app/commit/baef59b007f00873f243fc11624d091cd2282a6a))
+
 ## [4.3.0](https://github.com/nader-eloshaiker/screen-geometry-app/compare/v4.2.0...v4.3.0) (2025-09-08)
 
 

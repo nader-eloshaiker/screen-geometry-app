@@ -112,5 +112,7 @@
   "screens.theme.darkLabel": "다크 모드",
   "screens.theme.lightLabel": "라이트 모드",
   "translations.selector.placeholder": "번역 검색...",
-  "translations.selector.nomatching": "일치하는 번역을 찾을 수 없습니다"
+  "translations.selector.nomatching": "일치하는 번역을 찾을 수 없습니다",
+  "help.content.heading": "화면 지오메트리 사용에 대한 도움말",
+  "screens.content.heading": "화면 비교"
 }
