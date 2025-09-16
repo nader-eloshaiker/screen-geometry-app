@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.4.1](https://github.com/nader-eloshaiker/screen-geometry-app/compare/v4.4.0...v4.4.1) (2025-09-16)
+
+
+### Bug Fixes
+
+* **web:** update sitemap to use correct case for path ([#593](https://github.com/nader-eloshaiker/screen-geometry-app/issues/593)) ([db4b3db](https://github.com/nader-eloshaiker/screen-geometry-app/commit/db4b3db07e99bde0591429f238fa511fb0f3fb90))
+
 ## [4.4.0](https://github.com/nader-eloshaiker/screen-geometry-app/compare/v4.3.0...v4.4.0) (2025-09-11)
 
 
