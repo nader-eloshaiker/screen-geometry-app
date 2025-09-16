@@ -42,6 +42,10 @@ catalogs:
     typescript-eslint:
       specifier: ^8.39.1
       version: 8.39.1
+  node:
+    axios:
+      specifier: ^1.12.2
+      version: 1.12.2
   prettier:
     prettier:
       specifier: ^3.6.2
@@ -339,8 +343,8 @@ importers:
         specifier: catalog:tanstack
         version: 1.131.28(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       axios:
-        specifier: ^1.7.9
-        version: 1.11.0
+        specifier: catalog:node
+        version: 1.12.2
       clsx:
         specifier: ^2.1.0
         version: 2.1.1
@@ -538,8 +542,8 @@ importers:
         specifier: catalog:tanstack
         version: 5.85.0(react@19.1.1)
       axios:
-        specifier: ^1.7.9
-        version: 1.11.0
+        specifier: catalog:node
+        version: 1.12.2
       graphql:
         specifier: ^16.11.0
         version: 16.11.0
@@ -4219,8 +4223,8 @@ packages:
     resolution: {integrity: sha512-wvUjBtSGN7+7SjNpq/9M2Tg350UZD3q62IFZLbRAR1bSMlCo1ZaeW+BJ+D090e4hIIZLBcTDWe4Mh4jvUDajzQ==}
     engines: {node: '>= 0.4'}
 
-  axios@1.11.0:
-    resolution: {integrity: sha512-1Lx3WLFQWm3ooKDYZD1eXmoGO9fxYQjrycfHFC8P0sCfQVXyROp0p9PFWBehewBOdCwHc+f/b8I0fMto5eSfwA==}
+  axios@1.12.2:
+    resolution: {integrity: sha512-vMJzPewAlRyOgxV2dU0Cuz2O8zzzx9VYtbJOaBgXFeLc4IV/Eg50n4LowmehOOR61S8ZMpc2K5Sa7g6A4jfkUw==}
 
   babel-dead-code-elimination@1.0.10:
     resolution: {integrity: sha512-DV5bdJZTzZ0zn0DC24v3jD7Mnidh6xhKa4GfKCbq3sfW8kaWhDdZjP3i81geA8T33tdYqWKw4D3fVv0CwEgKVA==}
@@ -12638,7 +12642,7 @@ snapshots:
     dependencies:
       possible-typed-array-names: 1.1.0
 
-  axios@1.11.0:
+  axios@1.12.2:
     dependencies:
       follow-redirects: 1.15.11
       form-data: 4.0.4
@@ -17362,7 +17366,7 @@ snapshots:
 
   wait-on@7.2.0:
     dependencies:
-      axios: 1.11.0
+      axios: 1.12.2
       joi: 17.13.3
       lodash: 4.17.21
       minimist: 1.2.8

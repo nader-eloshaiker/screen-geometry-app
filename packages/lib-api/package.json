@@ -30,7 +30,7 @@
   "dependencies": {
     "@faker-js/faker": "^9.9.0",
     "@tanstack/react-query": "catalog:tanstack",
-    "axios": "^1.7.9",
+    "axios": "catalog:node",
     "graphql": "^16.11.0",
     "msw": "catalog:utils",
     "uuid": "^11.1.0"
