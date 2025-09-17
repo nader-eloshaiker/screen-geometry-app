@@ -41,7 +41,7 @@
     "@types/node": "^24.2.1",
     "@types/react": "catalog:react19",
     "@types/react-dom": "catalog:react19",
-    "@vitejs/plugin-react": "catalog:vite",
+    "@vitejs/plugin-react-swc": "catalog:vite",
     "@vitest/coverage-istanbul": "catalog:vite",
     "@vitest/ui": "catalog:vite",
     "eslint": "catalog:eslint",

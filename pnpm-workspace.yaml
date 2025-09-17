@@ -60,6 +60,7 @@ catalogs:
     vitest-mock-axios: ^0.1.0
   vite:
     "@vitejs/plugin-react": ^5.0.0
+    "@vitejs/plugin-react-swc": ^4.0.1
     "@vitest/coverage-istanbul": ^3.2.4
     "@vitest/ui": ^3.2.4
     vite: ^7.1.5
