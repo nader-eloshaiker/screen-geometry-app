@@ -38,7 +38,7 @@
     "@testing-library/jest-dom": "catalog:unittesting",
     "@testing-library/react": "catalog:unittesting",
     "@testing-library/user-event": "catalog:unittesting",
-    "@types/node": "^24.2.1",
+    "@types/node": "^24.5.2",
     "@types/react": "catalog:react19",
     "@types/react-dom": "catalog:react19",
     "@vitejs/plugin-react-swc": "catalog:vite",
