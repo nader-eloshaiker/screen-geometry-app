@@ -33,7 +33,7 @@
     "axios": "catalog:node",
     "graphql": "^16.11.0",
     "msw": "catalog:utils",
-    "uuid": "^11.1.0"
+    "uuid": "^13.0.0"
   },
   "peerDependencies": {
     "react": "catalog:react19",
