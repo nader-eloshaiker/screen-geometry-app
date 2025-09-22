@@ -6,7 +6,7 @@ packages:
 catalogs:
   utils:
     "@redocly/cli": ^1.34.4
-    chromatic: ^13.1.4
+    chromatic: ^13.2.0
     concurrently: ^9.2.1
     lint-staged: ^16.1.6
     msw: ^2.11.1
