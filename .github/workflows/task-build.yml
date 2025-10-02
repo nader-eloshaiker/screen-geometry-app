@@ -65,6 +65,8 @@ jobs:
           wranglerVersion: latest
           command: pages deploy dist --project-name=screengeometry
           gitHubToken: ${{ secrets.GITHUB_TOKEN }}
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
 
       - name: Print Deployment URL
         env:
