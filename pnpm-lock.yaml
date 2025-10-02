@@ -135,8 +135,8 @@ catalogs:
       specifier: ^1.34.4
       version: 1.34.5
     chromatic:
-      specifier: ^13.1.4
-      version: 13.1.4
+      specifier: ^13.2.1
+      version: 13.2.1
     concurrently:
       specifier: ^9.2.1
       version: 9.2.1
@@ -857,7 +857,7 @@ importers:
         version: 3.2.4(vitest@3.2.4)
       chromatic:
         specifier: catalog:utils
-        version: 13.1.4
+        version: 13.2.1
       concurrently:
         specifier: catalog:utils
         version: 9.2.1
@@ -4398,8 +4398,8 @@ packages:
     resolution: {integrity: sha512-+IxzY9BZOQd/XuYPRmrvEVjF/nqj5kgT4kEq7VofrDoM1MxoRjEWkrCC3EtLi59TVawxTAn+orJwFQcrqEN1+g==}
     engines: {node: '>=18'}
 
-  chromatic@13.1.4:
-    resolution: {integrity: sha512-6Voxdy2OvSyoA7mJjyiFiWii7d8ng0jBcW97TqL+ptlAWrJhIf10jrJ78KLPDUNOBIPxvx9Vcpe/bUwoLFIG5g==}
+  chromatic@13.2.1:
+    resolution: {integrity: sha512-J/b5JbwtkjXHocVgnJO1MXV1zuyFZlFEGoVEHeyNPRLqaEgGRwVXtoMJIVioeeUlavrg5OCnb//6RagS/fi5Yw==}
     hasBin: true
     peerDependencies:
       '@chromatic-com/cypress': ^0.*.* || ^1.0.0
@@ -12865,7 +12865,7 @@ snapshots:
 
   chownr@3.0.0: {}
 
-  chromatic@13.1.4: {}
+  chromatic@13.2.1: {}
 
   ci-info@3.9.0: {}
 
