@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.4.2](https://github.com/nader-eloshaiker/screen-geometry-app/compare/v4.4.1...v4.4.2) (2025-10-03)
+
+
+### Bug Fixes
+
+* **ops:** add env to wrangler deployment for ci/cd actions ([aa34c8c](https://github.com/nader-eloshaiker/screen-geometry-app/commit/aa34c8c43d1a2850444fbf86b299279f7080b701))
+
 ## [4.4.1](https://github.com/nader-eloshaiker/screen-geometry-app/compare/v4.4.0...v4.4.1) (2025-09-16)
 
 
