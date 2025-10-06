@@ -1,5 +1,5 @@
 import { type FileRouteTypes } from '@/app/routetree/routeTree.gen'
-import { Sitemap } from 'tanstack-router-sitemap'
+import { Sitemap } from './tanstack-router-sitemap'
 
 // This will become a string literal union of all your routes
 export type TRoutes = FileRouteTypes['fullPaths']
