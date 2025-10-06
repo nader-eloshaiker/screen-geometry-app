@@ -70,7 +70,7 @@ export const LanguageSwitcher = () => {
           aria-expanded={open}
           className='h-10 py-2 pl-3 pr-2 text-base [&_svg]:size-5'
         >
-          <span className='text-2xl'>{selectedCountry.emoji}</span>
+          <span className='text-3xl'>{selectedCountry.emoji}</span>
           <ChevronsUpDown />
         </Button>
       </PopoverTrigger>

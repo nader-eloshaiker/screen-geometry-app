@@ -73,7 +73,7 @@ export const ButtonVariants = cva(
         palette: 'secondary',
       },
       {
-        className: 'text-secondary-label [&_svg]:text-secondary-label',
+        className: 'text-secondary-foreground [&_svg]:text-foreground-secondary',
         mode: ['outline', 'ghost', 'link'],
         palette: 'secondary',
       },
