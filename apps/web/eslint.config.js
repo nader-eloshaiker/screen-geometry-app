@@ -30,7 +30,7 @@ export default tseslint.config(
     ],
   },
   {
-    files: ['**/*.{js,mjs,cjs,jsx,mjsx,ts,tsx,mtsx}'],
+    files: ['**/*.{js,mjs,cjs,jsx,mjsx,ts,tsx,mtsx,xml}'],
     ...reactPlugin.configs.flat.recommended,
     languageOptions: {
       ...reactPlugin.configs.flat.recommended.languageOptions,

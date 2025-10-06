@@ -6,6 +6,8 @@ import react from '@vitejs/plugin-react-swc'
 import tsconfigPaths from 'vite-tsconfig-paths'
 import { type ViteUserConfig, configDefaults, defineConfig } from 'vitest/config'
 import packageJson from '../../package.json'
+import { SiteMap } from './src/configs/sitemap'
+import { generateSitemap } from './src/configs/tanstack-router-sitemap'
 
 const isTest = process.env.NODE_ENV === 'test'
 
@@ -48,6 +50,7 @@ const Config: ViteUserConfig = {
 }
 
 const now = new Date().toString()
+
 export default defineConfig({
   base: '',
   define: {
@@ -58,6 +61,8 @@ export default defineConfig({
   plugins: [
     tsconfigPaths(),
     tailwindcss(),
+    generateSitemap(SiteMap),
+    // copySitemapToDistPlugin(),
     !isTest &&
       tanstackRouter({
         target: 'react',
