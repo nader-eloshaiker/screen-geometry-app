@@ -41,10 +41,10 @@ catalogs:
   react19:
     "@hookform/resolvers": ^3.9.1
     "@types/react": ^19.1.10
-    "@types/react-dom": ^19.1.7
+    "@types/react-dom": ^19.2.0
     lucide-react: ^0.536.0
     react: ^19.1.1
-    react-dom: ^19.1.1
+    react-dom: ^19.2.0
     react-hook-form: ^7.62.0
     yup: ^1.4.0
   tailwindcss:
