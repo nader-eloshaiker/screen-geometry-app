@@ -25,12 +25,13 @@ export default tseslint.config(
       'dist/',
       'coverage/',
       'storybook-static/',
+      'public/sitemap.xml',
       'public/mockServiceWorker.js',
       'src/app/routetree/routeTree.gen.ts',
     ],
   },
   {
-    files: ['**/*.{js,mjs,cjs,jsx,mjsx,ts,tsx,mtsx}'],
+    files: ['**/*.{js,mjs,cjs,jsx,mjsx,ts,tsx,mtsx,xml}'],
     ...reactPlugin.configs.flat.recommended,
     languageOptions: {
       ...reactPlugin.configs.flat.recommended.languageOptions,

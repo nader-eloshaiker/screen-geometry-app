@@ -1,34 +1,13 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <urlset
-      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-      xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
-            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
-<!-- created with Free Online Sitemap Generator www.xml-sitemaps.com -->
-
-
-<url>
-  <loc>https://screengeometry.com/</loc>
-  <lastmod>2024-02-13T13:43:57+10:00</lastmod>
-  <priority>1.00</priority>
-</url>
-
-<url>
-  <loc>https://screengeometry.com/screens</loc>
-  <lastmod>2024-02-12T13:39:25+10:00</lastmod>
-  <priority>0.40</priority>
-</url>
-
-<url>
-  <loc>https://screengeometry.com/help</loc>
-  <lastmod>2024-02-12T12:46:08+10:00</lastmod>
-  <priority>0.80</priority>
-</url>
-
-<url>
-  <loc>https://screengeometry.com/contact</loc>
-  <lastmod>2024-02-07T19:35:35+10:00</lastmod>
-  <priority>0.60</priority>
-</url>
-
-</urlset>
+  xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:news="http://www.google.com/schemas/sitemap-news/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml"
+  xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
+  xmlns:video="http://www.google.com/schemas/sitemap-video/1.1"
+><url><loc>https://screengeometry.com/</loc><lastmod>2025-10-06T09:54:32.751Z</lastmod><changefreq
+    >weekly</changefreq><priority>1.0</priority></url><url><loc>https://screengeometry.com/screens</loc><lastmod
+    >2025-10-06T09:54:32.751Z</lastmod><changefreq>weekly</changefreq><priority>0.4</priority></url><url><loc
+    >https://screengeometry.com/help</loc><lastmod>2025-10-06T09:54:32.751Z</lastmod><changefreq
+    >weekly</changefreq><priority>0.8</priority></url><url><loc>https://screengeometry.com/contact</loc><lastmod
+    >2025-10-06T09:54:32.751Z</lastmod><changefreq>weekly</changefreq><priority>0.6</priority></url></urlset>

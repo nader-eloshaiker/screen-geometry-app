@@ -20,6 +20,7 @@ vi.mock('@screengeometry/lib-api/apiClient', () => ({
   setAccessTokenResolver: () => Promise.resolve('accessToken'),
 }))
 
+// eslint-disable-next-line react-refresh/only-export-components
 const TestLoadingComponent = () => {
   const { isPageLoading } = usePageLoader()
 
