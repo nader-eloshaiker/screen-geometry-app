@@ -1,5 +1,17 @@
 # Changelog
 
+## [4.5.0](https://github.com/nader-eloshaiker/screen-geometry-app/compare/v4.4.1...v4.5.0) (2025-10-06)
+
+
+### Features
+
+* **web:** auto-generate sitemap ([#609](https://github.com/nader-eloshaiker/screen-geometry-app/issues/609)) ([54d07e9](https://github.com/nader-eloshaiker/screen-geometry-app/commit/54d07e9762812fc21956402bad10a00aaa2f98e5))
+
+
+### Bug Fixes
+
+* **ops:** add env to wrangler deployment for ci/cd actions ([aa34c8c](https://github.com/nader-eloshaiker/screen-geometry-app/commit/aa34c8c43d1a2850444fbf86b299279f7080b701))
+
 ## [4.4.1](https://github.com/nader-eloshaiker/screen-geometry-app/compare/v4.4.0...v4.4.1) (2025-09-16)
 
 
