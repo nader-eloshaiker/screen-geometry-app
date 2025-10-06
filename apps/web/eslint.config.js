@@ -25,6 +25,7 @@ export default tseslint.config(
       'dist/',
       'coverage/',
       'storybook-static/',
+      'public/sitemap.xml',
       'public/mockServiceWorker.js',
       'src/app/routetree/routeTree.gen.ts',
     ],

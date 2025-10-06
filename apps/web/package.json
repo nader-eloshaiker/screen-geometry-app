@@ -65,6 +65,7 @@
     "@eslint/js": "catalog:eslint",
     "@formatjs/cli": "^6.7.2",
     "@playwright/test": "^1.54.1",
+    "@prettier/plugin-xml": "catalog:prettier",
     "@tailwindcss/vite": "catalog:tailwindcss",
     "@tanstack/eslint-plugin-query": "catalog:eslint",
     "@tanstack/router-plugin": "catalog:tanstack",
