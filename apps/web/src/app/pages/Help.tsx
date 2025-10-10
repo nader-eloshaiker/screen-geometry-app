@@ -1,4 +1,4 @@
-import { CreateScreenButton } from '@/app/components/screen/createbutton/CreateButton'
+import { CreateScreenButton } from '@/app/components/createbutton/CreateButton'
 import { ScreenForm } from '@/app/components/screen/form/ScreenForm'
 import { ScreenPanel } from '@/app/components/screen/panel/ScreenPanel'
 import { ScreenTable } from '@/app/components/screen/table/ScreenTable'
@@ -217,7 +217,7 @@ export const Help = () => {
             <div className='pointer-events-none p-2'>
               <ScreenForm
                 setOpen={() => {}}
-                isEditLoading={false}
+                isFormLoading={false}
                 editId={''}
                 editScreen={undefined}
                 selectedItem={undefined}

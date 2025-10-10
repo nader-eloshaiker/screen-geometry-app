@@ -124,7 +124,7 @@ export const ScreenFormDrawer = ({ open, setOpen, mode, id: editId = '', childre
         />
 
         <ScreenForm
-          isEditLoading={isEditLoading}
+          isFormLoading={isEditLoading}
           editId={editId}
           editScreen={editScreen}
           setOpen={setOpen}

@@ -1,4 +1,5 @@
 import RefreshIcon from '@/app/assets/icons/Refresh'
+import { FormButton } from '@/app/components/formbutton/FormButton'
 import { useCreateScreenEffect } from '@/app/hooks/api/useCreateScreenEffect'
 import { useUpdateScreenEffect } from '@/app/hooks/api/useUpdateScreenEffect'
 import { DarkMode, LightMode } from '@/app/stores/theme/Theme.types'
@@ -8,8 +9,6 @@ import { type ScreenInput, type SearchItem, useCreateScreen, useUpdateScreen } f
 import { Button } from '@screengeometry/lib-ui/button'
 import { Form } from '@screengeometry/lib-ui/form'
 import { Separator } from '@screengeometry/lib-ui/separator'
-import { cn } from '@screengeometry/lib-ui/utils'
-import { Loader2 } from 'lucide-react'
 import { type Dispatch, type SetStateAction, useEffect, useState } from 'react'
 import ReactGA from 'react-ga4'
 import { type SubmitHandler, useForm } from 'react-hook-form'
@@ -21,19 +20,21 @@ import { EmptyInputValues, type FormSubmitType, ScreenFormSchema } from './Scree
 
 type Props = React.PropsWithChildren & {
   setOpen: Dispatch<SetStateAction<boolean>>
-  isEditLoading?: boolean
+  isFormLoading: boolean
   editId?: string
   editScreen?: FormSubmitType
   selectedItem: SearchItem | undefined
   setSelectedItem: Dispatch<SetStateAction<SearchItem | undefined>>
 }
 
-export const ScreenForm = ({ setOpen, editId, isEditLoading, editScreen, selectedItem, setSelectedItem }: Props) => {
+export const ScreenForm = ({ setOpen, editId, isFormLoading, editScreen, selectedItem, setSelectedItem }: Props) => {
   const { isPending: isCreateLoading, mutate: createAction, data: createData, error: createError } = useCreateScreen()
   useCreateScreenEffect(createData, createError)
 
   const { isPending: isUpdateLoading, mutate: updateAction, data: updateData, error: updateError } = useUpdateScreen()
   useUpdateScreenEffect(updateData, updateError)
+
+  const isLoading = isCreateLoading || isUpdateLoading || isFormLoading
 
   const { formatMessage } = useIntl()
 
@@ -54,6 +55,7 @@ export const ScreenForm = ({ setOpen, editId, isEditLoading, editScreen, selecte
 
   const handleClose = () => {
     setOpen(false)
+    setSelectedItem(undefined)
   }
 
   useEffect(() => {
@@ -160,7 +162,7 @@ export const ScreenForm = ({ setOpen, editId, isEditLoading, editScreen, selecte
               endAdornment='in'
               autoComplete='off'
               placeholder='27'
-              isLoading={isEditLoading}
+              isLoading={isFormLoading}
               className='shadow-lg'
             />
 
@@ -172,7 +174,7 @@ export const ScreenForm = ({ setOpen, editId, isEditLoading, editScreen, selecte
               dir='auto'
               autoComplete='off'
               placeholder='16:9'
-              isLoading={isEditLoading}
+              isLoading={isFormLoading}
               className='shadow-lg'
             />
           </div>
@@ -187,7 +189,7 @@ export const ScreenForm = ({ setOpen, editId, isEditLoading, editScreen, selecte
               endAdornment='px'
               autoComplete='off'
               placeholder='3840'
-              isLoading={isEditLoading}
+              isLoading={isFormLoading}
               className='shadow-lg'
             />
 
@@ -200,7 +202,7 @@ export const ScreenForm = ({ setOpen, editId, isEditLoading, editScreen, selecte
               endAdornment='px'
               autoComplete='off'
               placeholder='2160'
-              isLoading={isEditLoading}
+              isLoading={isFormLoading}
               className='shadow-lg'
             />
           </div>
@@ -210,7 +212,7 @@ export const ScreenForm = ({ setOpen, editId, isEditLoading, editScreen, selecte
               formKey={'lightColor'}
               title={formatMessage({ id: 'screen.form.light', defaultMessage: 'Light Color' })}
               mode={LightMode}
-              isLoading={isEditLoading}
+              isLoading={isFormLoading}
               control={control}
               className='w-full'
             />
@@ -218,7 +220,7 @@ export const ScreenForm = ({ setOpen, editId, isEditLoading, editScreen, selecte
               formKey={'darkColor'}
               title={formatMessage({ id: 'screen.form.dark', defaultMessage: 'Dark Color' })}
               mode={DarkMode}
-              isLoading={isEditLoading}
+              isLoading={isFormLoading}
               control={control}
               className='w-full'
             />
@@ -231,7 +233,7 @@ export const ScreenForm = ({ setOpen, editId, isEditLoading, editScreen, selecte
               mode='ghost'
               onMouseDown={() => setToggleAnimation(!toggleAnimation)}
               onClick={generateColorHandler}
-              disabled={isEditLoading}
+              disabled={isFormLoading}
             >
               <RefreshIcon
                 className='size-6 fill-current transition-transform duration-500'
@@ -244,40 +246,33 @@ export const ScreenForm = ({ setOpen, editId, isEditLoading, editScreen, selecte
 
           <div className='flex w-full justify-between'>
             <div className='flex gap-6'>
-              <Button
-                type='button'
-                className='shadow-lg'
-                mode='outline'
-                disabled={isCreateLoading || isUpdateLoading || isEditLoading}
-                onClick={handleClose}
-              >
+              <FormButton type='button' className='shadow-lg' mode='outline' onClick={handleClose} loading={isLoading}>
                 <FormattedMessage id='screens.form.close' defaultMessage='Close' />
-              </Button>
-              <Button
+              </FormButton>
+              <FormButton
                 type='button'
                 className='shadow-lg'
                 mode='outline'
-                disabled={isCreateLoading || isUpdateLoading || isEditLoading || !isDirty}
                 onClick={handleReset}
+                loading={isLoading}
+                disabled={!isDirty}
               >
                 <FormattedMessage id='screens.form.reset' defaultMessage='Reset' />
-              </Button>
+              </FormButton>
             </div>
-            <Button
+            <FormButton
               type='submit'
-              className={cn('shadow-lg', {
-                'pointer-events-none': isCreateLoading || isUpdateLoading,
-              })}
+              className='w-26 shadow-lg'
+              loading={isLoading}
               disabled={!isDirty}
+              showSpinner={true}
             >
-              {isCreateLoading || isUpdateLoading ? (
-                <Loader2 data-testid='busySubmitButton' className='animate-spin' />
-              ) : !editId ? (
+              {!editId ? (
                 <FormattedMessage id='screens.form.createButton' defaultMessage='Create' />
               ) : (
                 <FormattedMessage id='screens.form.updateButton' defaultMessage='Update' />
               )}
-            </Button>
+            </FormButton>
           </div>
         </div>
       </form>
