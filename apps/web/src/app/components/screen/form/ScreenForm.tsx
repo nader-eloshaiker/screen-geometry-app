@@ -4,7 +4,7 @@ import { useCreateScreenEffect } from '@/app/hooks/api/useCreateScreenEffect'
 import { useUpdateScreenEffect } from '@/app/hooks/api/useUpdateScreenEffect'
 import { DarkMode, LightMode } from '@/app/stores/theme/Theme.types'
 import { createScreenColors } from '@/app/utils'
-import { yupResolver } from '@hookform/resolvers/yup'
+import { zodResolver } from '@hookform/resolvers/zod'
 import { type ScreenInput, type SearchItem, useCreateScreen, useUpdateScreen } from '@screengeometry/lib-api/spec'
 import { Button } from '@screengeometry/lib-ui/button'
 import { Form } from '@screengeometry/lib-ui/form'
@@ -16,7 +16,7 @@ import { FormattedMessage, useIntl } from 'react-intl'
 import { ColorField } from './fields/ColorField'
 import { InputField } from './fields/InputField'
 import { FormModeTypes } from './FormMode'
-import { EmptyInputValues, type FormSubmitType, ScreenFormSchema } from './ScreenFormSchema'
+import { FormSubmitType, ScreenFormSchema } from './ScreenFormSchema'
 
 type Props = React.PropsWithChildren & {
   setOpen: Dispatch<SetStateAction<boolean>>
@@ -39,8 +39,8 @@ export const ScreenForm = ({ setOpen, editId, isFormLoading, editScreen, selecte
   const { formatMessage } = useIntl()
 
   const form = useForm<FormSubmitType>({
-    resolver: yupResolver(ScreenFormSchema),
-    defaultValues: EmptyInputValues,
+    resolver: zodResolver(ScreenFormSchema),
+    // defaultValues: EmptyInputValues,
     mode: 'onSubmit',
   })
   const {
@@ -134,7 +134,7 @@ export const ScreenForm = ({ setOpen, editId, isFormLoading, editScreen, selecte
     }
 
     setSelectedItem(undefined)
-    reset(EmptyInputValues)
+    reset()
   }
 
   useEffect(() => {
@@ -142,7 +142,7 @@ export const ScreenForm = ({ setOpen, editId, isFormLoading, editScreen, selecte
       reset(editScreen)
     } else {
       const color = createScreenColors()
-      const value = { ...EmptyInputValues, ...color }
+      const value = { ...color }
 
       reset(value)
     }

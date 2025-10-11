@@ -71,7 +71,7 @@ Although this tool was designed with the purpose of testing, it is also usefull 
   - Functional Components
 - TanStack Router
 - React-Hook-Form
-- YUP (Form Resolver)
+- Zod (Form Resolver)
 
 ### GUI
 

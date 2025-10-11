@@ -46,7 +46,7 @@ catalogs:
     react: ^19.1.1
     react-dom: ^19.1.1
     react-hook-form: ^7.62.0
-    yup: ^1.4.0
+    zod: "^4.1.12"
   tailwindcss:
     "@tailwindcss/vite": ^4.1.12
     tailwind-merge: ^3.3.1
