@@ -40,7 +40,6 @@ export const ScreenForm = ({ setOpen, editId, isFormLoading, editScreen, selecte
 
   const form = useForm<FormSubmitType>({
     resolver: zodResolver(ScreenFormSchema),
-    // defaultValues: EmptyInputValues,
     mode: 'onSubmit',
   })
   const {

@@ -84,6 +84,7 @@ Although this tool was designed with the purpose of testing, it is also usefull 
 
 - Axios
 - React-Query
+- Apollo GraphQL Client
 - Orval
   - Orval allows the developer to choose which HTTP client is to be used as the underlying framework to actually make the fetch call, in this case React-Query with AXIOS
   - Generate fixtures for api mocks to serve using MockServiceWorker (mswjs)
