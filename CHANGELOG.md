@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.6.0](https://github.com/nader-eloshaiker/screen-geometry-app/compare/v4.5.0...v4.6.0) (2025-10-12)
+
+
+### Features
+
+* **web:** creat screen form uplift ([#614](https://github.com/nader-eloshaiker/screen-geometry-app/issues/614)) ([12450dd](https://github.com/nader-eloshaiker/screen-geometry-app/commit/12450dd4e44011ca45bb9aaf872adeccd23b1218))
+
 ## [4.5.0](https://github.com/nader-eloshaiker/screen-geometry-app/compare/v4.4.1...v4.5.0) (2025-10-06)
 
 
