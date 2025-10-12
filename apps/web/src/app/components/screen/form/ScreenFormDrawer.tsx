@@ -18,7 +18,7 @@ import {
   SheetTrigger,
 } from '@screengeometry/lib-ui/sheet'
 import { keepPreviousData } from '@tanstack/react-query'
-import { type Dispatch, useEffect, useState } from 'react'
+import { type Dispatch, useCallback, useEffect, useState } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 import { FormModeTypes } from './FormMode'
 import { ScreenForm } from './ScreenForm'
@@ -69,7 +69,7 @@ export const ScreenFormDrawer = ({ open, setOpen, mode, id: editId = '', childre
 
   const isEditLoading = isEdit && isScreenLoading
   const [editScreen, setEditScreen] = useState<FormSubmitType | undefined>()
-  const [selectedItem, setSelectedItem] = useState<SearchItem>()
+  const [selectedScreen, setSelectedScreen] = useState<SearchItem>()
 
   const { formatMessage } = useIntl()
   const sheetDir = getTextDirection() === 'ltr' ? 'right' : 'left'
@@ -77,12 +77,21 @@ export const ScreenFormDrawer = ({ open, setOpen, mode, id: editId = '', childre
   useEffect(() => {
     if (screenData && editId && !isScreenLoading) {
       const inputScreen = toScreenInput(screenData.item)
-      const resetInputValues = inputScreen as FormSubmitType
-      setEditScreen(resetInputValues)
+      setEditScreen(inputScreen as FormSubmitType)
     } else if (!editId && !isScreenLoading) {
       setEditScreen(undefined)
     }
   }, [editId, isScreenLoading, screenData])
+
+  const handleCloseWindow = useCallback(() => {
+    setOpen(false)
+    setSelectedScreen(undefined)
+    setEditScreen(undefined)
+  }, [])
+
+  const handleClearPredefinedSelection = useCallback(() => {
+    setSelectedScreen(undefined)
+  }, [])
 
   return (
     <Sheet open={open} onOpenChange={setOpen}>
@@ -108,8 +117,8 @@ export const ScreenFormDrawer = ({ open, setOpen, mode, id: editId = '', childre
           </SheetDescription>
         </SheetHeader>
         <ScreenSelector
-          selectedItem={selectedItem}
-          onSelectItem={setSelectedItem}
+          selection={selectedScreen}
+          onSelection={setSelectedScreen}
           isLoading={isSearchLoading}
           items={searchData?.list}
           commandPlaceholder={formatMessage({
@@ -124,12 +133,12 @@ export const ScreenFormDrawer = ({ open, setOpen, mode, id: editId = '', childre
         />
 
         <ScreenForm
-          isEditLoading={isEditLoading}
+          isFormLoading={isEditLoading}
           editId={editId}
-          editScreen={editScreen}
-          setOpen={setOpen}
-          selectedItem={selectedItem}
-          setSelectedItem={setSelectedItem}
+          editValue={editScreen}
+          predefinedValue={selectedScreen}
+          onClose={handleCloseWindow}
+          onClearPredefinedSelection={handleClearPredefinedSelection}
         />
       </SheetContent>
     </Sheet>

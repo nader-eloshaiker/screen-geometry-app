@@ -24,8 +24,8 @@ type TProps = {
   commandPlaceholder?: string
   selectPlaceholder?: string
   isLoading: boolean
-  onSelectItem: (item: SearchItem | undefined) => void
-  selectedItem?: SearchItem | undefined
+  selection?: SearchItem | undefined
+  onSelection: Dispatch<SetStateAction<SearchItem | undefined>>
   onSearch: Dispatch<SetStateAction<string>>
 }
 
@@ -34,8 +34,8 @@ export const ScreenSelector = ({
   commandPlaceholder,
   selectPlaceholder,
   isLoading = false,
-  onSelectItem = () => {},
-  selectedItem,
+  onSelection = () => {},
+  selection,
   onSearch = () => {},
 }: TProps) => {
   const [open, setOpen] = useState(false)
@@ -67,11 +67,11 @@ export const ScreenSelector = ({
             aria-expanded={open}
             className={cn('flex w-full justify-between border-2 shadow-lg', InputVariants({ palette: 'primary' }), {
               'pointer-events-none animate-pulse': isLoading,
-              'text-primary-foreground-input': !!selectedItem,
-              'text-primary-foreground-muted': !selectedItem,
+              'text-primary-foreground-input': !!selection,
+              'text-primary-foreground-muted': !selection,
             })}
           >
-            <span>{selectedItem?.label ?? selectPlaceholder}</span>
+            <span>{selection?.label ?? selectPlaceholder}</span>
             <ChevronsUpDown />
           </Button>
         </PopoverTrigger>
@@ -89,12 +89,12 @@ export const ScreenSelector = ({
                     value={item.id}
                     style={{ width: width }}
                     onSelect={(value) => {
-                      onSelectItem(selectedItem && value === selectedItem.id ? undefined : item)
-                      setOpen(!!selectedItem && value === selectedItem.id)
+                      onSelection(selection && value === selection.id ? undefined : item)
+                      setOpen(!!selection && value === selection.id)
                     }}
                   >
                     <span>{item.decoratedLabel ? parse(item.decoratedLabel) : item.label}</span>
-                    <Check className={cn('ml-auto', selectedItem?.id === item.id ? 'opacity-100' : 'opacity-0')} />
+                    <Check className={cn('ml-auto', selection?.id === item.id ? 'opacity-100' : 'opacity-0')} />
                   </CommandItem>
                 ))}
               </CommandGroup>
