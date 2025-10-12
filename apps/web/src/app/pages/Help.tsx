@@ -220,8 +220,8 @@ export const Help = () => {
                 isFormLoading={false}
                 editId={''}
                 editScreen={undefined}
-                selectedItem={undefined}
-                setSelectedItem={() => {}}
+                predefinedScreen={undefined}
+                setPredefinedScreen={() => {}}
               />
             </div>
           </div>

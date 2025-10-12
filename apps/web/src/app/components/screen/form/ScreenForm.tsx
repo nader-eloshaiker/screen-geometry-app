@@ -5,11 +5,17 @@ import { useUpdateScreenEffect } from '@/app/hooks/api/useUpdateScreenEffect'
 import { DarkMode, LightMode } from '@/app/stores/theme/Theme.types'
 import { createScreenColors } from '@/app/utils'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { type ScreenInput, type SearchItem, useCreateScreen, useUpdateScreen } from '@screengeometry/lib-api/spec'
+import {
+  ScreenColor,
+  type ScreenInput,
+  type SearchItem,
+  useCreateScreen,
+  useUpdateScreen,
+} from '@screengeometry/lib-api/spec'
 import { Button } from '@screengeometry/lib-ui/button'
 import { Form } from '@screengeometry/lib-ui/form'
 import { Separator } from '@screengeometry/lib-ui/separator'
-import { type Dispatch, type SetStateAction, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import ReactGA from 'react-ga4'
 import { type SubmitHandler, useForm } from 'react-hook-form'
 import { FormattedMessage, useIntl } from 'react-intl'
@@ -19,15 +25,25 @@ import { FormModeTypes } from './FormMode'
 import { FormSubmitType, ScreenFormSchema } from './ScreenFormSchema'
 
 type Props = React.PropsWithChildren & {
-  setOpen: Dispatch<SetStateAction<boolean>>
   isFormLoading: boolean
   editId?: string
   editScreen?: FormSubmitType
-  selectedItem: SearchItem | undefined
-  setSelectedItem: Dispatch<SetStateAction<SearchItem | undefined>>
+  predefinedScreen: SearchItem | undefined
+  onClose: () => void
+  onClearPredefinedSelection: () => void
 }
 
-export const ScreenForm = ({ setOpen, editId, isFormLoading, editScreen, selectedItem, setSelectedItem }: Props) => {
+export const ScreenForm = ({
+  editId,
+  isFormLoading,
+  editScreen,
+  predefinedScreen,
+  onClose,
+  onClearPredefinedSelection,
+}: Props) => {
+  const [toggleAnimation, setToggleAnimation] = useState<boolean>(false)
+  const [color] = useState<ScreenColor>(createScreenColors)
+
   const { isPending: isCreateLoading, mutate: createAction, data: createData, error: createError } = useCreateScreen()
   useCreateScreenEffect(createData, createError)
 
@@ -40,7 +56,7 @@ export const ScreenForm = ({ setOpen, editId, isFormLoading, editScreen, selecte
 
   const form = useForm<FormSubmitType>({
     resolver: zodResolver(ScreenFormSchema),
-    mode: 'onSubmit',
+    defaultValues: { ...color, diagonalSize: undefined, aspectRatio: undefined, hRes: undefined, vRes: undefined },
   })
   const {
     formState: { isDirty },
@@ -50,71 +66,40 @@ export const ScreenForm = ({ setOpen, editId, isFormLoading, editScreen, selecte
     resetField,
     control,
   } = form
-  const [toggleAnimation, setToggleAnimation] = useState<boolean>(false)
-
-  const handleClose = () => {
-    setOpen(false)
-    setSelectedItem(undefined)
-  }
 
   useEffect(() => {
-    // Gaurd Order is important
-    if (!selectedItem) {
-      reset()
-      return
+    if (predefinedScreen) {
+      setValue('aspectRatio', predefinedScreen.aspectRatio, { shouldDirty: true })
+      if (predefinedScreen.diagonalSize) {
+        setValue('diagonalSize', predefinedScreen.diagonalSize, { shouldDirty: true })
+      } else {
+        resetField('diagonalSize')
+      }
+      setValue('hRes', predefinedScreen.hRes, { shouldDirty: true })
+      setValue('vRes', predefinedScreen.vRes, { shouldDirty: true })
     }
+  }, [predefinedScreen])
 
-    setValue('aspectRatio', selectedItem.aspectRatio, {
-      shouldValidate: true,
-      shouldDirty: true,
-      shouldTouch: true,
-    })
-    if (selectedItem.diagonalSize) {
-      setValue('diagonalSize', selectedItem.diagonalSize, {
-        shouldValidate: true,
-        shouldDirty: true,
-        shouldTouch: true,
-      })
-    } else {
-      resetField('diagonalSize')
+  useEffect(() => {
+    if (editScreen) {
+      reset(editScreen)
     }
-    if (selectedItem.hRes) {
-      setValue('hRes', selectedItem.hRes, {
-        shouldValidate: true,
-        shouldDirty: true,
-        shouldTouch: true,
-      })
-    } else {
-      resetField('hRes')
-    }
-    if (selectedItem.vRes) {
-      setValue('vRes', selectedItem.vRes, {
-        shouldValidate: true,
-        shouldDirty: true,
-        shouldTouch: true,
-      })
-    } else {
-      resetField('vRes')
-    }
-    // only effect on selection change
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [selectedItem])
+  }, [editScreen])
 
   const generateColorHandler = () => {
-    const color = createScreenColors()
+    const c = createScreenColors()
 
-    setValue('darkColor', color.darkColor, {
-      shouldValidate: true,
-      shouldDirty: true,
-    })
-    setValue('lightColor', color.lightColor, {
-      shouldValidate: true,
-      shouldDirty: true,
-    })
+    setValue('darkColor', c.darkColor, { shouldDirty: true })
+    setValue('lightColor', c.lightColor, { shouldDirty: true })
+  }
+
+  const handleClose = () => {
+    onClose()
+    reset()
   }
 
   const handleReset = () => {
-    setSelectedItem(undefined)
+    onClearPredefinedSelection()
     reset()
   }
 
@@ -125,33 +110,18 @@ export const ScreenForm = ({ setOpen, editId, isFormLoading, editScreen, selecte
       label: 'Screens Page',
     })
 
-    // type casting safe due to form validation
     if (editId) {
       updateAction({ id: editId, data: form as ScreenInput }, { onSuccess: handleClose })
     } else {
       createAction({ data: form as ScreenInput }, { onSuccess: handleClose })
     }
-
-    setSelectedItem(undefined)
-    reset()
   }
-
-  useEffect(() => {
-    if (editScreen) {
-      reset(editScreen)
-    } else {
-      const color = createScreenColors()
-      const value = { ...color }
-
-      reset(value)
-    }
-  }, [editScreen, reset])
 
   return (
     <Form {...form}>
       <form method='post' onSubmit={handleSubmit(actionSubmit)}>
         <div className='flex flex-col gap-10'>
-          <div id='screenTag' className='grid grid-cols-2 gap-6'>
+          <div id='screenTag' className='grid grid-cols-2 items-start gap-6'>
             <InputField
               formKey={'diagonalSize'}
               control={control}
@@ -178,7 +148,7 @@ export const ScreenForm = ({ setOpen, editId, isFormLoading, editScreen, selecte
             />
           </div>
 
-          <div id='screenData' className='grid grid-cols-2 gap-6'>
+          <div id='screenData' className='grid grid-cols-2 items-start gap-6'>
             <InputField
               formKey={'hRes'}
               control={control}
@@ -248,6 +218,7 @@ export const ScreenForm = ({ setOpen, editId, isFormLoading, editScreen, selecte
               <FormButton type='button' className='shadow-lg' mode='outline' onClick={handleClose} loading={isLoading}>
                 <FormattedMessage id='screens.form.close' defaultMessage='Close' />
               </FormButton>
+
               <FormButton
                 type='button'
                 className='shadow-lg'
