@@ -219,8 +219,8 @@ export const Help = () => {
                 setOpen={() => {}}
                 isFormLoading={false}
                 editId={''}
-                editScreen={undefined}
-                predefinedScreen={undefined}
+                editValue={undefined}
+                predefinedValue={undefined}
                 setPredefinedScreen={() => {}}
               />
             </div>

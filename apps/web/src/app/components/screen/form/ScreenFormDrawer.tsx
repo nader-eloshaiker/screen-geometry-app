@@ -69,7 +69,7 @@ export const ScreenFormDrawer = ({ open, setOpen, mode, id: editId = '', childre
 
   const isEditLoading = isEdit && isScreenLoading
   const [editScreen, setEditScreen] = useState<FormSubmitType | undefined>()
-  const [predefinedScreen, setPredefinedScreen] = useState<SearchItem>()
+  const [selectedScreen, setSelectedScreen] = useState<SearchItem>()
 
   const { formatMessage } = useIntl()
   const sheetDir = getTextDirection() === 'ltr' ? 'right' : 'left'
@@ -85,12 +85,12 @@ export const ScreenFormDrawer = ({ open, setOpen, mode, id: editId = '', childre
 
   const handleCloseWindow = useCallback(() => {
     setOpen(false)
-    setPredefinedScreen(undefined)
+    setSelectedScreen(undefined)
     setEditScreen(undefined)
   }, [])
 
   const handleClearPredefinedSelection = useCallback(() => {
-    setPredefinedScreen(undefined)
+    setSelectedScreen(undefined)
   }, [])
 
   return (
@@ -117,8 +117,8 @@ export const ScreenFormDrawer = ({ open, setOpen, mode, id: editId = '', childre
           </SheetDescription>
         </SheetHeader>
         <ScreenSelector
-          selectedItem={predefinedScreen}
-          onSelectItem={setPredefinedScreen}
+          selection={selectedScreen}
+          onSelection={setSelectedScreen}
           isLoading={isSearchLoading}
           items={searchData?.list}
           commandPlaceholder={formatMessage({
@@ -135,8 +135,8 @@ export const ScreenFormDrawer = ({ open, setOpen, mode, id: editId = '', childre
         <ScreenForm
           isFormLoading={isEditLoading}
           editId={editId}
-          editScreen={editScreen}
-          predefinedScreen={predefinedScreen}
+          editValue={editScreen}
+          predefinedValue={selectedScreen}
           onClose={handleCloseWindow}
           onClearPredefinedSelection={handleClearPredefinedSelection}
         />

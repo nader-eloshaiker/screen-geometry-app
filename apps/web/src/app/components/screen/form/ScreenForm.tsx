@@ -27,17 +27,17 @@ import { FormSubmitType, ScreenFormSchema } from './ScreenFormSchema'
 type Props = React.PropsWithChildren & {
   isFormLoading: boolean
   editId?: string
-  editScreen?: FormSubmitType
-  predefinedScreen: SearchItem | undefined
+  editValue?: FormSubmitType
+  predefinedValue: SearchItem | undefined
   onClose: () => void
   onClearPredefinedSelection: () => void
 }
 
 export const ScreenForm = ({
-  editId,
   isFormLoading,
-  editScreen,
-  predefinedScreen,
+  editId,
+  editValue,
+  predefinedValue,
   onClose,
   onClearPredefinedSelection,
 }: Props) => {
@@ -68,23 +68,23 @@ export const ScreenForm = ({
   } = form
 
   useEffect(() => {
-    if (predefinedScreen) {
-      setValue('aspectRatio', predefinedScreen.aspectRatio, { shouldDirty: true })
-      if (predefinedScreen.diagonalSize) {
-        setValue('diagonalSize', predefinedScreen.diagonalSize, { shouldDirty: true })
+    if (predefinedValue) {
+      setValue('aspectRatio', predefinedValue.aspectRatio, { shouldDirty: true })
+      if (predefinedValue.diagonalSize) {
+        setValue('diagonalSize', predefinedValue.diagonalSize, { shouldDirty: true })
       } else {
         resetField('diagonalSize')
       }
-      setValue('hRes', predefinedScreen.hRes, { shouldDirty: true })
-      setValue('vRes', predefinedScreen.vRes, { shouldDirty: true })
+      setValue('hRes', predefinedValue.hRes, { shouldDirty: true })
+      setValue('vRes', predefinedValue.vRes, { shouldDirty: true })
     }
-  }, [predefinedScreen])
+  }, [predefinedValue])
 
   useEffect(() => {
-    if (editScreen) {
-      reset(editScreen)
+    if (editValue) {
+      reset(editValue)
     }
-  }, [editScreen])
+  }, [editValue])
 
   const generateColorHandler = () => {
     const c = createScreenColors()
