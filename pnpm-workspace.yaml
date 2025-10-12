@@ -39,14 +39,14 @@ catalogs:
     prettier-plugin-tailwindcss: ^0.6.14
     "@prettier/plugin-xml": ^3.4.2
   react19:
-    "@hookform/resolvers": ^3.9.1
+    "@hookform/resolvers": ^5.2.2
     "@types/react": ^19.1.10
     "@types/react-dom": ^19.1.7
     lucide-react: ^0.536.0
     react: ^19.1.1
     react-dom: ^19.1.1
-    react-hook-form: ^7.62.0
-    yup: ^1.4.0
+    react-hook-form: ^7.65.0
+    zod: "^4.1.12"
   tailwindcss:
     "@tailwindcss/vite": ^4.1.12
     tailwind-merge: ^3.3.1

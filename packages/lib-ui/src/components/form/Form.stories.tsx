@@ -1,8 +1,7 @@
-import { yupResolver } from '@hookform/resolvers/yup'
+import { zodResolver } from '@hookform/resolvers/zod'
 import type { Meta, StoryObj } from '@storybook/react-vite'
 import { useForm } from 'react-hook-form'
-import * as yup from 'yup'
-import { ObjectSchema } from 'yup'
+import * as z from 'zod'
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from '.'
 import { Button } from '../button'
 import { Input } from '../input'
@@ -21,28 +20,27 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof Form>
 
-const formSchema: ObjectSchema<{ username: string }> = yup.object().shape(
+const formSchema = z.object(
   {
-    username: yup
+    username: z
       .string()
       .min(2, 'Username must be at least 2 characters')
-      .max(50, 'Username must be at most 50 characters')
-      .required('User name is required'),
+      .max(50, 'Username must be at most 50 characters'),
   }
   //[[ScreenDataEnum.hRes, ScreenDataEnum.vRes]],
 )
 
 const ProfileForm = () => {
   // 1. Define your form.
-  const form = useForm<yup.InferType<typeof formSchema>>({
+  const form = useForm<z.infer<typeof formSchema>>({
     defaultValues: {
       username: '',
     },
-    resolver: yupResolver(formSchema),
+    resolver: zodResolver(formSchema),
   })
 
   // 2. Define a submit handler.
-  function onSubmit(values: yup.InferType<typeof formSchema>) {
+  function onSubmit(values: z.infer<typeof formSchema>) {
     // Do something with the form values.
     // ✅ This will be type-safe and validated.
     console.log(values)

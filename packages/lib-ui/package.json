@@ -126,6 +126,6 @@
     "vitest": "catalog:vite",
     "vitest-location-mock": "catalog:unittesting",
     "wait-on": "^7.2.0",
-    "yup": "catalog:react19"
+    "zod": "catalog:react19"
   }
 }
