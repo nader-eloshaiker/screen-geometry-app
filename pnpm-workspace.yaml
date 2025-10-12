@@ -40,8 +40,8 @@ catalogs:
     "@prettier/plugin-xml": ^3.4.2
   react19:
     "@hookform/resolvers": ^5.2.2
-    "@types/react": ^19.1.10
-    "@types/react-dom": ^19.2.0
+    "@types/react": ^19.2.2
+    "@types/react-dom": ^19.2.1
     lucide-react: ^0.536.0
     react: ^19.2.0
     react-dom: ^19.2.0
