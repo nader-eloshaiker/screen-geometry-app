@@ -43,7 +43,7 @@ catalogs:
     "@types/react": ^19.1.10
     "@types/react-dom": ^19.2.0
     lucide-react: ^0.536.0
-    react: ^19.1.1
+    react: ^19.2.0
     react-dom: ^19.2.0
     react-hook-form: ^7.65.0
     zod: "^4.1.12"
