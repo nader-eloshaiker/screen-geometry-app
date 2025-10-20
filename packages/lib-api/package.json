@@ -28,7 +28,7 @@
     "test:ui": "vitest watch --ui --coverage.enabled=true"
   },
   "dependencies": {
-    "@faker-js/faker": "^9.9.0",
+    "@faker-js/faker": "^10.1.0",
     "@tanstack/react-query": "catalog:tanstack",
     "axios": "catalog:node",
     "graphql": "^16.11.0",
