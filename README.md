@@ -1,6 +1,5 @@
 # Screen Geometry
 
-[![Validation App](https://github.com/nader-eloshaiker/screen-geometry-app/actions/workflows/validation-app.yml/badge.svg?branch=main)](https://github.com/nader-eloshaiker/screen-geometry-app/actions/workflows/validation-app.yml)
 [![CI](https://github.com/nader-eloshaiker/screen-geometry-app/actions/workflows/ci.yml/badge.svg)](https://github.com/nader-eloshaiker/screen-geometry-app/actions/workflows/ci.yml)
 [![CD](https://github.com/nader-eloshaiker/screen-geometry-app/actions/workflows/cd.yml/badge.svg)](https://github.com/nader-eloshaiker/screen-geometry-app/actions/workflows/cd.yml)
 
