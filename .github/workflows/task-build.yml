@@ -16,7 +16,7 @@ jobs:
         uses: actions/checkout@v5
 
       - name: Install pnpm
-        uses: pnpm/action-setup@v4.1.0
+        uses: pnpm/action-setup@v4.2.0
         with:
           run_install: false
 
@@ -53,25 +53,3 @@ jobs:
       - name: Show config.json
         run: |
           cat apps/web/dist/env/config.json
-
-      - name: Deploy App
-        id: deploy
-        uses: cloudflare/wrangler-action@v3
-        with:
-          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          workingDirectory: apps/web
-          packageManager: pnpm
-          wranglerVersion: latest
-          command: pages deploy dist --project-name=screengeometry
-          gitHubToken: ${{ secrets.GITHUB_TOKEN }}
-        env:
-          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-
-      - name: Print Deployment URL
-        env:
-          DEPLOYMENT_URL: ${{ steps.deploy.outputs.deployment-url }}
-          DEPLOYMENT_ALIAS_URL: ${{ steps.deploy.outputs.pages-deployment-alias-url }}
-        run: |
-          echo $DEPLOYMENT_URL
-          echo $DEPLOYMENT_ALIAS_URL

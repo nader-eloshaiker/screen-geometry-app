@@ -20,6 +20,7 @@ const Config: ViteUserConfig = {
         ...configDefaults.exclude,
         'src/generated',
         'src/extended/models',
+        'src/gql',
         'src/configs',
         'src/lib',
         'src/**/*.mock.{ts,tsx}',
