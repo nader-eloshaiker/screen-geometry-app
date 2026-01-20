@@ -1,5 +1,13 @@
 # Changelog
 
+## [4.6.1](https://github.com/nader-eloshaiker/screen-geometry-app/compare/v4.6.0...v4.6.1) (2026-01-20)
+
+
+### Bug Fixes
+
+* **app:** code coverage exclusions and validation badge ([#630](https://github.com/nader-eloshaiker/screen-geometry-app/issues/630)) ([2a949f0](https://github.com/nader-eloshaiker/screen-geometry-app/commit/2a949f09b790590a72b2af0294c57a88b5f1c08f))
+* **ops:** remove validation badge ([#632](https://github.com/nader-eloshaiker/screen-geometry-app/issues/632)) ([b1cdc58](https://github.com/nader-eloshaiker/screen-geometry-app/commit/b1cdc5896e39ca3e529c204850cddf7e758ffdad))
+
 ## [4.6.0](https://github.com/nader-eloshaiker/screen-geometry-app/compare/v4.5.0...v4.6.0) (2025-10-12)
 
 
