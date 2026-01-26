@@ -352,8 +352,8 @@ importers:
         specifier: ^2.1.0
         version: 2.1.1
       framer-motion:
-        specifier: ^11.2.10
-        version: 11.18.2(@emotion/is-prop-valid@1.2.2)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
+        specifier: ^12.23.24
+        version: 12.23.24(@emotion/is-prop-valid@1.2.2)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
       html-react-parser:
         specifier: ^5.2.2
         version: 5.2.6(@types/react@19.2.2)(react@19.2.0)
@@ -5427,8 +5427,8 @@ packages:
     resolution: {integrity: sha512-buewHzMvYL29jdeQTVILecSaZKnt/RJWjoZCF5OW60Z67/GmSLBkOFM7qh1PI3zFNtJbaZL5eQu1vLfazOwj4g==}
     engines: {node: '>=12.20.0'}
 
-  framer-motion@11.18.2:
-    resolution: {integrity: sha512-5F5Och7wrvtLVElIpclDT0CBzMVg3dL22B64aZwHtsIY8RB4mXICLrkajK4G9R+ieSAGcgrLeae2SeUTg2pr6w==}
+  framer-motion@12.23.24:
+    resolution: {integrity: sha512-HMi5HRoRCTou+3fb3h9oTLyJGBxHfW+HnNE25tAXOvVx/IvwMHK0cx7IR4a2ZU6sh3IX1Z+4ts32PcYBOqka8w==}
     peerDependencies:
       '@emotion/is-prop-valid': '*'
       react: ^18.0.0 || ^19.0.0
@@ -6704,11 +6704,11 @@ packages:
   mobx@6.13.7:
     resolution: {integrity: sha512-aChaVU/DO5aRPmk1GX8L+whocagUUpBQqoPtJk+cm7UOXUk87J4PeWCh6nNmTTIfEhiR9DI/+FnA8dln/hTK7g==}
 
-  motion-dom@11.18.1:
-    resolution: {integrity: sha512-g76KvA001z+atjfxczdRtw/RXOM3OMSdd1f4DL77qCTF/+avrRJiawSG4yDibEQ215sr9kpinSlX2pCTJ9zbhw==}
+  motion-dom@12.23.23:
+    resolution: {integrity: sha512-n5yolOs0TQQBRUFImrRfs/+6X4p3Q4n1dUEqt/H58Vx7OW6RF+foWEgmTVDhIWJIMXOuNNL0apKH2S16en9eiA==}
 
-  motion-utils@11.18.1:
-    resolution: {integrity: sha512-49Kt+HKjtbJKLtgO/LKj9Ld+6vw9BjH5d9sc40R/kVyH8GLAXgT42M2NnuPcJNuA3s9ZfZBUcwIgpmZWGEE+hA==}
+  motion-utils@12.23.6:
+    resolution: {integrity: sha512-eAWoPgr4eFEOFfg2WjIsMoqJTW6Z8MTUCgn/GZ3VRpClWBdnbjryiA3ZSNLyxCTmCQx4RmYX6jX1iWHbenUPNQ==}
 
   mrmime@2.0.1:
     resolution: {integrity: sha512-Y3wQdFg2Va6etvQ5I82yUhGdsKrcYox6p7FfL1LbK2J4V01F9TGlepTIhnK24t7koZibmg82KGglhA1XK5IsLQ==}
@@ -8035,6 +8035,9 @@ packages:
 
   tslib@2.6.2:
     resolution: {integrity: sha512-AEYxH93jGFPn/a2iVAwW87VuUIkR1FVUKB77NwMF7nBTDkDrrT/Hpt/IrCJ0QXhW27jTBDcf5ZY7w6RiqTMw2Q==}
+
+  tslib@2.6.3:
+    resolution: {integrity: sha512-xNvxJEOUiWPGhUuUdQgAJPKOOJfGnIyKySOc09XkKsgdUV/3E2zvwZYdejjmRgPCgcym1juLH3226yA7sEFJKQ==}
 
   tslib@2.8.1:
     resolution: {integrity: sha512-oJFu94HQb+KVduSUQL7wnpmqnfmLsOA/nAh6b6EH0wCEoK0/mPeXU6c3wKDV83MkOuHPRHtSXKKU99IBazS/2w==}
@@ -9588,7 +9591,7 @@ snapshots:
     dependencies:
       '@graphql-codegen/plugin-helpers': 6.0.0(graphql@16.11.0)
       graphql: 16.11.0
-      tslib: 2.6.2
+      tslib: 2.6.3
 
   '@graphql-codegen/cli@6.0.0(@types/node@24.5.2)(graphql@16.11.0)(typescript@5.9.2)':
     dependencies:
@@ -9655,7 +9658,7 @@ snapshots:
       '@graphql-tools/utils': 10.9.1(graphql@16.11.0)
       '@graphql-typed-document-node/core': 3.2.0(graphql@16.11.0)
       graphql: 16.11.0
-      tslib: 2.6.2
+      tslib: 2.6.3
     transitivePeerDependencies:
       - encoding
 
@@ -9665,7 +9668,7 @@ snapshots:
       '@graphql-tools/schema': 10.0.25(graphql@16.11.0)
       '@graphql-tools/utils': 10.9.1(graphql@16.11.0)
       graphql: 16.11.0
-      tslib: 2.6.2
+      tslib: 2.6.3
 
   '@graphql-codegen/gql-tag-operations@5.0.0(graphql@16.11.0)':
     dependencies:
@@ -9674,7 +9677,7 @@ snapshots:
       '@graphql-tools/utils': 10.9.1(graphql@16.11.0)
       auto-bind: 4.0.0
       graphql: 16.11.0
-      tslib: 2.6.2
+      tslib: 2.6.3
     transitivePeerDependencies:
       - encoding
 
@@ -9696,7 +9699,7 @@ snapshots:
       graphql: 16.11.0
       import-from: 4.0.0
       lodash: 4.17.21
-      tslib: 2.6.2
+      tslib: 2.6.3
 
   '@graphql-codegen/schema-ast@5.0.0(graphql@16.11.0)':
     dependencies:
@@ -9712,7 +9715,7 @@ snapshots:
       auto-bind: 4.0.0
       change-case-all: 1.0.15
       graphql: 16.11.0
-      tslib: 2.6.2
+      tslib: 2.6.3
     transitivePeerDependencies:
       - encoding
 
@@ -9736,7 +9739,7 @@ snapshots:
       '@graphql-codegen/visitor-plugin-common': 6.0.0(graphql@16.11.0)
       auto-bind: 4.0.0
       graphql: 16.11.0
-      tslib: 2.6.2
+      tslib: 2.6.3
     transitivePeerDependencies:
       - encoding
 
@@ -9759,7 +9762,7 @@ snapshots:
       '@graphql-codegen/visitor-plugin-common': 6.0.0(graphql@16.11.0)
       auto-bind: 4.0.0
       graphql: 16.11.0
-      tslib: 2.6.2
+      tslib: 2.6.3
     transitivePeerDependencies:
       - encoding
 
@@ -9792,7 +9795,7 @@ snapshots:
       graphql: 16.11.0
       graphql-tag: 2.12.6(graphql@16.11.0)
       parse-filepath: 1.0.2
-      tslib: 2.6.2
+      tslib: 2.6.3
     transitivePeerDependencies:
       - encoding
 
@@ -13956,10 +13959,10 @@ snapshots:
     dependencies:
       fetch-blob: 3.2.0
 
-  framer-motion@11.18.2(@emotion/is-prop-valid@1.2.2)(react-dom@19.2.0(react@19.2.0))(react@19.2.0):
+  framer-motion@12.23.24(@emotion/is-prop-valid@1.2.2)(react-dom@19.2.0(react@19.2.0))(react@19.2.0):
     dependencies:
-      motion-dom: 11.18.1
-      motion-utils: 11.18.1
+      motion-dom: 12.23.23
+      motion-utils: 12.23.6
       tslib: 2.8.1
     optionalDependencies:
       '@emotion/is-prop-valid': 1.2.2
@@ -15403,11 +15406,11 @@ snapshots:
 
   mobx@6.13.7: {}
 
-  motion-dom@11.18.1:
+  motion-dom@12.23.23:
     dependencies:
-      motion-utils: 11.18.1
+      motion-utils: 12.23.6
 
-  motion-utils@11.18.1: {}
+  motion-utils@12.23.6: {}
 
   mrmime@2.0.1: {}
 
@@ -16841,6 +16844,8 @@ snapshots:
   tslib@2.4.1: {}
 
   tslib@2.6.2: {}
+
+  tslib@2.6.3: {}
 
   tslib@2.8.1: {}
 
