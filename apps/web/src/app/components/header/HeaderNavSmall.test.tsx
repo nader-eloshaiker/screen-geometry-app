@@ -44,7 +44,7 @@ describe('HeaderNavSmall', () => {
     render(<HeaderNavSmall setOpen={mockSetOpen} />, { wrapper: TestTranslationsEnvironment })
 
     expect(screen.getByText('Home')).toBeInTheDocument()
-    expect(screen.getByText('Screens')).toBeInTheDocument()
+    expect(screen.getByText('My Screens')).toBeInTheDocument()
     expect(screen.getByText('Contact')).toBeInTheDocument()
     expect(screen.getByText('Help')).toBeInTheDocument()
   })
@@ -58,8 +58,8 @@ describe('HeaderNavSmall', () => {
     expect(homeLink).toHaveAttribute('href', '/')
 
     // Screens link
-    const screensLink = screen.getByTestId('nav-link-screens')
-    expect(screensLink).toHaveAttribute('href', '/screens')
+    const screensLink = screen.getByTestId('nav-link-myscreens')
+    expect(screensLink).toHaveAttribute('href', '/myscreens')
 
     // Contact link
     const contactLink = screen.getByTestId('nav-link-contact')
@@ -76,7 +76,7 @@ describe('HeaderNavSmall', () => {
 
     const links = [
       screen.getByTestId('nav-link-'),
-      screen.getByTestId('nav-link-screens'),
+      screen.getByTestId('nav-link-myscreens'),
       screen.getByTestId('nav-link-contact'),
       screen.getByTestId('nav-link-help'),
     ]
@@ -96,7 +96,7 @@ describe('HeaderNavSmall', () => {
     // Click each link and verify setOpen was called with false
     const links = [
       test.getByTestId('nav-link-'),
-      test.getByTestId('nav-link-screens'),
+      test.getByTestId('nav-link-myscreens'),
       test.getByTestId('nav-link-contact'),
       test.getByTestId('nav-link-help'),
     ]

@@ -51,7 +51,7 @@ describe('#HeaderNavLarge', () => {
     render(<HeaderNavLarge />, { wrapper: TestTranslationsEnvironment })
 
     expect(screen.getByText('Home')).toBeInTheDocument()
-    expect(screen.getByText('Screens')).toBeInTheDocument()
+    expect(screen.getByText('My Screens')).toBeInTheDocument()
     expect(screen.getByText('Contact')).toBeInTheDocument()
     expect(screen.getByText('Help')).toBeInTheDocument()
   })
@@ -64,8 +64,8 @@ describe('#HeaderNavLarge', () => {
     expect(homeLink).toHaveAttribute('href', '/')
 
     // Screens link
-    const screensLink = screen.getByTestId('nav-link-screens')
-    expect(screensLink).toHaveAttribute('href', '/screens')
+    const screensLink = screen.getByTestId('nav-link-myscreens')
+    expect(screensLink).toHaveAttribute('href', '/myscreens')
 
     // Contact link
     const contactLink = screen.getByTestId('nav-link-contact')
@@ -82,7 +82,7 @@ describe('#HeaderNavLarge', () => {
     // Check all links for common props
     const links = [
       screen.getByTestId('nav-link-'),
-      screen.getByTestId('nav-link-screens'),
+      screen.getByTestId('nav-link-myscreens'),
       screen.getByTestId('nav-link-contact'),
       screen.getByTestId('nav-link-help'),
     ]
@@ -90,7 +90,7 @@ describe('#HeaderNavLarge', () => {
     links.forEach((link) => {
       expect(link).toHaveAttribute('data-mode', 'ghost')
       expect(link).toHaveAttribute('data-palette', 'navigation')
-      expect(link).toHaveClass('group', 'w-24', 'text-base', 'font-semibold')
+      expect(link).toHaveClass('group', 'min-w-24', 'text-base', 'font-semibold')
     })
   })
 })
