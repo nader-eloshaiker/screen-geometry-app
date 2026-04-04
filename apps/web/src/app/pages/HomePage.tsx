@@ -1,7 +1,7 @@
 import { NavigationLink } from '@screengeometry/lib-ui/navigationlink'
 import { FormattedMessage } from 'react-intl'
 
-export const Home = () => {
+export const HomePage = () => {
   return (
     <div className='flex h-full flex-col justify-between'>
       <div>

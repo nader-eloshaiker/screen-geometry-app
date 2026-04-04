@@ -1,8 +1,8 @@
-import { CreateScreenButton } from '@/app/components/createbutton/CreateButton'
+import { CreateScreenButton } from '@/app/components/buttons/CreateButton'
 import {
-  type Alignment,
   HorizontalAlignmentSelector,
   VerticalAlignmentSelector,
+  type Alignment,
 } from '@/app/components/screen/alignment/AlignmentSelector'
 import { FormModeTypes } from '@/app/components/screen/form/FormMode'
 import { ScreenFormDrawer } from '@/app/components/screen/form/ScreenFormDrawer'
@@ -18,23 +18,26 @@ import { useElementSize } from '@/app/hooks/useElementSize'
 import type { ScreenItemRender } from '@/app/models/screenItemRender'
 import { useScreenContext } from '@/app/stores/screen/useScreenContext'
 import { getMaxScreenSize } from '@/app/utils'
-import type { Dimensions } from '@screengeometry/lib-api/extended'
+import { toShareScreenItem, type Dimensions } from '@screengeometry/lib-api/extended'
 import { useCreateScreenList, useDeleteScreen, useGetScreenList, useShowScreen } from '@screengeometry/lib-api/spec'
 import { Button } from '@screengeometry/lib-ui/button'
-import { Label } from '@screengeometry/lib-ui/label'
 import { usePageLoader } from '@screengeometry/lib-ui/pageloader'
 import { Skeleton } from '@screengeometry/lib-ui/skeleton'
 import { keepPreviousData } from '@tanstack/react-query'
+import { useNavigate } from '@tanstack/react-router'
 import { Loader2 } from 'lucide-react'
 import { useCallback, useEffect, useState } from 'react'
 import ReactGA from 'react-ga4'
 import { FormattedMessage } from 'react-intl'
+import { ShareButton } from '../components/buttons/ShareButton'
 
-export const Screens = () => {
+export const MyScreensPage = () => {
   const [setRef, { width }] = useElementSize()
   const {
     state: { screens },
   } = useScreenContext()
+  const navigate = useNavigate()
+
   const [highlighted, setHighlighted] = useState<ScreenItemRender | undefined>()
   const [maxPanelSize, setMaxPanelSize] = useState<Dimensions>({ width, height: 0 })
   const [hAlignment, setHAlignment] = useState<Alignment>('center')
@@ -98,7 +101,7 @@ export const Screens = () => {
     ReactGA.event({
       category: 'Button Click',
       action: 'Clicked edit',
-      label: 'Screens Page',
+      label: 'My Screens Page',
     })
     setIsEditorOpen(true)
     setEditMode(FormModeTypes.edit)
@@ -110,7 +113,7 @@ export const Screens = () => {
       ReactGA.event({
         category: 'Checkbox Click',
         action: 'Clicked show',
-        label: 'Screens Page',
+        label: 'My Screens Page',
       })
       showAction({ id })
     },
@@ -122,12 +125,24 @@ export const Screens = () => {
       ReactGA.event({
         category: 'Button Click',
         action: 'Clicked delete',
-        label: 'Screens Page',
+        label: 'My Screens Page',
       })
       deleteAction({ id })
     },
     [deleteAction]
   )
+
+  const onShare = useCallback(async () => {
+    ReactGA.event({
+      category: 'Button Click',
+      action: 'Clicked share',
+      label: 'My Screens Page',
+    })
+
+    const selectedScreensToShare = screens.filter((screen) => screen.visible).map((screen) => toShareScreenItem(screen))
+
+    return navigate({ to: '/share', search: { screens: selectedScreensToShare } })
+  }, [navigate, screens])
 
   useEffect(() => {
     const widestScreen = screens.length > 0 ? getMaxScreenSize(screens) : { width: 47, height: 16 }
@@ -141,17 +156,20 @@ export const Screens = () => {
       </h1>
       <div className='flex flex-1 flex-col gap-10'>
         <div className='flex flex-col items-center gap-4 md:flex-row md:justify-between' ref={setRef}>
-          <Label palette='primary' className='text-xl'>
+          <h2 className='text-primary-label text-xl'>
             <FormattedMessage id='screens.specs.title' defaultMessage='Screen Specs' />
-          </Label>
-          <ScreenFormDrawer mode={editMode} open={isEditorOpen} setOpen={setIsEditorOpen} id={editId}>
-            <CreateScreenButton
-              onClick={() => {
-                setEditId(undefined)
-                setEditMode(FormModeTypes.create)
-              }}
-            />
-          </ScreenFormDrawer>
+          </h2>
+          <div className='flex gap-4 max-[375px]:flex-col max-[375px]:justify-center'>
+            <ShareButton onClick={onShare} />
+            <ScreenFormDrawer mode={editMode} open={isEditorOpen} setOpen={setIsEditorOpen} id={editId}>
+              <CreateScreenButton
+                onClick={() => {
+                  setEditId(undefined)
+                  setEditMode(FormModeTypes.create)
+                }}
+              />
+            </ScreenFormDrawer>
+          </div>
         </div>
 
         <ScreenTable
@@ -161,12 +179,14 @@ export const Screens = () => {
           setHighLighted={setHighlighted}
           editAction={{ handler: onEdit }}
           deleteAction={{ handler: onDelete, isPending: isDeletePending, id: deleteParams?.id }}
-          showActon={{ handler: onShow, isPending: isShowPending, id: showParams?.id }}
+          showAction={{ handler: onShow, isPending: isShowPending, id: showParams?.id }}
         />
 
         {screens.length === 0 && !isLoading && (
           <div className='flex h-full flex-col items-center'>
-            <div className='text-primary-label py-4 text-xl'>No List Found</div>
+            <div className='text-primary-label py-4 text-xl'>
+              <FormattedMessage id='screens.emptytable.nolist' defaultMessage='No List Found' />
+            </div>
             <div className='flex flex-col items-center gap-2 py-6'>
               <div>
                 <FormattedMessage
@@ -187,9 +207,9 @@ export const Screens = () => {
         {(screens.length > 0 || isLoading) && (
           <>
             <div className='flex flex-col items-center gap-4 md:flex-row md:justify-between'>
-              <Label palette='primary' className='text-xl'>
-                <FormattedMessage id='screens.size.title' defaultMessage='Size and Pixel Density Comparison' />
-              </Label>
+              <h2 className='text-primary-label text-xl'>
+                <FormattedMessage id='screens.size.title' defaultMessage='Size and Pixel Density' />
+              </h2>
               <div className='flex flex-wrap gap-4'>
                 <HorizontalAlignmentSelector onChange={setHAlignment} />
                 <VerticalAlignmentSelector onChange={setVAlignment} />

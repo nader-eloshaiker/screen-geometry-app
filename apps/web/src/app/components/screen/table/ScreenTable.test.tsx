@@ -1,5 +1,5 @@
 import type { ScreenItemRender } from '@/app/models/screenItemRender'
-import { Screens } from '@/app/pages/Screens'
+import { MyScreensPage } from '@/app/pages/MyScreensPage'
 import { QueryProvider } from '@/app/stores/query/QueryProvider'
 import { normaliseScreenRender } from '@/app/stores/screen/ScreenManager'
 import { ScreenProvider } from '@/app/stores/screen/ScreenProvider'
@@ -45,7 +45,7 @@ const TestComponent = ({
           isScreenListLoading={isScreenListLoading}
           editAction={{ handler: editHandler }}
           deleteAction={{ handler: () => {}, isPending: false }}
-          showActon={{ handler: () => {}, isPending: false }}
+          showAction={{ handler: () => {}, isPending: false }}
         />
         <Toaster />
       </TestEnvironment>
@@ -59,7 +59,7 @@ const TestParentComponent = ({ initialise }: { initialise?: Array<ScreenItemRend
       <TestEnvironment>
         <EnvSessionProvider>
           <ScreenProvider initialise={{ screens: initialise ?? [], query: '' }}>
-            <Screens />
+            <MyScreensPage />
           </ScreenProvider>
           <Toaster />
         </EnvSessionProvider>

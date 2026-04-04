@@ -1,5 +1,5 @@
 import RefreshIcon from '@/app/assets/icons/Refresh'
-import { FormButton } from '@/app/components/formbutton/FormButton'
+import { FormButton } from '@/app/components/buttons/FormButton'
 import { useCreateScreenEffect } from '@/app/hooks/api/useCreateScreenEffect'
 import { useUpdateScreenEffect } from '@/app/hooks/api/useUpdateScreenEffect'
 import { DarkMode, LightMode } from '@/app/stores/theme/Theme.types'

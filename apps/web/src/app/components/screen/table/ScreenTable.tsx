@@ -11,6 +11,7 @@ import { Loader2, LoaderCircle, Pencil, X } from 'lucide-react'
 import { type Dispatch, type SetStateAction } from 'react'
 import { FormattedMessage, FormattedNumber } from 'react-intl'
 import styled from 'styled-components'
+import { match, P } from 'ts-pattern'
 
 const StyledCheckbox = styled(Checkbox)<{ $fgColor: string; $bgColor: string }>`
   border-color: ${(props) => props.$fgColor};
@@ -85,15 +86,15 @@ type Props = {
   className?: string
   highlighted?: ScreenItemRender
   setHighLighted?: Dispatch<SetStateAction<ScreenItemRender | undefined>>
-  editAction: {
+  editAction?: {
     handler: (id: string) => void
   }
-  deleteAction: {
+  deleteAction?: {
     id?: string
     isPending: boolean
     handler: (id: string) => void
   }
-  showActon: {
+  showAction?: {
     id?: string
     isPending: boolean
     handler: (id: string) => void
@@ -108,7 +109,7 @@ export const ScreenTable = ({
   setHighLighted = () => {},
   editAction,
   deleteAction,
-  showActon,
+  showAction,
 }: Props) => {
   const [themeMode] = useTheme()
 
@@ -157,27 +158,29 @@ export const ScreenTable = ({
               onMouseEnter={() => setHighLighted(screen.id === highlighted?.id ? undefined : screen)}
               onMouseLeave={() => setHighLighted(undefined)}
             >
-              <TableCell>
-                <div className='flex items-center justify-center'>
-                  {showActon.isPending && screen.id === showActon.id ? (
-                    <LoaderCircle
-                      className='ml-[5px] size-6 animate-spin'
-                      style={{ color: themeMode === DarkMode ? screen.color.lightColor : screen.color.darkColor }}
-                    />
-                  ) : (
-                    <StyledCheckbox
-                      id={screen.id}
-                      palette='none'
-                      dimension='sm'
-                      $fgColor={fgColor(themeMode, screen.color)}
-                      $bgColor={bgColor(themeMode, screen.color)}
-                      checked={screen.visible}
-                      onCheckedChange={() => showActon.handler(screen.id)}
-                      title='Show'
-                    />
-                  )}
-                </div>
-              </TableCell>
+              {showAction && (
+                <TableCell>
+                  <div className='flex items-center justify-center'>
+                    {showAction.isPending && screen.id === showAction.id ? (
+                      <LoaderCircle
+                        className='ml-[5px] size-6 animate-spin'
+                        style={{ color: themeMode === DarkMode ? screen.color.lightColor : screen.color.darkColor }}
+                      />
+                    ) : (
+                      <StyledCheckbox
+                        id={screen.id}
+                        palette='none'
+                        dimension='sm'
+                        $fgColor={fgColor(themeMode, screen.color)}
+                        $bgColor={bgColor(themeMode, screen.color)}
+                        checked={screen.visible}
+                        onCheckedChange={() => showAction.handler(screen.id)}
+                        title='Show'
+                      />
+                    )}
+                  </div>
+                </TableCell>
+              )}
               <TableCell className='text-center'>
                 <FormattedNumber value={screen.data.diagonalSize} style='unit' unit='inch' unitDisplay='narrow' />
               </TableCell>
@@ -208,28 +211,33 @@ export const ScreenTable = ({
               </TableCell>
               <TableCell>
                 <div className='flex flex-row items-center justify-center gap-0'>
-                  <Button
-                    title='Edit'
-                    mode='ghost'
-                    dimension='icon-sm'
-                    palette='mono'
-                    onClick={() => editAction.handler(screen.id)}
-                  >
-                    <Pencil id='edit-icon' />
-                  </Button>
-                  {deleteAction.isPending && screen.id === deleteAction.id ? (
-                    <Loader2 className='size-4 animate-spin' />
-                  ) : (
-                    <Button
-                      title='Delete'
-                      mode='ghost'
-                      dimension='icon-sm'
-                      palette='mono'
-                      onClick={() => deleteAction.handler(screen.id)}
-                    >
-                      <X id='delete-icon' />
-                    </Button>
-                  )}
+                  {match(editAction)
+                    .with(P.nonNullable, (action) => (
+                      <Button
+                        title='Edit'
+                        mode='ghost'
+                        dimension='icon-sm'
+                        palette='mono'
+                        onClick={() => action.handler(screen.id)}
+                      >
+                        <Pencil id='edit-icon' />
+                      </Button>
+                    ))
+                    .otherwise(() => null)}
+                  {match(deleteAction)
+                    .with({ isPending: true, id: screen.id }, () => <Loader2 className='size-4 animate-spin' />)
+                    .with(P.nonNullable, (action) => (
+                      <Button
+                        title='Delete'
+                        mode='ghost'
+                        dimension='icon-sm'
+                        palette='mono'
+                        onClick={() => action.handler(screen.id)}
+                      >
+                        <X id='delete-icon' />
+                      </Button>
+                    ))
+                    .otherwise(() => null)}
                 </div>
               </TableCell>
             </StyledTableRow>

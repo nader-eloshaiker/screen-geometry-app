@@ -71,7 +71,7 @@ export default function Header() {
         </Sheet>
         <Title size='lg' appTitle={appTitle} />
       </div>
-      <div className='container mx-auto hidden lg:flex lg:flex-col' data-testid='large-header'>
+      <div className='container mx-auto hidden lg:flex lg:flex-col lg:gap-2' data-testid='large-header'>
         <Title size='lg' appTitle={appTitle} />
         <div className='flex justify-between'>
           <HeaderNavLarge />

@@ -4,7 +4,7 @@ import { Card } from '@screengeometry/lib-ui/card'
 import { AlertCircle } from 'lucide-react'
 import { FormattedMessage } from 'react-intl'
 
-export const ErrorFallback = ({ error }: { error: Error | { message: string } }) => {
+export const ErrorFallbackPage = ({ error }: { error: Error | { message: string } }) => {
   return (
     <div className='flex min-h-screen items-center justify-center'>
       <Card className='w-full max-w-lg p-6 shadow-xl'>

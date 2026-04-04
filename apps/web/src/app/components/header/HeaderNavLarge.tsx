@@ -1,19 +1,19 @@
 import { NavigationLink } from '@screengeometry/lib-ui/navigationlink'
 import { FormattedMessage } from 'react-intl'
+import { Menu } from './Menu'
 
 export const HeaderNavLarge = () => (
   <nav aria-label='Main' className='flex gap-6' data-testid='large-header-menu'>
-    <NavigationLink mode='ghost' palette='navigation' to='/' className='group w-24 text-base font-semibold'>
-      <FormattedMessage id='header.large.home' defaultMessage='Home' />
-    </NavigationLink>
-    <NavigationLink mode='ghost' palette='navigation' to='/screens' className='group w-24 text-base font-semibold'>
-      <FormattedMessage id='header.large.screens' defaultMessage='Screens' />
-    </NavigationLink>
-    <NavigationLink mode='ghost' palette='navigation' to='/contact' className='group w-24 text-base font-semibold'>
-      <FormattedMessage id='header.large.contact' defaultMessage='Contact' />
-    </NavigationLink>
-    <NavigationLink mode='ghost' palette='navigation' to='/help' className='group w-24 text-base font-semibold'>
-      <FormattedMessage id='header.large.help' defaultMessage='Help' />
-    </NavigationLink>
+    {Menu.map((route) => (
+      <NavigationLink
+        key={route.id}
+        mode='ghost'
+        palette='navigation'
+        {...route.linkOptions}
+        className='group min-w-24 text-base font-semibold'
+      >
+        <FormattedMessage id={route.id} defaultMessage={route.defaultMessage} />
+      </NavigationLink>
+    ))}
   </nav>
 )

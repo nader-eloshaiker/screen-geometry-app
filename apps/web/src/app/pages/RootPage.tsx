@@ -5,7 +5,7 @@ import { Outlet, useLocation } from '@tanstack/react-router'
 import { useEffect } from 'react'
 import ReactGA from 'react-ga4'
 
-export const Root = () => {
+export const RootPage = () => {
   const location = useLocation()
   useEffect(() => {
     ReactGA.send({ hitType: 'pageview', page: location.pathname + location.search, title: location.pathname })

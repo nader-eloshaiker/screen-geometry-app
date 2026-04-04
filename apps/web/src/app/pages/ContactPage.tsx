@@ -20,7 +20,7 @@ const ListItem = ({ href, icon, text }: ListItemProps) => {
   )
 }
 
-export const Contact = () => {
+export const ContactPage = () => {
   return (
     <div className='h-full'>
       <h1 className='mb-4 text-3xl'>

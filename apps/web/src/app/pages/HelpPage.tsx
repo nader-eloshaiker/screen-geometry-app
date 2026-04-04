@@ -1,4 +1,4 @@
-import { CreateScreenButton } from '@/app/components/createbutton/CreateButton'
+import { CreateScreenButton } from '@/app/components/buttons/CreateButton'
 import { ScreenForm } from '@/app/components/screen/form/ScreenForm'
 import { ScreenPanel } from '@/app/components/screen/panel/ScreenPanel'
 import { ScreenTable } from '@/app/components/screen/table/ScreenTable'
@@ -26,7 +26,7 @@ const Heading = tw(Label)`
   mb-8 text-2xl font-bold
 `
 
-export const Help = () => {
+export const HelpPage = () => {
   const [setRef, { width }] = useElementSize()
 
   const { fullList, smallList, invisibleList, maxPanelSize } = useMemo(() => {
@@ -70,7 +70,7 @@ export const Help = () => {
               isScreenListLoading={false}
               editAction={{ handler: () => {} }}
               deleteAction={{ handler: () => {}, isPending: false }}
-              showActon={{ handler: () => {}, isPending: false }}
+              showAction={{ handler: () => {}, isPending: false }}
             />
             <div className='flex h-full flex-col items-center'>
               <div className='text-primary-label py-4 text-xl'>
@@ -111,7 +111,7 @@ export const Help = () => {
               isScreenListLoading={false}
               editAction={{ handler: () => {} }}
               deleteAction={{ handler: () => {}, isPending: false }}
-              showActon={{ handler: () => {}, isPending: false }}
+              showAction={{ handler: () => {}, isPending: false }}
             />
           </div>
         </Diagram>
@@ -129,7 +129,7 @@ export const Help = () => {
               highlighted={smallList[0]}
               editAction={{ handler: () => {} }}
               deleteAction={{ handler: () => {}, isPending: false }}
-              showActon={{ handler: () => {}, isPending: false }}
+              showAction={{ handler: () => {}, isPending: false }}
             />
             <Stacked height={maxPanelSize.height}>
               {smallList
@@ -164,7 +164,7 @@ export const Help = () => {
               screens={invisibleList}
               editAction={{ handler: () => {} }}
               deleteAction={{ handler: () => {}, isPending: false }}
-              showActon={{ handler: () => {}, isPending: false }}
+              showAction={{ handler: () => {}, isPending: false }}
             />
             <Stacked height={maxPanelSize.height}>
               {invisibleList
@@ -216,12 +216,12 @@ export const Help = () => {
           <div className='border-primary-border bg-background text-foreground mb-6 w-96 border-l-2 p-2 shadow-lg'>
             <div className='pointer-events-none p-2'>
               <ScreenForm
-                setOpen={() => {}}
                 isFormLoading={false}
                 editId={''}
                 editValue={undefined}
                 predefinedValue={undefined}
-                setPredefinedScreen={() => {}}
+                onClose={() => {}}
+                onClearPredefinedSelection={() => {}}
               />
             </div>
           </div>

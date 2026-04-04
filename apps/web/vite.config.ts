@@ -3,13 +3,14 @@ import { codecovVitePlugin } from '@codecov/vite-plugin'
 import tailwindcss from '@tailwindcss/vite'
 import { tanstackRouter } from '@tanstack/router-plugin/vite'
 import react from '@vitejs/plugin-react-swc'
+import { join } from 'path'
 import tsconfigPaths from 'vite-tsconfig-paths'
 import { type ViteUserConfig, configDefaults, defineConfig } from 'vitest/config'
 import packageJson from '../../package.json'
 import { SiteMap } from './src/configs/sitemap'
 import { generateSitemap } from './src/configs/tanstack-router-sitemap'
 
-const isTest = process.env.NODE_ENV === 'test'
+// const isTest = process.env.NODE_ENV === 'test'
 
 const Config: ViteUserConfig = {
   test: {
@@ -52,6 +53,7 @@ const Config: ViteUserConfig = {
 const now = new Date().toString()
 
 export default defineConfig({
+  root: __dirname,
   base: '',
   define: {
     'import.meta.env.VITE_PACKAGE_VERSION': JSON.stringify(packageJson.version),
@@ -60,25 +62,24 @@ export default defineConfig({
   assetsInclude: ['./sb-preview/runtime.js'],
   plugins: [
     tsconfigPaths(),
+    react(),
     tailwindcss(),
     generateSitemap(SiteMap),
     // copySitemapToDistPlugin(),
-    !isTest &&
-      tanstackRouter({
-        target: 'react',
-        autoCodeSplitting: false,
-        routesDirectory: './src/app/routes',
-        generatedRouteTree: './src/app/routetree/routeTree.gen.ts',
-        // routeFileIgnorePattern: '\\.(test|spec)\\.[jt]sx?$',
-        // quoteStyle: 'single',
-        // routeFileIgnorePrefix: '-',
-      }),
+    tanstackRouter({
+      target: 'react',
+      autoCodeSplitting: false,
+      routesDirectory: join(__dirname, 'src/app/routes'),
+      generatedRouteTree: join(__dirname, 'src/app/routetree/routeTree.gen.ts'),
+      // routeFileIgnorePattern: '\\.(test|spec)\\.[jt]sx?$',
+      // quoteStyle: 'single',
+      // routeFileIgnorePrefix: '-',
+    }),
     codecovVitePlugin({
       enableBundleAnalysis: process.env.CODECOV_TOKEN !== undefined,
       bundleName: 'screen-geometry-app',
       uploadToken: process.env.CODECOV_TOKEN,
     }),
-    react(),
   ],
   resolve: {
     // alias: {
