@@ -25,7 +25,7 @@ export const useApiEffect = <TData>({
     if (successNotification) {
       const { title, message } = successNotification
       toast({
-        palette: 'success',
+        palette: 'info',
         title,
         description: message,
       })

@@ -118,7 +118,7 @@ export const ScreenTable = ({
       <TableHeader>
         <TableRow>
           <TableHead className='text-center'>
-            <FormattedMessage id='screens.table.show' defaultMessage='Show' />
+            <FormattedMessage id='screens.table.select' defaultMessage='Select' />
           </TableHead>
           <TableHead className='text-center'>
             <FormattedMessage id='screens.table.size' defaultMessage='Size' />

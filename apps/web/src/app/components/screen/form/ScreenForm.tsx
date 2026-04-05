@@ -6,6 +6,8 @@ import { DarkMode, LightMode } from '@/app/stores/theme/Theme.types'
 import { createScreenColors } from '@/app/utils'
 import { zodResolver } from '@hookform/resolvers/zod'
 import {
+  getGetScreenListQueryKey,
+  getGetScreenQueryKey,
   ScreenColor,
   type ScreenInput,
   type SearchItem,
@@ -15,6 +17,7 @@ import {
 import { Button } from '@screengeometry/lib-ui/button'
 import { Form } from '@screengeometry/lib-ui/form'
 import { Separator } from '@screengeometry/lib-ui/separator'
+import { useQueryClient } from '@tanstack/react-query'
 import { useEffect, useState } from 'react'
 import ReactGA from 'react-ga4'
 import { type SubmitHandler, useForm } from 'react-hook-form'
@@ -43,11 +46,31 @@ export const ScreenForm = ({
 }: Props) => {
   const [toggleAnimation, setToggleAnimation] = useState<boolean>(false)
   const [color] = useState<ScreenColor>(createScreenColors)
+  const queryClient = useQueryClient()
 
-  const { isPending: isCreateLoading, mutate: createAction, data: createData, error: createError } = useCreateScreen()
+  const {
+    isPending: isCreateLoading,
+    mutate: createAction,
+    data: createData,
+    error: createError,
+  } = useCreateScreen({
+    mutation: {
+      onSuccess: () => queryClient.invalidateQueries({ queryKey: getGetScreenListQueryKey() }),
+    },
+  })
   useCreateScreenEffect(createData, createError)
 
-  const { isPending: isUpdateLoading, mutate: updateAction, data: updateData, error: updateError } = useUpdateScreen()
+  const {
+    isPending: isUpdateLoading,
+    mutate: updateAction,
+    data: updateData,
+    error: updateError,
+  } = useUpdateScreen({
+    mutation: {
+      onSuccess: () =>
+        queryClient.invalidateQueries({ queryKey: [getGetScreenListQueryKey(), getGetScreenQueryKey()] }),
+    },
+  })
   useUpdateScreenEffect(updateData, updateError)
 
   const isLoading = isCreateLoading || isUpdateLoading || isFormLoading
@@ -78,13 +101,13 @@ export const ScreenForm = ({
       setValue('hRes', predefinedValue.hRes, { shouldDirty: true })
       setValue('vRes', predefinedValue.vRes, { shouldDirty: true })
     }
-  }, [predefinedValue])
+  }, [predefinedValue, resetField, setValue])
 
   useEffect(() => {
     if (editValue) {
       reset(editValue)
     }
-  }, [editValue])
+  }, [editValue, reset])
 
   const generateColorHandler = () => {
     const c = createScreenColors()

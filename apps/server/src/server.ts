@@ -15,6 +15,7 @@ import {
   getSearchList,
   showScreen,
   updateScreen,
+  updateScreenList,
 } from './api/api'
 import { DatabaseError } from './db/DatabaseError'
 
@@ -49,6 +50,21 @@ export const generateStub = (baseUrl: string, responseTime?: number): TReturn =>
 
       const requestBody = await resolver.request.json()
       const [err, payload] = await to<ScreenListResponse>(createScreenList(requestBody as ScreenInputList))
+
+      return err
+        ? new HttpResponse(null, { status: err instanceof DatabaseError ? err.code : 500, statusText: err.message })
+        : new HttpResponse(JSON.stringify(payload), {
+            status: 200,
+            headers: {
+              'Content-Type': 'application/json',
+            },
+          })
+    }),
+    http.put(`${baseUrl}${apiRoutes.screens}`, async (resolver) => {
+      await delay(delayResponse)
+
+      const requestBody = await resolver.request.json()
+      const [err, payload] = await to<ScreenListResponse>(updateScreenList(requestBody as ScreenInputList))
 
       return err
         ? new HttpResponse(null, { status: err instanceof DatabaseError ? err.code : 500, statusText: err.message })

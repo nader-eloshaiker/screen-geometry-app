@@ -3,6 +3,7 @@ import { useApiEffect } from '@/app/hooks/api/useApiEffect'
 import { getTextDirection } from '@/app/stores/translation/TranslationsUtils'
 import { toScreenInput } from '@screengeometry/lib-api/extended'
 import {
+  getGetScreenQueryKey,
   type ScreenItemResponse,
   type SearchItem,
   type SearchListResponse,
@@ -17,7 +18,7 @@ import {
   SheetTitle,
   SheetTrigger,
 } from '@screengeometry/lib-ui/sheet'
-import { keepPreviousData } from '@tanstack/react-query'
+import { keepPreviousData, useQueryClient } from '@tanstack/react-query'
 import { type Dispatch, useCallback, useEffect, useState } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 import { FormModeTypes } from './FormMode'
@@ -33,6 +34,7 @@ type Props = React.PropsWithChildren & {
 
 export const ScreenFormDrawer = ({ open, setOpen, mode, id: editId = '', children }: Props) => {
   const isEdit = mode === FormModeTypes.edit
+  const queryClient = useQueryClient()
   const {
     data: screenData,
     isFetching: isScreenLoading,
@@ -40,9 +42,14 @@ export const ScreenFormDrawer = ({ open, setOpen, mode, id: editId = '', childre
   } = useGetScreen(editId, {
     query: {
       enabled: isEdit && !!editId,
-      placeholderData: keepPreviousData,
     },
   })
+
+  useEffect(() => {
+    if (open && isEdit && editId) {
+      queryClient.invalidateQueries({ queryKey: getGetScreenQueryKey(editId) })
+    }
+  }, [open, isEdit, editId, queryClient])
   useApiEffect<ScreenItemResponse>({
     data: screenData,
     error: screenError,
@@ -87,7 +94,7 @@ export const ScreenFormDrawer = ({ open, setOpen, mode, id: editId = '', childre
     setOpen(false)
     setSelectedScreen(undefined)
     setEditScreen(undefined)
-  }, [])
+  }, [setOpen])
 
   const handleClearPredefinedSelection = useCallback(() => {
     setSelectedScreen(undefined)

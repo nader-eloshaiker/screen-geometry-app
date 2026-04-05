@@ -116,7 +116,7 @@
   --color-danger-foreground: var(--danger-foreground);
   --color-danger-foreground-active: var(--danger-foreground-active);
   --color-danger-foreground-hover: var(--danger-foreground-hover);
-  --color-danger-foreground-muted: var(--danger-foreground-muted: );
+  --color-danger-foreground-muted: var(--danger-foreground-muted);
   --color-danger-foreground-input: var(--danger-foreground-input);
   --color-danger-foreground-input-hover: var(--danger-foreground-input-hover);
   --color-danger-foreground-input-muted: var(--danger-foreground-input-muted);

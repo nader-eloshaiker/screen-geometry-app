@@ -294,7 +294,7 @@
   "screens.table.resolution": {
     "defaultMessage": "Resolution"
   },
-  "screens.table.show": {
+  "screens.table.select": {
     "defaultMessage": "Show"
   },
   "screens.table.size": {

@@ -2,11 +2,13 @@
   "api.created.title": "생성됨",
   "api.deleted.title": "삭제됨",
   "api.updated.title": "업데이트됨",
+  "api.updatedList.title": "업데이트됨",
   "api.createScreen.successNotification.message": "화면 사양이 목록에 추가되었습니다",
   "api.createScreenList.successNotification.message": "일반적인 화면 사양 목록이 생성되었습니다",
   "api.deleteScreen.successNotification.message": "화면 사양이 삭제되었습니다",
   "api.showScreen.successNotification.message": "화면 표시 여부가 업데이트되었습니다",
   "api.updateScreen.successNotification.message": "화면 사양이 업데이트되었습니다",
+  "api.updateScreenList.successNotification.message": "화면 사양 목록이 성공적으로 업데이트되었습니다.",
   "contact.content.heading": "저 또는 이 앱과 소통하는 방법",
   "contact.content.p1": "안녕하세요! 항상 여러분의 의견을 듣게 되어 기쁩니다. 질문이 있으시거나, 피드백을 주시거나, 단순히 인사를 하고 싶으시다면 언제든지 환영합니다.",
   "contact.content.p2": "저는 API 설계부터 개발, 지속적인 통합/배포, 그리고 마지막으로 호스팅까지 아이디어의 전체적인 제품화를 경험하기 위해 이 웹 앱을 만들었습니다.",
@@ -108,7 +110,7 @@
   "screens.table.pixelsInch": "인치당 픽셀",
   "screens.table.ratio": "비율",
   "screens.table.resolution": "해상도",
-  "screens.table.show": "표시",
+  "screens.table.select": "선택",
   "screens.table.size": "크기",
   "screens.theme.darkLabel": "다크 모드",
   "screens.theme.lightLabel": "라이트 모드",
@@ -117,6 +119,8 @@
   "help.content.heading": "화면 지오메트리 사용에 대한 도움말",
   "screens.content.heading": "화면 비교",
   "share.content.heading": "공유된 화면 비교",
-  "share.content.saveButton": "선택 항목 저장",
-  "share.content.shareButton": "선택 항목 공유"
+  "share.content.saveButton": "내 화면에 추가",
+  "share.content.shareButton": "선택 항목 공유",
+  "share.shareNotification.title": "공유 링크 복사됨",
+  "share.shareNotification.description": "공유 링크가 클립보드에 복사되었습니다."
 }

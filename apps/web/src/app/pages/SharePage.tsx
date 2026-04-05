@@ -12,7 +12,7 @@ import { createScreenColors, getMaxScreenSize, toScreenItemRender } from '@/app/
 import { type Dimensions, toScreenItem } from '@screengeometry/lib-api/extended'
 import type { ScreenItem } from '@screengeometry/lib-api/spec'
 import { Skeleton } from '@screengeometry/lib-ui/skeleton'
-import { useSearch } from '@tanstack/react-router'
+import { useNavigate, useSearch } from '@tanstack/react-router'
 import { useCallback, useEffect, useState } from 'react'
 import ReactGA from 'react-ga4'
 import { FormattedMessage } from 'react-intl'
@@ -25,6 +25,7 @@ export const SharePage = () => {
   const [maxPanelSize, setMaxPanelSize] = useState<Dimensions>({ width, height: 0 })
   const [hAlignment, setHAlignment] = useState<Alignment>('center')
   const [vAlignment, setVAlignment] = useState<Alignment>('end')
+  const navigate = useNavigate()
 
   const { screens: screensParams } = useSearch({ from: '/share' })
   const [screens, setScreens] = useState<ScreenItemRender[]>([])
@@ -79,7 +80,14 @@ export const SharePage = () => {
       action: 'Clicked save',
       label: 'Share Page',
     })
-  }, [])
+
+    const selectedScreensToSave = screens.filter((screen) => screen.visible)
+
+    return navigate({
+      to: '/myscreens',
+      state: (prev) => ({ ...prev, screens: selectedScreensToSave }),
+    })
+  }, [navigate, screens])
 
   useEffect(() => {
     const widestScreen = screens.length > 0 ? getMaxScreenSize(screens) : { width: 47, height: 16 }
