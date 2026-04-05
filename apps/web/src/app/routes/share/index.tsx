@@ -19,6 +19,6 @@ const SearchParamsSchema = z.object({
 export type ScreenParam = z.infer<typeof ScreenSchema>
 // export type ScreenSearchParams = z.infer<typeof SearchParamsSchema>
 
-export const Route = createFileRoute('/share')({
+export const Route = createFileRoute('/share/')({
   validateSearch: zodValidator(SearchParamsSchema),
 })

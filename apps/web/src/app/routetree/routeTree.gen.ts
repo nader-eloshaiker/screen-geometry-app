@@ -11,13 +11,17 @@
 import { createFileRoute } from '@tanstack/react-router'
 
 import { Route as rootRouteImport } from './../routes/__root'
-import { Route as ShareRouteImport } from './../routes/share'
 import { Route as ScreensRouteImport } from './../routes/screens'
 import { Route as MyscreensRouteImport } from './../routes/myscreens'
+import { Route as ShareIndexRouteImport } from './../routes/share/index'
 
 const HelpLazyRouteImport = createFileRoute('/help')()
 const ContactLazyRouteImport = createFileRoute('/contact')()
 const IndexLazyRouteImport = createFileRoute('/')()
+const ShareAllLazyRouteImport = createFileRoute('/share/all')()
+const Share32by9LazyRouteImport = createFileRoute('/share/32by9')()
+const Share21by9LazyRouteImport = createFileRoute('/share/21by9')()
+const Share16by9LazyRouteImport = createFileRoute('/share/16by9')()
 
 const HelpLazyRoute = HelpLazyRouteImport.update({
   id: '/help',
@@ -29,11 +33,6 @@ const ContactLazyRoute = ContactLazyRouteImport.update({
   path: '/contact',
   getParentRoute: () => rootRouteImport,
 } as any).lazy(() => import('./../routes/contact.lazy').then((d) => d.Route))
-const ShareRoute = ShareRouteImport.update({
-  id: '/share',
-  path: '/share',
-  getParentRoute: () => rootRouteImport,
-} as any).lazy(() => import('./../routes/share.lazy').then((d) => d.Route))
 const ScreensRoute = ScreensRouteImport.update({
   id: '/screens',
   path: '/screens',
@@ -49,54 +48,127 @@ const IndexLazyRoute = IndexLazyRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any).lazy(() => import('./../routes/index.lazy').then((d) => d.Route))
+const ShareIndexRoute = ShareIndexRouteImport.update({
+  id: '/share/',
+  path: '/share/',
+  getParentRoute: () => rootRouteImport,
+} as any).lazy(() =>
+  import('./../routes/share/index.lazy').then((d) => d.Route),
+)
+const ShareAllLazyRoute = ShareAllLazyRouteImport.update({
+  id: '/share/all',
+  path: '/share/all',
+  getParentRoute: () => rootRouteImport,
+} as any).lazy(() => import('./../routes/share/all.lazy').then((d) => d.Route))
+const Share32by9LazyRoute = Share32by9LazyRouteImport.update({
+  id: '/share/32by9',
+  path: '/share/32by9',
+  getParentRoute: () => rootRouteImport,
+} as any).lazy(() =>
+  import('./../routes/share/32by9.lazy').then((d) => d.Route),
+)
+const Share21by9LazyRoute = Share21by9LazyRouteImport.update({
+  id: '/share/21by9',
+  path: '/share/21by9',
+  getParentRoute: () => rootRouteImport,
+} as any).lazy(() =>
+  import('./../routes/share/21by9.lazy').then((d) => d.Route),
+)
+const Share16by9LazyRoute = Share16by9LazyRouteImport.update({
+  id: '/share/16by9',
+  path: '/share/16by9',
+  getParentRoute: () => rootRouteImport,
+} as any).lazy(() =>
+  import('./../routes/share/16by9.lazy').then((d) => d.Route),
+)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexLazyRoute
   '/myscreens': typeof MyscreensRoute
   '/screens': typeof ScreensRoute
-  '/share': typeof ShareRoute
   '/contact': typeof ContactLazyRoute
   '/help': typeof HelpLazyRoute
+  '/share/16by9': typeof Share16by9LazyRoute
+  '/share/21by9': typeof Share21by9LazyRoute
+  '/share/32by9': typeof Share32by9LazyRoute
+  '/share/all': typeof ShareAllLazyRoute
+  '/share/': typeof ShareIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexLazyRoute
   '/myscreens': typeof MyscreensRoute
   '/screens': typeof ScreensRoute
-  '/share': typeof ShareRoute
   '/contact': typeof ContactLazyRoute
   '/help': typeof HelpLazyRoute
+  '/share/16by9': typeof Share16by9LazyRoute
+  '/share/21by9': typeof Share21by9LazyRoute
+  '/share/32by9': typeof Share32by9LazyRoute
+  '/share/all': typeof ShareAllLazyRoute
+  '/share': typeof ShareIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexLazyRoute
   '/myscreens': typeof MyscreensRoute
   '/screens': typeof ScreensRoute
-  '/share': typeof ShareRoute
   '/contact': typeof ContactLazyRoute
   '/help': typeof HelpLazyRoute
+  '/share/16by9': typeof Share16by9LazyRoute
+  '/share/21by9': typeof Share21by9LazyRoute
+  '/share/32by9': typeof Share32by9LazyRoute
+  '/share/all': typeof ShareAllLazyRoute
+  '/share/': typeof ShareIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/myscreens' | '/screens' | '/share' | '/contact' | '/help'
+  fullPaths:
+    | '/'
+    | '/myscreens'
+    | '/screens'
+    | '/contact'
+    | '/help'
+    | '/share/16by9'
+    | '/share/21by9'
+    | '/share/32by9'
+    | '/share/all'
+    | '/share/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/myscreens' | '/screens' | '/share' | '/contact' | '/help'
+  to:
+    | '/'
+    | '/myscreens'
+    | '/screens'
+    | '/contact'
+    | '/help'
+    | '/share/16by9'
+    | '/share/21by9'
+    | '/share/32by9'
+    | '/share/all'
+    | '/share'
   id:
     | '__root__'
     | '/'
     | '/myscreens'
     | '/screens'
-    | '/share'
     | '/contact'
     | '/help'
+    | '/share/16by9'
+    | '/share/21by9'
+    | '/share/32by9'
+    | '/share/all'
+    | '/share/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexLazyRoute: typeof IndexLazyRoute
   MyscreensRoute: typeof MyscreensRoute
   ScreensRoute: typeof ScreensRoute
-  ShareRoute: typeof ShareRoute
   ContactLazyRoute: typeof ContactLazyRoute
   HelpLazyRoute: typeof HelpLazyRoute
+  Share16by9LazyRoute: typeof Share16by9LazyRoute
+  Share21by9LazyRoute: typeof Share21by9LazyRoute
+  Share32by9LazyRoute: typeof Share32by9LazyRoute
+  ShareAllLazyRoute: typeof ShareAllLazyRoute
+  ShareIndexRoute: typeof ShareIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -113,13 +185,6 @@ declare module '@tanstack/react-router' {
       path: '/contact'
       fullPath: '/contact'
       preLoaderRoute: typeof ContactLazyRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/share': {
-      id: '/share'
-      path: '/share'
-      fullPath: '/share'
-      preLoaderRoute: typeof ShareRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/screens': {
@@ -143,6 +208,41 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexLazyRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/share/': {
+      id: '/share/'
+      path: '/share'
+      fullPath: '/share/'
+      preLoaderRoute: typeof ShareIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/share/all': {
+      id: '/share/all'
+      path: '/share/all'
+      fullPath: '/share/all'
+      preLoaderRoute: typeof ShareAllLazyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/share/32by9': {
+      id: '/share/32by9'
+      path: '/share/32by9'
+      fullPath: '/share/32by9'
+      preLoaderRoute: typeof Share32by9LazyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/share/21by9': {
+      id: '/share/21by9'
+      path: '/share/21by9'
+      fullPath: '/share/21by9'
+      preLoaderRoute: typeof Share21by9LazyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/share/16by9': {
+      id: '/share/16by9'
+      path: '/share/16by9'
+      fullPath: '/share/16by9'
+      preLoaderRoute: typeof Share16by9LazyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -150,9 +250,13 @@ const rootRouteChildren: RootRouteChildren = {
   IndexLazyRoute: IndexLazyRoute,
   MyscreensRoute: MyscreensRoute,
   ScreensRoute: ScreensRoute,
-  ShareRoute: ShareRoute,
   ContactLazyRoute: ContactLazyRoute,
   HelpLazyRoute: HelpLazyRoute,
+  Share16by9LazyRoute: Share16by9LazyRoute,
+  Share21by9LazyRoute: Share21by9LazyRoute,
+  Share32by9LazyRoute: Share32by9LazyRoute,
+  ShareAllLazyRoute: ShareAllLazyRoute,
+  ShareIndexRoute: ShareIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

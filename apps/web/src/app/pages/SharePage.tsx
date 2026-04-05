@@ -12,14 +12,15 @@ import { createScreenColors, getMaxScreenSize, toScreenItemRender } from '@/app/
 import { type Dimensions, toScreenItem } from '@screengeometry/lib-api/extended'
 import type { ScreenItem } from '@screengeometry/lib-api/spec'
 import { Skeleton } from '@screengeometry/lib-ui/skeleton'
-import { useNavigate, useSearch } from '@tanstack/react-router'
+import { useNavigate } from '@tanstack/react-router'
 import { useCallback, useEffect, useState } from 'react'
 import ReactGA from 'react-ga4'
 import { FormattedMessage } from 'react-intl'
 import { ulid } from 'ulid'
 import { SaveShareButton } from '../components/buttons/SaveShareButton'
+import { ScreenParam } from '../routes/share'
 
-export const SharePage = () => {
+export const SharePage = ({ screenParams = [] }: { screenParams: ScreenParam[] }) => {
   const [setRef, { width }] = useElementSize()
   const [highlighted, setHighlighted] = useState<ScreenItemRender | undefined>()
   const [maxPanelSize, setMaxPanelSize] = useState<Dimensions>({ width, height: 0 })
@@ -27,16 +28,15 @@ export const SharePage = () => {
   const [vAlignment, setVAlignment] = useState<Alignment>('end')
   const navigate = useNavigate()
 
-  const { screens: screensParams } = useSearch({ from: '/share' })
   const [screens, setScreens] = useState<ScreenItemRender[]>([])
 
   useEffect(() => {
-    if (!screensParams?.length) {
+    if (!screenParams?.length) {
       setScreens([])
       return
     }
 
-    const screenItems = screensParams
+    const screenItems = screenParams
       .map((param) => {
         const { lightColor, darkColor } = createScreenColors()
         return {
@@ -56,7 +56,7 @@ export const SharePage = () => {
     const biggest = getMaxScreenSize(screenItems)
     const renderedScreens = screenItems.map((item) => toScreenItemRender(item, biggest))
     setScreens(renderedScreens)
-  }, [screensParams])
+  }, [screenParams])
 
   const onShow = useCallback(
     (id: string) => {
