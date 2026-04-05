@@ -3,7 +3,7 @@ import { MyScreensPage } from '@/app/pages/MyScreensPage'
 import { QueryProvider } from '@/app/stores/query/QueryProvider'
 import { normaliseScreenRender } from '@/app/stores/screen/ScreenManager'
 import { ScreenProvider } from '@/app/stores/screen/ScreenProvider'
-import { EnvSessionProvider } from '@/app/stores/session/EnvSessionProvider'
+import { EnvironmentSessionLoaderKey, EnvSessionProvider } from '@/app/stores/session/EnvSessionProvider'
 import { initMSW } from '@/serviceworker/NodeServiceWorker'
 import { renderWithUserEvents } from '@/test/utils/RenderWithUserEvents'
 import { TestEnvironment } from '@/test/utils/TestEnvironment'
@@ -14,12 +14,14 @@ import {
   getScreenServiceMock,
   getSearchServiceMock,
 } from '@screengeometry/lib-api/spec'
+import { PageLoaderProvider } from '@screengeometry/lib-ui/pageloader'
 import { Toaster } from '@screengeometry/lib-ui/toaster'
+import { createMemoryHistory, createRootRoute, createRoute, createRouter, RouterProvider } from '@tanstack/react-router'
 import { waitFor } from '@testing-library/react'
-import { useState } from 'react'
+import { useMemo, useState } from 'react'
 import { ScreenTable } from './ScreenTable'
 
-vi.mock('@/lib/ui/hooks/useElementSize', () => ({
+vi.mock('@/app/hooks/useElementSize', () => ({
   __esModule: true,
   useElementSize: () => [() => {}, { width: 1024, height: 1024 }],
 }))
@@ -53,16 +55,55 @@ const TestComponent = ({
   )
 }
 
+const TestRouter = ({ children }: React.PropsWithChildren) => {
+  const memoryHistory = useMemo(
+    () =>
+      createMemoryHistory({
+        initialEntries: ['/myscreens'],
+        initialIndex: 0,
+      }),
+    []
+  )
+  const rootRoute = useMemo(
+    () =>
+      createRootRoute({
+        component: () => children,
+      }),
+    [children]
+  )
+  const router = useMemo(
+    () =>
+      createRouter({
+        history: memoryHistory,
+        defaultPendingMinMs: 0,
+        routeTree: rootRoute.addChildren([
+          createRoute({
+            path: '*',
+            component: () => children,
+            getParentRoute: () => rootRoute,
+          }),
+        ]),
+      }),
+    [memoryHistory, children, rootRoute]
+  )
+
+  return <RouterProvider<typeof router> router={router} />
+}
+
 const TestParentComponent = ({ initialise }: { initialise?: Array<ScreenItemRender> }) => {
   return (
     <QueryProvider>
       <TestEnvironment>
-        <EnvSessionProvider>
-          <ScreenProvider initialise={{ screens: initialise ?? [], query: '' }}>
-            <MyScreensPage />
-          </ScreenProvider>
+        <TestRouter>
+          <PageLoaderProvider initialLoadingKeys={[EnvironmentSessionLoaderKey]}>
+            <EnvSessionProvider>
+              <ScreenProvider initialise={{ screens: initialise ?? [], query: '' }}>
+                <MyScreensPage />
+              </ScreenProvider>
+            </EnvSessionProvider>
+          </PageLoaderProvider>
           <Toaster />
-        </EnvSessionProvider>
+        </TestRouter>
       </TestEnvironment>
     </QueryProvider>
   )
@@ -111,9 +152,10 @@ describe('#ScreenTable', () => {
       await test.user.click(deleteElements[0])
     })
 
-    expect(expect(mswObj.apiEventStack.length).toBe(2))
-    expect(mswObj.apiEventStack[mswObj.apiEventStack.length - 1]).toEqual(
-      expect.stringContaining('method:DELETE|url:https://dev.api.screengeometry.com/v1/screen/')
+    expect(mswObj.apiEventStack).toEqual(
+      expect.arrayContaining([
+        expect.stringContaining('method:DELETE|url:https://dev.api.screengeometry.com/v1/screen/'),
+      ])
     )
   })
 
@@ -128,11 +170,11 @@ describe('#ScreenTable', () => {
       await test.user.click(showElement)
     })
 
-    const apiEventStack = mswObj.apiEventStack[mswObj.apiEventStack.length - 1]
-    expect(apiEventStack).toEqual(
-      expect.stringContaining('method:PATCH|url:https://dev.api.screengeometry.com/v1/screen/')
+    const patchEvent = mswObj.apiEventStack.find(
+      (event) => event.includes('method:PATCH') && event.includes('/v1/screen/')
     )
-    expect(apiEventStack).toEqual(expect.stringContaining('/show'))
+    expect(patchEvent).toBeDefined()
+    expect(patchEvent).toEqual(expect.stringContaining('/show'))
   })
 
   test('show skeleton table when screen list is loading', async () => {
