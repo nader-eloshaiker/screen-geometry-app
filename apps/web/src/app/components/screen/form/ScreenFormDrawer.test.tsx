@@ -243,7 +243,7 @@ describe('#ScreenFormDrawer', () => {
       expect(updateButton).toBeEnabled()
       await waitFor(async () => await user.click(updateButton))
 
-      await waitFor(() => expect(updateButton).not.toBeEnabled())
+      expect(await test.findByText('formState:close')).toBeTruthy()
     })
   })
 

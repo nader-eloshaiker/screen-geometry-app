@@ -1,7 +1,7 @@
+import { MyScreensPage } from '@/app/pages/MyScreens/MyScreensPage'
 import { EnvironmentSessionLoaderKey, EnvSessionProvider } from '@/app/stores/session/EnvSessionProvider'
 import { PageLoaderProvider } from '@screengeometry/lib-ui/pageloader'
 import { createLazyFileRoute } from '@tanstack/react-router'
-import { MyScreensPage } from '../pages/MyScreens/MyScreensPage'
 
 const Component = () => (
   <>
