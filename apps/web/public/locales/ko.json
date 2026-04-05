@@ -102,7 +102,7 @@
   "screens.selector.nomatching": "일치하는 화면을 찾을 수 없습니다",
   "screens.size.title": "크기 및 픽셀 밀도",
   "screens.specs.loadscreens": "화면 로드",
-  "screens.specs.title": "화면 사양",
+  "screens.specs.title": "사양 표",
   "screens.table.action": "작업",
   "screens.table.dimension": "치수",
   "screens.table.pixelsInch": "인치당 픽셀",
@@ -117,5 +117,6 @@
   "help.content.heading": "화면 지오메트리 사용에 대한 도움말",
   "screens.content.heading": "화면 비교",
   "share.content.heading": "공유된 화면 비교",
-  "share.content.saveButton": "내 화면에 저장"
+  "share.content.saveButton": "선택 항목 저장",
+  "share.content.shareButton": "선택 항목 공유"
 }

@@ -6,6 +6,6 @@ import { FormattedMessage } from 'react-intl'
 export const ShareButton = ({ className, ...rest }: React.ComponentProps<typeof Button>) => (
   <Button mode='outline' className={cn('shadow-md', className)} {...rest}>
     <Share id='share-icon' className='size-5 p-0' />
-    <FormattedMessage id='share.content.shareButton' defaultMessage='Share Screens' />
+    <FormattedMessage id='share.content.shareButton' defaultMessage='Share Selected' />
   </Button>
 )

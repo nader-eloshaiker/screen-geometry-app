@@ -103,7 +103,7 @@
   "screens.selector.nomatching": "未找到匹配的屏幕",
   "screens.size.title": "尺寸和像素密度",
   "screens.specs.loadscreens": "加载屏幕",
-  "screens.specs.title": "屏幕规格",
+  "screens.specs.title": "规格表",
   "screens.table.action": "操作",
   "screens.table.dimension": "尺寸",
   "screens.table.pixelsInch": "像素/英寸",
@@ -114,5 +114,6 @@
   "screens.theme.darkLabel": "深色模式",
   "screens.theme.lightLabel": "浅色模式",
   "share.content.heading": "共享的屏幕比较",
-  "share.content.saveButton": "保存到我的屏幕"
+  "share.content.saveButton": "保存已选",
+  "share.content.shareButton": "分享已选"
 }

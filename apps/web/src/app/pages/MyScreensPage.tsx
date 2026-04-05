@@ -23,8 +23,9 @@ import { useCreateScreenList, useDeleteScreen, useGetScreenList, useShowScreen }
 import { Button } from '@screengeometry/lib-ui/button'
 import { usePageLoader } from '@screengeometry/lib-ui/pageloader'
 import { Skeleton } from '@screengeometry/lib-ui/skeleton'
+import { useToast } from '@screengeometry/lib-ui/toaster'
 import { keepPreviousData } from '@tanstack/react-query'
-import { useNavigate } from '@tanstack/react-router'
+import { useRouter } from '@tanstack/react-router'
 import { Loader2 } from 'lucide-react'
 import { useCallback, useEffect, useState } from 'react'
 import ReactGA from 'react-ga4'
@@ -36,7 +37,8 @@ export const MyScreensPage = () => {
   const {
     state: { screens },
   } = useScreenContext()
-  const navigate = useNavigate()
+  const router = useRouter()
+  const { toast } = useToast()
 
   const [highlighted, setHighlighted] = useState<ScreenItemRender | undefined>()
   const [maxPanelSize, setMaxPanelSize] = useState<Dimensions>({ width, height: 0 })
@@ -141,8 +143,15 @@ export const MyScreensPage = () => {
 
     const selectedScreensToShare = screens.filter((screen) => screen.visible).map((screen) => toShareScreenItem(screen))
 
-    return navigate({ to: '/share', search: { screens: selectedScreensToShare } })
-  }, [navigate, screens])
+    const shareLocation = router.buildLocation({ to: '/share', search: { screens: selectedScreensToShare } })
+    const shareUrl = `${window.location.origin}${shareLocation.href}`
+    await navigator.clipboard.writeText(shareUrl)
+    toast({
+      palette: 'success',
+      title: 'Share Link Copied',
+      description: 'The share link has been copied to the clipboard.',
+    })
+  }, [router, screens, toast])
 
   useEffect(() => {
     const widestScreen = screens.length > 0 ? getMaxScreenSize(screens) : { width: 47, height: 16 }
@@ -157,7 +166,7 @@ export const MyScreensPage = () => {
       <div className='flex flex-1 flex-col gap-10'>
         <div className='flex flex-col items-center gap-4 md:flex-row md:justify-between' ref={setRef}>
           <h2 className='text-primary-label text-xl'>
-            <FormattedMessage id='screens.specs.title' defaultMessage='Screen Specs' />
+            <FormattedMessage id='screens.specs.title' defaultMessage='Specs Table' />
           </h2>
           <div className='flex gap-4 max-[375px]:flex-col max-[375px]:justify-center'>
             <ShareButton onClick={onShare} />

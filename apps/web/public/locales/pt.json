@@ -102,7 +102,7 @@
   "screens.selector.nomatching": "Nenhuma Tela Correspondente encontrada",
   "screens.size.title": "Tamanho e Densidade de Pixels",
   "screens.specs.loadscreens": "Carregar Telas",
-  "screens.specs.title": "Especificações da Tela",
+  "screens.specs.title": "Tabela de especificações",
   "screens.table.action": "Ação",
   "screens.table.dimension": "Dimensão",
   "screens.table.pixelsInch": "Pixels/Polegada",
@@ -115,5 +115,6 @@
   "translations.selector.placeholder": "Procurar tradução...",
   "translations.selector.nomatching": "Nenhuma tradução correspondente encontrada",
   "share.content.heading": "Comparações de telas compartilhadas",
-  "share.content.saveButton": "Salvar em Minhas Telas"
+  "share.content.saveButton": "Salvar Selecionados",
+  "share.content.shareButton": "Compartilhar Selecionados"
 }

@@ -73,6 +73,14 @@ export const SharePage = () => {
     [screens]
   )
 
+  const onSave = useCallback(() => {
+    ReactGA.event({
+      category: 'Button Click',
+      action: 'Clicked save',
+      label: 'Share Page',
+    })
+  }, [])
+
   useEffect(() => {
     const widestScreen = screens.length > 0 ? getMaxScreenSize(screens) : { width: 47, height: 16 }
     setMaxPanelSize({ width, height: Math.round(widestScreen.height * (width / widestScreen.width)) })
@@ -86,9 +94,9 @@ export const SharePage = () => {
       <div className='flex flex-1 flex-col gap-10'>
         <div className='flex flex-col items-center gap-4 md:flex-row md:justify-between' ref={setRef}>
           <h2 className='text-primary-label text-xl'>
-            <FormattedMessage id='screens.specs.title' defaultMessage='Screen Specs' />
+            <FormattedMessage id='screens.specs.title' defaultMessage='Specs Table' />
           </h2>
-          <SaveShareButton />
+          <SaveShareButton onClick={onSave} />
         </div>
 
         <ScreenTable

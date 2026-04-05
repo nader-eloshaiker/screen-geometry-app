@@ -102,7 +102,7 @@
   "screens.selector.nomatching": "பொருந்தும் திரைகள் எதுவும் கிடைக்கவில்லை",
   "screens.size.title": "அளவு மற்றும் பிக்சல் அடர்த்தி",
   "screens.specs.loadscreens": "திரைகளை ஏற்றவும்",
-  "screens.specs.title": "திரை விவரக்குறிப்புகள்",
+  "screens.specs.title": "விவரக்குறிப்பு அட்டவணை",
   "screens.table.action": "செயல்",
   "screens.table.dimension": "பரிமாணம்",
   "screens.table.pixelsInch": "பிக்சல்கள்/அங்குலம்",
@@ -115,5 +115,6 @@
   "translations.selector.placeholder": "மொழிபெயர்ப்பைத் தேடு...",
   "translations.selector.nomatching": "பொருந்தும் மொழிபெயர்ப்புகள் எதுவும் காணப்படவில்லை",
   "share.content.heading": "பகிரப்பட்ட திரை ஒப்பீடுகள்",
-  "share.content.saveButton": "எனது திரைகளில் சேமி"
+  "share.content.saveButton": "தேர்ந்தெடுத்ததைச் சேமி",
+  "share.content.shareButton": "தேர்ந்தெடுத்ததைப் பகிர்"
 }

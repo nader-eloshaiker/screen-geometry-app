@@ -102,7 +102,7 @@
   "screens.selector.nomatching": "ගැලපෙන තිර හමු නොවීය",
   "screens.size.title": "ප්‍රමාණය සහ පික්සල් ඝනත්වය",
   "screens.specs.loadscreens": "තිර පටවන්න",
-  "screens.specs.title": "තිර පිරිවිතර",
+  "screens.specs.title": "පිරිවිතර වලඟුව",
   "screens.table.action": "ක්‍රියාව",
   "screens.table.dimension": "මානය",
   "screens.table.pixelsInch": "පික්සල්/අඟල",
@@ -115,5 +115,6 @@
   "translations.selector.placeholder": "පරිවර්තනය සොයන්න...",
   "translations.selector.nomatching": "ගැලපෙන පරිවර්තන හමු නොවීය",
   "share.content.heading": "බෑහැර තිර සැසඳීම්",
-  "share.content.saveButton": "මගේ තිර වලට සේව් කරන්න"
+  "share.content.saveButton": "තෝරාගත් ඒවා සේව් කරන්න",
+  "share.content.shareButton": "තෝරාගත් ඒවා බෙදාගන්න"
 }
