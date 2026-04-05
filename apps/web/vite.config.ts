@@ -7,8 +7,6 @@ import { join } from 'path'
 import tsconfigPaths from 'vite-tsconfig-paths'
 import { type ViteUserConfig, configDefaults, defineConfig } from 'vitest/config'
 import packageJson from '../../package.json'
-import { SiteMap } from './src/configs/sitemap'
-import { generateSitemap } from './src/configs/tanstack-router-sitemap'
 
 // const isTest = process.env.NODE_ENV === 'test'
 
@@ -64,7 +62,7 @@ export default defineConfig({
     tsconfigPaths(),
     react(),
     tailwindcss(),
-    generateSitemap(SiteMap),
+    // generateSitemap(SiteMap),
     // copySitemapToDistPlugin(),
     tanstackRouter({
       target: 'react',
