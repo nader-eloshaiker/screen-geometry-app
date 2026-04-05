@@ -50,6 +50,7 @@ export const ScreenFormDrawer = ({ open, setOpen, mode, id: editId = '', childre
       queryClient.invalidateQueries({ queryKey: getGetScreenQueryKey(editId) })
     }
   }, [open, isEdit, editId, queryClient])
+
   useApiEffect<ScreenItemResponse>({
     data: screenData,
     error: screenError,

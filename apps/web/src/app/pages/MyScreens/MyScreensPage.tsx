@@ -10,47 +10,33 @@ import { ScreenFormDrawer } from '@/app/components/screen/form/ScreenFormDrawer'
 import { ScreenPanel } from '@/app/components/screen/panel/ScreenPanel'
 import { ScreenTable } from '@/app/components/screen/table/ScreenTable'
 import { Stacked } from '@/app/components/stacked/Stacked'
-import { defaultScreenInputList } from '@/app/constants/defaultScreenList'
-import { useCreateScreenListEffect } from '@/app/hooks/api/useCreateScreenListEffect'
-import { useDeleteScreenEffect } from '@/app/hooks/api/useDeleteScreenEffect'
 import { useGetScreensListEffect } from '@/app/hooks/api/useGetScreensListEffect'
-import { useShowScreenEffect } from '@/app/hooks/api/useShowScreenEffect'
-import { useUpdateScreenListEffect } from '@/app/hooks/api/useUpdateScreenListEffect'
 import { useElementSize } from '@/app/hooks/useElementSize'
 import type { ScreenItemRender } from '@/app/models/screenItemRender'
 import type { MyScreensLocationState } from '@/app/routes/myscreens'
 import { useScreenContext } from '@/app/stores/screen/useScreenContext'
 import { getMaxScreenSize } from '@/app/utils'
-import { isScreenDataEqual, toShareScreenItem, type Dimensions } from '@screengeometry/lib-api/extended'
-import {
-  getGetScreenListQueryKey,
-  useCreateScreenList,
-  useDeleteScreen,
-  useGetScreenList,
-  useShowScreen,
-  useUpdateScreenList,
-} from '@screengeometry/lib-api/spec'
+import { type Dimensions } from '@screengeometry/lib-api/extended'
+import { useGetScreenList } from '@screengeometry/lib-api/spec'
 import { Button } from '@screengeometry/lib-ui/button'
 import { usePageLoader } from '@screengeometry/lib-ui/pageloader'
 import { Skeleton } from '@screengeometry/lib-ui/skeleton'
-import { useToast } from '@screengeometry/lib-ui/toaster'
-import { useQueryClient } from '@tanstack/react-query'
-import { useNavigate, useRouter, useRouterState } from '@tanstack/react-router'
+import { useRouterState } from '@tanstack/react-router'
 import { Loader2 } from 'lucide-react'
-import { useCallback, useEffect, useState } from 'react'
-import ReactGA from 'react-ga4'
-import { FormattedMessage, useIntl } from 'react-intl'
+import { useEffect, useState } from 'react'
+import { FormattedMessage } from 'react-intl'
+import { useCreateListhandler } from './hooks/useCreateListHandler'
+import { useDeleteHandler } from './hooks/useDeleteHandler'
+import { useEditHandler } from './hooks/useEditHandler'
+import { useShareHandler } from './hooks/useShareHandler'
+import { useShowHandler } from './hooks/useShowHandler'
+import { useUpdateListHandler } from './hooks/useUpdateListHandler'
 
 export const MyScreensPage = () => {
   const [setRef, { width }] = useElementSize()
   const {
     state: { screens },
   } = useScreenContext()
-  const router = useRouter()
-  const navigate = useNavigate()
-  const { toast } = useToast()
-  const { formatMessage } = useIntl()
-  const queryClient = useQueryClient()
   const { screens: incomingScreens } = useRouterState({
     select: (s) => (s.location.state as MyScreensLocationState) ?? {},
   })
@@ -71,167 +57,27 @@ export const MyScreensPage = () => {
   })
   useGetScreensListEffect(listData, listError)
 
-  const {
-    isPending: isCreateLoading,
-    mutate: createAction,
-    data: createData,
-    error: createError,
-  } = useCreateScreenList({
-    mutation: {
-      onSuccess: () => queryClient.invalidateQueries({ queryKey: getGetScreenListQueryKey() }),
-    },
-  })
-  useCreateScreenListEffect(createData, createError)
-
-  const {
-    isPending: isUpdateListLoading,
-    mutate: updateListAction,
-    data: updateListData,
-    error: updateListError,
-  } = useUpdateScreenList({
-    mutation: {
-      onSuccess: () => queryClient.invalidateQueries({ queryKey: getGetScreenListQueryKey() }),
-    },
-  })
-  useUpdateScreenListEffect(updateListData, updateListError)
-
-  const {
-    isPending: isDeletePending,
-    mutate: deleteAction,
-    variables: deleteParams,
-    data: deleteData,
-    error: deleteError,
-  } = useDeleteScreen({
-    mutation: {
-      onSuccess: () => queryClient.invalidateQueries({ queryKey: getGetScreenListQueryKey() }),
-    },
-  })
-  useDeleteScreenEffect(deleteData, deleteError)
-
-  const {
-    isPending: isShowPending,
-    mutate: showAction,
-    variables: showParams,
-    data: showData,
-    error: showError,
-  } = useShowScreen({
-    mutation: {
-      onSuccess: () => queryClient.invalidateQueries({ queryKey: getGetScreenListQueryKey() }),
-    },
-  })
-  useShowScreenEffect(showData, showError)
-
   const { isPageLoading } = usePageLoader()
-  const isLoading = isListLoading || isPageLoading || isUpdateListLoading
 
   const [isEditorOpen, setIsEditorOpen] = useState(false)
   const [editMode, setEditMode] = useState<FormModeTypes>(FormModeTypes.create)
   const [editId, setEditId] = useState<string | undefined>()
 
-  const onLoadDefault = () => {
-    ReactGA.event({
-      category: 'Button Click',
-      action: 'Clicked load default list',
-      label: 'Screens Page',
-    })
-    createAction({ data: defaultScreenInputList })
-  }
+  const { isPending: isCreateLoading, onAction: onLoadDefault } = useCreateListhandler()
+  const { isPending: isUpdateListLoading, onAction: onUpdateList } = useUpdateListHandler()
+  const { isPending: isDeletePending, onAction: onDelete, variables: deleteParams } = useDeleteHandler()
+  const { isPending: isShowPending, onAction: onShow, variables: showParams } = useShowHandler()
 
-  const onUpdateList = useCallback(
-    (newScreens: NonNullable<MyScreensLocationState['screens']>) => {
-      ReactGA.event({
-        category: 'Button Click',
-        action: 'Clicked update list with shared screens',
-        label: 'My Screens Page',
-      })
+  const isLoading = isListLoading || isPageLoading || isUpdateListLoading
 
-      const newScreenInputs = newScreens.map((screen) => ({
-        diagonalSize: screen.data.diagonalSize,
-        aspectRatio: screen.data.aspectRatio,
-        hRes: screen.data.hRes,
-        vRes: screen.data.vRes,
-        lightColor: screen.color.lightColor,
-        darkColor: screen.color.darkColor,
-      }))
-
-      updateListAction({
-        data: newScreenInputs,
-      })
-    },
-    [updateListAction]
-  )
-
-  const onEdit = useCallback((id: string) => {
-    ReactGA.event({
-      category: 'Button Click',
-      action: 'Clicked edit',
-      label: 'My Screens Page',
-    })
-    setIsEditorOpen(true)
-    setEditMode(FormModeTypes.edit)
-    setEditId(id)
-  }, [])
-
-  const onShow = useCallback(
-    (id: string) => {
-      ReactGA.event({
-        category: 'Checkbox Click',
-        action: 'Clicked show',
-        label: 'My Screens Page',
-      })
-
-      showAction({ id })
-    },
-    [showAction]
-  )
-
-  const onDelete = useCallback(
-    (id: string) => {
-      ReactGA.event({
-        category: 'Button Click',
-        action: 'Clicked delete',
-        label: 'My Screens Page',
-      })
-      deleteAction({ id })
-    },
-    [deleteAction]
-  )
-
-  const onShare = useCallback(async () => {
-    ReactGA.event({
-      category: 'Button Click',
-      action: 'Clicked share',
-      label: 'My Screens Page',
-    })
-
-    const selectedScreensToShare = screens.filter((screen) => screen.visible).map((screen) => toShareScreenItem(screen))
-
-    const shareLocation = router.buildLocation({ to: '/share', search: { screens: selectedScreensToShare } })
-    const shareUrl = `${window.location.origin}${shareLocation.href}`
-    await navigator.clipboard.writeText(shareUrl)
-    toast({
-      palette: 'info',
-      title: formatMessage({ id: 'share.shareNotification.title', defaultMessage: 'Share Link Copied' }),
-      description: formatMessage({
-        id: 'share.shareNotification.description',
-        defaultMessage: 'The share link has been copied to the clipboard.',
-      }),
-    })
-  }, [formatMessage, router, screens, toast])
-
-  useEffect(() => {
-    if (!incomingScreens?.length || isLoading || isUpdateListLoading) return
-
-    const missingScreens = incomingScreens.filter(
-      (incoming) => !screens.some((existing) => isScreenDataEqual(existing.data, incoming))
-    )
-
-    if (missingScreens.length > 0) {
-      // Clear router state immediately to prevent re-processing on refresh
-      navigate({ to: '/myscreens', state: {}, replace: true })
-      onUpdateList(missingScreens)
-    }
-  }, [incomingScreens, screens, isLoading, isUpdateListLoading, onUpdateList, navigate])
+  const { onAction: onEdit } = useEditHandler({ setIsEditorOpen, setEditMode, setEditId })
+  const { onAction: onShare } = useShareHandler({
+    screens,
+    incomingScreens,
+    isLoading,
+    isUpdateListLoading,
+    onUpdateList,
+  })
 
   useEffect(() => {
     const widestScreen = screens.length > 0 ? getMaxScreenSize(screens) : { width: 47, height: 16 }

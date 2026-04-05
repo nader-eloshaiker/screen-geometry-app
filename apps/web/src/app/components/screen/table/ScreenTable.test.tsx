@@ -1,5 +1,5 @@
 import type { ScreenItemRender } from '@/app/models/screenItemRender'
-import { MyScreensPage } from '@/app/pages/MyScreensPage'
+import { MyScreensPage } from '@/app/pages/MyScreens/MyScreensPage'
 import { QueryProvider } from '@/app/stores/query/QueryProvider'
 import { normaliseScreenRender } from '@/app/stores/screen/ScreenManager'
 import { ScreenProvider } from '@/app/stores/screen/ScreenProvider'

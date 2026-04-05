@@ -1,30 +1,19 @@
 import RefreshIcon from '@/app/assets/icons/Refresh'
 import { FormButton } from '@/app/components/buttons/FormButton'
-import { useCreateScreenEffect } from '@/app/hooks/api/useCreateScreenEffect'
-import { useUpdateScreenEffect } from '@/app/hooks/api/useUpdateScreenEffect'
 import { DarkMode, LightMode } from '@/app/stores/theme/Theme.types'
 import { createScreenColors } from '@/app/utils'
 import { zodResolver } from '@hookform/resolvers/zod'
-import {
-  getGetScreenListQueryKey,
-  getGetScreenQueryKey,
-  ScreenColor,
-  type ScreenInput,
-  type SearchItem,
-  useCreateScreen,
-  useUpdateScreen,
-} from '@screengeometry/lib-api/spec'
+import { ScreenColor, type ScreenInput, type SearchItem } from '@screengeometry/lib-api/spec'
 import { Button } from '@screengeometry/lib-ui/button'
 import { Form } from '@screengeometry/lib-ui/form'
 import { Separator } from '@screengeometry/lib-ui/separator'
-import { useQueryClient } from '@tanstack/react-query'
-import { useEffect, useState } from 'react'
-import ReactGA from 'react-ga4'
+import { useCallback, useEffect, useState } from 'react'
 import { type SubmitHandler, useForm } from 'react-hook-form'
 import { FormattedMessage, useIntl } from 'react-intl'
 import { ColorField } from './fields/ColorField'
 import { InputField } from './fields/InputField'
-import { FormModeTypes } from './FormMode'
+import { useCreateHandler } from './hooks/useCreateHandler'
+import { useUpdateHandler } from './hooks/useUpdateHandler'
 import { FormSubmitType, ScreenFormSchema } from './ScreenFormSchema'
 
 type Props = React.PropsWithChildren & {
@@ -46,32 +35,9 @@ export const ScreenForm = ({
 }: Props) => {
   const [toggleAnimation, setToggleAnimation] = useState<boolean>(false)
   const [color] = useState<ScreenColor>(createScreenColors)
-  const queryClient = useQueryClient()
 
-  const {
-    isPending: isCreateLoading,
-    mutate: createAction,
-    data: createData,
-    error: createError,
-  } = useCreateScreen({
-    mutation: {
-      onSuccess: () => queryClient.invalidateQueries({ queryKey: getGetScreenListQueryKey() }),
-    },
-  })
-  useCreateScreenEffect(createData, createError)
-
-  const {
-    isPending: isUpdateLoading,
-    mutate: updateAction,
-    data: updateData,
-    error: updateError,
-  } = useUpdateScreen({
-    mutation: {
-      onSuccess: () =>
-        queryClient.invalidateQueries({ queryKey: [getGetScreenListQueryKey(), getGetScreenQueryKey()] }),
-    },
-  })
-  useUpdateScreenEffect(updateData, updateError)
+  const { isPending: isCreateLoading, onAction: createAction } = useCreateHandler({ handleClose: onClose })
+  const { isPending: isUpdateLoading, onAction: updateAction } = useUpdateHandler({ handleClose: onClose })
 
   const isLoading = isCreateLoading || isUpdateLoading || isFormLoading
 
@@ -116,29 +82,26 @@ export const ScreenForm = ({
     setValue('lightColor', c.lightColor, { shouldDirty: true })
   }
 
-  const handleClose = () => {
+  const handleClose = useCallback(() => {
     onClose()
     reset()
-  }
+  }, [onClose, reset])
 
-  const handleReset = () => {
+  const handleReset = useCallback(() => {
     onClearPredefinedSelection()
     reset()
-  }
+  }, [onClearPredefinedSelection, reset])
 
-  const actionSubmit: SubmitHandler<FormSubmitType> = (form: FormSubmitType) => {
-    ReactGA.event({
-      category: 'Submit Button Click',
-      action: `Submited ${editId ? FormModeTypes.edit : FormModeTypes.create} Screen Button`,
-      label: 'Screens Page',
-    })
-
-    if (editId) {
-      updateAction({ id: editId, data: form as ScreenInput }, { onSuccess: handleClose })
-    } else {
-      createAction({ data: form as ScreenInput }, { onSuccess: handleClose })
-    }
-  }
+  const actionSubmit: SubmitHandler<FormSubmitType> = useCallback(
+    (form: FormSubmitType) => {
+      if (editId) {
+        updateAction(form as ScreenInput, editId)
+      } else {
+        createAction(form as ScreenInput)
+      }
+    },
+    [createAction, updateAction, editId]
+  )
 
   return (
     <Form {...form}>
