@@ -8,6 +8,7 @@ import ReactGA from 'react-ga4'
 export const useCreateListhandler = () => {
   const query = useCreateScreenList({
     mutation: {
+      // invalidate getGetScreenListQueryKey to force refetch
       onSuccess: () => queryClient.invalidateQueries({ queryKey: getGetScreenListQueryKey() }),
     },
   })
