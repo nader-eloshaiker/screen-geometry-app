@@ -54,7 +54,7 @@ export const ScreenSelector = ({
   }, [open])
 
   return (
-    <div className='flex w-full flex-col gap-2 py-8' ref={setRef}>
+    <div className='flex w-full flex-col gap-2' ref={setRef}>
       <Label palette='mono' htmlFor='searchList'>
         <FormattedMessage id='screens.selector.description' defaultMessage='Pre fill the form from list of Screens' />
       </Label>

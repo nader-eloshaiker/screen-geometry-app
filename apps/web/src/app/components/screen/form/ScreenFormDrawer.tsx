@@ -104,8 +104,8 @@ export const ScreenFormDrawer = ({ open, setOpen, mode, id: editId = '', childre
   return (
     <Sheet open={open} onOpenChange={setOpen}>
       <SheetTrigger asChild>{children}</SheetTrigger>
-      <SheetContent side={sheetDir} className='flex flex-col overflow-auto p-6'>
-        <SheetHeader>
+      <SheetContent side={sheetDir} className='flex flex-col gap-10 overflow-auto p-6'>
+        <SheetHeader className='p-0 pt-6'>
           <SheetTitle className='text-start'>
             {editId ? (
               <FormattedMessage id='screens.form.titleEdit' defaultMessage='Edit Screen' />
