@@ -23,6 +23,6 @@ const Component = () => {
   )
 }
 
-export const Route = createLazyFileRoute('/share/')({
+export const Route = createLazyFileRoute('/share')({
   component: Component,
 })

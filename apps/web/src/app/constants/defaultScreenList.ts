@@ -55,6 +55,6 @@ export const defaultScreenInputList: ScreenInputList = [
     vRes: 1440,
     aspectRatio: '21:9',
     lightColor: '#EE5E83',
-    darkColor: '#14857B',
+    darkColor: '#8A0F2F',
   },
 ]

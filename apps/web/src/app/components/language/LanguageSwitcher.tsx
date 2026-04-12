@@ -63,7 +63,7 @@ export const LanguageSwitcher = () => {
     <Popover open={open} onOpenChange={setOpen} modal={true}>
       <PopoverTrigger asChild>
         <Button
-          mode='outline'
+          mode='ghost'
           palette='secondary'
           role='combobox'
           dimension='none'

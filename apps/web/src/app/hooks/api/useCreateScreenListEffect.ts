@@ -1,9 +1,17 @@
+import { ScreenEvent } from '@/app/stores/screen/ScreenManager'
+import { useScreenContext } from '@/app/stores/screen/useScreenContext'
 import type { ErrorResponse, ScreenListResponse } from '@screengeometry/lib-api/spec'
-import { useMemo } from 'react'
+import { useCallback, useMemo } from 'react'
 import { useIntl } from 'react-intl'
 import { useApiEffect } from './useApiEffect'
 
 export const useCreateScreenListEffect = (data: ScreenListResponse | undefined, error: ErrorResponse | null) => {
+  const { dispatch } = useScreenContext()
+  const responseHandler = useCallback(
+    (data: ScreenListResponse) => dispatch({ type: ScreenEvent.load, payload: data.list }),
+    [dispatch]
+  )
+
   const { formatMessage } = useIntl()
   const successNotification = useMemo(
     () => ({
@@ -19,6 +27,7 @@ export const useCreateScreenListEffect = (data: ScreenListResponse | undefined, 
   useApiEffect<ScreenListResponse>({
     data,
     error,
+    responseHandler,
     successNotification,
   })
 }

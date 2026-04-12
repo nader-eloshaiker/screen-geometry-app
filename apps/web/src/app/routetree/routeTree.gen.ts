@@ -11,17 +11,20 @@
 import { createFileRoute } from '@tanstack/react-router'
 
 import { Route as rootRouteImport } from './../routes/__root'
+import { Route as ShareRouteImport } from './../routes/share'
 import { Route as ScreensRouteImport } from './../routes/screens'
 import { Route as MyscreensRouteImport } from './../routes/myscreens'
-import { Route as ShareIndexRouteImport } from './../routes/share/index'
+import { Route as PresetIndexRouteImport } from './../routes/preset/index'
 
 const HelpLazyRouteImport = createFileRoute('/help')()
 const ContactLazyRouteImport = createFileRoute('/contact')()
 const IndexLazyRouteImport = createFileRoute('/')()
-const ShareAllLazyRouteImport = createFileRoute('/share/all')()
-const Share32by9LazyRouteImport = createFileRoute('/share/32by9')()
-const Share21by9LazyRouteImport = createFileRoute('/share/21by9')()
-const Share16by9LazyRouteImport = createFileRoute('/share/16by9')()
+const PresetProLazyRouteImport = createFileRoute('/preset/pro')()
+const PresetPopularLazyRouteImport = createFileRoute('/preset/popular')()
+const PresetGamerLazyRouteImport = createFileRoute('/preset/gamer')()
+const Preset32by9LazyRouteImport = createFileRoute('/preset/32by9')()
+const Preset21by9LazyRouteImport = createFileRoute('/preset/21by9')()
+const Preset16by9LazyRouteImport = createFileRoute('/preset/16by9')()
 
 const HelpLazyRoute = HelpLazyRouteImport.update({
   id: '/help',
@@ -33,6 +36,11 @@ const ContactLazyRoute = ContactLazyRouteImport.update({
   path: '/contact',
   getParentRoute: () => rootRouteImport,
 } as any).lazy(() => import('./../routes/contact.lazy').then((d) => d.Route))
+const ShareRoute = ShareRouteImport.update({
+  id: '/share',
+  path: '/share',
+  getParentRoute: () => rootRouteImport,
+} as any).lazy(() => import('./../routes/share.lazy').then((d) => d.Route))
 const ScreensRoute = ScreensRouteImport.update({
   id: '/screens',
   path: '/screens',
@@ -48,76 +56,97 @@ const IndexLazyRoute = IndexLazyRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any).lazy(() => import('./../routes/index.lazy').then((d) => d.Route))
-const ShareIndexRoute = ShareIndexRouteImport.update({
-  id: '/share/',
-  path: '/share/',
+const PresetIndexRoute = PresetIndexRouteImport.update({
+  id: '/preset/',
+  path: '/preset/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PresetProLazyRoute = PresetProLazyRouteImport.update({
+  id: '/preset/pro',
+  path: '/preset/pro',
+  getParentRoute: () => rootRouteImport,
+} as any).lazy(() => import('./../routes/preset/pro.lazy').then((d) => d.Route))
+const PresetPopularLazyRoute = PresetPopularLazyRouteImport.update({
+  id: '/preset/popular',
+  path: '/preset/popular',
   getParentRoute: () => rootRouteImport,
 } as any).lazy(() =>
-  import('./../routes/share/index.lazy').then((d) => d.Route),
+  import('./../routes/preset/popular.lazy').then((d) => d.Route),
 )
-const ShareAllLazyRoute = ShareAllLazyRouteImport.update({
-  id: '/share/all',
-  path: '/share/all',
-  getParentRoute: () => rootRouteImport,
-} as any).lazy(() => import('./../routes/share/all.lazy').then((d) => d.Route))
-const Share32by9LazyRoute = Share32by9LazyRouteImport.update({
-  id: '/share/32by9',
-  path: '/share/32by9',
+const PresetGamerLazyRoute = PresetGamerLazyRouteImport.update({
+  id: '/preset/gamer',
+  path: '/preset/gamer',
   getParentRoute: () => rootRouteImport,
 } as any).lazy(() =>
-  import('./../routes/share/32by9.lazy').then((d) => d.Route),
+  import('./../routes/preset/gamer.lazy').then((d) => d.Route),
 )
-const Share21by9LazyRoute = Share21by9LazyRouteImport.update({
-  id: '/share/21by9',
-  path: '/share/21by9',
+const Preset32by9LazyRoute = Preset32by9LazyRouteImport.update({
+  id: '/preset/32by9',
+  path: '/preset/32by9',
   getParentRoute: () => rootRouteImport,
 } as any).lazy(() =>
-  import('./../routes/share/21by9.lazy').then((d) => d.Route),
+  import('./../routes/preset/32by9.lazy').then((d) => d.Route),
 )
-const Share16by9LazyRoute = Share16by9LazyRouteImport.update({
-  id: '/share/16by9',
-  path: '/share/16by9',
+const Preset21by9LazyRoute = Preset21by9LazyRouteImport.update({
+  id: '/preset/21by9',
+  path: '/preset/21by9',
   getParentRoute: () => rootRouteImport,
 } as any).lazy(() =>
-  import('./../routes/share/16by9.lazy').then((d) => d.Route),
+  import('./../routes/preset/21by9.lazy').then((d) => d.Route),
+)
+const Preset16by9LazyRoute = Preset16by9LazyRouteImport.update({
+  id: '/preset/16by9',
+  path: '/preset/16by9',
+  getParentRoute: () => rootRouteImport,
+} as any).lazy(() =>
+  import('./../routes/preset/16by9.lazy').then((d) => d.Route),
 )
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexLazyRoute
   '/myscreens': typeof MyscreensRoute
   '/screens': typeof ScreensRoute
+  '/share': typeof ShareRoute
   '/contact': typeof ContactLazyRoute
   '/help': typeof HelpLazyRoute
-  '/share/16by9': typeof Share16by9LazyRoute
-  '/share/21by9': typeof Share21by9LazyRoute
-  '/share/32by9': typeof Share32by9LazyRoute
-  '/share/all': typeof ShareAllLazyRoute
-  '/share/': typeof ShareIndexRoute
+  '/preset/16by9': typeof Preset16by9LazyRoute
+  '/preset/21by9': typeof Preset21by9LazyRoute
+  '/preset/32by9': typeof Preset32by9LazyRoute
+  '/preset/gamer': typeof PresetGamerLazyRoute
+  '/preset/popular': typeof PresetPopularLazyRoute
+  '/preset/pro': typeof PresetProLazyRoute
+  '/preset/': typeof PresetIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexLazyRoute
   '/myscreens': typeof MyscreensRoute
   '/screens': typeof ScreensRoute
+  '/share': typeof ShareRoute
   '/contact': typeof ContactLazyRoute
   '/help': typeof HelpLazyRoute
-  '/share/16by9': typeof Share16by9LazyRoute
-  '/share/21by9': typeof Share21by9LazyRoute
-  '/share/32by9': typeof Share32by9LazyRoute
-  '/share/all': typeof ShareAllLazyRoute
-  '/share': typeof ShareIndexRoute
+  '/preset/16by9': typeof Preset16by9LazyRoute
+  '/preset/21by9': typeof Preset21by9LazyRoute
+  '/preset/32by9': typeof Preset32by9LazyRoute
+  '/preset/gamer': typeof PresetGamerLazyRoute
+  '/preset/popular': typeof PresetPopularLazyRoute
+  '/preset/pro': typeof PresetProLazyRoute
+  '/preset': typeof PresetIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexLazyRoute
   '/myscreens': typeof MyscreensRoute
   '/screens': typeof ScreensRoute
+  '/share': typeof ShareRoute
   '/contact': typeof ContactLazyRoute
   '/help': typeof HelpLazyRoute
-  '/share/16by9': typeof Share16by9LazyRoute
-  '/share/21by9': typeof Share21by9LazyRoute
-  '/share/32by9': typeof Share32by9LazyRoute
-  '/share/all': typeof ShareAllLazyRoute
-  '/share/': typeof ShareIndexRoute
+  '/preset/16by9': typeof Preset16by9LazyRoute
+  '/preset/21by9': typeof Preset21by9LazyRoute
+  '/preset/32by9': typeof Preset32by9LazyRoute
+  '/preset/gamer': typeof PresetGamerLazyRoute
+  '/preset/popular': typeof PresetPopularLazyRoute
+  '/preset/pro': typeof PresetProLazyRoute
+  '/preset/': typeof PresetIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -125,50 +154,62 @@ export interface FileRouteTypes {
     | '/'
     | '/myscreens'
     | '/screens'
+    | '/share'
     | '/contact'
     | '/help'
-    | '/share/16by9'
-    | '/share/21by9'
-    | '/share/32by9'
-    | '/share/all'
-    | '/share/'
+    | '/preset/16by9'
+    | '/preset/21by9'
+    | '/preset/32by9'
+    | '/preset/gamer'
+    | '/preset/popular'
+    | '/preset/pro'
+    | '/preset/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/myscreens'
     | '/screens'
+    | '/share'
     | '/contact'
     | '/help'
-    | '/share/16by9'
-    | '/share/21by9'
-    | '/share/32by9'
-    | '/share/all'
-    | '/share'
+    | '/preset/16by9'
+    | '/preset/21by9'
+    | '/preset/32by9'
+    | '/preset/gamer'
+    | '/preset/popular'
+    | '/preset/pro'
+    | '/preset'
   id:
     | '__root__'
     | '/'
     | '/myscreens'
     | '/screens'
+    | '/share'
     | '/contact'
     | '/help'
-    | '/share/16by9'
-    | '/share/21by9'
-    | '/share/32by9'
-    | '/share/all'
-    | '/share/'
+    | '/preset/16by9'
+    | '/preset/21by9'
+    | '/preset/32by9'
+    | '/preset/gamer'
+    | '/preset/popular'
+    | '/preset/pro'
+    | '/preset/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexLazyRoute: typeof IndexLazyRoute
   MyscreensRoute: typeof MyscreensRoute
   ScreensRoute: typeof ScreensRoute
+  ShareRoute: typeof ShareRoute
   ContactLazyRoute: typeof ContactLazyRoute
   HelpLazyRoute: typeof HelpLazyRoute
-  Share16by9LazyRoute: typeof Share16by9LazyRoute
-  Share21by9LazyRoute: typeof Share21by9LazyRoute
-  Share32by9LazyRoute: typeof Share32by9LazyRoute
-  ShareAllLazyRoute: typeof ShareAllLazyRoute
-  ShareIndexRoute: typeof ShareIndexRoute
+  Preset16by9LazyRoute: typeof Preset16by9LazyRoute
+  Preset21by9LazyRoute: typeof Preset21by9LazyRoute
+  Preset32by9LazyRoute: typeof Preset32by9LazyRoute
+  PresetGamerLazyRoute: typeof PresetGamerLazyRoute
+  PresetPopularLazyRoute: typeof PresetPopularLazyRoute
+  PresetProLazyRoute: typeof PresetProLazyRoute
+  PresetIndexRoute: typeof PresetIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -185,6 +226,13 @@ declare module '@tanstack/react-router' {
       path: '/contact'
       fullPath: '/contact'
       preLoaderRoute: typeof ContactLazyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/share': {
+      id: '/share'
+      path: '/share'
+      fullPath: '/share'
+      preLoaderRoute: typeof ShareRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/screens': {
@@ -208,39 +256,53 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexLazyRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/share/': {
-      id: '/share/'
-      path: '/share'
-      fullPath: '/share/'
-      preLoaderRoute: typeof ShareIndexRouteImport
+    '/preset/': {
+      id: '/preset/'
+      path: '/preset'
+      fullPath: '/preset/'
+      preLoaderRoute: typeof PresetIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/share/all': {
-      id: '/share/all'
-      path: '/share/all'
-      fullPath: '/share/all'
-      preLoaderRoute: typeof ShareAllLazyRouteImport
+    '/preset/pro': {
+      id: '/preset/pro'
+      path: '/preset/pro'
+      fullPath: '/preset/pro'
+      preLoaderRoute: typeof PresetProLazyRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/share/32by9': {
-      id: '/share/32by9'
-      path: '/share/32by9'
-      fullPath: '/share/32by9'
-      preLoaderRoute: typeof Share32by9LazyRouteImport
+    '/preset/popular': {
+      id: '/preset/popular'
+      path: '/preset/popular'
+      fullPath: '/preset/popular'
+      preLoaderRoute: typeof PresetPopularLazyRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/share/21by9': {
-      id: '/share/21by9'
-      path: '/share/21by9'
-      fullPath: '/share/21by9'
-      preLoaderRoute: typeof Share21by9LazyRouteImport
+    '/preset/gamer': {
+      id: '/preset/gamer'
+      path: '/preset/gamer'
+      fullPath: '/preset/gamer'
+      preLoaderRoute: typeof PresetGamerLazyRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/share/16by9': {
-      id: '/share/16by9'
-      path: '/share/16by9'
-      fullPath: '/share/16by9'
-      preLoaderRoute: typeof Share16by9LazyRouteImport
+    '/preset/32by9': {
+      id: '/preset/32by9'
+      path: '/preset/32by9'
+      fullPath: '/preset/32by9'
+      preLoaderRoute: typeof Preset32by9LazyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/preset/21by9': {
+      id: '/preset/21by9'
+      path: '/preset/21by9'
+      fullPath: '/preset/21by9'
+      preLoaderRoute: typeof Preset21by9LazyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/preset/16by9': {
+      id: '/preset/16by9'
+      path: '/preset/16by9'
+      fullPath: '/preset/16by9'
+      preLoaderRoute: typeof Preset16by9LazyRouteImport
       parentRoute: typeof rootRouteImport
     }
   }
@@ -250,13 +312,16 @@ const rootRouteChildren: RootRouteChildren = {
   IndexLazyRoute: IndexLazyRoute,
   MyscreensRoute: MyscreensRoute,
   ScreensRoute: ScreensRoute,
+  ShareRoute: ShareRoute,
   ContactLazyRoute: ContactLazyRoute,
   HelpLazyRoute: HelpLazyRoute,
-  Share16by9LazyRoute: Share16by9LazyRoute,
-  Share21by9LazyRoute: Share21by9LazyRoute,
-  Share32by9LazyRoute: Share32by9LazyRoute,
-  ShareAllLazyRoute: ShareAllLazyRoute,
-  ShareIndexRoute: ShareIndexRoute,
+  Preset16by9LazyRoute: Preset16by9LazyRoute,
+  Preset21by9LazyRoute: Preset21by9LazyRoute,
+  Preset32by9LazyRoute: Preset32by9LazyRoute,
+  PresetGamerLazyRoute: PresetGamerLazyRoute,
+  PresetPopularLazyRoute: PresetPopularLazyRoute,
+  PresetProLazyRoute: PresetProLazyRoute,
+  PresetIndexRoute: PresetIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

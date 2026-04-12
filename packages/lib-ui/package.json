@@ -17,6 +17,7 @@
     "./input": "./src/components/input/index.ts",
     "./label": "./src/components/label/index.ts",
     "./navigationlink": "./src/components/navigationlink/index.ts",
+    "./navigationmenu": "./src/components/navigationmenu/index.ts",
     "./pageloader": "./src/components/pageloader/index.ts",
     "./popover": "./src/components/popover/index.ts",
     "./pagination": "./src/components/pagination/index.ts",
@@ -71,6 +72,7 @@
     "cmdk": "^1.1.1",
     "date-fns": "^4.1.0",
     "lucide-react": "catalog:react19",
+    "radix-ui": "^1.4.3",
     "ts-pattern": "catalog:typescript"
   },
   "peerDependencies": {
