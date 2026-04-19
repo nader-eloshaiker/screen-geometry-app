@@ -1,3 +1,4 @@
+import { TranslateMessage } from '@/app/stores/translation'
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -10,7 +11,6 @@ import { cn } from '@screengeometry/lib-ui/utils'
 import { Link, ToOptions, useMatchRoute } from '@tanstack/react-router'
 import { Check } from 'lucide-react'
 import { PropsWithChildren } from 'react'
-import { FormattedMessage } from 'react-intl'
 import { Menu } from './Menu'
 
 const NavLink = ({ className, children, ...linkOptions }: PropsWithChildren<ToOptions & { className?: string }>) => {
@@ -78,20 +78,20 @@ export const HeaderNavLarge = () => {
           route.type === 'link' ? (
             <NavigationMenuItem key={route.id}>
               <NavLink {...route.linkOptions} className='min-w-28'>
-                <FormattedMessage id={route.id} defaultMessage={route.defaultMessage} />
+                <TranslateMessage id={route.id} />
               </NavLink>
             </NavigationMenuItem>
           ) : (
             <NavigationMenuItem key={route.id}>
               <NavigationMenuTrigger data-active={isPresetActive} className='min-w-28 text-base font-semibold'>
-                <FormattedMessage id={route.id} defaultMessage={route.defaultMessage} />
+                <TranslateMessage id={route.id} />
               </NavigationMenuTrigger>
               <NavigationMenuContent className='relative z-10'>
                 <ul className='w-40'>
                   {route.groupOptions.map((item) => (
                     <li key={item.id}>
                       <SubMenuNavLink {...item.linkOptions} className='w-full'>
-                        <FormattedMessage id={item.id} defaultMessage={item.defaultMessage} />
+                        <TranslateMessage id={item.id} />
                       </SubMenuNavLink>
                     </li>
                   ))}

@@ -1,6 +1,7 @@
 import { type ScreenItemRender } from '@/app/models/screenItemRender'
 import { DarkMode, type TThemeMode } from '@/app/stores/theme/Theme.types'
 import { useTheme } from '@/app/stores/theme/useTheme'
+import { TranslateMessage } from '@/app/stores/translation'
 import { type ScreenColor } from '@screengeometry/lib-api/spec'
 import { Button } from '@screengeometry/lib-ui/button'
 import { Checkbox } from '@screengeometry/lib-ui/checkbox'
@@ -9,7 +10,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@
 import { cn } from '@screengeometry/lib-ui/utils'
 import { Loader2, LoaderCircle, Pencil, X } from 'lucide-react'
 import { type Dispatch, type SetStateAction } from 'react'
-import { FormattedMessage, FormattedNumber } from 'react-intl'
+import { FormattedNumber } from 'react-intl'
 import styled from 'styled-components'
 import { match, P } from 'ts-pattern'
 
@@ -118,28 +119,28 @@ export const ScreenTable = ({
       <TableHeader>
         <TableRow>
           <TableHead className='text-center'>
-            <FormattedMessage id='screens.table.select' defaultMessage='Select' />
+            <TranslateMessage id='screens.table.select' />
           </TableHead>
           <TableHead className='text-center'>
-            <FormattedMessage id='screens.table.size' defaultMessage='Size' />
+            <TranslateMessage id='screens.table.size' />
           </TableHead>
           <TableHead className='text-center'>
-            <FormattedMessage id='screens.table.ratio' defaultMessage='Ratio' />
+            <TranslateMessage id='screens.table.ratio' />
           </TableHead>
           <TableHead className='hidden text-center sm:table-cell'>
-            <FormattedMessage id='screens.table.dimension' defaultMessage='Dimension' />
+            <TranslateMessage id='screens.table.dimension' />
           </TableHead>
           <TableHead className='hidden text-center md:table-cell'>
-            <FormattedMessage id='screens.table.resolution' defaultMessage='Resolution' />
+            <TranslateMessage id='screens.table.resolution' />
           </TableHead>
           <TableHead className='text-center'>
             <span className='md:hidden'>PPI</span>
             <span className='hidden text-nowrap md:block'>
-              <FormattedMessage id='screens.table.pixelsInch' defaultMessage='Pixels/Inch' />
+              <TranslateMessage id='screens.table.pixelsInch' />
             </span>
           </TableHead>
           <TableHead className='text-center'>
-            <FormattedMessage id='screens.table.action' defaultMessage='Action' />
+            <TranslateMessage id='screens.table.action' />
           </TableHead>
         </TableRow>
       </TableHeader>

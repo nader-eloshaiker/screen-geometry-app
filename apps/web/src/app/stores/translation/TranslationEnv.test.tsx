@@ -3,7 +3,7 @@ import { getGetTranslationsResponseMock, useGetTranslations } from '@screengeome
 import { PageLoaderProvider } from '@screengeometry/lib-ui/pageloader'
 import { render } from '@testing-library/react'
 import { vi } from 'vitest'
-import { EnvTranslationProvider } from './EnvTranslationProvider'
+import { TranslationEnvProvider } from './TranslationEnvProvider'
 
 vi.mock('react-intl', () => ({
   IntlProvider: vi.fn(({ children }) => <div data-testid='Intl-provider'>{children}</div>),
@@ -11,7 +11,7 @@ vi.mock('react-intl', () => ({
 
 const TestHarness = ({ children }: { children: React.ReactNode }) => (
   <PageLoaderProvider initialLoadingKeys={['aaa']}>
-    <EnvTranslationProvider translationsReadyKey={'aaa'}>{children}</EnvTranslationProvider>
+    <TranslationEnvProvider translationsReadyKey={'aaa'}>{children}</TranslationEnvProvider>
   </PageLoaderProvider>
 )
 
@@ -43,9 +43,9 @@ describe('#EnvironmentTranslations', () => {
 
       const test = render(
         <PageLoaderProvider initialLoadingKeys={['aaa']}>
-          <EnvTranslationProvider translationsReadyKey={'aaa'}>
+          <TranslationEnvProvider translationsReadyKey={'aaa'}>
             <div>Child Component</div>
-          </EnvTranslationProvider>
+          </TranslationEnvProvider>
         </PageLoaderProvider>
       )
 

@@ -1,8 +1,8 @@
 import { ScreenEvent } from '@/app/stores/screen/ScreenManager'
 import { useScreenContext } from '@/app/stores/screen/useScreenContext'
+import { useTranslation } from '@/app/stores/translation'
 import type { ErrorResponse, ScreenListResponse } from '@screengeometry/lib-api/spec'
 import { useCallback, useMemo } from 'react'
-import { useIntl } from 'react-intl'
 import { useApiEffect } from './useApiEffect'
 
 export const useCreateScreenListEffect = (data: ScreenListResponse | undefined, error: ErrorResponse | null) => {
@@ -12,14 +12,11 @@ export const useCreateScreenListEffect = (data: ScreenListResponse | undefined, 
     [dispatch]
   )
 
-  const { formatMessage } = useIntl()
+  const { formatMessage } = useTranslation()
   const successNotification = useMemo(
     () => ({
-      title: formatMessage({ id: 'api.created.title', defaultMessage: 'Created' }),
-      message: formatMessage({
-        id: 'api.createScreenList.successNotification.message',
-        defaultMessage: 'A list of common Screen specifications has been generated',
-      }),
+      title: formatMessage('api.created.title'),
+      message: formatMessage('api.createScreenList.successNotification.message'),
     }),
     [formatMessage]
   )

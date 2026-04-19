@@ -1,34 +1,24 @@
+import { TranslateMessage } from '@/app/stores/translation'
 import { NavigationLink } from '@screengeometry/lib-ui/navigationlink'
-import { FormattedMessage } from 'react-intl'
 
 export const HomePage = () => {
   return (
     <div className='h-full'>
       <h1 className='mb-4 text-3xl'>
-        <FormattedMessage id='home.content.heading' defaultMessage='Welcome to Screen Geometry' />
+        <TranslateMessage id='home.content.heading' />
       </h1>
       <p className='mb-4'>
-        <FormattedMessage id='home.content.solutation' defaultMessage="Hey there, I'm Nader!" />
+        <TranslateMessage id='home.content.solutation' />
       </p>
       <p className='mb-4'>
-        <FormattedMessage
-          id='home.content.p1'
-          defaultMessage=" I know choosing a monitor, phone or even a tablet, based on the LCD screen information can be a real
-            head-scratcher because we have so much choice. Well I've cooked up a handy tool that lets you compare
-            screen sizes and resolutions to help you decide."
-        />
+        <TranslateMessage id='home.content.p1' />
       </p>
       <p className='mb-4'>
-        <FormattedMessage
-          id='home.content.p2'
-          defaultMessage="Whether you're a gamer on the hunt for the perfect screen to level up your gaming experience or a
-            design enthusiast in need of pixel-perfect clarity, this tool will help you find the right screen."
-        />
+        <TranslateMessage id='home.content.p2' />
       </p>
       <p className='mb-4'>
-        <FormattedMessage
+        <TranslateMessage
           id='home.content.callToAction'
-          defaultMessage='Click <cta></cta> to start your journey into finding the right screen.'
           values={{
             cta: (_children) => (
               <span className='mx-2'>
@@ -38,7 +28,7 @@ export const HomePage = () => {
                   // mode='ghost'
                   to='/myscreens'
                 >
-                  <FormattedMessage id='header.large.screens' defaultMessage='Screens' />
+                  <TranslateMessage id='header.menu.myscreens' />
                 </NavigationLink>
               </span>
             ),
@@ -55,23 +45,14 @@ export const HomePage = () => {
           alt='Demo Screen Capture'
         />
         {/* <label className='my-2 text-xs' htmlFor='demo-image'>
-          <FormattedMessage id='home.demo-image.caption' defaultMessage='Screens Page' />
+          <TranslateMessage id='home.demo-image.caption' defaultMessage='Screens Page' />
         </label> */}
         <div>
           <p className='mb-4'>
-            <FormattedMessage
-              id='home.content.p3'
-              defaultMessage='No corporate marketing here! I show you the differences and focus on what matters - finding the ideal
-            monitor for you. Say goodbye to endless scrolling and hello to informed choices.'
-            />
+            <TranslateMessage id='home.content.p3' />
           </p>
           <p className='mb-4'>
-            <FormattedMessage
-              id='home.content.p4'
-              defaultMessage=" P.S. Have questions or feedback? I'm all ears. Feel free to reach out and let me know how I can make
-            this experience even better for you. Go to the contact page for details on how to get in touch. Also, show
-            your support by starring the project on"
-            />
+            <TranslateMessage id='home.content.p4' />
             <span className='mx-2'>
               <a className='underline' href='https://github.com/nader-eloshaiker/screen-geometry-app'>
                 Github
@@ -81,10 +62,10 @@ export const HomePage = () => {
           <div>
             <div className='mb-4 mt-10 flex flex-col items-end'>
               <p>
-                <FormattedMessage id='home.sign-off.l1' defaultMessage='The choice is yours' />
+                <TranslateMessage id='home.sign-off.l1' />
               </p>
               <p className='italic'>
-                <FormattedMessage id='home.sign-off.l2' defaultMessage='Happy Shopping' />
+                <TranslateMessage id='home.sign-off.l2' />
               </p>
             </div>
           </div>

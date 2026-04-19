@@ -1,7 +1,7 @@
 import useLocalStorage from '@/app/hooks/useLocalStorage'
 import { defaultLanguage, defaultLocale, supportedLanguageCodes } from '@/app/stores/country/CountryUtils'
 import { useEnvCountry } from '@/app/stores/country/useEnvCountry'
-import { EnvTranslationContext } from '@/app/stores/translation/EnvTranslationContext'
+import { EnvTranslationContext } from '@/app/stores/translation'
 import { match } from '@formatjs/intl-localematcher'
 import { Translations, useGetTranslations } from '@screengeometry/lib-api/spec'
 import { usePageLoader } from '@screengeometry/lib-ui/pageloader'
@@ -12,7 +12,7 @@ import { getBrowserLocales, setTextDirection, TextDirection } from './Translatio
 const LocaleStorageKey = 'prefered-locale'
 const browserLocales = getBrowserLocales()
 
-export const EnvTranslationProvider = ({
+export const TranslationEnvProvider = ({
   children,
   translationsReadyKey,
 }: React.PropsWithChildren & { translationsReadyKey: string; override?: boolean }) => {

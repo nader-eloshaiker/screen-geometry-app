@@ -7,6 +7,7 @@ import { defaultScreenInputList } from '@/app/constants/defaultScreenList'
 import { useElementSize } from '@/app/hooks/useElementSize'
 import type { ScreenItemRender } from '@/app/models/screenItemRender'
 import { normaliseScreenRender } from '@/app/stores/screen/ScreenManager'
+import { TranslateMessage } from '@/app/stores/translation'
 import { getMaxScreenSize } from '@/app/utils'
 import { toScreenItem, type Dimensions } from '@screengeometry/lib-api/extended'
 import type { ScreenItem } from '@screengeometry/lib-api/spec'
@@ -14,7 +15,6 @@ import { Button } from '@screengeometry/lib-ui/button'
 import { Label } from '@screengeometry/lib-ui/label'
 import { Pencil, X } from 'lucide-react'
 import { useMemo } from 'react'
-import { FormattedMessage } from 'react-intl'
 import tw from 'tailwind-styled-components'
 import { ulid } from 'ulid'
 
@@ -50,18 +50,14 @@ export const HelpPage = () => {
   return (
     <div className='h-full'>
       <h1 className='mb-4 text-3xl'>
-        <FormattedMessage id='help.content.heading' defaultMessage='Help with using Screen Geometry' />
+        <TranslateMessage id='help.content.heading' />
       </h1>
       <Section>
         <Heading palette='primary'>
-          <FormattedMessage id='help.gettingstarted.heading' defaultMessage='Getting started' />
+          <TranslateMessage id='help.gettingstarted.heading' />
         </Heading>
         <Paragraph>
-          <FormattedMessage
-            id='help.emptytable.p1'
-            defaultMessage='When you navigate to the screens page for the first time, you will be greated with an empty table and the
-            ability to import a default list of screens'
-          />
+          <TranslateMessage id='help.emptytable.p1' />
         </Paragraph>
         <Diagram>
           <div className='border-primary-border w-96 overflow-hidden rounded-lg border-2 shadow-lg'>
@@ -74,34 +70,25 @@ export const HelpPage = () => {
             />
             <div className='flex h-full flex-col items-center'>
               <div className='text-primary-label py-4 text-xl'>
-                <FormattedMessage id='help.emptytable.nolistfound' defaultMessage='No List Found' />
+                <TranslateMessage id='help.emptytable.nolistfound' />
               </div>
               <div className='flex flex-col items-center gap-2 py-6'>
-                <FormattedMessage
-                  id='screens.emptytable.populatelist'
-                  defaultMessage='Click here to populate default list'
-                />
+                <TranslateMessage id='screens.emptytable.populatelist' />
                 <Button className='w-40' mode='outline' disabled={false}>
-                  <FormattedMessage id='help.emptytable.loadbutton' defaultMessage='Load Screens' />
+                  <TranslateMessage id='help.emptytable.loadbutton' />
                 </Button>
               </div>
             </div>
           </div>
         </Diagram>
         <Paragraph>
-          <FormattedMessage
-            id='help.emptytable.sidenote'
-            defaultMessage='Side Note: You can also create a new screen by clicking the button in the top right corner'
-          />
+          <TranslateMessage id='help.emptytable.sidenote' />
         </Paragraph>
         <Diagram>
           <CreateScreenButton className='pointer-events-none' />
         </Diagram>
         <Paragraph>
-          <FormattedMessage
-            id='help.emptytable.loadDefaultList'
-            defaultMessage='Loading the default list will populate the table with a list of screens.'
-          />
+          <TranslateMessage id='help.emptytable.loadDefaultList' />
         </Paragraph>
         <Diagram>
           <div className='border-primary-border rounded-lg border-2 p-6 shadow-lg'>
@@ -116,10 +103,7 @@ export const HelpPage = () => {
           </div>
         </Diagram>
         <Paragraph>
-          <FormattedMessage
-            id='help.fulltable.comparison'
-            defaultMessage='Once the screens you are interested in are present in your table, you will notice a panel underneath which overlays their  physically sizes you easy comparison. Moving your mouse over the table will highlight the corresponding panel and vice versa.'
-          />
+          <TranslateMessage id='help.fulltable.comparison' />
         </Paragraph>
         <Diagram>
           <div ref={setRef} className='border-primary-border flex flex-col gap-4 rounded-lg border-2 p-6 shadow-lg'>
@@ -148,14 +132,10 @@ export const HelpPage = () => {
 
       <Section>
         <Heading palette='primary'>
-          <FormattedMessage id='help.hideshow.heading' defaultMessage='Hide / Show' />
+          <TranslateMessage id='help.hideshow.heading' />
         </Heading>
         <Paragraph>
-          <FormattedMessage
-            id='help.hideshow.p1'
-            defaultMessage='You can choose to exclude a screen from the the <strong>Physical Screen Comparison</strong> by unchecking the <strong>Show</strong> check box'
-            values={{ strong: (text) => <strong>{text}</strong> }}
-          />
+          <TranslateMessage id='help.hideshow.p1' values={{ strong: (text) => <strong>{text}</strong> }} />
         </Paragraph>
         <Diagram>
           <div className='border-primary-border flex flex-col rounded-lg border-2 p-6 shadow-lg'>
@@ -179,12 +159,11 @@ export const HelpPage = () => {
 
       <Section>
         <Heading className='mb-4 text-2xl font-bold'>
-          <FormattedMessage id='help.delete.heading' defaultMessage='Delete' />
+          <TranslateMessage id='help.delete.heading' />
         </Heading>
         <Paragraph>
-          <FormattedMessage
+          <TranslateMessage
             id='help.delete.p1'
-            defaultMessage='To delete an existing screen, click on the <button></button> icon in the <strong>action</strong> column of the Screen  Specs table.'
             values={{
               button: () => (
                 <span className='px-2'>
@@ -201,12 +180,11 @@ export const HelpPage = () => {
 
       <Section>
         <Heading className='mb-4 text-2xl font-bold'>
-          <FormattedMessage id='help.create.heading' defaultMessage='Create' />
+          <TranslateMessage id='help.create.heading' />
         </Heading>
         <Paragraph>
-          <FormattedMessage
+          <TranslateMessage
             id='help.create.p1'
-            defaultMessage='To create a new screen, click the <button></button> button in the top right corner. This will open a form in the sidebar as show below.'
             values={{
               button: () => <CreateScreenButton className='pointer-events-none mx-4 shadow-lg' />,
             }}
@@ -227,21 +205,17 @@ export const HelpPage = () => {
           </div>
         </DiagramPanel>
         <Paragraph>
-          <FormattedMessage
-            id='help.create.p2'
-            defaultMessage='You can then either use the search feature to populate the details or enter the details of the screen you want to create. Once you are happy with the details, click Create.'
-          />
+          <TranslateMessage id='help.create.p2' />
         </Paragraph>
       </Section>
 
       <Section>
         <Heading className='mb-4 text-2xl font-bold'>
-          <FormattedMessage id='help.update.heading' defaultMessage='Create / Update' />
+          <TranslateMessage id='help.update.heading' />
         </Heading>
         <Paragraph>
-          <FormattedMessage
+          <TranslateMessage
             id='help.update.p1'
-            defaultMessage='To edit an existing screen, click on the <button></button> icon in the <strong>action</strong> column of the Screen Specs table. Then make your changes and click the <strong>Update</strong> button.'
             values={{
               button: () => (
                 <span className='px-2'>

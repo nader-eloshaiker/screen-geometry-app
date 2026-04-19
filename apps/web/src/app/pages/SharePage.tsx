@@ -8,6 +8,7 @@ import { ScreenTable } from '@/app/components/screen/table/ScreenTable'
 import { Stacked } from '@/app/components/stacked/Stacked'
 import { useElementSize } from '@/app/hooks/useElementSize'
 import type { ScreenItemRender } from '@/app/models/screenItemRender'
+import { TranslateMessage } from '@/app/stores/translation'
 import { createScreenColors, getMaxScreenSize, toScreenItemRender } from '@/app/utils'
 import { type Dimensions, toScreenItem } from '@screengeometry/lib-api/extended'
 import type { ScreenItem } from '@screengeometry/lib-api/spec'
@@ -15,7 +16,6 @@ import { Skeleton } from '@screengeometry/lib-ui/skeleton'
 import { useNavigate } from '@tanstack/react-router'
 import { useCallback, useEffect, useState } from 'react'
 import ReactGA from 'react-ga4'
-import { FormattedMessage } from 'react-intl'
 import { ulid } from 'ulid'
 import { SaveShareButton } from '../components/buttons/SaveShareButton'
 import { ScreenParam } from '../routes/share'
@@ -97,12 +97,12 @@ export const SharePage = ({ screenParams = [] }: { screenParams: ScreenParam[] }
   return (
     <>
       <h1 className='mb-4 text-3xl'>
-        <FormattedMessage id='share.content.heading' defaultMessage='Shared Screen Comparisons' />
+        <TranslateMessage id='share.content.heading' />
       </h1>
       <div className='flex flex-1 flex-col gap-10'>
         <div className='flex flex-col items-center gap-4 md:flex-row md:justify-between' ref={setRef}>
           <h2 className='text-primary-label text-xl'>
-            <FormattedMessage id='screens.specs.title' defaultMessage='Specs Table' />
+            <TranslateMessage id='screens.specs.title' />
           </h2>
           <SaveShareButton onClick={onSave} />
         </div>
@@ -120,10 +120,7 @@ export const SharePage = ({ screenParams = [] }: { screenParams: ScreenParam[] }
             <div className='text-primary-label py-4 text-xl'>No List Found</div>
             <div className='flex flex-col items-center gap-2 py-6'>
               <div>
-                <FormattedMessage
-                  id='screens.emptytable.populatelist'
-                  defaultMessage='Click here to populate default list'
-                />
+                <TranslateMessage id='screens.emptytable.populatelist' />
               </div>
             </div>
           </div>
@@ -132,7 +129,7 @@ export const SharePage = ({ screenParams = [] }: { screenParams: ScreenParam[] }
           <>
             <div className='flex flex-col items-center gap-4 md:flex-row md:justify-between'>
               <h2 className='text-primary-label text-xl'>
-                <FormattedMessage id='screens.size.title' defaultMessage='Size and Pixel Density' />
+                <TranslateMessage id='screens.size.title' />
               </h2>
               <div className='flex flex-wrap gap-4'>
                 <HorizontalAlignmentSelector onChange={setHAlignment} />

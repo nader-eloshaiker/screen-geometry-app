@@ -1,12 +1,11 @@
-import { getTextDirection, TextDirection } from '@/app/stores/translation/TranslationUtils'
+import { getTextDirection, TextDirection, TranslateMessage } from '@/app/stores/translation'
 import { Button, ButtonVariants } from '@screengeometry/lib-ui/button'
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@screengeometry/lib-ui/collapsible'
 import { cn } from '@screengeometry/lib-ui/utils'
 import { Link, useMatchRoute } from '@tanstack/react-router'
 import { Check, ChevronDown } from 'lucide-react'
 import { useState, type Dispatch, type SetStateAction } from 'react'
-import { FormattedMessage } from 'react-intl'
-import { MenuSmall } from './Menu'
+import { Menu } from './Menu'
 
 type Props = {
   setOpen: Dispatch<SetStateAction<boolean>>
@@ -114,28 +113,16 @@ export const HeaderNavSmall = ({ setOpen }: Props) => {
 
   return (
     <nav aria-label='Main' className='flex flex-col space-y-1 px-4' data-testid='small-header-menu'>
-      {MenuSmall.map((route) =>
+      {Menu.map((route) =>
         route.type === 'link' ? (
           <MenuItem key={route.id} to={route.linkOptions.to} setOpen={setOpen}>
-            <FormattedMessage
-              id={route.id}
-              defaultMessage={route.defaultMessage}
-              description={`Header small ${route.id} link`}
-            />
+            <TranslateMessage id={route.id} />
           </MenuItem>
         ) : (
-          <SubMenu
-            key={route.id}
-            title={<FormattedMessage id={route.id} defaultMessage={route.defaultMessage} />}
-            defaultExpanded={isPresetActive}
-          >
+          <SubMenu key={route.id} title={<TranslateMessage id={route.id} />} defaultExpanded={isPresetActive}>
             {route.groupOptions.map((item) => (
               <SubMenuItem key={item.id} to={item.linkOptions.to} setOpen={setOpen}>
-                <FormattedMessage
-                  id={item.id}
-                  defaultMessage={item.defaultMessage}
-                  description={`Header small ${item.id} link`}
-                />
+                <TranslateMessage id={item.id} />
               </SubMenuItem>
             ))}
           </SubMenu>
