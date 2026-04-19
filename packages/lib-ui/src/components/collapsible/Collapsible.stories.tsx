@@ -1,150 +1,69 @@
+// Replace nextjs-vite with the name of your framework
 import type { Meta, StoryObj } from '@storybook/react-vite'
-import { useState } from 'react'
-import { fn } from 'storybook/test'
-import { Button } from '../button'
+import { Info } from 'lucide-react'
+import { expect, userEvent } from 'storybook/test'
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from './Collapsilble'
 
+/**
+ * An interactive component which expands/collapses a panel.
+ */
 const meta = {
-  args: { onOpenChange: fn() },
-  argTypes: {
-    defaultOpen: {
-      control: 'boolean',
-      description: 'Whether the collapsible is open by default',
-    },
-    disabled: {
-      control: 'boolean',
-      description: 'Whether the collapsible is disabled',
-    },
-    open: {
-      control: 'boolean',
-      description: 'Whether the collapsible is open (controlled)',
-    },
-  },
+  title: 'Elements/Collapsible',
   component: Collapsible,
+  tags: ['autodocs'],
+  argTypes: {},
+  args: {
+    className: 'w-96',
+    disabled: false,
+  },
+  render: (args) => (
+    <Collapsible {...args}>
+      <CollapsibleTrigger className='hover:text-primary flex gap-2 transition-colors duration-300'>
+        <h3 className='font-semibold'>Can I use this in my project?</h3>
+        <Info className='size-6' />
+      </CollapsibleTrigger>
+      <CollapsibleContent className='data-[state=closed]:animate-collapsible-up data-[state=open]:animate-collapsible-down overflow-hidden'>
+        <div className='py-2'>Yes. Free to use for personal and commercial projects. No attribution required.</div>
+      </CollapsibleContent>
+    </Collapsible>
+  ),
   parameters: {
     layout: 'centered',
   },
-  title: 'Elements/Collapsible',
 } satisfies Meta<typeof Collapsible>
 
 export default meta
+
 type Story = StoryObj<typeof meta>
 
-export const Default: Story = {
-  args: {},
-  render: (args) => (
-    <Collapsible {...args}>
-      <CollapsibleTrigger asChild>
-        <Button mode='outline'>Toggle</Button>
-      </CollapsibleTrigger>
-      <CollapsibleContent className='mt-2 rounded-md border p-4'>
-        This is the collapsible content. It can contain any React elements.
-      </CollapsibleContent>
-    </Collapsible>
-  ),
-}
+/**
+ * The default form of the collapsible.
+ */
+export const Default: Story = {}
 
-export const DefaultOpen: Story = {
-  args: {
-    defaultOpen: true,
-  },
-  render: (args) => (
-    <Collapsible {...args}>
-      <CollapsibleTrigger asChild>
-        <Button mode='outline'>Toggle</Button>
-      </CollapsibleTrigger>
-      <CollapsibleContent className='mt-2 rounded-md border p-4'>This content is open by default.</CollapsibleContent>
-    </Collapsible>
-  ),
-}
-
-const ControlledCollapsible = () => {
-  const [isOpen, setIsOpen] = useState(true)
-
-  return (
-    <Collapsible open={isOpen} onOpenChange={setIsOpen}>
-      <CollapsibleTrigger asChild>
-        <Button mode='outline'>{isOpen ? 'Close' : 'Open'} (Controlled)</Button>
-      </CollapsibleTrigger>
-      <CollapsibleContent className='mt-2 rounded-md border p-4'>
-        This is a controlled collapsible. The open state is managed by React state.
-      </CollapsibleContent>
-    </Collapsible>
-  )
-}
-
-export const Controlled: Story = {
-  args: {
-    open: true,
-  },
-  render: () => <ControlledCollapsible />,
-}
-
+/**
+ * Use the `disabled` prop to disable the interaction.
+ */
 export const Disabled: Story = {
   args: {
     disabled: true,
   },
-  render: (args) => (
-    <Collapsible {...args}>
-      <CollapsibleTrigger asChild>
-        <Button mode='outline' disabled>
-          Disabled Toggle
-        </Button>
-      </CollapsibleTrigger>
-      <CollapsibleContent className='mt-2 rounded-md border p-4'>
-        This collapsible is disabled and cannot be toggled.
-      </CollapsibleContent>
-    </Collapsible>
-  ),
 }
 
-export const WithCustomContent: Story = {
-  args: {},
-  render: (args) => (
-    <Collapsible {...args}>
-      <CollapsibleTrigger asChild>
-        <Button mode='outline'>Advanced Content</Button>
-      </CollapsibleTrigger>
-      <CollapsibleContent className='mt-2 space-y-4'>
-        <div className='bg-muted rounded-md p-4'>
-          <h4 className='font-semibold'>Section 1</h4>
-          <p className='text-muted-foreground text-sm'>This is a section with custom styling and multiple elements.</p>
-        </div>
-        <div className='bg-muted rounded-md p-4'>
-          <h4 className='font-semibold'>Section 2</h4>
-          <ul className='text-muted-foreground list-inside list-disc text-sm'>
-            <li>Item 1</li>
-            <li>Item 2</li>
-            <li>Item 3</li>
-          </ul>
-        </div>
-      </CollapsibleContent>
-    </Collapsible>
-  ),
-}
+export const ShouldOpenClose: Story = {
+  name: 'when collapsable trigger is clicked, should show content',
+  tags: ['!dev', '!autodocs'],
+  play: async ({ canvas, step }) => {
+    const trigger = await canvas.findByRole('button')
 
-export const Nested: Story = {
-  args: {},
-  render: (args) => (
-    <Collapsible {...args}>
-      <CollapsibleTrigger asChild>
-        <Button mode='outline'>Parent Collapsible</Button>
-      </CollapsibleTrigger>
-      <CollapsibleContent className='mt-2 space-y-2'>
-        <p className='text-muted-foreground text-sm'>Parent content with nested collapsible:</p>
-        <div className='ml-4 rounded-md border p-4'>
-          <Collapsible>
-            <CollapsibleTrigger asChild>
-              <Button mode='ghost' dimension='sm'>
-                Nested Collapsible
-              </Button>
-            </CollapsibleTrigger>
-            <CollapsibleContent className='bg-muted mt-2 rounded-md p-3'>
-              This is nested content inside the parent collapsible.
-            </CollapsibleContent>
-          </Collapsible>
-        </div>
-      </CollapsibleContent>
-    </Collapsible>
-  ),
+    await step('Open the collapsible', async () => {
+      await userEvent.click(trigger, { delay: 100 })
+      expect(await canvas.queryByText(/yes/i, { exact: true })).toBeVisible()
+    })
+
+    await step('Close the collapsible', async () => {
+      await userEvent.click(trigger, { delay: 100 })
+      expect(await canvas.queryByText(/yes/i, { exact: true })).toBeNull()
+    })
+  },
 }
