@@ -1,6 +1,6 @@
-import { renderWithUserEvents } from '@/test/utils/RenderWithUserEvents'
 import { TestTranslationsEnvironment } from '@/test/utils/TestTranslationsEnvironment'
 import { render, screen } from '@testing-library/react'
+import userEvent from '@testing-library/user-event'
 import { vi } from 'vitest'
 import { HeaderNavSmall } from './HeaderNavSmall'
 
@@ -28,6 +28,29 @@ vi.mock('@screengeometry/lib-ui/navigationlink', () => ({
   ),
 }))
 
+// Mock TanStack Router hooks and components
+vi.mock('@tanstack/react-router', () => ({
+  useMatchRoute: () => () => false,
+  useRouterState: () => ({
+    isServer: false,
+    location: {
+      pathname: '/',
+      search: '',
+      hash: '',
+      state: null,
+      key: 'test',
+    },
+    status: 'idle',
+    matches: [],
+    pendingMatches: [],
+  }),
+  Link: ({ children, to, onClick, ...props }: React.PropsWithChildren & { to: string; onClick?: () => void }) => (
+    <a href={to} onClick={onClick} {...props}>
+      {children}
+    </a>
+  ),
+}))
+
 describe('HeaderNavSmall', () => {
   it('renders navigation with correct aria-label and classes', () => {
     const mockSetOpen = vi.fn()
@@ -36,7 +59,7 @@ describe('HeaderNavSmall', () => {
     const nav = screen.getByRole('navigation')
     expect(nav).toBeInTheDocument()
     expect(nav).toHaveAttribute('aria-label', 'Main')
-    expect(nav).toHaveClass('grid', 'gap-6', 'py-6')
+    expect(nav).toHaveClass('flex', 'flex-col', 'space-y-1', 'px-4')
   })
 
   it('renders all navigation links with correct text', () => {
@@ -54,19 +77,19 @@ describe('HeaderNavSmall', () => {
     render(<HeaderNavSmall setOpen={mockSetOpen} />, { wrapper: TestTranslationsEnvironment })
 
     // Home link
-    const homeLink = screen.getByTestId('nav-link-')
+    const homeLink = screen.getByText('Home').closest('a')
     expect(homeLink).toHaveAttribute('href', '/')
 
     // Screens link
-    const screensLink = screen.getByTestId('nav-link-myscreens')
+    const screensLink = screen.getByText('My Screens').closest('a')
     expect(screensLink).toHaveAttribute('href', '/myscreens')
 
     // Contact link
-    const contactLink = screen.getByTestId('nav-link-contact')
+    const contactLink = screen.getByText('Contact').closest('a')
     expect(contactLink).toHaveAttribute('href', '/contact')
 
     // Help link
-    const helpLink = screen.getByTestId('nav-link-help')
+    const helpLink = screen.getByText('Help').closest('a')
     expect(helpLink).toHaveAttribute('href', '/help')
   })
 
@@ -75,36 +98,34 @@ describe('HeaderNavSmall', () => {
     render(<HeaderNavSmall setOpen={mockSetOpen} />, { wrapper: TestTranslationsEnvironment })
 
     const links = [
-      screen.getByTestId('nav-link-'),
-      screen.getByTestId('nav-link-myscreens'),
-      screen.getByTestId('nav-link-contact'),
-      screen.getByTestId('nav-link-help'),
+      screen.getByText('Home').closest('a'),
+      screen.getByText('My Screens').closest('a'),
+      screen.getByText('Contact').closest('a'),
+      screen.getByText('Help').closest('a'),
     ]
 
     links.forEach((link) => {
-      expect(link).toHaveAttribute('data-mode', 'ghost')
-      expect(link).toHaveClass('justify-start', 'text-lg', 'font-semibold')
+      expect(link).toHaveClass('justify-between', 'w-full')
     })
   })
 
   it('calls setOpen(false) when any link is clicked', async () => {
     const mockSetOpen = vi.fn()
-    const test = await renderWithUserEvents(<HeaderNavSmall setOpen={mockSetOpen} />, {
-      wrapper: TestTranslationsEnvironment,
-    })
+    const user = userEvent.setup()
+    render(<HeaderNavSmall setOpen={mockSetOpen} />, { wrapper: TestTranslationsEnvironment })
 
     // Click each link and verify setOpen was called with false
     const links = [
-      test.getByTestId('nav-link-'),
-      test.getByTestId('nav-link-myscreens'),
-      test.getByTestId('nav-link-contact'),
-      test.getByTestId('nav-link-help'),
+      screen.getByText('Home').closest('a'),
+      screen.getByText('My Screens').closest('a'),
+      screen.getByText('Contact').closest('a'),
+      screen.getByText('Help').closest('a'),
     ]
 
-    for await (const link of links) {
+    for (const link of links) {
       mockSetOpen.mockClear()
 
-      await test.user.click(link)
+      await user.click(link!)
 
       expect(mockSetOpen).toHaveBeenCalledTimes(1)
       expect(mockSetOpen).toHaveBeenCalledWith(false)
@@ -114,16 +135,15 @@ describe('HeaderNavSmall', () => {
   it('requires setOpen prop to be provided', async () => {
     // TypeScript would catch this at compile time, but testing for prop requirements is still good
     const mockSetOpen = vi.fn()
-    const test = await renderWithUserEvents(<HeaderNavSmall setOpen={mockSetOpen} />, {
-      wrapper: TestTranslationsEnvironment,
-    })
+    const user = userEvent.setup()
+    render(<HeaderNavSmall setOpen={mockSetOpen} />, { wrapper: TestTranslationsEnvironment })
 
     // Check that it renders with the prop
-    expect(test.getByRole('navigation')).toBeInTheDocument()
+    expect(screen.getByRole('navigation')).toBeInTheDocument()
 
     // Test that the component uses the provided prop
-    const homeLink = test.getByTestId('nav-link-')
-    await test.user.click(homeLink)
+    const homeLink = screen.getByText('Home').closest('a')
+    await user.click(homeLink!)
     expect(mockSetOpen).toHaveBeenCalledWith(false)
   })
 })
