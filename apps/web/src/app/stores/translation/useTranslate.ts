@@ -1,6 +1,6 @@
 import { useIntl } from 'react-intl'
+import { TRANSLATION_KEYS } from './TranslationStore'
 import { TranslationKeyType } from './TranslationTypes'
-import { TRANSLATION_KEYS } from './Translationkeys'
 
 export const useTranslation = () => {
   const { formatMessage } = useIntl()

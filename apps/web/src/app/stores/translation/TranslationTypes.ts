@@ -1,4 +1,4 @@
-import { TRANSLATION_KEYS } from './Translationkeys'
+import { TRANSLATION_KEYS } from './TranslationStore'
 
 export type TranslationKeyType = keyof typeof TRANSLATION_KEYS
 
