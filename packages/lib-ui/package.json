@@ -9,6 +9,7 @@
     "./button": "./src/components/button/index.ts",
     "./card": "./src/components/card/index.ts",
     "./checkbox": "./src/components/checkbox/index.ts",
+    "./collapsible": "./src/components/collapsible/index.ts",
     "./command": "./src/components/command/index.ts",
     "./dialog": "./src/components/dialog/index.ts",
     "./direction": "./src/components/direction/index.ts",

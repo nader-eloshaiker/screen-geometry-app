@@ -72,8 +72,7 @@ export const HeaderNavLarge = () => {
   const isPresetActive = !!matchRoute({ to: '/preset', fuzzy: true })
 
   return (
-    // <nav aria-label='Main' className='flex gap-6' data-testid='large-header-menu'>
-    <NavigationMenu viewport={false}>
+    <NavigationMenu viewport={false} data-testid='large-header-menu'>
       <NavigationMenuList>
         {Menu.map((route) =>
           route.type === 'link' ? (
@@ -103,6 +102,5 @@ export const HeaderNavLarge = () => {
         )}
       </NavigationMenuList>
     </NavigationMenu>
-    // </nav>
   )
 }

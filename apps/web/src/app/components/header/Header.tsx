@@ -1,5 +1,6 @@
 import ThemeToggle from '@/app/components/theme/ThemeToggle'
 import { useEnvConfig } from '@/app/stores/config/useEnvConfig'
+import { getTextDirection, TextDirection } from '@/app/stores/translation/TranslationUtils'
 import { Button } from '@screengeometry/lib-ui/button'
 import {
   Sheet,
@@ -35,6 +36,7 @@ export default function Header() {
   const [open, setOpen] = useState(false)
   const { ENV_TYPE } = useEnvConfig()
   const { formatMessage } = useIntl()
+  const dir = getTextDirection()
 
   const appTitle = useMemo(
     () =>
@@ -54,7 +56,7 @@ export default function Header() {
               </span>
             </Button>
           </SheetTrigger>
-          <SheetContent side='left'>
+          <SheetContent dir={dir} side={dir === TextDirection.RTL ? 'right' : 'left'}>
             <SheetHeader>
               <SheetTitle className='text-left'>
                 <FormattedMessage id='header.navigation.title' defaultMessage='Navigation' />

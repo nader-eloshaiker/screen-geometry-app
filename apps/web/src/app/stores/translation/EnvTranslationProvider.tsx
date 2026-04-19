@@ -7,7 +7,7 @@ import { Translations, useGetTranslations } from '@screengeometry/lib-api/spec'
 import { usePageLoader } from '@screengeometry/lib-ui/pageloader'
 import { useEffect, useState } from 'react'
 import { IntlProvider } from 'react-intl'
-import { getBrowserLocales, setTextDirection } from './TranslationsUtils'
+import { getBrowserLocales, setTextDirection, TextDirection } from './TranslationUtils'
 
 const LocaleStorageKey = 'prefered-locale'
 const browserLocales = getBrowserLocales()
@@ -54,7 +54,9 @@ export const EnvTranslationProvider = ({
     if (storedLocale && supportedLanguageCodes && languageList) {
       const finalLanguage = match([storedLocale], supportedLanguageCodes, defaultLanguage)
       setLanguage(finalLanguage)
-      setTextDirection(languageList.find((lang) => lang.code === finalLanguage)?.rtl ? 'rtl' : 'ltr')
+      setTextDirection(
+        languageList.find((lang) => lang.code === finalLanguage)?.rtl ? TextDirection.RTL : TextDirection.LTR
+      )
     }
   }, [languageList, storedLocale])
 

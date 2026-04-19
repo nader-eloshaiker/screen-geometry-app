@@ -1,3 +1,10 @@
+export const TextDirection = {
+  LTR: 'ltr',
+  RTL: 'rtl',
+} as const
+
+export type TextDirection = (typeof TextDirection)[keyof typeof TextDirection]
+
 export const getBrowserLocales = () => {
   const result = []
 
@@ -18,5 +25,5 @@ export const getBrowserLocales = () => {
   return result
 }
 
-export const getTextDirection = () => document.dir ?? 'ltr'
-export const setTextDirection = (dir: 'ltr' | 'rtl') => (document.dir = dir)
+export const getTextDirection = (): TextDirection => (document.dir as TextDirection) ?? TextDirection.LTR
+export const setTextDirection = (dir: TextDirection) => (document.dir = dir)

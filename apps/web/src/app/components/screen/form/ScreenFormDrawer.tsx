@@ -1,6 +1,6 @@
 import { ScreenSelector } from '@/app/components/screen/screenselector/ScreenSelector'
 import { useApiEffect } from '@/app/hooks/api/useApiEffect'
-import { getTextDirection } from '@/app/stores/translation/TranslationsUtils'
+import { getTextDirection } from '@/app/stores/translation/TranslationUtils'
 import { toScreenInput } from '@screengeometry/lib-api/extended'
 import {
   getGetScreenQueryKey,

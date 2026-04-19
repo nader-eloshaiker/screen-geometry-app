@@ -54,7 +54,7 @@ export const MenuSmall = [
         id: 'header.small.presetPopular',
         defaultMessage: 'Popular',
       },
-      { type: 'link', linkOptions: { to: '/preset/gamer' }, id: 'header.small.presetFamer', defaultMessage: 'Gamer' },
+      { type: 'link', linkOptions: { to: '/preset/gamer' }, id: 'header.small.presetGamer', defaultMessage: 'Gamer' },
     ],
     id: 'header.small.presets',
     defaultMessage: 'Presets',
