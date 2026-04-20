@@ -190,6 +190,20 @@ export const TRANSLATION_KEYS = {
     defaultMessage:
       'To edit an existing screen, click on the <button></button> icon in the <strong>action</strong> column of the Screen Specs table. Then make your changes and click the <strong>Update</strong> button.',
   },
+  'help.sharing.heading': {
+    defaultMessage: 'Sharing',
+  },
+  'help.sharing.p1': {
+    defaultMessage:
+      'Any of the screens that have been checked/selected can then be shared by clicking the <button></button> button.',
+  },
+  'help.sharing.p2': {
+    defaultMessage: 'Clicking share copies a URL to your clipboard that can then be shared with anyone.',
+  },
+  'help.sharing.p3': {
+    defaultMessage:
+      'You can then paste that link into a browser and it will render those screens. You will then have the option to save any of those (checked/selected) screens to your list under "My Screens".',
+  },
   'home.content.callToAction': {
     defaultMessage: 'Click <cta></cta> to start your journey into finding the right screen.',
   },

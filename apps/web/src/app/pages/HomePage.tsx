@@ -24,7 +24,7 @@ export const HomePage = () => {
               <span className='mx-2'>
                 <NavigationLink
                   data-testid='home-screen-link'
-                  className='w-24 text-base font-semibold'
+                  className='text-base font-semibold'
                   // mode='ghost'
                   to='/myscreens'
                 >

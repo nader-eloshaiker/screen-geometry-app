@@ -1,4 +1,5 @@
 import { CreateScreenButton } from '@/app/components/buttons/CreateButton'
+import { ShareButton } from '@/app/components/buttons/ShareButton'
 import { ScreenForm } from '@/app/components/screen/form/ScreenForm'
 import { ScreenPanel } from '@/app/components/screen/panel/ScreenPanel'
 import { ScreenTable } from '@/app/components/screen/table/ScreenTable'
@@ -158,7 +159,7 @@ export const HelpPage = () => {
       </Section>
 
       <Section>
-        <Heading className='mb-4 text-2xl font-bold'>
+        <Heading palette='primary'>
           <TranslateMessage id='help.delete.heading' />
         </Heading>
         <Paragraph>
@@ -179,7 +180,7 @@ export const HelpPage = () => {
       </Section>
 
       <Section>
-        <Heading className='mb-4 text-2xl font-bold'>
+        <Heading palette='primary'>
           <TranslateMessage id='help.create.heading' />
         </Heading>
         <Paragraph>
@@ -210,7 +211,7 @@ export const HelpPage = () => {
       </Section>
 
       <Section>
-        <Heading className='mb-4 text-2xl font-bold'>
+        <Heading palette='primary'>
           <TranslateMessage id='help.update.heading' />
         </Heading>
         <Paragraph>
@@ -227,6 +228,27 @@ export const HelpPage = () => {
               strong: (text) => <strong>{text}</strong>,
             }}
           />
+        </Paragraph>
+      </Section>
+
+      <Section>
+        <Heading palette='primary'>
+          <TranslateMessage id='help.sharing.heading' />
+        </Heading>
+        <Paragraph>
+          <TranslateMessage
+            id='help.sharing.p1'
+            values={{
+              button: () => <ShareButton className='pointer-events-none mx-4 shadow-lg' />,
+              strong: (text) => <strong>{text}</strong>,
+            }}
+          />
+        </Paragraph>
+        <Paragraph>
+          <TranslateMessage id='help.sharing.p2' />
+        </Paragraph>
+        <Paragraph>
+          <TranslateMessage id='help.sharing.p3' />
         </Paragraph>
       </Section>
     </div>
