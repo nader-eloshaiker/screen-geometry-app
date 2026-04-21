@@ -5,7 +5,9 @@ import { getGetScreenListQueryKey, useCreateScreenList } from '@screengeometry/l
 import { useCallback } from 'react'
 import ReactGA from 'react-ga4'
 
-export const useCreateListhandler = () => {
+export type CreateListHandler = Omit<ReturnType<typeof useCreateScreenList>, 'mutate'> & { onAction: () => void }
+
+export const useCreateListhandler = (): CreateListHandler => {
   const query = useCreateScreenList({
     mutation: {
       // invalidate getGetScreenListQueryKey to force refetch

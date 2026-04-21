@@ -5,7 +5,13 @@ import { getGetScreenListQueryKey, useUpdateScreenList } from '@screengeometry/l
 import { useCallback } from 'react'
 import ReactGA from 'react-ga4'
 
-export const useUpdateListHandler = () => {
+type ScreenState = NonNullable<MyScreensLocationState['screens']>
+
+export type UpdateListHandler = Omit<ReturnType<typeof useUpdateScreenList>, 'mutate'> & {
+  onAction: (newScreens: ScreenState) => void
+}
+
+export const useUpdateListHandler = (): UpdateListHandler => {
   const query = useUpdateScreenList({
     mutation: {
       onSuccess: () => queryClient.invalidateQueries({ queryKey: getGetScreenListQueryKey() }),
@@ -16,7 +22,7 @@ export const useUpdateListHandler = () => {
   useUpdateScreenListEffect(params.data, params.error)
 
   const onAction = useCallback(
-    (newScreens: NonNullable<MyScreensLocationState['screens']>) => {
+    (newScreens: ScreenState) => {
       ReactGA.event({
         category: 'Button Click',
         action: 'Clicked update list with shared screens',

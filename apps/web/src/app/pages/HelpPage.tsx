@@ -14,18 +14,50 @@ import { toScreenItem, type Dimensions } from '@screengeometry/lib-api/extended'
 import type { ScreenItem } from '@screengeometry/lib-api/spec'
 import { Button } from '@screengeometry/lib-ui/button'
 import { Label } from '@screengeometry/lib-ui/label'
+import { cn } from '@screengeometry/lib-ui/utils'
 import { Pencil, X } from 'lucide-react'
 import { useMemo } from 'react'
-import tw from 'tailwind-styled-components'
 import { ulid } from 'ulid'
 
-const Section = tw.div`mb-14`
-const Diagram = tw.div`my-8 flex w-full justify-center`
-const DiagramPanel = tw.div`my-8 flex justify-center`
-const Paragraph = tw.div`mb-6`
-const Heading = tw(Label)`
-  mb-8 text-2xl font-bold
-`
+function Section({ className, children, ...props }: React.ComponentProps<'div'>) {
+  return (
+    <div className={cn('mb-14', className)} {...props}>
+      {children}
+    </div>
+  )
+}
+
+function Diagram({ className, children, ...props }: React.ComponentProps<'div'>) {
+  return (
+    <div className={cn('my-8 flex w-full justify-center', className)} {...props}>
+      {children}
+    </div>
+  )
+}
+
+function DiagramPanel({ className, children, ...props }: React.ComponentProps<'div'>) {
+  return (
+    <div className={cn('my-8 flex justify-center', className)} {...props}>
+      {children}
+    </div>
+  )
+}
+
+function Paragraph({ className, children, ...props }: React.ComponentProps<'div'>) {
+  return (
+    <div className={cn('mb-6', className)} {...props}>
+      {children}
+    </div>
+  )
+}
+
+function Heading({ className, children, ...props }: React.ComponentProps<typeof Label>) {
+  return (
+    <Label className={cn('mb-8 text-2xl font-bold', className)} {...props}>
+      {children}
+    </Label>
+  )
+}
 
 export const HelpPage = () => {
   const [setRef, { width }] = useElementSize()
@@ -65,9 +97,9 @@ export const HelpPage = () => {
             <ScreenTable
               screens={[]}
               isScreenListLoading={false}
-              editAction={{ handler: () => {} }}
-              deleteAction={{ handler: () => {}, isPending: false }}
-              showAction={{ handler: () => {}, isPending: false }}
+              formOpenHandler={undefined}
+              deleteHandler={undefined}
+              showHandler={undefined}
             />
             <div className='flex h-full flex-col items-center'>
               <div className='text-primary-label py-4 text-xl'>
@@ -97,9 +129,9 @@ export const HelpPage = () => {
               className='pointer-events-none'
               screens={fullList}
               isScreenListLoading={false}
-              editAction={{ handler: () => {} }}
-              deleteAction={{ handler: () => {}, isPending: false }}
-              showAction={{ handler: () => {}, isPending: false }}
+              formOpenHandler={undefined}
+              deleteHandler={undefined}
+              showHandler={undefined}
             />
           </div>
         </Diagram>
@@ -112,9 +144,9 @@ export const HelpPage = () => {
               className='pointer-events-none'
               screens={smallList}
               highlighted={smallList[0]}
-              editAction={{ handler: () => {} }}
-              deleteAction={{ handler: () => {}, isPending: false }}
-              showAction={{ handler: () => {}, isPending: false }}
+              formOpenHandler={undefined}
+              deleteHandler={undefined}
+              showHandler={undefined}
             />
             <Stacked height={maxPanelSize.height}>
               {smallList
@@ -140,13 +172,7 @@ export const HelpPage = () => {
         </Paragraph>
         <Diagram>
           <div className='border-primary-border flex flex-col rounded-lg border-2 p-6 shadow-lg'>
-            <ScreenTable
-              className='pointer-events-none'
-              screens={invisibleList}
-              editAction={{ handler: () => {} }}
-              deleteAction={{ handler: () => {}, isPending: false }}
-              showAction={{ handler: () => {}, isPending: false }}
-            />
+            <ScreenTable className='pointer-events-none' screens={invisibleList} formOpenHandler={undefined} />
             <Stacked height={maxPanelSize.height}>
               {invisibleList
                 .filter((screen) => screen.visible)

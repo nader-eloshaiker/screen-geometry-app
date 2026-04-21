@@ -5,20 +5,21 @@ import { useNavigate, useRouter } from '@tanstack/react-router'
 import { useCallback, useEffect } from 'react'
 import ReactGA from 'react-ga4'
 import useIntl from 'react-intl/src/components/useIntl'
+import { UpdateListHandler } from './useUpdateListHandler'
+
+export type ShareHandler = { onAction: () => void }
 
 export const useShareHandler = ({
   screens,
   incomingScreens,
   isLoading,
-  isUpdateListLoading,
-  onUpdateList,
+  updateListHandler,
 }: {
   screens: ScreenItemRender[]
   incomingScreens?: ScreenItemRender[]
   isLoading: boolean
-  isUpdateListLoading: boolean
-  onUpdateList: (screens: ScreenItemRender[]) => void
-}) => {
+  updateListHandler: UpdateListHandler
+}): ShareHandler => {
   const router = useRouter()
   const navigate = useNavigate()
   const { formatMessage } = useIntl()
@@ -46,7 +47,7 @@ export const useShareHandler = ({
   }, [formatMessage, router, screens])
 
   useEffect(() => {
-    if (!incomingScreens?.length || isLoading || isUpdateListLoading) return
+    if (!incomingScreens?.length || isLoading || updateListHandler.isPending) return
 
     const missingScreens = incomingScreens.filter(
       (incoming) => !screens.some((existing) => isScreenDataEqual(existing.data, incoming))
@@ -55,9 +56,9 @@ export const useShareHandler = ({
     if (missingScreens.length > 0) {
       // Clear router state immediately to prevent re-processing on refresh
       navigate({ to: '/myscreens', state: {}, replace: true })
-      onUpdateList(missingScreens)
+      updateListHandler.onAction(missingScreens)
     }
-  }, [incomingScreens, screens, isLoading, isUpdateListLoading, onUpdateList, navigate])
+  }, [incomingScreens, screens, isLoading, updateListHandler, navigate])
 
   return {
     onAction,

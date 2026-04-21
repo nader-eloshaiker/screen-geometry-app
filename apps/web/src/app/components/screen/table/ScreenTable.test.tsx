@@ -45,9 +45,9 @@ const TestComponent = ({
           setHighLighted={setHighlighted}
           screens={screens ?? normaliseScreenRender(getGetScreenListResponseMock().list)}
           isScreenListLoading={isScreenListLoading}
-          editAction={{ handler: editHandler }}
-          deleteAction={{ handler: () => {}, isPending: false }}
-          showAction={{ handler: () => {}, isPending: false }}
+          formOpenHandler={{ handler: editHandler }}
+          deleteHandler={{ handler: () => {}, isPending: false }}
+          showHandler={{ handler: () => {}, isPending: false }}
         />
         <Toaster />
       </TestEnvironment>

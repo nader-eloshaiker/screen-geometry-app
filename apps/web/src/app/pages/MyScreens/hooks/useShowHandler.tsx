@@ -4,7 +4,11 @@ import { getGetScreenListQueryKey, useShowScreen } from '@screengeometry/lib-api
 import { useCallback } from 'react'
 import ReactGA from 'react-ga4'
 
-export const useShowHandler = () => {
+export type ShowHandler = Omit<ReturnType<typeof useShowScreen>, 'mutate'> & {
+  onAction: (id: string) => void
+}
+
+export const useShowHandler = (): ShowHandler => {
   const query = useShowScreen({
     mutation: {
       onSuccess: () => queryClient.invalidateQueries({ queryKey: getGetScreenListQueryKey() }),

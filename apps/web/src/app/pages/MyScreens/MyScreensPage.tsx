@@ -27,7 +27,7 @@ import { Loader2 } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import { useCreateListhandler } from './hooks/useCreateListHandler'
 import { useDeleteHandler } from './hooks/useDeleteHandler'
-import { useEditHandler } from './hooks/useEditHandler'
+import { useFormOpenHandler } from './hooks/useFormOpenHandler'
 import { useShareHandler } from './hooks/useShareHandler'
 import { useShowHandler } from './hooks/useShowHandler'
 import { useUpdateListHandler } from './hooks/useUpdateListHandler'
@@ -63,20 +63,19 @@ export const MyScreensPage = () => {
   const [editMode, setEditMode] = useState<FormModeTypes>(FormModeTypes.create)
   const [editId, setEditId] = useState<string | undefined>()
 
-  const { isPending: isCreateLoading, onAction: onLoadDefault } = useCreateListhandler()
-  const { isPending: isUpdateListLoading, onAction: onUpdateList } = useUpdateListHandler()
-  const { isPending: isDeletePending, onAction: onDelete, variables: deleteParams } = useDeleteHandler()
-  const { isPending: isShowPending, onAction: onShow, variables: showParams } = useShowHandler()
+  const createListHandler = useCreateListhandler()
+  const updateListHandler = useUpdateListHandler()
+  const deleteHandler = useDeleteHandler()
+  const showHandler = useShowHandler()
+  const formOpenHandler = useFormOpenHandler({ setIsEditorOpen, setEditMode, setEditId })
 
-  const isLoading = isListLoading || isPageLoading || isUpdateListLoading
+  const isLoading = isListLoading || isPageLoading || updateListHandler.isPending
 
-  const { onAction: onEdit } = useEditHandler({ setIsEditorOpen, setEditMode, setEditId })
-  const { onAction: onShare } = useShareHandler({
+  const shareHandler = useShareHandler({
     screens,
     incomingScreens,
     isLoading,
-    isUpdateListLoading,
-    onUpdateList,
+    updateListHandler,
   })
 
   useEffect(() => {
@@ -95,7 +94,7 @@ export const MyScreensPage = () => {
             <TranslateMessage id='screens.specs.title' />
           </h2>
           <div className='flex gap-4 max-[375px]:flex-col max-[375px]:justify-center'>
-            <ShareButton onClick={onShare} />
+            <ShareButton onClick={shareHandler.onAction} />
             <ScreenFormDrawer mode={editMode} open={isEditorOpen} setOpen={setIsEditorOpen} id={editId}>
               <CreateScreenButton
                 onClick={() => {
@@ -112,9 +111,9 @@ export const MyScreensPage = () => {
           isScreenListLoading={isLoading}
           highlighted={highlighted}
           setHighLighted={setHighlighted}
-          editAction={{ handler: onEdit }}
-          deleteAction={{ handler: onDelete, isPending: isDeletePending, id: deleteParams?.id }}
-          showAction={{ handler: onShow, isPending: isShowPending, id: showParams?.id }}
+          formOpenHandler={formOpenHandler}
+          deleteHandler={deleteHandler}
+          showHandler={showHandler}
         />
 
         {screens.length === 0 && !isLoading && (
@@ -126,8 +125,13 @@ export const MyScreensPage = () => {
               <div>
                 <TranslateMessage id='screens.emptytable.populatelist' />
               </div>
-              <Button className='w-40' mode='outline' onClick={onLoadDefault} disabled={isCreateLoading}>
-                {isCreateLoading ? (
+              <Button
+                className='w-40'
+                mode='outline'
+                onClick={createListHandler.onAction}
+                disabled={createListHandler.isPending}
+              >
+                {createListHandler.isPending ? (
                   <Loader2 data-testid='ButtonSpinner' className='animate-spin' />
                 ) : (
                   <TranslateMessage id='screens.specs.loadscreens' />

@@ -19,6 +19,7 @@ import ReactGA from 'react-ga4'
 import { ulid } from 'ulid'
 import { SaveShareButton } from '../components/buttons/SaveShareButton'
 import { ScreenParam } from '../routes/share'
+import { ShowHandler } from './MyScreens/hooks/useShowHandler'
 
 export const SharePage = ({ screenParams = [] }: { screenParams: ScreenParam[] }) => {
   const [setRef, { width }] = useElementSize()
@@ -112,7 +113,13 @@ export const SharePage = ({ screenParams = [] }: { screenParams: ScreenParam[] }
           isScreenListLoading={false}
           highlighted={highlighted}
           setHighLighted={setHighlighted}
-          showAction={{ handler: onShow, isPending: false, id: undefined }}
+          showHandler={
+            {
+              onAction: onShow,
+              isPending: false,
+              variables: undefined,
+            } as ShowHandler
+          }
         />
 
         {screens.length === 0 && (

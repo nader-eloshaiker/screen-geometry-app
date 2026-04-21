@@ -1,4 +1,7 @@
 import { type ScreenItemRender } from '@/app/models/screenItemRender'
+import { DeleteHandler } from '@/app/pages/MyScreens/hooks/useDeleteHandler'
+import { FormOpenHandler } from '@/app/pages/MyScreens/hooks/useFormOpenHandler'
+import { ShowHandler } from '@/app/pages/MyScreens/hooks/useShowHandler'
 import { DarkMode, type TThemeMode } from '@/app/stores/theme/Theme.types'
 import { useTheme } from '@/app/stores/theme/useTheme'
 import { TranslateMessage } from '@/app/stores/translation'
@@ -11,40 +14,61 @@ import { cn } from '@screengeometry/lib-ui/utils'
 import { Loader2, LoaderCircle, Pencil, X } from 'lucide-react'
 import { type Dispatch, type SetStateAction } from 'react'
 import { FormattedNumber } from 'react-intl'
-import styled from 'styled-components'
 import { match, P } from 'ts-pattern'
 
-const StyledCheckbox = styled(Checkbox)<{ $fgColor: string; $bgColor: string }>`
-  border-color: ${(props) => props.$fgColor};
-  color: ${(props) => props.$fgColor};
+const StyledCheckbox = ({
+  $fgColor,
+  $bgColor,
+  className,
+  style,
+  ...props
+}: React.ComponentProps<typeof Checkbox> & { $fgColor: string; $bgColor: string }) => {
+  return (
+    <Checkbox
+      className={cn(
+        'hover:opacity-70 focus-visible:opacity-70 focus-visible:[outline-color:var(--checkbox-fg)] [&_[data-state=checked]]:bg-[var(--checkbox-bg)]',
+        className
+      )}
+      style={
+        {
+          borderColor: $fgColor,
+          color: $fgColor,
+          '--checkbox-bg': $bgColor,
+          '--checkbox-fg': $fgColor,
+          ...style,
+        } as React.CSSProperties
+      }
+      {...props}
+    />
+  )
+}
 
-  [data-state='checked'] {
-    background-color: ${(props) => props.$bgColor};
-  }
-
-  &:hover,
-  &:focus-visible {
-    opacity: 0.7;
-  }
-
-  &:focus-visible {
-    outline-color: ${(props) => props.$fgColor};
-  }
-`
-
-const StyledTableRow = styled(TableRow)<{ $fgColor: string; $bgColor: string; $selected: boolean }>`
-  ${({ $selected, $bgColor, $fgColor }) =>
-    $selected &&
-    `
-    background-color: ${$bgColor};
-    border-color: ${$fgColor};
-  `}
-  &:hover,
-  &:focus {
-    background-color: ${({ $bgColor }) => $bgColor};
-    border-color: ${({ $fgColor }) => $fgColor};
-  }
-`
+const StyledTableRow = ({
+  $fgColor,
+  $bgColor,
+  $selected,
+  className,
+  style,
+  ...props
+}: React.ComponentProps<typeof TableRow> & { $fgColor: string; $bgColor: string; $selected: boolean }) => {
+  return (
+    <TableRow
+      className={cn(
+        'hover:border-[var(--row-fg)] hover:bg-[var(--row-bg)] focus:border-[var(--row-fg)] focus:bg-[var(--row-bg)]',
+        className
+      )}
+      style={
+        {
+          '--row-bg': $bgColor,
+          '--row-fg': $fgColor,
+          ...($selected && { backgroundColor: $bgColor, borderColor: $fgColor }),
+          ...style,
+        } as React.CSSProperties
+      }
+      {...props}
+    />
+  )
+}
 
 const bgColor = (themeMode: TThemeMode, color: ScreenColor) =>
   `${themeMode === DarkMode ? color.lightColor : color.darkColor}${Math.round(0.2 * 255).toString(16)}`
@@ -87,19 +111,9 @@ type Props = {
   className?: string
   highlighted?: ScreenItemRender
   setHighLighted?: Dispatch<SetStateAction<ScreenItemRender | undefined>>
-  editAction?: {
-    handler: (id: string) => void
-  }
-  deleteAction?: {
-    id?: string
-    isPending: boolean
-    handler: (id: string) => void
-  }
-  showAction?: {
-    id?: string
-    isPending: boolean
-    handler: (id: string) => void
-  }
+  formOpenHandler?: FormOpenHandler
+  deleteHandler?: DeleteHandler
+  showHandler?: ShowHandler
 }
 
 export const ScreenTable = ({
@@ -108,9 +122,9 @@ export const ScreenTable = ({
   className,
   highlighted = undefined,
   setHighLighted = () => {},
-  editAction,
-  deleteAction,
-  showAction,
+  formOpenHandler,
+  deleteHandler,
+  showHandler,
 }: Props) => {
   const [themeMode] = useTheme()
 
@@ -159,10 +173,10 @@ export const ScreenTable = ({
               onMouseEnter={() => setHighLighted(screen.id === highlighted?.id ? undefined : screen)}
               onMouseLeave={() => setHighLighted(undefined)}
             >
-              {showAction && (
+              {showHandler && (
                 <TableCell>
                   <div className='flex items-center justify-center'>
-                    {showAction.isPending && screen.id === showAction.id ? (
+                    {showHandler.isPending && screen.id === showHandler.variables?.id ? (
                       <LoaderCircle
                         className='ml-[5px] size-6 animate-spin'
                         style={{ color: themeMode === DarkMode ? screen.color.lightColor : screen.color.darkColor }}
@@ -175,7 +189,7 @@ export const ScreenTable = ({
                         $fgColor={fgColor(themeMode, screen.color)}
                         $bgColor={bgColor(themeMode, screen.color)}
                         checked={screen.visible}
-                        onCheckedChange={() => showAction.handler(screen.id)}
+                        onCheckedChange={() => showHandler.onAction(screen.id)}
                         title='Show'
                       />
                     )}
@@ -212,28 +226,28 @@ export const ScreenTable = ({
               </TableCell>
               <TableCell>
                 <div className='flex flex-row items-center justify-center gap-0'>
-                  {match(editAction)
-                    .with(P.nonNullable, (action) => (
+                  {match(formOpenHandler)
+                    .with(P.nonNullable, (item) => (
                       <Button
                         title='Edit'
                         mode='ghost'
                         dimension='icon-sm'
                         palette='mono'
-                        onClick={() => action.handler(screen.id)}
+                        onClick={() => item.onAction(screen.id)}
                       >
                         <Pencil id='edit-icon' />
                       </Button>
                     ))
                     .otherwise(() => null)}
-                  {match(deleteAction)
+                  {match(deleteHandler)
                     .with({ isPending: true, id: screen.id }, () => <Loader2 className='size-4 animate-spin' />)
-                    .with(P.nonNullable, (action) => (
+                    .with(P.nonNullable, (item) => (
                       <Button
                         title='Delete'
                         mode='ghost'
                         dimension='icon-sm'
                         palette='mono'
-                        onClick={() => action.handler(screen.id)}
+                        onClick={() => item.onAction(screen.id)}
                       >
                         <X id='delete-icon' />
                       </Button>

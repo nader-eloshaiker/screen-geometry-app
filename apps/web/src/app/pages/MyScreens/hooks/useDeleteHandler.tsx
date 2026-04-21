@@ -4,7 +4,9 @@ import { getGetScreenListQueryKey, useDeleteScreen } from '@screengeometry/lib-a
 import { useCallback } from 'react'
 import ReactGA from 'react-ga4'
 
-export const useDeleteHandler = () => {
+export type DeleteHandler = Omit<ReturnType<typeof useDeleteScreen>, 'mutate'> & { onAction: (id: string) => void }
+
+export const useDeleteHandler = (): DeleteHandler => {
   const query = useDeleteScreen({
     mutation: {
       onSuccess: () => queryClient.invalidateQueries({ queryKey: getGetScreenListQueryKey() }),
