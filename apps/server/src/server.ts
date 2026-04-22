@@ -28,7 +28,7 @@ type TReturn = {
 // Stub out the API calls using axios-mock-adapter for indexAPI to store data in the browser's IndexedDB
 // The stubbed API calls can later be replaced with real API calls to a backend store
 export const generateStub = (baseUrl: string, responseTime?: number): TReturn => {
-  const delayResponse = responseTime ?? 1000
+  const delayResponse = responseTime ?? 500
 
   const screenListMocks = () => [
     http.get(`${baseUrl}${apiRoutes.screens}`, async () => {
