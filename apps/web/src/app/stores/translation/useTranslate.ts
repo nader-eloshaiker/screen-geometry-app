@@ -1,3 +1,4 @@
+import { useCallback, useMemo } from 'react'
 import { useIntl } from 'react-intl'
 import { TRANSLATION_KEYS } from './TranslationStore'
 import { TranslationKeyType } from './TranslationTypes'
@@ -5,14 +6,15 @@ import { TranslationKeyType } from './TranslationTypes'
 export const useTranslation = () => {
   const { formatMessage } = useIntl()
 
-  const typedFormatMessage = (id: TranslationKeyType) => {
-    return formatMessage({
-      id,
-      defaultMessage: TRANSLATION_KEYS[id].defaultMessage,
-    })
-  }
+  const typedFormatMessage = useCallback(
+    (id: TranslationKeyType) => {
+      return formatMessage({
+        id,
+        defaultMessage: TRANSLATION_KEYS[id].defaultMessage,
+      })
+    },
+    [formatMessage]
+  )
 
-  return {
-    formatMessage: typedFormatMessage,
-  }
+  return useMemo(() => ({ formatMessage: typedFormatMessage }), [typedFormatMessage])
 }
