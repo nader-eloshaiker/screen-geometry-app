@@ -161,7 +161,7 @@ export const ScreenTable = ({
       {screens.length === 0 && isScreenListLoading ? (
         <TableSkeleton cols={7} rows={6} />
       ) : (
-        <TableBody>
+        <TableBody showBottomBorder={true}>
           {screens.map((screen) => (
             <StyledTableRow
               className='transition-colors duration-200 ease-out'
