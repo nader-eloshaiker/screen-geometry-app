@@ -26,6 +26,26 @@ vi.mock('@/app/hooks/useElementSize', () => ({
   useElementSize: () => [() => {}, { width: 1024, height: 1024 }],
 }))
 
+const createMockMutation = () => ({
+  isPending: false,
+  status: 'idle' as const,
+  isSuccess: false,
+  isError: false,
+  isIdle: true,
+  data: undefined,
+  error: null,
+  failureCount: 0,
+  failureReason: null,
+  errorUpdateCount: 0,
+  isPaused: false,
+  variables: undefined,
+  context: undefined,
+  submittedAt: 0,
+  mutate: vi.fn(),
+  mutateAsync: vi.fn(),
+  reset: vi.fn(),
+})
+
 const TestComponent = ({
   screens,
   isScreenListLoading = false,
@@ -45,9 +65,9 @@ const TestComponent = ({
           setHighLighted={setHighlighted}
           screens={screens ?? normaliseScreenRender(getGetScreenListResponseMock().list)}
           isScreenListLoading={isScreenListLoading}
-          formOpenHandler={{ handler: editHandler }}
-          deleteHandler={{ handler: () => {}, isPending: false }}
-          showHandler={{ handler: () => {}, isPending: false }}
+          formOpenHandler={{ onAction: editHandler }}
+          deleteHandler={{ ...createMockMutation(), onAction: () => {} }}
+          showHandler={{ ...createMockMutation(), onAction: () => {} }}
         />
         <Toaster />
       </TestEnvironment>
