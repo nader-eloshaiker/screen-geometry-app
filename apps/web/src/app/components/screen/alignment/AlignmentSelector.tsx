@@ -1,7 +1,8 @@
 import useLocalStorage from '@/app/hooks/useLocalStorage'
 import { useTranslation } from '@/app/stores/translation'
 import { ToggleGroup, ToggleGroupItem } from '@screengeometry/lib-ui/togglegroup'
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@screengeometry/lib-ui/tooltip'
+import { TooltipProvider } from '@screengeometry/lib-ui/tooltip'
+import { cn } from '@screengeometry/lib-ui/utils'
 import {
   AlignCenterHorizontal,
   AlignCenterVertical,
@@ -35,28 +36,33 @@ type AlignmentSelectorProps = TProps & {
 }
 
 const AlignmentSelector = ({ onChange, storageKey, defaultValue, description, content }: AlignmentSelectorProps) => {
-  const [alignment, setAlignment] = useLocalStorage<string>(storageKey, defaultValue)
+  const [selectedAlignment, setSelectedAlignment] = useLocalStorage<string>(storageKey, defaultValue)
 
   useEffect(() => {
-    onChange(alignment as Alignment)
-  }, [alignment, onChange])
+    onChange(selectedAlignment as Alignment)
+  }, [selectedAlignment, onChange])
 
   return (
     <TooltipProvider>
-      <Tooltip>
-        <TooltipTrigger asChild>
-          <ToggleGroup type='single' mode='pill' value={alignment} onValueChange={setAlignment} className='shadow-md'>
-            {content.map(({ Icon, alignment, label }) => (
-              <ToggleGroupItem key={label} value={alignment} aria-label={label}>
-                <Icon className='size-5' />
-              </ToggleGroupItem>
-            ))}
-          </ToggleGroup>
-        </TooltipTrigger>
-        <TooltipContent>
-          <p>{description}</p>
-        </TooltipContent>
-      </Tooltip>
+      <ToggleGroup
+        type='single'
+        mode='pill'
+        value={selectedAlignment}
+        onValueChange={setSelectedAlignment}
+        className='shadow-md'
+        aria-label={description}
+      >
+        {content.map(({ Icon, alignment, label }) => (
+          <ToggleGroupItem
+            key={label}
+            value={alignment}
+            aria-label={label}
+            className={cn(selectedAlignment === alignment && 'pointer-events-none')}
+          >
+            <Icon className='size-5' />
+          </ToggleGroupItem>
+        ))}
+      </ToggleGroup>
     </TooltipProvider>
   )
 }
@@ -92,7 +98,6 @@ export const VerticalAlignmentSelector = ({ onChange }: TProps) => {
 
 export const HorizontalAlignmentSelector = ({ onChange }: TProps) => {
   const { formatMessage } = useTranslation()
-
   return (
     <AlignmentSelector
       storageKey={HAlignKey}
