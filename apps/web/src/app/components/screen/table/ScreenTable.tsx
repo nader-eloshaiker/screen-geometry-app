@@ -189,7 +189,7 @@ export const ScreenTable = ({
                         $fgColor={fgColor(themeMode, screen.color)}
                         $bgColor={bgColor(themeMode, screen.color)}
                         checked={screen.visible}
-                        onCheckedChange={() => showHandler.onAction(screen.id)}
+                        onCheckedChange={() => showHandler.mutate({ id: screen.id })}
                         title='Show'
                       />
                     )}
@@ -247,7 +247,7 @@ export const ScreenTable = ({
                         mode='ghost'
                         dimension='icon-sm'
                         palette='mono'
-                        onClick={() => item.onAction(screen.id)}
+                        onClick={() => item.mutate({ id: screen.id })}
                       >
                         <X id='delete-icon' />
                       </Button>

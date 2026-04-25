@@ -36,8 +36,8 @@ export const ScreenForm = ({
   const [toggleAnimation, setToggleAnimation] = useState<boolean>(false)
   const [color] = useState<ScreenColor>(createScreenColors)
 
-  const { isPending: isCreateLoading, onAction: createAction } = useCreateHandler({ handleClose: onClose })
-  const { isPending: isUpdateLoading, onAction: updateAction } = useUpdateHandler({ handleClose: onClose })
+  const { isPending: isCreateLoading, mutate: createAction } = useCreateHandler()
+  const { isPending: isUpdateLoading, mutate: updateAction } = useUpdateHandler()
 
   const isLoading = isCreateLoading || isUpdateLoading || isFormLoading
 
@@ -94,13 +94,13 @@ export const ScreenForm = ({
 
   const actionSubmit: SubmitHandler<FormSubmitType> = useCallback(
     (form: FormSubmitType) => {
-      if (editId) {
-        updateAction(form as ScreenInput, editId)
+      if (editId && updateAction) {
+        updateAction({ id: editId, data: form as ScreenInput }, { onSuccess: handleClose })
       } else {
-        createAction(form as ScreenInput)
+        createAction({ data: form as ScreenInput }, { onSuccess: handleClose })
       }
     },
-    [createAction, updateAction, editId]
+    [createAction, updateAction, editId, handleClose]
   )
 
   return (

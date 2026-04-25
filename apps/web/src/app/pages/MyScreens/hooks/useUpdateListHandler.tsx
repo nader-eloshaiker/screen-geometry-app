@@ -1,35 +1,43 @@
 import { useUpdateScreenListEffect } from '@/app/hooks/api/useUpdateScreenListEffect'
-import { MyScreensLocationState } from '@/app/routes/myscreens'
+import { ScreenItemRender } from '@/app/models/screenItemRender'
 import { queryClient } from '@/app/stores/query/QueryClient'
+import { isScreenDataEqual } from '@screengeometry/lib-api/extended'
 import { getGetScreenListQueryKey, useUpdateScreenList } from '@screengeometry/lib-api/spec'
-import { useCallback } from 'react'
-import ReactGA from 'react-ga4'
+import { useNavigate } from '@tanstack/react-router'
+import { useEffect } from 'react'
 
-type ScreenState = NonNullable<MyScreensLocationState['screens']>
+export type UpdateListHandler = ReturnType<typeof useUpdateScreenList>
 
-export type UpdateListHandler = Omit<ReturnType<typeof useUpdateScreenList>, 'mutate'> & {
-  onAction: (newScreens: ScreenState) => void
-}
-
-export const useUpdateListHandler = (): UpdateListHandler => {
+export const useUpdateListHandler = ({
+  screens,
+  incomingScreens,
+  isLoading,
+}: {
+  screens: ScreenItemRender[]
+  incomingScreens?: ScreenItemRender[]
+  isLoading: boolean
+}): UpdateListHandler => {
+  const navigate = useNavigate()
   const query = useUpdateScreenList({
     mutation: {
       onSuccess: () => queryClient.invalidateQueries({ queryKey: getGetScreenListQueryKey() }),
     },
   })
-  const { mutate, ...params } = query
+  useUpdateScreenListEffect(query)
 
-  useUpdateScreenListEffect(params.data, params.error)
+  useEffect(() => {
+    if (!incomingScreens?.length || isLoading || query.isPending) {
+      return
+    }
 
-  const onAction = useCallback(
-    (newScreens: ScreenState) => {
-      ReactGA.event({
-        category: 'Button Click',
-        action: 'Clicked update list with shared screens',
-        label: 'My Screens Page',
-      })
+    const missingScreens = incomingScreens.filter(
+      (incoming) => !screens.some((existing) => isScreenDataEqual(existing.data, incoming))
+    )
 
-      const newScreenInputs = newScreens.map((screen) => ({
+    if (missingScreens.length > 0) {
+      // Clear router state immediately to prevent re-processing on refresh
+      navigate({ to: '/myscreens', state: {}, replace: true })
+      const newScreenInputs = missingScreens.map((screen) => ({
         diagonalSize: screen.data.diagonalSize,
         aspectRatio: screen.data.aspectRatio,
         hRes: screen.data.hRes,
@@ -37,16 +45,9 @@ export const useUpdateListHandler = (): UpdateListHandler => {
         lightColor: screen.color.lightColor,
         darkColor: screen.color.darkColor,
       }))
+      query.mutate({ data: newScreenInputs })
+    }
+  }, [incomingScreens, screens, isLoading, query, navigate])
 
-      mutate({
-        data: newScreenInputs,
-      })
-    },
-    [mutate]
-  )
-
-  return {
-    ...params,
-    onAction,
-  }
+  return query
 }

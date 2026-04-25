@@ -10,7 +10,7 @@ export const useApiEffect = <TData>({
   successNotification,
 }: {
   data?: TData
-  error?: ErrorResponse | null
+  error?: unknown
   responseHandler?(data: TData | undefined): void
   successNotification?: { title: string; message: string }
 }) => {
@@ -40,9 +40,11 @@ export const useApiEffect = <TData>({
       return
     }
 
+    const typedError = error as ErrorResponse
+
     toast({
       title: 'Server Error',
-      description: error.error.details?.reason ?? error.error.message,
+      description: typedError.error.details?.reason ?? typedError.error.message,
       palette: 'danger',
     })
   }, [error, toast])

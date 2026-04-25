@@ -1,8 +1,8 @@
-import { SharePage } from '@/app/pages/SharePage'
+import { SharePage } from '@/app/pages/Share/SharePage'
 import { createLazyFileRoute, useSearch } from '@tanstack/react-router'
 
 const Component = () => {
-  const { screens } = useSearch({ from: '/share/' })
+  const { screens } = useSearch({ from: '/share' })
 
   return (
     <>

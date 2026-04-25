@@ -10,6 +10,7 @@ import { ScreenFormDrawer } from '@/app/components/screen/form/ScreenFormDrawer'
 import { ScreenPanel } from '@/app/components/screen/panel/ScreenPanel'
 import { ScreenTable } from '@/app/components/screen/table/ScreenTable'
 import { Stacked } from '@/app/components/stacked/Stacked'
+import { defaultScreenInputList } from '@/app/constants/defaultScreenList'
 import { useGetScreensListEffect } from '@/app/hooks/api/useGetScreensListEffect'
 import { useElementSize } from '@/app/hooks/useElementSize'
 import type { ScreenItemRender } from '@/app/models/screenItemRender'
@@ -24,7 +25,7 @@ import { usePageLoader } from '@screengeometry/lib-ui/pageloader'
 import { Skeleton } from '@screengeometry/lib-ui/skeleton'
 import { useRouterState } from '@tanstack/react-router'
 import { Loader2 } from 'lucide-react'
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { useCreateListhandler } from './hooks/useCreateListHandler'
 import { useDeleteHandler } from './hooks/useDeleteHandler'
 import { useFormOpenHandler } from './hooks/useFormOpenHandler'
@@ -64,19 +65,23 @@ export const MyScreensPage = () => {
   const [editId, setEditId] = useState<string | undefined>()
 
   const createListHandler = useCreateListhandler()
-  const updateListHandler = useUpdateListHandler()
+  const updateListHandler = useUpdateListHandler({
+    screens,
+    incomingScreens,
+    isLoading: isListLoading || isPageLoading,
+  })
   const deleteHandler = useDeleteHandler()
   const showHandler = useShowHandler()
   const formOpenHandler = useFormOpenHandler({ setIsEditorOpen, setEditMode, setEditId })
+  const shareHandler = useShareHandler({
+    screens,
+  })
 
   const isLoading = isListLoading || isPageLoading || updateListHandler.isPending
 
-  const shareHandler = useShareHandler({
-    screens,
-    incomingScreens,
-    isLoading,
-    updateListHandler,
-  })
+  const onCreateList = useCallback(() => {
+    createListHandler.mutate({ data: defaultScreenInputList })
+  }, [createListHandler])
 
   useEffect(() => {
     const widestScreen = screens.length > 0 ? getMaxScreenSize(screens) : { width: 47, height: 16 }
@@ -125,12 +130,7 @@ export const MyScreensPage = () => {
               <div>
                 <TranslateMessage id='screens.emptytable.populatelist' />
               </div>
-              <Button
-                className='w-40'
-                mode='outline'
-                onClick={createListHandler.onAction}
-                disabled={createListHandler.isPending}
-              >
+              <Button className='w-40' mode='outline' onClick={onCreateList} disabled={createListHandler.isPending}>
                 {createListHandler.isPending ? (
                   <Loader2 data-testid='ButtonSpinner' className='animate-spin' />
                 ) : (

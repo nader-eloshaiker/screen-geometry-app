@@ -1,10 +1,8 @@
 import { useDeleteScreenEffect } from '@/app/hooks/api/useDeleteScreenEffect'
 import { queryClient } from '@/app/stores/query/QueryClient'
 import { getGetScreenListQueryKey, useDeleteScreen } from '@screengeometry/lib-api/spec'
-import { useCallback } from 'react'
-import ReactGA from 'react-ga4'
 
-export type DeleteHandler = Omit<ReturnType<typeof useDeleteScreen>, 'mutate'> & { onAction: (id: string) => void }
+export type DeleteHandler = ReturnType<typeof useDeleteScreen>
 
 export const useDeleteHandler = (): DeleteHandler => {
   const query = useDeleteScreen({
@@ -12,25 +10,7 @@ export const useDeleteHandler = (): DeleteHandler => {
       onSuccess: () => queryClient.invalidateQueries({ queryKey: getGetScreenListQueryKey() }),
     },
   })
-  const { mutate, ...params } = query
+  useDeleteScreenEffect(query)
 
-  useDeleteScreenEffect(params.data, params.error)
-
-  const onAction = useCallback(
-    (id: string) => {
-      ReactGA.event({
-        category: 'Button Click',
-        action: 'Clicked delete',
-        label: 'My Screens Page',
-      })
-
-      mutate({ id })
-    },
-    [mutate]
-  )
-
-  return {
-    ...params,
-    onAction,
-  }
+  return query
 }

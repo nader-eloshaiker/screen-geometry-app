@@ -250,6 +250,15 @@ export const SearchDocuments: Array<SearchItem> = [
     hRes: 5120,
   },
   {
+    id: '6KWUHD5221:9',
+    name: '6K WUHD',
+    label: '6K WUHD 52" 6144x2560 21:9',
+    aspectRatio: '21:9',
+    diagonalSize: 52,
+    vRes: 2560,
+    hRes: 6144,
+  },
+  {
     id: '5KUHD2716:9',
     name: '5K UHD',
     label: '5K UHD 27" 5120x2880 16:9',

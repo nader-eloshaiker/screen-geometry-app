@@ -17,9 +17,9 @@ import { useNavigate } from '@tanstack/react-router'
 import { useCallback, useEffect, useState } from 'react'
 import ReactGA from 'react-ga4'
 import { ulid } from 'ulid'
-import { SaveShareButton } from '../components/buttons/SaveShareButton'
-import { ScreenParam } from '../routes/share'
-import { ShowHandler } from './MyScreens/hooks/useShowHandler'
+import { SaveShareButton } from '../../components/buttons/SaveShareButton'
+import { ScreenParam } from '../../routes/share'
+import { useLocalShowHandler } from './hooks/useShareHandler'
 
 export const SharePage = ({ screenParams = [] }: { screenParams: ScreenParam[] }) => {
   const [setRef, { width }] = useElementSize()
@@ -59,21 +59,7 @@ export const SharePage = ({ screenParams = [] }: { screenParams: ScreenParam[] }
     setScreens(renderedScreens)
   }, [screenParams])
 
-  const onShow = useCallback(
-    (id: string) => {
-      ReactGA.event({
-        category: 'Checkbox Click',
-        action: 'Clicked show',
-        label: 'Share Page',
-      })
-      const item = screens.find((screen) => screen.id === id)
-      if (item) {
-        item.visible = !item.visible
-        setScreens([...screens])
-      }
-    },
-    [screens]
-  )
+  const showHandler = useLocalShowHandler(screens, setScreens)
 
   const onSave = useCallback(() => {
     ReactGA.event({
@@ -113,13 +99,7 @@ export const SharePage = ({ screenParams = [] }: { screenParams: ScreenParam[] }
           isScreenListLoading={false}
           highlighted={highlighted}
           setHighLighted={setHighlighted}
-          showHandler={
-            {
-              onAction: onShow,
-              isPending: false,
-              variables: undefined,
-            } as ShowHandler
-          }
+          showHandler={showHandler}
         />
 
         {screens.length === 0 && (

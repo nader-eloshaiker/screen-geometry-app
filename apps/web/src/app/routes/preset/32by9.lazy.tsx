@@ -1,4 +1,4 @@
-import { SharePage } from '@/app/pages/SharePage'
+import { SharePage } from '@/app/pages/Share/SharePage'
 import { createLazyFileRoute } from '@tanstack/react-router'
 
 const Component = () => (
