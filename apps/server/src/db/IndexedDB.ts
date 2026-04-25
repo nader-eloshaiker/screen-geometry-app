@@ -3,7 +3,7 @@ import { match } from 'ts-pattern'
 import { ulid } from 'ulid'
 import { type KeyedObject, StoresEnum, dbNameDefault, dbVersionDefault } from './DbConstants'
 import { SearchDocuments } from './SearchDocuments'
-import { migrateV2toV4 } from './migration/v2-v4'
+import { migrateV2toV3 } from './migration/v2-v3'
 import { migrateV3toV4 } from './migration/v3-v4'
 
 const handleRequestError = (
@@ -108,7 +108,7 @@ export const initDB = (options?: dbProps): Promise<boolean> => {
       }
 
       match(event)
-        .with({ oldVersion: 2 }, () => migrateV2toV4(db, openReq))
+        .with({ oldVersion: 2 }, () => migrateV2toV3(db, openReq, true))
         .with({ oldVersion: 3 }, () => migrateV3toV4(db, openReq))
         .otherwise(() => {
           console.log('No migration needed')

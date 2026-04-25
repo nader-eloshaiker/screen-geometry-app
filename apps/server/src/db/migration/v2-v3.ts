@@ -1,9 +1,8 @@
 import { type ScreenColor, type ScreenItem } from '@screengeometry/lib-api/spec'
 import { ulid } from 'ulid'
 import { StoresEnum } from '../DbConstants'
-import { migrateV3toV4 } from './v3-v4'
 
-export const migrateV2toV4 = (db: IDBDatabase, openReq: IDBOpenDBRequest) => {
+export const migrateV2toV3 = (db: IDBDatabase, openReq: IDBOpenDBRequest, includeV4Migration = false) => {
   if (!db.objectStoreNames.contains(StoresEnum.DeprecatedLocalForageTable)) {
     return
   }
@@ -48,6 +47,10 @@ export const migrateV2toV4 = (db: IDBDatabase, openReq: IDBOpenDBRequest) => {
     db.deleteObjectStore(StoresEnum.DeprecatedLocalForageTable)
     db.deleteObjectStore(StoresEnum.DeprecatedLocalForageBlob)
 
-    migrateV3toV4(db, openReq)
+    // If upgrading directly to v4, also delete the Search store
+    if (includeV4Migration && db.objectStoreNames.contains(StoresEnum.Search)) {
+      console.log('Also removing Search store for v4 migration')
+      db.deleteObjectStore(StoresEnum.Search)
+    }
   }
 }
