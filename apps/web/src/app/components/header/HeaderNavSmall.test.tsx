@@ -4,30 +4,6 @@ import userEvent from '@testing-library/user-event'
 import { vi } from 'vitest'
 import { HeaderNavSmall } from './HeaderNavSmall'
 
-// Mock the NavigationLink component
-vi.mock('@screengeometry/lib-ui/navigationlink', () => ({
-  NavigationLink: ({
-    children,
-    to,
-    mode,
-    className,
-    onClick,
-  }: React.PropsWithChildren & { to: string; mode: string; className: string; onClick: () => void }) => (
-    <a
-      href={to}
-      data-testid={`nav-link-${to.replace('/', '')}`}
-      data-mode={mode}
-      className={className}
-      onClick={(e) => {
-        e.preventDefault()
-        onClick()
-      }}
-    >
-      {children}
-    </a>
-  ),
-}))
-
 // Mock TanStack Router hooks and components
 vi.mock('@tanstack/react-router', () => ({
   useMatchRoute: () => () => false,
@@ -45,7 +21,14 @@ vi.mock('@tanstack/react-router', () => ({
     pendingMatches: [],
   }),
   Link: ({ children, to, onClick, ...props }: React.PropsWithChildren & { to: string; onClick?: () => void }) => (
-    <a href={to} onClick={onClick} {...props}>
+    <a
+      href={to}
+      onClick={(e) => {
+        e.preventDefault()
+        onClick?.()
+      }}
+      {...props}
+    >
       {children}
     </a>
   ),
