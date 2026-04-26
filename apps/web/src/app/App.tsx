@@ -2,10 +2,10 @@ import { AppRouterProvider } from '@/app/router/AppRouterProvider'
 import { QueryProvider } from '@/app/stores/query/QueryProvider'
 import { ScreenProvider } from '@/app/stores/screen/ScreenProvider'
 import { ThemeProvider } from '@/app/stores/theme/ThemeProvider'
+import { TranslationEnvProvider } from '@/app/stores/translation'
 import { PageLoader, PageLoaderProvider, usePageLoader } from '@screengeometry/lib-ui/pageloader'
 import { EnvConfigProvider } from './stores/config/EnvConfigProvider'
 import { EnvCountryProvider } from './stores/country/EnvCountryProvider'
-import { EnvTranslationProvider } from './stores/translation/EnvTranslationProvider'
 
 const Application = () => {
   const { isPageLoading } = usePageLoader()
@@ -25,13 +25,13 @@ export const App = () => (
     <PageLoaderProvider initialLoadingKeys={[ConfigLoaderKey, ConfigLoaderKey, TranslationsLoaderKey]}>
       <EnvConfigProvider configReadyKey={ConfigLoaderKey}>
         <EnvCountryProvider countriesReadyKey={CountriesLoaderKey}>
-          <EnvTranslationProvider translationsReadyKey={TranslationsLoaderKey}>
+          <TranslationEnvProvider translationsReadyKey={TranslationsLoaderKey}>
             <ThemeProvider>
               <ScreenProvider>
                 <Application />
               </ScreenProvider>
             </ThemeProvider>
-          </EnvTranslationProvider>
+          </TranslationEnvProvider>
         </EnvCountryProvider>
       </EnvConfigProvider>
     </PageLoaderProvider>
