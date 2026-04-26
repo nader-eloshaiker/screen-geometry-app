@@ -38,7 +38,14 @@ export const getGetScreenListQueryKey = () => {
 
 export const getGetScreenListQueryOptions = <
   TData = Awaited<ReturnType<typeof getScreenList>>,
-  TError = ErrorResponse,
+  TError =
+    | ErrorResponse
+    | ErrorResponse
+    | ErrorResponse
+    | ErrorResponse
+    | ErrorResponse
+    | ErrorResponse
+    | ErrorResponse,
 >(options?: {
   query?: Partial<UseQueryOptions<Awaited<ReturnType<typeof getScreenList>>, TError, TData>>
 }) => {
@@ -56,9 +63,26 @@ export const getGetScreenListQueryOptions = <
 }
 
 export type GetScreenListQueryResult = NonNullable<Awaited<ReturnType<typeof getScreenList>>>
-export type GetScreenListQueryError = ErrorResponse
+export type GetScreenListQueryError =
+  | ErrorResponse
+  | ErrorResponse
+  | ErrorResponse
+  | ErrorResponse
+  | ErrorResponse
+  | ErrorResponse
+  | ErrorResponse
 
-export function useGetScreenList<TData = Awaited<ReturnType<typeof getScreenList>>, TError = ErrorResponse>(
+export function useGetScreenList<
+  TData = Awaited<ReturnType<typeof getScreenList>>,
+  TError =
+    | ErrorResponse
+    | ErrorResponse
+    | ErrorResponse
+    | ErrorResponse
+    | ErrorResponse
+    | ErrorResponse
+    | ErrorResponse,
+>(
   options: {
     query: Partial<UseQueryOptions<Awaited<ReturnType<typeof getScreenList>>, TError, TData>> &
       Pick<
@@ -72,7 +96,17 @@ export function useGetScreenList<TData = Awaited<ReturnType<typeof getScreenList
   },
   queryClient?: QueryClient
 ): DefinedUseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-export function useGetScreenList<TData = Awaited<ReturnType<typeof getScreenList>>, TError = ErrorResponse>(
+export function useGetScreenList<
+  TData = Awaited<ReturnType<typeof getScreenList>>,
+  TError =
+    | ErrorResponse
+    | ErrorResponse
+    | ErrorResponse
+    | ErrorResponse
+    | ErrorResponse
+    | ErrorResponse
+    | ErrorResponse,
+>(
   options?: {
     query?: Partial<UseQueryOptions<Awaited<ReturnType<typeof getScreenList>>, TError, TData>> &
       Pick<
@@ -86,7 +120,17 @@ export function useGetScreenList<TData = Awaited<ReturnType<typeof getScreenList
   },
   queryClient?: QueryClient
 ): UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-export function useGetScreenList<TData = Awaited<ReturnType<typeof getScreenList>>, TError = ErrorResponse>(
+export function useGetScreenList<
+  TData = Awaited<ReturnType<typeof getScreenList>>,
+  TError =
+    | ErrorResponse
+    | ErrorResponse
+    | ErrorResponse
+    | ErrorResponse
+    | ErrorResponse
+    | ErrorResponse
+    | ErrorResponse,
+>(
   options?: { query?: Partial<UseQueryOptions<Awaited<ReturnType<typeof getScreenList>>, TError, TData>> },
   queryClient?: QueryClient
 ): UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
@@ -94,7 +138,17 @@ export function useGetScreenList<TData = Awaited<ReturnType<typeof getScreenList
  * @summary Get a list of ScreenItem objects
  */
 
-export function useGetScreenList<TData = Awaited<ReturnType<typeof getScreenList>>, TError = ErrorResponse>(
+export function useGetScreenList<
+  TData = Awaited<ReturnType<typeof getScreenList>>,
+  TError =
+    | ErrorResponse
+    | ErrorResponse
+    | ErrorResponse
+    | ErrorResponse
+    | ErrorResponse
+    | ErrorResponse
+    | ErrorResponse,
+>(
   options?: { query?: Partial<UseQueryOptions<Awaited<ReturnType<typeof getScreenList>>, TError, TData>> },
   queryClient?: QueryClient
 ): UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
@@ -122,7 +176,17 @@ export const createScreenList = (screenInputList: ScreenInputList, signal?: Abor
   })
 }
 
-export const getCreateScreenListMutationOptions = <TError = ErrorResponse, TContext = unknown>(options?: {
+export const getCreateScreenListMutationOptions = <
+  TError =
+    | ErrorResponse
+    | ErrorResponse
+    | ErrorResponse
+    | ErrorResponse
+    | ErrorResponse
+    | ErrorResponse
+    | ErrorResponse,
+  TContext = unknown,
+>(options?: {
   mutation?: UseMutationOptions<
     Awaited<ReturnType<typeof createScreenList>>,
     TError,
@@ -150,12 +214,29 @@ export const getCreateScreenListMutationOptions = <TError = ErrorResponse, TCont
 
 export type CreateScreenListMutationResult = NonNullable<Awaited<ReturnType<typeof createScreenList>>>
 export type CreateScreenListMutationBody = ScreenInputList
-export type CreateScreenListMutationError = ErrorResponse
+export type CreateScreenListMutationError =
+  | ErrorResponse
+  | ErrorResponse
+  | ErrorResponse
+  | ErrorResponse
+  | ErrorResponse
+  | ErrorResponse
+  | ErrorResponse
 
 /**
  * @summary Create a list of ScreenItem objects
  */
-export const useCreateScreenList = <TError = ErrorResponse, TContext = unknown>(
+export const useCreateScreenList = <
+  TError =
+    | ErrorResponse
+    | ErrorResponse
+    | ErrorResponse
+    | ErrorResponse
+    | ErrorResponse
+    | ErrorResponse
+    | ErrorResponse,
+  TContext = unknown,
+>(
   options?: {
     mutation?: UseMutationOptions<
       Awaited<ReturnType<typeof createScreenList>>,
@@ -167,6 +248,93 @@ export const useCreateScreenList = <TError = ErrorResponse, TContext = unknown>(
   queryClient?: QueryClient
 ): UseMutationResult<Awaited<ReturnType<typeof createScreenList>>, TError, { data: ScreenInputList }, TContext> => {
   const mutationOptions = getCreateScreenListMutationOptions(options)
+
+  return useMutation(mutationOptions, queryClient)
+}
+/**
+ * @summary Update a list of ScreenItem objects
+ */
+export const updateScreenList = (screenInputList: ScreenInputList) => {
+  return serverApiClient<ScreenListResponse>({
+    url: `/v1/screens`,
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json' },
+    data: screenInputList,
+  })
+}
+
+export const getUpdateScreenListMutationOptions = <
+  TError =
+    | ErrorResponse
+    | ErrorResponse
+    | ErrorResponse
+    | ErrorResponse
+    | ErrorResponse
+    | ErrorResponse
+    | ErrorResponse,
+  TContext = unknown,
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof updateScreenList>>,
+    TError,
+    { data: ScreenInputList },
+    TContext
+  >
+}): UseMutationOptions<Awaited<ReturnType<typeof updateScreenList>>, TError, { data: ScreenInputList }, TContext> => {
+  const mutationKey = ['updateScreenList']
+  const { mutation: mutationOptions } = options
+    ? options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey
+      ? options
+      : { ...options, mutation: { ...options.mutation, mutationKey } }
+    : { mutation: { mutationKey } }
+
+  const mutationFn: MutationFunction<Awaited<ReturnType<typeof updateScreenList>>, { data: ScreenInputList }> = (
+    props
+  ) => {
+    const { data } = props ?? {}
+
+    return updateScreenList(data)
+  }
+
+  return { mutationFn, ...mutationOptions }
+}
+
+export type UpdateScreenListMutationResult = NonNullable<Awaited<ReturnType<typeof updateScreenList>>>
+export type UpdateScreenListMutationBody = ScreenInputList
+export type UpdateScreenListMutationError =
+  | ErrorResponse
+  | ErrorResponse
+  | ErrorResponse
+  | ErrorResponse
+  | ErrorResponse
+  | ErrorResponse
+  | ErrorResponse
+
+/**
+ * @summary Update a list of ScreenItem objects
+ */
+export const useUpdateScreenList = <
+  TError =
+    | ErrorResponse
+    | ErrorResponse
+    | ErrorResponse
+    | ErrorResponse
+    | ErrorResponse
+    | ErrorResponse
+    | ErrorResponse,
+  TContext = unknown,
+>(
+  options?: {
+    mutation?: UseMutationOptions<
+      Awaited<ReturnType<typeof updateScreenList>>,
+      TError,
+      { data: ScreenInputList },
+      TContext
+    >
+  },
+  queryClient?: QueryClient
+): UseMutationResult<Awaited<ReturnType<typeof updateScreenList>>, TError, { data: ScreenInputList }, TContext> => {
+  const mutationOptions = getUpdateScreenListMutationOptions(options)
 
   return useMutation(mutationOptions, queryClient)
 }

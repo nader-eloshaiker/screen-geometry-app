@@ -13,7 +13,7 @@ const Root = () => {
   return (
     <div className='flex min-h-dvh flex-col'>
       <Header />
-      <main id='app-root' className='2xs:px-2 container mx-auto my-6 flex-auto px-1 md:px-4'>
+      <main id='app-root' className='2xs:px-2 container mx-auto my-6 flex-auto px-1 pb-16 md:px-4'>
         <Outlet />
       </main>
       <Footer />

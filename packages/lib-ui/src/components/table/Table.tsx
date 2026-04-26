@@ -20,8 +20,20 @@ export function TableHeader({ className, ...props }: React.ComponentProps<'thead
     />
   )
 }
-export function TableBody({ className, ...props }: React.ComponentProps<'tbody'>) {
-  return <tbody data-slot='table-body' className={cn('[&_tr:last-child]:border-0', className)} {...props} />
+
+// Note: Customisation to give the option to show bottom border
+export function TableBody({
+  className,
+  showBottomBorder = false,
+  ...props
+}: React.ComponentProps<'tbody'> & { showBottomBorder?: boolean }) {
+  return (
+    <tbody
+      data-slot='table-body'
+      className={cn(showBottomBorder ? '' : '[&_tr:last-child]:border-0', className)}
+      {...props}
+    />
+  )
 }
 export function TableFooter({ className, ...props }: React.ComponentProps<'tfoot'>) {
   return (

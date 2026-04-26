@@ -1,7 +1,7 @@
 import { defaultLanguage, defaultLocale } from '@/app/stores/country/CountryUtils'
 import { Country } from '@/app/stores/country/EnvCountryContext'
 import { useEnvCountry } from '@/app/stores/country/useEnvCountry'
-import { useEnvTranslate } from '@/app/stores/translation/useEnvTranslate'
+import { TranslateMessage, useTranslation, useTranslationEnv } from '@/app/stores/translation'
 import { Button } from '@screengeometry/lib-ui/button'
 import {
   Command,
@@ -15,7 +15,6 @@ import { Popover, PopoverContent, PopoverTrigger } from '@screengeometry/lib-ui/
 import { cn } from '@screengeometry/lib-ui/utils'
 import { Check, ChevronsUpDown } from 'lucide-react'
 import { useEffect, useMemo, useState } from 'react'
-import { FormattedMessage, useIntl } from 'react-intl'
 
 const findCountry = ({ locale = defaultLocale, countriesList }: { locale: string; countriesList: Array<Country> }) =>
   countriesList.find((country) => country.locale === locale) ??
@@ -38,9 +37,9 @@ const CommandLanguageGroup = ({ code, ...rest }: { code: string } & React.Compon
 }
 
 export const LanguageSwitcher = () => {
-  const { formatMessage } = useIntl()
+  const { formatMessage } = useTranslation()
   const { countriesDict = {} } = useEnvCountry()
-  const { locale, setLocale } = useEnvTranslate()
+  const { locale, setLocale } = useTranslationEnv()
 
   const countriesList = useMemo(() => Object.values(countriesDict).flat(), [countriesDict])
 
@@ -63,7 +62,7 @@ export const LanguageSwitcher = () => {
     <Popover open={open} onOpenChange={setOpen} modal={true}>
       <PopoverTrigger asChild>
         <Button
-          mode='outline'
+          mode='ghost'
           palette='secondary'
           role='combobox'
           dimension='none'
@@ -76,16 +75,10 @@ export const LanguageSwitcher = () => {
       </PopoverTrigger>
       <PopoverContent className='mt-2 border-none p-0'>
         <Command filter={(value, search) => (value.toLocaleLowerCase().includes(search.toLocaleLowerCase()) ? 1 : 0)}>
-          <CommandInput
-            placeholder={formatMessage({
-              id: 'translations.selector.placeholder',
-              defaultMessage: 'Search Translation...',
-            })}
-            className='h-9'
-          />
+          <CommandInput placeholder={formatMessage('footer.translations.placeholder')} className='h-9' />
           <CommandList>
             <CommandEmpty>
-              <FormattedMessage id='screens.selector.nomatching' defaultMessage='No Matching Screens found' />
+              <TranslateMessage id='screens.selector.nomatching' />
             </CommandEmpty>
             {Object.entries(countriesDict).map(([languageCode, countries]) => (
               <CommandLanguageGroup key={languageCode} code={languageCode}>

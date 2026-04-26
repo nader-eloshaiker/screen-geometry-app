@@ -1,5 +1,6 @@
 import { useDebounce } from '@/app/hooks/useDebounce'
 import { useElementSize } from '@/app/hooks/useElementSize'
+import { TranslateMessage } from '@/app/stores/translation'
 import { type SearchItem } from '@screengeometry/lib-api/spec'
 import { Button } from '@screengeometry/lib-ui/button'
 import {
@@ -17,7 +18,6 @@ import { cn } from '@screengeometry/lib-ui/utils'
 import parse from 'html-react-parser'
 import { Check, ChevronsUpDown } from 'lucide-react'
 import { type Dispatch, type SetStateAction, useEffect, useState } from 'react'
-import { FormattedMessage } from 'react-intl'
 
 type TProps = {
   items: Array<SearchItem> | undefined
@@ -54,9 +54,9 @@ export const ScreenSelector = ({
   }, [open])
 
   return (
-    <div className='flex w-full flex-col gap-2 py-8' ref={setRef}>
+    <div className='flex w-full flex-col gap-2' ref={setRef}>
       <Label palette='mono' htmlFor='searchList'>
-        <FormattedMessage id='screens.selector.description' defaultMessage='Pre fill the form from list of Screens' />
+        <TranslateMessage id='screens.selector.description' />
       </Label>
       <Popover open={open} onOpenChange={setOpen} modal={true}>
         <PopoverTrigger asChild>
@@ -80,7 +80,7 @@ export const ScreenSelector = ({
             <CommandInput placeholder={commandPlaceholder} className='h-9' onValueChange={setSearchTerm} />
             <CommandList>
               <CommandEmpty style={{ width: width }}>
-                <FormattedMessage id='screens.selector.nomatching' defaultMessage='No Matching Screens found' />
+                <TranslateMessage id='screens.selector.nomatching' />
               </CommandEmpty>
               <CommandGroup>
                 {items.map((item) => (
