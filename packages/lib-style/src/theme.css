@@ -26,13 +26,16 @@
   --color-popover-border: var(--popover-border);
   --color-popover-border-hover: var(--popover-border-hover);
   --color-popover-foreground: var(--popover-foreground);
+  --color-popover-foreground-muted: var(--popover-foreground-muted);
   --color-popover-foreground-hover: var(--popover-foreground-hover);
   --color-popover-foreground-active: var(--popover-foreground-active);
 
   --color-header: var(--header);
+  --color-header-muted: var(--header-muted);
   --color-header-hover: var(--header-hover);
   --color-header-active: var(--header-active);
   --color-header-foreground: var(--header-foreground);
+  --color-header-foreground-muted: var(--header-foreground-muted);
   --color-header-foreground-hover: var(---header-foreground-hover);
   --color-header-foreground-active: var(--header-foreground-active);
 
@@ -116,7 +119,7 @@
   --color-danger-foreground: var(--danger-foreground);
   --color-danger-foreground-active: var(--danger-foreground-active);
   --color-danger-foreground-hover: var(--danger-foreground-hover);
-  --color-danger-foreground-muted: var(--danger-foreground-muted: );
+  --color-danger-foreground-muted: var(--danger-foreground-muted);
   --color-danger-foreground-input: var(--danger-foreground-input);
   --color-danger-foreground-input-hover: var(--danger-foreground-input-hover);
   --color-danger-foreground-input-muted: var(--danger-foreground-input-muted);
@@ -209,19 +212,22 @@
     --card-border-hover: var(--mono-300);
     --card-foreground: var(--mono-800);
 
-    --popover: var(--mono-100);
-    --popover-hover: var(--mono-500);
-    --popover-active: var(--mono-500);
-    --popover-border: var(--primary-200);
-    --popover-border-hover: var(--primary-300);
+    --popover: var(--primary-300);
+    --popover-hover: var(--primary-500);
+    --popover-active: var(--primary-500);
+    --popover-border: var(--primary-700);
+    --popover-border-hover: var(--primary-600);
     --popover-foreground: var(--primary-900);
+    --popover-foreground-muted: var(--primary-500);
     --popover-foreground-hover: var(--primary-100);
     --popover-foreground-active: var(--primary-100);
 
     --header: var(--primary-600);
+    --header-muted: var(--primary-500);
     --header-hover: var(--primary-400);
     --header-active: var(--primary-400);
     --header-foreground: var(--primary-200);
+    --header-foreground-muted: var(--primary-300);
     --header-foreground-hover: var(--primary-100);
     --header-foreground-active: var(--primary-100);
 
@@ -261,8 +267,8 @@
 
     --navigation: var(--primary-200);
     --navigation-active: var(--primary-800);
-    --navigation-hover: var(--primary-100);
-    --navigation-muted: var(--primary-800);
+    --navigation-hover: var(--primary-200);
+    --navigation-muted: var(--primary-600);
     --navigation-ring: var(--primary-300);
     --navigation-input: var(--primary-950);
     --navigation-label: var(--primary-200);
@@ -271,7 +277,7 @@
     --navigation-foreground: var(--primary-950);
     --navigation-foreground-active: var(--primary-50);
     --navigation-foreground-hover: var(--primary-800);
-    --navigation-foreground-muted: var(--primary-400);
+    --navigation-foreground-muted: var(--primary-300);
     --navigation-foreground-input: var(--primary-200);
     --navigation-foreground-input-hover: var(--primary-100);
     --navigation-foreground-input-muted: var(--primary-400);
@@ -382,12 +388,13 @@
     --card-border-hover: var(--mono-600);
     --card-foreground: var(--mono-200);
 
-    --popover: var(--mono-900);
-    --popover-hover: var(--mono-500);
-    --popover-border: var(--primary-700);
-    --popover-border-hover: var(--primary-600);
-    --popover-active: var(--mono-500);
+    --popover: var(--primary-500);
+    --popover-hover: var(--primary-500);
+    --popover-border: var(--primary-200);
+    --popover-border-hover: var(--primary-300);
+    --popover-active: var(--primary-500);
     --popover-foreground: var(--primary-100);
+    --popover-foreground-muted: var(--primary-300);
     --popover-foreground-hover: var(--primary-50);
     --popover-foreground-active: var(--primary-50);
 

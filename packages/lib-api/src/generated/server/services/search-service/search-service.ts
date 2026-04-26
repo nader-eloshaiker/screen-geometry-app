@@ -33,7 +33,17 @@ export const getGetSearchQueryKey = (params?: GetSearchParams) => {
   return [`/v1/search`, ...(params ? [params] : [])] as const
 }
 
-export const getGetSearchQueryOptions = <TData = Awaited<ReturnType<typeof getSearch>>, TError = ErrorResponse>(
+export const getGetSearchQueryOptions = <
+  TData = Awaited<ReturnType<typeof getSearch>>,
+  TError =
+    | ErrorResponse
+    | ErrorResponse
+    | ErrorResponse
+    | ErrorResponse
+    | ErrorResponse
+    | ErrorResponse
+    | ErrorResponse,
+>(
   params?: GetSearchParams,
   options?: { query?: Partial<UseQueryOptions<Awaited<ReturnType<typeof getSearch>>, TError, TData>> }
 ) => {
@@ -51,9 +61,26 @@ export const getGetSearchQueryOptions = <TData = Awaited<ReturnType<typeof getSe
 }
 
 export type GetSearchQueryResult = NonNullable<Awaited<ReturnType<typeof getSearch>>>
-export type GetSearchQueryError = ErrorResponse
+export type GetSearchQueryError =
+  | ErrorResponse
+  | ErrorResponse
+  | ErrorResponse
+  | ErrorResponse
+  | ErrorResponse
+  | ErrorResponse
+  | ErrorResponse
 
-export function useGetSearch<TData = Awaited<ReturnType<typeof getSearch>>, TError = ErrorResponse>(
+export function useGetSearch<
+  TData = Awaited<ReturnType<typeof getSearch>>,
+  TError =
+    | ErrorResponse
+    | ErrorResponse
+    | ErrorResponse
+    | ErrorResponse
+    | ErrorResponse
+    | ErrorResponse
+    | ErrorResponse,
+>(
   params: undefined | GetSearchParams,
   options: {
     query: Partial<UseQueryOptions<Awaited<ReturnType<typeof getSearch>>, TError, TData>> &
@@ -64,7 +91,17 @@ export function useGetSearch<TData = Awaited<ReturnType<typeof getSearch>>, TErr
   },
   queryClient?: QueryClient
 ): DefinedUseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-export function useGetSearch<TData = Awaited<ReturnType<typeof getSearch>>, TError = ErrorResponse>(
+export function useGetSearch<
+  TData = Awaited<ReturnType<typeof getSearch>>,
+  TError =
+    | ErrorResponse
+    | ErrorResponse
+    | ErrorResponse
+    | ErrorResponse
+    | ErrorResponse
+    | ErrorResponse
+    | ErrorResponse,
+>(
   params?: GetSearchParams,
   options?: {
     query?: Partial<UseQueryOptions<Awaited<ReturnType<typeof getSearch>>, TError, TData>> &
@@ -79,7 +116,17 @@ export function useGetSearch<TData = Awaited<ReturnType<typeof getSearch>>, TErr
   },
   queryClient?: QueryClient
 ): UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-export function useGetSearch<TData = Awaited<ReturnType<typeof getSearch>>, TError = ErrorResponse>(
+export function useGetSearch<
+  TData = Awaited<ReturnType<typeof getSearch>>,
+  TError =
+    | ErrorResponse
+    | ErrorResponse
+    | ErrorResponse
+    | ErrorResponse
+    | ErrorResponse
+    | ErrorResponse
+    | ErrorResponse,
+>(
   params?: GetSearchParams,
   options?: { query?: Partial<UseQueryOptions<Awaited<ReturnType<typeof getSearch>>, TError, TData>> },
   queryClient?: QueryClient
@@ -88,7 +135,17 @@ export function useGetSearch<TData = Awaited<ReturnType<typeof getSearch>>, TErr
  * @summary Search for screens
  */
 
-export function useGetSearch<TData = Awaited<ReturnType<typeof getSearch>>, TError = ErrorResponse>(
+export function useGetSearch<
+  TData = Awaited<ReturnType<typeof getSearch>>,
+  TError =
+    | ErrorResponse
+    | ErrorResponse
+    | ErrorResponse
+    | ErrorResponse
+    | ErrorResponse
+    | ErrorResponse
+    | ErrorResponse,
+>(
   params?: GetSearchParams,
   options?: { query?: Partial<UseQueryOptions<Awaited<ReturnType<typeof getSearch>>, TError, TData>> },
   queryClient?: QueryClient

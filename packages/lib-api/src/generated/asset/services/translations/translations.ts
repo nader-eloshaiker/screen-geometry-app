@@ -30,7 +30,7 @@ export const getTranslations = (locale: string, signal?: AbortSignal) => {
   return assetApiClient<Translations>({ url: `/locales/${locale}.json`, method: 'GET', signal })
 }
 
-export const getGetTranslationsQueryKey = (locale: string) => {
+export const getGetTranslationsQueryKey = (locale?: string) => {
   return [`/locales/${locale}.json`] as const
 }
 

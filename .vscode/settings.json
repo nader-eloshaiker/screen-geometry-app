@@ -32,9 +32,16 @@
   "search.useParentIgnoreFiles": false,
   "explorer.excludeGitIgnore": false,
   "eslint.workingDirectories": [
-    {
-      "mode": "auto"
-    }
+    { "pattern": "./apps/*/" },
+    { "pattern": "./packages/*/" },
+    { "pattern": "./docs/*/" }
+  ],
+  "eslint.useFlatConfig": true,
+  "eslint.validate": [
+    "javascript",
+    "javascriptreact",
+    "typescript",
+    "typescriptreact"
   ],
   "search.useIgnoreFiles": true,
   // enable ESLint to fix tailwind classes on save

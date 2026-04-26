@@ -1,11 +1,12 @@
 import { ScreenEvent } from '@/app/stores/screen/ScreenManager'
 import { useScreenContext } from '@/app/stores/screen/useScreenContext'
-import type { ErrorResponse, ScreenItemResponse } from '@screengeometry/lib-api/spec'
-import { useCallback, useMemo } from 'react'
-import { useIntl } from 'react-intl'
+import { useTranslation } from '@/app/stores/translation'
+import type { ScreenItemResponse, useShowScreen } from '@screengeometry/lib-api/spec'
+import { useCallback, useEffect, useMemo } from 'react'
+import ReactGA from 'react-ga4'
 import { useApiEffect } from './useApiEffect'
 
-export const useShowScreenEffect = (data: ScreenItemResponse | undefined, error: ErrorResponse | null) => {
+export const useShowScreenEffect = ({ data, error, isPending }: ReturnType<typeof useShowScreen>) => {
   const { dispatch } = useScreenContext()
   const responseHandler = useCallback(
     (data: ScreenItemResponse) => {
@@ -13,17 +14,24 @@ export const useShowScreenEffect = (data: ScreenItemResponse | undefined, error:
     },
     [dispatch]
   )
-  const { formatMessage } = useIntl()
+  const { formatMessage } = useTranslation()
   const successNotification = useMemo(
     () => ({
-      title: formatMessage({ id: 'api.updated.title', defaultMessage: 'Updated' }),
-      message: formatMessage({
-        id: 'api.showScreen.successNotification.message',
-        defaultMessage: 'Screen visibility has been updated',
-      }),
+      title: formatMessage('api.updated.title'),
+      message: formatMessage('api.showScreen.successNotification.message'),
     }),
     [formatMessage]
   )
+
+  useEffect(() => {
+    if (isPending) {
+      ReactGA.event({
+        category: 'Checkbox Click',
+        action: 'Clicked show',
+        label: 'My Screens Page',
+      })
+    }
+  }, [isPending])
 
   useApiEffect<ScreenItemResponse>({
     data,

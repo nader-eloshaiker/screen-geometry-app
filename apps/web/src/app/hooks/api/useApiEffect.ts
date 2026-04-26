@@ -10,22 +10,25 @@ export const useApiEffect = <TData>({
   successNotification,
 }: {
   data?: TData
-  error?: ErrorResponse | null
+  error?: unknown
   responseHandler?(data: TData | undefined): void
   successNotification?: { title: string; message: string }
 }) => {
   const { toast } = useToast()
 
   useEffect(() => {
-    if (!responseHandler || !data || !toast) {
+    if (!data) {
       return
     }
-    responseHandler(data)
 
-    if (successNotification) {
+    if (responseHandler) {
+      responseHandler(data)
+    }
+
+    if (successNotification && toast) {
       const { title, message } = successNotification
       toast({
-        palette: 'success',
+        palette: 'info',
         title,
         description: message,
       })
@@ -33,12 +36,16 @@ export const useApiEffect = <TData>({
   }, [data, responseHandler, successNotification, toast])
 
   useEffect(() => {
-    if (error) {
-      toast({
-        title: 'Server Error',
-        description: error.error.details?.reason ?? error.error.message,
-        palette: 'danger',
-      })
+    if (!error || !toast) {
+      return
     }
+
+    const typedError = error as ErrorResponse
+
+    toast({
+      title: 'Server Error',
+      description: typedError.error.details?.reason ?? typedError.error.message,
+      palette: 'danger',
+    })
   }, [error, toast])
 }

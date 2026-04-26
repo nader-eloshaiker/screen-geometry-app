@@ -1,9 +1,9 @@
 import type { ScreenItemRender } from '@/app/models/screenItemRender'
-import { Screens } from '@/app/pages/Screens'
+import { MyScreensPage } from '@/app/pages/MyScreens/MyScreensPage'
 import { QueryProvider } from '@/app/stores/query/QueryProvider'
 import { normaliseScreenRender } from '@/app/stores/screen/ScreenManager'
 import { ScreenProvider } from '@/app/stores/screen/ScreenProvider'
-import { EnvSessionProvider } from '@/app/stores/session/EnvSessionProvider'
+import { EnvironmentSessionLoaderKey, EnvSessionProvider } from '@/app/stores/session/EnvSessionProvider'
 import { initMSW } from '@/serviceworker/NodeServiceWorker'
 import { renderWithUserEvents } from '@/test/utils/RenderWithUserEvents'
 import { TestEnvironment } from '@/test/utils/TestEnvironment'
@@ -14,15 +14,38 @@ import {
   getScreenServiceMock,
   getSearchServiceMock,
 } from '@screengeometry/lib-api/spec'
+import { PageLoaderProvider } from '@screengeometry/lib-ui/pageloader'
 import { Toaster } from '@screengeometry/lib-ui/toaster'
+import { createMemoryHistory, createRootRoute, createRoute, createRouter, RouterProvider } from '@tanstack/react-router'
 import { waitFor } from '@testing-library/react'
-import { useState } from 'react'
+import { useMemo, useState } from 'react'
 import { ScreenTable } from './ScreenTable'
 
-vi.mock('@/lib/ui/hooks/useElementSize', () => ({
+vi.mock('@/app/hooks/useElementSize', () => ({
   __esModule: true,
   useElementSize: () => [() => {}, { width: 1024, height: 1024 }],
 }))
+
+const createMockMutation = () => ({
+  isPending: false as const,
+  status: 'idle' as const,
+  isSuccess: false as const,
+  isError: false as const,
+  isIdle: true as const,
+  data: undefined,
+  error: null,
+  failureCount: 0,
+  failureReason: null,
+  errorUpdateCount: 0,
+  isPaused: false as const,
+  variables: undefined,
+  context: undefined,
+  submittedAt: 0,
+  id: undefined as string | undefined,
+  mutate: vi.fn(),
+  mutateAsync: vi.fn(),
+  reset: vi.fn(),
+})
 
 const TestComponent = ({
   screens,
@@ -43,9 +66,9 @@ const TestComponent = ({
           setHighLighted={setHighlighted}
           screens={screens ?? normaliseScreenRender(getGetScreenListResponseMock().list)}
           isScreenListLoading={isScreenListLoading}
-          editAction={{ handler: editHandler }}
-          deleteAction={{ handler: () => {}, isPending: false }}
-          showActon={{ handler: () => {}, isPending: false }}
+          formOpenHandler={{ onAction: editHandler }}
+          deleteHandler={createMockMutation()}
+          showHandler={createMockMutation()}
         />
         <Toaster />
       </TestEnvironment>
@@ -53,16 +76,55 @@ const TestComponent = ({
   )
 }
 
+const TestRouter = ({ children }: React.PropsWithChildren) => {
+  const memoryHistory = useMemo(
+    () =>
+      createMemoryHistory({
+        initialEntries: ['/myscreens'],
+        initialIndex: 0,
+      }),
+    []
+  )
+  const rootRoute = useMemo(
+    () =>
+      createRootRoute({
+        component: () => children,
+      }),
+    [children]
+  )
+  const router = useMemo(
+    () =>
+      createRouter({
+        history: memoryHistory,
+        defaultPendingMinMs: 0,
+        routeTree: rootRoute.addChildren([
+          createRoute({
+            path: '*',
+            component: () => children,
+            getParentRoute: () => rootRoute,
+          }),
+        ]),
+      }),
+    [memoryHistory, children, rootRoute]
+  )
+
+  return <RouterProvider<typeof router> router={router} />
+}
+
 const TestParentComponent = ({ initialise }: { initialise?: Array<ScreenItemRender> }) => {
   return (
     <QueryProvider>
       <TestEnvironment>
-        <EnvSessionProvider>
-          <ScreenProvider initialise={{ screens: initialise ?? [], query: '' }}>
-            <Screens />
-          </ScreenProvider>
+        <TestRouter>
+          <PageLoaderProvider initialLoadingKeys={[EnvironmentSessionLoaderKey]}>
+            <EnvSessionProvider>
+              <ScreenProvider initialise={{ screens: initialise ?? [], query: '' }}>
+                <MyScreensPage />
+              </ScreenProvider>
+            </EnvSessionProvider>
+          </PageLoaderProvider>
           <Toaster />
-        </EnvSessionProvider>
+        </TestRouter>
       </TestEnvironment>
     </QueryProvider>
   )
@@ -94,8 +156,11 @@ describe('#ScreenTable', () => {
     const tableElement = await test.findByRole('table')
     expect(tableElement).toBeDefined()
 
+    // Wait for data to load by waiting for delete buttons to appear
+    await test.findAllByTitle('Delete')
+
     const rowElements = await test.findAllByRole('row')
-    expect(rowElements.length).toBe(7)
+    expect(rowElements.length).toBe(5)
 
     const colElements = await test.findAllByRole('columnheader')
     expect(colElements.length).toBe(7)
@@ -111,9 +176,10 @@ describe('#ScreenTable', () => {
       await test.user.click(deleteElements[0])
     })
 
-    expect(expect(mswObj.apiEventStack.length).toBe(2))
-    expect(mswObj.apiEventStack[mswObj.apiEventStack.length - 1]).toEqual(
-      expect.stringContaining('method:DELETE|url:https://dev.api.screengeometry.com/v1/screen/')
+    expect(mswObj.apiEventStack).toEqual(
+      expect.arrayContaining([
+        expect.stringContaining('method:DELETE|url:https://dev.api.screengeometry.com/v1/screen/'),
+      ])
     )
   })
 
@@ -128,11 +194,11 @@ describe('#ScreenTable', () => {
       await test.user.click(showElement)
     })
 
-    const apiEventStack = mswObj.apiEventStack[mswObj.apiEventStack.length - 1]
-    expect(apiEventStack).toEqual(
-      expect.stringContaining('method:PATCH|url:https://dev.api.screengeometry.com/v1/screen/')
+    const patchEvent = mswObj.apiEventStack.find(
+      (event) => event.includes('method:PATCH') && event.includes('/v1/screen/')
     )
-    expect(apiEventStack).toEqual(expect.stringContaining('/show'))
+    expect(patchEvent).toBeDefined()
+    expect(patchEvent).toEqual(expect.stringContaining('/show'))
   })
 
   test('show skeleton table when screen list is loading', async () => {
