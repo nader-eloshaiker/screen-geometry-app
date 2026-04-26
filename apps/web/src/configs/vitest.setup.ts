@@ -3,9 +3,6 @@ import '@testing-library/jest-dom'
 import 'vitest-location-mock'
 import '../index.css'
 
-import { MotionGlobalConfig } from 'framer-motion'
-MotionGlobalConfig.skipAnimations = true
-
 const getRandomString = (length = 10) => {
   const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789_'
   let result = ''
