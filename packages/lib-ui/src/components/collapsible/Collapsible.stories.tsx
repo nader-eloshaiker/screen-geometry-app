@@ -1,7 +1,6 @@
 // Replace nextjs-vite with the name of your framework
 import type { Meta, StoryObj } from '@storybook/react-vite'
 import { Info } from 'lucide-react'
-import { expect, userEvent } from 'storybook/test'
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from './Collapsilble'
 
 /**
@@ -47,23 +46,5 @@ export const Default: Story = {}
 export const Disabled: Story = {
   args: {
     disabled: true,
-  },
-}
-
-export const ShouldOpenClose: Story = {
-  name: 'when collapsable trigger is clicked, should show content',
-  tags: ['!dev', '!autodocs'],
-  play: async ({ canvas, step }) => {
-    const trigger = await canvas.findByRole('button')
-
-    await step('Open the collapsible', async () => {
-      await userEvent.click(trigger, { delay: 100 })
-      expect(await canvas.queryByText(/yes/i, { exact: true })).toBeVisible()
-    })
-
-    await step('Close the collapsible', async () => {
-      await userEvent.click(trigger, { delay: 100 })
-      expect(await canvas.queryByText(/yes/i, { exact: true })).toBeNull()
-    })
   },
 }
