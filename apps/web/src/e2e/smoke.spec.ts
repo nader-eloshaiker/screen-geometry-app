@@ -1,9 +1,6 @@
 import { expect, test } from '@playwright/test'
-import { MotionGlobalConfig } from 'framer-motion'
 
 test('Smoke Test Screens Page', async ({ page }) => {
-  MotionGlobalConfig.skipAnimations = true
-
   // Load Page and navigate to Screens
   await page.goto('/')
 
