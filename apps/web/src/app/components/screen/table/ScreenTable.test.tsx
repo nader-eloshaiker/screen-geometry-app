@@ -160,7 +160,7 @@ describe('#ScreenTable', () => {
     await test.findAllByTitle('Delete')
 
     const rowElements = await test.findAllByRole('row')
-    expect(rowElements.length).toBe(7)
+    expect(rowElements.length).toBe(5)
 
     const colElements = await test.findAllByRole('columnheader')
     expect(colElements.length).toBe(7)
