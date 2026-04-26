@@ -15,6 +15,7 @@ import {
   getSearchList,
   showScreen,
   updateScreen,
+  updateScreenList,
 } from './api/api'
 import { DatabaseError } from './db/DatabaseError'
 
@@ -27,7 +28,7 @@ type TReturn = {
 // Stub out the API calls using axios-mock-adapter for indexAPI to store data in the browser's IndexedDB
 // The stubbed API calls can later be replaced with real API calls to a backend store
 export const generateStub = (baseUrl: string, responseTime?: number): TReturn => {
-  const delayResponse = responseTime ?? 1000
+  const delayResponse = responseTime ?? 500
 
   const screenListMocks = () => [
     http.get(`${baseUrl}${apiRoutes.screens}`, async () => {
@@ -49,6 +50,21 @@ export const generateStub = (baseUrl: string, responseTime?: number): TReturn =>
 
       const requestBody = await resolver.request.json()
       const [err, payload] = await to<ScreenListResponse>(createScreenList(requestBody as ScreenInputList))
+
+      return err
+        ? new HttpResponse(null, { status: err instanceof DatabaseError ? err.code : 500, statusText: err.message })
+        : new HttpResponse(JSON.stringify(payload), {
+            status: 200,
+            headers: {
+              'Content-Type': 'application/json',
+            },
+          })
+    }),
+    http.put(`${baseUrl}${apiRoutes.screens}`, async (resolver) => {
+      await delay(delayResponse)
+
+      const requestBody = await resolver.request.json()
+      const [err, payload] = await to<ScreenListResponse>(updateScreenList(requestBody as ScreenInputList))
 
       return err
         ? new HttpResponse(null, { status: err instanceof DatabaseError ? err.code : 500, statusText: err.message })

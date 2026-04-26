@@ -7,7 +7,7 @@ test('Smoke Test Screens Page', async ({ page }) => {
   // Load Page and navigate to Screens
   await page.goto('/')
 
-  const screensLink = await page.getByTestId('large-header-menu').getByRole('link', { name: 'Screens' })
+  const screensLink = await page.getByTestId('large-header-menu').getByRole('link', { name: 'My Screens' })
   await screensLink.click()
 
   // Does the skeleton loader show up?
@@ -25,7 +25,8 @@ test('Smoke Test Screens Page', async ({ page }) => {
 
   // Check for table data
   const tableOriginal = page.getByTestId('ScreenTable')
-  await expect(tableOriginal.locator('tbody > tr')).toHaveCount(6)
+  await expect(tableOriginal.locator('tbody > tr')).toHaveCount(7)
+  await expect(tableOriginal).toContainText('52″')
   await expect(tableOriginal).toContainText('49″')
   await expect(tableOriginal).toContainText('40″')
   await expect(tableOriginal).toContainText('38″')
@@ -39,7 +40,7 @@ test('Smoke Test Screens Page', async ({ page }) => {
 
   // Check for table data
   const tableDeletedRow = page.getByTestId('ScreenTable')
-  await expect(tableDeletedRow.locator('tbody > tr')).toHaveCount(5)
+  await expect(tableDeletedRow.locator('tbody > tr')).toHaveCount(6)
   await expect(tableDeletedRow).not.toContainText('27″')
 
   // Create new row and check for count
@@ -64,7 +65,7 @@ test('Smoke Test Screens Page', async ({ page }) => {
 
   // Check for table data
   const tableUpdatedRow = page.getByTestId('ScreenTable')
-  await expect(tableUpdatedRow.locator('tbody > tr')).toHaveCount(6)
+  await expect(tableUpdatedRow.locator('tbody > tr')).toHaveCount(7)
   await expect(tableUpdatedRow).toContainText('31″')
   await expect(tableUpdatedRow).not.toContainText('32″')
 

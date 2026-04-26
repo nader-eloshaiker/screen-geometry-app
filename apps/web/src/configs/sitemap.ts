@@ -15,7 +15,7 @@ export const SiteMap: Sitemap<TRoutes> = {
       changeFrequency: 'weekly',
       lastModified: now,
     },
-    '/screens': {
+    '/myscreens': {
       priority: 0.4,
       changeFrequency: 'weekly',
       lastModified: now,

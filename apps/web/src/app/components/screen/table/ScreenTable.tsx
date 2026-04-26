@@ -1,6 +1,10 @@
 import { type ScreenItemRender } from '@/app/models/screenItemRender'
+import { DeleteHandler } from '@/app/pages/MyScreens/hooks/useDeleteHandler'
+import { FormOpenHandler } from '@/app/pages/MyScreens/hooks/useFormOpenHandler'
+import { ShowHandler } from '@/app/pages/MyScreens/hooks/useShowHandler'
 import { DarkMode, type TThemeMode } from '@/app/stores/theme/Theme.types'
 import { useTheme } from '@/app/stores/theme/useTheme'
+import { TranslateMessage } from '@/app/stores/translation'
 import { type ScreenColor } from '@screengeometry/lib-api/spec'
 import { Button } from '@screengeometry/lib-ui/button'
 import { Checkbox } from '@screengeometry/lib-ui/checkbox'
@@ -9,40 +13,62 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@
 import { cn } from '@screengeometry/lib-ui/utils'
 import { Loader2, LoaderCircle, Pencil, X } from 'lucide-react'
 import { type Dispatch, type SetStateAction } from 'react'
-import { FormattedMessage, FormattedNumber } from 'react-intl'
-import styled from 'styled-components'
+import { FormattedNumber } from 'react-intl'
+import { match, P } from 'ts-pattern'
 
-const StyledCheckbox = styled(Checkbox)<{ $fgColor: string; $bgColor: string }>`
-  border-color: ${(props) => props.$fgColor};
-  color: ${(props) => props.$fgColor};
+const StyledCheckbox = ({
+  $fgColor,
+  $bgColor,
+  className,
+  style,
+  ...props
+}: React.ComponentProps<typeof Checkbox> & { $fgColor: string; $bgColor: string }) => {
+  return (
+    <Checkbox
+      className={cn(
+        'hover:opacity-70 focus-visible:opacity-70 focus-visible:[outline-color:var(--checkbox-fg)] [&_[data-state=checked]]:bg-[var(--checkbox-bg)]',
+        className
+      )}
+      style={
+        {
+          borderColor: $fgColor,
+          color: $fgColor,
+          '--checkbox-bg': $bgColor,
+          '--checkbox-fg': $fgColor,
+          ...style,
+        } as React.CSSProperties
+      }
+      {...props}
+    />
+  )
+}
 
-  [data-state='checked'] {
-    background-color: ${(props) => props.$bgColor};
-  }
-
-  &:hover,
-  &:focus-visible {
-    opacity: 0.7;
-  }
-
-  &:focus-visible {
-    outline-color: ${(props) => props.$fgColor};
-  }
-`
-
-const StyledTableRow = styled(TableRow)<{ $fgColor: string; $bgColor: string; $selected: boolean }>`
-  ${({ $selected, $bgColor, $fgColor }) =>
-    $selected &&
-    `
-    background-color: ${$bgColor};
-    border-color: ${$fgColor};
-  `}
-  &:hover,
-  &:focus {
-    background-color: ${({ $bgColor }) => $bgColor};
-    border-color: ${({ $fgColor }) => $fgColor};
-  }
-`
+const StyledTableRow = ({
+  $fgColor,
+  $bgColor,
+  $selected,
+  className,
+  style,
+  ...props
+}: React.ComponentProps<typeof TableRow> & { $fgColor: string; $bgColor: string; $selected: boolean }) => {
+  return (
+    <TableRow
+      className={cn(
+        'hover:border-[var(--row-fg)] hover:bg-[var(--row-bg)] focus:border-[var(--row-fg)] focus:bg-[var(--row-bg)]',
+        className
+      )}
+      style={
+        {
+          '--row-bg': $bgColor,
+          '--row-fg': $fgColor,
+          ...($selected && { backgroundColor: $bgColor, borderColor: $fgColor }),
+          ...style,
+        } as React.CSSProperties
+      }
+      {...props}
+    />
+  )
+}
 
 const bgColor = (themeMode: TThemeMode, color: ScreenColor) =>
   `${themeMode === DarkMode ? color.lightColor : color.darkColor}${Math.round(0.2 * 255).toString(16)}`
@@ -85,19 +111,9 @@ type Props = {
   className?: string
   highlighted?: ScreenItemRender
   setHighLighted?: Dispatch<SetStateAction<ScreenItemRender | undefined>>
-  editAction: {
-    handler: (id: string) => void
-  }
-  deleteAction: {
-    id?: string
-    isPending: boolean
-    handler: (id: string) => void
-  }
-  showActon: {
-    id?: string
-    isPending: boolean
-    handler: (id: string) => void
-  }
+  formOpenHandler?: FormOpenHandler
+  deleteHandler?: DeleteHandler
+  showHandler?: ShowHandler
 }
 
 export const ScreenTable = ({
@@ -106,9 +122,9 @@ export const ScreenTable = ({
   className,
   highlighted = undefined,
   setHighLighted = () => {},
-  editAction,
-  deleteAction,
-  showActon,
+  formOpenHandler,
+  deleteHandler,
+  showHandler,
 }: Props) => {
   const [themeMode] = useTheme()
 
@@ -117,35 +133,35 @@ export const ScreenTable = ({
       <TableHeader>
         <TableRow>
           <TableHead className='text-center'>
-            <FormattedMessage id='screens.table.show' defaultMessage='Show' />
+            <TranslateMessage id='screens.table.select' />
           </TableHead>
           <TableHead className='text-center'>
-            <FormattedMessage id='screens.table.size' defaultMessage='Size' />
+            <TranslateMessage id='screens.table.size' />
           </TableHead>
           <TableHead className='text-center'>
-            <FormattedMessage id='screens.table.ratio' defaultMessage='Ratio' />
+            <TranslateMessage id='screens.table.ratio' />
           </TableHead>
           <TableHead className='hidden text-center sm:table-cell'>
-            <FormattedMessage id='screens.table.dimension' defaultMessage='Dimension' />
+            <TranslateMessage id='screens.table.dimension' />
           </TableHead>
           <TableHead className='hidden text-center md:table-cell'>
-            <FormattedMessage id='screens.table.resolution' defaultMessage='Resolution' />
+            <TranslateMessage id='screens.table.resolution' />
           </TableHead>
           <TableHead className='text-center'>
             <span className='md:hidden'>PPI</span>
             <span className='hidden text-nowrap md:block'>
-              <FormattedMessage id='screens.table.pixelsInch' defaultMessage='Pixels/Inch' />
+              <TranslateMessage id='screens.table.pixelsInch' />
             </span>
           </TableHead>
           <TableHead className='text-center'>
-            <FormattedMessage id='screens.table.action' defaultMessage='Action' />
+            <TranslateMessage id='screens.table.action' />
           </TableHead>
         </TableRow>
       </TableHeader>
       {screens.length === 0 && isScreenListLoading ? (
         <TableSkeleton cols={7} rows={6} />
       ) : (
-        <TableBody>
+        <TableBody showBottomBorder={true}>
           {screens.map((screen) => (
             <StyledTableRow
               className='transition-colors duration-200 ease-out'
@@ -157,27 +173,29 @@ export const ScreenTable = ({
               onMouseEnter={() => setHighLighted(screen.id === highlighted?.id ? undefined : screen)}
               onMouseLeave={() => setHighLighted(undefined)}
             >
-              <TableCell>
-                <div className='flex items-center justify-center'>
-                  {showActon.isPending && screen.id === showActon.id ? (
-                    <LoaderCircle
-                      className='ml-[5px] size-6 animate-spin'
-                      style={{ color: themeMode === DarkMode ? screen.color.lightColor : screen.color.darkColor }}
-                    />
-                  ) : (
-                    <StyledCheckbox
-                      id={screen.id}
-                      palette='none'
-                      dimension='sm'
-                      $fgColor={fgColor(themeMode, screen.color)}
-                      $bgColor={bgColor(themeMode, screen.color)}
-                      checked={screen.visible}
-                      onCheckedChange={() => showActon.handler(screen.id)}
-                      title='Show'
-                    />
-                  )}
-                </div>
-              </TableCell>
+              {showHandler && (
+                <TableCell>
+                  <div className='flex items-center justify-center'>
+                    {showHandler.isPending && screen.id === showHandler.variables?.id ? (
+                      <LoaderCircle
+                        className='ml-[5px] size-6 animate-spin'
+                        style={{ color: themeMode === DarkMode ? screen.color.lightColor : screen.color.darkColor }}
+                      />
+                    ) : (
+                      <StyledCheckbox
+                        id={screen.id}
+                        palette='none'
+                        dimension='sm'
+                        $fgColor={fgColor(themeMode, screen.color)}
+                        $bgColor={bgColor(themeMode, screen.color)}
+                        checked={screen.visible}
+                        onCheckedChange={() => showHandler.mutate({ id: screen.id })}
+                        title='Show'
+                      />
+                    )}
+                  </div>
+                </TableCell>
+              )}
               <TableCell className='text-center'>
                 <FormattedNumber value={screen.data.diagonalSize} style='unit' unit='inch' unitDisplay='narrow' />
               </TableCell>
@@ -208,28 +226,33 @@ export const ScreenTable = ({
               </TableCell>
               <TableCell>
                 <div className='flex flex-row items-center justify-center gap-0'>
-                  <Button
-                    title='Edit'
-                    mode='ghost'
-                    dimension='icon-sm'
-                    palette='mono'
-                    onClick={() => editAction.handler(screen.id)}
-                  >
-                    <Pencil id='edit-icon' />
-                  </Button>
-                  {deleteAction.isPending && screen.id === deleteAction.id ? (
-                    <Loader2 className='size-4 animate-spin' />
-                  ) : (
-                    <Button
-                      title='Delete'
-                      mode='ghost'
-                      dimension='icon-sm'
-                      palette='mono'
-                      onClick={() => deleteAction.handler(screen.id)}
-                    >
-                      <X id='delete-icon' />
-                    </Button>
-                  )}
+                  {match(formOpenHandler)
+                    .with(P.nonNullable, (item) => (
+                      <Button
+                        title='Edit'
+                        mode='ghost'
+                        dimension='icon-sm'
+                        palette='mono'
+                        onClick={() => item.onAction(screen.id)}
+                      >
+                        <Pencil id='edit-icon' />
+                      </Button>
+                    ))
+                    .otherwise(() => null)}
+                  {match(deleteHandler)
+                    .with({ isPending: true, id: screen.id }, () => <Loader2 className='size-4 animate-spin' />)
+                    .with(P.nonNullable, (item) => (
+                      <Button
+                        title='Delete'
+                        mode='ghost'
+                        dimension='icon-sm'
+                        palette='mono'
+                        onClick={() => item.mutate({ id: screen.id })}
+                      >
+                        <X id='delete-icon' />
+                      </Button>
+                    ))
+                    .otherwise(() => null)}
                 </div>
               </TableCell>
             </StyledTableRow>

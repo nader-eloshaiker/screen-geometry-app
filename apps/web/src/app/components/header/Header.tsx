@@ -1,5 +1,6 @@
 import ThemeToggle from '@/app/components/theme/ThemeToggle'
 import { useEnvConfig } from '@/app/stores/config/useEnvConfig'
+import { getTextDirection, TextDirection, TranslateMessage, useTranslation } from '@/app/stores/translation'
 import { Button } from '@screengeometry/lib-ui/button'
 import {
   Sheet,
@@ -12,7 +13,6 @@ import {
 import { cn } from '@screengeometry/lib-ui/utils'
 import { Menu } from 'lucide-react'
 import { useMemo, useState } from 'react'
-import { FormattedMessage, useIntl } from 'react-intl'
 import { HeaderNavLarge } from './HeaderNavLarge'
 import { HeaderNavSmall } from './HeaderNavSmall'
 
@@ -34,11 +34,11 @@ const Title = ({ size, appTitle }: { size: 'sm' | 'lg'; appTitle: string }) => (
 export default function Header() {
   const [open, setOpen] = useState(false)
   const { ENV_TYPE } = useEnvConfig()
-  const { formatMessage } = useIntl()
+  const { formatMessage } = useTranslation()
+  const dir = getTextDirection()
 
   const appTitle = useMemo(
-    () =>
-      `${formatMessage({ id: 'header.title', defaultMessage: 'Screen Geometry' })}${ENV_TYPE === 'prod' ? '' : ` [${ENV_TYPE}]`}`,
+    () => `${formatMessage('header.title')}${ENV_TYPE === 'prod' ? '' : ` [${ENV_TYPE}]`}`,
     [ENV_TYPE, formatMessage]
   )
 
@@ -50,19 +50,19 @@ export default function Header() {
             <Button mode='ghost' dimension='none' className='p-0'>
               <Menu className='size-10' />
               <span className='sr-only'>
-                <FormattedMessage id='header.small.title' defaultMessage='Toggle navigation menu' />
+                <TranslateMessage id='header.menu.title' />
               </span>
             </Button>
           </SheetTrigger>
-          <SheetContent side='left'>
+          <SheetContent dir={dir} side={dir === TextDirection.RTL ? 'right' : 'left'}>
             <SheetHeader>
               <SheetTitle className='text-left'>
-                <FormattedMessage id='header.navigation.title' defaultMessage='Navigation' />
+                <TranslateMessage id='header.mobile.title' />
               </SheetTitle>
               <SheetDescription className='flex items-center gap-2 pt-4 text-left'>
                 <ThemeToggleStyled id='theme-toggle' />
                 <span>
-                  <FormattedMessage id='header.large.title' defaultMessage='Theme Toggle' />
+                  <TranslateMessage id='header.menu.title' />
                 </span>
               </SheetDescription>
             </SheetHeader>
@@ -71,7 +71,7 @@ export default function Header() {
         </Sheet>
         <Title size='lg' appTitle={appTitle} />
       </div>
-      <div className='container mx-auto hidden lg:flex lg:flex-col' data-testid='large-header'>
+      <div className='container mx-auto hidden lg:flex lg:flex-col lg:gap-2' data-testid='large-header'>
         <Title size='lg' appTitle={appTitle} />
         <div className='flex justify-between'>
           <HeaderNavLarge />

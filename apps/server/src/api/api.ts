@@ -106,6 +106,33 @@ export const createScreenList = async (data: ScreenInputList) => {
   return { list } as ScreenListResponse
 }
 
+export const updateScreenList = async (data: ScreenInputList) => {
+  if (!data) {
+    throw new ApiError('No parameters provided', 400)
+  }
+
+  const [getErr, existingList = []] = await to<Array<ScreenItem>>(getAllData<ScreenItem>(StoresEnum.Screens))
+
+  if (getErr) {
+    throw new DatabaseError('Database error', 500, getErr)
+  }
+
+  const existingSignatures = new Set(existingList.map((item) => item.signature))
+  const newItems = data.map((item) => toScreenItem(item)).filter((item) => !existingSignatures.has(item.signature))
+
+  if (newItems.length === 0) {
+    return { list: existingList } as ScreenListResponse
+  }
+
+  const [addErr, addedList] = await to<Array<ScreenItem>>(addAllData<ScreenItem>(StoresEnum.Screens, newItems))
+
+  if (addErr) {
+    throw new DatabaseError('Database error', 500, addErr)
+  }
+
+  return { list: [...existingList, ...(addedList ?? [])] } as ScreenListResponse
+}
+
 export const deleteScreen = async (id: string) => {
   if (!id) {
     throw new ApiError('No parameters provided', 400)
