@@ -1,27 +1,19 @@
 import RefreshIcon from '@/app/assets/icons/Refresh'
-import { FormButton } from '@/app/components/formbutton/FormButton'
-import { useCreateScreenEffect } from '@/app/hooks/api/useCreateScreenEffect'
-import { useUpdateScreenEffect } from '@/app/hooks/api/useUpdateScreenEffect'
+import { FormButton } from '@/app/components/buttons/FormButton'
 import { DarkMode, LightMode } from '@/app/stores/theme/Theme.types'
+import { TranslateMessage, useTranslation } from '@/app/stores/translation'
 import { createScreenColors } from '@/app/utils'
 import { zodResolver } from '@hookform/resolvers/zod'
-import {
-  ScreenColor,
-  type ScreenInput,
-  type SearchItem,
-  useCreateScreen,
-  useUpdateScreen,
-} from '@screengeometry/lib-api/spec'
+import { ScreenColor, type ScreenInput, type SearchItem } from '@screengeometry/lib-api/spec'
 import { Button } from '@screengeometry/lib-ui/button'
 import { Form } from '@screengeometry/lib-ui/form'
 import { Separator } from '@screengeometry/lib-ui/separator'
-import { useEffect, useState } from 'react'
-import ReactGA from 'react-ga4'
+import { useCallback, useEffect, useState } from 'react'
 import { type SubmitHandler, useForm } from 'react-hook-form'
-import { FormattedMessage, useIntl } from 'react-intl'
 import { ColorField } from './fields/ColorField'
 import { InputField } from './fields/InputField'
-import { FormModeTypes } from './FormMode'
+import { useCreateHandler } from './hooks/useCreateHandler'
+import { useUpdateHandler } from './hooks/useUpdateHandler'
 import { FormSubmitType, ScreenFormSchema } from './ScreenFormSchema'
 
 type Props = React.PropsWithChildren & {
@@ -44,15 +36,12 @@ export const ScreenForm = ({
   const [toggleAnimation, setToggleAnimation] = useState<boolean>(false)
   const [color] = useState<ScreenColor>(createScreenColors)
 
-  const { isPending: isCreateLoading, mutate: createAction, data: createData, error: createError } = useCreateScreen()
-  useCreateScreenEffect(createData, createError)
-
-  const { isPending: isUpdateLoading, mutate: updateAction, data: updateData, error: updateError } = useUpdateScreen()
-  useUpdateScreenEffect(updateData, updateError)
+  const { isPending: isCreateLoading, mutate: createAction } = useCreateHandler()
+  const { isPending: isUpdateLoading, mutate: updateAction } = useUpdateHandler()
 
   const isLoading = isCreateLoading || isUpdateLoading || isFormLoading
 
-  const { formatMessage } = useIntl()
+  const { formatMessage } = useTranslation()
 
   const form = useForm<FormSubmitType>({
     resolver: zodResolver(ScreenFormSchema),
@@ -78,13 +67,13 @@ export const ScreenForm = ({
       setValue('hRes', predefinedValue.hRes, { shouldDirty: true })
       setValue('vRes', predefinedValue.vRes, { shouldDirty: true })
     }
-  }, [predefinedValue])
+  }, [predefinedValue, resetField, setValue])
 
   useEffect(() => {
     if (editValue) {
       reset(editValue)
     }
-  }, [editValue])
+  }, [editValue, reset])
 
   const generateColorHandler = () => {
     const c = createScreenColors()
@@ -93,29 +82,26 @@ export const ScreenForm = ({
     setValue('lightColor', c.lightColor, { shouldDirty: true })
   }
 
-  const handleClose = () => {
+  const handleClose = useCallback(() => {
     onClose()
     reset()
-  }
+  }, [onClose, reset])
 
-  const handleReset = () => {
+  const handleReset = useCallback(() => {
     onClearPredefinedSelection()
     reset()
-  }
+  }, [onClearPredefinedSelection, reset])
 
-  const actionSubmit: SubmitHandler<FormSubmitType> = (form: FormSubmitType) => {
-    ReactGA.event({
-      category: 'Submit Button Click',
-      action: `Submited ${editId ? FormModeTypes.edit : FormModeTypes.create} Screen Button`,
-      label: 'Screens Page',
-    })
-
-    if (editId) {
-      updateAction({ id: editId, data: form as ScreenInput }, { onSuccess: handleClose })
-    } else {
-      createAction({ data: form as ScreenInput }, { onSuccess: handleClose })
-    }
-  }
+  const actionSubmit: SubmitHandler<FormSubmitType> = useCallback(
+    (form: FormSubmitType) => {
+      if (editId && updateAction) {
+        updateAction({ id: editId, data: form as ScreenInput }, { onSuccess: handleClose })
+      } else {
+        createAction({ data: form as ScreenInput }, { onSuccess: handleClose })
+      }
+    },
+    [createAction, updateAction, editId, handleClose]
+  )
 
   return (
     <Form {...form}>
@@ -125,7 +111,7 @@ export const ScreenForm = ({
             <InputField
               formKey={'diagonalSize'}
               control={control}
-              title={formatMessage({ id: 'screen.form.size', defaultMessage: 'Screen Size' })}
+              title={formatMessage('screen.form.size')}
               type='number'
               dir='auto'
               endAdornment='in'
@@ -138,7 +124,7 @@ export const ScreenForm = ({
             <InputField
               formKey={'aspectRatio'}
               control={control}
-              title={formatMessage({ id: 'screen.form.aspect', defaultMessage: 'Aspect Ratio' })}
+              title={formatMessage('screen.form.aspect')}
               type='text'
               dir='auto'
               autoComplete='off'
@@ -152,7 +138,7 @@ export const ScreenForm = ({
             <InputField
               formKey={'hRes'}
               control={control}
-              title={formatMessage({ id: 'screen.form.horizontal', defaultMessage: 'Horizontal Res' })}
+              title={formatMessage('screen.form.horizontal')}
               type='number'
               dir='auto'
               endAdornment='px'
@@ -165,7 +151,7 @@ export const ScreenForm = ({
             <InputField
               formKey={'vRes'}
               control={control}
-              title={formatMessage({ id: 'screen.form.vertical', defaultMessage: 'Vertical Res' })}
+              title={formatMessage('screen.form.vertical')}
               type='number'
               dir='auto'
               endAdornment='px'
@@ -179,7 +165,7 @@ export const ScreenForm = ({
           <div className='flex items-end justify-between gap-6'>
             <ColorField
               formKey={'lightColor'}
-              title={formatMessage({ id: 'screen.form.light', defaultMessage: 'Light Color' })}
+              title={formatMessage('screen.form.light')}
               mode={LightMode}
               isLoading={isFormLoading}
               control={control}
@@ -187,7 +173,7 @@ export const ScreenForm = ({
             />
             <ColorField
               formKey={'darkColor'}
-              title={formatMessage({ id: 'screen.form.dark', defaultMessage: 'Dark Color' })}
+              title={formatMessage('screen.form.dark')}
               mode={DarkMode}
               isLoading={isFormLoading}
               control={control}
@@ -196,7 +182,7 @@ export const ScreenForm = ({
             <Button
               type='button'
               className='size-9'
-              title={formatMessage({ id: 'screen.form.colors', defaultMessage: 'Generate Colors' })}
+              title={formatMessage('screen.form.colors')}
               dimension='icon-lg'
               data-testid='generate-color-btn'
               mode='ghost'
@@ -216,7 +202,7 @@ export const ScreenForm = ({
           <div className='flex w-full justify-between'>
             <div className='flex gap-6'>
               <FormButton type='button' className='shadow-lg' mode='outline' onClick={handleClose} loading={isLoading}>
-                <FormattedMessage id='screens.form.close' defaultMessage='Close' />
+                <TranslateMessage id='screens.form.close' />
               </FormButton>
 
               <FormButton
@@ -227,7 +213,7 @@ export const ScreenForm = ({
                 loading={isLoading}
                 disabled={!isDirty}
               >
-                <FormattedMessage id='screens.form.reset' defaultMessage='Reset' />
+                <TranslateMessage id='screens.form.reset' />
               </FormButton>
             </div>
             <FormButton
@@ -238,9 +224,9 @@ export const ScreenForm = ({
               showSpinner={true}
             >
               {!editId ? (
-                <FormattedMessage id='screens.form.createButton' defaultMessage='Create' />
+                <TranslateMessage id='screens.form.createButton' />
               ) : (
-                <FormattedMessage id='screens.form.updateButton' defaultMessage='Update' />
+                <TranslateMessage id='screens.form.updateButton' />
               )}
             </FormButton>
           </div>

@@ -1,71 +1,52 @@
-import { TestTranslationsEnvironment } from '@/test/utils/TestTranslationsEnvironment'
 import { render, screen } from '@testing-library/react'
 import { vi } from 'vitest'
 import { HeaderNavLarge } from './HeaderNavLarge'
 
-// Mock the NavigationLink component
-vi.mock('@screengeometry/lib-ui/navigationlink', () => ({
-  NavigationLink: ({
-    children,
-    to,
-    mode,
-    palette,
-    className,
-  }: React.PropsWithChildren & {
-    to: string
-    mode: string
-    className: string
-    palette: string
-    onClick: () => void
-  }) => (
-    <a
-      href={to}
-      data-testid={`nav-link-${to.replace('/', '')}`}
-      data-mode={mode}
-      data-palette={palette}
-      className={className}
-    >
-      {children}
-    </a>
+// Mock react-intl
+vi.mock('react-intl', () => ({
+  IntlProvider: ({ children }: { children: React.ReactNode }) => <>{children}</>,
+  FormattedMessage: ({ id, defaultMessage }: { id: string; defaultMessage: string }) => (
+    <span>{defaultMessage || id}</span>
   ),
 }))
 
+// Mock TanStack Router Link component
+vi.mock('@tanstack/react-router', () => ({
+  Link: ({ children, to, ...props }: React.PropsWithChildren & { to: string }) => (
+    <a href={to} data-testid={`nav-link-${to.replace('/', '')}`} {...props}>
+      {children}
+    </a>
+  ),
+  useMatchRoute: () => () => false,
+}))
+
 describe('#HeaderNavLarge', () => {
-  it('renders navigation with correct aria-label', () => {
-    render(<HeaderNavLarge />, { wrapper: TestTranslationsEnvironment })
+  it('renders navigation menu component', () => {
+    render(<HeaderNavLarge />)
 
-    const nav = screen.getByRole('navigation')
-    expect(nav).toBeInTheDocument()
-    expect(nav).toHaveAttribute('aria-label', 'Main')
-  })
-
-  it('renders with the correct CSS class', () => {
-    render(<HeaderNavLarge />, { wrapper: TestTranslationsEnvironment })
-
-    const nav = screen.getByRole('navigation')
-    expect(nav).toHaveClass('flex', 'gap-6')
-    expect(nav).toHaveAttribute('data-testid', 'large-header-menu')
+    const navMenu = screen.getByRole('navigation')
+    expect(navMenu).toBeInTheDocument()
   })
 
   it('contains all navigation links with correct text', () => {
-    render(<HeaderNavLarge />, { wrapper: TestTranslationsEnvironment })
+    render(<HeaderNavLarge />)
 
     expect(screen.getByText('Home')).toBeInTheDocument()
-    expect(screen.getByText('Screens')).toBeInTheDocument()
+    expect(screen.getByText('My Screens')).toBeInTheDocument()
     expect(screen.getByText('Contact')).toBeInTheDocument()
     expect(screen.getByText('Help')).toBeInTheDocument()
   })
 
   it('has links pointing to the correct routes', () => {
-    render(<HeaderNavLarge />, { wrapper: TestTranslationsEnvironment })
+    render(<HeaderNavLarge />)
 
     // Home link
     const homeLink = screen.getByTestId('nav-link-')
     expect(homeLink).toHaveAttribute('href', '/')
 
     // Screens link
-    const screensLink = screen.getByTestId('nav-link-screens')
-    expect(screensLink).toHaveAttribute('href', '/screens')
+    const screensLink = screen.getByTestId('nav-link-myscreens')
+    expect(screensLink).toHaveAttribute('href', '/myscreens')
 
     // Contact link
     const contactLink = screen.getByTestId('nav-link-contact')
@@ -76,21 +57,17 @@ describe('#HeaderNavLarge', () => {
     expect(helpLink).toHaveAttribute('href', '/help')
   })
 
-  it('passes correct props to each NavigationLink', () => {
-    render(<HeaderNavLarge />, { wrapper: TestTranslationsEnvironment })
+  it('renders navigation menu items', () => {
+    render(<HeaderNavLarge />)
 
-    // Check all links for common props
-    const links = [
-      screen.getByTestId('nav-link-'),
-      screen.getByTestId('nav-link-screens'),
-      screen.getByTestId('nav-link-contact'),
-      screen.getByTestId('nav-link-help'),
-    ]
+    const navMenuItems = screen.getAllByRole('listitem')
+    expect(navMenuItems).toHaveLength(5) // Home, My Screens, Presets (dropdown), Contact, Help
+  })
 
-    links.forEach((link) => {
-      expect(link).toHaveAttribute('data-mode', 'ghost')
-      expect(link).toHaveAttribute('data-palette', 'navigation')
-      expect(link).toHaveClass('group', 'w-24', 'text-base', 'font-semibold')
-    })
+  it('renders navigation menu trigger for dropdown', () => {
+    render(<HeaderNavLarge />)
+
+    const navMenuTrigger = screen.getByRole('button', { name: 'Presets' })
+    expect(navMenuTrigger).toBeInTheDocument()
   })
 })

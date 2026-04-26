@@ -1,5 +1,5 @@
 import { screenItemFixture } from '@/test/fixtures/ScreenFixtures'
-import { setupV2DB } from '@/test/stubs/IndexedDBMigration.stub'
+import { setupV2DB, setupV3DB } from '@/test/stubs/IndexedDBMigration.stub'
 import { getGetScreenResponseMock, type ScreenItem } from '@screengeometry/lib-api/spec'
 import { IDBFactory } from 'fake-indexeddb'
 import { dbNameDefault, dbVersionDefault, StoresEnum } from './DbConstants'
@@ -193,6 +193,18 @@ describe('#indexDB', () => {
         },
         visible: true,
       })
+    })
+
+    it('should upgrade from v3 to v4', async () => {
+      await setupV3DB()
+      await initDB({
+        dbName: 'Testv3Tov4',
+        dbVersion: 4,
+      })
+
+      // Search store should be deleted and recreated with new data
+      const searchResult = await getAllData(StoresEnum.Search, { dbName: 'Testv3Tov4', dbVersion: 4 })
+      expect(searchResult?.length).toBeGreaterThan(0)
     })
   })
 })

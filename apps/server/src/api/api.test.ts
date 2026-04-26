@@ -29,12 +29,12 @@ describe('#api', () => {
     describe('#getSearchList', () => {
       it('should return a list of screens that match a term', async () => {
         const result = await getSearchList(new URLSearchParams('term=4k'))
-        expect(result.list.length).toBe(3)
+        expect(result.list.length).toBe(6)
       })
 
       it('should return a full list of screens when no term is specified', async () => {
         const result = await getSearchList(new URLSearchParams(''))
-        expect(result.list.length).toBe(34)
+        expect(result.list.length).toBe(45)
       })
     })
   })

@@ -34,7 +34,7 @@
   },
   "devDependencies": {
     "@eslint/js": "catalog:eslint",
-    "@tanstack/eslint-plugin-query": "catalog:eslint",
+    "@tanstack/eslint-plugin-query": "catalog:tanstack",
     "@testing-library/jest-dom": "catalog:unittesting",
     "@testing-library/react": "catalog:unittesting",
     "@testing-library/user-event": "catalog:unittesting",
