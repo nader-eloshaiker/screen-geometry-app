@@ -1,5 +1,7 @@
 import type { AddonOptionsVite } from '@storybook/addon-coverage'
 import type { StorybookConfig } from '@storybook/react-vite'
+import { dirname } from 'node:path'
+import { fileURLToPath } from 'node:url'
 // import type { AddonOptionsWebpack } from '@storybook/addon-coverage'
 
 const coverageConfig: AddonOptionsVite = {
@@ -13,16 +15,16 @@ const coverageConfig: AddonOptionsVite = {
 const config: StorybookConfig = {
   stories: ['../src/**/*.stories.@(js|jsx|mjs|ts|tsx)'],
   addons: [
-    '@storybook/addon-themes',
-    'storybook-addon-pseudo-states',
+    getAbsolutePath('@storybook/addon-themes'),
+    getAbsolutePath('storybook-addon-pseudo-states'),
     {
-      name: '@storybook/addon-coverage',
+      name: getAbsolutePath('@storybook/addon-coverage'),
       options: coverageConfig,
     },
-    '@storybook/addon-docs',
+    getAbsolutePath('@storybook/addon-docs'),
   ],
   framework: {
-    name: '@storybook/react-vite',
+    name: getAbsolutePath('@storybook/react-vite'),
     options: {},
   },
   features: {},
@@ -32,3 +34,7 @@ const config: StorybookConfig = {
   },
 }
 export default config
+
+function getAbsolutePath(value: string): string {
+  return dirname(fileURLToPath(import.meta.resolve(`${value}/package.json`)))
+}
