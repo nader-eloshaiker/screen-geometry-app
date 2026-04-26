@@ -109,8 +109,12 @@ describe('#Header', () => {
     const smallHeader = test.getByTestId('small-header')
     expect(smallHeader).toBeInTheDocument()
 
-    // Check for the menu button
-    expect(screen.getByText('Toggle navigation menu')).toBeInTheDocument()
+    // Check for the menu button within small header - it should have a Menu icon and sr-only text
+    const menuButton = test.getByTestId('small-header').querySelector('button[data-slot="sheet-trigger"]')
+    expect(menuButton).toBeInTheDocument()
+
+    // Verify that button has a menu icon
+    expect(menuButton?.querySelector('svg')).toBeInTheDocument()
   })
 
   it('renders large header on desktop view', async () => {
@@ -127,11 +131,12 @@ describe('#Header', () => {
   it('opens the sheet when menu button is clicked', async () => {
     const test = await renderWithUserEvents(<Header />, { wrapper: TestRouter })
 
-    // Get the menu button and click it
-    const menuButton = test.getByRole('button', { name: 'Toggle navigation menu' })
+    // Get the menu button from small header and click it
+    const smallHeader = test.getByTestId('small-header')
+    const menuButton = smallHeader.querySelector('button[data-slot="sheet-trigger"]')
     expect(menuButton).toBeInTheDocument()
 
-    await waitFor(async () => test.user.click(menuButton))
+    await waitFor(async () => test.user.click(menuButton as HTMLElement))
 
     // The sheet should now be open, check if sheet content is visible
     expect(test.getByText('Navigation')).toBeInTheDocument()
@@ -142,9 +147,10 @@ describe('#Header', () => {
   it('closes the sheet when a navigation link is clicked', async () => {
     const test = await renderWithUserEvents(<Header />, { wrapper: TestRouter })
 
-    // Open the sheet
-    const menuButton = test.getByText('Toggle navigation menu')
-    await waitFor(async () => test.user.click(menuButton))
+    // Open the sheet first
+    const smallHeader = test.getByTestId('small-header')
+    const menuButton = smallHeader.querySelector('button[data-slot="sheet-trigger"]')
+    await waitFor(async () => test.user.click(menuButton as HTMLElement))
 
     // Click on the navigation (our mock will call setOpen(false))
     const navSmall = test.getByTestId('mocked-header-nav-small')

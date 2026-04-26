@@ -1,27 +1,42 @@
-import styled from 'styled-components'
+import { cn } from '@screengeometry/lib-ui/utils'
 import { type Alignment, HAlignDefault } from '../screen/alignment/AlignmentSelector'
 
-export const Stacked = styled.div<{ height: number; $hAlign?: Alignment; $vAlign?: Alignment }>`
-  padding: 0.5rem;
-  display: inline-grid;
-  justify-items: ${({ $hAlign }) => $hAlign ?? HAlignDefault};
-  align-items: ${({ $vAlign }) => {
-    switch ($vAlign) {
-      case 'start':
-        return 'flex-start'
-      case 'end':
-        return 'flex-end'
-      case 'center':
-        return 'center'
-      default:
-        return 'flex-end'
-    }
-  }};
+const justifyItemsMap: Record<Alignment, string> = {
+  start: 'justify-items-start',
+  center: 'justify-items-center',
+  end: 'justify-items-end',
+}
 
-  width: 100%;
-  height: ${({ height }) => height}px;
-  * {
-    grid-column-start: 1;
-    grid-row-start: 1;
-  }
-`
+const alignItemsMap: Record<Alignment, string> = {
+  start: 'items-start',
+  center: 'items-center',
+  end: 'items-end',
+}
+
+export const Stacked = ({
+  height,
+  $hAlign,
+  $vAlign,
+  className,
+  children,
+  ...props
+}: {
+  height: number
+  $hAlign?: Alignment
+  $vAlign?: Alignment
+} & Omit<React.ComponentProps<'div'>, 'height'>) => {
+  return (
+    <div
+      className={cn(
+        'inline-grid w-full p-2 [&>*]:col-start-1 [&>*]:row-start-1',
+        justifyItemsMap[$hAlign ?? HAlignDefault],
+        alignItemsMap[$vAlign ?? 'end'],
+        className
+      )}
+      style={{ height: `${height}px` }}
+      {...props}
+    >
+      {children}
+    </div>
+  )
+}

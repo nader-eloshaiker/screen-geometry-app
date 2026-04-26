@@ -1,7 +1,7 @@
 name: Validation PR
 on:
   pull_request_target:
-    types: ["opened", "edited", "reopened", "synchronize"]
+    types: [ "opened", "edited", "reopened", "synchronize" ]
 jobs:
   prlint-reloaded:
     name: PR Lint
@@ -48,7 +48,8 @@ jobs:
 
           # Configure additional validation for the subject based on a regex.
           # This example ensures the subject doesn't start with an uppercase character.
-          subjectPattern: ^(?![A-Z]).+$
+          # Also allows ! at the end for breaking changes
+          subjectPattern: ^(?![A-Z]).*!?$
 
           # If `subjectPattern` is configured, you can use this property to override
           # the default error message that is shown when the pattern doesn't match.
@@ -72,11 +73,10 @@ jobs:
             github_actions
             autorelease: pending
             autorelease: tagged
-
           # If you're using a format for the PR title that differs from the traditional Conventional
           # Commits spec, you can use these options to customize the parsing of the type, scope and
           # subject. The `headerPattern` should contain a regex where the capturing groups in parentheses
           # correspond to the parts listed in `headerPatternCorrespondence`.
           # See: https://github.com/conventional-changelog/conventional-changelog/tree/master/packages/conventional-commits-parser#headerpattern
-          # headerPattern: '^(\w*)(?:\(([\w$.\-*/ ]*)\))?: (.*)$'
-          # headerPatternCorrespondence: type, scope, subject
+          headerPattern: "^(\\w*)(?:\\(([\\w$.\\-*/ ]*)\\))?!?: (.*)$"
+          headerPatternCorrespondence: type, scope, subject

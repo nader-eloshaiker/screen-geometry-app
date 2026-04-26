@@ -5,14 +5,31 @@ import { type ScreenColor } from '@screengeometry/lib-api/spec'
 import { cn } from '@screengeometry/lib-ui/utils'
 import { type Dispatch, type SetStateAction, useEffect, useState } from 'react'
 import { useIntl } from 'react-intl'
-import styled from 'styled-components'
 
-const Panel = styled.div<{ $width: number; $height: number; $color?: string }>`
-  width: ${(props) => props.$width}%;
-  height: ${(props) => props.$height}%;
-  color: ${(props) => props.$color};
-  outline-color: ${(props) => props.$color};
-`
+const Panel = ({
+  $width,
+  $height,
+  $color,
+  className,
+  style,
+  ...props
+}: React.ComponentProps<'div'> & { $width: number; $height: number; $color?: string }) => {
+  return (
+    <div
+      className={cn('outline-solid relative rounded-md transition-[outline-width] duration-300 ease-out', className)}
+      style={
+        {
+          width: `${$width}%`,
+          height: `${$height}%`,
+          color: $color,
+          outlineColor: $color,
+          ...style,
+        } as React.CSSProperties
+      }
+      {...props}
+    />
+  )
+}
 
 // const isEven = (num: number) => num % 2 == 0
 

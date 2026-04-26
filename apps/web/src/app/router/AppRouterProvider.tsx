@@ -1,7 +1,7 @@
 import { createRouter, type RouteComponent, RouterProvider } from '@tanstack/react-router'
 
-import { ErrorFallback } from '@/app/pages/ErrorFallback'
-import { NotFound } from '@/app/pages/NotFound'
+import { ErrorFallbackPage } from '@/app/pages/ErrorFallbackPge'
+import { NotFoundPage } from '@/app/pages/NotFoundPage'
 import { routeTree } from '@/app/routetree/routeTree.gen'
 
 const NotFoundComponent = () => (
@@ -10,17 +10,17 @@ const NotFoundComponent = () => (
       <title>Screen Geometry: Page Not Found</title>
       <meta name='description' content='A service error has occured' />
     </article>
-    <NotFound />
+    <NotFoundPage />
   </>
 )
 
-const ErrorFallbackComponent = ({ ...rest }: React.ComponentProps<typeof ErrorFallback>) => (
+const ErrorFallbackComponent = ({ ...rest }: React.ComponentProps<typeof ErrorFallbackPage>) => (
   <>
     <article>
       <title>Screen Geometry: Error</title>
       <meta name='description' content='A service error has occured' />
     </article>
-    <ErrorFallback {...rest} />
+    <ErrorFallbackPage {...rest} />
   </>
 )
 
@@ -29,6 +29,16 @@ const appRouter = createRouter({
   defaultNotFoundComponent: NotFoundComponent,
   defaultErrorComponent: ErrorFallbackComponent,
 })
+
+declare module '@tanstack/react-router' {
+  interface Register {
+    router: typeof appRouter
+  }
+
+  interface StaticDataRouteOption {
+    pageHeading?: string
+  }
+}
 
 type AppRouter = typeof appRouter
 
