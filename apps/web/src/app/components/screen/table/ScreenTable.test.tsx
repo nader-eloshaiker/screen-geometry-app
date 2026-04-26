@@ -156,6 +156,9 @@ describe('#ScreenTable', () => {
     const tableElement = await test.findByRole('table')
     expect(tableElement).toBeDefined()
 
+    // Wait for data to load by waiting for delete buttons to appear
+    await test.findAllByTitle('Delete')
+
     const rowElements = await test.findAllByRole('row')
     expect(rowElements.length).toBe(7)
 
