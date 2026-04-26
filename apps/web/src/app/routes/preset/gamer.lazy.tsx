@@ -17,16 +17,21 @@ const Component = () => (
     </article>
     <SharePage
       screenParams={[
-        { size: 57, ratio: '32:9', h: 7680, v: 2160 }, // 57" 8K Super Ultrawide - Ultimate gaming experience
-        { size: 49, ratio: '32:9', h: 5120, v: 1440 }, // 49" Super Ultrawide - Immersive gaming powerhouse
-        { size: 45, ratio: '32:9', h: 5120, v: 1440 }, // 45" Super Ultrawide - Large format gaming
-        { size: 40, ratio: '32:9', h: 5120, v: 2160 }, // 40" 4K Super Ultrawide - Premium gaming display
-        { size: 38, ratio: '21:9', h: 3840, v: 1600 }, // 38" UW4K - High-end ultrawide gaming
-        { size: 34, ratio: '32:9', h: 3440, v: 1440 }, // 34" Super Ultrawide - Compact superwide gaming
-        { size: 34, ratio: '21:9', h: 3440, v: 1440 }, // 34" UWQHD - Popular ultrawide gaming
-        { size: 43, ratio: '16:9', h: 3840, v: 2160 }, // 43" 4K - Large console gaming display
-        { size: 48, ratio: '16:9', h: 5120, v: 2880 }, // 48" 5K - Premium large format gaming
-        { size: 32, ratio: '16:9', h: 3840, v: 2160 }, // 32" 4K - Large 4K gaming monitor
+        // 1440p — best all-round gaming sweet spot
+        { size: 27, ratio: '16:9', h: 2560, v: 1440 },
+        { size: 32, ratio: '16:9', h: 2560, v: 1440 },
+
+        // 4K — premium gaming
+        { size: 27, ratio: '16:9', h: 3840, v: 2160 },
+        { size: 32, ratio: '16:9', h: 3840, v: 2160 },
+
+        // Ultrawide 21:9 — immersive gaming
+        { size: 34, ratio: '21:9', h: 3440, v: 1440 },
+        { size: 45, ratio: '21:9', h: 3440, v: 1440 },
+
+        // Super ultrawide 32:9 — hardcore/sim racing
+        { size: 49, ratio: '32:9', h: 5120, v: 1440 },
+        { size: 57, ratio: '32:9', h: 7680, v: 2160 },
       ]}
     />
   </>
