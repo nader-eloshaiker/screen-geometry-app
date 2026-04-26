@@ -17,16 +17,26 @@ const Component = () => (
     </article>
     <SharePage
       screenParams={[
-        { size: 55, ratio: '16:9', h: 2840, v: 2160 }, // 55" 4K - Large 4K monitor
-        { size: 48, ratio: '16:9', h: 5120, v: 2880 }, // 48" 5K - High-resolution productivity
-        { size: 43, ratio: '16:9', h: 3840, v: 2160 }, // 43" 4K - Large 4K display
-        { size: 42, ratio: '16:9', h: 3840, v: 2160 }, // 42" 4K - Large 4K monitor
-        { size: 32, ratio: '16:9', h: 3840, v: 2160 }, // 32" 4K - Popular 4K productivity
-        { size: 32, ratio: '16:9', h: 2560, v: 1440 }, // 32" QHD - Large QHD monitor
-        { size: 27, ratio: '16:9', h: 3840, v: 2160 }, // 27" 4K - Most popular 4K size
-        { size: 27, ratio: '16:9', h: 2560, v: 1440 }, // 27" QHD - Popular gaming monitor
-        { size: 27, ratio: '16:9', h: 1920, v: 1080 }, // 27" FHD - Budget-friendly option
-        { size: 24, ratio: '16:9', h: 1920, v: 1080 }, // 24" FHD - Standard office/gaming
+        // Full HD (1080p)
+        { size: 27, ratio: '16:9', h: 1920, v: 1080 },
+        { size: 32, ratio: '16:9', h: 1920, v: 1080 },
+
+        // QHD (1440p)
+        { size: 27, ratio: '16:9', h: 2560, v: 1440 },
+        { size: 32, ratio: '16:9', h: 2560, v: 1440 },
+
+        // 4K UHD (2160p)
+        { size: 27, ratio: '16:9', h: 3840, v: 2160 },
+        { size: 32, ratio: '16:9', h: 3840, v: 2160 },
+        { size: 42, ratio: '16:9', h: 3840, v: 2160 },
+        { size: 43, ratio: '16:9', h: 3840, v: 2160 },
+        { size: 55, ratio: '16:9', h: 3840, v: 2160 },
+
+        // 6K (Apple Pro Display XDR)
+        { size: 32, ratio: '16:9', h: 6016, v: 3384 },
+
+        // 8K
+        { size: 32, ratio: '16:9', h: 7680, v: 4320 },
       ]}
     />
   </>

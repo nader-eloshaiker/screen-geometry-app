@@ -26,7 +26,7 @@ const StyledCheckbox = ({
   return (
     <Checkbox
       className={cn(
-        'hover:opacity-70 focus-visible:opacity-70 focus-visible:[outline-color:var(--checkbox-fg)] [&_[data-state=checked]]:bg-[var(--checkbox-bg)]',
+        'focus-visible:outline-(--checkbox-fg) **:data-[state=checked]:bg-(--checkbox-bg) hover:opacity-70 focus-visible:opacity-70',
         className
       )}
       style={
@@ -54,7 +54,7 @@ const StyledTableRow = ({
   return (
     <TableRow
       className={cn(
-        'hover:border-[var(--row-fg)] hover:bg-[var(--row-bg)] focus:border-[var(--row-fg)] focus:bg-[var(--row-bg)]',
+        'hover:border-(--row-fg) hover:bg-(--row-bg) focus:border-(--row-fg) focus:bg-(--row-bg) h-13',
         className
       )}
       style={
@@ -109,6 +109,7 @@ type Props = {
   screens: ScreenItemRender[]
   isScreenListLoading?: boolean
   className?: string
+  enableActions?: boolean
   highlighted?: ScreenItemRender
   setHighLighted?: Dispatch<SetStateAction<ScreenItemRender | undefined>>
   formOpenHandler?: FormOpenHandler
@@ -120,6 +121,7 @@ export const ScreenTable = ({
   screens,
   isScreenListLoading = false,
   className,
+  enableActions = true,
   highlighted = undefined,
   setHighLighted = () => {},
   formOpenHandler,
@@ -153,9 +155,11 @@ export const ScreenTable = ({
               <TranslateMessage id='screens.table.pixelsInch' />
             </span>
           </TableHead>
-          <TableHead className='text-center'>
-            <TranslateMessage id='screens.table.action' />
-          </TableHead>
+          {enableActions && (
+            <TableHead className='text-center'>
+              <TranslateMessage id='screens.table.action' />
+            </TableHead>
+          )}
         </TableRow>
       </TableHeader>
       {screens.length === 0 && isScreenListLoading ? (
@@ -224,37 +228,39 @@ export const ScreenTable = ({
               <TableCell className='text-center'>
                 <FormattedNumber value={Math.round((screen.specs.ppi * 100) / 100)} />
               </TableCell>
-              <TableCell>
-                <div className='flex flex-row items-center justify-center gap-0'>
-                  {match(formOpenHandler)
-                    .with(P.nonNullable, (item) => (
-                      <Button
-                        title='Edit'
-                        mode='ghost'
-                        dimension='icon-sm'
-                        palette='mono'
-                        onClick={() => item.onAction(screen.id)}
-                      >
-                        <Pencil id='edit-icon' />
-                      </Button>
-                    ))
-                    .otherwise(() => null)}
-                  {match(deleteHandler)
-                    .with({ isPending: true, id: screen.id }, () => <Loader2 className='size-4 animate-spin' />)
-                    .with(P.nonNullable, (item) => (
-                      <Button
-                        title='Delete'
-                        mode='ghost'
-                        dimension='icon-sm'
-                        palette='mono'
-                        onClick={() => item.mutate({ id: screen.id })}
-                      >
-                        <X id='delete-icon' />
-                      </Button>
-                    ))
-                    .otherwise(() => null)}
-                </div>
-              </TableCell>
+              {enableActions && (
+                <TableCell>
+                  <div className='flex flex-row items-center justify-center gap-0'>
+                    {match(formOpenHandler)
+                      .with(P.nonNullable, (item) => (
+                        <Button
+                          title='Edit'
+                          mode='ghost'
+                          dimension='icon-sm'
+                          palette='mono'
+                          onClick={() => item.onAction(screen.id)}
+                        >
+                          <Pencil id='edit-icon' />
+                        </Button>
+                      ))
+                      .otherwise(() => null)}
+                    {match(deleteHandler)
+                      .with({ isPending: true, id: screen.id }, () => <Loader2 className='size-4 animate-spin' />)
+                      .with(P.nonNullable, (item) => (
+                        <Button
+                          title='Delete'
+                          mode='ghost'
+                          dimension='icon-sm'
+                          palette='mono'
+                          onClick={() => item.mutate({ id: screen.id })}
+                        >
+                          <X id='delete-icon' />
+                        </Button>
+                      ))
+                      .otherwise(() => null)}
+                  </div>
+                </TableCell>
+              )}
             </StyledTableRow>
           ))}
         </TableBody>

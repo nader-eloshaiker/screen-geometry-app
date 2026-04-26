@@ -102,19 +102,19 @@ export const ScreenPanel = ({ screen, highlighted = undefined, setHighLighted = 
     >
       {selected && (
         <div
-          className='absolute top-[-24px] text-xs font-bold sm:top-[-30px] sm:text-base'
+          className='absolute -top-6 text-xs font-bold sm:top-[-30px] sm:text-base'
           style={{ color: themeMode === DarkMode ? screen.color.lightColor : screen.color.darkColor }}
         >
           {config.title}
         </div>
       )}
       {selected && (
-        <table className='size-full border-separate border-spacing-px p-px md:border-spacing-[2px] md:p-px lg:border-spacing-[4px] lg:p-[2px]'>
+        <table className='size-full border-separate border-spacing-px p-px'>
           <tbody>
             {Array.from({ length: config.vPixelCount }, (_, v) => (
               <tr key={v}>
                 {Array.from({ length: config.hPixelCount }, (_, h) => (
-                  <td key={`h-${h}-v-${v}`} style={{ backgroundColor: config.bgColor, borderRadius: '20%' }}></td>
+                  <td key={`h-${h}-v-${v}`} style={{ backgroundColor: config.bgColor }}></td>
                 ))}
               </tr>
             ))}

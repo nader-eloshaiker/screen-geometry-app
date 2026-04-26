@@ -100,6 +100,7 @@ export const SharePage = ({ screenParams = [] }: { screenParams: ScreenParam[] }
           highlighted={highlighted}
           setHighLighted={setHighlighted}
           showHandler={showHandler}
+          enableActions={false}
         />
 
         {screens.length === 0 && (

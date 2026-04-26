@@ -17,12 +17,11 @@ const Component = () => (
     </article>
     <SharePage
       screenParams={[
-        { size: 49, ratio: '32:9', h: 5120, v: 1440 }, // 49" Super Ultrawide - Flagship gaming monitor
-        { size: 45, ratio: '32:9', h: 5120, v: 1440 }, // 45" Super Ultrawide - High-end productivity
-        { size: 40, ratio: '32:9', h: 5120, v: 2160 }, // 40" 4K Super Ultrawide - Premium option
-        { size: 38, ratio: '32:9', h: 3840, v: 1600 }, // 38" Super Ultrawide - Compact superwide
-        { size: 34, ratio: '32:9', h: 3440, v: 1440 }, // 34" Super Ultrawide - Entry superwide
-        { size: 29, ratio: '32:9', h: 2560, v: 1080 }, // 29" Super Ultrawide - Budget option
+        // DQHD (1440p) — entry super ultrawide, dual 27" QHD equivalent
+        { size: 49, ratio: '32:9', h: 5120, v: 1440 },
+
+        // 8K Dual UHD (2160p) — Samsung Odyssey Neo G9, dual 4K equivalent
+        { size: 57, ratio: '32:9', h: 7680, v: 2160 },
       ]}
     />
   </>
