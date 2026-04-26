@@ -1,5 +1,12 @@
 # Changelog
 
+## [5.0.1](https://github.com/nader-eloshaiker/screen-geometry-app/compare/v5.0.0...v5.0.1) (2026-04-26)
+
+
+### Bug Fixes
+
+* **web:** fix spinner visibility during busy state and linting issues ([#651](https://github.com/nader-eloshaiker/screen-geometry-app/issues/651)) ([d04e02f](https://github.com/nader-eloshaiker/screen-geometry-app/commit/d04e02f6d1ac411356267c3aa0fda1c7b804ee34))
+
 ## [5.0.0](https://github.com/nader-eloshaiker/screen-geometry-app/compare/v4.6.0...v5.0.0) (2026-04-26)
 
 
