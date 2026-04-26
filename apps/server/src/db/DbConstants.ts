@@ -1,4 +1,4 @@
-export const dbVersionDefault = 3
+export const dbVersionDefault = 4
 export const dbNameDefault = 'localforage'
 
 export interface KeyedObject {

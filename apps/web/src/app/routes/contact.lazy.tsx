@@ -1,4 +1,4 @@
-import { Contact } from '@/app/pages/Contact'
+import { ContactPage } from '@/app/pages/ContactPage'
 import { createLazyFileRoute } from '@tanstack/react-router'
 
 const Component = () => (
@@ -12,7 +12,7 @@ const Component = () => (
       />
       <link rel='canonical' href='https://screengeometry.com/contact' />
     </article>
-    <Contact />
+    <ContactPage />
   </>
 )
 

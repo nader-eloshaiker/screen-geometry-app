@@ -49,4 +49,12 @@ export const defaultScreenInputList: ScreenInputList = [
     lightColor: '#64E8DD',
     darkColor: '#14857B',
   },
+  {
+    diagonalSize: 52,
+    hRes: 6144,
+    vRes: 2560,
+    aspectRatio: '21:9',
+    lightColor: '#EE5E83',
+    darkColor: '#8A0F2F',
+  },
 ]

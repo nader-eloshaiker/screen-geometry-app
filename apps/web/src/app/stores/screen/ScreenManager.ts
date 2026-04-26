@@ -10,7 +10,7 @@ export const normaliseScreenRender = (list: ScreenItem[]) => {
     .map((item) => toScreenItemRender(item, biggest))
     .sort((a, b) => b.data.diagonalSize - a.data.diagonalSize)
 
-  return sorted
+  return [...sorted]
 }
 
 export const initialScreenState = {
@@ -26,12 +26,14 @@ export const ScreenEvent = {
   update: 'update',
   add: 'add',
   addList: 'add_list',
+  updateList: 'update_list',
 } as const
 export type ScreenEvent =
   | { type: 'load'; payload: ScreenItem[] }
   | { type: 'update'; payload: ScreenItem }
   | { type: 'add'; payload: ScreenItem }
   | { type: 'add_list'; payload: ScreenItem[] }
+  | { type: 'update_list'; payload: ScreenItem[] }
   | { type: 'delete'; payload: string }
 
 export const screenReducer = (state: ScreenState, event: ScreenEvent): ScreenState =>
@@ -64,5 +66,13 @@ export const screenReducer = (state: ScreenState, event: ScreenEvent): ScreenSta
       const additionList = normaliseScreenRender([...state.screens, ...payload])
 
       return { ...state, screens: additionList }
+    })
+    .with({ type: ScreenEvent.updateList }, ({ payload }) => {
+      const existingSignatures = new Set(state.screens.map((screen) => screen.signature))
+      const newItems = payload.filter((item) => !existingSignatures.has(item.signature))
+
+      if (newItems.length === 0) return state
+
+      return { ...state, screens: normaliseScreenRender([...state.screens, ...newItems]) }
     })
     .exhaustive()

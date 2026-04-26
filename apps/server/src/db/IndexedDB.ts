@@ -4,6 +4,7 @@ import { ulid } from 'ulid'
 import { type KeyedObject, StoresEnum, dbNameDefault, dbVersionDefault } from './DbConstants'
 import { SearchDocuments } from './SearchDocuments'
 import { migrateV2toV3 } from './migration/v2-v3'
+import { migrateV3toV4 } from './migration/v3-v4'
 
 const handleRequestError = (
   request: IDBRequest | IDBOpenDBRequest | IDBTransaction,
@@ -106,15 +107,17 @@ export const initDB = (options?: dbProps): Promise<boolean> => {
         db.createObjectStore(StoresEnum.Screens, { keyPath: 'id' })
       }
 
-      if (!db.objectStoreNames.contains(StoresEnum.Search)) {
-        seedSearchDocuments(openReq)
-      }
-
       match(event)
-        .with({ oldVersion: 2 }, () => migrateV2toV3(db, openReq))
+        .with({ oldVersion: 2 }, () => migrateV2toV3(db, openReq, true))
+        .with({ oldVersion: 3 }, () => migrateV3toV4(db, openReq))
         .otherwise(() => {
           console.log('No migration needed')
         })
+
+      // Create or recreate Search store after migrations
+      if (!db.objectStoreNames.contains(StoresEnum.Search)) {
+        seedSearchDocuments(openReq)
+      }
     }
 
     openReq.onsuccess = () => {
