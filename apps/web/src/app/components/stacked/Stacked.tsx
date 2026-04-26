@@ -28,7 +28,7 @@ export const Stacked = ({
   return (
     <div
       className={cn(
-        'inline-grid w-full p-2 [&>*]:col-start-1 [&>*]:row-start-1',
+        'inline-grid w-full p-2 *:col-start-1 *:row-start-1',
         justifyItemsMap[$hAlign ?? HAlignDefault],
         alignItemsMap[$vAlign ?? 'end'],
         className
