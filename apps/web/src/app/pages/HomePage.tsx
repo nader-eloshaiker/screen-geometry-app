@@ -20,7 +20,7 @@ export const HomePage = () => {
         <TranslateMessage
           id='home.content.callToAction'
           values={{
-            cta: (_children) => (
+            cta: (children) => (
               <span className='mx-2'>
                 <NavigationLink
                   data-testid='home-screen-link'
@@ -28,7 +28,7 @@ export const HomePage = () => {
                   // mode='ghost'
                   to='/myscreens'
                 >
-                  <TranslateMessage id='header.menu.myscreens' />
+                  {children}
                 </NavigationLink>
               </span>
             ),
