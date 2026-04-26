@@ -5,6 +5,11 @@ const getAspectRatio = (str: string) => {
   return [parseFloat(width ?? '1'), parseFloat(height ?? '1')] as const
 }
 
+export const toShareScreenItem = (input: ScreenItem) => {
+  const { diagonalSize, aspectRatio, hRes, vRes } = input.data
+  return { size: diagonalSize, ratio: aspectRatio, h: hRes, v: vRes }
+}
+
 export const toScreenItem = ({
   diagonalSize,
   aspectRatio,

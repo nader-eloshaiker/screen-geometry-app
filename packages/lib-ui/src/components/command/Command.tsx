@@ -51,11 +51,11 @@ export function CommandDialog({
 export function CommandInput({ className, ...props }: React.ComponentProps<typeof CommandPrimitive.Input>) {
   return (
     <div data-slot='command-input-wrapper' className='border-primary-border flex h-9 items-center gap-2 border-b px-3'>
-      <SearchIcon className='size-4 shrink-0 opacity-50' />
+      <SearchIcon className='text-popover-foreground size-4 shrink-0' />
       <CommandPrimitive.Input
         data-slot='command-input'
         className={cn(
-          'outline-hidden placeholder:text-foreground-muted flex h-10 w-full rounded-md bg-transparent py-3 text-sm disabled:cursor-not-allowed disabled:opacity-50',
+          'outline-hidden placeholder:text-popover-foreground-muted flex h-10 w-full rounded-md bg-transparent py-3 text-sm disabled:cursor-not-allowed disabled:opacity-50',
           className
         )}
         {...props}

@@ -1,6 +1,8 @@
 import useLocalStorage from '@/app/hooks/useLocalStorage'
+import { useTranslation } from '@/app/stores/translation'
 import { ToggleGroup, ToggleGroupItem } from '@screengeometry/lib-ui/togglegroup'
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@screengeometry/lib-ui/tooltip'
+import { TooltipProvider } from '@screengeometry/lib-ui/tooltip'
+import { cn } from '@screengeometry/lib-ui/utils'
 import {
   AlignCenterHorizontal,
   AlignCenterVertical,
@@ -10,7 +12,6 @@ import {
   AlignStartVertical,
 } from 'lucide-react'
 import { type ComponentType, type SVGProps, useEffect } from 'react'
-import { useIntl } from 'react-intl'
 
 export type Alignment = 'start' | 'center' | 'end'
 
@@ -35,67 +36,60 @@ type AlignmentSelectorProps = TProps & {
 }
 
 const AlignmentSelector = ({ onChange, storageKey, defaultValue, description, content }: AlignmentSelectorProps) => {
-  const [alignment, setAlignment] = useLocalStorage<string>(storageKey, defaultValue)
+  const [selectedAlignment, setSelectedAlignment] = useLocalStorage<string>(storageKey, defaultValue)
 
   useEffect(() => {
-    onChange(alignment as Alignment)
-  }, [alignment, onChange])
+    onChange(selectedAlignment as Alignment)
+  }, [selectedAlignment, onChange])
 
   return (
     <TooltipProvider>
-      <Tooltip>
-        <TooltipTrigger asChild>
-          <ToggleGroup type='single' mode='pill' value={alignment} onValueChange={setAlignment} className='shadow-md'>
-            {content.map(({ Icon, alignment, label }) => (
-              <ToggleGroupItem key={label} value={alignment} aria-label={label}>
-                <Icon className='size-5' />
-              </ToggleGroupItem>
-            ))}
-          </ToggleGroup>
-        </TooltipTrigger>
-        <TooltipContent>
-          <p>{description}</p>
-        </TooltipContent>
-      </Tooltip>
+      <ToggleGroup
+        type='single'
+        mode='pill'
+        value={selectedAlignment}
+        onValueChange={setSelectedAlignment}
+        className='shadow-md'
+        aria-label={description}
+      >
+        {content.map(({ Icon, alignment, label }) => (
+          <ToggleGroupItem
+            key={label}
+            value={alignment}
+            aria-label={label}
+            className={cn(selectedAlignment === alignment && 'pointer-events-none')}
+          >
+            <Icon className='size-5' />
+          </ToggleGroupItem>
+        ))}
+      </ToggleGroup>
     </TooltipProvider>
   )
 }
 
 export const VerticalAlignmentSelector = ({ onChange }: TProps) => {
-  const { formatMessage } = useIntl()
+  const { formatMessage } = useTranslation()
   return (
     <AlignmentSelector
       storageKey={VAlignKey}
       defaultValue={VAlignDefault}
       onChange={onChange}
-      description={formatMessage({
-        id: 'screens.panel.vertical',
-        defaultMessage: 'Vertical Alignment',
-      })}
+      description={formatMessage('screens.panel.vertical')}
       content={[
         {
           Icon: AlignStartHorizontal,
           alignment: 'start',
-          label: formatMessage({
-            id: 'screens.panel.verticalTop',
-            defaultMessage: 'Align Top',
-          }),
+          label: formatMessage('screens.panel.verticalTop'),
         },
         {
           Icon: AlignCenterHorizontal,
           alignment: 'center',
-          label: formatMessage({
-            id: 'screens.panel.verticalCenter',
-            defaultMessage: 'Align Center',
-          }),
+          label: formatMessage('screens.panel.verticalCenter'),
         },
         {
           Icon: AlignEndHorizontal,
           alignment: 'end',
-          label: formatMessage({
-            id: 'screens.panel.verticalBottom',
-            defaultMessage: 'Align Bottom',
-          }),
+          label: formatMessage('screens.panel.verticalBottom'),
         },
       ]}
     />
@@ -103,41 +97,28 @@ export const VerticalAlignmentSelector = ({ onChange }: TProps) => {
 }
 
 export const HorizontalAlignmentSelector = ({ onChange }: TProps) => {
-  const { formatMessage } = useIntl()
-
+  const { formatMessage } = useTranslation()
   return (
     <AlignmentSelector
       storageKey={HAlignKey}
       defaultValue={HAlignDefault}
       onChange={onChange}
-      description={formatMessage({
-        id: 'screens.panel.horizontal',
-        defaultMessage: 'Horizontal Alignment',
-      })}
+      description={formatMessage('screens.panel.horizontal')}
       content={[
         {
           Icon: AlignStartVertical,
           alignment: 'start',
-          label: formatMessage({
-            id: 'screens.panel.horizontalLeft',
-            defaultMessage: 'Align Left',
-          }),
+          label: formatMessage('screens.panel.horizontalLeft'),
         },
         {
           Icon: AlignCenterVertical,
           alignment: 'center',
-          label: formatMessage({
-            id: 'screens.panel.horizontalCenter',
-            defaultMessage: 'Align Center',
-          }),
+          label: formatMessage('screens.panel.horizontalCenter'),
         },
         {
           Icon: AlignEndVertical,
           alignment: 'end',
-          label: formatMessage({
-            id: 'screens.panel.horizontalRight',
-            defaultMessage: 'Align Right',
-          }),
+          label: formatMessage('screens.panel.horizontalRight'),
         },
       ]}
     />

@@ -1,7 +1,8 @@
 import GithubIcon from '@/app/assets/icons/Github'
 import { LanguageSwitcher } from '@/app/components/language/LanguageSwitcher'
+import { TranslateMessage } from '@/app/stores/translation'
 import { Copyright } from 'lucide-react'
-import { FormattedMessage, FormattedNumber } from 'react-intl'
+import { FormattedNumber } from 'react-intl'
 
 export default function Footer() {
   const longVer = import.meta.env.VITE_PACKAGE_VERSION
@@ -16,7 +17,7 @@ export default function Footer() {
           <div className='flex items-center gap-2'>
             <Copyright className='size-6' />
             <span>
-              <FormattedMessage id='footer.copyright.title' defaultMessage='2023 All right reserved' />
+              <TranslateMessage id='footer.copyright.title' />
             </span>
           </div>
           <div className='flex items-center gap-2'>
@@ -24,8 +25,7 @@ export default function Footer() {
               <GithubIcon className='size-6 fill-current' />
             </a>
             <span>
-              <FormattedMessage id='footer.version.title' defaultMessage='Version' />{' '}
-              <FormattedNumber value={majorVer} />
+              <TranslateMessage id='footer.version.title' /> <FormattedNumber value={majorVer} />
               .<FormattedNumber value={minorVer} />.<FormattedNumber value={patchVer} />
             </span>
           </div>

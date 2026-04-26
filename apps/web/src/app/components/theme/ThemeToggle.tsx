@@ -1,9 +1,9 @@
 import { DarkMode, LightMode } from '@/app/stores/theme/Theme.types'
 import { useTheme } from '@/app/stores/theme/useTheme'
+import { useTranslation } from '@/app/stores/translation'
 import { Button } from '@screengeometry/lib-ui/button'
 import { cn } from '@screengeometry/lib-ui/utils'
 import { MoonStar, Sun } from 'lucide-react'
-import { useIntl } from 'react-intl'
 
 type TProps = TRestProps & { className?: string; id: string }
 
@@ -15,21 +15,13 @@ export default function ThemeToggle({ className, id, ...rest }: TProps) {
     setThemeState(isDarkMode ? LightMode : DarkMode)
   }
 
-  const { formatMessage } = useIntl()
+  const { formatMessage } = useTranslation()
 
   return (
     <Button
       id={id}
       aria-label={`switch theme to ${
-        isDarkMode
-          ? formatMessage({
-              id: 'screens.theme.lightLabel',
-              defaultMessage: 'Light Mode',
-            })
-          : formatMessage({
-              id: 'screens.theme.darkLabel',
-              defaultMessage: 'Dark Mode',
-            })
+        isDarkMode ? formatMessage('screens.theme.lightLabel') : formatMessage('screens.theme.darkLabel')
       }`}
       onClick={handleChange}
       mode='ghost'

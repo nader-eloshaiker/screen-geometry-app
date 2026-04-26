@@ -1,4 +1,4 @@
-import { Home } from '@/app/pages/Home'
+import { HomePage } from '@/app/pages/HomePage'
 import { createLazyFileRoute } from '@tanstack/react-router'
 
 const Component = () => (
@@ -15,7 +15,7 @@ const Component = () => (
       />
       <link rel='canonical' href='https://screengeometry.com' />
     </article>
-    <Home />
+    <HomePage />
   </>
 )
 
