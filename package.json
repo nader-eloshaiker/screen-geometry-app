@@ -10,6 +10,11 @@
   "engines": {
     "node": ">=22.11.0"
   },
+  "workspaces": [
+    "packages/*",
+    "apps/*",
+    "docs/*"
+  ],
   "scripts": {
     "preinstall": "npx only-allow pnpm",
     "prepare": "husky",

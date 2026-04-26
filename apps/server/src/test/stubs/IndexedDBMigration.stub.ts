@@ -1,4 +1,5 @@
 import { StoresEnum } from '@/db/DbConstants'
+import { seedSearchDocuments } from '@/db/IndexedDB'
 
 export const setupV2DB = () =>
   new Promise((resolve) => {
@@ -31,6 +32,25 @@ export const setupV2DB = () =>
         ],
         'screens'
       )
+    }
+    openReq.onsuccess = () => {
+      openReq.result.close()
+      resolve(true)
+    }
+
+    openReq.onerror = () => {
+      openReq.result.close()
+      resolve(false)
+    }
+  })
+
+export const setupV3DB = () =>
+  new Promise((resolve) => {
+    const openReq = indexedDB.open('Testv3Tov4', 3)
+    openReq.onupgradeneeded = () => {
+      const db = openReq.result
+      db.createObjectStore(StoresEnum.Screens, { keyPath: 'id' })
+      seedSearchDocuments(openReq)
     }
     openReq.onsuccess = () => {
       openReq.result.close()

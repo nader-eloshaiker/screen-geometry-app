@@ -1,4 +1,4 @@
-import { Help } from '@/app/pages/Help'
+import { HelpPage } from '@/app/pages/HelpPage'
 import { createLazyFileRoute } from '@tanstack/react-router'
 
 const Component = () => (
@@ -12,7 +12,7 @@ const Component = () => (
       />
       <link rel='canonical' href='https://screengeometry.com/help' />
     </article>
-    <Help />
+    <HelpPage />
   </>
 )
 export const Route = createLazyFileRoute('/help')({

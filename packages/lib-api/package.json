@@ -33,7 +33,7 @@
     "axios": "catalog:node",
     "graphql": "^16.11.0",
     "msw": "catalog:utils",
-    "uuid": "^13.0.0"
+    "uuid": "^14.0.0"
   },
   "peerDependencies": {
     "react": "catalog:react19",
@@ -46,7 +46,7 @@
     "@graphql-codegen/schema-ast": "^5.0.0",
     "@graphql-codegen/typescript-msw": "^3.0.1",
     "@graphql-codegen/typescript-react-query": "^6.1.1",
-    "@tanstack/eslint-plugin-query": "catalog:eslint",
+    "@tanstack/eslint-plugin-query": "catalog:tanstack",
     "@testing-library/jest-dom": "catalog:unittesting",
     "@testing-library/react": "catalog:unittesting",
     "@testing-library/user-event": "catalog:unittesting",

@@ -6,7 +6,7 @@ export type TToggleSize = NonNullable<TToggleGroupVariants['dimension']>
 export type TToggleMode = NonNullable<TToggleGroupVariants['mode']>
 
 export const ToggleVariants = cva(
-  'ring-offset-background outline-hidden inline-flex items-center justify-center gap-2 text-sm font-medium transition-colors focus-visible:outline-2 focus-visible:outline-offset-4 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0',
+  'ring-offset-background outline-hidden hocus:cursor-pointer inline-flex items-center justify-center gap-2 text-sm font-medium transition-colors focus-visible:outline-2 focus-visible:outline-offset-4 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0',
   {
     compoundVariants: [
       {

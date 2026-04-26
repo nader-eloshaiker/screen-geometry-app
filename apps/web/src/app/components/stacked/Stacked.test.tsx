@@ -7,10 +7,9 @@ describe('#Stacked', () => {
     const element = getByText('Test')
 
     expect(element).toBeInTheDocument()
-    const styles = getComputedStyle(element)
-    expect(styles.height).toBe('10px')
-    expect(styles.justifyItems).toBe('center')
-    expect(styles.alignItems).toBe('flex-end')
+    expect(element).toHaveStyle({ height: '10px' })
+    expect(element.className).toContain('justify-items-center')
+    expect(element.className).toContain('items-end')
   })
 
   it('should render with vertical alignment top', async () => {
@@ -21,8 +20,7 @@ describe('#Stacked', () => {
     )
     const element = getByText('Test')
 
-    const styles = getComputedStyle(element)
-    expect(styles.alignItems).toBe('flex-start')
+    expect(element.className).toContain('items-start')
   })
 
   it('should render with vertical alignment center', async () => {
@@ -33,7 +31,6 @@ describe('#Stacked', () => {
     )
     const element = getByText('Test')
 
-    const styles = getComputedStyle(element)
-    expect(styles.alignItems).toBe('center')
+    expect(element.className).toContain('items-center')
   })
 })

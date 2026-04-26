@@ -38,7 +38,17 @@ export const createScreen = (screenInput: ScreenInput, signal?: AbortSignal) => 
   })
 }
 
-export const getCreateScreenMutationOptions = <TError = ErrorResponse, TContext = unknown>(options?: {
+export const getCreateScreenMutationOptions = <
+  TError =
+    | ErrorResponse
+    | ErrorResponse
+    | ErrorResponse
+    | ErrorResponse
+    | ErrorResponse
+    | ErrorResponse
+    | ErrorResponse,
+  TContext = unknown,
+>(options?: {
   mutation?: UseMutationOptions<Awaited<ReturnType<typeof createScreen>>, TError, { data: ScreenInput }, TContext>
 }): UseMutationOptions<Awaited<ReturnType<typeof createScreen>>, TError, { data: ScreenInput }, TContext> => {
   const mutationKey = ['createScreen']
@@ -59,12 +69,29 @@ export const getCreateScreenMutationOptions = <TError = ErrorResponse, TContext 
 
 export type CreateScreenMutationResult = NonNullable<Awaited<ReturnType<typeof createScreen>>>
 export type CreateScreenMutationBody = ScreenInput
-export type CreateScreenMutationError = ErrorResponse
+export type CreateScreenMutationError =
+  | ErrorResponse
+  | ErrorResponse
+  | ErrorResponse
+  | ErrorResponse
+  | ErrorResponse
+  | ErrorResponse
+  | ErrorResponse
 
 /**
  * @summary Create a ScreenItem object
  */
-export const useCreateScreen = <TError = ErrorResponse, TContext = unknown>(
+export const useCreateScreen = <
+  TError =
+    | ErrorResponse
+    | ErrorResponse
+    | ErrorResponse
+    | ErrorResponse
+    | ErrorResponse
+    | ErrorResponse
+    | ErrorResponse,
+  TContext = unknown,
+>(
   options?: {
     mutation?: UseMutationOptions<Awaited<ReturnType<typeof createScreen>>, TError, { data: ScreenInput }, TContext>
   },
@@ -81,7 +108,17 @@ export const showScreen = (id: string) => {
   return serverApiClient<ScreenItemResponse>({ url: `/v1/screen/${id}/show`, method: 'PATCH' })
 }
 
-export const getShowScreenMutationOptions = <TError = ErrorResponse, TContext = unknown>(options?: {
+export const getShowScreenMutationOptions = <
+  TError =
+    | ErrorResponse
+    | ErrorResponse
+    | ErrorResponse
+    | ErrorResponse
+    | ErrorResponse
+    | ErrorResponse
+    | ErrorResponse,
+  TContext = unknown,
+>(options?: {
   mutation?: UseMutationOptions<Awaited<ReturnType<typeof showScreen>>, TError, { id: string }, TContext>
 }): UseMutationOptions<Awaited<ReturnType<typeof showScreen>>, TError, { id: string }, TContext> => {
   const mutationKey = ['showScreen']
@@ -102,12 +139,29 @@ export const getShowScreenMutationOptions = <TError = ErrorResponse, TContext = 
 
 export type ShowScreenMutationResult = NonNullable<Awaited<ReturnType<typeof showScreen>>>
 
-export type ShowScreenMutationError = ErrorResponse
+export type ShowScreenMutationError =
+  | ErrorResponse
+  | ErrorResponse
+  | ErrorResponse
+  | ErrorResponse
+  | ErrorResponse
+  | ErrorResponse
+  | ErrorResponse
 
 /**
  * @summary Show a screen
  */
-export const useShowScreen = <TError = ErrorResponse, TContext = unknown>(
+export const useShowScreen = <
+  TError =
+    | ErrorResponse
+    | ErrorResponse
+    | ErrorResponse
+    | ErrorResponse
+    | ErrorResponse
+    | ErrorResponse
+    | ErrorResponse,
+  TContext = unknown,
+>(
   options?: { mutation?: UseMutationOptions<Awaited<ReturnType<typeof showScreen>>, TError, { id: string }, TContext> },
   queryClient?: QueryClient
 ): UseMutationResult<Awaited<ReturnType<typeof showScreen>>, TError, { id: string }, TContext> => {
@@ -122,11 +176,21 @@ export const getScreen = (id: string, signal?: AbortSignal) => {
   return serverApiClient<ScreenItemResponse>({ url: `/v1/screen/${id}`, method: 'GET', signal })
 }
 
-export const getGetScreenQueryKey = (id: string) => {
+export const getGetScreenQueryKey = (id?: string) => {
   return [`/v1/screen/${id}`] as const
 }
 
-export const getGetScreenQueryOptions = <TData = Awaited<ReturnType<typeof getScreen>>, TError = ErrorResponse>(
+export const getGetScreenQueryOptions = <
+  TData = Awaited<ReturnType<typeof getScreen>>,
+  TError =
+    | ErrorResponse
+    | ErrorResponse
+    | ErrorResponse
+    | ErrorResponse
+    | ErrorResponse
+    | ErrorResponse
+    | ErrorResponse,
+>(
   id: string,
   options?: { query?: Partial<UseQueryOptions<Awaited<ReturnType<typeof getScreen>>, TError, TData>> }
 ) => {
@@ -144,9 +208,26 @@ export const getGetScreenQueryOptions = <TData = Awaited<ReturnType<typeof getSc
 }
 
 export type GetScreenQueryResult = NonNullable<Awaited<ReturnType<typeof getScreen>>>
-export type GetScreenQueryError = ErrorResponse
+export type GetScreenQueryError =
+  | ErrorResponse
+  | ErrorResponse
+  | ErrorResponse
+  | ErrorResponse
+  | ErrorResponse
+  | ErrorResponse
+  | ErrorResponse
 
-export function useGetScreen<TData = Awaited<ReturnType<typeof getScreen>>, TError = ErrorResponse>(
+export function useGetScreen<
+  TData = Awaited<ReturnType<typeof getScreen>>,
+  TError =
+    | ErrorResponse
+    | ErrorResponse
+    | ErrorResponse
+    | ErrorResponse
+    | ErrorResponse
+    | ErrorResponse
+    | ErrorResponse,
+>(
   id: string,
   options: {
     query: Partial<UseQueryOptions<Awaited<ReturnType<typeof getScreen>>, TError, TData>> &
@@ -157,7 +238,17 @@ export function useGetScreen<TData = Awaited<ReturnType<typeof getScreen>>, TErr
   },
   queryClient?: QueryClient
 ): DefinedUseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-export function useGetScreen<TData = Awaited<ReturnType<typeof getScreen>>, TError = ErrorResponse>(
+export function useGetScreen<
+  TData = Awaited<ReturnType<typeof getScreen>>,
+  TError =
+    | ErrorResponse
+    | ErrorResponse
+    | ErrorResponse
+    | ErrorResponse
+    | ErrorResponse
+    | ErrorResponse
+    | ErrorResponse,
+>(
   id: string,
   options?: {
     query?: Partial<UseQueryOptions<Awaited<ReturnType<typeof getScreen>>, TError, TData>> &
@@ -172,7 +263,17 @@ export function useGetScreen<TData = Awaited<ReturnType<typeof getScreen>>, TErr
   },
   queryClient?: QueryClient
 ): UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-export function useGetScreen<TData = Awaited<ReturnType<typeof getScreen>>, TError = ErrorResponse>(
+export function useGetScreen<
+  TData = Awaited<ReturnType<typeof getScreen>>,
+  TError =
+    | ErrorResponse
+    | ErrorResponse
+    | ErrorResponse
+    | ErrorResponse
+    | ErrorResponse
+    | ErrorResponse
+    | ErrorResponse,
+>(
   id: string,
   options?: { query?: Partial<UseQueryOptions<Awaited<ReturnType<typeof getScreen>>, TError, TData>> },
   queryClient?: QueryClient
@@ -181,7 +282,17 @@ export function useGetScreen<TData = Awaited<ReturnType<typeof getScreen>>, TErr
  * @summary Get a screen by id
  */
 
-export function useGetScreen<TData = Awaited<ReturnType<typeof getScreen>>, TError = ErrorResponse>(
+export function useGetScreen<
+  TData = Awaited<ReturnType<typeof getScreen>>,
+  TError =
+    | ErrorResponse
+    | ErrorResponse
+    | ErrorResponse
+    | ErrorResponse
+    | ErrorResponse
+    | ErrorResponse
+    | ErrorResponse,
+>(
   id: string,
   options?: { query?: Partial<UseQueryOptions<Awaited<ReturnType<typeof getScreen>>, TError, TData>> },
   queryClient?: QueryClient
@@ -209,7 +320,17 @@ export const updateScreen = (id: string, screenInput: ScreenInput) => {
   })
 }
 
-export const getUpdateScreenMutationOptions = <TError = ErrorResponse, TContext = unknown>(options?: {
+export const getUpdateScreenMutationOptions = <
+  TError =
+    | ErrorResponse
+    | ErrorResponse
+    | ErrorResponse
+    | ErrorResponse
+    | ErrorResponse
+    | ErrorResponse
+    | ErrorResponse,
+  TContext = unknown,
+>(options?: {
   mutation?: UseMutationOptions<
     Awaited<ReturnType<typeof updateScreen>>,
     TError,
@@ -242,12 +363,29 @@ export const getUpdateScreenMutationOptions = <TError = ErrorResponse, TContext 
 
 export type UpdateScreenMutationResult = NonNullable<Awaited<ReturnType<typeof updateScreen>>>
 export type UpdateScreenMutationBody = ScreenInput
-export type UpdateScreenMutationError = ErrorResponse
+export type UpdateScreenMutationError =
+  | ErrorResponse
+  | ErrorResponse
+  | ErrorResponse
+  | ErrorResponse
+  | ErrorResponse
+  | ErrorResponse
+  | ErrorResponse
 
 /**
  * @summary Update a screen
  */
-export const useUpdateScreen = <TError = ErrorResponse, TContext = unknown>(
+export const useUpdateScreen = <
+  TError =
+    | ErrorResponse
+    | ErrorResponse
+    | ErrorResponse
+    | ErrorResponse
+    | ErrorResponse
+    | ErrorResponse
+    | ErrorResponse,
+  TContext = unknown,
+>(
   options?: {
     mutation?: UseMutationOptions<
       Awaited<ReturnType<typeof updateScreen>>,
@@ -269,7 +407,17 @@ export const deleteScreen = (id: string) => {
   return serverApiClient<ScreenIdResponse>({ url: `/v1/screen/${id}`, method: 'DELETE' })
 }
 
-export const getDeleteScreenMutationOptions = <TError = ErrorResponse, TContext = unknown>(options?: {
+export const getDeleteScreenMutationOptions = <
+  TError =
+    | ErrorResponse
+    | ErrorResponse
+    | ErrorResponse
+    | ErrorResponse
+    | ErrorResponse
+    | ErrorResponse
+    | ErrorResponse,
+  TContext = unknown,
+>(options?: {
   mutation?: UseMutationOptions<Awaited<ReturnType<typeof deleteScreen>>, TError, { id: string }, TContext>
 }): UseMutationOptions<Awaited<ReturnType<typeof deleteScreen>>, TError, { id: string }, TContext> => {
   const mutationKey = ['deleteScreen']
@@ -290,12 +438,29 @@ export const getDeleteScreenMutationOptions = <TError = ErrorResponse, TContext 
 
 export type DeleteScreenMutationResult = NonNullable<Awaited<ReturnType<typeof deleteScreen>>>
 
-export type DeleteScreenMutationError = ErrorResponse
+export type DeleteScreenMutationError =
+  | ErrorResponse
+  | ErrorResponse
+  | ErrorResponse
+  | ErrorResponse
+  | ErrorResponse
+  | ErrorResponse
+  | ErrorResponse
 
 /**
  * @summary Delete a screen
  */
-export const useDeleteScreen = <TError = ErrorResponse, TContext = unknown>(
+export const useDeleteScreen = <
+  TError =
+    | ErrorResponse
+    | ErrorResponse
+    | ErrorResponse
+    | ErrorResponse
+    | ErrorResponse
+    | ErrorResponse
+    | ErrorResponse,
+  TContext = unknown,
+>(
   options?: {
     mutation?: UseMutationOptions<Awaited<ReturnType<typeof deleteScreen>>, TError, { id: string }, TContext>
   },
