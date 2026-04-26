@@ -245,7 +245,11 @@ export const ScreenTable = ({
                       ))
                       .otherwise(() => null)}
                     {match(deleteHandler)
-                      .with({ isPending: true, id: screen.id }, () => <Loader2 className='size-4 animate-spin' />)
+                      .with({ isPending: true, variables: { id: screen.id } }, () => (
+                        <div className='flex size-9 items-center justify-center'>
+                          <Loader2 className='size-6 animate-spin' />
+                        </div>
+                      ))
                       .with(P.nonNullable, (item) => (
                         <Button
                           title='Delete'
