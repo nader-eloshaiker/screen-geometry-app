@@ -22,7 +22,7 @@ catalogs:
     typescript: ~5.9.2
     ts-pattern: ^5.8.0
   node:
-    "axios": "^1.12.2"
+    "axios": "^1.15.2"
   eslint:
     "@eslint/js": ^9.33.0
     eslint: ^9.38.0
