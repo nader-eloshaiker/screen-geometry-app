@@ -1,5 +1,26 @@
 # Changelog
 
+## [5.0.0](https://github.com/nader-eloshaiker/screen-geometry-app/compare/v4.6.0...v5.0.0) (2026-04-26)
+
+
+### ⚠ BREAKING CHANGES
+
+* **web:** add screen sharing functionality ([#641](https://github.com/nader-eloshaiker/screen-geometry-app/issues/641))
+
+### Features
+
+* **ui:** update storybook ([#649](https://github.com/nader-eloshaiker/screen-geometry-app/issues/649)) ([f0f6068](https://github.com/nader-eloshaiker/screen-geometry-app/commit/f0f6068aa6e92f5a12e8918adc864439998928c6))
+* **web:** add screen sharing functionality ([#641](https://github.com/nader-eloshaiker/screen-geometry-app/issues/641)) ([0c03639](https://github.com/nader-eloshaiker/screen-geometry-app/commit/0c03639e1610a4c986416cde17c00012a4888592))
+* **web:** remove framer-motion ([#648](https://github.com/nader-eloshaiker/screen-geometry-app/issues/648)) ([f06038b](https://github.com/nader-eloshaiker/screen-geometry-app/commit/f06038b93686a32e2efe8d0407a576875cf22314))
+* **web:** tweak ui ([#650](https://github.com/nader-eloshaiker/screen-geometry-app/issues/650)) ([1c3d2d7](https://github.com/nader-eloshaiker/screen-geometry-app/commit/1c3d2d793e93eb106bc98ed1b1f47722d52eaa88))
+
+
+### Bug Fixes
+
+* **app:** code coverage exclusions and validation badge ([#630](https://github.com/nader-eloshaiker/screen-geometry-app/issues/630)) ([2a949f0](https://github.com/nader-eloshaiker/screen-geometry-app/commit/2a949f09b790590a72b2af0294c57a88b5f1c08f))
+* **ops:** remove validation badge ([#632](https://github.com/nader-eloshaiker/screen-geometry-app/issues/632)) ([b1cdc58](https://github.com/nader-eloshaiker/screen-geometry-app/commit/b1cdc5896e39ca3e529c204850cddf7e758ffdad))
+* **ui:** tests ([#646](https://github.com/nader-eloshaiker/screen-geometry-app/issues/646)) ([3245021](https://github.com/nader-eloshaiker/screen-geometry-app/commit/3245021860440e8bf67706ef452bce85fa576f99))
+
 ## [4.6.0](https://github.com/nader-eloshaiker/screen-geometry-app/compare/v4.5.0...v4.6.0) (2025-10-12)
 
 
